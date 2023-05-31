@@ -921,7 +921,7 @@ int RunDOSCommand (const TCHAR* pFilename) {
 
 	/* Start the program depending on whether we found the COMSPEC variable */
   if (Args[0] == NULL) {
-    Args[0] = ( _osver & 0x8000 ) ? _T("command.com") : _T("cmd.exe");
+    Args[0] = _T("cmd.exe");
     ProcessHandle = _tspawnvpe(_P_NOWAIT, Args[0], Args, NULL);
    }
   else {

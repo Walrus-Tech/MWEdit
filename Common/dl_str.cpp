@@ -891,20 +891,20 @@ TCHAR* strupr (TCHAR* pString) {
  * See Also: vsnprintf()
  *
  *=========================================================================*/
-int snprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, ...) {
-  DEFINE_FUNCTION("vsnprintf()");
-  va_list Args;
-  int     Result;
-
-	/* Ensure valid input */
-  ASSERT(pBuffer != NULL && pFormat != NULL);
-
-  va_start(Args, pFormat);
-  Result = vsnprintf (pBuffer, MaxLength, pFormat, Args);
-  va_end(Args);
-
-  return (Result);
- }
+//int snprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, ...) {
+//  DEFINE_FUNCTION("vsnprintf()");
+//  va_list Args;
+//  int     Result;
+//
+//	/* Ensure valid input */
+//  ASSERT(pBuffer != NULL && pFormat != NULL);
+//
+//  va_start(Args, pFormat);
+//  Result = vsnprintf (pBuffer, MaxLength, pFormat, Args);
+//  va_end(Args);
+//
+//  return (Result);
+// }
 /*===========================================================================
  *		End of Function snprintf()
  *=========================================================================*/
@@ -924,29 +924,29 @@ int snprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, ...)
  * negative value on any error.
  *
  *=========================================================================*/
-int vsnprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, va_list Args) {
-  DEFINE_FUNCTION("vsnprintf()");
-  int Result;
-
-	/* Ensure valid input */
-  ASSERT(pBuffer != NULL && pFormat != NULL);
-
-	/* Windows has a builtin vsnprintf() type function */
-  #if defined(_WIN32) && !defined(__BCPLUSPLUS__)
-    Result = _vsntprintf(pBuffer, MaxLength, pFormat, Args);
-  #else
-    Result = vsprintf(pBuffer, pFormat, Args);
-    //ASSERT(Result >= 0 && ((size_t)Result) <= MaxLength);
-
-    if (Result > 0 && (size_t)Result > MaxLength) {
-      ErrorHandler.AddError(ERR_OVERFLOW, "Wrote %d bytes to a maximum buffer size of %u bytes!", Result, MaxLength);
-      Result = -1;
-     }
-  #endif
-
-  if (Result < 0) pBuffer[MaxLength] = NULL_CHAR;
-  return (Result);
- }
+//int vsnprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, va_list Args) {
+//  DEFINE_FUNCTION("vsnprintf()");
+//  int Result;
+//
+//	/* Ensure valid input */
+//  ASSERT(pBuffer != NULL && pFormat != NULL);
+//
+//	/* Windows has a builtin vsnprintf() type function */
+//  #if defined(_WIN32) && !defined(__BCPLUSPLUS__)
+//    Result = _vsntprintf(pBuffer, MaxLength, pFormat, Args);
+//  #else
+//    Result = vsprintf(pBuffer, pFormat, Args);
+//    //ASSERT(Result >= 0 && ((size_t)Result) <= MaxLength);
+//
+//    if (Result > 0 && (size_t)Result > MaxLength) {
+//      ErrorHandler.AddError(ERR_OVERFLOW, "Wrote %d bytes to a maximum buffer size of %u bytes!", Result, MaxLength);
+//      Result = -1;
+//     }
+//  #endif
+//
+//  if (Result < 0) pBuffer[MaxLength] = NULL_CHAR;
+//  return (Result);
+// }
 /*===========================================================================
  *		End of Function vsnprintf()
  *=========================================================================*/
