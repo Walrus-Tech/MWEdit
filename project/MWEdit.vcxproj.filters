@@ -1398,6 +1398,10 @@
     <None Include="customfunctions.dat" />
     <None Include="Functions.dat" />
     <None Include="MWEdit.reg" />
+    <None Include="..\IL\DevIL.dll" />
+    <None Include="..\IL\ilu.dll" />
+    <None Include="..\IL\ilu-l.dll" />
+    <None Include="..\IL\ILUT.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\activato.bmp">
