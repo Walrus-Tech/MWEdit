@@ -276,7 +276,7 @@ CEsmSubRecord* CEsmNpc::AllocNewSubRecord (const TCHAR* pType, const long Record
   CEsmSubRecord* pSubRecord;
 
 	/* Check for special case */
-  if (TSTRICMP(pType, MWESM_SUBREC_NPDT) != 0) return CEsmItem1::AllocNewSubRecord(pType, RecordSize);
+  if ( _stricmp(pType, MWESM_SUBREC_NPDT) != 0) return CEsmItem1::AllocNewSubRecord(pType, RecordSize);
 
 	/* Create and initialize the new record */
   if (RecordSize == sizeof(npclongdata_t)) 

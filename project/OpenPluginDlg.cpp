@@ -346,7 +346,7 @@ void COpenPluginDlg::CreateFileList (void) {
 
      }
 
-    else if (TSTRICMP(pExtension, "esm") == 0) {
+    else if ( _stricmp(pExtension, "esm") == 0) {
 
       AddFile  = true;
 
@@ -356,7 +356,7 @@ void COpenPluginDlg::CreateFileList (void) {
 
      }
 
-    else if (TSTRICMP(pExtension, "esp") == 0) {
+    else if ( _stricmp(pExtension, "esp") == 0) {
 
       AddFile  = true;
 
@@ -366,7 +366,7 @@ void COpenPluginDlg::CreateFileList (void) {
 
      }
 
-    else if (TSTRICMP(pExtension, "ess") == 0) {
+    else if ( _stricmp(pExtension, "ess") == 0) {
 
       AddFile  = true;
 

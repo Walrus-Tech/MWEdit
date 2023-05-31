@@ -330,7 +330,7 @@
   bool GetFreeMemory       (long& Memory);
   bool GetUsedMemory       (long& Memory);
   int     GetHeapStatus       (void);
-  TCHAR*  GetHeapStatusString (void);
+  const TCHAR*  GetHeapStatusString (void);
 
 	/* Search binary memory buffer for a sub-buffer */
   TCHAR* memsearch (const TCHAR* pBuffer, const TCHAR* pSearchBuffer, 

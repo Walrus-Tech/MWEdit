@@ -107,8 +107,8 @@
  * functions should always return a valid string.
  *
  *=========================================================================*/
-  typedef TCHAR* (  ERR_CUSTOM_FUNCTION) (const errcode_t Code);
-  typedef TCHAR* (*PERR_CUSTOM_FUNCTION) (const errcode_t Code);
+  typedef const TCHAR* (  ERR_CUSTOM_FUNCTION) (const errcode_t Code);
+  typedef const TCHAR* (*PERR_CUSTOM_FUNCTION) (const errcode_t Code);
 /*===========================================================================
  *		End of Custom Error Function Definition
  *=========================================================================*/
@@ -154,7 +154,7 @@ public:
   errcode_t     GetCode    (void) const { return (Code); }
   errlevel_t    GetLevel   (void) const { return (Level); }
   CErrorRecord* GetNext    (void) const { return (pNext); }
-  TCHAR*      GetMsg     (const errcode_t SubCode = ERR_NONE) const;
+  const TCHAR*      GetMsg     (const errcode_t SubCode = ERR_NONE) const;
 
 	/* Is this record the last in the linked list? */
   boolean IsLast (void) { if (pNext == NULL) return (TRUE); else return (FALSE); }
@@ -332,8 +332,8 @@ public:
   CErrorIncident* GetError (const int Index = 0);
 
 	/* Gets the error message of the most recent error incident */
-  TCHAR* GetLastErrorMsg   (void);
-  TCHAR* GetLastErrorDBMsg (void);
+  const TCHAR* GetLastErrorMsg   (void);
+  const TCHAR* GetLastErrorDBMsg (void);
 
 	/* Get class members */
   int GetNumErrors  (void) { return (NumErrors); }
@@ -384,11 +384,11 @@ public:
  *=========================================================================*/
 
 	/* Returns the system error message associated with the error code */
-  TCHAR* SystemErrorFunction  (const errcode_t Code);
-  TCHAR* TCGraphErrorFunction (const errcode_t Code);
+  const TCHAR* SystemErrorFunction  (const errcode_t Code);
+  const TCHAR* TCGraphErrorFunction (const errcode_t Code);
 
   #if defined(_WIN32) || defined(__BCPLUSPLUS__)
-    TCHAR* WindowsErrorFunction (const errcode_t Code);
+  const TCHAR* WindowsErrorFunction (const errcode_t Code);
   #endif
 
 /*===========================================================================
@@ -420,7 +420,7 @@ public:
   void Test_HandlerAddError (void);
   void Test_HandlerNotify (void);
   void Test_DLErr (void);
-  TCHAR* Test_CustomErrFunc (const errcode_t Code);
+  const TCHAR* Test_CustomErrFunc (const errcode_t Code);
 
 /*===========================================================================
  *		End of Test Routine Definitions

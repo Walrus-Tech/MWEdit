@@ -122,7 +122,7 @@
 
 	/* Holds information on a single template variable */
 
-  typedef struct {
+  typedef struct esmscrtempvar {
 
 	TCHAR	Name[ESM_SCRTEMP_MAXVARSIZE+1];
 

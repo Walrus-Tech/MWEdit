@@ -1002,9 +1002,9 @@ bool StringToBool (const TCHAR* pString, bool&  DestValue) {
   ASSERT(pString != NULL);
 
 	/* Check for an exact true/false string */
-  if (TSTRICMP(pString, _T("true")) == 0)
+  if ( _stricmp(pString, _T("true")) == 0)
     bValue = true;
-  else if (TSTRICMP(pString, _T("false")) == 0)
+  else if ( _stricmp(pString, _T("false")) == 0)
     bValue = false;
 	/* Check for a numeric boolean value */
   else {

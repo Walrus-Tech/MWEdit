@@ -211,7 +211,7 @@ inline int CSString::Compare (const TCHAR* pString) const {
 	/* String comparison, case insensitive, returns as per stricmp() */
 inline int CSString::CompareNoCase (const TCHAR* pString) const {
   IASSERT(pString != NULL);
-  return (stricmp(m_pString, pString));
+  return (_stricmp(m_pString, pString));
  }
 
 	/* Creates a new string at most Count bytes in size */
@@ -276,8 +276,8 @@ inline CSString CSString::Left (const int Count) const {
  }
 
 	/* Makes the string all lower/upper case */
-inline void CSString::MakeLower (void) { strlwr(m_pString); }
-inline void CSString::MakeUpper (void) { strupr(m_pString); }
+inline void CSString::MakeLower (void) { _strlwr(m_pString); }
+inline void CSString::MakeUpper (void) { _strupr(m_pString); }
 
 	/* Returns a new string starting at the 0-based index of the current string */
 inline CSString CSString::Mid (const int Index) const {

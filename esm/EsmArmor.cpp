@@ -298,7 +298,7 @@ bool GetESMArmorType (int& OutIndex, const TCHAR* pString) {
 
 	/* Check for a valid armor type */
   for (Index = MWESM_ARMORTYPE_MIN; Index <= MWESM_ARMORTYPE_MAX; Index++) {
-    if (TSTRICMP(l_ArmorTypes[Index], pString) == 0) {
+    if ( _stricmp(l_ArmorTypes[Index], pString) == 0) {
       OutIndex = Index;
       return (true);
      }

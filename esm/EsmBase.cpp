@@ -707,7 +707,7 @@ bool GetESMSkill (int& OutSkill, const TCHAR* pString) {
   int Index;
 
   for (Index = 0; Index < MWESM_MAX_SKILLS; Index++) {
-    if (TSTRICMP(l_Skills[Index].Name, pString) == 0) {
+    if ( _stricmp(l_Skills[Index].Name, pString) == 0) {
       OutSkill = Index;
       return (true);
      }
@@ -721,7 +721,7 @@ int GetESMSkill (const TCHAR* pString) {
   int Index;
 
   for (Index = 0; Index < MWESM_MAX_SKILLS; Index++) {
-    if (TSTRICMP(l_Skills[Index].Name, pString) == 0) return (Index);
+    if ( _stricmp(l_Skills[Index].Name, pString) == 0) return (Index);
    }
 
   return (0);
@@ -803,12 +803,12 @@ bool GetESMEffectID (int& EffectID, const TCHAR* pString) {
   int Index;
 
   for (Index = 0; Index < MWESM_MAX_EFFECTS; Index++) {
-    if (TSTRICMP(l_Effects[Index].ID,   pString) == 0) {
+    if ( _stricmp(l_Effects[Index].ID,   pString) == 0) {
       EffectID = Index;
       return (true);
      }
 
-    if (TSTRICMP(l_Effects[Index].Name, pString) == 0) {
+    if ( _stricmp(l_Effects[Index].Name, pString) == 0) {
       EffectID = Index;
       return (true);
      }
@@ -821,8 +821,8 @@ int GetESMEffectID (const TCHAR* pString) {
   int Index;
 
   for (Index = 0; Index < MWESM_MAX_EFFECTS; Index++) {
-    if (TSTRICMP(l_Effects[Index].ID,   pString) == 0) return (Index);
-    if (TSTRICMP(l_Effects[Index].Name, pString) == 0) return (Index);
+    if ( _stricmp(l_Effects[Index].ID,   pString) == 0) return (Index);
+    if ( _stricmp(l_Effects[Index].Name, pString) == 0) return (Index);
    }
 
   return (-1);

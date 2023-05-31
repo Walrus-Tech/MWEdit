@@ -608,12 +608,12 @@
  *=========================================================================*/
 
 	/* Used to hold basic info on the magic effects */
-  typedef struct {
-	TCHAR* Name;
+  typedef struct esmeffectdata {
+	const TCHAR* Name;
 	long   Flags;
-	TCHAR* ID;
+	const TCHAR* ID;
 	
-	bool IsID (const TCHAR* pString) { return TSTRICMP(ID, pString) == 0; }
+	bool IsID (const TCHAR* pString) { return  _stricmp(ID, pString) == 0; }
 	bool HasDuration  (void) const { return (Flags & MWESM_EFFECTFLAG_HASDUR) != 0; }
 	bool HasMagnitude (void) const { return (Flags & MWESM_EFFECTFLAG_HASMAG) != 0; }
 	bool IsTribunal   (void) const { return (Flags & MWESM_EFFECTFLAG_TRIB) != 0; }
@@ -623,21 +623,21 @@
     } esmeffectdata_t;
 
 	/* Holds information on skills */
-  typedef struct {
-	TCHAR*	Name;
-	TCHAR*	Action1;
-	TCHAR*	Action2;
-	TCHAR*	Action3;
-	TCHAR*	Action4;
+  typedef struct esmskilldata {
+	const TCHAR*	Name;
+	const TCHAR*	Action1;
+	const TCHAR*	Action2;
+	const TCHAR*	Action3;
+	const TCHAR*	Action4;
    } esmskilldata_t;
 
 	/* Holds information on animation groups */
-  typedef struct {
+  typedef struct esmanimdata {
 	const TCHAR* pName;
 	short	     ID;
 	short	     OldID;
 
-	bool IsName (const TCHAR* pString) { return TSTRICMP(pName, pString) == 0; }
+	bool IsName (const TCHAR* pString) { return  _stricmp(pName, pString) == 0; }
    } esmanimdata_t;
 
 /*===========================================================================

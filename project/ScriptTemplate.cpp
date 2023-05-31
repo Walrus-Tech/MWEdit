@@ -552,7 +552,7 @@ CSString* CEsmScriptTemplate::GetCsvString (const TCHAR* pVarName, CCsvRow* pRow
 
 	/* Special script name */
 
-  if (TSTRICMP(pVarName, ESMSCRTEMP_CSV_SCRIPTNAME) == 0) return (&m_ScriptName);
+  if ( _stricmp(pVarName, ESMSCRTEMP_CSV_SCRIPTNAME) == 0) return (&m_ScriptName);
 
   
 

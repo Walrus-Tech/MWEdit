@@ -730,7 +730,7 @@ bool CEsmScrFuncData::ReadData (CGenFile& File) {
 
     Result = SeperateVarValue(&pVariable, &pValue, LineBuffer);
 
-    if (TSTRICMP(pVariable, _T("End")) == 0) return (true);
+    if ( _stricmp(pVariable, _T("End")) == 0) return (true);
 
 
 
@@ -926,31 +926,31 @@ bool CEsmScrFuncData::SetValue (const TCHAR* pVariable, TCHAR* pValue) {
 
 
 
-  if (TSTRICMP(pVariable, _T("function")) == 0) {
+  if ( _stricmp(pVariable, _T("function")) == 0) {
 
     SetFunction(pValue);
 
    }
 
-  else if (TSTRICMP(pVariable, _T("wikilink")) == 0) {
+  else if ( _stricmp(pVariable, _T("wikilink")) == 0) {
 
     SetWikiLink(pValue);
 
    }
 
-  else if (TSTRICMP(pVariable, _T("options")) == 0) {
+  else if ( _stricmp(pVariable, _T("options")) == 0) {
 
     m_Flags = strtoul(pValue, NULL, 0);
 
    }
 
-  else if (TSTRICMP(pVariable, _T("opcode")) == 0) {
+  else if ( _stricmp(pVariable, _T("opcode")) == 0) {
 
     m_OpCode = strtoul(pValue, NULL, 0);
 
    }
 
-  else if (TSTRICMP(pVariable, _T("return")) == 0) {
+  else if ( _stricmp(pVariable, _T("return")) == 0) {
 
     SetReturnValue(pValue);
 
@@ -964,7 +964,7 @@ bool CEsmScrFuncData::SetValue (const TCHAR* pVariable, TCHAR* pValue) {
 
    }
 
-  else if (TSTRICMP(pVariable, _T("desc")) == 0) {
+  else if ( _stricmp(pVariable, _T("desc")) == 0) {
 
     m_Description += UnquoteString(pValue);
 
@@ -972,7 +972,7 @@ bool CEsmScrFuncData::SetValue (const TCHAR* pVariable, TCHAR* pValue) {
 
    }
 
-  else if (TSTRICMP(pVariable, _T("descl")) == 0) {
+  else if ( _stricmp(pVariable, _T("descl")) == 0) {
 
     m_Description += UnquoteString(pValue);
 

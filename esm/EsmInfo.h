@@ -66,7 +66,7 @@
 	/* Used to hold type information on the various function bytes */
   typedef struct {
 	short  Type;
-	TCHAR* pName;
+	const TCHAR* pName;
    } esmfuncinfo_t;
 
   class CEsmDialogue;

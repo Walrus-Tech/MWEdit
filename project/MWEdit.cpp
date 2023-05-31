@@ -424,7 +424,7 @@ CEsmFile* CMWEditApp::FindMaster (const TCHAR *pPathname) {
 
     pFile = m_EsmMasters.GetAt(Index);
 
-    if (TSTRICMP(FindFilename(pFile->GetFilename()), pFilename) == 0) return (pFile);
+    if (_stricmp(FindFilename(pFile->GetFilename()), pFilename) == 0) return (pFile);
 
    }
 
@@ -513,18 +513,6 @@ BOOL CMWEditApp::InitInstance() {
 	/* Attempt to load the custom function definitions */
 
   ReadMwCustomFunctions(g_CustomFunctions, MWEDIT_DEFAULT_CUSTOMFUNCS);
-
-
-
-#ifdef _AFXDLL
-
-  Enable3dControls();
-
-#else
-
-  Enable3dControlsStatic();
-
-#endif
 
 
 
@@ -789,8 +777,8 @@ BOOL CMWEditApp::InitInstance() {
 
 
 	/* Display warning dialog */
-
-  pMainFrame->MessageBox(_T("WARNING: This version of MWEdit is a BETA version and still\nhas not been thoroughly tested. Please use caution and backup any\nplugins while editting. View the README.TXT file for more information."), _T("MWEdit Warning"), MB_OK | MB_ICONWARNING);
+  // let's not. it's been 20 years 
+  //pMainFrame->MessageBox(_T("WARNING: This version of MWEdit is a BETA version and still\nhas not been thoroughly tested. Please use caution and backup any\nplugins while editting. View the README.TXT file for more information."), _T("MWEdit Warning"), MB_OK | MB_ICONWARNING);
 
 
 

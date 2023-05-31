@@ -214,8 +214,9 @@
   typedef unsigned long  ulong;
   typedef unsigned long  dword;
 
-  #define WORD_MAX  UINT_MAX
-  #define DWORD_MAX ULONG_MAX
+  // TODO redefinition
+  //#define WORD_MAX  UINT_MAX
+  //#define DWORD_MAX ULONG_MAX
 
 	/* Define the TCHAR type if required */
 #if defined(_WIN32) && !defined(__BORLANDC__)
@@ -245,7 +246,7 @@
   #if defined(_WIN32)
     #define TSTRLEN(string) _tcslen(string)
     #define TSTRCMP(string1, string2) _tcscmp(string1, string2)
-    #define TSTRICMP(string1, string2) _tcsicmp(string1, string2)
+    #define  _stricmp(string1, string2) _tcsicmp(string1, string2)
     #define TSTRCPY(string1, string2) _tcscpy(string1, string2)
     #define TSTRCAT(string1, string2) _tcscat(string1, string2)
     #define TSTRCHR(string, char1) _tcschr(string, (TCHAR)char1)
@@ -280,7 +281,7 @@
   #define TSTRCPY(string1, string2) strcpy(string1, string2)
   #define TSTRCAT(string1, string2) strcat(string1, string2)
   #define TSTRCMP(string1, string2) strcmp(string1, string2)
-  #define TSTRICMP(string1, string2) stricmp(string1, string2)
+  #define  _stricmp(string1, string2) stricmp(string1, string2)
   #define TSTRLEN(string) strlen(string)
   #define TSTRCHR(string, char1) strchr(string, char1)
   #define TSTRRCHR(string, char1) strrchr(string, char1)

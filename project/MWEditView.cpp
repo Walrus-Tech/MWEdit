@@ -1880,7 +1880,7 @@ bool CMWEditView::IsCurrentType (const TCHAR* pType) {
 
   
 
-  return (TSTRICMP(l_RecordTabData[TypeIndex].ItemType, pType) == 0);
+  return ( _stricmp(l_RecordTabData[TypeIndex].ItemType, pType) == 0);
 
  }
 

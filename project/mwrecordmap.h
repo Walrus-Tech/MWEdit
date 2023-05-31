@@ -1278,7 +1278,7 @@ inline bool CMwIdRecordMap::CompareKeys (esmrecinfo_t* Record1, esmrecinfo_t* Re
 
 inline bool CMwIdRecordMap::CompareKeys (esmrecinfo_t* Record, const TCHAR* Key) {
 
-  return (stricmp(Record->pRecord->GetID(), Key) == 0);
+  return (_stricmp(Record->pRecord->GetID(), Key) == 0);
 
  }
 

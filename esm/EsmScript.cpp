@@ -249,7 +249,7 @@ short CEsmScript::FindLocalVar (const TCHAR* pLocalVar, char& VarType) {
 
   while (DataIndex < m_pScriptVars->GetRecordSize()) {
     Length = strlen(pParse);
-    if (TSTRICMP(pLocalVar, pParse) == 0) return(TypeIndex + 1);
+    if ( _stricmp(pLocalVar, pParse) == 0) return(TypeIndex + 1);
     pParse    += Length + 1;
     DataIndex += Length + 1;
 

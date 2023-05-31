@@ -616,7 +616,7 @@ void FillEsmBodyRaceCombo (CComboBox& ComboBox, const int BodyPart, const bool I
 
     if ((pBodyPart->IsFemale() == IsFemale) && (pBodyPart->GetBodyPartID() == BodyPart) && BodyPart >= 0 &&
 
-		TSTRICMP(pRace, pBodyPart->GetRace()) == 0)  {
+		 _stricmp(pRace, pBodyPart->GetRace()) == 0)  {
 
       ListIndex = ComboBox.AddString(pRecInfo->pRecord->GetID());
 

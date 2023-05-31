@@ -349,7 +349,7 @@ int GetESMWeaponType (const TCHAR* pString) {
 
 	/* Check for a valid input type */
   for (Index = MWESM_WEAPONTYPE_MIN; Index <= MWESM_WEAPONTYPE_MAX; Index++) {
-    if (TSTRICMP(l_WeaponTypes[Index], pString) == 0) return (Index);
+    if ( _stricmp(l_WeaponTypes[Index], pString) == 0) return (Index);
    }
 
   return (MWESM_WEAPONTYPE_SHORT);

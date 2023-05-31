@@ -206,7 +206,7 @@ public:
 
 	/* Checks for a mathcing function name, case insensitive */
 
-  bool IsName (const TCHAR* pName) const { return (TSTRICMP(m_Function, pName) == 0); }
+  bool IsName (const TCHAR* pName) const { return ( _stricmp(m_Function, pName) == 0); }
 
 
 

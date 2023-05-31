@@ -175,7 +175,7 @@ bool CompareExtension (const TCHAR* pFilename, const TCHAR* pExtension) {
   pFileExt = FindExtension(pFilename);
 
   if (pFileExt != NULL) {
-    Result = TSTRICMP(pFileExt, pExtension);
+    Result =  _stricmp(pFileExt, pExtension);
     if (Result == 0) return (TRUE);
    }
 

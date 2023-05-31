@@ -284,7 +284,7 @@ bool CEsmScrFuncArray::Read (CGenFile& File) {
 
 		/* Check for the start of a function definition */
 
-    if (TSTRICMP(pVariable, _T("Function")) == 0) {
+    if ( _stricmp(pVariable, _T("Function")) == 0) {
 
       Result = ReadFunction(File, pValue);
 

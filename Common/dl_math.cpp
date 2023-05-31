@@ -88,7 +88,7 @@
 	{ -15,	(TCHAR)	'f',	_T("femto") },
 	{ -12,	(TCHAR)	'p',	_T("pico")  },
 	{  -9,	(TCHAR)	'n',	_T("nano")  },
-	{  -6, (TCHAR)MU_CHAR,	_T("micro") },
+	//{  -6,  (TCHAR)230,	    _T("micro") },
 	{  -3,	(TCHAR)	'm',	_T("milli") },
 	{   0,	(TCHAR)	' ',	_T("")      },
 	{   3,	(TCHAR)	'k',	_T("kilo")  }, 

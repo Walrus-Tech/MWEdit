@@ -682,13 +682,13 @@ bool CMWEditDoc::CanCreateNew (const TCHAR* pType) {
 
 
 
-  if (TSTRICMP(pType, MWESM_REC_MGEF) == 0) return (false);
+  if ( _stricmp(pType, MWESM_REC_MGEF) == 0) return (false);
 
-  if (TSTRICMP(pType, MWESM_REC_TES3) == 0) return (false);
+  if ( _stricmp(pType, MWESM_REC_TES3) == 0) return (false);
 
-  if (TSTRICMP(pType, MWESM_REC_GMST) == 0) return (false);
+  if ( _stricmp(pType, MWESM_REC_GMST) == 0) return (false);
 
-  if (TSTRICMP(pType, MWESM_REC_SKIL) == 0) return (false);
+  if ( _stricmp(pType, MWESM_REC_SKIL) == 0) return (false);
 
   return (true);
 
@@ -3290,7 +3290,7 @@ esmrecinfo_t* CMWEditDoc::FindRecInfo (CEsmRecord* pRecord) {
 
     if (tolower(*pID1) != tolower(*pID2)) continue;
 
-    Result = TSTRICMP(pRecInfo->pRecord->GetID(), pRecord->GetID());
+    Result =  _stricmp(pRecInfo->pRecord->GetID(), pRecord->GetID());
 
     if (Result > 0) break;
 

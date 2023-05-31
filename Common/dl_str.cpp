@@ -409,11 +409,11 @@ bool StringToBoolean (bool& Flag, const TCHAR* pString) {
   ASSERT(pString != NULL);
 
 	/* See if the string contains explicit TRUE/FALSE strings */
-  if (TSTRICMP(pString, _T("TRUE")) == 0 || TSTRICMP(pString, _T("YES")) == 0) {
+  if ( _stricmp(pString, _T("TRUE")) == 0 ||  _stricmp(pString, _T("YES")) == 0) {
     Flag = TRUE;
     return (true);
    }
-  else if (TSTRICMP(pString, _T("FALSE")) == 0 || TSTRICMP(pString, _T("NO")) == 0) {
+  else if ( _stricmp(pString, _T("FALSE")) == 0 ||  _stricmp(pString, _T("NO")) == 0) {
     Flag = FALSE;
     return (true);
    }
@@ -455,7 +455,7 @@ bool StringChanged (const TCHAR* pString1, const TCHAR* pString2, const bool Cas
     if (TSTRCMP(pString1, pString2) == 0) return (FALSE);
    }
   else {
-    if (TSTRICMP(pString1, pString2) == 0) return (FALSE);
+    if ( _stricmp(pString1, pString2) == 0) return (FALSE);
    }
 
   return (TRUE);
@@ -486,7 +486,7 @@ int StringCompare (const TCHAR* pString1, const TCHAR* pString2, const bool Case
     return TSTRCMP(pString1, pString2);
    }
   else {
-    return TSTRICMP(pString1, pString2);
+    return  _stricmp(pString1, pString2);
    }
 
  }
@@ -1427,11 +1427,11 @@ void Test_stristr (void) {
 
   	/* Check case insensitivity */
   pStr = stristr(_T("aBcDeFG"), _T("DEF"));
-  ASSERT(TSTRICMP(pStr, _T("defg")) == 0);
+  ASSERT( _stricmp(pStr, _T("defg")) == 0);
 
   	/* Check overlapping string case */
   pStr = stristr(_T("1111111234"), _T("11112"));
-  ASSERT(TSTRICMP(pStr, _T("1111234")) == 0);
+  ASSERT( _stricmp(pStr, _T("1111234")) == 0);
 
   	/* Check empty string cases */
   pStr = stristr(_T(""), _T("111"));

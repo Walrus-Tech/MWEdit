@@ -270,14 +270,14 @@ bool GetESMEnchantType (int& OutType, const TCHAR* pString) {
   int Index;
 
   for (Index = MWESM_ENCHTYPE_MIN; Index <=  MWESM_ENCHTYPE_MAX; Index++) {
-    if (TSTRICMP(l_EnchantTypes[Index], pString) == 0) {
+    if ( _stricmp(l_EnchantTypes[Index], pString) == 0) {
       OutType = Index;
       return (true);
      }
    }
 
 	/* Check old string values */
-  if (TSTRICMP(pString, _T("Cast Strikes")) == 0) {
+  if ( _stricmp(pString, _T("Cast Strikes")) == 0) {
     OutType = MWESM_ENCHTYPE_CASTSTRIKES;
     return (true);
   }
@@ -290,11 +290,11 @@ int GetESMEnchantType (const TCHAR* pString) {
   int Index;
 
   for (Index = MWESM_ENCHTYPE_MIN; Index <=  MWESM_ENCHTYPE_MAX; Index++) {
-    if (TSTRICMP(l_EnchantTypes[Index], pString) == 0) return (Index);
+    if ( _stricmp(l_EnchantTypes[Index], pString) == 0) return (Index);
    }
 
 	/* Check old string values */
-  if (TSTRICMP(pString, _T("Cast Strikes")) == 0) return (MWESM_ENCHTYPE_CASTSTRIKES);
+  if ( _stricmp(pString, _T("Cast Strikes")) == 0) return (MWESM_ENCHTYPE_CASTSTRIKES);
   return (MWESM_ENCHTYPE_MIN);
  }
 /*===========================================================================
@@ -321,7 +321,7 @@ bool GetESMEnchantRangeType (int& OutType, const TCHAR* pString) {
   int Index;
 
   for (Index = MWESM_ENCHANTRANGE_MIN; Index <= MWESM_ENCHANTRANGE_MAX; Index++) {
-    if (TSTRICMP(l_EnchantRanges[Index], pString) == 0) {
+    if ( _stricmp(l_EnchantRanges[Index], pString) == 0) {
       OutType = Index;
       return (true);
      }
@@ -335,7 +335,7 @@ int GetESMEnchantRangeType (const TCHAR* pString) {
   int Index;
 
   for (Index = MWESM_ENCHANTRANGE_MIN; Index <= MWESM_ENCHANTRANGE_MAX; Index++) {
-    if (TSTRICMP(l_EnchantRanges[Index], pString) == 0) return (Index);
+    if ( _stricmp(l_EnchantRanges[Index], pString) == 0) return (Index);
    }
 
   return (MWESM_ENCHANTRANGE_MIN);

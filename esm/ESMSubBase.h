@@ -168,7 +168,7 @@ public:
   typedef CEsmSubRecord* (*ESMSUBREC_CREATEFUNC) (void);
 
 	/* Structure to hold information on sub-records */
-  typedef struct {
+  typedef struct esmsubreccreate {
 	const TCHAR*		Type;
 	ESMSUBREC_CREATEFUNC	CreateMethod;
 

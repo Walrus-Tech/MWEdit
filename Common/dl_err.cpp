@@ -131,7 +131,7 @@ void CErrorRecord::Destroy (void) {
  * object is returned.
  *
  *=========================================================================*/
-TCHAR* CErrorRecord::GetMsg (const errcode_t SubCode) const {
+const TCHAR* CErrorRecord::GetMsg (const errcode_t SubCode) const {
   //DEFINE_FUNCTION("CErrorRecord::GetMsg()");
 
 	/* Return the current message string for a regular error */
@@ -658,7 +658,7 @@ CErrorIncident* CErrorHandler::GetError (const int Index) {
  * message for that error.  Always returns a valid string, never NULL.
  *
  *=========================================================================*/
-TCHAR* CErrorHandler::GetLastErrorMsg (void) {
+const TCHAR* CErrorHandler::GetLastErrorMsg (void) {
   //DEFINE_FUNCTION("CErrorHandler::GetLastErrorMsg()");
 
 	/* Ensure there is at least one incident recorded in list */
@@ -684,7 +684,7 @@ TCHAR* CErrorHandler::GetLastErrorMsg (void) {
  * string.  Always returns a valid string, never NULL.
  *
  *=========================================================================*/
-TCHAR* CErrorHandler::GetLastErrorDBMsg (void) {
+const TCHAR* CErrorHandler::GetLastErrorDBMsg (void) {
   //DEFINE_FUNCTION("CErrorHandler::GetLastDBErrorMsg()");
   CErrorRecord* pErrRecord;
 
@@ -1095,7 +1095,7 @@ void CErrorHandler::Printf (const TCHAR* pTitle, const TCHAR* pString, va_list A
  * Always returns a valid string.
  *
  *=========================================================================*/
-TCHAR* SystemErrorFunction (const errcode_t Code) {
+const TCHAR* SystemErrorFunction (const errcode_t Code) {
   DEFINE_FUNCTION("SystemErrorFunction()");
   TCHAR* pErrMessage;
 
@@ -1138,7 +1138,7 @@ TCHAR* SystemErrorFunction (const errcode_t Code) {
  * under TurboC for DOS. Always returns a valid string.
  *
  *=========================================================================*/
-TCHAR* TCGraphErrorFunction (const errcode_t Code) {
+const TCHAR* TCGraphErrorFunction (const errcode_t Code) {
   //DEFINE_FUNCTION("TCGraphErrorFunction()");
   TCHAR* pErrMessage;
 
@@ -1164,7 +1164,7 @@ TCHAR* TCGraphErrorFunction (const errcode_t Code) {
  * as returned by GetLastError(). Always returns a valid string.
  *
  *=========================================================================*/
-TCHAR* WindowsErrorFunction (const errcode_t Code) {
+const TCHAR* WindowsErrorFunction (const errcode_t Code) {
   //DEFINE_FUNCTION("WindowsErrorFunction()");
   static TCHAR ErrMessage[512] = _T("");
   DWORD Result;

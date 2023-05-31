@@ -182,7 +182,7 @@ bool IsESMScriptFunction (const TCHAR* pString) {
 
   for (Index = 0; pStartSearch[Index].Name[0] != NULL_CHAR; Index++) {
 
-    Result = TSTRICMP(pStartSearch[Index].Name, pString);
+    Result =  _stricmp(pStartSearch[Index].Name, pString);
 
     if (Result == 0) return (true);
 
@@ -310,7 +310,7 @@ esmscrfuncinfo_t* GetESMScriptFuncInfo (const TCHAR* pString) {
 
   for (Index = 0; pStartSearch[Index].Name[0] != NULL_CHAR; Index++) {
 
-    Result = TSTRICMP(pStartSearch[Index].Name, pString);
+    Result =  _stricmp(pStartSearch[Index].Name, pString);
 
     if (Result == 0) return &(pStartSearch[Index]);
 
@@ -366,7 +366,7 @@ bool IsESMScriptFunction1 (const TCHAR* pString) {
 
   for (Index = 0; g_ScriptFunctions[Index].Name[0] != NULL_CHAR; Index++) {
 
-    Result = TSTRICMP(g_ScriptFunctions[Index].Name, pString);
+    Result =  _stricmp(g_ScriptFunctions[Index].Name, pString);
 
     if (Result == 0) return (true);
 
@@ -796,31 +796,31 @@ int GetESMScriptResToken (const TCHAR* pString) {
 
     case 'B':
 
-	if (TSTRICMP(pString+1, _T("egin")) == 0) return (ESMSCR_TOKEN_BEGIN);
+	if ( _stricmp(pString+1, _T("egin")) == 0) return (ESMSCR_TOKEN_BEGIN);
 
 	break;
 
     case 'E':
 
-	if (TSTRICMP(pString+1, _T("nd"))      == 0) return (ESMSCR_TOKEN_END);
+	if ( _stricmp(pString+1, _T("nd"))      == 0) return (ESMSCR_TOKEN_END);
 
-	if (TSTRICMP(pString+1, _T("ndwhile")) == 0) return (ESMSCR_TOKEN_ENDWHILE);
+	if ( _stricmp(pString+1, _T("ndwhile")) == 0) return (ESMSCR_TOKEN_ENDWHILE);
 
-	if (TSTRICMP(pString+1, _T("lse"))     == 0) return (ESMSCR_TOKEN_ELSE);
+	if ( _stricmp(pString+1, _T("lse"))     == 0) return (ESMSCR_TOKEN_ELSE);
 
-	if (TSTRICMP(pString+1, _T("lseif"))   == 0) return (ESMSCR_TOKEN_ELSEIF);
+	if ( _stricmp(pString+1, _T("lseif"))   == 0) return (ESMSCR_TOKEN_ELSEIF);
 
-	if (TSTRICMP(pString+1, _T("ndif"))    == 0) return (ESMSCR_TOKEN_ENDIF);
+	if ( _stricmp(pString+1, _T("ndif"))    == 0) return (ESMSCR_TOKEN_ENDIF);
 
 	break;
 
     case 'I':
 
-	if (TSTRICMP(pString+1, _T("f")) == 0) return (ESMSCR_TOKEN_IF);
+	if ( _stricmp(pString+1, _T("f")) == 0) return (ESMSCR_TOKEN_IF);
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
-	if (TSTRICMP(pString+1, _T("fx")) == 0) return (ESMSCR_TOKEN_IFX);
+	if ( _stricmp(pString+1, _T("fx")) == 0) return (ESMSCR_TOKEN_IFX);
 
 #endif
 
@@ -828,33 +828,33 @@ int GetESMScriptResToken (const TCHAR* pString) {
 
     case 'L':
 
-	if (TSTRICMP(pString+1, _T("ong")) == 0) return (ESMSCR_TOKEN_TYPEOP);
+	if ( _stricmp(pString+1, _T("ong")) == 0) return (ESMSCR_TOKEN_TYPEOP);
 
 	break;
 
     case 'F':
 
-	if (TSTRICMP(pString+1, _T("loat")) == 0) return (ESMSCR_TOKEN_TYPEOP);
+	if ( _stricmp(pString+1, _T("loat")) == 0) return (ESMSCR_TOKEN_TYPEOP);
 
 	break;
 
     case 'R':
 
-	if (TSTRICMP(pString+1, _T("eturn"))   == 0) return (ESMSCR_TOKEN_RETURN);
+	if ( _stricmp(pString+1, _T("eturn"))   == 0) return (ESMSCR_TOKEN_RETURN);
 
-//	if (TSTRICMP(pString+1, _T("eset"))    == 0) return (ESMSCR_TOKEN_RESET);
+//	if ( _stricmp(pString+1, _T("eset"))    == 0) return (ESMSCR_TOKEN_RESET);
 
 	break;
 
     case 'S':
 
-	if (TSTRICMP(pString+1, _T("et"))   == 0) return (ESMSCR_TOKEN_SET);
+	if ( _stricmp(pString+1, _T("et"))   == 0) return (ESMSCR_TOKEN_SET);
 
-	if (TSTRICMP(pString+1, _T("hort")) == 0) return (ESMSCR_TOKEN_TYPEOP);
+	if ( _stricmp(pString+1, _T("hort")) == 0) return (ESMSCR_TOKEN_TYPEOP);
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
-	if (TSTRICMP(pString+1, _T("etx"))   == 0) return (ESMSCR_TOKEN_SETX);
+	if ( _stricmp(pString+1, _T("etx"))   == 0) return (ESMSCR_TOKEN_SETX);
 
 #endif
 
@@ -862,23 +862,23 @@ int GetESMScriptResToken (const TCHAR* pString) {
 
     case 'T':
 
-	if (TSTRICMP(pString+1, _T("o"))   == 0) return (ESMSCR_TOKEN_TO);
+	if ( _stricmp(pString+1, _T("o"))   == 0) return (ESMSCR_TOKEN_TO);
 
 	break;
 
     case 'G':
 
-	if (TSTRICMP(pString+1, _T("et")) == 0) return (ESMSCR_TOKEN_GET);
+	if ( _stricmp(pString+1, _T("et")) == 0) return (ESMSCR_TOKEN_GET);
 
 	break;
 
     case 'W':
 
-	if (TSTRICMP(pString+1, _T("hile")) == 0) return (ESMSCR_TOKEN_WHILE);
+	if ( _stricmp(pString+1, _T("hile")) == 0) return (ESMSCR_TOKEN_WHILE);
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
-	if (TSTRICMP(pString+1, _T("hilex")) == 0) return (ESMSCR_TOKEN_WHILEX);
+	if ( _stricmp(pString+1, _T("hilex")) == 0) return (ESMSCR_TOKEN_WHILEX);
 
 #endif
 
@@ -938,7 +938,7 @@ bool IsESMScriptReserved1 (const TCHAR* pString) {
 
   for (Index = 0; l_Reserved[Index] != NULL; Index++) {
 
-    Result = TSTRICMP(l_Reserved[Index], pString);
+    Result =  _stricmp(l_Reserved[Index], pString);
 
 
 

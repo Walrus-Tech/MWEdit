@@ -371,7 +371,7 @@ int GetHeapStatus (void) {
  * valid string, never NULL.
  *
  *=======================================================================*/
-TCHAR *GetHeapStatusString (void) {
+const TCHAR *GetHeapStatusString (void) {
 
   switch (GetHeapStatus()) {
     case HEAP_OK:	  return (_T("Ok"));

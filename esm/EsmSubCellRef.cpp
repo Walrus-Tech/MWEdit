@@ -336,7 +336,7 @@ bool CEsmSubCellRef::IsSame (CEsmSubCellRef* pCellRef) {
   pName2 = (CEsmSubNameFix *) pCellRef->FindSubRecord(MWESM_SUBREC_NAME);
   if (pName1 == NULL || pName2 == NULL) return (false);
   //SystemLog.Printf ("Compare '%s' and '%s'", pName1->GetName(), pName2->GetName());
-  if (TSTRICMP(pName1->GetName(), pName2->GetName()) != 0) return (false);
+  if ( _stricmp(pName1->GetName(), pName2->GetName()) != 0) return (false);
 
 	/* Check the object indices */
   pIndex1 = (CEsmSubFRMR *) FindSubRecord(MWESM_SUBREC_FRMR);

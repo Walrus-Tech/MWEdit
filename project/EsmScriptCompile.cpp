@@ -2884,7 +2884,7 @@ bool CEsmScriptCompile::FindLocalVar (const TCHAR* pName) {
 
   for (Index = 0; Index < m_NumShortVars; Index++) {
 
-    if (TSTRICMP(pName, m_ShortVars[Index].Name) == 0) return (true);
+    if ( _stricmp(pName, m_ShortVars[Index].Name) == 0) return (true);
 
    }
 
@@ -2892,7 +2892,7 @@ bool CEsmScriptCompile::FindLocalVar (const TCHAR* pName) {
 
   for (Index = 0; Index < m_NumLongVars; Index++) {
 
-    if (TSTRICMP(pName, m_LongVars[Index].Name) == 0) return (true);
+    if ( _stricmp(pName, m_LongVars[Index].Name) == 0) return (true);
 
    }
 
@@ -2900,7 +2900,7 @@ bool CEsmScriptCompile::FindLocalVar (const TCHAR* pName) {
 
   for (Index = 0; Index < m_NumFloatVars; Index++) {
 
-    if (TSTRICMP(pName, m_FloatVars[Index].Name) == 0) return (true);
+    if ( _stricmp(pName, m_FloatVars[Index].Name) == 0) return (true);
 
    }
 
@@ -2946,7 +2946,7 @@ int CEsmScriptCompile::FindLocalVarIndex (const TCHAR* pName, char& Type) {
 
   for (Index = 0; Index < m_NumShortVars; Index++) {
 
-    if (TSTRICMP(pName, m_ShortVars[Index].Name) == 0) {
+    if ( _stricmp(pName, m_ShortVars[Index].Name) == 0) {
 
       Type = 's';
 
@@ -2968,7 +2968,7 @@ int CEsmScriptCompile::FindLocalVarIndex (const TCHAR* pName, char& Type) {
 
   for (Index = 0; Index < m_NumLongVars; Index++) {
 
-    if (TSTRICMP(pName, m_LongVars[Index].Name) == 0) {
+    if ( _stricmp(pName, m_LongVars[Index].Name) == 0) {
 
       Type = 'l';
 
@@ -2992,7 +2992,7 @@ int CEsmScriptCompile::FindLocalVarIndex (const TCHAR* pName, char& Type) {
 
   for (Index = 0; Index < m_NumFloatVars; Index++) {
 
-    if (TSTRICMP(pName, m_FloatVars[Index].Name) == 0) {
+    if ( _stricmp(pName, m_FloatVars[Index].Name) == 0) {
 
       Type = 'f';
 
@@ -3270,11 +3270,11 @@ CEsmGlobal* CEsmScriptCompile::GetGlobal (const TCHAR* pName) {
 
 int CEsmScriptCompile::GetGlobalType (const TCHAR* pName) {
 
-  //if (TSTRICMP(pName, "GameHour") == 0) return (ESMSCR_VAR_FLOAT);
+  //if ( _stricmp(pName, "GameHour") == 0) return (ESMSCR_VAR_FLOAT);
 
-  //if (TSTRICMP(pName, "Day") == 0) return (ESMSCR_VAR_SHORT);
+  //if ( _stricmp(pName, "Day") == 0) return (ESMSCR_VAR_SHORT);
 
-  //if (TSTRICMP(pName, "PlayerGold") == 0) return (ESMSCR_VAR_LONG);
+  //if ( _stricmp(pName, "PlayerGold") == 0) return (ESMSCR_VAR_LONG);
 
   CEsmGlobal* pGlobal;
 

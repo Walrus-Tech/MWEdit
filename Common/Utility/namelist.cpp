@@ -52,7 +52,7 @@ bool FindNameValue (long& lValue, const valuenames_t* pValueArray, const TCHAR* 
   Index = 0;
 
   while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-    if (TSTRICMP(pValueArray[Index].pName, pName) == 0) {
+    if ( _stricmp(pValueArray[Index].pName, pName) == 0) {
       lValue = pValueArray[Index].lValue;
       return (true);
      }
@@ -94,7 +94,7 @@ long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName) {
   Index = 0;
 
   while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-    if (TSTRICMP(pValueArray[Index].pName, pName) == 0) return ( pValueArray[Index].lValue);
+    if ( _stricmp(pValueArray[Index].pName, pName) == 0) return ( pValueArray[Index].lValue);
     Index++;
    }
 

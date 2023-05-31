@@ -221,7 +221,7 @@ public:
   typedef CEsmRecord* (*ESMREC_CREATEFUNC) (void);
 
 	/* Structure to hold information on records */
-  typedef struct {
+  typedef struct esmreccreate {
 	const TCHAR*		Type;
 	ESMREC_CREATEFUNC	CreateMethod;
 
