@@ -1529,8 +1529,7 @@ void CEsmListCtrl::OnInitCtrl (void) {
   SetImageList(&m_ImageList, LVSIL_SMALL);
 
 
-
-  m_hBadDropCursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_NO));
+  m_hBadDropCursor = LoadCursor(NULL, IDC_NO);
 
  }
 

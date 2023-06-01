@@ -734,7 +734,7 @@ void CEsmCsvImportDlg::FillCsvList (void) {
 
     pString = pRow->GetAt(ColIndex);
 
-    m_CsvList.InsertColumn(ColIndex+1, pString == NULL ? _T("?") : *pString, LVCFMT_CENTER, ESMCSVIMP_LIST_COLWIDTH, ColIndex+1);
+    m_CsvList.InsertColumn(ColIndex+1, pString == NULL ? _T("?") : static_cast<const char*>(*pString), LVCFMT_CENTER, ESMCSVIMP_LIST_COLWIDTH, ColIndex+1);
 
    }
 

@@ -390,7 +390,7 @@ bool CEsmScrTempPage3::FillCsvList (CCsvFile* pCsvFile) {
 
       pString = pRow->GetAt(ColIndex);
 
-      m_CsvList.SetItemText(ListIndex, ColIndex+1, pString == NULL ? _T("") : *pString);
+      m_CsvList.SetItemText(ListIndex, ColIndex+1, pString == NULL ? _T("") : static_cast<const char *>(*pString));
 
      }
 

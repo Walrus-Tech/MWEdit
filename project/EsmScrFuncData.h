@@ -196,7 +196,7 @@ public:
 
 	/* Get parameter members */
 
-  const TCHAR*	GetParamDesc	(const int Index) const { return (IsValidIndex(Index) ? m_ParamDesc[Index]  : _T("")); }
+  const TCHAR*	GetParamDesc	(const int Index) const { return (IsValidIndex(Index) ? static_cast<const TCHAR*>(m_ParamDesc[Index])  : _T("")); }
 
   long		GetParamFlags	(const int Index) const { return (IsValidIndex(Index) ? m_ParamFlags[Index] : 0); }
 

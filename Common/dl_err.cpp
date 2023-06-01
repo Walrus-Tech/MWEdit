@@ -1214,7 +1214,7 @@ const TCHAR* WindowsErrorFunction (const errcode_t Code) {
  * a valid string.
  *
  *=========================================================================*/
-TCHAR* Test_CustomErrorFunc (const errcode_t Code) {
+const TCHAR* Test_CustomErrorFunc (const errcode_t Code) {
   //DEFINE_FUNCTION("Test_CustomErrorFunc()");
 
   switch (Code) {

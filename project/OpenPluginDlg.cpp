@@ -128,7 +128,7 @@ int CALLBACK l_SortFiles (LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 
   int	         Flags    = lParamSort >> 16;
 
-  int	         Result;
+  int	         Result = 0;
 
     
 
@@ -145,8 +145,8 @@ int CALLBACK l_SortFiles (LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
    }
 
   else if (SortType == OPENPLUG_SUBITEM_DATE) {
-
-    Result = pFileInfo1->FileDate - pFileInfo2->FileDate;
+    auto diff = pFileInfo1->FileDate - pFileInfo2->FileDate;
+    Result = static_cast<int>(diff);
 
    }
 

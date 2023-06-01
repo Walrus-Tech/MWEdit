@@ -911,7 +911,7 @@ HINSTANCE OpenWebPage (const TCHAR* pSiteAddress) {
  *=========================================================================*/
 int RunDOSCommand (const TCHAR* pFilename) {
   int     ProcessHandle;
-  TCHAR*  Args[4];
+  const TCHAR*  Args[4];
 
 	/* Setup the program arguments */
   Args[0] = _tgetenv(_T("COMSPEC"));

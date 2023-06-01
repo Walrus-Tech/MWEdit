@@ -190,7 +190,7 @@ const TCHAR* CEsmScrFuncData::CreateParamString (const int Index) const {
 
 
 
-  snprintf(s_Buffer, 60, _T("[%s]"), m_ParamDesc[Index]);
+  snprintf(s_Buffer, 60, _T("[%s]"), static_cast<const TCHAR*>(m_ParamDesc[Index]));
 
 
 

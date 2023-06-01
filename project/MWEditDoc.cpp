@@ -4636,7 +4636,7 @@ const TCHAR* CMWEditDoc::MakeNewINFOId (void) {
 
 	/* Make the ID string */
 
-  snprintf (s_Buffer, 31, _T("%lu%010lu%010lu"), s_Counter, CurrentTime, SerialNumber);
+  snprintf (s_Buffer, 31, _T("%lu%llu%010lu"), s_Counter, CurrentTime, SerialNumber);
 
   //SystemLog.Printf ("INFO = '%s'", s_Buffer);
 

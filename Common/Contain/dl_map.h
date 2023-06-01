@@ -41,6 +41,48 @@
  *=========================================================================*/
 
 
+
+ /*===========================================================================
+  *
+  * Begin Predefined CompareKeys Functions
+  *
+  *=========================================================================*/
+  inline bool CompareKeys(dword Key1, dword Key2) {
+      return (Key1 == Key2);
+  }
+
+  inline bool CompareKeys(const char* Key1, const char* Key2) {
+      return (StringCompare(Key1, Key2, false) == 0);
+  }
+  /*===========================================================================
+   *		End of Predefined CompareKeys Functions
+   *=========================================================================*/
+
+
+   /*===========================================================================
+    *
+    * Begin Predefined HashKey Functions
+    *
+    *=========================================================================*/
+  inline dword HashKey(dword Key) {
+      return (Key >> 4);
+  }
+
+
+  inline dword HashKey(const char* Key) {
+      dword nHash = 0;
+
+      while (*Key) {
+          nHash = (nHash << 5) + nHash + tolower(*Key);
+          ++Key;
+      }
+
+      return nHash;
+  }
+  /*===========================================================================
+   *		End of Predefined HashKey Functions
+   *=========================================================================*/
+
 /*===========================================================================
  *
  * Begin Class TGenMap Definition
@@ -130,7 +172,7 @@ template<class TKey, class TValue, class TKeyArg>
 class TGenRefMap : public TGenMap<TKey, TValue, TKeyArg> {
 public:
 
-  TGenRefMap() { m_DeleteValues = false; }
+  TGenRefMap() {/* m_DeleteValues = false;*/ }
 };
 /*===========================================================================
  *		End of Class TGenMap Definition
@@ -495,46 +537,6 @@ void TGenMap<TKey, TValue, TKeyArg>::SetAt (TKeyArg Key, TValue& Record) {
  *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Predefined CompareKeys Functions
- *
- *=========================================================================*/
-inline bool CompareKeys (dword Key1, dword Key2) {
-  return (Key1 == Key2);
-}
-
-inline bool CompareKeys (const char* Key1, const char* Key2) {
-  return (StringCompare(Key1, Key2, false) == 0);
-}
-/*===========================================================================
- *		End of Predefined CompareKeys Functions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Predefined HashKey Functions
- *
- *=========================================================================*/
-inline dword HashKey (dword Key) {
-  return (Key >> 4);
-}
-
-
-inline dword HashKey (const char* Key) {
-  dword nHash = 0;
-
-  while (*Key) {
-    nHash = (nHash << 5) + nHash + tolower(*Key);
-    ++Key;
-   }
-
-  return nHash;
-}
-/*===========================================================================
- *		End of Predefined HashKey Functions
- *=========================================================================*/
 
 
 #endif

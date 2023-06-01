@@ -104,7 +104,7 @@
 
 	/* Template options */
 
-  typedef struct {
+  typedef struct esmscrtempoptions {
 
 	bool	OnlyCompleteRows;	/* Ignore any incomplete row */
 

@@ -432,6 +432,8 @@ void CEsmNpcPage5::SetControlData (void) {
 
   CString	  Buffer;
 
+#pragma warning( push )
+#pragma warning( disable : 4101 )
   CEsmSubPos6*	  pDoorData;
 
   CEsmSubRecord*  pCellName;
@@ -439,7 +441,7 @@ void CEsmNpcPage5::SetControlData (void) {
   int		  ArrayIndex;
 
   int		  Count;
-
+#pragma warning( pop )
   
 
   if (m_pRecInfo == NULL || m_pDlgHandler == NULL) return;

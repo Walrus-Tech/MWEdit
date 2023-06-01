@@ -190,7 +190,7 @@ int CEsmScriptCompile::WriteFuncOp (const TCHAR* ident) {
 
   char LocalType;
 
-  int LocalIndex= FindLocalVarIndex(ident, LocalType);
+  short LocalIndex= FindLocalVarIndex(ident, LocalType);
 
 
 
@@ -252,7 +252,7 @@ int CEsmScriptCompile::PushLetLocal (void) {
 
 int CEsmScriptCompile::OutputLetEnd (void) {
 
-	int  LocalIndex;
+	short  LocalIndex;
 
 	char LocalType;
 
@@ -322,7 +322,7 @@ int CEsmScriptCompile::OutputXIf(void) {
 
 	char LocalType;
 
-	int  LocalIndex= FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
+	short  LocalIndex= FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
 
 	struct { short pushb; short type; short pushs; short index;
 
@@ -465,8 +465,9 @@ int CEsmScriptCompile::OutputFuncXArgLocal(const TCHAR* name)
 int CEsmScriptCompile::PushFuncXArgNum(void)
 
 {
-
-  int FuncArgFlag = m_pCurrentFunc->Var[m_FuncArgIndex];
+	// TODO checks
+	auto v = m_pCurrentFunc->Var[m_FuncArgIndex];
+	int FuncArgFlag = static_cast<int>(v);
 
 
 
@@ -554,9 +555,9 @@ int CEsmScriptCompile::PushFuncXArgString(void)
 
 {
 
-	CString left= m_Token.Left(m_Token.GetLength()-1);
+	auto left= m_Token.Left(m_Token.GetLength()-1);
 
-	CString right= left.Right(left.GetLength()-1);
+	auto right= left.Right(left.GetLength()-1);
 
 	return PushFuncXArg(ESMSCR_FUNC_STRING,(const TCHAR*)right);
 
@@ -582,7 +583,8 @@ int CEsmScriptCompile::OutputFuncXArgString(const TCHAR* token)
 
 	short opcode= MWESM_OPCODE_PUSHS;
 
-	char StringLen = strlen(token);
+	// TODO checks
+	char StringLen = static_cast<char>(strlen(token));
 
 	char BStringLen= StringLen%2?StringLen:StringLen+1;
 
@@ -764,7 +766,7 @@ int CEsmScriptCompile::OutputXWhile(void) {
 
 	char LocalType;
 
-	int  LocalIndex= FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
+	short  LocalIndex= FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
 
 	struct { short pushb; short type; short pushs; short index;
 
@@ -794,7 +796,9 @@ int CEsmScriptCompile::OutputXEndWhile(void) {
 
 		m_XIfStack.pop();
 
-		struct { short jmp; short pos; } endwhilecmd= {MWESM_OPCODE_JUMPSHORT,pos->IfStartPos};
+		// TODO checks
+		struct { short jmp; short pos; } 
+		endwhilecmd= {MWESM_OPCODE_JUMPSHORT, static_cast<short>( pos->IfStartPos)};
 
 		AddScriptData(&endwhilecmd,sizeof(endwhilecmd));
 

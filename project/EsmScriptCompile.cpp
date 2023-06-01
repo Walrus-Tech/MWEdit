@@ -1934,7 +1934,7 @@ int CEsmScriptCompile::AssertToken (const int Token1, const int Token2) {
 
  *=========================================================================*/
 
-bool CEsmScriptCompile::CheckFuncID (const long ArgFlags, const TCHAR* pID, const bool Optional) {
+bool CEsmScriptCompile::CheckFuncID (const long long ArgFlags, const TCHAR* pID, const bool Optional) {
 
   CEsmRecord*   pRecord;
 
@@ -2252,7 +2252,7 @@ CEsmRecord* CEsmScriptCompile::FindRecordCarryable (const char* pID) {
 
  *=========================================================================*/
 
-bool CEsmScriptCompile::CheckFuncID1 (const long ArgFlags, const TCHAR* pID, const bool Optional) {
+bool CEsmScriptCompile::CheckFuncID1 (const long long ArgFlags, const TCHAR* pID, const bool Optional) {
 
   static TCHAR  s_IDBuffer[256];
 
@@ -3078,7 +3078,7 @@ int CEsmScriptCompile::FindMsgLevel (const int MessageID) {
 
  *=========================================================================*/
 
-const TCHAR* CEsmScriptCompile::GetFuncArgIDType (const long ArgFlags) {
+const TCHAR* CEsmScriptCompile::GetFuncArgIDType (const long long ArgFlags) {
 
 
 
@@ -3158,7 +3158,7 @@ const TCHAR* CEsmScriptCompile::GetFuncArgIDType (const long ArgFlags) {
 
  *=========================================================================*/
 
-const TCHAR* CEsmScriptCompile::GetFuncArgRefType (const long ArgFlags) {
+const TCHAR* CEsmScriptCompile::GetFuncArgRefType (const long long ArgFlags) {
 
 
 
@@ -8162,7 +8162,7 @@ int CEsmScriptCompile::OutputIfRelOp (void) {
 
   //Length = snprintf (Buffer, 15, _T(" %s "), m_Token);
 
-  Length = snprintf (Buffer, 15, _T(" %s"), m_Token);
+  Length = snprintf (Buffer, 15, _T(" %s"), static_cast<const char *>(m_Token));
 
 
 

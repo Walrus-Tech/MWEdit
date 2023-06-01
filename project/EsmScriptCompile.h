@@ -266,7 +266,7 @@
 
 	/* Holds defined type information */
 
-  typedef struct {
+  typedef struct esmscrtypeinfo {
 
 	TCHAR	Name[ESMSCR_VAR_MAXLENGTH+1];
 
@@ -588,9 +588,9 @@ protected:
 
 	/* Checks to see if given function argument ID is valid */
 
-  bool CheckFuncID  (const long ArgFlags, const TCHAR* pID, const bool Optional);
+  bool CheckFuncID  (const long long ArgFlags, const TCHAR* pID, const bool Optional);
 
-  bool CheckFuncID1 (const long ArgFlags, const TCHAR* pID, const bool Optional);
+  bool CheckFuncID1 (const long long ArgFlags, const TCHAR* pID, const bool Optional);
 
 
 
@@ -636,9 +636,9 @@ protected:
 
 	/* Converts a function argument ID type flags to a string */
 
-  const TCHAR* GetFuncArgIDType  (const long FuncArgs);
+  const TCHAR* GetFuncArgIDType  (const long long FuncArgs);
 
-  const TCHAR* GetFuncArgRefType (const long FuncArgs);
+  const TCHAR* GetFuncArgRefType (const long long FuncArgs);
 
 
 
@@ -824,7 +824,7 @@ public:
 
   bool IsParseStringChar (void) { return (*m_pParse == ESMSCR_CHAR_STRING); }
 
-  bool IsParseWhiteSpace (void) { return (m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SPACE != 0); }
+  bool IsParseWhiteSpace (void) { return ((m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SPACE) != 0); }
 
 
 

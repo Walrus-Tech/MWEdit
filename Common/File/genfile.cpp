@@ -332,8 +332,8 @@ void Test_RWCharGenFile (const size_t NumTests) {
 void Test_GenFileRWNumbers (const size_t NumTests) {
   DEFINE_FUNCTION("Test_GenFileRWNumbers()");
   static short ShortNumbers[] = { 1, -1, SHRT_MIN, SHRT_MAX, (short)USHRT_MAX, 0, 0 };
-  static int   IntNumbers[]   = { 1, -1, INT_MIN,  INT_MAX,  UINT_MAX,  0, 0 };
-  static long  LongNumbers[]  = { 1, -1, LONG_MIN, LONG_MAX, ULONG_MAX, 0, 0 };
+  static int   IntNumbers[]   = { 1, -1, INT_MIN,  INT_MAX,  (int)UINT_MAX,  0, 0 };
+  static long  LongNumbers[]  = { 1, -1, LONG_MIN, LONG_MAX, (long)ULONG_MAX, 0, 0 };
   static float FloatNumbers[] = { 1, -1, SHRT_MIN, SHRT_MAX, USHRT_MAX, 0, 0 };
   CGenFile InputFile;
   CGenFile OutputFile;

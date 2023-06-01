@@ -182,7 +182,7 @@ const TCHAR* CEsmScriptError::GetFuncArgString(void) const {
 
   else {
 
-    snprintf (s_Buffer, 63, _T("0x%08X"), m_pFunction->Var[m_FuncArgIndex]);
+    snprintf (s_Buffer, 63, _T("0x%08I64X"), m_pFunction->Var[m_FuncArgIndex]);
 
    }
 

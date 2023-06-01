@@ -54,13 +54,13 @@
 
 
 
-  static DWORD s_dwVersion;
+  //static DWORD s_dwVersion;
 
-  static int   s_nWinVer;
+  //static int   s_nWinVer;
 
-  static int   s_bWin95;
+  //static int   s_bWin95;
 
-  static int   s_bWin4;
+  //static int   s_bWin4;
 
   static int   s_cxBorder2;
 
@@ -154,7 +154,7 @@ AFX_STATIC void AFXAPI _AfxDeferClientPos(AFX_SIZEPARENTPARAMS* lpLayout, CWnd* 
 
 	// adjust for border size (even if zero client size)
 
-	if (!s_bWin4)
+	//if (!s_bWin4)
 
 	{
 
@@ -452,17 +452,17 @@ void l_ObLayoutRowCol (CSplitterWnd::CRowColInfo* pInfoArray, int nMax,
 
 CMwSplitterWnd::CMwSplitterWnd() {
 
-  s_dwVersion = ::GetVersion();
+  //s_dwVersion = ::GetVersion();
 
-  s_nWinVer   = (LOBYTE(s_dwVersion) << 8) + HIBYTE(s_dwVersion);
+  //s_nWinVer   = (LOBYTE(s_dwVersion) << 8) + HIBYTE(s_dwVersion);
 
-  s_bWin4     = (BYTE)s_dwVersion >= 4;
+  //s_bWin4     = (BYTE)s_dwVersion >= 4;
 
 
 
-  s_cxBorder2 = s_bWin4 ? 2*CX_BORDER : CX_BORDER;
+  s_cxBorder2 = /*s_bWin4 ? 2*CX_BORDER :*/ CX_BORDER;
 
-  s_cyBorder2 = s_bWin4 ? 2*CY_BORDER : CY_BORDER;
+  s_cyBorder2 = /*s_bWin4 ? 2*CY_BORDER :*/ CY_BORDER;
 
 
 
@@ -564,9 +564,9 @@ void CMwSplitterWnd::RecalcLayout() {
 
 	// size of scrollbars
 
-	int cx = (rectClient.right - rectInside.right) - (1 - s_bWin4);
+	int cx = (rectClient.right - rectInside.right) /*- (1 - s_bWin4)*/;
 
-	int cy = (rectClient.bottom - rectInside.bottom) - (1 - s_bWin4);
+	int cy = (rectClient.bottom - rectInside.bottom) /*- (1 - s_bWin4)*/;
 
 
 
@@ -602,9 +602,9 @@ void CMwSplitterWnd::RecalcLayout() {
 
 		_AfxDeferClientPos(&layout, pScrollBar,
 
-			rectInside.right + 1 - s_bWin4,
+			rectInside.right /*+ 1 - s_bWin4*/,
 
-			rectInside.bottom + 1 - s_bWin4, cx, cy, TRUE);
+			rectInside.bottom /*+ 1 - s_bWin4*/, cx, cy, TRUE);
 
 	}
 
@@ -616,11 +616,11 @@ void CMwSplitterWnd::RecalcLayout() {
 
 	{
 
-		int cxSplitterBox = m_cxSplitter + 1 - s_bWin4;// split box bigger
+		int cxSplitterBox = m_cxSplitter /*+ 1 - s_bWin4*/;// split box bigger
 
 		int x = rectClient.left;
 
-		int y = rectInside.bottom + 1 - s_bWin4;
+		int y = rectInside.bottom /*+ 1 - s_bWin4*/;
 
 		for (int col = 0; col < m_nCols; col++)
 
@@ -650,9 +650,9 @@ void CMwSplitterWnd::RecalcLayout() {
 
 	{
 
-		int cySplitterBox = m_cySplitter + 1 - s_bWin4;// split box bigger
+		int cySplitterBox = m_cySplitter /*+ 1 - s_bWin4*/;// split box bigger
 
-		int x = rectInside.right + 1 - s_bWin4;
+		int x = rectInside.right /*+ 1 - s_bWin4*/;
 
 		int y = rectClient.top;
 
