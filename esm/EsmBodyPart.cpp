@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmBodyPart.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmBodyPart.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmBodyPart.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmBodyPart.cpp");
+DEFINE_FILE("EsmBodyPart.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -28,12 +28,13 @@
  * Begin Local Type String Arrays
  *
  *=========================================================================*/
-const TCHAR* l_BodyPartTypes[] = {
+const TCHAR *l_BodyPartTypes[] = {
 	_T("Skin"),
 	_T("Clothing"),
-	_T("Armor") };
+	_T("Armor")
+};
 
-const TCHAR* l_BodyParts[] = {
+const TCHAR *l_BodyParts[] = {
 	_T("Head"),
 	_T("Hair"),
 	_T("Neck"),
@@ -48,9 +49,10 @@ const TCHAR* l_BodyParts[] = {
 	_T("Knee"),
 	_T("Upperleg"),
 	_T("Clavicle"),
-	_T("Tail") } ;
+	_T("Tail")
+} ;
 /*===========================================================================
- *		End of Local Type String Arrays
+ *      End of Local Type String Arrays
  *=========================================================================*/
 
 
@@ -60,14 +62,14 @@ const TCHAR* l_BodyParts[] = {
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmBodyPart::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BYDT,	CEsmSubBYDT::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_BYDT, CEsmSubBYDT::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -77,13 +79,14 @@ const esmsubreccreate_t CEsmBodyPart::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmBodyPart::CEsmBodyPart () {
-  //DEFINE_FUNCTION("CEsmBodyPart::CEsmBodyPart()");
-  m_pName     = NULL;
-  m_pBodyData = NULL;
-  m_pModel    = NULL;
- }
+	//DEFINE_FUNCTION("CEsmBodyPart::CEsmBodyPart()");
+	m_pName = NULL;
+	m_pBodyData = NULL;
+	m_pModel = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmBodyPart Constructor
+ *      End of Class CEsmBodyPart Constructor
  *=========================================================================*/
 
 
@@ -95,15 +98,15 @@ CEsmBodyPart::CEsmBodyPart () {
  *
  *=========================================================================*/
 void CEsmBodyPart::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmBodyPart::Destroy()");
-  m_pName     = NULL;
-  m_pBodyData = NULL;
-  m_pModel    = NULL;
+	//DEFINE_FUNCTION("CEsmBodyPart::Destroy()");
+	m_pName = NULL;
+	m_pBodyData = NULL;
+	m_pModel = NULL;
+	CEsmRecord::Destroy();
+}
 
-  CEsmRecord::Destroy();
- }
 /*===========================================================================
- *		End of Class Method CEsmBodyPart::Destroy()
+ *      End of Class Method CEsmBodyPart::Destroy()
  *=========================================================================*/
 
 
@@ -116,32 +119,42 @@ void CEsmBodyPart::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmBodyPart::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmBodyPart* pBody;
+	CEsmBodyPart* pBody;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_BODY)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pBody = (CEsmBodyPart *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_BODY)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_MODEL:
-	return StringCompare(GetModel(), pBody->GetModel());
-    case ESM_FIELD_NAME:
-    case ESM_FIELD_RACE:
-	return StringCompare(GetRace(), pBody->GetRace());
-    case ESM_FIELD_FEMALE:
-	return (int)IsFemale() - (int)pBody->IsFemale();
-    case ESM_FIELD_PLAYABLE:
-	return (int)IsPlayable() - (int)pBody->IsPlayable();
-    case ESM_FIELD_TYPE:
-	return StringCompare(GetBodyPartType(), pBody->GetBodyPartType());
-    case ESM_FIELD_PART:
-	return StringCompare(GetBodyPart(), pBody->GetBodyPart());
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
- }
+	pBody = (CEsmBodyPart *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_MODEL:
+			return StringCompare(GetModel(), pBody->GetModel());
+
+		case ESM_FIELD_NAME:
+		case ESM_FIELD_RACE:
+			return StringCompare(GetRace(), pBody->GetRace());
+
+		case ESM_FIELD_FEMALE:
+			return (int)IsFemale() - (int)pBody->IsFemale();
+
+		case ESM_FIELD_PLAYABLE:
+			return (int)IsPlayable() - (int)pBody->IsPlayable();
+
+		case ESM_FIELD_TYPE:
+			return StringCompare(GetBodyPartType(), pBody->GetBodyPartType());
+
+		case ESM_FIELD_PART:
+			return StringCompare(GetBodyPart(), pBody->GetBodyPart());
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmBodyPart::CompareFields()
+ *      End of Class Method CEsmBodyPart::CompareFields()
  *=========================================================================*/
 
 
@@ -152,15 +165,15 @@ int CEsmBodyPart::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmBodyPart::Create (void) {
-  DEFINE_FUNCTION("CEsmBodyPart::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmBodyPart::Create (void) {
+	DEFINE_FUNCTION("CEsmBodyPart::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmBodyPart);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmBodyPart);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmBodyPart::Create()
+ *      End of Class Method CEsmBodyPart::Create()
  *=========================================================================*/
 
 
@@ -172,18 +185,17 @@ CEsmRecord* CEsmBodyPart::Create (void) {
  *
  *=========================================================================*/
 void CEsmBodyPart::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_FNAM);
-  AllocateSubRecord(MWESM_SUBREC_MODL);
-  AllocateSubRecord(MWESM_SUBREC_BYDT);
-  m_pBodyData->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_FNAM);
+	AllocateSubRecord(MWESM_SUBREC_MODL);
+	AllocateSubRecord(MWESM_SUBREC_BYDT);
+	m_pBodyData->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmBodyPart::CreateNew()
+ *      End of Class Method CEsmBodyPart::CreateNew()
  *=========================================================================*/
 
 
@@ -195,29 +207,34 @@ void CEsmBodyPart::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmBodyPart::GetFieldString (const int FieldID) {
+const TCHAR *CEsmBodyPart::GetFieldString (const int FieldID) {
+	switch (FieldID) {
+		case ESM_FIELD_MODEL:
+			return (GetModel());
 
-  switch (FieldID) {
-    case ESM_FIELD_MODEL:
-	return (GetModel());
-    case ESM_FIELD_NAME:
-    case ESM_FIELD_RACE:
-	return (GetRace());
-    case ESM_FIELD_FEMALE:
-	return (BOOLTOYESNO(IsFemale()));
-    case ESM_FIELD_TYPE:
-	return (GetBodyPartType());
-    case ESM_FIELD_PART:
-	return (GetBodyPart());
-    case ESM_FIELD_PLAYABLE:
-	return (BOOLTOYESNO(IsPlayable()));
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+		case ESM_FIELD_NAME:
+		case ESM_FIELD_RACE:
+			return (GetRace());
+
+		case ESM_FIELD_FEMALE:
+			return (BOOLTOYESNO(IsFemale()));
+
+		case ESM_FIELD_TYPE:
+			return (GetBodyPartType());
+
+		case ESM_FIELD_PART:
+			return (GetBodyPart());
+
+		case ESM_FIELD_PLAYABLE:
+			return (BOOLTOYESNO(IsPlayable()));
+
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmBodyPart::GetFieldString()
+ *      End of Class Method TCHAR* CEsmBodyPart::GetFieldString()
  *=========================================================================*/
 
 
@@ -227,19 +244,19 @@ const TCHAR* CEsmBodyPart::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmBodyPart::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_BYDT)) {
+		m_pBodyData = (CEsmSubBYDT *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
+		m_pName = (CEsmSubNameFix *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_MODL)) {
+		m_pModel = (CEsmSubNameFix *) pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_BYDT))
-    m_pBodyData = (CEsmSubBYDT *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_FNAM))
-    m_pName = (CEsmSubNameFix *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_MODL))
-    m_pModel = (CEsmSubNameFix *) pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmBodyPart::CEsmBodyPart()
+ *      End of Class Event CEsmBodyPart::CEsmBodyPart()
  *=========================================================================*/
 
 
@@ -252,36 +269,51 @@ void CEsmBodyPart::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmBodyPart::SetFieldValue (const int FieldID, const TCHAR* pString) {
+	switch (FieldID) {
+		case ESM_FIELD_MODEL:
+			SetModel(pString);
+			return (true);
 
-  switch (FieldID) { 
-    case ESM_FIELD_MODEL:
-        SetModel(pString);
-	return (true);
-    case ESM_FIELD_NAME:
-    case ESM_FIELD_RACE:
-        SetRace(pString);
-	return (true);
-    case ESM_FIELD_FEMALE:
-        SetFemale(StringToBoolean(pString));
-	return (true);
-    case ESM_FIELD_TYPE: {
-        int Type = GetESMBodyPartType(pString);
-	if (Type >= 0) SetBodyPartType(Type);
-	return (true); }
-    case ESM_FIELD_PART: {
-        int Type = GetESMBodyPart(pString);
-	if (Type >= 0) SetBodyPart(Type);
-	return (true); }
-    case ESM_FIELD_PLAYABLE:
-	SetPlayable(StringToBoolean(pString));
-	return (true);
-   };
+		case ESM_FIELD_NAME:
+		case ESM_FIELD_RACE:
+			SetRace(pString);
+			return (true);
+
+		case ESM_FIELD_FEMALE:
+			SetFemale(StringToBoolean(pString));
+			return (true);
+
+		case ESM_FIELD_TYPE: {
+			int Type = GetESMBodyPartType(pString);
+
+			if (Type >= 0) {
+				SetBodyPartType(Type);
+			}
+
+			return (true);
+		}
+
+		case ESM_FIELD_PART: {
+			int Type = GetESMBodyPart(pString);
+
+			if (Type >= 0) {
+				SetBodyPart(Type);
+			}
+
+			return (true);
+		}
+
+		case ESM_FIELD_PLAYABLE:
+			SetPlayable(StringToBoolean(pString));
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmRecord::SetFieldValue(FieldID, pString);
- }
+	return CEsmRecord::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmBodyPart::SetFieldValue()
+ *      End of Class Method CEsmBodyPart::SetFieldValue()
  *=========================================================================*/
 
 
@@ -292,24 +324,29 @@ bool CEsmBodyPart::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Converts a part value into a string.
  *
  *=========================================================================*/
-const TCHAR* GetESMBodyPart (const int Part) {
-  if (Part < MWESM_PART_MIN || Part > MWESM_PART_MAX) return _T("Unknown");
+const TCHAR *GetESMBodyPart (const int Part) {
+	if (Part < MWESM_PART_MIN || Part > MWESM_PART_MAX) {
+		return _T("Unknown");
+	}
 
-  return l_BodyParts[Part];
- }
+	return l_BodyParts[Part];
+}
 
 
 int GetESMBodyPart (const TCHAR* pString) {
-  int Index;
+	int Index;
 
-  for (Index = MWESM_PART_MIN; Index <= MWESM_PART_MAX; Index++) {
-    if (stricmp(l_BodyParts[Index], pString) == 0) return (Index);
-   }
+	for (Index = MWESM_PART_MIN; Index <= MWESM_PART_MAX; Index++) {
+		if (stricmp(l_BodyParts[Index], pString) == 0) {
+			return (Index);
+		}
+	}
 
-  return (-1);
- }
+	return (-1);
+}
+
 /*===========================================================================
- *		End of Function TCHAR* GetESMBodyPart()
+ *      End of Function TCHAR* GetESMBodyPart()
  *=========================================================================*/
 
 
@@ -320,22 +357,27 @@ int GetESMBodyPart (const TCHAR* pString) {
  * Converts a part type into a string.
  *
  *=========================================================================*/
-const TCHAR* GetESMBodyPartType (const int PartType) {
-  if (PartType < MWESM_PARTTYPE_MIN || PartType > MWESM_PARTTYPE_MAX) return _T("Unknown");
+const TCHAR *GetESMBodyPartType (const int PartType) {
+	if (PartType < MWESM_PARTTYPE_MIN || PartType > MWESM_PARTTYPE_MAX) {
+		return _T("Unknown");
+	}
 
-  return l_BodyPartTypes[PartType];
- }
+	return l_BodyPartTypes[PartType];
+}
 
 
 int GetESMBodyPartType (const TCHAR* pString) {
-  int Index;
+	int Index;
 
-  for (Index = MWESM_PARTTYPE_MIN; Index <= MWESM_PARTTYPE_MAX; Index++) {
-    if (stricmp(l_BodyPartTypes[Index], pString) == 0) return (Index);
-   }
+	for (Index = MWESM_PARTTYPE_MIN; Index <= MWESM_PARTTYPE_MAX; Index++) {
+		if (stricmp(l_BodyPartTypes[Index], pString) == 0) {
+			return (Index);
+		}
+	}
 
-  return (-1);
- }
+	return (-1);
+}
+
 /*===========================================================================
- *		End of Function TCHAR* GetESMBodyPartType()
+ *      End of Function TCHAR* GetESMBodyPartType()
  *=========================================================================*/

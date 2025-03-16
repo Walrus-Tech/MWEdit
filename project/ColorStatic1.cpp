@@ -2,11 +2,11 @@
 
  *
 
- * File:	Colorstatic1.CPP
+ * File:    Colorstatic1.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,21 +42,21 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  DEFINE_FILE("ColorStatic1.cpp");
+DEFINE_FILE("ColorStatic1.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -76,17 +76,17 @@
 
 BEGIN_MESSAGE_MAP(CColorStatic, CStatic)
 
-  //{{AFX_MSG_MAP(CColorStatic)
+	//{{AFX_MSG_MAP(CColorStatic)
 
-  ON_WM_PAINT()
+	ON_WM_PAINT()
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CColorStatic Message Map
+ *      End of CColorStatic Message Map
 
  *=========================================================================*/
 
@@ -105,20 +105,15 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CColorStatic::CColorStatic() {
-
-  m_Color = 0; 
-
-  m_Red   = 0; 
-
-  m_Green = 0; 
-
-  m_Blue  = 0;
-
- }
+	m_Color = 0;
+	m_Red = 0;
+	m_Green = 0;
+	m_Blue = 0;
+}
 
 /*===========================================================================
 
- *		End of Class CColorStatic Constructor
+ *      End of Class CColorStatic Constructor
 
  *=========================================================================*/
 
@@ -137,12 +132,11 @@ CColorStatic::CColorStatic() {
  *=========================================================================*/
 
 CColorStatic::~CColorStatic() {
-
- }
+}
 
 /*===========================================================================
 
- *		End of Class CColorStatic Destructor
+ *      End of Class CColorStatic Destructor
 
  *=========================================================================*/
 
@@ -161,23 +155,15 @@ CColorStatic::~CColorStatic() {
  *=========================================================================*/
 
 void CColorStatic::OnPaint() {
-
-  CPaintDC DC(this);
-
-  CRect    ClientRect;
-
-
-
-  GetClientRect(&ClientRect);
-
-  DC.FillSolidRect(ClientRect, m_Color);
-
- }
+	CPaintDC DC(this);
+	CRect ClientRect;
+	GetClientRect(&ClientRect);
+	DC.FillSolidRect(ClientRect, m_Color);
+}
 
 /*===========================================================================
 
- *		End of Class Event CColorStatic::OnPaint()
+ *      End of Class Event CColorStatic::OnPaint()
 
  *=========================================================================*/
 
-  

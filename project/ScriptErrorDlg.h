@@ -2,11 +2,11 @@
 
  *
 
- * File:	Scripterrordlg.H
+ * File:    Scripterrordlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	September 6, 2003
+ * Created On:  September 6, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmScriptError.h"
+#include "EsmScriptError.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -56,19 +56,19 @@
 
  *=========================================================================*/
 
-	
 
-	/* Return codes */
 
-  #define SCRERRDLG_RESULT_GOTO		101
+/* Return codes */
 
-  #define SCRERRDLG_RESULT_MOREHELP	102
+#define SCRERRDLG_RESULT_GOTO     101
+
+#define SCRERRDLG_RESULT_MOREHELP 102
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -90,81 +90,83 @@ class CScriptErrorDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Memebers -----------------------*/
+	/*---------- Begin Protected Class Memebers -----------------------*/
 
-protected:
+  protected:
 
-  CEsmScriptError*	m_pError;		/* Reference to the script error object */
-
-
+	CEsmScriptError *m_pError;       /* Reference to the script error object */
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Standard constructor */
 
-  CScriptErrorDlg(CWnd* pParent = NULL);
+	CScriptErrorDlg(CWnd* pParent = NULL);
 
 
 
 	/* Clear/enable control contents */
 
-  void ClearControlData  (void);
+	void ClearControlData (void);
 
-  void ClearFunctionData (void);
+	void ClearFunctionData (void);
 
-  void EnableControls    (const bool Enable);
+	void EnableControls (const bool Enable);
 
-  void EnableFuncCtrls   (const bool Enable);
+	void EnableFuncCtrls (const bool Enable);
 
 
 
 	/* Set class members */
 
-  void SetScriptError (CEsmScriptError* pError) { m_pError = pError; }
+	void SetScriptError (CEsmScriptError* pError) {
+		m_pError = pError;
+	}
 
 
 
 	/* Update the controls from the current error object */
 
-  void SetControlData  (void);
+	void SetControlData (void);
 
-  void SetFunctionData (void);
+	void SetFunctionData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CScriptErrorDlg)
+	//{{AFX_DATA(CScriptErrorDlg)
 
 	enum { IDD = IDD_SCRIPTERROR_DLG };
 
-	CButton	m_GotoButton;
+	CButton m_GotoButton;
 
-  CButton	m_FuncButton;
+	CButton m_FuncButton;
 
-  CEdit		m_FuncDescText;
+	CEdit m_FuncDescText;
 
-  CEdit		m_FuncFormText;
+	CEdit m_FuncFormText;
 
-  CEdit		m_FuncArgText;
+	CEdit m_FuncArgText;
 
-  CEdit		m_FunctionText;
+	CEdit m_FunctionText;
 
-  CEdit		m_MsgText;
+	CEdit m_MsgText;
 
-  CEdit		m_TokenText;
+	CEdit m_TokenText;
 
-  CEdit		m_LocationText;
+	CEdit m_LocationText;
 
-  CEdit		m_CodeText;
+	CEdit m_CodeText;
 
-  CEdit		m_MsgTypeText;
+	CEdit m_MsgTypeText;
 
 	//}}AFX_DATA
 
@@ -172,27 +174,27 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CScriptErrorDlg)
+	//{{AFX_VIRTUAL(CScriptErrorDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CScriptErrorDlg)
+	//{{AFX_MSG(CScriptErrorDlg)
 
-  afx_msg void OnFuncButton();
+	afx_msg void OnFuncButton();
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
 	afx_msg void OnFuncGoto();
 
@@ -200,15 +202,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CScriptErrorDlg
+ *      End of Class CScriptErrorDlg
 
  *=========================================================================*/
 
@@ -228,7 +230,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Scripterrordlg.H
+ *      End of File Scripterrordlg.H
 
  *=========================================================================*/
 

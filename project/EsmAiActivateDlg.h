@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmaiactivatedlg.H
+ * File:    Esmaiactivatedlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 24, 2003
+ * Created On:  February 24, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmSubAI_A.h"
+#include "EsmSubAI_A.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,83 +60,83 @@ class CEsmAiActivateDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Members -------------------------*/
+	/*---------- Begin Protected Class Members -------------------------*/
 
-protected:
+  protected:
 
-  CEsmSubAI_A*	m_pSubRecord;
-
-
+	CEsmSubAI_A *m_pSubRecord;
 
 
 
-  /*---------- Begin Public Class Method -----------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Method -----------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmAiActivateDlg(CWnd* pParent = NULL);
+	CEsmAiActivateDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmSubAI_A* pSubRecord);
+	bool DoModal (CEsmSubAI_A* pSubRecord);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmAiActivateDlg)
+	//{{AFX_DATA(CEsmAiActivateDlg)
 
-  enum { IDD = IDD_AIACTIVATE_DLG };
+	enum { IDD = IDD_AIACTIVATE_DLG };
 
-  CComboBox	m_TargetList;
+	CComboBox m_TargetList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmAiActivateDlg)
+	//{{AFX_VIRTUAL(CEsmAiActivateDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmAiActivateDlg)
+	//{{AFX_MSG(CEsmAiActivateDlg)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  virtual void OnOK();
+	virtual void OnOK();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmAiActivateDlg
+ *      End of Class CEsmAiActivateDlg
 
  *=========================================================================*/
 
@@ -156,7 +156,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmaiactivatedlg.H
+ *      End of File Esmaiactivatedlg.H
 
  *=========================================================================*/
 

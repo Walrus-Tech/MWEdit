@@ -2,11 +2,11 @@
 
  *
 
- * File:	EsmScriptCompareDlg.H
+ * File:    EsmScriptCompareDlg.H
 
- * Author:	Dave Humphrey (uesp@sympatico.ca)
+ * Author:  Dave Humphrey (uesp@sympatico.ca)
 
- * Created On:	September 8, 2006
+ * Created On:  September 8, 2006
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "MWEditDoc.h"
+#include "MWEditDoc.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,11 +58,11 @@
 
  *=========================================================================*/
 
-  class CEsmDlgHandler;
+class CEsmDlgHandler;
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -84,91 +84,95 @@ class CEsmScriptCompareDlg : public CFormView {
 
 
 
-  /*---------- Begin Protected Class Members --------------------*/
+	/*---------- Begin Protected Class Members --------------------*/
 
-protected:
+  protected:
 
-  CEsmDlgHandler* m_pDlgHandler;	/* Reference to parent handler */
-
-
+	CEsmDlgHandler *m_pDlgHandler;    /* Reference to parent handler */
 
 
 
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
-
-protected:
-
-  CEsmScriptCompareDlg();
-
-  virtual ~CEsmScriptCompareDlg();
-
-  DECLARE_DYNCREATE(CEsmScriptCompareDlg);
 
 
+	/*---------- Begin Protected Class Methods --------------------*/
+
+  protected:
+
+	CEsmScriptCompareDlg();
+
+	virtual ~CEsmScriptCompareDlg();
+
+	DECLARE_DYNCREATE(CEsmScriptCompareDlg);
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Add text to the log */
 
-  void AddLogText (const TCHAR* pString, va_list Args);
+	void AddLogText (const TCHAR* pString, va_list Args);
 
 
 
 	/* Clear the text */
 
-  void ClearText (void) { m_LogText.SetWindowText(""); }
+	void ClearText (void) {
+		m_LogText.SetWindowText("");
+	}
 
 
 
 	/* Set class members */
 
-  void SetDlgHandler (CEsmDlgHandler* pParent) { m_pDlgHandler = pParent; }
+	void SetDlgHandler (CEsmDlgHandler* pParent) {
+		m_pDlgHandler = pParent;
+	}
 
 
 
 	/* Update the view title */
 
-  void UpdateTitle (void);
+	void UpdateTitle (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmScriptCompareDlg)
+	//{{AFX_DATA(CEsmScriptCompareDlg)
 
-  enum { IDD = IDD_SCRIPTCOMPARE_DLG };
+	enum { IDD = IDD_SCRIPTCOMPARE_DLG };
 
-  CEdit		m_LogText;
+	CEdit m_LogText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmScriptCompareDlg)
+	//{{AFX_VIRTUAL(CEsmScriptCompareDlg)
 
-public:
+  public:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
@@ -176,9 +180,9 @@ protected:
 
 #ifdef _DEBUG
 
-  virtual void AssertValid() const;
+	virtual void AssertValid() const;
 
-  virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext& dc) const;
 
 #endif
 
@@ -186,25 +190,25 @@ protected:
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmScriptCompareDlg)
+	//{{AFX_MSG(CEsmScriptCompareDlg)
 
-  afx_msg void OnCancel();
+	afx_msg void OnCancel();
 
-  afx_msg void OnDestroy();
+	afx_msg void OnDestroy();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of CEsmScriptCompareDlg Definition
+ *      End of CEsmScriptCompareDlg Definition
 
  *=========================================================================*/
 
@@ -224,7 +228,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File EsmScriptCompareDlg.H
+ *      End of File EsmScriptCompareDlg.H
 
  *=========================================================================*/
 

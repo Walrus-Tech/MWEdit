@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmaitraveldlg.CPP
+ * File:    Esmaitraveldlg.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 24, 2003
+ * Created On:  February 24, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,21 +42,21 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  DEFINE_FILE("EsmAiTravelDlg.cpp");
+DEFINE_FILE("EsmAiTravelDlg.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -76,15 +76,15 @@
 
 BEGIN_MESSAGE_MAP(CEsmAiTravelDlg, CDialog)
 
-  //{{AFX_MSG_MAP(CEsmAiTravelDlg)
+	//{{AFX_MSG_MAP(CEsmAiTravelDlg)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CEsmAiTravelDlg Message Map
+ *      End of CEsmAiTravelDlg Message Map
 
  *=========================================================================*/
 
@@ -103,18 +103,14 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CEsmAiTravelDlg::CEsmAiTravelDlg(CWnd* pParent) : CDialog(CEsmAiTravelDlg::IDD, pParent) {
-
-  //{{AFX_DATA_INIT(CEsmAiTravelDlg)
-
-  //}}AFX_DATA_INIT
-
-  m_pSubRecord = NULL;
-
- }
+	//{{AFX_DATA_INIT(CEsmAiTravelDlg)
+	//}}AFX_DATA_INIT
+	m_pSubRecord = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CEsmAiTravelDlg Constructor
+ *      End of Class CEsmAiTravelDlg Constructor
 
  *=========================================================================*/
 
@@ -133,24 +129,17 @@ CEsmAiTravelDlg::CEsmAiTravelDlg(CWnd* pParent) : CDialog(CEsmAiTravelDlg::IDD, 
  *=========================================================================*/
 
 void CEsmAiTravelDlg::DoDataExchange(CDataExchange* pDX) {
-
-  CDialog::DoDataExchange(pDX);
-
-  //{{AFX_DATA_MAP(CEsmAiTravelDlg)
-
-  DDX_Control(pDX, IDC_ZTEXT, m_ZText);
-
-  DDX_Control(pDX, IDC_YTEXT, m_YText);
-
-  DDX_Control(pDX, IDC_XTEXT, m_XText);
-
-  //}}AFX_DATA_MAP
-
- }
+	CDialog::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CEsmAiTravelDlg)
+	DDX_Control(pDX, IDC_ZTEXT, m_ZText);
+	DDX_Control(pDX, IDC_YTEXT, m_YText);
+	DDX_Control(pDX, IDC_XTEXT, m_XText);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmAiTravelDlg::DoDataExchange()
+ *      End of Class Method CEsmAiTravelDlg::DoDataExchange()
 
  *=========================================================================*/
 
@@ -169,30 +158,25 @@ void CEsmAiTravelDlg::DoDataExchange(CDataExchange* pDX) {
  *=========================================================================*/
 
 bool CEsmAiTravelDlg::DoModal (CEsmSubAI_T* pSubRecord) {
+	int Result;
+	m_pSubRecord = pSubRecord;
 
-  int Result; 
+	if (pSubRecord == NULL) {
+		return (false);
+	}
 
+	Result = CDialog::DoModal();
 
+	if (Result != IDOK) {
+		return (false);
+	}
 
-  m_pSubRecord = pSubRecord;
-
-  if (pSubRecord == NULL) return (false);
-
-
-
-  Result = CDialog::DoModal();
-
-  if (Result != IDOK) return (false);
-
-
-
-  return (true);
-
- }
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmAiTravelDlg::DoModal()
+ *      End of Class Method CEsmAiTravelDlg::DoModal()
 
  *=========================================================================*/
 
@@ -211,52 +195,31 @@ bool CEsmAiTravelDlg::DoModal (CEsmSubAI_T* pSubRecord) {
  *=========================================================================*/
 
 BOOL CEsmAiTravelDlg::OnInitDialog() {
-
-  ai_tdata_t*	pAiData;
-
-  CString	Buffer;
-
-
-
-  CDialog::OnInitDialog();
-
-  pAiData = m_pSubRecord->GetAIData();
-
-  m_XText.LimitText(16);
-
-  m_YText.LimitText(16);
-
-  m_ZText.LimitText(16);
-
-
+	ai_tdata_t *pAiData;
+	CString Buffer;
+	CDialog::OnInitDialog();
+	pAiData = m_pSubRecord->GetAIData();
+	m_XText.LimitText(16);
+	m_YText.LimitText(16);
+	m_ZText.LimitText(16);
 
 	/* Set the text values */
 
-  if (pAiData != NULL) {
+	if (pAiData != NULL) {
+		Buffer.Format(_T("%g"), pAiData->X);
+		m_XText.SetWindowText(Buffer);
+		Buffer.Format(_T("%g"), pAiData->Y);
+		m_YText.SetWindowText(Buffer);
+		Buffer.Format(_T("%g"), pAiData->Z);
+		m_ZText.SetWindowText(Buffer);
+	}
 
-    Buffer.Format(_T("%g"), pAiData->X);
-
-    m_XText.SetWindowText(Buffer); 
-
-    Buffer.Format(_T("%g"), pAiData->Y);
-
-    m_YText.SetWindowText(Buffer); 
-
-    Buffer.Format(_T("%g"), pAiData->Z);
-
-    m_ZText.SetWindowText(Buffer); 
-
-   }
-
-	
-
-  return (TRUE);
-
- }
+	return (TRUE);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmAiTravelDlg::OnInitDialog()
+ *      End of Class Event CEsmAiTravelDlg::OnInitDialog()
 
  *=========================================================================*/
 
@@ -275,44 +238,27 @@ BOOL CEsmAiTravelDlg::OnInitDialog() {
  *=========================================================================*/
 
 void CEsmAiTravelDlg::OnOK() {
-
-  ai_tdata_t*	pAiData;
-
-  CString	Buffer;
-
-
-
-  pAiData = m_pSubRecord->GetAIData();
-
-
+	ai_tdata_t *pAiData;
+	CString Buffer;
+	pAiData = m_pSubRecord->GetAIData();
 
 	/* Savet the text values */
 
-  if (pAiData != NULL) {
+	if (pAiData != NULL) {
+		m_XText.GetWindowText(Buffer);
+		pAiData->X = (float) atof(Buffer);
+		m_YText.GetWindowText(Buffer);
+		pAiData->Y = (float) atof(Buffer);
+		m_ZText.GetWindowText(Buffer);
+		pAiData->Z = (float) atof(Buffer);
+	}
 
-    m_XText.GetWindowText(Buffer);
-
-    pAiData->X = (float) atof(Buffer);
-
-    m_YText.GetWindowText(Buffer);
-
-    pAiData->Y = (float) atof(Buffer);
-
-    m_ZText.GetWindowText(Buffer);
-
-    pAiData->Z = (float) atof(Buffer);
-
-   }
-
-  
-
-  CDialog::OnOK();
-
- }
+	CDialog::OnOK();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmAiTravelDlg::OnOK()
+ *      End of Class Event CEsmAiTravelDlg::OnOK()
 
  *=========================================================================*/
 

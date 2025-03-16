@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmscrfuncarray.CPP
+ * File:    Esmscrfuncarray.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	September 2, 2003
+ * Created On:  September 2, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "esmscrfuncarray.h"
 
@@ -36,11 +36,11 @@
 
  *=========================================================================*/
 
-  DEFINE_FILE("EsmScrFuncArray.cpp");
+DEFINE_FILE("EsmScrFuncArray.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -61,16 +61,12 @@
  *=========================================================================*/
 
 CEsmScrFuncArray::CEsmScrFuncArray () : m_Functions(0) {
-
-  //DEFINE_FUNCTION("CEsmScrFuncArray::CEsmScrFuncArray()");
-
-
-
- }
+	//DEFINE_FUNCTION("CEsmScrFuncArray::CEsmScrFuncArray()");
+}
 
 /*===========================================================================
 
- *		End of Class CEsmScrFuncArray Constructor
+ *      End of Class CEsmScrFuncArray Constructor
 
  *=========================================================================*/
 
@@ -89,34 +85,23 @@ CEsmScrFuncArray::CEsmScrFuncArray () : m_Functions(0) {
  *=========================================================================*/
 
 void CEsmScrFuncArray::Destroy (void) {
-
-  DEFINE_FUNCTION("CEsmScrFuncArray::Destroy()");
-
-  CEsmScrFuncData* pFunction;
-
-  int		   Index;
-
-
+	DEFINE_FUNCTION("CEsmScrFuncArray::Destroy()");
+	CEsmScrFuncData* pFunction;
+	int Index;
 
 	/* Delete all function objects in the array */
 
-  for (Index = 0; Index < m_Functions.GetNumElements(); Index++) {
+	for (Index = 0; Index < m_Functions.GetNumElements(); Index++) {
+		pFunction = m_Functions.GetAt(Index);
+		DestroyPointer(pFunction);
+	}
 
-    pFunction = m_Functions.GetAt(Index);
-
-    DestroyPointer(pFunction);
-
-   }
-
-
-
-  m_Functions.RemoveAll();
-
- }
+	m_Functions.RemoveAll();
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScrFuncArray::Destroy()
+ *      End of Class Method CEsmScrFuncArray::Destroy()
 
  *=========================================================================*/
 
@@ -140,33 +125,26 @@ void CEsmScrFuncArray::Destroy (void) {
 
  *=========================================================================*/
 
-CEsmScrFuncData* CEsmScrFuncArray::FindFunction (const TCHAR* pName) {
+CEsmScrFuncData *CEsmScrFuncArray::FindFunction (const TCHAR* pName) {
+	CEsmScrFuncData* pFunction;
+	int Index;
 
-  CEsmScrFuncData* pFunction;
+	/* Look at all function objects in the array */
 
-  int		   Index;
+	for (Index = 0; Index < m_Functions.GetNumElements(); Index++) {
+		pFunction = m_Functions.GetAt(Index);
 
+		if (pFunction->IsName(pName)) {
+			return (pFunction);
+		}
+	}
 
-
-  	/* Look at all function objects in the array */
-
-  for (Index = 0; Index < m_Functions.GetNumElements(); Index++) {
-
-    pFunction = m_Functions.GetAt(Index);
-
-    if (pFunction->IsName(pName)) return (pFunction);
-
-   }
-
-
-
-  return (NULL);
-
- }
+	return (NULL);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScrFuncArray::FindFunction()
+ *      End of Class Method CEsmScrFuncArray::FindFunction()
 
  *=========================================================================*/
 
@@ -191,36 +169,24 @@ CEsmScrFuncData* CEsmScrFuncArray::FindFunction (const TCHAR* pName) {
  *=========================================================================*/
 
 bool CEsmScrFuncArray::Load (const TCHAR* pFilename) {
-
-  CGenFile File;
-
-  bool     Result;
-
-	
-
+	CGenFile File;
+	bool Result;
 	/* Attempt to open the file for input */
+	Result = File.Open(pFilename, _T("rt"));
 
-  Result = File.Open(pFilename, _T("rt"));
-
-  if (!Result) return (false);
-
-
+	if (!Result) {
+		return (false);
+	}
 
 	/* Clear the current contents */
-
-  Destroy();
-
-
-
+	Destroy();
 	/* Input the data file */
-
-  return Read(File);
-
- }
+	return Read(File);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScrFuncArray::Load()
+ *      End of Class Method CEsmScrFuncArray::Load()
 
  *=========================================================================*/
 
@@ -245,64 +211,50 @@ bool CEsmScrFuncArray::Load (const TCHAR* pFilename) {
  *=========================================================================*/
 
 bool CEsmScrFuncArray::Read (CGenFile& File) {
-
-  TCHAR  LineBuffer[ESM_SFDATA_LINELENGTH];
-
-  TCHAR* pVariable;
-
-  TCHAR* pValue;
-
-  int    LineResult;
-
-  bool   Result;
-
-
+	TCHAR LineBuffer[ESM_SFDATA_LINELENGTH];
+	TCHAR* pVariable;
+	TCHAR* pValue;
+	int LineResult;
+	bool Result;
 
 	/* Read until end of file */
 
-  while (!File.IsEOF()) {
-
-
-
+	while (!File.IsEOF()) {
 		/* Input one line from the file */
+		LineResult = File.ReadLine(LineBuffer, ESM_SFDATA_LINELENGTH);
 
-    LineResult = File.ReadLine(LineBuffer, ESM_SFDATA_LINELENGTH);
+		if (LineResult == READLINE_MSL) {
+			LineResult = File.ReadLine();
+		}
 
-    if (LineResult == READLINE_MSL) LineResult = File.ReadLine();
-
-    if (LineResult == READLINE_ERROR) return (false);
-
-
+		if (LineResult == READLINE_ERROR) {
+			return (false);
+		}
 
 		/* Attempt to parse the input line */
+		Result = SeperateVarValue(&pVariable, &pValue, LineBuffer);
 
-    Result = SeperateVarValue(&pVariable, &pValue, LineBuffer);
-
-    if (!Result) continue;
-
-
+		if (!Result) {
+			continue;
+		}
 
 		/* Check for the start of a function definition */
 
-    if ( _stricmp(pVariable, _T("Function")) == 0) {
+		if ( _stricmp(pVariable, _T("Function")) == 0) {
+			Result = ReadFunction(File, pValue);
 
-      Result = ReadFunction(File, pValue);
+			if (!Result) {
+				return (false);
+			}
+		}
+	}
 
-      if (!Result) return (false);
-
-     }
-
-   }
-
-
-
-  return (true);
-
- }
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScrFuncArray::Read()
+ *      End of Class Method CEsmScrFuncArray::Read()
 
  *=========================================================================*/
 
@@ -329,32 +281,19 @@ bool CEsmScrFuncArray::Read (CGenFile& File) {
  *=========================================================================*/
 
 bool CEsmScrFuncArray::ReadFunction (CGenFile& File, const TCHAR* pFuncName) {
-
-  DEFINE_FUNCTION("CEsmScrFuncArray::ReadFunction()");
-
-  CEsmScrFuncData* pFunction;
-
-
-
+	DEFINE_FUNCTION("CEsmScrFuncArray::ReadFunction()");
+	CEsmScrFuncData* pFunction;
 	/* Allocate and initialize the new function object */
-
-  CreatePointer(pFunction, CEsmScrFuncData);
-
-  m_Functions.Add(pFunction);
-
-  pFunction->SetFunction(pFuncName);
-
-
-
+	CreatePointer(pFunction, CEsmScrFuncData);
+	m_Functions.Add(pFunction);
+	pFunction->SetFunction(pFuncName);
 	/* Input the function record */
-
-  return pFunction->ReadData(File);
-
- }
+	return pFunction->ReadData(File);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScrFuncArray::ReadFunction()
+ *      End of Class Method CEsmScrFuncArray::ReadFunction()
 
  *=========================================================================*/
 

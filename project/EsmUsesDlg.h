@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmusesdlg.H
+ * File:    Esmusesdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 7, 2003
+ * Created On:  October 7, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "MWEditDoc.h"
+#include "MWEditDoc.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,11 +58,11 @@
 
  *=========================================================================*/
 
-  class CEsmDlgHandler;
+class CEsmDlgHandler;
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -84,101 +84,105 @@ class CEsmUsesDlg : public CFormView {
 
 
 
-  /*---------- Begin Protected Class Members --------------------*/
+	/*---------- Begin Protected Class Members --------------------*/
 
-protected:
+  protected:
 
-  CEsmDlgHandler* m_pDlgHandler;	/* Reference to parent handler */
+	CEsmDlgHandler *m_pDlgHandler;    /* Reference to parent handler */
 
-  esmrecinfo_t*   m_pRecInfo;		/* The record being searched for */
-
-
-
-  int		  m_TotalRecords;
-
-  int		  m_UsedRecords;
+	esmrecinfo_t *m_pRecInfo;       /* The record being searched for */
 
 
 
+	int m_TotalRecords;
 
-
-  /*---------- Begin Protected Class Methods --------------------*/
-
-protected:
-
-  CEsmUsesDlg();
-
-  virtual ~CEsmUsesDlg();
-
-  DECLARE_DYNCREATE(CEsmUsesDlg);
+	int m_UsedRecords;
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
 
-public:
+
+	/*---------- Begin Protected Class Methods --------------------*/
+
+  protected:
+
+	CEsmUsesDlg();
+
+	virtual ~CEsmUsesDlg();
+
+	DECLARE_DYNCREATE(CEsmUsesDlg);
+
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Set class members */
 
-  void SetDlgHandler (CEsmDlgHandler* pParent) { m_pDlgHandler = pParent; }
+	void SetDlgHandler (CEsmDlgHandler* pParent) {
+		m_pDlgHandler = pParent;
+	}
 
-  void SetRecInfo    (esmrecinfo_t* pRecInfo)  { m_pRecInfo    = pRecInfo; }
+	void SetRecInfo (esmrecinfo_t* pRecInfo) {
+		m_pRecInfo = pRecInfo;
+	}
 
 
 
 	/* Updates the uses label control */
 
-  void UpdateLabel (void);
+	void UpdateLabel (void);
 
 
 
 	/* Updates the title based on the current information */
 
-  void UpdateTitle (void);
+	void UpdateTitle (void);
 
 
 
 	/* Updates the uses information for the current record */
 
-  bool UpdateUses (void);
+	bool UpdateUses (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmUsesDlg)
+	//{{AFX_DATA(CEsmUsesDlg)
 
-  enum { IDD = IDD_USES_DLG };
+	enum { IDD = IDD_USES_DLG };
 
-  CStatic	m_UsesLabel;
+	CStatic m_UsesLabel;
 
-  CProgressCtrl	m_ProgressBar;
+	CProgressCtrl m_ProgressBar;
 
-  CEsmListCtrl	m_RecordList;
+	CEsmListCtrl m_RecordList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmUsesDlg)
+	//{{AFX_VIRTUAL(CEsmUsesDlg)
 
-public:
+  public:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
@@ -186,9 +190,9 @@ protected:
 
 #ifdef _DEBUG
 
-  virtual void AssertValid() const;
+	virtual void AssertValid() const;
 
-  virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext& dc) const;
 
 #endif
 
@@ -196,13 +200,13 @@ protected:
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmUsesDlg)
+	//{{AFX_MSG(CEsmUsesDlg)
 
-  afx_msg void OnCancel();
+	afx_msg void OnCancel();
 
-  afx_msg void OnDestroy();
+	afx_msg void OnDestroy();
 
-  afx_msg LRESULT OnEditRecord (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnEditRecord (LPARAM lParam, LPARAM wParam);
 
 	afx_msg void OnEditInfo();
 
@@ -218,15 +222,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of CEsmUsesDlg Definition
+ *      End of CEsmUsesDlg Definition
 
  *=========================================================================*/
 
@@ -246,7 +250,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmusesdlg.H
+ *      End of File Esmusesdlg.H
 
  *=========================================================================*/
 

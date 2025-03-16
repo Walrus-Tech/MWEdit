@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	RtfEditView.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Monday, 10 February, 2003
+ * File:    RtfEditView.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Monday, 10 February, 2003
  *
  * Interface of the CEsmScriptDlg class.
  *
@@ -11,11 +11,11 @@
 #define __RtfEditView_H
 
 
- /*===========================================================================
-  *
-  * Begin Required Includes
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Required Includes
+ *
+ *=========================================================================*/
 #include "EsmGlobOptions.h"
 #include "contain/PtrArray.h"
 #include "esmscriptdefs.h"
@@ -26,111 +26,111 @@
 #include "EsmScrFuncArray.h"
 #include "editundo.h"
 #include "richole.h"
-  /*===========================================================================
-   *		End of Required Includes
-   *=========================================================================*/
-
-
-   /*===========================================================================
-	*
-	* Begin Definitions
-	*
-	*=========================================================================*/
-
-	/* Word Types */
-#define ESMSCRIPT_WORDTYPE_END	-1
-#define ESMSCRIPT_WORDTYPE_UNKNOWN	0
-#define ESMSCRIPT_WORDTYPE_ALPHA	1
-#define ESMSCRIPT_WORDTYPE_INTEGER	2
-#define ESMSCRIPT_WORDTYPE_FLOAT	3
-#define ESMSCRIPT_WORDTYPE_OPERATOR	4
-#define ESMSCRIPT_WORDTYPE_STRING	5
-#define ESMSCRIPT_WORDTYPE_COMMENT	6
-
-  /* Used when resizing the view */
-#define ESMSCR_VIEW_TOPMARGIN		24
-#define ESMSCR_VIEW_BOTTOMMARGIN	16
-#define ESMSCR_VIEW_RIGHTMARGIN	0
-#define ESMSCR_VIEW_LEFTMARGIN	0
-#define ESMSCR_VIEW_MINSIZE		50
-
-#define ESMSCR_PARSETTFUNC_NOFUNC	-1
-#define ESMSCR_PARSETTFUNC_NOCHANGE	0
-#define ESMSCR_PARSETTFUNC_UPDATE	1
-#define ESMSCR_PARSETTFUNC_NEWFUNC	2
-
-
 /*===========================================================================
- *		End of Definitions
+ *        End of Required Includes
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Begin Type Definitions
-  *
-  *=========================================================================*/
+/*===========================================================================
+*
+* Begin Definitions
+*
+*=========================================================================*/
 
-  /*===========================================================================
-   *		End of Type Definitions
-   *=========================================================================*/
+/* Word Types */
+#define ESMSCRIPT_WORDTYPE_END  -1
+#define ESMSCRIPT_WORDTYPE_UNKNOWN  0
+#define ESMSCRIPT_WORDTYPE_ALPHA    1
+#define ESMSCRIPT_WORDTYPE_INTEGER  2
+#define ESMSCRIPT_WORDTYPE_FLOAT    3
+#define ESMSCRIPT_WORDTYPE_OPERATOR 4
+#define ESMSCRIPT_WORDTYPE_STRING   5
+#define ESMSCRIPT_WORDTYPE_COMMENT  6
+
+/* Used when resizing the view */
+#define ESMSCR_VIEW_TOPMARGIN       24
+#define ESMSCR_VIEW_BOTTOMMARGIN    16
+#define ESMSCR_VIEW_RIGHTMARGIN 0
+#define ESMSCR_VIEW_LEFTMARGIN  0
+#define ESMSCR_VIEW_MINSIZE     50
+
+#define ESMSCR_PARSETTFUNC_NOFUNC   -1
+#define ESMSCR_PARSETTFUNC_NOCHANGE 0
+#define ESMSCR_PARSETTFUNC_UPDATE   1
+#define ESMSCR_PARSETTFUNC_NEWFUNC  2
 
 
-   /*===========================================================================
-	*
-	* Begin Class CEsmScriptDlg Definition
-	*
-	*=========================================================================*/
+/*===========================================================================
+ *      End of Definitions
+ *=========================================================================*/
+
+
+/*===========================================================================
+ *
+ * Begin Type Definitions
+ *
+ *=========================================================================*/
+
+/*===========================================================================
+ *        End of Type Definitions
+ *=========================================================================*/
+
+
+/*===========================================================================
+*
+* Begin Class CEsmScriptDlg Definition
+*
+*=========================================================================*/
 class CEsmScriptDlg : public CEsmRecDialog {
 
 	/*---------- Begin Protected Class Members ----------------------*/
-protected:
-	CEsmScript* m_pScript;
+  protected:
+	CEsmScript *m_pScript;
 
-	CEsmScriptCompile	m_Compiler;
+	CEsmScriptCompile m_Compiler;
 
-	bool			m_UpdatingRichEdit;
-	long			m_LastUpdateLineCount;
+	bool m_UpdatingRichEdit;
+	long m_LastUpdateLineCount;
 
-	CEsmScriptOptions* m_pCurrentScriptOptions;
+	CEsmScriptOptions *m_pCurrentScriptOptions;
 
-	HACCEL		m_ScriptAccel;
-	CFindReplaceDialog* m_pFindReplaceDlg;
+	HACCEL m_ScriptAccel;
+	CFindReplaceDialog *m_pFindReplaceDlg;
 
-	CBitmap		m_CopyBmp;
-	CBitmap		m_CutBmp;
-	CBitmap		m_UndoBmp;
-	CBitmap		m_PasteBmp;
-	CBitmap		m_CompileBmp;
-	CBitmap		m_FindBmp;
-	CBitmap		m_ReplaceBmp;
-	CBitmap		m_WhiteBmp;
-	CBitmap		m_BlueBmp;
-	CBitmap		m_IndentBmp;
+	CBitmap m_CopyBmp;
+	CBitmap m_CutBmp;
+	CBitmap m_UndoBmp;
+	CBitmap m_PasteBmp;
+	CBitmap m_CompileBmp;
+	CBitmap m_FindBmp;
+	CBitmap m_ReplaceBmp;
+	CBitmap m_WhiteBmp;
+	CBitmap m_BlueBmp;
+	CBitmap m_IndentBmp;
 
-	CToolTipCtrl		m_ToolbarTip;
+	CToolTipCtrl m_ToolbarTip;
 
-	CString		m_ScriptID;
+	CString m_ScriptID;
 
-	CDlToolTip		m_ToolTip;
-	CFont			m_ToolTipFont;
+	CDlToolTip m_ToolTip;
+	CFont m_ToolTipFont;
 
-	CString		m_ToolFunction;
-	CEsmScrFuncData* m_pToolFuncData;
-	esmscrfuncinfo_t* m_pToolFuncInfo;
-	int			m_TipFuncArgIndex;
-	int			m_LastTipFuncLine;
+	CString m_ToolFunction;
+	CEsmScrFuncData *m_pToolFuncData;
+	esmscrfuncinfo_t *m_pToolFuncInfo;
+	int m_TipFuncArgIndex;
+	int m_LastTipFuncLine;
 
-	CEditUndoStack	m_UndoStack;
+	CEditUndoStack m_UndoStack;
 
-	CString		m_DragBuffer;
-	long			m_LastDragStartSel;
-	long			m_LastDragEndSel;
+	CString m_DragBuffer;
+	long m_LastDragStartSel;
+	long m_LastDragEndSel;
 
 
 
 	/*---------- Begin Protected Class Methods ----------------------*/
-protected:
+  protected:
 
 	/* Create from serialization only */
 	CEsmScriptDlg();
@@ -141,28 +141,28 @@ protected:
 	CString GetCurrentScriptWord(void);
 
 
-public:
+  public:
 	//{{AFX_DATA(CEsmScriptDlg)
 	enum { IDD = IDD_SCRIPT_DLG };
-	CButton	m_NoFormatCheck;
-	CButton	m_BlueButton;
-	CButton	m_WhiteButton;
-	CButton	m_ReplaceButton;
-	CButton	m_FindButton;
-	CButton	m_PasteButton;
-	CButton	m_CutButton;
-	CButton	m_UndoButton;
-	CButton	m_CopyButton;
-	CButton	m_CompileButton;
-	CButton	m_IndentButton;
-	CStatic	m_StatusLabel2;
-	CStatic	m_StatusLabel1;
-	CCustRichEdit	m_ScriptText;
+	CButton m_NoFormatCheck;
+	CButton m_BlueButton;
+	CButton m_WhiteButton;
+	CButton m_ReplaceButton;
+	CButton m_FindButton;
+	CButton m_PasteButton;
+	CButton m_CutButton;
+	CButton m_UndoButton;
+	CButton m_CopyButton;
+	CButton m_CompileButton;
+	CButton m_IndentButton;
+	CStatic m_StatusLabel2;
+	CStatic m_StatusLabel1;
+	CCustRichEdit m_ScriptText;
 	//}}AFX_DATA
 
 
 	/*---------- Begin Public Class Methods --------------------------*/
-public:
+  public:
 
 	/* Class destructor */
 	virtual ~CEsmScriptDlg();
@@ -177,7 +177,7 @@ public:
 	void CloseToolTips(void);
 
 	/* Return a format to display a token word with */
-	CHARFORMAT2* GetScriptWordFormat(CString& ScriptWord, const int WordType);
+	CHARFORMAT2 *GetScriptWordFormat(CString& ScriptWord, const int WordType);
 
 	/* Get class members */
 	virtual bool IsModified(void);
@@ -197,7 +197,7 @@ public:
 
 	/* Attempt to find and open a function tool tip */
 	bool OpenFunctionToolTip(void);
-	int  ParseFuncToolTip(const  TCHAR* pLineBuffer, const int CharPos);
+	int ParseFuncToolTip(const TCHAR* pLineBuffer, const int CharPos);
 	bool UpdateFuncToolTip(void);
 
 	/* Update the current position status bar */
@@ -205,18 +205,18 @@ public:
 	void UpdateSizeStatus(void);
 
 	/* ClassWizard generated virtual function overrides */
-  //{{AFX_VIRTUAL(CEsmScriptDlg)
-public:
+	//{{AFX_VIRTUAL(CEsmScriptDlg)
+  public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
-protected:
+  protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 	virtual void OnInitialUpdate();
 	//}}AFX_VIRTUAL
 
 
-	  /* Generated message map functions */
-protected:
+	/* Generated message map functions */
+  protected:
 	//{{AFX_MSG(CEsmScriptDlg)
 	afx_msg void OnChangeScriptText();
 	afx_msg void OnUpdateScriptText();
@@ -259,14 +259,14 @@ protected:
 
 
 	// Interface Map
-public:
+  public:
 
 	BEGIN_INTERFACE_PART(RichEditOleCallback, IRichEditOleCallback)
-		INIT_INTERFACE_PART(CRichEditView, RichEditOleCallback)
-		STDMETHOD(GetNewStorage) (LPSTORAGE*);
+	INIT_INTERFACE_PART(CRichEditView, RichEditOleCallback)
+	STDMETHOD(GetNewStorage) (LPSTORAGE*);
 	STDMETHOD(GetInPlaceContext) (LPOLEINPLACEFRAME*,
-		LPOLEINPLACEUIWINDOW*,
-		LPOLEINPLACEFRAMEINFO);
+	                              LPOLEINPLACEUIWINDOW *,
+	                              LPOLEINPLACEFRAMEINFO);
 	STDMETHOD(ShowContainerUI) (BOOL);
 	STDMETHOD(QueryInsertObject) (LPCLSID, LPSTORAGE, LONG);
 	STDMETHOD(DeleteObject) (LPOLEOBJECT);
@@ -280,16 +280,17 @@ public:
 	DECLARE_INTERFACE_MAP()
 
 };
+
 /*===========================================================================
- *		End of Class CEsmScriptDlg Definition
+ *      End of Class CEsmScriptDlg Definition
  *=========================================================================*/
 
 
- //{{AFX_INSERT_LOCATION}}
- //}}AFX_INSERT_LOCATION
+//{{AFX_INSERT_LOCATION}}
+//}}AFX_INSERT_LOCATION
 
 
 #endif
 /*===========================================================================
- *		End of File View.H
+ *      End of File View.H
  *=========================================================================*/

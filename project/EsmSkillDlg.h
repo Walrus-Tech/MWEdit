@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmskilldlg.H
+ * File:    Esmskilldlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 18, 2003
+ * Created On:  February 18, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,85 +60,85 @@
 
 class CEsmSkillDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmSkillDlg);
+	DECLARE_DYNCREATE(CEsmSkillDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmSkill*	m_pSkill;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
+	CEsmSkill *m_pSkill;
 
 
 
 
 
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmSkillDlg();
+	CEsmSkillDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmSkillDlg)
+	//{{AFX_DATA(CEsmSkillDlg)
 
 	enum { IDD = IDD_SKILL_DLG };
 
-	CEdit	m_ValueText4;
+	CEdit m_ValueText4;
 
-	CEdit	m_ValueText3;
+	CEdit m_ValueText3;
 
-	CEdit	m_ValueText2;
+	CEdit m_ValueText2;
 
-	CEdit	m_ActionText4;
+	CEdit m_ActionText4;
 
-	CEdit	m_ActionText3;
+	CEdit m_ActionText3;
 
-	CEdit	m_ActionText2;
+	CEdit m_ActionText2;
 
-	CEdit	m_ValueText1;
+	CEdit m_ValueText1;
 
-	CEdit	m_ActionText1;
+	CEdit m_ActionText1;
 
-	CEdit	m_DescText;
+	CEdit m_DescText;
 
-	CComboBox	m_SpecialList;
+	CComboBox m_SpecialList;
 
-	CComboBox	m_AttributeList;
+	CComboBox m_AttributeList;
 
-	CEdit	m_NameText;
+	CEdit m_NameText;
 
 	//}}AFX_DATA
 
@@ -146,39 +146,39 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmSkillDlg)
+	//{{AFX_VIRTUAL(CEsmSkillDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmSkillDlg)
+	//{{AFX_MSG(CEsmSkillDlg)
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmSkillDlg Definition
+ *      End of Class CEsmSkillDlg Definition
 
  *=========================================================================*/
 
@@ -198,7 +198,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmskilldlg.H
+ *      End of File Esmskilldlg.H
 
  *=========================================================================*/
 

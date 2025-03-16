@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmDialogue.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmDialogue.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmDialogue.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmDialogue.cpp");
+DEFINE_FILE("EsmDialogue.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,12 +29,12 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmDialogue::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DATA,	CEsmSubRecord::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_DATA, CEsmSubRecord::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -43,15 +43,15 @@ const esmsubreccreate_t CEsmDialogue::s_SubRecCreate[] = {
  * Begin Dialogue Type Array
  *
  *=========================================================================*/
-const TCHAR* l_DialogueTypes[] = {
+const TCHAR *l_DialogueTypes[] = {
 	_T("Topic"),
 	_T("Voice"),
 	_T("Greeting"),
 	_T("Persuasion"),
 	_T("Journal")
- };
+};
 /*===========================================================================
- *		End of Dialogue Type Array
+ *      End of Dialogue Type Array
  *=========================================================================*/
 
 
@@ -61,11 +61,12 @@ const TCHAR* l_DialogueTypes[] = {
  *
  *=========================================================================*/
 CEsmDialogue::CEsmDialogue () {
-  //DEFINE_FUNCTION("CEsmDialogue::CEsmDialogue()");
-  m_pData = NULL;
- }
+	//DEFINE_FUNCTION("CEsmDialogue::CEsmDialogue()");
+	m_pData = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmDialogue Constructor
+ *      End of Class CEsmDialogue Constructor
  *=========================================================================*/
 
 
@@ -77,13 +78,13 @@ CEsmDialogue::CEsmDialogue () {
  *
  *=========================================================================*/
 void CEsmDialogue::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmDialogue::Destroy()");
-  m_pData = NULL;
-  
-  CEsmRecord::Destroy();
- }
+	//DEFINE_FUNCTION("CEsmDialogue::Destroy()");
+	m_pData = NULL;
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmDialogue::Destroy()
+ *      End of Class Method CEsmDialogue::Destroy()
  *=========================================================================*/
 
 
@@ -96,21 +97,26 @@ void CEsmDialogue::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmDialogue::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmDialogue* pDialog;
+	CEsmDialogue* pDialog;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_DIAL)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pDialog = (CEsmDialogue *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_DIAL)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_TYPE:
-	return StringCompare(GetDialogType(), pDialog->GetDialogType(), false);
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
- }
+	pDialog = (CEsmDialogue *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_TYPE:
+			return StringCompare(GetDialogType(), pDialog->GetDialogType(), false);
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmDialogue::CompareFields()
+ *      End of Class Method CEsmDialogue::CompareFields()
  *=========================================================================*/
 
 
@@ -121,15 +127,15 @@ int CEsmDialogue::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmDialogue::Create (void) {
-  DEFINE_FUNCTION("CEsmDialogue::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmDialogue::Create (void) {
+	DEFINE_FUNCTION("CEsmDialogue::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmDialogue);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmDialogue);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmDialogue::Create()
+ *      End of Class Method CEsmDialogue::Create()
  *=========================================================================*/
 
 
@@ -141,16 +147,15 @@ CEsmRecord* CEsmDialogue::Create (void) {
  *
  *=========================================================================*/
 void CEsmDialogue::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_DATA);
-  m_pData->CreateNew(1);
- }
+	AllocateSubRecord(MWESM_SUBREC_DATA);
+	m_pData->CreateNew(1);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmDialogue::CreateNew()
+ *      End of Class Method CEsmDialogue::CreateNew()
  *=========================================================================*/
 
 
@@ -162,18 +167,18 @@ void CEsmDialogue::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmDialogue::GetFieldString (const int FieldID) {
+const TCHAR *CEsmDialogue::GetFieldString (const int FieldID) {
+	switch (FieldID) {
+		case ESM_FIELD_TYPE:
+			return GetDialogType();
 
-  switch (FieldID) {
-    case ESM_FIELD_TYPE:
-	return GetDialogType();
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmDialogue::GetFieldString()
+ *      End of Class Method TCHAR* CEsmDialogue::GetFieldString()
  *=========================================================================*/
 
 
@@ -182,19 +187,30 @@ const TCHAR* CEsmDialogue::GetFieldString (const int FieldID) {
  * Class TCHAR* CEsmDialogue Method - const GetItemType (void);
  *
  *=========================================================================*/
-const TCHAR* CEsmDialogue::GetItemType (void) {
+const TCHAR *CEsmDialogue::GetItemType (void) {
+	switch (GetDialogTypeID()) {
+		case MWESM_DIALTYPE_TOPIC:
+			return _T("Dialogue");
 
-  switch (GetDialogTypeID()) {
-    case MWESM_DIALTYPE_TOPIC:		return _T("Dialogue");
-    case MWESM_DIALTYPE_VOICE:		return _T("Voice");
-    case MWESM_DIALTYPE_GREETING:	return _T("Greeting");
-    case MWESM_DIALTYPE_PERSUASION:	return _T("Persuasion");
-    case MWESM_DIALTYPE_JOURNAL:	return _T("Journal");
-    default:				return _T("Dialogue");
-   }
- }
+		case MWESM_DIALTYPE_VOICE:
+			return _T("Voice");
+
+		case MWESM_DIALTYPE_GREETING:
+			return _T("Greeting");
+
+		case MWESM_DIALTYPE_PERSUASION:
+			return _T("Persuasion");
+
+		case MWESM_DIALTYPE_JOURNAL:
+			return _T("Journal");
+
+		default:
+			return _T("Dialogue");
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmDialogue::GetItemType()
+ *      End of Class Method TCHAR* CEsmDialogue::GetItemType()
  *=========================================================================*/
 
 
@@ -204,15 +220,15 @@ const TCHAR* CEsmDialogue::GetItemType (void) {
  *
  *=========================================================================*/
 void CEsmDialogue::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
+		m_pData = pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_DATA))
-    m_pData = pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmArmor::CEsmDialogue()
+ *      End of Class Event CEsmArmor::CEsmDialogue()
  *=========================================================================*/
 
 
@@ -221,10 +237,14 @@ void CEsmDialogue::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Function - const TCHAR* GetESMDialogType (Type);
  *
  *=========================================================================*/
-const TCHAR* GetESMDialogType (const int Type) {
-  if (Type < MWESM_DIALTYPE_MIN || Type > MWESM_DIALTYPE_MAX) return _T("Unknown");
-  return l_DialogueTypes[Type];
- }
+const TCHAR *GetESMDialogType (const int Type) {
+	if (Type < MWESM_DIALTYPE_MIN || Type > MWESM_DIALTYPE_MAX) {
+		return _T("Unknown");
+	}
+
+	return l_DialogueTypes[Type];
+}
+
 /*===========================================================================
- *		End of Function TCHAR* GetESMDialogType()
+ *      End of Function TCHAR* GetESMDialogType()
  *=========================================================================*/

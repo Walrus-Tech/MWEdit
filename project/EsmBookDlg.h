@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmbookdlg.H
+ * File:    Esmbookdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 14, 2003
+ * Created On:  February 14, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,127 +60,127 @@
 
 class CEsmBookDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmBookDlg);
+	DECLARE_DYNCREATE(CEsmBookDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmBook*	m_pBook;
-
-
+	CEsmBook *m_pBook;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmBookDlg();
+	CEsmBookDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmBookDlg)
+	//{{AFX_DATA(CEsmBookDlg)
 
-  enum { IDD = IDD_BOOK_DLG };
+	enum { IDD = IDD_BOOK_DLG };
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CButton	m_ScrollCheck;
+	CButton m_ScrollCheck;
 
-  CEdit		m_EnchantText;
+	CEdit m_EnchantText;
 
-  CEdit		m_BookText;
+	CEdit m_BookText;
 
-  CComboBox	m_EnchantList;
+	CComboBox m_EnchantList;
 
-  CComboBox	m_SkillList;
+	CComboBox m_SkillList;
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CEdit		m_WeightText;
+	CEdit m_WeightText;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmBookDlg)
+	//{{AFX_VIRTUAL(CEsmBookDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmBookDlg)
+	//{{AFX_MSG(CEsmBookDlg)
 
 	afx_msg void OnEnchantedit();
 
 	//}}AFX_MSG
 
-  
-
-  DECLARE_MESSAGE_MAP();
 
 
+	DECLARE_MESSAGE_MAP();
 
- };
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmBookDlg Definition
+ *      End of Class CEsmBookDlg Definition
 
  *=========================================================================*/
 
@@ -200,7 +200,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmbookdlg.H
+ *      End of File Esmbookdlg.H
 
  *=========================================================================*/
 

@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmfinddlg.H
+ * File:    Esmfinddlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	March 3, 2003
+ * Created On:  March 3, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
- #include "MWEditDoc.h"
+#include "MWEditDoc.h"
 
- #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Include Files
+ *      End of Required Include Files
 
  *=========================================================================*/
 
@@ -58,11 +58,11 @@
 
  *=========================================================================*/
 
-  class CEsmDlgHandler;
+class CEsmDlgHandler;
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -84,85 +84,87 @@ class CEsmFindDlg : public CFormView {
 
 
 
-  /*---------- Begin Protected Class Members --------------------*/
+	/*---------- Begin Protected Class Members --------------------*/
 
-protected:
+  protected:
 
-  CEsmDlgHandler* m_pDlgHandler;
+	CEsmDlgHandler *m_pDlgHandler;
 
-  HACCEL	  m_hAccelerator;
-
-
+	HACCEL m_hAccelerator;
 
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
 
-protected:
 
-  CEsmFindDlg();
+	/*---------- Begin Protected Class Methods --------------------*/
 
-  virtual ~CEsmFindDlg();
+  protected:
 
-  DECLARE_DYNCREATE(CEsmFindDlg);
+	CEsmFindDlg();
+
+	virtual ~CEsmFindDlg();
+
+	DECLARE_DYNCREATE(CEsmFindDlg);
 
 
 
 	/* Save a find history to the registry */
 
-  void AddFindHistory (const TCHAR* pString);
+	void AddFindHistory (const TCHAR* pString);
 
 
 
 	/* Fills the find list with previous entries */
 
-  void FillFindList (void);
+	void FillFindList (void);
 
 
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
+	/*---------- Begin Public Class Methods -----------------------*/
 
-public:
+  public:
 
 
 
 	/* Set parent dialog handler */
 
-  void SetDlgHandler (CEsmDlgHandler* pParent) { m_pDlgHandler = pParent; }
+	void SetDlgHandler (CEsmDlgHandler* pParent) {
+		m_pDlgHandler = pParent;
+	}
 
 
 
-  //{{AFX_DATA(CEsmFindDlg)
+	//{{AFX_DATA(CEsmFindDlg)
 
-  enum { IDD = IDD_FIND_DLG };
+	enum { IDD = IDD_FIND_DLG };
 
-  CProgressCtrl	m_ProgressBar;
+	CProgressCtrl m_ProgressBar;
 
-  CComboBox	m_FindList;
+	CComboBox m_FindList;
 
-  CStatic	m_CountLabel;
+	CStatic m_CountLabel;
 
-  CEsmListCtrl	m_RecordList;
+	CEsmListCtrl m_RecordList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmFindDlg)
+	//{{AFX_VIRTUAL(CEsmFindDlg)
 
-	public:
+  public:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
-	protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
 	//}}AFX_VIRTUAL
 
@@ -170,7 +172,7 @@ public:
 
 
 
-protected:
+  protected:
 
 
 
@@ -178,9 +180,9 @@ protected:
 
 #ifdef _DEBUG
 
-  virtual void AssertValid() const;
+	virtual void AssertValid() const;
 
-  virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext& dc) const;
 
 #endif
 
@@ -188,25 +190,25 @@ protected:
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmFindDlg)
+	//{{AFX_MSG(CEsmFindDlg)
 
-  afx_msg void OnFindbutton();
+	afx_msg void OnFindbutton();
 
-  afx_msg void OnCancel();
+	afx_msg void OnCancel();
 
-  afx_msg void OnDestroy();
+	afx_msg void OnDestroy();
 
-  afx_msg LRESULT OnEditRecord (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnEditRecord (LPARAM lParam, LPARAM wParam);
 
-  afx_msg void OnEditInfo();
+	afx_msg void OnEditInfo();
 
-  afx_msg void OnUpdateEditInfo(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateEditInfo(CCmdUI* pCmdUI);
 
-  afx_msg void OnEditCopy();
+	afx_msg void OnEditCopy();
 
-  afx_msg void OnEditCut();
+	afx_msg void OnEditCut();
 
-  afx_msg void OnEditPaste();
+	afx_msg void OnEditPaste();
 
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 
@@ -218,15 +220,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmFindDlg Definition
+ *      End of Class CEsmFindDlg Definition
 
  *=========================================================================*/
 
@@ -248,7 +250,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmfinddlg.H
+ *      End of File Esmfinddlg.H
 
  *=========================================================================*/
 

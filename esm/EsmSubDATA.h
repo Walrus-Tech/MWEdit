@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmSubDATA.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmSubDATA.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmSubBase.h"
+#include "EsmSubBase.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -28,7 +28,7 @@
  *
  *=========================================================================*/
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -39,15 +39,15 @@
  *=========================================================================*/
 #pragma pack(push, 1)
 
-  typedef struct {
+typedef struct {
 	byte Volume;
 	byte MinRange;
 	byte MaxRange;
-  } sounddata_t;
+} sounddata_t;
 
 #pragma pack(pop)
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -60,55 +60,75 @@
  *=========================================================================*/
 class CEsmSubDATA : public CEsmSubRecord {
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  //CEsmSubDATA();
-  //virtual ~CEsmSubDATA() { Destroy(); }
-  //virtual void Destroy (void);
+	//CEsmSubDATA();
+	//virtual ~CEsmSubDATA() { Destroy(); }
+	//virtual void Destroy (void);
 
 	/* Create a name object */
-  static CEsmSubRecord* Create (void) {
-	CEsmSubRecord* pSubRecord;
-	CreatePointerL(pSubRecord, CEsmSubDATA);
-	return (pSubRecord);
-   }
+	static CEsmSubRecord *Create (void) {
+		CEsmSubRecord* pSubRecord;
+		CreatePointerL(pSubRecord, CEsmSubDATA);
+		return (pSubRecord);
+	}
 
 	/* Create a new sub-record */
-  virtual void CreateNew (void) { 
-	CEsmSubRecord::CreateNew();
-	CreateArrayPointerL(m_pData, byte, sizeof(sounddata_t)); 
-	m_RecordSize = sizeof(sounddata_t); 
-	memset(m_pData, 0, sizeof(sounddata_t));
-   }
+	virtual void CreateNew (void) {
+		CEsmSubRecord::CreateNew();
+		CreateArrayPointerL(m_pData, byte, sizeof(sounddata_t));
+		m_RecordSize = sizeof(sounddata_t);
+		memset(m_pData, 0, sizeof(sounddata_t));
+	}
 
 	/* Get class members */
-  sounddata_t*	GetSoundData (void) { return ((sounddata_t *) m_pData); }
-  byte		GetVolume    (void) { return (GetSoundData()->Volume); }
-  byte		GetMinRange  (void) { return (GetSoundData()->MinRange); }
-  byte		GetMaxRange  (void) { return (GetSoundData()->MaxRange); }
-	
-	/* Set class members */
-  void SetVolume   (const byte Value) { GetSoundData()->Volume   = Value; }
-  void SetMinRange (const byte Value) { GetSoundData()->MinRange = Value; }
-  void SetMaxRange (const byte Value) { GetSoundData()->MaxRange = Value; }
+	sounddata_t *GetSoundData (void) {
+		return ((sounddata_t *) m_pData);
+	}
 
- };
+	byte GetVolume (void) {
+		return (GetSoundData()->Volume);
+	}
+
+	byte GetMinRange (void) {
+		return (GetSoundData()->MinRange);
+	}
+
+	byte GetMaxRange (void) {
+		return (GetSoundData()->MaxRange);
+	}
+
+	/* Set class members */
+	void SetVolume (const byte Value) {
+		GetSoundData()->Volume = Value;
+	}
+
+	void SetMinRange (const byte Value) {
+		GetSoundData()->MinRange = Value;
+	}
+
+	void SetMaxRange (const byte Value) {
+		GetSoundData()->MaxRange = Value;
+	}
+
+};
+
 /*===========================================================================
- *		End of Class CEsmSubAADT CEsmSubDATA
+ *      End of Class CEsmSubAADT CEsmSubDATA
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmsubDATA.H
+ *      End of File EsmsubDATA.H
  *=========================================================================*/

@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmOptionsDlg.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	September 6, 2003
+ * File:    EsmOptionsDlg.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  September 6, 2003
  *
  * Implements the CEsmOptionsDlg class for the options dialog.
  *
  *=========================================================================*/
 
- /* Include Files */
+/* Include Files */
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmOptionsDlg.h"
@@ -23,22 +23,22 @@
  *
  *=========================================================================*/
 #ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
+	#define new DEBUG_NEW
+	#undef THIS_FILE
+	static char THIS_FILE[] = __FILE__;
 #endif
 
 DEFINE_FILE("EsmOptionsDlg.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Begin CEsmOptionsDlg Message Map
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin CEsmOptionsDlg Message Map
+ *
+ *=========================================================================*/
 BEGIN_MESSAGE_MAP(CEsmOptionsDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmOptionsDlg)
 	ON_CBN_SELCHANGE(IDC_FONTFACE_LIST, OnSelchangeFontfaceList)
@@ -55,34 +55,34 @@ BEGIN_MESSAGE_MAP(CEsmOptionsDlg, CDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 /*===========================================================================
- *		End of CEsmOptionsDlg Message Map
+ *      End of CEsmOptionsDlg Message Map
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Constructor
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Constructor
+ *
+ *=========================================================================*/
 CEsmOptionsDlg::CEsmOptionsDlg(CWnd* pParent) : CDialog(CEsmOptionsDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmOptionsDlg)
 	//}}AFX_DATA_INIT
 	m_pOrigOptions = NULL;
 	m_CurrentFormat = -1;
 }
+
 /*===========================================================================
- *		End of Class CEsmOptionsDlg Constructor
+ *      End of Class CEsmOptionsDlg Constructor
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void DoDataExchange (pDX);
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void DoDataExchange (pDX);
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::DoDataExchange(CDataExchange* pDX) {
 	CDialog::DoDataExchange(pDX);
-
 	//{{AFX_DATA_MAP(CEsmOptionsDlg)
 	DDX_Control(pDX, IDC_ALLOWTRIBUNAL, m_AllowTribunal);
 	DDX_Control(pDX, IDC_ALLOWBLOODMOON, m_AllowBloodmoon);
@@ -112,24 +112,23 @@ void CEsmOptionsDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_WARNLEVEL_LIST, m_WarnLevelList);
 	//}}AFX_DATA_MAP
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::DoDataExchange()
+ *      End of Class Method CEsmOptionsDlg::DoDataExchange()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void FillFormatList (void);
-  *
-  * Fills the format list with the format names.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void FillFormatList (void);
+ *
+ * Fills the format list with the format names.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::FillFormatList(void) {
-
 	/* Clear the current list */
 	m_FormatList.ResetContent();
 	m_CurrentFormat = -1;
-
 	/* Add the script format types */
 	AddListString(m_FormatList, _T("Text"), ESMSCRIPT_FORMAT_DEFAULT);
 	AddListString(m_FormatList, _T("Symbol"), ESMSCRIPT_FORMAT_SYMBOL);
@@ -142,23 +141,22 @@ void CEsmOptionsDlg::FillFormatList(void) {
 	AddListString(m_FormatList, _T("Operator"), ESMSCRIPT_FORMAT_OPERATOR);
 	AddListString(m_FormatList, _T("Error"), ESMSCRIPT_FORMAT_ERROR);
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::FillFormatList()
+ *      End of Class Method CEsmOptionsDlg::FillFormatList()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void FillFontSizeList (void);
-  *
-  * Fills the font size list.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void FillFontSizeList (void);
+ *
+ * Fills the font size list.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::FillFontSizeList(void) {
-
 	/* Clear the current list */
 	m_FontSizeList.ResetContent();
-
 	/* Add the font sizes */
 	AddComboString(m_FontSizeList, _T("6"), 6);
 	AddComboString(m_FontSizeList, _T("7"), 7);
@@ -174,23 +172,22 @@ void CEsmOptionsDlg::FillFontSizeList(void) {
 	AddComboString(m_FontSizeList, _T("18"), 18);
 	AddComboString(m_FontSizeList, _T("20"), 20);
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::FillFontSizeList()
+ *      End of Class Method CEsmOptionsDlg::FillFontSizeList()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void FillFontNameList (void);
-  *
-  * Fills the font name list.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void FillFontNameList (void);
+ *
+ * Fills the font name list.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::FillFontNameList(void) {
-
 	/* Clear the current list */
 	m_FontFaceList.ResetContent();
-
 	/* Add the font names (fixed for now) */
 	m_FontFaceList.AddString(_T("Fixedsys"));
 	m_FontFaceList.AddString(_T("Courier"));
@@ -200,82 +197,94 @@ void CEsmOptionsDlg::FillFontNameList(void) {
 	m_FontFaceList.AddString(_T("Arial"));
 	m_FontFaceList.AddString(_T("Terminal"));
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::FillFontNameList()
+ *      End of Class Method CEsmOptionsDlg::FillFontNameList()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void FillWarnLevelList (void);
-  *
-  * Fill the warning level list with the level types.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void FillWarnLevelList (void);
+ *
+ * Fill the warning level list with the level types.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::FillWarnLevelList(void) {
 	int ListIndex;
-
 	/* Clear the current list */
 	m_WarnLevelList.ResetContent();
-
 	/* Add the warning level types */
 	ListIndex = m_WarnLevelList.AddString(_T("Strong"));
-	if (ListIndex >= 0) m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_STRONG);
+
+	if (ListIndex >= 0) {
+		m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_STRONG);
+	}
+
 	ListIndex = m_WarnLevelList.AddString(_T("Default"));
-	if (ListIndex >= 0) m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_DEFAULT);
+
+	if (ListIndex >= 0) {
+		m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_DEFAULT);
+	}
+
 	ListIndex = m_WarnLevelList.AddString(_T("Weak"));
-	if (ListIndex >= 0) m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_WEAK);
+
+	if (ListIndex >= 0) {
+		m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_WEAK);
+	}
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::FillWarnLevelList()
+ *      End of Class Method CEsmOptionsDlg::FillWarnLevelList()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void GetControlData (void);
-  *
-  * Save the control data to the original options object.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void GetControlData (void);
+ *
+ * Save the control data to the original options object.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::GetControlData(void) {
 	CString Buffer;
-	int     ListIndex;
-	int     Count;
-	bool    Result;
+	int ListIndex;
+	int Count;
+	bool Result;
 
 	/* Ensure a valid options object */
-	if (m_pOrigOptions == NULL) return;
+	if (m_pOrigOptions == NULL) {
+		return;
+	}
 
 	/* General options */
 	m_AuthorText.GetWindowText(Buffer);
 	m_pOrigOptions->SetAuthorName(Buffer);
-
 	m_GamePath.GetWindowText(Buffer);
 	TerminatePathString(Buffer);
 	m_pOrigOptions->SetDataPath(Buffer);
 
 	if (Buffer.IsEmpty()) {
 		FindMWRegistryPath();
-	}
-	else {
+	} else {
 		SetMWDataPath(Buffer);
 	}
 
 	m_pOrigOptions->SetBackupSaves(m_BackupSaves.GetCheck() != 0);
 	m_pOrigOptions->SetAllowExtFuncs(m_AllowExtFuncs.GetCheck() != 0);
 	m_pOrigOptions->SetStrictIDs(m_StrictIDs.GetCheck() != 0);
-
 	m_pOrigOptions->SetAllowBloodmoon(m_AllowBloodmoon.GetCheck() != 0);
 	m_pOrigOptions->SetAllowTribunal(m_AllowTribunal.GetCheck() != 0);
-
 	/* Save the script no-format flag and script warning level */
 	m_pOrigOptions->SetNoScriptFormat(m_NoFormatCheck.GetCheck() != 0);
 	m_pOrigOptions->SetNoScriptPrompt(m_NoScriptPrompt.GetCheck() != 0);
 	m_pOrigOptions->SetNoToolTips(m_NoToolTipCheck.GetCheck() != 0);
 	m_pOrigOptions->SetUseExtraFile(m_UseExtraFile.GetCheck() != 0);
 	ListIndex = m_WarnLevelList.GetCurSel();
-	if (ListIndex >= 0) m_pOrigOptions->SetScriptWarnLevel(m_WarnLevelList.GetItemData(ListIndex));
+
+	if (ListIndex >= 0) {
+		m_pOrigOptions->SetScriptWarnLevel(m_WarnLevelList.GetItemData(ListIndex));
+	}
 
 	/* Get the extra file */
 	m_ExtraFile.GetWindowText(Buffer);
@@ -287,11 +296,13 @@ void CEsmOptionsDlg::GetControlData(void) {
 	if (Buffer.IsEmpty()) {
 		CEsmScriptCompile::GetExtraFile().Destroy();
 		CEsmScriptCompile::InitializeExtraRecords();
-	}
-	else {
+	} else {
 		Result = CEsmScriptCompile::GetExtraFile().Read(Buffer);
 		CEsmScriptCompile::InitializeExtraRecords();
-		if (m_pOrigOptions->GetUseExtraFile() && !Result) ErrorHandler.Notify(_T("Failed to read the extra file!"), _T("MWEdit Error"));
+
+		if (m_pOrigOptions->GetUseExtraFile() && !Result) {
+			ErrorHandler.Notify(_T("Failed to read the extra file!"), _T("MWEdit Error"));
+		}
 	}
 
 	/* Indentation values */
@@ -301,8 +312,15 @@ void CEsmOptionsDlg::GetControlData(void) {
 	if (m_IndentSpace.GetCheck()) {
 		m_IndentSpacesText.GetWindowText(Buffer);
 		Count = atoi(Buffer);
-		if (Count < 0) Count = 0;
-		if (Count > 16) Count = 16;
+
+		if (Count < 0) {
+			Count = 0;
+		}
+
+		if (Count > 16) {
+			Count = 16;
+		}
+
 		Buffer.Empty();
 
 		for (int i = 0; i < Count; ++i) {
@@ -310,264 +328,287 @@ void CEsmOptionsDlg::GetControlData(void) {
 		}
 
 		m_pOrigOptions->SetScriptIndentString(Buffer);
-	}
-	else {
+	} else {
 		m_pOrigOptions->SetScriptIndentString("\t");
 	}
 
 	if (m_pOrigOptions->GetScriptIndentString()[0] == ' ') {
-
 		Buffer.Format(_T("%d"), _tcslen(m_pOrigOptions->GetScriptIndentString()));
-
-	}
-	else {
+	} else {
 	}
 
 	/* Update the current format data */
 	GetFormatData();
-	memcpy(m_pOrigOptions->GetUserFormat()->GetCharFormat(0), m_ScriptOptions.GetCharFormat(0), sizeof(CHARFORMAT2) * ESMSCRIPT_NUMFORMATS);
+	memcpy(m_pOrigOptions->GetUserFormat()->GetCharFormat(0), m_ScriptOptions.GetCharFormat(0),
+	       sizeof(CHARFORMAT2) * ESMSCRIPT_NUMFORMATS);
 	m_pOrigOptions->GetUserFormat()->SetBGColor(m_BGColor.m_Color);
-
 	/* Update the font data */
 	GetFontData(m_pOrigOptions->GetUserFormat()->GetTextFont());
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::GetControlData()
+ *      End of Class Method CEsmOptionsDlg::GetControlData()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void GetFormatData (void);
-  *
-  * Gets the format data from the controls if required.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void GetFormatData (void);
+ *
+ * Gets the format data from the controls if required.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::GetFormatData(void) {
 	CHARFORMAT2* pFormat;
-	int	       FormatIndex;
+	int FormatIndex;
 
 	/* Ignore if the current format is not valid */
-	if (m_CurrentFormat < 0) return;
+	if (m_CurrentFormat < 0) {
+		return;
+	}
 
 	FormatIndex = m_FormatList.GetItemData(m_CurrentFormat);
 	pFormat = m_ScriptOptions.GetCharFormat(FormatIndex);
 	pFormat->crTextColor = m_FormatColor.m_Color;
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::GetFormatData()
+ *      End of Class Method CEsmOptionsDlg::GetFormatData()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void GetFontData (pFont);
-  *
-  * Gets the current font data from the controls and updates the given
-  * font object.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void GetFontData (pFont);
+ *
+ * Gets the current font data from the controls and updates the given
+ * font object.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::GetFontData(CFont* pFont) {
-	int     Size;
-	int     Italic = 0;
-	int     Bold = FW_NORMAL;
+	int Size;
+	int Italic = 0;
+	int Bold = FW_NORMAL;
 	CString Face;
-	int     ListIndex;
-
+	int ListIndex;
 	/* Get the font information */
 	ListIndex = m_FontFaceList.GetCurSel();
-	if (ListIndex < 0) return;
-	m_FontFaceList.GetLBText(ListIndex, Face);
 
+	if (ListIndex < 0) {
+		return;
+	}
+
+	m_FontFaceList.GetLBText(ListIndex, Face);
 	ListIndex = m_FontSizeList.GetCurSel();
-	if (ListIndex < 0) return;
+
+	if (ListIndex < 0) {
+		return;
+	}
+
 	Size = m_FontSizeList.GetItemData(ListIndex);
 
-	if (m_FontBoldCheck.GetCheck()) Bold = FW_BOLD;
-	if (m_FontItalicCheck.GetCheck()) Italic = 1;
+	if (m_FontBoldCheck.GetCheck()) {
+		Bold = FW_BOLD;
+	}
+
+	if (m_FontItalicCheck.GetCheck()) {
+		Italic = 1;
+	}
 
 	/* Update the font object */
 	pFont->Detach();
 	CFONT_CREATE((*pFont), Size, Bold, Italic, Face);
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::GetFontData()
+ *      End of Class Method CEsmOptionsDlg::GetFontData()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnBgcolor ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnBgcolor ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnBgcolor() {
 	int Result;
-
 	/* Initialize and display the dialog */
-	CColorDialog  ColorDlg(m_BGColor.m_Color, CC_ANYCOLOR | CC_FULLOPEN, this);
+	CColorDialog ColorDlg(m_BGColor.m_Color, CC_ANYCOLOR | CC_FULLOPEN, this);
 	Result = ColorDlg.DoModal();
-	if (Result != IDOK) return;
+
+	if (Result != IDOK) {
+		return;
+	}
 
 	m_BGColor.SetColor(ColorDlg.GetColor());
 	m_BGColor.RedrawWindow();
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnBgcolor()
+ *      End of Class Event CEsmOptionsDlg::OnBgcolor()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnBrowseextrafile ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnBrowseextrafile ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnBrowseextrafile() {
-	CString     Buffer;
+	CString Buffer;
 	m_ExtraFile.GetWindowText(Buffer);
-
-	CFileDialog BrowseDlg(TRUE, _T("esp"), Buffer, OFN_FILEMUSTEXIST | OFN_HIDEREADONLY, _T("Plugin Files (*.esp)|*.esp|Master Files (*.esm)|*.esm|All Files (*.*)|*.*||"), this);
-	int	      Result;
-
+	CFileDialog BrowseDlg(TRUE, _T("esp"), Buffer, OFN_FILEMUSTEXIST | OFN_HIDEREADONLY,
+	                      _T("Plugin Files (*.esp)|*.esp|Master Files (*.esm)|*.esm|All Files (*.*)|*.*||"), this);
+	int Result;
 	BrowseDlg.m_ofn.lpstrTitle = _T("Select Extra File for Script Compiling");
-
 	Result = BrowseDlg.DoModal();
-	if (Result != IDOK) return;
+
+	if (Result != IDOK) {
+		return;
+	}
 
 	m_ExtraFile.SetWindowText(BrowseDlg.GetPathName());
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnBrowseextrafile()
+ *      End of Class Event CEsmOptionsDlg::OnBrowseextrafile()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnBrowsegamepath ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnBrowsegamepath ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnBrowsegamepath() {
 	CString Buffer;
-	bool    Result;
-
+	bool Result;
 	m_GamePath.GetWindowText(Buffer);
-
 	Result = BrowseForFolder(Buffer, m_hWnd, _T("Select Custom Game Path"));
-	if (!Result) return;
+
+	if (!Result) {
+		return;
+	}
 
 	TerminatePathString(Buffer);
 	m_GamePath.SetWindowText(Buffer);
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnBrowsegamepath()
+ *      End of Class Event CEsmOptionsDlg::OnBrowsegamepath()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnCancel ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnCancel ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnCancel() {
-
 	CDialog::OnCancel();
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnCancel()
+ *      End of Class Event CEsmOptionsDlg::OnCancel()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnFormatcolor ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnFormatcolor ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnFormatcolor() {
 	int Result;
-
 	/* Initialize and display the dialog */
-	CColorDialog  ColorDlg(m_FormatColor.m_Color, CC_ANYCOLOR | CC_FULLOPEN, this);
+	CColorDialog ColorDlg(m_FormatColor.m_Color, CC_ANYCOLOR | CC_FULLOPEN, this);
 	Result = ColorDlg.DoModal();
-	if (Result != IDOK) return;
+
+	if (Result != IDOK) {
+		return;
+	}
 
 	m_FormatColor.SetColor(ColorDlg.GetColor());
 	m_FormatColor.RedrawWindow();
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnFormatcolor()
+ *      End of Class Event CEsmOptionsDlg::OnFormatcolor()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnBlueformatButton ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnBlueformatButton ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnBlueformatButton() {
 	int Result;
-
 	/* Prompt user to make sure they want to change formats */
-	Result = MessageBox(_T("Lose the current format settings and use the default blue format?"), _T("Set Blue Format"), MB_YESNO | MB_ICONQUESTION);
-	if (Result != IDYES) return;
+	Result = MessageBox(_T("Lose the current format settings and use the default blue format?"),
+	                    _T("Set Blue Format"), MB_YESNO | MB_ICONQUESTION);
+
+	if (Result != IDYES) {
+		return;
+	}
 
 	/* Copy the default blue format into the current script options */
 	m_ScriptOptions.CreateDefaultBlueFormat();
-
 	/* Update the dialog */
 	m_BGColor.SetColor(m_ScriptOptions.GetBGColor());
 	m_BGColor.RedrawWindow();
 	SetFormatData(m_CurrentFormat);
-
 	m_pOrigOptions->SetBlueScript();
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnBlueformatButton()
+ *      End of Class Event CEsmOptionsDlg::OnBlueformatButton()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnWhiteformatButton ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnWhiteformatButton ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnWhiteformatButton() {
 	int Result;
-
 	/* Prompt user to make sure they want to change formats */
-	Result = MessageBox(_T("Lose the current format settings and use the default white format?"), _T("Set White Format"), MB_YESNO | MB_ICONQUESTION);
-	if (Result != IDYES) return;
+	Result = MessageBox(_T("Lose the current format settings and use the default white format?"),
+	                    _T("Set White Format"), MB_YESNO | MB_ICONQUESTION);
+
+	if (Result != IDYES) {
+		return;
+	}
 
 	/* Copy the default white format into the current script options */
 	m_ScriptOptions.CreateDefaultWhiteFormat();
-
 	/* Update the dialog */
 	m_BGColor.SetColor(m_ScriptOptions.GetBGColor());
 	m_BGColor.RedrawWindow();
 	SetFormatData(m_CurrentFormat);
-
 	m_pOrigOptions->SetWhiteScript();
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnWhiteformatButton()
+ *      End of Class Event CEsmOptionsDlg::OnWhiteformatButton()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - BOOL OnInitDialog ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - BOOL OnInitDialog ();
+ *
+ *=========================================================================*/
 BOOL CEsmOptionsDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
-
 	/* Fill/create the required lists */
 	FillWarnLevelList();
 	FillFormatList();
 	FillFontNameList();
 	FillFontSizeList();
-
 	/* Limit the size of the input author name textbox */
 	m_AuthorText.SetLimitText(ESMSCR_OPTION_NAMESIZE);
-
 	/* Set the sample text value */
 	m_SampleText.SetWindowText(_T("Sample Text..."));
 
@@ -579,54 +620,57 @@ BOOL CEsmOptionsDlg::OnInitDialog() {
 	SetControlData();
 	return (TRUE);
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnInitDialog()
+ *      End of Class Event CEsmOptionsDlg::OnInitDialog()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnOK ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnOK ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnOK() {
-
 	GetControlData();
 	m_pOrigOptions->WriteToRegistry();
-
 	CDialog::OnOK();
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnOK()
+ *      End of Class Event CEsmOptionsDlg::OnOK()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Event - void OnSelchangeFormatList ();
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Event - void OnSelchangeFormatList ();
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnSelchangeFormatList() {
 	GetFormatData();
 	SetFormatData(m_FormatList.GetCurSel());
 }
+
 /*===========================================================================
- *		End of Class Event CEsmOptionsDlg::OnSelchangeFormatList()
+ *      End of Class Event CEsmOptionsDlg::OnSelchangeFormatList()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void SetControlData (void);
-  *
-  * Set the control values from the options object.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void SetControlData (void);
+ *
+ * Set the control values from the options object.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::SetControlData(void) {
 	CString Buffer;
 
 	/* Ensure a valid options object */
-	if (m_pOrigOptions == NULL) return;
+	if (m_pOrigOptions == NULL) {
+		return;
+	}
 
 	/* General options */
 	m_AuthorText.SetWindowText(m_pOrigOptions->GetAuthorName());
@@ -636,7 +680,6 @@ void CEsmOptionsDlg::SetControlData(void) {
 	m_StrictIDs.SetCheck(m_pOrigOptions->GetStrictIDs());
 	m_AllowBloodmoon.SetCheck(m_pOrigOptions->GetAllowBloodmoon());
 	m_AllowTribunal.SetCheck(m_pOrigOptions->GetAllowTribunal());
-
 	/* Format and warning level type */
 	m_NoFormatCheck.SetCheck(m_pOrigOptions->GetNoScriptFormat());
 	m_NoScriptPrompt.SetCheck(m_pOrigOptions->GetNoScriptPrompt());
@@ -646,7 +689,6 @@ void CEsmOptionsDlg::SetControlData(void) {
 	FindComboListItem(m_WarnLevelList, m_pOrigOptions->GetScriptWarnLevel(), true);
 	m_BGColor.SetColor(m_pOrigOptions->GetUserFormat()->GetBGColor());
 	m_BGColor.RedrawWindow();
-
 	/* Indentation values */
 	m_InitialIndentLevel.SetCheck(m_pOrigOptions->GetInitialIndentLevel());
 	m_IndentCommentsMore.SetCheck(m_pOrigOptions->GetIndentCommentsMore());
@@ -655,8 +697,7 @@ void CEsmOptionsDlg::SetControlData(void) {
 		m_IndentSpace.SetCheck(TRUE);
 		Buffer.Format(_T("%d"), _tcslen(m_pOrigOptions->GetScriptIndentString()));
 		m_IndentSpacesText.SetWindowText(Buffer);
-	}
-	else {
+	} else {
 		m_IndentSpacesText.SetWindowText("4");
 		m_IndentTab.SetCheck(TRUE);
 	}
@@ -664,93 +705,98 @@ void CEsmOptionsDlg::SetControlData(void) {
 	/* Display the first format information */
 	m_FormatList.SetCurSel(0);
 	SetFormatData(0);
-
 	/* Set the font controls */
 	SetFontData();
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::SetControlData()
+ *      End of Class Method CEsmOptionsDlg::SetControlData()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void SetFontData (void);
-  *
-  * Sets the font control data from the current options object.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void SetFontData (void);
+ *
+ * Sets the font control data from the current options object.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::SetFontData(void) {
 	LOGFONT LogFont;
-	int     ListIndex;
-
+	int ListIndex;
 	/* Get the font information */
 	m_pOrigOptions->GetUserFormat()->GetTextFont()->GetLogFont(&LogFont);
-
 	/* Update the font controls */
 	FindComboListItem(m_FontSizeList, (int)(LogFont.lfHeight), true);
 	ListIndex = m_FontFaceList.FindStringExact(0, LogFont.lfFaceName);
 	m_FontFaceList.SetCurSel(ListIndex);
 	m_FontBoldCheck.SetCheck(LogFont.lfWeight > FW_NORMAL);
 	m_FontItalicCheck.SetCheck(LogFont.lfItalic);
-
 	/* Update the font display in the sample textbox */
 	UpdateSampleFontText();
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::SetFontData()
+ *      End of Class Method CEsmOptionsDlg::SetFontData()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void SetFormatData (Index);
-  *
-  * Sets the displayed format to the list index.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void SetFormatData (Index);
+ *
+ * Sets the displayed format to the list index.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::SetFormatData(const int Index) {
-	int		FormatIndex;
+	int FormatIndex;
 	CHARFORMAT2* pFormat;
 
 	/* Ensure a valid input list index and format index */
-	if (Index < 0 || Index >= m_FormatList.GetCount()) return;
-	FormatIndex = m_FormatList.GetItemData(Index);
-	if (FormatIndex < 0 || FormatIndex >= ESMSCRIPT_NUMFORMATS) return;
-	pFormat = m_ScriptOptions.GetCharFormat(FormatIndex);
+	if (Index < 0 || Index >= m_FormatList.GetCount()) {
+		return;
+	}
 
+	FormatIndex = m_FormatList.GetItemData(Index);
+
+	if (FormatIndex < 0 || FormatIndex >= ESMSCRIPT_NUMFORMATS) {
+		return;
+	}
+
+	pFormat = m_ScriptOptions.GetCharFormat(FormatIndex);
 	/* Update the format color box */
 	m_FormatColor.SetColor(pFormat->crTextColor);
 	m_FormatColor.RedrawWindow();
-
 	m_CurrentFormat = Index;
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::SetFormatData()
+ *      End of Class Method CEsmOptionsDlg::SetFormatData()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Class CEsmOptionsDlg Method - void UpdateSampleFontText (void);
-  *
-  * Updates the font of the sample textbox and redraws it.
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmOptionsDlg Method - void UpdateSampleFontText (void);
+ *
+ * Updates the font of the sample textbox and redraws it.
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::UpdateSampleFontText(void) {
 	GetFontData(&m_SampleFont);
 	m_SampleText.SetFont(&m_SampleFont, TRUE);
 }
+
 /*===========================================================================
- *		End of Class Method CEsmOptionsDlg::UpdateSampleFontText()
+ *      End of Class Method CEsmOptionsDlg::UpdateSampleFontText()
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Begin Font Update Methods
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Font Update Methods
+ *
+ *=========================================================================*/
 void CEsmOptionsDlg::OnSelchangeFontfaceList() {
 	UpdateSampleFontText();
 }
@@ -766,6 +812,7 @@ void CEsmOptionsDlg::OnFontboldCheck() {
 void CEsmOptionsDlg::OnFontitalicCheck() {
 	UpdateSampleFontText();
 }
+
 /*===========================================================================
- *		End of Font Update Methods
+ *      End of Font Update Methods
  *=========================================================================*/

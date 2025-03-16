@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	Esmoptionsdlg.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	September 6, 2003
+ * File:    Esmoptionsdlg.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  September 6, 2003
  *
  * Description
  *
@@ -11,36 +11,36 @@
 #define __ESMOPTIONSDLG_H
 
 
- /*===========================================================================
-  *
-  * Begin Required Includes
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Required Includes
+ *
+ *=========================================================================*/
 #include "EsmOptions.h"
 #include "ColorStatic1.h"
-  /*===========================================================================
-   *		End of Required Includes
-   *=========================================================================*/
+/*===========================================================================
+ *        End of Required Includes
+ *=========================================================================*/
 
 
-   /*===========================================================================
-	*
-	* Begin Class CEsmOptionsDlg Definition
-	*
-	*=========================================================================*/
+/*===========================================================================
+*
+* Begin Class CEsmOptionsDlg Definition
+*
+*=========================================================================*/
 class CEsmOptionsDlg : public CDialog {
 
 	/*---------- Begin Protected Class Members -------------------------*/
-protected:
-	CEsmOptions* m_pOrigOptions;		/* Reference to the original options object */
-	CEsmScriptOptions	m_ScriptOptions;	/* Temporary script options */
-	int			m_CurrentFormat;	/* Currently displayed format for editting */
+  protected:
+	CEsmOptions *m_pOrigOptions;        /* Reference to the original options object */
+	CEsmScriptOptions m_ScriptOptions;    /* Temporary script options */
+	int m_CurrentFormat;    /* Currently displayed format for editting */
 
-	CFont			m_SampleFont;		/* Sample font object for output */
+	CFont m_SampleFont;       /* Sample font object for output */
 
 
 	/*---------- Begin Protected Class Methods -------------------------*/
-protected:
+  protected:
 
 	/* Fill the various lists with contents */
 	void FillWarnLevelList(void);
@@ -50,7 +50,7 @@ protected:
 
 
 	/*---------- Begin Public Class Methods ----------------------------*/
-public:
+  public:
 
 	/* Construction */
 	CEsmOptionsDlg(CWnd* pParent = NULL);
@@ -66,52 +66,54 @@ public:
 	void SetFontData(void);
 
 	/* Set class members */
-	void SetOptions(CEsmOptions* pOptions) { m_pOrigOptions = pOptions; }
+	void SetOptions(CEsmOptions* pOptions) {
+		m_pOrigOptions = pOptions;
+	}
 
 	/* Update the sample font display in the textbox */
 	void UpdateSampleFontText(void);
 
 	/* Dialog Data */
-  //{{AFX_DATA(CEsmOptionsDlg)
+	//{{AFX_DATA(CEsmOptionsDlg)
 	enum { IDD = IDD_OPTIONS_DLG };
-	CButton	m_AllowTribunal;
-	CButton	m_AllowBloodmoon;
-	CButton	m_IndentCommentsMore;
-	CEdit		m_IndentSpacesText;
-	CButton	m_IndentSpace;
-	CButton	m_IndentTab;
-	CButton	m_InitialIndentLevel;
-	CButton	m_StrictIDs;
-	CButton	m_UseExtraFile;
-	CEdit		m_ExtraFile;
-	CButton	m_NoScriptPrompt;
-	CButton	m_AllowExtFuncs;
-	CButton	m_BackupSaves;
-	CEdit		m_GamePath;
-	CButton	m_NoToolTipCheck;
-	CEdit		m_AuthorText;
-	CColorStatic	m_BGColor;
-	CColorStatic	m_FormatColor;
-	CEdit		m_SampleText;
-	CButton	m_FontItalicCheck;
-	CButton	m_FontBoldCheck;
-	CComboBox	m_FontFaceList;
-	CComboBox	m_FontSizeList;
-	CListBox	m_FormatList;
-	CButton	m_NoFormatCheck;
-	CComboBox	m_WarnLevelList;
+	CButton m_AllowTribunal;
+	CButton m_AllowBloodmoon;
+	CButton m_IndentCommentsMore;
+	CEdit m_IndentSpacesText;
+	CButton m_IndentSpace;
+	CButton m_IndentTab;
+	CButton m_InitialIndentLevel;
+	CButton m_StrictIDs;
+	CButton m_UseExtraFile;
+	CEdit m_ExtraFile;
+	CButton m_NoScriptPrompt;
+	CButton m_AllowExtFuncs;
+	CButton m_BackupSaves;
+	CEdit m_GamePath;
+	CButton m_NoToolTipCheck;
+	CEdit m_AuthorText;
+	CColorStatic m_BGColor;
+	CColorStatic m_FormatColor;
+	CEdit m_SampleText;
+	CButton m_FontItalicCheck;
+	CButton m_FontBoldCheck;
+	CComboBox m_FontFaceList;
+	CComboBox m_FontSizeList;
+	CListBox m_FormatList;
+	CButton m_NoFormatCheck;
+	CComboBox m_WarnLevelList;
 	//}}AFX_DATA
 
 	/* ClassWizard generated virtual function overrides */
-  //{{AFX_VIRTUAL(CEsmOptionsDlg)
-protected:
+	//{{AFX_VIRTUAL(CEsmOptionsDlg)
+  protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 	//}}AFX_VIRTUAL
 
-protected:
+  protected:
 
 	/* Generated message map functions */
-  //{{AFX_MSG(CEsmOptionsDlg)
+	//{{AFX_MSG(CEsmOptionsDlg)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 	virtual void OnCancel();
@@ -131,16 +133,17 @@ protected:
 	DECLARE_MESSAGE_MAP();
 
 };
+
 /*===========================================================================
- *		End of Class CEsmOptionsDlg Definition
+ *      End of Class CEsmOptionsDlg Definition
  *=========================================================================*/
 
 
- //{{AFX_INSERT_LOCATION}}
- //}}AFX_INSERT_LOCATION
+//{{AFX_INSERT_LOCATION}}
+//}}AFX_INSERT_LOCATION
 
 
 #endif
 /*===========================================================================
- *		End of File Esmoptionsdlg.H
+ *      End of File Esmoptionsdlg.H
  *=========================================================================*/

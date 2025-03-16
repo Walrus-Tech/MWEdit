@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	DL_File.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Monday, May 07, 2001
+ * File:    DL_File.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Monday, May 07, 2001
  *
  * Contains file releated definitions for Dave's Library of common code.
  *
@@ -16,14 +16,14 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "dl_base.h"
-  #include "dl_mem.h"
-  #include "dl_log.h"
-  #include "dl_err.h"
-  #include "dl_chr.h"
-  #include "dl_str.h"
+#include "dl_base.h"
+#include "dl_mem.h"
+#include "dl_log.h"
+#include "dl_err.h"
+#include "dl_chr.h"
+#include "dl_str.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -33,20 +33,20 @@
  *
  *=========================================================================*/
 
-	/* Size of input/output buffer for the CopyFile() function */
-  #if defined(__BCPLUSPLUS__)
-    #define COPYFILE_BUFFERSIZE 1024u
-  #elif defined(__TURBOC__)
-    #define COPYFILE_BUFFERSIZE 60000u
-  #else
-    #define COPYFILE_BUFFERSIZE 60000u
-  #endif
+/* Size of input/output buffer for the CopyFile() function */
+#if defined(__BCPLUSPLUS__)
+	#define COPYFILE_BUFFERSIZE 1024u
+#elif defined(__TURBOC__)
+	#define COPYFILE_BUFFERSIZE 60000u
+#else
+	#define COPYFILE_BUFFERSIZE 60000u
+#endif
 
-  	/* Number of bytes read at a time for the ReadFileCB() function */
-  #define READFILECB_NUMBYTES	32000 
+/* Number of bytes read at a time for the ReadFileCB() function */
+#define READFILECB_NUMBYTES   32000
 
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -55,10 +55,10 @@
  * Begin ReadFile()/WriteFile() Mode Definitions
  *
  *=========================================================================*/
-  #define FILE_BINARY FALSE
-  #define FILE_TEXT   TRUE
+#define FILE_BINARY FALSE
+#define FILE_TEXT   TRUE
 /*===========================================================================
- *		End of ReadFile()/WriteFile() Mode Definitions
+ *      End of ReadFile()/WriteFile() Mode Definitions
  *=========================================================================*/
 
 
@@ -67,13 +67,13 @@
  * Begin ReadLine() Return Type Definitions
  *
  *=========================================================================*/
-  #define READLINE_ERROR (-1)
-  #define READLINE_OK    (0)
-  #define READLINE_MSL   (1)
-  #define READLINE_EOF   (2)
- /*===========================================================================
- *		End of ReadLine() Return Type Definition
- *=========================================================================*/
+#define READLINE_ERROR (-1)
+#define READLINE_OK    (0)
+#define READLINE_MSL   (1)
+#define READLINE_EOF   (2)
+/*===========================================================================
+*      End of ReadLine() Return Type Definition
+*=========================================================================*/
 
 
 /*===========================================================================
@@ -82,11 +82,11 @@
  *
  *=========================================================================*/
 
-	/* ReadFileCB callback function type */
-  typedef int (*READFILE_CALLBACK) (const long FileSize, const long BytesRead, void* pUserData);
+/* ReadFileCB callback function type */
+typedef int (*READFILE_CALLBACK) (const long FileSize, const long BytesRead, void* pUserData);
 
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -96,112 +96,115 @@
  *
  *=========================================================================*/
 
-	/* Attempt to change directory to the given path */
-  bool ChangeDirectory (const TCHAR* pPath);
+/* Attempt to change directory to the given path */
+bool ChangeDirectory (const TCHAR* pPath);
 
-	/* Copy filename to a new string, changing it's extensions */
-  TCHAR* ChangeExtension (TCHAR* pDestFilename, const TCHAR* pSourceFilename, 
-		         const TCHAR* pNewExtension, const size_t MaxStringLength);
+/* Copy filename to a new string, changing it's extensions */
+TCHAR *ChangeExtension (TCHAR* pDestFilename, const TCHAR* pSourceFilename,
+                        const TCHAR* pNewExtension, const size_t MaxStringLength);
 
-	/* Compare the extension with the given filename's extension */
-  bool CompareExtension (const TCHAR* pFilename, const TCHAR* pExtension);
+/* Compare the extension with the given filename's extension */
+bool CompareExtension (const TCHAR* pFilename, const TCHAR* pExtension);
 
-  	/* Copy from the source to the destination file */
-  bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile);
-	
-	/* Create a properly terminated path string */
-  TCHAR* CreatePath (TCHAR* pNewPath, const TCHAR* pString, const size_t MaxStringLength);
+/* Copy from the source to the destination file */
+bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile);
 
-  	/* Delete a file */
-  bool DelOneFile (const TCHAR* pFilename);
+/* Create a properly terminated path string */
+TCHAR *CreatePath (TCHAR* pNewPath, const TCHAR* pString, const size_t MaxStringLength);
 
-	/* Copy the filename from a path to a string */
-  TCHAR* ExtractFilename (TCHAR* pFilename, const TCHAR* pPath, const size_t MaxStringLength);
+/* Delete a file */
+bool DelOneFile (const TCHAR* pFilename);
 
-	/* Copy the path from a given string */
-  TCHAR* ExtractPath (TCHAR* pPath, const TCHAR* pString, const size_t MaxStringLength);
+/* Copy the filename from a path to a string */
+TCHAR *ExtractFilename (TCHAR* pFilename, const TCHAR* pPath, const size_t MaxStringLength);
 
-	/* Checks to see if a file is available for reading */
-  bool FileExists (const TCHAR* pFilename);
+/* Copy the path from a given string */
+TCHAR *ExtractPath (TCHAR* pPath, const TCHAR* pString, const size_t MaxStringLength);
 
-	/* Return a pointer to the extension in a path */
-  const TCHAR* FindExtension (const TCHAR* pFilename);
+/* Checks to see if a file is available for reading */
+bool FileExists (const TCHAR* pFilename);
 
-	/* Return a pointer to the filename in a path */
-  const TCHAR* FindFilename (const TCHAR* pPath);
+/* Return a pointer to the extension in a path */
+const TCHAR *FindExtension (const TCHAR* pFilename);
 
-	/* Retrieve the size of a file in bytes */
-  long GetFileSize (const TCHAR* pFilename);
-  long GetFileSize (FILE* pFileHandle);
-  bool GetFileSize (long& FileSize, const TCHAR* pFilename);
-  bool GetFileSize (long& FileSize, FILE* pFileHandle);
+/* Return a pointer to the filename in a path */
+const TCHAR *FindFilename (const TCHAR* pPath);
 
-	/* Return the current directory */
-  TCHAR* GetDirString (TCHAR* pString, const int MaxLength);
+/* Retrieve the size of a file in bytes */
+long GetFileSize (const TCHAR* pFilename);
+long GetFileSize (FILE* pFileHandle);
+bool GetFileSize (long &FileSize, const TCHAR* pFilename);
+bool GetFileSize (long &FileSize, FILE* pFileHandle);
 
-	/* Returns TRUE if the given file has any extension */
-  bool HasExtension (const TCHAR* pFilename);
+/* Return the current directory */
+TCHAR *GetDirString (TCHAR* pString, const int MaxLength);
 
-	/* Returns TRUE if the given filename contains a path */
-  bool HasPath (const TCHAR* pFilename);
+/* Returns TRUE if the given file has any extension */
+bool HasExtension (const TCHAR* pFilename);
 
-	/* Returns TRUE if the given path is valid but does not change current path */
-  bool IsDirectory (const TCHAR* pPath);
+/* Returns TRUE if the given filename contains a path */
+bool HasPath (const TCHAR* pFilename);
 
-  	/* Determines if a file can be written to */
-  bool IsFileWriteable (const TCHAR* pFilename);
+/* Returns TRUE if the given path is valid but does not change current path */
+bool IsDirectory (const TCHAR* pPath);
 
-	/* Returns TRUE if the given filename contains wildcard TCHARacters */
-  bool IsWildCard (const TCHAR* pFilename);
+/* Determines if a file can be written to */
+bool IsFileWriteable (const TCHAR* pFilename);
 
-	/* Makes multiple levels of directories */
-  bool MakePathEx (const TCHAR* pPath);
+/* Returns TRUE if the given filename contains wildcard TCHARacters */
+bool IsWildCard (const TCHAR* pFilename);
 
-	/* Create a convienient drive space string */
-  TCHAR* MakeSpaceLabel (TCHAR* Buffer, const int BufferSize, const double Value);
+/* Makes multiple levels of directories */
+bool MakePathEx (const TCHAR* pPath);
 
-	/* Opens a file with fopen(), recording log and error information */
-  FILE* OpenFile (const TCHAR* pFilename, const TCHAR* pMode);
-  bool  OpenFile (FILE** ppFileHandle, const TCHAR* pFilename, const TCHAR* pMode);
+/* Create a convienient drive space string */
+TCHAR *MakeSpaceLabel (TCHAR* Buffer, const int BufferSize, const double Value);
 
-	/* Attempt to read in entire file to a newly allocated pointer */
-  bool ReadFile   (byte** pBuffer, size_t& BytesRead, const TCHAR* pFilename, const bool TextMode = FILE_BINARY);
-  bool ReadFileCB (byte** pBuffer, size_t& BytesRead, const TCHAR* pFilename, READFILE_CALLBACK CallBackFunc, void* pUserData);
+/* Opens a file with fopen(), recording log and error information */
+FILE *OpenFile (const TCHAR* pFilename, const TCHAR* pMode);
+bool OpenFile (FILE** ppFileHandle, const TCHAR* pFilename, const TCHAR* pMode);
 
-	/* Read all/part of a file to an existing buffer */
-  bool ReadFileBuffer (byte** ppBuffer, size_t& BytesRead, const TCHAR* pFilename, 
-		       const size_t MaxInputSize, const bool TextMode = FILE_BINARY);
+/* Attempt to read in entire file to a newly allocated pointer */
+bool ReadFile (byte** pBuffer, size_t &BytesRead, const TCHAR* pFilename,
+                 const bool TextMode = FILE_BINARY);
+bool ReadFileCB (byte** pBuffer, size_t &BytesRead, const TCHAR* pFilename,
+                 READFILE_CALLBACK CallBackFunc, void* pUserData);
 
-	/* Reads one line from the given file stream */
-  int ReadLine (FILE* pFileHandle, TCHAR* pString = NULL, const size_t MaxStringLength = 1);
+/* Read all/part of a file to an existing buffer */
+bool ReadFileBuffer (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
+                     const size_t MaxInputSize, const bool TextMode = FILE_BINARY);
 
-  	/* Read integers from a file stream */
-  bool read_int (FILE* pFileHandle, int& Value);
-  bool read_long (FILE* pFileHandle, long& Value);
-  bool read_short (FILE* pFileHandle, short& Value);
-  bool read_motlong (FILE* pFileHandle, long& Value);
+/* Reads one line from the given file stream */
+int ReadLine (FILE* pFileHandle, TCHAR* pString = NULL, const size_t MaxStringLength = 1);
 
-	/* Removes any filename extension from the string */
-  TCHAR* RemoveExtension (TCHAR* pFilename);
+/* Read integers from a file stream */
+bool read_int (FILE* pFileHandle, int &Value);
+bool read_long (FILE* pFileHandle, long &Value);
+bool read_short (FILE* pFileHandle, short &Value);
+bool read_motlong (FILE* pFileHandle, long &Value);
 
-	/* Ensure the path string ends in the current path TCHARacter */
-  TCHAR* TerminatePath (TCHAR* pPath);
+/* Removes any filename extension from the string */
+TCHAR *RemoveExtension (TCHAR* pFilename);
 
-	/* Output a data buffer to a file */
-  bool WriteFile (const byte* pBuffer, const size_t Size, const TCHAR* pFilename, const bool TextMode = FILE_BINARY);
+/* Ensure the path string ends in the current path TCHARacter */
+TCHAR *TerminatePath (TCHAR* pPath);
 
-  	/* Write integers to a file stream */
-  bool write_short (FILE* pFileHandle, const short OutputValue);
-  bool write_int (FILE* pFileHandle, const int OutputValue);
-  bool write_long (FILE* pFileHandle, const long OutputValue);
-  bool write_motlong (FILE* pFileHandle, const long OutputValue);
+/* Output a data buffer to a file */
+bool WriteFile (const byte* pBuffer, const size_t Size, const TCHAR* pFilename,
+                const bool TextMode = FILE_BINARY);
 
-	/* Compare a filename against a wildcard filter */
-  bool WildcardCompare (const TCHAR* pFilename, const TCHAR* pFilter);
+/* Write integers to a file stream */
+bool write_short (FILE* pFileHandle, const short OutputValue);
+bool write_int (FILE* pFileHandle, const int OutputValue);
+bool write_long (FILE* pFileHandle, const long OutputValue);
+bool write_motlong (FILE* pFileHandle, const long OutputValue);
+
+/* Compare a filename against a wildcard filter */
+bool WildcardCompare (const TCHAR* pFilename, const TCHAR* pFilter);
 
 
 /*===========================================================================
- *		End of Function Prototypes
+ *      End of Function Prototypes
  *=========================================================================*/
 
 
@@ -209,61 +212,62 @@
  *
  * Begin Test Function Prototypes
  *
- * Prototypes for routines to test this module. Available only in DEBUG 
+ * Prototypes for routines to test this module. Available only in DEBUG
  * builds.
  *
  *=========================================================================*/
 #if defined(_DEBUG)
 
 	/* Maximum file size to use for Test_RWFile() */
-  #if defined(__TURBOC__)
-    #define TEST_RWFILE_MAXFILESIZE 65000u
-  #else
-    #define TEST_RWFILE_MAXFILESIZE 100000
-  #endif
-  	
+	#if defined(__TURBOC__)
+		#define TEST_RWFILE_MAXFILESIZE 65000u
+	#else
+		#define TEST_RWFILE_MAXFILESIZE 100000
+	#endif
+
 	/* Helper function to create a random file of a given size */
-  void Test_CreateRandomFile (const TCHAR* pFilename, const size_t Size, const bool TextMode = FILE_BINARY);
+	void Test_CreateRandomFile (const TCHAR* pFilename, const size_t Size,
+	const bool TextMode = FILE_BINARY);
 
 	/* Helper function to compare two files */
-  bool Test_CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2);
+	bool Test_CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2);
 
 	/* Test routines */
-  void Test_ChangeExtension (void);
-  void Test_ChangeDirectory (void);
-  void Test_CompareExtension (void);
-  void Test_CopyFile (void);
-  void Test_CreatePath (void);
-  void Test_ExtractFilename (void);
-  void Test_ExtractPath (void);
-  void Test_FileExists (void);
-  void Test_GetFileSize (void);
-  void Test_HasExtension (void);
-  void Test_HasPath (void);
-  void Test_IsDirectory (void);
-  void Test_IsFileWriteable (void);
-  void Test_IsWildCard (void);
-  void Test_ReadFile (void);
-  void Test_ReadFileBuffer (void);
-  void Test_read_int (void);
-  void Test_read_long (void);
-  void Test_read_motlong (void);
-  void Test_read_short (void);
-  void Test_ReadLine (void);
-  void Text_RemoveExtension (void);
-  void Test_RWFile (const size_t NumTests = 100);
-  void Test_RWNumbers (const size_t NumTests = 1000);
-  void Test_TerminatePath (void);
-  void Test_WriteFile (void);
-  void Test_DL_File (void);
+	void Test_ChangeExtension (void);
+	void Test_ChangeDirectory (void);
+	void Test_CompareExtension (void);
+	void Test_CopyFile (void);
+	void Test_CreatePath (void);
+	void Test_ExtractFilename (void);
+	void Test_ExtractPath (void);
+	void Test_FileExists (void);
+	void Test_GetFileSize (void);
+	void Test_HasExtension (void);
+	void Test_HasPath (void);
+	void Test_IsDirectory (void);
+	void Test_IsFileWriteable (void);
+	void Test_IsWildCard (void);
+	void Test_ReadFile (void);
+	void Test_ReadFileBuffer (void);
+	void Test_read_int (void);
+	void Test_read_long (void);
+	void Test_read_motlong (void);
+	void Test_read_short (void);
+	void Test_ReadLine (void);
+	void Text_RemoveExtension (void);
+	void Test_RWFile (const size_t NumTests = 100);
+	void Test_RWNumbers (const size_t NumTests = 1000);
+	void Test_TerminatePath (void);
+	void Test_WriteFile (void);
+	void Test_DL_File (void);
 
 #endif
 /*===========================================================================
- *		End of Test Function Prototypes
+ *      End of Test Function Prototypes
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File DL_File.H
+ *      End of File DL_File.H
  *=========================================================================*/

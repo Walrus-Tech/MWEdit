@@ -2,11 +2,11 @@
 
  *
 
- * File:	Activatordlg.CPP
+ * File:    Activatordlg.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 10, 2003
+ * Created On:  February 10, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,23 +42,23 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  DEFINE_FILE("ActivatorDlg.cpp");
+DEFINE_FILE("ActivatorDlg.cpp");
 
-  IMPLEMENT_DYNCREATE(CEsmActivatorDlg, CEsmRecDialog);
+IMPLEMENT_DYNCREATE(CEsmActivatorDlg, CEsmRecDialog);
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -78,15 +78,15 @@
 
 BEGIN_MESSAGE_MAP(CEsmActivatorDlg, CEsmRecDialog)
 
-  //{{AFX_MSG_MAP(CEsmActivatorDlg)
+	//{{AFX_MSG_MAP(CEsmActivatorDlg)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CEsmActivatorDlg Message Map
+ *      End of CEsmActivatorDlg Message Map
 
  *=========================================================================*/
 
@@ -105,18 +105,14 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CEsmActivatorDlg::CEsmActivatorDlg() : CEsmRecDialog(CEsmActivatorDlg::IDD) {
-
-  //{{AFX_DATA_INIT(CEsmActivatorDlg)
-
-  //}}AFX_DATA_INIT
-
-  m_pActivator = NULL;
-
- }
+	//{{AFX_DATA_INIT(CEsmActivatorDlg)
+	//}}AFX_DATA_INIT
+	m_pActivator = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CEsmActivatorDlg Constructor
+ *      End of Class CEsmActivatorDlg Constructor
 
  *=========================================================================*/
 
@@ -135,32 +131,20 @@ CEsmActivatorDlg::CEsmActivatorDlg() : CEsmRecDialog(CEsmActivatorDlg::IDD) {
  *=========================================================================*/
 
 void CEsmActivatorDlg::DoDataExchange(CDataExchange* pDX) {
-
-  CFormView::DoDataExchange(pDX);
-
-
-
-  //{{AFX_DATA_MAP(CEsmActivatorDlg)
-
-  DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
-
-  DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
-
-  DDX_Control(pDX, IDC_MODELBUTTON, m_ModelButton);
-
-  DDX_Control(pDX, IDC_SCRIPTLIST, m_ScriptList);
-
-  DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
-
-  DDX_Control(pDX, IDC_IDTEXT, m_IDText);
-
-  //}}AFX_DATA_MAP
-
- }
+	CFormView::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CEsmActivatorDlg)
+	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
+	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
+	DDX_Control(pDX, IDC_MODELBUTTON, m_ModelButton);
+	DDX_Control(pDX, IDC_SCRIPTLIST, m_ScriptList);
+	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
+	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmActivatorDlg::DoDataExchange()
+ *      End of Class Method CEsmActivatorDlg::DoDataExchange()
 
  *=========================================================================*/
 
@@ -179,68 +163,36 @@ void CEsmActivatorDlg::DoDataExchange(CDataExchange* pDX) {
  *=========================================================================*/
 
 void CEsmActivatorDlg::GetControlData (void) {
-
-  DEFINE_FUNCTION("CEsmActivatorDlg::GetControlData()");
-
-  CString	Buffer;  
-
-  
-
+	DEFINE_FUNCTION("CEsmActivatorDlg::GetControlData()");
+	CString Buffer;
 	/* Update the armor pointer and data */
-
-  m_pActivator = (CEsmActivator *) GetRecInfo()->pRecord;
-
-  ASSERT(m_pActivator != NULL);
-
-  
+	m_pActivator = (CEsmActivator *) GetRecInfo()->pRecord;
+	ASSERT(m_pActivator != NULL);
 
 	/* Armor ID, if changed */
 
-  if (m_IDText.GetModify()) {
-
-    m_IDText.GetWindowText(Buffer);
-
-    m_pActivator->SetID(TrimStringSpace(Buffer));
-
-   }
-
-
+	if (m_IDText.GetModify()) {
+		m_IDText.GetWindowText(Buffer);
+		m_pActivator->SetID(TrimStringSpace(Buffer));
+	}
 
 	/* Armor name */
-
-  m_NameText.GetWindowText(Buffer);
-
-  m_pActivator->SetName(TrimStringSpace(Buffer));
-
-
-
+	m_NameText.GetWindowText(Buffer);
+	m_pActivator->SetName(TrimStringSpace(Buffer));
 	/* Item script */
-
-  m_ScriptList.GetWindowText(Buffer);
-
-  m_pActivator->SetScript(TrimStringSpace(Buffer));
-
-  	
-
+	m_ScriptList.GetWindowText(Buffer);
+	m_pActivator->SetScript(TrimStringSpace(Buffer));
 	/* Model filename */
-
-  m_ModelButton.GetWindowText(Buffer);
-
-  m_pActivator->SetModel(TrimStringSpace(Buffer));
-
-
-
+	m_ModelButton.GetWindowText(Buffer);
+	m_pActivator->SetModel(TrimStringSpace(Buffer));
 	/* Record flags */
-
-  m_pActivator->SetPersist(m_PersistCheck.GetCheck() != 0);
-
-  m_pActivator->SetBlocked(m_BlockedCheck.GetCheck() != 0);
-
- }
+	m_pActivator->SetPersist(m_PersistCheck.GetCheck() != 0);
+	m_pActivator->SetBlocked(m_BlockedCheck.GetCheck() != 0);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmActivatorDlg::GetControlData()
+ *      End of Class Method CEsmActivatorDlg::GetControlData()
 
  *=========================================================================*/
 
@@ -259,26 +211,26 @@ void CEsmActivatorDlg::GetControlData (void) {
  *=========================================================================*/
 
 bool CEsmActivatorDlg::IsModified (void) {
-
-  if (m_Modified) return (true);
-
-
+	if (m_Modified) {
+		return (true);
+	}
 
 	/* Check edit controls for changes */
 
-  if (m_NameText.GetModify()) m_Modified = true;
+	if (m_NameText.GetModify()) {
+		m_Modified = true;
+	}
 
-  if (m_IDText.GetModify())   m_Modified = true;
+	if (m_IDText.GetModify()) {
+		m_Modified = true;
+	}
 
-  
-
-  return (m_Modified);
-
- }
+	return (m_Modified);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmActivatorDlg::IsModified()
+ *      End of Class Method CEsmActivatorDlg::IsModified()
 
  *=========================================================================*/
 
@@ -297,38 +249,20 @@ bool CEsmActivatorDlg::IsModified (void) {
  *=========================================================================*/
 
 void CEsmActivatorDlg::OnInitialUpdate() {
-
-
-
-  CEsmRecDialog::OnInitialUpdate();
-
-  UpdateTitle(NULL);
-
-
-
+	CEsmRecDialog::OnInitialUpdate();
+	UpdateTitle(NULL);
 	/* Initialize the armor record */
-
-  ASSERT(GetRecInfo() != NULL);
-
-  m_pActivator = (CEsmActivator *) GetRecInfo()->pRecord;
-
-
-
+	ASSERT(GetRecInfo() != NULL);
+	m_pActivator = (CEsmActivator *) GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
-
-  FillEsmScriptCombo(m_ScriptList);
-
-
-
+	FillEsmScriptCombo(m_ScriptList);
 	/* Update the UI data */
-
-  SetControlData();
-
- }
+	SetControlData();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmActivatorDlg::OnInitialUpdate()
+ *      End of Class Event CEsmActivatorDlg::OnInitialUpdate()
 
  *=========================================================================*/
 
@@ -347,38 +281,26 @@ void CEsmActivatorDlg::OnInitialUpdate() {
  *=========================================================================*/
 
 int CEsmActivatorDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+	/* Refill the script list if required */
+	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
+		esmrecinfo_t *pRecInfo = NULL;
+		int Index;
+		Index = m_ScriptList.GetCurSel();
 
+		if (Index >= 0) {
+			pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
+		}
 
+		FillEsmScriptCombo(m_ScriptList);
+		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+	}
 
-  	/* Refill the script list if required */
-
-  if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
-
-   esmrecinfo_t* pRecInfo = NULL;
-
-    int	  	  Index;
-
-
-
-    Index = m_ScriptList.GetCurSel();
-
-    if (Index >= 0) pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
-
-    FillEsmScriptCombo(m_ScriptList);
-
-    FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
-
-   }
-
-
-
-  return (0);
-
- }
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmActivatorDlg::OnUpdateItem()
+ *      End of Class Event CEsmActivatorDlg::OnUpdateItem()
 
  *=========================================================================*/
 
@@ -397,54 +319,29 @@ int CEsmActivatorDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
  *=========================================================================*/
 
 void CEsmActivatorDlg::SetControlData (void) {
-
-
-
 	/* Ignore if the current item is not valid */
-
-  if (m_pActivator == NULL) return;
-
-
+	if (m_pActivator == NULL) {
+		return;
+	}
 
 	/* Armor ID, update title as well */
-
-  m_IDText.SetWindowText(m_pActivator->GetID());
-
-  UpdateTitle(m_pActivator->GetID());
-
-
-
+	m_IDText.SetWindowText(m_pActivator->GetID());
+	UpdateTitle(m_pActivator->GetID());
 	/* Item strings and values */
-
-  m_NameText.SetWindowText(m_pActivator->GetName());
-
-  m_NameText.SetModify(FALSE);
-
-  
-
+	m_NameText.SetWindowText(m_pActivator->GetName());
+	m_NameText.SetModify(FALSE);
 	/* Model/icon buttons */
-
-  m_ModelButton.SetWindowText(m_pActivator->GetModel());
-
-  
-
+	m_ModelButton.SetWindowText(m_pActivator->GetModel());
 	/* Item lists */
-
-  m_ScriptList.SelectString(-1, m_pActivator->GetScript());
-
-
-
+	m_ScriptList.SelectString(-1, m_pActivator->GetScript());
 	/* Record flags */
-
-  m_BlockedCheck.SetCheck(m_pActivator->IsBlocked());
-
-  m_PersistCheck.SetCheck(m_pActivator->IsPersist());
-
- }
+	m_BlockedCheck.SetCheck(m_pActivator->IsBlocked());
+	m_PersistCheck.SetCheck(m_pActivator->IsPersist());
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmActivatorDlg::SetControlData()
+ *      End of Class Method CEsmActivatorDlg::SetControlData()
 
  *=========================================================================*/
 

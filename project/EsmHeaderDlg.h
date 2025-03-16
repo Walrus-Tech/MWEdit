@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmheaderdlg.H
+ * File:    Esmheaderdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	March 2, 2003
+ * Created On:  March 2, 2003
 
  *
 
@@ -38,71 +38,71 @@ class CEsmHeaderDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Members ----------------------*/
+	/*---------- Begin Protected Class Members ----------------------*/
 
-protected:
+  protected:
 
-  CEsmTES3*    m_pHeader;
+	CEsmTES3 *m_pHeader;
 
-  const TCHAR* m_pFilename;
-
-  
+	const TCHAR *m_pFilename;
 
 
 
-  /*---------- Begin Public Class Methods -------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods -------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmHeaderDlg(CWnd* pParent = NULL);
+	CEsmHeaderDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmTES3* pHeader, const TCHAR* pFilename);
+	bool DoModal (CEsmTES3* pHeader, const TCHAR* pFilename);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmHeaderDlg)
+	//{{AFX_DATA(CEsmHeaderDlg)
 
-  enum { IDD = IDD_HEADER_DLG };
+	enum { IDD = IDD_HEADER_DLG };
 
-  CEdit	m_DescText;
+	CEdit m_DescText;
 
-  CEdit	m_AuthorText;
+	CEdit m_AuthorText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmHeaderDlg)
+	//{{AFX_VIRTUAL(CEsmHeaderDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmHeaderDlg)
+	//{{AFX_MSG(CEsmHeaderDlg)
 
-  virtual void OnOK();
+	virtual void OnOK();
 
 	virtual BOOL OnInitDialog();
 
@@ -110,7 +110,7 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
@@ -118,7 +118,7 @@ protected:
 
 /*===========================================================================
 
- *		End of Class CEsmHeaderDlg Definition
+ *      End of Class CEsmHeaderDlg Definition
 
  *=========================================================================*/
 
@@ -138,7 +138,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmheaderdlg.H
+ *      End of File Esmheaderdlg.H
 
  *=========================================================================*/
 

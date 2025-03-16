@@ -2,11 +2,11 @@
 
  *
 
- * File:	EsmScrTempPage3.H
+ * File:    EsmScrTempPage3.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 8, 2003
+ * Created On:  October 8, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "dl_err.h"
+#include "dl_err.h"
 
-  #include "EsmDlgArray.h"
+#include "EsmDlgArray.h"
 
-  #include "file/CsvFile.h"
+#include "file/CsvFile.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,15 +62,15 @@
 
 
 
-	/* Default list column width */
+/* Default list column width */
 
-  #define ESMSCRTEMP_CSVLIST_COLWIDTH	80
+#define ESMSCRTEMP_CSVLIST_COLWIDTH   80
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -94,109 +94,113 @@ class CEsmScrTempView;
 
 class CEsmScrTempPage3 : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmScrTempPage3);
+	DECLARE_DYNCREATE(CEsmScrTempPage3);
 
 
 
-  /*---------- Begin Protected Class Members ---------------------------*/
+	/*---------- Begin Protected Class Members ---------------------------*/
 
-protected:
+  protected:
 
-  CEsmDlgHandler*	m_pDlgHandler;		/* Parent dialog handler */
+	CEsmDlgHandler *m_pDlgHandler;      /* Parent dialog handler */
 
-  CEsmScrTempView*	m_pParentView;
+	CEsmScrTempView *m_pParentView;
 
-  int			m_NumColumns;
-
-
+	int m_NumColumns;
 
 
 
-  /*---------- Begin Protected Class Methods ---------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ---------------------------*/
+
+  protected:
 
 
 
 	/* Add columns to the list control */
 
-  bool AddCsvColumns (CCsvFile* pCsvFile);
+	bool AddCsvColumns (CCsvFile* pCsvFile);
 
 
 
 	/* Deletes all items and columns in the csv list */
 
-  void ClearCsvList (void);
+	void ClearCsvList (void);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ------------------------------*/
+	/*---------- Begin Public Class Methods ------------------------------*/
 
-public:
+  public:
 
 
 
 	/* Constructor and Destructor */
 
-  CEsmScrTempPage3();
+	CEsmScrTempPage3();
 
-  ~CEsmScrTempPage3();
+	~CEsmScrTempPage3();
 
 
 
 	/* Fills the CSV list with its contents */
 
-  bool FillCsvList (CCsvFile* pCsvFile);
+	bool FillCsvList (CCsvFile* pCsvFile);
 
 
 
 	/* Set class members */
 
-  void SetDlgHandler (CEsmDlgHandler* pHandler) { m_pDlgHandler = pHandler; }
+	void SetDlgHandler (CEsmDlgHandler* pHandler) {
+		m_pDlgHandler = pHandler;
+	}
 
-  void SetParentView (CEsmScrTempView* pView)    { m_pParentView = pView; }
+	void SetParentView (CEsmScrTempView* pView) {
+		m_pParentView = pView;
+	}
 
 
 
 	/* Update the page controls */
 
-  void UpdatePage (void);
+	void UpdatePage (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmScrTempPage3)
+	//{{AFX_DATA(CEsmScrTempPage3)
 
-  enum { IDD = IDD_SCRTEMP_PAGE3 };
+	enum { IDD = IDD_SCRTEMP_PAGE3 };
 
-  CListCtrl	m_CsvList;
+	CListCtrl m_CsvList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmScrTempPage3)
+	//{{AFX_VIRTUAL(CEsmScrTempPage3)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmScrTempPage3)
+	//{{AFX_MSG(CEsmScrTempPage3)
 
 	virtual BOOL OnInitDialog();
 
@@ -204,15 +208,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmScrTempPage3 Definition
+ *      End of Class CEsmScrTempPage3 Definition
 
  *=========================================================================*/
 
@@ -232,7 +236,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File EsmScrTempPage3.H
+ *      End of File EsmScrTempPage3.H
 
  *=========================================================================*/
 

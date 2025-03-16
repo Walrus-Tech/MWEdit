@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmscrtemppage1.H
+ * File:    Esmscrtemppage1.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 8, 2003
+ * Created On:  October 8, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "dl_err.h"
+#include "dl_err.h"
 
-  #include "EsmDlgArray.h"
+#include "EsmDlgArray.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,15 +60,15 @@
 
 
 
-	/* String sizes */
+/* String sizes */
 
-  #define ESMSCRTEMP_SCRIPTNAMESIZE 24
+#define ESMSCRTEMP_SCRIPTNAMESIZE 24
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -92,67 +92,71 @@ class CEsmScrTempView;
 
 class CEsmScrTempPage1 : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmScrTempPage1);
+	DECLARE_DYNCREATE(CEsmScrTempPage1);
 
 
 
-  /*---------- Begin Public Class Members ----------------------------*/
+	/*---------- Begin Public Class Members ----------------------------*/
 
-protected:
+  protected:
 
-  CEsmDlgHandler*	m_pDlgHandler;		/* Parent dialog handler */
+	CEsmDlgHandler *m_pDlgHandler;      /* Parent dialog handler */
 
-  CEsmScrTempView*	m_pParentView;
-
-
-
-
-
-  /*---------- Begin Public Class Methods ----------------------------*/
-
-protected:
+	CEsmScrTempView *m_pParentView;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ----------------------------*/
+	/*---------- Begin Public Class Methods ----------------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods ----------------------------*/
+
+  public:
 
 
 
 	/* Constructor/destructor */
 
-  CEsmScrTempPage1();
+	CEsmScrTempPage1();
 
-  ~CEsmScrTempPage1();
+	~CEsmScrTempPage1();
 
 
 
 	/* Update the template variable list */
 
-  void FillTempVarList (void);
+	void FillTempVarList (void);
 
 
 
 	/* Save the control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
 
 
-	  /* Set class members */
+	/* Set class members */
 
-  void SetDlgHandler (CEsmDlgHandler*  pHandler) { m_pDlgHandler = pHandler; }
+	void SetDlgHandler (CEsmDlgHandler* pHandler) {
+		m_pDlgHandler = pHandler;
+	}
 
-  void SetParentView (CEsmScrTempView* pView)    { m_pParentView = pView; }
+	void SetParentView (CEsmScrTempView* pView) {
+		m_pParentView = pView;
+	}
 
 
 
 	/* Update the page controls */
 
-  void UpdatePage (void);
+	void UpdatePage (void);
 
 
 
@@ -160,23 +164,23 @@ public:
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmScrTempPage1)
+	//{{AFX_DATA(CEsmScrTempPage1)
 
 	enum { IDD = IDD_SCRTEMP_PAGE1 };
 
-	CEdit	m_ScriptName;
+	CEdit m_ScriptName;
 
-	CButton	m_AutoScriptName;
+	CButton m_AutoScriptName;
 
-  CButton	m_OnlyCompleteRows;
+	CButton m_OnlyCompleteRows;
 
-  CButton	m_KeepQuotes;
+	CButton m_KeepQuotes;
 
-  CEdit		m_CsvFile;
+	CEdit m_CsvFile;
 
-  CEdit		m_TemplateFile;
+	CEdit m_TemplateFile;
 
-  CListBox	m_TemplateList;
+	CListBox m_TemplateList;
 
 	//}}AFX_DATA
 
@@ -184,55 +188,55 @@ public:
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmScrTempPage1)
+	//{{AFX_VIRTUAL(CEsmScrTempPage1)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmScrTempPage1)
+	//{{AFX_MSG(CEsmScrTempPage1)
 
-  afx_msg void OnLoadscrtemp();
+	afx_msg void OnLoadscrtemp();
 
-  afx_msg void OnUpdatetext();
+	afx_msg void OnUpdatetext();
 
-  afx_msg void OnLoadcsv();
+	afx_msg void OnLoadcsv();
 
-  afx_msg void OnReloadscrtemp();
+	afx_msg void OnReloadscrtemp();
 
-  afx_msg void OnReloadcsvfile();
+	afx_msg void OnReloadcsvfile();
 
-  afx_msg void OnAutoscriptname();
+	afx_msg void OnAutoscriptname();
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  afx_msg void OnCheckTemplate();
+	afx_msg void OnCheckTemplate();
 
-  afx_msg void OnCreateTemplate();
+	afx_msg void OnCreateTemplate();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmScrTempPage1 Definition
+ *      End of Class CEsmScrTempPage1 Definition
 
  *=========================================================================*/
 
@@ -252,7 +256,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmscrtemppage1.H
+ *      End of File Esmscrtemppage1.H
 
  *=========================================================================*/
 

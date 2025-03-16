@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmlevelitemdlg.H
+ * File:    Esmlevelitemdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 15, 2003
+ * Created On:  February 15, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,139 +62,141 @@
 
 class CEsmLevelItemDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmLevelItemDlg);
+	DECLARE_DYNCREATE(CEsmLevelItemDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmLevelItem*	m_pLevelItem;
+	CEsmLevelItem *m_pLevelItem;
 
-  int			m_SortData;
-
-
+	int m_SortData;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Helper get/set methods */
 
-  void GetItemData (void);
+	void GetItemData (void);
 
-  void SetItemData (void);
+	void SetItemData (void);
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmLevelItemDlg();
+	CEsmLevelItemDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified   (void);
+	virtual bool IsModified (void);
 
-          int  GetSortData  (void) { return (m_SortData); }
+	int GetSortData (void) {
+		return (m_SortData);
+	}
 
-	  int  GetSortCount (esmrecinfo_t* pRecInfo);
+	int GetSortCount (esmrecinfo_t* pRecInfo);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmLevelItemDlg)
+	//{{AFX_DATA(CEsmLevelItemDlg)
 
-  enum { IDD = IDD_LEVELITEM_DLG };
+	enum { IDD = IDD_LEVELITEM_DLG };
 
-  CButton	m_PCLevelCheck;
+	CButton m_PCLevelCheck;
 
-  CButton	m_EachItemCheck;
+	CButton m_EachItemCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CEdit		m_ChanceNoneText;
+	CEdit m_ChanceNoneText;
 
-  CEsmListCtrl	m_ItemList;
+	CEsmListCtrl m_ItemList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmLevelItemDlg)
+	//{{AFX_VIRTUAL(CEsmLevelItemDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmLevelItemDlg)
+	//{{AFX_MSG(CEsmLevelItemDlg)
 
-  afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordKey  (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordSort (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordSort (LPARAM lParam, LPARAM wParam);
 
-  afx_msg void OnEndlabeleditlist(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnEndlabeleditlist(NMHDR* pNMHDR, LRESULT* pResult);
 
-  afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmLevelItemDlg Definition
+ *      End of Class CEsmLevelItemDlg Definition
 
  *=========================================================================*/
 
@@ -214,7 +216,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmlevelitemdlg.H
+ *      End of File Esmlevelitemdlg.H
 
  *=========================================================================*/
 

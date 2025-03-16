@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmLockPick.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmLockPick.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,10 +16,10 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmItem2.h"
-  #include "EsmSubLKDT.h"
+#include "EsmItem2.h"
+#include "EsmSubLKDT.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -30,7 +30,7 @@
  *=========================================================================*/
 
 /*===========================================================================
- *		End of Function Prototypes
+ *      End of Function Prototypes
  *=========================================================================*/
 
 
@@ -42,66 +42,102 @@
  *
  *=========================================================================*/
 class CEsmLockPick : public CEsmItem2 {
-  DECLARE_SUBRECCREATE();
+	DECLARE_SUBRECCREATE();
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-  CEsmSubLKDT*	m_pLockData;	/* Reference to subrecords */
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
+	CEsmSubLKDT *m_pLockData;    /* Reference to subrecords */
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CEsmLockPick();
-  //virtual ~CEsmLockPick() { Destroy(); }
-  virtual void Destroy (void);
+	CEsmLockPick();
+	//virtual ~CEsmLockPick() { Destroy(); }
+	virtual void Destroy (void);
 
-  	/* Compare two fields of the record */
-  virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	/* Compare two fields of the record */
+	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
 
-  	/* Return a new record object */
-  static CEsmRecord* Create (void);
+	/* Return a new record object */
+	static CEsmRecord *Create (void);
 
-  	/* Create a new, empty, record */
-  virtual void CreateNew (CEsmFile* pFile);
+	/* Create a new, empty, record */
+	virtual void CreateNew (CEsmFile* pFile);
 
-  	/* Return a text representation of the item type */
-  virtual const TCHAR* GetItemType (void) { return _T("Lock Pick"); }
+	/* Return a text representation of the item type */
+	virtual const TCHAR *GetItemType (void) {
+		return _T("Lock Pick");
+	}
 
-  	/* Get class members */
-  lockdata_t*   GetLockData	(void) { return (m_pLockData ? m_pLockData->GetLockData() : NULL); }
-  virtual float	GetWeight	(void) { return (m_pLockData ? m_pLockData->GetWeight()  : 0); }
-  virtual long	GetValue	(void) { return (m_pLockData ? m_pLockData->GetValue()   : 0); } 
-  float		GetQuality	(void) { return (m_pLockData ? m_pLockData->GetQuality() : 0); } 
-  long		GetUses		(void) { return (m_pLockData ? m_pLockData->GetUses()    : 0); } 
+	/* Get class members */
+	lockdata_t *GetLockData (void) {
+		return (m_pLockData ? m_pLockData->GetLockData() : NULL);
+	}
 
-  	/* Get a string representation of a particular field */
-  virtual const TCHAR* GetFieldString (const int FieldID);
+	virtual float GetWeight (void) {
+		return (m_pLockData ? m_pLockData->GetWeight() : 0);
+	}
 
-  	/* Used to save the various record elements */
-  virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual long GetValue (void) {
+		return (m_pLockData ? m_pLockData->GetValue() : 0);
+	}
+
+	float GetQuality (void) {
+		return (m_pLockData ? m_pLockData->GetQuality() : 0);
+	}
+
+	long GetUses (void) {
+		return (m_pLockData ? m_pLockData->GetUses() : 0);
+	}
+
+	/* Get a string representation of a particular field */
+	virtual const TCHAR *GetFieldString (const int FieldID);
+
+	/* Used to save the various record elements */
+	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
 
 	/* Set class members */
-  virtual void SetWeight  (const float Weight) { if (m_pLockData) m_pLockData->SetWeight(Weight); }
-  virtual void SetValue   (const long Value)   { if (m_pLockData) m_pLockData->SetValue(Value); }
-          void SetUses    (const long  Value)  { if (m_pLockData) m_pLockData->SetUses(Value); }
-          void SetQuality (const float Value)  { if (m_pLockData) m_pLockData->SetQuality(Value); }
+	virtual void SetWeight (const float Weight) {
+		if (m_pLockData) {
+			m_pLockData->SetWeight(Weight);
+		}
+	}
 
-  	/* Set a certain field of the record */
-  virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual void SetValue (const long Value) {
+		if (m_pLockData) {
+			m_pLockData->SetValue(Value);
+		}
+	}
 
- };
+	void SetUses (const long Value) {
+		if (m_pLockData) {
+			m_pLockData->SetUses(Value);
+		}
+	}
+
+	void SetQuality (const float Value) {
+		if (m_pLockData) {
+			m_pLockData->SetQuality(Value);
+		}
+	}
+
+	/* Set a certain field of the record */
+	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+
+};
+
 /*===========================================================================
- *		End of Class CEsmArmor Definition
+ *      End of Class CEsmArmor Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File Esmarmor.H
+ *      End of File Esmarmor.H
  *=========================================================================*/

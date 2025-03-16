@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmTES3.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmTES3.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "esmTES3.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmTES3.cpp");
+DEFINE_FILE("EsmTES3.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,13 +29,13 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmTES3::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_HEDR,	CEsmSubHEDR::Create },
-	{ MWESM_SUBREC_MAST,	CEsmSubName::Create },
-	{ MWESM_SUBREC_DATA,	CEsmSubLong64::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_HEDR, CEsmSubHEDR::Create },
+	{ MWESM_SUBREC_MAST, CEsmSubName::Create },
+	{ MWESM_SUBREC_DATA, CEsmSubLong64::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -45,11 +45,12 @@ const esmsubreccreate_t CEsmTES3::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmTES3::CEsmTES3 () {
-  //DEFINE_FUNCTION("CEsmTES3::CEsmTES3()");
-  m_pHeader = NULL;
- }
+	//DEFINE_FUNCTION("CEsmTES3::CEsmTES3()");
+	m_pHeader = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmTES3 Constructor
+ *      End of Class CEsmTES3 Constructor
  *=========================================================================*/
 
 
@@ -61,16 +62,15 @@ CEsmTES3::CEsmTES3 () {
  *
  *=========================================================================*/
 void CEsmTES3::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmTES3::Destroy()");
-
+	//DEFINE_FUNCTION("CEsmTES3::Destroy()");
 	/* Clear the references */
-  m_pHeader = NULL;
-  
+	m_pHeader = NULL;
 	/* Call the base class method */
-  CEsmRecord::Destroy();
- }
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmTES3::Destroy()
+ *      End of Class Method CEsmTES3::Destroy()
  *=========================================================================*/
 
 
@@ -80,18 +80,18 @@ void CEsmTES3::Destroy (void) {
  *
  *=========================================================================*/
 void CEsmTES3::AddMaster(const TCHAR* pFilename, const long FileSize) {
-  CEsmSubName*   pName;
-  CEsmSubLong64* pSize;
+	CEsmSubName* pName;
+	CEsmSubLong64* pSize;
+	pName = (CEsmSubName *) AllocateSubRecord(MWESM_SUBREC_MAST);
+	pSize = (CEsmSubLong64 *) AllocateSubRecord(MWESM_SUBREC_DATA);
+	pName->CreateNew();
+	pSize->CreateNew();
+	pName->SetName(pFilename);
+	pSize->SetValue1(FileSize);
+}
 
-  pName = (CEsmSubName *) AllocateSubRecord(MWESM_SUBREC_MAST);
-  pSize = (CEsmSubLong64 *) AllocateSubRecord(MWESM_SUBREC_DATA);
-  pName->CreateNew();
-  pSize->CreateNew();
-  pName->SetName(pFilename);
-  pSize->SetValue1(FileSize);
- }
 /*===========================================================================
- *		End of Class Method CEsmTES3::AddMaster()
+ *      End of Class Method CEsmTES3::AddMaster()
  *=========================================================================*/
 
 
@@ -102,15 +102,15 @@ void CEsmTES3::AddMaster(const TCHAR* pFilename, const long FileSize) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmTES3::Create (void) {
-  DEFINE_FUNCTION("CEsmTES3::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmTES3::Create (void) {
+	DEFINE_FUNCTION("CEsmTES3::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmTES3);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmTES3);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmTES3::Create()
+ *      End of Class Method CEsmTES3::Create()
  *=========================================================================*/
 
 
@@ -122,16 +122,15 @@ CEsmRecord* CEsmTES3::Create (void) {
  *
  *=========================================================================*/
 void CEsmTES3::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_HEDR);
-  m_pHeader->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_HEDR);
+	m_pHeader->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmTES3::CreateNew()
+ *      End of Class Method CEsmTES3::CreateNew()
  *=========================================================================*/
 
 
@@ -141,14 +140,14 @@ void CEsmTES3::CreateNew (CEsmFile* pFile) {
  *
  *=========================================================================*/
 void CEsmTES3::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_HEDR)) {
+		m_pHeader = (CEsmSubHEDR *) pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_HEDR))
-    m_pHeader = (CEsmSubHEDR *) pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-  
- }
 /*===========================================================================
- *		End of Class Event CEsmTES3::OnAddSubRecord()
+ *      End of Class Event CEsmTES3::OnAddSubRecord()
  *=========================================================================*/
 

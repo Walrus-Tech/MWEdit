@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcreaturepage4.H
+ * File:    Esmcreaturepage4.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	March 1, 2003
+ * Created On:  March 1, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -56,11 +56,11 @@
 
  *=========================================================================*/
 
-  class CEsmDlgHandler;
+class CEsmDlgHandler;
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -80,169 +80,173 @@
 
 class CEsmCreaturePage4 : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmCreaturePage4);
+	DECLARE_DYNCREATE(CEsmCreaturePage4);
 
 
 
-  /*---------- Begin Protected Class Members  --------------------*/
+	/*---------- Begin Protected Class Members  --------------------*/
 
-protected:
+  protected:
 
-  esmrecinfo_t*		m_pRecInfo;
+	esmrecinfo_t *m_pRecInfo;
 
-  CEsmDlgHandler*	m_pDlgHandler;
+	CEsmDlgHandler *m_pDlgHandler;
 
-  CEsmSubRecArray	m_PackageArray;		/* Holds all the packages being editted */
+	CEsmSubRecArray m_PackageArray;     /* Holds all the packages being editted */
 
 
 
-  /*---------- Begin Protected Class Methods ---------------------*/
+	/*---------- Begin Protected Class Methods ---------------------*/
 
-protected:
+  protected:
 
 
 
 	/* Creates a copy of all the given AI subrecords */
 
-  void AddAIRecords (const TCHAR* pType);
+	void AddAIRecords (const TCHAR* pType);
 
 
 
 	/* Delete all sub-records in the package array */
 
-  void ClearPackageArray (void);
+	void ClearPackageArray (void);
 
 
 
 	/* Delete all selected items in the list */
 
-  void DeleteSelectedItems (void);
+	void DeleteSelectedItems (void);
 
 
 
 	/* Find a subrecord array index */
 
-  CEsmSubNameFix* FindCNDTSubRec (CEsmSubRecord* pSubRecord);
+	CEsmSubNameFix *FindCNDTSubRec (CEsmSubRecord* pSubRecord);
 
 
 
 	/* Output the given AI package sub-record to the text control */
 
-  void OutputAIData (CEsmSubRecord* pSubRec);
+	void OutputAIData (CEsmSubRecord* pSubRec);
 
 
 
 	/* Updates the package list */
 
-  void UpdatePackageList (void);
-
-  
+	void UpdatePackageList (void);
 
 
 
-  /*---------- Begin Public Class Methods ------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods ------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmCreaturePage4();
+	CEsmCreaturePage4();
 
-  ~CEsmCreaturePage4();
-
-
-
-  	/* Get class members */
-
-  CMWEditDoc* GetDocument (void);
+	~CEsmCreaturePage4();
 
 
 
-    	/* Set class members */
+	/* Get class members */
 
-  void SetRecInfo    (esmrecinfo_t* pRecInfo)   { m_pRecInfo = pRecInfo; }
+	CMWEditDoc *GetDocument (void);
 
-  void SetDlgHandler (CEsmDlgHandler*  pParent) { m_pDlgHandler = pParent; }
+
+
+	/* Set class members */
+
+	void SetRecInfo (esmrecinfo_t* pRecInfo) {
+		m_pRecInfo = pRecInfo;
+	}
+
+	void SetDlgHandler (CEsmDlgHandler* pParent) {
+		m_pDlgHandler = pParent;
+	}
 
 
 
 	/* Get/set control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
-  void SetControlData (void);
+	void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmCreaturePage4)
+	//{{AFX_DATA(CEsmCreaturePage4)
 
-  enum { IDD = IDD_NPC_VIEW4 };
+	enum { IDD = IDD_NPC_VIEW4 };
 
-  CEdit		m_PackageText;
+	CEdit m_PackageText;
 
-  CEdit		m_HelloText;
+	CEdit m_HelloText;
 
-  CEdit		m_FleeText;
+	CEdit m_FleeText;
 
-  CEdit		m_AlarmText;
+	CEdit m_AlarmText;
 
-  CEdit		m_FightText;
+	CEdit m_FightText;
 
-  CEsmListCtrl	m_PackageList;
+	CEsmListCtrl m_PackageList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmCreaturePage4)
+	//{{AFX_VIRTUAL(CEsmCreaturePage4)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmCreaturePage4)
+	//{{AFX_MSG(CEsmCreaturePage4)
 
-  afx_msg void OnActivatebutton();
+	afx_msg void OnActivatebutton();
 
-  afx_msg void OnEscortbutton();
+	afx_msg void OnEscortbutton();
 
-  afx_msg void OnFollowbutton();
+	afx_msg void OnFollowbutton();
 
-  afx_msg void OnTravelbutton();
+	afx_msg void OnTravelbutton();
 
-  afx_msg void OnWanderbutton();
+	afx_msg void OnWanderbutton();
 
-  afx_msg void OnEditbutton();
+	afx_msg void OnEditbutton();
 
-  afx_msg void OnDeletebutton();
+	afx_msg void OnDeletebutton();
 
-  afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnEditRecord(LPARAM lParam, WPARAM wParam);
+	afx_msg LRESULT OnEditRecord(LPARAM lParam, WPARAM wParam);
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  afx_msg void OnItemchangingPackagelist(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnItemchangingPackagelist(NMHDR* pNMHDR, LRESULT* pResult);
 
-  //}}AFX_MSG
+	//}}AFX_MSG
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
@@ -250,7 +254,7 @@ protected:
 
 /*===========================================================================
 
- *		End of Class CEsmCreaturePage4 Definition
+ *      End of Class CEsmCreaturePage4 Definition
 
  *=========================================================================*/
 
@@ -270,7 +274,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmcreaturepage4.H
+ *      End of File Esmcreaturepage4.H
 
  *=========================================================================*/
 

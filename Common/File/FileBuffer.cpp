@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	Filebuffer.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Friday, December 05, 2003
+ * File:    Filebuffer.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Friday, December 05, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "filebuffer.h"
 #include "dl_file.h"
 
@@ -18,9 +18,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("FileBuffer.cpp");
+DEFINE_FILE("FileBuffer.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -30,20 +30,19 @@
  *
  *=========================================================================*/
 CFileBuffer::CFileBuffer () {
-  DEFINE_FUNCTION("CFileBuffer::CFileBuffer()");
-
-  m_pFile         = NULL;
-  m_Attached      = false;
-  m_FileIndex     = 0;
-  m_BufferIndex   = 0;
-
+	DEFINE_FUNCTION("CFileBuffer::CFileBuffer()");
+	m_pFile = NULL;
+	m_Attached = false;
+	m_FileIndex = 0;
+	m_BufferIndex = 0;
 	/* Create the initial data buffer */
-  CreateArrayPointer(m_pBuffer, char, FILEBUF_DEFAULT_BUFFER_SIZE);
-  m_BufferSize    = 0;
-  m_MaxBufferSize = FILEBUF_DEFAULT_BUFFER_SIZE;
- }
+	CreateArrayPointer(m_pBuffer, char, FILEBUF_DEFAULT_BUFFER_SIZE);
+	m_BufferSize = 0;
+	m_MaxBufferSize = FILEBUF_DEFAULT_BUFFER_SIZE;
+}
+
 /*===========================================================================
- *		End of Class CFileBuffer Constructor
+ *      End of Class CFileBuffer Constructor
  *=========================================================================*/
 
 
@@ -53,14 +52,13 @@ CFileBuffer::CFileBuffer () {
  *
  *=========================================================================*/
 CFileBuffer::~CFileBuffer () {
-  DEFINE_FUNCTION("CFileBuffer::~CFileBuffer()");
+	DEFINE_FUNCTION("CFileBuffer::~CFileBuffer()");
+	Destroy();
+	DestroyArrayPointer(m_pBuffer);
+}
 
-  Destroy();
-
-  DestroyArrayPointer(m_pBuffer);
- }
 /*===========================================================================
- *		End of Class CFileBuffer Destructor
+ *      End of Class CFileBuffer Destructor
  *=========================================================================*/
 
 
@@ -70,14 +68,13 @@ CFileBuffer::~CFileBuffer () {
  *
  *=========================================================================*/
 void CFileBuffer::Destroy (void) {
-  //DEFINE_FUNCTION("CFileBuffer::Destroy()");
-
+	//DEFINE_FUNCTION("CFileBuffer::Destroy()");
 	/* Ensure the file is properly closed */
-  Close();
+	Close();
+}
 
- }
 /*===========================================================================
- *		End of Class Method CFileBuffer::Destroy()
+ *      End of Class Method CFileBuffer::Destroy()
  *=========================================================================*/
 
 
@@ -90,17 +87,15 @@ void CFileBuffer::Destroy (void) {
  *
  *=========================================================================*/
 void CFileBuffer::Attach (FILE* pFile) {
-
 	/* Close the current file, if any */
-  Close();
+	Close();
+	m_Attached = true;
+	m_pFile = pFile;
+	m_FileIndex = ftell(m_pFile);
+}
 
-  m_Attached = true;
-  m_pFile = pFile;
-
-  m_FileIndex = ftell(m_pFile);
- }
 /*===========================================================================
- *		End of Class Method CFileBuffer::Attach()
+ *      End of Class Method CFileBuffer::Attach()
  *=========================================================================*/
 
 
@@ -112,24 +107,24 @@ void CFileBuffer::Attach (FILE* pFile) {
  *
  *=========================================================================*/
 void CFileBuffer::Close (void) {
-
 	/* Detach the handle if we don't own it */
-  if (m_Attached) {
-    m_pFile = NULL;
-    m_Attached = false;
-   }
+	if (m_Attached) {
+		m_pFile = NULL;
+		m_Attached = false;
+	}
 	/* Close the file if it is open */
-  else if (m_pFile != NULL) {
-    fclose(m_pFile);
-    m_pFile = NULL;
-   }
+	else if (m_pFile != NULL) {
+		fclose(m_pFile);
+		m_pFile = NULL;
+	}
 
-  m_BufferSize  = 0;
-  m_FileIndex   = 0;
-  m_BufferIndex = 0;
- }
+	m_BufferSize = 0;
+	m_FileIndex = 0;
+	m_BufferIndex = 0;
+}
+
 /*===========================================================================
- *		End of Class Method CFileBuffer::Close()
+ *      End of Class Method CFileBuffer::Close()
  *=========================================================================*/
 
 
@@ -139,55 +134,56 @@ void CFileBuffer::Close (void) {
  *
  * Ensures that at least hte given amount of data is available in the file
  * buffer. Reads more in if required. Returns false if the requested amount
- * is not available. Protected class method. 
+ * is not available. Protected class method.
  *
  * Only call from the GetData() method.
  *
  *=========================================================================*/
 bool CFileBuffer::GetData_Priv (const int Size) {
-  int  ReadSize;
-  int  Result;
+	int ReadSize;
+	int Result;
 
 	/* Ignore invalid input */
-  if (Size <= 0) return (true);
+	if (Size <= 0) {
+		return (true);
+	}
 
 	/* Too much data for one read? */
-  if (Size > m_MaxBufferSize) {
-    ErrorHandler.AddError(ERR_MAXINDEX, _T("Cannot request for more than the file buffer size!"));
-    return (false);
-   }
+	if (Size > m_MaxBufferSize) {
+		ErrorHandler.AddError(ERR_MAXINDEX, _T("Cannot request for more than the file buffer size!"));
+		return (false);
+	}
 
 	/* Is the file handle valid? */
-  if (m_pFile == NULL) {
-    ErrorHandler.AddError(ERR_MAXINDEX, _T("File buffer not currently open!"));
-    return (false);
-   }
-  else if (feof(m_pFile)) {
-    ErrorHandler.AddError(ERR_MAXINDEX, _T("End-of-file reached in file buffer!"));
-    return (false);
-   }  
+	if (m_pFile == NULL) {
+		ErrorHandler.AddError(ERR_MAXINDEX, _T("File buffer not currently open!"));
+		return (false);
+	} else if (feof(m_pFile)) {
+		ErrorHandler.AddError(ERR_MAXINDEX, _T("End-of-file reached in file buffer!"));
+		return (false);
+	}
 
 	/* Shift data in preparation for a read */
-  memmove(m_pBuffer, m_pBuffer + m_BufferIndex, m_BufferSize - m_BufferIndex);
-  ReadSize       = m_BufferIndex + (m_MaxBufferSize - m_BufferSize);
-  m_BufferSize  -= m_BufferIndex;
-  m_BufferIndex  = 0;
-  m_FileIndex    = ftell(m_pFile) - m_BufferSize;
-  
+	memmove(m_pBuffer, m_pBuffer + m_BufferIndex, m_BufferSize - m_BufferIndex);
+	ReadSize = m_BufferIndex + (m_MaxBufferSize - m_BufferSize);
+	m_BufferSize -= m_BufferIndex;
+	m_BufferIndex = 0;
+	m_FileIndex = ftell(m_pFile) - m_BufferSize;
 	/* Attempt to read the data  */
-  Result = fread(m_pBuffer + m_BufferSize, 1, ReadSize, m_pFile);
-  m_BufferSize += Result;
+	Result = fread(m_pBuffer + m_BufferSize, 1, ReadSize, m_pFile);
+	m_BufferSize += Result;
 
 	/* Have we read enough data? */
-  if (Size > m_BufferSize) {
-    ErrorHandler.AddError(ERR_BADINPUT, _T("Not enough data in file for requested amount!"));
-    return (false);
-   }
+	if (Size > m_BufferSize) {
+		ErrorHandler.AddError(ERR_BADINPUT, _T("Not enough data in file for requested amount!"));
+		return (false);
+	}
 
-  return (true);
- }
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CFileBuffer::GetData_Priv()
+ *      End of Class Method CFileBuffer::GetData_Priv()
  *=========================================================================*/
 
 
@@ -199,20 +195,22 @@ bool CFileBuffer::GetData_Priv (const int Size) {
  *
  *=========================================================================*/
 bool CFileBuffer::Open (const TCHAR* pFilename, const TCHAR* pMode) {
-  bool Result;
-
+	bool Result;
 	/* Close the current file, if any */
-  Close();
-
+	Close();
 	/* Attempt to open the file in the given mode */
-  Result = OpenFile(&m_pFile, pFilename, pMode);
-  if (!Result) return (false);
- 
-  m_FileIndex = 0;
-  return (true);
- }
+	Result = OpenFile(&m_pFile, pFilename, pMode);
+
+	if (!Result) {
+		return (false);
+	}
+
+	m_FileIndex = 0;
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CFileBuffer::Open()
+ *      End of Class Method CFileBuffer::Open()
  *=========================================================================*/
 
 
@@ -224,21 +222,23 @@ bool CFileBuffer::Open (const TCHAR* pFilename, const TCHAR* pMode) {
  *
  *=========================================================================*/
 bool CFileBuffer::Read (char* pData, const int Size) {
-  bool Result;
-
+	bool Result;
 	/* Ensure the requested amount of data can be provided */
-  Result = GetData(Size);
-  if (!Result) return (false);
-  
-	/* Copy the data */
-  memcpy(pData, m_pBuffer + m_BufferIndex, Size);
-  m_BufferIndex += Size;
-  m_FileIndex   += Size;
+	Result = GetData(Size);
 
-  return (true);
- }
+	if (!Result) {
+		return (false);
+	}
+
+	/* Copy the data */
+	memcpy(pData, m_pBuffer + m_BufferIndex, Size);
+	m_BufferIndex += Size;
+	m_FileIndex += Size;
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CFileBuffer::Read()
+ *      End of Class Method CFileBuffer::Read()
  *=========================================================================*/
 
 
@@ -249,22 +249,24 @@ bool CFileBuffer::Read (char* pData, const int Size) {
  * Input a character from the buffer, returning false on any error.
  *
  *=========================================================================*/
-bool CFileBuffer::ReadChar (char& InputChar) {
-  bool Result;
-
+bool CFileBuffer::ReadChar (char &InputChar) {
+	bool Result;
 	/* Ensure there's enough required data */
-  Result = GetData(1);
-  if (!Result) return (false);
+	Result = GetData(1);
+
+	if (!Result) {
+		return (false);
+	}
 
 	/* Get the character, modify file pointers */
-  InputChar = m_pBuffer[m_BufferIndex];
-  m_BufferIndex++;
-  m_FileIndex++;
+	InputChar = m_pBuffer[m_BufferIndex];
+	m_BufferIndex++;
+	m_FileIndex++;
+	return (true);
+}
 
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CFileBuffer::ReadChar()
+ *      End of Class Method CFileBuffer::ReadChar()
  *=========================================================================*/
 
 
@@ -277,31 +279,36 @@ bool CFileBuffer::ReadChar (char& InputChar) {
  *
  *=========================================================================*/
 bool CFileBuffer::ReadData (char* pData, const int Size) {
-  bool Result;
-  int  ReadSize = 0;
-  int  CopySize;
+	bool Result;
+	int ReadSize = 0;
+	int CopySize;
 
 	/* Read data until the requested amount is available */
-  while (ReadSize < Size) {
-
+	while (ReadSize < Size) {
 		/* Copy the current data in the buffer */
-    CopySize  = m_BufferSize - m_BufferIndex;
-    if (CopySize + ReadSize > Size) CopySize = Size - ReadSize;
-    memcpy(pData + ReadSize, m_pBuffer + m_BufferIndex, CopySize);
+		CopySize = m_BufferSize - m_BufferIndex;
 
-    ReadSize      += CopySize;
-    m_BufferIndex += CopySize;
-    m_FileIndex   += CopySize;
+		if (CopySize + ReadSize > Size) {
+			CopySize = Size - ReadSize;
+		}
 
+		memcpy(pData + ReadSize, m_pBuffer + m_BufferIndex, CopySize);
+		ReadSize += CopySize;
+		m_BufferIndex += CopySize;
+		m_FileIndex += CopySize;
 		/* Read in more data */
-    Result = GetData(m_BufferIndex);
-    if (!Result) return (false);
-   }  
+		Result = GetData(m_BufferIndex);
 
-  return (true);
- }
+		if (!Result) {
+			return (false);
+		}
+	}
+
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CFileBuffer::ReadData()
+ *      End of Class Method CFileBuffer::ReadData()
  *=========================================================================*/
 
 
@@ -312,22 +319,24 @@ bool CFileBuffer::ReadData (char* pData, const int Size) {
  * Input an integer from the buffer, returning false on any error.
  *
  *=========================================================================*/
-bool CFileBuffer::ReadInt (int& InputValue) {
-  bool Result;
-
+bool CFileBuffer::ReadInt (int &InputValue) {
+	bool Result;
 	/* Ensure there's enough required data */
-  Result = GetData(sizeof(int));
-  if (!Result) return (false);
+	Result = GetData(sizeof(int));
+
+	if (!Result) {
+		return (false);
+	}
 
 	/* Get the value, modify file pointers */
-  InputValue = *(int *) (m_pBuffer + m_BufferIndex);
-  m_BufferIndex += sizeof(int);
-  m_FileIndex   += sizeof(int);
+	InputValue = *(int *) (m_pBuffer + m_BufferIndex);
+	m_BufferIndex += sizeof(int);
+	m_FileIndex += sizeof(int);
+	return (true);
+}
 
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CFileBuffer::ReadInt()
+ *      End of Class Method CFileBuffer::ReadInt()
  *=========================================================================*/
 
 
@@ -338,22 +347,24 @@ bool CFileBuffer::ReadInt (int& InputValue) {
  * Input a long integer from the buffer, returning false on any error.
  *
  *=========================================================================*/
-bool CFileBuffer::ReadLong (long& InputValue) {
-  bool Result;
-
+bool CFileBuffer::ReadLong (long &InputValue) {
+	bool Result;
 	/* Ensure there's enough required data */
-  Result = GetData(sizeof(long));
-  if (!Result) return (false);
+	Result = GetData(sizeof(long));
+
+	if (!Result) {
+		return (false);
+	}
 
 	/* Get the value, modify file pointers */
-  InputValue = *(long *) (m_pBuffer + m_BufferIndex);
-  m_BufferIndex += sizeof(long);
-  m_FileIndex   += sizeof(long);
+	InputValue = *(long *) (m_pBuffer + m_BufferIndex);
+	m_BufferIndex += sizeof(long);
+	m_FileIndex += sizeof(long);
+	return (true);
+}
 
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CFileBuffer::ReadLong()
+ *      End of Class Method CFileBuffer::ReadLong()
  *=========================================================================*/
 
 
@@ -364,22 +375,24 @@ bool CFileBuffer::ReadLong (long& InputValue) {
  * Input a short integer from the buffer, returning false on any error.
  *
  *=========================================================================*/
-bool CFileBuffer::ReadShort (short& InputValue) {
-  bool Result;
-
+bool CFileBuffer::ReadShort (short &InputValue) {
+	bool Result;
 	/* Ensure there's enough required data */
-  Result = GetData(sizeof(short));
-  if (!Result) return (false);
+	Result = GetData(sizeof(short));
+
+	if (!Result) {
+		return (false);
+	}
 
 	/* Get the value, modify file pointers */
-  InputValue = *(short *) (m_pBuffer + m_BufferIndex);
-  m_BufferIndex += sizeof(short);
-  m_FileIndex   += sizeof(short);
+	InputValue = *(short *) (m_pBuffer + m_BufferIndex);
+	m_BufferIndex += sizeof(short);
+	m_FileIndex += sizeof(short);
+	return (true);
+}
 
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CFileBuffer::ReadShort()
+ *      End of Class Method CFileBuffer::ReadShort()
  *=========================================================================*/
 
 
@@ -393,32 +406,34 @@ bool CFileBuffer::ReadShort (short& InputValue) {
  *
  *=========================================================================*/
 void CFileBuffer::SetBufferSize (const int Size) {
-  DEFINE_FUNCTION("CFileBuffer::SetBufferSize()");
-  char* pNewBuffer;
-  int   NewBufferSize;
+	DEFINE_FUNCTION("CFileBuffer::SetBufferSize()");
+	char *pNewBuffer;
+	int NewBufferSize;
 
 	/* Ignore invalid input */
-  if (Size <= 0) return;
+	if (Size <= 0) {
+		return;
+	}
 
 	/* Create the new buffer */
-  CreateArrayPointer(pNewBuffer, char, Size);
+	CreateArrayPointer(pNewBuffer, char, Size);
 
 	/* Copy any current data into the new buffer */
-  if (Size < m_BufferSize) {
-    memcpy(pNewBuffer, m_pBuffer, Size);
-    NewBufferSize = Size;
-   }
-  else {
-    memcpy(pNewBuffer, m_pBuffer, m_BufferSize);
-    NewBufferSize = m_BufferSize;
-   }
+	if (Size < m_BufferSize) {
+		memcpy(pNewBuffer, m_pBuffer, Size);
+		NewBufferSize = Size;
+	} else {
+		memcpy(pNewBuffer, m_pBuffer, m_BufferSize);
+		NewBufferSize = m_BufferSize;
+	}
 
 	/* Destroy the old buffer data */
-  DestroyArrayPointer(m_pBuffer);
-  m_pBuffer       = pNewBuffer;
-  m_MaxBufferSize = Size;
-  m_BufferSize    = NewBufferSize;
- }
+	DestroyArrayPointer(m_pBuffer);
+	m_pBuffer = pNewBuffer;
+	m_MaxBufferSize = Size;
+	m_BufferSize = NewBufferSize;
+}
+
 /*===========================================================================
- *		End of Class Method CFileBuffer::SetBufferSize()
+ *      End of Class Method CFileBuffer::SetBufferSize()
  *=========================================================================*/

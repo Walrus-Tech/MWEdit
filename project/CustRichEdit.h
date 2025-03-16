@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	Custrichedit.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Friday, February 21, 2003
+ * File:    Custrichedit.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Friday, February 21, 2003
  *
  * Description
  *
@@ -11,46 +11,46 @@
 #define __CUSTRICHEDIT_H
 
 
- /*===========================================================================
-  *
-  * Begin Definitions
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Definitions
+ *
+ *=========================================================================*/
 
-  /* Custom events */
-#define CRE_UPDATEPOS		0x8001
-#define CRE_UPDATESCROLL	0x8002
+/* Custom events */
+#define CRE_UPDATEPOS       0x8001
+#define CRE_UPDATESCROLL    0x8002
 
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Begin CCustRichEdit Class Definition
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin CCustRichEdit Class Definition
+ *
+ *=========================================================================*/
 class CCustRichEdit : public CRichEditCtrl {
 
-public:
+  public:
 
 	/* Construction */
 	CCustRichEdit();
 	virtual ~CCustRichEdit();
 
 	/* Get the current line of text */
-	const TCHAR* GetCurLineText(CString& Buffer);
-	int	       GetCurLineCharPos(void);
+	const TCHAR *GetCurLineText(CString& Buffer);
+	int GetCurLineCharPos(void);
 
 	/* ClassWizard generated virtual function overrides */
-  //{{AFX_VIRTUAL(CCustRichEdit)
-public:
+	//{{AFX_VIRTUAL(CCustRichEdit)
+  public:
 	virtual BOOL Create(DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID);
 	//}}AFX_VIRTUAL
 
-	  /* Generated message map functions */
-protected:
+	/* Generated message map functions */
+  protected:
 	//{{AFX_MSG(CCustRichEdit)
 	afx_msg UINT OnGetDlgCode();
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
@@ -65,16 +65,17 @@ protected:
 	DECLARE_MESSAGE_MAP();
 
 };
+
 /*===========================================================================
- *		End of CCustRichEdit Class Definition
+ *      End of CCustRichEdit Class Definition
  *=========================================================================*/
 
 
- //{{AFX_INSERT_LOCATION}}
- //}}AFX_INSERT_LOCATION
+//{{AFX_INSERT_LOCATION}}
+//}}AFX_INSERT_LOCATION
 
 
 #endif
 /*===========================================================================
- *		End of File Custrichedit.H
+ *      End of File Custrichedit.H
  *=========================================================================*/

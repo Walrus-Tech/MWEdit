@@ -2,11 +2,11 @@
 
  *
 
- * File:	ChildFrmVar.CPP
+ * File:    ChildFrmVar.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Monday, 03 February, 2003
+ * Created On:  Monday, 03 February, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -26,7 +26,7 @@
 
 #include "ChildFrmVar.h"
 
- 
+
 
 
 
@@ -42,27 +42,27 @@
 
 
 
-	/* Debug defines */
+/* Debug defines */
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  IMPLEMENT_DYNCREATE(CChildFrameVar, CMDIChildWnd)
+IMPLEMENT_DYNCREATE(CChildFrameVar, CMDIChildWnd)
 
-  DEFINE_FILE("ChildFrmVar.cpp");
+DEFINE_FILE("ChildFrmVar.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -82,21 +82,21 @@
 
 BEGIN_MESSAGE_MAP(CChildFrameVar, CMDIChildWnd)
 
-  //{{AFX_MSG_MAP(CChildFrameVar)
+	//{{AFX_MSG_MAP(CChildFrameVar)
 
-  ON_WM_SIZE()
+	ON_WM_SIZE()
 
-  ON_WM_CLOSE()
+	ON_WM_CLOSE()
 
-  ON_WM_SYSCOMMAND()
+	ON_WM_SYSCOMMAND()
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CChildFrameVar Message Map
+ *      End of CChildFrameVar Message Map
 
  *=========================================================================*/
 
@@ -115,14 +115,12 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CChildFrameVar::CChildFrameVar() {
-
-  m_IsFakeMaximized = false;
-
+	m_IsFakeMaximized = false;
 }
 
 /*===========================================================================
 
- *		End of Class CChildFrameVar Constructor
+ *      End of Class CChildFrameVar Constructor
 
  *=========================================================================*/
 
@@ -141,12 +139,11 @@ CChildFrameVar::CChildFrameVar() {
  *=========================================================================*/
 
 CChildFrameVar::~CChildFrameVar() {
-
- }
+}
 
 /*===========================================================================
 
- *		End of Class CChildFrameVar Destructor
+ *      End of Class CChildFrameVar Destructor
 
  *=========================================================================*/
 
@@ -156,7 +153,7 @@ CChildFrameVar::~CChildFrameVar() {
 
 /*===========================================================================
 
- *		End of Class Event CChildFrameVar::OnCreateClient()
+ *      End of Class Event CChildFrameVar::OnCreateClient()
 
  *=========================================================================*/
 
@@ -175,22 +172,20 @@ CChildFrameVar::~CChildFrameVar() {
  *=========================================================================*/
 
 BOOL CChildFrameVar::PreCreateWindow (CREATESTRUCT& cs) {
+	//cs.style &= ~WS_THICKFRAME;
+	//cs.style &= ~WS_MAXIMIZEBOX;
+	cs.style &= ~WS_MAXIMIZE;
 
-  //cs.style &= ~WS_THICKFRAME;
+	if ( !CMDIChildWnd::PreCreateWindow(cs) ) {
+		return FALSE;
+	}
 
-  //cs.style &= ~WS_MAXIMIZEBOX;
-
-  cs.style &= ~WS_MAXIMIZE;
-
-  if( !CMDIChildWnd::PreCreateWindow(cs) ) return FALSE;
-
-  return TRUE;
-
- }
+	return TRUE;
+}
 
 /*===========================================================================
 
- *		End of Class Method CChildFrameVar::PreCreateWindow()
+ *      End of Class Method CChildFrameVar::PreCreateWindow()
 
  *=========================================================================*/
 
@@ -211,22 +206,18 @@ BOOL CChildFrameVar::PreCreateWindow (CREATESTRUCT& cs) {
  *=========================================================================*/
 
 void CChildFrameVar::AssertValid() const {
-
-  CMDIChildWnd::AssertValid();
-
- }
+	CMDIChildWnd::AssertValid();
+}
 
 
 
 void CChildFrameVar::Dump(CDumpContext& dc) const {
-
-  CMDIChildWnd::Dump(dc);
-
- }
+	CMDIChildWnd::Dump(dc);
+}
 
 /*===========================================================================
 
- *		End of CChildFrameVar Diagnostics
+ *      End of CChildFrameVar Diagnostics
 
  *=========================================================================*/
 
@@ -247,18 +238,16 @@ void CChildFrameVar::Dump(CDumpContext& dc) const {
  *=========================================================================*/
 
 void CChildFrameVar::OnClose(void) {
-
-  DestroyWindow();
-
- }
+	DestroyWindow();
+}
 
 /*===========================================================================
 
- *		End of Class Event CChildFrameVar::OnClose()
+ *      End of Class Event CChildFrameVar::OnClose()
 
  *=========================================================================*/
 
-  
+
 
 
 
@@ -273,34 +262,25 @@ void CChildFrameVar::OnClose(void) {
  *=========================================================================*/
 
 void CChildFrameVar::OnSize(UINT nType, int cx, int cy) {
-
-
-
 	/* Cannot maximize this type of frame */
+	/*if (nType == SIZE_MAXIMIZED) {
 
-  /*if (nType == SIZE_MAXIMIZED) {
+	  CMDIChildWnd::OnSize(SIZE_RESTORED, 200, 200);
 
-    CMDIChildWnd::OnSize(SIZE_RESTORED, 200, 200);
+	 }
 
-   }
-
-  else  //*/
-
-    CMDIChildWnd::OnSize(nType, cx, cy);
-
-    m_IsFakeMaximized = false;
-
-
-
- }
+	else  //*/
+	CMDIChildWnd::OnSize(nType, cx, cy);
+	m_IsFakeMaximized = false;
+}
 
 /*===========================================================================
 
- *		End of Class Event CChildFrameVar::OnSize()
+ *      End of Class Event CChildFrameVar::OnSize()
 
  *=========================================================================*/
 
-  
+
 
 
 
@@ -315,56 +295,30 @@ void CChildFrameVar::OnSize(UINT nType, int cx, int cy) {
  *=========================================================================*/
 
 void CChildFrameVar::FakeMaximize (void) {
+	CRect ClientRect;
+	CRect RestoreRect;
 
-  CRect ClientRect;
+	if (m_IsFakeMaximized) {
+		SetWindowPos(NULL, m_RestoreRect.left, m_RestoreRect.top, m_RestoreRect.Width(),
+		             m_RestoreRect.Height(), SWP_NOZORDER);
+		m_IsFakeMaximized = false;
+	} else {
+		if (IsIconic()) {
+			ShowWindow(SW_RESTORE);
+		}
 
-  CRect RestoreRect;
-
-
-
-  if (m_IsFakeMaximized) {
-
-    SetWindowPos(NULL, m_RestoreRect.left, m_RestoreRect.top, m_RestoreRect.Width(), m_RestoreRect.Height(), SWP_NOZORDER);
-
-    m_IsFakeMaximized = false;
-
-  }
-
-  else {
-
-    if (IsIconic()) {
-
-      ShowWindow(SW_RESTORE);
-
-    }
-
-
-
-    GetWindowRect(&RestoreRect);
-
-    GetParent()->ScreenToClient(&RestoreRect);
-
-
-
-    GetParent()->GetClientRect(&ClientRect);
-
-    SetWindowPos(NULL, 0, 0, ClientRect.Width(), ClientRect.Height(), SWP_NOZORDER);
-
-
-
-    m_IsFakeMaximized = true;
-
-    m_RestoreRect = RestoreRect;
-
-  }
-
-
-
+		GetWindowRect(&RestoreRect);
+		GetParent()->ScreenToClient(&RestoreRect);
+		GetParent()->GetClientRect(&ClientRect);
+		SetWindowPos(NULL, 0, 0, ClientRect.Width(), ClientRect.Height(), SWP_NOZORDER);
+		m_IsFakeMaximized = true;
+		m_RestoreRect = RestoreRect;
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CChildFrameVar::FakeMaximize()
+ *      End of Class Method CChildFrameVar::FakeMaximize()
 
  *=========================================================================*/
 
@@ -383,32 +337,19 @@ void CChildFrameVar::FakeMaximize (void) {
  *=========================================================================*/
 
 void CChildFrameVar::OnSysCommand (UINT nID, LPARAM Param) {
+	if ((nID & 0xFFF0) == SC_MAXIMIZE) {
+		FakeMaximize();
+		return;
+	} else if ((nID & 0xFFF0) == SC_MINIMIZE) {
+		m_IsFakeMaximized = false;
+	}
 
-
-
-  if ((nID & 0xFFF0) == SC_MAXIMIZE) {
-
-    FakeMaximize();
-
-    return;
-
-  }
-
-  else if ((nID & 0xFFF0) == SC_MINIMIZE) {
-
-    m_IsFakeMaximized = false;
-
-  }
-
-
-
-  CMDIChildWnd::OnSysCommand(nID, Param);
-
+	CMDIChildWnd::OnSysCommand(nID, Param);
 }
 
 /*===========================================================================
 
- *		End of Class Event CChildFrameVar::OnSysCommand()
+ *      End of Class Event CChildFrameVar::OnSysCommand()
 
  *=========================================================================*/
 

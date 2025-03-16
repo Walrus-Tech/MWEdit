@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmBirthSign.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmBirthSign.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,12 +16,12 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmRecord.h"
-  #include "EsmSubName.h"
-  #include "EsmSubNameFix.h"
-  #include "EsmSubName32.h"
+#include "EsmRecord.h"
+#include "EsmSubName.h"
+#include "EsmSubNameFix.h"
+#include "EsmSubName32.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -30,9 +30,9 @@
  * Begin Definitions
  *
  *=========================================================================*/
- 	
+
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -44,66 +44,91 @@
  *
  *=========================================================================*/
 class CEsmBirthSign : public CEsmRecord {
-  DECLARE_SUBRECCREATE();
+	DECLARE_SUBRECCREATE();
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-  CEsmSubNameFix*	m_pNameData;
-  CEsmSubNameFix*	m_pTextureData;
-  CEsmSubName*		m_pDescData;
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
+	CEsmSubNameFix *m_pNameData;
+	CEsmSubNameFix *m_pTextureData;
+	CEsmSubName *m_pDescData;
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CEsmBirthSign();
-  //virtual ~CEsmBirthSign() { Destroy(); }
-  virtual void Destroy (void);
+	CEsmBirthSign();
+	//virtual ~CEsmBirthSign() { Destroy(); }
+	virtual void Destroy (void);
 
-  	/* Compare two fields of the record */
-  virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	/* Compare two fields of the record */
+	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
 
-  	/* Return a new record object */
-  static CEsmRecord* Create (void);
+	/* Return a new record object */
+	static CEsmRecord *Create (void);
 
-  	/* Create a new, empty, record */
-  virtual void CreateNew (CEsmFile* pFile);
+	/* Create a new, empty, record */
+	virtual void CreateNew (CEsmFile* pFile);
 
-  	/* Get a string representation of a particular field */
-  virtual const TCHAR* GetFieldString (const int FieldID);
+	/* Get a string representation of a particular field */
+	virtual const TCHAR *GetFieldString (const int FieldID);
 
-  	/* Return a text representation of the item type */
-  virtual const TCHAR* GetItemType (void) { return _T("Birth Sign"); }
+	/* Return a text representation of the item type */
+	virtual const TCHAR *GetItemType (void) {
+		return _T("Birth Sign");
+	}
 
-  	/* Get class members */
-  const TCHAR*	GetName		(void) { return (m_pNameData    ? m_pNameData->GetName() : _T("")); }
-  const TCHAR*	GetDescription	(void) { return (m_pDescData    ? m_pDescData->GetName() : _T("")); }
-  const TCHAR*	GetTexture	(void) { return (m_pTextureData ? m_pTextureData->GetName() : _T("")); }
-    
-  	/* Used to save the various record elements */
-  virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	/* Get class members */
+	const TCHAR *GetName (void) {
+		return (m_pNameData ? m_pNameData->GetName() : _T(""));
+	}
+
+	const TCHAR *GetDescription (void) {
+		return (m_pDescData ? m_pDescData->GetName() : _T(""));
+	}
+
+	const TCHAR *GetTexture (void) {
+		return (m_pTextureData ? m_pTextureData->GetName() : _T(""));
+	}
+
+	/* Used to save the various record elements */
+	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
 
 	/* Set class members */
-  void SetName        (const TCHAR* pString) { if (m_pNameData)    m_pNameData->SetName(pString); }
-  void SetDescription (const TCHAR* pString) { if (m_pDescData)    m_pDescData->SetName(pString); }
-  void SetTexture     (const TCHAR* pString) { if (m_pTextureData) m_pTextureData->SetName(pString); }
+	void SetName (const TCHAR* pString) {
+		if (m_pNameData) {
+			m_pNameData->SetName(pString);
+		}
+	}
 
-  	/* Set a certain field of the record */
-  virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	void SetDescription (const TCHAR* pString) {
+		if (m_pDescData) {
+			m_pDescData->SetName(pString);
+		}
+	}
 
- };
+	void SetTexture (const TCHAR* pString) {
+		if (m_pTextureData) {
+			m_pTextureData->SetName(pString);
+		}
+	}
+
+	/* Set a certain field of the record */
+	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+
+};
+
 /*===========================================================================
- *		End of Class CEsmBirthSign Definition
+ *      End of Class CEsmBirthSign Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmBodyPart.H
+ *      End of File EsmBodyPart.H
  *=========================================================================*/
 

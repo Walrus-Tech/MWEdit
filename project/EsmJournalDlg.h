@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmjournaldlg.H
+ * File:    Esmjournaldlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	March 2, 2003
+ * Created On:  March 2, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmInfo.h"
+#include "EsmInfo.h"
 
-  #include "contain/ptrarray.h"
+#include "contain/ptrarray.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,7 +62,7 @@
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -82,15 +82,15 @@
 
 
 
-	/* Class forward definition */
+/* Class forward definition */
 
-  class CMWEditDoc;
+class CMWEditDoc;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -112,111 +112,115 @@ class CEsmJournalDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Methods ----------------------*/
+	/*---------- Begin Protected Class Methods ----------------------*/
 
-protected:
+  protected:
 
-  CEsmInfo*	m_pInfo;	/* The info object we are editting */
+	CEsmInfo *m_pInfo;    /* The info object we are editting */
 
-  bool		m_IsNew;	
+	bool m_IsNew;
 
-  bool		m_AlreadyIsNew;
-
-
-
-  CMWEditDoc*	m_pDocument;
+	bool m_AlreadyIsNew;
 
 
 
+	CMWEditDoc *m_pDocument;
 
 
-  /*---------- Begin Public Class Methods ------------------------*/
 
-public:
+
+
+	/*---------- Begin Public Class Methods ------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmJournalDlg(CWnd* pParent = NULL);
+	CEsmJournalDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmInfo* pInfo, const bool IsNew, CMWEditDoc* pDocument);
+	bool DoModal (CEsmInfo* pInfo, const bool IsNew, CMWEditDoc* pDocument);
 
 
 
 	/* Get class members */
 
-  bool      HasNewInfo (void) { return (m_IsNew); }
+	bool HasNewInfo (void) {
+		return (m_IsNew);
+	}
 
-  CEsmInfo* GetInfo    (void) { return (m_pInfo); }
+	CEsmInfo *GetInfo (void) {
+		return (m_pInfo);
+	}
 
 
 
 	/* Set/get control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
-  void SetControlData (void);
+	void SetControlData (void);
 
-  void GetFuncData (const int Index, int& FuncIndex);
+	void GetFuncData (const int Index, int &FuncIndex);
 
-  void SetFuncData (const int Index, CEsmSubSCVR* pFuncData, CEsmSubRecord* pValue);
+	void SetFuncData (const int Index, CEsmSubSCVR* pFuncData, CEsmSubRecord* pValue);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmJournalDlg)
+	//{{AFX_DATA(CEsmJournalDlg)
 
-  enum { IDD = IDD_JOURNAL_DLG };
+	enum { IDD = IDD_JOURNAL_DLG };
 
-  CEdit		m_IndexText;
+	CEdit m_IndexText;
 
-  CButton	m_RestartCheck;
+	CButton m_RestartCheck;
 
-  CButton	m_FinishCheck;
+	CButton m_FinishCheck;
 
-  CButton	m_NameCheck;
+	CButton m_NameCheck;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  CEdit		m_IDText;
+	CEdit m_IDText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
-  
+
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmJournalDlg)
+	//{{AFX_VIRTUAL(CEsmJournalDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmJournalDlg)
+	//{{AFX_MSG(CEsmJournalDlg)
 
-  virtual void OnOK();
+	virtual void OnOK();
 
-  virtual void OnCancel();
+	virtual void OnCancel();
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
 	afx_msg void OnNamecheck();
 
@@ -226,17 +230,17 @@ protected:
 
 	//}}AFX_MSG
 
-  
-
-  DECLARE_MESSAGE_MAP();
 
 
+	DECLARE_MESSAGE_MAP();
 
- };
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmJournalDlg Definition
+ *      End of Class CEsmJournalDlg Definition
 
  *=========================================================================*/
 
@@ -256,7 +260,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmjournaldlg.H
+ *      End of File Esmjournaldlg.H
 
  *=========================================================================*/
 

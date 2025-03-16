@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmeffectdlg.H
+ * File:    Esmeffectdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "ColorStatic1.h"
+#include "ColorStatic1.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,183 +62,183 @@
 
 class CEsmEffectDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmEffectDlg);
+	DECLARE_DYNCREATE(CEsmEffectDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmMagicEffect*	m_pEffect;
-
-
+	CEsmMagicEffect *m_pEffect;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmEffectDlg();
+	CEsmEffectDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmEffectDlg)
+	//{{AFX_DATA(CEsmEffectDlg)
 
-  enum { IDD = IDD_EFFECT_DLG };
+	enum { IDD = IDD_EFFECT_DLG };
 
-  CComboBox	m_CastSoundList;
+	CComboBox m_CastSoundList;
 
-  CComboBox	m_BoltSoundList;
+	CComboBox m_BoltSoundList;
 
-  CComboBox	m_HitSoundList;
+	CComboBox m_HitSoundList;
 
-  CComboBox	m_AreaSoundList;
+	CComboBox m_AreaSoundList;
 
-  CComboBox	m_CastVisualList;
+	CComboBox m_CastVisualList;
 
-  CComboBox	m_BoltVisualList;
+	CComboBox m_BoltVisualList;
 
-  CComboBox	m_HitVisualList;
+	CComboBox m_HitVisualList;
 
-  CComboBox	m_AreaVisualList;
+	CComboBox m_AreaVisualList;
 
-  CComboBox	m_SchoolList;
+	CComboBox m_SchoolList;
 
-  CButton	m_EnchantCheck;
+	CButton m_EnchantCheck;
 
-  CButton	m_SpellCheck;
+	CButton m_SpellCheck;
 
-  CButton	m_NegativeCheck;
+	CButton m_NegativeCheck;
 
-  CEsmIconFrame	m_ParticleBox;
+	CEsmIconFrame m_ParticleBox;
 
-  CButton	m_ParticleButton;
+	CButton m_ParticleButton;
 
-  CEsmIconFrame	m_IconBox;
+	CEsmIconFrame m_IconBox;
 
-  CButton	m_IconButton;
+	CButton m_IconButton;
 
-  CColorStatic	m_ColorBox;
+	CColorStatic m_ColorBox;
 
-  CSpinButtonCtrl	m_RedSpin;
+	CSpinButtonCtrl m_RedSpin;
 
-  CSpinButtonCtrl	m_GreenSpin;
+	CSpinButtonCtrl m_GreenSpin;
 
-  CSpinButtonCtrl	m_BlueSpin;
+	CSpinButtonCtrl m_BlueSpin;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  CEdit		m_BaseCostText;
+	CEdit m_BaseCostText;
 
-  CEdit		m_MaxSizeText;
+	CEdit m_MaxSizeText;
 
-  CEdit		m_SizeText;
+	CEdit m_SizeText;
 
-  CEdit		m_SpeedText;
+	CEdit m_SpeedText;
 
-  CEdit		m_RedText;
+	CEdit m_RedText;
 
-  CEdit		m_GreenText;
+	CEdit m_GreenText;
 
-  CEdit		m_BlueText;
+	CEdit m_BlueText;
 
-  CEdit		m_DescText;
+	CEdit m_DescText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmEffectDlg)
+	//{{AFX_VIRTUAL(CEsmEffectDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmEffectDlg)
+	//{{AFX_MSG(CEsmEffectDlg)
 
-  afx_msg void OnOpenbutton();
+	afx_msg void OnOpenbutton();
 
-  afx_msg void OnClosebutton();
+	afx_msg void OnClosebutton();
 
-  afx_msg void OnCastPlay();
+	afx_msg void OnCastPlay();
 
-  afx_msg void OnAreaPlay();
+	afx_msg void OnAreaPlay();
 
-  afx_msg void OnHitPlay();
+	afx_msg void OnHitPlay();
 
-  afx_msg void OnBoltPlay();
+	afx_msg void OnBoltPlay();
 
-  afx_msg void OnChangeColor();
+	afx_msg void OnChangeColor();
 
-  afx_msg void OnColorbutton();
+	afx_msg void OnColorbutton();
 
-  afx_msg void OnParticlebutton();
+	afx_msg void OnParticlebutton();
 
-  afx_msg void OnIconbutton();
+	afx_msg void OnIconbutton();
 
-  //}}AFX_MSG
-
-  
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmEffectDlg Definition
+ *      End of Class CEsmEffectDlg Definition
 
  *=========================================================================*/
 
@@ -258,7 +258,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmeffectdlg.H
+ *      End of File Esmeffectdlg.H
 
  *=========================================================================*/
 

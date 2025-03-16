@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmScript.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmScript.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,11 +16,11 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmRecord.h"
-  #include "EsmSubName.h"
-  #include "EsmSubSCHD.h"
+#include "EsmRecord.h"
+#include "EsmSubName.h"
+#include "EsmSubSCHD.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -29,12 +29,12 @@
  * Begin Definitions
  *
  *=========================================================================*/
-  	
-	/* Max script text size */
-  #define ESM_SCRIPT_MAXTEXT 32768
+
+/* Max script text size */
+#define ESM_SCRIPT_MAXTEXT 32768
 
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -46,77 +46,106 @@
  *
  *=========================================================================*/
 class CEsmScript : public CEsmRecord {
-  DECLARE_SUBRECCREATE();
+	DECLARE_SUBRECCREATE();
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-  CEsmSubSCHD*	 m_pScriptHeader;
-  CEsmSubRecord* m_pScriptVars;
-  CEsmSubRecord* m_pScriptData;
-  CEsmSubName*   m_pScriptText;
-  
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
+	CEsmSubSCHD *m_pScriptHeader;
+	CEsmSubRecord *m_pScriptVars;
+	CEsmSubRecord *m_pScriptData;
+	CEsmSubName *m_pScriptText;
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CEsmScript();
-  //virtual ~CEsmScript() { Destroy(); }
-  virtual void Destroy (void);
+	CEsmScript();
+	//virtual ~CEsmScript() { Destroy(); }
+	virtual void Destroy (void);
 
 	/* Clear any of the compiled data information */
-  void ClearCompileData (void);
+	void ClearCompileData (void);
 
-  	/* Compare two fields of the record */
-  virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	/* Compare two fields of the record */
+	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
 
-  	/* Return a new record object */
-  static CEsmRecord* Create (void);
+	/* Return a new record object */
+	static CEsmRecord *Create (void);
 
-  	/* Create a new, empty, record */
-  virtual void CreateNew (CEsmFile* pFile);
+	/* Create a new, empty, record */
+	virtual void CreateNew (CEsmFile* pFile);
 
 	/* Export a script to a text file */
-  bool ExportScript (const TCHAR* pPath);
+	bool ExportScript (const TCHAR* pPath);
 
 	/* Find a local variable info */
-  short FindLocalVar (const TCHAR* pLocalVar, char& VarType);
+	short FindLocalVar (const TCHAR* pLocalVar, char &VarType);
 
-  	/* Get a string representation of a particular field */
-  virtual const TCHAR* GetFieldString (const int FieldID);
+	/* Get a string representation of a particular field */
+	virtual const TCHAR *GetFieldString (const int FieldID);
 
-  	/* Return a text representation of the item type */
-  virtual const TCHAR* GetItemType (void) { return _T("Script"); }
+	/* Return a text representation of the item type */
+	virtual const TCHAR *GetItemType (void) {
+		return _T("Script");
+	}
 
-  	/* Get class members */
-  virtual const TCHAR*	GetID (void)		     { return (m_pScriptHeader ? m_pScriptHeader->GetName() : _T("")); }
-  virtual void		SetID (const TCHAR* pString) { if (m_pScriptHeader) m_pScriptHeader->SetName(pString); }
-  CEsmSubSCHD*		GetScriptHeader (void)	     { return (m_pScriptHeader); }
-  CEsmSubRecord*	GetScriptVars (void)	     { return (m_pScriptVars); }
-  CEsmSubRecord*	GetScriptData (void)	     { return (m_pScriptData); }
-  const TCHAR*		GetScriptText (void)	     { return (m_pScriptText ? m_pScriptText->GetName() : _T("")); }
-  int			GetScriptSize (void)	     { return (m_pScriptText ? m_pScriptText->GetRecordSize() : 0); }
+	/* Get class members */
+	virtual const TCHAR *GetID (void) {
+		return (m_pScriptHeader ? m_pScriptHeader->GetName() : _T(""));
+	}
 
-  	/* Checks if another record is used in this record */
-  virtual bool IsUsed (const TCHAR* pID);
+	virtual void SetID (const TCHAR* pString) {
+		if (m_pScriptHeader) {
+			m_pScriptHeader->SetName(pString);
+		}
+	}
 
-  	/* Used to save the various record elements */
-  virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	CEsmSubSCHD *GetScriptHeader (void) {
+		return (m_pScriptHeader);
+	}
+
+	CEsmSubRecord *GetScriptVars (void) {
+		return (m_pScriptVars);
+	}
+
+	CEsmSubRecord *GetScriptData (void) {
+		return (m_pScriptData);
+	}
+
+	const TCHAR *GetScriptText (void) {
+		return (m_pScriptText ? m_pScriptText->GetName() : _T(""));
+	}
+
+	int GetScriptSize (void) {
+		return (m_pScriptText ? m_pScriptText->GetRecordSize() : 0);
+	}
+
+	/* Checks if another record is used in this record */
+	virtual bool IsUsed (const TCHAR* pID);
+
+	/* Used to save the various record elements */
+	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
 
 	/* Set class members */
-  void SetScriptText (const TCHAR* pName) { if (m_pScriptText) m_pScriptText->SetName(pName); }
+	void SetScriptText (const TCHAR* pName) {
+		if (m_pScriptText) {
+			m_pScriptText->SetName(pName);
+		}
+	}
 
- };
+};
+
 /*===========================================================================
- *		End of Class CEsmScript Definition
+ *      End of Class CEsmScript Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmScript.H
+ *      End of File EsmScript.H
  *=========================================================================*/

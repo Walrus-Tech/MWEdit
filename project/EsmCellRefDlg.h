@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcellrefdlg.H
+ * File:    Esmcellrefdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 22, 2003
+ * Created On:  February 22, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "EsmSubCellRef.h"
+#include "EsmSubCellRef.h"
 
-  #include "EsmCell.h"
+#include "EsmCell.h"
 
-  #include "contain/ptrarray.h"
+#include "contain/ptrarray.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,7 +62,7 @@
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -84,105 +84,109 @@ class CEsmCellRefDlg : public CDialog {
 
 
 
-  /*---------- Protected Class Members ----------------------------*/
+	/*---------- Protected Class Members ----------------------------*/
 
-protected:
+  protected:
 
-  CEsmSubCellRef*	m_pCellRef;	/* The cell reference we are editting */
+	CEsmSubCellRef *m_pCellRef; /* The cell reference we are editting */
 
-  CEsmCell*		m_pCell;
+	CEsmCell *m_pCell;
 
-  bool			m_HasNewCellRef;
+	bool m_HasNewCellRef;
 
-  bool			m_IsAlreadyNew;
-
-
+	bool m_IsAlreadyNew;
 
 
 
-  /*---------- Public Class Methods -------------------------------*/
 
-public:
+
+	/*---------- Public Class Methods -------------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmCellRefDlg(CWnd* pParent = NULL); 
+	CEsmCellRefDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmSubCellRef* pCellRef, const bool IsNew, CEsmCell* pCell);
+	bool DoModal (CEsmSubCellRef* pCellRef, const bool IsNew, CEsmCell* pCell);
 
 
 
 	/* Get class members */
 
-  bool		  HasNewCellRef (void) { return (m_HasNewCellRef); }
+	bool HasNewCellRef (void) {
+		return (m_HasNewCellRef);
+	}
 
-  CEsmSubCellRef* GetCellRef    (void) { return (m_pCellRef); }
+	CEsmSubCellRef *GetCellRef (void) {
+		return (m_pCellRef);
+	}
 
 
 
 	/* Set/get control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
-  void SetControlData (void);
+	void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmCellRefDlg)
+	//{{AFX_DATA(CEsmCellRefDlg)
 
-  enum { IDD = IDD_CELLREF_DLG };
+	enum { IDD = IDD_CELLREF_DLG };
 
-  CEdit		m_ScaleText;
+	CEdit m_ScaleText;
 
-  CEdit		m_ZRotText;
+	CEdit m_ZRotText;
 
-  CEdit		m_YRotText;
+	CEdit m_YRotText;
 
-  CEdit		m_XRotText;
+	CEdit m_XRotText;
 
-  CEdit		m_ZPosText;
+	CEdit m_ZPosText;
 
-  CEdit		m_YPosText;
+	CEdit m_YPosText;
 
-  CEdit		m_XPosText;
+	CEdit m_XPosText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmCellRefDlg)
+	//{{AFX_VIRTUAL(CEsmCellRefDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
 // Implementation
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmCellRefDlg)
+	//{{AFX_MSG(CEsmCellRefDlg)
 
-  virtual void OnOK();
+	virtual void OnOK();
 
-  virtual void OnCancel();
+	virtual void OnCancel();
 
 	virtual BOOL OnInitDialog();
 
@@ -190,7 +194,7 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
@@ -198,7 +202,7 @@ protected:
 
 /*===========================================================================
 
- *		End of Class CEsmCellRefDlg Definition
+ *      End of Class CEsmCellRefDlg Definition
 
  *=========================================================================*/
 
@@ -218,7 +222,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmcellrefdlg.H
+ *      End of File Esmcellrefdlg.H
 
  *=========================================================================*/
 

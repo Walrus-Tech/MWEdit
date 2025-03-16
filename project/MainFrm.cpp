@@ -2,11 +2,11 @@
 
  *
 
- * File:	MainFrm.CPP
+ * File:    MainFrm.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Wednesday, July 03, 2002
+ * Created On:  Wednesday, July 03, 2002
 
  *
 
@@ -16,11 +16,11 @@
 
  * 24 September 2003
 
- *	- Added the GetActiveMainView().
+ *  - Added the GetActiveMainView().
 
- *	- Added the event methods for handling 'global' CMWEditView events.
+ *  - Added the event methods for handling 'global' CMWEditView events.
 
- *	- Added the events for opening the various web page links.
+ *  - Added the events for opening the various web page links.
 
  *
 
@@ -28,7 +28,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -56,23 +56,23 @@
 
 
 
-	/* Debug defines */
+/* Debug defines */
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-	/* Status bar setup */
+/* Status bar setup */
 
-  static UINT indicators[] = {
+static UINT indicators[] = {
 
 	ID_SEPARATOR,
 
@@ -82,17 +82,17 @@
 
 	ID_INDICATOR_SCRL,
 
-   };
+};
 
 
 
-  IMPLEMENT_DYNAMIC(CMainFrame, CMDIFrameWnd);
+IMPLEMENT_DYNAMIC(CMainFrame, CMDIFrameWnd);
 
-  DEFINE_FILE("MainFrm.cpp");
+DEFINE_FILE("MainFrm.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -112,49 +112,49 @@
 
 BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 
-  //{{AFX_MSG_MAP(CMainFrame)
+	//{{AFX_MSG_MAP(CMainFrame)
 
-  ON_WM_CREATE()
+	ON_WM_CREATE()
 
-  ON_COMMAND(ID_HELP_FUNCTIONS, OnHelpFunctions)
+	ON_COMMAND(ID_HELP_FUNCTIONS, OnHelpFunctions)
 
-  ON_COMMAND(ID_VIEW_OPTIONS, OnViewOptions)
+	ON_COMMAND(ID_VIEW_OPTIONS, OnViewOptions)
 
-  ON_COMMAND(ID_EDIT_FINDTEXT, OnEditFindtext)
+	ON_COMMAND(ID_EDIT_FINDTEXT, OnEditFindtext)
 
-  ON_COMMAND(ID_EDIT_PLUGININFO, OnEditPluginInfo)  
+	ON_COMMAND(ID_EDIT_PLUGININFO, OnEditPluginInfo)
 
-  ON_COMMAND(ID_HELP_SUBMITBUG, OnHelpSubmitbug)
+	ON_COMMAND(ID_HELP_SUBMITBUG, OnHelpSubmitbug)
 
-  ON_COMMAND(ID_HELP_SUBMITFEATURE, OnHelpSubmitfeature)
+	ON_COMMAND(ID_HELP_SUBMITFEATURE, OnHelpSubmitfeature)
 
-  ON_COMMAND(ID_HELP_LINKS_SOURCEFORGE, OnHelpLinksSourceforge)
+	ON_COMMAND(ID_HELP_LINKS_SOURCEFORGE, OnHelpLinksSourceforge)
 
-  ON_COMMAND(ID_HELP_EMAIL, OnHelpEmail)
+	ON_COMMAND(ID_HELP_EMAIL, OnHelpEmail)
 
-  ON_COMMAND(ID_HELP_ITEMINDEX, OnHelpItemindex)
+	ON_COMMAND(ID_HELP_ITEMINDEX, OnHelpItemindex)
 
-  ON_COMMAND(ID_APP_ABOUT, OnHelpAbout)
+	ON_COMMAND(ID_APP_ABOUT, OnHelpAbout)
 
-  ON_COMMAND(ID_HELP_LINKS_UESPTES3MOD, OnHelpLinksUesptes3mod)
+	ON_COMMAND(ID_HELP_LINKS_UESPTES3MOD, OnHelpLinksUesptes3mod)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 
 
-  ON_COMMAND(ID_HELP_FINDER, CMDIFrameWnd::OnHelpFinder)
+	ON_COMMAND(ID_HELP_FINDER, CMDIFrameWnd::OnHelpFinder)
 
-  ON_COMMAND(ID_HELP, CMDIFrameWnd::OnHelp)
+	ON_COMMAND(ID_HELP, CMDIFrameWnd::OnHelp)
 
-  ON_COMMAND(ID_CONTEXT_HELP, CMDIFrameWnd::OnContextHelp)
+	ON_COMMAND(ID_CONTEXT_HELP, CMDIFrameWnd::OnContextHelp)
 
-  ON_COMMAND(ID_DEFAULT_HELP, CMDIFrameWnd::OnHelpFinder)
+	ON_COMMAND(ID_DEFAULT_HELP, CMDIFrameWnd::OnHelpFinder)
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of Class CMainFrame Message Map
+ *      End of Class CMainFrame Message Map
 
  *=========================================================================*/
 
@@ -173,14 +173,12 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CMainFrame::CMainFrame() {
-
-  m_hItemHelp = NULL;
-
- }
+	m_hItemHelp = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CMainFrame Constructor
+ *      End of Class CMainFrame Constructor
 
  *=========================================================================*/
 
@@ -199,12 +197,11 @@ CMainFrame::CMainFrame() {
  *=========================================================================*/
 
 CMainFrame::~CMainFrame() {
-
- }
+}
 
 /*===========================================================================
 
- *		End of Class CMainFrame Destructor
+ *      End of Class CMainFrame Destructor
 
  *=========================================================================*/
 
@@ -228,57 +225,48 @@ CMainFrame::~CMainFrame() {
 
  *=========================================================================*/
 
-CView* CMainFrame::GetActiveMainView (void) {
-
-  CMDIChildWnd* pActiveWnd = MDIGetActive();
-
-  CView*	pView;
-
-  POSITION	ViewPos;
-
-  CDocument*	pDoc;  
-
-  
+CView *CMainFrame::GetActiveMainView (void) {
+	CMDIChildWnd* pActiveWnd = MDIGetActive();
+	CView* pView;
+	POSITION ViewPos;
+	CDocument* pDoc;
 
 	/* Ensure there is an active child window, view, and document */
 
-  if (pActiveWnd == NULL) return (NULL);
+	if (pActiveWnd == NULL) {
+		return (NULL);
+	}
 
-  CView* pActiveView = pActiveWnd->GetActiveView();
+	CView* pActiveView = pActiveWnd->GetActiveView();
 
-  if (pActiveView == NULL) return (NULL);
+	if (pActiveView == NULL) {
+		return (NULL);
+	}
 
-  pDoc = pActiveView->GetDocument();
+	pDoc = pActiveView->GetDocument();
 
-  if (pDoc == NULL) return (NULL);
-
-
+	if (pDoc == NULL) {
+		return (NULL);
+	}
 
 	/* Find the 'main' view in the list of current document views */
+	ViewPos = pDoc->GetFirstViewPosition();
 
-  ViewPos = pDoc->GetFirstViewPosition();
+	while (ViewPos != NULL) {
+		pView = pDoc->GetNextView(ViewPos);
 
-
-
-  while (ViewPos != NULL) {
-
-    pView = pDoc->GetNextView(ViewPos);
-
-    if (pView->IsKindOf(RUNTIME_CLASS(CMWEditView))) return (pView);
-
-   }
-
-
+		if (pView->IsKindOf(RUNTIME_CLASS(CMWEditView))) {
+			return (pView);
+		}
+	}
 
 	/* No matching view found */
-
-  return (NULL);
-
- }
+	return (NULL);
+}
 
 /*===========================================================================
 
- *		End of Class Method CMainFrame::GetActiveMainView()
+ *      End of Class Method CMainFrame::GetActiveMainView()
 
  *=========================================================================*/
 
@@ -297,56 +285,33 @@ CView* CMainFrame::GetActiveMainView (void) {
  *=========================================================================*/
 
 int CMainFrame::OnCreate (LPCREATESTRUCT lpCreateStruct) {
-
-
-
 	/* Call the base class create method first */
+	if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1) {
+		return (-1);
+	}
 
-  if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1) return (-1);
+	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
+	                           | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+	    !m_wndToolBar.LoadToolBar(IDR_MAINFRAME)) {
+		TRACE0("Failed to create toolbar\n");
+		return (-1);
+	}
 
+	if (!m_wndStatusBar.Create(this) || !m_wndStatusBar.SetIndicators(indicators,
+	        sizeof(indicators) / sizeof(UINT))) {
+		TRACE0("Failed to create status bar\n");
+		return (-1);
+	}
 
-
-  if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
-
-		| CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-
-		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME)) {
-
-    TRACE0("Failed to create toolbar\n");
-
-    return (-1);
-
-   }
-
-
-
-  if (!m_wndStatusBar.Create(this) || !m_wndStatusBar.SetIndicators(indicators,
-
-		  sizeof(indicators)/sizeof(UINT))) {
-
-    TRACE0("Failed to create status bar\n");
-
-    return (-1);
-
-   }
-
-
-
-  m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
-
-  EnableDocking(CBRS_ALIGN_ANY);
-
-  DockControlBar(&m_wndToolBar);
-
-
-
-  return (0);
-
- }
+	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+	EnableDocking(CBRS_ALIGN_ANY);
+	DockControlBar(&m_wndToolBar);
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnCreate()
+ *      End of Class Event CMainFrame::OnCreate()
 
  *=========================================================================*/
 
@@ -365,16 +330,16 @@ int CMainFrame::OnCreate (LPCREATESTRUCT lpCreateStruct) {
  *=========================================================================*/
 
 BOOL CMainFrame::PreCreateWindow (CREATESTRUCT& cs) {
+	if ( !CMDIFrameWnd::PreCreateWindow(cs) ) {
+		return FALSE;
+	}
 
-  if( !CMDIFrameWnd::PreCreateWindow(cs) ) return FALSE;
-
-  return TRUE;
-
- }
+	return TRUE;
+}
 
 /*===========================================================================
 
- *		End of Class Method CMainFrame::PreCreateWindow()
+ *      End of Class Method CMainFrame::PreCreateWindow()
 
  *=========================================================================*/
 
@@ -395,22 +360,18 @@ BOOL CMainFrame::PreCreateWindow (CREATESTRUCT& cs) {
  *=========================================================================*/
 
 void CMainFrame::AssertValid() const {
-
-  CMDIFrameWnd::AssertValid();
-
- }
+	CMDIFrameWnd::AssertValid();
+}
 
 
 
 void CMainFrame::Dump(CDumpContext& dc) const {
-
-  CMDIFrameWnd::Dump(dc);
-
- }
+	CMDIFrameWnd::Dump(dc);
+}
 
 /*===========================================================================
 
- *		End of Class CMainFrame Diagnostics
+ *      End of Class CMainFrame Diagnostics
 
  *=========================================================================*/
 
@@ -431,16 +392,16 @@ void CMainFrame::Dump(CDumpContext& dc) const {
  *=========================================================================*/
 
 void CMainFrame::OnEditFindtext () {
+	CView* pView = GetActiveMainView();
 
-  CView* pView = GetActiveMainView();
-
-  if (pView != NULL) pView->SendMessage(WM_COMMAND, ID_EDIT_FINDTEXT, 0);
-
- }
+	if (pView != NULL) {
+		pView->SendMessage(WM_COMMAND, ID_EDIT_FINDTEXT, 0);
+	}
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnEditFindtext()
+ *      End of Class Event CMainFrame::OnEditFindtext()
 
  *=========================================================================*/
 
@@ -459,16 +420,16 @@ void CMainFrame::OnEditFindtext () {
  *=========================================================================*/
 
 void CMainFrame::OnEditPluginInfo () {
+	CView* pView = GetActiveMainView();
 
-  CView* pView = GetActiveMainView();
-
-  if (pView != NULL) pView->SendMessage(WM_COMMAND, ID_EDIT_PLUGININFO, 0);
-
- }
+	if (pView != NULL) {
+		pView->SendMessage(WM_COMMAND, ID_EDIT_PLUGININFO, 0);
+	}
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnEditPluginInfo()
+ *      End of Class Event CMainFrame::OnEditPluginInfo()
 
  *=========================================================================*/
 
@@ -487,16 +448,13 @@ void CMainFrame::OnEditPluginInfo () {
  *=========================================================================*/
 
 void CMainFrame::OnHelpAbout() {
-
-  CDialog dlg(IDD_ABOUTBOX);
-
-  dlg.DoModal();
-
- }
+	CDialog dlg(IDD_ABOUTBOX);
+	dlg.DoModal();
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpAbout()
+ *      End of Class Event CMainFrame::OnHelpAbout()
 
  *=========================================================================*/
 
@@ -515,14 +473,12 @@ void CMainFrame::OnHelpAbout() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpEmail() {
-
-  OpenWebPage(MWEDIT_EMAIL_DEVELOPER);
-
- }
+	OpenWebPage(MWEDIT_EMAIL_DEVELOPER);
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpEmail()
+ *      End of Class Event CMainFrame::OnHelpEmail()
 
  *=========================================================================*/
 
@@ -541,16 +497,13 @@ void CMainFrame::OnHelpEmail() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpFunctions() {
-
-  CMWEditApp* pApp = (CMWEditApp *) AfxGetApp();
-
-  pApp->OpenFuncHelpView();
-
- }
+	CMWEditApp* pApp = (CMWEditApp *) AfxGetApp();
+	pApp->OpenFuncHelpView();
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpFunctions()
+ *      End of Class Event CMainFrame::OnHelpFunctions()
 
  *=========================================================================*/
 
@@ -569,32 +522,21 @@ void CMainFrame::OnHelpFunctions() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpItemindex() {
-
-  HWND hWnd = NULL;
-
-
-
+	HWND hWnd = NULL;
 	/* Activate a currently open window, if any */
+	//if (m_hItemHelp != NULL) hWnd = FindWindowHandle(m_hItemHelp);
+	hWnd = ::FindWindow(NULL, MWEDIT_FILE_ITEMHELPTITLE);
 
-  //if (m_hItemHelp != NULL) hWnd = FindWindowHandle(m_hItemHelp);
-
-  hWnd = ::FindWindow(NULL, MWEDIT_FILE_ITEMHELPTITLE);
-
-
-
-  if (hWnd != NULL) 
-
-    ::SetForegroundWindow(hWnd);
-
-  else
-
-    m_hItemHelp = OpenWebPage(MWEDIT_FILE_ITEMHELP);
-
- }
+	if (hWnd != NULL) {
+		::SetForegroundWindow(hWnd);
+	} else {
+		m_hItemHelp = OpenWebPage(MWEDIT_FILE_ITEMHELP);
+	}
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpItemindex()
+ *      End of Class Event CMainFrame::OnHelpItemindex()
 
  *=========================================================================*/
 
@@ -613,14 +555,12 @@ void CMainFrame::OnHelpItemindex() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpLinksSourceforge() {
-
-  OpenWebPage(MWEDIT_WEBPAGE_PROJECT);
-
- }
+	OpenWebPage(MWEDIT_WEBPAGE_PROJECT);
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpLinksSourceforge()
+ *      End of Class Event CMainFrame::OnHelpLinksSourceforge()
 
  *=========================================================================*/
 
@@ -639,14 +579,12 @@ void CMainFrame::OnHelpLinksSourceforge() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpSubmitbug() {
-
-  OpenWebPage(MWEDIT_WEBPAGE_BUG);
-
- }
+	OpenWebPage(MWEDIT_WEBPAGE_BUG);
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpSubmitbug()
+ *      End of Class Event CMainFrame::OnHelpSubmitbug()
 
  *=========================================================================*/
 
@@ -665,14 +603,12 @@ void CMainFrame::OnHelpSubmitbug() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpSubmitfeature() {
-
-  OpenWebPage(MWEDIT_WEBPAGE_FEATURE);
-
- }
+	OpenWebPage(MWEDIT_WEBPAGE_FEATURE);
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpSubmitfeature()
+ *      End of Class Event CMainFrame::OnHelpSubmitfeature()
 
  *=========================================================================*/
 
@@ -691,28 +627,17 @@ void CMainFrame::OnHelpSubmitfeature() {
  *=========================================================================*/
 
 void CMainFrame::OnViewOptions() {
-
-  CEsmOptionsDlg OptionsDlg;
-
-  CMWEditApp*    pApp = (CMWEditApp *) AfxGetApp();
-
-  int		 Result;
-
-
-
+	CEsmOptionsDlg OptionsDlg;
+	CMWEditApp* pApp = (CMWEditApp *) AfxGetApp();
+	int Result;
 	/* Initialize and display the options dlg */
-
-  OptionsDlg.SetOptions(pApp->GetOptions());
-
-  Result = OptionsDlg.DoModal();
-
-
-
- }
+	OptionsDlg.SetOptions(pApp->GetOptions());
+	Result = OptionsDlg.DoModal();
+}
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnViewOptions()
+ *      End of Class Event CMainFrame::OnViewOptions()
 
  *=========================================================================*/
 
@@ -731,14 +656,12 @@ void CMainFrame::OnViewOptions() {
  *=========================================================================*/
 
 void CMainFrame::OnHelpLinksUesptes3mod() {
-
-  OpenWebPage(MWEDIT_WEBPAGE_UESPTES3MOD);
-
+	OpenWebPage(MWEDIT_WEBPAGE_UESPTES3MOD);
 }
 
 /*===========================================================================
 
- *		End of Class Event CMainFrame::OnHelpLinksUesptes3mod()
+ *      End of Class Event CMainFrame::OnHelpLinksUesptes3mod()
 
  *=========================================================================*/
 

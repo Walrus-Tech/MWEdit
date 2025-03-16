@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmclassdlg.H
+ * File:    Esmclassdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 17, 2003
+ * Created On:  February 17, 2003
 
  *
 
@@ -32,13 +32,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,195 +58,215 @@
 
 class CEsmClassDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmClassDlg);
+	DECLARE_DYNCREATE(CEsmClassDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmClass*	m_pClass;
-
-
+	CEsmClass *m_pClass;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update modified items during edit */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmClassDlg();
+	CEsmClassDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmClassDlg)
+	//{{AFX_DATA(CEsmClassDlg)
 
-  enum { IDD = IDD_CLASS_DLG };
+	enum { IDD = IDD_CLASS_DLG };
 
-  CComboBox	m_MinorList5;
+	CComboBox m_MinorList5;
 
-  CComboBox	m_MinorList4;
+	CComboBox m_MinorList4;
 
-  CComboBox	m_MinorList3;
+	CComboBox m_MinorList3;
 
-  CComboBox	m_MinorList2;
+	CComboBox m_MinorList2;
 
-  CComboBox	m_MinorList1;
+	CComboBox m_MinorList1;
 
-  CComboBox	m_MajorList5;
+	CComboBox m_MajorList5;
 
-  CComboBox	m_MajorList4;
+	CComboBox m_MajorList4;
 
-  CComboBox	m_MajorList3;
+	CComboBox m_MajorList3;
 
-  CComboBox	m_MajorList2;
+	CComboBox m_MajorList2;
 
-  CComboBox	m_MajorList1;
+	CComboBox m_MajorList1;
 
-  CButton	m_PlayableCheck;
+	CButton m_PlayableCheck;
 
-  CButton	m_RepairItemsCheck;
+	CButton m_RepairItemsCheck;
 
-  CButton	m_TrainCheck;
+	CButton m_TrainCheck;
 
-  CButton	m_SpellmakingCheck;
+	CButton m_SpellmakingCheck;
 
-  CButton	m_EnchantCheck;
+	CButton m_EnchantCheck;
 
-  CButton	m_WeaponCheck;
+	CButton m_WeaponCheck;
 
-  CButton	m_SpellCheck;
+	CButton m_SpellCheck;
 
-  CButton	m_MagicItemCheck;
+	CButton m_MagicItemCheck;
 
-  CButton	m_RepairCheck;
+	CButton m_RepairCheck;
 
-  CButton	m_PotionCheck;
+	CButton m_PotionCheck;
 
-  CButton	m_ProbeCheck;
+	CButton m_ProbeCheck;
 
-  CButton	m_MiscCheck;
+	CButton m_MiscCheck;
 
-  CButton	m_PickCheck;
+	CButton m_PickCheck;
 
-  CButton	m_LightCheck;
+	CButton m_LightCheck;
 
-  CButton	m_IngrediantCheck;
+	CButton m_IngrediantCheck;
 
-  CButton	m_ClothingCheck;
+	CButton m_ClothingCheck;
 
-  CButton	m_BookCheck;
+	CButton m_BookCheck;
 
-  CButton	m_ArmorCheck;
+	CButton m_ArmorCheck;
 
-  CButton	m_ApparatusCheck;
+	CButton m_ApparatusCheck;
 
-  CEdit		m_DescText;
+	CEdit m_DescText;
 
-  CComboBox	m_SpecialList;
+	CComboBox m_SpecialList;
 
-  CComboBox	m_AttributeList2;
+	CComboBox m_AttributeList2;
 
-  CComboBox	m_AttributeList1;
+	CComboBox m_AttributeList1;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmClassDlg)
+	//{{AFX_VIRTUAL(CEsmClassDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmClassDlg)
+	//{{AFX_MSG(CEsmClassDlg)
 
-  //}}AFX_MSG
+	//}}AFX_MSG
 
-  void OnSelChangeSkillList (CComboBox* pComboBox);
+	void OnSelChangeSkillList (CComboBox* pComboBox);
 
-  afx_msg void OnSelchangeMajorlist1() { OnSelChangeSkillList(&m_MajorList1); }
+	afx_msg void OnSelchangeMajorlist1() {
+		OnSelChangeSkillList(&m_MajorList1);
+	}
 
-  afx_msg void OnSelchangeMajorlist2() { OnSelChangeSkillList(&m_MajorList2); }
+	afx_msg void OnSelchangeMajorlist2() {
+		OnSelChangeSkillList(&m_MajorList2);
+	}
 
-  afx_msg void OnSelchangeMajorlist3() { OnSelChangeSkillList(&m_MajorList3); }
+	afx_msg void OnSelchangeMajorlist3() {
+		OnSelChangeSkillList(&m_MajorList3);
+	}
 
-  afx_msg void OnSelchangeMajorlist4() { OnSelChangeSkillList(&m_MajorList4); }
+	afx_msg void OnSelchangeMajorlist4() {
+		OnSelChangeSkillList(&m_MajorList4);
+	}
 
-  afx_msg void OnSelchangeMajorlist5() { OnSelChangeSkillList(&m_MajorList5); }
+	afx_msg void OnSelchangeMajorlist5() {
+		OnSelChangeSkillList(&m_MajorList5);
+	}
 
-  afx_msg void OnSelchangeMinorlist1() { OnSelChangeSkillList(&m_MinorList1); }
+	afx_msg void OnSelchangeMinorlist1() {
+		OnSelChangeSkillList(&m_MinorList1);
+	}
 
-  afx_msg void OnSelchangeMinorlist2() { OnSelChangeSkillList(&m_MinorList2); }
+	afx_msg void OnSelchangeMinorlist2() {
+		OnSelChangeSkillList(&m_MinorList2);
+	}
 
-  afx_msg void OnSelchangeMinorlist3() { OnSelChangeSkillList(&m_MinorList3); }
+	afx_msg void OnSelchangeMinorlist3() {
+		OnSelChangeSkillList(&m_MinorList3);
+	}
 
-  afx_msg void OnSelchangeMinorlist4() { OnSelChangeSkillList(&m_MinorList4); }
+	afx_msg void OnSelchangeMinorlist4() {
+		OnSelChangeSkillList(&m_MinorList4);
+	}
 
-  afx_msg void OnSelchangeMinorlist5() { OnSelChangeSkillList(&m_MinorList5); }
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	afx_msg void OnSelchangeMinorlist5() {
+		OnSelChangeSkillList(&m_MinorList5);
+	}
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmClassDlg Definition
+ *      End of Class CEsmClassDlg Definition
 
  *=========================================================================*/
 
@@ -266,7 +286,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmclassdlg.H
+ *      End of File Esmclassdlg.H
 
  *=========================================================================*/
 

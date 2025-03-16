@@ -1,25 +1,25 @@
 /*===========================================================================
  *
- * File:	Xmlattr.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	January 25, 2003
+ * File:    Xmlattr.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  January 25, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "xmlattr.h"
 
- 
+
 /*===========================================================================
  *
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("XmlAttr.cpp");
+DEFINE_FILE("XmlAttr.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,11 +29,11 @@
  *
  *=========================================================================*/
 CXmlAttribute::CXmlAttribute () {
-  //DEFINE_FUNCTION("CXmlAttribute::CXmlAttribute()");
+	//DEFINE_FUNCTION("CXmlAttribute::CXmlAttribute()");
+}
 
- }
 /*===========================================================================
- *		End of Class CXmlAttribute Constructor
+ *      End of Class CXmlAttribute Constructor
  *=========================================================================*/
 
 
@@ -43,12 +43,13 @@ CXmlAttribute::CXmlAttribute () {
  *
  *=========================================================================*/
 void CXmlAttribute::Destroy (void) {
-  //DEFINE_FUNCTION("CXmlAttribute::Destroy()");
-  m_Name.Empty();
-  m_Value.Empty();
- }
+	//DEFINE_FUNCTION("CXmlAttribute::Destroy()");
+	m_Name.Empty();
+	m_Value.Empty();
+}
+
 /*===========================================================================
- *		End of Class Method CXmlAttribute::Destroy()
+ *      End of Class Method CXmlAttribute::Destroy()
  *=========================================================================*/
 
 
@@ -60,16 +61,19 @@ void CXmlAttribute::Destroy (void) {
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlAttribute::Read (TCHAR* pBuffer, int& BufferPos, const int FileSize, long& LineCount) {
-  bool Result;
+bool CXmlAttribute::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+	bool Result;
+	Result = ReadName(pBuffer, BufferPos, FileSize, LineCount);
 
-  Result = ReadName(pBuffer, BufferPos, FileSize, LineCount);
-  if (Result) Result = ReadValue(pBuffer, BufferPos, FileSize, LineCount);
+	if (Result) {
+		Result = ReadValue(pBuffer, BufferPos, FileSize, LineCount);
+	}
 
-  return (Result);
- }
+	return (Result);
+}
+
 /*===========================================================================
- *		End of Class Method CXmlAttribute::Read()
+ *      End of Class Method CXmlAttribute::Read()
  *=========================================================================*/
 
 
@@ -81,33 +85,39 @@ bool CXmlAttribute::Read (TCHAR* pBuffer, int& BufferPos, const int FileSize, lo
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlAttribute::ReadName (TCHAR* pBuffer, int& BufferPos, const int FileSize, long& LineCount) {
-  int  StartPos = BufferPos;
+bool CXmlAttribute::ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+	int StartPos = BufferPos;
 
-  while (BufferPos < FileSize) {
+	while (BufferPos < FileSize) {
+		switch (pBuffer[BufferPos]) {
+			case '\n':
+				LineCount++;    /* Fall through */
 
-    switch (pBuffer[BufferPos]) {
-      case '\n':
-	LineCount++;	/* Fall through */
-      case '\r':
-      case '\t':
-      case ' ':		/* End of name */
-      case '=':
-        if (StartPos >= 0) m_Name.Copy(pBuffer + StartPos, BufferPos - StartPos);
+			case '\r':
+			case '\t':
+			case ' ':     /* End of name */
+			case '=':
+				if (StartPos >= 0) {
+					m_Name.Copy(pBuffer + StartPos, BufferPos - StartPos);
+				}
+
+				return (true);
+
+			case '>':
+			case '/':
+				return (true);
+
+			default:      /* Add character to element name */
+				BufferPos++;
+				break;
+		} /* End of switch */
+	}
+
 	return (true);
-      case '>':
-      case '/':
-        return (true);
-      default:		/* Add character to element name */
-	BufferPos++;
-        break;
-     } /* End of switch */
-   }
+}
 
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CXmlAttribute::ReadName()
+ *      End of Class Method CXmlAttribute::ReadName()
  *=========================================================================*/
 
 
@@ -119,49 +129,56 @@ bool CXmlAttribute::ReadName (TCHAR* pBuffer, int& BufferPos, const int FileSize
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlAttribute::ReadValue (TCHAR* pBuffer, int& BufferPos, const int FileSize, long& LineCount) {
-  int   StartPos = -1;
-  TCHAR QuoteType = 0;
-  bool  FoundStart;
+bool CXmlAttribute::ReadValue (TCHAR* pBuffer, int &BufferPos, const int FileSize,
+                               long &LineCount) {
+	int StartPos = -1;
+	TCHAR QuoteType = 0;
+	bool FoundStart;
 
-  while (BufferPos < FileSize) {
+	while (BufferPos < FileSize) {
+		switch (pBuffer[BufferPos]) {
+			case '=':
+				FoundStart = true;
+				BufferPos++;
+				break;
 
-    switch (pBuffer[BufferPos]) {
-      case '=':
-        FoundStart = true;
-	BufferPos++;
-	break;
-      case '\"':
-      case '\'':
-        if (QuoteType == pBuffer[BufferPos]) {
-	  m_Value.Copy(pBuffer + StartPos, BufferPos - StartPos);
-	  BufferPos++;
-	  return (true);
-	 }
-        else if (QuoteType == 0 && FoundStart) {
-	  QuoteType = pBuffer[BufferPos];
-	  StartPos = BufferPos + 1;
-	 }
+			case '\"':
+			case '\'':
+				if (QuoteType == pBuffer[BufferPos]) {
+					m_Value.Copy(pBuffer + StartPos, BufferPos - StartPos);
+					BufferPos++;
+					return (true);
+				} else if (QuoteType == 0 && FoundStart) {
+					QuoteType = pBuffer[BufferPos];
+					StartPos = BufferPos + 1;
+				}
 
-        BufferPos++;
-        break;
-      case '>':
-      case '/':
-        if (QuoteType == 0) return (true);
-	BufferPos++;
-	break;
-      case '\n':
-	LineCount++;	/* Fall through */
-      default:
-	BufferPos++;
-        break;
-     } /* End of switch */
-   }
+				BufferPos++;
+				break;
 
-  return (true);
- }
+			case '>':
+			case '/':
+				if (QuoteType == 0) {
+					return (true);
+				}
+
+				BufferPos++;
+				break;
+
+			case '\n':
+				LineCount++;    /* Fall through */
+
+			default:
+				BufferPos++;
+				break;
+		} /* End of switch */
+	}
+
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CXmlAttribute::ReadValue()
+ *      End of Class Method CXmlAttribute::ReadValue()
  *=========================================================================*/
 
 
@@ -171,13 +188,13 @@ bool CXmlAttribute::ReadValue (TCHAR* pBuffer, int& BufferPos, const int FileSiz
  *
  *=========================================================================*/
 void CXmlAttribute::SetValue (const long Value) {
-  TCHAR Buffer[48];
-  
-  ltoa(Value, Buffer, 10);
-  SetValue(Buffer);
- }
+	TCHAR Buffer[48];
+	ltoa(Value, Buffer, 10);
+	SetValue(Buffer);
+}
+
 /*===========================================================================
- *		End of Class Method CXmlAttribute::SetValue()
+ *      End of Class Method CXmlAttribute::SetValue()
  *=========================================================================*/
 
 
@@ -189,11 +206,11 @@ void CXmlAttribute::SetValue (const long Value) {
  *
  *=========================================================================*/
 bool CXmlAttribute::Write (CGenFile& File) {
-  bool Result;
+	bool Result;
+	Result = File.Printf(" %s=\"%s\"", m_Name, m_Value);
+	return (Result);
+}
 
-  Result = File.Printf(" %s=\"%s\"", m_Name, m_Value);
-  return (Result);
- }
 /*===========================================================================
- *		End of Class Method CXmlAttribute::Write()
+ *      End of Class Method CXmlAttribute::Write()
  *=========================================================================*/

@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmSkill.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmSkill.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmSkill.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmSkill.cpp");
+DEFINE_FILE("EsmSkill.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,13 +29,13 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmSkill::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_INDX,	CEsmSubLong::Create },
-	{ MWESM_SUBREC_DESC,	CEsmSubName::Create },
-	{ MWESM_SUBREC_SKDT,	CEsmSubSKDT::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_INDX, CEsmSubLong::Create },
+	{ MWESM_SUBREC_DESC, CEsmSubName::Create },
+	{ MWESM_SUBREC_SKDT, CEsmSubSKDT::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -45,13 +45,14 @@ const esmsubreccreate_t CEsmSkill::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmSkill::CEsmSkill () {
-  //DEFINE_FUNCTION("CEsmSkill::CEsmSkill()");
-  m_pIndexData = NULL;
-  m_pSkillData = NULL;
-  m_pDescData  = NULL;
- }
+	//DEFINE_FUNCTION("CEsmSkill::CEsmSkill()");
+	m_pIndexData = NULL;
+	m_pSkillData = NULL;
+	m_pDescData = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmSkill Constructor
+ *      End of Class CEsmSkill Constructor
  *=========================================================================*/
 
 
@@ -61,15 +62,15 @@ CEsmSkill::CEsmSkill () {
  *
  *=========================================================================*/
 void CEsmSkill::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmSkill::Destroy()");
-  m_pIndexData = NULL;
-  m_pSkillData = NULL;
-  m_pDescData  = NULL;
-  
-  CEsmRecord::Destroy();
- }
+	//DEFINE_FUNCTION("CEsmSkill::Destroy()");
+	m_pIndexData = NULL;
+	m_pSkillData = NULL;
+	m_pDescData = NULL;
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSkill::Destroy()
+ *      End of Class Method CEsmSkill::Destroy()
  *=========================================================================*/
 
 
@@ -82,26 +83,32 @@ void CEsmSkill::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmSkill::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmSkill* pSkill;
+	CEsmSkill* pSkill;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_SKIL)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pSkill = (CEsmSkill *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_SKIL)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_NAME:
-	return StringCompare(GetName(), pSkill->GetName(), false);
-    case ESM_FIELD_TYPE:
-	return StringCompare(GetType(), pSkill->GetType(), false);
-    case ESM_FIELD_ATTRIBUTE:
-	return StringCompare(GetAttribute(), pSkill->GetAttribute(), false);
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
+	pSkill = (CEsmSkill *) pRecord;
 
- }
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			return StringCompare(GetName(), pSkill->GetName(), false);
+
+		case ESM_FIELD_TYPE:
+			return StringCompare(GetType(), pSkill->GetType(), false);
+
+		case ESM_FIELD_ATTRIBUTE:
+			return StringCompare(GetAttribute(), pSkill->GetAttribute(), false);
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSkill::CompareFields()
+ *      End of Class Method CEsmSkill::CompareFields()
  *=========================================================================*/
 
 
@@ -112,15 +119,15 @@ int CEsmSkill::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmSkill::Create (void) {
-  DEFINE_FUNCTION("CEsmSkill::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmSkill::Create (void) {
+	DEFINE_FUNCTION("CEsmSkill::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmSkill);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmSkill);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmSkill::Create()
+ *      End of Class Method CEsmSkill::Create()
  *=========================================================================*/
 
 
@@ -132,19 +139,18 @@ CEsmRecord* CEsmSkill::Create (void) {
  *
  *=========================================================================*/
 void CEsmSkill::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_INDX);
-  AllocateSubRecord(MWESM_SUBREC_DESC);
-  AllocateSubRecord(MWESM_SUBREC_SKDT);
-  m_pIndexData->CreateNew();
-  m_pSkillData->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_INDX);
+	AllocateSubRecord(MWESM_SUBREC_DESC);
+	AllocateSubRecord(MWESM_SUBREC_SKDT);
+	m_pIndexData->CreateNew();
+	m_pSkillData->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSkill::CreateNew()
+ *      End of Class Method CEsmSkill::CreateNew()
  *=========================================================================*/
 
 
@@ -156,22 +162,24 @@ void CEsmSkill::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmSkill::GetFieldString (const int FieldID) {
-  
-  switch (FieldID) {
-    case ESM_FIELD_NAME:
-	return GetName();
-    case ESM_FIELD_TYPE:
-	return GetType();;
-    case ESM_FIELD_ATTRIBUTE:
-	return GetAttribute();
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+const TCHAR *CEsmSkill::GetFieldString (const int FieldID) {
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			return GetName();
+
+		case ESM_FIELD_TYPE:
+			return GetType();;
+
+		case ESM_FIELD_ATTRIBUTE:
+			return GetAttribute();
+
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmSkill::GetFieldString()
+ *      End of Class Method TCHAR* CEsmSkill::GetFieldString()
  *=========================================================================*/
 
 
@@ -185,17 +193,23 @@ const TCHAR* CEsmSkill::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 bool CEsmSkill::IsSame (CEsmRecord* pRecord) {
-
 	/* Check types */
-  if (!pRecord->IsType(MWESM_REC_SKIL)) return (false);
-  CEsmSkill* pSkill = (CEsmSkill *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_SKIL)) {
+		return (false);
+	}
+
+	CEsmSkill* pSkill = (CEsmSkill *) pRecord;
 
 	/* Check the skill indices */
-  if (GetSkillID() == pSkill->GetSkillID()) return (true);
-  return (false);
- }
+	if (GetSkillID() == pSkill->GetSkillID()) {
+		return (true);
+	}
+
+	return (false);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSkill::IsSame()
+ *      End of Class Method CEsmSkill::IsSame()
  *=========================================================================*/
 
 
@@ -205,19 +219,19 @@ bool CEsmSkill::IsSame (CEsmRecord* pRecord) {
  *
  *=========================================================================*/
 void CEsmSkill::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_INDX)) {
+		m_pIndexData = (CEsmSubLong *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_DESC)) {
+		m_pDescData = (CEsmSubName *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_SKDT)) {
+		m_pSkillData = (CEsmSubSKDT *) pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_INDX))
-    m_pIndexData = (CEsmSubLong *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_DESC))
-    m_pDescData = (CEsmSubName *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_SKDT))
-    m_pSkillData = (CEsmSubSKDT *) pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmSkill::OnAddSubRecord()
+ *      End of Class Event CEsmSkill::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -230,16 +244,16 @@ void CEsmSkill::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmSkill::SetFieldValue (const int FieldID, const TCHAR* pString) {
-
-  switch (FieldID) { 
-    case ESM_FIELD_DESC:
-	SetDescription(pString);
-	return (true);
-   };
+	switch (FieldID) {
+		case ESM_FIELD_DESC:
+			SetDescription(pString);
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmRecord::SetFieldValue(FieldID, pString);
- }
+	return CEsmRecord::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSkill::SetFieldValue()
+ *      End of Class Method CEsmSkill::SetFieldValue()
  *=========================================================================*/

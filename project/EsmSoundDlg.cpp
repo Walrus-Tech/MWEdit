@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmsounddlg.CPP
+ * File:    Esmsounddlg.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -44,23 +44,23 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  DEFINE_FILE("EsmSoundDlg.cpp");
+DEFINE_FILE("EsmSoundDlg.cpp");
 
-  IMPLEMENT_DYNCREATE(CEsmSoundDlg, CEsmRecDialog);
+IMPLEMENT_DYNCREATE(CEsmSoundDlg, CEsmRecDialog);
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -80,19 +80,19 @@
 
 BEGIN_MESSAGE_MAP(CEsmSoundDlg, CEsmRecDialog)
 
-  //{{AFX_MSG_MAP(CEsmSoundDlg)
+	//{{AFX_MSG_MAP(CEsmSoundDlg)
 
-  ON_BN_CLICKED(IDC_SOUNDBUTTON, OnSoundbutton)
+	ON_BN_CLICKED(IDC_SOUNDBUTTON, OnSoundbutton)
 
-  ON_BN_CLICKED(IDC_PLAYSOUND, OnPlaysound)
+	ON_BN_CLICKED(IDC_PLAYSOUND, OnPlaysound)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CEsmSoundDlg Message Map
+ *      End of CEsmSoundDlg Message Map
 
  *=========================================================================*/
 
@@ -111,18 +111,14 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CEsmSoundDlg::CEsmSoundDlg() : CEsmRecDialog(CEsmSoundDlg::IDD) {
-
-  //{{AFX_DATA_INIT(CEsmSoundDlg)
-
-  //}}AFX_DATA_INIT
-
-  m_pSound = NULL;
-
- }
+	//{{AFX_DATA_INIT(CEsmSoundDlg)
+	//}}AFX_DATA_INIT
+	m_pSound = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CEsmSoundDlg Constructor
+ *      End of Class CEsmSoundDlg Constructor
 
  *=========================================================================*/
 
@@ -141,30 +137,19 @@ CEsmSoundDlg::CEsmSoundDlg() : CEsmRecDialog(CEsmSoundDlg::IDD) {
  *=========================================================================*/
 
 void CEsmSoundDlg::DoDataExchange(CDataExchange* pDX) {
-
-  CFormView::DoDataExchange(pDX);
-
-
-
-  //{{AFX_DATA_MAP(CEsmSoundDlg)
-
-  DDX_Control(pDX, IDC_VOLUMETEXT, m_VolumeText);
-
-  DDX_Control(pDX, IDC_MINRANGETEXT, m_MinRangeText);
-
-  DDX_Control(pDX, IDC_MAXRANGETEXT, m_MaxRangeText);
-
-  DDX_Control(pDX, IDC_SOUNDBUTTON, m_SoundButton);
-
-  DDX_Control(pDX, IDC_IDTEXT, m_IDText);
-
-  //}}AFX_DATA_MAP
-
- }
+	CFormView::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CEsmSoundDlg)
+	DDX_Control(pDX, IDC_VOLUMETEXT, m_VolumeText);
+	DDX_Control(pDX, IDC_MINRANGETEXT, m_MinRangeText);
+	DDX_Control(pDX, IDC_MAXRANGETEXT, m_MaxRangeText);
+	DDX_Control(pDX, IDC_SOUNDBUTTON, m_SoundButton);
+	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSoundDlg::DoDataExchange()
+ *      End of Class Method CEsmSoundDlg::DoDataExchange()
 
  *=========================================================================*/
 
@@ -183,66 +168,35 @@ void CEsmSoundDlg::DoDataExchange(CDataExchange* pDX) {
  *=========================================================================*/
 
 void CEsmSoundDlg::GetControlData (void) {
-
-  DEFINE_FUNCTION("CEsmSoundDlg::GetControlData()");
-
-  CString Buffer;  
-
-  
-
+	DEFINE_FUNCTION("CEsmSoundDlg::GetControlData()");
+	CString Buffer;
 	/* Update the armor pointer and data */
-
-  m_pSound = (CEsmSound *) GetRecInfo()->pRecord;
-
-  ASSERT(m_pSound != NULL);
-
-  
+	m_pSound = (CEsmSound *) GetRecInfo()->pRecord;
+	ASSERT(m_pSound != NULL);
 
 	/* Item ID, if changed */
 
-  if (m_IDText.GetModify()) {
-
-    m_IDText.GetWindowText(Buffer);
-
-    m_pSound->SetID(TrimStringSpace(Buffer));
-
-   }
-
-
+	if (m_IDText.GetModify()) {
+		m_IDText.GetWindowText(Buffer);
+		m_pSound->SetID(TrimStringSpace(Buffer));
+	}
 
 	/* Sound volume */
-
-  m_VolumeText.GetWindowText(Buffer);
-
-  m_pSound->SetVolume((float)atof(Buffer));
-
-
-
-  	/* Range */
-
-  m_MinRangeText.GetWindowText(Buffer);
-
-  m_pSound->SetMinRange(atoi(Buffer));
-
-  m_MaxRangeText.GetWindowText(Buffer);
-
-  m_pSound->SetMaxRange(atoi(Buffer));
-
-
-
+	m_VolumeText.GetWindowText(Buffer);
+	m_pSound->SetVolume((float)atof(Buffer));
+	/* Range */
+	m_MinRangeText.GetWindowText(Buffer);
+	m_pSound->SetMinRange(atoi(Buffer));
+	m_MaxRangeText.GetWindowText(Buffer);
+	m_pSound->SetMaxRange(atoi(Buffer));
 	/* Sound filename */
-
-  m_SoundButton.GetWindowText(Buffer);
-
-  m_pSound->SetName(TrimStringSpace(Buffer));
-
-
-
- }
+	m_SoundButton.GetWindowText(Buffer);
+	m_pSound->SetName(TrimStringSpace(Buffer));
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSoundDlg::GetControlData()
+ *      End of Class Method CEsmSoundDlg::GetControlData()
 
  *=========================================================================*/
 
@@ -261,30 +215,34 @@ void CEsmSoundDlg::GetControlData (void) {
  *=========================================================================*/
 
 bool CEsmSoundDlg::IsModified (void) {
-
-  if (m_Modified) return (true);
-
-
+	if (m_Modified) {
+		return (true);
+	}
 
 	/* Check edit controls for changes */
 
-  if (m_IDText.GetModify())     m_Modified = true;
+	if (m_IDText.GetModify()) {
+		m_Modified = true;
+	}
 
-  if (m_VolumeText.GetModify()) m_Modified = true;
+	if (m_VolumeText.GetModify()) {
+		m_Modified = true;
+	}
 
-  if (m_MinRangeText.GetModify()) m_Modified = true;
+	if (m_MinRangeText.GetModify()) {
+		m_Modified = true;
+	}
 
-  if (m_MaxRangeText.GetModify()) m_Modified = true;
+	if (m_MaxRangeText.GetModify()) {
+		m_Modified = true;
+	}
 
-  
-
-  return (m_Modified);
-
- }
+	return (m_Modified);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSoundDlg::IsModified()
+ *      End of Class Method CEsmSoundDlg::IsModified()
 
  *=========================================================================*/
 
@@ -303,44 +261,23 @@ bool CEsmSoundDlg::IsModified (void) {
  *=========================================================================*/
 
 void CEsmSoundDlg::OnInitialUpdate() {
-
-
-
-  CEsmRecDialog::OnInitialUpdate();
-
-  UpdateTitle(NULL);
-
-
-
+	CEsmRecDialog::OnInitialUpdate();
+	UpdateTitle(NULL);
 	/* Initialize the armor record */
-
-  ASSERT(GetRecInfo() != NULL);
-
-  m_pSound = (CEsmSound *) GetRecInfo()->pRecord;
-
-
-
+	ASSERT(GetRecInfo() != NULL);
+	m_pSound = (CEsmSound *) GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
-
-  m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
-
-  m_VolumeText.SetLimitText(8);
-
-  m_MinRangeText.SetLimitText(8);
-
-  m_MaxRangeText.SetLimitText(8);
-
-  
-
+	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
+	m_VolumeText.SetLimitText(8);
+	m_MinRangeText.SetLimitText(8);
+	m_MaxRangeText.SetLimitText(8);
 	/* Update the UI data */
-
-  SetControlData();
-
- }
+	SetControlData();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmSoundDlg::OnInitialUpdate()
+ *      End of Class Event CEsmSoundDlg::OnInitialUpdate()
 
  *=========================================================================*/
 
@@ -359,32 +296,18 @@ void CEsmSoundDlg::OnInitialUpdate() {
  *=========================================================================*/
 
 void CEsmSoundDlg::OnPlaysound() {
-
-  CString	SoundFile;
-
-  CString	Buffer;
-
-
-
-  m_SoundButton.GetWindowText(Buffer);
-
-  
-
-  SoundFile  = GetMWDataPath();
-
-  SoundFile += MWPATH_SOUNDS;
-
-  SoundFile += Buffer;
-
-
-
-  PlaySound(SoundFile, NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
-
- }
+	CString SoundFile;
+	CString Buffer;
+	m_SoundButton.GetWindowText(Buffer);
+	SoundFile = GetMWDataPath();
+	SoundFile += MWPATH_SOUNDS;
+	SoundFile += Buffer;
+	PlaySound(SoundFile, NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmSoundDlg::OnPlaysound()
+ *      End of Class Event CEsmSoundDlg::OnPlaysound()
 
  *=========================================================================*/
 
@@ -403,24 +326,19 @@ void CEsmSoundDlg::OnPlaysound() {
  *=========================================================================*/
 
 void CEsmSoundDlg::OnSoundbutton() {
+	CString Buffer;
+	bool Result;
+	m_SoundButton.GetWindowText(Buffer);
+	Result = SelectEsmSound(Buffer, _T("Select Sound"), this);
 
-  CString	Buffer; 
-
-  bool		Result;
-
-
-
-  m_SoundButton.GetWindowText(Buffer);
-
-  Result = SelectEsmSound(Buffer, _T("Select Sound"), this);
-
-  if (Result) m_SoundButton.SetWindowText(Buffer);
-
- }
+	if (Result) {
+		m_SoundButton.SetWindowText(Buffer);
+	}
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmSoundDlg::OnSoundbutton()
+ *      End of Class Event CEsmSoundDlg::OnSoundbutton()
 
  *=========================================================================*/
 
@@ -439,14 +357,12 @@ void CEsmSoundDlg::OnSoundbutton() {
  *=========================================================================*/
 
 int CEsmSoundDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
-
-  return (0);
-
- }
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmSoundDlg::OnUpdateItem()
+ *      End of Class Event CEsmSoundDlg::OnUpdateItem()
 
  *=========================================================================*/
 
@@ -465,40 +381,24 @@ int CEsmSoundDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
  *=========================================================================*/
 
 void CEsmSoundDlg::SetControlData (void) {
-
-
-
 	/* Ignore if the current item is not valid */
-
-  if (m_pSound == NULL) return;
-
-
+	if (m_pSound == NULL) {
+		return;
+	}
 
 	/* Item ID, update title as well */
-
-  m_IDText.SetWindowText(m_pSound->GetID());
-
-  UpdateTitle(m_pSound->GetID());
-
-
-
+	m_IDText.SetWindowText(m_pSound->GetID());
+	UpdateTitle(m_pSound->GetID());
 	/* Item texts */
-
-  m_SoundButton.SetWindowText(m_pSound->GetName());
-
-  m_MinRangeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_MINRANGE));
-
-  m_MaxRangeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_MAXRANGE));
-
-  m_VolumeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_VOLUME));
-
-  
-
- }
+	m_SoundButton.SetWindowText(m_pSound->GetName());
+	m_MinRangeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_MINRANGE));
+	m_MaxRangeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_MAXRANGE));
+	m_VolumeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_VOLUME));
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSoundDlg::SetControlData()
+ *      End of Class Method CEsmSoundDlg::SetControlData()
 
  *=========================================================================*/
 

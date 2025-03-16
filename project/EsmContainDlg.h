@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcontaindlg.H
+ * File:    Esmcontaindlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 14, 2003
+ * Created On:  February 14, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,149 +62,149 @@
 
 class CEsmContainDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmContainDlg);
+	DECLARE_DYNCREATE(CEsmContainDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmContainer*	m_pContainer;
-
-
+	CEsmContainer *m_pContainer;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Helper get/set methods */
 
-  void GetItemData (void);
+	void GetItemData (void);
 
-  void SetItemData (void);
+	void SetItemData (void);
 
-  void UpdateTotalWeight (void);
+	void UpdateTotalWeight (void);
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Update the rec info user data count values */
 
-  void UpdateUserData (void);
+	void UpdateUserData (void);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmContainDlg();
+	CEsmContainDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmContainDlg)
+	//{{AFX_DATA(CEsmContainDlg)
 
-  enum { IDD = IDD_CONTAINER_DLG };
+	enum { IDD = IDD_CONTAINER_DLG };
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_OrganicCheck;
+	CButton m_OrganicCheck;
 
-  CButton	m_RespawnCheck;
+	CButton m_RespawnCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  CEdit		m_WeightText;
+	CEdit m_WeightText;
 
-  CEsmListCtrl	m_ItemList;
+	CEsmListCtrl m_ItemList;
 
-  CStatic	m_WeightLabel;
+	CStatic m_WeightLabel;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmContainDlg)
+	//{{AFX_VIRTUAL(CEsmContainDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmContainDlg)
+	//{{AFX_MSG(CEsmContainDlg)
 
-  afx_msg void OnOrganiccheck();
+	afx_msg void OnOrganiccheck();
 
-  afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordKey  (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  afx_msg void OnEndlabeleditItemlist(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnEndlabeleditItemlist(NMHDR* pNMHDR, LRESULT* pResult);
 
-  afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 
-  afx_msg LRESULT OnRecordSort (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordSort (LPARAM lParam, LPARAM wParam);
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmContainDlg Definition
+ *      End of Class CEsmContainDlg Definition
 
  *=========================================================================*/
 
@@ -224,7 +224,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmcontaindlg.H
+ *      End of File Esmcontaindlg.H
 
  *=========================================================================*/
 

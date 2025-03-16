@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmclothingdlg.H
+ * File:    Esmclothingdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 14, 2003
+ * Created On:  February 14, 2003
 
  *
 
@@ -32,13 +32,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,167 +58,183 @@
 
 class CEsmClothingDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmClothingDlg);
+	DECLARE_DYNCREATE(CEsmClothingDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmClothing*	m_pClothing;
-
-
+	CEsmClothing *m_pClothing;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Handles selchange events in all the biped lists */
 
-  void OnSelChangeBipedList (const int Index);
+	void OnSelChangeBipedList (const int Index);
 
 
 
-  	/* Update item data */
+	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Sets the values for a biped object */
 
-  void SetBipedObject (const int Index);
+	void SetBipedObject (const int Index);
 
 
 
 	/* Helper get/set methods */
 
-  void GetBipedData (void);
+	void GetBipedData (void);
 
-  void SetBipedData (void);
+	void SetBipedData (void);
 
-  void SetBipedData (const int BipedIndex, CEsmSubByte* pIndexRecord, const int RecordIndex);
-
-
+	void SetBipedData (const int BipedIndex, CEsmSubByte* pIndexRecord, const int RecordIndex);
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmClothingDlg();
+	CEsmClothingDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmClothingDlg)
+	//{{AFX_DATA(CEsmClothingDlg)
 
-  enum { IDD = IDD_CLOTHING_DLG };
+	enum { IDD = IDD_CLOTHING_DLG };
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CEdit		m_EnchantText;
+	CEdit m_EnchantText;
 
-  CComboBox	m_EnchantList;
+	CComboBox m_EnchantList;
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CEdit		m_WeightText;
+	CEdit m_WeightText;
 
-  CComboBox	m_TypeList;
+	CComboBox m_TypeList;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
-  CComboBox	m_MClothList[MWESM_CLOTH_MAXBODYPARTS];
+	CComboBox m_MClothList[MWESM_CLOTH_MAXBODYPARTS];
 
-  CComboBox	m_FClothList[MWESM_CLOTH_MAXBODYPARTS];
+	CComboBox m_FClothList[MWESM_CLOTH_MAXBODYPARTS];
 
-  CComboBox	m_BipedList[MWESM_CLOTH_MAXBODYPARTS];
+	CComboBox m_BipedList[MWESM_CLOTH_MAXBODYPARTS];
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmClothingDlg)
+	//{{AFX_VIRTUAL(CEsmClothingDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmClothingDlg)
+	//{{AFX_MSG(CEsmClothingDlg)
 
 	afx_msg void OnEnchantedit();
 
 	//}}AFX_MSG
 
-  void OnSelchangeBipedlist1() { OnSelChangeBipedList(0); }
+	void OnSelchangeBipedlist1() {
+		OnSelChangeBipedList(0);
+	}
 
-  void OnSelchangeBipedlist2() { OnSelChangeBipedList(1); }
+	void OnSelchangeBipedlist2() {
+		OnSelChangeBipedList(1);
+	}
 
-  void OnSelchangeBipedlist3() { OnSelChangeBipedList(2); }
+	void OnSelchangeBipedlist3() {
+		OnSelChangeBipedList(2);
+	}
 
-  void OnSelchangeBipedlist4() { OnSelChangeBipedList(3); }
+	void OnSelchangeBipedlist4() {
+		OnSelChangeBipedList(3);
+	}
 
-  void OnSelchangeBipedlist5() { OnSelChangeBipedList(4); }
+	void OnSelchangeBipedlist5() {
+		OnSelChangeBipedList(4);
+	}
 
-  void OnSelchangeBipedlist6() { OnSelChangeBipedList(5); }
+	void OnSelchangeBipedlist6() {
+		OnSelChangeBipedList(5);
+	}
 
-  void OnSelchangeBipedlist7() { OnSelChangeBipedList(6); }
+	void OnSelchangeBipedlist7() {
+		OnSelChangeBipedList(6);
+	}
 
-  void OnSelchangeClothList() { m_Modified = true; }
+	void OnSelchangeClothList() {
+		m_Modified = true;
+	}
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmClothingDlg Definition
+ *      End of Class CEsmClothingDlg Definition
 
  *=========================================================================*/
 
@@ -238,7 +254,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmclothingdlg.H
+ *      End of File Esmclothingdlg.H
 
  *=========================================================================*/
 

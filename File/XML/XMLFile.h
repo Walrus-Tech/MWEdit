@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	Xmlfile.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	January 25, 2003
+ * File:    Xmlfile.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  January 25, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "XmlElem.h"
+#include "XmlElem.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -28,17 +28,17 @@
  *
  *=========================================================================*/
 
-	/* Callback event codes */
-  #define XMLFILE_CBCODE_READSTART  101
-  #define XMLFILE_CBCODE_READDONE   102
-  #define XMLFILE_CBCODE_READING    103
-  #define XMLFILE_CBCODE_PARSEDONE  110
-  #define XMLFILE_CBCODE_WRITESTART 121
-  #define XMLFILE_CBCODE_WRITEDONE  122
-  #define XMLFILE_CBCODE_WRITING    123
+/* Callback event codes */
+#define XMLFILE_CBCODE_READSTART  101
+#define XMLFILE_CBCODE_READDONE   102
+#define XMLFILE_CBCODE_READING    103
+#define XMLFILE_CBCODE_PARSEDONE  110
+#define XMLFILE_CBCODE_WRITESTART 121
+#define XMLFILE_CBCODE_WRITEDONE  122
+#define XMLFILE_CBCODE_WRITING    123
 
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -51,56 +51,68 @@
  *=========================================================================*/
 class CXmlFile {
 
-  /*---------- Begin Private Class Members ----------------------*/
-protected:
-  CSString	m_Filename;
-  CGenFile	m_File;
-  CXmlElement   m_RootElement;
-  long		m_LineCount;
+	/*---------- Begin Private Class Members ----------------------*/
+  protected:
+	CSString m_Filename;
+	CGenFile m_File;
+	CXmlElement m_RootElement;
+	long m_LineCount;
 
-  	/* Callback information for load/save */
-  XMLFILE_CALLBACK  m_CallBackFunc;
-  xmlcallbackinfo_t m_CallBackInfo;
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/* Callback information for load/save */
+	XMLFILE_CALLBACK m_CallBackFunc;
+	xmlcallbackinfo_t m_CallBackInfo;
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CXmlFile();
-  virtual ~CXmlFile() { Destroy(); }
-  virtual void Destroy (void);
+	CXmlFile();
+	virtual ~CXmlFile() {
+		Destroy();
+	}
+
+	virtual void Destroy (void);
 
 	/* Get class members */
-  CXmlElement* GetRootElement (void) { return (&m_RootElement); }
-  const TCHAR* GetFilename    (void) const { return (m_Filename); }
-  long	       GetLineCount   (void) const { return (m_LineCount); }
+	CXmlElement *GetRootElement (void) {
+		return (&m_RootElement);
+	}
 
-  	/* Set the callback function and data */
-  void SetCallback (XMLFILE_CALLBACK pCallBack, void* pUserData) {
-	m_CallBackFunc           = pCallBack;
-	m_CallBackInfo.pUserData = pUserData;
-   }
+	const TCHAR *GetFilename (void) const {
+		return (m_Filename);
+	}
+
+	long GetLineCount (void) const {
+		return (m_LineCount);
+	}
+
+	/* Set the callback function and data */
+	void SetCallback (XMLFILE_CALLBACK pCallBack, void* pUserData) {
+		m_CallBackFunc = pCallBack;
+		m_CallBackInfo.pUserData = pUserData;
+	}
 
 	/* Input an XML file */
-  bool Read  (const TCHAR* pFilename);
+	bool Read (const TCHAR* pFilename);
 
 	/* Used during the callback of the read event */
-  int OnReadCallback (const long FileSize, const long BytesRead);
+	int OnReadCallback (const long FileSize, const long BytesRead);
 
 	/* Output an XML file */
-  bool Write (const TCHAR* pFilename);
+	bool Write (const TCHAR* pFilename);
 
- };
+};
+
 /*===========================================================================
- *		End of Class CXmlFile Definition
+ *      End of Class CXmlFile Definition
  *=========================================================================*/
 
 #endif
 /*===========================================================================
- *		End of File Xmlfile.H
+ *      End of File Xmlfile.H
  *=========================================================================*/

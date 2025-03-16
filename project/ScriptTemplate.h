@@ -2,11 +2,11 @@
 
  *
 
- * File:	Scripttemplate.H
+ * File:    Scripttemplate.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 8, 2003
+ * Created On:  October 8, 2003
 
  *
 
@@ -34,17 +34,17 @@
 
  *=========================================================================*/
 
-  #include "dl_err.h"
+#include "dl_err.h"
 
-  #include "EsmScript.h"
+#include "EsmScript.h"
 
-  #include "contain/PtrArray.h"
+#include "contain/PtrArray.h"
 
-  #include "file/csvfile.h"
+#include "file/csvfile.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -64,43 +64,43 @@
 
 
 
-	/* Maximum size of template files */
+/* Maximum size of template files */
 
-  #define ESM_SCRTEMP_MAXTEMPSIZE	ESM_SCRIPT_MAXTEXT	
-
-
-
-	/* Maximum size of template variables */
-
-  #define ESM_SCRTEMP_MAXVARSIZE	31
+#define ESM_SCRTEMP_MAXTEMPSIZE   ESM_SCRIPT_MAXTEXT
 
 
 
-	/* Template characters */
+/* Maximum size of template variables */
 
-  #define ESM_SCRTEMP_TEMPCHAR1		'['
-
-  #define ESM_SCRTEMP_TEMPCHAR2		']'
+#define ESM_SCRTEMP_MAXVARSIZE    31
 
 
 
-	/* File parameters */
+/* Template characters */
 
-  #define ESM_SCRTEMP_FILEEXT		_T("txt")
+#define ESM_SCRTEMP_TEMPCHAR1     '['
 
-  #define ESM_SCRTEMP_FILEFILTER	_T("Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
+#define ESM_SCRTEMP_TEMPCHAR2     ']'
 
 
 
-	/* Special variable names */
+/* File parameters */
 
-  #define ESMSCRTEMP_CSV_SCRIPTNAME	_T("ScriptName")
+#define ESM_SCRTEMP_FILEEXT       _T("txt")
+
+#define ESM_SCRTEMP_FILEFILTER    _T("Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
+
+
+
+/* Special variable names */
+
+#define ESMSCRTEMP_CSV_SCRIPTNAME _T("ScriptName")
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -120,33 +120,37 @@
 
 
 
-	/* Holds information on a single template variable */
+/* Holds information on a single template variable */
 
-  typedef struct esmscrtempvar {
+typedef struct esmscrtempvar {
 
-	TCHAR	Name[ESM_SCRTEMP_MAXVARSIZE+1];
+	TCHAR Name[ESM_SCRTEMP_MAXVARSIZE + 1];
 
-	int	Uses;
+	int Uses;
 
-	int	CsvColIndex;
-
-
-
-	bool IsName  (const TCHAR* pString) { return (StringCompare(Name, pString, false) == 0); }
-
-	void SetName (const TCHAR* pString) { strnncpy(Name, pString, ESM_SCRTEMP_MAXVARSIZE); }
-
-   } esmscrtempvar_t;
+	int CsvColIndex;
 
 
 
-  typedef TPtrArray<esmscrtempvar_t> CEsmScrTempVarArray;
+	bool IsName (const TCHAR* pString) {
+		return (StringCompare(Name, pString, false) == 0);
+	}
 
-  
+	void SetName (const TCHAR* pString) {
+		strnncpy(Name, pString, ESM_SCRTEMP_MAXVARSIZE);
+	}
+
+} esmscrtempvar_t;
+
+
+
+typedef TPtrArray<esmscrtempvar_t> CEsmScrTempVarArray;
+
+
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -172,129 +176,145 @@ class CEsmScriptTemplate {
 
 
 
-  /*---------- Begin Private Class Members ----------------------*/
+	/*---------- Begin Private Class Members ----------------------*/
 
-private:
+  private:
 
-  CSString		m_TemplateText;		/* The template text buffer */
+	CSString m_TemplateText;     /* The template text buffer */
 
-  CSString		m_Filename;
+	CSString m_Filename;
 
-  CEsmScrTempVarArray	m_TemplateVars;
-
-
-
-  CSString		m_ScriptName;		/* Used for conversion */
-
-  
+	CEsmScrTempVarArray m_TemplateVars;
 
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
+	CSString m_ScriptName;       /* Used for conversion */
 
-protected:
+
+
+
+
+	/*---------- Begin Protected Class Methods --------------------*/
+
+  protected:
 
 
 
 	/* Parses and adds a template variable */
 
-  bool AddTemplateVariable (const TCHAR* pVariable, const int Length);
+	bool AddTemplateVariable (const TCHAR* pVariable, const int Length);
 
 
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
+	/*---------- Begin Public Class Methods -----------------------*/
 
-public:
+  public:
 
 
 
 	/* Class Constructors/Destructors */
 
-  CEsmScriptTemplate();
+	CEsmScriptTemplate();
 
-  virtual ~CEsmScriptTemplate() { Destroy(); }
+	virtual ~CEsmScriptTemplate() {
+		Destroy();
+	}
 
-  virtual void Destroy (void);
+	virtual void Destroy (void);
 
 
 
-  	/* Parses and adds a template variable */
+	/* Parses and adds a template variable */
 
-  bool AddTemplateVar (const TCHAR* pVariable);
+	bool AddTemplateVar (const TCHAR* pVariable);
 
 
 
 	/* Delete any defined template variables */
 
-  void ClearTemplateVars (void);
+	void ClearTemplateVars (void);
 
 
 
 	/* Converts a script template text buffer */
 
-  bool ConvertText (TCHAR* pOutBuffer, const int BufferSize, CCsvRow* pRow);
+	bool ConvertText (TCHAR* pOutBuffer, const int BufferSize, CCsvRow* pRow);
 
 
 
 	/* Attempt to find a template variable */
 
-  esmscrtempvar_t* FindTemplateVar (const TCHAR* pVariable);
+	esmscrtempvar_t *FindTemplateVar (const TCHAR* pVariable);
 
 
 
 	/* Find a variable value from a csv row */
 
-  CSString* GetCsvString (const TCHAR* pVarName, CCsvRow* pRow);
+	CSString *GetCsvString (const TCHAR* pVarName, CCsvRow* pRow);
 
-  
+
 
 	/* Get class members */
 
-  const TCHAR*	GetTemplateText (void) const { return (m_TemplateText); }
+	const TCHAR *GetTemplateText (void) const {
+		return (m_TemplateText);
+	}
 
-  const TCHAR*	GetFilename     (void) const { return (m_Filename); }
+	const TCHAR *GetFilename (void) const {
+		return (m_Filename);
+	}
 
-  int		GetTemplateSize (void) const { return (m_TemplateText.GetLength()); }
+	int GetTemplateSize (void) const {
+		return (m_TemplateText.GetLength());
+	}
 
-  int		GetNumTempVars  (void) const { return (m_TemplateVars.GetNumElements()); }
+	int GetNumTempVars (void) const {
+		return (m_TemplateVars.GetNumElements());
+	}
 
 
 
 	/* Access a template variable */
 
-  esmscrtempvar_t* GetTemplateVar     (const int Index) { return (m_TemplateVars.GetAt(Index)); }
+	esmscrtempvar_t *GetTemplateVar (const int Index) {
+		return (m_TemplateVars.GetAt(Index));
+	}
 
-  
+
 
 	/* Attempt to load a script template file */
 
-  bool Load (const TCHAR* pFilename);
+	bool Load (const TCHAR* pFilename);
 
 
 
 	/* Parse the template text */
 
-  bool ParseText (void);
+	bool ParseText (void);
 
 
 
 	/* Set class members */
 
-  void SetText       (const TCHAR* pString) { m_TemplateText = pString; }
+	void SetText (const TCHAR* pString) {
+		m_TemplateText = pString;
+	}
 
-  void SetScriptName (const TCHAR* pString) { m_ScriptName = pString; }
+	void SetScriptName (const TCHAR* pString) {
+		m_ScriptName = pString;
+	}
 
 
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmScriptTemplate Definition
+ *      End of Class CEsmScriptTemplate Definition
 
  *=========================================================================*/
 
@@ -306,7 +326,7 @@ public:
 
 /*===========================================================================
 
- *		End of File Scripttemplate.H
+ *      End of File Scripttemplate.H
 
  *=========================================================================*/
 

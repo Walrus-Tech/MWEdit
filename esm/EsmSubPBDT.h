@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmsubPBDT.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmsubPBDT.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmSubBase.h"
+#include "EsmSubBase.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -29,16 +29,16 @@
  *=========================================================================*/
 #pragma pack(push, 1)
 
-  typedef struct {
-	float	Weight;
-	long	Value;
-	float	Quality;
-	long 	Uses;
-  } probedata_t;
+typedef struct {
+	float Weight;
+	long Value;
+	float Quality;
+	long Uses;
+} probedata_t;
 
 #pragma pack(pop)
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -51,57 +51,83 @@
  *=========================================================================*/
 class CEsmSubPBDT : public CEsmSubRecord {
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  //CEsmSubPBDT();
-  //virtual ~CEsmSubPBDT() { Destroy(); }
-  //virtual void Destroy (void);
+	//CEsmSubPBDT();
+	//virtual ~CEsmSubPBDT() { Destroy(); }
+	//virtual void Destroy (void);
 
 	/* Create a name object */
-  static CEsmSubRecord* Create (void) {
-	CEsmSubRecord* pSubRecord;
-	CreatePointerL(pSubRecord, CEsmSubPBDT);
-	return (pSubRecord);
-   }
+	static CEsmSubRecord *Create (void) {
+		CEsmSubRecord* pSubRecord;
+		CreatePointerL(pSubRecord, CEsmSubPBDT);
+		return (pSubRecord);
+	}
 
 	/* Create a new sub-record */
-  virtual void CreateNew (void) { 
-	CEsmSubRecord::CreateNew();
-	CreateArrayPointerL(m_pData, byte, sizeof(probedata_t)); 
-	m_RecordSize = sizeof(probedata_t); 
-	memset(m_pData, 0, sizeof(probedata_t));
-   }
+	virtual void CreateNew (void) {
+		CEsmSubRecord::CreateNew();
+		CreateArrayPointerL(m_pData, byte, sizeof(probedata_t));
+		m_RecordSize = sizeof(probedata_t);
+		memset(m_pData, 0, sizeof(probedata_t));
+	}
 
 	/* Get class methods */
-  probedata_t* GetProbeData (void) { return ((probedata_t *) m_pData); }
-  float	       GetWeight    (void) { return (GetProbeData()->Weight); }
-  float	       GetQuality   (void) { return (GetProbeData()->Quality); }
-  long	       GetValue     (void) { return (GetProbeData()->Value); }
-  long	       GetUses      (void) { return (GetProbeData()->Uses); }
+	probedata_t *GetProbeData (void) {
+		return ((probedata_t *) m_pData);
+	}
+
+	float GetWeight (void) {
+		return (GetProbeData()->Weight);
+	}
+
+	float GetQuality (void) {
+		return (GetProbeData()->Quality);
+	}
+
+	long GetValue (void) {
+		return (GetProbeData()->Value);
+	}
+
+	long GetUses (void) {
+		return (GetProbeData()->Uses);
+	}
 
 	/* Set class members */
-  void SetWeight  (const float Value) { GetProbeData()->Weight  = Value; }
-  void SetQuality (const float Value) { GetProbeData()->Quality = Value; }
-  void SetValue   (const long  Value) { GetProbeData()->Value   = Value; }
-  void SetUses    (const long  Value) { GetProbeData()->Uses    = Value; }
+	void SetWeight (const float Value) {
+		GetProbeData()->Weight = Value;
+	}
 
- };
+	void SetQuality (const float Value) {
+		GetProbeData()->Quality = Value;
+	}
+
+	void SetValue (const long Value) {
+		GetProbeData()->Value = Value;
+	}
+
+	void SetUses (const long Value) {
+		GetProbeData()->Uses = Value;
+	}
+
+};
+
 /*===========================================================================
- *		End of Class CEsmSubAADT Definition
+ *      End of Class CEsmSubAADT Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmsubINDX.H
+ *      End of File EsmsubINDX.H
  *=========================================================================*/

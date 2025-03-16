@@ -2,11 +2,11 @@
 
  *
 
- * File:	Inputdialog.CPP
+ * File:    Inputdialog.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	April 5, 2003
+ * Created On:  April 5, 2003
 
  *
 
@@ -16,15 +16,15 @@
 
  * 14 September 2003
 
- *	- Input textbox has initial focus.
+ *  - Input textbox has initial focus.
 
- * 
+ *
 
  *=========================================================================*/
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -48,21 +48,21 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  DEFINE_FILE("InputDialog.cpp");
+DEFINE_FILE("InputDialog.cpp");
 
 /*===========================================================================
 
- *		End of Debug Definitions
+ *      End of Debug Definitions
 
  *=========================================================================*/
 
@@ -82,15 +82,15 @@
 
 BEGIN_MESSAGE_MAP(CInputDialog, CDialog)
 
-  //{{AFX_MSG_MAP(CInputDialog)
+	//{{AFX_MSG_MAP(CInputDialog)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CInputDialog Message Map
+ *      End of CInputDialog Message Map
 
  *=========================================================================*/
 
@@ -109,16 +109,13 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CInputDialog::CInputDialog(CWnd* pParent) : CDialog(CInputDialog::IDD, pParent) {
-
-  //{{AFX_DATA_INIT(CInputDialog)
-
-  //}}AFX_DATA_INIT
-
- }
+	//{{AFX_DATA_INIT(CInputDialog)
+	//}}AFX_DATA_INIT
+}
 
 /*===========================================================================
 
- *		End of Class CInputDialog Constructor
+ *      End of Class CInputDialog Constructor
 
  *=========================================================================*/
 
@@ -137,22 +134,16 @@ CInputDialog::CInputDialog(CWnd* pParent) : CDialog(CInputDialog::IDD, pParent) 
  *=========================================================================*/
 
 void CInputDialog::DoDataExchange (CDataExchange* pDX) {
-
-  CDialog::DoDataExchange(pDX);
-
-  //{{AFX_DATA_MAP(CInputDialog)
-
-  DDX_Control(pDX, IDC_MAINLABEL, m_MainLabel);
-
-  DDX_Control(pDX, IDC_EDIT1, m_InputText);
-
-  //}}AFX_DATA_MAP
-
- }
+	CDialog::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CInputDialog)
+	DDX_Control(pDX, IDC_MAINLABEL, m_MainLabel);
+	DDX_Control(pDX, IDC_EDIT1, m_InputText);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CInputDialog::DoDataExchange()
+ *      End of Class Method CInputDialog::DoDataExchange()
 
  *=========================================================================*/
 
@@ -171,32 +162,22 @@ void CInputDialog::DoDataExchange (CDataExchange* pDX) {
  *=========================================================================*/
 
 bool CInputDialog::DoModal (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle) {
+	int Result;
+	m_pLabel = pLabel;
+	m_pTitle = pTitle;
+	m_pOutputString = pResult;
+	Result = CDialog::DoModal();
 
-  int Result;
+	if (Result != IDOK) {
+		return (false);
+	}
 
-
-
-  m_pLabel = pLabel;
-
-  m_pTitle = pTitle;
-
-  m_pOutputString = pResult;
-
-
-
-  Result = CDialog::DoModal();
-
-  if (Result != IDOK) return (false);
-
- 
-
-  return (true);
-
- }
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CInputDialog::DoModal()
+ *      End of Class Method CInputDialog::DoModal()
 
  *=========================================================================*/
 
@@ -215,28 +196,17 @@ bool CInputDialog::DoModal (CString* pResult, const TCHAR* pLabel, const TCHAR* 
  *=========================================================================*/
 
 BOOL CInputDialog::OnInitDialog() {
-
-  CDialog::OnInitDialog();
-
- 
-
-  SetWindowText(m_pTitle == NULL ? _T("Input Text") : m_pTitle);
-
-  m_MainLabel.SetWindowText(m_pLabel == NULL ? _T("Input text:") : m_pLabel);	
-
-  m_InputText.SetWindowText(m_pOutputString == NULL ? _T("") : (const TCHAR *)*m_pOutputString);
-
-  
-
-  m_InputText.SetFocus();
-
-  return (FALSE);
-
- }
+	CDialog::OnInitDialog();
+	SetWindowText(m_pTitle == NULL ? _T("Input Text") : m_pTitle);
+	m_MainLabel.SetWindowText(m_pLabel == NULL ? _T("Input text:") : m_pLabel);
+	m_InputText.SetWindowText(m_pOutputString == NULL ? _T("") : (const TCHAR *)*m_pOutputString);
+	m_InputText.SetFocus();
+	return (FALSE);
+}
 
 /*===========================================================================
 
- *		End of Class Event CInputDialog::OnInitDialog()
+ *      End of Class Event CInputDialog::OnInitDialog()
 
  *=========================================================================*/
 
@@ -255,16 +225,16 @@ BOOL CInputDialog::OnInitDialog() {
  *=========================================================================*/
 
 void CInputDialog::OnOK() {
+	if (m_pOutputString != NULL) {
+		m_InputText.GetWindowText(*m_pOutputString);
+	}
 
-  if (m_pOutputString != NULL) m_InputText.GetWindowText(*m_pOutputString);
-
-  CDialog::OnOK();
-
- }
+	CDialog::OnOK();
+}
 
 /*===========================================================================
 
- *		End of Class Event CInputDialog::OnInitDialog()
+ *      End of Class Event CInputDialog::OnInitDialog()
 
  *=========================================================================*/
 
@@ -287,16 +257,13 @@ void CInputDialog::OnOK() {
  *=========================================================================*/
 
 bool InputDialog (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle) {
-
-  CInputDialog Dlg;
-
-  return Dlg.DoModal(pResult, pLabel, pTitle);
-
- }
+	CInputDialog Dlg;
+	return Dlg.DoModal(pResult, pLabel, pTitle);
+}
 
 /*===========================================================================
 
- *		End of Function InputDialog()
+ *      End of Function InputDialog()
 
  *=========================================================================*/
 

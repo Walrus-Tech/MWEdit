@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmMisc.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmMisc.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmMisc.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmMisc.cpp");
+DEFINE_FILE("EsmMisc.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,16 +29,16 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmMisc::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MCDT,	CEsmSubMCDT::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_MCDT, CEsmSubMCDT::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -48,11 +48,12 @@ const esmsubreccreate_t CEsmMisc::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmMisc::CEsmMisc () {
-  //DEFINE_FUNCTION("CEsmMisc::CEsmMisc()");
-  m_pMiscData = NULL;
- }
+	//DEFINE_FUNCTION("CEsmMisc::CEsmMisc()");
+	m_pMiscData = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmMisc Constructor
+ *      End of Class CEsmMisc Constructor
  *=========================================================================*/
 
 
@@ -64,13 +65,13 @@ CEsmMisc::CEsmMisc () {
  *
  *=========================================================================*/
 void CEsmMisc::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmMisc::Destroy()");
-  m_pMiscData = NULL;
+	//DEFINE_FUNCTION("CEsmMisc::Destroy()");
+	m_pMiscData = NULL;
+	CEsmItem2::Destroy();
+}
 
-  CEsmItem2::Destroy();
- }
 /*===========================================================================
- *		End of Class Method CEsmMisc::Destroy()
+ *      End of Class Method CEsmMisc::Destroy()
  *=========================================================================*/
 
 
@@ -83,22 +84,27 @@ void CEsmMisc::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmMisc::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  DEFINE_FUNCTION("CEsmMisc::CompareFields()");
-  CEsmMisc* pMisc;
+	DEFINE_FUNCTION("CEsmMisc::CompareFields()");
+	CEsmMisc* pMisc;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_MISC)) return CEsmItem2::CompareFields(FieldID, pRecord);
-  pMisc = (CEsmMisc *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_MISC)) {
+		return CEsmItem2::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_UNKNOWN:
-	return (GetUnknown() - pMisc->GetUnknown());
-    default:
-	return CEsmItem2::CompareFields(FieldID, pRecord); 
-   }
- }
+	pMisc = (CEsmMisc *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_UNKNOWN:
+			return (GetUnknown() - pMisc->GetUnknown());
+
+		default:
+			return CEsmItem2::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmMisc::CompareFields()
+ *      End of Class Method CEsmMisc::CompareFields()
  *=========================================================================*/
 
 
@@ -109,15 +115,15 @@ int CEsmMisc::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmMisc::Create (void) {
-  DEFINE_FUNCTION("CEsmMisc::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmMisc::Create (void) {
+	DEFINE_FUNCTION("CEsmMisc::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmMisc);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmMisc);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmMisc::Create()
+ *      End of Class Method CEsmMisc::Create()
  *=========================================================================*/
 
 
@@ -129,16 +135,15 @@ CEsmRecord* CEsmMisc::Create (void) {
  *
  *=========================================================================*/
 void CEsmMisc::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmItem2::CreateNew(pFile);
-
+	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_MCDT);
-  m_pMiscData->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_MCDT);
+	m_pMiscData->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmMisc::CreateNew()
+ *      End of Class Method CEsmMisc::CreateNew()
  *=========================================================================*/
 
 
@@ -150,20 +155,21 @@ void CEsmMisc::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmMisc::GetFieldString (const int FieldID) {
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmMisc::GetFieldString (const int FieldID) {
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-  case ESM_FIELD_UNKNOWN:
-	snprintf (s_Buffer, 31, _T("%ld"), GetUnknown());
-	return (s_Buffer);
-    default:
-	return CEsmItem2::GetFieldString(FieldID);
-   }
-  
- }
+	switch (FieldID) {
+		case ESM_FIELD_UNKNOWN:
+			snprintf (s_Buffer, 31, _T("%ld"), GetUnknown());
+			return (s_Buffer);
+
+		default:
+			return CEsmItem2::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmMisc::GetFieldString()
+ *      End of Class Method TCHAR* CEsmMisc::GetFieldString()
  *=========================================================================*/
 
 
@@ -173,15 +179,15 @@ const TCHAR* CEsmMisc::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmMisc::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_MCDT)) {
+		m_pMiscData = (CEsmSubMCDT *) pSubRecord;
+	} else {
+		CEsmItem2::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_MCDT))
-    m_pMiscData = (CEsmSubMCDT *) pSubRecord;
-  else
-    CEsmItem2::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmMisc::OnAddSubRecord()
+ *      End of Class Event CEsmMisc::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -194,16 +200,16 @@ void CEsmMisc::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmMisc::SetFieldValue (const int FieldID, const TCHAR* pString) {
-
-  switch (FieldID) { 
-    case ESM_FIELD_UNKNOWN:
-	GetMiscData()->Unknown = atol(pString);
-	return (true);
-   };
+	switch (FieldID) {
+		case ESM_FIELD_UNKNOWN:
+			GetMiscData()->Unknown = atol(pString);
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmItem2::SetFieldValue(FieldID, pString);
- }
+	return CEsmItem2::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmMisc::SetFieldValue()
+ *      End of Class Method CEsmMisc::SetFieldValue()
  *=========================================================================*/

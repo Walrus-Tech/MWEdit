@@ -6,7 +6,7 @@
 
 #if _MSC_VER > 1000
 
-#pragma once
+	#pragma once
 
 #endif // _MSC_VER > 1000
 
@@ -32,7 +32,7 @@ class CCreaturePage2 : public CPropertyPage
 
 // Construction
 
-public:
+  public:
 
 	CCreaturePage2();
 
@@ -46,9 +46,9 @@ public:
 
 	enum { IDD = IDD_CREATURE2_VIEW };
 
-		// NOTE - ClassWizard will add data members here.
+	// NOTE - ClassWizard will add data members here.
 
-		//    DO NOT EDIT what you see in these blocks of generated code !
+	// DO NOT EDIT what you see in these blocks of generated code !
 
 	//}}AFX_DATA
 
@@ -62,7 +62,7 @@ public:
 
 	//{{AFX_VIRTUAL(CCreaturePage2)
 
-	protected:
+  protected:
 
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
@@ -72,13 +72,13 @@ public:
 
 // Implementation
 
-protected:
+  protected:
 
 	// Generated message map functions
 
 	//{{AFX_MSG(CCreaturePage2)
 
-		// NOTE: the ClassWizard will add member functions here
+	// NOTE: the ClassWizard will add member functions here
 
 	//}}AFX_MSG
 

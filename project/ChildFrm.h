@@ -2,11 +2,11 @@
 
  *
 
- * File:	ChildFrm.H
+ * File:    ChildFrm.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Monday, 03 February, 2003
+ * Created On:  Monday, 03 February, 2003
 
  *
 
@@ -36,11 +36,11 @@
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
-  
+
 
 
 
@@ -56,45 +56,45 @@
 
 class CChildFrame : public CMDIChildWnd {
 
-  DECLARE_DYNCREATE(CChildFrame)
+	DECLARE_DYNCREATE(CChildFrame)
 
 
 
-  /*---------- Begin Private Class Members ----------------------*/
+	/*---------- Begin Private Class Members ----------------------*/
 
-protected:
+  protected:
 
-  bool		m_IsFakeMaximized;
+	bool m_IsFakeMaximized;
 
-  CRect		m_RestoreRect;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-
-protected:
+	CRect m_RestoreRect;
 
 
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
+	/*---------- Begin Protected Class Methods --------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Class constructor/destructor */
 
-  CChildFrame();
+	CChildFrame();
 
-  virtual ~CChildFrame();
+	virtual ~CChildFrame();
 
 
 
-  void FakeMaximize (void);
+	void FakeMaximize (void);
 
 
 
@@ -102,9 +102,9 @@ public:
 
 #ifdef _DEBUG
 
-  virtual void AssertValid () const;
+	virtual void AssertValid () const;
 
-  virtual void Dump (CDumpContext& dc) const;
+	virtual void Dump (CDumpContext& dc) const;
 
 #endif
 
@@ -114,41 +114,41 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CChildFrame)
+	//{{AFX_VIRTUAL(CChildFrame)
 
-  virtual BOOL PreCreateWindow (CREATESTRUCT& cs);
+	virtual BOOL PreCreateWindow (CREATESTRUCT& cs);
 
-  //}}AFX_VIRTUAL
-
-
+	//}}AFX_VIRTUAL
 
 
 
-  /*---------- Generated message map functions ------------------*/
-
-protected:
-
-  //{{AFX_MSG(CChildFrame)
-
-  afx_msg void OnSize(UINT nType, int cx, int cy);
-
-  afx_msg void OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd);
-
-  afx_msg void OnSysCommand (UINT nID, LPARAM Param);
-
-  //}}AFX_MSG
 
 
+	/*---------- Generated message map functions ------------------*/
 
-  DECLARE_MESSAGE_MAP();
+  protected:
+
+	//{{AFX_MSG(CChildFrame)
+
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+	afx_msg void OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd);
+
+	afx_msg void OnSysCommand (UINT nID, LPARAM Param);
+
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CMWEditView Definition
+ *      End of Class CMWEditView Definition
 
  *=========================================================================*/
 
@@ -168,7 +168,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File ChildFrm.H
+ *      End of File ChildFrm.H
 
  *=========================================================================*/
 

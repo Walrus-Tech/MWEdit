@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmStatic.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmStatic.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmStatic.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmStatic.cpp");
+DEFINE_FILE("EsmStatic.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,12 +29,12 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmStatic::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL,	CEsmSubNameFix::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -44,11 +44,12 @@ const esmsubreccreate_t CEsmStatic::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmStatic::CEsmStatic () {
-  //DEFINE_FUNCTION("CEsmStatic::CEsmStatic()");
-  m_pModel = NULL;
- }
+	//DEFINE_FUNCTION("CEsmStatic::CEsmStatic()");
+	m_pModel = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmStatic Constructor
+ *      End of Class CEsmStatic Constructor
  *=========================================================================*/
 
 
@@ -60,13 +61,13 @@ CEsmStatic::CEsmStatic () {
  *
  *=========================================================================*/
 void CEsmStatic::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmStatic::Destroy()");
-  m_pModel = NULL;
-  
-  CEsmRecord::Destroy();
- }
+	//DEFINE_FUNCTION("CEsmStatic::Destroy()");
+	m_pModel = NULL;
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmStatic::Destroy()
+ *      End of Class Method CEsmStatic::Destroy()
  *=========================================================================*/
 
 
@@ -79,21 +80,26 @@ void CEsmStatic::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmStatic::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmStatic* pStatic;
+	CEsmStatic* pStatic;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_STAT)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pStatic = (CEsmStatic *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_STAT)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_MODEL:
-	return StringCompare(GetModel(), pStatic->GetModel(), false);
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
- }
+	pStatic = (CEsmStatic *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_MODEL:
+			return StringCompare(GetModel(), pStatic->GetModel(), false);
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmStatic::CompareFields()
+ *      End of Class Method CEsmStatic::CompareFields()
  *=========================================================================*/
 
 
@@ -104,15 +110,15 @@ int CEsmStatic::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmStatic::Create (void) {
-  DEFINE_FUNCTION("CEsmStatic::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmStatic::Create (void) {
+	DEFINE_FUNCTION("CEsmStatic::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmStatic);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmStatic);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmStatic::Create()
+ *      End of Class Method CEsmStatic::Create()
  *=========================================================================*/
 
 
@@ -124,15 +130,14 @@ CEsmRecord* CEsmStatic::Create (void) {
  *
  *=========================================================================*/
 void CEsmStatic::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_MODL);
- }
+	AllocateSubRecord(MWESM_SUBREC_MODL);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmStatic::CreateNew()
+ *      End of Class Method CEsmStatic::CreateNew()
  *=========================================================================*/
 
 
@@ -144,19 +149,20 @@ void CEsmStatic::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmStatic::GetFieldString (const int FieldID) {
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmStatic::GetFieldString (const int FieldID) {
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-    case ESM_FIELD_MODEL:
-    	return GetModel();
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+	switch (FieldID) {
+		case ESM_FIELD_MODEL:
+			return GetModel();
+
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmStatic::GetFieldString()
+ *      End of Class Method TCHAR* CEsmStatic::GetFieldString()
  *=========================================================================*/
 
 
@@ -166,15 +172,15 @@ const TCHAR* CEsmStatic::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmStatic::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_MODL)) {
+		m_pModel = (CEsmSubNameFix *) pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_MODL))
-    m_pModel = (CEsmSubNameFix *) pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmStatic::OnAddSubRecord()
+ *      End of Class Event CEsmStatic::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -187,16 +193,16 @@ void CEsmStatic::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmStatic::SetFieldValue (const int FieldID, const TCHAR* pString) {
-
-  switch (FieldID) { 
-    case ESM_FIELD_MODEL:
-        SetModel(pString);
-	return (true);
-   };
+	switch (FieldID) {
+		case ESM_FIELD_MODEL:
+			SetModel(pString);
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmRecord::SetFieldValue(FieldID, pString);
- }
+	return CEsmRecord::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmStatic::SetFieldValue()
+ *      End of Class Method CEsmStatic::SetFieldValue()
  *=========================================================================*/

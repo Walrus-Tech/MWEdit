@@ -2,11 +2,11 @@
 
  *
 
- * File:	Scripttemplate.CPP
+ * File:    Scripttemplate.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 8, 2003
+ * Created On:  October 8, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "scripttemplate.h"
 
@@ -36,11 +36,11 @@
 
  *=========================================================================*/
 
-  DEFINE_FILE("ScriptTemplate.cpp");
+DEFINE_FILE("ScriptTemplate.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -59,16 +59,12 @@
  *=========================================================================*/
 
 CEsmScriptTemplate::CEsmScriptTemplate () : m_TemplateVars(0) {
-
-  //DEFINE_FUNCTION("CEsmScriptTemplate::CEsmScriptTemplate()");
-
-
-
- }
+	//DEFINE_FUNCTION("CEsmScriptTemplate::CEsmScriptTemplate()");
+}
 
 /*===========================================================================
 
- *		End of Class CEsmScriptTemplate Constructor
+ *      End of Class CEsmScriptTemplate Constructor
 
  *=========================================================================*/
 
@@ -87,22 +83,15 @@ CEsmScriptTemplate::CEsmScriptTemplate () : m_TemplateVars(0) {
  *=========================================================================*/
 
 void CEsmScriptTemplate::Destroy (void) {
-
-  //DEFINE_FUNCTION("CEsmScriptTemplate::Destroy()");
-
-  m_TemplateText.Empty();
-
-  m_Filename.Empty();
-
-
-
-  ClearTemplateVars();
-
- }
+	//DEFINE_FUNCTION("CEsmScriptTemplate::Destroy()");
+	m_TemplateText.Empty();
+	m_Filename.Empty();
+	ClearTemplateVars();
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::Destroy()
+ *      End of Class Method CEsmScriptTemplate::Destroy()
 
  *=========================================================================*/
 
@@ -127,26 +116,22 @@ void CEsmScriptTemplate::Destroy (void) {
  *=========================================================================*/
 
 bool CEsmScriptTemplate::AddTemplateVariable (const TCHAR* pVariable, const int Length) {
-
-  TCHAR Buffer[ESM_SCRTEMP_MAXVARSIZE+1];
-
-
+	TCHAR Buffer[ESM_SCRTEMP_MAXVARSIZE + 1];
 
 	/* Ignore invalid input */
 
-  if (pVariable == NULL || Length <= 2) return (false);
+	if (pVariable == NULL || Length <= 2) {
+		return (false);
+	}
 
-  strnncpy(Buffer, pVariable + 1, (Length-1 > ESM_SCRTEMP_MAXVARSIZE) ? ESM_SCRTEMP_MAXVARSIZE : Length-1);
-
-
-
-  return AddTemplateVar(Buffer);
-
- }
+	strnncpy(Buffer, pVariable + 1,
+	         (Length - 1 > ESM_SCRTEMP_MAXVARSIZE) ? ESM_SCRTEMP_MAXVARSIZE : Length - 1);
+	return AddTemplateVar(Buffer);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::AddTemplateVariable()
+ *      End of Class Method CEsmScriptTemplate::AddTemplateVariable()
 
  *=========================================================================*/
 
@@ -169,50 +154,28 @@ bool CEsmScriptTemplate::AddTemplateVariable (const TCHAR* pVariable, const int 
  *=========================================================================*/
 
 bool CEsmScriptTemplate::AddTemplateVar (const TCHAR* pVariable) {
-
-  DEFINE_FUNCTION("CEsmScriptTemplate::AddTemplateVar()");
-
-  esmscrtempvar_t* pTempVar;
-
-
-
+	DEFINE_FUNCTION("CEsmScriptTemplate::AddTemplateVar()");
+	esmscrtempvar_t *pTempVar;
 	/* See if the variable already exists */
+	pTempVar = FindTemplateVar(pVariable);
 
-  pTempVar = FindTemplateVar(pVariable);
-
-
-
-  if (pTempVar != NULL) {
-
-    pTempVar->Uses++;
-
-    return (true);
-
-   }
-
-
+	if (pTempVar != NULL) {
+		pTempVar->Uses++;
+		return (true);
+	}
 
 	/* Create a new template variable */
-
-  CreatePointer(pTempVar, esmscrtempvar_t);
-
-  pTempVar->SetName(pVariable);
-
-  pTempVar->Uses        = 1;
-
-  pTempVar->CsvColIndex = -1;
-
-  m_TemplateVars.Add(pTempVar);
-
-    
-
-  return (true);
-
- }
+	CreatePointer(pTempVar, esmscrtempvar_t);
+	pTempVar->SetName(pVariable);
+	pTempVar->Uses = 1;
+	pTempVar->CsvColIndex = -1;
+	m_TemplateVars.Add(pTempVar);
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::AddTemplateVar()
+ *      End of Class Method CEsmScriptTemplate::AddTemplateVar()
 
  *=========================================================================*/
 
@@ -235,32 +198,21 @@ bool CEsmScriptTemplate::AddTemplateVar (const TCHAR* pVariable) {
  *=========================================================================*/
 
 void CEsmScriptTemplate::ClearTemplateVars (void) {
+	DEFINE_FUNCTION("CEsmScriptTemplate::ClearTemplateVars()");
+	esmscrtempvar_t *pTempVar;
+	int Index;
 
-  DEFINE_FUNCTION("CEsmScriptTemplate::ClearTemplateVars()");
+	for (Index = 0; Index < m_TemplateVars.GetNumElements(); Index++) {
+		pTempVar = m_TemplateVars.GetAt(Index);
+		DestroyPointer(pTempVar);
+	}
 
-  esmscrtempvar_t* pTempVar;
-
-  int		   Index;
-
-
-
-  for (Index = 0; Index < m_TemplateVars.GetNumElements(); Index++) {
-
-    pTempVar = m_TemplateVars.GetAt(Index);
-
-    DestroyPointer(pTempVar);
-
-   }
-
-
-
-  m_TemplateVars.RemoveAll();
-
- }
+	m_TemplateVars.RemoveAll();
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::ClearTemplateVars()
+ *      End of Class Method CEsmScriptTemplate::ClearTemplateVars()
 
  *=========================================================================*/
 
@@ -287,184 +239,109 @@ void CEsmScriptTemplate::ClearTemplateVars (void) {
  *=========================================================================*/
 
 bool CEsmScriptTemplate::ConvertText (TCHAR* pOutBuffer, const int BufferSize, CCsvRow* pRow) {
-
-  TCHAR*		pParse;
-
-  TCHAR*		pLastVarStart;
-
-  CSString		CurrentVar;
-
-  CSString*		pCsvString;
-
-  bool			InQuote;
-
-  bool			EndVar;
-
-  int			Index;
-
-  int			OutSize;
-
-  int			LengthDiff;
-
-
+	TCHAR* pParse;
+	TCHAR* pLastVarStart;
+	CSString CurrentVar;
+	CSString* pCsvString;
+	bool InQuote;
+	bool EndVar;
+	int Index;
+	int OutSize;
+	int LengthDiff;
 
 	/* Ensure valid input */
 
-  if (pOutBuffer == NULL || BufferSize < m_TemplateText.GetLength()) {
-
-    ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid or short template script string received!"));
-
-    return (false);
-
-   }
-
-
+	if (pOutBuffer == NULL || BufferSize < m_TemplateText.GetLength()) {
+		ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid or short template script string received!"));
+		return (false);
+	}
 
 	/* Create the buffer copy */
-
-  OutSize = m_TemplateText.GetLength();
-
-  strnncpy(pOutBuffer, m_TemplateText, OutSize);
-
-  
-
+	OutSize = m_TemplateText.GetLength();
+	strnncpy(pOutBuffer, m_TemplateText, OutSize);
 	/* Initialize loop variables */
-
-  pParse	= pOutBuffer;
-
-  pLastVarStart = NULL;
-
-  InQuote	= false;
-
-  EndVar	= false;
-
-  Index		= 0;
-
-
+	pParse = pOutBuffer;
+	pLastVarStart = NULL;
+	InQuote = false;
+	EndVar = false;
+	Index = 0;
 
 	/* Parse the entire string */
 
-  while (Index < OutSize) {
+	while (Index < OutSize) {
+		switch (*pParse) {
+			/* Quote character indicating a string */
+			case '"':
+				InQuote = !InQuote;
+				break;
 
+			/* Carriage return, end-of-line */
 
+			case '\n':
+				InQuote = false;
 
-    switch (*pParse) {
+				if (pLastVarStart != NULL) {
+					EndVar = true;
+				}
 
-		/* Quote character indicating a string */
+				break;
 
-      case '"':
+			/* Start of a template variable */
 
-	InQuote = !InQuote;
+			case ESM_SCRTEMP_TEMPCHAR1:
+				pLastVarStart = pParse;
+				break;
 
-	break;
+			/* End of a template variable */
 
-		/* Carriage return, end-of-line */
-
-      case '\n':
-
-        InQuote = false;
-
-	if (pLastVarStart != NULL) EndVar = true;
-
-	break;
-
-		/* Start of a template variable */
-
-      case ESM_SCRTEMP_TEMPCHAR1:
-
-        pLastVarStart = pParse;
-
-	break;
-
-		/* End of a template variable */
-
-     case ESM_SCRTEMP_TEMPCHAR2:
-
-        EndVar = true;
-
-	break;
-
-     }
-
-
+			case ESM_SCRTEMP_TEMPCHAR2:
+				EndVar = true;
+				break;
+		}
 
 		/* Parse a template variable */
 
-    if (EndVar) {
+		if (EndVar) {
+			CurrentVar.Copy(pLastVarStart + 1, (int) (pParse - pLastVarStart - 1));
+			/* Get the variable value */
+			pCsvString = GetCsvString (CurrentVar, pRow);
 
-      CurrentVar.Copy(pLastVarStart + 1, (int) (pParse - pLastVarStart - 1));
+			if (pCsvString == NULL) {
+				return (false);
+			}
 
+			/* Ensure the buffer size is not exceeded */
+			LengthDiff = pCsvString->GetLength() - CurrentVar.GetLength() - 2;
 
+			if (OutSize + LengthDiff >= BufferSize) {
+				ErrorHandler.AddError(ERR_BADINPUT, _T("Exceeded the script template buffer size of %d!"),
+				                      BufferSize);
+				return (false);
+			}
 
-		/* Get the variable value */
+			/* Shift the right-hand portion of the string */
+			memmove((pParse + (1 + LengthDiff)*sizeof(TCHAR)), (void *)(pParse + sizeof(TCHAR)),
+			        (OutSize - Index)*sizeof(TCHAR));
+			/* Copy in the new variable value */
+			memcpy((void *)pLastVarStart, (const TCHAR *)*pCsvString, pCsvString->GetLength()*sizeof(TCHAR));
+			pParse += LengthDiff;
+			Index += LengthDiff;
+			OutSize += LengthDiff;
+			pLastVarStart = NULL;
+			EndVar = false;
+		}
 
-      pCsvString = GetCsvString (CurrentVar, pRow);
+		Index++;
+		pParse++;
+	}
 
-      if (pCsvString == NULL) return (false);
-
-
-
-		/* Ensure the buffer size is not exceeded */
-
-      LengthDiff = pCsvString->GetLength() - CurrentVar.GetLength() - 2;
-
-
-
-      if (OutSize + LengthDiff >= BufferSize) { 
-
-        ErrorHandler.AddError(ERR_BADINPUT, _T("Exceeded the script template buffer size of %d!"), BufferSize);
-
-        return (false);
-
-       }
-
-
-
-		/* Shift the right-hand portion of the string */
-
-      memmove((pParse + (1 + LengthDiff)*sizeof(TCHAR)), (void *)(pParse + sizeof(TCHAR)), (OutSize - Index)*sizeof(TCHAR));
-
-
-
-		/* Copy in the new variable value */
-
-      memcpy((void *)pLastVarStart, (const TCHAR *)*pCsvString, pCsvString->GetLength()*sizeof(TCHAR));
-
-
-
-      pParse  += LengthDiff;
-
-      Index   += LengthDiff;
-
-      OutSize += LengthDiff;
-
-
-
-      pLastVarStart = NULL;
-
-      EndVar = false;
-
-     }
-
-
-
-    Index++;
-
-    pParse++;
-
-   }
-
-
-
-  pOutBuffer[OutSize] = NULL_CHAR;
-
-  return (true);
-
- }
+	pOutBuffer[OutSize] = NULL_CHAR;
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::ConvertText()
+ *      End of Class Method CEsmScriptTemplate::ConvertText()
 
  *=========================================================================*/
 
@@ -488,35 +365,27 @@ bool CEsmScriptTemplate::ConvertText (TCHAR* pOutBuffer, const int BufferSize, C
 
  *=========================================================================*/
 
-esmscrtempvar_t* CEsmScriptTemplate::FindTemplateVar (const TCHAR* pVariable) {
-
-  esmscrtempvar_t* pTempVar;
-
-  int		   Index;
-
-
+esmscrtempvar_t *CEsmScriptTemplate::FindTemplateVar (const TCHAR* pVariable) {
+	esmscrtempvar_t *pTempVar;
+	int Index;
 
 	/* Check all currently defined variables in the array */
 
-  for (Index = 0; Index < m_TemplateVars.GetNumElements(); Index++) {
+	for (Index = 0; Index < m_TemplateVars.GetNumElements(); Index++) {
+		pTempVar = m_TemplateVars.GetAt(Index);
 
-    pTempVar = m_TemplateVars.GetAt(Index);
-
-    if (pTempVar->IsName(pVariable)) return (pTempVar);
-
-   }
-
-
+		if (pTempVar->IsName(pVariable)) {
+			return (pTempVar);
+		}
+	}
 
 	/* No match */
-
-  return (NULL);
-
- }
+	return (NULL);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::FindTemplateVar()
+ *      End of Class Method CEsmScriptTemplate::FindTemplateVar()
 
  *=========================================================================*/
 
@@ -540,63 +409,41 @@ esmscrtempvar_t* CEsmScriptTemplate::FindTemplateVar (const TCHAR* pVariable) {
 
  *=========================================================================*/
 
-CSString* CEsmScriptTemplate::GetCsvString (const TCHAR* pVarName, CCsvRow* pRow) {
-
-  //DEFINE_FUNCTION("CEsmScriptTemplate::GetCsvString()");
-
-  esmscrtempvar_t* pTempVar;
-
-  CSString*	   pCsvString;
-
-
+CSString *CEsmScriptTemplate::GetCsvString (const TCHAR* pVarName, CCsvRow* pRow) {
+	//DEFINE_FUNCTION("CEsmScriptTemplate::GetCsvString()");
+	esmscrtempvar_t *pTempVar;
+	CSString* pCsvString;
 
 	/* Special script name */
 
-  if ( _stricmp(pVarName, ESMSCRTEMP_CSV_SCRIPTNAME) == 0) return (&m_ScriptName);
+	if ( _stricmp(pVarName, ESMSCRTEMP_CSV_SCRIPTNAME) == 0) {
+		return (&m_ScriptName);
+	}
 
-  
+	/* Ensure a valid template variable */
+	pTempVar = FindTemplateVar(pVarName);
 
-		/* Ensure a valid template variable */
+	if (pTempVar == NULL) {
+		ErrorHandler.AddError(ERR_BADINPUT, _T("Failed to find the script template variable '%s'!"),
+		                      pVarName);
+		return (NULL);
+	}
 
-  pTempVar = FindTemplateVar(pVarName);
+	/* Ensure a valid variable value */
+	pCsvString = pRow->GetAt(pTempVar->CsvColIndex);
 
+	if (pCsvString == NULL || pCsvString->IsEmpty()) {
+		ErrorHandler.AddError(ERR_BADINPUT, _T("Empty or missing script template variable '%s'!"),
+		                      pVarName);
+		return (NULL);
+	}
 
-
-  if (pTempVar == NULL) {
-
-    ErrorHandler.AddError(ERR_BADINPUT, _T("Failed to find the script template variable '%s'!"), pVarName);
-
-    return (NULL);
-
-   }
-
-
-
-		/* Ensure a valid variable value */
-
-  pCsvString = pRow->GetAt(pTempVar->CsvColIndex);
-
-
-
-  if (pCsvString == NULL || pCsvString->IsEmpty()) {
-
-    ErrorHandler.AddError(ERR_BADINPUT, _T("Empty or missing script template variable '%s'!"), pVarName);
-
-    return (NULL);
-
-   }
-
-   
-
-
-
-  return (pCsvString);
-
- }
+	return (pCsvString);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::GetCsvString()
+ *      End of Class Method CEsmScriptTemplate::GetCsvString()
 
  *=========================================================================*/
 
@@ -618,63 +465,47 @@ CSString* CEsmScriptTemplate::GetCsvString (const TCHAR* pVarName, CCsvRow* pRow
 
  *=========================================================================*/
 
-bool CEsmScriptTemplate::Load (const TCHAR* pFilename) { 
-
-  CGenFile File;
-
-  bool	   Result;
-
-  long	   FileSize;
-
-
-
+bool CEsmScriptTemplate::Load (const TCHAR* pFilename) {
+	CGenFile File;
+	bool Result;
+	long FileSize;
 	/* Attempt to open the file for reading */
+	Result = File.Open(pFilename, _T("rb"));
 
-  Result = File.Open(pFilename, _T("rb"));
+	if (!Result) {
+		return (false);
+	}
 
-  if (!Result) return (false);
+	FileSize = File.GetFileSize();
 
-
-
-  FileSize = File.GetFileSize();
-
-  if (FileSize > ESM_SCRTEMP_MAXTEMPSIZE) FileSize = ESM_SCRTEMP_MAXTEMPSIZE;
-
-
+	if (FileSize > ESM_SCRTEMP_MAXTEMPSIZE) {
+		FileSize = ESM_SCRTEMP_MAXTEMPSIZE;
+	}
 
 	/* Clear the current contents */
-
-  Destroy();
-
-  m_Filename = pFilename;
-
-
-
+	Destroy();
+	m_Filename = pFilename;
 	/* Read the text all at once */
+	m_TemplateText.SetSize(FileSize);
+	Result = File.Read((TCHAR *)(const TCHAR *)m_TemplateText, FileSize);
 
-  m_TemplateText.SetSize(FileSize);
-
-  Result = File.Read((TCHAR *)(const TCHAR *)m_TemplateText, FileSize);
-
-  if (!Result) return (false);
-
-
+	if (!Result) {
+		return (false);
+	}
 
 	/* Parse the template text */
+	Result = ParseText();
 
-  Result = ParseText();
+	if (!Result) {
+		return (false);
+	}
 
-  if (!Result) return (false);
-
-
-
-  return (true);
-
- }
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::Load()
+ *      End of Class Method CEsmScriptTemplate::Load()
 
  *=========================================================================*/
 
@@ -699,122 +530,75 @@ bool CEsmScriptTemplate::Load (const TCHAR* pFilename) {
  *=========================================================================*/
 
 bool CEsmScriptTemplate::ParseText (void) {
-
-  const TCHAR*  pParse;
-
-  const TCHAR*  pLastVarStart;
-
-  bool		InQuote;
-
-  bool	        EndVar;
-
-  bool		Result;
-
-  int		VarLength;
-
-  int	        Index;
-
-
-
+	const TCHAR* pParse;
+	const TCHAR* pLastVarStart;
+	bool InQuote;
+	bool EndVar;
+	bool Result;
+	int VarLength;
+	int Index;
 	/* Delete any previous variable information */
-
-  ClearTemplateVars();
-
-
-
+	ClearTemplateVars();
 	/* Initialize loop variables */
-
-  pParse	= m_TemplateText;
-
-  pLastVarStart = NULL;
-
-  InQuote	= false;
-
-  EndVar	= false;
-
-  Index		= 0;
-
-
+	pParse = m_TemplateText;
+	pLastVarStart = NULL;
+	InQuote = false;
+	EndVar = false;
+	Index = 0;
 
 	/* Parse the entire string */
 
-  while (Index < m_TemplateText.GetLength()) {
+	while (Index < m_TemplateText.GetLength()) {
+		switch (*pParse) {
+			/* Quote character indicating a string */
+			case '"':
+				InQuote = !InQuote;
+				break;
 
+			/* Carriage return, end-of-line */
 
+			case '\n':
+				InQuote = false;
 
-    switch (*pParse) {
+				if (pLastVarStart != NULL) {
+					EndVar = true;
+				}
 
-		/* Quote character indicating a string */
+				break;
 
-      case '"':
+			/* Start of a template variable */
 
-	InQuote = !InQuote;
+			case ESM_SCRTEMP_TEMPCHAR1:
+				pLastVarStart = pParse;
+				VarLength = 0;
+				break;
 
-	break;
+			/* End of a template variable */
 
-		/* Carriage return, end-of-line */
-
-      case '\n':
-
-        InQuote = false;
-
-	if (pLastVarStart != NULL) EndVar  = true;
-
-	break;
-
-		/* Start of a template variable */
-
-      case ESM_SCRTEMP_TEMPCHAR1:
-
-        pLastVarStart = pParse;
-
-	VarLength     = 0;
-
-	break;
-
-		/* End of a template variable */
-
-     case ESM_SCRTEMP_TEMPCHAR2:
-
-        EndVar = true;
-
-	break;
-
-     }
-
-
+			case ESM_SCRTEMP_TEMPCHAR2:
+				EndVar = true;
+				break;
+		}
 
 		/* Parse a template variable */
 
-    if (EndVar) {
+		if (EndVar) {
+			EndVar = false;
+			Result = AddTemplateVariable(pLastVarStart, VarLength);
+			pLastVarStart = NULL;
+		}
 
-      EndVar = false;
+		Index++;
+		pParse++;
+		VarLength++;
+	}
 
-      Result = AddTemplateVariable(pLastVarStart, VarLength);
-
-      pLastVarStart = NULL;
-
-     }
-
-
-
-    Index++;
-
-    pParse++;
-
-    VarLength++;
-
-   }
-
-
-
-  return (true);
-
- }
+	return (true);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptTemplate::ParseText()
+ *      End of Class Method CEsmScriptTemplate::ParseText()
 
  *=========================================================================*/
 

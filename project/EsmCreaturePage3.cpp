@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcreaturepage3.CPP
+ * File:    Esmcreaturepage3.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	March 1, 2003
+ * Created On:  March 1, 2003
 
  *
 
@@ -16,15 +16,15 @@
 
  * 14 September 2003
 
- *	- Properly implemented the item count mechanism. The item count is
+ *  - Properly implemented the item count mechanism. The item count is
 
- *	  now held only in the actual list. The RecInfo->UserData member is
+ *    now held only in the actual list. The RecInfo->UserData member is
 
- *	  only updated just before a sort.
+ *    only updated just before a sort.
 
- *	- Added the ability to increment/decrement item counts using the
+ *  - Added the ability to increment/decrement item counts using the
 
- *	  +/- key.
+ *    +/- key.
 
  *
 
@@ -32,7 +32,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -62,23 +62,23 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  IMPLEMENT_DYNCREATE(CEsmCreaturePage3, CPropertyPage);
+IMPLEMENT_DYNCREATE(CEsmCreaturePage3, CPropertyPage);
 
-  DEFINE_FILE("EsmCreaturePage3.cpp");
+DEFINE_FILE("EsmCreaturePage3.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -97,38 +97,28 @@
  *=========================================================================*/
 
 int CALLBACK l_CreaItemSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
+	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*) lParam1;
+	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*) lParam2;
+	int SortType = lParamSort & 0xFFFF;
+	int Flags = lParamSort >> 16;
+	int Result;
 
-  esmrecinfo_t* pRecInfo1 = (esmrecinfo_t*) lParam1;
+	if (SortType == ESM_FIELD_CUSTOM) {
+		Result = pRecInfo1->UserData - pRecInfo2->UserData;
 
-  esmrecinfo_t* pRecInfo2 = (esmrecinfo_t*) lParam2;
+		if (Flags) {
+			return (-Result);
+		}
 
-  int	        SortType = lParamSort & 0xFFFF;
+		return (Result);
+	}
 
-  int	        Flags    = lParamSort >> 16;
-
-  int	        Result;
-
-
-
-  if (SortType == ESM_FIELD_CUSTOM) {
-
-    Result = pRecInfo1->UserData - pRecInfo2->UserData;
-
-    if (Flags) return (-Result);
-
-    return (Result);
-
-   }
-
-
-
-  return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
-
- }
+	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
+}
 
 /*===========================================================================
 
- *		End of Function CALLBACK l_CreaItemSortCallBack()
+ *      End of Function CALLBACK l_CreaItemSortCallBack()
 
  *=========================================================================*/
 
@@ -148,23 +138,23 @@ int CALLBACK l_CreaItemSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lPar
 
 static esmcoldata_t l_ItemColData[] = {
 
-	{  _T("Count"),		ESM_FIELD_CUSTOM,	LVCFMT_CENTER,	ESMLIST_WIDTH_COUNT+20,	ESMLIST_SUBITEM_COUNT, l_CreaItemSortCallBack }, 
+	{ _T("Count"), ESM_FIELD_CUSTOM, LVCFMT_CENTER, ESMLIST_WIDTH_COUNT + 20, ESMLIST_SUBITEM_COUNT, l_CreaItemSortCallBack },
 
-	{  _T("ID"),		ESM_FIELD_ID,		LVCFMT_LEFT,	ESMLIST_WIDTH_ID,	ESMLIST_SUBITEM_ID, }, 
+	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, },
 
-	{  _T("Mod"),		ESM_FIELD_CHANGED,	LVCFMT_CENTER,	ESMLIST_WIDTH_CHANGED,	ESMLIST_SUBITEM_CHANGED }, 
+	{ _T("Mod"), ESM_FIELD_CHANGED, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
 
-	{  _T("Name"),		ESM_FIELD_NAME,		LVCFMT_LEFT,	ESMLIST_WIDTH_NAME,	ESMLIST_SUBITEM_NAME }, 
+	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
 
-	{  _T("Type"),		ESM_FIELD_ITEMTYPE,	LVCFMT_LEFT,	ESMLIST_WIDTH_ITEMTYPE,	ESMLIST_SUBITEM_ITEMTYPE }, 
+	{ _T("Type"), ESM_FIELD_ITEMTYPE, LVCFMT_LEFT, ESMLIST_WIDTH_ITEMTYPE, ESMLIST_SUBITEM_ITEMTYPE },
 
-	{ NULL, 0, 0, 0 }	/* Must be last record */
+	{ NULL, 0, 0, 0 }   /* Must be last record */
 
- };
+};
 
 /*===========================================================================
 
- *		End of Item List Display Data Array
+ *      End of Item List Display Data Array
 
  *=========================================================================*/
 
@@ -184,23 +174,23 @@ static esmcoldata_t l_ItemColData[] = {
 
 BEGIN_MESSAGE_MAP(CEsmCreaturePage3, CPropertyPage)
 
-  //{{AFX_MSG_MAP(CEsmCreaturePage3)
+	//{{AFX_MSG_MAP(CEsmCreaturePage3)
 
-  ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
+	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
 
-  ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
+	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
 
-  ON_MESSAGE(ESMLIST_NOTIFY_ONSORT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordSort)
+	ON_MESSAGE(ESMLIST_NOTIFY_ONSORT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordSort)
 
-  ON_NOTIFY(LVN_ENDLABELEDIT, IDC_ITEMLIST, OnEndlabeleditItemlist)
+	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_ITEMLIST, OnEndlabeleditItemlist)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CEsmCreaturePage3 Message Map
+ *      End of CEsmCreaturePage3 Message Map
 
  *=========================================================================*/
 
@@ -219,20 +209,15 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CEsmCreaturePage3::CEsmCreaturePage3() : CPropertyPage(CEsmCreaturePage3::IDD) {
-
-  //{{AFX_DATA_INIT(CEsmCreaturePage3)
-
-  //}}AFX_DATA_INIT
-
-  m_pRecInfo    = NULL;
-
-  m_pDlgHandler = NULL;
-
- }
+	//{{AFX_DATA_INIT(CEsmCreaturePage3)
+	//}}AFX_DATA_INIT
+	m_pRecInfo = NULL;
+	m_pDlgHandler = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CEsmCreaturePage3 Constructor
+ *      End of Class CEsmCreaturePage3 Constructor
 
  *=========================================================================*/
 
@@ -251,12 +236,11 @@ CEsmCreaturePage3::CEsmCreaturePage3() : CPropertyPage(CEsmCreaturePage3::IDD) {
  *=========================================================================*/
 
 CEsmCreaturePage3::~CEsmCreaturePage3() {
-
- }
+}
 
 /*===========================================================================
 
- *		End of Class CEsmCreaturePage3 Destructor
+ *      End of Class CEsmCreaturePage3 Destructor
 
  *=========================================================================*/
 
@@ -275,22 +259,16 @@ CEsmCreaturePage3::~CEsmCreaturePage3() {
  *=========================================================================*/
 
 void CEsmCreaturePage3::DoDataExchange(CDataExchange* pDX) {
-
-  CPropertyPage::DoDataExchange(pDX);
-
-  //{{AFX_DATA_MAP(CEsmCreaturePage3)
-
-  DDX_Control(pDX, IDC_ENCUMLABEL, m_WeightLabel);
-
-  DDX_Control(pDX, IDC_ITEMLIST, m_ItemList);
-
-  //}}AFX_DATA_MAP
-
- }
+	CPropertyPage::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CEsmCreaturePage3)
+	DDX_Control(pDX, IDC_ENCUMLABEL, m_WeightLabel);
+	DDX_Control(pDX, IDC_ITEMLIST, m_ItemList);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmCreaturePage3::DoDataExchange()
+ *      End of Class Method CEsmCreaturePage3::DoDataExchange()
 
  *=========================================================================*/
 
@@ -309,56 +287,35 @@ void CEsmCreaturePage3::DoDataExchange(CDataExchange* pDX) {
  *=========================================================================*/
 
 void CEsmCreaturePage3::GetControlData (void) {
+	CEsmCreature* pCreature;
+	CEsmSubNPCO* pItemName;
+	esmrecinfo_t *pRecInfo;
+	CString Buffer;
+	int ListIndex;
 
-  CEsmCreature*   pCreature;
+	if (m_pRecInfo == NULL || m_pDlgHandler == NULL) {
+		return;
+	}
 
-  CEsmSubNPCO*    pItemName;
-
-  esmrecinfo_t*   pRecInfo;
-
-  CString	  Buffer;
-
-  int		  ListIndex;
-
-  
-
-  if (m_pRecInfo == NULL || m_pDlgHandler == NULL) return;
-
-  pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
-
-
-
+	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
 	/* Delete all current spell records */
-
-  pCreature->DeleteSubRecords(MWESM_SUBREC_NPCO);
-
-
+	pCreature->DeleteSubRecords(MWESM_SUBREC_NPCO);
 
 	/* Add all the new spell ID records */
 
-  for (ListIndex = 0; ListIndex < m_ItemList.GetItemCount(); ListIndex++) {
-
-    pRecInfo = m_ItemList.GetRecInfo(ListIndex);
-
-    pItemName = (CEsmSubNPCO *) pCreature->AllocateSubRecord(MWESM_SUBREC_NPCO);
-
-    pItemName->CreateNew();
-
-    pItemName->SetItem(pRecInfo->pRecord->GetID());
-
-    Buffer = m_ItemList.GetItemText(ListIndex, 0);
-
-    pItemName->SetCount(atoi(Buffer));
-
-   }
-
- 
-
- }
+	for (ListIndex = 0; ListIndex < m_ItemList.GetItemCount(); ListIndex++) {
+		pRecInfo = m_ItemList.GetRecInfo(ListIndex);
+		pItemName = (CEsmSubNPCO *) pCreature->AllocateSubRecord(MWESM_SUBREC_NPCO);
+		pItemName->CreateNew();
+		pItemName->SetItem(pRecInfo->pRecord->GetID());
+		Buffer = m_ItemList.GetItemText(ListIndex, 0);
+		pItemName->SetCount(atoi(Buffer));
+	}
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmCreaturePage3::GetControlData()
+ *      End of Class Method CEsmCreaturePage3::GetControlData()
 
  *=========================================================================*/
 
@@ -376,19 +333,15 @@ void CEsmCreaturePage3::GetControlData (void) {
 
  *=========================================================================*/
 
-CMWEditDoc* CEsmCreaturePage3::GetDocument (void) {
-
-  DEFINE_FUNCTION("CEsmCreaturePage3::GetDocument()");
-
-  ASSERT(m_pDlgHandler != NULL);
-
-  return m_pDlgHandler->GetDocument();
-
- }
+CMWEditDoc *CEsmCreaturePage3::GetDocument (void) {
+	DEFINE_FUNCTION("CEsmCreaturePage3::GetDocument()");
+	ASSERT(m_pDlgHandler != NULL);
+	return m_pDlgHandler->GetDocument();
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmCreaturePage3::GetDocument()
+ *      End of Class Method CEsmCreaturePage3::GetDocument()
 
  *=========================================================================*/
 
@@ -407,40 +360,32 @@ CMWEditDoc* CEsmCreaturePage3::GetDocument (void) {
  *=========================================================================*/
 
 void CEsmCreaturePage3::OnEndlabeleditItemlist(NMHDR* pNMHDR, LRESULT* pResult) {
+	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)pNMHDR;
+	CString Buffer;
+	int Count;
 
-  LV_DISPINFO*	pDispInfo = (LV_DISPINFO*)pNMHDR;
+	if (pDispInfo->item.pszText != NULL) {
+		Count = atoi(pDispInfo->item.pszText);
 
-  CString	Buffer;
+		if (Count < SHRT_MIN) {
+			Count = SHRT_MIN;
+		}
 
-  int		Count;
+		if (Count > SHRT_MAX) {
+			Count = SHRT_MAX;
+		}
 
+		Buffer.Format(_T("%d"), Count);
+		m_ItemList.SetItemText(pDispInfo->item.iItem, 0, Buffer);
+		UpdateTotalWeight();
+	}
 
-
-  if (pDispInfo->item.pszText != NULL) {
-
-    Count = atoi(pDispInfo->item.pszText);
-
-    if (Count < SHRT_MIN) Count = SHRT_MIN;
-
-    if (Count > SHRT_MAX) Count = SHRT_MAX;
-
-    Buffer.Format(_T("%d"), Count);
-
-    m_ItemList.SetItemText(pDispInfo->item.iItem, 0, Buffer);
-
-    UpdateTotalWeight();
-
-   }
-
-
-
-  *pResult = 0;
-
- }
+	*pResult = 0;
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmCreaturePage3::OnEndlabeleditItemlist()
+ *      End of Class Event CEsmCreaturePage3::OnEndlabeleditItemlist()
 
  *=========================================================================*/
 
@@ -459,34 +404,20 @@ void CEsmCreaturePage3::OnEndlabeleditItemlist(NMHDR* pNMHDR, LRESULT* pResult) 
  *=========================================================================*/
 
 BOOL CEsmCreaturePage3::OnInitDialog() {
-
-  CPropertyPage::OnInitDialog();
-
-
-
+	CPropertyPage::OnInitDialog();
 	/* Spell List */
-
-  m_ItemList.OnInitCtrl();
-
-  m_ItemList.SetDlgHandler(m_pDlgHandler);
-
-  m_ItemList.SetEnableDrag(true);
-
-  m_ItemList.SetAcceptDrag(true);
-
-  m_ItemList.SetWantKeys(true);
-
-  m_ItemList.InitObjectList(&l_ItemColData[0]);
-
-	
-
-  return (TRUE);
-
- }
+	m_ItemList.OnInitCtrl();
+	m_ItemList.SetDlgHandler(m_pDlgHandler);
+	m_ItemList.SetEnableDrag(true);
+	m_ItemList.SetAcceptDrag(true);
+	m_ItemList.SetWantKeys(true);
+	m_ItemList.InitObjectList(&l_ItemColData[0]);
+	return (TRUE);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmCreaturePage3::OnInitDialog()
+ *      End of Class Event CEsmCreaturePage3::OnInitDialog()
 
  *=========================================================================*/
 
@@ -505,68 +436,47 @@ BOOL CEsmCreaturePage3::OnInitDialog() {
  *=========================================================================*/
 
 LRESULT CEsmCreaturePage3::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
-
-  CString	Buffer;
-
-  CMWEditDoc*   pSourceDoc = (CMWEditDoc *) lParam;
-
-  esmrecinfo_t* pRecInfo = (esmrecinfo_t *) wParam;
-
-  int		ListIndex;
-
-  int		Count;
-
-
+	CString Buffer;
+	CMWEditDoc* pSourceDoc = (CMWEditDoc *) lParam;
+	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
+	int ListIndex;
+	int Count;
 
 	/* Ensure we only drag from the current document */
 
-  if (pSourceDoc != GetDocument()) return (0);
-
-  
+	if (pSourceDoc != GetDocument()) {
+		return (0);
+	}
 
 	/* Can only drag spells onto the list */
 
-  if (!IsESMRecordCarryable(pRecInfo->pRecord->GetType())) return (0);
+	if (!IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
+		return (0);
+	}
 
-  ListIndex = m_ItemList.FindRecord(pRecInfo);
-
-
+	ListIndex = m_ItemList.FindRecord(pRecInfo);
 
 	/* Add a new item to the npc */
 
-  if (ListIndex < 0) {
-
-    ListIndex = m_ItemList.AddItem(pRecInfo);
-
-    m_ItemList.SetItemText(ListIndex, 0, _T("1"));	/* Default 1 item */
-
-   }
-
+	if (ListIndex < 0) {
+		ListIndex = m_ItemList.AddItem(pRecInfo);
+		m_ItemList.SetItemText(ListIndex, 0, _T("1"));  /* Default 1 item */
+	}
 	/* Update an existing item in the npc */
+	else {
+		Buffer = m_ItemList.GetItemText(ListIndex, 0);
+		Count = atoi(Buffer);
+		Buffer.Format(_T("%d"), (Count < 0) ? --Count : ++Count);
+		m_ItemList.SetItemText(ListIndex, 0, Buffer);
+	}
 
-  else {
-
-    Buffer = m_ItemList.GetItemText(ListIndex, 0);
-
-    Count = atoi(Buffer);
-
-    Buffer.Format(_T("%d"), (Count < 0) ? --Count : ++Count);
-
-    m_ItemList.SetItemText(ListIndex, 0,  Buffer);
-
-   }
-
-
-
-  UpdateTotalWeight();
-
-  return (0);
-
- }
+	UpdateTotalWeight();
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmCreaturePage3::OnRecordDrop()
+ *      End of Class Event CEsmCreaturePage3::OnRecordDrop()
 
  *=========================================================================*/
 
@@ -585,82 +495,46 @@ LRESULT CEsmCreaturePage3::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
  *=========================================================================*/
 
 LRESULT CEsmCreaturePage3::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+	CString Buffer;
+	int ListIndex;
+	int AddCount;
+	int Count;
 
-  CString Buffer;
+	/* Delete all currently selected items */
 
-  int	  ListIndex;
+	if (lParam == VK_DELETE || lParam == VK_BACK) {
+		ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 
-  int	  AddCount;
+		while (ListIndex >= 0) {
+			m_ItemList.DeleteItem(ListIndex);
+			ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
+		}
 
-  int     Count;
-
-    
-
-	/* Delete all currently selected items */  
-
-  if (lParam == VK_DELETE || lParam == VK_BACK) {
-
-    ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
-
-
-
-    while (ListIndex >= 0) {
-
-      m_ItemList.DeleteItem(ListIndex);
-
-      ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
-
-     }
-
-  
-
-    UpdateTotalWeight();
-
-    return (1);
-
-   }
-
+		UpdateTotalWeight();
+		return (1);
+	}
 	/* Update all selected items by increment/decrementing their count */
+	else if (lParam == VK_ADD || lParam == VK_SUBTRACT) {
+		AddCount = (lParam == VK_ADD) ? 1 : -1;
+		ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 
-  else if (lParam == VK_ADD || lParam ==  VK_SUBTRACT) {
+		while (ListIndex >= 0) {
+			Buffer = m_ItemList.GetItemText(ListIndex, 0);
+			Count = atoi(Buffer);
+			Buffer.Format(_T("%d"), Count + AddCount);
+			m_ItemList.SetItemText(ListIndex, 0, Buffer);
+			ListIndex = m_ItemList.GetNextItem(ListIndex, LVNI_SELECTED);
+		}
 
-    AddCount = (lParam == VK_ADD) ? 1 : -1;
+		return (1);
+	}
 
-    ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
-
-
-
-    while (ListIndex >= 0) {
-
-      Buffer = m_ItemList.GetItemText(ListIndex, 0);
-
-      Count = atoi(Buffer);
-
-
-
-      Buffer.Format(_T("%d"), Count + AddCount);
-
-      m_ItemList.SetItemText(ListIndex, 0, Buffer);
-
-      ListIndex = m_ItemList.GetNextItem(ListIndex, LVNI_SELECTED);
-
-     }
-
-  
-
-    return (1);
-
-   }
-
-
-
-  return (0);
-
- }
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmCreaturePage3::OnRecordKey()
+ *      End of Class Event CEsmCreaturePage3::OnRecordKey()
 
  *=========================================================================*/
 
@@ -679,24 +553,15 @@ LRESULT CEsmCreaturePage3::OnRecordKey (LPARAM lParam, LPARAM wParam) {
  *=========================================================================*/
 
 LRESULT CEsmCreaturePage3::OnRecordSort (LPARAM lParam, LPARAM wParam) {
-
-  esmlistsortdata_t* pSortData = (esmlistsortdata_t *) lParam;
-
-
-
-  UpdateUserData();
-
-  m_ItemList.SortItems(l_CreaItemSortCallBack, pSortData->iField | (pSortData->Reverse << 16));
-
-
-
-  return (0);
-
- }
+	esmlistsortdata_t *pSortData = (esmlistsortdata_t *) lParam;
+	UpdateUserData();
+	m_ItemList.SortItems(l_CreaItemSortCallBack, pSortData->iField | (pSortData->Reverse << 16));
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmCreaturePage3::OnRecordSort()
+ *      End of Class Event CEsmCreaturePage3::OnRecordSort()
 
  *=========================================================================*/
 
@@ -715,16 +580,13 @@ LRESULT CEsmCreaturePage3::OnRecordSort (LPARAM lParam, LPARAM wParam) {
  *=========================================================================*/
 
 int CEsmCreaturePage3::OnUpdateItem (esmrecinfo_t* pRecInfo) {
-
-  m_ItemList.UpdateItem(pRecInfo);
-
-  return (0);
-
- }
+	m_ItemList.UpdateItem(pRecInfo);
+	return (0);
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmCreaturePage3::OnUpdateItem()
+ *      End of Class Event CEsmCreaturePage3::OnUpdateItem()
 
  *=========================================================================*/
 
@@ -743,66 +605,40 @@ int CEsmCreaturePage3::OnUpdateItem (esmrecinfo_t* pRecInfo) {
  *=========================================================================*/
 
 void CEsmCreaturePage3::SetControlData (void) {
+	CEsmCreature* pCreature;
+	CEsmSubNPCO* pItemName;
+	esmrecinfo_t *pRecInfo;
+	CString Buffer;
+	int ArrayIndex;
+	int ListIndex;
 
-  CEsmCreature*   pCreature;
+	if (m_pRecInfo == NULL || m_pDlgHandler == NULL) {
+		return;
+	}
 
-  CEsmSubNPCO*    pItemName;
+	m_ItemList.SetDlgHandler(m_pDlgHandler);
+	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
+	pItemName = (CEsmSubNPCO *) pCreature->FindFirst(MWESM_SUBREC_NPCO, ArrayIndex);
 
-  esmrecinfo_t*   pRecInfo;
+	while (pItemName != NULL) {
+		pRecInfo = GetDocument()->FindRecord(pItemName->GetItem());
 
-  CString	  Buffer;
+		if (pRecInfo != NULL) {
+			ListIndex = m_ItemList.AddItem(pRecInfo);
+			Buffer.Format(_T("%d"), pItemName->GetCount());
+			m_ItemList.SetItemText(ListIndex, 0, Buffer);
+		}
 
-  int		  ArrayIndex;
+		pItemName = (CEsmSubNPCO *) pCreature->FindNext(MWESM_SUBREC_NPCO, ArrayIndex);
+	}
 
-  int		  ListIndex;
-
-  
-
-  if (m_pRecInfo == NULL || m_pDlgHandler == NULL) return;
-
-  m_ItemList.SetDlgHandler(m_pDlgHandler);
-
-  pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
-
-
-
-  pItemName = (CEsmSubNPCO *) pCreature->FindFirst(MWESM_SUBREC_NPCO, ArrayIndex);
-
-
-
-  while (pItemName != NULL) {
-
-    pRecInfo = GetDocument()->FindRecord(pItemName->GetItem());
-
-
-
-    if (pRecInfo != NULL) {
-
-      ListIndex = m_ItemList.AddItem(pRecInfo);
-
-      Buffer.Format(_T("%d"), pItemName->GetCount());
-
-      m_ItemList.SetItemText(ListIndex, 0, Buffer);
-
-     }
-
-
-
-    pItemName = (CEsmSubNPCO *) pCreature->FindNext(MWESM_SUBREC_NPCO, ArrayIndex);
-
-   }
-
-
-
-  UpdateUserData();
-
-  UpdateTotalWeight();
-
- }
+	UpdateUserData();
+	UpdateTotalWeight();
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmCreaturePage3::SetControlData()
+ *      End of Class Method CEsmCreaturePage3::SetControlData()
 
  *=========================================================================*/
 
@@ -821,42 +657,26 @@ void CEsmCreaturePage3::SetControlData (void) {
  *=========================================================================*/
 
 void CEsmCreaturePage3::UpdateTotalWeight (void) {
+	esmrecinfo_t *pRecInfo;
+	CString Buffer;
+	int Index;
+	float Total = 0;
+	float Weight;
 
-  esmrecinfo_t* pRecInfo;
+	for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
+		pRecInfo = (esmrecinfo_t*) m_ItemList.GetItemData(Index);
+		Weight = (float)atof(pRecInfo->pRecord->GetFieldString(ESM_FIELD_WEIGHT));
+		Buffer = m_ItemList.GetItemText(Index, 0);
+		Total += Weight * abs(atoi(Buffer));
+	}
 
-  CString	Buffer;
-
-  int		Index;
-
-  float		Total = 0;
-
-  float		Weight;
-
-
-
-  for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
-
-    pRecInfo = (esmrecinfo_t*) m_ItemList.GetItemData(Index);
-
-    Weight = (float)atof(pRecInfo->pRecord->GetFieldString(ESM_FIELD_WEIGHT));
-
-    Buffer = m_ItemList.GetItemText(Index, 0);
-
-    Total +=  Weight * abs(atoi(Buffer));
-
-   }
-
-
-
-  Buffer.Format(_T("Encumberance: %.2f lbs"), Total);
-
-  m_WeightLabel.SetWindowText(Buffer);
-
- }
+	Buffer.Format(_T("Encumberance: %.2f lbs"), Total);
+	m_WeightLabel.SetWindowText(Buffer);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmCreaturePage3::UpdateTotalWeight()
+ *      End of Class Method CEsmCreaturePage3::UpdateTotalWeight()
 
  *=========================================================================*/
 
@@ -881,40 +701,24 @@ void CEsmCreaturePage3::UpdateTotalWeight (void) {
  *=========================================================================*/
 
 void CEsmCreaturePage3::UpdateUserData (void) {
-
-  CString	Buffer;
-
-  esmrecinfo_t* pRecInfo;
-
-  int		Index;
-
-  int		Count;
-
-
+	CString Buffer;
+	esmrecinfo_t *pRecInfo;
+	int Index;
+	int Count;
 
 	/* Loop over all items in the list */
 
-  for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
-
-    Buffer   = m_ItemList.GetItemText(Index, 0);
-
-    Count    = atoi(Buffer);
-
-    pRecInfo = (esmrecinfo_t *) m_ItemList.GetItemData(Index);
-
-    
-
-    pRecInfo->UserData = Count;    	
-
-   }
-
-
-
- }
+	for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
+		Buffer = m_ItemList.GetItemText(Index, 0);
+		Count = atoi(Buffer);
+		pRecInfo = (esmrecinfo_t *) m_ItemList.GetItemData(Index);
+		pRecInfo->UserData = Count;
+	}
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmCreaturePage3::UpdateUserData()
+ *      End of Class Method CEsmCreaturePage3::UpdateUserData()
 
  *=========================================================================*/
 

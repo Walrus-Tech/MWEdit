@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmsettingdlg.CPP
+ * File:    Esmsettingdlg.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 17, 2003
+ * Created On:  February 17, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,23 +42,23 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  IMPLEMENT_DYNCREATE(CEsmSettingDlg, CEsmRecDialog);
+IMPLEMENT_DYNCREATE(CEsmSettingDlg, CEsmRecDialog);
 
-  DEFINE_FILE("EsmSettingDlg.cpp");
+DEFINE_FILE("EsmSettingDlg.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -78,15 +78,15 @@
 
 BEGIN_MESSAGE_MAP(CEsmSettingDlg, CEsmRecDialog)
 
-  //{{AFX_MSG_MAP(CEsmSettingDlg)
+	//{{AFX_MSG_MAP(CEsmSettingDlg)
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CEsmSettingDlg Message Map
+ *      End of CEsmSettingDlg Message Map
 
  *=========================================================================*/
 
@@ -105,18 +105,14 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CEsmSettingDlg::CEsmSettingDlg() : CEsmRecDialog(CEsmSettingDlg::IDD) {
-
-  //{{AFX_DATA_INIT(CEsmSettingDlg)
-
-  //}}AFX_DATA_INIT
-
-  m_pSetting = NULL;
-
- }
+	//{{AFX_DATA_INIT(CEsmSettingDlg)
+	//}}AFX_DATA_INIT
+	m_pSetting = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CEsmSettingDlg Constructor
+ *      End of Class CEsmSettingDlg Constructor
 
  *=========================================================================*/
 
@@ -135,26 +131,17 @@ CEsmSettingDlg::CEsmSettingDlg() : CEsmRecDialog(CEsmSettingDlg::IDD) {
  *=========================================================================*/
 
 void CEsmSettingDlg::DoDataExchange(CDataExchange* pDX) {
-
-  CFormView::DoDataExchange(pDX);
-
-
-
-  //{{AFX_DATA_MAP(CEsmSettingDlg)
-
-  DDX_Control(pDX, IDC_VALUETEXT, m_ValueText);
-
-  DDX_Control(pDX, IDC_TYPELABEL, m_TypeLabel);
-
-  DDX_Control(pDX, IDC_IDTEXT,    m_IDText);
-
-  //}}AFX_DATA_MAP
-
- }
+	CFormView::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CEsmSettingDlg)
+	DDX_Control(pDX, IDC_VALUETEXT, m_ValueText);
+	DDX_Control(pDX, IDC_TYPELABEL, m_TypeLabel);
+	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSettingDlg::DoDataExchange()
+ *      End of Class Method CEsmSettingDlg::DoDataExchange()
 
  *=========================================================================*/
 
@@ -173,32 +160,23 @@ void CEsmSettingDlg::DoDataExchange(CDataExchange* pDX) {
  *=========================================================================*/
 
 void CEsmSettingDlg::GetControlData (void) {
-
-  DEFINE_FUNCTION("CEsmSettingDlg::GetControlData()");
-
-  CString	Buffer;  
-
-
-
+	DEFINE_FUNCTION("CEsmSettingDlg::GetControlData()");
+	CString Buffer;
 	/* Update the record pointer and data */
+	m_pSetting = (CEsmGameSetting *) GetRecInfo()->pRecord;
 
-  m_pSetting = (CEsmGameSetting *) GetRecInfo()->pRecord;
-
-  if (m_pSetting == NULL) return;
-
-
+	if (m_pSetting == NULL) {
+		return;
+	}
 
 	/* Item value */
-
-  m_ValueText.GetWindowText(Buffer);
-
-  m_pSetting->SetValue(Buffer);
-
- }
+	m_ValueText.GetWindowText(Buffer);
+	m_pSetting->SetValue(Buffer);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSettingDlg::GetControlData()
+ *      End of Class Method CEsmSettingDlg::GetControlData()
 
  *=========================================================================*/
 
@@ -217,24 +195,22 @@ void CEsmSettingDlg::GetControlData (void) {
  *=========================================================================*/
 
 bool CEsmSettingDlg::IsModified (void) {
-
-  if (m_Modified) return (true);
-
-
+	if (m_Modified) {
+		return (true);
+	}
 
 	/* Check edit controls for changes */
 
-  if (m_ValueText.GetModify()) m_Modified = true;
+	if (m_ValueText.GetModify()) {
+		m_Modified = true;
+	}
 
-  
-
-  return (m_Modified);
-
- }
+	return (m_Modified);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSettingDlg::IsModified()
+ *      End of Class Method CEsmSettingDlg::IsModified()
 
  *=========================================================================*/
 
@@ -253,38 +229,20 @@ bool CEsmSettingDlg::IsModified (void) {
  *=========================================================================*/
 
 void CEsmSettingDlg::OnInitialUpdate() {
-
-
-
-  CEsmRecDialog::OnInitialUpdate();
-
-  UpdateTitle(NULL);
-
-  
-
+	CEsmRecDialog::OnInitialUpdate();
+	UpdateTitle(NULL);
 	/* Initialize the armor record */
-
-  ASSERT(GetRecInfo() != NULL);
-
-  m_pSetting = (CEsmGameSetting *) GetRecInfo()->pRecord;
-
-
-
+	ASSERT(GetRecInfo() != NULL);
+	m_pSetting = (CEsmGameSetting *) GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
-
-  m_ValueText.SetLimitText(256);
-
-
-
+	m_ValueText.SetLimitText(256);
 	/* Update the UI data */
-
-  SetControlData();
-
- }
+	SetControlData();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmSettingDlg::OnInitialUpdate()
+ *      End of Class Event CEsmSettingDlg::OnInitialUpdate()
 
  *=========================================================================*/
 
@@ -303,40 +261,24 @@ void CEsmSettingDlg::OnInitialUpdate() {
  *=========================================================================*/
 
 void CEsmSettingDlg::SetControlData (void) {
-
-
-
 	/* Ignore if the current item is not valid */
-
-  if (m_pSetting == NULL) return;
-
-
+	if (m_pSetting == NULL) {
+		return;
+	}
 
 	/* Armor ID, update title as well */
-
-  m_IDText.SetWindowText(m_pSetting->GetID());
-
-  UpdateTitle(m_pSetting->GetID());
-
-
-
+	m_IDText.SetWindowText(m_pSetting->GetID());
+	UpdateTitle(m_pSetting->GetID());
 	/* Item strings and values */
-
-  m_ValueText.SetWindowText(m_pSetting->GetValue());
-
-  m_TypeLabel.SetWindowText(m_pSetting->GetTypeString());
-
-  m_IDText.SetModify(FALSE);
-
-  m_ValueText.SetModify(FALSE);
-
-
-
- }
+	m_ValueText.SetWindowText(m_pSetting->GetValue());
+	m_TypeLabel.SetWindowText(m_pSetting->GetTypeString());
+	m_IDText.SetModify(FALSE);
+	m_ValueText.SetModify(FALSE);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmSettingDlg::SetControlData()
+ *      End of Class Method CEsmSettingDlg::SetControlData()
 
  *=========================================================================*/
 

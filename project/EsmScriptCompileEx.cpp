@@ -1,15 +1,15 @@
 /*===========================================================================
  *
- * File:	Esmscriptcompileex.CPP
- * Author:	Dave Humphrey (uesp@sympatico.ca)
- * Created On:	August 21, 2006
+ * File:    Esmscriptcompileex.CPP
+ * Author:  Dave Humphrey (uesp@sympatico.ca)
+ * Created On:  August 21, 2006
  *
  * Functions related to extended script compiler for MWSE and other
  * non-standard script extenions.
  *
  *=========================================================================*/
 
- /* Include Files */
+/* Include Files */
 #include <stdafx.h>
 #include "esmscriptcompile.h"
 #include "ctype.h"
@@ -25,49 +25,52 @@
  *=========================================================================*/
 DEFINE_FILE("EsmScriptCompileEx.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
- /*===========================================================================
-  *
-  * Class CEsmScriptCompile Method - int ParseFuncArgX (void);
-  *
-  * Alternate to ParseFuncArg() for Extended Functions - parse only, does not output anything
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Class CEsmScriptCompile Method - int ParseFuncArgX (void);
+ *
+ * Alternate to ParseFuncArg() for Extended Functions - parse only, does not output anything
+ *
+ *=========================================================================*/
 int CEsmScriptCompile::ParseFuncArgX(void) {
-	int  Result = ESMSC_FUNCARG_OK;
+	int Result = ESMSC_FUNCARG_OK;
 	bool CheckMsgArgs = false;
-
 	m_TokenParsed = true;
 
 	/* Missing commas between last argument */
 	if (m_LastFuncArg == m_NumFuncArgs) {
 		m_NumFuncArgs++;
-		Result = AddMessage(ESMSCR_WARNING_NOCOMMA, _T("Missing ',' between arguments %d and %d!"), m_NumFuncArgs - 1, m_NumFuncArgs);
-		if (!Result) return (ESMSCR_RESULT_ERROR);
+		Result = AddMessage(ESMSCR_WARNING_NOCOMMA, _T("Missing ',' between arguments %d and %d!"),
+		                    m_NumFuncArgs - 1, m_NumFuncArgs);
+
+		if (!Result) {
+			return (ESMSCR_RESULT_ERROR);
+		}
 	}
 
-	if (m_pCurrentFunc == NULL || m_FuncArgIndex >= ESMSCR_MAX_FUNCARGS)
+	if (m_pCurrentFunc == NULL || m_FuncArgIndex >= ESMSCR_MAX_FUNCARGS) {
 		return (ESMSC_FUNCARG_ERROR);
+	}
 
 	/* Move counters to the next function argument */
 	m_LastFuncArg = m_NumFuncArgs;
 	m_FuncArgIndex++;
-
 	return (ESMSCR_RESULT_OK);
 }
+
 /*===========================================================================
- *		End of Class Method CEsmScriptCompile::ParseFuncArgX()
+ *      End of Class Method CEsmScriptCompile::ParseFuncArgX()
  *=========================================================================*/
 
 
 int CEsmScriptCompile::PushFuncOp(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::PushFuncOp()");
-
 	m_refObject = m_LastToken;
 	return 0;
 }
@@ -75,7 +78,6 @@ int CEsmScriptCompile::PushFuncOp(void) {
 
 int CEsmScriptCompile::OutputFuncOp(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFuncOp()");
-
 	WriteFuncOp((const TCHAR*)m_LastToken);
 	return 0;
 }
@@ -84,8 +86,10 @@ int CEsmScriptCompile::OutputFuncOp(void) {
 int CEsmScriptCompile::OutputStoredFuncOp(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFuncOp()");
 
-	if (!m_refObject.IsEmpty())
+	if (!m_refObject.IsEmpty()) {
 		WriteFuncOp((const TCHAR*)m_refObject);
+	}
+
 	m_refObject = "";
 	return 0;
 }
@@ -96,14 +100,21 @@ int CEsmScriptCompile::WriteFuncOp(const TCHAR* ident) {
 	char LocalType;
 	short LocalIndex = FindLocalVarIndex(ident, LocalType);
 
-	if (LocalIndex >= 0)
-	{
-		struct { short pushb; short type; short pushs; short index; short getlocal; short setref; }
-		setrefcmd = { MWESM_OPCODE_PUSHS,LocalIndex - 1,MWESM_OPCODE_PUSHS,LocalType,MWESM_OPCODE_GETLOCAL,MWESM_OPCODE_SETREF };
+	if (LocalIndex >= 0) {
+		struct {
+			short pushb;
+			short type;
+			short pushs;
+			short index;
+			short getlocal;
+			short setref;
+		}
+
+		setrefcmd = { MWESM_OPCODE_PUSHS, LocalIndex - 1, MWESM_OPCODE_PUSHS, LocalType, MWESM_OPCODE_GETLOCAL, MWESM_OPCODE_SETREF };
 		AddScriptData(&setrefcmd, sizeof(setrefcmd));
-	}
-	else
+	} else {
 		InsertScriptDataRef(ident, _tcslen(ident));
+	}
 
 	return 0;
 }
@@ -116,7 +127,7 @@ int CEsmScriptCompile::WriteFuncOp(const TCHAR* ident) {
  *=========================================================================*/
 int CEsmScriptCompile::PushLetLocal(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::PushLetLocal()");
-	esmscrstack_t* param = 0;
+	esmscrstack_t *param = 0;
 	CreatePointer(param, esmscrstack_t);
 	param->TokenID = ESMSCR_FUNC_LOCALVAR;
 	strnncpy(param->Token, (const TCHAR*)m_Token, sizeof(param->Token) / sizeof(param->Token[0]) - 1);
@@ -125,17 +136,22 @@ int CEsmScriptCompile::PushLetLocal(void) {
 }
 
 int CEsmScriptCompile::OutputLetEnd(void) {
-	short  LocalIndex;
+	short LocalIndex;
 	char LocalType;
 
-	while (!m_LetQueue.empty())
-	{
-		esmscrstack_t* param = m_LetQueue.front();
-
+	while (!m_LetQueue.empty()) {
+		esmscrstack_t *param = m_LetQueue.front();
 		const TCHAR* token = param->Token;
 		LocalIndex = FindLocalVarIndex(token, LocalType);
-		struct { short pushb; short index; short pushs; short type; short setlocal; }
-		getlocalcmd = { MWESM_OPCODE_PUSHS,LocalIndex - 1,MWESM_OPCODE_PUSHS,LocalType,MWESM_OPCODE_SETLOCAL };
+		struct {
+			short pushb;
+			short index;
+			short pushs;
+			short type;
+			short setlocal;
+		}
+
+		getlocalcmd = { MWESM_OPCODE_PUSHS, LocalIndex - 1, MWESM_OPCODE_PUSHS, LocalType, MWESM_OPCODE_SETLOCAL };
 		AddScriptData(&getlocalcmd, sizeof(getlocalcmd));
 		m_LetQueue.pop();
 		DestroyPointer(param);
@@ -143,40 +159,50 @@ int CEsmScriptCompile::OutputLetEnd(void) {
 
 	return 0;
 }
+
 /*===========================================================================
- *		End of Output Let Blocks
+ *      End of Output Let Blocks
  *=========================================================================*/
 
- /*===========================================================================
-  *
-  * Begin Output XIf Blocks
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Output XIf Blocks
+ *
+ *=========================================================================*/
 int CEsmScriptCompile::OutputXIf(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputXIf()");
-	esmscrifblock_t* pos = 0;
+	esmscrifblock_t *pos = 0;
 	CreatePointer(pos, esmscrifblock_t);
 	pos->IfStartPos = m_ScriptDataSize + 16;
 	m_XIfStack.push(pos);
-
 	char LocalType;
-	short  LocalIndex = FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
+	short LocalIndex = FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
 	struct {
-		short pushb; short type; short pushs; short index;
-		short getlocal; short pops; short size; short jz; short pos;
+		short pushb;
+		short type;
+		short pushs;
+		short index;
+		short getlocal;
+		short pops;
+		short size;
+		short jz;
+		short pos;
 	}
-	testcmd = { MWESM_OPCODE_PUSHS,LocalIndex - 1,MWESM_OPCODE_PUSHS,LocalType,
-		MWESM_OPCODE_GETLOCAL,MWESM_OPCODE_POP,4,MWESM_OPCODE_JUMPSHORTZERO,0 };
-	AddScriptData(&testcmd, sizeof(testcmd));
 
+	testcmd = { MWESM_OPCODE_PUSHS, LocalIndex - 1, MWESM_OPCODE_PUSHS, LocalType,
+	            MWESM_OPCODE_GETLOCAL, MWESM_OPCODE_POP, 4, MWESM_OPCODE_JUMPSHORTZERO, 0
+	          };
+	AddScriptData(&testcmd, sizeof(testcmd));
 	return 0;
 }
 
 int CEsmScriptCompile::OutputXElse(void) {
-	if (m_XIfStack.size() > 0)
-	{
-		struct { short jmp; short pos; } elsecmd = { MWESM_OPCODE_JUMPSHORT,0 };
-		esmscrifblock_t* pos = m_XIfStack.top();
+	if (m_XIfStack.size() > 0) {
+		struct {
+			short jmp;
+			short pos;
+		} elsecmd = { MWESM_OPCODE_JUMPSHORT, 0 };
+		esmscrifblock_t *pos = m_XIfStack.top();
 		*(short*)(&m_ScriptData[pos->IfStartPos]) = m_ScriptDataSize + 4;
 		pos->IfStartPos = m_ScriptDataSize + 2;
 		AddScriptData(&elsecmd, sizeof(elsecmd));
@@ -191,9 +217,8 @@ int CEsmScriptCompile::OutputXElseIf(void) {
 }
 
 int CEsmScriptCompile::OutputXEndIf(void) {
-	if (m_XIfStack.size() > 0)
-	{
-		esmscrifblock_t* pos = m_XIfStack.top();
+	if (m_XIfStack.size() > 0) {
+		esmscrifblock_t *pos = m_XIfStack.top();
 		m_XIfStack.pop();
 		*(short*)(&m_ScriptData[pos->IfStartPos]) = m_ScriptDataSize;
 		DestroyPointer(pos);
@@ -201,48 +226,49 @@ int CEsmScriptCompile::OutputXEndIf(void) {
 
 	return 0;
 }
+
 /*===========================================================================
- *		End of Output XIf Blocks
+ *      End of Output XIf Blocks
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Begin Output SE Function Arguments
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Output SE Function Arguments
+ *
+ *=========================================================================*/
 
-int CEsmScriptCompile::PushFuncXArgLocal()
-{
+int CEsmScriptCompile::PushFuncXArgLocal() {
 	return PushFuncXArg(ESMSCR_FUNC_LOCALVAR, (const TCHAR*)m_Token);
 }
 
-int CEsmScriptCompile::OutputFuncXArgLocal(const TCHAR* name)
-{
+int CEsmScriptCompile::OutputFuncXArgLocal(const TCHAR* name) {
 	short LocalIndex;
-	char  LocalType;
-
+	char LocalType;
 	LocalIndex = FindLocalVarIndex(name, LocalType);
-	struct { short pushb; short type; short pushs; short index; short getlocal; }
-	pushlocalcmd = { MWESM_OPCODE_PUSHS,LocalIndex - 1,MWESM_OPCODE_PUSHS,LocalType,MWESM_OPCODE_GETLOCAL };
+	struct {
+		short pushb;
+		short type;
+		short pushs;
+		short index;
+		short getlocal;
+	}
 
+	pushlocalcmd = { MWESM_OPCODE_PUSHS, LocalIndex - 1, MWESM_OPCODE_PUSHS, LocalType, MWESM_OPCODE_GETLOCAL };
 	AddScriptData(&pushlocalcmd, sizeof(pushlocalcmd));
 	m_LastFuncArgSymbol = true;
-
 	return 0;
 }
 
-int CEsmScriptCompile::PushFuncXArgNum(void)
-{
+int CEsmScriptCompile::PushFuncXArgNum(void) {
 	// TODO checks
 	auto v = m_pCurrentFunc->Var[m_FuncArgIndex];
 	int FuncArgFlag = static_cast<int>(v);
 
 	if ((FuncArgFlag & ESMSCR_FUNC_FLOAT) != 0) {
 		FuncArgFlag = ESMSCR_FUNC_FLOAT;
-	}
-	else if ((FuncArgFlag & ESMSCR_FUNC_LONG) != 0
-		|| (FuncArgFlag & ESMSCR_FUNC_SHORT) != 0) {
+	} else if ((FuncArgFlag & ESMSCR_FUNC_LONG) != 0
+	           || (FuncArgFlag & ESMSCR_FUNC_SHORT) != 0) {
 		FuncArgFlag = ESMSCR_FUNC_LONG;
 	}
 
@@ -258,73 +284,72 @@ int CEsmScriptCompile::PushFuncXArgNum(void)
 
 	PushFuncXArg(FuncArgFlag, (const TCHAR*)m_Token);
 	m_LastFuncArgSymbol = false;
-
 	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncXArgNum(int type, const TCHAR* token)
-{
+int CEsmScriptCompile::OutputFuncXArgNum(int type, const TCHAR* token) {
 #pragma pack(1)
-	struct { short pushcode; union { float fval; long lval; } value; } pushcmd;
+	struct {
+		short pushcode;
+		union {
+			float fval;
+			long lval;
+		} value;
+	} pushcmd;
+
 #pragma pack()
 	pushcmd.pushcode = MWESM_OPCODE_PUSH;
 
-	if (type & ESMSCR_FUNC_FLOAT)
+	if (type & ESMSCR_FUNC_FLOAT) {
 		pushcmd.value.fval = (float)atof(token);
-	else
+	} else {
 		pushcmd.value.lval = atol(token);
+	}
 
 	AddScriptData(&pushcmd, sizeof(pushcmd));
 	return 0;
 }
 
-int CEsmScriptCompile::PushFuncXArgString(void)
-{
+int CEsmScriptCompile::PushFuncXArgString(void) {
 	auto left = m_Token.Left(m_Token.GetLength() - 1);
 	auto right = left.Right(left.GetLength() - 1);
 	return PushFuncXArg(ESMSCR_FUNC_STRING, (const TCHAR*)right);
 }
 
-char* CEsmScriptCompile::OutputFuncXArgStringCat(char* buf, const void* newdata, int newdatalen)
-{
+char *CEsmScriptCompile::OutputFuncXArgStringCat(char* buf, const void* newdata, int newdatalen) {
 	memcpy(buf, newdata, newdatalen);
 	return buf + newdatalen;
 }
 
-int CEsmScriptCompile::OutputFuncXArgString(const TCHAR* token)
-{
+int CEsmScriptCompile::OutputFuncXArgString(const TCHAR* token) {
 	short opcode = MWESM_OPCODE_PUSHS;
 	// TODO checks
 	char StringLen = static_cast<char>(strlen(token));
 	char BStringLen = StringLen % 2 ? StringLen : StringLen + 1;
 	short script_pos = m_ScriptDataSize + 8;
-	char* pushstring = new char[BStringLen + 10];
-
-	char* current = OutputFuncXArgStringCat(pushstring, &opcode, sizeof(opcode));
+	char *pushstring = new char[BStringLen + 10];
+	char *current = OutputFuncXArgStringCat(pushstring, &opcode, sizeof(opcode));
 	current = OutputFuncXArgStringCat(current, &script_pos, sizeof(script_pos));
-
 	opcode = MWESM_OPCODE_JUMPSHORT;
 	current = OutputFuncXArgStringCat(current, &opcode, sizeof(opcode));
 	script_pos += BStringLen + 1;
 	current = OutputFuncXArgStringCat(current, &script_pos, sizeof(script_pos));
-
 	current = OutputFuncXArgStringCat(current, &StringLen, sizeof(StringLen));
 	current = OutputFuncXArgStringCat(current, token, StringLen);
-	if (BStringLen > StringLen) //TODO: use a messagebox so fixupscript still works
-	{
+
+	if (BStringLen > StringLen) { //TODO: use a messagebox so fixupscript still works
 		char padding = 0;
 		current = OutputFuncXArgStringCat(current, &padding, sizeof(padding));
 	}
-	AddScriptData(pushstring, current - pushstring);
 
+	AddScriptData(pushstring, current - pushstring);
 	delete[]pushstring;
 	return 0;
 }
 
-int CEsmScriptCompile::PushFuncXArg(int type, const TCHAR* token)
-{
+int CEsmScriptCompile::PushFuncXArg(int type, const TCHAR* token) {
 	DEFINE_FUNCTION("CEsmScriptCompile::PushFuncXArg()");
-	esmscrstack_t* param = 0;
+	esmscrstack_t *param = 0;
 	CreatePointer(param, esmscrstack_t);
 	param->TokenID = type;
 	strnncpy(param->Token, token, sizeof(param->Token) / sizeof(param->Token[0]) - 1);
@@ -332,24 +357,32 @@ int CEsmScriptCompile::PushFuncXArg(int type, const TCHAR* token)
 	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncXBlock(void)
-{
+int CEsmScriptCompile::OutputFuncXBlock(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFuncXBlock()");
-	esmscrstack_t* param = 0;
-	while (m_ArgXStack.size())
-	{
+	esmscrstack_t *param = 0;
+
+	while (m_ArgXStack.size()) {
 		param = m_ArgXStack.top();
 		m_ArgXStack.pop();
 		int type = param->TokenID;
 		const TCHAR* token = param->Token;
-		switch (type)
-		{
-		case ESMSCR_FUNC_LOCALVAR: OutputFuncXArgLocal(token); break;
-		case ESMSCR_FUNC_FLOAT:
-		case ESMSCR_FUNC_LONG:
-		case ESMSCR_FUNC_SHORT: OutputFuncXArgNum(type, token); break;
-		case ESMSCR_FUNC_STRING: OutputFuncXArgString(token); break;
+
+		switch (type) {
+			case ESMSCR_FUNC_LOCALVAR:
+				OutputFuncXArgLocal(token);
+				break;
+
+			case ESMSCR_FUNC_FLOAT:
+			case ESMSCR_FUNC_LONG:
+			case ESMSCR_FUNC_SHORT:
+				OutputFuncXArgNum(type, token);
+				break;
+
+			case ESMSCR_FUNC_STRING:
+				OutputFuncXArgString(token);
+				break;
 		}
+
 		DestroyPointer(param);
 	}
 
@@ -357,54 +390,62 @@ int CEsmScriptCompile::OutputFuncXBlock(void)
 	//TODO: check for object-> and replicate that code here or call setref if var->
 	OutputStoredFuncOp();
 	AddScriptData(&(m_pCurrentFunc->OpCode), 2);
-
 	m_LastMsgBoxArgs = -1;
 	m_LastMsgBoxBut = -1;
 	m_NumMsgArgs = 0;
 	m_NumMsgButtons = 0;
 	m_FuncOptCount = 0;
 	m_LastFuncArgSymbol = false;
-
 	return 0;
 }
 
 /*===========================================================================
- *		End of Output SE Function Arguments
+ *      End of Output SE Function Arguments
  *=========================================================================*/
 
 
- /*===========================================================================
-  *
-  * Begin Output XIf Blocks
-  *
-  *=========================================================================*/
+/*===========================================================================
+ *
+ * Begin Output XIf Blocks
+ *
+ *=========================================================================*/
 int CEsmScriptCompile::OutputXWhile(void) {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputXWhile()");
-	esmscrifblock_t* pos = 0;
+	esmscrifblock_t *pos = 0;
 	CreatePointer(pos, esmscrifblock_t);
 	pos->IfStartPos = m_ScriptDataSize;
 	m_XIfStack.push(pos);
-
 	char LocalType;
-	short  LocalIndex = FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
+	short LocalIndex = FindLocalVarIndex((const TCHAR*)m_Token, LocalType);
 	struct {
-		short pushb; short type; short pushs; short index;
-		short getlocal; short pops; short size; short jz; short pos;
+		short pushb;
+		short type;
+		short pushs;
+		short index;
+		short getlocal;
+		short pops;
+		short size;
+		short jz;
+		short pos;
 	}
-	testcmd = { MWESM_OPCODE_PUSHS,LocalIndex - 1,MWESM_OPCODE_PUSHS,LocalType,
-		MWESM_OPCODE_GETLOCAL,MWESM_OPCODE_POP,4,MWESM_OPCODE_JUMPSHORTZERO,0 };
-	AddScriptData(&testcmd, sizeof(testcmd));
 
+	testcmd = { MWESM_OPCODE_PUSHS, LocalIndex - 1, MWESM_OPCODE_PUSHS, LocalType,
+	            MWESM_OPCODE_GETLOCAL, MWESM_OPCODE_POP, 4, MWESM_OPCODE_JUMPSHORTZERO, 0
+	          };
+	AddScriptData(&testcmd, sizeof(testcmd));
 	return 0;
 }
 
 int CEsmScriptCompile::OutputXEndWhile(void) {
-	if (m_XIfStack.size() > 0)
-	{
-		esmscrifblock_t* pos = m_XIfStack.top();
+	if (m_XIfStack.size() > 0) {
+		esmscrifblock_t *pos = m_XIfStack.top();
 		m_XIfStack.pop();
 		// TODO checks
-		struct { short jmp; short pos; }
+		struct {
+			short jmp;
+			short pos;
+		}
+
 		endwhilecmd = { MWESM_OPCODE_JUMPSHORT, static_cast<short>(pos->IfStartPos) };
 		AddScriptData(&endwhilecmd, sizeof(endwhilecmd));
 		*(short*)(&m_ScriptData[pos->IfStartPos + 16]) = m_ScriptDataSize;
@@ -415,7 +456,7 @@ int CEsmScriptCompile::OutputXEndWhile(void) {
 }
 
 /*===========================================================================
- *		End of Output XWhile Blocks
+ *      End of Output XWhile Blocks
  *=========================================================================*/
 
 #endif /* MWEDIT_SCRIPT_MWSE */

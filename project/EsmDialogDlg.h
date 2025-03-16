@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmdialogdlg.H
+ * File:    Esmdialogdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,35 +62,35 @@
 
 
 
-	/* Used for resizing the window and controls */
+/* Used for resizing the window and controls */
 
-  #define MWESM_DLGFORM_MINWIDTH     400
+#define MWESM_DLGFORM_MINWIDTH     400
 
-  #define MWESM_DLGFORM_MINHEIGHT    120
+#define MWESM_DLGFORM_MINHEIGHT    120
 
-  #define MWESM_DLGFORM_HEIGHTMARGIN 80
+#define MWESM_DLGFORM_HEIGHTMARGIN 80
 
-  #define MWESM_DLGFORM_WIDTHMARGIN  20
+#define MWESM_DLGFORM_WIDTHMARGIN  20
 
-  #define MWESM_DLGFORM_BUTTONWIDTH  60
+#define MWESM_DLGFORM_BUTTONWIDTH  60
 
 
 
-	/* Identifies the type of new info records */
+/* Identifies the type of new info records */
 
-  #define MWESM_DLGFORM_CLEANED		2
+#define MWESM_DLGFORM_CLEANED     2
 
-  #define MWESM_DLGFORM_OLDINFO		3
+#define MWESM_DLGFORM_OLDINFO     3
 
-  #define MWESM_DLGFORM_ACTIVEINFO	4
+#define MWESM_DLGFORM_ACTIVEINFO  4
 
-  #define MWESM_DLGFORM_NEWINFO		5
+#define MWESM_DLGFORM_NEWINFO     5
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -110,25 +110,25 @@
 
 
 
-	/* Holds information on modified info records */
+/* Holds information on modified info records */
 
-  typedef struct {
+typedef struct {
 
-	esmrecinfo_t*	pNewRecInfo;
+	esmrecinfo_t *pNewRecInfo;
 
-	esmrecinfo_t*	pRecInfo;
+	esmrecinfo_t *pRecInfo;
 
-   } esminfodata_t;
+} esminfodata_t;
 
 
 
-  typedef TPtrArray<esminfodata_t> CEsmInfoDataArray;     
+typedef TPtrArray<esminfodata_t> CEsmInfoDataArray;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -148,183 +148,183 @@
 
 class CEsmDialogDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmDialogDlg);
+	DECLARE_DYNCREATE(CEsmDialogDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmDialogue*		m_pDialog;	/* Current dialog record we are editting */
+	CEsmDialogue *m_pDialog;  /* Current dialog record we are editting */
 
-  CEsmInfoDataArray	m_NewInfos;	/* List of new and modified info records */
+	CEsmInfoDataArray m_NewInfos; /* List of new and modified info records */
 
-  CEsmInfo*		m_pStartInfo;	/* Head of the info linked list */
+	CEsmInfo *m_pStartInfo;   /* Head of the info linked list */
 
-  esmrecinfo_t*		m_pNpcFilter;	/* Current NPC that we are filtering for */
-
-
+	esmrecinfo_t *m_pNpcFilter;   /* Current NPC that we are filtering for */
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Clear the new info array */
 
-  void ClearNewInfos (void);
+	void ClearNewInfos (void);
 
 
 
 	/* Copy all INFOs into the record */
 
-  void CopyAllInfos (const bool Rename = false);
+	void CopyAllInfos (const bool Rename = false);
 
 
 
 	/* Checks if the info record can be cleaned or not */
 
-  bool CanCleanInfo (esmrecinfo_t* pRecInfo);
+	bool CanCleanInfo (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Ensure that the given list index has a new/modified info */
 
-  esmrecinfo_t* CreateNewInfo (const int ListIndex);
+	esmrecinfo_t *CreateNewInfo (const int ListIndex);
 
-  esmrecinfo_t* CreateNewInfo (esmrecinfo_t* pRecInfo, const bool MustBeNew = false);
+	esmrecinfo_t *CreateNewInfo (esmrecinfo_t* pRecInfo, const bool MustBeNew = false);
 
 
 
 	/* Attempt to find a new INFO record in the array */
 
-  esminfodata_t* FindNewInfo (const TCHAR* pID);
+	esminfodata_t *FindNewInfo (const TCHAR* pID);
 
-  esminfodata_t* FindNewInfo (esmrecinfo_t* pRecInfo);
+	esminfodata_t *FindNewInfo (esmrecinfo_t* pRecInfo);
 
-  esmrecinfo_t*  GetRecInfo  (const TCHAR* pID, const TCHAR* pDialogID = NULL);
+	esmrecinfo_t *GetRecInfo (const TCHAR* pID, const TCHAR* pDialogID = NULL);
 
 
 
 	/* Helper get/set methods */
 
-  void FillInfoList   (void);
+	void FillInfoList (void);
 
-  void UpdateInfoList (const bool FirstUpdate = false);
+	void UpdateInfoList (const bool FirstUpdate = false);
 
-  bool CheckInfoLinks (esmrecinfo_t* pStartInfoRec, const bool FirstUpdate, CEsmNpc* pFilterNpc);
+	bool CheckInfoLinks (esmrecinfo_t* pStartInfoRec, const bool FirstUpdate, CEsmNpc* pFilterNpc);
 
- 
+
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Removes the given info from the linked info list */
 
-  void RemoveInfo (esmrecinfo_t* pRecInfo);
+	void RemoveInfo (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmDialogDlg();
+	CEsmDialogDlg();
 
-  virtual ~CEsmDialogDlg();
+	virtual ~CEsmDialogDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmDialogDlg)
+	//{{AFX_DATA(CEsmDialogDlg)
 
-  enum { IDD = IDD_DIALOGUE_DLG };
+	enum { IDD = IDD_DIALOGUE_DLG };
 
-  CButton	m_CancelButton;
+	CButton m_CancelButton;
 
-  CButton	m_SaveButton;
+	CButton m_SaveButton;
 
-  CComboBox	m_FilterList;
+	CComboBox m_FilterList;
 
-  CEsmListCtrl	m_InfoList;
+	CEsmListCtrl m_InfoList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmDialogDlg)
+	//{{AFX_VIRTUAL(CEsmDialogDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmDialogDlg)
+	//{{AFX_MSG(CEsmDialogDlg)
 
-  afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordKey  (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnEditRecord (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnEditRecord (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnEditInfoRecord (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnEditInfoRecord (LPARAM lParam, LPARAM wParam);
 
-  afx_msg void OnMoveupbutton();
+	afx_msg void OnMoveupbutton();
 
-  afx_msg void OnMovedownbutton();
+	afx_msg void OnMovedownbutton();
 
-  afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 
-  afx_msg void OnEditAddnew();
+	afx_msg void OnEditAddnew();
 
-  afx_msg void OnEditEdititem();
+	afx_msg void OnEditEdititem();
 
-  afx_msg void OnSelchangeFilterlist();
+	afx_msg void OnSelchangeFilterlist();
 
-  afx_msg void OnEditCreatecopy();
+	afx_msg void OnEditCreatecopy();
 
-  afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
 	afx_msg void OnEditDelete();
 
@@ -332,17 +332,17 @@ protected:
 
 	//}}AFX_MSG
 
- 
-
-  DECLARE_MESSAGE_MAP();
 
 
+	DECLARE_MESSAGE_MAP();
 
- };
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmDialogDlg Definition
+ *      End of Class CEsmDialogDlg Definition
 
  *=========================================================================*/
 
@@ -362,7 +362,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmdialogdlg.H
+ *      End of File Esmdialogdlg.H
 
  *=========================================================================*/
 

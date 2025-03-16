@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	CsvFile.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Thursday, October 09, 2003
+ * File:    CsvFile.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Thursday, October 09, 2003
  *
  * Implements a simple CSV (Comma Seperated File) class, CCsvFile.
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "csvFile.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("CsvFile.cpp");
+DEFINE_FILE("CsvFile.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,11 +29,12 @@
  *
  *=========================================================================*/
 CCsvFile::CCsvFile () : m_Rows(0) {
-  //DEFINE_FUNCTION("CCsvFile::CCsvFile()");
-  m_KeepQuotes = false;
- }
+	//DEFINE_FUNCTION("CCsvFile::CCsvFile()");
+	m_KeepQuotes = false;
+}
+
 /*===========================================================================
- *		End of Class CCsvFile Constructor
+ *      End of Class CCsvFile Constructor
  *=========================================================================*/
 
 
@@ -43,13 +44,13 @@ CCsvFile::CCsvFile () : m_Rows(0) {
  *
  *=========================================================================*/
 void CCsvFile::Destroy (void) {
-  //DEFINE_FUNCTION("CCsvFile::Destroy()");
- 
-  m_Filename.Empty();
-  ClearRows();
- }
+	//DEFINE_FUNCTION("CCsvFile::Destroy()");
+	m_Filename.Empty();
+	ClearRows();
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::Destroy()
+ *      End of Class Method CCsvFile::Destroy()
  *=========================================================================*/
 
 
@@ -61,17 +62,16 @@ void CCsvFile::Destroy (void) {
  * NULL on any error.
  *
  *=========================================================================*/
-CCsvRow* CCsvFile::AddRow (void) {
-  DEFINE_FUNCTION("CCsvFile::AddRow()");
-  CCsvRow* pRow;
+CCsvRow *CCsvFile::AddRow (void) {
+	DEFINE_FUNCTION("CCsvFile::AddRow()");
+	CCsvRow* pRow;
+	CreateClassPointer(pRow, CCsvRow, 0);
+	m_Rows.Add(pRow);
+	return (pRow);
+}
 
-  CreateClassPointer(pRow, CCsvRow, 0);
-  m_Rows.Add(pRow);
-
-  return (pRow);
- }
 /*===========================================================================
- *		End of Class Method CCsvFile::AddRow()
+ *      End of Class Method CCsvFile::AddRow()
  *=========================================================================*/
 
 
@@ -83,19 +83,20 @@ CCsvRow* CCsvFile::AddRow (void) {
  *
  *=========================================================================*/
 void CCsvFile::ClearRows (void) {
-  DEFINE_FUNCTION("CCsvFile::ClearRows()"); 
-  CCsvRow* pRow;
-  int	   Index;
+	DEFINE_FUNCTION("CCsvFile::ClearRows()");
+	CCsvRow* pRow;
+	int Index;
 
-  for (Index = 0; Index < m_Rows.GetNumElements(); Index++) {
-    pRow = m_Rows.GetAt(Index);
-    DestroyPointer(pRow);
-   }
+	for (Index = 0; Index < m_Rows.GetNumElements(); Index++) {
+		pRow = m_Rows.GetAt(Index);
+		DestroyPointer(pRow);
+	}
 
-  m_Rows.RemoveAll();
- }
+	m_Rows.RemoveAll();
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::ClearRows()
+ *      End of Class Method CCsvFile::ClearRows()
  *=========================================================================*/
 
 
@@ -108,25 +109,34 @@ void CCsvFile::ClearRows (void) {
  *
  *=========================================================================*/
 int CCsvFile::FindHeaderCol (const TCHAR* pString) {
-  CCsvRow*  pRow;
-  CSString* pColString;
-  int       ColIndex;
-
+	CCsvRow* pRow;
+	CSString* pColString;
+	int ColIndex;
 	/* Get the header row */
-  pRow = GetRow(0);
-  if (pRow == NULL) return (-1);
+	pRow = GetRow(0);
 
-  for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
-    pColString = pRow->GetAt(ColIndex);
-    if (pColString == NULL) continue;
-    if (pColString->CompareNoCase(pString) == 0) return (ColIndex);
-   }
+	if (pRow == NULL) {
+		return (-1);
+	}
+
+	for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
+		pColString = pRow->GetAt(ColIndex);
+
+		if (pColString == NULL) {
+			continue;
+		}
+
+		if (pColString->CompareNoCase(pString) == 0) {
+			return (ColIndex);
+		}
+	}
 
 	/* No match */
-  return (-1);
- }
+	return (-1);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::FindHeaderCol()
+ *      End of Class Method CCsvFile::FindHeaderCol()
  *=========================================================================*/
 
 
@@ -137,13 +147,16 @@ int CCsvFile::FindHeaderCol (const TCHAR* pString) {
  * Returns the text of the given CSV element (0-based) or NULL.
  *
  *=========================================================================*/
-const TCHAR* CCsvFile::GetElement (const int Row, const int Col) {
-  if (!IsValidElement(Row, Col)) return (NULL);
+const TCHAR *CCsvFile::GetElement (const int Row, const int Col) {
+	if (!IsValidElement(Row, Col)) {
+		return (NULL);
+	}
 
-  return (const TCHAR *)*((m_Rows.GetAt(Row))->GetAt(Col));
- }
+	return (const TCHAR *) * ((m_Rows.GetAt(Row))->GetAt(Col));
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::GetElement()
+ *      End of Class Method CCsvFile::GetElement()
  *=========================================================================*/
 
 
@@ -155,20 +168,24 @@ const TCHAR* CCsvFile::GetElement (const int Row, const int Col) {
  *
  *=========================================================================*/
 bool CCsvFile::IsMissingCells (void) {
-  int  RowIndex;
-  bool Result;
+	int RowIndex;
+	bool Result;
 
 	/* Check all rows */
-  for (RowIndex = 0; RowIndex < m_Rows.GetNumElements(); RowIndex++) {
-    Result = IsRowMissingCells(RowIndex);
-    if (Result) return (true);
-   }
+	for (RowIndex = 0; RowIndex < m_Rows.GetNumElements(); RowIndex++) {
+		Result = IsRowMissingCells(RowIndex);
+
+		if (Result) {
+			return (true);
+		}
+	}
 
 	/* No missing/empty cells found */
-  return (false);
- }
+	return (false);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::IsMissingCells()
+ *      End of Class Method CCsvFile::IsMissingCells()
  *=========================================================================*/
 
 
@@ -180,24 +197,33 @@ bool CCsvFile::IsMissingCells (void) {
  *
  *=========================================================================*/
 bool CCsvFile::IsRowMissingCells (const int RowIndex) {
-  CCsvRow*  pRow;
-  CSString* pColString;
-  int       ColIndex;
+	CCsvRow* pRow;
+	CSString* pColString;
+	int ColIndex;
+	pRow = GetRow(RowIndex);
 
-  pRow = GetRow(RowIndex);
-  if (pRow == NULL) return (true);
+	if (pRow == NULL) {
+		return (true);
+	}
 
 	/* Check all columns in the row */
-  for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
-    pColString = pRow->GetAt(ColIndex);
-    if (pColString == NULL) return (true);
-    if (pColString->IsEmpty()) return (true);
-   }
+	for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
+		pColString = pRow->GetAt(ColIndex);
 
-  return (false);
- }
+		if (pColString == NULL) {
+			return (true);
+		}
+
+		if (pColString->IsEmpty()) {
+			return (true);
+		}
+	}
+
+	return (false);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::IsRowMissingCells()
+ *      End of Class Method CCsvFile::IsRowMissingCells()
  *=========================================================================*/
 
 
@@ -209,17 +235,29 @@ bool CCsvFile::IsRowMissingCells (const int RowIndex) {
  *
  *=========================================================================*/
 bool CCsvFile::IsValidElement (const int Row, const int Col) {
-  if (!m_Rows.IsValidIndex(Row)) return (false);
+	if (!m_Rows.IsValidIndex(Row)) {
+		return (false);
+	}
 
-  CCsvRow* pRow = m_Rows.GetAt(Row);
-  if (pRow == NULL) return (false);
-  if (!pRow->IsValidIndex(Col)) return (false);
-  if (pRow->GetAt(Col) == NULL) return (false);
+	CCsvRow* pRow = m_Rows.GetAt(Row);
 
-  return (true);
- }
+	if (pRow == NULL) {
+		return (false);
+	}
+
+	if (!pRow->IsValidIndex(Col)) {
+		return (false);
+	}
+
+	if (pRow->GetAt(Col) == NULL) {
+		return (false);
+	}
+
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::IsValidElement()
+ *      End of Class Method CCsvFile::IsValidElement()
  *=========================================================================*/
 
 
@@ -227,38 +265,41 @@ bool CCsvFile::IsValidElement (const int Row, const int Col) {
  *
  * Class CCsvFile Method - bool Load (pFilename);
  *
- * Attempt to load and parse the given CSV file, returning false on 
+ * Attempt to load and parse the given CSV file, returning false on
  * any error. The current contents are destroyed.
  *
  *=========================================================================*/
 bool CCsvFile::Load (const TCHAR* pFilename) {
-  CGenFile File;
-  CSString Buffer;
-  bool     Result;
-  int	   FileSize;
-
+	CGenFile File;
+	CSString Buffer;
+	bool Result;
+	int FileSize;
 	/* Clear the current contents */
-  Destroy();
-
+	Destroy();
 	/* Attempt to openb the given file for input */
-  Result = File.Open(pFilename, "rb");
-  if (!Result) return (false);
+	Result = File.Open(pFilename, "rb");
 
-  m_Filename = pFilename;
-  FileSize = File.GetFileSize();
-  Buffer.SetSize(FileSize);
+	if (!Result) {
+		return (false);
+	}
 
+	m_Filename = pFilename;
+	FileSize = File.GetFileSize();
+	Buffer.SetSize(FileSize);
 	/* Read the file text */
-  Result = File.Read((TCHAR *)(const TCHAR *)Buffer, FileSize);
-  if (!Result) return (false);
+	Result = File.Read((TCHAR *)(const TCHAR *)Buffer, FileSize);
+
+	if (!Result) {
+		return (false);
+	}
 
 	/* Parse the file text */
-  Result = ParseText(Buffer, FileSize);	    
+	Result = ParseText(Buffer, FileSize);
+	return (true);
+}
 
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CCsvFile::Load()
+ *      End of Class Method CCsvFile::Load()
  *=========================================================================*/
 
 
@@ -271,118 +312,127 @@ bool CCsvFile::Load (const TCHAR* pFilename) {
  *
  *=========================================================================*/
 bool CCsvFile::ParseText (const TCHAR* pBuffer, const int BufferSize) {
-  DEFINE_FUNCTION("CCsvFile::ParseText()");
-  const TCHAR*	pParse;
-  const TCHAR*	pQuoteStart;
-  const TCHAR*  pRowStart;
-  const TCHAR*  pColStart;
-  CSString	QuoteBuffer;
-  CSString	CellBuffer;
-  CSString*	pNewString;
-  CCsvRow*	pRow;
-  bool		InQuote;
-  bool		HasQuote;
-  bool		EndCell;
-  bool		EndRow;
-  int		Index;
-
+	DEFINE_FUNCTION("CCsvFile::ParseText()");
+	const TCHAR* pParse;
+	const TCHAR* pQuoteStart;
+	const TCHAR* pRowStart;
+	const TCHAR* pColStart;
+	CSString QuoteBuffer;
+	CSString CellBuffer;
+	CSString* pNewString;
+	CCsvRow* pRow;
+	bool InQuote;
+	bool HasQuote;
+	bool EndCell;
+	bool EndRow;
+	int Index;
 	/* Initialize the loop variables */
-  pParse	= pBuffer;
-  pQuoteStart	= NULL;
-  pRowStart	= pBuffer;
-  pColStart	= pBuffer;
-  InQuote	= false;
-  HasQuote	= false;
-  EndCell	= false;
-  EndRow	= false;
-  Index		= 0;
-
+	pParse = pBuffer;
+	pQuoteStart = NULL;
+	pRowStart = pBuffer;
+	pColStart = pBuffer;
+	InQuote = false;
+	HasQuote = false;
+	EndCell = false;
+	EndRow = false;
+	Index = 0;
 	/* Create the first row */
-  pRow = AddRow();
+	pRow = AddRow();
 
 	/* Parse the entire buffer string */
-  while (Index <= BufferSize) {
+	while (Index <= BufferSize) {
+		switch (*pParse) {
+			case CSVFILE_COLCHAR:
+				if (!InQuote) {
+					EndCell = true;
+				}
 
-    switch (*pParse) {
-      case CSVFILE_COLCHAR:
-        if (!InQuote) EndCell = true;
-	break;
-      case NULL_CHAR:
-        if (pParse[-1] == CSVFILE_ROWCHAR1) break;
-	if (pParse[-1] == CSVFILE_ROWCHAR2) break;
-      case CSVFILE_ROWCHAR2:
-        EndCell = true;
-	EndRow  = true;
+				break;
 
-	if (InQuote) {
-	  HasQuote = true;
-	  QuoteBuffer.Copy(pQuoteStart + 1, (int)(pParse - pQuoteStart - 1));
-	  InQuote = false;
-	 }
-	break;
-      case CSVFILE_QUOTECHAR:
-        if (!m_KeepQuotes) {
-          if (InQuote) {
-	    HasQuote = true;
-	    QuoteBuffer.Copy(pQuoteStart + 1, (int)(pParse - pQuoteStart - 1));
-	   }
-          else {
-  	    QuoteBuffer.Empty();
-	    pQuoteStart = pParse;
-	   }
+			case NULL_CHAR:
+				if (pParse[-1] == CSVFILE_ROWCHAR1) {
+					break;
+				}
 
-          InQuote = !InQuote;
-	  break;
-        }
-     };
+				if (pParse[-1] == CSVFILE_ROWCHAR2) {
+					break;
+				}
+
+			case CSVFILE_ROWCHAR2:
+				EndCell = true;
+				EndRow = true;
+
+				if (InQuote) {
+					HasQuote = true;
+					QuoteBuffer.Copy(pQuoteStart + 1, (int)(pParse - pQuoteStart - 1));
+					InQuote = false;
+				}
+
+				break;
+
+			case CSVFILE_QUOTECHAR:
+				if (!m_KeepQuotes) {
+					if (InQuote) {
+						HasQuote = true;
+						QuoteBuffer.Copy(pQuoteStart + 1, (int)(pParse - pQuoteStart - 1));
+					} else {
+						QuoteBuffer.Empty();
+						pQuoteStart = pParse;
+					}
+
+					InQuote = !InQuote;
+					break;
+				}
+		};
 
 		/* Finish a cell parse */
-    if (EndCell) {
-      CreatePointer(pNewString, CSString);
-      pRow->Add(pNewString);
+		if (EndCell) {
+			CreatePointer(pNewString, CSString);
+			pRow->Add(pNewString);
 
-      if (HasQuote)
-        *pNewString = QuoteBuffer;
-      else if (pParse != pColStart) {
-        pNewString->Copy(pColStart, (int)(pParse - pColStart));
-	pNewString->Trim();
-       }
+			if (HasQuote) {
+				*pNewString = QuoteBuffer;
+			} else if (pParse != pColStart) {
+				pNewString->Copy(pColStart, (int)(pParse - pColStart));
+				pNewString->Trim();
+			}
 
-      HasQuote = false;
-      EndCell = false;
-      pColStart = pParse + 1;
-     }
+			HasQuote = false;
+			EndCell = false;
+			pColStart = pParse + 1;
+		}
 
 		/* End of a row */
-    if (EndRow) {
-      pRow = AddRow();
+		if (EndRow) {
+			pRow = AddRow();
 
-      if (pParse[1] == CSVFILE_ROWCHAR1) {
-        pParse++;
-        Index++;
-       }
+			if (pParse[1] == CSVFILE_ROWCHAR1) {
+				pParse++;
+				Index++;
+			}
 
-      pRowStart = pParse + 1;
-      pColStart = pRowStart;
-      EndRow    = false;
-     }
+			pRowStart = pParse + 1;
+			pColStart = pRowStart;
+			EndRow = false;
+		}
 
-    Index++;
-    pParse++;
-   }
+		Index++;
+		pParse++;
+	}
 
 	/* Delete the last row if it is empty */
-  if (pRow->GetNumElements() == 0) {
-    m_Rows.DeleteElement(m_Rows.GetNumElements() - 1);
-    DestroyPointer(pRow);
-   } 
+	if (pRow->GetNumElements() == 0) {
+		m_Rows.DeleteElement(m_Rows.GetNumElements() - 1);
+		DestroyPointer(pRow);
+	}
 
-  return (true);
- }
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::ParseText()
+ *      End of Class Method CCsvFile::ParseText()
  *=========================================================================*/
-  
+
 
 /*===========================================================================
  *
@@ -393,38 +443,53 @@ bool CCsvFile::ParseText (const TCHAR* pBuffer, const int BufferSize) {
  *
  *=========================================================================*/
 bool CCsvFile::Save (const TCHAR* pFilename) {
-  CGenFile  File;
-  CCsvRow*  pRow;
-  CSString* pString;
-  int	    RowIndex;
-  int       ColIndex;
-  bool	    Result;
-
+	CGenFile File;
+	CCsvRow* pRow;
+	CSString* pString;
+	int RowIndex;
+	int ColIndex;
+	bool Result;
 	/* Attempt to open the file for output */
-  Result = File.Open(pFilename, "wb");
-  if (!Result) return (false);
-  m_Filename = pFilename;
+	Result = File.Open(pFilename, "wb");
 
-  for (RowIndex = 0; RowIndex < m_Rows.GetNumElements(); RowIndex++) {
-    pRow = m_Rows.GetAt(RowIndex);
-    if (pRow == NULL || pRow->GetNumElements() == 0) continue;
+	if (!Result) {
+		return (false);
+	}
 
-    for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) { 
-      pString = pRow->GetAt(ColIndex);
-      Result  = true;
+	m_Filename = pFilename;
 
-      if (ColIndex > 0)    Result = File.Printf(_T(","));
-      if (pString != NULL) Result = File.Printf(_T("\"%s\""), *pString);
-      if (!Result) return (false);
-     }
+	for (RowIndex = 0; RowIndex < m_Rows.GetNumElements(); RowIndex++) {
+		pRow = m_Rows.GetAt(RowIndex);
 
-    File.Printf(_T("\n"));
-   } 
+		if (pRow == NULL || pRow->GetNumElements() == 0) {
+			continue;
+		}
 
-  return (true);
- }
+		for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
+			pString = pRow->GetAt(ColIndex);
+			Result = true;
+
+			if (ColIndex > 0) {
+				Result = File.Printf(_T(","));
+			}
+
+			if (pString != NULL) {
+				Result = File.Printf(_T("\"%s\""), *pString);
+			}
+
+			if (!Result) {
+				return (false);
+			}
+		}
+
+		File.Printf(_T("\n"));
+	}
+
+	return (true);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::Save()
+ *      End of Class Method CCsvFile::Save()
  *=========================================================================*/
 
 
@@ -435,36 +500,40 @@ bool CCsvFile::Save (const TCHAR* pFilename) {
  * Sets the given string. Returns the new string on NULL on any error.
  *
  *=========================================================================*/
-CSString* CCsvFile::SetString (const int Row, const int Col, const TCHAR* pString) {
-  DEFINE_FUNCTION("CCsvFile::SetString()");
-  CCsvRow*  pRow;
-  CSString* pNewString;
+CSString *CCsvFile::SetString (const int Row, const int Col, const TCHAR* pString) {
+	DEFINE_FUNCTION("CCsvFile::SetString()");
+	CCsvRow* pRow;
+	CSString* pNewString;
 
 	/* Ignore invalid input */
-  if (Row < 0 || Col < 0) return (NULL);
-  pRow = GetRow(Row);
- 
+	if (Row < 0 || Col < 0) {
+		return (NULL);
+	}
+
+	pRow = GetRow(Row);
+
 	/* Create the row if required */
-  if (pRow == NULL) {
-    while (m_Rows.GetNumElements() <= Row) {
-      pRow = AddRow();
-     }
-   }
+	if (pRow == NULL) {
+		while (m_Rows.GetNumElements() <= Row) {
+			pRow = AddRow();
+		}
+	}
 
 	/* Create the column if required */
-  pNewString = pRow->GetAt(Col);
-  
-  if (pNewString == NULL) {
-    while (pRow->GetNumElements() <= Col) {
-      CreatePointer(pNewString, CSString);
-      pRow->Add(pNewString);
-     }
-   }
+	pNewString = pRow->GetAt(Col);
+
+	if (pNewString == NULL) {
+		while (pRow->GetNumElements() <= Col) {
+			CreatePointer(pNewString, CSString);
+			pRow->Add(pNewString);
+		}
+	}
 
 	/* Set the string value */
-  (*pNewString) = pString;
-  return (pNewString);
- }
+	(*pNewString) = pString;
+	return (pNewString);
+}
+
 /*===========================================================================
- *		End of Class Method CCsvFile::SetString()
+ *      End of Class Method CCsvFile::SetString()
  *=========================================================================*/

@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmaitraveldlg.H
+ * File:    Esmaitraveldlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 24, 2003
+ * Created On:  February 24, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmSubAI_T.h"
+#include "EsmSubAI_T.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,87 +60,87 @@ class CEsmAiTravelDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Members -------------------------*/
+	/*---------- Begin Protected Class Members -------------------------*/
 
-protected:
+  protected:
 
-  CEsmSubAI_T*	m_pSubRecord;
-
-
+	CEsmSubAI_T *m_pSubRecord;
 
 
 
-  /*---------- Begin Public Class Method -----------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Method -----------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmAiTravelDlg(CWnd* pParent = NULL);
+	CEsmAiTravelDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmSubAI_T* pSubRecord);
+	bool DoModal (CEsmSubAI_T* pSubRecord);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmAiTravelDlg)
+	//{{AFX_DATA(CEsmAiTravelDlg)
 
-  enum { IDD = IDD_AITRAVEL_DLG };
+	enum { IDD = IDD_AITRAVEL_DLG };
 
-  CEdit		m_XText;
+	CEdit m_XText;
 
-  CEdit		m_YText;
+	CEdit m_YText;
 
-  CEdit		m_ZText;
+	CEdit m_ZText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmAiTravelDlg)
+	//{{AFX_VIRTUAL(CEsmAiTravelDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmAiTravelDlg)
+	//{{AFX_MSG(CEsmAiTravelDlg)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  virtual void OnOK();
+	virtual void OnOK();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmAiTravelDlg
+ *      End of Class CEsmAiTravelDlg
 
  *=========================================================================*/
 
@@ -160,7 +160,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmaitraveldlg.H
+ *      End of File Esmaitraveldlg.H
 
  *=========================================================================*/
 

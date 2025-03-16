@@ -2,11 +2,11 @@
 
  *
 
- * File:	ChildFrm.CPP
+ * File:    ChildFrm.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Monday, 03 February, 2003
+ * Created On:  Monday, 03 February, 2003
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,27 +42,27 @@
 
 
 
-	/* Debug defines */
+/* Debug defines */
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  IMPLEMENT_DYNCREATE(CChildFrame, CMDIChildWnd);
+IMPLEMENT_DYNCREATE(CChildFrame, CMDIChildWnd);
 
-  DEFINE_FILE("ChildFrm.cpp");
+DEFINE_FILE("ChildFrm.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -82,21 +82,21 @@
 
 BEGIN_MESSAGE_MAP(CChildFrame, CMDIChildWnd)
 
-  //{{AFX_MSG_MAP(CChildFrame)
+	//{{AFX_MSG_MAP(CChildFrame)
 
-  ON_WM_SIZE()
+	ON_WM_SIZE()
 
-  ON_WM_MDIACTIVATE()
+	ON_WM_MDIACTIVATE()
 
-  ON_WM_SYSCOMMAND()
+	ON_WM_SYSCOMMAND()
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CChildFrame Message Map
+ *      End of CChildFrame Message Map
 
  *=========================================================================*/
 
@@ -115,14 +115,12 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CChildFrame::CChildFrame() {
-
-  m_IsFakeMaximized = false;
-
+	m_IsFakeMaximized = false;
 }
 
 /*===========================================================================
 
- *		End of Class CChildFrame Constructor
+ *      End of Class CChildFrame Constructor
 
  *=========================================================================*/
 
@@ -141,12 +139,11 @@ CChildFrame::CChildFrame() {
  *=========================================================================*/
 
 CChildFrame::~CChildFrame() {
-
 }
 
 /*===========================================================================
 
- *		End of Class CChildFrame Destructor
+ *      End of Class CChildFrame Destructor
 
  *=========================================================================*/
 
@@ -156,7 +153,7 @@ CChildFrame::~CChildFrame() {
 
 /*===========================================================================
 
- *		End of Class Event CChildFrame::OnCreateClient()
+ *      End of Class Event CChildFrame::OnCreateClient()
 
  *=========================================================================*/
 
@@ -175,20 +172,18 @@ CChildFrame::~CChildFrame() {
  *=========================================================================*/
 
 BOOL CChildFrame::PreCreateWindow (CREATESTRUCT& cs) {
+	cs.style &= ~WS_MAXIMIZE;
 
-  cs.style &= ~WS_MAXIMIZE;
+	if ( !CMDIChildWnd::PreCreateWindow(cs) ) {
+		return FALSE;
+	}
 
-  if( !CMDIChildWnd::PreCreateWindow(cs) ) return FALSE;
-
-
-
-  return TRUE;
-
+	return TRUE;
 }
 
 /*===========================================================================
 
- *		End of Class Method CChildFrame::PreCreateWindow()
+ *      End of Class Method CChildFrame::PreCreateWindow()
 
  *=========================================================================*/
 
@@ -209,22 +204,18 @@ BOOL CChildFrame::PreCreateWindow (CREATESTRUCT& cs) {
  *=========================================================================*/
 
 void CChildFrame::AssertValid() const {
-
-  CMDIChildWnd::AssertValid();
-
- }
+	CMDIChildWnd::AssertValid();
+}
 
 
 
 void CChildFrame::Dump(CDumpContext& dc) const {
-
-  CMDIChildWnd::Dump(dc);
-
- }
+	CMDIChildWnd::Dump(dc);
+}
 
 /*===========================================================================
 
- *		End of CChildFrame Diagnostics
+ *      End of CChildFrame Diagnostics
 
  *=========================================================================*/
 
@@ -245,16 +236,13 @@ void CChildFrame::Dump(CDumpContext& dc) const {
  *=========================================================================*/
 
 void CChildFrame::OnSize(UINT nType, int cx, int cy) {
-
-  CMDIChildWnd::OnSize(nType, cx, cy);
-
-  m_IsFakeMaximized = false;
-
+	CMDIChildWnd::OnSize(nType, cx, cy);
+	m_IsFakeMaximized = false;
 }
 
 /*===========================================================================
 
- *		End of Class Event CChildFrame::OnSize()
+ *      End of Class Event CChildFrame::OnSize()
 
  *=========================================================================*/
 
@@ -273,14 +261,12 @@ void CChildFrame::OnSize(UINT nType, int cx, int cy) {
  *=========================================================================*/
 
 void CChildFrame::OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd) {
-
-  CMDIChildWnd::OnMDIActivate(bActivate, pActivateWnd, pDeactivateWnd);
-
+	CMDIChildWnd::OnMDIActivate(bActivate, pActivateWnd, pDeactivateWnd);
 }
 
 /*===========================================================================
 
- *		End of Class Event CChildFrame::OnMDIActivate()
+ *      End of Class Event CChildFrame::OnMDIActivate()
 
  *=========================================================================*/
 
@@ -299,56 +285,30 @@ void CChildFrame::OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeact
  *=========================================================================*/
 
 void CChildFrame::FakeMaximize (void) {
+	CRect ClientRect;
+	CRect RestoreRect;
 
-  CRect ClientRect;
+	if (m_IsFakeMaximized) {
+		SetWindowPos(NULL, m_RestoreRect.left, m_RestoreRect.top, m_RestoreRect.Width(),
+		             m_RestoreRect.Height(), SWP_NOZORDER);
+		m_IsFakeMaximized = false;
+	} else {
+		if (IsIconic()) {
+			ShowWindow(SW_RESTORE);
+		}
 
-  CRect RestoreRect;
-
-
-
-  if (m_IsFakeMaximized) {
-
-    SetWindowPos(NULL, m_RestoreRect.left, m_RestoreRect.top, m_RestoreRect.Width(), m_RestoreRect.Height(), SWP_NOZORDER);
-
-    m_IsFakeMaximized = false;
-
-  }
-
-  else {
-
-    if (IsIconic()) {
-
-      ShowWindow(SW_RESTORE);
-
-    }
-
-
-
-    GetWindowRect(&RestoreRect);
-
-    GetParent()->ScreenToClient(&RestoreRect);
-
-
-
-    GetParent()->GetClientRect(&ClientRect);
-
-    SetWindowPos(NULL, 0, 0, ClientRect.Width(), ClientRect.Height(), SWP_NOZORDER);
-
-
-
-    m_IsFakeMaximized = true;
-
-    m_RestoreRect = RestoreRect;
-
-  }
-
-
-
+		GetWindowRect(&RestoreRect);
+		GetParent()->ScreenToClient(&RestoreRect);
+		GetParent()->GetClientRect(&ClientRect);
+		SetWindowPos(NULL, 0, 0, ClientRect.Width(), ClientRect.Height(), SWP_NOZORDER);
+		m_IsFakeMaximized = true;
+		m_RestoreRect = RestoreRect;
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CChildFrame::FakeMaximize()
+ *      End of Class Method CChildFrame::FakeMaximize()
 
  *=========================================================================*/
 
@@ -367,32 +327,19 @@ void CChildFrame::FakeMaximize (void) {
  *=========================================================================*/
 
 void CChildFrame::OnSysCommand (UINT nID, LPARAM Param) {
+	if ((nID & 0xFFF0) == SC_MAXIMIZE) {
+		FakeMaximize();
+		return;
+	} else if ((nID & 0xFFF0) == SC_MINIMIZE) {
+		m_IsFakeMaximized = false;
+	}
 
-
-
-  if ((nID & 0xFFF0) == SC_MAXIMIZE) {
-
-    FakeMaximize();
-
-    return;
-
-  }
-
-  else if ((nID & 0xFFF0) == SC_MINIMIZE) {
-
-    m_IsFakeMaximized = false;
-
-  }
-
-
-
-  CMDIChildWnd::OnSysCommand(nID, Param);
-
+	CMDIChildWnd::OnSysCommand(nID, Param);
 }
 
 /*===========================================================================
 
- *		End of Class Event CChildFrame::OnSysCommand()
+ *      End of Class Event CChildFrame::OnSysCommand()
 
  *=========================================================================*/
 

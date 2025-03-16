@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	Genstack.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	January 21, 2003
+ * File:    Genstack.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  January 21, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "genstack.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("GenStack.cpp");
+DEFINE_FILE("GenStack.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,17 +29,16 @@
  *
  *=========================================================================*/
 CGenStack::CGenStack (const int Size) {
-  DEFINE_FUNCTION("CGenStack::CGenStack()");
-  int NewSize = (Size <= 0) ? GENSTACK_DEFAULT_SIZE : Size;
-
+	DEFINE_FUNCTION("CGenStack::CGenStack()");
+	int NewSize = (Size <= 0) ? GENSTACK_DEFAULT_SIZE : Size;
 	/* Allocate the initial stack data */
-  CreateArrayPointer(m_ppStack, void*, NewSize);
-  m_NumElements  = 0;
-  m_NumAllocated = NewSize;
-  
- }
+	CreateArrayPointer(m_ppStack, void*, NewSize);
+	m_NumElements = 0;
+	m_NumAllocated = NewSize;
+}
+
 /*===========================================================================
- *		End of Class CGenStack Constructor
+ *      End of Class CGenStack Constructor
  *=========================================================================*/
 
 
@@ -49,16 +48,15 @@ CGenStack::CGenStack (const int Size) {
  *
  *=========================================================================*/
 CGenStack::~CGenStack () {
-  DEFINE_FUNCTION("CGenStack::~CGenStack()");
-
+	DEFINE_FUNCTION("CGenStack::~CGenStack()");
 	/* Delete the array */
-  RemoveAll();
-
+	RemoveAll();
 	/* Delete the array pointer */
-  DestroyArrayPointer(m_ppStack);
- }
+	DestroyArrayPointer(m_ppStack);
+}
+
 /*===========================================================================
- *		End of Class CGenStack Destructor
+ *      End of Class CGenStack Destructor
  *=========================================================================*/
 
 
@@ -72,38 +70,38 @@ CGenStack::~CGenStack () {
  *
  *=========================================================================*/
 bool CGenStack::AllocSize (const int Size) {
-  DEFINE_FUNCTION("CGenStack::AllocSize()");
-  void** ppNewData;
+	DEFINE_FUNCTION("CGenStack::AllocSize()");
+	void **ppNewData;
 
 	/* Check for valid input */
-  if (Size <= 0) {
-    ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid stack size to %d!"), Size);
-    return (false);
-   }
+	if (Size <= 0) {
+		ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid stack size to %d!"), Size);
+		return (false);
+	}
 	/* Ensure we don't truncate existing stack elements */
-  else if (m_NumElements > Size) {
-    ErrorHandler.AddError(ERR_BADINPUT, _T("Cannot set the stack size to %d, %d elements would be lost!"), Size, m_NumElements - Size);
-    return (false);
-   }
-  
+	else if (m_NumElements > Size) {
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("Cannot set the stack size to %d, %d elements would be lost!"), Size, m_NumElements - Size);
+		return (false);
+	}
+
 	/* Allocate the new stack data */
-  CreateArrayPointer(ppNewData, void*, Size);
+	CreateArrayPointer(ppNewData, void*, Size);
 
 	/* Copy the old stack data */
-  if (m_NumElements != 0) {
-    memcpy(ppNewData, m_ppStack, sizeof(void*)*m_NumElements);
-   }
-  
+	if (m_NumElements != 0) {
+		memcpy(ppNewData, m_ppStack, sizeof(void*)*m_NumElements);
+	}
+
 	/* Delete the old stack and set to the new */
-  DestroyArrayPointer(m_ppStack);
+	DestroyArrayPointer(m_ppStack);
+	m_ppStack = ppNewData;
+	m_NumAllocated = Size;
+	return (true);
+}
 
-  m_ppStack = ppNewData;
-  m_NumAllocated = Size;
-
-  return (true);
- }
 /*===========================================================================
- *		End of Class Method CGenStack::AllocSize()
+ *      End of Class Method CGenStack::AllocSize()
  *=========================================================================*/
 
 
@@ -115,12 +113,16 @@ bool CGenStack::AllocSize (const int Size) {
  * not valid.
  *
  *=========================================================================*/
-void* CGenStack::GetAt (const int Index) {
-  if (Index >= m_NumElements || Index < 0) return (NULL);
-  return (m_ppStack[m_NumElements - 1 - Index]);
- }
+void *CGenStack::GetAt (const int Index) {
+	if (Index >= m_NumElements || Index < 0) {
+		return (NULL);
+	}
+
+	return (m_ppStack[m_NumElements - 1 - Index]);
+}
+
 /*===========================================================================
- *		End of Class Method CGenStack::GetAt()
+ *      End of Class Method CGenStack::GetAt()
  *=========================================================================*/
 
 
@@ -132,12 +134,16 @@ void* CGenStack::GetAt (const int Index) {
  * if no item is available.
  *
  *=========================================================================*/
-void* CGenStack::Peek (void) {
-  if (m_NumElements == 0) return (NULL);
-  return (m_ppStack[m_NumElements - 1]);
- }
+void *CGenStack::Peek (void) {
+	if (m_NumElements == 0) {
+		return (NULL);
+	}
+
+	return (m_ppStack[m_NumElements - 1]);
+}
+
 /*===========================================================================
- *		End of Class Method CGenStack::Peek()
+ *      End of Class Method CGenStack::Peek()
  *=========================================================================*/
 
 
@@ -149,13 +155,17 @@ void* CGenStack::Peek (void) {
  * uis empty.
  *
  *=========================================================================*/
-void* CGenStack::Pop (void) {
-  if (m_NumElements == 0) return (NULL);
-  m_NumElements--;
-  return (m_ppStack[m_NumElements]);
- }
+void *CGenStack::Pop (void) {
+	if (m_NumElements == 0) {
+		return (NULL);
+	}
+
+	m_NumElements--;
+	return (m_ppStack[m_NumElements]);
+}
+
 /*===========================================================================
- *		End of Class Method CGenStack::Pop()
+ *      End of Class Method CGenStack::Pop()
  *=========================================================================*/
 
 
@@ -168,18 +178,19 @@ void* CGenStack::Pop (void) {
  *
  *=========================================================================*/
 void CGenStack::Push (void* pData) {
-  DEFINE_FUNCTION("");
+	DEFINE_FUNCTION("");
 
 	/* Grow array as required */
-  if (m_NumElements == m_NumAllocated) {
-    AllocSize(m_NumElements * 2);
-   }
+	if (m_NumElements == m_NumAllocated) {
+		AllocSize(m_NumElements * 2);
+	}
 
-  m_ppStack[m_NumElements] = pData;
-  m_NumElements++;
- }
+	m_ppStack[m_NumElements] = pData;
+	m_NumElements++;
+}
+
 /*===========================================================================
- *		End of Class Method CGenStack::Push()
+ *      End of Class Method CGenStack::Push()
  *=========================================================================*/
 
 
@@ -191,10 +202,11 @@ void CGenStack::Push (void* pData) {
  *
  *=========================================================================*/
 void CGenStack::RemoveAll (void) {
-  m_NumElements = 0;
- }
+	m_NumElements = 0;
+}
+
 /*===========================================================================
- *		End of Class Method CGenStack::RemoveAll()
+ *      End of Class Method CGenStack::RemoveAll()
  *=========================================================================*/
 
 
@@ -202,13 +214,14 @@ void CGenStack::RemoveAll (void) {
  *
  * Class CGenStack Method - bool SetSize (Size);
  *
- * Changes the size of the stack. Returns false on any error or if the 
+ * Changes the size of the stack. Returns false on any error or if the
  * given size is too small such that it truncates existing elements.
  *
  *=========================================================================*/
-bool CGenStack::SetSize (const int Size) { 
-  return AllocSize(Size);
- }
+bool CGenStack::SetSize (const int Size) {
+	return AllocSize(Size);
+}
+
 /*===========================================================================
- *		End of Class Method CGenStack::SetSize()
+ *      End of Class Method CGenStack::SetSize()
  *=========================================================================*/

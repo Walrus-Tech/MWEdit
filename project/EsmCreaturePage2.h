@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcreaturepage2.H
+ * File:    Esmcreaturepage2.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	March 1, 2003
+ * Created On:  March 1, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -56,11 +56,11 @@
 
  *=========================================================================*/
 
-  class CEsmDlgHandler;
+class CEsmDlgHandler;
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -80,61 +80,65 @@
 
 class CEsmCreaturePage2 : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmCreaturePage2);
+	DECLARE_DYNCREATE(CEsmCreaturePage2);
 
 
 
-  /*---------- Begin Protected Class Methods ----------------------*/
+	/*---------- Begin Protected Class Methods ----------------------*/
 
-protected:
+  protected:
 
-  esmrecinfo_t*		m_pRecInfo;
+	esmrecinfo_t *m_pRecInfo;
 
-  CEsmDlgHandler*	m_pDlgHandler;
-
-
+	CEsmDlgHandler *m_pDlgHandler;
 
 
 
-  /*---------- Begin Public Class Methods -------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods -------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmCreaturePage2();
+	CEsmCreaturePage2();
 
-  ~CEsmCreaturePage2();
+	~CEsmCreaturePage2();
 
 
 
 	/* Get class members */
 
-  CMWEditDoc* GetDocument (void);
+	CMWEditDoc *GetDocument (void);
 
 
 
-  	/* Update item data */
+	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
-  	/* Set class members */
+	/* Set class members */
 
-  void SetRecInfo    (esmrecinfo_t* pRecInfo)   { m_pRecInfo = pRecInfo; }
+	void SetRecInfo (esmrecinfo_t* pRecInfo) {
+		m_pRecInfo = pRecInfo;
+	}
 
-  void SetDlgHandler (CEsmDlgHandler*  pParent) { m_pDlgHandler = pParent; }
+	void SetDlgHandler (CEsmDlgHandler* pParent) {
+		m_pDlgHandler = pParent;
+	}
 
 
 
 	/* Get/set control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
-  void SetControlData (void);
+	void SetControlData (void);
 
 
 
@@ -142,55 +146,55 @@ public:
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmCreaturePage2)
+	//{{AFX_DATA(CEsmCreaturePage2)
 
-  enum { IDD = IDD_CREATURE_VIEW2 };
+	enum { IDD = IDD_CREATURE_VIEW2 };
 
-  CEsmListCtrl	m_SpellList;
+	CEsmListCtrl m_SpellList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmCreaturePage2)
+	//{{AFX_VIRTUAL(CEsmCreaturePage2)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmCreaturePage2)
+	//{{AFX_MSG(CEsmCreaturePage2)
 
-  afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordKey  (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmCreaturePage2 Definition
+ *      End of Class CEsmCreaturePage2 Definition
 
  *=========================================================================*/
 
@@ -210,7 +214,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmcreaturepage2.H
+ *      End of File Esmcreaturepage2.H
 
  *=========================================================================*/
 

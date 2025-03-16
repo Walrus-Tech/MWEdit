@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmaiwanderdlg.H
+ * File:    Esmaiwanderdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 24, 2003
+ * Created On:  February 24, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmSubAI_W.h"
+#include "EsmSubAI_W.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,89 +60,89 @@ class CEsmAiWanderDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Members -------------------------*/
+	/*---------- Begin Protected Class Members -------------------------*/
 
-protected:
+  protected:
 
-  CEsmSubAI_W*	m_pSubRecord;
-
-
+	CEsmSubAI_W *m_pSubRecord;
 
 
 
-  /*---------- Begin Public Class Method -----------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Method -----------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmAiWanderDlg(CWnd* pParent = NULL);
+	CEsmAiWanderDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmSubAI_W* pSubRecord);
+	bool DoModal (CEsmSubAI_W* pSubRecord);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmAiWanderDlg)
+	//{{AFX_DATA(CEsmAiWanderDlg)
 
-  enum { IDD = IDD_AIWANDER_DLG };
+	enum { IDD = IDD_AIWANDER_DLG };
 
-  CEdit	m_TimeText;
+	CEdit m_TimeText;
 
-  CEdit	m_DistanceText;
+	CEdit m_DistanceText;
 
-  CEdit	m_DurationText;
+	CEdit m_DurationText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
-  CEdit	m_IdleText[MWESM_AIW_NUMIDLES];
+	CEdit m_IdleText[MWESM_AIW_NUMIDLES];
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmAiWanderDlg)
+	//{{AFX_VIRTUAL(CEsmAiWanderDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmAiWanderDlg)
+	//{{AFX_MSG(CEsmAiWanderDlg)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  virtual void OnOK();
+	virtual void OnOK();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmAiWanderDlg
+ *      End of Class CEsmAiWanderDlg
 
  *=========================================================================*/
 
@@ -164,7 +164,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmaiwanderdlg.H
+ *      End of File Esmaiwanderdlg.H
 
  *=========================================================================*/
 

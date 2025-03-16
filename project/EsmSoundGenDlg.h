@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmsoundgendlg.H
+ * File:    Esmsoundgendlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 19, 2003
+ * Created On:  February 19, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,121 +60,121 @@
 
 class CEsmSoundGenDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmSoundGenDlg);
+	DECLARE_DYNCREATE(CEsmSoundGenDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmSoundGen*	m_pSoundGen;
-
-
+	CEsmSoundGen *m_pSoundGen;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Create the sound gen ID based on the current control data */
 
-  void UpdateID (void);
+	void UpdateID (void);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmSoundGenDlg();
+	CEsmSoundGenDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmSoundGenDlg)
+	//{{AFX_DATA(CEsmSoundGenDlg)
 
-  enum { IDD = IDD_SOUNDGEN_DLG };
+	enum { IDD = IDD_SOUNDGEN_DLG };
 
-  CComboBox	m_TypeList;
+	CComboBox m_TypeList;
 
-  CComboBox	m_SoundList;
+	CComboBox m_SoundList;
 
-  CComboBox	m_CreatureList;
+	CComboBox m_CreatureList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmSoundGenDlg)
+	//{{AFX_VIRTUAL(CEsmSoundGenDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmSoundGenDlg)
+	//{{AFX_MSG(CEsmSoundGenDlg)
 
-  afx_msg void OnPlaysound();
+	afx_msg void OnPlaysound();
 
-  afx_msg void OnSelchangeList();
+	afx_msg void OnSelchangeList();
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmSoundGenDlg Definition
+ *      End of Class CEsmSoundGenDlg Definition
 
  *=========================================================================*/
 
@@ -194,7 +194,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmsoundgendlg.H
+ *      End of File Esmsoundgendlg.H
 
  *=========================================================================*/
 

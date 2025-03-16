@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmintcellpage.H
+ * File:    Esmintcellpage.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 25, 2003
+ * Created On:  February 25, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "ColorStatic1.h"
+#include "ColorStatic1.h"
 
-  #include "EsmFile.h"
+#include "EsmFile.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,15 +58,15 @@
 
  *=========================================================================*/
 
-  class CEsmRecDialog;
+class CEsmRecDialog;
 
-  class CMWEditDoc;
+class CMWEditDoc;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -86,61 +86,65 @@
 
 class CEsmIntCellPage : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmIntCellPage);
+	DECLARE_DYNCREATE(CEsmIntCellPage);
 
 
 
-  /*---------- Begin Protected Class Methods ----------------------*/
+	/*---------- Begin Protected Class Methods ----------------------*/
 
-protected:
+  protected:
 
-  esmrecinfo_t*		m_pRecInfo;
+	esmrecinfo_t *m_pRecInfo;
 
-  CEsmRecDialog*	m_pDlgParent;
-
-
+	CEsmRecDialog *m_pDlgParent;
 
 
 
-  /*---------- Begin Public Class Methods -------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods -------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmIntCellPage();
+	CEsmIntCellPage();
 
-  ~CEsmIntCellPage();
+	~CEsmIntCellPage();
 
 
 
 	/* Get class members */
 
-  CMWEditDoc* GetDocument (void);
+	CMWEditDoc *GetDocument (void);
 
 
 
-    	/* Set class members */
+	/* Set class members */
 
-  void SetRecInfo    (esmrecinfo_t*   pRecInfo) { m_pRecInfo    = pRecInfo; }
+	void SetRecInfo (esmrecinfo_t* pRecInfo) {
+		m_pRecInfo = pRecInfo;
+	}
 
-  void SetEsmRecParent (CEsmRecDialog*   pDialog) { m_pDlgParent  = pDialog; }
+	void SetEsmRecParent (CEsmRecDialog* pDialog) {
+		m_pDlgParent = pDialog;
+	}
 
 
 
 	/* Get/set control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
-  void SetControlData (void);
+	void SetControlData (void);
 
 
 
-  	/* Update record data */
+	/* Update record data */
 
-  int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
@@ -148,119 +152,119 @@ public:
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmIntCellPage)
+	//{{AFX_DATA(CEsmIntCellPage)
 
-  enum { IDD = IDD_INTCELL_PAGE };
+	enum { IDD = IDD_INTCELL_PAGE };
 
-  CColorStatic	m_ColorBoxF;
+	CColorStatic m_ColorBoxF;
 
-  CSpinButtonCtrl	m_BSpinF;
+	CSpinButtonCtrl m_BSpinF;
 
-  CSpinButtonCtrl	m_GSpinF;
+	CSpinButtonCtrl m_GSpinF;
 
-  CSpinButtonCtrl	m_RSpinF;
+	CSpinButtonCtrl m_RSpinF;
 
-  CEdit		m_DensityText;
+	CEdit m_DensityText;
 
-  CEdit		m_BlueTextF;
+	CEdit m_BlueTextF;
 
-  CEdit		m_GreenTextF;
+	CEdit m_GreenTextF;
 
-  CEdit		m_RedTextF;
+	CEdit m_RedTextF;
 
-  CSpinButtonCtrl	m_BSpinS;
+	CSpinButtonCtrl m_BSpinS;
 
-  CSpinButtonCtrl	m_GSpinS;
+	CSpinButtonCtrl m_GSpinS;
 
-  CSpinButtonCtrl	m_RSpinS;
+	CSpinButtonCtrl m_RSpinS;
 
-  CColorStatic	m_ColorBoxS;
+	CColorStatic m_ColorBoxS;
 
-  CEdit		m_BlueTextS;
+	CEdit m_BlueTextS;
 
-  CEdit		m_GreenTextS;
+	CEdit m_GreenTextS;
 
-  CEdit		m_RedTextS;
+	CEdit m_RedTextS;
 
-  CSpinButtonCtrl	m_BSpinA;
+	CSpinButtonCtrl m_BSpinA;
 
-  CSpinButtonCtrl	m_GSpinA;
+	CSpinButtonCtrl m_GSpinA;
 
-  CSpinButtonCtrl	m_RSpinA;
+	CSpinButtonCtrl m_RSpinA;
 
-  CColorStatic	m_ColorBoxA;
+	CColorStatic m_ColorBoxA;
 
-  CEdit		m_WaterText;
+	CEdit m_WaterText;
 
-  CComboBox	m_RegionList;
+	CComboBox m_RegionList;
 
-  CButton	m_ExteriorCheck;
+	CButton m_ExteriorCheck;
 
-  CButton	m_SleepCheck;
+	CButton m_SleepCheck;
 
-  CButton	m_WaterCheck;
+	CButton m_WaterCheck;
 
-  CEdit		m_BlueTextA;
+	CEdit m_BlueTextA;
 
-  CEdit		m_GreenTextA;
+	CEdit m_GreenTextA;
 
-  CEdit		m_RedTextA;
+	CEdit m_RedTextA;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmIntCellPage)
+	//{{AFX_VIRTUAL(CEsmIntCellPage)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmIntCellPage)
+	//{{AFX_MSG(CEsmIntCellPage)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  afx_msg void OnColorbuttona();
+	afx_msg void OnColorbuttona();
 
-  afx_msg void OnColorbuttons();
+	afx_msg void OnColorbuttons();
 
-  afx_msg void OnColorbuttonf();
+	afx_msg void OnColorbuttonf();
 
-  afx_msg void OnChangeColorA();
+	afx_msg void OnChangeColorA();
 
-  afx_msg void OnChangeColorS();
+	afx_msg void OnChangeColorS();
 
-  afx_msg void OnChangeColorF();
+	afx_msg void OnChangeColorF();
 
-  afx_msg void OnWatercheck();
+	afx_msg void OnWatercheck();
 
-  afx_msg void OnExteriorcheck();
+	afx_msg void OnExteriorcheck();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmIntCellPage Definition
+ *      End of Class CEsmIntCellPage Definition
 
  *=========================================================================*/
 
@@ -280,7 +284,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmintcellpage.H
+ *      End of File Esmintcellpage.H
 
  *=========================================================================*/
 
