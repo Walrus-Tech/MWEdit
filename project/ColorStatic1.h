@@ -2,11 +2,11 @@
 
  *
 
- * File:	Colorstatic1.H
+ * File:    Colorstatic1.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -40,75 +40,73 @@ class CColorStatic : public CStatic {
 
 
 
-public:
+  public:
 
-  COLORREF	m_Color;
+	COLORREF m_Color;
 
-  int		m_Red;
+	int m_Red;
 
-  int		m_Green;
+	int m_Green;
 
-  int		m_Blue;
+	int m_Blue;
 
 
 
 	/* Construction */
 
-  CColorStatic();
+	CColorStatic();
 
-  virtual ~CColorStatic();
-
-
-
-  void SetColor (int Red, int Green, int Blue) { 
-
-    m_Red = Red;  m_Green = Green; m_Blue = Blue;
-
-    m_Color = RGB(m_Red, m_Green, m_Blue);
-
-   }
+	virtual ~CColorStatic();
 
 
 
-  void SetColor (const long ColorRef) { 
+	void SetColor (int Red, int Green, int Blue) {
+		m_Red = Red;
+		m_Green = Green;
+		m_Blue = Blue;
+		m_Color = RGB(m_Red, m_Green, m_Blue);
+	}
 
-    m_Red = GetRValue(ColorRef);  m_Green = GetGValue(ColorRef); m_Blue = GetBValue(ColorRef);
 
-    m_Color = ColorRef;
 
-   }
+	void SetColor (const long ColorRef) {
+		m_Red = GetRValue(ColorRef);
+		m_Green = GetGValue(ColorRef);
+		m_Blue = GetBValue(ColorRef);
+		m_Color = ColorRef;
+	}
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CColorStatic)
+	//{{AFX_VIRTUAL(CColorStatic)
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
 	/* Generated message map functions */
 
-protected:
+  protected:
 
-  //{{AFX_MSG(CColorStatic)
+	//{{AFX_MSG(CColorStatic)
 
-  afx_msg void OnPaint();
+	afx_msg void OnPaint();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CColorStatic Definition
+ *      End of Class CColorStatic Definition
 
  *=========================================================================*/
 
@@ -128,7 +126,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Colorstatic1.H
+ *      End of File Colorstatic1.H
 
  *=========================================================================*/
 

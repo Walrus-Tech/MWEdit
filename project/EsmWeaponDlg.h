@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmweapondlg.H
+ * File:    Esmweapondlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,103 +60,103 @@
 
 class CEsmWeaponDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmWeaponDlg);
+	DECLARE_DYNCREATE(CEsmWeaponDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmWeapon*	m_pWeapon;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
-
-
-
-  	/* Update item data */
-
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	CEsmWeapon *m_pWeapon;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Protected Class Methods ------------------------*/
 
-public:
+  protected:
+
+
+
+	/* Update item data */
+
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmWeaponDlg();
+	CEsmWeaponDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmWeaponDlg)
+	//{{AFX_DATA(CEsmWeaponDlg)
 
 	enum { IDD = IDD_WEAPON_DLG };
 
-	CButton	m_ScriptButton;
+	CButton m_ScriptButton;
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CButton	m_IgnoreResistCheck;
+	CButton m_IgnoreResistCheck;
 
-  CEdit		m_EnchantText;
+	CEdit m_EnchantText;
 
-  CComboBox	m_EnchantList;
+	CComboBox m_EnchantList;
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CEdit		m_HealthText;
+	CEdit m_HealthText;
 
-  CEdit		m_SpeedText;
+	CEdit m_SpeedText;
 
-  CEdit		m_ChopMinText;
+	CEdit m_ChopMinText;
 
-  CEdit		m_ChopMaxText;
+	CEdit m_ChopMaxText;
 
-  CEdit		m_SlashMinText;
+	CEdit m_SlashMinText;
 
-  CEdit		m_SlashMaxText;
+	CEdit m_SlashMaxText;
 
-  CEdit		m_ThrustMinText;
+	CEdit m_ThrustMinText;
 
-  CEdit		m_ThrustMaxText;
+	CEdit m_ThrustMaxText;
 
-  CEdit		m_ReachText;
+	CEdit m_ReachText;
 
-  CEdit		m_WeightText;
+	CEdit m_WeightText;
 
-  CComboBox	m_TypeList;
+	CComboBox m_TypeList;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
 	//}}AFX_DATA
 
@@ -164,25 +164,25 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmWeaponDlg)
+	//{{AFX_VIRTUAL(CEsmWeaponDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmWeaponDlg)
+	//{{AFX_MSG(CEsmWeaponDlg)
 
 	afx_msg void OnEnchantedit();
 
@@ -190,19 +190,21 @@ protected:
 
 	//}}AFX_MSG
 
-  void OnSelchangeWeaponList() { m_Modified = true; }
+	void OnSelchangeWeaponList() {
+		m_Modified = true;
+	}
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmWeaponDlg Definition
+ *      End of Class CEsmWeaponDlg Definition
 
  *=========================================================================*/
 
@@ -222,7 +224,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmweapondlg.H
+ *      End of File Esmweapondlg.H
 
  *=========================================================================*/
 

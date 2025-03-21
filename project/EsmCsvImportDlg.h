@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcsvimportdlg.H
+ * File:    Esmcsvimportdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 13, 2003
+ * Created On:  October 13, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmCsvDefs.h"
+#include "EsmCsvDefs.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,23 +58,23 @@
 
 
 
-	/* List definitions */
+/* List definitions */
 
-  #define ESMCSVIMP_LIST_COLWIDTH 80
+#define ESMCSVIMP_LIST_COLWIDTH 80
 
 
 
-	/* Csv file definitions */
+/* Csv file definitions */
 
-  #define ESMCSVIMP_CSV_EXT		_T("csv")
+#define ESMCSVIMP_CSV_EXT     _T("csv")
 
-  #define ESMCSVIMP_CSV_FILTER		_T("CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
+#define ESMCSVIMP_CSV_FILTER      _T("CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
 
-  
+
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -102,135 +102,137 @@ class CEsmCsvImportDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Members ------------------*/
+	/*---------- Begin Protected Class Members ------------------*/
 
-protected:
+  protected:
 
-  CCsvFile	m_CsvFile;		/* Csv file object */
+	CCsvFile m_CsvFile;      /* Csv file object */
 
-  CMWEditDoc*   m_pDocument;		/* Reference to parent document */
+	CMWEditDoc *m_pDocument;        /* Reference to parent document */
 
-  int		m_CreatedRecords;
-
-
-
-  int		m_IDColIndex;		/* Special column indices */
-
-  int		m_TypeColIndex;
+	int m_CreatedRecords;
 
 
 
+	int m_IDColIndex;       /* Special column indices */
 
-
-  /*---------- Begin Protected Class Methods ------------------*/
-
-protected:
-
-
-
-   
+	int m_TypeColIndex;
 
 
 
-  /*---------- Begin Public Class Methods ---------------------*/
-
-public:
 
 
+	/*---------- Begin Protected Class Methods ------------------*/
 
-        /* Protected constructor used by dynamic creation */
+  protected:
 
-  CEsmCsvImportDlg(CWnd* pParent);
 
-  virtual ~CEsmCsvImportDlg();
+
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------*/
+
+  public:
+
+
+
+	/* Protected constructor used by dynamic creation */
+
+	CEsmCsvImportDlg(CWnd* pParent);
+
+	virtual ~CEsmCsvImportDlg();
 
 
 
 	/* Checks the validity of the current data */
 
-  bool CheckData (void);
+	bool CheckData (void);
 
-  bool CheckRow  (const int RowIndex);
+	bool CheckRow (const int RowIndex);
 
 
 
 	/* Helper methods to create new records */
 
-  bool CreateRecords (void);
+	bool CreateRecords (void);
 
-  bool CreateRecord  (CCsvRow* pRow);
+	bool CreateRecord (CCsvRow* pRow);
 
 
 
 	/* Update the list control */
 
-  void ClearCsvList (void);
+	void ClearCsvList (void);
 
-  void FillCsvList  (void);
+	void FillCsvList (void);
 
 
 
 	/* Look for special column names */
 
-  bool FindColumns (void);
+	bool FindColumns (void);
 
 
 
 	/* Prompts user and loads CSV file if required */
 
-  bool LoadCsvFile (void);
+	bool LoadCsvFile (void);
 
 
 
 	/* Set control data */
 
-  void SetControlData (void);
+	void SetControlData (void);
 
-  void SetDocument    (CMWEditDoc* pDoc) { m_pDocument = pDoc; }
-
-
-
-
-
-  //{{AFX_DATA(CEsmCsvImportDlg)
-
-  enum { IDD = IDD_IMPORTCSV_DLG };
-
-  CListCtrl	m_CsvList;
-
-  CEdit		m_CsvFilename;
-
-  //}}AFX_DATA
+	void SetDocument (CMWEditDoc* pDoc) {
+		m_pDocument = pDoc;
+	}
 
 
 
-public:
+
+
+	//{{AFX_DATA(CEsmCsvImportDlg)
+
+	enum { IDD = IDD_IMPORTCSV_DLG };
+
+	CListCtrl m_CsvList;
+
+	CEdit m_CsvFilename;
+
+	//}}AFX_DATA
+
+
+
+  public:
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmCsvImportDlg)
+	//{{AFX_VIRTUAL(CEsmCsvImportDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmCsvImportDlg)
+	//{{AFX_MSG(CEsmCsvImportDlg)
 
-  afx_msg void OnLoadcsvbutton();
+	afx_msg void OnLoadcsvbutton();
 
-  afx_msg void OnCreatebutton();
+	afx_msg void OnCreatebutton();
 
 	virtual BOOL OnInitDialog();
 
@@ -238,15 +240,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmCsvImportDlg Definition
+ *      End of Class CEsmCsvImportDlg Definition
 
  *=========================================================================*/
 
@@ -266,7 +268,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmcsvimportdlg.H
+ *      End of File Esmcsvimportdlg.H
 
  *=========================================================================*/
 

@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmdoordlg.H
+ * File:    Esmdoordlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 15, 2003
+ * Created On:  February 15, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,103 +60,103 @@
 
 class CEsmDoorDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmDoorDlg);
+	DECLARE_DYNCREATE(CEsmDoorDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmDoor*	m_pDoor;
-
-
+	CEsmDoor *m_pDoor;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmDoorDlg();
+	CEsmDoorDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmDoorDlg)
+	//{{AFX_DATA(CEsmDoorDlg)
 
-  enum { IDD = IDD_DOOR_DLG };
+	enum { IDD = IDD_DOOR_DLG };
 
-  CComboBox	m_OpenList;
+	CComboBox m_OpenList;
 
-  CComboBox	m_CloseList;
+	CComboBox m_CloseList;
 
-  CComboBox	m_ScriptList;
+	CComboBox m_ScriptList;
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmDoorDlg)
+	//{{AFX_VIRTUAL(CEsmDoorDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmDoorDlg)
+	//{{AFX_MSG(CEsmDoorDlg)
 
 	afx_msg void OnOpenbutton();
 
@@ -168,17 +168,17 @@ protected:
 
 	//}}AFX_MSG
 
-  
-
-  DECLARE_MESSAGE_MAP();
 
 
+	DECLARE_MESSAGE_MAP();
 
- };
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmDoorDlg Definition
+ *      End of Class CEsmDoorDlg Definition
 
  *=========================================================================*/
 
@@ -198,7 +198,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmdoordlg.H
+ *      End of File Esmdoordlg.H
 
  *=========================================================================*/
 

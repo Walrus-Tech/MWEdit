@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmgloboptions.H
+ * File:    Esmgloboptions.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	September 7, 2003
+ * Created On:  September 7, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmOptionsDef.h"
+#include "EsmOptionsDef.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -56,53 +56,53 @@
 
  *=========================================================================*/
 
-  
 
 
 
-  bool	GetEsmOptNoScriptFormat       (void);
 
-  bool  GetEsmOptBackupSaves          (void);
+bool GetEsmOptNoScriptFormat (void);
 
-  bool  GetEsmOptNoScriptPrompt       (void);
+bool GetEsmOptBackupSaves (void);
 
-  bool  GetEsmOptAllowExtFuncs	      (void);
+bool GetEsmOptNoScriptPrompt (void);
 
-  bool  GetEsmOptUseExtraFile	      (void);
+bool GetEsmOptAllowExtFuncs (void);
 
-  bool  GetEsmOptStrictIDs	      (void);
+bool GetEsmOptUseExtraFile (void);
 
-  bool  GetEsmOptInitialIndentLevel   (void);
+bool GetEsmOptStrictIDs (void);
 
-  bool  GetEsmOptIndentCommentsMore   (void);
+bool GetEsmOptInitialIndentLevel (void);
 
-  bool  GetEsmOptAllowBloodmoon       (void);
+bool GetEsmOptIndentCommentsMore (void);
 
-  bool  GetEsmOptAllowTribunal        (void);
+bool GetEsmOptAllowBloodmoon (void);
 
-  int	GetEsmOptScriptWarnLevel      (void);
+bool GetEsmOptAllowTribunal (void);
 
-  int	GetEsmOptScriptFormatType     (void);
+int GetEsmOptScriptWarnLevel (void);
 
-  const TCHAR* GetEsmOptDefaultAuthor (void);
+int GetEsmOptScriptFormatType (void);
 
-  const TCHAR* GetEsmOptExtraFile     (void);
+const TCHAR *GetEsmOptDefaultAuthor (void);
 
-  const TCHAR* GetEsmOptScriptIndentString (void);
+const TCHAR *GetEsmOptExtraFile (void);
+
+const TCHAR *GetEsmOptScriptIndentString (void);
 
 
 
-	/* Forward definition */
+/* Forward definition */
 
-  class CEsmScriptOptions;
+class CEsmScriptOptions;
 
-  CEsmScriptOptions* GetEsmOptScriptOptions (void);
+CEsmScriptOptions *GetEsmOptScriptOptions (void);
 
 
 
 /*===========================================================================
 
- *		End of Function Prototypes
+ *      End of Function Prototypes
 
  *=========================================================================*/
 
@@ -114,7 +114,7 @@
 
 /*===========================================================================
 
- *		End of File Esmgloboptions.H
+ *      End of File Esmgloboptions.H
 
  *=========================================================================*/
 

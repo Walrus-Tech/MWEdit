@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmDialogue.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmDialogue.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,11 +16,11 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmRecord.h"
-  #include "EsmSubNameFix.h"
-  #include "EsmSubByte.h"
+#include "EsmRecord.h"
+#include "EsmSubNameFix.h"
+#include "EsmSubByte.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -30,17 +30,17 @@
  *
  *=========================================================================*/
 
-	/* Dialogue types */
-  #define MWESM_DIALTYPE_MIN		0
-  #define MWESM_DIALTYPE_TOPIC		0
-  #define MWESM_DIALTYPE_VOICE		1
-  #define MWESM_DIALTYPE_GREETING	2
-  #define MWESM_DIALTYPE_PERSUASION	3
-  #define MWESM_DIALTYPE_JOURNAL	4
-  #define MWESM_DIALTYPE_MAX		4
-  	
+/* Dialogue types */
+#define MWESM_DIALTYPE_MIN        0
+#define MWESM_DIALTYPE_TOPIC      0
+#define MWESM_DIALTYPE_VOICE      1
+#define MWESM_DIALTYPE_GREETING   2
+#define MWESM_DIALTYPE_PERSUASION 3
+#define MWESM_DIALTYPE_JOURNAL    4
+#define MWESM_DIALTYPE_MAX        4
+
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -49,9 +49,9 @@
  * Begin Function Prototypes
  *
  *=========================================================================*/
-  const TCHAR* GetESMDialogType (const int Type);
+const TCHAR *GetESMDialogType (const int Type);
 /*===========================================================================
- *		End of Function Prototypes
+ *      End of Function Prototypes
  *=========================================================================*/
 
 
@@ -63,57 +63,67 @@
  *
  *=========================================================================*/
 class CEsmDialogue : public CEsmRecord {
-  DECLARE_SUBRECCREATE();
+	DECLARE_SUBRECCREATE();
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-  CEsmSubRecord*	m_pData;
-  
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
+	CEsmSubRecord *m_pData;
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CEsmDialogue();
-  //virtual ~CEsmDialogue() { Destroy(); }
-  virtual void Destroy (void);
+	CEsmDialogue();
+	//virtual ~CEsmDialogue() { Destroy(); }
+	virtual void Destroy (void);
 
-  	/* Compare two fields of the record */
-  virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	/* Compare two fields of the record */
+	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
 
-  	/* Return a new record object */
-  static CEsmRecord* Create (void);
+	/* Return a new record object */
+	static CEsmRecord *Create (void);
 
-  	/* Create a new, empty, record */
-  virtual void CreateNew (CEsmFile* pFile);
+	/* Create a new, empty, record */
+	virtual void CreateNew (CEsmFile* pFile);
 
-  	/* Get a string representation of a particular field */
-  virtual const TCHAR* GetFieldString (const int FieldID);
+	/* Get a string representation of a particular field */
+	virtual const TCHAR *GetFieldString (const int FieldID);
 
-  	/* Return a text representation of the item type */
-  virtual const TCHAR* GetItemType (void);
+	/* Return a text representation of the item type */
+	virtual const TCHAR *GetItemType (void);
 
-  	/* Get class members */
-  const TCHAR* GetDialogType   (void) { return (GetESMDialogType(GetDialogTypeID())); }
-  int          GetDialogTypeID (void) { return (m_pData ? (int) *(m_pData->GetData()) : 0); }
-  
-  	/* Used to save the various record elements */
-  virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	/* Get class members */
+	const TCHAR *GetDialogType (void) {
+		return (GetESMDialogType(GetDialogTypeID()));
+	}
 
-  	/* Set class members */
-  void SetDialogType (const int Type) { if (m_pData) *(m_pData->GetData()) = (byte) Type; }
+	int GetDialogTypeID (void) {
+		return (m_pData ? (int) * (m_pData->GetData()) : 0);
+	}
 
- };
+	/* Used to save the various record elements */
+	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+
+	/* Set class members */
+	void SetDialogType (const int Type) {
+		if (m_pData) {
+			*(m_pData->GetData()) = (byte) Type;
+		}
+	}
+
+};
+
 /*===========================================================================
- *		End of Class CEsmDialogue Definition
+ *      End of Class CEsmDialogue Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmDialogue.H
+ *      End of File EsmDialogue.H
  *=========================================================================*/

@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmItem2.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmItem2.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "esmitem2.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmItem2.cpp");
+DEFINE_FILE("EsmItem2.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,11 +29,12 @@
  *
  *=========================================================================*/
 CEsmItem2::CEsmItem2 () {
-  //DEFINE_FUNCTION("CEsmItem2::CEsmItem2()");
-  m_pIcon	= NULL;
- }
+	//DEFINE_FUNCTION("CEsmItem2::CEsmItem2()");
+	m_pIcon = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmItem2 Constructor
+ *      End of Class CEsmItem2 Constructor
  *=========================================================================*/
 
 
@@ -45,16 +46,15 @@ CEsmItem2::CEsmItem2 () {
  *
  *=========================================================================*/
 void CEsmItem2::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmItem2::Destroy()");
-
+	//DEFINE_FUNCTION("CEsmItem2::Destroy()");
 	/* Clear the references */
-  m_pIcon	= NULL;
-
+	m_pIcon = NULL;
 	/* Call the base class method */
-  CEsmItem1::Destroy();
- }
+	CEsmItem1::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmItem2::Destroy()
+ *      End of Class Method CEsmItem2::Destroy()
  *=========================================================================*/
 
 
@@ -67,26 +67,33 @@ void CEsmItem2::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmItem2::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  //DEFINE_FUNCTION("CEsmItem2::CompareFields()");
-  CEsmItem2* pRecord2;
+	//DEFINE_FUNCTION("CEsmItem2::CompareFields()");
+	CEsmItem2* pRecord2;
 
 	/* Ensure the correct type */
-  if ((MWESM_CLASSTYPE_ITEM2 & pRecord->GetClassType()) == 0) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pRecord2 = (CEsmItem2 *) pRecord;
+	if ((MWESM_CLASSTYPE_ITEM2 & pRecord->GetClassType()) == 0) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_ICON:
-	return StringCompare(GetIcon(), pRecord2->GetIcon(), FALSE);
-    case ESM_FIELD_WEIGHT:
-	return (int) (GetWeight()*100 - pRecord2->GetWeight()*100);
-    case ESM_FIELD_VALUE:
-	return (int) (GetValue() - pRecord2->GetValue());
-    default:	/* Call the base class method */
-	return CEsmItem1::CompareFields(FieldID, pRecord); 
-   }
- }
+	pRecord2 = (CEsmItem2 *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_ICON:
+			return StringCompare(GetIcon(), pRecord2->GetIcon(), FALSE);
+
+		case ESM_FIELD_WEIGHT:
+			return (int) (GetWeight() * 100 - pRecord2->GetWeight() * 100);
+
+		case ESM_FIELD_VALUE:
+			return (int) (GetValue() - pRecord2->GetValue());
+
+		default:    /* Call the base class method */
+			return CEsmItem1::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmItem2::CompareFields()
+ *      End of Class Method CEsmItem2::CompareFields()
  *=========================================================================*/
 
 
@@ -98,16 +105,14 @@ int CEsmItem2::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  *
  *=========================================================================*/
 void CEsmItem2::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmItem1::CreateNew(pFile);
-
+	CEsmItem1::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_ITEX);
+	AllocateSubRecord(MWESM_SUBREC_ITEX);
+}
 
- }
 /*===========================================================================
- *		End of Class Method CEsmItem1::CreateNew()
+ *      End of Class Method CEsmItem1::CreateNew()
  *=========================================================================*/
 
 
@@ -119,28 +124,33 @@ void CEsmItem2::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmItem2::GetFieldString (const int FieldID) {
-  //DEFINE_FUNCTION("CEsmItem2::GetFieldString()");
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmItem2::GetFieldString (const int FieldID) {
+	//DEFINE_FUNCTION("CEsmItem2::GetFieldString()");
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-    case ESM_FIELD_ICON:
-	if (m_pIcon == NULL) return _T("");
-	return (m_pIcon->GetName());
-    case ESM_FIELD_WEIGHT:
-	snprintf (s_Buffer, 31, _T("%.2f"), GetWeight());
-	return (s_Buffer);
-    case ESM_FIELD_VALUE:
-    	snprintf (s_Buffer, 31, _T("%lu"), (unsigned long)GetValue());
-	return (s_Buffer);
+	switch (FieldID) {
+		case ESM_FIELD_ICON:
+			if (m_pIcon == NULL) {
+				return _T("");
+			}
 
-    default:	/* Call the base class record */
-	return CEsmItem1::GetFieldString(FieldID);
-   }
-  
- }
+			return (m_pIcon->GetName());
+
+		case ESM_FIELD_WEIGHT:
+			snprintf (s_Buffer, 31, _T("%.2f"), GetWeight());
+			return (s_Buffer);
+
+		case ESM_FIELD_VALUE:
+			snprintf (s_Buffer, 31, _T("%lu"), (unsigned long)GetValue());
+			return (s_Buffer);
+
+		default:    /* Call the base class record */
+			return CEsmItem1::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmItem2::GetFieldString()
+ *      End of Class Method TCHAR* CEsmItem2::GetFieldString()
  *=========================================================================*/
 
 
@@ -150,15 +160,15 @@ const TCHAR* CEsmItem2::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmItem2::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_ITEX)) {
+		m_pIcon = (CEsmSubNameFix *) pSubRecord;
+	} else {
+		CEsmItem1::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_ITEX))
-    m_pIcon = (CEsmSubNameFix *) pSubRecord;
-  else
-    CEsmItem1::OnAddSubRecord(pSubRecord);
-  
- }
 /*===========================================================================
- *		End of Class Event CEsmItem2::OnAddSubRecord()
+ *      End of Class Event CEsmItem2::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -171,24 +181,26 @@ void CEsmItem2::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmItem2::SetFieldValue (const int FieldID, const TCHAR* pString) {
+	switch (FieldID) {
+		case ESM_FIELD_ICON:
+			SetIcon(pString);
+			return (true);
 
-  switch (FieldID) { 
-    case ESM_FIELD_ICON:
-	SetIcon(pString);
-	return (true);
-    case ESM_FIELD_WEIGHT:	
-	SetWeight((float)atof(pString));
-	return (true);
-    case ESM_FIELD_VALUE:
-        SetValue(atol(pString));
-	return (true);
-   };
+		case ESM_FIELD_WEIGHT:
+			SetWeight((float)atof(pString));
+			return (true);
+
+		case ESM_FIELD_VALUE:
+			SetValue(atol(pString));
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmItem1::SetFieldValue(FieldID, pString);
- }
+	return CEsmItem1::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmItem2::SetFieldValue()
+ *      End of Class Method CEsmItem2::SetFieldValue()
  *=========================================================================*/
 
 
@@ -198,24 +210,26 @@ bool CEsmItem2::SetFieldValue (const int FieldID, const TCHAR* pString) {
  *
  *=========================================================================*/
 void CEsmItem2::SetIcon (const TCHAR* pIcon) {
-  DEFINE_FUNCTION("CEsmItem2::SetIcon()");
- 
-	/* Should we delete the current enchant? */
-   if (pIcon == NULL || *pIcon == NULL_CHAR) {
-     if (m_pIcon != NULL) RemoveSubRecord(m_pIcon);
-     m_pIcon = NULL;
-    }
-	/* Create a new enchant sub-record */
-   else if (m_pIcon == NULL) {
-     AllocateSubRecord(MWESM_SUBREC_ITEX);
-     ASSERT(m_pIcon != NULL);
-     m_pIcon->SetName(pIcon);
-    }
-   else {
-     m_pIcon->SetName(pIcon);
-    }
+	DEFINE_FUNCTION("CEsmItem2::SetIcon()");
 
- }
+	/* Should we delete the current enchant? */
+	if (pIcon == NULL || *pIcon == NULL_CHAR) {
+		if (m_pIcon != NULL) {
+			RemoveSubRecord(m_pIcon);
+		}
+
+		m_pIcon = NULL;
+	}
+	/* Create a new enchant sub-record */
+	else if (m_pIcon == NULL) {
+		AllocateSubRecord(MWESM_SUBREC_ITEX);
+		ASSERT(m_pIcon != NULL);
+		m_pIcon->SetName(pIcon);
+	} else {
+		m_pIcon->SetName(pIcon);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmItem2::SetIcon()
+ *      End of Class Method CEsmItem2::SetIcon()
  *=========================================================================*/

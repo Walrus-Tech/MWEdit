@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmsettingdlg.H
+ * File:    Esmsettingdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 17, 2003
+ * Created On:  February 17, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,103 +60,103 @@
 
 class CEsmSettingDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmSettingDlg);
+	DECLARE_DYNCREATE(CEsmSettingDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmGameSetting*	m_pSetting;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
+	CEsmGameSetting *m_pSetting;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Protected Class Methods ------------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmSettingDlg();
+	CEsmSettingDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmSettingDlg)
+	//{{AFX_DATA(CEsmSettingDlg)
 
-  enum { IDD = IDD_SETTING_DLG };
+	enum { IDD = IDD_SETTING_DLG };
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CStatic	m_TypeLabel;
+	CStatic m_TypeLabel;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
-  
+
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmSettingDlg)
+	//{{AFX_VIRTUAL(CEsmSettingDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmSettingDlg)
+	//{{AFX_MSG(CEsmSettingDlg)
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmSettingDlg Definition
+ *      End of Class CEsmSettingDlg Definition
 
  *=========================================================================*/
 
@@ -176,7 +176,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmsettingdlg.H
+ *      End of File Esmsettingdlg.H
 
  *=========================================================================*/
 

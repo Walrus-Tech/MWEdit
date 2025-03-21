@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmlockpickdlg.H
+ * File:    Esmlockpickdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 16, 2003
+ * Created On:  February 16, 2003
 
  *
 
@@ -36,13 +36,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,119 +62,119 @@
 
 class CEsmLockPickDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmLockPickDlg);
+	DECLARE_DYNCREATE(CEsmLockPickDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmLockPick*	m_pLockPick;
-
-
+	CEsmLockPick *m_pLockPick;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmLockPickDlg();
+	CEsmLockPickDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmLockPickDlg)
+	//{{AFX_DATA(CEsmLockPickDlg)
 
-  enum { IDD = IDD_LOCKPICK_DLG };
+	enum { IDD = IDD_LOCKPICK_DLG };
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CEdit		m_QualityText;
+	CEdit m_QualityText;
 
-  CEdit		m_WeightText;
+	CEdit m_WeightText;
 
-  CEdit		m_UsesText;
+	CEdit m_UsesText;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmLockPickDlg)
+	//{{AFX_VIRTUAL(CEsmLockPickDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmLockPickDlg)
+	//{{AFX_MSG(CEsmLockPickDlg)
 
-  //}}AFX_MSG
-
-  
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmLockPickDlg Definition
+ *      End of Class CEsmLockPickDlg Definition
 
  *=========================================================================*/
 
@@ -194,7 +194,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmlockpickdlg.H
+ *      End of File Esmlockpickdlg.H
 
  *=========================================================================*/
 

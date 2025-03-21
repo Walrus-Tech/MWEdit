@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmdlgarray.H
+ * File:    Esmdlgarray.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 8, 2003
+ * Created On:  February 8, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "MainFrm.h"
+#include "MainFrm.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,55 +60,55 @@
 
 
 
-	/* Array of dialog pointers */
+/* Array of dialog pointers */
 
-  typedef TPtrArray<CFrameWnd> CEsmFrameArray;
-
-
-
-	/* Type for dialog static creation methods */
-
-  typedef CEsmRecDialog* (*ESMRECDLG_CREATEFUNC) (void);
+typedef TPtrArray<CFrameWnd> CEsmFrameArray;
 
 
 
-	/* Function typedef for custom dialog creation */
+/* Type for dialog static creation methods */
 
-  class CEsmDlgHandler;
-
-  typedef CFrameWnd* (CEsmDlgHandler::*DLGCREATE_FUNC) (esmrecinfo_t* pRecInfo);
+typedef CEsmRecDialog *(*ESMRECDLG_CREATEFUNC) (void);
 
 
 
-	/* Used to create the various dialogs */
+/* Function typedef for custom dialog creation */
 
-  struct esmdlgcreateinfo_t {
+class CEsmDlgHandler;
 
-	const TCHAR*		Type;
-
-	const TCHAR*		pTitle;
-
-	int			ResourceID;
-
-	CRuntimeClass*		pViewClass;
-
-	CRuntimeClass*		pFrameClass;
-
-	DLGCREATE_FUNC		CreateFunc;
-
-   };
+typedef CFrameWnd *(CEsmDlgHandler::*DLGCREATE_FUNC) (esmrecinfo_t* pRecInfo);
 
 
 
-	/* Class forward definitions */
+/* Used to create the various dialogs */
 
-  class CEsmScriptCompareDlg;
+struct esmdlgcreateinfo_t {
+
+	const TCHAR *Type;
+
+	const TCHAR *pTitle;
+
+	int ResourceID;
+
+	CRuntimeClass *pViewClass;
+
+	CRuntimeClass *pFrameClass;
+
+	DLGCREATE_FUNC CreateFunc;
+
+};
+
+
+
+/* Class forward definitions */
+
+class CEsmScriptCompareDlg;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -134,177 +134,195 @@ class CEsmDlgHandler {
 
 
 
-  /*---------- Begin Private Class Members ----------------------*/
+	/*---------- Begin Private Class Members ----------------------*/
 
-protected:
+  protected:
 
-  CEsmFrameArray  m_Frames;		/* Array of ESM frame windows */
+	CEsmFrameArray m_Frames;     /* Array of ESM frame windows */
 
-  CMWEditDoc*	  m_pDocument;		/* Current document */
+	CMWEditDoc *m_pDocument;      /* Current document */
 
-  CMainFrame*	  m_pMainFrame;
-
-
-
-  CFrameWnd*	  m_pFindDlg;		/* Find dialog parent frame */
-
-  CFrameWnd*	  m_pUsesDlg;
-
-  CFrameWnd*	  m_pScrTempDlg;
-
-  CFrameWnd*	  m_pScriptCompareDlg;
+	CMainFrame *m_pMainFrame;
 
 
 
+	CFrameWnd *m_pFindDlg;       /* Find dialog parent frame */
+
+	CFrameWnd *m_pUsesDlg;
+
+	CFrameWnd *m_pScrTempDlg;
+
+	CFrameWnd *m_pScriptCompareDlg;
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
 
-protected:
+
+
+	/*---------- Begin Protected Class Methods --------------------*/
+
+  protected:
 
 
 
 	/* Create a new dialog based on the input type */
 
-  CFrameWnd* CreateESMDialog (esmrecinfo_t* pRecInfo, const bool IsNew);
+	CFrameWnd *CreateESMDialog (esmrecinfo_t* pRecInfo, const bool IsNew);
 
-  CFrameWnd* CreateESMDialog (esmdlgcreateinfo_t& CreateInfo);
-
-
+	CFrameWnd *CreateESMDialog (esmdlgcreateinfo_t &CreateInfo);
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Class Constructors/Destructors */
 
-  CEsmDlgHandler();
+	CEsmDlgHandler();
 
-  virtual ~CEsmDlgHandler() { Destroy(); }
+	virtual ~CEsmDlgHandler() {
+		Destroy();
+	}
 
-  virtual void Destroy (void);
+	virtual void Destroy (void);
 
 
 
 	/* Delete all the dialogs current in the array */
 
-  void ClearDlgArray (void);
+	void ClearDlgArray (void);
 
 
 
 	/* Create a copy of a record */
 
-  CEsmRecord* CreateCopy (CEsmRecord* pRecord);
+	CEsmRecord *CreateCopy (CEsmRecord* pRecord);
 
 
 
 	/* Custom dialog creation methods */
 
-  CFrameWnd* CreateDialogueDlg (esmrecinfo_t* pRecInfo);  
+	CFrameWnd *CreateDialogueDlg (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Attempt to open a new edit window */
 
-  bool EditRecord (esmrecinfo_t* pRecInfo, const bool IsNew = false);
+	bool EditRecord (esmrecinfo_t* pRecInfo, const bool IsNew = false);
 
 
 
 	/* Find an existing dialog */
 
-  CFrameWnd* FindDialog (esmrecinfo_t* pRecInfo);
+	CFrameWnd *FindDialog (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Get the current active filename */
 
-  const TCHAR* GetDocFilename (void);
+	const TCHAR *GetDocFilename (void);
 
-  CMWEditDoc*  GetDocument    (void) { return (m_pDocument); }
+	CMWEditDoc *GetDocument (void) {
+		return (m_pDocument);
+	}
 
-  CEsmFile*    GetActiveFile  (void);
+	CEsmFile *GetActiveFile (void);
 
-  CMainFrame*  GetMainFrame   (void) { return (m_pMainFrame); }
+	CMainFrame *GetMainFrame (void) {
+		return (m_pMainFrame);
+	}
 
 
 
 	/* Try and find a magic effect record */
 
-  esmrecinfo_t* GetEffectRecord (const int EffectID);
+	esmrecinfo_t *GetEffectRecord (const int EffectID);
 
 
 
-  	/* Checks the validity of a new ID */
+	/* Checks the validity of a new ID */
 
-  bool IsValidID    (const TCHAR* pID);
+	bool IsValidID (const TCHAR* pID);
 
-  bool IsExistingID (const TCHAR* pID);
+	bool IsExistingID (const TCHAR* pID);
 
 
 
-  	/* Notifies when the find dialog is closed */
+	/* Notifies when the find dialog is closed */
 
-  void OnCloseFindDlg	       (void) { m_pFindDlg = NULL; }
+	void OnCloseFindDlg (void) {
+		m_pFindDlg = NULL;
+	}
 
-  void OnCloseUsesDlg	       (void) { m_pUsesDlg = NULL; }
+	void OnCloseUsesDlg (void) {
+		m_pUsesDlg = NULL;
+	}
 
-  void OnCloseScrTempDlg       (void) { m_pScrTempDlg = NULL; }
+	void OnCloseScrTempDlg (void) {
+		m_pScrTempDlg = NULL;
+	}
 
-  void OnCloseScriptCompareDlg (void) { m_pScriptCompareDlg = NULL; }
+	void OnCloseScriptCompareDlg (void) {
+		m_pScriptCompareDlg = NULL;
+	}
 
 
 
 	/* Indicates that changes are about to be written to the given object */
 
-  int OnPreSaveRecord  (esmreceditinfo_t* pRecEditInfo);
+	int OnPreSaveRecord (esmreceditinfo_t* pRecEditInfo);
 
-  int OnPostSaveRecord (esmreceditinfo_t* pRecEditInfo);
+	int OnPostSaveRecord (esmreceditinfo_t* pRecEditInfo);
 
 
 
 	/* Request to create a new item of the given type */
 
-  CEsmRecord* OnAddNew (const TCHAR* pType);
+	CEsmRecord *OnAddNew (const TCHAR* pType);
 
-  CEsmRecord* OnAddNewDialog (const int DialType);
+	CEsmRecord *OnAddNewDialog (const int DialType);
 
 
 
 	/* Display other dialog types */
 
-  void OpenFindDlg	    (void);
+	void OpenFindDlg (void);
 
-  void OpenUsesDlg   	    (esmrecinfo_t* pRecInfo);
+	void OpenUsesDlg (esmrecinfo_t* pRecInfo);
 
-  CEsmScriptCompareDlg* OpenScriptCompareDlg (void);
+	CEsmScriptCompareDlg *OpenScriptCompareDlg (void);
 
-  void OpenScrTempDlg	    (void);
+	void OpenScrTempDlg (void);
 
 
 
-  	/* Removes a frame from the array */
+	/* Removes a frame from the array */
 
-  void RemoveFrame (CFrameWnd* pFrame);
+	void RemoveFrame (CFrameWnd* pFrame);
 
 
 
 	/* Set class members */
 
-  void SetDocument  (CMWEditDoc* pDoc)	     { m_pDocument  = pDoc; }
+	void SetDocument (CMWEditDoc* pDoc) {
+		m_pDocument = pDoc;
+	}
 
-  void SetMainFrame (CMainFrame* pMainFrame) { m_pMainFrame = pMainFrame; }
+	void SetMainFrame (CMainFrame* pMainFrame) {
+		m_pMainFrame = pMainFrame;
+	}
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmDlgHandler Definition
+ *      End of Class CEsmDlgHandler Definition
 
  *=========================================================================*/
 
@@ -316,7 +334,7 @@ public:
 
 /*===========================================================================
 
- *		End of File Esmdlgarray.H
+ *      End of File Esmdlgarray.H
 
  *=========================================================================*/
 

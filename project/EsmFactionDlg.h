@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmfactiondlg.H
+ * File:    Esmfactiondlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 18, 2003
+ * Created On:  February 18, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,35 +60,35 @@
 
 
 
-	/* Rank list definitions */
+/* Rank list definitions */
 
-  #define MWESM_RANKLIST_INDEX		0
+#define MWESM_RANKLIST_INDEX      0
 
-  #define MWESM_RANKLIST_NAME		1
+#define MWESM_RANKLIST_NAME       1
 
-  #define MWESM_RANKLIST_ATTRIB1	2
+#define MWESM_RANKLIST_ATTRIB1    2
 
-  #define MWESM_RANKLIST_ATTRIB2	3
+#define MWESM_RANKLIST_ATTRIB2    3
 
-  #define MWESM_RANKLIST_SKILL1		4
+#define MWESM_RANKLIST_SKILL1     4
 
-  #define MWESM_RANKLIST_SKILL2		5
+#define MWESM_RANKLIST_SKILL2     5
 
-  #define MWESM_RANKLIST_FACTREP	6
+#define MWESM_RANKLIST_FACTREP    6
 
 
 
-	/* Reaction list definitions */
+/* Reaction list definitions */
 
-  #define MWESM_REACLIST_NAME	0
+#define MWESM_REACLIST_NAME   0
 
-  #define MWESM_REACLIST_VALUE	1
+#define MWESM_REACLIST_VALUE  1
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -108,147 +108,147 @@
 
 class CEsmFactionDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmFactionDlg);
+	DECLARE_DYNCREATE(CEsmFactionDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmFaction*	m_pFaction;
+	CEsmFaction *m_pFaction;
 
-  int		m_CurrentRank;
+	int m_CurrentRank;
 
-  int		m_CurrentReaction;
-
-
+	int m_CurrentReaction;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update the rank list data controls */
 
-  void GetRankData (void);
+	void GetRankData (void);
 
-  void SetRankData (const int Rank);
+	void SetRankData (const int Rank);
 
-  void GetReactionData (void);
+	void GetReactionData (void);
 
-  void SetReactionData (const int Rank);
-
-
-
-  	/* Update item data */
-
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	void SetReactionData (const int Rank);
 
 
 
+	/* Update item data */
+
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmFactionDlg();
+	CEsmFactionDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmFactionDlg)
+	//{{AFX_DATA(CEsmFactionDlg)
 
-  enum { IDD = IDD_FACTION_DLG };
+	enum { IDD = IDD_FACTION_DLG };
 
-  CEdit		m_AdjustText;
+	CEdit m_AdjustText;
 
-  CEdit		m_FactRepText;
+	CEdit m_FactRepText;
 
-  CListCtrl	m_ReactionList;
+	CListCtrl m_ReactionList;
 
-  CComboBox	m_FactionList;
+	CComboBox m_FactionList;
 
-  CEdit		m_SkillText2;
+	CEdit m_SkillText2;
 
-  CEdit		m_SkillText1;
+	CEdit m_SkillText1;
 
-  CEdit		m_AttributeText2;
+	CEdit m_AttributeText2;
 
-  CEdit		m_AttributeText1;
+	CEdit m_AttributeText1;
 
-  CEdit		m_RankNameText;
+	CEdit m_RankNameText;
 
-  CComboBox	m_AttributeList2;
+	CComboBox m_AttributeList2;
 
-  CComboBox	m_AttributeList1;
+	CComboBox m_AttributeList1;
 
-  CComboBox	m_SkillList6;
+	CComboBox m_SkillList6;
 
-  CComboBox	m_SkillList5;
+	CComboBox m_SkillList5;
 
-  CComboBox	m_SkillList4;
+	CComboBox m_SkillList4;
 
-  CComboBox	m_SkillList3;
+	CComboBox m_SkillList3;
 
-  CComboBox	m_SkillList2;
+	CComboBox m_SkillList2;
 
-  CComboBox	m_SkillList1;
+	CComboBox m_SkillList1;
 
-  CListCtrl	m_RankList;
+	CListCtrl m_RankList;
 
-  CButton	m_HiddenCheck;
+	CButton m_HiddenCheck;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmFactionDlg)
+	//{{AFX_VIRTUAL(CEsmFactionDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmFactionDlg)
+	//{{AFX_MSG(CEsmFactionDlg)
 
 	afx_msg void OnItemchangingRanklist(NMHDR* pNMHDR, LRESULT* pResult);
 
@@ -260,17 +260,17 @@ protected:
 
 	//}}AFX_MSG
 
- 
-
-  DECLARE_MESSAGE_MAP();
 
 
+	DECLARE_MESSAGE_MAP();
 
- };
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmFactionDlg Definition
+ *      End of Class CEsmFactionDlg Definition
 
  *=========================================================================*/
 
@@ -290,7 +290,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmfactiondlg.H
+ *      End of File Esmfactiondlg.H
 
  *=========================================================================*/
 

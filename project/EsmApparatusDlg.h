@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmapparatusdlg.H
+ * File:    Esmapparatusdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 10, 2003
+ * Created On:  February 10, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,119 +60,119 @@
 
 class CEsmApparatusDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmApparatusDlg);
+	DECLARE_DYNCREATE(CEsmApparatusDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmApparatus*	m_pApparatus;
-
-
+	CEsmApparatus *m_pApparatus;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmApparatusDlg();
+	CEsmApparatusDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmApparatusDlg)
+	//{{AFX_DATA(CEsmApparatusDlg)
 
-  enum { IDD = IDD_APPARATUS_DLG };
+	enum { IDD = IDD_APPARATUS_DLG };
 
-  CButton	m_PersistCheck;
+	CButton m_PersistCheck;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CEdit		m_QualityText;
+	CEdit m_QualityText;
 
-  CEdit		m_WeightText;
+	CEdit m_WeightText;
 
-  CComboBox	m_TypeList;
+	CComboBox m_TypeList;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmApparatusDlg)
+	//{{AFX_VIRTUAL(CEsmApparatusDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmApparatusDlg)
+	//{{AFX_MSG(CEsmApparatusDlg)
 
-  //}}AFX_MSG
-
-  
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmApparatusDlg Definition
+ *      End of Class CEsmApparatusDlg Definition
 
  *=========================================================================*/
 
@@ -192,7 +192,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmapparatusdlg.H
+ *      End of File Esmapparatusdlg.H
 
  *=========================================================================*/
 

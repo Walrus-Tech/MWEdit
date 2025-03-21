@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmnpcdlg.H
+ * File:    Esmnpcdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 23, 2003
+ * Created On:  February 23, 2003
 
  *
 
@@ -34,25 +34,25 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "windows/TabCtrlSheet.h"
+#include "windows/TabCtrlSheet.h"
 
-  #include "EsmNpcPage1.h"
+#include "EsmNpcPage1.h"
 
-  #include "EsmNpcPage2.h"
+#include "EsmNpcPage2.h"
 
-  #include "EsmNpcPage3.h"
+#include "EsmNpcPage3.h"
 
-  #include "EsmNpcPage4.h"
+#include "EsmNpcPage4.h"
 
-  #include "EsmNpcPage5.h"
+#include "EsmNpcPage5.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -72,119 +72,119 @@
 
 class CEsmNpcDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmNpcDlg);
+	DECLARE_DYNCREATE(CEsmNpcDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmNpcPage1	 m_Page1;
+	CEsmNpcPage1 m_Page1;
 
-  CEsmNpcPage2	 m_Page2;
+	CEsmNpcPage2 m_Page2;
 
-  CEsmNpcPage3	 m_Page3;
+	CEsmNpcPage3 m_Page3;
 
-  CEsmNpcPage4	 m_Page4;
+	CEsmNpcPage4 m_Page4;
 
-  CEsmNpcPage5	 m_Page5;
+	CEsmNpcPage5 m_Page5;
 
-  CEsmNpc*	 m_pNpc;
-
-
+	CEsmNpc *m_pNpc;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
 
-protected:
+
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
 
 	/* Update item data */
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmNpcDlg();
+	CEsmNpcDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmNpcDlg)
+	//{{AFX_DATA(CEsmNpcDlg)
 
-  enum { IDD = IDD_NPC_DLG };
+	enum { IDD = IDD_NPC_DLG };
 
-  CTabCtrlSheet	m_MainTab;
+	CTabCtrlSheet m_MainTab;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmNpcDlg)
+	//{{AFX_VIRTUAL(CEsmNpcDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmNpcDlg)
+	//{{AFX_MSG(CEsmNpcDlg)
 
-  afx_msg void OnSelchangingMaintab(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnSelchangingMaintab(NMHDR* pNMHDR, LRESULT* pResult);
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmNpcDlg Definition
+ *      End of Class CEsmNpcDlg Definition
 
  *=========================================================================*/
 
@@ -204,7 +204,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmnpcdlg.H
+ *      End of File Esmnpcdlg.H
 
  *=========================================================================*/
 

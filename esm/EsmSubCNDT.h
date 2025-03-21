@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmsubCNDT.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmsubCNDT.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmSubBase.h"
+#include "EsmSubBase.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -29,7 +29,7 @@
  *=========================================================================*/
 
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -40,13 +40,13 @@
  *=========================================================================*/
 #pragma pack(push, 1)
 
-  typedef struct {
+typedef struct {
 	float Weight;
-   } contdata_t;
+} contdata_t;
 
 #pragma pack(pop)
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -59,52 +59,60 @@
  *=========================================================================*/
 class CEsmSubCNDT : public CEsmSubRecord {
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  //CEsmSubCNDT();
-  //virtual ~CEsmSubCNDT() { Destroy(); }
-  //virtual void Destroy (void);
+	//CEsmSubCNDT();
+	//virtual ~CEsmSubCNDT() { Destroy(); }
+	//virtual void Destroy (void);
 
 	/* Create a name object */
-  static CEsmSubRecord* Create (void) {
-	CEsmSubRecord* pSubRecord;
-	CreatePointerL(pSubRecord, CEsmSubCNDT);
-	return (pSubRecord);
-   }
+	static CEsmSubRecord *Create (void) {
+		CEsmSubRecord* pSubRecord;
+		CreatePointerL(pSubRecord, CEsmSubCNDT);
+		return (pSubRecord);
+	}
 
 	/* Create a new sub-record */
-  virtual void CreateNew (void) { 
-	CEsmSubRecord::CreateNew();
-	CreateArrayPointerL(m_pData, byte, sizeof(contdata_t)); 
-	m_RecordSize = sizeof(contdata_t); 
-	memset(m_pData, 0, sizeof(contdata_t));
-   }
+	virtual void CreateNew (void) {
+		CEsmSubRecord::CreateNew();
+		CreateArrayPointerL(m_pData, byte, sizeof(contdata_t));
+		m_RecordSize = sizeof(contdata_t);
+		memset(m_pData, 0, sizeof(contdata_t));
+	}
 
 	/* Get class members */
-  contdata_t*	GetContData (void) { return ((contdata_t *) m_pData); }
-  float		GetWeight   (void) { return (GetContData()->Weight); }
+	contdata_t *GetContData (void) {
+		return ((contdata_t *) m_pData);
+	}
+
+	float GetWeight (void) {
+		return (GetContData()->Weight);
+	}
 
 	/* Set class members */
-  void SetWeight (const float Value) { GetContData()->Weight = Value; }
+	void SetWeight (const float Value) {
+		GetContData()->Weight = Value;
+	}
 
- };
+};
+
 /*===========================================================================
- *		End of Class CEsmSubCNDT Definition
+ *      End of Class CEsmSubCNDT Definition
  *=========================================================================*/
 
 
 
 #endif
 /*===========================================================================
- *		End of File Esmsubaodt.H
+ *      End of File Esmsubaodt.H
  *=========================================================================*/

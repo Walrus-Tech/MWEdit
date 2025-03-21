@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmbodypartdlg.H
+ * File:    Esmbodypartdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 12, 2003
+ * Created On:  February 12, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,71 +60,71 @@
 
 class CEsmBodyPartDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmBodyPartDlg);
+	DECLARE_DYNCREATE(CEsmBodyPartDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmBodyPart*		m_pBodyPart;
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
+	CEsmBodyPart *m_pBodyPart;
 
 
 
+	/*---------- Begin Protected Class Methods ------------------------*/
+
+  protected:
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmBodyPartDlg();
+	CEsmBodyPartDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmBodyPartDlg)
+	//{{AFX_DATA(CEsmBodyPartDlg)
 
-  enum { IDD = IDD_BODYPART_DLG };
+	enum { IDD = IDD_BODYPART_DLG };
 
-  CButton	m_VampireCheck;
+	CButton m_VampireCheck;
 
-  CButton	m_FemaleCheck;
+	CButton m_FemaleCheck;
 
-  CButton	m_PlayableCheck;
+	CButton m_PlayableCheck;
 
-  CComboBox	m_RaceList;
+	CComboBox m_RaceList;
 
-  CComboBox	m_PartTypeList;
+	CComboBox m_PartTypeList;
 
-  CComboBox	m_PartList;
+	CComboBox m_PartList;
 
-  CButton	m_BlockedCheck;
+	CButton m_BlockedCheck;
 
 	//}}AFX_DATA
 
@@ -132,25 +132,25 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmBodyPartDlg)
+	//{{AFX_VIRTUAL(CEsmBodyPartDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmBodyPartDlg)
+	//{{AFX_MSG(CEsmBodyPartDlg)
 
 	afx_msg void OnSelchangeParttypelist();
 
@@ -160,17 +160,17 @@ protected:
 
 	//}}AFX_MSG
 
- 
-
-  DECLARE_MESSAGE_MAP();
 
 
+	DECLARE_MESSAGE_MAP();
 
- };
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmBodyPartDlg Definition
+ *      End of Class CEsmBodyPartDlg Definition
 
  *=========================================================================*/
 
@@ -182,7 +182,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmbodypartdlg.H
+ *      End of File Esmbodypartdlg.H
 
  *=========================================================================*/
 

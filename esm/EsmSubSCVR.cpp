@@ -1,17 +1,17 @@
 /*===========================================================================
  *
- * File:	EsmSubSCVR.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmSubSCVR.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  * 18 October 2003
- *	- Added the Fine() virtual method.
+ *  - Added the Fine() virtual method.
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmSubSCVR.h"
 
 
@@ -20,9 +20,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmSubSCVR.cpp");
+DEFINE_FILE("EsmSubSCVR.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -32,16 +32,15 @@
  *
  *=========================================================================*/
 void CEsmSubSCVR::Copy (CEsmSubRecord* pSubRecord) {
-  Destroy();
+	Destroy();
+	m_Type.SetType(pSubRecord->GetType());
+	m_RecordSize = pSubRecord->GetRecordSize();
+	memcpy(&m_FuncData, ((CEsmSubSCVR *)pSubRecord)->GetInfoFuncData(), sizeof(infofuncdata_t));
+	m_StringLength = strlen(m_FuncData.Name);
+}
 
-  m_Type.SetType(pSubRecord->GetType());
-  m_RecordSize = pSubRecord->GetRecordSize();
-
-  memcpy(&m_FuncData, ((CEsmSubSCVR *)pSubRecord)->GetInfoFuncData(), sizeof(infofuncdata_t));
-  m_StringLength = strlen(m_FuncData.Name);
- }
 /*===========================================================================
- *		End of Class Method CEsmSubSCVR::Copy()
+ *      End of Class Method CEsmSubSCVR::Copy()
  *=========================================================================*/
 
 
@@ -54,21 +53,27 @@ void CEsmSubSCVR::Copy (CEsmSubRecord* pSubRecord) {
  * sensitive).  Stops searching on the first match.
  *
  *=========================================================================*/
-bool CEsmSubSCVR::Find (esmfind_t& FindData) {
-  int iResult;
+bool CEsmSubSCVR::Find (esmfind_t &FindData) {
+	int iResult;
 
 	/* Ignore if data is invalid or too small */
-  if (m_pData == NULL || GetRecordSize() < FindData.Length) return (false);
+	if (m_pData == NULL || GetRecordSize() < FindData.Length) {
+		return (false);
+	}
 
 	/* Find the first occurence of the text in the name */
-  iResult = memisearch((char *)GetName(), FindData.pText, GetNameLength(), FindData.Length, 0);
-  if (iResult >= 0) return (true);
+	iResult = memisearch((char *)GetName(), FindData.pText, GetNameLength(), FindData.Length, 0);
+
+	if (iResult >= 0) {
+		return (true);
+	}
 
 	/* No match */
-  return (false);
- }
+	return (false);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSubSCVR::Find()
+ *      End of Class Method CEsmSubSCVR::Find()
  *=========================================================================*/
 
 
@@ -77,11 +82,12 @@ bool CEsmSubSCVR::Find (esmfind_t& FindData) {
  * Class CEsmSubSCVR Method - bool IsUsed (pID);
  *
  *=========================================================================*/
-bool CEsmSubSCVR::IsUsed (const TCHAR* pID) { 
-   return (StringCompare(GetName(), pID, false) == 0); 
- }
+bool CEsmSubSCVR::IsUsed (const TCHAR* pID) {
+	return (StringCompare(GetName(), pID, false) == 0);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSubSCVR::IsUsed()
+ *      End of Class Method CEsmSubSCVR::IsUsed()
  *=========================================================================*/
 
 
@@ -91,17 +97,16 @@ bool CEsmSubSCVR::IsUsed (const TCHAR* pID) {
  *
  *=========================================================================*/
 bool CEsmSubSCVR::ReadData (CGenFile& File) {
-  //DEFINE_FUNCTION("CEsmSubSCVR::ReadData()");
-  bool Result;
+	//DEFINE_FUNCTION("CEsmSubSCVR::ReadData()");
+	bool Result;
+	Result = File.Read((char *)&m_FuncData, m_RecordSize);
+	m_StringLength = m_RecordSize - MWESM_SCVR_BASESIZE;
+	m_FuncData.Name[m_StringLength] = NULL_CHAR;
+	return (Result);
+}
 
-  Result = File.Read((char *)&m_FuncData, m_RecordSize);
-  m_StringLength = m_RecordSize - MWESM_SCVR_BASESIZE;
-  m_FuncData.Name[m_StringLength] = NULL_CHAR;
-
-  return (Result);
- }
 /*===========================================================================
- *		End of Class Method CEsmSubSCVR::Read()
+ *      End of Class Method CEsmSubSCVR::Read()
  *=========================================================================*/
 
 
@@ -111,20 +116,22 @@ bool CEsmSubSCVR::ReadData (CGenFile& File) {
  *
  *=========================================================================*/
 void CEsmSubSCVR::SetName (const TCHAR* pString) {
+	if (pString == NULL) {
+		m_StringLength = 0;
+		m_FuncData.Name[0] = NULL_CHAR;
+	} else {
+		m_StringLength = strlen(pString);
 
-  if (pString == NULL) {
-    m_StringLength = 0;
-    m_FuncData.Name[0] = NULL_CHAR;
-   }
-  else {
-    m_StringLength = strlen(pString);
-    if (m_StringLength > MWESM_SCVR_IDSIZE) m_StringLength = MWESM_SCVR_IDSIZE;
-    strncpy(m_FuncData.Name, pString, MWESM_SCVR_IDSIZE);
-   }
+		if (m_StringLength > MWESM_SCVR_IDSIZE) {
+			m_StringLength = MWESM_SCVR_IDSIZE;
+		}
 
- }
+		strncpy(m_FuncData.Name, pString, MWESM_SCVR_IDSIZE);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSubSCVR::SetName()
+ *      End of Class Method CEsmSubSCVR::SetName()
  *=========================================================================*/
 
 
@@ -134,14 +141,13 @@ void CEsmSubSCVR::SetName (const TCHAR* pString) {
  *
  *=========================================================================*/
 bool CEsmSubSCVR::WriteData (CGenFile& File) {
-  //DEFINE_FUNCTION("CEsmSubSCVR::WriteData()");
-  bool Result;
+	//DEFINE_FUNCTION("CEsmSubSCVR::WriteData()");
+	bool Result;
+	m_RecordSize = MWESM_SCVR_BASESIZE + m_StringLength;
+	Result = File.Write((char *)&m_FuncData, m_RecordSize);
+	return (Result);
+}
 
-  m_RecordSize = MWESM_SCVR_BASESIZE + m_StringLength;
-  Result = File.Write((char *)&m_FuncData, m_RecordSize);
-
-  return (Result);
- }
 /*===========================================================================
- *		End of Class Method CEsmSubSCVR::WriteData()
+ *      End of Class Method CEsmSubSCVR::WriteData()
  *=========================================================================*/

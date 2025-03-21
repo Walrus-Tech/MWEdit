@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmracedlg.H
+ * File:    Esmracedlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 18, 2003
+ * Created On:  February 18, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -64,7 +64,7 @@
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -84,213 +84,213 @@
 
 class CEsmRaceDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmRaceDlg);
+	DECLARE_DYNCREATE(CEsmRaceDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmRace*	m_pRace;
-
-
+	CEsmRace *m_pRace;
 
 
 
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
 
 
+	/*---------- Begin Protected Class Methods ------------------------*/
 
-  	/* Update item data */
+  protected:
 
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+
+
+	/* Update item data */
+
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Update the male/female attribute total controls */
 
-  void UpdateAttribTotals (void);
+	void UpdateAttribTotals (void);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Public Class Methods ---------------------------*/
 
-public:
+  public:
 
 
 
 	/* Construction */
 
-  CEsmRaceDlg();
+	CEsmRaceDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmRaceDlg)
+	//{{AFX_DATA(CEsmRaceDlg)
 
-  enum { IDD = IDD_RACE_DLG };
+	enum { IDD = IDD_RACE_DLG };
 
-  CStatic	m_FemaleTotal;
+	CStatic m_FemaleTotal;
 
-  CStatic	m_MaleTotal;
+	CStatic m_MaleTotal;
 
-  CEdit		m_DescText;
+	CEdit m_DescText;
 
-  CEsmListCtrl	m_SpellList;
+	CEsmListCtrl m_SpellList;
 
-  CEdit		m_BonusText7;
+	CEdit m_BonusText7;
 
-  CEdit		m_BonusText6;
+	CEdit m_BonusText6;
 
-  CEdit		m_BonusText5;
+	CEdit m_BonusText5;
 
-  CEdit		m_BonusText4;
+	CEdit m_BonusText4;
 
-  CEdit		m_BonusText3;
+	CEdit m_BonusText3;
 
-  CEdit		m_BonusText2;
+	CEdit m_BonusText2;
 
-  CEdit		m_BonusText1;
+	CEdit m_BonusText1;
 
-  CComboBox	m_SkillList7;
+	CComboBox m_SkillList7;
 
-  CComboBox	m_SkillList6;
+	CComboBox m_SkillList6;
 
-  CComboBox	m_SkillList5;
+	CComboBox m_SkillList5;
 
-  CComboBox	m_SkillList4;
+	CComboBox m_SkillList4;
 
-  CComboBox	m_SkillList3;
+	CComboBox m_SkillList3;
 
-  CComboBox	m_SkillList2;
+	CComboBox m_SkillList2;
 
-  CComboBox	m_SkillList1;
+	CComboBox m_SkillList1;
 
-  CButton	m_BeastCheck;
+	CButton m_BeastCheck;
 
-  CButton	m_PlayableCheck;
+	CButton m_PlayableCheck;
 
-  CEdit		m_WeightText2;
+	CEdit m_WeightText2;
 
-  CEdit		m_WeightText1;
+	CEdit m_WeightText1;
 
-  CEdit		m_HeightText2;
+	CEdit m_HeightText2;
 
-  CEdit		m_HeightText1;
+	CEdit m_HeightText1;
 
-  CEdit		m_LucText2;
+	CEdit m_LucText2;
 
-  CEdit		m_LucText1;
+	CEdit m_LucText1;
 
-  CEdit		m_PerText2;
+	CEdit m_PerText2;
 
-  CEdit		m_PerText1;
+	CEdit m_PerText1;
 
-  CEdit		m_EndText2;
+	CEdit m_EndText2;
 
-  CEdit		m_EndText1;
+	CEdit m_EndText1;
 
-  CEdit		m_SpdText2;
+	CEdit m_SpdText2;
 
-  CEdit		m_SpdText1;
+	CEdit m_SpdText1;
 
-  CEdit		m_AgiText2;
+	CEdit m_AgiText2;
 
-  CEdit		m_AgiText1;
+	CEdit m_AgiText1;
 
-  CEdit		m_WilText2;
+	CEdit m_WilText2;
 
-  CEdit		m_WilText1;
+	CEdit m_WilText1;
 
-  CEdit		m_IntText2;
+	CEdit m_IntText2;
 
-  CEdit		m_IntText1;
+	CEdit m_IntText1;
 
-  CEdit		m_StrText2;
+	CEdit m_StrText2;
 
-  CEdit		m_StrText1;
+	CEdit m_StrText1;
 
-  CEdit		m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmRaceDlg)
+	//{{AFX_VIRTUAL(CEsmRaceDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmRaceDlg)
+	//{{AFX_MSG(CEsmRaceDlg)
 
-  afx_msg void OnChangeAttribText();
+	afx_msg void OnChangeAttribText();
 
-  afx_msg void OnSelchangeSkilllist1();
+	afx_msg void OnSelchangeSkilllist1();
 
-  afx_msg void OnSelchangeSkilllist2();
+	afx_msg void OnSelchangeSkilllist2();
 
-  afx_msg void OnSelchangeSkilllist3();
+	afx_msg void OnSelchangeSkilllist3();
 
-  afx_msg void OnSelchangeSkilllist4();
+	afx_msg void OnSelchangeSkilllist4();
 
-  afx_msg void OnSelchangeSkilllist5();
+	afx_msg void OnSelchangeSkilllist5();
 
-  afx_msg void OnSelchangeSkilllist6();
+	afx_msg void OnSelchangeSkilllist6();
 
-  afx_msg void OnSelchangeSkilllist7();
+	afx_msg void OnSelchangeSkilllist7();
 
-  afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordKey  (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmRaceDlg Definition
+ *      End of Class CEsmRaceDlg Definition
 
  *=========================================================================*/
 
@@ -310,7 +310,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmracedlg.H
+ *      End of File Esmracedlg.H
 
  *=========================================================================*/
 

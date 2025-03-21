@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcreaturedlg.H
+ * File:    Esmcreaturedlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 15, 2003
+ * Created On:  February 15, 2003
 
  *
 
@@ -34,25 +34,25 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "windows/TabCtrlSheet.h"
+#include "windows/TabCtrlSheet.h"
 
-  #include "EsmCreaturePage1.h"
+#include "EsmCreaturePage1.h"
 
-  #include "EsmCreaturePage2.h"
+#include "EsmCreaturePage2.h"
 
-  #include "EsmCreaturePage3.h"
+#include "EsmCreaturePage3.h"
 
-  #include "EsmCreaturePage4.h"
+#include "EsmCreaturePage4.h"
 
-  #include "EsmCreaturePage5.h"
+#include "EsmCreaturePage5.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -72,113 +72,113 @@
 
 class CEsmCreatureDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmCreatureDlg);
+	DECLARE_DYNCREATE(CEsmCreatureDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmCreaturePage1 m_Page1;
+	CEsmCreaturePage1 m_Page1;
 
-  CEsmCreaturePage2 m_Page2;
+	CEsmCreaturePage2 m_Page2;
 
-  CEsmCreaturePage3 m_Page3;
+	CEsmCreaturePage3 m_Page3;
 
-  CEsmCreaturePage4 m_Page4;
+	CEsmCreaturePage4 m_Page4;
 
-  CEsmCreaturePage5 m_Page5;
+	CEsmCreaturePage5 m_Page5;
 
-  CEsmCreature*	    m_pCreature;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
+	CEsmCreature *m_pCreature;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Protected Class Methods ------------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmCreatureDlg();
+	CEsmCreatureDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmCreatureDlg)
+	//{{AFX_DATA(CEsmCreatureDlg)
 
-  enum { IDD = IDD_CREATURE_DLG };
+	enum { IDD = IDD_CREATURE_DLG };
 
-  CTabCtrlSheet	m_MainTab;
+	CTabCtrlSheet m_MainTab;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmCreatureDlg)
+	//{{AFX_VIRTUAL(CEsmCreatureDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmCreatureDlg)
+	//{{AFX_MSG(CEsmCreatureDlg)
 
-  afx_msg void OnScriptEdit();
+	afx_msg void OnScriptEdit();
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmCreatureDlg Definition
+ *      End of Class CEsmCreatureDlg Definition
 
  *=========================================================================*/
 
@@ -198,7 +198,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmcreaturedlg.H
+ *      End of File Esmcreaturedlg.H
 
  *=========================================================================*/
 

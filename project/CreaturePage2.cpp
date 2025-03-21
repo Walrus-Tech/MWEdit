@@ -14,11 +14,11 @@
 
 #ifdef _DEBUG
 
-#define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-#undef THIS_FILE
+	#undef THIS_FILE
 
-static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
@@ -39,13 +39,9 @@ IMPLEMENT_DYNCREATE(CCreaturePage2, CPropertyPage)
 CCreaturePage2::CCreaturePage2() : CPropertyPage(CCreaturePage2::IDD)
 
 {
-
 	//{{AFX_DATA_INIT(CCreaturePage2)
-
-		// NOTE: the ClassWizard will add member initialization here
-
+	// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
-
 }
 
 
@@ -53,7 +49,6 @@ CCreaturePage2::CCreaturePage2() : CPropertyPage(CCreaturePage2::IDD)
 CCreaturePage2::~CCreaturePage2()
 
 {
-
 }
 
 
@@ -61,15 +56,10 @@ CCreaturePage2::~CCreaturePage2()
 void CCreaturePage2::DoDataExchange(CDataExchange* pDX)
 
 {
-
 	CPropertyPage::DoDataExchange(pDX);
-
 	//{{AFX_DATA_MAP(CCreaturePage2)
-
-		// NOTE: the ClassWizard will add DDX and DDV calls here
-
+	// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
-
 }
 
 
@@ -80,7 +70,7 @@ BEGIN_MESSAGE_MAP(CCreaturePage2, CPropertyPage)
 
 	//{{AFX_MSG_MAP(CCreaturePage2)
 
-		// NOTE: the ClassWizard will add message map macros here
+	// NOTE: the ClassWizard will add message map macros here
 
 	//}}AFX_MSG_MAP
 

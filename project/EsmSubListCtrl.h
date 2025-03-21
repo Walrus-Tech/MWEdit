@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmlistctrl.H
+ * File:    Esmlistctrl.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 5, 2003
+ * Created On:  February 5, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,7 +58,7 @@
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -78,97 +78,97 @@
 
 class CEsmSubListCtrl : public CEsmListCtrl {
 
-  DECLARE_DYNCREATE(CEsmSubListCtrl);
+	DECLARE_DYNCREATE(CEsmSubListCtrl);
 
 
 
-  /*---------- Begin Protected Class Members --------------------*/
+	/*---------- Begin Protected Class Members --------------------*/
 
-protected:
-
-
-
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-
-protected:
+  protected:
 
 
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
+	/*---------- Begin Protected Class Methods --------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmSubListCtrl();
+	CEsmSubListCtrl();
 
-  virtual ~CEsmSubListCtrl();
+	virtual ~CEsmSubListCtrl();
 
 
 
-  	/* Add an item to the list */
+	/* Add an item to the list */
 
-  int AddItem (CEsmSubCellRef* pCellRef);
+	int AddItem (CEsmSubCellRef* pCellRef);
 
 
 
 	/* Find an existing cellref in the list */
 
-  int FindCellRef (CEsmSubCellRef* pCellRef);
+	int FindCellRef (CEsmSubCellRef* pCellRef);
 
 
 
 	/* Access the recinfo data for an item */
 
-  virtual esmrecinfo_t* GetRecInfo (const int Item);
+	virtual esmrecinfo_t *GetRecInfo (const int Item);
 
 
 
-  	/* Set the properties of the given armor item */
+	/* Set the properties of the given armor item */
 
-  void SetItem (const int ListIndex, CEsmSubCellRef* pCellRef);
+	void SetItem (const int ListIndex, CEsmSubCellRef* pCellRef);
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmSubListCtrl)
+	//{{AFX_VIRTUAL(CEsmSubListCtrl)
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
 	/* Generated message map functions */
 
-protected:
+  protected:
 
-  //{{AFX_MSG(CEsmSubListCtrl)
+	//{{AFX_MSG(CEsmSubListCtrl)
 
-  afx_msg void OnColumnclick(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnColumnclick(NMHDR* pNMHDR, LRESULT* pResult);
 
-  afx_msg void OnBeginDrag(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnBeginDrag(NMHDR* pNMHDR, LRESULT* pResult);
 
-  afx_msg void OnCustomdraw(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnCustomdraw(NMHDR* pNMHDR, LRESULT* pResult);
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmSubListCtrl Definition
+ *      End of Class CEsmSubListCtrl Definition
 
  *=========================================================================*/
 
@@ -188,7 +188,7 @@ protected:
 
 /*===========================================================================
 
- *		End of Function Prototypes
+ *      End of Function Prototypes
 
  *=========================================================================*/
 
@@ -210,7 +210,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmlistctrl.H
+ *      End of File Esmlistctrl.H
 
  *=========================================================================*/
 

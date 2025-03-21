@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	NameList.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Tuesday, May 29, 2001
+ * File:    NameList.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Tuesday, May 29, 2001
  *
  * Routines for simple handling of name-value lists.
  *
@@ -16,9 +16,9 @@
  * Begin Required Include Files
  *
  *=========================================================================*/
-  #include "dl_err.h"
+#include "dl_err.h"
 /*===========================================================================
- *		End of Required Include Files
+ *      End of Required Include Files
  *=========================================================================*/
 
 
@@ -28,14 +28,14 @@
  *
  *=========================================================================*/
 
-	/* Associate a short string with a long integer value */
-  typedef struct {
-    long	 lValue;
-    const TCHAR* pName;
-   } valuenames_t;
+/* Associate a short string with a long integer value */
+typedef struct {
+	long lValue;
+	const TCHAR *pName;
+} valuenames_t;
 
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -45,19 +45,19 @@
  *
  *=========================================================================*/
 
-	/* Find a value associated with a name */
-  bool FindNameValue (long& lValue, const valuenames_t* pValueArray,  const TCHAR* pName);
-  long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName);
+/* Find a value associated with a name */
+bool FindNameValue (long &lValue, const valuenames_t* pValueArray, const TCHAR* pName);
+long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName);
 
-  	/* Find a name associated with a value */
-  const TCHAR* FindValueName (const valuenames_t* pValueArray, const long lValue);
+/* Find a name associated with a value */
+const TCHAR *FindValueName (const valuenames_t* pValueArray, const long lValue);
 
 /*===========================================================================
- *		End of Function Prototypes
+ *      End of Function Prototypes
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File Namelist.H
+ *      End of File Namelist.H
  *=========================================================================*/

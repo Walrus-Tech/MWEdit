@@ -2,11 +2,11 @@
 
  *
 
- * File:	Childfrmscript.H
+ * File:    Childfrmscript.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	September 3, 2003
+ * Created On:  September 3, 2003
 
  *
 
@@ -34,15 +34,15 @@
 
  *=========================================================================*/
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "EsmScriptDefs.h"
+#include "EsmScriptDefs.h"
 
-  #include "splitterwnd.h"
+#include "splitterwnd.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -62,7 +62,7 @@
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -88,101 +88,101 @@ class CEsmScriptDlg;
 
 class CChildFrmScript : public CMDIChildWnd {
 
-  DECLARE_DYNCREATE(CChildFrmScript);
+	DECLARE_DYNCREATE(CChildFrmScript);
 
 
 
-  /*---------- Begin Protected Class Members --------------------*/
+	/*---------- Begin Protected Class Members --------------------*/
 
-protected:
+  protected:
 
-  CMwSplitterWnd	m_wndSplitter;
+	CMwSplitterWnd m_wndSplitter;
 
-  CScriptErrorView*	m_pErrorView;
+	CScriptErrorView *m_pErrorView;
 
-  CEsmScriptDlg*	m_pScriptView;
-
-
-
-  bool			m_IsFakeMaximized;
-
-  CRect			m_RestoreRect;
+	CEsmScriptDlg *m_pScriptView;
 
 
 
-  bool			m_Created;
+	bool m_IsFakeMaximized;
 
-  
+	CRect m_RestoreRect;
 
 
 
-  /*---------- Begin Protected Class Methods -------------------*/
+	bool m_Created;
 
-protected:
+
+
+
+
+	/*---------- Begin Protected Class Methods -------------------*/
+
+  protected:
 
 
 
 	/* Protected constructor used by dynamic creation */
 
-  CChildFrmScript();
+	CChildFrmScript();
 
 
 
-  virtual BOOL PreCreateWindow (CREATESTRUCT& cs);
+	virtual BOOL PreCreateWindow (CREATESTRUCT& cs);
 
 
 
 
 
-  /*---------- Begin Public Class Methods ----------------------*/
+	/*---------- Begin Public Class Methods ----------------------*/
 
-public:
+  public:
 
-  virtual ~CChildFrmScript();
+	virtual ~CChildFrmScript();
 
-  virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
+	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
 
 
 
-  void FakeMaximize (void);
+	void FakeMaximize (void);
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CChildFrmScript)
+	//{{AFX_MSG(CChildFrmScript)
 
-  afx_msg LRESULT OnClearError  (LPARAM lParam, WPARAM wParam);
+	afx_msg LRESULT OnClearError (LPARAM lParam, WPARAM wParam);
 
-  afx_msg LRESULT OnUpdateError (LPARAM lParam, WPARAM wParam);
+	afx_msg LRESULT OnUpdateError (LPARAM lParam, WPARAM wParam);
 
-  afx_msg LRESULT OnGotoError   (LPARAM lParam, WPARAM wParam);
+	afx_msg LRESULT OnGotoError (LPARAM lParam, WPARAM wParam);
 
-  afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
-  afx_msg void OnClose (void);
+	afx_msg void OnClose (void);
 
-  afx_msg void OnMove(int cx, int cy);
+	afx_msg void OnMove(int cx, int cy);
 
-  afx_msg void OnKillFocus(CWnd* pWnd);
+	afx_msg void OnKillFocus(CWnd* pWnd);
 
-  afx_msg void OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd);
+	afx_msg void OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd);
 
-  afx_msg void OnSysCommand (UINT nID, LPARAM Param);
+	afx_msg void OnSysCommand (UINT nID, LPARAM Param);
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CChildFrmScript Definition
+ *      End of Class CChildFrmScript Definition
 
  *=========================================================================*/
 
@@ -194,7 +194,7 @@ public:
 
 /*===========================================================================
 
- *		End of File Childfrmscript.H
+ *      End of File Childfrmscript.H
 
  *=========================================================================*/
 

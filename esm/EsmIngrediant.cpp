@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmIngrediant.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmIngrediant.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmIngrediant.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmIngrediant.cpp");
+DEFINE_FILE("EsmIngrediant.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,16 +29,16 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmIngrediant::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_IRDT,	CEsmSubIRDT::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_IRDT, CEsmSubIRDT::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -48,11 +48,12 @@ const esmsubreccreate_t CEsmIngrediant::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmIngrediant::CEsmIngrediant () {
-  //DEFINE_FUNCTION("CEsmIngrediant::CEsmIngrediant()");
-  m_pIngreData = NULL;
- }
+	//DEFINE_FUNCTION("CEsmIngrediant::CEsmIngrediant()");
+	m_pIngreData = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmIngrediant Constructor
+ *      End of Class CEsmIngrediant Constructor
  *=========================================================================*/
 
 
@@ -64,13 +65,13 @@ CEsmIngrediant::CEsmIngrediant () {
  *
  *=========================================================================*/
 void CEsmIngrediant::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmIngrediant::Destroy()");
-  m_pIngreData = NULL;
+	//DEFINE_FUNCTION("CEsmIngrediant::Destroy()");
+	m_pIngreData = NULL;
+	CEsmItem2::Destroy();
+}
 
-  CEsmItem2::Destroy();
- }
 /*===========================================================================
- *		End of Class Method CEsmIngrediant::Destroy()
+ *      End of Class Method CEsmIngrediant::Destroy()
  *=========================================================================*/
 
 
@@ -83,28 +84,36 @@ void CEsmIngrediant::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmIngrediant::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  DEFINE_FUNCTION("CEsmIngrediant::CompareFields()");
-  CEsmIngrediant* pIngre;
+	DEFINE_FUNCTION("CEsmIngrediant::CompareFields()");
+	CEsmIngrediant* pIngre;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_INGR)) return CEsmItem2::CompareFields(FieldID, pRecord);
-  pIngre = (CEsmIngrediant *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_INGR)) {
+		return CEsmItem2::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_EFFECT1:
-	return StringCompare(GetEffect(0), pIngre->GetEffect(0), false);
-    case ESM_FIELD_EFFECT2:
-	return StringCompare(GetEffect(1), pIngre->GetEffect(1), false);
-    case ESM_FIELD_EFFECT3:
-	return StringCompare(GetEffect(2), pIngre->GetEffect(2), false);
-    case ESM_FIELD_EFFECT4:
-	return StringCompare(GetEffect(3), pIngre->GetEffect(3), false);
-    default:
-	return CEsmItem2::CompareFields(FieldID, pRecord); 
-   }
- }
+	pIngre = (CEsmIngrediant *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_EFFECT1:
+			return StringCompare(GetEffect(0), pIngre->GetEffect(0), false);
+
+		case ESM_FIELD_EFFECT2:
+			return StringCompare(GetEffect(1), pIngre->GetEffect(1), false);
+
+		case ESM_FIELD_EFFECT3:
+			return StringCompare(GetEffect(2), pIngre->GetEffect(2), false);
+
+		case ESM_FIELD_EFFECT4:
+			return StringCompare(GetEffect(3), pIngre->GetEffect(3), false);
+
+		default:
+			return CEsmItem2::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmIngrediant::CompareFields()
+ *      End of Class Method CEsmIngrediant::CompareFields()
  *=========================================================================*/
 
 
@@ -115,15 +124,15 @@ int CEsmIngrediant::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmIngrediant::Create (void) {
-  DEFINE_FUNCTION("CEsmIngrediant::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmIngrediant::Create (void) {
+	DEFINE_FUNCTION("CEsmIngrediant::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmIngrediant);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmIngrediant);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmIngrediant::Create()
+ *      End of Class Method CEsmIngrediant::Create()
  *=========================================================================*/
 
 
@@ -135,16 +144,15 @@ CEsmRecord* CEsmIngrediant::Create (void) {
  *
  *=========================================================================*/
 void CEsmIngrediant::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmItem2::CreateNew(pFile);
-
+	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_IRDT);
-  m_pIngreData->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_IRDT);
+	m_pIngreData->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmIngrediant::CreateNew()
+ *      End of Class Method CEsmIngrediant::CreateNew()
  *=========================================================================*/
 
 
@@ -156,25 +164,29 @@ void CEsmIngrediant::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmIngrediant::GetFieldString (const int FieldID) {
-  DEFINE_FUNCTION("CEsmIngrediant::GetFieldString()");
+const TCHAR *CEsmIngrediant::GetFieldString (const int FieldID) {
+	DEFINE_FUNCTION("CEsmIngrediant::GetFieldString()");
 
-  switch (FieldID) {
-    case ESM_FIELD_EFFECT1:
-	return GetEffect(0);
-    case ESM_FIELD_EFFECT2:
-	return GetEffect(1);
-    case ESM_FIELD_EFFECT3:
-	return GetEffect(2);
-    case ESM_FIELD_EFFECT4:
-	return GetEffect(3);
-    default:
-	return CEsmItem2::GetFieldString(FieldID);
-   }
-  
- }
+	switch (FieldID) {
+		case ESM_FIELD_EFFECT1:
+			return GetEffect(0);
+
+		case ESM_FIELD_EFFECT2:
+			return GetEffect(1);
+
+		case ESM_FIELD_EFFECT3:
+			return GetEffect(2);
+
+		case ESM_FIELD_EFFECT4:
+			return GetEffect(3);
+
+		default:
+			return CEsmItem2::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmIngrediant::GetFieldString()
+ *      End of Class Method TCHAR* CEsmIngrediant::GetFieldString()
  *=========================================================================*/
 
 
@@ -184,15 +196,15 @@ const TCHAR* CEsmIngrediant::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmIngrediant::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_IRDT)) {
+		m_pIngreData = (CEsmSubIRDT *) pSubRecord;
+	} else {
+		CEsmItem2::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_IRDT))
-    m_pIngreData = (CEsmSubIRDT *) pSubRecord;
-  else
-    CEsmItem2::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmIngrediant::OnAddSubRecord()
+ *      End of Class Event CEsmIngrediant::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -205,29 +217,52 @@ void CEsmIngrediant::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmIngrediant::SetFieldValue (const int FieldID, const TCHAR* pString) {
+	switch (FieldID) {
+		case ESM_FIELD_EFFECT1: {
+			int Effect = GetESMEffectID(pString);
 
-  switch (FieldID) { 
-    case ESM_FIELD_EFFECT1: {
-    	int Effect = GetESMEffectID(pString);
-	if (Effect >= 0) GetIngreData()->EffectID[0] = Effect;
-	return (true); }
-    case ESM_FIELD_EFFECT2: {
-	int Effect = GetESMEffectID(pString);
-	if (Effect >= 0) GetIngreData()->EffectID[1] = Effect;
-	return (true); }
-    case ESM_FIELD_EFFECT3: {
-    	int Effect = GetESMEffectID(pString);
-	if (Effect >= 0) GetIngreData()->EffectID[2] = Effect;
-	return (true); }
-    case ESM_FIELD_EFFECT4: {
-	int Effect = GetESMEffectID(pString);
-	if (Effect >= 0) GetIngreData()->EffectID[3] = Effect;
-	return (true); }
-   };
+			if (Effect >= 0) {
+				GetIngreData()->EffectID[0] = Effect;
+			}
+
+			return (true);
+		}
+
+		case ESM_FIELD_EFFECT2: {
+			int Effect = GetESMEffectID(pString);
+
+			if (Effect >= 0) {
+				GetIngreData()->EffectID[1] = Effect;
+			}
+
+			return (true);
+		}
+
+		case ESM_FIELD_EFFECT3: {
+			int Effect = GetESMEffectID(pString);
+
+			if (Effect >= 0) {
+				GetIngreData()->EffectID[2] = Effect;
+			}
+
+			return (true);
+		}
+
+		case ESM_FIELD_EFFECT4: {
+			int Effect = GetESMEffectID(pString);
+
+			if (Effect >= 0) {
+				GetIngreData()->EffectID[3] = Effect;
+			}
+
+			return (true);
+		}
+	};
 
 	/* No matching field found */
-  return CEsmItem2::SetFieldValue(FieldID, pString);
- }
+	return CEsmItem2::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmIngrediant::SetFieldValue()
+ *      End of Class Method CEsmIngrediant::SetFieldValue()
  *=========================================================================*/

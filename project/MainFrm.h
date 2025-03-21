@@ -2,11 +2,11 @@
 
  *
 
- * File:	MainFrm.H
+ * File:    MainFrm.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Monday, 03 February, 2003
+ * Created On:  Monday, 03 February, 2003
 
  *
 
@@ -36,11 +36,11 @@
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
-  	
+
 
 
 
@@ -56,45 +56,45 @@
 
 class CMainFrame : public CMDIFrameWnd {
 
-  DECLARE_DYNAMIC(CMainFrame)
+	DECLARE_DYNAMIC(CMainFrame)
 
-public:
+  public:
 
-  CMainFrame();
-
-
-
-  /*---------- Begin Protected Class Members ----------------------*/
-
-protected:
-
-  CStatusBar		m_wndStatusBar;
-
-  CToolBar		m_wndToolBar;
+	CMainFrame();
 
 
 
-  HINSTANCE		m_hItemHelp;
+	/*---------- Begin Protected Class Members ----------------------*/
+
+  protected:
+
+	CStatusBar m_wndStatusBar;
+
+	CToolBar m_wndToolBar;
+
+
+
+	HINSTANCE m_hItemHelp;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ------------------------*/
+	/*---------- Begin Public Class Methods ------------------------*/
 
-public:
+  public:
 
 
 
 	/* Destructor */
 
-  virtual ~CMainFrame();
+	virtual ~CMainFrame();
 
 
 
 	/* Attempt to find the main application view */
 
-  CView* GetActiveMainView (void);
+	CView *GetActiveMainView (void);
 
 
 
@@ -104,9 +104,9 @@ public:
 
 #ifdef _DEBUG
 
-  virtual void AssertValid() const;
+	virtual void AssertValid() const;
 
-  virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext& dc) const;
 
 #endif
 
@@ -116,57 +116,57 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CMainFrame)
+	//{{AFX_VIRTUAL(CMainFrame)
 
-  virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
 	/* Generated message map functions */
 
-protected:
+  protected:
 
-  //{{AFX_MSG(CMainFrame)
+	//{{AFX_MSG(CMainFrame)
 
-  afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 
-  afx_msg void OnHelpFunctions();
+	afx_msg void OnHelpFunctions();
 
-  afx_msg void OnViewOptions();
+	afx_msg void OnViewOptions();
 
-  afx_msg void OnEditFindtext();
+	afx_msg void OnEditFindtext();
 
-  afx_msg void OnEditPluginInfo();
+	afx_msg void OnEditPluginInfo();
 
-  afx_msg void OnHelpSubmitbug();
+	afx_msg void OnHelpSubmitbug();
 
-  afx_msg void OnHelpSubmitfeature();
+	afx_msg void OnHelpSubmitfeature();
 
-  afx_msg void OnHelpLinksSourceforge();
+	afx_msg void OnHelpLinksSourceforge();
 
-  afx_msg void OnHelpEmail();
+	afx_msg void OnHelpEmail();
 
-  afx_msg void OnHelpItemindex();
+	afx_msg void OnHelpItemindex();
 
-  afx_msg void OnHelpAbout();
+	afx_msg void OnHelpAbout();
 
-  afx_msg void OnHelpLinksUesptes3mod();
+	afx_msg void OnHelpLinksUesptes3mod();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CMainFrame Definition
+ *      End of Class CMainFrame Definition
 
  *=========================================================================*/
 
@@ -186,7 +186,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File MainFrm.H
+ *      End of File MainFrm.H
 
  *=========================================================================*/
 

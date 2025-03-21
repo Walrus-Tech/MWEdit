@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmsubMCDT.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmsubMCDT.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmSubBase.h"
+#include "EsmSubBase.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -28,7 +28,7 @@
  *
  *=========================================================================*/
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -39,15 +39,15 @@
  *=========================================================================*/
 #pragma pack(push, 1)
 
-  typedef struct {
-	float	Weight;
-	long	Value;
-	long 	Unknown;
-  } miscdata_t;
+typedef struct {
+	float Weight;
+	long Value;
+	long Unknown;
+} miscdata_t;
 
 #pragma pack(pop)
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -60,55 +60,75 @@
  *=========================================================================*/
 class CEsmSubMCDT : public CEsmSubRecord {
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  //CEsmSubMCDT();
-  //virtual ~CEsmSubMCDT() { Destroy(); }
-  //virtual void Destroy (void);
+	//CEsmSubMCDT();
+	//virtual ~CEsmSubMCDT() { Destroy(); }
+	//virtual void Destroy (void);
 
 	/* Create a name object */
-  static CEsmSubRecord* Create (void) {
-	CEsmSubRecord* pSubRecord;
-	CreatePointerL(pSubRecord, CEsmSubMCDT);
-	return (pSubRecord);
-   }
+	static CEsmSubRecord *Create (void) {
+		CEsmSubRecord* pSubRecord;
+		CreatePointerL(pSubRecord, CEsmSubMCDT);
+		return (pSubRecord);
+	}
 
 	/* Create a new sub-record */
-  virtual void CreateNew (void) { 
-	CEsmSubRecord::CreateNew();
-	CreateArrayPointerL(m_pData, byte, sizeof(miscdata_t)); 
-	m_RecordSize = sizeof(miscdata_t); 
-	memset(m_pData, 0, sizeof(miscdata_t));
-   }
+	virtual void CreateNew (void) {
+		CEsmSubRecord::CreateNew();
+		CreateArrayPointerL(m_pData, byte, sizeof(miscdata_t));
+		m_RecordSize = sizeof(miscdata_t);
+		memset(m_pData, 0, sizeof(miscdata_t));
+	}
 
 	/* Get class members */
-  miscdata_t*	GetMiscData (void) { return ((miscdata_t *) m_pData); }
-  float		GetWeight   (void) { return (GetMiscData()->Weight); }
-  long		GetValue    (void) { return (GetMiscData()->Value); }
-  long		GetUnknown  (void) { return (GetMiscData()->Unknown); }
+	miscdata_t *GetMiscData (void) {
+		return ((miscdata_t *) m_pData);
+	}
+
+	float GetWeight (void) {
+		return (GetMiscData()->Weight);
+	}
+
+	long GetValue (void) {
+		return (GetMiscData()->Value);
+	}
+
+	long GetUnknown (void) {
+		return (GetMiscData()->Unknown);
+	}
 
 	/* Set class members */
-  void SetWeight  (const float Value) { GetMiscData()->Weight  = Value; }
-  void SetValue   (const long  Value) { GetMiscData()->Value   = Value; }
-  void SetUnknown (const long  Value) { GetMiscData()->Unknown = Value; }
+	void SetWeight (const float Value) {
+		GetMiscData()->Weight = Value;
+	}
 
- };
+	void SetValue (const long Value) {
+		GetMiscData()->Value = Value;
+	}
+
+	void SetUnknown (const long Value) {
+		GetMiscData()->Unknown = Value;
+	}
+
+};
+
 /*===========================================================================
- *		End of Class CEsmSubAADT Definition
+ *      End of Class CEsmSubAADT Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmsubINDX.H
+ *      End of File EsmsubINDX.H
  *=========================================================================*/

@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmBook.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmBook.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmBook.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmBook.cpp");
+DEFINE_FILE("EsmBook.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,18 +29,18 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmBook::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BKDT,	CEsmSubBKDT::Create },
-	{ MWESM_SUBREC_TEXT,	CEsmSubName::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_ENAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_BKDT, CEsmSubBKDT::Create },
+	{ MWESM_SUBREC_TEXT, CEsmSubName::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -50,12 +50,13 @@ const esmsubreccreate_t CEsmBook::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmBook::CEsmBook () {
-  //DEFINE_FUNCTION("CEsmBook::CEsmBook()");
-  m_pBookData = NULL;
-  m_pText     = NULL;
- }
+	//DEFINE_FUNCTION("CEsmBook::CEsmBook()");
+	m_pBookData = NULL;
+	m_pText = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmBook Constructor
+ *      End of Class CEsmBook Constructor
  *=========================================================================*/
 
 
@@ -67,14 +68,14 @@ CEsmBook::CEsmBook () {
  *
  *=========================================================================*/
 void CEsmBook::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmBook::Destroy()");
-  m_pBookData = NULL;
-  m_pText     = NULL;
+	//DEFINE_FUNCTION("CEsmBook::Destroy()");
+	m_pBookData = NULL;
+	m_pText = NULL;
+	CEsmItem3::Destroy();
+}
 
-  CEsmItem3::Destroy();
- }
 /*===========================================================================
- *		End of Class Method CEsmBook::Destroy()
+ *      End of Class Method CEsmBook::Destroy()
  *=========================================================================*/
 
 
@@ -87,25 +88,31 @@ void CEsmBook::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmBook::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  DEFINE_FUNCTION("CEsmBook::CompareFields()");
-  CEsmBook* pBook;
+	DEFINE_FUNCTION("CEsmBook::CompareFields()");
+	CEsmBook* pBook;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_BOOK)) return CEsmItem3::CompareFields(FieldID, pRecord);
-  pBook = (CEsmBook *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_BOOK)) {
+		return CEsmItem3::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_SCROLL:
-	return (int) IsScroll()  - (int) pBook->IsScroll();
-    case ESM_FIELD_SKILL:
-    case ESM_FIELD_TEACHES:
-	return StringCompare(GetESMSkill(GetSkillID()), GetESMSkill(pBook->GetSkillID()), false);;
-    default:
-	return CEsmItem3::CompareFields(FieldID, pRecord); 
-   }
- }
+	pBook = (CEsmBook *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_SCROLL:
+			return (int) IsScroll() - (int) pBook->IsScroll();
+
+		case ESM_FIELD_SKILL:
+		case ESM_FIELD_TEACHES:
+			return StringCompare(GetESMSkill(GetSkillID()), GetESMSkill(pBook->GetSkillID()), false);;
+
+		default:
+			return CEsmItem3::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmBook::CompareFields()
+ *      End of Class Method CEsmBook::CompareFields()
  *=========================================================================*/
 
 
@@ -116,15 +123,15 @@ int CEsmBook::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmBook::Create (void) {
-  DEFINE_FUNCTION("CEsmBook::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmBook::Create (void) {
+	DEFINE_FUNCTION("CEsmBook::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmBook);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmBook);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmBook::Create()
+ *      End of Class Method CEsmBook::Create()
  *=========================================================================*/
 
 
@@ -136,18 +143,17 @@ CEsmRecord* CEsmBook::Create (void) {
  *
  *=========================================================================*/
 void CEsmBook::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmItem3::CreateNew(pFile);
-
+	CEsmItem3::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_BKDT);
-  AllocateSubRecord(MWESM_SUBREC_TEXT);
-  m_pBookData->CreateNew();
-  m_pText->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_BKDT);
+	AllocateSubRecord(MWESM_SUBREC_TEXT);
+	m_pBookData->CreateNew();
+	m_pText->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmBook::CreateNew()
+ *      End of Class Method CEsmBook::CreateNew()
  *=========================================================================*/
 
 
@@ -159,28 +165,32 @@ void CEsmBook::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmBook::GetFieldString (const int FieldID) {
-  DEFINE_FUNCTION("CEsmBook::GetFieldString()");
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmBook::GetFieldString (const int FieldID) {
+	DEFINE_FUNCTION("CEsmBook::GetFieldString()");
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-    case ESM_FIELD_ENCHANTPTS:
-	snprintf (s_Buffer, 31, _T("%ld"), GetEnchantPts());
-	return (s_Buffer);
-    case ESM_FIELD_SKILL:
-    case ESM_FIELD_TEACHES:
-	return GetESMSkill(GetSkillID());
-    case ESM_FIELD_SCROLL:
-	return (BOOLTOYESNO(IsScroll()));
-    case ESM_FIELD_TEXT:
-	return (GetBookText());
-    default:
-	return CEsmItem3::GetFieldString(FieldID);
-   }
-  
- }
+	switch (FieldID) {
+		case ESM_FIELD_ENCHANTPTS:
+			snprintf (s_Buffer, 31, _T("%ld"), GetEnchantPts());
+			return (s_Buffer);
+
+		case ESM_FIELD_SKILL:
+		case ESM_FIELD_TEACHES:
+			return GetESMSkill(GetSkillID());
+
+		case ESM_FIELD_SCROLL:
+			return (BOOLTOYESNO(IsScroll()));
+
+		case ESM_FIELD_TEXT:
+			return (GetBookText());
+
+		default:
+			return CEsmItem3::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmBook::GetFieldString()
+ *      End of Class Method TCHAR* CEsmBook::GetFieldString()
  *=========================================================================*/
 
 
@@ -190,17 +200,17 @@ const TCHAR* CEsmBook::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmBook::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_BKDT)) {
+		m_pBookData = (CEsmSubBKDT *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_TEXT)) {
+		m_pText = (CEsmSubName *) pSubRecord;
+	} else {
+		CEsmItem3::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_BKDT))
-    m_pBookData = (CEsmSubBKDT *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_TEXT))
-    m_pText = (CEsmSubName *) pSubRecord;
-  else
-    CEsmItem3::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmBook::OnAddSubRecord()
+ *      End of Class Event CEsmBook::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -213,27 +223,35 @@ void CEsmBook::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmBook::SetFieldValue (const int FieldID, const TCHAR* pString) {
+	switch (FieldID) {
+		case ESM_FIELD_ENCHANTPTS:
+			SetEnchantPts(atoi(pString));
+			return (true);
 
-  switch (FieldID) { 
-    case ESM_FIELD_ENCHANTPTS:
-        SetEnchantPts(atoi(pString));
-	return (true);
-    case ESM_FIELD_SKILL:
-    case ESM_FIELD_TEACHES: {
-        int Skill = GetESMSkill(pString);
-	if (Skill >= 0) SetSkillID(Skill);
-	return (true); }
-    case ESM_FIELD_SCROLL:
-        SetScroll(StringToBoolean(pString));
-	return (true);
-    case ESM_FIELD_TEXT:
-	SetBookText(pString);
-	return (true);
-   };
+		case ESM_FIELD_SKILL:
+		case ESM_FIELD_TEACHES: {
+			int Skill = GetESMSkill(pString);
+
+			if (Skill >= 0) {
+				SetSkillID(Skill);
+			}
+
+			return (true);
+		}
+
+		case ESM_FIELD_SCROLL:
+			SetScroll(StringToBoolean(pString));
+			return (true);
+
+		case ESM_FIELD_TEXT:
+			SetBookText(pString);
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmItem3::SetFieldValue(FieldID, pString);
- }
+	return CEsmItem3::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmBook::SetFieldValue()
+ *      End of Class Method CEsmBook::SetFieldValue()
  *=========================================================================*/

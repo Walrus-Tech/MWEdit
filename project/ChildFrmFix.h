@@ -2,11 +2,11 @@
 
  *
 
- * File:	ChildFrmFix.H
+ * File:    ChildFrmFix.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Monday, 03 February, 2003
+ * Created On:  Monday, 03 February, 2003
 
  *
 
@@ -36,11 +36,11 @@
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
-  
+
 
 
 
@@ -56,45 +56,47 @@
 
 class CChildFrameFix : public CMDIChildWnd {
 
-  DECLARE_DYNCREATE(CChildFrameFix)
+	DECLARE_DYNCREATE(CChildFrameFix)
 
 
 
 
 
-  /*---------- Begin Private Class Members ----------------------*/
+	/*---------- Begin Private Class Members ----------------------*/
 
-private:
-
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-
-protected:
+  private:
 
 
 
+	/*---------- Begin Protected Class Methods --------------------*/
+
+  protected:
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
 
-public:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Class constructor/destructor */
 
-  CChildFrameFix();
+	CChildFrameFix();
 
-  virtual ~CChildFrameFix();
-
-
-
-  virtual void ActivateFrame(int nCmdShow = -1);
+	virtual ~CChildFrameFix();
 
 
 
-  void SetSharedMenu (HMENU hMenu) { m_hMenuShared = hMenu; }
+	virtual void ActivateFrame(int nCmdShow = -1);
+
+
+
+	void SetSharedMenu (HMENU hMenu) {
+		m_hMenuShared = hMenu;
+	}
 
 
 
@@ -102,9 +104,9 @@ public:
 
 #ifdef _DEBUG
 
-  virtual void AssertValid () const;
+	virtual void AssertValid () const;
 
-  virtual void Dump (CDumpContext& dc) const;
+	virtual void Dump (CDumpContext& dc) const;
 
 #endif
 
@@ -114,39 +116,39 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CChildFrameFix)
+	//{{AFX_VIRTUAL(CChildFrameFix)
 
-  virtual BOOL PreCreateWindow (CREATESTRUCT& cs);
+	virtual BOOL PreCreateWindow (CREATESTRUCT& cs);
 
-  //}}AFX_VIRTUAL
-
-
+	//}}AFX_VIRTUAL
 
 
 
-  /*---------- Generated message map functions ------------------*/
-
-protected:
-
-  //{{AFX_MSG(CChildFrameFix)
-
-  afx_msg void OnSize(UINT nType, int cx, int cy);
-
-  afx_msg void OnClose (void);
-
-  //}}AFX_MSG
 
 
+	/*---------- Generated message map functions ------------------*/
 
-  DECLARE_MESSAGE_MAP();
+  protected:
+
+	//{{AFX_MSG(CChildFrameFix)
+
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+	afx_msg void OnClose (void);
+
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CMWEditView Definition
+ *      End of Class CMWEditView Definition
 
  *=========================================================================*/
 
@@ -166,7 +168,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File ChildFrm.H
+ *      End of File ChildFrm.H
 
  *=========================================================================*/
 

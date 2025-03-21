@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmGlobal.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmGlobal.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmGlobal.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmGlobal.cpp");
+DEFINE_FILE("EsmGlobal.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,13 +29,13 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmGlobal::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubByte::Create },
-	{ MWESM_SUBREC_FLTV,	CEsmSubFloat::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubByte::Create },
+	{ MWESM_SUBREC_FLTV, CEsmSubFloat::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -45,12 +45,13 @@ const esmsubreccreate_t CEsmGlobal::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmGlobal::CEsmGlobal () {
-  //DEFINE_FUNCTION("CEsmGlobal::CEsmGlobal()");
-  m_pTypeData   = NULL;
-  m_pFloatData  = NULL;
- }
+	//DEFINE_FUNCTION("CEsmGlobal::CEsmGlobal()");
+	m_pTypeData = NULL;
+	m_pFloatData = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmGlobal Constructor
+ *      End of Class CEsmGlobal Constructor
  *=========================================================================*/
 
 
@@ -60,14 +61,14 @@ CEsmGlobal::CEsmGlobal () {
  *
  *=========================================================================*/
 void CEsmGlobal::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmGlobal::Destroy()");
-  m_pTypeData   = NULL;
-  m_pFloatData  = NULL;
-  
-  CEsmRecord::Destroy();
- }
+	//DEFINE_FUNCTION("CEsmGlobal::Destroy()");
+	m_pTypeData = NULL;
+	m_pFloatData = NULL;
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmGlobal::Destroy()
+ *      End of Class Method CEsmGlobal::Destroy()
  *=========================================================================*/
 
 
@@ -80,24 +81,29 @@ void CEsmGlobal::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmGlobal::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmGlobal* pGlobal;
+	CEsmGlobal* pGlobal;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_GLOB)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pGlobal = (CEsmGlobal *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_GLOB)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_VALUE:
-	return (int)(GetValue()*1000 - pGlobal->GetValue()*1000);
-    case ESM_FIELD_TYPE:
-	return (int)(GetType() - pGlobal->GetType());
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
+	pGlobal = (CEsmGlobal *) pRecord;
 
- }
+	switch (FieldID) {
+		case ESM_FIELD_VALUE:
+			return (int)(GetValue() * 1000 - pGlobal->GetValue() * 1000);
+
+		case ESM_FIELD_TYPE:
+			return (int)(GetType() - pGlobal->GetType());
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmGlobal::CompareFields()
+ *      End of Class Method CEsmGlobal::CompareFields()
  *=========================================================================*/
 
 
@@ -108,15 +114,15 @@ int CEsmGlobal::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmGlobal::Create (void) {
-  DEFINE_FUNCTION("CEsmGlobal::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmGlobal::Create (void) {
+	DEFINE_FUNCTION("CEsmGlobal::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmGlobal);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmGlobal);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmGlobal::Create()
+ *      End of Class Method CEsmGlobal::Create()
  *=========================================================================*/
 
 
@@ -128,19 +134,18 @@ CEsmRecord* CEsmGlobal::Create (void) {
  *
  *=========================================================================*/
 void CEsmGlobal::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_FNAM);
-  AllocateSubRecord(MWESM_SUBREC_FLTV);
-  m_pTypeData->CreateNew();
-  m_pFloatData->CreateNew();
-  SetType(MWESM_GLOBAL_SHORT);
- }
+	AllocateSubRecord(MWESM_SUBREC_FNAM);
+	AllocateSubRecord(MWESM_SUBREC_FLTV);
+	m_pTypeData->CreateNew();
+	m_pFloatData->CreateNew();
+	SetType(MWESM_GLOBAL_SHORT);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmGlobal::CreateNew()
+ *      End of Class Method CEsmGlobal::CreateNew()
  *=========================================================================*/
 
 
@@ -152,26 +157,29 @@ void CEsmGlobal::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmGlobal::GetFieldString (const int FieldID) {
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmGlobal::GetFieldString (const int FieldID) {
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-    case ESM_FIELD_VALUE:
-	if (GetType() == MWESM_GLOBAL_FLOAT)
-	  snprintf (s_Buffer, 31, _T("%g"), GetValue());
-	else
-	  snprintf (s_Buffer, 31, _T("%d"), (int) GetValue());
+	switch (FieldID) {
+		case ESM_FIELD_VALUE:
+			if (GetType() == MWESM_GLOBAL_FLOAT) {
+				snprintf (s_Buffer, 31, _T("%g"), GetValue());
+			} else {
+				snprintf (s_Buffer, 31, _T("%d"), (int) GetValue());
+			}
 
-	return (s_Buffer);
-    case ESM_FIELD_TYPE:
-	return GetTypeString();
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+			return (s_Buffer);
+
+		case ESM_FIELD_TYPE:
+			return GetTypeString();
+
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmGlobal::GetFieldString()
+ *      End of Class Method TCHAR* CEsmGlobal::GetFieldString()
  *=========================================================================*/
 
 
@@ -180,30 +188,41 @@ const TCHAR* CEsmGlobal::GetFieldString (const int FieldID) {
  * Class TCHAR* CEsmGlobal Method - const GetTypeString (void);
  *
  *=========================================================================*/
-const TCHAR* CEsmGlobal::GetTypeString (void) {
+const TCHAR *CEsmGlobal::GetTypeString (void) {
+	switch (GetType()) {
+		case MWESM_GLOBAL_FLOAT:
+			return _T("float");
 
-  switch (GetType()) {
-    case MWESM_GLOBAL_FLOAT:
-	return _T("float");
-    case MWESM_GLOBAL_LONG:
-	return _T("long");
-    case MWESM_GLOBAL_SHORT:
-	return _T("short");
-    default:
-	return _T("unknown");
-   }
+		case MWESM_GLOBAL_LONG:
+			return _T("long");
 
- }
+		case MWESM_GLOBAL_SHORT:
+			return _T("short");
+
+		default:
+			return _T("unknown");
+	}
+}
 
 
 int CEsmGlobal::GetTypeID (const TCHAR* pString) {
-  if (stricmp(pString, _T("float")) == 0) return (MWESM_GLOBAL_FLOAT);
-  if (stricmp(pString, _T("long"))  == 0) return (MWESM_GLOBAL_LONG);
-  if (stricmp(pString, _T("short")) == 0) return (MWESM_GLOBAL_SHORT);
-  return (MWESM_GLOBAL_FLOAT);
- }
+	if (stricmp(pString, _T("float")) == 0) {
+		return (MWESM_GLOBAL_FLOAT);
+	}
+
+	if (stricmp(pString, _T("long")) == 0) {
+		return (MWESM_GLOBAL_LONG);
+	}
+
+	if (stricmp(pString, _T("short")) == 0) {
+		return (MWESM_GLOBAL_SHORT);
+	}
+
+	return (MWESM_GLOBAL_FLOAT);
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmGlobal::GetTypeString()
+ *      End of Class Method TCHAR* CEsmGlobal::GetTypeString()
  *=========================================================================*/
 
 
@@ -213,17 +232,17 @@ int CEsmGlobal::GetTypeID (const TCHAR* pString) {
  *
  *=========================================================================*/
 void CEsmGlobal::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
+		m_pTypeData = (CEsmSubByte *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_FLTV)) {
+		m_pFloatData = (CEsmSubFloat *) pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_FNAM))
-    m_pTypeData = (CEsmSubByte *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_FLTV))
-    m_pFloatData = (CEsmSubFloat *) pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmGlobal::OnAddSubRecord()
+ *      End of Class Event CEsmGlobal::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -236,20 +255,21 @@ void CEsmGlobal::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmGlobal::SetFieldValue (const int FieldID, const TCHAR* pString) {
+	switch (FieldID) {
+		case ESM_FIELD_VALUE:
+			SetValue((float)atof(pString));
+			return (true);
 
-  switch (FieldID) { 
-    case ESM_FIELD_VALUE:
-        SetValue((float)atof(pString));
-	return (true);
-    case ESM_FIELD_TYPE:
-	int Type = GetTypeID(pString);
-	SetType(Type);
-	return (true);
-   };
+		case ESM_FIELD_TYPE:
+			int Type = GetTypeID(pString);
+			SetType(Type);
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmRecord::SetFieldValue(FieldID, pString);
- }
+	return CEsmRecord::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmGlobal::SetFieldValue()
+ *      End of Class Method CEsmGlobal::SetFieldValue()
  *=========================================================================*/

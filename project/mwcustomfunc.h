@@ -2,11 +2,11 @@
 
  *
 
- * File:	Mwcustomfunc.H
+ * File:    Mwcustomfunc.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	August 21, 2006
+ * Created On:  August 21, 2006
 
  *
 
@@ -34,17 +34,17 @@
 
  *=========================================================================*/
 
-  #include "file/genfile.h"
+#include "file/genfile.h"
 
-  #include "string/sstring.h"
+#include "string/sstring.h"
 
-  #include "contain/dl_map.h"
+#include "contain/dl_map.h"
 
-  #include "Esmscriptdefs.h"
+#include "Esmscriptdefs.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -70,89 +70,105 @@ class CMwCustomFunction {
 
 
 
-  /*---------- Begin Private Class Members ----------------------*/
+	/*---------- Begin Private Class Members ----------------------*/
 
-private:
+  private:
 
-  esmscrfuncinfo_t m_Data;	/* Function data */
+	esmscrfuncinfo_t m_Data;  /* Function data */
 
-  dword		   m_LineCount;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-
-protected:
-
-
-
-  bool ParseFuncOptions    (dword& Options, const char* pValue);
-
-  bool ParseFuncArgOptions (dword& Options, const char* pValue);
-
-  bool ParseReturnOptions  (dword& Options, const char* pValue);
+	dword m_LineCount;
 
 
 
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
+	/*---------- Begin Protected Class Methods --------------------*/
 
-public:
+  protected:
+
+
+
+	bool ParseFuncOptions (dword& Options, const char* pValue);
+
+	bool ParseFuncArgOptions (dword& Options, const char* pValue);
+
+	bool ParseReturnOptions (dword& Options, const char* pValue);
+
+
+
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+
+  public:
 
 
 
 	/* Class Constructors/Destructors */
 
-  CMwCustomFunction();
+	CMwCustomFunction();
 
-  //virtual ~CMwCustomFunction() { Destroy(); }
+	//virtual ~CMwCustomFunction() { Destroy(); }
 
-  //virtual void Destroy (void);
+	//virtual void Destroy (void);
 
 
 
 	/* Get class members */
 
-  esmscrfuncinfo_t& GetData (void) { return (m_Data); }
+	esmscrfuncinfo_t &GetData (void) {
+		return (m_Data);
+	}
 
-  const char*       GetName (void) { return (m_Data.Name); }
+	const char *GetName (void) {
+		return (m_Data.Name);
+	}
 
 
 
 	/* Read in function parameters from a file */
 
-  bool Read (CGenFile& File, dword& LineCount);
+	bool Read (CGenFile& File, dword& LineCount);
 
 
 
 	/* Sets a parameter based on the string inputs */
 
-  bool SetParameter (const char* pVariable, const char* pValue);
+	bool SetParameter (const char* pVariable, const char* pValue);
 
 
 
 	/* Set class members */
 
-  void SetName          (const char* pValue) { strnncpy(m_Data.Name, pValue, MWESM_SCRIPT_FUNCNAMESIZE); } 
+	void SetName (const char* pValue) {
+		strnncpy(m_Data.Name, pValue, MWESM_SCRIPT_FUNCNAMESIZE);
+	}
 
-  void SetOpCode        (const short Value)  { m_Data.OpCode = Value; }
+	void SetOpCode (const short Value) {
+		m_Data.OpCode = Value;
+	}
 
-  void SetOptions       (const dword Value)  { m_Data.Flags  = Value; }
+	void SetOptions (const dword Value) {
+		m_Data.Flags = Value;
+	}
 
-  void SetReturnOptions (const dword Value)  { m_Data.Return = Value; }
+	void SetReturnOptions (const dword Value) {
+		m_Data.Return = Value;
+	}
 
-  void SetArgOptions    (const dword Index, const dword Value) { if (Index <= MWESM_SCRIPT_MAXARGS) m_Data.Var[Index] = Value; }
+	void SetArgOptions (const dword Index, const dword Value) {
+		if (Index <= MWESM_SCRIPT_MAXARGS) {
+			m_Data.Var[Index] = Value;
+		}
+	}
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CMwCustomFunction Definition
+ *      End of Class CMwCustomFunction Definition
 
  *=========================================================================*/
 
@@ -172,15 +188,15 @@ public:
 
 
 
-	/* Map of custom functions */
+/* Map of custom functions */
 
-  typedef TGenMap<CSString, CMwCustomFunction*, const char*> CMwCustomFunctions;
+typedef TGenMap<CSString, CMwCustomFunction *, const char *> CMwCustomFunctions;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -200,15 +216,15 @@ public:
 
 
 
-	/* Input functions from a file */
+/* Input functions from a file */
 
-   bool ReadMwCustomFunctions (CMwCustomFunctions& Functions, const char* pFilename);
+bool ReadMwCustomFunctions (CMwCustomFunctions& Functions, const char* pFilename);
 
 
 
 /*===========================================================================
 
- *		End of Functions
+ *      End of Functions
 
  *=========================================================================*/
 
@@ -228,15 +244,15 @@ public:
 
 
 
-	/* Global custom function map */
+/* Global custom function map */
 
-  extern CMwCustomFunctions g_CustomFunctions;
+extern CMwCustomFunctions g_CustomFunctions;
 
 
 
 /*===========================================================================
 
- *		End of External Definitions
+ *      End of External Definitions
 
  *=========================================================================*/
 
@@ -248,7 +264,7 @@ public:
 
 /*===========================================================================
 
- *		End of File Mwcustomfunc.H
+ *      End of File Mwcustomfunc.H
 
  *=========================================================================*/
 

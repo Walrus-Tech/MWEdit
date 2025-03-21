@@ -2,11 +2,11 @@
 
  *
 
- * File:	Errordialog.H
+ * File:    Errordialog.H
 
- * Author:	Dave Humphrey (uesp@sympatico.ca)
+ * Author:  Dave Humphrey (uesp@sympatico.ca)
 
- * Created On:	November 21, 2006
+ * Created On:  November 21, 2006
 
  *
 
@@ -36,7 +36,7 @@
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -50,15 +50,15 @@ class CErrorDialog : public CDialog
 
 
 
-public:
+  public:
 
 	CErrorDialog(CWnd* pParent = NULL);
 
 
 
-	CString	m_MessageText;
+	CString m_MessageText;
 
-	CString	m_TitleText;
+	CString m_TitleText;
 
 
 
@@ -66,9 +66,9 @@ public:
 
 	enum { IDD = IDD_ERROR_DLG };
 
-	CEdit	m_Text;
+	CEdit m_Text;
 
-	CStatic	m_Label;
+	CStatic m_Label;
 
 	//}}AFX_DATA
 
@@ -78,7 +78,7 @@ public:
 
 	//{{AFX_VIRTUAL(CErrorDialog)
 
-	protected:
+  protected:
 
 	virtual void DoDataExchange(CDataExchange* pDX);
 
@@ -86,13 +86,13 @@ public:
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CErrorDialog)
+	//{{AFX_MSG(CErrorDialog)
 
 	virtual BOOL OnInitDialog();
 
@@ -100,7 +100,7 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 };
 
@@ -120,7 +120,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Errordialog.H
+ *      End of File Errordialog.H
 
  *=========================================================================*/
 

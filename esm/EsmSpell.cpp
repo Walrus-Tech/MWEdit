@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmSpell.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmSpell.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmSpell.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmSpell.cpp");
+DEFINE_FILE("EsmSpell.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -28,7 +28,7 @@
  * Begin Local Spell Type Array
  *
  *=========================================================================*/
-const TCHAR* l_SpellTypes[] = {
+const TCHAR *l_SpellTypes[] = {
 	_T("Spell"),
 	_T("Ability"),
 	_T("Blight"),
@@ -36,9 +36,9 @@ const TCHAR* l_SpellTypes[] = {
 	_T("Curse"),
 	_T("Power"),
 
- };
+};
 /*===========================================================================
- *		End of Local Spell Type Array
+ *      End of Local Spell Type Array
  *=========================================================================*/
 
 
@@ -48,14 +48,14 @@ const TCHAR* l_SpellTypes[] = {
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmSpell::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SPDT,	CEsmSubSPDT::Create },
-	{ MWESM_SUBREC_ENAM,	CEsmSubENAM::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_SPDT, CEsmSubSPDT::Create },
+	{ MWESM_SUBREC_ENAM, CEsmSubENAM::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -65,12 +65,13 @@ const esmsubreccreate_t CEsmSpell::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmSpell::CEsmSpell () {
-  //DEFINE_FUNCTION("CEsmSpell::CEsmSpell()");
-  m_pSpellData = NULL;
-  m_pName      = NULL;
- }
+	//DEFINE_FUNCTION("CEsmSpell::CEsmSpell()");
+	m_pSpellData = NULL;
+	m_pName = NULL;
+}
+
 /*===========================================================================
- *		End of Class CEsmSpell Constructor
+ *      End of Class CEsmSpell Constructor
  *=========================================================================*/
 
 
@@ -82,14 +83,14 @@ CEsmSpell::CEsmSpell () {
  *
  *=========================================================================*/
 void CEsmSpell::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmSpell::Destroy()");
-  m_pSpellData = NULL;
-  m_pName      = NULL;
-  
-  CEsmRecord::Destroy();
- }
+	//DEFINE_FUNCTION("CEsmSpell::Destroy()");
+	m_pSpellData = NULL;
+	m_pName = NULL;
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSpell::Destroy()
+ *      End of Class Method CEsmSpell::Destroy()
  *=========================================================================*/
 
 
@@ -102,29 +103,38 @@ void CEsmSpell::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmSpell::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmSpell* pSpell;
+	CEsmSpell* pSpell;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_SPEL)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pSpell = (CEsmSpell *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_SPEL)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_NAME:
-	return StringCompare(GetName(), pSpell->GetName(), false);
-    case ESM_FIELD_AUTOCALC:
-	return (int)IsAutoCalc() - (int)pSpell->IsAutoCalc();
-    case ESM_FIELD_PCSTART:
-	return (int)IsPCStart() - (int)pSpell->IsPCStart();
-    case ESM_FIELD_COST:
-	return GetSpellCost() - pSpell->GetSpellCost();
-    case ESM_FIELD_TYPE:
-	return StringCompare(GetSpellType(), pSpell->GetSpellType(), false);
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
- }
+	pSpell = (CEsmSpell *) pRecord;
+
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			return StringCompare(GetName(), pSpell->GetName(), false);
+
+		case ESM_FIELD_AUTOCALC:
+			return (int)IsAutoCalc() - (int)pSpell->IsAutoCalc();
+
+		case ESM_FIELD_PCSTART:
+			return (int)IsPCStart() - (int)pSpell->IsPCStart();
+
+		case ESM_FIELD_COST:
+			return GetSpellCost() - pSpell->GetSpellCost();
+
+		case ESM_FIELD_TYPE:
+			return StringCompare(GetSpellType(), pSpell->GetSpellType(), false);
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSpell::CompareFields()
+ *      End of Class Method CEsmSpell::CompareFields()
  *=========================================================================*/
 
 
@@ -135,15 +145,15 @@ int CEsmSpell::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmSpell::Create (void) {
-  DEFINE_FUNCTION("CEsmSpell::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmSpell::Create (void) {
+	DEFINE_FUNCTION("CEsmSpell::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmSpell);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmSpell);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmSpell::Create()
+ *      End of Class Method CEsmSpell::Create()
  *=========================================================================*/
 
 
@@ -155,17 +165,16 @@ CEsmRecord* CEsmSpell::Create (void) {
  *
  *=========================================================================*/
 void CEsmSpell::CreateNew (CEsmFile* pFile) {
-
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_FNAM);
-  AllocateSubRecord(MWESM_SUBREC_SPDT);
-  m_pSpellData->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_FNAM);
+	AllocateSubRecord(MWESM_SUBREC_SPDT);
+	m_pSpellData->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSpell::CreateNew()
+ *      End of Class Method CEsmSpell::CreateNew()
  *=========================================================================*/
 
 
@@ -177,28 +186,33 @@ void CEsmSpell::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmSpell::GetFieldString (const int FieldID) {
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmSpell::GetFieldString (const int FieldID) {
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-    case ESM_FIELD_NAME:
-    	return GetName();
-    case ESM_FIELD_AUTOCALC:
- 	return BOOLTOYESNO(IsAutoCalc());
-    case ESM_FIELD_PCSTART:
-	return BOOLTOYESNO(IsPCStart());
-    case ESM_FIELD_COST:
-	snprintf (s_Buffer, 31, _T("%ld"), GetSpellCost());
-	return (s_Buffer);
-    case ESM_FIELD_TYPE:
-	return GetSpellType();
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			return GetName();
+
+		case ESM_FIELD_AUTOCALC:
+			return BOOLTOYESNO(IsAutoCalc());
+
+		case ESM_FIELD_PCSTART:
+			return BOOLTOYESNO(IsPCStart());
+
+		case ESM_FIELD_COST:
+			snprintf (s_Buffer, 31, _T("%ld"), GetSpellCost());
+			return (s_Buffer);
+
+		case ESM_FIELD_TYPE:
+			return GetSpellType();
+
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmSpell::GetFieldString()
+ *      End of Class Method TCHAR* CEsmSpell::GetFieldString()
  *=========================================================================*/
 
 
@@ -208,17 +222,17 @@ const TCHAR* CEsmSpell::GetFieldString (const int FieldID) {
  *
  *=========================================================================*/
 void CEsmSpell::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
+		m_pName = (CEsmSubNameFix *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_SPDT)) {
+		m_pSpellData = (CEsmSubSPDT *) pSubRecord;
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_FNAM))
-    m_pName = (CEsmSubNameFix *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_SPDT))
-    m_pSpellData = (CEsmSubSPDT *) pSubRecord;
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmSpell::OnAddSubRecord()
+ *      End of Class Event CEsmSpell::OnAddSubRecord()
  *=========================================================================*/
 
 
@@ -231,31 +245,39 @@ void CEsmSpell::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmSpell::SetFieldValue (const int FieldID, const TCHAR* pString) {
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			SetName(pString);
+			return (true);
 
-  switch (FieldID) { 
-    case ESM_FIELD_NAME:
-        SetName(pString);
-	return (true);
-    case ESM_FIELD_AUTOCALC:
-        SetAutoCalc(StringToBoolean(pString));
-	return (true);
-    case ESM_FIELD_PCSTART:
-        SetPCStart(StringToBoolean(pString));
-	return (true);
-    case ESM_FIELD_COST:
-        SetSpellCost(atoi(pString));
-	return (true);
-    case ESM_FIELD_TYPE:
-	int Type = GetESMSpellType(pString);
-        if (Type >= 0) SetSpellType(Type);
-	return (true);
-   };
+		case ESM_FIELD_AUTOCALC:
+			SetAutoCalc(StringToBoolean(pString));
+			return (true);
+
+		case ESM_FIELD_PCSTART:
+			SetPCStart(StringToBoolean(pString));
+			return (true);
+
+		case ESM_FIELD_COST:
+			SetSpellCost(atoi(pString));
+			return (true);
+
+		case ESM_FIELD_TYPE:
+			int Type = GetESMSpellType(pString);
+
+			if (Type >= 0) {
+				SetSpellType(Type);
+			}
+
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmRecord::SetFieldValue(FieldID, pString);
- }
+	return CEsmRecord::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmSpell::SetFieldValue()
+ *      End of Class Method CEsmSpell::SetFieldValue()
  *=========================================================================*/
 
 
@@ -264,25 +286,29 @@ bool CEsmSpell::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Function - const TCHAR* GetESMSpellType (Type);
  *
  *=========================================================================*/
-const TCHAR* GetESMSpellType (const int Type) {
-
+const TCHAR *GetESMSpellType (const int Type) {
 	/* Check for a valid input type */
-  if (Type < MWESM_SPELLTYPE_MIN || Type > MWESM_SPELLTYPE_MAX)  return _T("Unknown");
+	if (Type < MWESM_SPELLTYPE_MIN || Type > MWESM_SPELLTYPE_MAX) {
+		return _T("Unknown");
+	}
 
 	/* Return the type string from the name array */
-  return l_SpellTypes[Type];
- }
+	return l_SpellTypes[Type];
+}
 
 
 int GetESMSpellType (const TCHAR* pString) {
-  int Index;
+	int Index;
 
-  for (Index = MWESM_SPELLTYPE_MIN; Index <= MWESM_SPELLTYPE_MAX; Index++) {
-    if (stricmp(pString, l_SpellTypes[Index]) == 0) return (Index);
-   }
-  
-  return (-1);
- }
+	for (Index = MWESM_SPELLTYPE_MIN; Index <= MWESM_SPELLTYPE_MAX; Index++) {
+		if (stricmp(pString, l_SpellTypes[Index]) == 0) {
+			return (Index);
+		}
+	}
+
+	return (-1);
+}
+
 /*===========================================================================
- *		End of Function TCHAR* GetESMSpellType()
+ *      End of Function TCHAR* GetESMSpellType()
  *=========================================================================*/

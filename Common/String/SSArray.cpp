@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	Ssarray.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Thursday, December 18, 2003
+ * File:    Ssarray.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Thursday, December 18, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "ssarray.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("SSArray.cpp");
+DEFINE_FILE("SSArray.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,11 +29,11 @@
  *
  *=========================================================================*/
 CSStringArray::CSStringArray () {
-  //DEFINE_FUNCTION("CSStringArray::CSStringArray()");
+	//DEFINE_FUNCTION("CSStringArray::CSStringArray()");
+}
 
- }
 /*===========================================================================
- *		End of Class CSStringArray Constructor
+ *      End of Class CSStringArray Constructor
  *=========================================================================*/
 
 
@@ -43,12 +43,12 @@ CSStringArray::CSStringArray () {
  *
  *=========================================================================*/
 void CSStringArray::Destroy (void) {
-  //DEFINE_FUNCTION("CSStringArray::Destroy()");
+	//DEFINE_FUNCTION("CSStringArray::Destroy()");
+	DeleteStrings();
+}
 
-  DeleteStrings();
- }
 /*===========================================================================
- *		End of Class Method CSStringArray::Destroy()
+ *      End of Class Method CSStringArray::Destroy()
  *=========================================================================*/
 
 
@@ -60,18 +60,17 @@ void CSStringArray::Destroy (void) {
  * NULL on any error.
  *
  *=========================================================================*/
-CSString* CSStringArray::Add (const TCHAR* pString) {
-  DEFINE_FUNCTION("CSStringArray::Add()");
-  CSString* pNewString;
-
+CSString *CSStringArray::Add (const TCHAR* pString) {
+	DEFINE_FUNCTION("CSStringArray::Add()");
+	CSString* pNewString;
 	/* Allocate and initialize the new object */
-  CreateClassPointer(pNewString, CSString, pString);
-  m_Strings.Add(pNewString);
+	CreateClassPointer(pNewString, CSString, pString);
+	m_Strings.Add(pNewString);
+	return (pNewString);
+}
 
-  return (pNewString);
- }
 /*===========================================================================
- *		End of Class Method CSStringArray::Add()
+ *      End of Class Method CSStringArray::Add()
  *=========================================================================*/
 
 
@@ -83,16 +82,19 @@ CSString* CSStringArray::Add (const TCHAR* pString) {
  *
  *=========================================================================*/
 void CSStringArray::DeleteElement (CSString* pString) {
-  int Index;
-
+	int Index;
 	/* Attempt to find the element in the array */
-  Index = m_Strings.FindElement(pString);
-  if (Index < 0) return;
+	Index = m_Strings.FindElement(pString);
 
-  DeleteElement(Index);
- }
+	if (Index < 0) {
+		return;
+	}
+
+	DeleteElement(Index);
+}
+
 /*===========================================================================
- *		End of Class Method CSStringArray::DeleteElement()
+ *      End of Class Method CSStringArray::DeleteElement()
  *=========================================================================*/
 
 
@@ -104,21 +106,23 @@ void CSStringArray::DeleteElement (CSString* pString) {
  *
  *=========================================================================*/
 void CSStringArray::DeleteElement (const int Index) {
-  DEFINE_FUNCTION("CSStringArray::DeleteElement()");
-  CSString* pString;
-	
+	DEFINE_FUNCTION("CSStringArray::DeleteElement()");
+	CSString* pString;
 	/* Get string element and ensure it is valid */
-  pString = m_Strings.GetAt(Index);
-  if (pString == NULL) return;
+	pString = m_Strings.GetAt(Index);
+
+	if (pString == NULL) {
+		return;
+	}
 
 	/* Delete element from array */
-  m_Strings.DeleteElement(Index);
-
+	m_Strings.DeleteElement(Index);
 	/* Delete element string */
-  DestroyPointer(pString);
- }
+	DestroyPointer(pString);
+}
+
 /*===========================================================================
- *		End of Class Method CSStringArray::DeleteElement()
+ *      End of Class Method CSStringArray::DeleteElement()
  *=========================================================================*/
 
 
@@ -130,17 +134,18 @@ void CSStringArray::DeleteElement (const int Index) {
  *
  *=========================================================================*/
 void CSStringArray::DeleteStrings (void) {
-  DEFINE_FUNCTION("CSStringArray::DeleteStrings()");
-  CSString* pString;
-  int       Index;
+	DEFINE_FUNCTION("CSStringArray::DeleteStrings()");
+	CSString* pString;
+	int Index;
 
-  for (Index = 0; Index < m_Strings.GetNumElements(); Index++) {
-    pString = m_Strings.GetAt(Index);
-    DestroyPointer(pString);
-   }
+	for (Index = 0; Index < m_Strings.GetNumElements(); Index++) {
+		pString = m_Strings.GetAt(Index);
+		DestroyPointer(pString);
+	}
 
-  m_Strings.RemoveAll();
- }
+	m_Strings.RemoveAll();
+}
+
 /*===========================================================================
- *		End of Class Method CSStringArray::DeleteStrings()
+ *      End of Class Method CSStringArray::DeleteStrings()
  *=========================================================================*/

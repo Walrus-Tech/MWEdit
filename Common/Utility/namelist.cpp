@@ -1,15 +1,15 @@
 /*===========================================================================
  *
- * File:	NameList.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Tuesday, May 29, 2001
+ * File:    NameList.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Tuesday, May 29, 2001
  *
- * Implements routines related to manipulating simple name-value associative 
+ * Implements routines related to manipulating simple name-value associative
  * lists.
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "utility\namelist.h"
 #include <string.h>
 
@@ -19,9 +19,9 @@
  * Begin Local Variable Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("NameList.cpp");
+DEFINE_FILE("NameList.cpp");
 /*===========================================================================
- *		End of Local Variable Definitions
+ *      End of Local Variable Definitions
  *=========================================================================*/
 
 
@@ -35,36 +35,37 @@
  * case insensitive.
  *
  *=========================================================================*/
-bool FindNameValue (long& lValue, const valuenames_t* pValueArray, const TCHAR* pName) {
-  DEFINE_FUNCTION("FindNameValue()")
-  int	Index;
-
+bool FindNameValue (long &lValue, const valuenames_t* pValueArray, const TCHAR* pName) {
+	DEFINE_FUNCTION("FindNameValue()")
+	int Index;
 	/* Ensure valid array */
-  ASSERT(pValueArray != NULL);
+	ASSERT(pValueArray != NULL);
 
 	/* Ignore NULL input */
-  if (pName == NULL) {
-    ErrorHandler.AddError(ERR_BADINPUT, "Value name string was not specified!");
-    return (false);
-   }
+	if (pName == NULL) {
+		ErrorHandler.AddError(ERR_BADINPUT, "Value name string was not specified!");
+		return (false);
+	}
 
 	/* Search array until an empty string or null is found */
-  Index = 0;
+	Index = 0;
 
-  while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-    if (TSTRICMP(pValueArray[Index].pName, pName) == 0) {
-      lValue = pValueArray[Index].lValue;
-      return (true);
-     }
-    Index++;
-   }
+	while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
+		if ( _stricmp(pValueArray[Index].pName, pName) == 0) {
+			lValue = pValueArray[Index].lValue;
+			return (true);
+		}
+
+		Index++;
+	}
 
 	/* No match found */
-  ErrorHandler.AddError(ERR_BADINPUT, "Value for the string '%s' was not found!", pName);
-  return (FALSE);
- }
+	ErrorHandler.AddError(ERR_BADINPUT, "Value for the string '%s' was not found!", pName);
+	return (FALSE);
+}
+
 /*===========================================================================
- *		End of Function FindNameValue()
+ *      End of Function FindNameValue()
  *=========================================================================*/
 
 
@@ -78,31 +79,34 @@ bool FindNameValue (long& lValue, const valuenames_t* pValueArray, const TCHAR* 
  *
  *=========================================================================*/
 long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName) {
-  DEFINE_FUNCTION("FindNameValue()")
-  int	Index;
-
+	DEFINE_FUNCTION("FindNameValue()")
+	int Index;
 	/* Ensure valid input */
-  ASSERT(pValueArray != NULL);
+	ASSERT(pValueArray != NULL);
 
 	/* Ignore NULL input */
-  if (pName == NULL) {
-    ErrorHandler.AddError(ERR_BADINPUT, "Value name string was not specified!");
-    return (false);
-   }
+	if (pName == NULL) {
+		ErrorHandler.AddError(ERR_BADINPUT, "Value name string was not specified!");
+		return (false);
+	}
 
 	/* Search array until an empty string or null is found */
-  Index = 0;
+	Index = 0;
 
-  while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-    if (TSTRICMP(pValueArray[Index].pName, pName) == 0) return ( pValueArray[Index].lValue);
-    Index++;
-   }
+	while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
+		if ( _stricmp(pValueArray[Index].pName, pName) == 0) {
+			return ( pValueArray[Index].lValue);
+		}
+
+		Index++;
+	}
 
 	/* No match found */
-  return (pValueArray[Index].lValue);
- }
+	return (pValueArray[Index].lValue);
+}
+
 /*===========================================================================
- *		End of Function FindNameValue()
+ *      End of Function FindNameValue()
  *=========================================================================*/
 
 
@@ -114,24 +118,26 @@ long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName) {
  * the string if found, or an empty string.
  *
  *=========================================================================*/
-const TCHAR* FindValueName (const valuenames_t* pValueArray, const long lValue) {
-  DEFINE_FUNCTION("FindValueName()")
-  int	Index;
-
+const TCHAR *FindValueName (const valuenames_t* pValueArray, const long lValue) {
+	DEFINE_FUNCTION("FindValueName()")
+	int Index;
 	/* Ensure valid input */
-  ASSERT(pValueArray != NULL);
-
+	ASSERT(pValueArray != NULL);
 	/* Search array until an empty string or null is found */
-  Index = 0;
+	Index = 0;
 
-  while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-    if (pValueArray[Index].lValue == lValue) return (pValueArray[Index].pName);
-    Index++;
-   }
+	while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
+		if (pValueArray[Index].lValue == lValue) {
+			return (pValueArray[Index].pName);
+		}
+
+		Index++;
+	}
 
 	/* No match found */
-  return _T("");
- }
+	return _T("");
+}
+
 /*===========================================================================
- *		End of Function FindValueName()
+ *      End of Function FindValueName()
  *=========================================================================*/

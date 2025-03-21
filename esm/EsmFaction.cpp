@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	EsmFaction.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmFaction.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "EsmFaction.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("EsmFaction.cpp");
+DEFINE_FILE("EsmFaction.cpp");
 /*===========================================================================
- *		End of Local Definitions
+ *      End of Local Definitions
  *=========================================================================*/
 
 
@@ -29,16 +29,16 @@
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmFaction::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_RNAM,	CEsmSubName32::Create },
-	{ MWESM_SUBREC_ANAM,	CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_INTV,	CEsmSubLong::Create },
-	{ MWESM_SUBREC_FADT,	CEsmSubFADT::Create },
-	{ NULL,			CEsmSubRecord::Create }	/* Must be last record */
- };
+	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_RNAM, CEsmSubName32::Create },
+	{ MWESM_SUBREC_ANAM, CEsmSubNameFix::Create },
+	{ MWESM_SUBREC_INTV, CEsmSubLong::Create },
+	{ MWESM_SUBREC_FADT, CEsmSubFADT::Create },
+	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+};
 /*===========================================================================
- *		End of Sub-Record Create Array
+ *      End of Sub-Record Create Array
  *=========================================================================*/
 
 
@@ -48,14 +48,14 @@ const esmsubreccreate_t CEsmFaction::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 CEsmFaction::CEsmFaction () {
-  //DEFINE_FUNCTION("CEsmFaction::CEsmFaction()");
-  m_pName	 = NULL;
-  m_pFactionData = NULL;
-  m_NumRankNames = 0;
+	//DEFINE_FUNCTION("CEsmFaction::CEsmFaction()");
+	m_pName = NULL;
+	m_pFactionData = NULL;
+	m_NumRankNames = 0;
+}
 
- }
 /*===========================================================================
- *		End of Class CEsmFaction Constructor
+ *      End of Class CEsmFaction Constructor
  *=========================================================================*/
 
 
@@ -65,15 +65,15 @@ CEsmFaction::CEsmFaction () {
  *
  *=========================================================================*/
 void CEsmFaction::Destroy (void) {
-  //DEFINE_FUNCTION("CEsmFaction::Destroy()");
-  m_pName	 = NULL;
-  m_pFactionData = NULL;
-  m_NumRankNames = 0;
-  
-  CEsmRecord::Destroy();
- }
+	//DEFINE_FUNCTION("CEsmFaction::Destroy()");
+	m_pName = NULL;
+	m_pFactionData = NULL;
+	m_NumRankNames = 0;
+	CEsmRecord::Destroy();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmFaction::Destroy()
+ *      End of Class Method CEsmFaction::Destroy()
  *=========================================================================*/
 
 
@@ -86,22 +86,26 @@ void CEsmFaction::Destroy (void) {
  *
  *=========================================================================*/
 int CEsmFaction::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-  CEsmFaction* pFaction;
+	CEsmFaction* pFaction;
 
 	/* Ensure the correct type */
-  if (!pRecord->IsType(MWESM_REC_FACT)) return CEsmRecord::CompareFields(FieldID, pRecord);
-  pFaction = (CEsmFaction *) pRecord;
+	if (!pRecord->IsType(MWESM_REC_FACT)) {
+		return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
 
-  switch (FieldID) {
-    case ESM_FIELD_NAME:
-	return StringCompare(GetName(), pFaction->GetName(), false);
-    default:
-	return CEsmRecord::CompareFields(FieldID, pRecord); 
-   }
+	pFaction = (CEsmFaction *) pRecord;
 
- }
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			return StringCompare(GetName(), pFaction->GetName(), false);
+
+		default:
+			return CEsmRecord::CompareFields(FieldID, pRecord);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method CEsmFaction::CompareFields()
+ *      End of Class Method CEsmFaction::CompareFields()
  *=========================================================================*/
 
 
@@ -112,15 +116,15 @@ int CEsmFaction::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord* CEsmFaction::Create (void) {
-  DEFINE_FUNCTION("CEsmFaction::Create()");
-  CEsmRecord* pRecord;
+CEsmRecord *CEsmFaction::Create (void) {
+	DEFINE_FUNCTION("CEsmFaction::Create()");
+	CEsmRecord* pRecord;
+	CreatePointer(pRecord, CEsmFaction);
+	return (pRecord);
+}
 
-  CreatePointer(pRecord, CEsmFaction);
-  return (pRecord);
- }
 /*===========================================================================
- *		End of Class Method CEsmFaction::Create()
+ *      End of Class Method CEsmFaction::Create()
  *=========================================================================*/
 
 
@@ -132,25 +136,24 @@ CEsmRecord* CEsmFaction::Create (void) {
  *
  *=========================================================================*/
 void CEsmFaction::CreateNew (CEsmFile* pFile) {
-  CEsmSubRecord* pSubRec;
-  int		 Index;
-
+	CEsmSubRecord* pSubRec;
+	int Index;
 	/* Call the base class record first */
-  CEsmRecord::CreateNew(pFile);
-
+	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
-  AllocateSubRecord(MWESM_SUBREC_FNAM);
+	AllocateSubRecord(MWESM_SUBREC_FNAM);
 
-  for (Index = 0; Index < MWESM_FACTION_NUMRANKS; Index++) {
-    pSubRec = AllocateSubRecord(MWESM_SUBREC_RNAM);
-    pSubRec->CreateNew();
-   }
+	for (Index = 0; Index < MWESM_FACTION_NUMRANKS; Index++) {
+		pSubRec = AllocateSubRecord(MWESM_SUBREC_RNAM);
+		pSubRec->CreateNew();
+	}
 
-  AllocateSubRecord(MWESM_SUBREC_FADT);
-  m_pFactionData->CreateNew();
- }
+	AllocateSubRecord(MWESM_SUBREC_FADT);
+	m_pFactionData->CreateNew();
+}
+
 /*===========================================================================
- *		End of Class Method CEsmFaction::CreateNew()
+ *      End of Class Method CEsmFaction::CreateNew()
  *=========================================================================*/
 
 
@@ -162,19 +165,20 @@ void CEsmFaction::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR* CEsmFaction::GetFieldString (const int FieldID) {
-  static TCHAR s_Buffer[32];
+const TCHAR *CEsmFaction::GetFieldString (const int FieldID) {
+	static TCHAR s_Buffer[32];
 
-  switch (FieldID) {
-    case ESM_FIELD_NAME:
-	return GetName();
-    default:
-	return CEsmRecord::GetFieldString(FieldID);
-   }
-  
- }
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			return GetName();
+
+		default:
+			return CEsmRecord::GetFieldString(FieldID);
+	}
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmFaction::GetFieldString()
+ *      End of Class Method TCHAR* CEsmFaction::GetFieldString()
  *=========================================================================*/
 
 
@@ -186,13 +190,20 @@ const TCHAR* CEsmFaction::GetFieldString (const int FieldID) {
  * defined.
  *
  *=========================================================================*/
-const TCHAR* CEsmFaction::GetRankName (const int Rank) {
-  if (Rank < 0 || Rank >= m_NumRankNames) return _T("");
-  if (m_pRankNames[Rank] == NULL) return _T("");
-  return m_pRankNames[Rank]->GetName();
- }
+const TCHAR *CEsmFaction::GetRankName (const int Rank) {
+	if (Rank < 0 || Rank >= m_NumRankNames) {
+		return _T("");
+	}
+
+	if (m_pRankNames[Rank] == NULL) {
+		return _T("");
+	}
+
+	return m_pRankNames[Rank]->GetName();
+}
+
 /*===========================================================================
- *		End of Class Method TCHAR* CEsmFaction::GetRankName()
+ *      End of Class Method TCHAR* CEsmFaction::GetRankName()
  *=========================================================================*/
 
 
@@ -202,24 +213,22 @@ const TCHAR* CEsmFaction::GetRankName (const int Rank) {
  *
  *=========================================================================*/
 void CEsmFaction::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
+		m_pName = (CEsmSubNameFix *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_FADT)) {
+		m_pFactionData = (CEsmSubFADT *) pSubRecord;
+	} else if (pSubRecord->IsType(MWESM_SUBREC_RNAM)) {
+		if (m_NumRankNames < MWESM_FACTION_NUMRANKS) {
+			m_pRankNames[m_NumRankNames] = (CEsmSubName32 *) pSubRecord;
+			m_NumRankNames++;
+		}
+	} else {
+		CEsmRecord::OnAddSubRecord(pSubRecord);
+	}
+}
 
-  if (pSubRecord->IsType(MWESM_SUBREC_FNAM))
-    m_pName = (CEsmSubNameFix *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_FADT))
-    m_pFactionData = (CEsmSubFADT *) pSubRecord;
-  else if (pSubRecord->IsType(MWESM_SUBREC_RNAM)) {
-
-    if (m_NumRankNames < MWESM_FACTION_NUMRANKS) {
-      m_pRankNames[m_NumRankNames] = (CEsmSubName32 *) pSubRecord;
-      m_NumRankNames++;
-     }
-   }
-  else
-    CEsmRecord::OnAddSubRecord(pSubRecord);
-
- }
 /*===========================================================================
- *		End of Class Event CEsmFaction::CEsmFaction()
+ *      End of Class Event CEsmFaction::CEsmFaction()
  *=========================================================================*/
 
 
@@ -232,18 +241,18 @@ void CEsmFaction::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  *
  *=========================================================================*/
 bool CEsmFaction::SetFieldValue (const int FieldID, const TCHAR* pString) {
-
-  switch (FieldID) { 
-    case ESM_FIELD_NAME:
-        SetName(pString);
-	return (true);
-   };
+	switch (FieldID) {
+		case ESM_FIELD_NAME:
+			SetName(pString);
+			return (true);
+	};
 
 	/* No matching field found */
-  return CEsmRecord::SetFieldValue(FieldID, pString);
- }
+	return CEsmRecord::SetFieldValue(FieldID, pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmFaction::SetFieldValue()
+ *      End of Class Method CEsmFaction::SetFieldValue()
  *=========================================================================*/
 
 
@@ -255,20 +264,26 @@ bool CEsmFaction::SetFieldValue (const int FieldID, const TCHAR* pString) {
  *
  *=========================================================================*/
 void CEsmFaction::SetRankName (const int Rank, const TCHAR* pString) {
-  int Index;
+	int Index;
 
 	/* Ignore any invalid input */
-  if (Rank < 0 || Rank >= MWESM_FACTION_NUMRANKS) return;
+	if (Rank < 0 || Rank >= MWESM_FACTION_NUMRANKS) {
+		return;
+	}
 
 	/* Create the rank name if required */
-  for (Index = m_NumRankNames; Index < Rank; Index++) {
-    AllocateSubRecord(MWESM_SUBREC_RNAM);
-   }
+	for (Index = m_NumRankNames; Index < Rank; Index++) {
+		AllocateSubRecord(MWESM_SUBREC_RNAM);
+	}
 
 	/* Check array pointer just in case */
-  if (m_pRankNames[Rank] == NULL) return;
-  m_pRankNames[Rank]->SetName(pString);
- }
+	if (m_pRankNames[Rank] == NULL) {
+		return;
+	}
+
+	m_pRankNames[Rank]->SetName(pString);
+}
+
 /*===========================================================================
- *		End of Class Method CEsmFaction::SetRankName()
+ *      End of Class Method CEsmFaction::SetRankName()
  *=========================================================================*/

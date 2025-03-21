@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmregiondlg.H
+ * File:    Esmregiondlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 20, 2003
+ * Created On:  February 20, 2003
 
  *
 
@@ -34,17 +34,17 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
-  #include "EsmListCtrl.h"
+#include "EsmListCtrl.h"
 
-  #include "ColorStatic1.h"
+#include "ColorStatic1.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -66,7 +66,7 @@
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -86,151 +86,151 @@
 
 class CEsmRegionDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmRegionDlg);
+	DECLARE_DYNCREATE(CEsmRegionDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmRegion*	m_pRegion;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
-
-
-
-  	/* Update item data */
-
-  virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	CEsmRegion *m_pRegion;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Protected Class Methods ------------------------*/
 
-public:
+  protected:
+
+
+
+	/* Update item data */
+
+	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmRegionDlg();
+	CEsmRegionDlg();
 
 
 
-  	/* Get class members */
+	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-	
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
+
+	virtual void SetControlData (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmRegionDlg)
+	//{{AFX_DATA(CEsmRegionDlg)
 
-  enum { IDD = IDD_REGION_DLG };
+	enum { IDD = IDD_REGION_DLG };
 
-  CColorStatic		m_ColorBox;
+	CColorStatic m_ColorBox;
 
-  CSpinButtonCtrl	m_BSpin;
+	CSpinButtonCtrl m_BSpin;
 
-  CSpinButtonCtrl	m_GSpin;
+	CSpinButtonCtrl m_GSpin;
 
-  CSpinButtonCtrl	m_RSpin;
+	CSpinButtonCtrl m_RSpin;
 
-  CEdit			m_BlueText;
+	CEdit m_BlueText;
 
-  CEdit			m_GreenText;
+	CEdit m_GreenText;
 
-  CEdit			m_RedText;
+	CEdit m_RedText;
 
-  CEdit			m_BlightText;
+	CEdit m_BlightText;
 
-  CEdit			m_AshText;
+	CEdit m_AshText;
 
-  CEdit			m_ThunderText;
+	CEdit m_ThunderText;
 
-  CEdit			m_RainText;
+	CEdit m_RainText;
 
-  CEdit			m_OvercastText;
+	CEdit m_OvercastText;
 
-  CEdit			m_FoggyText;
+	CEdit m_FoggyText;
 
-  CEdit			m_CloudyText;
+	CEdit m_CloudyText;
 
-  CEdit			m_ClearText;
+	CEdit m_ClearText;
 
-  CComboBox		m_CreatureList;
+	CComboBox m_CreatureList;
 
-  CEsmListCtrl		m_SoundList;
+	CEsmListCtrl m_SoundList;
 
-  CEdit			m_NameText;
+	CEdit m_NameText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmRegionDlg)
+	//{{AFX_VIRTUAL(CEsmRegionDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmRegionDlg)
+	//{{AFX_MSG(CEsmRegionDlg)
 
-  afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordDrop (LPARAM lParam, LPARAM wParam);
 
-  afx_msg LRESULT OnRecordKey  (LPARAM lParam, LPARAM wParam);
+	afx_msg LRESULT OnRecordKey (LPARAM lParam, LPARAM wParam);
 
-  void OnEndlabeleditItemlist (NMHDR* pNMHDR, LRESULT* pResult);
+	void OnEndlabeleditItemlist (NMHDR* pNMHDR, LRESULT* pResult);
 
-  void OnChangeColor();
+	void OnChangeColor();
 
-  afx_msg void OnColorbutton();
+	afx_msg void OnColorbutton();
 
-  //}}AFX_MSG
-
- 
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmRegionDlg Definition
+ *      End of Class CEsmRegionDlg Definition
 
  *=========================================================================*/
 
@@ -250,7 +250,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmregiondlg.H
+ *      End of File Esmregiondlg.H
 
  *=========================================================================*/
 

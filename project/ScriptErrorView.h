@@ -2,11 +2,11 @@
 
  *
 
- * File:	Scripterrorview.H
+ * File:    Scripterrorview.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	September 3, 2003
+ * Created On:  September 3, 2003
 
  *
 
@@ -22,7 +22,7 @@
 
 
 
-	
+
 
 /*===========================================================================
 
@@ -36,17 +36,17 @@
 
 #ifndef __AFXEXT_H__
 
-  #include <afxext.h>
+	#include <afxext.h>
 
 #endif
 
 
 
-  #include "EsmScriptError.h"
+#include "EsmScriptError.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -68,47 +68,47 @@ class CScriptErrorView : public CFormView {
 
 
 
-  /*---------- Begin Protected Class Methods -----------------------*/
+	/*---------- Begin Protected Class Methods -----------------------*/
 
-protected:
+  protected:
 
-  CScriptErrorView();
+	CScriptErrorView();
 
-  DECLARE_DYNCREATE(CScriptErrorView);
+	DECLARE_DYNCREATE(CScriptErrorView);
 
 
 
 	/* Destructor */
 
-  virtual ~CScriptErrorView();
+	virtual ~CScriptErrorView();
 
 
 
 
 
-  /*---------- Begin Public Class Methods --------------------------*/
+	/*---------- Begin Public Class Methods --------------------------*/
 
-public:
+  public:
 
-  //{{AFX_DATA(CScriptErrorView)
+	//{{AFX_DATA(CScriptErrorView)
 
-  enum { IDD = IDD_SCRIPTERRORVIEW };
+	enum { IDD = IDD_SCRIPTERRORVIEW };
 
-  CListBox	m_ErrorList;
+	CListBox m_ErrorList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* Clear the current error list */
 
-  void ClearErrors (void);
+	void ClearErrors (void);
 
 
 
 	/* Update the displayed errors */
 
-  void UpdateErrors (CEsmScriptErrArray* pErrorArray);
+	void UpdateErrors (CEsmScriptErrArray* pErrorArray);
 
 
 
@@ -116,29 +116,29 @@ public:
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CScriptErrorView)
+	//{{AFX_VIRTUAL(CScriptErrorView)
 
-public:
+  public:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 #ifdef _DEBUG
 
-  virtual void AssertValid() const;
+	virtual void AssertValid() const;
 
-  virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext& dc) const;
 
 #endif
 
@@ -146,11 +146,11 @@ protected:
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CScriptErrorView)
+	//{{AFX_MSG(CScriptErrorView)
 
-  afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
-  afx_msg void OnDblclkErrorlist();
+	afx_msg void OnDblclkErrorlist();
 
 	afx_msg void OnScrerrorGoto();
 
@@ -174,15 +174,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CScriptErrorView Definition
+ *      End of Class CScriptErrorView Definition
 
  *=========================================================================*/
 
@@ -202,7 +202,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Scripterrorview.H
+ *      End of File Scripterrorview.H
 
  *=========================================================================*/
 

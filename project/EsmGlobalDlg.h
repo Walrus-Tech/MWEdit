@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmglobaldlg.H
+ * File:    Esmglobaldlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 12, 2003
+ * Created On:  February 12, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "EsmRecDialog.h"
+#include "EsmRecDialog.h"
 
-  #include "Resource.h"
+#include "Resource.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,105 +60,105 @@
 
 class CEsmGlobalDlg : public CEsmRecDialog {
 
-  DECLARE_DYNCREATE(CEsmGlobalDlg);
+	DECLARE_DYNCREATE(CEsmGlobalDlg);
 
 
 
-  /*---------- Begin Protected Class Members ------------------------*/
+	/*---------- Begin Protected Class Members ------------------------*/
 
-protected:
+  protected:
 
-  CEsmGlobal*	m_pGlobal;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ------------------------*/
-
-protected:
+	CEsmGlobal *m_pGlobal;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ---------------------------*/
+	/*---------- Begin Protected Class Methods ------------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods ---------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmGlobalDlg();
+	CEsmGlobalDlg();
 
 
 
 	/* Get class members */
 
-  virtual bool IsModified (void);
+	virtual bool IsModified (void);
 
-  
 
-  	/* Set or update the record data */
 
-  virtual void GetControlData (void);
+	/* Set or update the record data */
 
-  virtual void SetControlData (void);
+	virtual void GetControlData (void);
 
-	
+	virtual void SetControlData (void);
+
+
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmGlobalDlg)
+	//{{AFX_DATA(CEsmGlobalDlg)
 
-  enum { IDD = IDD_GLOBAL_DLG };
+	enum { IDD = IDD_GLOBAL_DLG };
 
-  CEdit		m_ValueText;
+	CEdit m_ValueText;
 
-  CComboBox	m_TypeList;
+	CComboBox m_TypeList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
-  
+
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmGlobalDlg)
+	//{{AFX_VIRTUAL(CEsmGlobalDlg)
 
-protected:
+  protected:
 
-  virtual void OnInitialUpdate();
+	virtual void OnInitialUpdate();
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmGlobalDlg)
+	//{{AFX_MSG(CEsmGlobalDlg)
 
-  afx_msg void OnSelchangeTypelist();
+	afx_msg void OnSelchangeTypelist();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmGlobalDlg Definition
+ *      End of Class CEsmGlobalDlg Definition
 
  *=========================================================================*/
 
@@ -178,7 +178,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmglobaldlg.H
+ *      End of File Esmglobaldlg.H
 
  *=========================================================================*/
 

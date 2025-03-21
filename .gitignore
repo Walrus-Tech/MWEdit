@@ -6,3 +6,6 @@
 *.user
 Debug/
 Release/
+project/.vs/
+project/mwedit.log
+DebugOptimized/

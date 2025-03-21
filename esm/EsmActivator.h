@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmActivator.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmActivator.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmItem1.h"
+#include "EsmItem1.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -30,40 +30,43 @@
  *
  *=========================================================================*/
 class CEsmActivator : public CEsmItem1 {
-  DECLARE_SUBRECCREATE();
+	DECLARE_SUBRECCREATE();
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CEsmActivator();
-  //virtual ~CEsmActivator() { Destroy(); }
-  virtual void Destroy (void);
+	CEsmActivator();
+	//virtual ~CEsmActivator() { Destroy(); }
+	virtual void Destroy (void);
 
-  	/* Return a new record object */
-  static CEsmRecord* Create (void);
+	/* Return a new record object */
+	static CEsmRecord *Create (void);
 
 	/* Return a text representation of the item type */
-  virtual const TCHAR* GetItemType (void) { return _T("Activator"); }
+	virtual const TCHAR *GetItemType (void) {
+		return _T("Activator");
+	}
 
-  	/* Set a certain field of the record */
-  virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	/* Set a certain field of the record */
+	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
 
- };
+};
+
 /*===========================================================================
- *		End of Class CEsmActivator Definition
+ *      End of Class CEsmActivator Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmActivator.H
+ *      End of File EsmActivator.H
  *=========================================================================*/

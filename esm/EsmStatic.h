@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmStatic.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmStatic.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,10 +16,10 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmRecord.h"
-  #include "EsmSubName.h"
+#include "EsmRecord.h"
+#include "EsmSubName.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -32,59 +32,68 @@
  *
  *=========================================================================*/
 class CEsmStatic : public CEsmRecord {
-  DECLARE_SUBRECCREATE();
+	DECLARE_SUBRECCREATE();
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-  CEsmSubNameFix*	m_pModel;	/* Reference to sub-records */
-  
-
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
+	CEsmSubNameFix *m_pModel;   /* Reference to sub-records */
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
+
+
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  CEsmStatic();
-  //virtual ~CEsmStatic() { Destroy(); }
-  virtual void Destroy (void);
+	CEsmStatic();
+	//virtual ~CEsmStatic() { Destroy(); }
+	virtual void Destroy (void);
 
-  	/* Compare two fields of the record */
-  virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	/* Compare two fields of the record */
+	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
 
-  	/* Return a new record object */
-  static CEsmRecord* Create (void);
+	/* Return a new record object */
+	static CEsmRecord *Create (void);
 
-  	/* Create a new, empty, record */
-  virtual void CreateNew (CEsmFile* pFile);
+	/* Create a new, empty, record */
+	virtual void CreateNew (CEsmFile* pFile);
 
-  	/* Get a string representation of a particular field */
-  virtual const TCHAR* GetFieldString (const int FieldID);
+	/* Get a string representation of a particular field */
+	virtual const TCHAR *GetFieldString (const int FieldID);
 
-  	/* Return a text representation of the item type */
-  virtual const TCHAR* GetItemType (void) { return _T("Static"); }
+	/* Return a text representation of the item type */
+	virtual const TCHAR *GetItemType (void) {
+		return _T("Static");
+	}
 
-  	/* Get class members */
-  const TCHAR* GetModel (void) { return (m_pModel ? m_pModel->GetName() : _T("")); }
+	/* Get class members */
+	const TCHAR *GetModel (void) {
+		return (m_pModel ? m_pModel->GetName() : _T(""));
+	}
 
-  	/* Used to save the various record elements */
-  virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	/* Used to save the various record elements */
+	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
 
 	/* Set class members */
-  void SetModel (const TCHAR* pString) { if (m_pModel) m_pModel->SetName(pString); }
+	void SetModel (const TCHAR* pString) {
+		if (m_pModel) {
+			m_pModel->SetName(pString);
+		}
+	}
 
-  	/* Set a certain field of the record */
-  virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	/* Set a certain field of the record */
+	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
 
- };
+};
+
 /*===========================================================================
- *		End of Class CEsmStatic Definition
+ *      End of Class CEsmStatic Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmSpell.H
+ *      End of File EsmSpell.H
  *=========================================================================*/

@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmiconframe.H
+ * File:    Esmiconframe.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	Thursday, February 13, 2003
+ * Created On:  Thursday, February 13, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "dl_err.h"
+#include "dl_err.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,17 +58,17 @@
 
 
 
-	/* Default icon width/height */
+/* Default icon width/height */
 
-  #define MWESM_ICON_DEFAULTWIDTH  32
+#define MWESM_ICON_DEFAULTWIDTH  32
 
-  #define MWESM_ICON_DEFAULTHEIGHT 32
+#define MWESM_ICON_DEFAULTHEIGHT 32
 
 
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -90,77 +90,77 @@ class CEsmIconFrame : public CStatic {
 
 
 
-  /*---------- Begin Protected Class Members ---------------------*/
+	/*---------- Begin Protected Class Members ---------------------*/
 
-protected:
+  protected:
 
-  CBitmap	m_Bitmap;		/* The bitmap image to draw */
+	CBitmap m_Bitmap;       /* The bitmap image to draw */
 
-  bool		m_IsInitialized;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ---------------------*/
-
-protected:
+	bool m_IsInitialized;
 
 
 
 
 
+	/*---------- Begin Protected Class Methods ---------------------*/
+
+  protected:
 
 
-  /*---------- Begin Public Class Methods ------------------------*/
 
-public:
+
+
+
+
+	/*---------- Begin Public Class Methods ------------------------*/
+
+  public:
 
 
 
 	/* Construction/Destruction */
 
-  CEsmIconFrame();
+	CEsmIconFrame();
 
-  virtual ~CEsmIconFrame();
+	virtual ~CEsmIconFrame();
 
 
 
 	/* Called after the frame window is created */
 
-  void OnInitialUpdate (void);
+	void OnInitialUpdate (void);
 
 
 
 	/* Set class members */
 
-  void SetIconBitmap (CBitmap* pBitmap);
+	void SetIconBitmap (CBitmap* pBitmap);
 
-  void SetEsmIcon    (const TCHAR* pFilename, const bool RelativePath = true);
+	void SetEsmIcon (const TCHAR* pFilename, const bool RelativePath = true);
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmIconFrame)
+	//{{AFX_VIRTUAL(CEsmIconFrame)
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
 	/* Generated message map functions */
 
-protected:
+  protected:
 
-  //{{AFX_MSG(CEsmIconFrame)
+	//{{AFX_MSG(CEsmIconFrame)
 
-  afx_msg void OnPaint();
+	afx_msg void OnPaint();
 
-  //}}AFX_MSG
+	//}}AFX_MSG
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
@@ -168,7 +168,7 @@ protected:
 
 /*===========================================================================
 
- *		End of Class CEsmIcon Frame Definition
+ *      End of Class CEsmIcon Frame Definition
 
  *=========================================================================*/
 
@@ -188,7 +188,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmiconframe.H
+ *      End of File Esmiconframe.H
 
  *=========================================================================*/
 

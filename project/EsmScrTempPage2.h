@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmscrtemppage2.H
+ * File:    Esmscrtemppage2.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 8, 2003
+ * Created On:  October 8, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "dl_err.h"
+#include "dl_err.h"
 
-  #include "EsmDlgArray.h"
+#include "EsmDlgArray.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -64,105 +64,109 @@ class CEsmScrTempView;
 
 class CEsmScrTempPage2 : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmScrTempPage2);
+	DECLARE_DYNCREATE(CEsmScrTempPage2);
 
 
 
-  /*---------- Begin Protected Class Members ---------------------------*/
+	/*---------- Begin Protected Class Members ---------------------------*/
 
-protected:
+  protected:
 
-  CEsmDlgHandler*	m_pDlgHandler;		/* Parent dialog handler */
+	CEsmDlgHandler *m_pDlgHandler;      /* Parent dialog handler */
 
-  CEsmScrTempView*	m_pParentView;
-
-
-
-
-
-  /*---------- Begin Protected Class Methods ---------------------------*/
-
-protected:
+	CEsmScrTempView *m_pParentView;
 
 
 
 
 
-  /*---------- Begin Public Class Methods ------------------------------*/
+	/*---------- Begin Protected Class Methods ---------------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods ------------------------------*/
+
+  public:
 
 
 
 	/* Constructor and Destructor */
 
-  CEsmScrTempPage2();
+	CEsmScrTempPage2();
 
-  ~CEsmScrTempPage2();
+	~CEsmScrTempPage2();
 
 
 
 	/* Set class members */
 
-  void SetDlgHandler (CEsmDlgHandler* pHandler) { m_pDlgHandler = pHandler; }
+	void SetDlgHandler (CEsmDlgHandler* pHandler) {
+		m_pDlgHandler = pHandler;
+	}
 
-  void SetParentView (CEsmScrTempView* pView)    { m_pParentView = pView; }
+	void SetParentView (CEsmScrTempView* pView) {
+		m_pParentView = pView;
+	}
 
 
 
 	/* Update the page controls */
 
-  void UpdatePage (void);
+	void UpdatePage (void);
 
-  void UpdateText (void);
+	void UpdateText (void);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmScrTempPage2)
+	//{{AFX_DATA(CEsmScrTempPage2)
 
-  enum { IDD = IDD_SCRTEMP_PAGE2 };
+	enum { IDD = IDD_SCRTEMP_PAGE2 };
 
-  CEdit		m_TemplateText;
+	CEdit m_TemplateText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmScrTempPage2)
+	//{{AFX_VIRTUAL(CEsmScrTempPage2)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmScrTempPage2)
+	//{{AFX_MSG(CEsmScrTempPage2)
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmScrTempPage2 Definition
+ *      End of Class CEsmScrTempPage2 Definition
 
  *=========================================================================*/
 
@@ -182,7 +186,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmscrtemppage2.H
+ *      End of File Esmscrtemppage2.H
 
  *=========================================================================*/
 

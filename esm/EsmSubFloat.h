@@ -1,8 +1,8 @@
 /*===========================================================================
  *
- * File:	EsmSubFloat.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	February 3, 2003
+ * File:    EsmSubFloat.H
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  February 3, 2003
  *
  * Description
  *
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmSubBase.h"
+#include "EsmSubBase.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -31,7 +31,7 @@
 
 #pragma pack(pop)
 /*===========================================================================
- *		End of Type Definitions
+ *      End of Type Definitions
  *=========================================================================*/
 
 
@@ -44,61 +44,74 @@
  *=========================================================================*/
 class CEsmSubFloat : public CEsmSubRecord {
 
-  /*---------- Begin Protected Class Members --------------------*/
-protected:
-  float m_Float;
+	/*---------- Begin Protected Class Members --------------------*/
+  protected:
+	float m_Float;
 
 
-  /*---------- Begin Protected Class Methods --------------------*/
-protected:
+	/*---------- Begin Protected Class Methods --------------------*/
+  protected:
 
-  virtual bool ReadData  (CGenFile& File) { return File.ReadFloat(m_Float); }
-  virtual bool WriteData (CGenFile& File) { return File.WriteFloat(m_Float); }
+	virtual bool ReadData (CGenFile& File) {
+		return File.ReadFloat(m_Float);
+	}
+
+	virtual bool WriteData (CGenFile& File) {
+		return File.WriteFloat(m_Float);
+	}
 
 
-  /*---------- Begin Public Class Methods -----------------------*/
-public:
+	/*---------- Begin Public Class Methods -----------------------*/
+  public:
 
 	/* Class Constructors/Destructors */
-  //CEsmSubFLAG();
-  //virtual ~CEsmSubFLAG() { Destroy(); }
-  //virtual void Destroy (void);
+	//CEsmSubFLAG();
+	//virtual ~CEsmSubFLAG() { Destroy(); }
+	//virtual void Destroy (void);
 
-    	/* Copy from another name record */
-  virtual void Copy (CEsmSubRecord* pSubRecord) {
-	m_Type.SetType(pSubRecord->GetType());
-	m_RecordSize = pSubRecord->GetRecordSize();
-	m_Float = ((CEsmSubFloat *) pSubRecord)->GetValue();
-   }
+	/* Copy from another name record */
+	virtual void Copy (CEsmSubRecord* pSubRecord) {
+		m_Type.SetType(pSubRecord->GetType());
+		m_RecordSize = pSubRecord->GetRecordSize();
+		m_Float = ((CEsmSubFloat *) pSubRecord)->GetValue();
+	}
 
 	/* Create a name object */
-  static CEsmSubRecord* Create (void) {
-	CEsmSubRecord* pSubRecord;
-	CreatePointerL(pSubRecord, CEsmSubFloat);
-	return (pSubRecord);
-   }
+	static CEsmSubRecord *Create (void) {
+		CEsmSubRecord* pSubRecord;
+		CreatePointerL(pSubRecord, CEsmSubFloat);
+		return (pSubRecord);
+	}
 
 	/* Create a new sub-record */
-  virtual void CreateNew (void) { 
-	CEsmSubRecord::CreateNew();
-	m_Float = 0;
-	m_RecordSize = sizeof(float); 
-   }
+	virtual void CreateNew (void) {
+		CEsmSubRecord::CreateNew();
+		m_Float = 0;
+		m_RecordSize = sizeof(float);
+	}
 
 	/* Finds text in the sub-record */
-  virtual bool Find (esmfind_t& FindData) { return (false); }
+	virtual bool Find (esmfind_t &FindData) {
+		return (false);
+	}
 
 	/* Get/set the long value directly */
-  float GetValue (void)		     { return (m_Float); }
-  void  SetValue (const float Value) { m_Float = Value; }
+	float GetValue (void) {
+		return (m_Float);
+	}
 
- };
+	void SetValue (const float Value) {
+		m_Float = Value;
+	}
+
+};
+
 /*===========================================================================
- *		End of Class CEsmSubAADT Definition
+ *      End of Class CEsmSubAADT Definition
  *=========================================================================*/
 
 
 #endif
 /*===========================================================================
- *		End of File EsmsubINDX.H
+ *      End of File EsmsubINDX.H
  *=========================================================================*/

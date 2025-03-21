@@ -1,14 +1,14 @@
 /*===========================================================================
  *
- * File:	Dl_time.CPP
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	Wednesday, June 20, 2001
+ * File:    Dl_time.CPP
+ * Author:  Dave Humphrey (uesp@m0use.net)
+ * Created On:  Wednesday, June 20, 2001
  *
  * Contains common time related routines.
  *
  *=========================================================================*/
 
-	/* Include Files */
+/* Include Files */
 #include "dl_time.h"
 
 
@@ -17,9 +17,9 @@
  * Begin Local Variable Definitions
  *
  *=========================================================================*/
-  DEFINE_FILE("dl_time.h");
+DEFINE_FILE("dl_time.h");
 /*===========================================================================
- *		End of Local Variable Definitions
+ *      End of Local Variable Definitions
  *=========================================================================*/
 
 
@@ -32,28 +32,27 @@
  * routine is used.
  *
  *=========================================================================*/
-void GetHiClock (hiclock_t& Counter) {
-
+void GetHiClock (hiclock_t &Counter) {
 	/* Attempt to use the performance counter */
-  #if defined(_WIN32)
-    boolean Result;
-    
-		/* Attempt to get the performance timer count */
-    Result = QueryPerformanceCounter(&Counter.TimerCount);
+#if defined(_WIN32)
+	boolean Result;
+	/* Attempt to get the performance timer count */
+	Result = QueryPerformanceCounter(&Counter.TimerCount);
 
-		/* Set the counter type and return on success */
-    if (Result) {
-      Counter.CountType = HICLOCK_PERFORMANCE;
-      return;
-     }
-  #endif
+	/* Set the counter type and return on success */
+	if (Result) {
+		Counter.CountType = HICLOCK_PERFORMANCE;
+		return;
+	}
 
+#endif
 	/* Use the clock() count by default */
-  Counter.ClockCount = clock();
-  Counter.CountType  = HICLOCK_CLOCK;
- }
+	Counter.ClockCount = clock();
+	Counter.CountType = HICLOCK_CLOCK;
+}
+
 /*===========================================================================
- *		End of Function GetHiClock()
+ *      End of Function GetHiClock()
  *=========================================================================*/
 
 
@@ -65,12 +64,13 @@ void GetHiClock (hiclock_t& Counter) {
  *
  *=========================================================================*/
 double GetHiClockTime (void) {
-  hiclock_t CurrentClock;
-  GetHiClock(CurrentClock);
-  return ( ((double)CurrentClock) / GetHiClockFreq() );
- }
+	hiclock_t CurrentClock;
+	GetHiClock(CurrentClock);
+	return ( ((double)CurrentClock) / GetHiClockFreq() );
+}
+
 /*===========================================================================
- *		End of Function GetHiClockTime()
+ *      End of Function GetHiClockTime()
  *=========================================================================*/
 
 
@@ -82,23 +82,23 @@ double GetHiClockTime (void) {
  *
  *=========================================================================*/
 double GetHiClockFreq (void) {
-
 	/* Attempt to use the performance counter */
-  #if defined(_WIN32) 
-    LARGE_INTEGER Freq;
-    int   	  Result;
-	
-    Result = QueryPerformanceFrequency(&Freq);
+#if defined(_WIN32)
+	LARGE_INTEGER Freq;
+	int Result;
+	Result = QueryPerformanceFrequency(&Freq);
 
-    if (!Result || Freq.QuadPart == 0) return (double)(1.0);
-    return ((double)Freq.QuadPart);
+	if (!Result || Freq.QuadPart == 0) {
+		return (double)(1.0);
+	}
 
+	return ((double)Freq.QuadPart);
 	/* Use the clock() frequency */
-  #else
-    return ((double) CLOCKS_PER_SEC);
-  #endif
+#else
+	return ((double) CLOCKS_PER_SEC);
+#endif
+}
 
- }
 /*===========================================================================
- *		End of Function GetHiClockFreq()
+ *      End of Function GetHiClockFreq()
  *=========================================================================*/

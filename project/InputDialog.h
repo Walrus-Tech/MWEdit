@@ -2,11 +2,11 @@
 
  *
 
- * File:	Inputdialog.H
+ * File:    Inputdialog.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	April 5, 2003
+ * Created On:  April 5, 2003
 
  *
 
@@ -38,85 +38,85 @@ class CInputDialog : public CDialog {
 
 
 
-protected:
+  protected:
 
-  const TCHAR*  m_pLabel;		/* The label text string */
+	const TCHAR *m_pLabel;       /* The label text string */
 
-  const TCHAR*  m_pTitle;		/* The window title string */
+	const TCHAR *m_pTitle;       /* The window title string */
 
-  CString*	m_pOutputString;	/* Where to store the input result */
-
-
+	CString *m_pOutputString;    /* Where to store the input result */
 
 
 
-public:
+
+
+  public:
 
 
 
 	/* Construction */
 
-  CInputDialog(CWnd* pParent = NULL);
+	CInputDialog(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle);
+	bool DoModal (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle);
 
 
 
-  //{{AFX_DATA(CInputDialog)
+	//{{AFX_DATA(CInputDialog)
 
-  enum { IDD = IDD_INPUT_DIALOG };
+	enum { IDD = IDD_INPUT_DIALOG };
 
-  CStatic	m_MainLabel;
+	CStatic m_MainLabel;
 
-  CEdit		m_InputText;
+	CEdit m_InputText;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
-  
 
-  
+
+
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CInputDialog)
+	//{{AFX_VIRTUAL(CInputDialog)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CInputDialog)
+	//{{AFX_MSG(CInputDialog)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  virtual void OnOK ();
+	virtual void OnOK ();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CInputDialog Definition
+ *      End of Class CInputDialog Definition
 
  *=========================================================================*/
 
@@ -134,11 +134,11 @@ protected:
 
  *=========================================================================*/
 
-  bool InputDialog (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle);
+bool InputDialog (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle);
 
 /*===========================================================================
 
- *		End of Function Prototype
+ *      End of Function Prototype
 
  *=========================================================================*/
 
@@ -158,7 +158,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Inputdialog.H
+ *      End of File Inputdialog.H
 
  *=========================================================================*/
 

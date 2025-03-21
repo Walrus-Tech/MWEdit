@@ -2,11 +2,11 @@
 
  *
 
- * File:	SplitterWnd.H
+ * File:    SplitterWnd.H
 
- * Author:	Dave Humphrey (uesp@sympatico.ca)
+ * Author:  Dave Humphrey (uesp@sympatico.ca)
 
- * Created On:	April 27, 2006
+ * Created On:  April 27, 2006
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  
+
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,63 +60,63 @@ class CMwSplitterWnd : public CSplitterWnd {
 
 
 
-  /*---------- Begin Protected Class Members ----------------------*/
+	/*---------- Begin Protected Class Members ----------------------*/
 
-protected:
-
-  
-
-
-
-  /*---------- Begin Protected Class Methods ----------------------*/
-
-protected:
+  protected:
 
 
 
 
 
-  /*---------- Begin Public Class Methods -------------------------*/
+	/*---------- Begin Protected Class Methods ----------------------*/
 
-public:
+  protected:
+
+
+
+
+
+	/*---------- Begin Public Class Methods -------------------------*/
+
+  public:
 
 
 
 	/* Construction/Destructor */
 
-  CMwSplitterWnd();
+	CMwSplitterWnd();
 
-  virtual ~CMwSplitterWnd();
+	virtual ~CMwSplitterWnd();
 
 
 
 	/* Overloaded to change layout order */
 
-  virtual void RecalcLayout();  
+	virtual void RecalcLayout();
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CMwSplitterWnd)
+	//{{AFX_VIRTUAL(CMwSplitterWnd)
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CMwSplitterWnd)
+	//{{AFX_MSG(CMwSplitterWnd)
 
-  //}}AFX_MSG
+	//}}AFX_MSG
 
 
 
-  DECLARE_MESSAGE_MAP()
+	DECLARE_MESSAGE_MAP()
 
 
 
@@ -124,7 +124,7 @@ protected:
 
 /*===========================================================================
 
- *		End of Class CMwSplitterWnd Definition
+ *      End of Class CMwSplitterWnd Definition
 
  *=========================================================================*/
 
@@ -144,7 +144,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File SplitterWnd.H
+ *      End of File SplitterWnd.H
 
  *=========================================================================*/
 

@@ -2,11 +2,11 @@
 
  *
 
- * File:	Editundo.CPP
+ * File:    Editundo.CPP
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	August 22, 2006
+ * Created On:  August 22, 2006
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,11 +42,11 @@
 
  *=========================================================================*/
 
-  DEFINE_FILE("EditUndo.cpp");
+DEFINE_FILE("EditUndo.cpp");
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -65,28 +65,18 @@
  *=========================================================================*/
 
 CEditUndo::CEditUndo () {
-
-  //DEFINE_FUNCTION("CEditUndo::CEditUndo()");
-
-
-
-  m_pString      = NULL;
-
-  m_Char         = NULL_CHAR;
-
-  m_StringLength = 0;
-
-  m_Action       = EDITUNDO_NONE;
-
-  m_SelStart     = 0;
-
-  m_SelEnd       = 0;
-
+	//DEFINE_FUNCTION("CEditUndo::CEditUndo()");
+	m_pString = NULL;
+	m_Char = NULL_CHAR;
+	m_StringLength = 0;
+	m_Action = EDITUNDO_NONE;
+	m_SelStart = 0;
+	m_SelEnd = 0;
 }
 
 /*===========================================================================
 
- *		End of Class CEditUndo Constructor
+ *      End of Class CEditUndo Constructor
 
  *=========================================================================*/
 
@@ -105,26 +95,16 @@ CEditUndo::CEditUndo () {
  *=========================================================================*/
 
 void CEditUndo::Destroy (void) {
-
-
-
-  DestroyArrayPointer(m_pString);
-
-
-
-  m_StringLength = 0;
-
-  m_Action       = EDITUNDO_NONE;
-
-  m_SelStart     = 0;
-
-  m_SelEnd       = 0;
-
+	DestroyArrayPointer(m_pString);
+	m_StringLength = 0;
+	m_Action = EDITUNDO_NONE;
+	m_SelStart = 0;
+	m_SelEnd = 0;
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndo::Destroy()
+ *      End of Class Method CEditUndo::Destroy()
 
  *=========================================================================*/
 
@@ -143,34 +123,20 @@ void CEditUndo::Destroy (void) {
  *=========================================================================*/
 
 void CEditUndo::SetString (const TCHAR* pString) {
+	DEFINE_FUNCTION("CEditUndo::SetString()");
+	DestroyArrayPointer(m_pString);
+	m_StringLength = 0;
 
-  DEFINE_FUNCTION("CEditUndo::SetString()");
-
-
-
-  DestroyArrayPointer(m_pString);
-
-  m_StringLength = 0;
-
-
-
-  if (pString) {
-
-    m_StringLength = _tcslen(pString);
-
-    CreateArrayPointer(m_pString, TCHAR, m_StringLength + 4);
-
-    strnncpy(m_pString, pString, m_StringLength+1);
-
-  }
-
-
-
+	if (pString) {
+		m_StringLength = _tcslen(pString);
+		CreateArrayPointer(m_pString, TCHAR, m_StringLength + 4);
+		strnncpy(m_pString, pString, m_StringLength + 1);
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndo::SetString()
+ *      End of Class Method CEditUndo::SetString()
 
  *=========================================================================*/
 
@@ -189,16 +155,13 @@ void CEditUndo::SetString (const TCHAR* pString) {
  *=========================================================================*/
 
 CEditUndoStack::CEditUndoStack() {
-
-  m_GroupUndos = true;
-
-  m_Limit      = EDITUNDO_DEFAULT_LIMIT;
-
+	m_GroupUndos = true;
+	m_Limit = EDITUNDO_DEFAULT_LIMIT;
 }
 
 /*===========================================================================
 
- *		End of Class CEditUndoStack Constructor
+ *      End of Class CEditUndoStack Constructor
 
  *=========================================================================*/
 
@@ -217,14 +180,12 @@ CEditUndoStack::CEditUndoStack() {
  *=========================================================================*/
 
 void CEditUndoStack::Destroy (void) {
-
-  m_UndoStack.Destroy();
-
+	m_UndoStack.Destroy();
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::Destroy()
+ *      End of Class Method CEditUndoStack::Destroy()
 
  *=========================================================================*/
 
@@ -243,40 +204,23 @@ void CEditUndoStack::Destroy (void) {
  *=========================================================================*/
 
 void CEditUndoStack::CreateInsertChar (const TCHAR Char, const int StartSel, const int EndSel) {
+	DEFINE_FUNCTION("CEditUndoStack::CreateInsertChar()");
+	CEditUndo* pUndo;
+	CreatePointer(pUndo, CEditUndo);
+	m_UndoStack.Add(pUndo);
+	pUndo->SetChar(Char);
+	pUndo->SetAction(EDITUNDO_INSERTCHAR);
+	pUndo->SetSelStart(StartSel);
+	pUndo->SetSelEnd(EndSel);
 
-  DEFINE_FUNCTION("CEditUndoStack::CreateInsertChar()");
-
-  CEditUndo* pUndo;
-
-
-
-  CreatePointer(pUndo, CEditUndo);
-
-  m_UndoStack.Add(pUndo);
-
-
-
-  pUndo->SetChar(Char);
-
-  pUndo->SetAction(EDITUNDO_INSERTCHAR);
-
-  pUndo->SetSelStart(StartSel);
-
-  pUndo->SetSelEnd(EndSel);
-
-
-
-  if (m_UndoStack.GetNumElements() > m_Limit) {
-
-    m_UndoStack.DeleteElement(0);
-
-  }
-
+	if (m_UndoStack.GetNumElements() > m_Limit) {
+		m_UndoStack.DeleteElement(0);
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::CreateInsertChar()
+ *      End of Class Method CEditUndoStack::CreateInsertChar()
 
  *=========================================================================*/
 
@@ -294,41 +238,25 @@ void CEditUndoStack::CreateInsertChar (const TCHAR Char, const int StartSel, con
 
  *=========================================================================*/
 
-void CEditUndoStack::CreateInsertString (const TCHAR* pString, const int StartSel, const int EndSel) {
+void CEditUndoStack::CreateInsertString (const TCHAR* pString, const int StartSel,
+                                         const int EndSel) {
+	DEFINE_FUNCTION("CEditUndoStack::CreateInsertString()");
+	CEditUndo* pUndo;
+	CreatePointer(pUndo, CEditUndo);
+	m_UndoStack.Add(pUndo);
+	pUndo->SetString(pString);
+	pUndo->SetAction(EDITUNDO_INSERTSTRING);
+	pUndo->SetSelStart(StartSel);
+	pUndo->SetSelEnd(EndSel);
 
-  DEFINE_FUNCTION("CEditUndoStack::CreateInsertString()");
-
-  CEditUndo* pUndo;
-
-
-
-  CreatePointer(pUndo, CEditUndo);
-
-  m_UndoStack.Add(pUndo);
-
-
-
-  pUndo->SetString(pString);
-
-  pUndo->SetAction(EDITUNDO_INSERTSTRING);
-
-  pUndo->SetSelStart(StartSel);
-
-  pUndo->SetSelEnd(EndSel);
-
-
-
-  if (m_UndoStack.GetNumElements() > m_Limit) {
-
-    m_UndoStack.DeleteElement(0);
-
-  }
-
+	if (m_UndoStack.GetNumElements() > m_Limit) {
+		m_UndoStack.DeleteElement(0);
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::CreateInsertString()
+ *      End of Class Method CEditUndoStack::CreateInsertString()
 
  *=========================================================================*/
 
@@ -347,40 +275,23 @@ void CEditUndoStack::CreateInsertString (const TCHAR* pString, const int StartSe
  *=========================================================================*/
 
 void CEditUndoStack::CreateDeleteChar (const TCHAR Char, const int StartSel, const int EndSel) {
+	DEFINE_FUNCTION("CEditUndoStack::CreateDeleteChar()");
+	CEditUndo* pUndo;
+	CreatePointer(pUndo, CEditUndo);
+	m_UndoStack.Add(pUndo);
+	pUndo->SetChar(Char);
+	pUndo->SetAction(EDITUNDO_DELETECHAR);
+	pUndo->SetSelStart(StartSel);
+	pUndo->SetSelEnd(EndSel);
 
-  DEFINE_FUNCTION("CEditUndoStack::CreateDeleteChar()");
-
-  CEditUndo* pUndo;
-
-
-
-  CreatePointer(pUndo, CEditUndo);
-
-  m_UndoStack.Add(pUndo);
-
-
-
-  pUndo->SetChar(Char);
-
-  pUndo->SetAction(EDITUNDO_DELETECHAR);
-
-  pUndo->SetSelStart(StartSel);
-
-  pUndo->SetSelEnd(EndSel);
-
-
-
-  if (m_UndoStack.GetNumElements() > m_Limit) {
-
-    m_UndoStack.DeleteElement(0);
-
-  }
-
+	if (m_UndoStack.GetNumElements() > m_Limit) {
+		m_UndoStack.DeleteElement(0);
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::CreateDeleteChar()
+ *      End of Class Method CEditUndoStack::CreateDeleteChar()
 
  *=========================================================================*/
 
@@ -398,41 +309,25 @@ void CEditUndoStack::CreateDeleteChar (const TCHAR Char, const int StartSel, con
 
  *=========================================================================*/
 
-void CEditUndoStack::CreateDeleteString (const TCHAR* pString, const int StartSel, const int EndSel) {
+void CEditUndoStack::CreateDeleteString (const TCHAR* pString, const int StartSel,
+                                         const int EndSel) {
+	DEFINE_FUNCTION("CEditUndoStack::CreateDeleteString()");
+	CEditUndo* pUndo;
+	CreatePointer(pUndo, CEditUndo);
+	m_UndoStack.Add(pUndo);
+	pUndo->SetString(pString);
+	pUndo->SetAction(EDITUNDO_DELETESTRING);
+	pUndo->SetSelStart(StartSel);
+	pUndo->SetSelEnd(EndSel);
 
-  DEFINE_FUNCTION("CEditUndoStack::CreateDeleteString()");
-
-  CEditUndo* pUndo;
-
-
-
-  CreatePointer(pUndo, CEditUndo);
-
-  m_UndoStack.Add(pUndo);
-
-
-
-  pUndo->SetString(pString);
-
-  pUndo->SetAction(EDITUNDO_DELETESTRING);
-
-  pUndo->SetSelStart(StartSel);
-
-  pUndo->SetSelEnd(EndSel);
-
-
-
-  if (m_UndoStack.GetNumElements() > m_Limit) {
-
-    m_UndoStack.DeleteElement(0);
-
-  }
-
+	if (m_UndoStack.GetNumElements() > m_Limit) {
+		m_UndoStack.DeleteElement(0);
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::CreateDeleteString()
+ *      End of Class Method CEditUndoStack::CreateDeleteString()
 
  *=========================================================================*/
 
@@ -451,40 +346,23 @@ void CEditUndoStack::CreateDeleteString (const TCHAR* pString, const int StartSe
  *=========================================================================*/
 
 void CEditUndoStack::CreateEntireText (const TCHAR* pString) {
+	DEFINE_FUNCTION("CEditUndoStack::CreateDeleteString()");
+	CEditUndo* pUndo;
+	CreatePointer(pUndo, CEditUndo);
+	m_UndoStack.Add(pUndo);
+	pUndo->SetString(pString);
+	pUndo->SetAction(EDITUNDO_ENTIRETEXT);
+	pUndo->SetSelStart(0);
+	pUndo->SetSelEnd(0);
 
-  DEFINE_FUNCTION("CEditUndoStack::CreateDeleteString()");
-
-  CEditUndo* pUndo;
-
-
-
-  CreatePointer(pUndo, CEditUndo);
-
-  m_UndoStack.Add(pUndo);
-
-
-
-  pUndo->SetString(pString);
-
-  pUndo->SetAction(EDITUNDO_ENTIRETEXT);
-
-  pUndo->SetSelStart(0);
-
-  pUndo->SetSelEnd(0);
-
-
-
-  if (m_UndoStack.GetNumElements() > m_Limit) {
-
-    m_UndoStack.DeleteElement(0);
-
-  }
-
+	if (m_UndoStack.GetNumElements() > m_Limit) {
+		m_UndoStack.DeleteElement(0);
+	}
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::CreateEntireText()
+ *      End of Class Method CEditUndoStack::CreateEntireText()
 
  *=========================================================================*/
 
@@ -503,60 +381,44 @@ void CEditUndoStack::CreateEntireText (const TCHAR* pString) {
  *=========================================================================*/
 
 bool CEditUndoStack::GroupUndoInsertChar (CRichEditCtrl* pCtrl, CEditUndo* pUndo) {
+	DEFINE_FUNCTION("CEditUndoStack::GroupUndoInsertChar()");
+	int SelStart;
+	int SelEnd;
 
-  DEFINE_FUNCTION("CEditUndoStack::GroupUndoInsertChar()");
+	do {
+		SelStart = pUndo->GetSelStart();
+		SelEnd = pUndo->GetSelEnd();
+		pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart() + 1);
+		pCtrl->ReplaceSel(_T(""));
+		pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelEnd());
+		DestroyPointer(pUndo);
+		pUndo = m_UndoStack.GetAt(m_UndoStack.GetNumElements() - 1);
 
-  int SelStart;
+		if (pUndo == NULL) {
+			break;
+		}
 
-  int SelEnd;
+		if (pUndo->GetAction() != EDITUNDO_INSERTCHAR) {
+			break;
+		}
 
+		if (!__iscsym(pUndo->GetChar())) {
+			break;
+		}
 
+		if (abs(pUndo->GetSelStart() - SelStart) >= 2) {
+			break;
+		}
 
-  do {
+		m_UndoStack.DeleteElement(m_UndoStack.GetNumElements() - 1, false);
+	} while (pUndo != NULL);
 
-    SelStart = pUndo->GetSelStart();
-
-    SelEnd   = pUndo->GetSelEnd();
-
-
-
-    pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart()+1);
-
-    pCtrl->ReplaceSel(_T(""));
-
-    pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelEnd());
-
-    DestroyPointer(pUndo);
-
-
-
-    pUndo = m_UndoStack.GetAt(m_UndoStack.GetNumElements() - 1);
-
-    if (pUndo == NULL) break;
-
-
-
-    if (pUndo->GetAction() != EDITUNDO_INSERTCHAR) break;
-
-    if (!__iscsym(pUndo->GetChar())) break;
-
-    if (abs(pUndo->GetSelStart() - SelStart) >= 2) break;
-
-
-
-    m_UndoStack.DeleteElement(m_UndoStack.GetNumElements() - 1, false);
-
-  } while (pUndo != NULL);
-
-
-
-  return (true);
-
+	return (true);
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::GroupUndoInsertChar()
+ *      End of Class Method CEditUndoStack::GroupUndoInsertChar()
 
  *=========================================================================*/
 
@@ -575,88 +437,60 @@ bool CEditUndoStack::GroupUndoInsertChar (CRichEditCtrl* pCtrl, CEditUndo* pUndo
  *=========================================================================*/
 
 bool CEditUndoStack::OnChar (CRichEditCtrl* pCtrl, const int CharCode) {
-
-  CString Buffer;
-
-  long    StartSel;
-
-  long    EndSel;
-
-
+	CString Buffer;
+	long StartSel;
+	long EndSel;
 
 	/* Ignore invalid input */
 
-  if (pCtrl == NULL || CharCode == 0) return (false);
-
-
+	if (pCtrl == NULL || CharCode == 0) {
+		return (false);
+	}
 
 	/* Ignore if the Control or ALT keys are pressed */
 
-  if (GetKeyState(VK_CONTROL) & 0xf000) return (false);
-
-  if (GetKeyState(VK_MENU)    & 0xf000) return (false);
-
-
-
-  switch (CharCode) {
-
-    case VK_BACK:
-
-    case VK_DELETE:
-
-	break;
-
-    case VK_RETURN:
-
-        pCtrl->GetSel(StartSel, EndSel);
-
-
-
-    	if (EndSel - StartSel >= 1) {
-
-	  Buffer = pCtrl->GetSelText();
-
-	  CreateDeleteString(Buffer, StartSel, EndSel);
-
+	if (GetKeyState(VK_CONTROL) & 0xf000) {
+		return (false);
 	}
 
-
-
-	CreateInsertString(_T("\r\n"), StartSel, StartSel);
-
-	return (true);
-
-    default:
-
-	pCtrl->GetSel(StartSel, EndSel);
-
-
-
-	if (EndSel - StartSel >= 1) {
-
-	  Buffer = pCtrl->GetSelText();
-
-	  CreateDeleteString(Buffer, StartSel, EndSel);
-
+	if (GetKeyState(VK_MENU) & 0xf000) {
+		return (false);
 	}
 
+	switch (CharCode) {
+		case VK_BACK:
+		case VK_DELETE:
+			break;
 
+		case VK_RETURN:
+			pCtrl->GetSel(StartSel, EndSel);
 
-	CreateInsertChar((TCHAR) CharCode, StartSel, StartSel);
+			if (EndSel - StartSel >= 1) {
+				Buffer = pCtrl->GetSelText();
+				CreateDeleteString(Buffer, StartSel, EndSel);
+			}
 
-	return (true);
+			CreateInsertString(_T("\r\n"), StartSel, StartSel);
+			return (true);
 
-  }
+		default:
+			pCtrl->GetSel(StartSel, EndSel);
 
+			if (EndSel - StartSel >= 1) {
+				Buffer = pCtrl->GetSelText();
+				CreateDeleteString(Buffer, StartSel, EndSel);
+			}
 
+			CreateInsertChar((TCHAR) CharCode, StartSel, StartSel);
+			return (true);
+	}
 
-  return (false);
-
+	return (false);
 }
 
 /*===========================================================================
 
- *		End of Class Event CEditUndoStack::OnChar()
+ *      End of Class Event CEditUndoStack::OnChar()
 
  *=========================================================================*/
 
@@ -675,44 +509,31 @@ bool CEditUndoStack::OnChar (CRichEditCtrl* pCtrl, const int CharCode) {
  *=========================================================================*/
 
 bool CEditUndoStack::OnCut (CRichEditCtrl* pCtrl) {
-
-  CString Buffer;
-
-  long    StartSel;
-
-  long    EndSel;
-
-
+	CString Buffer;
+	long StartSel;
+	long EndSel;
 
 	/* Ignore invalid input */
 
-  if (pCtrl == NULL) return (false);
+	if (pCtrl == NULL) {
+		return (false);
+	}
 
-  pCtrl->GetSel(StartSel, EndSel);
+	pCtrl->GetSel(StartSel, EndSel);
 
-
-
-  if (EndSel - StartSel >= 1) {
-
-    Buffer = pCtrl->GetSelText();
-
-    CreateDeleteString(Buffer, StartSel, EndSel);
-
-    return (true);
-
-  }
-
-
+	if (EndSel - StartSel >= 1) {
+		Buffer = pCtrl->GetSelText();
+		CreateDeleteString(Buffer, StartSel, EndSel);
+		return (true);
+	}
 
 	/* Nothing to cut */
-
-  return (false);
-
+	return (false);
 }
 
 /*===========================================================================
 
- *		End of Class Event CEditUndoStack::OnCut()
+ *      End of Class Event CEditUndoStack::OnCut()
 
  *=========================================================================*/
 
@@ -731,118 +552,82 @@ bool CEditUndoStack::OnCut (CRichEditCtrl* pCtrl) {
  *=========================================================================*/
 
 bool CEditUndoStack::OnKeyDown (CRichEditCtrl* pCtrl, const int CharCode) {
-
-  CString Buffer;
-
-  long    StartSel;
-
-  long    EndSel;
-
-  long    CurLine;
-
-  long    LineStart;
-
-  long    LineLength;
-
-  int     CharIndex;
-
-  int     Offset;
-
-
+	CString Buffer;
+	long StartSel;
+	long EndSel;
+	long CurLine;
+	long LineStart;
+	long LineLength;
+	int CharIndex;
+	int Offset;
 
 	/* Ignore invalid input */
 
-  if (pCtrl == NULL || CharCode == 0) return (false);
-
-
+	if (pCtrl == NULL || CharCode == 0) {
+		return (false);
+	}
 
 	/* Ignore if the ALT key is pressed */
 
-  if (GetKeyState(VK_MENU) & 0xf000) return (false);
+	if (GetKeyState(VK_MENU) & 0xf000) {
+		return (false);
+	}
 
+	switch (CharCode) {
+		case VK_BACK:
+			Offset = -1;
+			break;
 
+		case VK_DELETE:
+			Offset = 0;
+			break;
 
-  switch (CharCode) {
+		default:
+			return (false);
+	}
 
-    case VK_BACK:
+	pCtrl->GetSel(StartSel, EndSel);
 
-        Offset = -1;
+	if (EndSel - StartSel >= 1) {
+		Buffer = pCtrl->GetSelText();
+		CreateDeleteString(Buffer, StartSel, EndSel);
+		//return (true);
+	}
 
-	break;
+	CurLine = pCtrl->LineFromChar(-1);
+	LineStart = pCtrl->LineIndex(-1);
+	LineLength = pCtrl->LineLength(CurLine);
+	CharIndex = StartSel - LineStart + Offset;
 
-    case VK_DELETE:
+	if (CurLine < 0) {
+		return (false);
+	}
 
-        Offset = 0;
-
-	break;
-
-    default:
-
-        return (false);
-
-  }
-
-        
-
-  pCtrl->GetSel(StartSel, EndSel);
-
-
-
-  if (EndSel - StartSel >= 1) {
-
-    Buffer = pCtrl->GetSelText();
-
-    CreateDeleteString(Buffer, StartSel, EndSel);
-
-    //return (true);
-
-  }
-
-
-
-  CurLine    = pCtrl->LineFromChar(-1);
-
-  LineStart  = pCtrl->LineIndex(-1);
-
-  LineLength = pCtrl->LineLength(CurLine);
-
-  CharIndex  = StartSel - LineStart + Offset;
-
-  if (CurLine < 0) return (false);
-
-
-
-  pCtrl->GetLine(CurLine, Buffer.GetBuffer(LineLength + 8), LineLength + 2);
-
-  Buffer.ReleaseBuffer(LineLength);
-
-
+	pCtrl->GetLine(CurLine, Buffer.GetBuffer(LineLength + 8), LineLength + 2);
+	Buffer.ReleaseBuffer(LineLength);
 
 	/* Check for at very end or start */
 
-  if (Offset  < 0 && CurLine == 0 && CharIndex < 0) return (false);
+	if (Offset < 0 && CurLine == 0 && CharIndex < 0) {
+		return (false);
+	}
 
-  if (Offset >= 0 && StartSel >= pCtrl->GetTextLength()) return (false);
+	if (Offset >= 0 && StartSel >= pCtrl->GetTextLength()) {
+		return (false);
+	}
 
+	if (CharIndex < 0 || CharIndex + Offset >= LineLength) {
+		CreateDeleteString("\r\n", StartSel + Offset * 2, EndSel);
+	} else if (CharIndex >= 0 && CharIndex < Buffer.GetLength()) {
+		CreateDeleteChar(Buffer[CharIndex], StartSel + Offset, StartSel);
+	}
 
-
-  if (CharIndex < 0 || CharIndex + Offset >= LineLength)
-
-    CreateDeleteString("\r\n", StartSel + Offset*2, EndSel);
-
-  else if (CharIndex >= 0 && CharIndex < Buffer.GetLength()) 
-
-    CreateDeleteChar(Buffer[CharIndex], StartSel + Offset, StartSel);
-
-
-
-  return (true);
-
+	return (true);
 }
 
 /*===========================================================================
 
- *		End of Class Event CEditUndoStack::OnKeyDown()
+ *      End of Class Event CEditUndoStack::OnKeyDown()
 
  *=========================================================================*/
 
@@ -861,58 +646,47 @@ bool CEditUndoStack::OnKeyDown (CRichEditCtrl* pCtrl, const int CharCode) {
  *=========================================================================*/
 
 bool CEditUndoStack::OnPaste (CRichEditCtrl* pCtrl) {
-
-  CString Buffer;
-
-  long    StartSel;
-
-  long    EndSel;
-
-
+	CString Buffer;
+	long StartSel;
+	long EndSel;
 
 	/* Ignore invalid input */
 
-  if (pCtrl == NULL) return (false);
+	if (pCtrl == NULL) {
+		return (false);
+	}
 
-  pCtrl->GetSel(StartSel, EndSel);
+	pCtrl->GetSel(StartSel, EndSel);
 
-
-
-  if (EndSel - StartSel >= 1) {
-
-    Buffer = pCtrl->GetSelText();
-
-    CreateDeleteString(Buffer, StartSel, EndSel);
-
-    //return (true);
-
-  }
-
-
+	if (EndSel - StartSel >= 1) {
+		Buffer = pCtrl->GetSelText();
+		CreateDeleteString(Buffer, StartSel, EndSel);
+		//return (true);
+	}
 
 	/* Get the clipboard text to insert */
 
-  if (!GetClipboardText(Buffer)) return (false);
+	if (!GetClipboardText(Buffer)) {
+		return (false);
+	}
 
-  if (Buffer.IsEmpty()) return (false);
+	if (Buffer.IsEmpty()) {
+		return (false);
+	}
 
-
-
-  CreateInsertString(Buffer, StartSel, StartSel);
-
-  return (true);
-
+	CreateInsertString(Buffer, StartSel, StartSel);
+	return (true);
 }
 
 /*===========================================================================
 
- *		End of Class Event CEditUndoStack::OnPaste()
+ *      End of Class Event CEditUndoStack::OnPaste()
 
  *=========================================================================*/
 
 
 
-   
+
 
 /*===========================================================================
 
@@ -925,130 +699,81 @@ bool CEditUndoStack::OnPaste (CRichEditCtrl* pCtrl) {
  *=========================================================================*/
 
 int CEditUndoStack::OnUndo (CRichEditCtrl* pCtrl) {
-
-  DEFINE_FUNCTION("CEditUndoStack::OnUndo()");
-
-  CEditUndo* pUndo;
-
-  CString    Buffer;
-
-  int	     UndoType = EDITUNDO_NONE;
-
-
+	DEFINE_FUNCTION("CEditUndoStack::OnUndo()");
+	CEditUndo* pUndo;
+	CString Buffer;
+	int UndoType = EDITUNDO_NONE;
 
 	/* Ignore invalid input */
 
-  if (pCtrl == NULL) return (UndoType);
+	if (pCtrl == NULL) {
+		return (UndoType);
+	}
 
+	pUndo = Pop();
 
+	if (pUndo == NULL) {
+		return (UndoType);
+	}
 
-  pUndo = Pop();
+	switch (pUndo->GetAction()) {
+		case EDITUNDO_INSERTCHAR:
+			if (m_GroupUndos) {
+				return GroupUndoInsertChar(pCtrl, pUndo);
+			}
 
-  if (pUndo == NULL) return (UndoType);
+			pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart() + 1);
+			pCtrl->ReplaceSel(_T(""));
+			pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelEnd());
+			UndoType = EDITUNDO_INSERTCHAR;
+			break;
 
+		case EDITUNDO_INSERTSTRING:
+			pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart() + pUndo->GetStringLength());
+			pCtrl->ReplaceSel(_T(""));
+			pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelEnd());
+			UndoType = EDITUNDO_INSERTSTRING;
+			break;
 
+		case EDITUNDO_DELETECHAR:
+			pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart());
+			Buffer = pUndo->GetChar();
+			pCtrl->ReplaceSel(Buffer);
+			pCtrl->SetSel(pUndo->GetSelEnd(), pUndo->GetSelEnd());
+			UndoType = EDITUNDO_DELETECHAR;
+			break;
 
-  switch (pUndo->GetAction()) {
+		case EDITUNDO_DELETESTRING:
+			pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart());
+			pCtrl->ReplaceSel(pUndo->GetString());
+			pCtrl->SetSel(pUndo->GetSelEnd(), pUndo->GetSelEnd());
+			UndoType = EDITUNDO_DELETESTRING;
+			break;
 
-    case EDITUNDO_INSERTCHAR:
-
-        if (m_GroupUndos) return GroupUndoInsertChar(pCtrl, pUndo);
-
-        pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart()+1);
-
-	pCtrl->ReplaceSel(_T(""));
-
-	pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelEnd());
-
-	UndoType = EDITUNDO_INSERTCHAR;
-
-	break;
-
-    case EDITUNDO_INSERTSTRING:
-
-        pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart() + pUndo->GetStringLength());
-
-	pCtrl->ReplaceSel(_T(""));
-
-	pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelEnd());
-
-	UndoType = EDITUNDO_INSERTSTRING;
-
-	break;
-
-    case EDITUNDO_DELETECHAR:
-
-        pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart());
-
-	Buffer = pUndo->GetChar();
-
-	pCtrl->ReplaceSel(Buffer);
-
-	pCtrl->SetSel(pUndo->GetSelEnd(), pUndo->GetSelEnd());
-
-	UndoType = EDITUNDO_DELETECHAR;
-
-	break;
-
-    case EDITUNDO_DELETESTRING:
-
-        pCtrl->SetSel(pUndo->GetSelStart(), pUndo->GetSelStart());
-
-	pCtrl->ReplaceSel(pUndo->GetString());
-
-	pCtrl->SetSel(pUndo->GetSelEnd(), pUndo->GetSelEnd());
-
-	UndoType = EDITUNDO_DELETESTRING;
-
-	break;
-
-    case EDITUNDO_ENTIRETEXT: {
-
-	long StartSel;
-
-	long EndSel;
-
-	pCtrl->HideSelection(TRUE, FALSE);
-
-	pCtrl->SetRedraw(FALSE);
-
-
-
-	pCtrl->GetSel(StartSel, EndSel);
-
-	pCtrl->SetSel(0, -1);
-
-	pCtrl->ReplaceSel(pUndo->GetString());
-
-	pCtrl->SetSel(StartSel, EndSel);
-
-
+		case EDITUNDO_ENTIRETEXT: {
+			long StartSel;
+			long EndSel;
+			pCtrl->HideSelection(TRUE, FALSE);
+			pCtrl->SetRedraw(FALSE);
+			pCtrl->GetSel(StartSel, EndSel);
+			pCtrl->SetSel(0, -1);
+			pCtrl->ReplaceSel(pUndo->GetString());
+			pCtrl->SetSel(StartSel, EndSel);
+			pCtrl->HideSelection(FALSE, FALSE);
+			pCtrl->SetRedraw(TRUE);
+			UndoType = EDITUNDO_ENTIRETEXT;
+			break;
+		}
+	}
 
 	pCtrl->HideSelection(FALSE, FALSE);
-
-	pCtrl->SetRedraw(TRUE);
-
-
-
-	UndoType = EDITUNDO_ENTIRETEXT;
-
-	break; }
-
-  }
-
-
-
-  pCtrl->HideSelection(FALSE, FALSE);
-
-  DestroyPointer(pUndo);
-
-  return (UndoType);
-
+	DestroyPointer(pUndo);
+	return (UndoType);
 }
 
 /*===========================================================================
 
- *		End of Class Event CEditUndoStack::OnUndo()
+ *      End of Class Event CEditUndoStack::OnUndo()
 
  *=========================================================================*/
 
@@ -1066,31 +791,26 @@ int CEditUndoStack::OnUndo (CRichEditCtrl* pCtrl) {
 
  *=========================================================================*/
 
-CEditUndo* CEditUndoStack::Pop (void) {
+CEditUndo *CEditUndoStack::Pop (void) {
+	CEditUndo* pUndo;
 
-  CEditUndo* pUndo;
+	if (m_UndoStack.GetNumElements() == 0) {
+		return (NULL);
+	}
 
+	pUndo = m_UndoStack.GetAt(m_UndoStack.GetNumElements() - 1);
 
+	if (pUndo == NULL) {
+		return (NULL);
+	}
 
-  if (m_UndoStack.GetNumElements() == 0) return (NULL);
-
-
-
-  pUndo = m_UndoStack.GetAt(m_UndoStack.GetNumElements() - 1);
-
-  if (pUndo == NULL) return (NULL);
-
-
-
-  m_UndoStack.DeleteElement(m_UndoStack.GetNumElements() - 1, false);
-
-  return (pUndo);
-
+	m_UndoStack.DeleteElement(m_UndoStack.GetNumElements() - 1, false);
+	return (pUndo);
 }
 
 /*===========================================================================
 
- *		End of Class Method CEditUndoStack::Pop()
+ *      End of Class Method CEditUndoStack::Pop()
 
  *=========================================================================*/
 

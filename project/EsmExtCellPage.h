@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmextcellpage.H
+ * File:    Esmextcellpage.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 25, 2003
+ * Created On:  February 25, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "ColorStatic1.h"
+#include "ColorStatic1.h"
 
-  #include "EsmFile.h"
+#include "EsmFile.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -58,15 +58,15 @@
 
  *=========================================================================*/
 
-  class CEsmRecDialog;
+class CEsmRecDialog;
 
-  class CMWEditDoc;
+class CMWEditDoc;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -86,137 +86,141 @@
 
 class CEsmExtCellPage : public CPropertyPage {
 
-  DECLARE_DYNCREATE(CEsmExtCellPage);
+	DECLARE_DYNCREATE(CEsmExtCellPage);
 
 
 
-  /*---------- Begin Protected Class Methods ----------------------*/
+	/*---------- Begin Protected Class Methods ----------------------*/
 
-protected:
+  protected:
 
-  esmrecinfo_t*		m_pRecInfo;
+	esmrecinfo_t *m_pRecInfo;
 
-  CEsmRecDialog*	m_pDlgParent;
-
-
+	CEsmRecDialog *m_pDlgParent;
 
 
 
-  /*---------- Begin Public Class Methods -------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Methods -------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmExtCellPage();
+	CEsmExtCellPage();
 
-  ~CEsmExtCellPage();
+	~CEsmExtCellPage();
 
 
 
 	/* Get class members */
 
-  CMWEditDoc* GetDocument (void);
+	CMWEditDoc *GetDocument (void);
 
 
 
-    	/* Set class members */
+	/* Set class members */
 
-  void SetRecInfo      (esmrecinfo_t*   pRecInfo) { m_pRecInfo    = pRecInfo; }
+	void SetRecInfo (esmrecinfo_t* pRecInfo) {
+		m_pRecInfo = pRecInfo;
+	}
 
-  void SetEsmRecParent (CEsmRecDialog*   pDialog) { m_pDlgParent  = pDialog; }
+	void SetEsmRecParent (CEsmRecDialog* pDialog) {
+		m_pDlgParent = pDialog;
+	}
 
 
 
 	/* Get/set control data */
 
-  void GetControlData (void);
+	void GetControlData (void);
 
-  void SetControlData (void);
+	void SetControlData (void);
 
 
 
-  	/* Update record data */
+	/* Update record data */
 
-  int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	int OnUpdateItem (esmrecinfo_t* pRecInfo);
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmExtCellPage)
+	//{{AFX_DATA(CEsmExtCellPage)
 
-  enum { IDD = IDD_EXTCELL_PAGE };
+	enum { IDD = IDD_EXTCELL_PAGE };
 
-  CButton		m_ColorButton;
+	CButton m_ColorButton;
 
-  CColorStatic		m_ColorBox;
+	CColorStatic m_ColorBox;
 
-  CSpinButtonCtrl	m_BSpin;
+	CSpinButtonCtrl m_BSpin;
 
-  CSpinButtonCtrl	m_GSpin;
+	CSpinButtonCtrl m_GSpin;
 
-  CSpinButtonCtrl	m_RSpin;
+	CSpinButtonCtrl m_RSpin;
 
-  CEdit			m_BlueText;
+	CEdit m_BlueText;
 
-  CEdit			m_GreenText;
+	CEdit m_GreenText;
 
-  CEdit			m_RedText;
+	CEdit m_RedText;
 
-  CComboBox		m_RegionList;
+	CComboBox m_RegionList;
 
-  CButton		m_MapCheck;
+	CButton m_MapCheck;
 
-  CButton		m_SleepCheck;
+	CButton m_SleepCheck;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generate virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmExtCellPage)
+	//{{AFX_VIRTUAL(CEsmExtCellPage)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmExtCellPage)
+	//{{AFX_MSG(CEsmExtCellPage)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  afx_msg void OnColorbutton();
+	afx_msg void OnColorbutton();
 
-  afx_msg void OnChangeColor();
+	afx_msg void OnChangeColor();
 
-  afx_msg void OnMapcheck();
+	afx_msg void OnMapcheck();
 
-  //}}AFX_MSG
-
-
-
-  DECLARE_MESSAGE_MAP();
+	//}}AFX_MSG
 
 
 
- };
+	DECLARE_MESSAGE_MAP();
+
+
+
+};
 
 /*===========================================================================
 
- *		End of Class CEsmExtCellPage Definition
+ *      End of Class CEsmExtCellPage Definition
 
  *=========================================================================*/
 
@@ -236,7 +240,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmextcellpage.H
+ *      End of File Esmextcellpage.H
 
  *=========================================================================*/
 

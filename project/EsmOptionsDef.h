@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmoptionsdef.H
+ * File:    Esmoptionsdef.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	September 7, 2003
+ * Created On:  September 7, 2003
 
  *
 
@@ -36,29 +36,29 @@
 
 
 
-	/* Compiler message levels */
+/* Compiler message levels */
 
-  #define ESMSCR_COMPILEMSG_WEAK	1
+#define ESMSCR_COMPILEMSG_WEAK    1
 
-  #define ESMSCR_COMPILEMSG_DEFAULT	2 
+#define ESMSCR_COMPILEMSG_DEFAULT 2
 
-  #define ESMSCR_COMPILEMSG_STRONG	3
-
-
-
-	/* Script format types */
-
-  #define ESMSCR_FORMAT_BLUE  1
-
-  #define ESMSCR_FORMAT_WHITE 2
-
-  #define ESMSCR_FORMAT_USER  3
+#define ESMSCR_COMPILEMSG_STRONG  3
 
 
 
-  	/* Max author name string size (same as in TES3 header) */
+/* Script format types */
 
-  #define ESMSCR_OPTION_NAMESIZE 32
+#define ESMSCR_FORMAT_BLUE  1
+
+#define ESMSCR_FORMAT_WHITE 2
+
+#define ESMSCR_FORMAT_USER  3
+
+
+
+/* Max author name string size (same as in TES3 header) */
+
+#define ESMSCR_OPTION_NAMESIZE 32
 
 
 
@@ -66,7 +66,7 @@
 
 /*===========================================================================
 
- *		End of Definitions
+ *      End of Definitions
 
  *=========================================================================*/
 
@@ -78,7 +78,7 @@
 
 /*===========================================================================
 
- *		End of File Esmoptionsdef.H
+ *      End of File Esmoptionsdef.H
 
  *=========================================================================*/
 

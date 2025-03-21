@@ -1,12 +1,12 @@
- /*===========================================================================
- *
- * File:	Esmwinutils.H
- * Author:	Dave Humphrey (uesp@m0use.net)
- * Created On:	May 27, 2003
- *
- * Description
- *
- *=========================================================================*/
+/*===========================================================================
+*
+* File:    Esmwinutils.H
+* Author:  Dave Humphrey (uesp@m0use.net)
+* Created On:  May 27, 2003
+*
+* Description
+*
+*=========================================================================*/
 #ifndef __ESMWINUTILS_H
 #define __ESMWINUTILS_H
 
@@ -16,9 +16,9 @@
  * Begin Required Includes
  *
  *=========================================================================*/
-  #include "EsmFile.h"
+#include "EsmFile.h"
 /*===========================================================================
- *		End of Required Includes
+ *      End of Required Includes
  *=========================================================================*/
 
 
@@ -28,12 +28,12 @@
  *
  *=========================================================================*/
 
-	/* Morrowind registries */
-  #define MWESM_REG_INSTALLPATH _T("SOFTWARE\\Bethesda Softworks\\Morrowind\\Installed Path")
-  #define MWESM_REG_PATH	_T("SOFTWARE\\Bethesda Softworks\\Morrowind")
+/* Morrowind registries */
+#define MWESM_REG_INSTALLPATH _T("SOFTWARE\\Bethesda Softworks\\Morrowind\\Installed Path")
+#define MWESM_REG_PATH    _T("SOFTWARE\\Bethesda Softworks\\Morrowind")
 
 /*===========================================================================
- *		End of Definitions
+ *      End of Definitions
  *=========================================================================*/
 
 
@@ -43,15 +43,15 @@
  *
  *=========================================================================*/
 
-	/* Path functions */
-  const TCHAR*	GetMWDataPath (void);
-  void		SetMWDataPath (const TCHAR* pString);
+/* Path functions */
+const TCHAR *GetMWDataPath (void);
+void SetMWDataPath (const TCHAR* pString);
 
-	/* Attempt to update the Morrowind paths from ther registry */
-  void FindMWRegistryPath (void);
+/* Attempt to update the Morrowind paths from ther registry */
+void FindMWRegistryPath (void);
 
 /*===========================================================================
- *		End of Function Prototypes
+ *      End of Function Prototypes
  *=========================================================================*/
 
 
@@ -59,6 +59,6 @@
 
 #endif
 /*===========================================================================
- *		End of File Esmwinutils.H
+ *      End of File Esmwinutils.H
  *=========================================================================*/
 

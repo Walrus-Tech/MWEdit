@@ -2,11 +2,11 @@
 
  *
 
- * File:	EsmScriptCompareDlg.CPP
+ * File:    EsmScriptCompareDlg.CPP
 
- * Author:	Dave Humphrey (uesp@sympatico.ca)
+ * Author:  Dave Humphrey (uesp@sympatico.ca)
 
- * Created On:	September 8, 2006
+ * Created On:  September 8, 2006
 
  *
 
@@ -18,7 +18,7 @@
 
 
 
-	/* Include Files */
+/* Include Files */
 
 #include "stdafx.h"
 
@@ -42,23 +42,23 @@
 
 #ifdef _DEBUG
 
-  #define new DEBUG_NEW
+	#define new DEBUG_NEW
 
-  #undef THIS_FILE
+	#undef THIS_FILE
 
-  static char THIS_FILE[] = __FILE__;
+	static char THIS_FILE[] = __FILE__;
 
 #endif
 
 
 
-  DEFINE_FILE("EsmScriptCompareDlg.CPP");
+DEFINE_FILE("EsmScriptCompareDlg.CPP");
 
-  IMPLEMENT_DYNCREATE(CEsmScriptCompareDlg, CFormView)
+IMPLEMENT_DYNCREATE(CEsmScriptCompareDlg, CFormView)
 
 /*===========================================================================
 
- *		End of Local Definitions
+ *      End of Local Definitions
 
  *=========================================================================*/
 
@@ -78,17 +78,17 @@
 
 BEGIN_MESSAGE_MAP(CEsmScriptCompareDlg, CFormView)
 
-  //{{AFX_MSG_MAP(CEsmScriptCompareDlg)
+	//{{AFX_MSG_MAP(CEsmScriptCompareDlg)
 
-  ON_WM_DESTROY()
+	ON_WM_DESTROY()
 
-  //}}AFX_MSG_MAP
+	//}}AFX_MSG_MAP
 
 END_MESSAGE_MAP()
 
 /*===========================================================================
 
- *		End of CEsmScriptCompareDlg Message Map
+ *      End of CEsmScriptCompareDlg Message Map
 
  *=========================================================================*/
 
@@ -109,18 +109,14 @@ END_MESSAGE_MAP()
  *=========================================================================*/
 
 CEsmScriptCompareDlg::CEsmScriptCompareDlg() : CFormView(CEsmScriptCompareDlg::IDD) {
-
-  //{{AFX_DATA_INIT(CEsmScriptCompareDlg)
-
-  //}}AFX_DATA_INIT
-
-  m_pDlgHandler = NULL;
-
- }
+	//{{AFX_DATA_INIT(CEsmScriptCompareDlg)
+	//}}AFX_DATA_INIT
+	m_pDlgHandler = NULL;
+}
 
 /*===========================================================================
 
- *		End of Class CEsmScriptCompareDlg Constructor
+ *      End of Class CEsmScriptCompareDlg Constructor
 
  *=========================================================================*/
 
@@ -139,12 +135,11 @@ CEsmScriptCompareDlg::CEsmScriptCompareDlg() : CFormView(CEsmScriptCompareDlg::I
  *=========================================================================*/
 
 CEsmScriptCompareDlg::~CEsmScriptCompareDlg() {
-
- }
+}
 
 /*===========================================================================
 
- *		End of Class CEsmScriptCompareDlg Destructor
+ *      End of Class CEsmScriptCompareDlg Destructor
 
  *=========================================================================*/
 
@@ -163,30 +158,18 @@ CEsmScriptCompareDlg::~CEsmScriptCompareDlg() {
  *=========================================================================*/
 
 void CEsmScriptCompareDlg::AddLogText (const TCHAR* pString, va_list Args) {
-
-  CString Buffer;
-
-  int     Length;
-
-
-
-  Buffer.FormatV(pString, Args);
-
-  Buffer += _T("\r\n");
-
-
-
-  Length = m_LogText.GetWindowTextLength();
-
-  m_LogText.SetSel(Length, Length);
-
-  m_LogText.ReplaceSel(Buffer);
-
+	CString Buffer;
+	int Length;
+	Buffer.FormatV(pString, Args);
+	Buffer += _T("\r\n");
+	Length = m_LogText.GetWindowTextLength();
+	m_LogText.SetSel(Length, Length);
+	m_LogText.ReplaceSel(Buffer);
 }
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptCompareDlg::AddLogText()
+ *      End of Class Method CEsmScriptCompareDlg::AddLogText()
 
  *=========================================================================*/
 
@@ -205,22 +188,15 @@ void CEsmScriptCompareDlg::AddLogText (const TCHAR* pString, va_list Args) {
  *=========================================================================*/
 
 void CEsmScriptCompareDlg::DoDataExchange (CDataExchange* pDX) {
-
-  CFormView::DoDataExchange(pDX);
-
-
-
-  //{{AFX_DATA_MAP(CEsmScriptCompareDlg)
-
-  DDX_Control(pDX, IDC_LOGTEXT, m_LogText);
-
-  //}}AFX_DATA_MAP
-
- }
+	CFormView::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CEsmScriptCompareDlg)
+	DDX_Control(pDX, IDC_LOGTEXT, m_LogText);
+	//}}AFX_DATA_MAP
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptCompareDlg::DoDataExchange()
+ *      End of Class Method CEsmScriptCompareDlg::DoDataExchange()
 
  *=========================================================================*/
 
@@ -243,26 +219,22 @@ void CEsmScriptCompareDlg::DoDataExchange (CDataExchange* pDX) {
 
 
 void CEsmScriptCompareDlg::AssertValid() const {
-
-  CFormView::AssertValid();
-
- }
+	CFormView::AssertValid();
+}
 
 
 
 void CEsmScriptCompareDlg::Dump(CDumpContext& dc) const {
-
-  CFormView::Dump(dc);
-
- }
+	CFormView::Dump(dc);
+}
 
 
 
-#endif 
+#endif
 
 /*===========================================================================
 
- *		End of Class Diagnostics
+ *      End of Class Diagnostics
 
  *=========================================================================*/
 
@@ -281,14 +253,12 @@ void CEsmScriptCompareDlg::Dump(CDumpContext& dc) const {
  *=========================================================================*/
 
 void CEsmScriptCompareDlg::OnCancel() {
-
-  GetParentFrame()->DestroyWindow();
-
- }
+	GetParentFrame()->DestroyWindow();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmScriptCompareDlg::OnCancel()
+ *      End of Class Event CEsmScriptCompareDlg::OnCancel()
 
  *=========================================================================*/
 
@@ -307,16 +277,13 @@ void CEsmScriptCompareDlg::OnCancel() {
  *=========================================================================*/
 
 void CEsmScriptCompareDlg::OnDestroy() {
-
-  CFormView::OnDestroy();
-
-  m_pDlgHandler->OnCloseScriptCompareDlg();
-
- }
+	CFormView::OnDestroy();
+	m_pDlgHandler->OnCloseScriptCompareDlg();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmScriptCompareDlg::OnDestroy()
+ *      End of Class Event CEsmScriptCompareDlg::OnDestroy()
 
  *=========================================================================*/
 
@@ -335,34 +302,19 @@ void CEsmScriptCompareDlg::OnDestroy() {
  *=========================================================================*/
 
 void CEsmScriptCompareDlg::OnInitialUpdate() {
-
-  
-
-  CFormView::OnInitialUpdate();
-
-  ResizeParentToFit(FALSE);
-
-
-
-  UpdateTitle();
-
-
-
+	CFormView::OnInitialUpdate();
+	ResizeParentToFit(FALSE);
+	UpdateTitle();
 	/* Find the uses information for the current record */
-
-  //ShowWindow(SW_NORMAL);
-
-  //RedrawWindow();
-
-  //GetParentFrame()->ShowWindow(SW_NORMAL);
-
-  //UpdateUses();
-
- }
+	//ShowWindow(SW_NORMAL);
+	//RedrawWindow();
+	//GetParentFrame()->ShowWindow(SW_NORMAL);
+	//UpdateUses();
+}
 
 /*===========================================================================
 
- *		End of Class Event CEsmScriptCompareDlg::OnInitialUpdate()
+ *      End of Class Event CEsmScriptCompareDlg::OnInitialUpdate()
 
  *=========================================================================*/
 
@@ -378,7 +330,7 @@ void CEsmScriptCompareDlg::OnInitialUpdate() {
 
  *
 
- * Updates the parent frame title based on the current document and 
+ * Updates the parent frame title based on the current document and
 
  * record information.
 
@@ -387,19 +339,13 @@ void CEsmScriptCompareDlg::OnInitialUpdate() {
  *=========================================================================*/
 
 void CEsmScriptCompareDlg::UpdateTitle (void) {
-
-  CString Buffer;
-
-
-
-  Buffer.Format(_T("%s -- Script Compare"), m_pDlgHandler->GetDocument()->GetTitle());
-
-  GetParentFrame()->SetWindowText(Buffer);
-
- }
+	CString Buffer;
+	Buffer.Format(_T("%s -- Script Compare"), m_pDlgHandler->GetDocument()->GetTitle());
+	GetParentFrame()->SetWindowText(Buffer);
+}
 
 /*===========================================================================
 
- *		End of Class Method CEsmScriptCompareDlg::UpdateTitle()
+ *      End of Class Method CEsmScriptCompareDlg::UpdateTitle()
 
  *=========================================================================*/

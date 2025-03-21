@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmaiescortdlg.H
+ * File:    Esmaiescortdlg.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	February 24, 2003
+ * Created On:  February 24, 2003
 
  *
 
@@ -34,11 +34,11 @@
 
  *=========================================================================*/
 
-  #include "EsmSubAI_E.h"
+#include "EsmSubAI_E.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,93 +60,95 @@ class CEsmAiEscortDlg : public CDialog {
 
 
 
-  /*---------- Begin Protected Class Members -------------------------*/
+	/*---------- Begin Protected Class Members -------------------------*/
 
-protected:
+  protected:
 
-  CEsmSubAI_E*	m_pSubRecord;
+	CEsmSubAI_E *m_pSubRecord;
 
-  CString	m_CellName;
+	CString m_CellName;
 
-  CString	m_Title;
-
-
+	CString m_Title;
 
 
 
-  /*---------- Begin Public Class Method -----------------------------*/
 
-public:
+
+	/*---------- Begin Public Class Method -----------------------------*/
+
+  public:
 
 
 
 	/* Construction */
 
-  CEsmAiEscortDlg(CWnd* pParent = NULL);
+	CEsmAiEscortDlg(CWnd* pParent = NULL);
 
 
 
 	/* Main access method */
 
-  bool DoModal (CEsmSubAI_E* pSubRecord, const TCHAR* pCellName, const TCHAR* pTitle);
+	bool DoModal (CEsmSubAI_E* pSubRecord, const TCHAR* pCellName, const TCHAR* pTitle);
 
 
 
 	/* Get class members */
 
-  CString& GetCellName (void) { return (m_CellName); }
+	CString &GetCellName (void) {
+		return (m_CellName);
+	}
 
 
 
 	/* Dialog Data */
 
-  //{{AFX_DATA(CEsmAiEscortDlg)
+	//{{AFX_DATA(CEsmAiEscortDlg)
 
-  enum { IDD = IDD_AIESCORT_DLG };
+	enum { IDD = IDD_AIESCORT_DLG };
 
-  CEdit		m_ZText;
+	CEdit m_ZText;
 
-  CEdit		m_YText;
+	CEdit m_YText;
 
-  CEdit		m_XText;
+	CEdit m_XText;
 
-  CButton	m_PointCheck;
+	CButton m_PointCheck;
 
-  CComboBox	m_CellList;
+	CComboBox m_CellList;
 
-  CButton	m_EscortCheck;
+	CButton m_EscortCheck;
 
-  CEdit		m_DurationText;
+	CEdit m_DurationText;
 
-  CComboBox	m_TargetList;
+	CComboBox m_TargetList;
 
-  //}}AFX_DATA
+	//}}AFX_DATA
 
 
 
 	/* ClassWizard generated virtual function overrides */
 
-  //{{AFX_VIRTUAL(CEsmAiEscortDlg)
+	//{{AFX_VIRTUAL(CEsmAiEscortDlg)
 
-protected:
+  protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange* pDX);
 
-  //}}AFX_VIRTUAL
+	//}}AFX_VIRTUAL
 
 
 
-protected:
+  protected:
 
 
 
 	/* Generated message map functions */
 
-  //{{AFX_MSG(CEsmAiEscortDlg)
+	//{{AFX_MSG(CEsmAiEscortDlg)
 
-  virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog();
 
-  virtual void OnOK();
+	virtual void OnOK();
 
 	afx_msg void OnEscortcheck();
 
@@ -156,15 +158,15 @@ protected:
 
 
 
-  DECLARE_MESSAGE_MAP();
+	DECLARE_MESSAGE_MAP();
 
 
 
- };
+};
 
 /*===========================================================================
 
- *		End of Class CEsmAiEscortDlg
+ *      End of Class CEsmAiEscortDlg
 
  *=========================================================================*/
 
@@ -184,7 +186,7 @@ protected:
 
 /*===========================================================================
 
- *		End of File Esmaiescortdlg.H
+ *      End of File Esmaiescortdlg.H
 
  *=========================================================================*/
 

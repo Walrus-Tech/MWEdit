@@ -2,11 +2,11 @@
 
  *
 
- * File:	Esmcsvdefs.H
+ * File:    Esmcsvdefs.H
 
- * Author:	Dave Humphrey (uesp@m0use.net)
+ * Author:  Dave Humphrey (uesp@m0use.net)
 
- * Created On:	October 13, 2003
+ * Created On:  October 13, 2003
 
  *
 
@@ -34,13 +34,13 @@
 
  *=========================================================================*/
 
-  #include "file/csvfile.h"
+#include "file/csvfile.h"
 
-  #include "EsmDefs.h"
+#include "EsmDefs.h"
 
 /*===========================================================================
 
- *		End of Required Includes
+ *      End of Required Includes
 
  *=========================================================================*/
 
@@ -60,37 +60,37 @@
 
 
 
-	/* Holds extended CSV import/export column information */
+/* Holds extended CSV import/export column information */
 
-  typedef struct {
+typedef struct {
 
-	int	FieldID;
+	int FieldID;
 
-	long	UserData;
+	long UserData;
 
-   } esmcsvcol_t;
+} esmcsvcol_t;
 
 
 
-	/* Holds information for importing/exporting a record type */
+/* Holds information for importing/exporting a record type */
 
-  typedef struct {
+typedef struct {
 
-	const TCHAR* pEsmRecType;
+	const TCHAR *pEsmRecType;
 
-	const TCHAR* pRecordName;
+	const TCHAR *pRecordName;
 
-	int*	     pColArray;
+	int *pColArray;
 
-	esmcsvcol_t* pExColArray;
+	esmcsvcol_t *pExColArray;
 
-   } esmcsvrecinfo_t;
+} esmcsvrecinfo_t;
 
 
 
 /*===========================================================================
 
- *		End of Type Definitions
+ *      End of Type Definitions
 
  *=========================================================================*/
 
@@ -110,21 +110,21 @@
 
 
 
-	/* Convert an input CSV item type to a regular item type string */
+/* Convert an input CSV item type to a regular item type string */
 
-  const TCHAR*	GetEsmCsvRecordType	(const TCHAR* pString);
+const TCHAR *GetEsmCsvRecordType (const TCHAR* pString);
 
-  const TCHAR*	GetEsmCsvRecordString	(const TCHAR* pString);
+const TCHAR *GetEsmCsvRecordString (const TCHAR* pString);
 
-  int*		GetEsmCsvColArray	(const TCHAR* pType);
+int *GetEsmCsvColArray (const TCHAR* pType);
 
-  esmcsvcol_t*  GetEsmCsvExColArray     (const TCHAR* pType);
+esmcsvcol_t *GetEsmCsvExColArray (const TCHAR* pType);
 
 
 
 /*===========================================================================
 
- *		End of Function Prototypes
+ *      End of Function Prototypes
 
  *=========================================================================*/
 
@@ -138,7 +138,7 @@
 
 /*===========================================================================
 
- *		End of File Esmcsvdefs.H
+ *      End of File Esmcsvdefs.H
 
  *=========================================================================*/
 
