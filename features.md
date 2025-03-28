@@ -33,7 +33,7 @@
 - Consistent design of the item windows.
 - Color coding of active (green) and deleted (red) records in all lists.
 - Records can be sorted by their modified/delete status in all lists.
-- The sort field and column widths for each item type is saved and restored when you leave and return to that item type. 
+- The sort field and column widths for each item type is saved and restored when you leave and return to that item type.
 
 ## Dialogue
 ---
@@ -57,7 +57,7 @@
 - All compiler errors/warnings are displayed in a splitter pane at the bottom of the script window. Double-click a message to jump to the location of the message.
 - View detailed information on compiler messages and display the function help if the message is related to a specific function.
 - Compiler does not permit the use of reserved words as local variables (such as end, X, Y, etc...).
-- Functions that are known to be broken will result in a compiler message.	  
+- Functions that are known to be broken will result in a compiler message.
 - Simple function tooltips can be displayed for faster scripting.
 - Define custom functions, such as MWSE or MWE functions, in an external data file (CustomFunctions.dat) which can then be used and compiled in the editor. Includes all current MWSE (v0.9.2a) and MWE functions.
 - Use an external plugin file (MwExtraFile.esp by default) to define extra records, such as 'player', in order to compile scripts without needing to load its master files.

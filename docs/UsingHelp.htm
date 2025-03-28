@@ -36,7 +36,7 @@
 <H3>1. Introduction</H3>
 MWEdit is an alternate editor for the Elder Scrolls: Morrowind RPG from Bethesda. While it is similar
 in appearance and design to the official Construction Set editor, it introduces new features that make
-creating plugins easier. 
+creating plugins easier.
 <P>
 This document explains some of the new features and the major differences from the official editor.
 <P>
@@ -49,7 +49,7 @@ to add bug/features, contribute to the forums, or simply e-mail me at <A HREF="m
 <A NAME="backup"></A>
 <H3>2. Backing Up Plugins</H3>
 A common concern when using any unofficial editor such as MWEdit is the possible corruption of the
-file data (plugins in this case),  especially for an editor still in alpha/beta release. As when 
+file data (plugins in this case),  especially for an editor still in alpha/beta release. As when
 working with any data, it is reccommended that you back up your plugin files regularily.
 <P>
 Fortunately, MWEdit automatically backs up your plugin when you save it. The first time the plugin
@@ -66,7 +66,7 @@ disk space.
 <HR NOSHADE>
 <A NAME="cantdo"></A>
 <H3>3. What It Can't Do (Yet)</H3>
-MWEdit is by no means a complete plugin editor, and might not ever be depending on the amount of 
+MWEdit is by no means a complete plugin editor, and might not ever be depending on the amount of
 support and feedback I receive. The specific major areas that are currently missing are:
 <OL>
 	<LI>3D view (so you cannot add/edit cell references)
@@ -102,7 +102,7 @@ view from one document to the other).
 <A NAME="mainview"></A>
 <H3>5. The Main View</H3>
 MWEdit's main view contains the same large item list but the tab control of record types has been changed
-into a list on the left side of the window. The alphabetically sorted list allows you to more quickly 
+into a list on the left side of the window. The alphabetically sorted list allows you to more quickly
 select the desired type rather than having to find the type in the tab bar (which tends to keep changing
 the tab positions).
 <P>
@@ -151,7 +151,7 @@ Some of what the new compiler checks include:
 <OL>
 	<LI>Object types used in functions are checked more rigourously. If the function
 		expects an NPC ID, you'll receive an error/warning if you use another type.
-	<LI>Functions that are known to be broken will result in a compiler message.	 
+	<LI>Functions that are known to be broken will result in a compiler message.
 	<LI>Compiler does not permit the use of reserved words as local variables (such as
 		<I>END</I>, <I>X</I>, <I>Y</I>, etc...).
 	<LI>Required spaces in <I>IF</I> and <I>SET</I> statements (spaces are added if missing)
@@ -169,7 +169,7 @@ at the bottom of the script window. You can double-click a message to jump to th
 script where the error occurred, or right-click the message to display more options such as
 viewing details of the message including any function information if available.
 <P>
-There are three levels of recording warning/error messages: <I>Weak</I>, <I>Default</I>, and 
+There are three levels of recording warning/error messages: <I>Weak</I>, <I>Default</I>, and
 <I>Strong</I>, allowing you to set how many warning/error messages are recorded during a compile.
 <P>
 The script text is color coded which allows you to easily identify functions, numbers, keywords,
@@ -185,7 +185,7 @@ Other script commands include the ability to export and import scripts to/from t
 the compiling of scripts on save automatically (no warrning/errors displayed). The Import/Export
 option is available from the <I>File</I> menu. Exporting a script will output the entire script(s)
 to a text file with the same name as the script (existing script files are overwritten). When
-you import a script the script name will be taken from the script name within the file (i.e., 
+you import a script the script name will be taken from the script name within the file (i.e.,
 <I>begin scriptname</I>).
 <P>
 
@@ -210,7 +210,7 @@ Other options include being able to easily change the order of INFO records and 
 filtering by NPC.
 <P>
 The INFO record IDs are generated slightly differently than in TESCS in a manner
-which virtually guarantees that the ID is unique. The ID is an up to 30 digit number such as 
+which virtually guarantees that the ID is unique. The ID is an up to 30 digit number such as
 <B>610641915360541333977</B> with the following format:
 <DL>
 	<DD><B>Bytes  0- 9:</B> Current system time in seconds since midnight, January 1, 1970
@@ -247,15 +247,15 @@ well as the INFO edit window).
 <HR NOSHADE>
 <A NAME="clean"></A>
 <H3>11. Cleaning Records</H3>
-A new command, <I>Clean</I>, is available for most record types (including INFOs) and some 
-sub-record types (such as individual cell references). To access the clean command select and 
-right-click one or more records. The clean command attempts to permanently remove the given 
+A new command, <I>Clean</I>, is available for most record types (including INFOs) and some
+sub-record types (such as individual cell references). To access the clean command select and
+right-click one or more records. The clean command attempts to permanently remove the given
 record from the current active file. Note that once you clean a record you cannot undo the clean
 (not yet anyways), other than reloading the plugin. This allows you to easily remove unwanted
 edits/references or revert a record to its original state. Previously this had to be done
 by a seperate utility such as TESAME.
 <P>
-It may not be possible to clean some INFO records depending on their contents. INFO records use a 
+It may not be possible to clean some INFO records depending on their contents. INFO records use a
 doubly linked list structure which, if a record is cleaned, can be permanently messed up resulting
 in lost INFO records or an infinite looping structure. Generally you can clean INFO records unless
 you move or add new ones. You'll receive a warning message if you cannot clean a particular INFO.
@@ -265,7 +265,7 @@ you move or add new ones. You'll receive a warning message if you cannot clean a
 <A NAME="bugs"></A>
 <H3>12. Submitting Bugs</H3>
 Bug/error reports and feature requests are gladly welcome and can be either submitted on the
-<A HREF="http://sourceforge.net/tracker/?group_id=90473&atid=593757"><B>MWEdit SourceForge Project Page</B></A> or by 
+<A HREF="http://sourceforge.net/tracker/?group_id=90473&atid=593757"><B>MWEdit SourceForge Project Page</B></A> or by
 <A HREF="mailto:uesp@sympatico.ca"><B>E-mailing Me</B></A>.
 You can find handy links in the Help menu as well on the toolbar for quickly displaying the bug reporting
 page on the SourceForge project site.
@@ -282,7 +282,7 @@ You can import/export files by from the commands under the File menu.
 Unlike the files output by the TESCS the supported CSV format is flexible and allows more record data to be imported
 or exported. The first line in the CSV file gives the column names for the subsequent data. In order for a CSV file
 to be successfully imported, these column names much match that as listed in the table below. The columns can appear
-in any order and all but the <I>ID</I> and <I>ItemType</I> columns are optional. 
+in any order and all but the <I>ID</I> and <I>ItemType</I> columns are optional.
 <P>
 <CENTER><TABLE BORDER=1 CELLPADDING=3 CELLSPACING=0>
 <TR VALIGN=TOP BGCOLOR="#cccccc">
@@ -309,7 +309,7 @@ in any order and all but the <I>ID</I> and <I>ItemType</I> columns are optional.
 		<LI>Clothing
 		<LI>Container
 		<LI>Enchantment
-		<LI>Global	
+		<LI>Global
 		<LI>Ingrediant
 		<LI>Light
 		<LI>Lock
@@ -865,14 +865,14 @@ to export some sample records and load that file into your spreadsheet applicati
 types but exported files contain only the selected records of the currently displayed type in the main view.
 <P>
 When importing records, any existing record with the same ID will be overwritten, assuming it is the same item type.
-This allows you to reimport the same CSV file several times as you fine tune your item list. 
+This allows you to reimport the same CSV file several times as you fine tune your item list.
 <P>
 
 
 <HR NOSHADE>
 <A NAME="scripttemplate"></A>
 <H3>14. Script Templates</H3>
-MWEdit v0.5.5 introduced the idea of Script Templates to help modders to quickly create any number of 
+MWEdit v0.5.5 introduced the idea of Script Templates to help modders to quickly create any number of
 similar scripts from a source script and a CSV (Comma Seperated Value) files. The Script Template
 command can be found in the Edit menu.
 <P>
@@ -890,7 +890,7 @@ source script as an example:
 end</PRE>
 The template variables are surrounded in square brackets ([]) and in the above example include <I>[ScriptName]</I>,
 <I>[ItemID1]</I>, and <I>[ItemCount1]</I>. The <I>[ScriptName]</I> is the only special and required template
-variable and specifies the script name for the new script (otherwise all scripts would be created with the same 
+variable and specifies the script name for the new script (otherwise all scripts would be created with the same
 name and overwrite each other). The other template variables can include any combination of letters/numbers
 (not case sensitive). When you loading a source script the template variables found in the script will be
 listed in the template variable list. The source script text can also be modified in the <I>Template Text</I> tab.
@@ -903,7 +903,7 @@ matching the above source example is given below:
 	dh_itemscr_02, dh_item_test_01, 1
 	dh_itemscr_03, dh_levelist_01, 4</PRE>
 The first row in the CSV file contains the template variables matching those in the source script (without
-the surrounding [] brackets). The columns can appear in any order and the template variable name is not 
+the surrounding [] brackets). The columns can appear in any order and the template variable name is not
 case sensitive. When you load a CSV file you can check its contents in the <I>CSV File</I> tab to ensure
 it has been loaded successfully.
 <P>
@@ -941,4 +941,3 @@ the new scripts from the current settings. Note that any existing script name wi
 </ADDRESS>
 </BODY>
 </HTML>
-
