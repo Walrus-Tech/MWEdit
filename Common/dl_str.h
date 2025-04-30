@@ -55,63 +55,67 @@
  *=========================================================================*/
 
 /* Returns the number of substrings in the given string */
-size_t CountSubstrings (const TCHAR* pSourceString, const TCHAR* pSearchString);
+size_t CountSubstrings(const TCHAR *pSourceString, const TCHAR *pSearchString);
 
 /* Is... type functions for strings */
-bool IsStringNumber (const TCHAR* pString);
-bool IsStringDigit (const TCHAR* pString);
-bool IsStringPrint (const TCHAR* pString);
-bool IsStringFloat (const TCHAR* pString);
+bool IsStringNumber(const TCHAR *pString);
+bool IsStringDigit(const TCHAR *pString);
+bool IsStringPrint(const TCHAR *pString);
+bool IsStringFloat(const TCHAR *pString);
 
 /* Strip whitespace from left/right side of string */
-TCHAR *ltrim (TCHAR* pString);
-TCHAR *rtrim (TCHAR* pString);
+TCHAR* ltrim(TCHAR *pString);
+TCHAR* rtrim(TCHAR *pString);
 
 /* A strlen() function which can handle NULL strings */
-size_t SafeStrLen (const TCHAR* pString);
+size_t SafeStrLen(const TCHAR *pString);
 
 /* Seperate a string in a variable/value pair */
-bool SeperateVarValue (TCHAR** ppVariable, TCHAR** ppValue, TCHAR* pString,
+bool SeperateVarValue(TCHAR **ppVariable,
+                      TCHAR** ppValue,
+                      TCHAR *pString,
+                      const TCHAR SeperatorTCHAR = _T('='),
+                      const TCHAR CommentTCHAR = _T('#'));
+bool SeperateVarValueQ(TCHAR **ppVariable,
+                       TCHAR **ppValue,
+                       TCHAR *pString,
                        const TCHAR SeperatorTCHAR = _T('='),
                        const TCHAR CommentTCHAR = _T('#'));
-bool SeperateVarValueQ (TCHAR** ppVariable, TCHAR** ppValue, TCHAR* pString,
-                        const TCHAR SeperatorTCHAR = _T('='),
-                        const TCHAR CommentTCHAR = _T('#'));
 
 /* A smart string compare function which supports NULL cases and case sensitivity */
-bool StringChanged (const TCHAR* pString1, const TCHAR* pString2, const bool CaseSensitive = FALSE);
-int StringCompare (const TCHAR* pString1, const TCHAR* pString2, const bool CaseSensitive = FALSE);
+bool StringChanged(const TCHAR *pString1, const TCHAR *pString2, const bool CaseSensitive = FALSE);
+int StringCompare(const TCHAR *pString1, const TCHAR *pString2, const bool CaseSensitive = FALSE);
 
 /* Convert a string to a bool value */
-bool StringToBoolean (bool& Flag, const TCHAR* pString);
-bool StringToBoolean (const TCHAR* pString);
+bool StringToBoolean(bool &Flag, const TCHAR *pString);
+bool StringToBoolean(const TCHAR *pString);
 
 /* Counts the number of lines in string, seperated by a CR */
-size_t strhgt (const TCHAR* pString);
+size_t strhgt(const TCHAR *pString);
 
 /* Find a substring in a string with case insensitivity */
-TCHAR *stristr (const TCHAR* pString, const TCHAR* pSubString);
+TCHAR* stristr(const TCHAR *pString, const TCHAR *pSubString);
 
 /* Compares two strings up to the length of the shortest, case insensitive */
-int strlicmp (const TCHAR *pString1, const TCHAR *pString2);
+int strlicmp(const TCHAR *pString1, const TCHAR *pString2);
 
 /* Return number of TCHARacters to first CR or end of string */
-size_t strlinelen (const TCHAR* pString);
+size_t strlinelen(const TCHAR *pString);
 
 /* Returns the maximum line length of lines seperated by CR */
-size_t strmaxlinelen (const TCHAR* pString);
+size_t strmaxlinelen(const TCHAR *pString);
 
 /* Copies a maximum number of TCHARacter ensuring string is NULL terminated */
-TCHAR *strnncpy (TCHAR* pDestString, const TCHAR* pSourceString, const size_t MaxStringLength);
+TCHAR* strnncpy(TCHAR *pDestString, const TCHAR *pSourceString, const size_t MaxStringLength);
 
 /* Output printf() formatted message to a string buffer */
-int snprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, ...);
+int snprintf(TCHAR *pBuffer, const size_t MaxLength, const TCHAR *pFormat, ...);
 
 /* Removes quotes from the string */
-TCHAR *UnquoteString (TCHAR* pString);
+TCHAR* UnquoteString(TCHAR *pString);
 
 /* String argument formatter with length checking */
-int vsnprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, va_list Args);
+int vsnprintf(TCHAR *pBuffer, const size_t MaxLength, const TCHAR *pFormat, va_list Args);
 
 
 /*===========================================================================
@@ -126,7 +130,7 @@ int vsnprintf (TCHAR* pBuffer, const size_t MaxLength, const TCHAR* pFormat, va_
  *=========================================================================*/
 
 /* A strlen() function which can handle NULL strings */
-inline size_t SafeStrLen (const TCHAR* pString) {
+inline size_t SafeStrLen(const TCHAR *pString) {
 	return ((pString == NULL) ? 0 : TSTRLEN(pString));
 }
 
@@ -146,11 +150,11 @@ inline size_t SafeStrLen (const TCHAR* pString) {
 #if !defined(__TURBOC__) && !defined(_WIN32)
 
 	/* Standard uppercase/lowercase conversion functions */
-	TCHAR *strlwr (TCHAR* pString);
-	TCHAR *strupr (TCHAR* pString);
+	TCHAR* strlwr(TCHAR *pString);
+	TCHAR* strupr(TCHAR *pString);
 
 	/* Compare a portion of a string with case insensitivity */
-	int strnicmp (const TCHAR* pString1, const TCHAR* pString2, const size_t MaxStringLength);
+	int strnicmp(const TCHAR *pString1, const TCHAR *pString2, const size_t MaxStringLength);
 
 #endif
 /*===========================================================================
@@ -166,24 +170,24 @@ inline size_t SafeStrLen (const TCHAR* pString) {
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_vsnprintf (void);
-	void Test_CountSubstrings (void);
-	void Test_ltrim (void);
-	void Test_rtrim (void);
-	void Test_strlinelen (void);
-	void Test_SeperateVarValue (void);
-	void Test_StringToBoolean (void);
-	void Test_StringChanged (void);
-	void Test_IsStringNumber (void);
-	void Test_stristr (void);
-	void Test_strlicmp (void);
-	void Test_strnncpy (void);
-	void Test_strproper (void);
-	void Test_strhgt (void);
-	void Test_strmaxlinelen (void);
-	void Test_strupr (void);
-	void Test_strnicmp (void);
-	void Test_DLStr (void);
+	void Test_vsnprintf(void);
+	void Test_CountSubstrings(void);
+	void Test_ltrim(void);
+	void Test_rtrim(void);
+	void Test_strlinelen(void);
+	void Test_SeperateVarValue(void);
+	void Test_StringToBoolean(void);
+	void Test_StringChanged(void);
+	void Test_IsStringNumber(void);
+	void Test_stristr(void);
+	void Test_strlicmp(void);
+	void Test_strnncpy(void);
+	void Test_strproper(void);
+	void Test_strhgt(void);
+	void Test_strmaxlinelen(void);
+	void Test_strupr(void);
+	void Test_strnicmp(void);
+	void Test_DLStr(void);
 #endif
 /*===========================================================================
  *      End of Testing Routine Prototypes

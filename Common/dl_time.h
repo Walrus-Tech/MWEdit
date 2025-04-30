@@ -54,14 +54,14 @@ typedef struct hiclock_t {
 
 	/*-------------- Structure Data Members ----------------------*/
 	union {
-		clock_t ClockCount;       /* For the standard clock() counter */
+		clock_t ClockCount; /* For the standard clock() counter */
 
 #if defined(_WIN32)
-		LARGE_INTEGER TimerCount;   /* Windows performance counter */
+		LARGE_INTEGER TimerCount; /* Windows performance counter */
 #endif
 	};
 
-	int CountType;         /* Stores what type of counter is used */
+	int CountType; /* Stores what type of counter is used */
 
 
 	/*-------------- Structure Overloaded Operators -------------*/
@@ -113,17 +113,17 @@ inline hiclock_t &hiclock_t::operator = (const hiclock_t &Value) {
 }
 
 /* High-resolution counter copy operator from a long value */
-inline hiclock_t &hiclock_t::operator = (const ulong& lValue) {
+inline hiclock_t &hiclock_t::operator = (const ulong &lValue) {
 #if defined(WIN32)
-	TimerCount.QuadPart = (LONGLONG) lValue;
+	TimerCount.QuadPart = (LONGLONG)lValue;
 #else
-	ClockCount = (clock_t) lValue;
+	ClockCount = (clock_t)lValue;
 #endif
 	return (*this);
 }
 
 /* Compare two high-resolution counter values */
-inline int HiClockCompare (const hiclock_t &Value1, const hiclock_t &Value2) {
+inline int HiClockCompare(const hiclock_t &Value1, const hiclock_t &Value2) {
 	/* Ensure the counters are the same counter type */
 	if (Value1.CountType != Value2.CountType) {
 		return (1);
@@ -317,11 +317,11 @@ inline hiclock_t::operator double () const {
  *=========================================================================*/
 
 /* Retrieves the systems high-resolution counter */
-void GetHiClock (hiclock_t &Counter);
-double GetHiClockTime (void);
+void GetHiClock(hiclock_t &Counter);
+double GetHiClockTime(void);
 
 /* Get the frequency of the system's high-resolution counter */
-double GetHiClockFreq (void);
+double GetHiClockFreq(void);
 
 /*===========================================================================
  *      End of Function Prototypes

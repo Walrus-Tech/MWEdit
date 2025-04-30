@@ -57,7 +57,7 @@ class CGenStack {
   protected:
 
 	/* Changes the size of the array */
-	bool AllocSize (const int Size);
+	bool AllocSize(const int Size);
 
 
 
@@ -65,29 +65,29 @@ class CGenStack {
   public:
 
 	/* Class Constructors/Destructors */
-	CGenStack (const int Size = GENSTACK_DEFAULT_SIZE);
+	CGenStack(const int Size = GENSTACK_DEFAULT_SIZE);
 	virtual ~CGenStack();
 
 	/* Get class members */
-	int GetSize (void) const {
+	int GetSize(void) const {
 		return (m_NumElements);
 	}
 
-	bool IsEmpty (void) const {
+	bool IsEmpty(void) const {
 		return (m_NumElements == 0);
 	}
 
 	/* Stack access */
-	void *Peek (void);
-	void *Pop (void);
-	void *GetAt (const int Index);
-	void Push (void* pData);
+	void *Peek(void);
+	void *Pop(void);
+	void *GetAt(const int Index);
+	void Push(void *pData);
 
 	/* Remove all elements from the stack */
-	void RemoveAll (void);
+	void RemoveAll(void);
 
 	/* Changes the size of the stack */
-	bool SetSize (const int Size);
+	bool SetSize(const int Size);
 
 };
 

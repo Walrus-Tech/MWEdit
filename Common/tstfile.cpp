@@ -55,10 +55,10 @@ DEFINE_FILE("tstfile.cpp");
  *  4. Test with empty path
  *
  *=========================================================================*/
-void Test_ChangeDirectory (void) {
+void Test_ChangeDirectory(void) {
 	DEFINE_FUNCTION("Test_ChangeDirectory()");
 	TCHAR Buffer[256];
-	SystemLog.Printf (stdout, _T("=============== Testing ChangeDirectory() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing ChangeDirectory() ==================="));
 	ChangeDirectory(_T("c:\\"));
 	SystemLog.Printf(stdout, _T("c:\\ = %s"), GetDirString(Buffer, 200));
 	/* Attempt to change paths within same disk */
@@ -100,11 +100,11 @@ void Test_ChangeDirectory (void) {
  *  4. Test case with short strings
  *
  *=========================================================================*/
-void Test_ChangeExtension (void) {
+void Test_ChangeExtension(void) {
 	DEFINE_FUNCTION("Test_ChangeExtension()");
 	TCHAR TestString[101];
 	TCHAR DestString[101];
-	SystemLog.Printf (stdout, _T("=============== Testing ChangeExtension() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing ChangeExtension() ==================="));
 	/* Test typical inputs */
 	TSTRCPY(TestString, _T("filename.ext"));
 	ChangeExtension(DestString, TestString, _T("new"), 100);
@@ -160,9 +160,9 @@ void Test_ChangeExtension (void) {
  *  4. Test files with no extension
  *
  *=========================================================================*/
-void Test_CompareExtension (void) {
+void Test_CompareExtension(void) {
 	DEFINE_FUNCTION("Test_CompareExtension()");
-	SystemLog.Printf (stdout, _T("=============== Testing CompareExtension() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing CompareExtension() ==================="));
 	/* Test several positive cases */
 	ASSERT(CompareExtension(_T("file.ext"), _T("ext")) == TRUE);
 	ASSERT(CompareExtension(_T("file.ext"), _T("EXT")) == TRUE);
@@ -206,36 +206,36 @@ void Test_CompareExtension (void) {
  *  6. Test with invalid destination file
  *
  *=========================================================================*/
-void Test_CopyFile (void) {
+void Test_CopyFile(void) {
 	DEFINE_FUNCTION("Test_CopyFile()");
-	SystemLog.Printf (stdout, _T("=============== Testing CopyFile() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing CopyFile() ==================="));
 	/* Test function with file size less than buffer size */
-	SystemLog.Printf (stdout, _T("\tTest file size less than buffer size"));
+	SystemLog.Printf(stdout, _T("\tTest file size less than buffer size"));
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), COPYFILE_BUFFERSIZE / 2);
-	SystemLog.Printf (stdout, _T("\t\tWrote random file"));
+	SystemLog.Printf(stdout, _T("\t\tWrote random file"));
 	ASSERT(CopyOneFile(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
-	SystemLog.Printf (stdout, _T("\t\tCopied file"));
+	SystemLog.Printf(stdout, _T("\t\tCopied file"));
 	ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	/* Test function with file size equal to buffer size */
-	SystemLog.Printf (stdout, _T("\tTest file size equal to buffer size"));
+	SystemLog.Printf(stdout, _T("\tTest file size equal to buffer size"));
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), COPYFILE_BUFFERSIZE);
 	ASSERT(CopyOneFile(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	/* Test function with file size greater than buffer size */
-	SystemLog.Printf (stdout, _T("\tTest file size greater than buffer size"));
+	SystemLog.Printf(stdout, _T("\tTest file size greater than buffer size"));
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), COPYFILE_BUFFERSIZE * 2);
 	ASSERT(CopyOneFile(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	/* Test function with zero size file */
-	SystemLog.Printf (stdout, _T("\tTest 0 file size"));
+	SystemLog.Printf(stdout, _T("\tTest 0 file size"));
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 0);
 	ASSERT(CopyOneFile(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")));
 	/* Test function with invalid source file */
-	SystemLog.Printf (stdout, _T("\tTest invalid source file"));
+	SystemLog.Printf(stdout, _T("\tTest invalid source file"));
 	ASSERT(CopyOneFile(_T("c:\\temp\\test123.dat"), _T("c:\\temp\\test2.dat")) == FALSE);
 	/* Test function with invalid destination file */
-	SystemLog.Printf (stdout, _T("\tTest invalid destination file"));
+	SystemLog.Printf(stdout, _T("\tTest invalid destination file"));
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 100);
 	ASSERT(CopyOneFile(_T("c:\\temp\\test1.dat"), _T("c:\\temp123\\test2.dat")) == FALSE);
 }
@@ -253,10 +253,10 @@ void Test_CopyFile (void) {
  * identical.  ASSERTs on any error.
  *
  *=========================================================================*/
-bool Test_CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2) {
+bool Test_CompareFiles(const TCHAR *pFilename1, const TCHAR *pFilename2) {
 	DEFINE_FUNCTION("Test_CompareFiles()");
-	FILE* pFileHandle1;
-	FILE* pFileHandle2;
+	FILE *pFileHandle1;
+	FILE *pFileHandle2;
 	bool ReturnValue = TRUE;
 	ASSERT(pFilename1 != NULL && pFilename2 != NULL);
 	/* Attempt to open both files for input */
@@ -300,10 +300,10 @@ bool Test_CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2) {
  *  3. Test short string cases
  *
  *=========================================================================*/
-void Test_CreatePath (void) {
+void Test_CreatePath(void) {
 	DEFINE_FUNCTION("Test_CreatePath()");
 	TCHAR TestString[101];
-	SystemLog.Printf (stdout, _T("=============== Testing CreatePath() ===================)"));
+	SystemLog.Printf(stdout, _T("=============== Testing CreatePath() ===================)"));
 	/* Test several typical inputs */
 	CreatePath(TestString, _T("c:\\temp\\"), 100);
 	ASSERT(TSTRCMP(TestString, _T("c:\\temp\\")) == 0);
@@ -341,9 +341,9 @@ void Test_CreatePath (void) {
  * a text or binary file depending on the value of the TextMode flag.
  *
  *=========================================================================*/
-void Test_CreateRandomFile (const TCHAR* pFilename, const size_t FileSize, const bool TextMode) {
+void Test_CreateRandomFile(const TCHAR *pFilename, const size_t FileSize, const bool TextMode) {
 	DEFINE_FUNCTION("Test_CreateRandomFile()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	size_t LoopCounter;
 	byte Char;
 	int Result;
@@ -393,10 +393,10 @@ void Test_CreateRandomFile (const TCHAR* pFilename, const size_t FileSize, const
  *  4. Test with short strings
  *
  *=========================================================================*/
-void Test_ExtractFilename (void) {
+void Test_ExtractFilename(void) {
 	DEFINE_FUNCTION("Test_ExtractFilename()");
 	TCHAR TestString[101];
-	SystemLog.Printf (stdout, _T("=============== Testing ExtractFilename() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing ExtractFilename() ==================="));
 	/* Test several typical inputs */
 	ExtractFilename(TestString, _T("c:\\temp\\filename.ext"), 100);
 	ASSERT(TSTRCMP(TestString, _T("filename.ext")) == 0);
@@ -436,10 +436,10 @@ void Test_ExtractFilename (void) {
  *  4. Test with short strings
  *
  *=========================================================================*/
-void Test_ExtractPath (void) {
+void Test_ExtractPath(void) {
 	DEFINE_FUNCTION("Test_ExtractPath()");
 	TCHAR TestString[101];
-	SystemLog.Printf (stdout, _T("=============== Testing ExtractPath() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing ExtractPath() ==================="));
 	/* Test several typical inputs */
 	ExtractPath(TestString, _T("c:\\temp\\filename.ext"), 100);
 	ASSERT(TSTRCMP(TestString, _T("c:\\temp\\")) == 0);
@@ -487,9 +487,9 @@ void Test_ExtractPath (void) {
  *  3. Test with empty filename
  *
  *=========================================================================*/
-void Test_FileExists (void) {
+void Test_FileExists(void) {
 	DEFINE_FUNCTION("Test_FileExists()");
-	SystemLog.Printf (stdout, _T("=============== Testing FileExists() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing FileExists() ==================="));
 	/* Check with valid files */
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 10);
 	ASSERT(FileExists(_T("c:\\temp\\test1.dat")) == TRUE);
@@ -515,10 +515,10 @@ void Test_FileExists (void) {
  *  4. Test with zero-sized files
  *
  *=========================================================================*/
-void Test_GetFileSize (void) {
+void Test_GetFileSize(void) {
 	DEFINE_FUNCTION("Test_GetFileSize()");
 	long FileSize;
-	SystemLog.Printf (stdout, _T("=============== Testing GetFileSize() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing GetFileSize() ==================="));
 	/* Test with some valid files */
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 101);
 	ASSERT(GetFileSize(FileSize, _T("c:\\temp\\test1.dat")) == TRUE);
@@ -553,9 +553,9 @@ void Test_GetFileSize (void) {
  *  4. Test with empty string
  *
  *=========================================================================*/
-void Test_HasExtension (void) {
+void Test_HasExtension(void) {
 	DEFINE_FUNCTION("Test_HasExtension()");
-	SystemLog.Printf (stdout, _T("=============== Testing HasExtension() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing HasExtension() ==================="));
 	/* Check with typical inputs */
 	ASSERT(HasExtension(_T("c:\\temp\\filename.ext")) == TRUE);
 	ASSERT(HasExtension(_T("filename.ext")) == TRUE);
@@ -585,9 +585,9 @@ void Test_HasExtension (void) {
  *  3. Test with empty strings
  *
  *=========================================================================*/
-void Test_HasPath (void) {
+void Test_HasPath(void) {
 	DEFINE_FUNCTION("Test_HasPath()");
-	SystemLog.Printf (stdout, _T("=============== Testing HasPath() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing HasPath() ==================="));
 	/* Check with typical inputs */
 	ASSERT(HasPath(_T("c:\\temp\\filename.ext")) == TRUE);
 	ASSERT(HasPath(_T("c:filename.ext")) == TRUE);
@@ -616,9 +616,9 @@ void Test_HasPath (void) {
  *  3. Test with empty path
  *
  *=========================================================================*/
-void Test_IsDirectory (void) {
+void Test_IsDirectory(void) {
 	DEFINE_FUNCTION("Test_IsDirectory()");
-	SystemLog.Printf (stdout, _T("=============== Testing IsDirectory() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing IsDirectory() ==================="));
 	/* Check several valid paths */
 	ASSERT(IsDirectory(_T("c:\\")) == TRUE);
 	ASSERT(IsDirectory(_T("c:")) == TRUE);
@@ -649,9 +649,9 @@ void Test_IsDirectory (void) {
  *  3. Tests empty filename
  *
  *=========================================================================*/
-void Test_IsFileWriteable (void) {
+void Test_IsFileWriteable(void) {
 	DEFINE_FUNCTION("Test_IsFileWriteable()");
-	SystemLog.Printf (stdout, _T("=============== Testing IsFileWriteable() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing IsFileWriteable() ==================="));
 	/* Check several TRUE cases */
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 101);
 	ASSERT(IsFileWriteable(_T("c:\\temp\\test1.dat")) == TRUE);
@@ -683,9 +683,9 @@ void Test_IsFileWriteable (void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_IsWildCard (void) {
+void Test_IsWildCard(void) {
 	DEFINE_FUNCTION("Test_IsWildCard()");
-	SystemLog.Printf (stdout, _T("=============== Testing IsWildCard() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing IsWildCard() ==================="));
 	/* Test for several positive cases */
 	ASSERT(IsWildCard(_T("*.*")) == TRUE);
 	ASSERT(IsWildCard(_T("test.???")) == TRUE);
@@ -716,10 +716,10 @@ void Test_IsWildCard (void) {
  *  5. Test empty string filenames
  *
  *=========================================================================*/
-void Test_OpenFile (void) {
+void Test_OpenFile(void) {
 	DEFINE_FUNCTION("Test_OpenFile()");
-	FILE* pFileHandle;
-	SystemLog.Printf (stdout, _T("=============== Testing OpenFile() ==================="));
+	FILE *pFileHandle;
+	SystemLog.Printf(stdout, _T("=============== Testing OpenFile() ==================="));
 	/* Check opening valid files for output */
 	ASSERT(OpenFile(&pFileHandle, _T("c:\\temp\\test1.dat"), _T("wt")) == TRUE);
 	ASSERT(pFileHandle != NULL);
@@ -760,12 +760,12 @@ void Test_OpenFile (void) {
  *  3. Test reading zero sized file
  *
  *=========================================================================*/
-void Test_ReadFile (void) {
+void Test_ReadFile(void) {
 	DEFINE_FUNCTION("Test_ReadFile()");
-	FILE* pFileHandle;
-	byte* pTestPtr;
+	FILE *pFileHandle;
+	byte *pTestPtr;
 	size_t FileSize;
-	SystemLog.Printf (stdout, _T("=============== Testing ReadFile() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing ReadFile() ==================="));
 	/* Test reading a sample file */
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 101);
 	ASSERT(ReadFile(&pTestPtr, FileSize, _T("c:\\temp\\test1.dat")) == TRUE);
@@ -774,7 +774,7 @@ void Test_ReadFile (void) {
 	pFileHandle = TFOPEN(_T("c:\\temp\\test2.dat"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
 	ASSERT(fwrite(pTestPtr, 1, 101, pFileHandle) == 101);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")) == TRUE);
 	DestroyPointer(pTestPtr);
 	/* Test reading an invalid file */
@@ -805,12 +805,12 @@ void Test_ReadFile (void) {
  *  5. Test reading a file bigger than buffer size
  *
  *=========================================================================*/
-void Test_ReadFileBuffer (void) {
+void Test_ReadFileBuffer(void) {
 	DEFINE_FUNCTION("Test_ReadFileBuffer()");
-	FILE* pFileHandle;
-	byte* pTestPtr;
+	FILE *pFileHandle;
+	byte *pTestPtr;
 	size_t FileSize;
-	SystemLog.Printf (stdout, _T("=============== Testing ReadFileBuffer() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing ReadFileBuffer() ==================="));
 	/* Test reading a sample file */
 	Test_CreateRandomFile(_T("c:\\temp\\test1.dat"), 101);
 	CreateArrayPointer(pTestPtr, byte, 1001);
@@ -821,7 +821,7 @@ void Test_ReadFileBuffer (void) {
 	pFileHandle = TFOPEN(_T("c:\\temp\\test2.dat"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
 	ASSERT(fwrite(pTestPtr, 1, 101, pFileHandle) == 101);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")) == TRUE);
 	/* Test reading an invalid file */
 	ASSERT(ReadFileBuffer(&pTestPtr, FileSize, _T("c:\\tata.rzr"), 1000) == NULL);
@@ -858,20 +858,20 @@ void Test_ReadFileBuffer (void) {
  *  5. Test error condition
  *
  *=========================================================================*/
-void Test_ReadLine (void) {
+void Test_ReadLine(void) {
 	DEFINE_FUNCTION("Test_ReadLine()");
 	TCHAR TestString[101];
-	FILE* pFileHandle;
-	SystemLog.Printf (stdout, _T("=============== Testing ReadLine() ==================="));
+	FILE *pFileHandle;
+	SystemLog.Printf(stdout, _T("=============== Testing ReadLine() ==================="));
 	/* Create a sample test file */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.txt"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
-	fprintf (pFileHandle, ("This is line 1\n"));
-	fprintf (pFileHandle, ("This is line 2\n"));
-	fprintf (pFileHandle, ("This is line 3333333333333333333333\n"));
-	fprintf (pFileHandle, ("This is line 4\n"));
-	fprintf (pFileHandle, ("\n"));
-	fclose (pFileHandle);
+	fprintf(pFileHandle, ("This is line 1\n"));
+	fprintf(pFileHandle, ("This is line 2\n"));
+	fprintf(pFileHandle, ("This is line 3333333333333333333333\n"));
+	fprintf(pFileHandle, ("This is line 4\n"));
+	fprintf(pFileHandle, ("\n"));
+	fclose(pFileHandle);
 	/* Open the sample test file */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.txt"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
@@ -897,7 +897,7 @@ void Test_ReadLine (void) {
 	/* Test the error condition */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.txt"), _T("wb"));
 	ASSERT(ReadLine(pFileHandle, TestString, 100) == READLINE_ERROR);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -914,12 +914,12 @@ void Test_ReadLine (void) {
  *  2. Test error conditions
  *
  *=========================================================================*/
-void Test_read_int (void) {
+void Test_read_int(void) {
 	DEFINE_FUNCTION("Test_read_int()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	int TestValue;
-	SystemLog.Printf (stdout,
-	                  _T("=============== Testing read_int() / write_int() ==================="));
+	SystemLog.Printf(stdout,
+	                 _T("=============== Testing read_int() / write_int() ==================="));
 	/* Output some sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
@@ -929,7 +929,7 @@ void Test_read_int (void) {
 	ASSERT(write_int(pFileHandle, -1) == TRUE);
 	ASSERT(write_int(pFileHandle, INT_MAX) == TRUE);
 	ASSERT(write_int(pFileHandle, INT_MIN) == TRUE);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Input the sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
@@ -950,7 +950,7 @@ void Test_read_int (void) {
 #if !defined(__BCPLUSPLUS__)
 	ASSERT(write_int(pFileHandle, 0) == FALSE);
 #endif
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -967,12 +967,12 @@ void Test_read_int (void) {
  *  2. Test error conditions
  *
  *=========================================================================*/
-void Test_read_long (void) {
+void Test_read_long(void) {
 	DEFINE_FUNCTION("Test_read_long()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	long TestValue;
-	SystemLog.Printf (stdout,
-	                  _T("=============== Testing read_long() / write_long() ==================="));
+	SystemLog.Printf(stdout,
+	                 _T("=============== Testing read_long() / write_long() ==================="));
 	/* Output some sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
@@ -982,7 +982,7 @@ void Test_read_long (void) {
 	ASSERT(write_long(pFileHandle, -1) == TRUE);
 	ASSERT(write_long(pFileHandle, LONG_MAX) == TRUE);
 	ASSERT(write_long(pFileHandle, LONG_MIN) == TRUE);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Input the sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
@@ -1003,7 +1003,7 @@ void Test_read_long (void) {
 #if !defined(__BCPLUSPLUS__)
 	ASSERT(write_long(pFileHandle, 0) == FALSE);
 #endif
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -1020,12 +1020,12 @@ void Test_read_long (void) {
  *  2. Test error conditions
  *
  *=========================================================================*/
-void Test_read_short (void) {
+void Test_read_short(void) {
 	DEFINE_FUNCTION("Test_read_short()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	short TestValue;
-	SystemLog.Printf (stdout,
-	                  _T("=============== Testing read_short() / write_short() ==================="));
+	SystemLog.Printf(stdout,
+	                 _T("=============== Testing read_short() / write_short() ==================="));
 	/* Output some sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
@@ -1035,7 +1035,7 @@ void Test_read_short (void) {
 	ASSERT(write_short(pFileHandle, -1) == TRUE);
 	ASSERT(write_short(pFileHandle, SHRT_MAX) == TRUE);
 	ASSERT(write_short(pFileHandle, SHRT_MIN) == TRUE);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Input the sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
@@ -1056,7 +1056,7 @@ void Test_read_short (void) {
 #if !defined(__BCPLUSPLUS__)
 	ASSERT(write_short(pFileHandle, 0) == FALSE);
 #endif
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -1073,12 +1073,12 @@ void Test_read_short (void) {
  *  2. Test error conditions
  *
  *=========================================================================*/
-void Test_read_motlong (void) {
+void Test_read_motlong(void) {
 	DEFINE_FUNCTION("Test_read_motlong()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	long TestValue;
-	SystemLog.Printf (stdout,
-	                  _T("=============== Testing read_motlong() / write_motlong() ==================="));
+	SystemLog.Printf(stdout,
+	                 _T("=============== Testing read_motlong() / write_motlong() ==================="));
 	/* Output some sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("wb"));
 	ASSERT(pFileHandle != NULL);
@@ -1088,7 +1088,7 @@ void Test_read_motlong (void) {
 	ASSERT(write_motlong(pFileHandle, -1) == TRUE);
 	ASSERT(write_motlong(pFileHandle, LONG_MAX) == TRUE);
 	ASSERT(write_motlong(pFileHandle, LONG_MIN) == TRUE);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Input the sample integers */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
@@ -1109,7 +1109,7 @@ void Test_read_motlong (void) {
 #if !defined(__BCPLUSPLUS__)
 	ASSERT(write_motlong(pFileHandle, 0) == FALSE);
 #endif
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -1129,10 +1129,10 @@ void Test_read_motlong (void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_RemoveExtension (void) {
+void Test_RemoveExtension(void) {
 	DEFINE_FUNCTION("Test_RemoveExtension()");
 	TCHAR TestString[101];
-	SystemLog.Printf (stdout, _T("=============== Testing RemoveExtension() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing RemoveExtension() ==================="));
 	/* Test several typical cases */
 	TSTRCPY(TestString, _T("filename.ext"));
 	RemoveExtension(TestString);
@@ -1175,16 +1175,16 @@ void Test_RemoveExtension (void) {
  *  - Similarly tests with a randomly sized text file
  *
  *=========================================================================*/
-void Test_RWFile (const size_t NumTests) {
+void Test_RWFile(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_RWFile()");
 	size_t LoopCounter;
 	size_t FileSize;
 	size_t BytesRead;
-	byte* pInputBuffer;
-	byte* pBuffer;
+	byte *pInputBuffer;
+	byte *pBuffer;
 	size_t BufferSize = TEST_RWFILE_MAXFILESIZE / 2;
-	SystemLog.Printf (stdout,
-	                  _T("=============== Repeated Testing of ReadFile() / WriteFile() ==================="));
+	SystemLog.Printf(stdout,
+	                 _T("=============== Repeated Testing of ReadFile() / WriteFile() ==================="));
 	CreateArrayPointer(pBuffer, byte, BufferSize);
 
 	for (LoopCounter = 0; LoopCounter < NumTests; LoopCounter++) {
@@ -1196,7 +1196,10 @@ void Test_RWFile (const size_t NumTests) {
 		ASSERT(BytesRead == FileSize);
 		ASSERT(WriteFile(pInputBuffer, BytesRead, _T("c:\\temp\\test2.dat"), FILE_BINARY) == TRUE);
 		ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")) == TRUE);
-		ASSERT(ReadFileBuffer(&pBuffer, BytesRead, _T("c:\\temp\\test1.dat"), BufferSize,
+		ASSERT(ReadFileBuffer(&pBuffer,
+		                      BytesRead,
+		                      _T("c:\\temp\\test1.dat"),
+		                      BufferSize,
 		                      FILE_BINARY) == TRUE);
 		ASSERT(BytesRead <= FileSize);
 		ASSERT(BytesRead <= BufferSize);
@@ -1211,7 +1214,10 @@ void Test_RWFile (const size_t NumTests) {
 		ASSERT(WriteFile(pInputBuffer, BytesRead, _T("c:\\temp\\test2.dat"), FILE_TEXT) == TRUE);
 		ASSERT(Test_CompareFiles(_T("c:\\temp\\test1.dat"), _T("c:\\temp\\test2.dat")) == TRUE);
 ///*
-		ASSERT(ReadFileBuffer(&pBuffer, BytesRead, _T("c:\\temp\\test1.dat"), BufferSize,
+		ASSERT(ReadFileBuffer(&pBuffer,
+		                      BytesRead,
+		                      _T("c:\\temp\\test1.dat"),
+		                      BufferSize,
 		                      FILE_TEXT) == TRUE);
 		ASSERT(pBuffer != NULL);
 		ASSERT(BytesRead <= FileSize);
@@ -1234,18 +1240,18 @@ void Test_RWFile (const size_t NumTests) {
  * Repeatedly tests the read/write int/short/long/motlong type functions.
  *
  *=========================================================================*/
-void Test_RWNumbers (const size_t NumTests) {
+void Test_RWNumbers(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_RWNumbers()");
 	size_t LoopCounter;
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	long *pLongArray;
 	long InputLong;
 	short *pShortArray;
 	short InputShort;
 	int *pIntArray;
 	int InputInt;
-	SystemLog.Printf (stdout,
-	                  _T("=============== Repeated Testing of the read/write integer functions ==============="));
+	SystemLog.Printf(stdout,
+	                 _T("=============== Repeated Testing of the read/write integer functions ==============="));
 	/* Create number arrays */
 	CreateArrayPointer(pLongArray, long, NumTests);
 	CreateArrayPointer(pIntArray, int, NumTests);
@@ -1268,7 +1274,7 @@ void Test_RWNumbers (const size_t NumTests) {
 		ASSERT(write_short(pFileHandle, pShortArray[LoopCounter]) == TRUE);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Input the random numbers, ensure success */
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
@@ -1288,7 +1294,7 @@ void Test_RWNumbers (const size_t NumTests) {
 		ASSERT(pShortArray[LoopCounter] == InputShort);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Delete allocated arrays */
 	DestroyArrayPointer(pLongArray);
 	DestroyArrayPointer(pIntArray);
@@ -1309,10 +1315,10 @@ void Test_RWNumbers (const size_t NumTests) {
  *  2. Test empty string
  *
  *=========================================================================*/
-void Test_TerminatePath (void) {
+void Test_TerminatePath(void) {
 	DEFINE_FUNCTION("Test_TerminatePath()");
 	TCHAR TestString[101];
-	SystemLog.Printf (stdout, _T("=============== Testing TerminatePath() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing TerminatePath() ==================="));
 	/* Test typical path inputs */
 	TSTRCPY(TestString, _T("c:\\temp\\"));
 	TerminatePath(TestString);
@@ -1341,19 +1347,19 @@ void Test_TerminatePath (void) {
  *  3. Test outputting an invalid file
  *
  *=========================================================================*/
-void Test_WriteFile (void) {
+void Test_WriteFile(void) {
 	DEFINE_FUNCTION("Test_WriteFile()");
 	byte TestString[101];
 	byte InputString[101];
-	FILE* pFileHandle;
-	SystemLog.Printf (stdout, _T("=============== Testing WriteFile() ==================="));
+	FILE *pFileHandle;
+	SystemLog.Printf(stdout, _T("=============== Testing WriteFile() ==================="));
 	/* Output a test file */
 	memcpy(TestString, "0123456789", 11);
 	ASSERT(WriteFile((byte *)TestString, 11, _T("c:\\temp\\test1.dat")) == TRUE);
 	pFileHandle = TFOPEN(_T("c:\\temp\\test1.dat"), _T("rb"));
 	ASSERT(pFileHandle != NULL);
 	ASSERT(fread((byte *)InputString, 1, 11, pFileHandle) == 11);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	ASSERT(memcmp(TestString, InputString, 11) == 0);
 	/* Output a zero-sized file */
 	ASSERT(WriteFile(TestString, 0, _T("c:\\temp\\test1.dat")) == TRUE);
@@ -1382,10 +1388,10 @@ void Test_WriteFile (void) {
  *  8. Test *? combination wildcards
  *
  *=========================================================================*/
-void Test_WildcardCompare (void) {
+void Test_WildcardCompare(void) {
 	DEFINE_FUNCTION("Test_WildcardCompare()");
 	bool Result;
-	SystemLog.Printf (stdout, _T("=============== Testing WildcardCompare() ==================="));
+	SystemLog.Printf(stdout, _T("=============== Testing WildcardCompare() ==================="));
 	/* Test exact match with/without case differences */
 	Result = WildcardCompare(_T("test.txt"), _T("test.txt"));
 	ASSERT(Result);
@@ -1507,7 +1513,7 @@ void Test_WildcardCompare (void) {
  *  21.Test the WriteFile() function
  *
  *=========================================================================*/
-void Test_DL_File (void) {
+void Test_DL_File(void) {
 	//DEFINE_FUNCTION("Test_DL_File()");
 	/* Ensure randomly generated numbers */
 	//srand(clock());

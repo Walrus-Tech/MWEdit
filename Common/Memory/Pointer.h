@@ -48,7 +48,7 @@ template <class TPtr> class CSPointer {
   public:
 
 	/* Class Constructor */
-	CSPointer(TPtr* pNewPtr) : m_pPointer(pNewPtr) {
+	CSPointer(TPtr *pNewPtr) : m_pPointer(pNewPtr) {
 		AutoDelete = TRUE;
 	}
 
@@ -62,7 +62,7 @@ template <class TPtr> class CSPointer {
 		Destroy();
 	}
 
-	virtual void Destroy (void) {
+	virtual void Destroy(void) {
 		if (AutoDelete) {
 			DestroyPointer(m_pPointer);
 		} else {
@@ -71,14 +71,14 @@ template <class TPtr> class CSPointer {
 	}
 
 	/* Copy the object pointer, but don't delete it */
-	CSPointer &Clone (TPtr *pSourcePtr) {
+	CSPointer &Clone(TPtr *pSourcePtr) {
 		Destroy();
 		m_pPointer = pSourcePtr;
 		AutoDelete = FALSE;
 		return (*this);
 	}
 
-	CSPointer &Clone (TPtr &Source) {
+	CSPointer &Clone(TPtr &Source) {
 		Destroy();
 		m_pPointer = &Source;
 		AutoDelete = FALSE;
@@ -86,27 +86,27 @@ template <class TPtr> class CSPointer {
 	}
 
 	/* Access the class object pointer */
-	virtual TPtr *Get (void) {
+	virtual TPtr *Get(void) {
 		return (m_pPointer);
 	}
 
-	operator TPtr* (void) {
+	operator TPtr *(void) {
 		return (m_pPointer);
 	}
 
-	TPtr &operator* (void) {
+	TPtr &operator *(void) {
 		return (*m_pPointer);
 	}
 
-	TPtr* operator-> (void) {
+	TPtr *operator ->(void) {
 		return (m_pPointer);
 	}
 
-	CSPointer &operator= (CSPointer<TPtr> &pSourcePtr) {
-		return Clone((TPtr *) pSourcePtr);
+	CSPointer &operator =(CSPointer<TPtr> &pSourcePtr) {
+		return Clone((TPtr *)pSourcePtr);
 	}
 
-	CSPointer &operator= ( TPtr * pSourcePtr) {
+	CSPointer &operator =(TPtr *pSourcePtr) {
 		Destroy();
 		m_pPointer = pSourcePtr;
 		AutoDelete = TRUE;

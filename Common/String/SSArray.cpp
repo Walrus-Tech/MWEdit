@@ -28,7 +28,7 @@ DEFINE_FILE("SSArray.cpp");
  * Class CSStringArray Constructor
  *
  *=========================================================================*/
-CSStringArray::CSStringArray () {
+CSStringArray::CSStringArray() {
 	//DEFINE_FUNCTION("CSStringArray::CSStringArray()");
 }
 
@@ -42,7 +42,7 @@ CSStringArray::CSStringArray () {
  * Class CSStringArray Method - void Destroy (void);
  *
  *=========================================================================*/
-void CSStringArray::Destroy (void) {
+void CSStringArray::Destroy(void) {
 	//DEFINE_FUNCTION("CSStringArray::Destroy()");
 	DeleteStrings();
 }
@@ -60,9 +60,9 @@ void CSStringArray::Destroy (void) {
  * NULL on any error.
  *
  *=========================================================================*/
-CSString *CSStringArray::Add (const TCHAR* pString) {
+CSString *CSStringArray::Add(const TCHAR *pString) {
 	DEFINE_FUNCTION("CSStringArray::Add()");
-	CSString* pNewString;
+	CSString *pNewString;
 	/* Allocate and initialize the new object */
 	CreateClassPointer(pNewString, CSString, pString);
 	m_Strings.Add(pNewString);
@@ -81,7 +81,7 @@ CSString *CSStringArray::Add (const TCHAR* pString) {
  * Attempts to delete the given element from the array. Ignores invalid input.
  *
  *=========================================================================*/
-void CSStringArray::DeleteElement (CSString* pString) {
+void CSStringArray::DeleteElement(CSString *pString) {
 	int Index;
 	/* Attempt to find the element in the array */
 	Index = m_Strings.FindElement(pString);
@@ -105,9 +105,9 @@ void CSStringArray::DeleteElement (CSString* pString) {
  * Deletes an elements from its array index. Ignores invalid input.
  *
  *=========================================================================*/
-void CSStringArray::DeleteElement (const int Index) {
+void CSStringArray::DeleteElement(const int Index) {
 	DEFINE_FUNCTION("CSStringArray::DeleteElement()");
-	CSString* pString;
+	CSString *pString;
 	/* Get string element and ensure it is valid */
 	pString = m_Strings.GetAt(Index);
 
@@ -133,9 +133,9 @@ void CSStringArray::DeleteElement (const int Index) {
  * Protected class method to delete all strings in the array.
  *
  *=========================================================================*/
-void CSStringArray::DeleteStrings (void) {
+void CSStringArray::DeleteStrings(void) {
 	DEFINE_FUNCTION("CSStringArray::DeleteStrings()");
-	CSString* pString;
+	CSString *pString;
 	int Index;
 
 	for (Index = 0; Index < m_Strings.GetNumElements(); Index++) {

@@ -53,7 +53,7 @@
 SYS_MSDOS(typedef void interrupt (*PDOS_TIMER_INT)(...));
 
 /* The task callback function type */
-typedef int (*PTASK_FUNC) (const ulong LastCalled, long UserData);
+typedef int (*PTASK_FUNC)(const ulong LastCalled, long UserData);
 
 /* Task handle used to identify tasks */
 typedef int HTIMERTASK;
@@ -105,7 +105,7 @@ class CTaskTimer {
   protected:
 
 	/* Find a task array index with the given handle */
-	int GetTaskIndex (const HTIMERTASK hTask) const;
+	int GetTaskIndex(const HTIMERTASK hTask) const;
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -117,37 +117,37 @@ class CTaskTimer {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Add a new task to the list */
-	virtual boolean AddTask (HTIMERTASK& hTask, const ulong Rate, PTASK_FUNC pFunc,
-	                         const long UserData);
+	virtual boolean AddTask(HTIMERTASK &hTask, const ulong Rate, PTASK_FUNC pFunc,
+	                        const long UserData);
 
 	/* Main task function */
-	virtual boolean DoTasks (const ulong Count);
+	virtual boolean DoTasks(const ulong Count);
 
 	/* Get class members */
-	virtual int GetNumTasks (void) const;
-	virtual boolean IsActive (void) const;
-	virtual ulong GetTaskRate (const HTIMERTASK hTask) const;
-	virtual ulong GetLastCalled (const HTIMERTASK hTask) const;
-	virtual boolean IsActive (const HTIMERTASK hTask) const;
-	virtual boolean IsValidTask (const HTIMERTASK hTask) const;
-	virtual boolean IsValidTaskIndex (const int iTask) const;
-	virtual boolean IsInitialized (void) const;
+	virtual int GetNumTasks(void) const;
+	virtual boolean IsActive(void) const;
+	virtual ulong GetTaskRate(const HTIMERTASK hTask) const;
+	virtual ulong GetLastCalled(const HTIMERTASK hTask) const;
+	virtual boolean IsActive(const HTIMERTASK hTask) const;
+	virtual boolean IsValidTask(const HTIMERTASK hTask) const;
+	virtual boolean IsValidTaskIndex(const int iTask) const;
+	virtual boolean IsInitialized(void) const;
 
 	/* Attempt to intialize the task timer */
-	virtual boolean Initialize (void);
+	virtual boolean Initialize(void);
 
 	/* Attempt to remove a task from the task array */
-	virtual boolean RemoveTask (const HTIMERTASK hTask);
+	virtual boolean RemoveTask(const HTIMERTASK hTask);
 
 	/* Set class members */
-	virtual void SetActive (const boolean Flag);
-	virtual void SetActive (const HTIMERTASK hTask, const boolean Flag);
-	virtual void SetTaskRate (const HTIMERTASK hTask, const ulong Rate);
-	virtual void SetTaskFunc (const HTIMERTASK hTask, const PTASK_FUNC pFunc);
-	virtual void SetUserData (const HTIMERTASK hTask, const long UserData);
+	virtual void SetActive(const boolean Flag);
+	virtual void SetActive(const HTIMERTASK hTask, const boolean Flag);
+	virtual void SetTaskRate(const HTIMERTASK hTask, const ulong Rate);
+	virtual void SetTaskFunc(const HTIMERTASK hTask, const PTASK_FUNC pFunc);
+	virtual void SetUserData(const HTIMERTASK hTask, const long UserData);
 
 };
 
@@ -163,24 +163,24 @@ class CTaskTimer {
  *=========================================================================*/
 
 /* Get class members */
-inline int CTaskTimer::GetNumTasks (void) const {
+inline int CTaskTimer::GetNumTasks(void) const {
 	return (m_NumTasks);
 }
 
-inline boolean CTaskTimer::IsActive (void) const {
+inline boolean CTaskTimer::IsActive(void) const {
 	return (m_Active);
 }
 
-inline boolean CTaskTimer::IsInitialized (void) const {
+inline boolean CTaskTimer::IsInitialized(void) const {
 	return (m_Initialized);
 }
 
-inline boolean CTaskTimer::IsValidTaskIndex (const int TaskIndex) const {
+inline boolean CTaskTimer::IsValidTaskIndex(const int TaskIndex) const {
 	return ((TaskIndex >= 0 && TaskIndex < m_NumTasks) ? TRUE : FALSE);
 }
 
 /* Set class members */
-inline void CTaskTimer::SetActive (const boolean Flag) {
+inline void CTaskTimer::SetActive(const boolean Flag) {
 	m_Active = Flag;
 }
 

@@ -71,7 +71,7 @@ DEFINE_FILE("DL_File.h");
  * ASSERTs if run under any other system.
  *
  *=======================================================================*/
-bool ChangeDirectory (const TCHAR* pPath) {
+bool ChangeDirectory(const TCHAR *pPath) {
 	DEFINE_FUNCTION("ChangeDirectory()");
 	int Result;
 	/* Make sure the given path is valid */
@@ -100,7 +100,10 @@ bool ChangeDirectory (const TCHAR* pPath) {
 #endif
 
 	if (Result != 0) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno, _T("Directory '%s' is not valid!"), pPath);
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Directory '%s' is not valid!"),
+		                      pPath);
 		return (FALSE);
 	}
 
@@ -124,8 +127,10 @@ bool ChangeDirectory (const TCHAR* pPath) {
  * The function ASSERTs if passed a bad pointer.
  *
  *=========================================================================*/
-TCHAR *ChangeExtension (TCHAR* pDestFilename, const TCHAR* pSourceFilename,
-                        const TCHAR* pNewExtension, const size_t MaxStringLength) {
+TCHAR *ChangeExtension(TCHAR *pDestFilename,
+                       const TCHAR *pSourceFilename,
+                       const TCHAR *pNewExtension,
+                       const size_t MaxStringLength) {
 	DEFINE_FUNCTION("ChangeExtension()");
 	size_t DestLength;
 	/* Ensure valid input */
@@ -160,9 +165,9 @@ TCHAR *ChangeExtension (TCHAR* pDestFilename, const TCHAR* pSourceFilename,
  * TCHARacter is not included. ASSERTs if passed invalid string pointers.
  *
  *=========================================================================*/
-bool CompareExtension (const TCHAR* pFilename, const TCHAR* pExtension) {
+bool CompareExtension(const TCHAR *pFilename, const TCHAR *pExtension) {
 	DEFINE_FUNCTION("CompareExtension()");
-	const TCHAR* pFileExt;
+	const TCHAR *pFileExt;
 	int Result;
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL && pExtension != NULL);
@@ -194,10 +199,10 @@ bool CompareExtension (const TCHAR* pFilename, const TCHAR* pExtension) {
  * Performs a binary compare (case sensitive).
  *
  *=========================================================================*/
-bool CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2) {
+bool CompareFiles(const TCHAR *pFilename1, const TCHAR *pFilename2) {
 	//DEFINE_FUNCTION("CompareFiles()");
-	FILE* pFileHandle1;
-	FILE* pFileHandle2;
+	FILE *pFileHandle1;
+	FILE *pFileHandle2;
 	bool ReturnValue = true;
 
 	/* Ignore invalid input */
@@ -238,8 +243,8 @@ bool CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2) {
 		ReturnValue = false;
 	}
 
-	fclose (pFileHandle1);
-	fclose (pFileHandle2);
+	fclose(pFileHandle1);
+	fclose(pFileHandle2);
 	return (ReturnValue);
 }
 
@@ -258,11 +263,11 @@ bool CompareFiles (const TCHAR* pFilename1, const TCHAR* pFilename2) {
  * to a dynamic because of problems with 16-bit compiles under Borland.
  *
  *=======================================================================*/
-bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile) {
+bool CopyOneFile(const TCHAR *pInputFile, const TCHAR *pOutputFile) {
 	DEFINE_FUNCTION("CopyOneFile()");
-	FILE* pInputHandle = NULL;
-	FILE* pOutputHandle = NULL;
-	byte* Buffer;
+	FILE *pInputHandle = NULL;
+	FILE *pOutputHandle = NULL;
+	byte *Buffer;
 	size_t ReadSize;
 	size_t WriteSize;
 	bool ReturnValue = TRUE;
@@ -284,7 +289,7 @@ bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile) {
 	}
 
 	/* Allocate the transfer buffer */
-	Buffer = (byte *) CreateString(COPYFILE_BUFFERSIZE);
+	Buffer = (byte *)CreateString(COPYFILE_BUFFERSIZE);
 
 	/* Read and write file in sections until finished */
 	do {
@@ -294,8 +299,11 @@ bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile) {
 
 		/* Ensure both the input and output was successful */
 		if (WriteSize != ReadSize || ferror(pInputHandle) || ferror(pOutputHandle)) {
-			ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno, _T("Failed to copy file '%s' to '%s'!"),
-			                      pInputFile, pOutputFile);
+			ErrorHandler.AddError(ERR_SYSTEM,
+			                      (errcode_t)errno,
+			                      _T("Failed to copy file '%s' to '%s'!"),
+			                      pInputFile,
+			                      pOutputFile);
 			ReturnValue = FALSE;
 			break;
 		}
@@ -303,8 +311,8 @@ bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile) {
 
 	/* Close files */
 	DestroyPointer(Buffer);
-	fclose (pInputHandle);
-	fclose (pOutputHandle);
+	fclose(pInputHandle);
+	fclose(pOutputHandle);
 	return (ReturnValue);
 }
 
@@ -323,7 +331,7 @@ bool CopyOneFile (const TCHAR* pInputFile, const TCHAR* pOutputFile) {
  * Returns a pointer to the new string.
  *
  *=======================================================================*/
-TCHAR *CreatePath (TCHAR* pNewPath, const TCHAR* pString, const size_t MaxStringLength) {
+TCHAR *CreatePath(TCHAR *pNewPath, const TCHAR *pString, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("CreatePath()");
 	/* Ensure all input is valid */
 	ASSERT(pNewPath != NULL && pString != NULL);
@@ -350,7 +358,7 @@ TCHAR *CreatePath (TCHAR* pNewPath, const TCHAR* pString, const size_t MaxString
  * Delete a single file, returns false on any error.
  *
  *=========================================================================*/
-bool DelOneFile (const TCHAR* pFilename) {
+bool DelOneFile(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("DelOneFile()");
 #if defined(_WIN32)
 	BOOL Result;
@@ -382,7 +390,7 @@ bool DelOneFile (const TCHAR* pFilename) {
  * a pointer to the file string.
  *
  *=======================================================================*/
-TCHAR *ExtractFilename (TCHAR* pFilename, const TCHAR* pPath, const size_t MaxStringLength) {
+TCHAR *ExtractFilename(TCHAR *pFilename, const TCHAR *pPath, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("ExtractFilename()");
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL && pPath != NULL);
@@ -419,19 +427,19 @@ TCHAR *ExtractFilename (TCHAR* pFilename, const TCHAR* pPath, const size_t MaxSt
  * Both the drive and filename are optional.
  *
  *=======================================================================*/
-TCHAR *ExtractPath (TCHAR* pPath, const TCHAR* pString, const size_t MaxStringLength) {
+TCHAR *ExtractPath(TCHAR *pPath, const TCHAR *pString, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("ExtractPath()");
-	TCHAR* pFilePtr;
+	TCHAR *pFilePtr;
 	/* Ensure all the input is valid */
 	ASSERT(pPath != NULL && pString != NULL);
 	/* Copy the string into the new path */
-	strnncpy (pPath, pString, MaxStringLength);
+	strnncpy(pPath, pString, MaxStringLength);
 	/* Remove any filename from the new path string, if any */
 	pFilePtr = (TCHAR *) FindFilename(pPath);
 	*pFilePtr = NULL_CHAR;
 
 	/* Ensure the path terminates properly, if possible */
-	if ((size_t) TSTRLEN(pPath) < MaxStringLength) {
+	if ((size_t)TSTRLEN(pPath) < MaxStringLength) {
 		TerminatePath(pPath);
 	}
 
@@ -451,9 +459,9 @@ TCHAR *ExtractPath (TCHAR* pPath, const TCHAR* pString, const size_t MaxStringLe
  * reading.  ASSERTs if passed a bad pointer.
  *
  *=======================================================================*/
-bool FileExists (const TCHAR* pFilename) {
+bool FileExists(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("FileExists()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
 
@@ -490,7 +498,7 @@ bool FileExists (const TCHAR* pFilename) {
  * character (LocalePathTCHAR) or a ':'.
  *
  *=========================================================================*/
-const TCHAR *FindExtension (const TCHAR* pFilename) {
+const TCHAR *FindExtension(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("FindExtension()");
 	size_t StringIndex;
 	/* Ensure valid input */
@@ -529,7 +537,7 @@ const TCHAR *FindExtension (const TCHAR* pFilename) {
  * LocalePathChar and the drive character ':'.
  *
  *=======================================================================*/
-const TCHAR *FindFilename (const TCHAR* pPath) {
+const TCHAR *FindFilename(const TCHAR *pPath) {
 	DEFINE_FUNCTION("FindFilename()");
 	size_t StringIndex;
 	/* Ensure the input is valid */
@@ -563,7 +571,7 @@ const TCHAR *FindFilename (const TCHAR* pPath) {
  * Up to MaxLength characters will be copied into the string.
  *
  *=========================================================================*/
-TCHAR *GetDirString (TCHAR* pString, const int MaxLength) {
+TCHAR *GetDirString(TCHAR *pString, const int MaxLength) {
 	DEFINE_FUNCTION("GetDirString()");
 	/* Ensure valid input */
 	ASSERT(pString != NULL && MaxLength > 0);
@@ -589,7 +597,7 @@ TCHAR *GetDirString (TCHAR* pString, const int MaxLength) {
  * sets the appropiate error code. ASSERTs if given a bad file string pointer.
  *
  *=========================================================================*/
-long GetFileSize (const TCHAR* pFilename) {
+long GetFileSize(const TCHAR *pFilename) {
 	//DEFINE_FUNCTION("GetFileSize(TCHAR*)");
 	long FileSize;
 	bool Result;
@@ -616,7 +624,7 @@ long GetFileSize (const TCHAR* pFilename) {
  * The current file position remains unchanged.
  *
  *=========================================================================*/
-long GetFileSize (FILE* pFileHandle) {
+long GetFileSize(FILE *pFileHandle) {
 	//DEFINE_FUNCTION("GetFileSize(FILE*)");
 	long FileSize;
 	bool Result;
@@ -643,9 +651,9 @@ long GetFileSize (FILE* pFileHandle) {
  * ASSERTs if given an invalid file string pointer.
  *
  *=========================================================================*/
-bool GetFileSize (long &FileSize, const TCHAR* pFilename) {
+bool GetFileSize(long &FileSize, const TCHAR *pFilename) {
 	DEFINE_FUNCTION("GetFileSize(long&, TCHAR*)");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	bool Result;
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
@@ -659,12 +667,15 @@ bool GetFileSize (long &FileSize, const TCHAR* pFilename) {
 	}
 
 	if (pFileHandle == NULL) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno, _T("Could not open the file '%s'!"), pFilename);
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Could not open the file '%s'!"),
+		                      pFilename);
 		return (FALSE);
 	}
 
 	Result = GetFileSize(FileSize, pFileHandle);
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	return (Result);
 }
 
@@ -684,7 +695,7 @@ bool GetFileSize (long &FileSize, const TCHAR* pFilename) {
  * may not report the file size correctly.
  *
  *=========================================================================*/
-bool GetFileSize (long &FileSize, FILE* pFileHandle) {
+bool GetFileSize(long &FileSize, FILE *pFileHandle) {
 	DEFINE_FUNCTION("GetFileSize(long&, FILE*)");
 	long PrevFilePos;
 	int Result;
@@ -694,7 +705,8 @@ bool GetFileSize (long &FileSize, FILE* pFileHandle) {
 	PrevFilePos = ftell(pFileHandle);
 
 	if (PrevFilePos < 0) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
 		                      _T("Could not retrieve current position in file!"));
 		return (FALSE);
 	}
@@ -703,7 +715,8 @@ bool GetFileSize (long &FileSize, FILE* pFileHandle) {
 	Result = fseek(pFileHandle, 0, SEEK_END);
 
 	if (Result < 0) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
 		                      _T("Could not move file position to end of file!"));
 		return (FALSE);
 	}
@@ -712,7 +725,8 @@ bool GetFileSize (long &FileSize, FILE* pFileHandle) {
 	FileSize = ftell(pFileHandle);
 
 	if (FileSize < 0) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
 		                      _T("Could not retrieve current position in file!"));
 		return (FALSE);
 	}
@@ -720,7 +734,8 @@ bool GetFileSize (long &FileSize, FILE* pFileHandle) {
 	Result = fseek(pFileHandle, PrevFilePos, SEEK_SET);
 
 	if (Result < 0) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
 		                      _T("Could not move file position to previous location!"));
 		return (FALSE);
 	}
@@ -741,7 +756,7 @@ bool GetFileSize (long &FileSize, FILE* pFileHandle) {
  * an invalid string pointer.
  *
  *=========================================================================*/
-bool HasExtension (const TCHAR* pFilename) {
+bool HasExtension(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("HasExtension()");
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
@@ -767,7 +782,7 @@ bool HasExtension (const TCHAR* pFilename) {
  * drive TCHARacter ':'.
  *
  *=========================================================================*/
-bool HasPath (const TCHAR* pFilename) {
+bool HasPath(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("HasPath()");
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
@@ -798,10 +813,10 @@ bool HasPath (const TCHAR* pFilename) {
  * invalid.  Sets the appropiate error on failure.
  *
  *=======================================================================*/
-bool IsDirectory(const TCHAR* pPath) {
+bool IsDirectory(const TCHAR *pPath) {
 	DEFINE_FUNCTION("IsDirectory()");
 	TCHAR InitialPath[_MAX_PATH + 1];
-	TCHAR* pResult;
+	TCHAR *pResult;
 	bool Result;
 	/* Ensure valid input */
 	ASSERT(pPath != NULL);
@@ -813,7 +828,8 @@ bool IsDirectory(const TCHAR* pPath) {
 #endif
 
 	if (pResult == NULL) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
 		                      _T("Failed to retrieve the current directory!"));
 		return (FALSE);
 	}
@@ -843,9 +859,9 @@ bool IsDirectory(const TCHAR* pPath) {
  * input string is invalid.
  *
  *======================================================================*/
-bool IsFileWriteable (const TCHAR* pFilename) {
+bool IsFileWriteable(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("IsFileWriteable()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
 
@@ -879,7 +895,7 @@ bool IsFileWriteable (const TCHAR* pFilename) {
  * TCHARacters in it.  ASSERTs if the given string is invalid.
  *
  *=======================================================================*/
-bool IsWildCard (const TCHAR* pFilename) {
+bool IsWildCard(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("IsWildCard()");
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
@@ -910,20 +926,20 @@ bool IsWildCard (const TCHAR* pFilename) {
  * string buffer.
  *
  *=========================================================================*/
-TCHAR *MakeSpaceLabel (TCHAR* Buffer, const int BufferSize, const double Value) {
+TCHAR *MakeSpaceLabel(TCHAR *Buffer, const int BufferSize, const double Value) {
 	//DEFINE_FUNCTION("MakeSpaceLabel()");
 	if ((int)Value == 0) {
-		snprintf (Buffer, BufferSize, _T("0 b"));
+		snprintf(Buffer, BufferSize, _T("0 b"));
 	} else if (Value < 0.0) {
-		snprintf (Buffer, BufferSize, _T("? b"));
+		snprintf(Buffer, BufferSize, _T("? b"));
 	} else if (Value <= 1500.0) {
-		snprintf (Buffer, BufferSize, _T("%d b"), (int)Value);
+		snprintf(Buffer, BufferSize, _T("%d b"), (int)Value);
 	} else if (Value <= 1500000.0) {
-		snprintf (Buffer, BufferSize, _T("%.1f kb"), Value / 1000.0);
+		snprintf(Buffer, BufferSize, _T("%.1f kb"), Value / 1000.0);
 	} else if (Value <= 1500000000.0) {
-		snprintf (Buffer, BufferSize, _T("%.1f Mb"), Value / 1000000.0);
+		snprintf(Buffer, BufferSize, _T("%.1f Mb"), Value / 1000000.0);
 	} else {
-		snprintf (Buffer, BufferSize, _T("%.1f Gb"), Value / 1000000000.0);
+		snprintf(Buffer, BufferSize, _T("%.1f Gb"), Value / 1000000000.0);
 	}
 
 	return (Buffer);
@@ -942,11 +958,11 @@ TCHAR *MakeSpaceLabel (TCHAR* Buffer, const int BufferSize, const double Value) 
  * Creates multiple levels of paths. Returns false on any error.
  *
  *=========================================================================*/
-bool MakePathEx (const TCHAR* pPath) {
+bool MakePathEx(const TCHAR *pPath) {
 	TCHAR TempPath[_MAX_PATH + 1];
 	TCHAR TempDrive[8] = _T("c:\\");
 	TCHAR InitialPath[_MAX_PATH + 1];
-	TCHAR* pParse;
+	TCHAR *pParse;
 	bool Result;
 	int iResult;
 
@@ -957,7 +973,7 @@ bool MakePathEx (const TCHAR* pPath) {
 
 	strnncpy(TempPath, pPath, _MAX_PATH);
 	/* Save the initial directory */
-	GetDirString (InitialPath, _MAX_PATH);
+	GetDirString(InitialPath, _MAX_PATH);
 	pParse = TSTRTOK(TempPath, _T("\\"));
 
 	while (pParse != NULL && *pParse != NULL_CHAR) {
@@ -974,7 +990,9 @@ bool MakePathEx (const TCHAR* pPath) {
 			iResult = _tmkdir(pParse);
 
 			if (iResult < 0) {
-				ErrorHandler.AddError(ERR_OPENFILE, _T("Failed to create the directory '%s'!"), pParse);
+				ErrorHandler.AddError(ERR_OPENFILE,
+				                      _T("Failed to create the directory '%s'!"),
+				                      pParse);
 				return (false);
 			}
 
@@ -1007,7 +1025,7 @@ bool MakePathEx (const TCHAR* pPath) {
  * ASSERTs if the filename or mode string is invalid.
  *
  *=========================================================================*/
-const TCHAR *l_GetFileMode (const TCHAR* pMode) {
+const TCHAR *l_GetFileMode(const TCHAR *pMode) {
 	switch (pMode[0]) {
 		case 'r':
 			return _T("reading");
@@ -1023,9 +1041,9 @@ const TCHAR *l_GetFileMode (const TCHAR* pMode) {
 	}
 }
 
-FILE *OpenFile (const TCHAR* pFilename, const TCHAR* pMode) {
+FILE *OpenFile (const TCHAR *pFilename, const TCHAR *pMode) {
 	DEFINE_FUNCTION("OpenFile(TCHAR*, TCHAR*)");
-	FILE* pFileHandle = NULL;
+	FILE *pFileHandle = NULL;
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL && pMode != NULL);
 
@@ -1036,10 +1054,13 @@ FILE *OpenFile (const TCHAR* pFilename, const TCHAR* pMode) {
 
 	/* Check for error conditions and output status */
 	if (pFileHandle == NULL) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Failed to open the file '%s' (mode was '%s')!"), pFilename, l_GetFileMode(pMode));
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Failed to open the file '%s' (mode was '%s')!"),
+		                      pFilename,
+		                      l_GetFileMode(pMode));
 	} else {
-		SystemLog.Printf (_T("Opened file '%s' in mode '%s'..."), pFilename, l_GetFileMode(pMode));
+		SystemLog.Printf(_T("Opened file '%s' in mode '%s'..."), pFilename, l_GetFileMode(pMode));
 	}
 
 	return (pFileHandle);
@@ -1059,7 +1080,7 @@ FILE *OpenFile (const TCHAR* pFilename, const TCHAR* pMode) {
  * string pointer is invalid.
  *
  *=========================================================================*/
-bool OpenFile (FILE** ppFileHandle, const TCHAR* pFilename, const TCHAR* pMode) {
+bool OpenFile(FILE **ppFileHandle, const TCHAR *pFilename, const TCHAR *pMode) {
 	DEFINE_FUNCTION("OpenFile(FILE**, TCHAR*, TCHAR*)");
 	/* Ensure valid input */
 	ASSERT(ppFileHandle != NULL);
@@ -1092,9 +1113,9 @@ bool OpenFile (FILE** ppFileHandle, const TCHAR* pFilename, const TCHAR* pMode) 
  * on some systems, the two modes are identical.
  *
  *=========================================================================*/
-bool ReadFile (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename, const bool TextMode) {
+bool ReadFile(byte **ppBuffer, size_t &BytesRead, const TCHAR *pFilename, const bool TextMode) {
 	DEFINE_FUNCTION("ReadFile()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	long FileSize;
 	size_t BufferSize;
 	bool Result;
@@ -1119,9 +1140,10 @@ bool ReadFile (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename, const
 		ReturnValue = FALSE;
 	}
 	/* For systems with long/int having different bit sizes */
-	else if (FileSize != (long) BufferSize) {
+	else if (FileSize != (long)BufferSize) {
 		ErrorHandler.AddError(ERR_MEM,
-		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"), pFilename);
+		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"),
+		                      pFilename);
 		ReturnValue = FALSE;
 	}
 	/* Allocate input buffer and read data from file */
@@ -1132,14 +1154,18 @@ bool ReadFile (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename, const
 
 		/* Ensure the input was entirely successfull */
 		if (ferror(pFileHandle)) {
-			ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-			                      _T("Could not read the entire file '%s' (%u of %u bytes read)!"), pFilename, BytesRead, BufferSize);
+			ErrorHandler.AddError(ERR_SYSTEM,
+			                      (errcode_t)errno,
+			                      _T("Could not read the entire file '%s' (%u of %u bytes read)!"),
+			                      pFilename,
+			                      BytesRead,
+			                      BufferSize);
 			DestroyPointer(*ppBuffer);
 			ReturnValue = FALSE;
 		}
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	return (ReturnValue);
 }
 
@@ -1157,11 +1183,14 @@ bool ReadFile (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename, const
  * File is read in BINARY mode.
  *
  *=========================================================================*/
-bool ReadFileCB (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
-                 READFILE_CALLBACK CallBackFunc, void *pUserData) {
+bool ReadFileCB(byte **ppBuffer,
+                size_t &BytesRead,
+                const TCHAR *pFilename,
+                READFILE_CALLBACK CallBackFunc,
+                void *pUserData) {
 	DEFINE_FUNCTION("ReadFileCB()");
-	FILE* pFileHandle;
-	byte* pCurrentPos;
+	FILE *pFileHandle;
+	byte *pCurrentPos;
 	long FileSize;
 	long TotalBytes;
 	size_t BufferSize;
@@ -1181,19 +1210,20 @@ bool ReadFileCB (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
 
 	/* Attempt to get the file size in bytes */
 	Result = GetFileSize(FileSize, pFileHandle);
-	BufferSize = (size_t) FileSize;
+	BufferSize = (size_t)FileSize;
 
 	/* If an error occured getting the file size, do nothing */
 	if (!Result) {
-		fclose (pFileHandle);
+		fclose(pFileHandle);
 		return (false);
 	}
 
 	/* For systems with long/int having different bit sizes */
 	if (FileSize != (long) BufferSize) {
 		ErrorHandler.AddError(ERR_MEM,
-		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"), pFilename);
-		fclose (pFileHandle);
+		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"),
+		                      pFilename);
+		fclose(pFileHandle);
 		return (false);
 	}
 
@@ -1218,7 +1248,8 @@ bool ReadFileCB (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
 			CBResult = CallBackFunc(FileSize, TotalBytes, pUserData);
 
 			if (CBResult < 0) {
-				ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
+				ErrorHandler.AddError(ERR_SYSTEM,
+				                      (errcode_t)errno,
 				                      _T("ReadFileCB() callback function returned abort code!"));
 				ReturnValue = FALSE;
 				break;
@@ -1235,14 +1266,18 @@ bool ReadFileCB (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
 
 	/* Ensure the input was entirely successfull */
 	if (ferror(pFileHandle)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Could not read the entire file '%s' (%u of %u bytes read)!"), pFilename, BytesRead, BufferSize);
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Could not read the entire file '%s' (%u of %u bytes read)!"),
+		                      pFilename,
+		                      BytesRead,
+		                      BufferSize);
 		DestroyPointer(*ppBuffer);
 		ReturnValue = FALSE;
 	}
 
 	BytesRead = TotalBytes;
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	return (ReturnValue);
 }
 
@@ -1266,10 +1301,13 @@ bool ReadFileCB (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
  * byte.
  *
  *=========================================================================*/
-bool ReadFileBuffer (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
-                     const size_t MaxInputSize, const bool TextMode) {
+bool ReadFileBuffer(byte **ppBuffer,
+                    size_t &BytesRead,
+                    const TCHAR *pFilename,
+                    const size_t MaxInputSize,
+                    const bool TextMode) {
 	DEFINE_FUNCTION("ReadFileBuffer()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	long FileSize;
 	size_t BufferSize;
 	bool Result;
@@ -1286,16 +1324,17 @@ bool ReadFileBuffer (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
 
 	/* Attempt to get the file size in bytes */
 	Result = GetFileSize(FileSize, pFileHandle);
-	BufferSize = (size_t) FileSize;
+	BufferSize = (size_t)FileSize;
 
 	/* If an error occured getting the file size, do nothing */
 	if (!Result) {
 		ReturnValue = FALSE;
 	}
 	/* For systems with long/int having different bit sizes */
-	else if (FileSize != (long) BufferSize) {
+	else if (FileSize != (long)BufferSize) {
 		ErrorHandler.AddError(ERR_MEM,
-		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"), pFilename);
+		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"),
+		                      pFilename);
 		ReturnValue = FALSE;
 	}
 	/* Read data from file */
@@ -1308,8 +1347,12 @@ bool ReadFileBuffer (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
 
 		/* Ensure the input was entirely successfull */
 		if (ferror(pFileHandle)) {
-			ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-			                      _T("Could not read the file '%s' (%u of %u bytes read)!"), pFilename, BytesRead, BufferSize);
+			ErrorHandler.AddError(ERR_SYSTEM,
+			                      (errcode_t)errno,
+			                      _T("Could not read the file '%s' (%u of %u bytes read)!"),
+			                      pFilename,
+			                      BytesRead,
+			                      BufferSize);
 			ReturnValue = FALSE;
 		}
 
@@ -1323,7 +1366,7 @@ bool ReadFileBuffer (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
 		}
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	return (ReturnValue);
 }
 
@@ -1348,7 +1391,7 @@ bool ReadFileBuffer (byte** ppBuffer, size_t &BytesRead, const TCHAR* pFilename,
  * than 0.
  *
  *=======================================================================*/
-int ReadLine (FILE* pFileHandle, TCHAR* pString, const size_t MaxStringLength) {
+int ReadLine(FILE *pFileHandle, TCHAR *pString, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("ReadLine()");
 	int ReturnValue = READLINE_OK;
 	int InputChar;
@@ -1358,7 +1401,8 @@ int ReadLine (FILE* pFileHandle, TCHAR* pString, const size_t MaxStringLength) {
 
 	/* Check if at the eof already */
 	if (feof(pFileHandle)) {
-		ErrorHandler.AddError(ERR_READFILE, _T("Could not read line, already at the end of the file!"));
+		ErrorHandler.AddError(ERR_READFILE,
+		                      _T("Could not read line, already at the end of the file!"));
 		return (READLINE_ERROR);
 	}
 
@@ -1370,7 +1414,9 @@ int ReadLine (FILE* pFileHandle, TCHAR* pString, const size_t MaxStringLength) {
 		/* Check for EOF or Error conditions */
 		if (InputChar == EOF) {
 			if (!feof(pFileHandle)) {
-				ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno, _T("Failed to read line from file!"));
+				ErrorHandler.AddError(ERR_SYSTEM,
+				                      (errcode_t)errno,
+				                      _T("Failed to read line from file!"));
 				ReturnValue = READLINE_ERROR;
 			} else {
 				ReturnValue = READLINE_EOF;
@@ -1384,12 +1430,13 @@ int ReadLine (FILE* pFileHandle, TCHAR* pString, const size_t MaxStringLength) {
 		}
 		/* Add character to string buffer */
 		else if (pString != NULL) {
-			pString[StringLength] = (TCHAR) InputChar;
+			pString[StringLength] = (TCHAR)InputChar;
 			StringLength++;
 
 			/* Ensure string buffer does not exceed its maximum length */
 			if (StringLength >= MaxStringLength) {
-				ErrorHandler.AddError (ERR_MAXINDEX, _T("ReadLine() - Maximum string length %u reached!"),
+				ErrorHandler.AddError (ERR_MAXINDEX,
+				                       _T("ReadLine() - Maximum string length %u reached!"),
 				                       MaxStringLength);
 				ReturnValue = READLINE_MSL;
 				break;
@@ -1420,7 +1467,7 @@ int ReadLine (FILE* pFileHandle, TCHAR* pString, const size_t MaxStringLength) {
  * in Windows it is 32 bit, etc...  ASSERTs if the input handle is invalid.
  *
  *=======================================================================*/
-bool read_int (FILE* pFileHandle, int &Value) {
+bool read_int(FILE *pFileHandle, int &Value) {
 	DEFINE_FUNCTION("read_int()");
 	size_t InputSize;
 	/* Make sure the file handle is valid */
@@ -1430,8 +1477,11 @@ bool read_int (FILE* pFileHandle, int &Value) {
 
 	/* Check for any read error */
 	if (InputSize != sizeof(int)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error reading binary integer value (read only %u of %u bytes)!"), InputSize, sizeof(int));
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error reading binary integer value (read only %u of %u bytes)!"),
+		                      InputSize,
+		                      sizeof(int));
 		return (FALSE);
 	}
 
@@ -1453,7 +1503,7 @@ bool read_int (FILE* pFileHandle, int &Value) {
  * ASSERTs if the input handle is invalid.
  *
  *=======================================================================*/
-bool read_long (FILE* pFileHandle, long &Value) {
+bool read_long(FILE *pFileHandle, long &Value) {
 	DEFINE_FUNCTION("read_long()");
 	size_t InputSize;
 	/* Ensure valid input */
@@ -1463,8 +1513,11 @@ bool read_long (FILE* pFileHandle, long &Value) {
 
 	/* Ensure the value was correctly read */
 	if (InputSize != sizeof(long)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error reading binary long integer value (read only %u of %u bytes)!"), InputSize, sizeof(long));
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error reading binary long integer value (read only %u of %u bytes)!"),
+		                      InputSize,
+		                      sizeof(long));
 		return (FALSE);
 	}
 
@@ -1486,7 +1539,7 @@ bool read_long (FILE* pFileHandle, long &Value) {
  * ASSERTs if the input handle is invalid.
  *
  *=======================================================================*/
-bool read_short (FILE* pFileHandle, short &Value) {
+bool read_short(FILE *pFileHandle, short &Value) {
 	DEFINE_FUNCTION("read_short()");
 	size_t InputSize;
 	/* Ensure valid input */
@@ -1496,8 +1549,10 @@ bool read_short (FILE* pFileHandle, short &Value) {
 
 	/* Check for any read error */
 	if (InputSize != sizeof(short)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error reading binary short integer value (read only %u of %u bytes)!"), InputSize,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error reading binary short integer value (read only %u of %u bytes)!"),
+		                      InputSize,
 		                      sizeof(short));
 		return (FALSE);
 	}
@@ -1520,7 +1575,7 @@ bool read_short (FILE* pFileHandle, short &Value) {
  * is usually 32 bit but may depend on the platform compiled under.
  *
  *=======================================================================*/
-bool read_motlong (FILE* pFileHandle, long &Value) {
+bool read_motlong(FILE *pFileHandle, long &Value) {
 	DEFINE_FUNCTION("read_motlong()");
 	unsigned char InputData[sizeof(long)];
 	size_t InputSize;
@@ -1531,15 +1586,17 @@ bool read_motlong (FILE* pFileHandle, long &Value) {
 
 	/* Check for any read error */
 	if (InputSize != sizeof(long)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error reading binary motorola long value (read only %u of %u bytes)!"), InputSize,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error reading binary motorola long value (read only %u of %u bytes)!"),
+		                      InputSize,
 		                      sizeof(long));
 		return (FALSE);
 	}
 
 	/* Compute the proper long integer value */
-	Value = (long) (((unsigned long)InputData[3]) + (((unsigned long)InputData[2]) << 8) +
-	                (((unsigned long)InputData[1]) << 16) + (((unsigned long)InputData[0]) << 24));
+	Value = (long)(((unsigned long)InputData[3]) + (((unsigned long)InputData[2]) << 8) +
+	               (((unsigned long)InputData[1]) << 16) + (((unsigned long)InputData[0]) << 24));
 	return (TRUE);
 }
 
@@ -1556,11 +1613,11 @@ bool read_motlong (FILE* pFileHandle, long &Value) {
  * the modified file string.  ASSERTs if passed a bad pointer.
  *
  *=========================================================================*/
-TCHAR *RemoveExtension (TCHAR* pFilename) {
+TCHAR *RemoveExtension(TCHAR *pFilename) {
 	//DEFINE_FUNCTION("RemoveExtension()");
-	TCHAR* pExtPtr;
+	TCHAR *pExtPtr;
 	/* Attempt to find the start of the file extension */
-	pExtPtr = (TCHAR *) FindExtension(pFilename);
+	pExtPtr = (TCHAR *)FindExtension(pFilename);
 
 	/* Terminate the file string at the '.' character */
 	if (pExtPtr != NULL) {
@@ -1585,7 +1642,7 @@ TCHAR *RemoveExtension (TCHAR* pFilename) {
  * to allow an additional TCHARacter to be added to it.
  *
  *=========================================================================*/
-TCHAR *TerminatePath (TCHAR* pPath) {
+TCHAR *TerminatePath(TCHAR *pPath) {
 	DEFINE_FUNCTION("TerminatePath()");
 	size_t PathLength;
 	/* Ensure the input path is valid */
@@ -1613,7 +1670,7 @@ TCHAR *TerminatePath (TCHAR* pPath) {
  * Description
  *
  *=========================================================================*/
-bool WildcardCompare (const TCHAR* pFilename, const TCHAR* pFilter) {
+bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter) {
 	while (*pFilename != NULL_CHAR && *pFilter != NULL_CHAR) {
 		switch (*pFilter) {
 			case '*': {
@@ -1671,10 +1728,12 @@ bool WildcardCompare (const TCHAR* pFilename, const TCHAR* pFilter) {
  * The file is overwritten if it currently exists.
  *
  *=========================================================================*/
-bool WriteFile (const byte* pBuffer, const size_t Size, const TCHAR* pFilename,
-                const bool TextMode) {
+bool WriteFile(const byte *pBuffer,
+               const size_t Size,
+               const TCHAR *pFilename,
+               const bool TextMode) {
 	DEFINE_FUNCTION("WriteFile()");
-	FILE* pFileHandle;
+	FILE *pFileHandle;
 	size_t OutputBytes;
 	bool ReturnValue = TRUE;
 	/* Ensure valid input */
@@ -1690,12 +1749,16 @@ bool WriteFile (const byte* pBuffer, const size_t Size, const TCHAR* pFilename,
 	OutputBytes = fwrite(pBuffer, 1, Size, pFileHandle);
 
 	if (ferror(pFileHandle)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Failed to write to the file '%s' (only %u of %u bytes output)!"), pFilename, OutputBytes, Size);
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Failed to write to the file '%s' (only %u of %u bytes output)!"),
+		                      pFilename,
+		                      OutputBytes,
+		                      Size);
 		ReturnValue = FALSE;
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	return (ReturnValue);
 }
 
@@ -1714,7 +1777,7 @@ bool WriteFile (const byte* pBuffer, const size_t Size, const TCHAR* pFilename,
  * handle.
  *
  *=======================================================================*/
-bool write_short (FILE* pFileHandle, const short OutputValue) {
+bool write_short(FILE *pFileHandle, const short OutputValue) {
 	DEFINE_FUNCTION("write_short()");
 	size_t OutputSize;
 	/* Ensure valid input */
@@ -1724,8 +1787,10 @@ bool write_short (FILE* pFileHandle, const short OutputValue) {
 
 	/* Ensure the data was properly output */
 	if (OutputSize != sizeof(short)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error writing binary short integer to file (%u of %u bytes output)!"), OutputSize,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error writing binary short integer to file (%u of %u bytes output)!"),
+		                      OutputSize,
 		                      sizeof(short));
 		return (FALSE);
 	}
@@ -1748,7 +1813,7 @@ bool write_short (FILE* pFileHandle, const short OutputValue) {
  * ASSERTs if given an invalid file handle.
  *
  *=======================================================================*/
-bool write_int (FILE* pFileHandle, const int OutputValue) {
+bool write_int(FILE *pFileHandle, const int OutputValue) {
 	DEFINE_FUNCTION("write_int()");
 	size_t OutputSize;
 	/* Ensure valid input */
@@ -1758,8 +1823,11 @@ bool write_int (FILE* pFileHandle, const int OutputValue) {
 
 	/* Ensure the data was properly output */
 	if (OutputSize != sizeof(int)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error writing binary integer to file (%u of %u bytes output)!"), OutputSize, sizeof(int));
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error writing binary integer to file (%u of %u bytes output)!"),
+		                      OutputSize,
+		                      sizeof(int));
 		return (FALSE);
 	}
 
@@ -1781,7 +1849,7 @@ bool write_int (FILE* pFileHandle, const int OutputValue) {
  * but may depend on the system compiled under.
  *
  *=======================================================================*/
-bool write_long (FILE* pFileHandle, const long OutputValue) {
+bool write_long(FILE *pFileHandle, const long OutputValue) {
 	DEFINE_FUNCTION("write_long()");
 	size_t OutputSize;
 	/* Ensure valid input */
@@ -1791,8 +1859,11 @@ bool write_long (FILE* pFileHandle, const long OutputValue) {
 
 	/* Ensure the data was properly output */
 	if (OutputSize != sizeof(long)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error writing binary long integer to file (%u of %u bytes output)!"), OutputSize, sizeof(long));
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error writing binary long integer to file (%u of %u bytes output)!"),
+		                      OutputSize,
+		                      sizeof(long));
 		return (FALSE);
 	}
 
@@ -1815,24 +1886,26 @@ bool write_long (FILE* pFileHandle, const long OutputValue) {
  * in size, but may depend on the system compiled under.
  *
  *=======================================================================*/
-bool write_motlong (FILE* pFileHandle, const long OutputValue) {
+bool write_motlong(FILE *pFileHandle, const long OutputValue) {
 	DEFINE_FUNCTION("write_motlong()");
 	unsigned char OutputData[sizeof(long)];
 	size_t OutputSize;
 	/* Ensure valid input */
 	ASSERT(pFileHandle != NULL);
 	/* Create the output buffer */
-	OutputData[0] = (unsigned char) ((OutputValue >> 24) & 0xFF);
-	OutputData[1] = (unsigned char) ((OutputValue >> 16) & 0xFF);
-	OutputData[2] = (unsigned char) ((OutputValue >> 8) & 0xFF);
-	OutputData[3] = (unsigned char) (OutputValue & 0xFF);
+	OutputData[0] = (unsigned char)((OutputValue >> 24) & 0xFF);
+	OutputData[1] = (unsigned char)((OutputValue >> 16) & 0xFF);
+	OutputData[2] = (unsigned char)((OutputValue >> 8) & 0xFF);
+	OutputData[3] = (unsigned char)(OutputValue & 0xFF);
 	/* Output the data */
-	OutputSize = fwrite (OutputData, 1, sizeof(long), pFileHandle);
+	OutputSize = fwrite(OutputData, 1, sizeof(long), pFileHandle);
 
 	/* Ensure the data was properly output */
 	if (OutputSize != sizeof(long)) {
-		ErrorHandler.AddError(ERR_SYSTEM, (errcode_t)errno,
-		                      _T("Error writing binary motorola long integer to file (%u of %u bytes output)!"), OutputSize,
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      (errcode_t)errno,
+		                      _T("Error writing binary motorola long integer to file (%u of %u bytes output)!"),
+		                      OutputSize,
 		                      sizeof(long));
 		return (FALSE);
 	}
@@ -1843,7 +1916,3 @@ bool write_motlong (FILE* pFileHandle, const long OutputValue) {
 /*=========================================================================
  *      End of Function write_motlong()
  *=======================================================================*/
-
-
-
-

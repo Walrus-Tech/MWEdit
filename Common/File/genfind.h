@@ -51,7 +51,7 @@
 	typedef WIN32_FIND_DATA fileblock_t;
 
 	/* Redefine attribute values */
-	#define FA_ARCH FILE_ATTRIBUTE_ARCHIVE
+	#define FA_ARCH     FILE_ATTRIBUTE_ARCHIVE
 	#define FA_DIREC    FILE_ATTRIBUTE_DIRECTORY
 	#define FA_RDONLY   FILE_ATTRIBUTE_READONLY
 	#define FA_HIDDEN   FILE_ATTRIBUTE_HIDDEN
@@ -64,7 +64,7 @@
 	typedef struct _finddata_t fileblock_t;
 
 	/* Redefine attribute values */
-	#define FA_ARCH _A_ARCH
+	#define FA_ARCH     _A_ARCH
 	#define FA_DIREC    _A_SUBDIR
 	#define FA_RDONLY   _A_RDONLY
 	#define FA_HIDDEN   _A_HIDDEN
@@ -102,94 +102,94 @@ class CFileBlock {
   public:
 
 	/* Class Constructor */
-	CFileBlock (void) {
+	CFileBlock(void) {
 		Destroy();
 	}
 
 	/* Class Destructor */
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Return various members of the file block data */
-	fileblock_t &GetBlock (void) {
+	fileblock_t &GetBlock(void) {
 		return (BlockData);
 	}
 
-	fileblock_t *GetBlockPtr (void) {
+	fileblock_t *GetBlockPtr(void) {
 		return (&BlockData);
 	}
 
 	/* Define the get methods depending on the platform */
 #if defined (_WIN32) && defined(__BORLANDC__)
-	time_t ConvertFileTime (const FILETIME& FileTime) const;
+	time_t ConvertFileTime(const FILETIME &FileTime) const;
 
-	char *GetName (void) {
+	char *GetName(void) {
 		return (&BlockData.cFileName[0]);
 	}
 
-	int GetAttribute (void) const {
+	int GetAttribute(void) const {
 		return (BlockData.dwFileAttributes);
 	}
 
-	time_t GetCreationTime (void) const {
+	time_t GetCreationTime(void) const {
 		return (ConvertFileTime(BlockData.ftCreationTime));
 	}
 
-	time_t GetAccessTime (void) const {
+	time_t GetAccessTime(void) const {
 		return (ConvertFileTime(BlockData.ftLastAccessTime ));
 	}
 
-	time_t GetWriteTime (void) const {
+	time_t GetWriteTime(void) const {
 		return (ConvertFileTime(BlockData.ftLastWriteTime ));
 	}
 
-	ulong GetSize (void) const {
+	ulong GetSize(void) const {
 		return (BlockData.nFileSizeLow );
 	}
 
 #elif defined(_WIN32)
-	char *GetName (void) {
+	char *GetName(void) {
 		return (&BlockData.name[0]);
 	}
 
-	int GetAttribute (void) const {
+	int GetAttribute(void) const {
 		return (BlockData.attrib);
 	}
 
-	time_t GetCreationTime (void) const {
+	time_t GetCreationTime(void) const {
 		return (BlockData.time_create);
 	}
 
-	time_t GetAccessTime (void) const {
+	time_t GetAccessTime(void) const {
 		return (BlockData.time_access);
 	}
 
-	time_t GetWriteTime (void) const {
+	time_t GetWriteTime(void) const {
 		return (BlockData.time_write);
 	}
 
-	ulong GetSize (void) const {
+	ulong GetSize(void) const {
 		return (BlockData.size);
 	}
 
 #elif defined(__MSDOS__)
-	char *GetName (void) const {
-		return (char*)(&BlockData.ff_name[0]);
+	char *GetName(void) const {
+		return (char *)(&BlockData.ff_name[0]);
 	}
 
-	int GetAttribute (void) const {
+	int GetAttribute(void) const {
 		return (BlockData.ff_attrib);
 	}
 
-	time_t GetCreationTime (void) const {
+	time_t GetCreationTime(void) const {
 		return (-1l);
 	}
 
-	time_t GetAccessTime (void) const {
+	time_t GetAccessTime(void) const {
 		return (-1l);
 	}
 
-	time_t GetWriteTime (void) const;
-	ulong GetSize (void) const {
+	time_t GetWriteTime(void) const;
+	ulong GetSize(void) const {
 		return (BlockData.ff_fsize);
 	}
 
@@ -222,30 +222,30 @@ class CFindFile {
   public:
 
 	/* Class Constructor */
-	CFindFile (void);
+	CFindFile(void);
 
 	/* Class Destructors */
-	~CFindFile (void) {
+	~CFindFile(void) {
 		Destroy();
 	}
 
-	void Destroy (void);
+	void Destroy(void);
 
 	/* Closes the file find */
-	bool Close (void);
+	bool Close(void);
 
 	/* Find the first occurence of a given file spec */
-	bool FindFirst (const char* pFileSpec, const int Attributes = FA_NORMAL);
+	bool FindFirst(const char *pFileSpec, const int Attributes = FA_NORMAL);
 
 	/* Find the next occurence of the previous file spec */
-	bool FindNext (void);
+	bool FindNext(void);
 
 	/* Used to get information on a found file */
-	char *GetName (void) {
+	char *GetName(void) {
 		return (FileBlock.GetName());
 	}
 
-	int GetAttribute (void) {
+	int GetAttribute(void) {
 		return (FileBlock.GetAttribute());
 	}
 
@@ -253,36 +253,36 @@ class CFindFile {
 		return (FileBlock.GetCreationTime());
 	}
 
-	time_t GetAccessTime (void) {
+	time_t GetAccessTime(void) {
 		return (FileBlock.GetAccessTime());
 	}
 
-	time_t GetWriteTime (void) {
+	time_t GetWriteTime(void) {
 		return (FileBlock.GetWriteTime());
 	}
 
-	ulong GetSize (void) {
+	ulong GetSize(void) {
 		return (FileBlock.GetSize());
 	}
 
 	/* Check the type of the current file */
-	bool IsDirectory (void) {
+	bool IsDirectory(void) {
 		return (FileBlock.GetAttribute() & FA_DIREC) == FA_DIREC;
 	}
 
-	bool IsSystem (void) {
+	bool IsSystem(void) {
 		return (FileBlock.GetAttribute() & FA_SYSTEM) == FA_SYSTEM;
 	}
 
-	bool IsHidden (void) {
+	bool IsHidden(void) {
 		return (FileBlock.GetAttribute() & FA_HIDDEN) == FA_HIDDEN;
 	}
 
-	bool IsReadOnly (void) {
+	bool IsReadOnly(void) {
 		return (FileBlock.GetAttribute() & FA_RDONLY) == FA_RDONLY;
 	}
 
-	bool IsArchive (void) {
+	bool IsArchive(void) {
 		return (FileBlock.GetAttribute() & FA_ARCH) == FA_ARCH;
 	}
 

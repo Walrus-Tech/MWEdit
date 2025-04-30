@@ -82,117 +82,117 @@ template <class TArrayPtr> class TPtrArray {
   protected:
 
 	/* Changes the max-size of the array */
-	void ResizeArray (const bool GrowArray);
-	void ResizeArray (const int NewSize);
+	void ResizeArray(const bool GrowArray);
+	void ResizeArray(const int NewSize);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
   public:
 
 	/* Class Constructors/Destructors */
-	TPtrArray (const int MaxSize = 0, const int GrowSize = -1);
+	TPtrArray(const int MaxSize = 0, const int GrowSize = -1);
 	virtual ~TPtrArray();
-	virtual void Destroy (void);
-	void RemoveAll (void) {
+	virtual void Destroy(void);
+	void RemoveAll(void) {
 		Destroy();
 	}
 
 	/* Tests the contents to ensure they are valid */
 #if defined(_DEBUG)
-	bool AssertValid (void);
+	bool AssertValid(void);
 #endif
 
 	/* Attempts to add a new object to the end of the array */
-	bool AddElement (TArrayPtr* pNewElement);
-	int Add (TArrayPtr* pNewElement);
-	int AddHead (TArrayPtr* pNewElement);
-	void AddSort (TArrayPtr* pNewElement);
-	void AddSortFast (TArrayPtr* pNewElement);
-	int Insert (TArrayPtr* pNewElement, const int Index);
+	bool AddElement(TArrayPtr *pNewElement);
+	int Add(TArrayPtr *pNewElement);
+	int AddHead(TArrayPtr *pNewElement);
+	void AddSort(TArrayPtr *pNewElement);
+	void AddSortFast(TArrayPtr *pNewElement);
+	int Insert(TArrayPtr *pNewElement, const int Index);
 
 	/* Attempts to delete an element from the array */
-	void DeleteElement (const int Index);
-	void DeleteElement (TArrayPtr* pElement);
-	void RemoveAt (const int Index) {
+	void DeleteElement(const int Index);
+	void DeleteElement(TArrayPtr *pElement);
+	void RemoveAt(const int Index) {
 		DeleteElement(Index);
 	}
 
 	/* Find an element in the array */
-	int FindElement (TArrayPtr* pElement);
-	int FindFast (TArrayPtr* pElement);
-	int FindFastFunc (PQSORT_CMPFUNC pCompareFunc, void* pElement2);
-	int FindInsertLoc (TArrayPtr* pElement);
-	int FindBSearch (PQSORT_CMPFUNC_ORIG pCompareFunc, void* pElement2);
+	int FindElement(TArrayPtr *pElement);
+	int FindFast(TArrayPtr *pElement);
+	int FindFastFunc(PQSORT_CMPFUNC pCompareFunc, void *pElement2);
+	int FindInsertLoc(TArrayPtr *pElement);
+	int FindBSearch(PQSORT_CMPFUNC_ORIG pCompareFunc, void *pElement2);
 
 	/* Frees any extra allocated memory */
-	void FreeExtra (void) {
+	void FreeExtra(void) {
 		ResizeArray(false);
 	}
 
 	/* Get the array size */
-	int GetMaxElements (void) const {
+	int GetMaxElements(void) const {
 		return (m_MaxElements);
 	}
 
-	int GetNumElements (void) const {
+	int GetNumElements(void) const {
 		return (m_NumElements);
 	}
 
-	int GetGrowSize (void) const {
+	int GetGrowSize(void) const {
 		return (m_GrowSize);
 	}
 
-	int GetSize (void) const {
+	int GetSize(void) const {
 		return (m_NumElements);
 	}
 
-	int GetUpperBound (void) const {
+	int GetUpperBound(void) const {
 		return (m_NumElements - 1);
 	}
 
 	/* Attempt to retrieve an array element */
-	bool GetElement (TArrayPtr** ppElement, const int Index) const;
-	TArrayPtr *GetAt (const int Index);
+	bool GetElement(TArrayPtr **ppElement, const int Index) const;
+	TArrayPtr *GetAt(const int Index);
 
 	/* Inserts an element after the given index */
-	bool InsertAfter (const int Index, TArrayPtr* pElement);
-	bool InsertBefore (const int Index, TArrayPtr* pElement);
-	bool InsertAt (const int Index, TArrayPtr* pElement) {
+	bool InsertAfter(const int Index, TArrayPtr *pElement);
+	bool InsertBefore(const int Index, TArrayPtr *pElement);
+	bool InsertAt(const int Index, TArrayPtr *pElement) {
 		return InsertBefore(Index, pElement);
 	}
 
 	/* Ensures the given array index is valid */
-	bool IsValidIndex (const int Index) const {
+	bool IsValidIndex(const int Index) const {
 		return ((Index >= 0 && Index < m_NumElements) ? true : false);
 	}
 
 	/* Attempts to get the specified array element */
-	TArrayPtr* operator [] (const int Index) const;
+	TArrayPtr *operator[](const int Index) const;
 
 	/* Change the grow size */
-	void SetGrowSize (const int GrowSize = -1) {
+	void SetGrowSize(const int GrowSize = -1) {
 		m_GrowSize = GrowSize;
 	}
 
-	void SetMaxElements (const int MaxSize) {
+	void SetMaxElements(const int MaxSize) {
 		ResizeArray(MaxSize);
 	}
 
-	void SetSize (const int NewSize) {
+	void SetSize(const int NewSize) {
 		SetMaxElements(NewSize);
 	}
 
 	/* Set the user supplied compare function */
-	void SetCompareFunc (PQSORT_CMPFUNC pFunction) {
+	void SetCompareFunc(PQSORT_CMPFUNC pFunction) {
 		m_pCmpFunc = pFunction;
 	}
 
-	void SetCmpFuncData (const long lUserData) {
+	void SetCmpFuncData(const long lUserData) {
 		m_CmpFuncData = lUserData;
 	}
 
 	/* Sorts the array using the current compare function */
-	void Sort (const long lUserData);
+	void Sort(const long lUserData);
 
 };
 
@@ -209,14 +209,14 @@ template <class TArrayPtr> class TPtrArray {
  * ASSERTs if given invalid input.
  *
  *=========================================================================*/
-template <class TArrayPtr> TPtrArray< TArrayPtr >::TPtrArray (const int MaxSize,
+template <class TArrayPtr> TPtrArray<TArrayPtr>::TPtrArray(const int MaxSize,
         const int GrowSize) {
 	DEFINE_FUNCTION("TPtrArray::TPtrArray()");
 	/* Ensure valid input */
-	IASSERT(MaxSize <= INT_MAX / sizeof(TArrayPtr*));
+	IASSERT(MaxSize <= INT_MAX / sizeof(TArrayPtr *));
 
 	if (MaxSize > 0) {
-		CreateArrayPointer(m_ppArray, TArrayPtr*, MaxSize);
+		CreateArrayPointer(m_ppArray, TArrayPtr *, MaxSize);
 	} else {
 		m_ppArray = NULL;
 	}
@@ -238,7 +238,7 @@ template <class TArrayPtr> TPtrArray< TArrayPtr >::TPtrArray (const int MaxSize,
  * Class TPtrArray Destructor
  *
  *=========================================================================*/
-template <class TArrayPtr> TPtrArray< TArrayPtr >::~TPtrArray (void) {
+template <class TArrayPtr> TPtrArray<TArrayPtr>::~TPtrArray(void) {
 	//DEFINE_FUNCTION("TPtrArray::~TPtrArray()");
 	Destroy();
 	/* Unallocate the array */
@@ -258,7 +258,7 @@ template <class TArrayPtr> TPtrArray< TArrayPtr >::~TPtrArray (void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::Destroy (void) {
+void TPtrArray<TArrayPtr>::Destroy(void) {
 	//DEFINE_FUNCTION("TPtrArray::Destroy()");
 	m_NumElements = 0;
 }
@@ -277,7 +277,7 @@ void TPtrArray<TArrayPtr>::Destroy (void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TPtrArray<TArrayPtr>::AddElement (TArrayPtr* pNewElement) {
+bool TPtrArray<TArrayPtr>::AddElement(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TPtrArray::AddElement()");
 	/* Ensure valid input */
 	IASSERT(pNewElement != NULL);
@@ -301,7 +301,7 @@ bool TPtrArray<TArrayPtr>::AddElement (TArrayPtr* pNewElement) {
 }
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::Add (TArrayPtr* pNewElement) {
+int TPtrArray<TArrayPtr>::Add(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TPtrArray::Add()");
 	/* Ensure valid input */
 	IASSERT(pNewElement != NULL);
@@ -326,14 +326,14 @@ int TPtrArray<TArrayPtr>::Add (TArrayPtr* pNewElement) {
 
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::AddHead (TArrayPtr* pNewElement) {
+int TPtrArray<TArrayPtr>::AddHead(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TPtrArray::AddHead()");
 	return InsertBefore(0, pNewElement);
 }
 
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::Insert (TArrayPtr* pNewElement, const int Index) {
+int TPtrArray<TArrayPtr>::Insert(TArrayPtr *pNewElement, const int Index) {
 	int InsertCounter;
 
 	/* Resize array if required */
@@ -379,7 +379,7 @@ int TPtrArray<TArrayPtr>::Insert (TArrayPtr* pNewElement, const int Index) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::AddSort (TArrayPtr* pNewElement) {
+void TPtrArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TPtrArray::AddSort()");
 	int LoopCounter;
 	int InsertCounter;
@@ -394,7 +394,7 @@ void TPtrArray<TArrayPtr>::AddSort (TArrayPtr* pNewElement) {
 	/* Find the position to insert the new element */
 	if (m_pCmpFunc != NULL) {
 		for (LoopCounter = 0; LoopCounter < m_NumElements; LoopCounter++) {
-			if (m_pCmpFunc((void * )m_ppArray[LoopCounter], (void * )pNewElement, m_CmpFuncData) > 0) {
+			if (m_pCmpFunc((void *)m_ppArray[LoopCounter], (void * )pNewElement, m_CmpFuncData) > 0) {
 				break;
 			}
 		}
@@ -414,7 +414,7 @@ void TPtrArray<TArrayPtr>::AddSort (TArrayPtr* pNewElement) {
 }
 
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::AddSortFast (TArrayPtr* pNewElement) {
+void TPtrArray<TArrayPtr>::AddSortFast(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TPtrArray::AddSortFast()");
 	int LoopCounter;
 	int InsertCounter;
@@ -462,7 +462,7 @@ void TPtrArray<TArrayPtr>::AddSortFast (TArrayPtr* pNewElement) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TPtrArray<TArrayPtr>::AssertValid (void) {
+bool TPtrArray<TArrayPtr>::AssertValid(void) {
 	DEFINE_FUNCTION("TPtrArray::AssertValid()");
 	int LoopCounter;
 	/* Ensure valid input */
@@ -498,7 +498,7 @@ bool TPtrArray<TArrayPtr>::AssertValid (void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::DeleteElement (const int Index) {
+void TPtrArray<TArrayPtr>::DeleteElement(const int Index) {
 	//DEFINE_FUNCTION("TPtrArray::DeleteElement()");
 	int LoopCounter;
 	/* Ensure the index is valid */
@@ -515,7 +515,7 @@ void TPtrArray<TArrayPtr>::DeleteElement (const int Index) {
 
 
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::DeleteElement (TArrayPtr* pElement) {
+void TPtrArray<TArrayPtr>::DeleteElement(TArrayPtr *pElement) {
 	//DEFINE_FUNCTION("TPtrArray::DeleteElement()");
 	int Index = FindElement(pElement);
 
@@ -535,7 +535,7 @@ void TPtrArray<TArrayPtr>::DeleteElement (TArrayPtr* pElement) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::FindElement (TArrayPtr* pElement) {
+int TPtrArray<TArrayPtr>::FindElement(TArrayPtr *pElement) {
 	int Index;
 
 	for (Index = 0; Index < m_NumElements; Index++) {
@@ -548,14 +548,14 @@ int TPtrArray<TArrayPtr>::FindElement (TArrayPtr* pElement) {
 }
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::FindFast (TArrayPtr* pElement) {
+int TPtrArray<TArrayPtr>::FindFast(TArrayPtr *pElement) {
 	if (m_pCmpFunc == NULL || m_ppArray == NULL || m_NumElements == 0) {
 		return FindElement(pElement);
 	}
 
 	int StartIndex = 0;
 	int EndIndex = GetSize() - 1;
-	int CompIndex = (int) ceil((EndIndex - StartIndex) / 2.0f);
+	int CompIndex = (int)ceil((EndIndex - StartIndex) / 2.0f);
 	int Result;
 
 	while (EndIndex - StartIndex > 1) {
@@ -568,7 +568,7 @@ int TPtrArray<TArrayPtr>::FindFast (TArrayPtr* pElement) {
 			CompIndex = StartIndex + (int)ceil((EndIndex - StartIndex) / 2.0f);
 		} else {
 			StartIndex = CompIndex;
-			CompIndex = StartIndex + (int) ceil((EndIndex - StartIndex) / 2.0f);
+			CompIndex = StartIndex + (int)ceil((EndIndex - StartIndex) / 2.0f);
 		}
 	}
 
@@ -589,7 +589,7 @@ int TPtrArray<TArrayPtr>::FindFast (TArrayPtr* pElement) {
 
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::FindFastFunc (PQSORT_CMPFUNC pCompareFunc, void* pElement2) {
+int TPtrArray<TArrayPtr>::FindFastFunc(PQSORT_CMPFUNC pCompareFunc, void *pElement2) {
 	if (pCompareFunc == NULL || m_ppArray == NULL || m_NumElements == 0) {
 		return (-1);
 	}
@@ -629,7 +629,7 @@ int TPtrArray<TArrayPtr>::FindFastFunc (PQSORT_CMPFUNC pCompareFunc, void* pElem
 }
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::FindInsertLoc (TArrayPtr* pElement) {
+int TPtrArray<TArrayPtr>::FindInsertLoc(TArrayPtr *pElement) {
 	if (m_pCmpFunc == NULL || m_ppArray == NULL) {
 		return FindElement(pElement);
 	}
@@ -673,10 +673,10 @@ int TPtrArray<TArrayPtr>::FindInsertLoc (TArrayPtr* pElement) {
 }
 
 template <class TArrayPtr>
-int TPtrArray<TArrayPtr>::FindBSearch (PQSORT_CMPFUNC_ORIG pCompareFunc, void* pElement) {
+int TPtrArray<TArrayPtr>::FindBSearch(PQSORT_CMPFUNC_ORIG pCompareFunc, void *pElement) {
 	TArrayPtr **pResult;
-	pResult = (TArrayPtr **) bsearch(pElement, (void *)m_ppArray, m_NumElements, sizeof(TArrayPtr *),
-	                                 pCompareFunc);
+	pResult = (TArrayPtr **)bsearch(pElement, (void *)m_ppArray, m_NumElements, sizeof(TArrayPtr *),
+	                                pCompareFunc);
 
 	if (pResult == NULL) {
 		return (-1);
@@ -699,7 +699,7 @@ int TPtrArray<TArrayPtr>::FindBSearch (PQSORT_CMPFUNC_ORIG pCompareFunc, void* p
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TPtrArray<TArrayPtr>::GetElement (TArrayPtr** ppElement, const int Index) const {
+bool TPtrArray<TArrayPtr>::GetElement(TArrayPtr **ppElement, const int Index) const {
 	//DEFINE_FUNCTION("TTemplateArray::GetElement()");
 
 	/* Ensure the index is valid */
@@ -716,9 +716,9 @@ bool TPtrArray<TArrayPtr>::GetElement (TArrayPtr** ppElement, const int Index) c
 }
 
 template <class TArrayPtr>
-TArrayPtr *TPtrArray<TArrayPtr>::GetAt (const int Index) {
+TArrayPtr *TPtrArray<TArrayPtr>::GetAt(const int Index) {
 	//DEFINE_FUNCTION("TTemplateArray::GetAt()");
-	TArrayPtr* pObject;
+	TArrayPtr *pObject;
 	bool Result;
 	Result = GetElement(&pObject, Index);
 
@@ -743,7 +743,7 @@ TArrayPtr *TPtrArray<TArrayPtr>::GetAt (const int Index) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TPtrArray<TArrayPtr>::InsertAfter (const int Index, TArrayPtr* pElement) {
+bool TPtrArray<TArrayPtr>::InsertAfter(const int Index, TArrayPtr *pElement) {
 	int LoopIndex;
 
 	/* Ensure the index is valid */
@@ -769,7 +769,7 @@ bool TPtrArray<TArrayPtr>::InsertAfter (const int Index, TArrayPtr* pElement) {
 
 
 template <class TArrayPtr>
-bool TPtrArray<TArrayPtr>::InsertBefore (const int Index, TArrayPtr* pElement) {
+bool TPtrArray<TArrayPtr>::InsertBefore(const int Index, TArrayPtr *pElement) {
 	int LoopIndex;
 
 	/* Ensure the index is valid */
@@ -810,7 +810,7 @@ bool TPtrArray<TArrayPtr>::InsertBefore (const int Index, TArrayPtr* pElement) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::ResizeArray (const bool GrowArray) {
+void TPtrArray<TArrayPtr>::ResizeArray(const bool GrowArray) {
 	DEFINE_FUNCTION("TPtrArray::ResizeArray()");
 	int NewSize;
 	TArrayPtr **ppNewArray = NULL;
@@ -841,17 +841,17 @@ void TPtrArray<TArrayPtr>::ResizeArray (const bool GrowArray) {
 	}
 
 	/* Ensure a valid size */
-	IASSERT(NewSize <= UINT_MAX / sizeof(TArrayPtr*));
+	IASSERT(NewSize <= UINT_MAX / sizeof(TArrayPtr *));
 
 	if (NewSize != 0) {
 		/* Attempt to allocate space for the new array */
-		CreateArrayPointer(ppNewArray, TArrayPtr*, NewSize);
+		CreateArrayPointer(ppNewArray, TArrayPtr *, NewSize);
 		/* Copy pointers into new array */
-		memcpy(ppNewArray, m_ppArray, sizeof(TArrayPtr*)*m_NumElements);
+		memcpy(ppNewArray, m_ppArray, sizeof(TArrayPtr *)*m_NumElements);
 	}
 
 	/* Set the resized array */
-	ppOldArray = (byte**) m_ppArray;
+	ppOldArray = (byte **)m_ppArray;
 	m_ppArray = ppNewArray;
 	m_MaxElements = NewSize;
 	/* Delete the old array (but not the objects!) */
@@ -860,7 +860,7 @@ void TPtrArray<TArrayPtr>::ResizeArray (const bool GrowArray) {
 
 
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::ResizeArray (const int NewSize) {
+void TPtrArray<TArrayPtr>::ResizeArray(const int NewSize) {
 	DEFINE_FUNCTION("TPtrArray::ResizeArray()");
 	TArrayPtr **ppNewArray = NULL;
 	byte **ppOldArray;
@@ -871,17 +871,17 @@ void TPtrArray<TArrayPtr>::ResizeArray (const int NewSize) {
 	}
 
 	/* Ensure a valid size */
-	IASSERT(NewSize <= UINT_MAX / sizeof(TArrayPtr*));
+	IASSERT(NewSize <= UINT_MAX / sizeof(TArrayPtr *));
 
 	if (NewSize != 0) {
 		/* Attempt to allocate space for the new array */
-		CreateArrayPointer(ppNewArray, TArrayPtr*, NewSize);
+		CreateArrayPointer(ppNewArray, TArrayPtr *, NewSize);
 		/* Copy pointers into new array */
-		memcpy(ppNewArray, m_ppArray, sizeof(TArrayPtr*)*m_NumElements);
+		memcpy(ppNewArray, m_ppArray, sizeof(TArrayPtr *)*m_NumElements);
 	}
 
 	/* Set the resized array */
-	ppOldArray = (byte**) m_ppArray;
+	ppOldArray = (byte **)m_ppArray;
 	m_ppArray = ppNewArray;
 	m_MaxElements = NewSize;
 	/* Delete the old array (but not the objects!) */
@@ -902,7 +902,7 @@ void TPtrArray<TArrayPtr>::ResizeArray (const int NewSize) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TPtrArray<TArrayPtr>::Sort (const long lUserData) {
+void TPtrArray<TArrayPtr>::Sort(const long lUserData) {
 	m_CmpFuncData = lUserData;
 
 	/* Ignore if no compare function defined */
@@ -911,7 +911,7 @@ void TPtrArray<TArrayPtr>::Sort (const long lUserData) {
 	}
 
 	/* Run the extended qsort() routine on the array */
-	qsort((void*)m_ppArray, m_NumElements, sizeof(TArrayPtr*), m_pCmpFunc, m_CmpFuncData);
+	qsort((void *)m_ppArray, m_NumElements, sizeof(TArrayPtr *), m_pCmpFunc, m_CmpFuncData);
 }
 
 /*===========================================================================
@@ -928,7 +928,7 @@ void TPtrArray<TArrayPtr>::Sort (const long lUserData) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-inline TArrayPtr* TPtrArray<TArrayPtr>::operator[] (const int Index) const {
+inline TArrayPtr *TPtrArray<TArrayPtr>::operator[](const int Index) const {
 	//DEFINE_FUNCTION("TPtrArray::operator[]()");
 
 	/* Ensure the index is valid */
@@ -964,4 +964,3 @@ inline TArrayPtr* TPtrArray<TArrayPtr>::operator[] (const int Index) const {
 /*===========================================================================
  *      End of File PTRArray.H
  *=========================================================================*/
-

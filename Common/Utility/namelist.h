@@ -46,11 +46,11 @@ typedef struct {
  *=========================================================================*/
 
 /* Find a value associated with a name */
-bool FindNameValue (long &lValue, const valuenames_t* pValueArray, const TCHAR* pName);
-long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName);
+bool FindNameValue(long &lValue, const valuenames_t *pValueArray, const TCHAR *pName);
+long FindNameValue(const valuenames_t *pValueArray, const TCHAR *pName);
 
 /* Find a name associated with a value */
-const TCHAR *FindValueName (const valuenames_t* pValueArray, const long lValue);
+const TCHAR *FindValueName(const valuenames_t *pValueArray, const long lValue);
 
 /*===========================================================================
  *      End of Function Prototypes

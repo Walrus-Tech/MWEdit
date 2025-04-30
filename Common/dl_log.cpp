@@ -56,7 +56,7 @@ DEFINE_FILE("DL_log.cpp");
  * Class CLogFile Constructor (Default)
  *
  *=========================================================================*/
-CLogFile::CLogFile (void) {
+CLogFile::CLogFile(void) {
 	TabLevel = 0;
 	pLogFileHandle = NULL;
 	pHookProc = NULL;
@@ -75,7 +75,7 @@ CLogFile::CLogFile (void) {
  * input as per the Open() class method.
  *
  *=========================================================================*/
-CLogFile::CLogFile (const TCHAR* pFilename, const logmode_t AppendFile) {
+CLogFile::CLogFile(const TCHAR *pFilename, const logmode_t AppendFile) {
 	/* Initialize the class members */
 	TabLevel = 0;
 	pLogFileHandle = NULL;
@@ -97,7 +97,7 @@ CLogFile::CLogFile (const TCHAR* pFilename, const logmode_t AppendFile) {
  * if no log file is currently open.
  *
  *=========================================================================*/
-bool CLogFile::Close (void) {
+bool CLogFile::Close(void) {
 	//DEFINE_FUNCTION("CLogFile::Close()");
 	int Result;
 
@@ -107,7 +107,7 @@ bool CLogFile::Close (void) {
 	}
 
 	/* Output status messages to log file */
-	Printf (_T("Closing Log File..."));
+	Printf(_T("Closing Log File..."));
 	OutputMemoryStatus();
 	/* Close log file and reset parameters */
 	Result = fclose(pLogFileHandle);
@@ -136,7 +136,7 @@ bool CLogFile::Close (void) {
  * Otherwise is identical to the Printf() method.
  *
  *=========================================================================*/
-void CLogFile::DebugPrintf (const TCHAR* pString, ...) {
+void CLogFile::DebugPrintf(const TCHAR *pString, ...) {
 	DEFINE_FUNCTION("CLogFile::DebugPrintf()");
 	va_list Args;
 	/* Ensure valid input */
@@ -148,9 +148,9 @@ void CLogFile::DebugPrintf (const TCHAR* pString, ...) {
 	}
 
 	/* Print the line to the file */
-	va_start (Args, pString);
+	va_start(Args, pString);
 	(pString, Args);
-	va_end (Args);
+	va_end(Args);
 }
 
 /*===========================================================================
@@ -171,7 +171,7 @@ void CLogFile::DebugPrintf (const TCHAR* pString, ...) {
  *      CLogFile::SetTabLevel(NewTabLevel);
  *
  *=========================================================================*/
-void CLogFile::DecrementTabs (void) {
+void CLogFile::DecrementTabs(void) {
 	if (TabLevel > 0) {
 		TabLevel--;
 	}
@@ -194,7 +194,7 @@ void CLogFile::DecrementTabs (void) {
  *      CLogFile::SetTabLevel(NewTabLevel);
  *
  *=========================================================================*/
-void CLogFile::IncrementTabs (void) {
+void CLogFile::IncrementTabs(void) {
 	if (TabLevel < LOGFILE_MAX_TABS) {
 		TabLevel++;
 	}
@@ -217,7 +217,7 @@ void CLogFile::IncrementTabs (void) {
  * if the log file was successfully opened.
  *
  *=========================================================================*/
-bool CLogFile::Open (const TCHAR* pFilename, const logmode_t AppendFile) {
+bool CLogFile::Open(const TCHAR *pFilename, const logmode_t AppendFile) {
 	DEFINE_FUNCTION("CLogFile::Open()");
 	bool Result;
 	/* Check for valid input */
@@ -241,7 +241,7 @@ bool CLogFile::Open (const TCHAR* pFilename, const logmode_t AppendFile) {
 	}
 
 	/* Output the filename and full date to log file */
-	Result = Printf (_T("==================== Opened Logfile %s ================"), pFilename);
+	Result = Printf(_T("==================== Opened Logfile %s ================"), pFilename);
 
 	if (!Result) {
 		return (FALSE);
@@ -263,10 +263,10 @@ bool CLogFile::Open (const TCHAR* pFilename, const logmode_t AppendFile) {
  * error.
  *
  *=========================================================================*/
-bool CLogFile::OutputDate (void) {
+bool CLogFile::OutputDate(void) {
 	//DEFINE_FUNCTION("CLogFile::OutputDate()");
 	TCHAR DateString[33] = _T("");
-	struct tm* pCurrentTime;
+	struct tm *pCurrentTime;
 	time_t Today;
 
 	/* Ensure the log file is currently open */
@@ -284,7 +284,7 @@ bool CLogFile::OutputDate (void) {
 
 	/* Output the date line to the file */
 	TSTRFTIME(DateString, 32, _T("%A, %d of %B, %Y"), pCurrentTime);
-	return ( Printf(_T("The current date is %s."), DateString) );
+	return (Printf(_T("The current date is %s."), DateString));
 }
 
 /*===========================================================================
@@ -301,12 +301,12 @@ bool CLogFile::OutputDate (void) {
  * Assumes that the log file is currently open and valid.
  *
  *=========================================================================*/
-bool CLogFile::OutputCurrentTime (void) {
+bool CLogFile::OutputCurrentTime(void) {
 	DEFINE_FUNCTION("CLogFile::OutputCurrentTime()()");
 	TCHAR TimeString[17] = _T("");
 	int Result;
 	time_t CurrentTime;
-	struct tm* pToday;
+	struct tm *pToday;
 	/* Ensure a valid log file handle */
 	ASSERT(pLogFileHandle != NULL);
 	/* Get the current local time and ensure its valid */
@@ -319,7 +319,7 @@ bool CLogFile::OutputCurrentTime (void) {
 
 	/* Output the formatted time to log file */
 	TSTRFTIME(TimeString, 16, _T("%H:%M:%S"), pToday);
-	Result = TFPRINTF (pLogFileHandle, _T("%s (%ld) - "), TimeString, clock());
+	Result = TFPRINTF(pLogFileHandle, _T("%s (%ld) - "), TimeString, clock());
 
 	if (Result < 0) {
 		return (FALSE);
@@ -340,7 +340,7 @@ bool CLogFile::OutputCurrentTime (void) {
  * Outputs the current memory status to the log file.
  *
  *=========================================================================*/
-void CLogFile::OutputMemoryStatus (void) {
+void CLogFile::OutputMemoryStatus(void) {
 	//DEFINE_FUNCTION("CLogFile::OutputMemoryStatus()");
 	bool MemResult;
 	long UsedMemory = 0;
@@ -358,9 +358,9 @@ void CLogFile::OutputMemoryStatus (void) {
 	}
 
 	if (MemResult) {
-		Printf (_T("Used/Free/Total Memory: %lu/%lu/%lu bytes"), UsedMemory, FreeMemory, TotalMemory);
+		Printf(_T("Used/Free/Total Memory: %lu/%lu/%lu bytes"), UsedMemory, FreeMemory, TotalMemory);
 	} else {
-		Printf (_T("Error attempting to retrieve memory usage!"));
+		Printf(_T("Error attempting to retrieve memory usage!"));
 	}
 
 	/* Output heap information */
@@ -368,7 +368,7 @@ void CLogFile::OutputMemoryStatus (void) {
 	DebugPrintf(_T("DebugHeapCheckMemory() returns %s"),
 	            DebugHeapCheckMemory() ? _T("TRUE") : _T("FALSE"));
 #endif
-	Printf (_T("Heap Status: %s"), GetHeapStatusString());
+	Printf(_T("Heap Status: %s"), GetHeapStatusString());
 	/* Output custom heap information */
 #if defined(_DEBUG)
 	OutputBlockInfo();
@@ -389,7 +389,7 @@ void CLogFile::OutputMemoryStatus (void) {
  * open and valid.  Returns FALSE on any error.
  *
  *=========================================================================*/
-bool CLogFile::OutputTabs (void) {
+bool CLogFile::OutputTabs(void) {
 	DEFINE_FUNCTION("CLogFile::OutputTabs()");
 	int LoopCounter;
 	int Result;
@@ -421,7 +421,7 @@ bool CLogFile::OutputTabs (void) {
  * on success, or FALSE on any error.
  *
  *=========================================================================*/
-bool CLogFile::Printf (const TCHAR* pString, ...) {
+bool CLogFile::Printf(const TCHAR *pString, ...) {
 	DEFINE_FUNCTION("CLogFile::Printf(TCHAR*)");
 	va_list Args;
 	bool Result;
@@ -434,9 +434,9 @@ bool CLogFile::Printf (const TCHAR* pString, ...) {
 	}
 
 	/* Print the line to the file */
-	va_start (Args, pString);
+	va_start(Args, pString);
 	Result = PrintLine(pString, Args);
-	va_end (Args);
+	va_end(Args);
 	return (Result);
 }
 
@@ -456,14 +456,14 @@ bool CLogFile::Printf (const TCHAR* pString, ...) {
  * even if the log file is closed.
  *
  *=========================================================================*/
-bool CLogFile::Printf (FILE* pFileHandle, const TCHAR* pString, ...) {
+bool CLogFile::Printf(FILE *pFileHandle, const TCHAR *pString, ...) {
 	DEFINE_FUNCTION("CLogFile::Printf(FILE*, TCHAR*)");
 	int Result;
 	int LoopCounter;
 	va_list Args;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
-	va_start (Args, pString);
+	va_start(Args, pString);
 
 	/* Output line header to log file if open */
 	if (IsOpen()) {
@@ -487,14 +487,14 @@ bool CLogFile::Printf (FILE* pFileHandle, const TCHAR* pString, ...) {
 		}
 
 		Result = TVFPRINTF(pFileHandle, pString, Args);
-		va_end (Args);
+		va_end(Args);
 
 		if (Result < 0) {
 			return (FALSE);
 		}
 
 		/* Terminate line with a line feed character */
-		Result = TFPRINTF (pFileHandle, _T("\n"));
+		Result = TFPRINTF(pFileHandle, _T("\n"));
 
 		if (Result < 0) {
 			return (FALSE);
@@ -525,7 +525,7 @@ bool CLogFile::Printf (FILE* pFileHandle, const TCHAR* pString, ...) {
  * is currently open.  Protected class method.
  *
  *=========================================================================*/
-bool CLogFile::PrintLine (const TCHAR* pString, va_list Args) {
+bool CLogFile::PrintLine(const TCHAR *pString, va_list Args) {
 	DEFINE_FUNCTION("CLogFile::PrintLine()");
 	int Result;
 	ASSERT(pString != NULL);
@@ -557,7 +557,7 @@ bool CLogFile::PrintLine (const TCHAR* pString, va_list Args) {
 	}
 
 	/* A linefeed to terminate the current line */
-	Result = TFPRINTF (pLogFileHandle, _T("\n"));
+	Result = TFPRINTF(pLogFileHandle, _T("\n"));
 
 	if (Result < 0) {
 		return (FALSE);
@@ -567,7 +567,7 @@ bool CLogFile::PrintLine (const TCHAR* pString, va_list Args) {
 	 * to the file. This is in case the program crashes and isn't closed. If
 	 * this did happen without the following line, any buffered log file
 	 * data might not be output. */
-	Result = fflush (pLogFileHandle);
+	Result = fflush(pLogFileHandle);
 
 	if (Result == EOF) {
 		return (FALSE);
@@ -594,7 +594,7 @@ bool CLogFile::PrintLine (const TCHAR* pString, va_list Args) {
  *      CLogFile::DecrementTags();
  *
  *=========================================================================*/
-void CLogFile::SetTabLevel (const int NewTabLevel) {
+void CLogFile::SetTabLevel(const int NewTabLevel) {
 	/* Ensure a valid input */
 	if (NewTabLevel < 0 || NewTabLevel > LOGFILE_MAX_TABS) {
 		return;
@@ -629,11 +629,11 @@ void CLogFile::SetTabLevel (const int NewTabLevel) {
  * Tests the callback functionality of the CLogFile class.
  *
  *=========================================================================*/
-void Test_LogHook (const TCHAR* pString, va_list Args) {
+void Test_LogHook(const TCHAR *pString, va_list Args) {
 	//DEFINE_FUNCTION("Test_LogHook()");
-	TPRINTF (_T("Test_LogHook called...\n"));
-	TVPRINTF (pString, Args);
-	TPRINTF (_T("\n"));
+	TPRINTF(_T("Test_LogHook called...\n"));
+	TVPRINTF(pString, Args);
+	TPRINTF(_T("\n"));
 }
 
 /*===========================================================================
@@ -658,7 +658,7 @@ void Test_LogHook (const TCHAR* pString, va_list Args) {
  *  - Tests DebugPrintf() method.
  *
  *=========================================================================*/
-void Test_LogFile (void) {
+void Test_LogFile(void) {
 	DEFINE_FUNCTION("Test_LogFile()");
 	CLogFile TestLog1(_T("test1.log"));       /* Check constructors */
 	CLogFile TestLog2;

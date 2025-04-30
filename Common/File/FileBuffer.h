@@ -48,7 +48,7 @@ class CFileBuffer {
 	/*---------- Begin Private Class Members ----------------------*/
   private:
 	FILE *m_pFile;        /* File handle */
-	bool m_Attached;     /* Does handle belong to us? */
+	bool m_Attached;      /* Does handle belong to us? */
 
 	char *m_pBuffer;      /* Buffered input data */
 	int m_BufferSize;
@@ -61,8 +61,8 @@ class CFileBuffer {
   protected:
 
 	/* Ensure the given amount of data is available */
-	bool GetData_Priv (const int Size);
-	bool GetData (const int Size) {
+	bool GetData_Priv(const int Size);
+	bool GetData(const int Size) {
 		return ((Size <= m_BufferSize - m_BufferIndex) ? true : GetData_Priv(Size));
 	}
 
@@ -73,48 +73,48 @@ class CFileBuffer {
 	/* Class Constructors/Destructors */
 	CFileBuffer();
 	virtual ~CFileBuffer();
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Attach an existing file handle */
-	void Attach (FILE* pFile);
+	void Attach(FILE *pFile);
 
 	/* Close or detach a file */
-	void Close (void);
+	void Close(void);
 
 	/* Get class members */
-	int GetBufferSize (void) {
+	int GetBufferSize(void) {
 		return (m_BufferSize);
 	}
 
-	int GetMaxBufferSize (void) {
+	int GetMaxBufferSize(void) {
 		return (m_MaxBufferSize);
 	}
 
-	int GetBufferIndex (void) {
+	int GetBufferIndex(void) {
 		return (m_BufferIndex);
 	}
 
-	int Tell (void) {
+	int Tell(void) {
 		return (m_FileIndex);
 	}
 
-	bool IsEOF (void) {
+	bool IsEOF(void) {
 		return (feof(m_pFile) != 0 && m_BufferIndex >= m_BufferSize);
 	}
 
 	/* Open a file */
-	bool Open (const TCHAR* pFilename, const TCHAR* pMode);
+	bool Open(const TCHAR *pFilename, const TCHAR *pMode);
 
 	/* Read data from the file buffer */
-	bool ReadChar (char &InputChar);
-	bool ReadShort (short &InputValue);
-	bool ReadInt (int &InputValue);
-	bool ReadLong (long &InputValue);
-	bool Read (char* pData, const int Size);
-	bool ReadData (char* pData, const int Size);
+	bool ReadChar(char &InputChar);
+	bool ReadShort(short &InputValue);
+	bool ReadInt(int &InputValue);
+	bool ReadLong(long &InputValue);
+	bool Read(char *pData, const int Size);
+	bool ReadData(char *pData, const int Size);
 
 	/* Set the size of the input buffer */
-	void SetBufferSize (const int Size);
+	void SetBufferSize(const int Size);
 
 };
 

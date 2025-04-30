@@ -33,7 +33,7 @@ DEFINE_FILE("RgbPal.cpp");
  * from 0 to 255.
  *
  *=========================================================================*/
-void ConvertFromRawRGBPal (rgbpalraw_t* pPalette, const int PaletteSize) {
+void ConvertFromRawRGBPal(rgbpalraw_t *pPalette, const int PaletteSize) {
 	DEFINE_FUNCTION("ConvertFromRawRGBPal()");
 	int Index;
 	/* Ensure valid input */
@@ -60,7 +60,7 @@ void ConvertFromRawRGBPal (rgbpalraw_t* pPalette, const int PaletteSize) {
  * Converts a raw palette entry to a standard one.
  *
  *=========================================================================*/
-rgbpal_t ConvertRawRGBPal (const rgbpalraw_t &RawPal) {
+rgbpal_t ConvertRawRGBPal(const rgbpalraw_t &RawPal) {
 	rgbpal_t NewPal = RawPal;
 	NewPal.Red <<= 2;
 	NewPal.Green <<= 2;
@@ -85,8 +85,8 @@ rgbpal_t ConvertRawRGBPal (const rgbpalraw_t &RawPal) {
  * Flag options can be OR'd for multiple operations.
  *
  *=========================================================================*/
-void CopyRGBPalette (rgbpal_t* pDestPal, rgbpal_t* pSourcePal, const int PaletteSize,
-                     const int Flags) {
+void CopyRGBPalette(rgbpal_t *pDestPal, rgbpal_t *pSourcePal, const int PaletteSize,
+                    const int Flags) {
 	DEFINE_FUNCTION("CopyRGBPalette()");
 	/* Ensure valid input */
 	ASSERT(pDestPal != NULL && pSourcePal != NULL && PaletteSize > 0);

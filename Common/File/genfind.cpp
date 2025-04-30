@@ -41,7 +41,7 @@ DEFINE_FILE("GenFind.cpp");
  * Class CFileBlock Destructor
  *
  *=======================================================================*/
-void CFileBlock::Destroy (void) {
+void CFileBlock::Destroy(void) {
 	//DEFINE_FUNCTION("CFileBlock::Destroy");
 	/* Clear all elements to 0 initially depending on platform */
 #if defined(_WIN32) && defined(__BORLANDC__)
@@ -77,7 +77,7 @@ void CFileBlock::Destroy (void) {
  * Helper function to convert from file time to a time_t value.
  *
  *=========================================================================*/
-time_t CFileBlock::ConvertFileTime (const FILETIME& FileTime) const {
+time_t CFileBlock::ConvertFileTime(const FILETIME &FileTime) const {
 	DEFINE_FUNCTION("CFileBlock::ConvertFileTime()");
 	BOOL Result;
 	SYSTEMTIME SysTime;
@@ -121,14 +121,14 @@ time_t CFileBlock::ConvertFileTime (const FILETIME& FileTime) const {
  * into a time_t value.
  *
  *=========================================================================*/
-time_t CFileBlock::GetWriteTime (void) const {
+time_t CFileBlock::GetWriteTime(void) const {
 	//DEFINE_FUNCTION("CFileBlock::GetWriteTime()");
 	struct ftime FileTime;
 	struct tm TimeM;
 	ulong Value;
 	/* Create a long value and assign the ftime to it */
 	Value = (BlockData.ff_ftime & 0xFFFF) + ((BlockData.ff_fdate << 16) & 0xFFFF000ul);
-	FileTime = *((ftime*)&Value);
+	FileTime = *((ftime *)&Value);
 	/* Convert ftime to a tm time, hopefully */
 	TimeM.tm_sec = (FileTime.ft_tsec / 2);
 	TimeM.tm_min = FileTime.ft_min;
@@ -154,7 +154,7 @@ time_t CFileBlock::GetWriteTime (void) const {
  * Class CFindFile Constructor
  *
  *=======================================================================*/
-CFindFile::CFindFile (void) {
+CFindFile::CFindFile(void) {
 	FindHandle = NULL_FIND_HANDLE;
 }
 
@@ -168,7 +168,7 @@ CFindFile::CFindFile (void) {
  * Class CFindFile Destructor
  *
  *=======================================================================*/
-void CFindFile::Destroy (void) {
+void CFindFile::Destroy(void) {
 	/* Ensure the find handle is closed */
 	Close();
 	FindHandle = NULL_FIND_HANDLE;
@@ -189,7 +189,7 @@ void CFindFile::Destroy (void) {
  * started.
  *
  *=======================================================================*/
-bool CFindFile::Close (void) {
+bool CFindFile::Close(void) {
 	//DEFINE_FUNCTION("CFindFile::Close()");
 
 	/* Make sure the filehandle is currently valid */
@@ -231,7 +231,7 @@ bool CFindFile::Close (void) {
  * Returns FALSE on any error.
  *
  *=========================================================================*/
-bool CFindFile::FindFirst (const char* pFilespec, const int Attribute) {
+bool CFindFile::FindFirst(const char *pFilespec, const int Attribute) {
 	DEFINE_FUNCTION("CFindFile::FindFirst()");
 	/* Ensure valid input */
 	ASSERT(pFilespec != NULL);
@@ -241,14 +241,14 @@ bool CFindFile::FindFirst (const char* pFilespec, const int Attribute) {
 #if defined(__MSDOS__)
 	int Result;
 	/* Just call the standard DOS findfirst function */
-	Result = findfirst (pFilespec, FileBlock.GetBlockPtr(), Attribute);
+	Result = findfirst(pFilespec, FileBlock.GetBlockPtr(), Attribute);
 	FindHandle = 0;
 	return ((Result != 0) ? FALSE : TRUE);
 	/* For Windows, Borland C++ */
 #elif defined(_WIN32) && defined(__BORLANDC__)
 	FileBlock.GetBlock().dwFileAttributes = Attribute;
 	strnncpy(FileBlock.GetBlock().cFileName, pFilespec, _MAX_PATH);
-	FindHandle = (long) FindFirstFile(pFilespec, &FileBlock);
+	FindHandle = (long)FindFirstFile(pFilespec, &FileBlock);
 	return ((FindHandle == (long)INVALID_HANDLE_VALUE) ? FALSE : TRUE);
 	/* For Windows, Visual C++ */
 #elif defined(_WIN32)
@@ -274,7 +274,7 @@ bool CFindFile::FindFirst (const char* pFilespec, const int Attribute) {
  * on any error or TRUE on success.
  *
  *=========================================================================*/
-bool CFindFile::FindNext (void) {
+bool CFindFile::FindNext(void) {
 	//DEFINE_FUNCTION("CFindFile::FindNext()");
 	int Result;
 
@@ -295,7 +295,7 @@ bool CFindFile::FindNext (void) {
 	/* For Windows, Visual C++ */
 #elif defined(_WIN32)
 	/* Call the Visual C++ function */
-	Result = _findnext (FindHandle, FileBlock.GetBlockPtr());
+	Result = _findnext(FindHandle, FileBlock.GetBlockPtr());
 	return ((Result == -1) ? FALSE : TRUE);
 	/* Undefined system in use */
 #else
@@ -306,4 +306,3 @@ bool CFindFile::FindNext (void) {
 /*===========================================================================
  *      End of Class Method CFindFile::FindNext()
  *=========================================================================*/
-

@@ -55,11 +55,11 @@
  * Definitions for identifying the file.
  *
  *=========================================================================*/
-#define DL_BASE_NAME    "DL_Base.cpp"
+#define DL_BASE_NAME "DL_Base.cpp"
 #define DL_BASE_VERSION "0.01d"
-#define DL_BASE_AUTHOR  "Dave Humphrey"
-#define DL_BASE_EMAIL   "uesp@m0use.net"
-#define DL_BASE_DATE    "1 April 2001"
+#define DL_BASE_AUTHOR "Dave Humphrey"
+#define DL_BASE_EMAIL "uesp@m0use.net"
+#define DL_BASE_DATE "1 April 2001"
 /*===========================================================================
  *      End of File Identification
  *=========================================================================*/
@@ -171,7 +171,7 @@
 	typedef unsigned char boolean;
 
 	#if !defined(TRUE)
-		#define TRUE  ((boolean)1)
+		#define TRUE ((boolean)1)
 		#define FALSE ((boolean)0)
 	#endif
 
@@ -187,12 +187,12 @@
  *
  *=========================================================================*/
 
-#define DL_RGB(r, g ,b) ((DWORD) (((BYTE) (r) | \
-                                    ((WORD) (g) << 8)) | \
-                                   (((DWORD) (BYTE) (b)) << 16)))
-#define DL_RED(color)   ((BYTE) ((color)&0xFF))
-#define DL_GREEN(color) ((BYTE) (((color)>>8)&0xFF))
-#define DL_BLUE(color)  ((BYTE) (((color)>>16)&0xFF))
+#define DL_RGB(r, g ,b) ((DWORD)(((BYTE)(r) | \
+                                 ((WORD)(g) << 8)) | \
+                                 (((DWORD)(BYTE)(b)) << 16)))
+#define DL_RED(color) ((BYTE)((color)&0xFF))
+#define DL_GREEN(color) ((BYTE)(((color)>>8)&0xFF))
+#define DL_BLUE(color) ((BYTE)(((color)>>16)&0xFF))
 
 /*===========================================================================
  *      End of Misc. Macro Definitions
@@ -313,9 +313,9 @@ typedef unsigned long dword;
 #endif
 
 /* The type for the new qsort() user compare function */
-typedef int (_cdecl* PQSORT_CMPFUNC) (const void* pElem1, const void* pElem2,
-                                           const long lUserData );
-typedef int (_cdecl* PQSORT_CMPFUNC_ORIG) (const void* pElem1, const void* pElem2);
+typedef int (_cdecl *PQSORT_CMPFUNC)(const void *pElem1, const void *pElem2,
+                                     const long lUserData );
+typedef int (_cdecl *PQSORT_CMPFUNC_ORIG)(const void *pElem1, const void *pElem2);
 
 /*===========================================================================
  *      End of Basic Type Definitions
@@ -373,15 +373,15 @@ extern TCHAR ThisFile[];
  *
  *=========================================================================*/
 #define NULL_CHAR ((TCHAR)'\0')
-#define DEL_CHAR  ((TCHAR)'\b')
-#define ESC_CHAR  ((TCHAR)'\x1B')
-#define LF_CHAR   ((TCHAR)'\n')
-#define CR_CHAR   ((TCHAR)'\r')
-#define TAB_CHAR  ((TCHAR)'\t')
-#define GARBAGE_CHAR  ((TCHAR)0xCC)
+#define DEL_CHAR ((TCHAR)'\b')
+#define ESC_CHAR ((TCHAR)'\x1B')
+#define LF_CHAR ((TCHAR)'\n')
+#define CR_CHAR ((TCHAR)'\r')
+#define TAB_CHAR ((TCHAR)'\t')
+#define GARBAGE_CHAR ((TCHAR)0xCC)
 #define BLOCKEND_CHAR ((TCHAR)0xFC)
-#define DEGREE_CHAR   ((TCHAR)248)
-#define MU_CHAR   ((TCHAR)230)
+#define DEGREE_CHAR ((TCHAR)248)
+#define MU_CHAR ((TCHAR)230)
 /*===========================================================================
  *      End of Character Definitions
  *=========================================================================*/
@@ -490,17 +490,17 @@ extern TCHAR ThisFile[];
  *=========================================================================*/
 
 /* A custom assert procedure used by the ASSERT macro */
-void CustomAssert (const TCHAR* pString, const TCHAR* pFile,
-                   const TCHAR* pFunction, const long Line);
+void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
+                  const TCHAR *pFunction, const long Line);
 
 /* Create the exception 'throw' function for DOS systems */
 #if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
-	void throw (const char* pString);
+	void throw(const char *pString);
 #endif
 
 /* Standard qsort() replacement */
-void qsort (void* pBase, size_t NumElements, size_t ElementWidth,
-            PQSORT_CMPFUNC pCmpFunc, long lUserData );
+void qsort(void *pBase, size_t NumElements, size_t ElementWidth,
+           PQSORT_CMPFUNC pCmpFunc, long lUserData );
 
 /*===========================================================================
  *      End of Function Prototypes
@@ -527,7 +527,7 @@ void qsort (void* pBase, size_t NumElements, size_t ElementWidth,
 extern long l_QSortUserData;
 extern PQSORT_CMPFUNC l_QSortCmpFunc;
 
-inline int l_QSortCompare (const void* pElem1, const void* pElem2) {
+inline int l_QSortCompare(const void *pElem1, const void *pElem2) {
 	//DEFINE_FUNCTION("l_QSortCompare()");
 	/* Pass the call onto the extended function */
 	return l_QSortCmpFunc(pElem1, pElem2, l_QSortUserData);

@@ -55,7 +55,7 @@ typedef TPtrArray<char> CPCharArray;
  * random number of random sized strings are added to two char* arrays.
  *
  *=========================================================================*/
-void Test_StressPtrArray (const size_t NumTests) {
+void Test_StressPtrArray(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_StressPtrArray()");
 	CPCharArray StringArray1(100);
 	size_t LoopCounter;
@@ -130,7 +130,7 @@ void Test_StressPtrArray (const size_t NumTests) {
 
  *
  *=========================================================================*/
-void Test_PtrArray (void) {
+void Test_PtrArray(void) {
 	DEFINE_FUNCTION("Test_PtrArray()");
 	long TestInt;
 	long *pTestInt;
@@ -249,4 +249,3 @@ void Test_PtrArray (void) {
 /*===========================================================================
  *      End of Module Test Routines
  *=========================================================================*/
-

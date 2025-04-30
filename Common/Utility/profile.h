@@ -34,11 +34,11 @@
 
 /* Define a profile variable */
 #define DEFINE_PROFILE(ProfName) \
-	profile_t ProfName = { { 0ul }, { 0ul }, { 0ul }, 0.0, { 0ul }, 0.0, { 0ul } };
+	profile_t ProfName = {{0ul}, {0ul}, {0ul}, 0.0, {0ul}, 0.0, {0ul}};
 
 /* Define a static profile variable */
 #define DEFINE_STATIC_PROFILE(ProfName) \
-	static profile_t ProfName = { { 0ul }, { 0ul }, { 0ul }, 0.0, { 0ul }, 0.0, { 0ul } }; \
+	static profile_t ProfName = {{0ul}, {0ul}, {0ul}, 0.0, {0ul}, 0.0, {0ul}}; \
 	CProfileEndFunc _tmpVar(ProfName); \
 	GetHiClock((ProfName).StartClock);
 
@@ -67,10 +67,10 @@
 	}
 
 /* Access profile data */
-#define GET_PROFILE_DIFFTIME(ProfName)   ((ProfName).DiffTime)
-#define GET_PROFILE_TOTALTIME(ProfName)  ((ProfName).TotalTime)
-#define GET_PROFILE_COUNT(ProfName)      ((ProfName).Count)
-#define GET_PROFILE_AVGTIME(ProfName)    ((double) (((ProfName).Count == 0) ? 0.0 : (ProfName).TotalTime/(double)(ProfName).Count ) )
+#define GET_PROFILE_DIFFTIME(ProfName) ((ProfName).DiffTime)
+#define GET_PROFILE_TOTALTIME(ProfName) ((ProfName).TotalTime)
+#define GET_PROFILE_COUNT(ProfName) ((ProfName).Count)
+#define GET_PROFILE_AVGTIME(ProfName) ((double)(((ProfName).Count == 0) ? 0.0 : (ProfName).TotalTime / (double)(ProfName).Count))
 
 
 /* Define profile macros to nothing in non-debug builds */

@@ -35,7 +35,7 @@ DEFINE_FILE();
  * LISTFILE_LINE_LENGTH is used.
  *
  *=========================================================================*/
-CListFile::CListFile (const size_t LineLength) {
+CListFile::CListFile(const size_t LineLength) {
 	//DEFINE_FUNCTION("CListFile::CListFile()");
 	/* Initialize the class members */
 	MaxLineLength = LineLength;
@@ -64,7 +64,7 @@ CListFile::CListFile (const size_t LineLength) {
  * Class CListFile Destructor
  *
  *=========================================================================*/
-CListFile::~CListFile () {
+CListFile::~CListFile() {
 	//DEFINE_FUNCTION("CListFile::~CListFile()");
 	/* Close the file if required */
 	Close();
@@ -84,7 +84,7 @@ CListFile::~CListFile () {
  * Clears the contents of the object.
  *
  *=========================================================================*/
-void CListFile::Destroy (void) {
+void CListFile::Destroy(void) {
 	//DEFINE_FUNCTION("CListFile::Destroy()");
 	/* Clear the line buffer */
 	*pCurrentLine = NULL_CHAR;
@@ -106,12 +106,12 @@ void CListFile::Destroy (void) {
  * Closes the current list file if it is open.
  *
  *=========================================================================*/
-void CListFile::Close (void) {
+void CListFile::Close(void) {
 	//DEFINE_FUNCTION("CListFile::Close()");
 
 	/* Don't close the file unless it is valid */
 	if (pFileHandle != NULL) {
-		fclose (pFileHandle);
+		fclose(pFileHandle);
 		pFileHandle = NULL;
 		*pCurrentLine = NULL_CHAR;
 		BufferValid = FALSE;
@@ -132,7 +132,7 @@ void CListFile::Close (void) {
  * it is closed.
  *
  *=========================================================================*/
-boolean CListFile::Open (const char* pFilename) {
+boolean CListFile::Open(const char *pFilename) {
 	DEFINE_FUNCTION("CListFile::Open()");
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL);
@@ -167,7 +167,7 @@ boolean CListFile::Open (const char* pFilename) {
  * the extra characters on the line are ignored.
  *
  *=========================================================================*/
-boolean CListFile::ReadNextLine (void) {
+boolean CListFile::ReadNextLine(void) {
 	DEFINE_FUNCTION("CListFile::ReadNextLine()");
 	int Result;
 	/* Ensure the list file is currently open */
@@ -239,9 +239,9 @@ boolean CListFile::ReadNextLine (void) {
  *  9. Test the autodestruction of the class objects
  *
  *=========================================================================*/
-void Test_ListFile (void) {
+void Test_ListFile(void) {
 	DEFINE_FUNCTION("Test_ListFile()");
-	SystemLog.Printf (stdout, "================= Testing CListFile =========================");
+	SystemLog.Printf(stdout, "================= Testing CListFile =========================");
 	/* Test the CListFile construction */
 	CListFile TestFile1;
 	CListFile TestFile2(10);
@@ -269,7 +269,7 @@ void Test_ListFile (void) {
 	/* Output the rest of the TestFile1 file to the SystemLog */
 	do {
 		ASSERT(TestFile1.IsValidLine() == TRUE);
-		SystemLog.Printf ("TestFile1:%s", TestFile1.GetCurrentLine());
+		SystemLog.Printf("TestFile1:%s", TestFile1.GetCurrentLine());
 	} while (TestFile1.ReadNextLine());
 
 	ASSERT(TestFile1.IsValidLine() == FALSE);

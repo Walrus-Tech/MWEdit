@@ -49,29 +49,29 @@
  *=========================================================================*/
 
 /* Insert a TCHARacter somewhere in a string */
-void chradd (TCHAR* pString, const size_t TCHARIndex, const TCHAR NewTCHAR);
+void chradd(TCHAR *pString, const size_t TCHARIndex, const TCHAR NewTCHAR);
 
 /* Add a TCHARacter to the end of a string */
-void chrcat (TCHAR* pString, const TCHAR NewTCHAR);
+void chrcat(TCHAR *pString, const TCHAR NewTCHAR);
 
 /* Count the number of TCHARacters in the string */
-int chrcount (const TCHAR* pString, const TCHAR TCHAR);
+int chrcount(const TCHAR *pString, const TCHAR TCHAR);
 
 /* Delete a TCHARacter from a string */
-void chrdel (TCHAR* pString, const size_t TCHARIndex);
+void chrdel(TCHAR *pString, const size_t TCHARIndex);
 
 /* Delete the last TCHARacter from the string */
-void chrdellast (TCHAR* pString);
+void chrdellast(TCHAR *pString);
 
 /* Reverse search for last punctuation TCHARacter in string */
-boolean chrrpunc (size_t &TCHARIndex, const TCHAR* pString);
+boolean chrrpunc(size_t &TCHARIndex, const TCHAR *pString);
 
 /* Divide string into substrings seperated by token TCHARacter */
-TCHAR *chrtok (TCHAR* pString, const TCHAR TokenTCHAR);
+TCHAR *chrtok(TCHAR *pString, const TCHAR TokenTCHAR);
 
 /* Truncate a string at first/last occurence of TCHARacter */
-TCHAR *chrtrunc (TCHAR* pString, const TCHAR TruncateTCHAR);
-TCHAR *chrrtrunc (TCHAR* pString, const TCHAR TruncateTCHAR);
+TCHAR *chrtrunc(TCHAR *pString, const TCHAR TruncateTCHAR);
+TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateTCHAR);
 
 /*===========================================================================
  *      End of Function Prototypes
@@ -86,15 +86,15 @@ TCHAR *chrrtrunc (TCHAR* pString, const TCHAR TruncateTCHAR);
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_chradd (void);
-	void Test_chrcat (void);
-	void Test_chrdel (void);
-	void Test_chrdellast (void);
-	void Test_chrtok (void);
-	void Test_chrrpunc (void);
-	void Test_chrtrunc (void);
-	void Test_chrrtrunc (void);
-	void Test_DLChr (void);
+	void Test_chradd(void);
+	void Test_chrcat(void);
+	void Test_chrdel(void);
+	void Test_chrdellast(void);
+	void Test_chrtok(void);
+	void Test_chrrpunc(void);
+	void Test_chrtrunc(void);
+	void Test_chrrtrunc(void);
+	void Test_DLChr(void);
 #endif
 /*===========================================================================
  *      End of Testing Routine Prototypes
@@ -104,5 +104,3 @@ TCHAR *chrrtrunc (TCHAR* pString, const TCHAR TruncateTCHAR);
 /*===========================================================================
  *      End of File DL_Chr.H
  *=========================================================================*/
-
-

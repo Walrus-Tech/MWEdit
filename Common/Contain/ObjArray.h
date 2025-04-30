@@ -44,7 +44,7 @@ template <class CObjType> class TObjArray {
   protected:
 
 	/* Helper function to delete all elements */
-	void DeleteElements_Priv (void);
+	void DeleteElements_Priv(void);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -57,145 +57,145 @@ template <class CObjType> class TObjArray {
 	}
 
 	/* Delete the array */
-	virtual void Destroy (void);
-	void RemoveAll (void) {
+	virtual void Destroy(void);
+	void RemoveAll(void) {
 		Destroy();
 	}
 
 	/* Add a new object */
-	int Add (CObjType* pObject) {
+	int Add(CObjType *pObject) {
 		return m_Array.Add(pObject);
 	}
 
-	bool AddElement (CObjType* pObject) {
+	bool AddElement(CObjType *pObject) {
 		return m_Array.AddElement(pObject);
 	}
 
-	int AddHead (CObjType* pObject) {
+	int AddHead(CObjType *pObject) {
 		return m_Array.AddHead(pObject);
 	}
 
-	void AddSort (CObjType* pObject) {
+	void AddSort(CObjType *pObject) {
 		m_Array.AddSort(pObject);
 	}
 
-	void AddSortFast (CObjType* pObject) {
+	void AddSortFast(CObjType *pObject) {
 		m_Array.AddSortFast(pObject);
 	}
 
-	CObjType *AddNew (void);
+	CObjType *AddNew(void);
 
 	/* Delete elements */
-	void DeleteElement (CObjType* pObject);
-	void DeleteElement (const int Index);
-	void RemoveAt (const int Index) {
+	void DeleteElement(CObjType *pObject);
+	void DeleteElement(const int Index);
+	void RemoveAt(const int Index) {
 		DeleteElement(Index);
 	}
 
 	/* Find an element in the array */
-	int FindElement (CObjType* pObject) {
+	int FindElement(CObjType *pObject) {
 		return m_Array.FindElement(pObject);
 	}
 
-	int FindFast (CObjType* pObject) {
+	int FindFast(CObjType *pObject) {
 		return m_Array.FindFast(pObject);
 	}
 
-	int FindInsertLoc (CObjType* pObject) {
+	int FindInsertLoc(CObjType *pObject) {
 		return m_Array.FindInsertLoc(pObject);
 	}
 
-	int FindFastFunc (PQSORT_CMPFUNC pCompareFunc, void* pObject2) {
+	int FindFastFunc(PQSORT_CMPFUNC pCompareFunc, void *pObject2) {
 		return m_Array.FindFastFunc(pCompareFunc, pObject2);
 	}
 
-	int FindBSearch (PQSORT_CMPFUNC_ORIG pCompareFunc, void* pObject2) {
+	int FindBSearch(PQSORT_CMPFUNC_ORIG pCompareFunc, void *pObject2) {
 		return m_Array.FindBSearch(pCompareFunc, pObject2);
 	}
 
 	/* Frees any extra allocated memory */
-	void FreeExtra (void) {
+	void FreeExtra(void) {
 		m_Array.FreeExtra();
 	}
 
 	/* Access elements */
-	CObjType *GetAt (const int Index) {
+	CObjType *GetAt(const int Index) {
 		return m_Array.GetAt(Index);
 	}
 
-	bool GetElement (CObjType** ppObject, const int Index) const {
+	bool GetElement(CObjType **ppObject, const int Index) const {
 		return m_Array.GetElement(ppObject, Index);
 	}
 
 	/* Get class members */
-	int GetNumElements (void) const {
+	int GetNumElements(void) const {
 		return (m_Array.GetNumElements());
 	}
 
-	int GetMaxElements (void) const {
+	int GetMaxElements(void) const {
 		return (m_Array.GetMaxElements());
 	}
 
-	int GetUpperBound (void) const {
+	int GetUpperBound(void) const {
 		return (m_Array.GetUpperBound())
 	}
 
-	int GetGrowSize (void) const {
+	int GetGrowSize(void) const {
 		return (m_Array.GetGrowSize())
 	}
 
-	int GetSize (void) const {
+	int GetSize(void) const {
 		return (m_Array.GetSize())
 	}
 
 	/* Ensures the given array index is valid */
-	bool IsValidIndex (const int Index) const {
+	bool IsValidIndex(const int Index) const {
 		return (m_Array.IsValidIndex(Index));
 	}
 
 	/* Inserts an element after the given index */
-	int Insert (CObjType* pObject, const int Index) {
+	int Insert(CObjType *pObject, const int Index) {
 		return m_Array.Insert(pObject, Index);
 	}
 
-	bool InsertAfter (const int Index, CObjType* pObject) {
+	bool InsertAfter(const int Index, CObjType *pObject) {
 		return m_Array.InsertAfter(Index, pObject);
 	}
 
-	bool InsertBefore (const int Index, CObjType* pObject) {
+	bool InsertBefore(const int Index, CObjType *pObject) {
 		return m_Array.InsertBefore(Index, pObject);
 	}
 
-	bool InsertAt (const int Index, CObjType* pObject) {
+	bool InsertAt(const int Index, CObjType *pObject) {
 		return m_Array.InsertAt(Index, pObject);
 	}
 
 	/* Attempts to get the specified array element */
-	CObjType* operator [] (const int Index) const {
+	CObjType *operator[](const int Index) const {
 		return (m_Array[Index]);
 	}
 
 	/* Change the grow size */
-	void SetGrowSize (const int GrowSize = -1) {
+	void SetGrowSize(const int GrowSize = -1) {
 		m_Array.SetGrowSize(GrowSize);
 	}
 
-	void SetMaxElements (const int MaxSize);
-	void SetSize (const int NewSize) {
+	void SetMaxElements(const int MaxSize);
+	void SetSize(const int NewSize) {
 		SetMaxElements(NewSize);
 	}
 
 	/* Set the user supplied compare function */
-	void SetCompareFunc (PQSORT_CMPFUNC pFunction) {
+	void SetCompareFunc(PQSORT_CMPFUNC pFunction) {
 		m_Array.SetCompareFunc(pFunction);
 	}
 
-	void SetCmpFuncData (const long lUserData) {
+	void SetCmpFuncData(const long lUserData) {
 		m_Array.SetCompareFunc(lUserData);
 	}
 
 	/* Sorts the array using the current compare function */
-	void Sort (const long lUserData) {
+	void Sort(const long lUserData) {
 		m_Array.Sort(lUserData);
 	}
 
@@ -214,7 +214,7 @@ template <class CObjType> class TObjArray {
  * ASSERTs if given invalid input.
  *
  *=========================================================================*/
-template <class CObjType> TObjArray< CObjType >::TObjArray (const int MaxSize, const int GrowSize) :
+template <class CObjType> TObjArray<CObjType>::TObjArray(const int MaxSize, const int GrowSize) :
 	m_Array(MaxSize, GrowSize) {
 	//DEFINE_FUNCTION("TObjArray::TObjArray()");
 }
@@ -230,7 +230,7 @@ template <class CObjType> TObjArray< CObjType >::TObjArray (const int MaxSize, c
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray< CObjType >::Destroy (void) {
+void TObjArray<CObjType>::Destroy(void) {
 	//DEFINE_FUNCTION("TObjArray::Destroy()");
 	DeleteElements_Priv();
 }
@@ -248,9 +248,9 @@ void TObjArray< CObjType >::Destroy (void) {
  *
  *=========================================================================*/
 template <class CObjType>
-CObjType *TObjArray< CObjType >::AddNew (void) {
+CObjType *TObjArray<CObjType>::AddNew(void) {
 	DEFINE_FUNCTION("CObjType::AddNew()");
-	CObjType* pNewObject;
+	CObjType *pNewObject;
 	/* Allocate the new object and add it to the end of the array */
 	CreatePointer(pNewObject, CObjType);
 	m_Array.Add(pNewObject);
@@ -270,7 +270,7 @@ CObjType *TObjArray< CObjType >::AddNew (void) {
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray< CObjType >::DeleteElement (CObjType* pObject) {
+void TObjArray<CObjType>::DeleteElement (CObjType *pObject) {
 	int Index;
 	/* Attempt to find the element in the array */
 	Index = m_Array.FindElement(pObject);
@@ -295,9 +295,9 @@ void TObjArray< CObjType >::DeleteElement (CObjType* pObject) {
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray< CObjType >::DeleteElement (const int Index) {
+void TObjArray<CObjType>::DeleteElement(const int Index) {
 	DEFINE_FUNCTION("TObjArray::DeleteElement()");
-	CObjType* pObject;
+	CObjType *pObject;
 	/* Get element and ensure it is valid */
 	pObject = m_Array.GetAt(Index);
 
@@ -324,9 +324,9 @@ void TObjArray< CObjType >::DeleteElement (const int Index) {
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray< CObjType >::DeleteElements_Priv (void) {
+void TObjArray<CObjType>::DeleteElements_Priv(void) {
 	DEFINE_FUNCTION("TObjArray::DeleteElements_Priv()");
-	CObjType* pObject;
+	CObjType *pObject;
 	int Index;
 
 	/* Delete each element in the array one-by-one */
@@ -352,9 +352,9 @@ void TObjArray< CObjType >::DeleteElements_Priv (void) {
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray< CObjType >::SetMaxElements (const int MaxSize) {
+void TObjArray<CObjType>::SetMaxElements(const int MaxSize) {
 	//DEFINE_FUNCTION("TObjArray::SetMaxElements()");
-	CObjType* pObject;
+	CObjType *pObject;
 	int Index;
 
 	/* Delete any truncated elements in the array one-by-one */

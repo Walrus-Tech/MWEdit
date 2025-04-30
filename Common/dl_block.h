@@ -65,37 +65,37 @@ typedef struct BLOCKINFO {
  *=========================================================================*/
 
 /* Check for dangling, unreferenced pointers */
-void CheckMemoryRefs (void);
+void CheckMemoryRefs(void);
 
 /* Reset all the referenced flags of blocks */
-void ClearMemoryRefs (void);
+void ClearMemoryRefs(void);
 
 /* Create a new block info node */
-boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize);
-boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize, const TCHAR* pName,
-                         const TCHAR* pFunc);
+boolean CreateBlockInfo(void *pNewBlock, const size_t NewSize);
+boolean CreateBlockInfo(void *pNewBlock, const size_t NewSize, const TCHAR *pName,
+                        const TCHAR *pFunc);
 
 /* Delete a block info node */
-void FreeBlockInfo (void* pBlock);
+void FreeBlockInfo(void *pBlock);
 
 /* Return the current number of allocated blocks */
-size_t GetNumBlocks (void);
+size_t GetNumBlocks(void);
 
 /* Checks for the given memory block in the current block list */
-boolean IsValidPointer (void* pBlock, const size_t MinSize);
-boolean IsValidPointer (void* pBlock);
+boolean IsValidPointer(void *pBlock, const size_t MinSize);
+boolean IsValidPointer(void *pBlock);
 
 /* Flag the referenced member of the block */
-void NoteMemoryRef (void* pBlock);
+void NoteMemoryRef(void *pBlock);
 
 /* Outputs all the block information to the system log file */
-void OutputBlockInfo (void);
+void OutputBlockInfo(void);
 
 /* Retrieve the size of a block */
-size_t SizeOfBlock (void* pBlock);
+size_t SizeOfBlock(void *pBlock);
 
 /* Update a block node information */
-void UpdateBlockInfo (void* pOldBlock, void* pNewBlock, const size_t NewSize);
+void UpdateBlockInfo(void *pOldBlock, void *pNewBlock, const size_t NewSize);
 
 /*===========================================================================
  *      End of Function Prototypes

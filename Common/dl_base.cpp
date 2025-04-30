@@ -48,8 +48,8 @@ PQSORT_CMPFUNC l_QSortCmpFunc = NULL;
  * Exits program with abort().
  *
  *=========================================================================*/
-void CustomAssert (const TCHAR* pString, const TCHAR* pFile,
-                   const TCHAR* pFunction, const long Line) {
+void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
+                  const TCHAR *pFunction, const long Line) {
 	//DEFINE_FUNCTION("CustomAssert()");
 	/* TODO: Hack to ensure we reset to text mode under MSDOS in
 	 * case we are in a graphics mode. */
@@ -62,22 +62,22 @@ void CustomAssert (const TCHAR* pString, const TCHAR* pFile,
 
 	/* Output message to log file */
 	if (SystemLog.IsOpen()) {
-		SystemLog.Printf (_T("ASSERTION FAILED: '%s'"), pString);
-		SystemLog.Printf (_T("     File: '%s'"), pFile);
-		SystemLog.Printf (_T("     Func: '%s'"), pFunction);
-		SystemLog.Printf (_T("     Line: %ld"), Line);
+		SystemLog.Printf(_T("ASSERTION FAILED: '%s'"), pString);
+		SystemLog.Printf(_T("     File: '%s'"), pFile);
+		SystemLog.Printf(_T("     Func: '%s'"), pFunction);
+		SystemLog.Printf(_T("     Line: %ld"), Line);
 	}
 
 	/* Display a message box under Borland */
 #if defined(__BCPLUSPLUS__) || defined(_WIN32)
-	ErrorHandler.Printf (_T("Application Assert!"),
-	                     _T("ASSERTION FAILED: '%s'\r\n\tFile: '%s'\r\n\tFunc: '%s'\r\n\tLine: %ld\r\nAborting Program!"),
-	                     pString, pFile, pFunction, Line);
+	ErrorHandler.Printf(_T("Application Assert!"),
+	                    _T("ASSERTION FAILED: '%s'\r\n\tFile: '%s'\r\n\tFunc: '%s'\r\n\tLine: %ld\r\nAborting Program!"),
+	                    pString, pFile, pFunction, Line);
 #else
-	fprintf (stderr, _T("ASSERTION FAILED: '%s'\r\n"), pString);
-	fprintf (stderr, _T("\tFile: '%s'\r\n"), pFile);
-	fprintf (stderr, _T("\tFunc: '%s'\r\n"), pFunction);
-	fprintf (stderr, _T("\tLine: %ld\r\n"), Line);
+	fprintf(stderr, _T("ASSERTION FAILED: '%s'\r\n"), pString);
+	fprintf(stderr, _T("\tFile: '%s'\r\n"), pFile);
+	fprintf(stderr, _T("\tFunc: '%s'\r\n"), pFunction);
+	fprintf(stderr, _T("\tLine: %ld\r\n"), Line);
 	fflush(stderr);
 #endif
 	/* Abort program */
@@ -104,7 +104,7 @@ void CustomAssert (const TCHAR* pString, const TCHAR* pFile,
  * the program.
  *
  *=========================================================================*/
-void throw (const TCHAR* pString) {
+void throw(const TCHAR *pString) {
 	ErrorHandler.Exit(pString);
 }
 
@@ -125,8 +125,8 @@ void throw (const TCHAR* pString) {
  * algorithim and local variables.
  *
  *=========================================================================*/
-void qsort (void* pBase, size_t NumElements, size_t ElementWidth,
-            PQSORT_CMPFUNC pCmpFunc, long lUserData) {
+void qsort(void *pBase, size_t NumElements, size_t ElementWidth,
+           PQSORT_CMPFUNC pCmpFunc, long lUserData) {
 	DEFINE_FUNCTION("qsort()");
 	/* Ensure valid input */
 	ASSERT(pCmpFunc != NULL);
@@ -141,5 +141,3 @@ void qsort (void* pBase, size_t NumElements, size_t ElementWidth,
  *      End of Function qsort()
  *=========================================================================*/
 #endif
-
-

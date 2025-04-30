@@ -32,21 +32,21 @@
 #define COPYRGBPAL_CONVERTFROMRAW 1
 
 /* Common conversion definitions */
-#define RGBPAL2LONG(pal) ((long)( ((long)(byte)((pal).R)) | \
-                                   (((long)(byte)((pal).G)) << 8) | \
-                                   (((long)(byte)((pal).B)) << 16) ))
+#define RGBPAL2LONG(pal) ((long)(((long)(byte)((pal).R)) | \
+                                 (((long)(byte)((pal).G)) << 8) | \
+                                 (((long)(byte)((pal).B)) << 16)))
 
-#define RGBRAWPAL2LONG(pal) ((long)( (((long)(byte)((pal).R)) << 2) | \
-                                     (((long)(byte)((pal).G)) << 10) | \
-                                     (((long)(byte)((pal).B)) << 18) ))
+#define RGBRAWPAL2LONG(pal) ((long)((((long)(byte)((pal).R)) << 2) | \
+                                    (((long)(byte)((pal).G)) << 10) | \
+                                    (((long)(byte)((pal).B)) << 18)))
 
-#define RGB2LONG(R, G, B) ((long)( ((long)(byte)(R)) | \
-                                   (((long)(byte)(G)) << 8) | \
-                                   (((long)(byte)(B)) << 16) ))
+#define RGB2LONG(R, G, B) ((long)(((long)(byte)(R)) | \
+                                  (((long)(byte)(G)) << 8) | \
+                                  (((long)(byte)(B)) << 16)))
 
-#define RGBRAW2LONG(R, G, B) ((long)( (((long)(byte)(R)) << 2) | \
-                                      (((long)(byte)(G)) << 8) | \
-                                      (((long)(byte)(B)) << 16) ))
+#define RGBRAW2LONG(R, G, B) ((long)((((long)(byte)(R)) << 2) | \
+                                     (((long)(byte)(G)) << 8) | \
+                                     (((long)(byte)(B)) << 16)))
 
 
 /*===========================================================================
@@ -92,13 +92,13 @@ typedef rgbpal_t rgbpalraw_t;
  *=========================================================================*/
 
 /* Convert a raw RGB palette to a normal one */
-void ConvertFromRawRGBPal (rgbpalraw_t* pPalette, const int PaletteSize);
-rgbpal_t ConvertRawRGBPal (const rgbpalraw_t &RawPal);
-long ConvertRawRGBToLong (const rgbpalraw_t &RawPal);
+void ConvertFromRawRGBPal(rgbpalraw_t *pPalette, const int PaletteSize);
+rgbpal_t ConvertRawRGBPal(const rgbpalraw_t &RawPal);
+long ConvertRawRGBToLong(const rgbpalraw_t &RawPal);
 
 /* Copy RGB palettes */
-void CopyRGBPalette (rgbpal_t* pDestPal, rgbpal_t* pSourcePal, const int PaletteSize,
-                     const int Flags = 0);
+void CopyRGBPalette(rgbpal_t *pDestPal, rgbpal_t *pSourcePal, const int PaletteSize,
+                    const int Flags = 0);
 
 /*===========================================================================
  *      End of Function Prototypes

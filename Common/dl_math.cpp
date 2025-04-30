@@ -116,7 +116,7 @@ unit_prefix_t UnitPrefixes[] = {
  * Modifies the input Start and End Axis values to be 'nice' values as well.
  *
  *=========================================================================*/
-double GetNiceTickLength (double &AxisStart, double &AxisEnd, const int NumTicks) {
+double GetNiceTickLength(double &AxisStart, double &AxisEnd, const int NumTicks) {
 	//DEFINE_FUNCTION("GetNiceTickLength()");
 	double AxisWidth;
 	double NewAxisStart;
@@ -157,7 +157,7 @@ double GetNiceTickLength (double &AxisStart, double &AxisEnd, const int NumTicks
  * number of ticks based on the returned tick length may be different.
  *
  *=========================================================================*/
-double GetNiceTickLengthC (const double AxisStart, const double AxisEnd, const int NumTicks) {
+double GetNiceTickLengthC(const double AxisStart, const double AxisEnd, const int NumTicks) {
 	//DEFINE_FUNCTION("GetNiceTickLengthC()");
 	double AxisWidth;
 	double NewAxisStart;
@@ -196,7 +196,7 @@ double GetNiceTickLengthC (const double AxisStart, const double AxisEnd, const i
  * larger by a factor of 1000 than the largest prefix.
  *
  *=========================================================================*/
-unit_prefix_t *GetUnitPrefix (boolean& OverFlow, const double Value) {
+unit_prefix_t *GetUnitPrefix(boolean &OverFlow, const double Value) {
 	//DEFINE_FUNCTION("GetUnitPrefix()");
 	int LoopCounter;
 	int Base10 = 0;
@@ -249,13 +249,13 @@ unit_prefix_t *GetUnitPrefix (boolean& OverFlow, const double Value) {
  * generate the results.
  *
  *=========================================================================*/
-TCHAR *Metricize (const double Value, const TCHAR* pUnits) {
+TCHAR *Metricize(const double Value, const TCHAR *pUnits) {
 	static TCHAR OutputBuffer[256];
 	return Metricize(OutputBuffer, 255, Value, pUnits);
 }
 
 
-TCHAR *Metricize (TCHAR* Buffer, const int BufferSize, const double Value, const TCHAR* pUnits) {
+TCHAR *Metricize(TCHAR *Buffer, const int BufferSize, const double Value, const TCHAR *pUnits) {
 	DEFINE_FUNCTION("Metricize()");
 	unit_prefix_t *pUnitPrefix;
 	int Result;
@@ -267,14 +267,25 @@ TCHAR *Metricize (TCHAR* Buffer, const int BufferSize, const double Value, const
 
 	/* Output the modified value to the string */
 	if (OverFlow) {
-		Result = snprintf (Buffer, BufferSize, _T("%g %c%s"), Value / exp10(pUnitPrefix->LogBase10),
-		                   pUnitPrefix->PrefixChar, pUnits);
+		Result = snprintf(Buffer,
+		                  BufferSize,
+		                  _T("%g %c%s"),
+		                  Value / exp10(pUnitPrefix->LogBase10),
+		                  pUnitPrefix->PrefixChar,
+		                  pUnits);
 	} else if (pUnitPrefix->LogBase10 == 0) {
-		Result = snprintf (Buffer, BufferSize, _T("%3g %s"), Value / exp10(pUnitPrefix->LogBase10),
-		                   pUnits);
+		Result = snprintf(Buffer,
+		                  BufferSize,
+		                  _T("%3g %s"),
+		                  Value / exp10(pUnitPrefix->LogBase10),
+		                  pUnits);
 	} else {
-		Result = snprintf (Buffer, BufferSize, _T("%3g %c%s"), Value / exp10(pUnitPrefix->LogBase10),
-		                   pUnitPrefix->PrefixChar, pUnits);
+		Result = snprintf(Buffer,
+		                  BufferSize,
+		                  _T("%3g %c%s"),
+		                  Value / exp10(pUnitPrefix->LogBase10),
+		                  pUnitPrefix->PrefixChar,
+		                  pUnits);
 	}
 
 	/* Check for errors */
@@ -301,11 +312,11 @@ TCHAR *Metricize (TCHAR* Buffer, const int BufferSize, const double Value, const
  * Round=1, take ceiling if Round=0.
  *
  *=========================================================================*/
-double NiceNumber (const double Value, const int Round) {
+double NiceNumber(const double Value, const int Round) {
 	int Exponent;      /* Exponent of x */
 	double Fraction;      /* Fractional part of x */
 	double NiceFraction;      /* Nice, rounded fraction */
-	Exponent = (int) floor(log10(Value));
+	Exponent = (int)floor(log10(Value));
 	Fraction = Value / pow10((double)Exponent); /* between 1 and 10 */
 
 	if (Round) {
@@ -346,7 +357,7 @@ double NiceNumber (const double Value, const int Round) {
  * long integer in the sequence (0 to ULONG_MAX).
  *
  *=========================================================================*/
-ulong Random (void) {
+ulong Random(void) {
 	//DEFINE_FUNCTION("Random()");
 	RandomSeed *= RandomMult;
 	RandomSeed += RandomAdd;
@@ -365,10 +376,10 @@ ulong Random (void) {
  * Generates a random number between 0 and MaxNumber (inclusive).
  *
  *=========================================================================*/
-int Random (const int MaxNumber) {
+int Random(const int MaxNumber) {
 	//DEFINE_FUNCTION("Random()");
-	return (int) ((double)Random() * ((double)sign(MaxNumber) + (double) MaxNumber) /
-	              (double) ULONG_MAX);
+	return (int)((double)Random() * ((double)sign(MaxNumber) + (double) MaxNumber) /
+	             (double) ULONG_MAX);
 }
 
 /*===========================================================================
@@ -384,9 +395,9 @@ int Random (const int MaxNumber) {
  * (inclusive).
  *
  *=========================================================================*/
-ulong Random (const ulong MaxNumber) {
+ulong Random(const ulong MaxNumber) {
 	//DEFINE_FUNCTION("Random()");
-	return (ulong) ((double)Random() * ((double)1 + (double) MaxNumber) / (double) ULONG_MAX);
+	return (ulong)((double)Random() * ((double)1 + (double)MaxNumber) / (double)ULONG_MAX);
 }
 
 /*===========================================================================
@@ -401,11 +412,11 @@ ulong Random (const ulong MaxNumber) {
  * Generates a random number between the given integer range (inclusive).
  *
  *=========================================================================*/
-int Random (const int MinNumber, const int MaxNumber) {
+int Random(const int MinNumber, const int MaxNumber) {
 	//DEFINE_FUNCTION("Random()");
 	double Range = (double)MaxNumber - (double)MinNumber;
-	return (int) ((double) Random() * ((double)sign(Range) + Range) / (double) ULONG_MAX +
-	              (double) MinNumber);
+	return (int)((double) Random() * ((double)sign(Range) + Range) / (double)ULONG_MAX +
+	             (double) MinNumber);
 }
 
 /*===========================================================================
@@ -423,7 +434,7 @@ int Random (const int MinNumber, const int MaxNumber) {
  * as well as the custom Random() functions.
  *
  *=========================================================================*/
-void RandomizeTimer (void) {
+void RandomizeTimer(void) {
 	//DEFINE_FUNCTION("RandomizeTimer()");
 	srand((uint)time(NULL));
 	SeedRandom((ulong)time(NULL));
@@ -441,7 +452,7 @@ void RandomizeTimer (void) {
  * Seeds the custom long integer random number generator.
  *
  *=========================================================================*/
-void SeedRandom (const ulong NewSeed) {
+void SeedRandom(const ulong NewSeed) {
 	//DEFINE_FUNCTION("SeedRandom()");
 	RandomSeed = NewSeed;
 }
@@ -474,9 +485,9 @@ void SeedRandom (const ulong NewSeed) {
  *  1. Test all hex characters to ensure success
  *
  *=========================================================================*/
-void Test_HexCharToInt (void) {
+void Test_HexCharToInt(void) {
 	DEFINE_FUNCTION("Test_HexCharToInt()");
-	SystemLog.Printf (stdout, _T("================= Testing Test_HexCharToInt() ==================="));
+	SystemLog.Printf(stdout, _T("================= Testing Test_HexCharToInt() ==================="));
 	/* Test all hex characters to ensure success */
 	ASSERT(HexCharToInt((TCHAR)'0') == 0);
 	ASSERT(HexCharToInt((TCHAR)'1') == 1);
@@ -519,90 +530,90 @@ void Test_HexCharToInt (void) {
  *  5. Test with different unit strings
  *
  *=========================================================================*/
-void Test_Metricize (void) {
+void Test_Metricize(void) {
 	DEFINE_FUNCTION("Test_Metricize()");
-	TCHAR* pString;
-	SystemLog.Printf (stdout, _T("================= Testing Metricize() ==================="));
+	TCHAR *pString;
+	SystemLog.Printf(stdout, _T("================= Testing Metricize() ==================="));
 	/* Test with typical strings */
 	pString = Metricize(123456789.0f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(123456789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(123456789) = '%s'"), pString);
 	pString = Metricize(12345678.9f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(12345678.9) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(12345678.9) = '%s'"), pString);
 	pString = Metricize(1234567.89f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(1234567.89) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(1234567.89) = '%s'"), pString);
 	pString = Metricize(123456.789f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(123456.789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(123456.789) = '%s'"), pString);
 	pString = Metricize(12345.6789f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(12345.6789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(12345.6789) = '%s'"), pString);
 	pString = Metricize(1234.56789f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(1234.56789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(1234.56789) = '%s'"), pString);
 	pString = Metricize(123.456789f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(123.456789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(123.456789) = '%s'"), pString);
 	pString = Metricize(12.3456789f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(12.3456789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(12.3456789) = '%s'"), pString);
 	pString = Metricize(1.23456789f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(1.23456789) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(1.23456789) = '%s'"), pString);
 	pString = Metricize(0.12345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.12345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.12345) = '%s'"), pString);
 	pString = Metricize(0.012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.012345) = '%s'"), pString);
 	pString = Metricize(0.0012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.0012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.0012345) = '%s'"), pString);
 	pString = Metricize(0.00012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.00012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.00012345) = '%s'"), pString);
 	pString = Metricize(0.000012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.000012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.000012345) = '%s'"), pString);
 	pString = Metricize(0.0000012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.0000012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.0000012345) = '%s'"), pString);
 	pString = Metricize(0.00000012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.00000012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.00000012345) = '%s'"), pString);
 	pString = Metricize(0.000000012345f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0.000000012345) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0.000000012345) = '%s'"), pString);
 	/* Test 0 input */
 	pString = Metricize(0.0f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(0) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(0) = '%s'"), pString);
 	/* Test some negative inputs */
 	pString = Metricize(-12345.6f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(-12345.6) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(-12345.6) = '%s'"), pString);
 	pString = Metricize(-1.23456f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(-1.23456) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(-1.23456) = '%s'"), pString);
 	pString = Metricize(-0.00000123456f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(-0.00000123456) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(-0.00000123456) = '%s'"), pString);
 	/* Test some very small/large values */
 	pString = Metricize(1.23456e30f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(1.23456e30) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(1.23456e30) = '%s'"), pString);
 	pString = Metricize(1.23456e-30f, _T("m"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(1.23456e-30) = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(1.23456e-30) = '%s'"), pString);
 	/* Test with various unit strings */
 	pString = Metricize(-12345.6e12f, _T(""));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(-12345.6e12, '') = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(-12345.6e12, '') = '%s'"), pString);
 	pString = Metricize(-12345.6e12f, _T("UNIT"));
 	ASSERT(pString != NULL);
-	SystemLog.Printf (stdout, _T("\tMetricize(-12345.6e12, 'UNIT') = '%s'"), pString);
+	SystemLog.Printf(stdout, _T("\tMetricize(-12345.6e12, 'UNIT') = '%s'"), pString);
 }
 
 /*===========================================================================
@@ -619,7 +630,7 @@ void Test_Metricize (void) {
  *  2. Outputs the frequency of the numbers (0 to 65535)
  *
  *=========================================================================*/
-void Test_Random (const size_t NumTests) {
+void Test_Random(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_Random()");
 #if defined(__BCPLUSPLUS__)
 	const size_t ArraySize = 4000u;
@@ -637,36 +648,43 @@ void Test_Random (const size_t NumTests) {
 	ulong RandNumber;
 	FILE* pFileHandle;
 	/* Allocate arrays due to problem with large stack variables in Win16 */
-	NumberCount = (size_t *) CreateString(ArraySize * sizeof(size_t));
-	NumberCount1 = (size_t *) CreateString(ArraySize * sizeof(size_t));
-	SystemLog.Printf (stdout, _T("================= Testing Random() ==================="));
+	NumberCount = (size_t *)CreateString(ArraySize * sizeof(size_t));
+	NumberCount1 = (size_t *)CreateString(ArraySize * sizeof(size_t));
+	SystemLog.Printf(stdout, _T("================= Testing Random() ==================="));
 	memset(NumberCount, 0, sizeof(size_t) * (size_t)ArraySize);
 	memset(NumberCount1, 0, sizeof(size_t) * (size_t)ArraySize);
 	/* Output random number data */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rand1.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Index,     Random,    HiBytes,   LowBytes\n"));
+	TFPRINTF(pFileHandle, _T("     Index,     Random,    HiBytes,   LowBytes\n"));
 
 	for (LoopCounter = 0; LoopCounter < NumTests; LoopCounter++) {
 		RandNumber = Random();
-		TFPRINTF (pFileHandle, _T("%10u, %10lu, %10lu, %10lu\n"), LoopCounter, RandNumber,
-		          (RandNumber >> ShiftSize), RandNumber & ArraySize);
+		TFPRINTF(pFileHandle,
+		         _T("%10u, %10lu, %10lu, %10lu\n"),
+		         LoopCounter,
+		         RandNumber,
+		         (RandNumber >> ShiftSize),
+		         RandNumber & ArraySize);
 		NumberCount[size_t((RandNumber >> ShiftSize) & ArraySize)]++;
 		NumberCount1[size_t(RandNumber & ArraySize)]++;
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Output random number frequency data */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rand2.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number, HighCount,  LowCount\n"));
+	TFPRINTF(pFileHandle, _T("     Number, HighCount,  LowCount\n"));
 
 	for (LoopCounter = 0; LoopCounter < ArraySize; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("%10lu, %10u, %10u\n"), LoopCounter, NumberCount[LoopCounter],
-		          NumberCount1[LoopCounter]);
+		TFPRINTF(pFileHandle,
+		         _T("%10lu, %10u, %10u\n"),
+		         LoopCounter,
+		         NumberCount[LoopCounter],
+		         NumberCount1[LoopCounter]);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	DestroyPointer(NumberCount);
 	DestroyPointer(NumberCount1);
 }
@@ -687,7 +705,7 @@ void Test_Random (const size_t NumTests) {
  *  3. Test for range 0 to -2, outputting frequency results
  *
  *=========================================================================*/
-void Test_Random1 (const size_t NumTests) {
+void Test_Random1(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_Random1()");
 	size_t LoopCounter;
 	size_t NumberCount1[1001];
@@ -695,7 +713,7 @@ void Test_Random1 (const size_t NumTests) {
 	size_t NumberCount3[4];
 	FILE* pFileHandle;
 	int RandNumber;
-	SystemLog.Printf (stdout, _T("================= Testing Random(int) ==================="));
+	SystemLog.Printf(stdout, _T("================= Testing Random(int) ==================="));
 	memset(NumberCount1, 0, sizeof(size_t) * (size_t)1001);
 	memset(NumberCount2, 0, sizeof(size_t) * (size_t)3);
 	memset(NumberCount3, 0, sizeof(size_t) * (size_t)4);
@@ -724,33 +742,33 @@ void Test_Random1 (const size_t NumTests) {
 	/* Output random number frequency data for 0 to 1000 */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rnd1000f.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number,     Count\n"));
+	TFPRINTF(pFileHandle, _T("     Number,     Count\n"));
 
 	for (LoopCounter = 0; LoopCounter < 1001; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("%10lu, %10u\n"), LoopCounter, NumberCount1[LoopCounter]);
+		TFPRINTF(pFileHandle, _T("%10lu, %10u\n"), LoopCounter, NumberCount1[LoopCounter]);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Output random number frequency data for 0 to 1 */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rnd1f.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number,     Count\n"));
+	TFPRINTF(pFileHandle, _T("     Number,     Count\n"));
 
 	for (LoopCounter = 0; LoopCounter < 2; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("%10lu, %10u\n"), LoopCounter, NumberCount2[LoopCounter]);
+		TFPRINTF(pFileHandle, _T("%10lu, %10u\n"), LoopCounter, NumberCount2[LoopCounter]);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Output random number frequency data for 0 to -2 */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rnd-2f.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number,     Count\n"));
+	TFPRINTF(pFileHandle, _T("     Number,     Count\n"));
 
 	for (LoopCounter = 0; LoopCounter < 3; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("-%10lu, %10u\n"), LoopCounter, NumberCount3[LoopCounter]);
+		TFPRINTF(pFileHandle, _T("-%10lu, %10u\n"), LoopCounter, NumberCount3[LoopCounter]);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -768,7 +786,7 @@ void Test_Random1 (const size_t NumTests) {
  *  3. Output frequency data for a range of -6105 to -6107
  *
  *=========================================================================*/
-void Test_Random2 (const size_t NumTests) {
+void Test_Random2(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_Random2()");
 	size_t LoopCounter;
 	size_t NumberCount1[1001];
@@ -776,7 +794,7 @@ void Test_Random2 (const size_t NumTests) {
 	size_t NumberCount3[4];
 	FILE* pFileHandle;
 	int RandNumber;
-	SystemLog.Printf (stdout, _T("================= Testing Random(int, int) ==================="));
+	SystemLog.Printf(stdout, _T("================= Testing Random(int, int) ==================="));
 	memset(NumberCount1, 0, sizeof(size_t) * (size_t)1001);
 	memset(NumberCount2, 0, sizeof(size_t) * (size_t)3);
 	memset(NumberCount3, 0, sizeof(size_t) * (size_t)4);
@@ -805,33 +823,36 @@ void Test_Random2 (const size_t NumTests) {
 	/* Output random number frequency data for 905 to 1005 */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rnd905f.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number,     Count\n"));
+	TFPRINTF(pFileHandle, _T("     Number,     Count\n"));
 
 	for (LoopCounter = 0; LoopCounter < 1001; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("%10lu, %10u\n"), LoopCounter + 905, NumberCount1[LoopCounter]);
+		TFPRINTF(pFileHandle, _T("%10lu, %10u\n"), LoopCounter + 905, NumberCount1[LoopCounter]);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 	/* Output random number frequency data for 1001 to 1002 */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rnd1001f.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number,     Count\n"));
+	TFPRINTF(pFileHandle, _T("     Number,     Count\n"));
 
 	for (LoopCounter = 0; LoopCounter < 2; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("%10lu, %10u\n"), LoopCounter + 1001, NumberCount2[LoopCounter]);
+		TFPRINTF(pFileHandle, _T("%10lu, %10u\n"), LoopCounter + 1001, NumberCount2[LoopCounter]);
 	}
 
 	fclose (pFileHandle);
 	/* Output random number frequency data for -6105 to -6107 */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rnd-6105f.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
-	TFPRINTF (pFileHandle, _T("     Number,     Count\n"));
+	TFPRINTF(pFileHandle, _T("     Number,     Count\n"));
 
 	for (LoopCounter = 0; LoopCounter < 3; LoopCounter++) {
-		TFPRINTF (pFileHandle, _T("%10ld, %10u\n"), (long)LoopCounter - 6107, NumberCount3[LoopCounter]);
+		TFPRINTF(pFileHandle,
+		         _T("%10ld, %10u\n"),
+		         (long)LoopCounter - 6107,
+		         NumberCount3[LoopCounter]);
 	}
 
-	fclose (pFileHandle);
+	fclose(pFileHandle);
 }
 
 /*===========================================================================
@@ -848,12 +869,12 @@ void Test_Random2 (const size_t NumTests) {
  * for each test.
  *
  *=========================================================================*/
-void Test_RandomRate (const size_t NumTests) {
+void Test_RandomRate(const size_t NumTests) {
 	//DEFINE_FUNCTION("Test_RandomRate()");
 	size_t LoopCounter;
 	ulong Counter;
 	ulong InitialSeed;
-	SystemLog.Printf (stdout, _T("================= Testing Random Turnover Rate ==================="));
+	SystemLog.Printf(stdout, _T("================= Testing Random Turnover Rate ==================="));
 	Random();
 	SeedRandom(Random());
 
@@ -861,18 +882,23 @@ void Test_RandomRate (const size_t NumTests) {
 	for (LoopCounter = 0; LoopCounter < NumTests; LoopCounter++) {
 		InitialSeed = RandomSeed;
 		Counter = 0;
-		SystemLog.Printf(stdout, _T("\t%u) Testing turnover rate of seed %lu..."), LoopCounter + 1,
+		SystemLog.Printf(stdout,
+		                 _T("\t%u) Testing turnover rate of seed %lu..."),
+		                 LoopCounter + 1,
 		                 InitialSeed);
 
 		while (Random() != InitialSeed) {
 			Counter++;
 
 			if ((Counter % 1000000ul) == 0) {
-				TPRINTF (_T("\t\t%lu million\n"), Counter / 1000000ul);
+				TPRINTF(_T("\t\t%lu million\n"), Counter / 1000000ul);
 			}
 		}
 
-		SystemLog.Printf(stdout, _T("\t\tSeed of %lu turned over in %lu calls..."), InitialSeed, Counter);
+		SystemLog.Printf(stdout,
+		                 _T("\t\tSeed of %lu turned over in %lu calls..."),
+		                 InitialSeed,
+		                 Counter);
 	}
 }
 
@@ -889,9 +915,9 @@ void Test_RandomRate (const size_t NumTests) {
  *  1. Ensures each version gives a valid -1/0/1 result.
  *
  *=========================================================================*/
-void Test_sign (void) {
+void Test_sign(void) {
 	DEFINE_FUNCTION("Test_sign()");
-	SystemLog.Printf (stdout, _T("================= Testing sign() Functions ==================="));
+	SystemLog.Printf(stdout, _T("================= Testing sign() Functions ==================="));
 	/* Test positive numbers */
 	ASSERT(sign((int)10) == 1);
 	ASSERT(sign((int)INT_MAX) == 1);
@@ -938,7 +964,7 @@ void Test_sign (void) {
  *  5. Tests the Metricize() function
  *
  *=========================================================================*/
-void Test_DL_Math (void) {
+void Test_DL_Math(void) {
 	//DEFINE_FUNCTION("Test_DL_Math()");
 	Test_sign();
 	Test_HexCharToInt();
@@ -964,4 +990,3 @@ void Test_DL_Math (void) {
 /*===========================================================================
  *      End of Test Module Routines
  *=========================================================================*/
-

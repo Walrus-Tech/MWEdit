@@ -35,7 +35,7 @@ DEFINE_FILE("CfgFile.cpp");
  * any error.
  *
  *=========================================================================*/
-bool CConfigEntry::Write (CGenFile& File) {
+bool CConfigEntry::Write(CGenFile &File) {
 	bool Result;
 	/* Output the entry name and value */
 	Result = File.Printf("%s = %s\n", m_Variable, m_Value);
@@ -52,13 +52,13 @@ bool CConfigEntry::Write (CGenFile& File) {
  * Class CConfigGroup Method - void Destroy (void);
  *
  *=========================================================================*/
-void CConfigGroup::Destroy (void) {
-	CConfigEntry* pEntry;
+void CConfigGroup::Destroy(void) {
+	CConfigEntry *pEntry;
 	int Index;
 
 	/* Unallocate all groups */
 	for (Index = 0; Index < m_Entries.GetSize(); Index++) {
-		pEntry = (CConfigEntry *) m_Entries.GetAt(Index);
+		pEntry = (CConfigEntry *)m_Entries.GetAt(Index);
 		DestroyPointer(pEntry);
 	}
 
@@ -81,9 +81,9 @@ void CConfigGroup::Destroy (void) {
  * pointer or NULL.
  *
  *=========================================================================*/
-CConfigEntry *CConfigGroup::AddEntry (const TCHAR* pVar, const TCHAR* pValue) {
+CConfigEntry *CConfigGroup::AddEntry(const TCHAR *pVar, const TCHAR *pValue) {
 	DEFINE_FUNCTION("CConfigGroup::AddEntry()");
-	CConfigEntry* pEntry;
+	CConfigEntry *pEntry;
 	/* Allocate the new object */
 	CreatePointer(pEntry, CConfigEntry);
 	pEntry->SetVariable(pVar);
@@ -110,9 +110,9 @@ CConfigEntry *CConfigGroup::AddEntry (const TCHAR* pVar, const TCHAR* pValue) {
  * Returns the entry with the given variable name, or NULL.
  *
  *=========================================================================*/
-CConfigEntry *CConfigGroup::FindEntry (const TCHAR* pVariable) {
+CConfigEntry *CConfigGroup::FindEntry(const TCHAR *pVariable) {
 	DEFINE_FUNCTION("CConfigGroup::FindEntry()");
-	CConfigEntry* pEntry;
+	CConfigEntry *pEntry;
 	int Result;
 	int Index;
 	/* Ensure valid input */
@@ -120,7 +120,7 @@ CConfigEntry *CConfigGroup::FindEntry (const TCHAR* pVariable) {
 
 	/* Search all defined entries */
 	for (Index = 0; Index < m_Entries.GetSize(); Index++) {
-		pEntry = (CConfigEntry *) m_Entries.GetAt(Index);
+		pEntry = (CConfigEntry *)m_Entries.GetAt(Index);
 		Result = stricmp(pVariable, pEntry->GetVariable());
 
 		if (Result == 0) {
@@ -143,9 +143,9 @@ CConfigEntry *CConfigGroup::FindEntry (const TCHAR* pVariable) {
  * Finds an existing entry or creates it if it does not exist.
  *
  *=========================================================================*/
-CConfigEntry *CConfigGroup::GetEntry (const TCHAR* pVariable) {
+CConfigEntry *CConfigGroup::GetEntry(const TCHAR *pVariable) {
 	DEFINE_FUNCTION("CConfigGroup::GetEntry()");
-	CConfigEntry* pEntry;
+	CConfigEntry *pEntry;
 	/* Find an existing variable */
 	pEntry = FindEntry(pVariable);
 
@@ -171,8 +171,8 @@ CConfigEntry *CConfigGroup::GetEntry (const TCHAR* pVariable) {
  * Returns the value of the first variable, or NULL if it does not exist.
  *
  *=========================================================================*/
-const TCHAR *CConfigGroup::GetValue (const TCHAR* pVariable) {
-	CConfigEntry* pEntry = FindEntry(pVariable);
+const TCHAR *CConfigGroup::GetValue(const TCHAR *pVariable) {
+	CConfigEntry *pEntry = FindEntry(pVariable);
 
 	if (pEntry == NULL) {
 		return (NULL);
@@ -193,8 +193,8 @@ const TCHAR *CConfigGroup::GetValue (const TCHAR* pVariable) {
  * Modifies an existing variable value or creates it if it does not exist.
  *
  *=========================================================================*/
-bool CConfigGroup::SetValue (const TCHAR* pVariable, const TCHAR* pValue) {
-	CConfigEntry* pEntry;
+bool CConfigGroup::SetValue(const TCHAR *pVariable, const TCHAR *pValue) {
+	CConfigEntry *pEntry;
 	/* Find or create the entry */
 	pEntry = GetEntry(pVariable);
 	pEntry->SetValue(pValue);
@@ -214,8 +214,8 @@ bool CConfigGroup::SetValue (const TCHAR* pVariable, const TCHAR* pValue) {
  * any error.
  *
  *=========================================================================*/
-bool CConfigGroup::Write (CGenFile& File) {
-	CConfigEntry* pEntry;
+bool CConfigGroup::Write(CGenFile& File) {
+	CConfigEntry *pEntry;
 	int Index;
 	bool Result;
 
@@ -230,7 +230,7 @@ bool CConfigGroup::Write (CGenFile& File) {
 
 	/* Output all entries in group */
 	for (Index = 0; Index < m_Entries.GetSize(); Index++) {
-		pEntry = (CConfigEntry *) m_Entries.GetAt(Index);
+		pEntry = (CConfigEntry *)m_Entries.GetAt(Index);
 		Result = pEntry->Write(File);
 	}
 
@@ -261,9 +261,9 @@ CConfigFile::CConfigFile() : m_Groups(2) {
  * Class CConfigFile Method - void Destroy (void);
  *
  *=========================================================================*/
-void CConfigFile::Destroy (void) {
+void CConfigFile::Destroy(void) {
 	DEFINE_FUNCTION("CConfigFile::Destroy()");
-	CConfigGroup* pGroup;
+	CConfigGroup *pGroup;
 	int Index;
 
 	/* Unallocate all groups */
@@ -291,9 +291,9 @@ void CConfigFile::Destroy (void) {
  * Adds the [] brackets to the group name if not already included.
  *
  *=========================================================================*/
-CConfigGroup *CConfigFile::AddGroup (const TCHAR* pName) {
+CConfigGroup *CConfigFile::AddGroup(const TCHAR *pName) {
 	DEFINE_FUNCTION("CConfigFile::AddGroup()");
-	CConfigGroup* pGroup;
+	CConfigGroup *pGroup;
 	TCHAR Buffer[CONFIG_LINE_LENGTH + 1];
 	/* Create the group */
 	CreatePointer(pGroup, CConfigGroup);
@@ -327,20 +327,20 @@ CConfigGroup *CConfigFile::AddGroup (const TCHAR* pName) {
  * Uses a static character buffer.
  *
  *=========================================================================*/
-const TCHAR *CConfigFile::CreateArrayString (const TCHAR* pVariable, const int ID) {
+const TCHAR *CConfigFile::CreateArrayString(const TCHAR *pVariable, const int ID) {
 	static TCHAR Buffer[CONFIG_LINE_LENGTH + 1];
 	snprintf(Buffer, CONFIG_LINE_LENGTH, "%s[%d]", pVariable, ID);
 	return (Buffer);
 }
 
-const TCHAR *CConfigFile::CreateArrayString (const TCHAR* pVariable, const int ID1, const int ID2) {
+const TCHAR *CConfigFile::CreateArrayString(const TCHAR *pVariable, const int ID1, const int ID2) {
 	static TCHAR Buffer[CONFIG_LINE_LENGTH + 1];
 	snprintf(Buffer, CONFIG_LINE_LENGTH, "%s[%d,%d]", pVariable, ID1, ID2);
 	return (Buffer);
 }
 
-const TCHAR *CConfigFile::CreateArrayString (const TCHAR* pVariable, const int ID1,
-                                             const TCHAR* pID2) {
+const TCHAR *CConfigFile::CreateArrayString(const TCHAR *pVariable, const int ID1,
+                                            const TCHAR *pID2) {
 	static TCHAR Buffer[CONFIG_LINE_LENGTH + 1];
 	snprintf(Buffer, CONFIG_LINE_LENGTH, "%s[%d].%s", pVariable, ID1, pID2);
 	return (Buffer);
@@ -359,9 +359,9 @@ const TCHAR *CConfigFile::CreateArrayString (const TCHAR* pVariable, const int I
  * input group name can have the [] brackets or not.
  *
  *=========================================================================*/
-CConfigGroup *CConfigFile::FindGroup (const TCHAR* pName) {
+CConfigGroup *CConfigFile::FindGroup(const TCHAR *pName) {
 	DEFINE_FUNCTION("CConfigFile::FindGroup()");
-	CConfigGroup* pGroup;
+	CConfigGroup *pGroup;
 	int Result;
 	int NameLength;
 	int Index;
@@ -371,7 +371,7 @@ CConfigGroup *CConfigFile::FindGroup (const TCHAR* pName) {
 
 	/* Search all defined groups */
 	for (Index = 0; Index < m_Groups.GetSize(); Index++) {
-		pGroup = (CConfigGroup *) m_Groups.GetAt(Index);
+		pGroup = (CConfigGroup *)m_Groups.GetAt(Index);
 
 		if (*pName == '[') {
 			Result = stricmp(pName, pGroup->GetName());
@@ -402,9 +402,9 @@ CConfigGroup *CConfigFile::FindGroup (const TCHAR* pName) {
  * Finds an existing group or creates it if it does not exist.
  *
  *=========================================================================*/
-CConfigGroup *CConfigFile::GetGroup (const TCHAR* pName) {
+CConfigGroup *CConfigFile::GetGroup(const TCHAR *pName) {
 	DEFINE_FUNCTION("CConfigFile::GetGroup()");
-	CConfigGroup* pGroup;
+	CConfigGroup *pGroup;
 	/* Find an existing group */
 	pGroup = FindGroup(pName);
 
@@ -433,43 +433,43 @@ CConfigGroup *CConfigFile::GetGroup (const TCHAR* pName) {
  *          pVariable[ID] = Value
  *
  *=========================================================================*/
-const TCHAR *CConfigFile::GetArrayValue (const TCHAR* pGroup, const TCHAR* pVariable,
-                                         const int ID) {
+const TCHAR *CConfigFile::GetArrayValue(const TCHAR *pGroup, const TCHAR *pVariable,
+                                        const int ID) {
 	return GetValue(pGroup, CreateArrayString(pVariable, ID));
 }
 
-const TCHAR *CConfigFile::GetArrayValue (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                                         const TCHAR* pID2) {
+const TCHAR *CConfigFile::GetArrayValue(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                                        const TCHAR *pID2) {
 	return GetValue(pGroup, CreateArrayString(pVariable, ID1, pID2));
 }
 
-bool CConfigFile::GetArrayBool (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                                const bool Default) {
+bool CConfigFile::GetArrayBool(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                               const bool Default) {
 	return GetBool(pGroup, CreateArrayString(pVariable, ID), Default);
 }
 
-int CConfigFile::GetArrayInt (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                              const int Default) {
+int CConfigFile::GetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                             const int Default) {
 	return GetInt(pGroup, CreateArrayString(pVariable, ID), Default);
 }
 
-int CConfigFile::GetArrayInt (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                              const int ID2, const int Default) {
+int CConfigFile::GetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                             const int ID2, const int Default) {
 	return GetInt(pGroup, CreateArrayString(pVariable, ID1, ID2), Default);
 }
 
-int CConfigFile::GetArrayInt (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                              const TCHAR* pID2, const int Default) {
+int CConfigFile::GetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                             const TCHAR *pID2, const int Default) {
 	return GetInt(pGroup, CreateArrayString(pVariable, ID1, pID2), Default);
 }
 
-float CConfigFile::GetArrayReal (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                                 const float Default) {
+float CConfigFile::GetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                                const float Default) {
 	return GetReal(pGroup, CreateArrayString(pVariable, ID), Default);
 }
 
-float CConfigFile::GetArrayReal (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                                 const TCHAR* pID2, const float Default) {
+float CConfigFile::GetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                                const TCHAR *pID2, const float Default) {
 	return GetReal(pGroup, CreateArrayString(pVariable, ID1, pID2), Default);
 }
 
@@ -486,8 +486,8 @@ float CConfigFile::GetArrayReal (const TCHAR* pGroup, const TCHAR* pVariable, co
  * is returned if the variable does not exist.
  *
  *=========================================================================*/
-bool CConfigFile::GetBool (const TCHAR* pGroup, const TCHAR* pVariable, const bool Default) {
-	const TCHAR* pValue;
+bool CConfigFile::GetBool(const TCHAR *pGroup, const TCHAR *pVariable, const bool Default) {
+	const TCHAR *pValue;
 	/* Attempt to find the variable value */
 	pValue = GetValue(pGroup, pVariable);
 
@@ -512,8 +512,8 @@ bool CConfigFile::GetBool (const TCHAR* pGroup, const TCHAR* pVariable, const bo
  * is returned if the variable does not exist.
  *
  *=========================================================================*/
-int CConfigFile::GetInt (const TCHAR* pGroup, const TCHAR* pVariable, const int Default) {
-	const TCHAR* pValue;
+int CConfigFile::GetInt(const TCHAR *pGroup, const TCHAR *pVariable, const int Default) {
+	const TCHAR *pValue;
 	/* Attempt to find the variable value */
 	pValue = GetValue(pGroup, pVariable);
 
@@ -538,8 +538,8 @@ int CConfigFile::GetInt (const TCHAR* pGroup, const TCHAR* pVariable, const int 
  * is returned if the variable does not exist.
  *
  *=========================================================================*/
-float CConfigFile::GetReal (const TCHAR* pGroup, const TCHAR* pVariable, const float Default) {
-	const TCHAR* pValue;
+float CConfigFile::GetReal(const TCHAR *pGroup, const TCHAR *pVariable, const float Default) {
+	const TCHAR *pValue;
 	/* Attempt to find the variable value */
 	pValue = GetValue(pGroup, pVariable);
 
@@ -564,17 +564,17 @@ float CConfigFile::GetReal (const TCHAR* pGroup, const TCHAR* pVariable, const f
  * Returns NULL if it is not found.
  *
  *=========================================================================*/
-const TCHAR *CConfigFile::GetValue (const TCHAR* pVariable) {
+const TCHAR *CConfigFile::GetValue(const TCHAR *pVariable) {
 	DEFINE_FUNCTION("CConfigFile::GetValue()");
-	CConfigGroup* pGroup;
-	const TCHAR* pResult;
+	CConfigGroup *pGroup;
+	const TCHAR *pResult;
 	int Index;
 	/* Ensure valid input */
 	ASSERT(pVariable != NULL);
 
 	/* Search all defined groups */
 	for (Index = 0; Index < m_Groups.GetSize(); Index++) {
-		pGroup = (CConfigGroup *) m_Groups.GetAt(Index);
+		pGroup = (CConfigGroup *)m_Groups.GetAt(Index);
 		pResult = pGroup->GetValue(pVariable);
 
 		if (pResult != NULL) {
@@ -600,9 +600,9 @@ const TCHAR *CConfigFile::GetValue (const TCHAR* pVariable) {
  * not.
  *
  *=========================================================================*/
-const TCHAR *CConfigFile::GetValue (const TCHAR* pGroupName, const TCHAR* pVariable) {
+const TCHAR *CConfigFile::GetValue(const TCHAR *pGroupName, const TCHAR *pVariable) {
 	DEFINE_FUNCTION("CConfigFile::GetValue()");
-	CConfigGroup* pGroup;
+	CConfigGroup *pGroup;
 	/* Ensure valid input */
 	ASSERT(pGroupName != NULL && pVariable != NULL);
 	/* Attempt to find the matching group name */
@@ -628,8 +628,8 @@ const TCHAR *CConfigFile::GetValue (const TCHAR* pGroupName, const TCHAR* pVaria
  * Attempt to load and parse the given config file, returns false on any error.
  *
  *=========================================================================*/
-bool CConfigFile::LoadINI (const TCHAR* pFilename) {
-	CConfigGroup* pReadingGroup;
+bool CConfigFile::LoadINI(const TCHAR *pFilename) {
+	CConfigGroup *pReadingGroup;
 	bool Result;
 	char Buffer[CONFIG_LINE_LENGTH + 1];
 	char *pVariable;
@@ -685,8 +685,8 @@ bool CConfigFile::LoadINI (const TCHAR* pFilename) {
  * Outputs the config file to the given filename, returns false on any error.
  *
  *=========================================================================*/
-bool CConfigFile::SaveINI (const TCHAR* pFilename) {
-	CConfigGroup* pGroup;
+bool CConfigFile::SaveINI(const TCHAR *pFilename) {
+	CConfigGroup *pGroup;
 	bool Result;
 	int Index;
 	/* Attempt to open file for output */
@@ -698,7 +698,7 @@ bool CConfigFile::SaveINI (const TCHAR* pFilename) {
 
 	/* Output all groups in config */
 	for (Index = 0; Index < m_Groups.GetSize(); Index++) {
-		pGroup = (CConfigGroup *) m_Groups.GetAt(Index);
+		pGroup = (CConfigGroup *)m_Groups.GetAt(Index);
 		Result = pGroup->Write(*this);
 
 		if (!Result) {
@@ -726,43 +726,43 @@ bool CConfigFile::SaveINI (const TCHAR* pFilename) {
  *          Variable[ID] = Value
  *
  *=========================================================================*/
-bool CConfigFile::SetArrayValue (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                                 const TCHAR* pValue) {
+bool CConfigFile::SetArrayValue(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                                const TCHAR *pValue) {
 	return SetValue(pGroup, CreateArrayString(pVariable, ID), pValue);
 }
 
-bool CConfigFile::SetArrayValue (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                                 const TCHAR* pID2, const TCHAR* pValue) {
+bool CConfigFile::SetArrayValue(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                                const TCHAR *pID2, const TCHAR *pValue) {
 	return SetValue(pGroup, CreateArrayString(pVariable, ID1, pID2), pValue);
 }
 
-bool CConfigFile::SetArrayBool (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                                const bool Value) {
+bool CConfigFile::SetArrayBool(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                               const bool Value) {
 	return SetBool(pGroup, CreateArrayString(pVariable, ID), Value);
 }
 
-bool CConfigFile::SetArrayInt (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                               const int Value) {
+bool CConfigFile::SetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                              const int Value) {
 	return SetInt(pGroup, CreateArrayString(pVariable, ID), Value);
 }
 
-bool CConfigFile::SetArrayInt (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                               const int ID2, const int Value) {
+bool CConfigFile::SetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                              const int ID2, const int Value) {
 	return SetInt(pGroup, CreateArrayString(pVariable, ID1, ID2), Value);
 }
 
-bool CConfigFile::SetArrayInt (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                               const TCHAR *pID2, const int Value) {
+bool CConfigFile::SetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                              const TCHAR *pID2, const int Value) {
 	return SetInt(pGroup, CreateArrayString(pVariable, ID1, pID2), Value);
 }
 
-bool CConfigFile::SetArrayReal (const TCHAR* pGroup, const TCHAR* pVariable, const int ID,
-                                const float Value) {
+bool CConfigFile::SetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID,
+                               const float Value) {
 	return SetReal(pGroup, CreateArrayString(pVariable, ID), Value);
 }
 
-bool CConfigFile::SetArrayReal (const TCHAR* pGroup, const TCHAR* pVariable, const int ID1,
-                                const TCHAR* pID2, const float Value) {
+bool CConfigFile::SetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+                               const TCHAR *pID2, const float Value) {
 	return SetReal(pGroup, CreateArrayString(pVariable, ID1, pID2), Value);
 }
 
@@ -779,7 +779,7 @@ bool CConfigFile::SetArrayReal (const TCHAR* pGroup, const TCHAR* pVariable, con
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CConfigFile::SetBool (const TCHAR* pGroup, const TCHAR* pVariable, const bool Value) {
+bool CConfigFile::SetBool(const TCHAR *pGroup, const TCHAR *pVariable, const bool Value) {
 	return SetValue(pGroup, pVariable, BooleanToString(Value));
 }
 
@@ -796,7 +796,7 @@ bool CConfigFile::SetBool (const TCHAR* pGroup, const TCHAR* pVariable, const bo
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CConfigFile::SetInt (const TCHAR* pGroup, const TCHAR* pVariable, const int Value) {
+bool CConfigFile::SetInt(const TCHAR *pGroup, const TCHAR *pVariable, const int Value) {
 	TCHAR Buffer[64];
 	sprintf (Buffer, "%d", Value);
 	return SetValue(pGroup, pVariable, Buffer);
@@ -815,7 +815,7 @@ bool CConfigFile::SetInt (const TCHAR* pGroup, const TCHAR* pVariable, const int
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CConfigFile::SetReal (const TCHAR* pGroup, const TCHAR* pVariable, const float Value) {
+bool CConfigFile::SetReal(const TCHAR *pGroup, const TCHAR *pVariable, const float Value) {
 	TCHAR Buffer[64];
 	sprintf (Buffer, "%g", Value);
 	return SetValue(pGroup, pVariable, Buffer);
@@ -834,8 +834,8 @@ bool CConfigFile::SetReal (const TCHAR* pGroup, const TCHAR* pVariable, const fl
  * exist.  Returns false on any error.
  *
  *=========================================================================*/
-bool CConfigFile::SetValue (const TCHAR* pGroupName, const TCHAR* pVariable, const TCHAR* pValue) {
-	CConfigGroup* pGroup;
+bool CConfigFile::SetValue(const TCHAR *pGroupName, const TCHAR *pVariable, const TCHAR *pValue) {
+	CConfigGroup *pGroup;
 	/* Find the group and create if it does not exist */
 	pGroup = GetGroup(pGroupName);
 	/* Set the entry value */
@@ -845,4 +845,3 @@ bool CConfigFile::SetValue (const TCHAR* pGroupName, const TCHAR* pVariable, con
 /*===========================================================================
  *      End of Class Method CConfigFile::SetValue()
  *=========================================================================*/
-

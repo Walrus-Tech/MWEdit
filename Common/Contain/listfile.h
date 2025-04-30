@@ -68,30 +68,30 @@ class CListFile {
 	/* Class Constructors/Destructors */
 	CListFile(const size_t LineLength = LISTFILE_LINE_LENGTH);
 	virtual ~CListFile();
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Close an open list file */
-	void Close (void);
+	void Close(void);
 
 	/* Get class members */
-	char *GetCurrentLine (void) const;
-	int GetMaxLineLength (void) const;
-	boolean GetIgnoreBlankLines (void) const;
+	char *GetCurrentLine(void) const;
+	int GetMaxLineLength(void) const;
+	boolean GetIgnoreBlankLines(void) const;
 
 	/* Is the list file currently open or not? */
-	boolean IsOpen (void) const;
+	boolean IsOpen(void) const;
 
 	/* Determine if the current line buffer is valid */
-	boolean IsValidLine (void) const;
+	boolean IsValidLine(void) const;
 
 	/* Open and starting parsing a list file */
-	boolean Open (const char* pFilename);
+	boolean Open(const char *pFilename);
 
 	/* Input one line from the list file */
-	boolean ReadNextLine (void);
+	boolean ReadNextLine(void);
 
 	/* Set class members */
-	void SetIgnoreBlankLines (const boolean Value);
+	void SetIgnoreBlankLines(const boolean Value);
 
 };
 
@@ -107,32 +107,32 @@ class CListFile {
  *=========================================================================*/
 
 /* Return the current line string buffer */
-inline char *CListFile::GetCurrentLine (void) const {
+inline char *CListFile::GetCurrentLine(void) const {
 	return (pCurrentLine);
 }
 
 /* Return the current maximum line length */
-inline int CListFile::GetMaxLineLength (void) const {
+inline int CListFile::GetMaxLineLength(void) const {
 	return (MaxLineLength);
 }
 
 /* Get the ignore empty line option */
-inline boolean CListFile::GetIgnoreBlankLines (void) const {
+inline boolean CListFile::GetIgnoreBlankLines(void) const {
 	return (IgnoreBlankLines);
 }
 
 /* Returns TRUE if the current file is open */
-inline boolean CListFile::IsOpen (void) const {
+inline boolean CListFile::IsOpen(void) const {
 	return ((pFileHandle == NULL) ? FALSE : TRUE);
 }
 
 /* Determine if the current line buffer is valid */
-inline boolean CListFile::IsValidLine (void) const {
+inline boolean CListFile::IsValidLine(void) const {
 	return (BufferValid);
 }
 
 /* Set the ignore empty line option */
-inline void CListFile::SetIgnoreBlankLines (const boolean Value) {
+inline void CListFile::SetIgnoreBlankLines(const boolean Value) {
 	IgnoreBlankLines = Value;
 }
 
@@ -147,7 +147,7 @@ inline void CListFile::SetIgnoreBlankLines (const boolean Value) {
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_ListFile (void);
+	void Test_ListFile(void);
 #endif
 /*===========================================================================
  *      End of Test Function Prototypes

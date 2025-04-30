@@ -41,9 +41,9 @@ DEFINE_FILE("DL_Chr.h");
  * if any invalid input is received.
  *
  *=========================================================================*/
-void chradd (TCHAR* pString, const size_t CharIndex, const TCHAR NewChar) {
+void chradd(TCHAR *pString, const size_t CharIndex, const TCHAR NewChar) {
 	DEFINE_FUNCTION("chradd()");
-	TCHAR* pInsertPosition;
+	TCHAR *pInsertPosition;
 	size_t StringLength;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
@@ -51,7 +51,7 @@ void chradd (TCHAR* pString, const size_t CharIndex, const TCHAR NewChar) {
 	ASSERT(CharIndex <= StringLength);
 	/* Shift the characters after insert position right by one */
 	pInsertPosition = pString + CharIndex;
-	memmove (pInsertPosition + 1, pInsertPosition, (StringLength - CharIndex + 1)*sizeof(TCHAR));
+	memmove (pInsertPosition + 1, pInsertPosition, (StringLength - CharIndex + 1) * sizeof(TCHAR));
 	/* Add the new character to the string */
 	*pInsertPosition = NewChar;
 }
@@ -70,9 +70,9 @@ void chradd (TCHAR* pString, const size_t CharIndex, const TCHAR NewChar) {
  * any bad input is received.
  *
  *=========================================================================*/
-void chrcat (TCHAR* pString, const TCHAR NewChar) {
+void chrcat(TCHAR *pString, const TCHAR NewChar) {
 	DEFINE_FUNCTION("chrcat()");
-	TCHAR* pInsertPosition;
+	TCHAR *pInsertPosition;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
 	/* Find the end of the string */
@@ -95,7 +95,7 @@ void chrcat (TCHAR* pString, const TCHAR NewChar) {
  * invalid input.
  *
  *=========================================================================*/
-int chrcount (const TCHAR* pString, const TCHAR Char) {
+int chrcount(const TCHAR *pString, const TCHAR Char) {
 	DEFINE_FUNCTION("chrcount()");
 	int Count = 0;
 	/* Ensure valid input */
@@ -126,9 +126,9 @@ int chrcount (const TCHAR* pString, const TCHAR Char) {
  * input.
  *
  *=========================================================================*/
-void chrdel (TCHAR* pString, const size_t CharIndex) {
+void chrdel(TCHAR *pString, const size_t CharIndex) {
 	DEFINE_FUNCTION("chrdel()");
-	TCHAR* pDeletePosition;
+	TCHAR *pDeletePosition;
 	size_t StringLength;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
@@ -136,7 +136,7 @@ void chrdel (TCHAR* pString, const size_t CharIndex) {
 	ASSERT(CharIndex <= StringLength);
 	/* Shift the characters left of the deletion position by one */
 	pDeletePosition = pString + CharIndex;
-	memmove (pDeletePosition, pDeletePosition + 1, (StringLength - CharIndex)*sizeof(TCHAR));
+	memmove (pDeletePosition, pDeletePosition + 1, (StringLength - CharIndex) * sizeof(TCHAR));
 }
 
 /*===========================================================================
@@ -151,7 +151,7 @@ void chrdel (TCHAR* pString, const size_t CharIndex) {
  * Deletes the last character from the string. ASSERTs on bad input.
  *
  *=========================================================================*/
-void chrdellast (TCHAR* pString) {
+void chrdellast(TCHAR *pString) {
 	DEFINE_FUNCTION("chrdellast()");
 	size_t StringLength;
 	/* Ensure valid input */
@@ -180,7 +180,7 @@ void chrdellast (TCHAR* pString) {
  * was found.  ASSERTs on bad input.
  *
  *=========================================================================*/
-boolean chrrpunc (size_t &CharIndex, const TCHAR* pString) {
+boolean chrrpunc(size_t &CharIndex, const TCHAR *pString) {
 	DEFINE_FUNCTION("chrrpunc()");
 	size_t StringPosition;
 	/* Ensure valid input */
@@ -224,11 +224,11 @@ boolean chrrpunc (size_t &CharIndex, const TCHAR* pString) {
  * The use is otherwise identical to strok().
  *
  *=========================================================================*/
-TCHAR *chrtok (TCHAR* pString, const TCHAR TokenChar) {
+TCHAR *chrtok(TCHAR *pString, const TCHAR TokenChar) {
 	DEFINE_FUNCTION("chrtok()");
-	static TCHAR* pParse = NULL;
-	TCHAR* pSearchChar;
-	TCHAR* pResult;
+	static TCHAR *pParse = NULL;
+	TCHAR *pSearchChar;
+	TCHAR *pResult;
 	/* Ensure valid input */
 	ASSERT(TokenChar != NULL_CHAR);
 
@@ -272,9 +272,9 @@ TCHAR *chrtok (TCHAR* pString, const TCHAR TokenChar) {
  * Returns the string.  ASSERTs if given invalid input.
  *
  *=========================================================================*/
-TCHAR *chrtrunc (TCHAR* pString, const TCHAR TruncateChar) {
+TCHAR *chrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
 	DEFINE_FUNCTION("chrtrunc()");
-	TCHAR* pFindChar;
+	TCHAR *pFindChar;
 	/* Ensure valid input */
 	ASSERT(pString != NULL && TruncateChar != NULL_CHAR);
 	/* Attempt to find the first truncation character */
@@ -300,9 +300,9 @@ TCHAR *chrtrunc (TCHAR* pString, const TCHAR TruncateChar) {
  * Returns the string.  ASSERTs if given invalid input.
  *
  *=========================================================================*/
-TCHAR *chrrtrunc (TCHAR* pString, const TCHAR TruncateChar) {
+TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
 	DEFINE_FUNCTION("chrrtrunc()");
-	TCHAR* pFindChar;
+	TCHAR *pFindChar;
 	/* Ensure valid input */
 	ASSERT(pString != NULL && TruncateChar != NULL_CHAR);
 	/* Attempt to find the last truncation character */
@@ -341,7 +341,7 @@ TCHAR *chrrtrunc (TCHAR* pString, const TCHAR TruncateChar) {
  *  3. Check adding characters at end of string
  *
  *=========================================================================*/
-void Test_chradd (void) {
+void Test_chradd(void) {
 	DEFINE_FUNCTION("Test_chradd()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chradd() ===================="));
@@ -370,7 +370,7 @@ void Test_chradd (void) {
  *  2. Tests adding a character to an empty string.
  *
  *=========================================================================*/
-void Test_chrcat (void) {
+void Test_chrcat(void) {
 	DEFINE_FUNCTION("Test_chrcat()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrcat() ===================="));
@@ -398,7 +398,7 @@ void Test_chrcat (void) {
  *  3. Test empty string deletion
  *
  *=========================================================================*/
-void Test_chrdel (void) {
+void Test_chrdel(void) {
 	DEFINE_FUNCTION("Test_chrdel()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrdel() ===================="));
@@ -431,7 +431,7 @@ void Test_chrdel (void) {
  *  2. Delete character from empty string.
  *
  *=========================================================================*/
-void Test_chrdellast (void) {
+void Test_chrdellast(void) {
 	DEFINE_FUNCTION("Test_chrdellast()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrdellast() ===================="));
@@ -458,12 +458,12 @@ void Test_chrdellast (void) {
  *  2. Check the function enhanced cabapility.
  *
  *=========================================================================*/
-void Test_chrtok (void) {
+void Test_chrtok(void) {
 	DEFINE_FUNCTION("Test_chrtok()");
 	TCHAR TestString1[] = _T("111x222x333x444x555");
 	TCHAR TestString2[] = _T("111x222x333x444x555");
-	TCHAR* pChrPtr;
-	TCHAR* pStrPtr;
+	TCHAR *pChrPtr;
+	TCHAR *pStrPtr;
 	SystemLog.Printf(stdout, _T("============= Testing chrtok() ===================="));
 	/* Compare chrtok() results with strtok() for a normal string */
 	pChrPtr = chrtok(TestString1, 'x');
@@ -511,7 +511,7 @@ void Test_chrtok (void) {
  *  4. Check empty string case.
  *
  *=========================================================================*/
-void Test_chrrpunc (void) {
+void Test_chrrpunc(void) {
 	DEFINE_FUNCTION("Test_chrrpunc()");
 	TCHAR TestString[101] = _T("0123=5678");
 	boolean Result;
@@ -562,7 +562,7 @@ void Test_chrrpunc (void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_chrtrunc (void) {
+void Test_chrtrunc(void) {
 	DEFINE_FUNCTION("Test_chrtrunc()");
 	TCHAR TestString[101];
 	SystemLog.Printf(stdout, _T("============= Testing chrtrunc() ===================="));
@@ -604,7 +604,7 @@ void Test_chrtrunc (void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_chrrtrunc (void) {
+void Test_chrrtrunc(void) {
 	DEFINE_FUNCTION("Test_chrrtrunc()");
 	TCHAR TestString[101];
 	SystemLog.Printf(stdout, _T("============= Testing chrrtrunc() ===================="));
@@ -649,7 +649,7 @@ void Test_chrrtrunc (void) {
  *  6. Tests the chrtrunc() and chrrtrunc() functions
  *
  *=========================================================================*/
-void Test_DLChr (void) {
+void Test_DLChr(void) {
 	//DEFINE_FUNCTION("Test_DLChr()");
 	Test_chradd();
 	Test_chrcat();

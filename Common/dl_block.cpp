@@ -87,7 +87,7 @@ static int l_AllocatedBlocks = 0;
  * block information is copied into the new block array.
  *
  *=========================================================================*/
-void ResizeBlockArray (void) {
+void ResizeBlockArray(void) {
 	DEFINE_FUNCTION("ResizeBlockArray()");
 	blockinfo_t **ppNewArray;
 
@@ -100,12 +100,12 @@ void ResizeBlockArray (void) {
 	}
 
 	/* Allocate the new array */
-	ppNewArray = new blockinfo_t*[l_AllocatedBlocks];
+	ppNewArray = new blockinfo_t *[l_AllocatedBlocks];
 	ASSERT(ppNewArray != NULL);
 
 	/* Copy existing blocks if required */
 	if (l_ppBlocks != NULL) {
-		memcpy(ppNewArray, l_ppBlocks, sizeof(blockinfo_t*)*l_NumBlocks);
+		memcpy(ppNewArray, l_ppBlocks, sizeof(blockinfo_t *) * l_NumBlocks);
 		delete[] l_ppBlocks;
 	}
 
@@ -126,12 +126,12 @@ void ResizeBlockArray (void) {
  * will ASSERT.  The function always returns a valid block.
  *
  *=========================================================================*/
-static blockinfo_t *GetBlockInfo (void* pBlock) {
+static blockinfo_t *GetBlockInfo(void *pBlock) {
 	DEFINE_FUNCTION("GetBlockInfo()");
 	int BlockIndex;
-	byte* pStart;
-	byte* pEnd;
-	byte* pByteBlock = (byte *) pBlock;
+	byte *pStart;
+	byte *pEnd;
+	byte *pByteBlock = (byte *)pBlock;
 
 	/* Look through the array for a match */
 	for (BlockIndex = 0; BlockIndex < l_NumBlocks; BlockIndex++) {
@@ -163,7 +163,7 @@ static blockinfo_t *GetBlockInfo (void* pBlock) {
  * for dangling pointers in your application.
  *
  *=========================================================================*/
-void CheckMemoryRefs (void) {
+void CheckMemoryRefs(void) {
 	DEFINE_FUNCTION("CheckMemoryRefs()");
 	int BlockIndex;
 	blockinfo_t *pBlockInfo;
@@ -196,7 +196,7 @@ void CheckMemoryRefs (void) {
  * in your application.
  *
  *=========================================================================*/
-void ClearMemoryRefs (void) {
+void ClearMemoryRefs(void) {
 	//DEFINE_FUNCTION("ClearMemoryRefs()");
 	int BlockIndex;
 
@@ -219,7 +219,7 @@ void ClearMemoryRefs (void) {
  * created.  On failure the newly allocated block should be freed.
  *
  *=========================================================================*/
-boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize) {
+boolean CreateBlockInfo(void *pNewBlock, const size_t NewSize) {
 	DEFINE_FUNCTION("CreateBlockInfo(void*, size_t)");
 	blockinfo_t *pBlockInfo;
 	/* Ensure valid input */
@@ -232,7 +232,7 @@ boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize) {
 	}
 
 	/* Initialize the new memory block */
-	pBlockInfo->pPointer = (byte*) pNewBlock;
+	pBlockInfo->pPointer = (byte *)pNewBlock;
 	pBlockInfo->Size = NewSize;
 	pBlockInfo->Referenced = TRUE;
 	pBlockInfo->pName = NULL;
@@ -264,8 +264,8 @@ boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize) {
  * the input pNname pointer is not valid.
  *
  *=========================================================================*/
-boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize, const TCHAR* pName,
-                         const TCHAR* pFunc) {
+boolean CreateBlockInfo(void *pNewBlock, const size_t NewSize, const TCHAR *pName,
+                        const TCHAR *pFunc) {
 	DEFINE_FUNCTION("CreateBlockInfo(void*, size_t, char*)");
 	blockinfo_t *pBlockInfo;
 	/* Ensure valid input */
@@ -278,7 +278,7 @@ boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize, const TCHAR* pNa
 	}
 
 	/* Initialize the new memory block */
-	pBlockInfo->pPointer = (byte*) pNewBlock;
+	pBlockInfo->pPointer = (byte *)pNewBlock;
 	pBlockInfo->Size = NewSize;
 	pBlockInfo->Referenced = TRUE;
 	/* Attempt to create the name string */
@@ -331,11 +331,11 @@ boolean CreateBlockInfo (void* pNewBlock, const size_t NewSize, const TCHAR* pNa
  * will ASSERT if given an invalid memory block.
  *
  *=========================================================================*/
-void FreeBlockInfo (void* pBlock) {
+void FreeBlockInfo(void *pBlock) {
 	DEFINE_FUNCTION("FreeBlockInfo()");
 	int BlockIndex;
 	blockinfo_t *pBlockInfo = NULL;
-	byte* pByteBlock = (byte *) pBlock;
+	byte* pByteBlock = (byte *)pBlock;
 	/* Ensure valid input */
 	ASSERT(pBlock != NULL);
 
@@ -346,7 +346,7 @@ void FreeBlockInfo (void* pBlock) {
 		/* Check for a block match */
 		if (IsPtrEqual(pBlockInfo->pPointer, pByteBlock)) {
 			memmove(l_ppBlocks + BlockIndex, l_ppBlocks + BlockIndex + 1,
-			        sizeof(blockinfo_t*) * (l_NumBlocks - BlockIndex));
+			        sizeof(blockinfo_t *) * (l_NumBlocks - BlockIndex));
 			l_NumBlocks--;
 			break;
 		}
@@ -358,13 +358,15 @@ void FreeBlockInfo (void* pBlock) {
 
 	/* Delete the pointer name, if any */
 	if (pBlockInfo->pName != NULL) {
-		memset(pBlockInfo->pName, (int)GARBAGE_CHAR, (TSTRLEN(pBlockInfo->pName) + 1)*sizeof(TCHAR));
+		memset(pBlockInfo->pName, (int)GARBAGE_CHAR,
+		       (TSTRLEN(pBlockInfo->pName) + 1) * sizeof(TCHAR));
 		delete[] pBlockInfo->pName;
 	}
 
 	/* Delete the function name, if any */
 	if (pBlockInfo->pFunc != NULL) {
-		memset(pBlockInfo->pFunc, (int)GARBAGE_CHAR, (TSTRLEN(pBlockInfo->pFunc) + 1)*sizeof(TCHAR));
+		memset(pBlockInfo->pFunc, (int)GARBAGE_CHAR,
+		       (TSTRLEN(pBlockInfo->pFunc) + 1) * sizeof(TCHAR));
 		delete[] pBlockInfo->pFunc;
 	}
 
@@ -385,7 +387,7 @@ void FreeBlockInfo (void* pBlock) {
  * Returns the total number of allocated blocks.
  *
  *=========================================================================*/
-size_t GetNumBlocks (void) {
+size_t GetNumBlocks(void) {
 	//DEFINE_FUNCTION("GetNumBlocks()");
 	return (l_NumBlocks);
 }
@@ -410,10 +412,10 @@ size_t GetNumBlocks (void) {
  *      ASSERT(IsValidPointer(pSomeObject, size));
   *
  *=========================================================================*/
-boolean IsValidPointer (void* pBlock, const size_t MinSize) {
+boolean IsValidPointer(void *pBlock, const size_t MinSize) {
 	DEFINE_FUNCTION("IsValidPointer(void*, size_t)");
 	blockinfo_t *pBlockInfo;
-	byte* pByteBlock = (byte*) pBlock;
+	byte *pByteBlock = (byte *)pBlock;
 	/* Ensure valid input */
 	ASSERT(pBlock != NULL && MinSize != 0);
 	pBlockInfo = GetBlockInfo(pBlock);
@@ -440,7 +442,7 @@ boolean IsValidPointer (void* pBlock, const size_t MinSize) {
  *      ASSERT(IsValidPointer(pSomeObject));
   *
  *=========================================================================*/
-boolean IsValidPointer (void* pBlock) {
+boolean IsValidPointer(void *pBlock) {
 	DEFINE_FUNCTION("IsValidPointer(void*)");
 	blockinfo_t *pBlockInfo;
 	/* Ensure valid input */
@@ -470,7 +472,7 @@ boolean IsValidPointer (void* pBlock) {
  * but anywhere within the block.
  *
  *=========================================================================*/
-void NoteMemoryRef (void* pBlock) {
+void NoteMemoryRef(void *pBlock) {
 	//DEFINE_FUNCTION("NoteMemoryRef()");
 	blockinfo_t *pBlockInfo;
 	pBlockInfo = GetBlockInfo(pBlock);
@@ -489,25 +491,25 @@ void NoteMemoryRef (void* pBlock) {
  * Outputs the current block information to the system log file.
  *
  *=========================================================================*/
-void OutputBlockInfo (void) {
+void OutputBlockInfo(void) {
 	//DEFINE_FUNCTION("OutputBlockInfo()");
 	blockinfo_t *pBlockInfo;
 	int BlockIndex;
 	long Index = 1;
 	long MemorySize = 0l;
-	SystemLog.Printf (_T("Outputting custom allocation blocks..."));
+	SystemLog.Printf(_T("Outputting custom allocation blocks..."));
 
 	for (BlockIndex = 0; BlockIndex < l_NumBlocks; BlockIndex++, Index++) {
 		pBlockInfo = l_ppBlocks[BlockIndex];
 		MemorySize += pBlockInfo->Size;
-		SystemLog.Printf (_T("\t\t%3ld) %p (%s, Func %s, %8u bytes), %s."), Index,
-		                  pBlockInfo->pPointer,
-		                  pBlockInfo->pName == NULL ? _T("NULL") : pBlockInfo->pName,
-		                  pBlockInfo->pFunc == NULL ? _T("NULL") : pBlockInfo->pFunc,
-		                  pBlockInfo->Size, pBlockInfo->Referenced ? _T("is Referenced") : _T("NOT Referenced"));
+		SystemLog.Printf(_T("\t\t%3ld) %p (%s, Func %s, %8u bytes), %s."), Index,
+		                 pBlockInfo->pPointer,
+		                 pBlockInfo->pName == NULL ? _T("NULL") : pBlockInfo->pName,
+		                 pBlockInfo->pFunc == NULL ? _T("NULL") : pBlockInfo->pFunc,
+		                 pBlockInfo->Size, pBlockInfo->Referenced ? _T("is Referenced") : _T("NOT Referenced"));
 	}
 
-	SystemLog.Printf (_T("\tOutput %ld bytes in %ld blocks..."), MemorySize, Index - 1);
+	SystemLog.Printf(_T("\tOutput %ld bytes in %ld blocks..."), MemorySize, Index - 1);
 }
 
 /*===========================================================================
@@ -523,7 +525,7 @@ void OutputBlockInfo (void) {
  * will ASSERT if the passed pointer is invalid.
  *
  *=========================================================================*/
-size_t SizeOfBlock (void* pBlock) {
+size_t SizeOfBlock(void *pBlock) {
 	DEFINE_FUNCTION("SizeOfBlock()");
 	blockinfo_t *pBlockInfo;
 	pBlockInfo = GetBlockInfo(pBlock);
@@ -544,16 +546,16 @@ size_t SizeOfBlock (void* pBlock) {
  * input parameters are invalid, the function will ASSERT.
  *
  *=========================================================================*/
-void UpdateBlockInfo (void* pOldBlock, void* pNewBlock, const size_t NewSize) {
+void UpdateBlockInfo(void *pOldBlock, void *pNewBlock, const size_t NewSize) {
 	DEFINE_FUNCTION("UpdateBlockInfo()");
 	blockinfo_t *pBlockInfo;
 	/* Ensure valid input */
 	ASSERT(pNewBlock != NULL && NewSize != 0);
 	/* Attempt to retrieve the block information */
 	pBlockInfo = GetBlockInfo(pOldBlock);
-	ASSERT((byte *) pOldBlock == pBlockInfo->pPointer);
+	ASSERT((byte *)pOldBlock == pBlockInfo->pPointer);
 	/* Update the log information */
-	pBlockInfo->pPointer = (byte *) pNewBlock;
+	pBlockInfo->pPointer = (byte *)pNewBlock;
 	pBlockInfo->Size = NewSize;
 }
 
@@ -563,5 +565,3 @@ void UpdateBlockInfo (void* pOldBlock, void* pNewBlock, const size_t NewSize) {
 
 
 #endif  /* End of if defined(_DEBUG) */
-
-

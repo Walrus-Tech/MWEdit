@@ -59,108 +59,108 @@ class CGenFile {
 
 	/* Class Constructors */
 	CGenFile();
-	CGenFile(FILE* pSourceHandle);
-	CGenFile(const char* pFilename, const char* pMode);
+	CGenFile(FILE *pSourceHandle);
+	CGenFile(const char *pFilename, const char *pMode);
 
 	/* Class destructors */
 	virtual ~CGenFile();
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Attach to an existing file stream */
-	void Attach (FILE* pFileHandle);
-	void Detach (void);
+	void Attach(FILE *pFileHandle);
+	void Detach(void);
 
 	/* Clears the error flag of the stream */
-	void ClearError (void);
+	void ClearError(void);
 
 	/* Close an opened file stream */
-	virtual void Close (void);
+	virtual void Close(void);
 
 	/* Creates a new temporary file */
-	bool CreateTemp (void);
+	bool CreateTemp(void);
 
 	/* Attempt to flush a file stream buffer */
-	bool Flush (void);
+	bool Flush(void);
 
 	/* Return the file handle for object */
-	FILE *GetHandle (void);
+	FILE *GetHandle(void);
 
 	/* Return the file size for the current file */
-	long GetFileSize (void);
-	bool GetFileSize (long &FileSize);
+	long GetFileSize(void);
+	bool GetFileSize(long &FileSize);
 
 	/* Class status methods */
-	bool IsOpen (void);
-	bool IsEOF (void);
-	bool IsError (void);
+	bool IsOpen(void);
+	bool IsEOF(void);
+	bool IsError(void);
 
 	/* Line count methods */
-	long DecLineCount (void) {
+	long DecLineCount(void) {
 		return (--m_LineCount);
 	}
 
-	long IncLineCount (void) {
+	long IncLineCount(void) {
 		return (++m_LineCount);
 	}
 
-	void SetLineCount (const long Value) {
+	void SetLineCount(const long Value) {
 		m_LineCount = Value;
 	}
 
-	long GetLineCount (void) const {
+	long GetLineCount(void) const {
 		return (m_LineCount);
 	}
 
 	/* Attempt to open the given filename */
-	virtual bool Open (const char* pFilename, const char* pMode);
+	virtual bool Open(const char *pFilename, const char *pMode);
 
 	/* Output formatted string to file stream */
-	bool Printf (const char* pString, ...);
-	bool VPrintf (const char* pString, va_list Args);
+	bool Printf(const char *pString, ...);
+	bool VPrintf(const char *pString, va_list Args);
 
 	/* Attempt to read a section from the file */
-	bool Read (char* pBuffer, size_t &BytesRead, const size_t NumBytes);
-	bool Read (char* pBuffer, const size_t NumBytes);
-	bool ReadEx (char* pBuffer, const size_t Size, const size_t Count);
+	bool Read(char *pBuffer, size_t &BytesRead, const size_t NumBytes);
+	bool Read(char *pBuffer, const size_t NumBytes);
+	bool ReadEx(char *pBuffer, const size_t Size, const size_t Count);
 
 	/* Read a line */
-	int ReadLine (char* pBuffer = NULL, const size_t MaxStringLength = 0);
+	int ReadLine(char *pBuffer = NULL, const size_t MaxStringLength = 0);
 
 	/* Input a character from the file stream */
-	bool ReadChar (char &Char);
+	bool ReadChar(char &Char);
 
 	/* Read binary integers */
-	bool ReadShort (short &Value);
-	bool ReadInt (int &Value);
-	bool ReadLong (long &Value);
-	bool ReadFloat (float &Value);
+	bool ReadShort(short &Value);
+	bool ReadInt(int &Value);
+	bool ReadLong(long &Value);
+	bool ReadFloat(float &Value);
 
 	/* Move the file position to the file beginning */
-	void Rewind (void);
+	void Rewind(void);
 
 	/* Move the current file position */
-	bool Seek (const filepos_t Position, const int SeekType);
+	bool Seek(const filepos_t Position, const int SeekType);
 
 	/* Get the current file position */
-	filepos_t Tell (void);
-	bool Tell (filepos_t &Position);
+	filepos_t Tell(void);
+	bool Tell(filepos_t &Position);
 
 	/* Attempt to write a section to the file */
-	bool Write (const char* pBuffer, size_t &BytesWritten, const size_t NumBytes);
-	bool Write (const char* pBuffer, const size_t NumBytes);
-	bool WriteEx (const char* pBuffer, const size_t Size, const size_t Count);
+	bool Write(const char *pBuffer, size_t &BytesWritten, const size_t NumBytes);
+	bool Write(const char *pBuffer, const size_t NumBytes);
+	bool WriteEx(const char *pBuffer, const size_t Size, const size_t Count);
 
 	/* Output a character to the file */
-	bool WriteChar (const char Char);
+	bool WriteChar(const char Char);
 
 	/* Write binary integers */
-	bool WriteShort (const short Value);
-	bool WriteInt (const int Value);
-	bool WriteLong (const long Value);
-	bool WriteFloat (const float Value);
+	bool WriteShort(const short Value);
+	bool WriteInt(const int Value);
+	bool WriteLong(const long Value);
+	bool WriteFloat(const float Value);
 
 	/* FILE* type conversion operator */
-	operator FILE* (void);
+	operator FILE *(void);
 
 };
 
@@ -181,12 +181,12 @@ inline CGenFile::CGenFile() {
 	m_Attached = FALSE;
 }
 
-inline CGenFile::CGenFile(FILE* pSourceHandle) {
+inline CGenFile::CGenFile(FILE *pSourceHandle) {
 	m_pFileHandle = pSourceHandle;
 	m_Attached = FALSE;
 }
 
-inline CGenFile::CGenFile(const char* pFilename, const char* pMode) {
+inline CGenFile::CGenFile(const char *pFilename, const char *pMode) {
 	m_pFileHandle = NULL;
 	m_Attached = FALSE;
 	m_LineCount = 0;
@@ -204,7 +204,7 @@ inline void CGenFile::Destroy (void) {
 }
 
 /* Attach to an existing file stream */
-inline void CGenFile::Attach (FILE* pFileHandle) {
+inline void CGenFile::Attach (FILE *pFileHandle) {
 	IASSERT(pFileHandle != NULL);
 	Close();
 	m_Attached = TRUE;
@@ -212,7 +212,7 @@ inline void CGenFile::Attach (FILE* pFileHandle) {
 }
 
 /* Unattached to an existing file stream */
-inline void CGenFile::Detach (void) {
+inline void CGenFile::Detach(void) {
 	if (m_Attached) {
 		m_Attached = FALSE;
 		m_pFileHandle = NULL;
@@ -220,13 +220,13 @@ inline void CGenFile::Detach (void) {
 }
 
 /* Clears the error flag of the file stream */
-inline void CGenFile::ClearError (void) {
+inline void CGenFile::ClearError(void) {
 	IASSERT(m_pFileHandle != NULL);
 	clearerr(m_pFileHandle);
 }
 
 /* Close the file stream, if it is open */
-inline void CGenFile::Close (void) {
+inline void CGenFile::Close(void) {
 	if (IsOpen()) {
 		if (!m_Attached) {
 			fclose(m_pFileHandle);
@@ -239,7 +239,7 @@ inline void CGenFile::Close (void) {
 }
 
 /* Creates a new temporary file for output */
-inline bool CGenFile::CreateTemp (void) {
+inline bool CGenFile::CreateTemp(void) {
 	Close();
 	m_pFileHandle = tmpfile();
 
@@ -251,7 +251,7 @@ inline bool CGenFile::CreateTemp (void) {
 	return (TRUE);
 }
 
-inline bool CGenFile::Flush (void) {
+inline bool CGenFile::Flush(void) {
 	IASSERT(IsOpen());
 
 	if (fflush(m_pFileHandle) != 0) {
@@ -263,24 +263,24 @@ inline bool CGenFile::Flush (void) {
 }
 
 /* Return the file handle for object */
-inline FILE *CGenFile::GetHandle (void) {
+inline FILE *CGenFile::GetHandle(void) {
 	return (m_pFileHandle);
 }
 
 /* Return the file size */
-inline long CGenFile::GetFileSize (void) {
+inline long CGenFile::GetFileSize(void) {
 	IASSERT(IsOpen());
 	return ::GetFileSize(m_pFileHandle);
 }
 
 /* Retrieve the file size with error status */
-inline bool CGenFile::GetFileSize (long &FileSize) {
+inline bool CGenFile::GetFileSize(long &FileSize) {
 	IASSERT(IsOpen());
 	return ::GetFileSize(FileSize, m_pFileHandle);
 }
 
 /* Returns TRUE if the EOF has been reached */
-inline bool CGenFile::IsEOF (void) {
+inline bool CGenFile::IsEOF(void) {
 	if (!IsOpen() || feof(m_pFileHandle)) {
 		return (TRUE);
 	}
@@ -289,7 +289,7 @@ inline bool CGenFile::IsEOF (void) {
 }
 
 /* Returns TRUE if the file stream has an error */
-inline bool CGenFile::IsError (void) {
+inline bool CGenFile::IsError(void) {
 	if (!IsOpen() || ferror(m_pFileHandle)) {
 		return (TRUE);
 	}
@@ -298,19 +298,19 @@ inline bool CGenFile::IsError (void) {
 }
 
 /* Returns TRUE if the file stream is currently open */
-inline bool CGenFile::IsOpen (void) {
-	return (bool) ((m_pFileHandle == NULL) ? FALSE : TRUE);
+inline bool CGenFile::IsOpen(void) {
+	return (bool)((m_pFileHandle == NULL) ? FALSE : TRUE);
 }
 
 /* Open a file as with the fopen() function */
-inline bool CGenFile::Open (const char* pFilename, const char* pMode) {
+inline bool CGenFile::Open(const char *pFilename, const char *pMode) {
 	Close();
 	m_LineCount = 0;
 	return OpenFile(&m_pFileHandle, pFilename, pMode);
 }
 
 /* Output a formatted string to file */
-inline bool CGenFile::Printf (const char* pString, ...) {
+inline bool CGenFile::Printf(const char *pString, ...) {
 	va_list Args;
 	bool Result;
 	IASSERT(pString != NULL);
@@ -321,7 +321,7 @@ inline bool CGenFile::Printf (const char* pString, ...) {
 }
 
 /* Output a formatted string to file using a variable argument list */
-inline bool CGenFile::VPrintf (const char* pString, va_list Args) {
+inline bool CGenFile::VPrintf(const char *pString, va_list Args) {
 	IASSERT(pString != NULL);
 
 	/* Ensure file is open for output */
@@ -340,7 +340,7 @@ inline bool CGenFile::VPrintf (const char* pString, va_list Args) {
 }
 
 /* Read a section from the file */
-inline bool CGenFile::Read (char* pBuffer, size_t &BytesRead, const size_t NumBytes) {
+inline bool CGenFile::Read(char *pBuffer, size_t &BytesRead, const size_t NumBytes) {
 	IASSERT(pBuffer != NULL && IsOpen());
 	/* Attempt to read buffer */
 	BytesRead = fread(pBuffer, 1, NumBytes, m_pFileHandle);
@@ -355,18 +355,18 @@ inline bool CGenFile::Read (char* pBuffer, size_t &BytesRead, const size_t NumBy
 }
 
 /* Read a section from the file */
-inline bool CGenFile::Read (char* pBuffer, const size_t NumBytes) {
+inline bool CGenFile::Read(char *pBuffer, const size_t NumBytes) {
 	size_t BytesRead;
 	return Read(pBuffer, BytesRead, NumBytes);
 }
 
 /* Read a section from the file */
-inline bool CGenFile::ReadEx (char* pBuffer, const size_t Size, const size_t Count) {
-	ulong NumBytes = (ulong) Size * (ulong)Count;
+inline bool CGenFile::ReadEx(char *pBuffer, const size_t Size, const size_t Count) {
+	ulong NumBytes = (ulong)Size * (ulong)Count;
 	size_t BytesRead;
 
 	/* Ensure valid input size */
-	if (NumBytes >= (ulong) UINT_MAX) {
+	if (NumBytes >= (ulong)UINT_MAX) {
 		ErrorHandler.AddError(ERR_OVERFLOW, "Exceeded the maximum input size of %ud bytes!", UINT_MAX);
 		return (FALSE);
 	}
@@ -375,7 +375,7 @@ inline bool CGenFile::ReadEx (char* pBuffer, const size_t Size, const size_t Cou
 }
 
 /* Read a character from the file */
-inline bool CGenFile::ReadChar (char &InputChar) {
+inline bool CGenFile::ReadChar(char &InputChar) {
 	IASSERT(IsOpen());
 	int Input;
 	/* Attempt to read character */
@@ -392,40 +392,40 @@ inline bool CGenFile::ReadChar (char &InputChar) {
 }
 
 /* Read one line from the file */
-inline int CGenFile::ReadLine (char* pBuffer, const size_t MaxStringLength) {
+inline int CGenFile::ReadLine(char *pBuffer, const size_t MaxStringLength) {
 	IASSERT(IsOpen());
 	return (::ReadLine(m_pFileHandle, pBuffer, MaxStringLength));
 }
 
 /* Read binary short integer (16 bit) */
-inline bool CGenFile::ReadShort (short &Value) {
-	return Read((char*)&Value, sizeof(short));
+inline bool CGenFile::ReadShort(short &Value) {
+	return Read((char *)&Value, sizeof(short));
 }
 
 /* Read binary integer (size depends on system) */
-inline bool CGenFile::ReadInt (int &Value) {
-	return Read((char*)&Value, sizeof(int));
+inline bool CGenFile::ReadInt(int &Value) {
+	return Read((char *)&Value, sizeof(int));
 }
 
 /* Read binary long integer (32 bit) */
-inline bool CGenFile::ReadLong (long &Value) {
-	return Read((char*)&Value, sizeof(long));
+inline bool CGenFile::ReadLong(long &Value) {
+	return Read((char *)&Value, sizeof(long));
 }
 
 /* Read binary float (32 bit) */
-inline bool CGenFile::ReadFloat (float &Value) {
-	return Read((char*)&Value, sizeof(float));
+inline bool CGenFile::ReadFloat(float &Value) {
+	return Read((char *)&Value, sizeof(float));
 }
 
 
 /* Move to the fiel beginning and clear the stream errors */
-inline void CGenFile::Rewind (void) {
+inline void CGenFile::Rewind(void) {
 	IASSERT(IsOpen());
 	rewind(m_pFileHandle);
 }
 
 /* Move the current file position as per fseek() */
-inline bool CGenFile::Seek (const filepos_t Position, const int SeekType) {
+inline bool CGenFile::Seek(const filepos_t Position, const int SeekType) {
 	IASSERT(IsOpen());
 
 	if (fseek(m_pFileHandle, Position, SeekType) != 0) {
@@ -437,7 +437,7 @@ inline bool CGenFile::Seek (const filepos_t Position, const int SeekType) {
 }
 
 /* Retrieve the current file position as per ftell() */
-inline bool CGenFile::Tell (filepos_t &Position) {
+inline bool CGenFile::Tell(filepos_t &Position) {
 	IASSERT(IsOpen());
 	Position = ftell(m_pFileHandle);
 
@@ -450,14 +450,14 @@ inline bool CGenFile::Tell (filepos_t &Position) {
 }
 
 /* Retrieve the current file position as per ftell() */
-inline filepos_t CGenFile::Tell (void) {
+inline filepos_t CGenFile::Tell(void) {
 	filepos_t Position;
 	Tell(Position);
 	return (Position);
 }
 
 /* Write a section to the file */
-inline bool CGenFile::Write (const char* pBuffer, size_t &BytesWritten, const size_t NumBytes) {
+inline bool CGenFile::Write(const char *pBuffer, size_t &BytesWritten, const size_t NumBytes) {
 	IASSERT(pBuffer != NULL && IsOpen());
 	/* Attempt to read buffer */
 	BytesWritten = fwrite(pBuffer, 1, NumBytes, m_pFileHandle);
@@ -472,18 +472,18 @@ inline bool CGenFile::Write (const char* pBuffer, size_t &BytesWritten, const si
 }
 
 /* Write a section to the file */
-inline bool CGenFile::Write (const char* pBuffer, const size_t NumBytes) {
+inline bool CGenFile::Write(const char *pBuffer, const size_t NumBytes) {
 	size_t BytesWritten;
 	return Write(pBuffer, BytesWritten, NumBytes);
 }
 
 /* Write a section to the file */
-inline bool CGenFile::WriteEx (const char* pBuffer, const size_t Size, const size_t Count) {
-	ulong NumBytes = (ulong) Size * (ulong)Count;
+inline bool CGenFile::WriteEx(const char *pBuffer, const size_t Size, const size_t Count) {
+	ulong NumBytes = (ulong)Size * (ulong)Count;
 	size_t BytesWritten;
 
 	/* Ensure valid input size */
-	if (NumBytes >= (ulong) UINT_MAX) {
+	if (NumBytes >= (ulong)UINT_MAX) {
 		ErrorHandler.AddError(ERR_OVERFLOW, "Exceeded the maximum output size of %ud bytes!", UINT_MAX);
 		return (FALSE);
 	}
@@ -492,11 +492,11 @@ inline bool CGenFile::WriteEx (const char* pBuffer, const size_t Size, const siz
 }
 
 /* Write a character to the file */
-inline bool CGenFile::WriteChar (const char Char) {
+inline bool CGenFile::WriteChar(const char Char) {
 	IASSERT(IsOpen());
 
 	/* Attempt to write character */
-	if ( fputc((int) Char, m_pFileHandle) < 0 ) {
+	if (fputc((int)Char, m_pFileHandle) < 0 ) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to write character to file!");
 		return (FALSE);
 	}
@@ -505,31 +505,31 @@ inline bool CGenFile::WriteChar (const char Char) {
 }
 
 /* Write binary short integer (16 bit) */
-inline bool CGenFile::WriteShort (const short Value) {
+inline bool CGenFile::WriteShort(const short Value) {
 	short TempValue = Value;
-	return Write((char*)&TempValue, sizeof(short));
+	return Write((char *)&TempValue, sizeof(short));
 }
 
 /* Write binary integer (size depends on system) */
-inline bool CGenFile::WriteInt (const int Value) {
+inline bool CGenFile::WriteInt(const int Value) {
 	int TempValue = Value;
-	return Write((char*)&TempValue, sizeof(int));
+	return Write((char *)&TempValue, sizeof(int));
 }
 
 /* Write binary long integer (32 bit) */
-inline bool CGenFile::WriteLong (const long Value) {
+inline bool CGenFile::WriteLong(const long Value) {
 	long TempValue = Value;
-	return Write((char*)&TempValue, sizeof(long));
+	return Write((char *)&TempValue, sizeof(long));
 }
 
 /* Write binary float (32 bit) */
-inline bool CGenFile::WriteFloat (const float Value) {
+inline bool CGenFile::WriteFloat(const float Value) {
 	float TempValue = Value;
-	return Write((char*)&TempValue, sizeof(float));
+	return Write((char *)&TempValue, sizeof(float));
 }
 
 /* Class FILE* type conversion operator */
-inline CGenFile::operator FILE* (void) {
+inline CGenFile::operator FILE *(void) {
 	return (m_pFileHandle);
 }
 
@@ -547,12 +547,12 @@ inline CGenFile::operator FILE* (void) {
 	#define TEST_GENFILE_SEEKFILESIZE 10000
 	#define TEST_GENFILE_RWNUMSIZE  1000
 
-	void Test_RWGenFile (const size_t NumTests = 100);
-	void Test_RWCharGenFile (const size_t NumTests = 20);
-	void Test_GenFileRWNumbers (const size_t NumTests = 1000);
-	void Test_GenFileSeekTell (const size_t NumTests = 1000);
-	void Test_GenFilePrint (void);
-	void Test_GenFile (void);
+	void Test_RWGenFile(const size_t NumTests = 100);
+	void Test_RWCharGenFile(const size_t NumTests = 20);
+	void Test_GenFileRWNumbers(const size_t NumTests = 1000);
+	void Test_GenFileSeekTell(const size_t NumTests = 1000);
+	void Test_GenFilePrint(void);
+	void Test_GenFile(void);
 #endif
 /*===========================================================================
  *      End of Test Routine Prototypes

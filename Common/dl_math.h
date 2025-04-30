@@ -86,7 +86,7 @@ typedef struct {
  * Function which return -1/0/1 depending on the sign of the number.
  *
  *=========================================================================*/
-inline int sign (const int Number) {
+inline int sign(const int Number) {
 	if (Number == 0) {
 		return (0);
 	}
@@ -98,7 +98,7 @@ inline int sign (const int Number) {
 	return (-1);
 }
 
-inline long sign (const long Number) {
+inline long sign(const long Number) {
 	if (Number == 0) {
 		return (0);
 	}
@@ -110,7 +110,7 @@ inline long sign (const long Number) {
 	return (-1);
 }
 
-inline float sign (const float Number) {
+inline float sign(const float Number) {
 	if (Number == 0) {
 		return (0.0);
 	}
@@ -122,7 +122,7 @@ inline float sign (const float Number) {
 	return (-1.0);
 }
 
-inline double sign (const double Number) {
+inline double sign(const double Number) {
 	if (Number == 0) {
 		return (0.0);
 	}
@@ -161,36 +161,36 @@ inline double sign (const double Number) {
  *=========================================================================*/
 
 /* Convert a hexadecimal character to a 0-15 integer value */
-int HexCharToInt (const TCHAR Character);
+int HexCharToInt(const TCHAR Character);
 
 /* Compute a nice tick length for graphs */
-double GetNiceTickLength (double &AxisStart, double &AxisEnd, const int NumTicks);
-double GetNiceTickLengthC (const double AxisStart, const double AxisEnd, const int NumTicks);
+double GetNiceTickLength(double &AxisStart, double &AxisEnd, const int NumTicks);
+double GetNiceTickLengthC(const double AxisStart, const double AxisEnd, const int NumTicks);
 
 
 /* Get the best unit prefix for the value */
-unit_prefix_t *GetUnitPrefix (boolean& OverFlow, const double Value);
+unit_prefix_t *GetUnitPrefix(boolean &OverFlow, const double Value);
 
 /* Converts a metric value a string in the best representation */
-TCHAR *Metricize (const double Value, const TCHAR* pUnits);
-TCHAR *Metricize (TCHAR* Buffer, const int BufferSize, const double Value, const TCHAR* pUnits);
+TCHAR *Metricize(const double Value, const TCHAR *pUnits);
+TCHAR *Metricize(TCHAR *Buffer, const int BufferSize, const double Value, const TCHAR *pUnits);
 
 /* Converts the input Value to a 'Nice' number */
-double NiceNumber (const double Value, const int Round);
+double NiceNumber(const double Value, const int Round);
 
 /* Returns a random number from 0 to ULONG_MAX */
-ulong Random (void);
+ulong Random(void);
 
 /* Generate a range of random integers */
-int Random (const int MaxNumber);
-ulong Random (const ulong MaxNumber);
-int Random (const int MinNumber, const int MaxNumber);
+int Random(const int MaxNumber);
+ulong Random(const ulong MaxNumber);
+int Random(const int MinNumber, const int MaxNumber);
 
 /* Seeds the random number generator with the current time */
-void RandomizeTimer (void);
+void RandomizeTimer(void);
 
 /* Seeds the custom random number generator */
-void SeedRandom (const ulong NewSeed = 1);
+void SeedRandom(const ulong NewSeed = 1);
 
 /*===========================================================================
  *      End of Function Prototypes
@@ -204,14 +204,14 @@ void SeedRandom (const ulong NewSeed = 1);
  *=========================================================================*/
 #if defined(_DEBUG)
 
-	void Test_Random  (const size_t NumTests = 1000);
-	void Test_Random1 (const size_t NumTests = 1000);
-	void Test_Random2 (const size_t NumTests = 1000);
-	void Test_RandomRate (const size_t NumTests = 100);
-	void Test_sign (void);
-	void Test_HexCharToInt (void);
-	void Test_Metricize (void);
-	void Test_DL_Math (void);
+	void Test_Random(const size_t NumTests = 1000);
+	void Test_Random1(const size_t NumTests = 1000);
+	void Test_Random2(const size_t NumTests = 1000);
+	void Test_RandomRate(const size_t NumTests = 100);
+	void Test_sign(void);
+	void Test_HexCharToInt(void);
+	void Test_Metricize(void);
+	void Test_DL_Math(void);
 
 #endif
 /*===========================================================================
@@ -237,9 +237,9 @@ extern char HexCharValues[];
  *=========================================================================*/
 
 /* Convert an ASCII character to hexadecimal value (0-15) */
-inline int HexCharToInt (const TCHAR Character) {
+inline int HexCharToInt(const TCHAR Character) {
 	IASSERT(isxdigit(Character));
-	return (int) HexCharValues[Character & 0x7F];
+	return (int)HexCharValues[Character & 0x7F];
 }
 
 /*===========================================================================

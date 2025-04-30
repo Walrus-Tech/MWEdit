@@ -55,7 +55,7 @@ typedef TTemplateArray<char> CPCharArray;
  * random number of random sized strings are added to two char* arrays.
  *
  *=========================================================================*/
-void Test_StressTemplateArray (const size_t NumTests) {
+void Test_StressTemplateArray(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_StressTemplateArray()");
 	CPCharArray StringArray1(100);
 	size_t LoopCounter;
@@ -128,7 +128,7 @@ void Test_StressTemplateArray (const size_t NumTests) {
 
  *
  *=========================================================================*/
-void Test_TemplateArray (void) {
+void Test_TemplateArray(void) {
 	DEFINE_FUNCTION("Test_TemplateArray()");
 	long *pTestInt;
 	char *pTestPtr;
@@ -252,4 +252,3 @@ void Test_TemplateArray (void) {
 /*===========================================================================
  *      End of Module Test Routines
  *=========================================================================*/
-

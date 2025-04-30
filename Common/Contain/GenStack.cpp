@@ -28,11 +28,11 @@ DEFINE_FILE("GenStack.cpp");
  * Class CGenStack Constructor
  *
  *=========================================================================*/
-CGenStack::CGenStack (const int Size) {
+CGenStack::CGenStack(const int Size) {
 	DEFINE_FUNCTION("CGenStack::CGenStack()");
 	int NewSize = (Size <= 0) ? GENSTACK_DEFAULT_SIZE : Size;
 	/* Allocate the initial stack data */
-	CreateArrayPointer(m_ppStack, void*, NewSize);
+	CreateArrayPointer(m_ppStack, void *, NewSize);
 	m_NumElements = 0;
 	m_NumAllocated = NewSize;
 }
@@ -47,7 +47,7 @@ CGenStack::CGenStack (const int Size) {
  * Class CGenStack Destructor
  *
  *=========================================================================*/
-CGenStack::~CGenStack () {
+CGenStack::~CGenStack() {
 	DEFINE_FUNCTION("CGenStack::~CGenStack()");
 	/* Delete the array */
 	RemoveAll();
@@ -69,7 +69,7 @@ CGenStack::~CGenStack () {
  * Protected class method.
  *
  *=========================================================================*/
-bool CGenStack::AllocSize (const int Size) {
+bool CGenStack::AllocSize(const int Size) {
 	DEFINE_FUNCTION("CGenStack::AllocSize()");
 	void **ppNewData;
 
@@ -90,7 +90,7 @@ bool CGenStack::AllocSize (const int Size) {
 
 	/* Copy the old stack data */
 	if (m_NumElements != 0) {
-		memcpy(ppNewData, m_ppStack, sizeof(void*)*m_NumElements);
+		memcpy(ppNewData, m_ppStack, sizeof(void *)*m_NumElements);
 	}
 
 	/* Delete the old stack and set to the new */
@@ -113,7 +113,7 @@ bool CGenStack::AllocSize (const int Size) {
  * not valid.
  *
  *=========================================================================*/
-void *CGenStack::GetAt (const int Index) {
+void *CGenStack::GetAt(const int Index) {
 	if (Index >= m_NumElements || Index < 0) {
 		return (NULL);
 	}
@@ -134,7 +134,7 @@ void *CGenStack::GetAt (const int Index) {
  * if no item is available.
  *
  *=========================================================================*/
-void *CGenStack::Peek (void) {
+void *CGenStack::Peek(void) {
 	if (m_NumElements == 0) {
 		return (NULL);
 	}
@@ -155,7 +155,7 @@ void *CGenStack::Peek (void) {
  * uis empty.
  *
  *=========================================================================*/
-void *CGenStack::Pop (void) {
+void *CGenStack::Pop(void) {
 	if (m_NumElements == 0) {
 		return (NULL);
 	}
@@ -177,7 +177,7 @@ void *CGenStack::Pop (void) {
  * required.
  *
  *=========================================================================*/
-void CGenStack::Push (void* pData) {
+void CGenStack::Push(void *pData) {
 	DEFINE_FUNCTION("");
 
 	/* Grow array as required */
@@ -201,7 +201,7 @@ void CGenStack::Push (void* pData) {
  * Remove all pointers from the stack.
  *
  *=========================================================================*/
-void CGenStack::RemoveAll (void) {
+void CGenStack::RemoveAll(void) {
 	m_NumElements = 0;
 }
 
@@ -218,7 +218,7 @@ void CGenStack::RemoveAll (void) {
  * given size is too small such that it truncates existing elements.
  *
  *=========================================================================*/
-bool CGenStack::SetSize (const int Size) {
+bool CGenStack::SetSize(const int Size) {
 	return AllocSize(Size);
 }
 

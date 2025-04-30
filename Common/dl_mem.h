@@ -69,7 +69,7 @@
 		} \
 		\
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes in file %s, function %s, line #%d!"), sizeof(Type), ThisFile, ThisFunction, __LINE__); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes in file %s, function %s, line #%d!"), sizeof(Type), ThisFile, ThisFunction, __LINE__); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -84,7 +84,7 @@
 		} \
 		\
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes (file '%s', line #%d)!"), sizeof(Type), __FILE__, __LINE__); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes (file '%s', line #%d)!"), sizeof(Type), __FILE__, __LINE__); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -93,14 +93,14 @@
 		(pObject) = new Type(Args); \
 		\
 		if ((pObject) != NULL) { \
-			if (!CreateBlockInfo((pObject), sizeof(Type), _T(#pObject), ThisFunction )) { \
+			if (!CreateBlockInfo((pObject), sizeof(Type), _T(#pObject), ThisFunction)) { \
 				delete pObject; \
 				pObject = NULL; \
 			} \
 		} \
 		\
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes in file %s, function %s, line #%d!"), sizeof(Type), ThisFile, ThisFunction, __LINE__); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes in file %s, function %s, line #%d!"), sizeof(Type), ThisFile, ThisFunction, __LINE__); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -110,14 +110,14 @@
 		(pObject) = new Type[Number]; \
 		\
 		if ((pObject) != NULL) { \
-			if (!CreateBlockInfo((pObject), sizeof(Type)*Number, _T(#pObject), ThisFunction )) { \
+			if (!CreateBlockInfo((pObject), sizeof(Type)*Number, _T(#pObject), ThisFunction)) { \
 				delete pObject; \
 				pObject = NULL; \
 			} \
 		} \
 		\
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes (%u[%u]) in file %s, function %s, line #%d!"), sizeof(Type)*Number, sizeof(Type), Number, ThisFile, ThisFunction, __LINE__); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes (%u[%u]) in file %s, function %s, line #%d!"), sizeof(Type)*Number, sizeof(Type), Number, ThisFile, ThisFunction, __LINE__); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -125,14 +125,14 @@
 		(pObject) = new Type[Number]; \
 		\
 		if ((pObject) != NULL) { \
-			if (!CreateBlockInfo((pObject), sizeof(Type)*Number, _T(#pObject), NULL )) { \
+			if (!CreateBlockInfo((pObject), sizeof(Type)*Number, _T(#pObject), NULL)) { \
 				delete pObject; \
 				pObject = NULL; \
 			} \
 		} \
 		\
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes (%u[%u]) in file %s, function %s, line #%d!"), sizeof(Type)*Number, sizeof(Type), Number, __FILE__, "", __LINE__); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes (%u[%u]) in file %s, function %s, line #%d!"), sizeof(Type)*Number, sizeof(Type), Number, __FILE__, "", __LINE__); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -144,14 +144,14 @@
      * type macros above. */
 #define ValidateNewPointer(pObject) { \
 		if ((pObject) != NULL) { \
-			if (!CreateBlockInfo((pObject), sizeof(*(pObject)), _T(#pObject), ThisFunction )) { \
+			if (!CreateBlockInfo((pObject), sizeof(*(pObject)), _T(#pObject), ThisFunction)) { \
 				delete pObject; \
 				pObject = NULL; \
 			} \
 		} \
 		\
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes in file %s, function %s, line #%d!"), sizeof(*pObject), ThisFile, ThisFunction, __LINE__); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes in file %s, function %s, line #%d!"), sizeof(*pObject), ThisFile, ThisFunction, __LINE__); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -163,7 +163,7 @@
 #define CreatePointer(pObject, Type) { \
 		(pObject) = new Type; \
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes!"), sizeof(Type)); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes!"), sizeof(Type)); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -173,7 +173,7 @@
 #define CreateClassPointer(pObject, Type, Args) { \
 		(pObject) = new Type(Args); \
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes!"), sizeof(Type)); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes!"), sizeof(Type)); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -182,7 +182,7 @@
 #define CreateArrayPointer(pObject, Type, Number) { \
 		(pObject) = new Type[Number]; \
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes!"), sizeof(Type)*Number); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes!"), sizeof(Type)*Number); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -191,7 +191,7 @@
 /* Validate a prexisting pointer (see debug version for more info) */
 #define ValidateNewPointer(pObject) { \
 		if ((pObject) == NULL) { \
-			SystemLog.Printf (stderr, _T("Failed to allocate %u bytes!"), sizeof(*(pObject)) ); \
+			SystemLog.Printf(stderr, _T("Failed to allocate %u bytes!"), sizeof(*(pObject)) ); \
 			throw (_T("Out of Memory!")); \
 		} }
 
@@ -314,37 +314,41 @@
  *=========================================================================*/
 
 /* Allocate a block of memory */
-void *AllocateMemory (const size_t Size);
+void *AllocateMemory(const size_t Size);
 
 /* Attempts to allocate and initialize a string pointer */
-TCHAR *CreateString (const TCHAR* pString);
+TCHAR *CreateString(const TCHAR *pString);
 //wchar_t* CreateStringW (const wchar_t*  pString);
-TCHAR *CreateString (const size_t Length);
+TCHAR *CreateString(const size_t Length);
 
 /* Attempt to create a new string from the given string */
-bool CreateString (TCHAR** pNewString, const TCHAR* pSourceString);
-bool CreateString (TCHAR** pNewString, const size_t StringSize);
+bool CreateString(TCHAR **pNewString, const TCHAR *pSourceString);
+bool CreateString(TCHAR **pNewString, const size_t StringSize);
 
 /* Memory status routines */
-bool GetTotalMemory (long &Memory);
-bool GetFreeMemory (long &Memory);
-bool GetUsedMemory (long &Memory);
-int GetHeapStatus (void);
-const TCHAR *GetHeapStatusString (void);
+bool GetTotalMemory(long &Memory);
+bool GetFreeMemory(long &Memory);
+bool GetUsedMemory(long &Memory);
+int GetHeapStatus(void);
+const TCHAR *GetHeapStatusString(void);
 
 /* Search binary memory buffer for a sub-buffer */
-TCHAR *memsearch (const TCHAR* pBuffer, const TCHAR* pSearchBuffer,
-                  const size_t BufferLength, const size_t SearchLength,
-                  const size_t StartIndex);
+TCHAR *memsearch(const TCHAR *pBuffer,
+                 const TCHAR *pSearchBuffer,
+                 const size_t BufferLength,
+                 const size_t SearchLength,
+                 const size_t StartIndex);
 
 /* Search binary memory buffer for a sub-buffer, case insensitive */
-int memisearch (const TCHAR* pBuffer, const TCHAR* pSearchBuffer,
-                const size_t BufferLength, const size_t SearchLength,
-                const size_t StartIndex);
+int memisearch(const TCHAR *pBuffer,
+               const TCHAR *pSearchBuffer,
+               const size_t BufferLength,
+               const size_t SearchLength,
+               const size_t StartIndex);
 
 /* Deletes the current string and allocates a new string */
-bool ReplaceString (TCHAR** pNewString, const TCHAR* pSourceString);
-bool ReplaceString (TCHAR** pNewString, const size_t Length);
+bool ReplaceString(TCHAR **pNewString, const TCHAR *pSourceString);
+bool ReplaceString(TCHAR **pNewString, const size_t Length);
 
 /*===========================================================================
  *      End of Function Prototypes
@@ -365,7 +369,7 @@ bool ReplaceString (TCHAR** pNewString, const size_t Length);
 		#define DebugHeapCheckMemory() true
 
 		/* Output all objects on the heap to the SystemLog */
-		void _DosMemDumpHeap (void);
+		void _DosMemDumpHeap(void);
 
 	#elif defined(_WIN32)
 		#define DebugHeapCheckMemory() (_CrtDumpMemoryLeaks() == TRUE)
@@ -392,12 +396,12 @@ bool ReplaceString (TCHAR** pNewString, const size_t Length);
 		#define TEST_MAXSTRING_SIZE 100000u
 	#endif
 
-	void Test_DL_Mem (void);
-	void Test_CreateString1 (void);
-	void Test_CreateString2 (void);
-	void Test_CreateString3 (void);
-	void Test_memsearch (void);
-	void Test_ReplaceString (void);
+	void Test_DL_Mem(void);
+	void Test_CreateString1(void);
+	void Test_CreateString2(void);
+	void Test_CreateString3(void);
+	void Test_memsearch(void);
+	void Test_ReplaceString(void);
 #endif
 /*===========================================================================
  *      End of Test Routine Definitions

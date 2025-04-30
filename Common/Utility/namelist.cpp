@@ -35,7 +35,7 @@ DEFINE_FILE("NameList.cpp");
  * case insensitive.
  *
  *=========================================================================*/
-bool FindNameValue (long &lValue, const valuenames_t* pValueArray, const TCHAR* pName) {
+bool FindNameValue(long &lValue, const valuenames_t *pValueArray, const TCHAR *pName) {
 	DEFINE_FUNCTION("FindNameValue()")
 	int Index;
 	/* Ensure valid array */
@@ -78,7 +78,7 @@ bool FindNameValue (long &lValue, const valuenames_t* pValueArray, const TCHAR* 
  * case insensitive.
  *
  *=========================================================================*/
-long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName) {
+long FindNameValue(const valuenames_t *pValueArray, const TCHAR *pName) {
 	DEFINE_FUNCTION("FindNameValue()")
 	int Index;
 	/* Ensure valid input */
@@ -118,7 +118,7 @@ long FindNameValue (const valuenames_t* pValueArray, const TCHAR* pName) {
  * the string if found, or an empty string.
  *
  *=========================================================================*/
-const TCHAR *FindValueName (const valuenames_t* pValueArray, const long lValue) {
+const TCHAR *FindValueName(const valuenames_t *pValueArray, const long lValue) {
 	DEFINE_FUNCTION("FindValueName()")
 	int Index;
 	/* Ensure valid input */

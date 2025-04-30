@@ -51,10 +51,10 @@ DEFINE_FILE("dl_str.cpp");
  * yields 5 (rather than just 3 if it didn't support overlapping strings).
  *
  *=========================================================================*/
-size_t CountSubstrings (const TCHAR* pSourceString, const TCHAR* pSearchString) {
+size_t CountSubstrings(const TCHAR *pSourceString, const TCHAR *pSearchString) {
 	DEFINE_FUNCTION("CountSubstrings()");
 	size_t Count = 0;
-	TCHAR* pFind;
+	TCHAR *pFind;
 	/* Ensure valid input */
 	ASSERT(pSourceString != NULL && pSearchString != NULL);
 	pFind = (TCHAR *)TSTRSTR(pSourceString, pSearchString);
@@ -80,7 +80,7 @@ size_t CountSubstrings (const TCHAR* pSourceString, const TCHAR* pSearchString) 
  * from 0 to 9 and one '.'.
  *
  *=========================================================================*/
-bool IsStringFloat (const TCHAR* pString) {
+bool IsStringFloat(const TCHAR *pString) {
 	DEFINE_FUNCTION("IsStringFloat()");
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
@@ -123,7 +123,7 @@ bool IsStringFloat (const TCHAR* pString) {
  * from 0 to 9.
  *
  *=========================================================================*/
-bool IsStringNumber (const TCHAR* pString) {
+bool IsStringNumber(const TCHAR *pString) {
 	DEFINE_FUNCTION("IsStringNumber()");
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
@@ -152,7 +152,7 @@ bool IsStringNumber (const TCHAR* pString) {
  * Returns TRUE if the string is composed only of decimal numbers 0 to 9.
  *
  *=========================================================================*/
-bool IsStringDigit (const TCHAR* pString) {
+bool IsStringDigit(const TCHAR *pString) {
 	DEFINE_FUNCTION("IsStringDigit()");
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
@@ -182,7 +182,7 @@ bool IsStringDigit (const TCHAR* pString) {
  * Returns TRUE if the string is composed only of printable characters.
  *
  *=========================================================================*/
-bool IsStringPrint (const TCHAR* pString) {
+bool IsStringPrint(const TCHAR *pString) {
 	DEFINE_FUNCTION("IsStringPrint()");
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
@@ -214,7 +214,7 @@ bool IsStringPrint (const TCHAR* pString) {
  * the isspace() function.  ASSERTs if given invalid input.
  *
  *=========================================================================*/
-TCHAR *ltrim (TCHAR* pString) {
+TCHAR* ltrim(TCHAR *pString) {
 	DEFINE_FUNCTION("ltrim()");
 	size_t Index = 0;
 	/* Ensure valid input */
@@ -244,7 +244,7 @@ TCHAR *ltrim (TCHAR* pString) {
  * ASSERTs if given invalid input.
  *
  *=========================================================================*/
-TCHAR *rtrim (TCHAR* pString) {
+TCHAR* rtrim(TCHAR *pString) {
 	DEFINE_FUNCTION("rtrim()");
 	size_t Index;
 	/* Ensure valid input */
@@ -288,10 +288,13 @@ TCHAR *rtrim (TCHAR* pString) {
  * ASSERTs if given invalid input.
  *
  *=========================================================================*/
-bool SeperateVarValue (TCHAR** ppVariable, TCHAR** ppValue, TCHAR* pString,
-                       const TCHAR SeperatorChar, const TCHAR CommentChar) {
+bool SeperateVarValue(TCHAR **ppVariable,
+                      TCHAR **ppValue,
+                      TCHAR *pString,
+                      const TCHAR SeperatorChar,
+                      const TCHAR CommentChar) {
 	DEFINE_FUNCTION("SeperateVarValue()");
-	TCHAR* pParse;
+	TCHAR *pParse;
 	/* Ensure valid input */
 	ASSERT(ppVariable != NULL && ppValue != NULL && pString != NULL);
 	ASSERT(SeperatorChar != NULL_CHAR);
@@ -331,10 +334,13 @@ bool SeperateVarValue (TCHAR** ppVariable, TCHAR** ppValue, TCHAR* pString,
  * surrounded by double quotes ("").
  *
  *=========================================================================*/
-bool SeperateVarValueQ (TCHAR** ppVariable, TCHAR** ppValue, TCHAR* pString,
-                        const TCHAR SeperatorChar, const TCHAR CommentChar) {
+bool SeperateVarValueQ(TCHAR **ppVariable,
+                       TCHAR **ppValue,
+                       TCHAR *pString,
+                       const TCHAR SeperatorChar,
+                       const TCHAR CommentChar) {
 	DEFINE_FUNCTION("SeperateVarValueQ()");
-	TCHAR* pParse;
+	TCHAR *pParse;
 	bool FoundSep;
 	bool FoundQuote;
 	/* Ensure valid input */
@@ -392,7 +398,7 @@ bool SeperateVarValueQ (TCHAR** ppVariable, TCHAR** ppValue, TCHAR* pString,
  * See Also: StringToBoolean (bool&, TCHAR*);
  *
  *=========================================================================*/
-bool StringToBoolean (const TCHAR* pString) {
+bool StringToBoolean(const TCHAR *pString) {
 	//DEFINE_FUNCTION("StringToBoolean(TCHAR*)");
 	bool Flag = FALSE;
 	StringToBoolean(Flag, pString);
@@ -420,23 +426,21 @@ bool StringToBoolean (const TCHAR* pString) {
  * See Also: StringToBoolean (TCHAR*);
  *
  *=========================================================================*/
-bool StringToBoolean (bool& Flag, const TCHAR* pString) {
+bool StringToBoolean(bool &Flag, const TCHAR *pString) {
 	DEFINE_FUNCTION("StringToBoolean(bool&, TCHAR*)");
-	TCHAR* pError;
+	TCHAR *pError;
 	long Result;
 	/* Make sure the string is valid */
 	ASSERT(pString != NULL);
 
 	/* See if the string contains explicit TRUE/FALSE strings */
-	if ( _stricmp(pString, _T("TRUE")) == 0 || _stricmp(pString, _T("YES")) == 0) {
+	if (_stricmp(pString, _T("TRUE")) == 0 || _stricmp(pString, _T("YES")) == 0) {
 		Flag = TRUE;
 		return (true);
-	} else if ( _stricmp(pString, _T("FALSE")) == 0 || _stricmp(pString, _T("NO")) == 0) {
+	} else if (_stricmp(pString, _T("FALSE")) == 0 || _stricmp(pString, _T("NO")) == 0) {
 		Flag = FALSE;
 		return (true);
-	}
-	/* Special case for an empty string */
-	else if (*pString == NULL_CHAR) {
+	} else if (*pString == NULL_CHAR) { /* Special case for an empty string */
 		return (false);
 	}
 
@@ -447,7 +451,7 @@ bool StringToBoolean (bool& Flag, const TCHAR* pString) {
 		return (false);
 	}
 
-	Flag = (bool) (Result == 0) ? false : true;
+	Flag = (bool)(Result == 0) ? false : true;
 	return (false);
 }
 
@@ -464,7 +468,7 @@ bool StringToBoolean (bool& Flag, const TCHAR* pString) {
  * Handles NULL cases and case sensitivity.  Default is case insensitive.
  *
  *=========================================================================*/
-bool StringChanged (const TCHAR* pString1, const TCHAR* pString2, const bool CaseSensitive) {
+bool StringChanged(const TCHAR *pString1, const TCHAR *pString2, const bool CaseSensitive) {
 	//DEFINE_FUNCTION("StringChanged()");
 
 	/* Check for NULL strings */
@@ -507,7 +511,7 @@ bool StringChanged (const TCHAR* pString1, const TCHAR* pString2, const bool Cas
  * and case sensitivity.  Default is case insensitive.
  *
  *=========================================================================*/
-int StringCompare (const TCHAR* pString1, const TCHAR* pString2, const bool CaseSensitive) {
+int StringCompare(const TCHAR *pString1, const TCHAR *pString2, const bool CaseSensitive) {
 	//DEFINE_FUNCTION("StringCompare()");
 
 	/* Check for NULL strings */
@@ -545,7 +549,7 @@ int StringCompare (const TCHAR* pString1, const TCHAR* pString2, const bool Case
  * ASSERTs if given invalid input.
  *
  *=======================================================================*/
-size_t strhgt (const TCHAR* pString) {
+size_t strhgt(const TCHAR *pString) {
 	DEFINE_FUNCTION("strhgt()");
 	size_t LineCount = 1;
 	/* Ensure valid input */
@@ -577,7 +581,7 @@ size_t strhgt (const TCHAR* pString) {
  * function.
  *
  *=========================================================================*/
-TCHAR *stristr (const TCHAR* pString, const TCHAR* pSearchString) {
+TCHAR* stristr(const TCHAR *pString, const TCHAR *pSearchString) {
 	DEFINE_FUNCTION("stristr()");
 	size_t StringIndex = 0;
 	size_t SearchIndex = 0;
@@ -623,7 +627,7 @@ TCHAR *stristr (const TCHAR* pString, const TCHAR* pSearchString) {
  * destination string.  ASSERTs if given invalid input.
  *
  *=======================================================================*/
-TCHAR *strnncpy (TCHAR* pDestString, const TCHAR* pSourceString, const size_t MaxStringLength) {
+TCHAR* strnncpy(TCHAR *pDestString, const TCHAR *pSourceString, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("strnncpy()");
 	size_t Index = 0;
 	/* Ensure valid Input */
@@ -663,7 +667,7 @@ TCHAR *strnncpy (TCHAR* pDestString, const TCHAR* pSourceString, const size_t Ma
  *  > 0 : String1 is greater than String2
  *
  *=======================================================================*/
-int strlicmp (const TCHAR *pString1, const TCHAR *pString2) {
+int strlicmp(const TCHAR *pString1, const TCHAR *pString2) {
 	DEFINE_FUNCTION("strlicmp()");
 	int StringDifference;
 	size_t Index = 0;
@@ -698,7 +702,7 @@ int strlicmp (const TCHAR *pString1, const TCHAR *pString2) {
  * is invalid.
  *
  *=========================================================================*/
-size_t strlinelen (const TCHAR* pString) {
+size_t strlinelen(const TCHAR *pString) {
 	DEFINE_FUNCTION("strlinelen()");
 	size_t Index = 0;
 	/* Ensure valid input */
@@ -727,7 +731,7 @@ size_t strlinelen (const TCHAR* pString) {
  *=======================================================================*/
 #if !defined(__TURBOC__) && !defined(_WIN32)
 
-TCHAR *strlwr (TCHAR* pString) {
+TCHAR* strlwr(TCHAR *pString) {
 	DEFINE_FUNCTION("strlwr()");
 	size_t Index = 0;
 	/* Ensure valid input */
@@ -755,7 +759,7 @@ TCHAR *strlwr (TCHAR* pString) {
  * separated by Line Feeds.  ASSERTs if given invalid input.
  *
  *=======================================================================*/
-size_t strmaxlinelen (const TCHAR* pString) {
+size_t strmaxlinelen(const TCHAR *pString) {
 	DEFINE_FUNCTION("strmaxlinelen()");
 	size_t LineLength = 0;
 	size_t MaxLineLength = 0;
@@ -804,7 +808,7 @@ size_t strmaxlinelen (const TCHAR* pString) {
  *=======================================================================*/
 #if !defined(__TURBOC__) && !defined(_WIN32)
 
-int strnicmp (const TCHAR* pString1, const TCHAR* pString2, const size_t MaxStringLength) {
+int strnicmp(const TCHAR *pString1, const TCHAR *pString2, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("strnicmp()");
 	int StringDiff;
 	size_t Index = 0;
@@ -847,7 +851,7 @@ int strnicmp (const TCHAR* pString1, const TCHAR* pString2, const size_t MaxStri
  * isspace() function.
  *
  *=======================================================================*/
-TCHAR *strproper (TCHAR* pString) {
+TCHAR* strproper(TCHAR *pString) {
 	DEFINE_FUNCTION("strproper()");
 	TCHAR* pInitialString = pString;
 	/* Make sure it is a valid string */
@@ -881,9 +885,9 @@ TCHAR *strproper (TCHAR* pString) {
  * modified. Returns the start to the unquoted string.
  *
  *=========================================================================*/
-TCHAR *UnquoteString (TCHAR* pString) {
-	TCHAR* pParse = pString;
-	TCHAR* pStart = pString;
+TCHAR* UnquoteString(TCHAR *pString) {
+	TCHAR *pParse = pString;
+	TCHAR *pStart = pString;
 	bool FoundQuote = false;
 
 	while (*pParse != NULL_CHAR) {
@@ -919,7 +923,7 @@ TCHAR *UnquoteString (TCHAR* pString) {
  *=======================================================================*/
 #if !defined(__TURBOC__) && !defined(_WIN32)
 
-TCHAR *strupr (TCHAR* pString) {
+TCHAR* strupr(TCHAR *pString) {
 	DEFINE_FUNCTION("strupr()");
 	size_t Index = 0;
 	/* Ensure valid input */
@@ -1041,7 +1045,7 @@ TCHAR *strupr (TCHAR* pString) {
  *  4. Test nosubstrings case
  *
  *=========================================================================*/
-void Test_CountSubstrings (void) {
+void Test_CountSubstrings(void) {
 	DEFINE_FUNCTION("Test_CountSubstrings()");
 	TCHAR TestString[101];
 	size_t Result;
@@ -1080,10 +1084,10 @@ void Test_CountSubstrings (void) {
  *  4. Test empty string
  *
  *=========================================================================*/
-void Test_ltrim (void) {
+void Test_ltrim(void) {
 	DEFINE_FUNCTION("Test_ltrim()");
 	TCHAR TestString[101];
-	TCHAR* pTrimmed;
+	TCHAR *pTrimmed;
 	SystemLog.Printf(stdout, _T("============= Testing ltrim() ===================="));
 	/* Check with a regular string with whitespace */
 	TSTRCPY(TestString, _T("  \t\t  123"));
@@ -1119,10 +1123,10 @@ void Test_ltrim (void) {
  *  4. Test empty string
  *
  *=========================================================================*/
-void Test_rtrim (void) {
+void Test_rtrim(void) {
 	DEFINE_FUNCTION("Test_rtrim()");
 	TCHAR TestString[101];
-	TCHAR* pTrimmed;
+	TCHAR *pTrimmed;
 	SystemLog.Printf(stdout, _T("============= Testing rtrim() ===================="));
 	/* Check with a regular string with whitespace */
 	TSTRCPY(TestString, _T("123  \t\t  "));
@@ -1159,12 +1163,12 @@ void Test_rtrim (void) {
  *  4. Test with string with no seperator character
  *
  *=========================================================================*/
-void Test_SeperateVarValue (void) {
+void Test_SeperateVarValue(void) {
 	DEFINE_FUNCTION("Test_SeperateVarValue()");
 	TCHAR TestString[101];
 	bool Result;
-	TCHAR* pVar;
-	TCHAR* pVal;
+	TCHAR *pVar;
+	TCHAR *pVal;
 	SystemLog.Printf(stdout, _T("============= Testing SeperateVarValue() ===================="));
 	/* Test a regular string using function default characters */
 	TSTRCPY(TestString, _T("  Variable   =  Value    # Comment"));
@@ -1225,7 +1229,7 @@ void Test_SeperateVarValue (void) {
  *  4. Tests with invalid bool strings
  *
  *=========================================================================*/
-void Test_StringToBoolean (void) {
+void Test_StringToBoolean(void) {
 	DEFINE_FUNCTION("Test_StringToBoolean()");
 	TCHAR TestString[101];
 	bool Flag;
@@ -1298,7 +1302,7 @@ void Test_StringToBoolean (void) {
  *  5. Check empty string cases
  *
  *=========================================================================*/
-void Test_StringChanged (void) {
+void Test_StringChanged(void) {
 	DEFINE_FUNCTION("Test_StringChanged()");
 	bool Result;
 	SystemLog.Printf(stdout, _T("============= Testing StringChanged() ===================="));
@@ -1357,7 +1361,7 @@ void Test_StringChanged (void) {
  *  2. Checks empty string case.
  *
  *=========================================================================*/
-void Test_IsStringNumber (void) {
+void Test_IsStringNumber(void) {
 	DEFINE_FUNCTION("Test_IsStringNumber()");
 	SystemLog.Printf(stdout, _T("============= Testing IsStringNumber() ===================="));
 	/* Check several typical positive cases */
@@ -1385,7 +1389,7 @@ void Test_IsStringNumber (void) {
  *  2. Test with empty string
   *
  *=========================================================================*/
-void Test_strhgt (void) {
+void Test_strhgt(void) {
 	DEFINE_FUNCTION("Test_strhgt()");
 	SystemLog.Printf(stdout, _T("============= Testing strhgt() ===================="));
 	/* Test several typical strings */
@@ -1417,9 +1421,9 @@ void Test_strhgt (void) {
  *  4. Check empty string cases
   *
  *=========================================================================*/
-void Test_stristr (void) {
+void Test_stristr(void) {
 	DEFINE_FUNCTION("Test_stristr()");
-	TCHAR* pStr;
+	TCHAR *pStr;
 	SystemLog.Printf(stdout, _T("============= Testing stristr() ===================="));
 	/* Check several typical positive cases */
 	pStr = stristr(_T("0123456789"), _T("45"));
@@ -1458,7 +1462,7 @@ void Test_stristr (void) {
  *  4, Check empty string cases
  *
  *=========================================================================*/
-void Test_strlicmp (void) {
+void Test_strlicmp(void) {
 	DEFINE_FUNCTION("Test_strlicmp()");
 	SystemLog.Printf(stdout, _T("============= Testing strlicmp() ===================="));
 	/* Check several equal cases */
@@ -1494,7 +1498,7 @@ void Test_strlicmp (void) {
  *  4. Tests with string with multiple CRs
  *
  *=========================================================================*/
-void Test_strlinelen (void) {
+void Test_strlinelen(void) {
 	DEFINE_FUNCTION("Test_strlinelen()");
 	TCHAR TestString[101];
 	size_t Result;
@@ -1540,7 +1544,7 @@ void Test_strlinelen (void) {
  *  2. Test with empty string
  *
  *=========================================================================*/
-void Test_strmaxlinelen (void) {
+void Test_strmaxlinelen(void) {
 	DEFINE_FUNCTION("Test_strmaxlinelen()");
 	SystemLog.Printf(stdout, _T("============= Testing strmaxlinelen() ===================="));
 	/* Test several typical strings */
@@ -1572,7 +1576,7 @@ void Test_strmaxlinelen (void) {
  *  4. Test with empty strings
  *
  *=========================================================================*/
-void Test_strnicmp (void) {
+void Test_strnicmp(void) {
 	DEFINE_FUNCTION("Test_strnicmp()");
 	SystemLog.Printf(stdout, _T("============= Testing strnicmp() ===================="));
 #if !defined(__TURBOC__) && !defined(_WIN32)
@@ -1608,7 +1612,7 @@ void Test_strnicmp (void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_strnncpy (void) {
+void Test_strnncpy(void) {
 	DEFINE_FUNCTION("Test_strnncpy()");
 	TCHAR TestString[101];
 	SystemLog.Printf(stdout, _T("============= Testing strnncpy() ===================="));
@@ -1638,7 +1642,7 @@ void Test_strnncpy (void) {
  *  3. Test with string without whitespace
  *
  *=========================================================================*/
-void Test_strproper (void) {
+void Test_strproper(void) {
 	DEFINE_FUNCTION("Test_strproper()");
 	TCHAR TestString[101];
 	SystemLog.Printf(stdout, _T("============= Testing strproper() ===================="));
@@ -1669,7 +1673,7 @@ void Test_strproper (void) {
  *  2. Test strupr() with typical strings
  *
  *=========================================================================*/
-void Test_strupr (void) {
+void Test_strupr(void) {
 	DEFINE_FUNCTION("Test_strupr()");
 	SystemLog.Printf(stdout, _T("============= Testing strlwr()/strupr() ===================="));
 #if !defined(__TURBOC__) && !defined(_WIN32)
@@ -1702,32 +1706,32 @@ void Test_strupr (void) {
  *  2. Test outputting more than allowed string length
  *
  *=========================================================================*/
-void Test_vsnprintf (void) {
+void Test_vsnprintf(void) {
 	DEFINE_FUNCTION("Test_vsnprintf()");
 	TCHAR TestString[] = _T("This is a test string...\n\r 1010 kkasdlkj");
 	TCHAR OutputString[1024];
-	TCHAR* pShortString;
+	TCHAR *pShortString;
 	int Result;
 	SystemLog.Printf(stdout, _T("============= Testing vsnprintf() ===================="));
 	ASSERT(DebugHeapCheckMemory());
 	/* Check basic function of snprintf() (and thus vsnprintf()) */
 	Result = snprintf(OutputString, 1000, _T("%s"), TestString);
 	ASSERT(Result > 0);
-	ASSERT(Result == (int) TSTRLEN(TestString));
+	ASSERT(Result == (int)TSTRLEN(TestString));
 	ASSERT(TSTRCMP(OutputString, TestString) == 0);
 	Result = snprintf(OutputString, 1000, TestString);
 	ASSERT(Result > 0);
-	ASSERT(Result == (int) TSTRLEN(TestString));
+	ASSERT(Result == (int)TSTRLEN(TestString));
 	ASSERT(TSTRCMP(OutputString, TestString) == 0);
-	Result = snprintf (OutputString, 1000, _T("This %s, 101 = %d"), _T("is a test"), 101);
+	Result = snprintf(OutputString, 1000, _T("This %s, 101 = %d"), _T("is a test"), 101);
 	ASSERT(Result > 0);
 	SystemLog.Printf(stdout, _T("snprintf() Output: %s"), OutputString);
 	/* Check outputting more than allowed characters */
-	Result = snprintf (OutputString, 5, _T("Testing maximum 5 characters"));
+	Result = snprintf(OutputString, 5, _T("Testing maximum 5 characters"));
 	ASSERT(Result < 0);
 	SystemLog.Printf(stdout, _T("snprintf(5) Output 1: %s"), OutputString);
 	pShortString = CreateString(6);
-	Result = snprintf (pShortString, 5, _T("Testing max 5 characters"));
+	Result = snprintf(pShortString, 5, _T("Testing max 5 characters"));
 	ASSERT(Result < 0);
 	SystemLog.Printf(stdout, _T("snprintf(5) Output 2: %s"), pShortString);
 	/* Check memory if nessecary */
@@ -1762,7 +1766,7 @@ void Test_vsnprintf (void) {
  *  15. Tests the strnicmp() function
  *
  *=========================================================================*/
-void Test_DLStr (void) {
+void Test_DLStr(void) {
 	//DEFINE_FUNCTION("Test_DLStr()");
 	Test_vsnprintf();
 	Test_CountSubstrings();

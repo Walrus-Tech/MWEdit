@@ -94,73 +94,73 @@ class CLogFile {
   protected:
 
 	/* Outputs the current time to the log file */
-	bool OutputCurrentTime (void);
+	bool OutputCurrentTime(void);
 
 	/* Outputs any tabs required by the current TabLevel */
-	bool OutputTabs (void);
+	bool OutputTabs(void);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
   public:
 
 	/* Class Constructor and Destructor */
-	CLogFile (void);
-	CLogFile (const TCHAR* pFilename, const logmode_t AppendFile = LOG_OPEN);
-	virtual ~CLogFile (void) {
+	CLogFile(void);
+	CLogFile(const TCHAR *pFilename, const logmode_t AppendFile = LOG_OPEN);
+	virtual ~CLogFile(void) {
 		Close();
 	}
 
 	/* Closes the log file if it's currently open */
-	bool Close (void);
+	bool Close(void);
 
 	/* Access the file handle */
-	FILE *GetFileHandle (void) {
+	FILE *GetFileHandle(void) {
 		return (pLogFileHandle);
 	}
 
 	/* Same as the Printf() method except it only works in debug builds.
 	 * For release builds the function is nothing (to save a call). */
 #if defined(_DEBUG)
-	void DebugPrintf (const TCHAR* pString, ...);
+	void DebugPrintf(const TCHAR *pString, ...);
 #else
-	void DebugPrintf (const TCHAR*, ...) { }
+	void DebugPrintf(const TCHAR *, ...) { }
 
 #endif
 
 	/* Increase or decrease the current tab level of log file */
-	void DecrementTabs (void);
-	void IncrementTabs (void);
+	void DecrementTabs(void);
+	void IncrementTabs(void);
 
 	/* Returns the open status of the log file */
-	bool IsOpen (void) {
-		return (bool) ((pLogFileHandle == NULL) ? FALSE : TRUE);
+	bool IsOpen(void) {
+		return (bool)((pLogFileHandle == NULL) ? FALSE : TRUE);
 	}
 
 	/* Attempt to open a log file for output */
-	bool Open (const TCHAR *pFilename, const logmode_t AppendFile = LOG_OPEN);
+	bool Open(const TCHAR *pFilename, const logmode_t AppendFile = LOG_OPEN);
 
 	/* Output the current date/time to the log file */
-	bool OutputDate (void);
+	bool OutputDate(void);
 
 	/* Prints the current memory status to the log file */
-	void OutputMemoryStatus (void);
+	void OutputMemoryStatus(void);
 
 	/* Output a log entry */
-	bool Printf (const TCHAR *pString, ...);
+	bool Printf(const TCHAR *pString, ...);
 
 	/* Output a log entry to logfile and another stream */
-	bool Printf (FILE* pFileHandle, const TCHAR* pString, ...);
+	bool Printf(FILE *pFileHandle, const TCHAR *pString, ...);
 
 	/* Output a line to the log file */
-	bool PrintLine (const TCHAR* pString, va_list Args);
+	bool PrintLine(const TCHAR *pString, va_list Args);
 
 	/* Change the hook procedure */
-	void SetHookProc (PLOGFILE_HOOKPROC pProc = NULL) {
+	void SetHookProc(PLOGFILE_HOOKPROC pProc = NULL) {
 		pHookProc = pProc;
 	}
 
 	/* Change the current tab level */
-	void SetTabLevel (const int NewTabLevel = 0);
+	void SetTabLevel(const int NewTabLevel = 0);
 
 };
 
@@ -177,7 +177,7 @@ class CLogFile {
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_LogFile (void);
+	void Test_LogFile(void);
 #endif
 /*===========================================================================
  *      End of Test Function Prototypes

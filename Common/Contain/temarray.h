@@ -81,85 +81,85 @@ class TTemplateArray {
   protected:
 
 	/* Changes the max-size of the array */
-	void ResizeArray (const bool GrowArray);
+	void ResizeArray(const bool GrowArray);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
   public:
 
 	/* Class Constructors/Destructors */
-	TTemplateArray (const int MaxSize = 0, const int GrowSize = -1);
+	TTemplateArray(const int MaxSize = 0, const int GrowSize = -1);
 	virtual ~TTemplateArray();
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Tests the contents to ensure they are valid */
 #if defined(_DEBUG)
-	bool AssertValid (void);
+	bool AssertValid(void);
 #endif
 
 	/* Attempts to add a new object to the end of the array */
-	bool Add (TArrayPtr* pNewElement) {
+	bool Add(TArrayPtr *pNewElement) {
 		return AddElement(pNewElement);
 	}
 
-	bool AddElement (TArrayPtr* pNewElement);
-	bool AddSort (TArrayPtr* pNewElement);
+	bool AddElement(TArrayPtr *pNewElement);
+	bool AddSort(TArrayPtr *pNewElement);
 
 	/* Attempts to delete an element from the array */
-	void DeleteElement (const int Index, const bool Delete = true);
+	void DeleteElement(const int Index, const bool Delete = true);
 
 	/* Frees any extra allocated memory */
-	void FreeExtra (void) {
+	void FreeExtra(void) {
 		ResizeArray(false);
 	}
 
 	/* Get the array size */
-	int GetMaxElements (void) const {
+	int GetMaxElements(void) const {
 		return (m_MaxElements);
 	}
 
-	int GetNumElements (void) const {
+	int GetNumElements(void) const {
 		return (m_NumElements);
 	}
 
-	int GetGrowSize (void) const {
+	int GetGrowSize(void) const {
 		return (m_GrowSize);
 	}
 
 	/* Attempt to retrieve an array element */
-	bool GetElement (TArrayPtr** ppElement, const int Index) const;
-	TArrayPtr *GetAt (const int Index) {
+	bool GetElement(TArrayPtr **ppElement, const int Index) const;
+	TArrayPtr *GetAt(const int Index) {
 		return IsValidIndex(Index) ? m_ppArray[Index] : NULL;
 	}
 
 	/* Ensures the given array index is valid */
-	bool IsValidIndex (const int Index) const {
+	bool IsValidIndex(const int Index) const {
 		return ((Index >= 0 && Index < m_NumElements) ? true : false);
 	}
 
 	/* Attempts to get the specified array element */
-	TArrayPtr* operator [] (const int Index) const;
+	TArrayPtr *operator[](const int Index) const;
 
 	/* Change the grow size */
-	void SetGrowSize (const int GrowSize = -1) {
+	void SetGrowSize(const int GrowSize = -1) {
 		m_GrowSize = GrowSize;
 	}
 
-	void SetMaxElements (const int MaxSize) {
+	void SetMaxElements(const int MaxSize) {
 		ResizeArray(MaxSize);
 	}
 
 	/* Set the user supplied compare function */
-	void SetCompareFunc (PQSORT_CMPFUNC pFunction) {
+	void SetCompareFunc(PQSORT_CMPFUNC pFunction) {
 		m_pCmpFunc = pFunction;
 	}
 
-	void SetCmpFuncData (const long lUserData) {
+	void SetCmpFuncData(const long lUserData) {
 		m_CmpFuncData = lUserData;
 	}
 
 	/* Sorts the array using the current compare function */
-	void Sort (const long lUserData);
+	void Sort(const long lUserData);
 
 };
 
@@ -176,14 +176,14 @@ class TTemplateArray {
  * ASSERTs if given invalid input.
  *
  *=========================================================================*/
-template <class TArrayPtr> TTemplateArray< TArrayPtr >::TTemplateArray (const int MaxSize,
-        const int GrowSize) {
+template <class TArrayPtr> TTemplateArray<TArrayPtr>::TTemplateArray(const int MaxSize,
+                                                                     const int GrowSize) {
 	DEFINE_FUNCTION("TTemplateArray::TTemplateArray()");
 	/* Ensure valid input */
-	IASSERT(MaxSize <= UINT_MAX / sizeof(TArrayPtr*));
+	IASSERT(MaxSize <= UINT_MAX / sizeof(TArrayPtr *));
 
 	if (MaxSize > 0) {
-		CreateArrayPointer(m_ppArray, TArrayPtr*, MaxSize);
+		CreateArrayPointer(m_ppArray, TArrayPtr *, MaxSize);
 	} else {
 		m_ppArray = NULL;
 	}
@@ -205,7 +205,7 @@ template <class TArrayPtr> TTemplateArray< TArrayPtr >::TTemplateArray (const in
  * Class TTemplateArray Destructor
  *
  *=========================================================================*/
-template <class TArrayPtr> TTemplateArray< TArrayPtr >::~TTemplateArray (void) {
+template <class TArrayPtr> TTemplateArray<TArrayPtr>::~TTemplateArray(void) {
 	//DEFINE_FUNCTION("TTemplateArray::~CGenArray()");
 	/* Delete all the valid pointers in array */
 	Destroy();
@@ -226,7 +226,7 @@ template <class TArrayPtr> TTemplateArray< TArrayPtr >::~TTemplateArray (void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TTemplateArray<TArrayPtr>::Destroy (void) {
+void TTemplateArray<TArrayPtr>::Destroy(void) {
 	//DEFINE_FUNCTION("TTemplateArray::Destroy()");
 	int LoopCounter;
 
@@ -256,7 +256,7 @@ void TTemplateArray<TArrayPtr>::Destroy (void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TTemplateArray<TArrayPtr>::AddElement (TArrayPtr* pNewElement) {
+bool TTemplateArray<TArrayPtr>::AddElement(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TTemplateArray::AddElement()");
 	/* Ensure valid input */
 	IASSERT(pNewElement != NULL);
@@ -296,7 +296,7 @@ bool TTemplateArray<TArrayPtr>::AddElement (TArrayPtr* pNewElement) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TTemplateArray<TArrayPtr>::AddSort (TArrayPtr* pNewElement) {
+bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TTemplateArray::AddSort()");
 	int LoopCounter;
 	int InsertCounter;
@@ -312,7 +312,7 @@ bool TTemplateArray<TArrayPtr>::AddSort (TArrayPtr* pNewElement) {
 	/* Find the position to insert the new element */
 	if (m_pCmpFunc != NULL) {
 		for (LoopCounter = 0; LoopCounter < m_NumElements; LoopCounter++) {
-			if (m_pCmpFunc((void * )(m_ppArray + LoopCounter), (void * )(&pNewElement), m_CmpFuncData) > 0) {
+			if (m_pCmpFunc((void *)(m_ppArray + LoopCounter), (void *)(&pNewElement), m_CmpFuncData) > 0) {
 				break;
 			}
 		}
@@ -360,7 +360,7 @@ bool TTemplateArray<TArrayPtr>::AddSort (TArrayPtr* pNewElement) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TTemplateArray<TArrayPtr>::AssertValid (void) {
+bool TTemplateArray<TArrayPtr>::AssertValid(void) {
 	DEFINE_FUNCTION("TTemplateArray::AssertValid()");
 	int LoopCounter;
 	/* Ensure valid input */
@@ -396,7 +396,7 @@ bool TTemplateArray<TArrayPtr>::AssertValid (void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TTemplateArray<TArrayPtr>::DeleteElement (const int Index, const bool Delete) {
+void TTemplateArray<TArrayPtr>::DeleteElement(const int Index, const bool Delete) {
 	//DEFINE_FUNCTION("TTemplateArray::DeleteElement()");
 	int LoopCounter;
 	/* Ensure the index is valid */
@@ -430,7 +430,7 @@ void TTemplateArray<TArrayPtr>::DeleteElement (const int Index, const bool Delet
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TTemplateArray<TArrayPtr>::GetElement (TArrayPtr** ppElement, const int Index) const {
+bool TTemplateArray<TArrayPtr>::GetElement(TArrayPtr **ppElement, const int Index) const {
 	//DEFINE_FUNCTION("TTemplateArray::GetElement()");
 
 	/* Ensure the index is valid */
@@ -463,7 +463,7 @@ bool TTemplateArray<TArrayPtr>::GetElement (TArrayPtr** ppElement, const int Ind
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TTemplateArray<TArrayPtr>::ResizeArray (const bool GrowArray) {
+void TTemplateArray<TArrayPtr>::ResizeArray(const bool GrowArray) {
 	DEFINE_FUNCTION("TTemplateArray::ResizeArray()");
 	int NewSize;
 	TArrayPtr **ppNewArray = NULL;
@@ -494,17 +494,17 @@ void TTemplateArray<TArrayPtr>::ResizeArray (const bool GrowArray) {
 	}
 
 	/* Ensure a valid size */
-	IASSERT(NewSize <= UINT_MAX / sizeof(TArrayPtr*));
+	IASSERT(NewSize <= UINT_MAX / sizeof(TArrayPtr *));
 
 	if (NewSize != 0) {
 		/* Attempt to allocate space for the new array */
-		CreateArrayPointer(ppNewArray, TArrayPtr*, NewSize);
+		CreateArrayPointer(ppNewArray, TArrayPtr *, NewSize);
 		/* Copy pointers into new array */
-		memcpy(ppNewArray, m_ppArray, sizeof(TArrayPtr*)*m_NumElements);
+		memcpy(ppNewArray, m_ppArray, sizeof(TArrayPtr *)*m_NumElements);
 	}
 
 	/* Set the resized array */
-	ppOldArray = (byte**) m_ppArray;
+	ppOldArray = (byte **) m_ppArray;
 	m_ppArray = ppNewArray;
 	m_MaxElements = NewSize;
 	/* Delete the old array (but not the objects!) */
@@ -525,7 +525,7 @@ void TTemplateArray<TArrayPtr>::ResizeArray (const bool GrowArray) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TTemplateArray<TArrayPtr>::Sort (const long lUserData) {
+void TTemplateArray<TArrayPtr>::Sort(const long lUserData) {
 	m_CmpFuncData = lUserData;
 
 	/* Ignore if no compare function defined */
@@ -534,7 +534,7 @@ void TTemplateArray<TArrayPtr>::Sort (const long lUserData) {
 	}
 
 	/* Run the extended qsort() routine on the array */
-	qsort((void*)m_ppArray, m_NumElements, sizeof(TArrayPtr*), m_pCmpFunc, m_CmpFuncData);
+	qsort((void *)m_ppArray, m_NumElements, sizeof(TArrayPtr *), m_pCmpFunc, m_CmpFuncData);
 }
 
 /*===========================================================================
@@ -551,7 +551,7 @@ void TTemplateArray<TArrayPtr>::Sort (const long lUserData) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-inline TArrayPtr* TTemplateArray<TArrayPtr>::operator[] (const int Index) const {
+inline TArrayPtr *TTemplateArray<TArrayPtr>::operator[](const int Index) const {
 	//DEFINE_FUNCTION("TTemplateArray::operator[]()");
 
 	/* Ensure the index is valid */
@@ -575,8 +575,8 @@ inline TArrayPtr* TTemplateArray<TArrayPtr>::operator[] (const int Index) const 
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_StressTemplateArray (const int NumTests = 100);
-	void Test_TemplateArray (void);
+	void Test_StressTemplateArray(const int NumTests = 100);
+	void Test_TemplateArray(void);
 #endif
 /*===========================================================================
  *      End of Module Test Function Prototypes

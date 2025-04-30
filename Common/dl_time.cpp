@@ -32,7 +32,7 @@ DEFINE_FILE("dl_time.h");
  * routine is used.
  *
  *=========================================================================*/
-void GetHiClock (hiclock_t &Counter) {
+void GetHiClock(hiclock_t &Counter) {
 	/* Attempt to use the performance counter */
 #if defined(_WIN32)
 	boolean Result;
@@ -63,10 +63,10 @@ void GetHiClock (hiclock_t &Counter) {
  * Returns the time of the system clock in seconds.
  *
  *=========================================================================*/
-double GetHiClockTime (void) {
+double GetHiClockTime(void) {
 	hiclock_t CurrentClock;
 	GetHiClock(CurrentClock);
-	return ( ((double)CurrentClock) / GetHiClockFreq() );
+	return (((double)CurrentClock) / GetHiClockFreq());
 }
 
 /*===========================================================================
@@ -81,7 +81,7 @@ double GetHiClockTime (void) {
  * Returns the frequency of the system's high-resolution counter in Hz.
  *
  *=========================================================================*/
-double GetHiClockFreq (void) {
+double GetHiClockFreq(void) {
 	/* Attempt to use the performance counter */
 #if defined(_WIN32)
 	LARGE_INTEGER Freq;
