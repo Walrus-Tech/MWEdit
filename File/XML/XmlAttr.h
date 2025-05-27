@@ -38,7 +38,7 @@
 #define XMLFILE_READ_VALUESTART 4
 
 /* Used only when inputting attributes */
-#define XMLATTR_MAX_NAMESIZE 255
+#define XMLATTR_MAX_NAMESIZE  255
 
 /*===========================================================================
  *      End of Definitions
@@ -64,8 +64,8 @@ class CXmlAttribute {
   protected:
 
 	/* Helper input methods */
-	bool ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount);
-	bool ReadValue (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount);
+	bool ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
+	bool ReadValue(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -77,42 +77,42 @@ class CXmlAttribute {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Get class members */
-	const TCHAR *GetName (void) const {
+	const TCHAR *GetName(void) const {
 		return (m_Name);
 	}
 
-	const TCHAR *GetValue (void) const {
+	const TCHAR *GetValue(void) const {
 		return (m_Value);
 	}
 
 	/* Compare name/value */
-	bool IsName (const TCHAR* pName) {
+	bool IsName(const TCHAR *pName) {
 		return m_Name.CompareNoCase(pName) == 0;
 	}
 
-	bool IsValue (const TCHAR* pValue) {
+	bool IsValue(const TCHAR *pValue) {
 		return m_Value.CompareNoCase(pValue) == 0;
 	}
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		m_Name = pString;
 	}
 
-	void SetValue (const TCHAR* pString) {
+	void SetValue(const TCHAR *pString) {
 		m_Value = pString;
 	}
 
-	void SetValue (const long Value);
+	void SetValue(const long Value);
 
 	/* Read the attribute from the file */
-	bool Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount);
+	bool Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
 
 	/* Output attribute to a file */
-	bool Write (CGenFile& File);
+	bool Write(CGenFile &File);
 
 };
 
@@ -121,7 +121,6 @@ typedef TPtrArray<CXmlAttribute> CAttributeArray;
 /*===========================================================================
  *      End of Class CXmlAttribute Definition
  *=========================================================================*/
-
 
 
 #endif

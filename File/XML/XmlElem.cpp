@@ -22,7 +22,16 @@ DEFINE_FILE("XmlElem.cpp");
 
 /* Class static members */
 XMLFILE_CALLBACK CXmlElement::m_CallBackFunc = NULL;
-xmlcallbackinfo_t CXmlElement::m_CallBackInfo = { 0, 0, 0, 0, 0.0f, NULL, NULL, NULL };
+xmlcallbackinfo_t CXmlElement::m_CallBackInfo = {
+	0,
+	0,
+	0,
+	0,
+	0.0f,
+	NULL,
+	NULL,
+	NULL
+};
 bool CXmlElement::m_OutputCR = true;
 
 /*===========================================================================
@@ -35,7 +44,7 @@ bool CXmlElement::m_OutputCR = true;
  * Class CXmlElement Constructor
  *
  *=========================================================================*/
-CXmlElement::CXmlElement () : m_Elements(XMLFILE_DEFAULT_ELEMENTS),
+CXmlElement::CXmlElement() : m_Elements(XMLFILE_DEFAULT_ELEMENTS),
 	m_Attributes(XMLFILE_DEFAULT_ATTRIBUTES) {
 	//DEFINE_FUNCTION("CXmlElement::CXmlElement()");
 	m_pParent = NULL;
@@ -56,10 +65,10 @@ CXmlElement::CXmlElement () : m_Elements(XMLFILE_DEFAULT_ELEMENTS),
  * Class CXmlElement Method - void Destroy (void);
  *
  *=========================================================================*/
-void CXmlElement::Destroy (void) {
+void CXmlElement::Destroy(void) {
 	//DEFINE_FUNCTION("CXmlElement::Destroy()");
-	CXmlElement* pElement;
-	CXmlAttribute* pAttribute;
+	CXmlElement *pElement;
+	CXmlAttribute *pAttribute;
 	int Index;
 
 	/* Delete all child elements */
@@ -95,9 +104,9 @@ void CXmlElement::Destroy (void) {
  * Adds an attribute to the element. Returns the attribute on success.
  *
  *=========================================================================*/
-CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const TCHAR* pValue) {
+CXmlAttribute *CXmlElement::AddAttribute(const TCHAR *pName, const TCHAR *pValue) {
 	DEFINE_FUNCTION("CXmlElement::AddAttribute()");
-	CXmlAttribute* pNewAttribute;
+	CXmlAttribute *pNewAttribute;
 	CreatePointer(pNewAttribute, CXmlAttribute);
 	pNewAttribute->SetName(pName);
 	pNewAttribute->SetValue(pValue);
@@ -106,26 +115,26 @@ CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const TCHAR* pValu
 }
 
 
-CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const long lValue) {
+CXmlAttribute *CXmlElement::AddAttribute(const TCHAR *pName, const long lValue) {
 	TCHAR Buffer[32];
 	snprintf(Buffer, 31, _T("%ld"), lValue);
 	return AddAttribute(pName, Buffer);
 }
 
-CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const int lValue) {
+CXmlAttribute *CXmlElement::AddAttribute(const TCHAR *pName, const int lValue) {
 	TCHAR Buffer[32];
 	snprintf(Buffer, 31, _T("%d"), lValue);
 	return AddAttribute(pName, Buffer);
 }
 
-CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const float fValue) {
+CXmlAttribute *CXmlElement::AddAttribute(const TCHAR *pName, const float fValue) {
 	TCHAR Buffer[64];
 	snprintf(Buffer, 63, _T("%f"), fValue);
 	return AddAttribute(pName, Buffer);
 }
 
 
-CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const bool bValue) {
+CXmlAttribute *CXmlElement::AddAttribute(const TCHAR *pName, const bool bValue) {
 	return AddAttribute(pName, BooleanToString(bValue));
 }
 
@@ -141,9 +150,9 @@ CXmlAttribute *CXmlElement::AddAttribute (const TCHAR* pName, const bool bValue)
  * Adds a child element to the element.  Returns the element on success.
  *
  *=========================================================================*/
-CXmlElement *CXmlElement::AddChild (const TCHAR* pName, const bool IsEmpty) {
+CXmlElement *CXmlElement::AddChild(const TCHAR *pName, const bool IsEmpty) {
 	DEFINE_FUNCTION("CXmlElement::AddChild()");
-	CXmlElement* pNewElement;
+	CXmlElement *pNewElement;
 	CreatePointer(pNewElement, CXmlElement);
 	pNewElement->SetName(pName);
 	pNewElement->SetIsEmpty(IsEmpty);
@@ -152,9 +161,9 @@ CXmlElement *CXmlElement::AddChild (const TCHAR* pName, const bool IsEmpty) {
 	return (pNewElement);
 }
 
-CXmlElement *CXmlElement::AddChildHead (const TCHAR* pName, const bool IsEmpty) {
+CXmlElement *CXmlElement::AddChildHead(const TCHAR *pName, const bool IsEmpty) {
 	DEFINE_FUNCTION("CXmlElement::AddChildHead()");
-	CXmlElement* pNewElement;
+	CXmlElement *pNewElement;
 	CreatePointer(pNewElement, CXmlElement);
 	pNewElement->SetName(pName);
 	pNewElement->SetIsEmpty(IsEmpty);
@@ -176,8 +185,8 @@ CXmlElement *CXmlElement::AddChildHead (const TCHAR* pName, const bool IsEmpty) 
  * if it is not found.
  *
  *=========================================================================*/
-CXmlAttribute *CXmlElement::FindAttribute (const TCHAR* pName) {
-	CXmlAttribute* pAttribute;
+CXmlAttribute *CXmlElement::FindAttribute(const TCHAR *pName) {
+	CXmlAttribute *pAttribute;
 	int Index;
 
 	for (Index = 0; Index < m_Attributes.GetSize(); Index++) {
@@ -189,8 +198,10 @@ CXmlAttribute *CXmlElement::FindAttribute (const TCHAR* pName) {
 	}
 
 	/* Child element not found */
-	ErrorHandler.AddError(ERR_BADINPUT, _T("%05ld: Element '%s' does not have an attribute '%s'!"),
-	                      m_StartLine + 1, m_Name, pName);
+	ErrorHandler.AddError(ERR_BADINPUT,
+	                      _T("%05ld: Element '%s' does not have an attribute '%s'!"),
+	                      m_StartLine + 1,
+	                      m_Name, pName);
 	return (NULL);
 }
 
@@ -207,7 +218,7 @@ CXmlAttribute *CXmlElement::FindAttribute (const TCHAR* pName) {
  * sensitive). Returns NULL if it was not found.
  *
  *=========================================================================*/
-CXmlElement *CXmlElement::FindChild (const TCHAR* pName) {
+CXmlElement *CXmlElement::FindChild(const TCHAR *pName) {
 	int Index;
 
 	for (Index = 0; Index < m_Elements.GetSize(); Index++) {
@@ -217,8 +228,10 @@ CXmlElement *CXmlElement::FindChild (const TCHAR* pName) {
 	}
 
 	/* Child element not found */
-	ErrorHandler.AddError(ERR_BADINPUT, _T("%05ld: Element '%s' does not have a child element '%s'!"),
-	                      m_StartLine + 1, m_Name, pName);
+	ErrorHandler.AddError(ERR_BADINPUT,
+	                      _T("%05ld: Element '%s' does not have a child element '%s'!"),
+	                      m_StartLine + 1,
+	                      m_Name, pName);
 	return (NULL);
 }
 
@@ -235,10 +248,11 @@ CXmlElement *CXmlElement::FindChild (const TCHAR* pName) {
  * attribute name/value pair.  Returns NULL if it is not found.
  *
  *=========================================================================*/
-CXmlElement *CXmlElement::FindChild (const TCHAR* pName, const TCHAR* pAttrName,
-                                     const TCHAR* pValue) {
-	CXmlElement* pElement;
-	CXmlAttribute* pAttribute;
+CXmlElement *CXmlElement::FindChild(const TCHAR *pName,
+                                    const TCHAR *pAttrName,
+                                    const TCHAR *pValue) {
+	CXmlElement *pElement;
+	CXmlAttribute *pAttribute;
 	int ElemIndex;
 	/* Search for all matching child elements */
 	pElement = FindFirstChild(pName, ElemIndex);
@@ -273,8 +287,8 @@ CXmlElement *CXmlElement::FindChild (const TCHAR* pName, const TCHAR* pAttrName,
  * to the found element.
  *
  *=========================================================================*/
-CXmlElement *CXmlElement::FindNextChild (const TCHAR* pName, int &ElemIndex) {
-	CXmlElement* pElement;
+CXmlElement *CXmlElement::FindNextChild(const TCHAR *pName, int &ElemIndex) {
+	CXmlElement *pElement;
 
 	for (ElemIndex++; ElemIndex < m_Elements.GetSize(); ElemIndex++) {
 		pElement = m_Elements.GetAt(ElemIndex);
@@ -299,7 +313,7 @@ CXmlElement *CXmlElement::FindNextChild (const TCHAR* pName, int &ElemIndex) {
  * Initializes the default root element.
  *
  *=========================================================================*/
-void CXmlElement::InitRoot (void) {
+void CXmlElement::InitRoot(void) {
 	SetName(_T("?xml"));
 	AddAttribute(_T("version"), _T("1.0"));
 	AddAttribute(_T("encoding"), _T("UTF-8"));
@@ -318,10 +332,10 @@ void CXmlElement::InitRoot (void) {
  * position in the given buffer.  Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlElement::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+bool CXmlElement::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
 	bool FoundName = false;
 	bool Result;
-	TCHAR* pContentStart = NULL;
+	TCHAR *pContentStart = NULL;
 	int ContentPos;
 	int CallBackResult;
 	/* Attempt to read the open tag and attributes */
@@ -344,7 +358,10 @@ bool CXmlElement::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long
 		m_CallBackInfo.LineCount = LineCount;
 		m_CallBackInfo.pMessage = NULL;
 		m_CallBackInfo.pCurrentElem = GetName();
-		m_CallBackInfo.PercentDone = 50.0f + (float) ((FileSize - BufferPos) * 50.0 / (float)BufferPos);
+		m_CallBackInfo.PercentDone = 50.0f
+		                             + (float)((FileSize - BufferPos)
+		                             * 50.0
+		                             / (float)BufferPos);
 		m_CallBackInfo.EventCode = XMLELEM_CBCODE_ELEMSTART;
 		CallBackResult = m_CallBackFunc(&m_CallBackInfo);
 
@@ -380,7 +397,7 @@ bool CXmlElement::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long
 				break;
 
 			case '\n':
-				LineCount++;    /* Fall through */
+				LineCount++; /* Fall through */
 
 			case '\r':
 				BufferPos++;
@@ -402,8 +419,10 @@ bool CXmlElement::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long
 		return (true);
 	}
 
-	ErrorHandler.AddError(ERR_READFILE, _T("%05ld: End of file reached in element %s!"),
-	                      m_StartLine + 1, GetName());
+	ErrorHandler.AddError(ERR_READFILE,
+	                      _T("%05ld: End of file reached in element %s!"),
+	                      m_StartLine + 1,
+	                      GetName());
 	return (false);
 }
 
@@ -420,10 +439,12 @@ bool CXmlElement::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long
  * file buffer.  Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlElement::ReadAttribute (TCHAR* pBuffer, int &BufferPos, const int FileSize,
-                                 long &LineCount) {
+bool CXmlElement::ReadAttribute(TCHAR *pBuffer,
+                                int &BufferPos,
+                                const int FileSize,
+                                long &LineCount) {
 	DEFINE_FUNCTION("CXmlElement::ReadAttribute()");
-	CXmlAttribute* pAttribute;
+	CXmlAttribute *pAttribute;
 	CreatePointer(pAttribute, CXmlAttribute);
 	m_Attributes.Add(pAttribute);
 	return pAttribute->Read(pBuffer, BufferPos, FileSize, LineCount);
@@ -441,9 +462,9 @@ bool CXmlElement::ReadAttribute (TCHAR* pBuffer, int &BufferPos, const int FileS
  * Description
  *
  *=========================================================================*/
-bool CXmlElement::ReadChild (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+bool CXmlElement::ReadChild(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
 	DEFINE_FUNCTION("CXmlElement::ReadChild()");
-	CXmlElement* pElement;
+	CXmlElement *pElement;
 	bool Result;
 	CreatePointer(pElement, CXmlElement);
 	pElement->SetParent(this);
@@ -465,7 +486,7 @@ bool CXmlElement::ReadChild (TCHAR* pBuffer, int &BufferPos, const int FileSize,
  * Description
  *
  *=========================================================================*/
-bool CXmlElement::ReadEnd (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+bool CXmlElement::ReadEnd(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
 	bool FoundStart = false;
 
 	while (BufferPos < FileSize) {
@@ -481,7 +502,7 @@ bool CXmlElement::ReadEnd (TCHAR* pBuffer, int &BufferPos, const int FileSize, l
 				return (true);
 
 			case '\n':
-				LineCount++;    /* Fall through */
+				LineCount++; /* Fall through */
 
 			default:
 				BufferPos++;
@@ -505,19 +526,19 @@ bool CXmlElement::ReadEnd (TCHAR* pBuffer, int &BufferPos, const int FileSize, l
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlElement::ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
-	TCHAR* pParse = pBuffer + BufferPos;
-	TCHAR* pStartPos = NULL;
+bool CXmlElement::ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+	TCHAR *pParse = pBuffer + BufferPos;
+	TCHAR *pStartPos = NULL;
 	int StartPos = -1;
 
 	while (BufferPos < FileSize) {
 		switch (*pParse) {
 			case '\n':
-				LineCount++;    /* Fall through */
+				LineCount++; /* Fall through */
 
 			case '>':
-			case '/':     /* End of element */
-			case ' ':     /* End of element name */
+			case '/': /* End of element */
+			case ' ': /* End of element name */
 			case '\t':
 			case '\r':
 				if (pStartPos != NULL) {
@@ -557,7 +578,7 @@ bool CXmlElement::ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize, 
  *  <Element [attr1="aaa" attrib2="bbb" ....] [/]>
  *
  *=========================================================================*/
-bool CXmlElement::ReadOpen (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+bool CXmlElement::ReadOpen(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
 	bool FoundName = false;
 	bool Result;
 	m_IsEmpty = false;
@@ -580,8 +601,10 @@ bool CXmlElement::ReadOpen (TCHAR* pBuffer, int &BufferPos, const int FileSize, 
 				BufferPos++;
 
 				if (pBuffer[BufferPos] != '>') {
-					ErrorHandler.AddError(ERR_READFILE, _T("%05ld: Invalid character sequence '/%c' found in element!"),
-					                      m_StartLine + 1, pBuffer[BufferPos]);
+					ErrorHandler.AddError(ERR_READFILE,
+					                      _T("%05ld: Invalid character sequence '/%c' found in element!"),
+					                      m_StartLine + 1,
+					                      pBuffer[BufferPos]);
 					return (false);
 				}
 
@@ -594,7 +617,7 @@ bool CXmlElement::ReadOpen (TCHAR* pBuffer, int &BufferPos, const int FileSize, 
 				return (true);
 
 			case '\n':
-				LineCount++;    /* Fall through */
+				LineCount++; /* Fall through */
 
 			case ' ':
 			case '\t':
@@ -620,7 +643,9 @@ bool CXmlElement::ReadOpen (TCHAR* pBuffer, int &BufferPos, const int FileSize, 
 	}
 
 	/* Unexpected end of file */
-	ErrorHandler.AddError(ERR_READFILE, _T("%05ld: End of file reached in element!"), m_StartLine + 1);
+	ErrorHandler.AddError(ERR_READFILE,
+	                      _T("%05ld: End of file reached in element!"),
+	                      m_StartLine + 1);
 	return (false);
 }
 
@@ -636,7 +661,7 @@ bool CXmlElement::ReadOpen (TCHAR* pBuffer, int &BufferPos, const int FileSize, 
  * Description
  *
  *=========================================================================*/
-bool CXmlElement::Write (CGenFile& File) {
+bool CXmlElement::Write(CGenFile &File) {
 	bool Result;
 	int CallBackResult;
 	int Index;
@@ -704,7 +729,7 @@ bool CXmlElement::Write (CGenFile& File) {
  * Description
  *
  *=========================================================================*/
-bool CXmlElement::WriteAttributes (CGenFile& File) {
+bool CXmlElement::WriteAttributes(CGenFile &File) {
 	bool Result = true;
 	int Index;
 
@@ -727,7 +752,7 @@ bool CXmlElement::WriteAttributes (CGenFile& File) {
  * Description
  *
  *=========================================================================*/
-bool CXmlElement::WriteChildren (CGenFile& File) {
+bool CXmlElement::WriteChildren(CGenFile &File) {
 	bool Result = true;
 	int Index;
 

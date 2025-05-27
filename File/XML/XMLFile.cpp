@@ -29,7 +29,7 @@ DEFINE_FILE("XmlFile.cpp");
  * Function - int l_ReadCallBack (FileSize, BytesRead, pUserData);
  *
  *=========================================================================*/
-int l_ReadCallBack (const long FileSize, const long BytesRead, void* pUserData) {
+int l_ReadCallBack(const long FileSize, const long BytesRead, void *pUserData) {
 	return ((CXmlFile *)pUserData)->OnReadCallback(FileSize, BytesRead);
 }
 
@@ -43,7 +43,7 @@ int l_ReadCallBack (const long FileSize, const long BytesRead, void* pUserData) 
  * Class CXmlFile Constructor
  *
  *=========================================================================*/
-CXmlFile::CXmlFile () {
+CXmlFile::CXmlFile() {
 	//DEFINE_FUNCTION("CXmlFile::CXmlFile()");
 	m_RootElement.SetIsRoot(true);
 	m_LineCount = 0;
@@ -61,7 +61,7 @@ CXmlFile::CXmlFile () {
  * Class CXmlFile Method - void Destroy (void);
  *
  *=========================================================================*/
-void CXmlFile::Destroy (void) {
+void CXmlFile::Destroy(void) {
 	//DEFINE_FUNCTION("CXmlFile::Destroy()");
 	m_RootElement.Destroy();
 	m_File.Destroy();
@@ -78,7 +78,7 @@ void CXmlFile::Destroy (void) {
  * Class CXmlFile Event - int OnReadCallback (FileSize, BytesRead);
  *
  *=========================================================================*/
-int CXmlFile::OnReadCallback (const long FileSize, const long BytesRead) {
+int CXmlFile::OnReadCallback(const long FileSize, const long BytesRead) {
 	m_CallBackInfo.FileSize = FileSize;
 	m_CallBackInfo.BytesParsed = BytesRead;
 
@@ -108,8 +108,8 @@ int CXmlFile::OnReadCallback (const long FileSize, const long BytesRead) {
  * file into a buffer and parsing it.  Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlFile::Read (const TCHAR* pFilename) {
-	TCHAR* pFileBuffer;
+bool CXmlFile::Read(const TCHAR *pFilename) {
+	TCHAR *pFileBuffer;
 	size_t BytesRead;
 	int FilePos;
 	int CBResult;
@@ -134,7 +134,7 @@ bool CXmlFile::Read (const TCHAR* pFilename) {
 	}
 
 	/* Attempt to input file all at once */
-	Result = ReadFileCB((byte**)&pFileBuffer, BytesRead, pFilename, l_ReadCallBack, this);
+	Result = ReadFileCB((byte **)&pFileBuffer, BytesRead, pFilename, l_ReadCallBack, this);
 
 	//Result = ReadFile((byte**)&pFileBuffer, BytesRead, pFilename, false);
 	if (!Result) {
@@ -191,7 +191,7 @@ bool CXmlFile::Read (const TCHAR* pFilename) {
  * Description
  *
  *=========================================================================*/
-bool CXmlFile::Write (const TCHAR* pFilename) {
+bool CXmlFile::Write(const TCHAR *pFilename) {
 	bool Result;
 	int CBResult;
 

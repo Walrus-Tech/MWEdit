@@ -28,7 +28,7 @@ DEFINE_FILE("XmlAttr.cpp");
  * Class CXmlAttribute Constructor
  *
  *=========================================================================*/
-CXmlAttribute::CXmlAttribute () {
+CXmlAttribute::CXmlAttribute() {
 	//DEFINE_FUNCTION("CXmlAttribute::CXmlAttribute()");
 }
 
@@ -42,7 +42,7 @@ CXmlAttribute::CXmlAttribute () {
  * Class CXmlAttribute Method - void Destroy (void);
  *
  *=========================================================================*/
-void CXmlAttribute::Destroy (void) {
+void CXmlAttribute::Destroy(void) {
 	//DEFINE_FUNCTION("CXmlAttribute::Destroy()");
 	m_Name.Empty();
 	m_Value.Empty();
@@ -61,7 +61,7 @@ void CXmlAttribute::Destroy (void) {
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlAttribute::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+bool CXmlAttribute::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
 	bool Result;
 	Result = ReadName(pBuffer, BufferPos, FileSize, LineCount);
 
@@ -85,17 +85,17 @@ bool CXmlAttribute::Read (TCHAR* pBuffer, int &BufferPos, const int FileSize, lo
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlAttribute::ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
+bool CXmlAttribute::ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount) {
 	int StartPos = BufferPos;
 
 	while (BufferPos < FileSize) {
 		switch (pBuffer[BufferPos]) {
 			case '\n':
-				LineCount++;    /* Fall through */
+				LineCount++; /* Fall through */
 
 			case '\r':
 			case '\t':
-			case ' ':     /* End of name */
+			case ' ': /* End of name */
 			case '=':
 				if (StartPos >= 0) {
 					m_Name.Copy(pBuffer + StartPos, BufferPos - StartPos);
@@ -107,7 +107,7 @@ bool CXmlAttribute::ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize
 			case '/':
 				return (true);
 
-			default:      /* Add character to element name */
+			default: /* Add character to element name */
 				BufferPos++;
 				break;
 		} /* End of switch */
@@ -129,8 +129,10 @@ bool CXmlAttribute::ReadName (TCHAR* pBuffer, int &BufferPos, const int FileSize
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CXmlAttribute::ReadValue (TCHAR* pBuffer, int &BufferPos, const int FileSize,
-                               long &LineCount) {
+bool CXmlAttribute::ReadValue(TCHAR *pBuffer,
+                              int &BufferPos,
+                              const int FileSize,
+                              long &LineCount) {
 	int StartPos = -1;
 	TCHAR QuoteType = 0;
 	bool FoundStart;
@@ -166,7 +168,7 @@ bool CXmlAttribute::ReadValue (TCHAR* pBuffer, int &BufferPos, const int FileSiz
 				break;
 
 			case '\n':
-				LineCount++;    /* Fall through */
+				LineCount++; /* Fall through */
 
 			default:
 				BufferPos++;
@@ -187,7 +189,7 @@ bool CXmlAttribute::ReadValue (TCHAR* pBuffer, int &BufferPos, const int FileSiz
  * Class CXmlAttribute Method - void SetValue (const long Value);
  *
  *=========================================================================*/
-void CXmlAttribute::SetValue (const long Value) {
+void CXmlAttribute::SetValue(const long Value) {
 	TCHAR Buffer[48];
 	ltoa(Value, Buffer, 10);
 	SetValue(Buffer);
@@ -205,7 +207,7 @@ void CXmlAttribute::SetValue (const long Value) {
  * Description
  *
  *=========================================================================*/
-bool CXmlAttribute::Write (CGenFile& File) {
+bool CXmlAttribute::Write(CGenFile &File) {
 	bool Result;
 	Result = File.Printf(" %s=\"%s\"", m_Name, m_Value);
 	return (Result);

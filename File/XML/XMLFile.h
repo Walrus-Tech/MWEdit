@@ -76,35 +76,35 @@ class CXmlFile {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Get class members */
-	CXmlElement *GetRootElement (void) {
+	CXmlElement *GetRootElement(void) {
 		return (&m_RootElement);
 	}
 
-	const TCHAR *GetFilename (void) const {
+	const TCHAR *GetFilename(void) const {
 		return (m_Filename);
 	}
 
-	long GetLineCount (void) const {
+	long GetLineCount(void) const {
 		return (m_LineCount);
 	}
 
 	/* Set the callback function and data */
-	void SetCallback (XMLFILE_CALLBACK pCallBack, void* pUserData) {
+	void SetCallback(XMLFILE_CALLBACK pCallBack, void *pUserData) {
 		m_CallBackFunc = pCallBack;
 		m_CallBackInfo.pUserData = pUserData;
 	}
 
 	/* Input an XML file */
-	bool Read (const TCHAR* pFilename);
+	bool Read(const TCHAR *pFilename);
 
 	/* Used during the callback of the read event */
-	int OnReadCallback (const long FileSize, const long BytesRead);
+	int OnReadCallback(const long FileSize, const long BytesRead);
 
 	/* Output an XML file */
-	bool Write (const TCHAR* pFilename);
+	bool Write(const TCHAR *pFilename);
 
 };
 
