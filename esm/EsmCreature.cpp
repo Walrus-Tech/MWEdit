@@ -46,18 +46,54 @@ const TCHAR *l_CreatureTypes[] = {
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmCreature::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CRDT, CEsmSubCRDT::Create },
-	{ MWESM_SUBREC_NPCO, CEsmSubNPCO::Create },
-	{ MWESM_SUBREC_FLAG, CEsmSubLong::Create },
-	{ MWESM_SUBREC_AIDT, CEsmSubAIDT::Create },
-	{ MWESM_SUBREC_NPCO, CEsmSubNPCO::Create },
-	{ MWESM_SUBREC_NPCS, CEsmSubNPCS::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubNameFix::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CRDT,
+		CEsmSubCRDT::Create
+	},
+	{
+		MWESM_SUBREC_NPCO,
+		CEsmSubNPCO::Create
+	},
+	{
+		MWESM_SUBREC_FLAG,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_AIDT,
+		CEsmSubAIDT::Create
+	},
+	{
+		MWESM_SUBREC_NPCO,
+		CEsmSubNPCO::Create
+	},
+	{
+		MWESM_SUBREC_NPCS,
+		CEsmSubNPCS::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -69,7 +105,7 @@ const esmsubreccreate_t CEsmCreature::s_SubRecCreate[] = {
  * Class CEsmCreature Constructor
  *
  *=========================================================================*/
-CEsmCreature::CEsmCreature () {
+CEsmCreature::CEsmCreature() {
 	//DEFINE_FUNCTION("CEsmCreature::CEsmCreature()");
 	m_pCreatureData = NULL;
 	m_pFlag = NULL;
@@ -89,7 +125,7 @@ CEsmCreature::CEsmCreature () {
  * Description
  *
  *=========================================================================*/
-void CEsmCreature::Destroy (void) {
+void CEsmCreature::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmCreature::Destroy()");
 	m_pCreatureData = NULL;
 	m_pFlag = NULL;
@@ -111,15 +147,15 @@ void CEsmCreature::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmCreature::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmCreature* pCreature;
+int CEsmCreature::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmCreature *pCreature;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_CREA)) {
 		return CEsmItem1::CompareFields(FieldID, pRecord);
 	}
 
-	pCreature = (CEsmCreature *) pRecord;
+	pCreature = (CEsmCreature *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
@@ -163,9 +199,9 @@ int CEsmCreature::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmCreature::Create (void) {
+CEsmRecord *CEsmCreature::Create(void) {
 	DEFINE_FUNCTION("CEsmCreature::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmCreature);
 	return (pRecord);
 }
@@ -182,7 +218,7 @@ CEsmRecord *CEsmCreature::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmCreature::CreateNew (CEsmFile* pFile) {
+void CEsmCreature::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem1::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -208,7 +244,7 @@ void CEsmCreature::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmCreature::GetFieldString (const int FieldID) {
+const TCHAR *CEsmCreature::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -216,7 +252,7 @@ const TCHAR *CEsmCreature::GetFieldString (const int FieldID) {
 			return GetCreaType();
 
 		case ESM_FIELD_LEVEL:
-			snprintf (s_Buffer, 31, _T("%ld"), GetLevel());
+			snprintf(s_Buffer, 31, _T("%ld"), GetLevel());
 			return (s_Buffer);
 
 		case ESM_FIELD_ESSENTIAL:
@@ -252,7 +288,7 @@ const TCHAR *CEsmCreature::GetFieldString (const int FieldID) {
  * Class TCHAR* CEsmCreature Method - const GetMoveType (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmCreature::GetMoveType (void) {
+const TCHAR *CEsmCreature::GetMoveType(void) {
 	if (IsWalks()) {
 		return _T("Walks");
 	}
@@ -282,15 +318,15 @@ const TCHAR *CEsmCreature::GetMoveType (void) {
  * Class CEsmCreature Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmCreature::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmCreature::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_CRDT)) {
-		m_pCreatureData = (CEsmSubCRDT *) pSubRecord;
+		m_pCreatureData = (CEsmSubCRDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_FLAG)) {
-		m_pFlag = (CEsmSubLong *) pSubRecord;
+		m_pFlag = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_AIDT)) {
-		m_pAIData = (CEsmSubAIDT *) pSubRecord;
+		m_pAIData = (CEsmSubAIDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CNAM)) {
-		m_pSound = (CEsmSubNameFix *) pSubRecord;
+		m_pSound = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmItem1::OnAddSubRecord(pSubRecord);
 	}
@@ -309,7 +345,7 @@ void CEsmCreature::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmCreature::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmCreature::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE: {
 			int Type = GetESMCreatureType(pString);
@@ -364,7 +400,7 @@ bool CEsmCreature::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Class TCHAR* CEsmCreature Method - void SetMoveType (pString);
  *
  *=========================================================================*/
-void CEsmCreature::SetMoveType (const TCHAR* pString) {
+void CEsmCreature::SetMoveType(const TCHAR *pString) {
 	if (stricmp(pString, _T("Walks")) == 0) {
 		SetWalks(true);
 	}
@@ -396,7 +432,7 @@ void CEsmCreature::SetMoveType (const TCHAR* pString) {
  * Class CEsmCreature Method - void SetSound (pString);
  *
  *=========================================================================*/
-void CEsmCreature::SetSound (const TCHAR* pString) {
+void CEsmCreature::SetSound(const TCHAR *pString) {
 	if (pString == NULL || *pString == NULL_CHAR) {
 		DeleteSubRecords(MWESM_SUBREC_CNAM);
 		m_pSound = NULL;
@@ -421,7 +457,7 @@ void CEsmCreature::SetSound (const TCHAR* pString) {
  * Convert a creature type into a string.
  *
  *=========================================================================*/
-const TCHAR *GetESMCreatureType (const int CreaType) {
+const TCHAR *GetESMCreatureType(const int CreaType) {
 	/* Check for a valid input type */
 	if (CreaType < MWESM_CREATYPE_MIN || CreaType > MWESM_CREATYPE_MAX) {
 		return _T("Unknown");
@@ -432,7 +468,7 @@ const TCHAR *GetESMCreatureType (const int CreaType) {
 }
 
 
-int GetESMCreatureType (const TCHAR *pString) {
+int GetESMCreatureType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_CREATYPE_MIN; Index <= MWESM_CREATYPE_MAX; Index++) {
@@ -447,4 +483,3 @@ int GetESMCreatureType (const TCHAR *pString) {
 /*===========================================================================
  *      End of Function TCHAR* GetESMCreatureType()
  *=========================================================================*/
-

@@ -32,7 +32,7 @@
 
 /* Global types */
 #define MWESM_GLOBAL_SHORT    ('s')
-#define MWESM_GLOBAL_LONG ('l')
+#define MWESM_GLOBAL_LONG     ('l')
 #define MWESM_GLOBAL_FLOAT    ('f')
 
 /*===========================================================================
@@ -66,55 +66,55 @@ class CEsmGlobal : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmGlobal();
 	//virtual ~CEsmGlobal() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Global");
 	}
 
 	/* Get class members */
-	int GetType (void) {
-		return (int) (m_pTypeData ? m_pTypeData->GetValue() : MWESM_GLOBAL_FLOAT);
+	int GetType(void) {
+		return (int)(m_pTypeData ? m_pTypeData->GetValue() : MWESM_GLOBAL_FLOAT);
 	}
 
-	float GetValue (void) {
+	float GetValue(void) {
 		return (m_pFloatData ? m_pFloatData->GetValue() : 0);
 	}
 
-	const TCHAR *GetTypeString (void);
-	int GetTypeID (const TCHAR* pString);
+	const TCHAR *GetTypeString(void);
+	int GetTypeID(const TCHAR *pString);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetType (const int Type) {
+	void SetType(const int Type) {
 		if (m_pTypeData) {
 			m_pTypeData->SetValue(Type);
 		}
 	}
 
-	void SetValue (const float Value) {
+	void SetValue(const float Value) {
 		if (m_pFloatData) {
 			m_pFloatData->SetValue(Value);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

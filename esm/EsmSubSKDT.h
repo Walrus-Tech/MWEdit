@@ -80,14 +80,14 @@ class CEsmSubSKDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSKDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(skilldata_t));
 		m_RecordSize = sizeof(skilldata_t);
@@ -99,56 +99,56 @@ class CEsmSubSKDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	skilldata_t *GetSkillData (void) {
-		return ((skilldata_t *) m_pData);
+	skilldata_t *GetSkillData(void) {
+		return ((skilldata_t *)m_pData);
 	}
 
-	long GetAttributeID (void) {
+	long GetAttributeID(void) {
 		return (GetSkillData()->Attribute);
 	}
 
-	long GetSpecialization (void) {
+	long GetSpecialization(void) {
 		return (GetSkillData()->Specialization);
 	}
 
-	float GetUseValue1 (void) {
+	float GetUseValue1(void) {
 		return (GetSkillData()->UseValue1);
 	}
 
-	float GetUseValue2 (void) {
+	float GetUseValue2(void) {
 		return (GetSkillData()->UseValue2);
 	}
 
-	float GetUseValue3 (void) {
+	float GetUseValue3(void) {
 		return (GetSkillData()->UseValue3);
 	}
 
-	float GetUseValue4 (void) {
+	float GetUseValue4(void) {
 		return (GetSkillData()->UseValue4);
 	}
 
 	/* Set class members */
-	void SetAttributeID (const long Value) {
+	void SetAttributeID(const long Value) {
 		GetSkillData()->Attribute = Value;
 	}
 
-	void SetSpecialization (const long Value) {
+	void SetSpecialization(const long Value) {
 		GetSkillData()->Specialization = Value;
 	}
 
-	void SetUseValue1 (const float Value) {
+	void SetUseValue1(const float Value) {
 		GetSkillData()->UseValue1 = Value;
 	}
 
-	void SetUseValue2 (const float Value) {
+	void SetUseValue2(const float Value) {
 		GetSkillData()->UseValue2 = Value;
 	}
 
-	void SetUseValue3 (const float Value) {
+	void SetUseValue3(const float Value) {
 		GetSkillData()->UseValue3 = Value;
 	}
 
-	void SetUseValue4 (const float Value) {
+	void SetUseValue4(const float Value) {
 		GetSkillData()->UseValue4 = Value;
 	}
 
@@ -163,4 +163,3 @@ class CEsmSubSKDT : public CEsmSubRecord {
 /*===========================================================================
  *      End of File EsmsubINDX.H
  *=========================================================================*/
-

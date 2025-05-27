@@ -68,66 +68,66 @@ class CEsmContainer : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmContainer();
 	//virtual ~CEsmContainer() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Container");
 	}
 
 	/* Get class members */
-	contdata_t *GetContData (void) {
+	contdata_t *GetContData(void) {
 		return (m_pContData == NULL ? NULL : m_pContData->GetContData());
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (m_pContData == NULL ? 0 : m_pContData->GetWeight());
 	}
 
-	bool IsOrganic (void) {
+	bool IsOrganic(void) {
 		return (m_pFlag == NULL ? false : m_pFlag->IsFlag(MWESM_CONTFLAG_ORGANIC));
 	}
 
-	bool IsRespawn (void) {
+	bool IsRespawn(void) {
 		return (m_pFlag == NULL ? false : m_pFlag->IsFlag(MWESM_CONTFLAG_RESPAWN));
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		if (m_pContData) {
 			m_pContData->SetWeight(Value);
 		}
 	}
 
-	void SetOrganic (const bool Flag) {
+	void SetOrganic(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CONTFLAG_ORGANIC, Flag);
 		}
 	}
 
-	void SetRespawn (const bool Flag) {
+	void SetRespawn(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CONTFLAG_RESPAWN, Flag);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

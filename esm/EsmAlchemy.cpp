@@ -29,14 +29,38 @@ DEFINE_FILE("EsmAlchemy.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmAlchemy::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_TEXT, CEsmSubNameFix::Create },   /* Not ITEX */
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubENAM::Create },
-	{ MWESM_SUBREC_ALDT, CEsmSubALDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_TEXT,
+		CEsmSubNameFix::Create
+	},   /* Not ITEX */
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubENAM::Create
+	},
+	{
+		MWESM_SUBREC_ALDT,
+		CEsmSubALDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -48,7 +72,7 @@ const esmsubreccreate_t CEsmAlchemy::s_SubRecCreate[] = {
  * Class CEsmAlchemy Constructor
  *
  *=========================================================================*/
-CEsmAlchemy::CEsmAlchemy () {
+CEsmAlchemy::CEsmAlchemy() {
 	//DEFINE_FUNCTION("CEsmAlchemy::CEsmAlchemy()");
 	m_pAlchemyData = NULL;
 }
@@ -65,7 +89,7 @@ CEsmAlchemy::CEsmAlchemy () {
  * Description
  *
  *=========================================================================*/
-void CEsmAlchemy::Destroy (void) {
+void CEsmAlchemy::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmAlchemy::Destroy()");
 	CEsmItem2::Destroy();
 }
@@ -83,16 +107,16 @@ void CEsmAlchemy::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmAlchemy::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmAlchemy::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmAlchemy::CompareFields()");
-	CEsmAlchemy* pAlchemy;
+	CEsmAlchemy *pAlchemy;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_ALCH)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pAlchemy = (CEsmAlchemy *) pRecord;
+	pAlchemy = (CEsmAlchemy *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_AUTOCALC:
@@ -116,9 +140,9 @@ int CEsmAlchemy::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmAlchemy::Create (void) {
+CEsmRecord *CEsmAlchemy::Create(void) {
 	DEFINE_FUNCTION("CEsmAlchemy::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmAlchemy);
 	return (pRecord);
 }
@@ -135,7 +159,7 @@ CEsmRecord *CEsmAlchemy::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmAlchemy::CreateNew (CEsmFile* pFile) {
+void CEsmAlchemy::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first (skip CEsmItem2 on purpose due to
 	 * the ALCH record using a TEXT instead of a ITEX icon record */
 	CEsmItem1::CreateNew(pFile);
@@ -158,7 +182,7 @@ void CEsmAlchemy::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmAlchemy::GetFieldString (const int FieldID) {
+const TCHAR *CEsmAlchemy::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmAlchemy::GetFieldString()");
 
 	switch (FieldID) {
@@ -181,11 +205,11 @@ const TCHAR *CEsmAlchemy::GetFieldString (const int FieldID) {
  * Class CEsmAlchemy Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmAlchemy::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmAlchemy::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_ALDT)) {
-		m_pAlchemyData = (CEsmSubALDT *) pSubRecord;
+		m_pAlchemyData = (CEsmSubALDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_TEXT)) {
-		m_pIcon = (CEsmSubNameFix *) pSubRecord;
+		m_pIcon = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -204,7 +228,7 @@ void CEsmAlchemy::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmAlchemy::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmAlchemy::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_AUTOCALC:
 			SetAutoCalc(StringToBoolean(pString));
@@ -225,7 +249,7 @@ bool CEsmAlchemy::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Class CEsmAlchemy Method - void SetIcon (pIcon);
  *
  *=========================================================================*/
-void CEsmAlchemy::SetIcon (const TCHAR* pIcon) {
+void CEsmAlchemy::SetIcon(const TCHAR *pIcon) {
 	DEFINE_FUNCTION("CEsmAlchemy::SetIcon()");
 
 	/* Should we delete the current enchant? */

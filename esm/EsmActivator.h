@@ -35,10 +35,8 @@ class CEsmActivator : public CEsmItem1 {
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
 
-
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 
 	/*---------- Begin Public Class Methods -----------------------*/
   public:
@@ -46,18 +44,15 @@ class CEsmActivator : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmActivator();
 	//virtual ~CEsmActivator() { Destroy(); }
-	virtual void Destroy (void);
-
+	virtual void Destroy(void);
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
-
+	static CEsmRecord *Create(void);
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Activator");
 	}
-
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

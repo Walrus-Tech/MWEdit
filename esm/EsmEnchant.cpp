@@ -51,10 +51,22 @@ const TCHAR *l_EnchantRanges[] = {
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmEnchant::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENDT, CEsmSubENDT::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubENAM::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ENDT,
+		CEsmSubENDT::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubENAM::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -66,7 +78,7 @@ const esmsubreccreate_t CEsmEnchant::s_SubRecCreate[] = {
  * Class CEsmEnchant Constructor
  *
  *=========================================================================*/
-CEsmEnchant::CEsmEnchant () {
+CEsmEnchant::CEsmEnchant() {
 	//DEFINE_FUNCTION("CEsmEnchant::CEsmEnchant()");
 	m_pEnchantData = NULL;
 }
@@ -83,7 +95,7 @@ CEsmEnchant::CEsmEnchant () {
  * Description
  *
  *=========================================================================*/
-void CEsmEnchant::Destroy (void) {
+void CEsmEnchant::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmEnchant::Destroy()");
 	m_pEnchantData = NULL;
 	CEsmRecord::Destroy();
@@ -102,15 +114,15 @@ void CEsmEnchant::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmEnchant::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmEnchant* pEnchant;
+int CEsmEnchant::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmEnchant *pEnchant;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_ENCH)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pEnchant = (CEsmEnchant *) pRecord;
+	pEnchant = (CEsmEnchant *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_CHARGE:
@@ -142,9 +154,9 @@ int CEsmEnchant::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmEnchant::Create (void) {
+CEsmRecord *CEsmEnchant::Create(void) {
 	DEFINE_FUNCTION("CEsmEnchant::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmEnchant);
 	return (pRecord);
 }
@@ -161,7 +173,7 @@ CEsmRecord *CEsmEnchant::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmEnchant::CreateNew (CEsmFile* pFile) {
+void CEsmEnchant::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -182,16 +194,16 @@ void CEsmEnchant::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmEnchant::GetFieldString (const int FieldID) {
+const TCHAR *CEsmEnchant::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_CHARGE:
-			snprintf (s_Buffer, 31, _T("%ld"), GetCharge());
+			snprintf(s_Buffer, 31, _T("%ld"), GetCharge());
 			return (s_Buffer);
 
 		case ESM_FIELD_COST:
-			snprintf (s_Buffer, 31, _T("%ld"), GetEnchantCost());
+			snprintf(s_Buffer, 31, _T("%ld"), GetEnchantCost());
 			return (s_Buffer);
 
 		case ESM_FIELD_TYPE:
@@ -215,9 +227,9 @@ const TCHAR *CEsmEnchant::GetFieldString (const int FieldID) {
  * Class CEsmEnchant Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmEnchant::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmEnchant::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_ENDT)) {
-		m_pEnchantData = (CEsmSubENDT *) pSubRecord;
+		m_pEnchantData = (CEsmSubENDT *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -236,7 +248,7 @@ void CEsmEnchant::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmEnchant::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmEnchant::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_CHARGE:
 			SetCharge(atoi(pString));
@@ -275,7 +287,7 @@ bool CEsmEnchant::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Function - const TCHAR* GetESMEnchantType (Type);
  *
  *=========================================================================*/
-const TCHAR *GetESMEnchantType (const int Type) {
+const TCHAR *GetESMEnchantType(const int Type) {
 	/* Check for a valid input type */
 	if (Type < MWESM_ENCHTYPE_MIN || Type > MWESM_ENCHTYPE_MAX) {
 		return _T("Unknown");
@@ -286,18 +298,18 @@ const TCHAR *GetESMEnchantType (const int Type) {
 }
 
 
-bool GetESMEnchantType (int &OutType, const TCHAR* pString) {
+bool GetESMEnchantType(int &OutType, const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_ENCHTYPE_MIN; Index <= MWESM_ENCHTYPE_MAX; Index++) {
-		if ( _stricmp(l_EnchantTypes[Index], pString) == 0) {
+		if (_stricmp(l_EnchantTypes[Index], pString) == 0) {
 			OutType = Index;
 			return (true);
 		}
 	}
 
 	/* Check old string values */
-	if ( _stricmp(pString, _T("Cast Strikes")) == 0) {
+	if (_stricmp(pString, _T("Cast Strikes")) == 0) {
 		OutType = MWESM_ENCHTYPE_CASTSTRIKES;
 		return (true);
 	}
@@ -306,17 +318,17 @@ bool GetESMEnchantType (int &OutType, const TCHAR* pString) {
 }
 
 
-int GetESMEnchantType (const TCHAR* pString) {
+int GetESMEnchantType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_ENCHTYPE_MIN; Index <= MWESM_ENCHTYPE_MAX; Index++) {
-		if ( _stricmp(l_EnchantTypes[Index], pString) == 0) {
+		if (_stricmp(l_EnchantTypes[Index], pString) == 0) {
 			return (Index);
 		}
 	}
 
 	/* Check old string values */
-	if ( _stricmp(pString, _T("Cast Strikes")) == 0) {
+	if (_stricmp(pString, _T("Cast Strikes")) == 0) {
 		return (MWESM_ENCHTYPE_CASTSTRIKES);
 	}
 
@@ -333,7 +345,7 @@ int GetESMEnchantType (const TCHAR* pString) {
  * Function - const TCHAR* GetESMEnchantRangeType (Type);
  *
  *=========================================================================*/
-const TCHAR *GetESMEnchantRangeType (const int Type) {
+const TCHAR *GetESMEnchantRangeType(const int Type) {
 	/* Check for a valid input type */
 	if (Type < MWESM_ENCHANTRANGE_MIN || Type > MWESM_ENCHANTRANGE_MAX) {
 		return _T("Unknown");
@@ -344,11 +356,11 @@ const TCHAR *GetESMEnchantRangeType (const int Type) {
 }
 
 
-bool GetESMEnchantRangeType (int &OutType, const TCHAR* pString) {
+bool GetESMEnchantRangeType(int &OutType, const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_ENCHANTRANGE_MIN; Index <= MWESM_ENCHANTRANGE_MAX; Index++) {
-		if ( _stricmp(l_EnchantRanges[Index], pString) == 0) {
+		if (_stricmp(l_EnchantRanges[Index], pString) == 0) {
 			OutType = Index;
 			return (true);
 		}
@@ -358,11 +370,11 @@ bool GetESMEnchantRangeType (int &OutType, const TCHAR* pString) {
 }
 
 
-int GetESMEnchantRangeType (const TCHAR* pString) {
+int GetESMEnchantRangeType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_ENCHANTRANGE_MIN; Index <= MWESM_ENCHANTRANGE_MAX; Index++) {
-		if ( _stricmp(l_EnchantRanges[Index], pString) == 0) {
+		if (_stricmp(l_EnchantRanges[Index], pString) == 0) {
 			return (Index);
 		}
 	}

@@ -29,13 +29,34 @@ DEFINE_FILE("EsmRegion.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmRegion::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubLong::Create },
-	{ MWESM_SUBREC_SNAM, CEsmSubSNAM::Create },
-	{ MWESM_SUBREC_WEAT, CEsmSubWEAT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_BNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_SNAM,
+		CEsmSubSNAM::Create
+	},
+	{
+		MWESM_SUBREC_WEAT,
+		CEsmSubWEAT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmRegion::s_SubRecCreate[] = {
  * Class CEsmRegion Constructor
  *
  *=========================================================================*/
-CEsmRegion::CEsmRegion () {
+CEsmRegion::CEsmRegion() {
 	//DEFINE_FUNCTION("CEsmRegion::CEsmRegion()");
 	m_pNameData = NULL;
 	m_pWeatherData = NULL;
@@ -65,7 +86,7 @@ CEsmRegion::CEsmRegion () {
  * Class CEsmRegion Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmRegion::Destroy (void) {
+void CEsmRegion::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmRegion::Destroy()");
 	m_pNameData = NULL;
 	m_pWeatherData = NULL;
@@ -87,15 +108,15 @@ void CEsmRegion::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmRegion::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmRegion* pRegion;
+int CEsmRegion::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmRegion *pRegion;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_REGN)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pRegion = (CEsmRegion *) pRecord;
+	pRegion = (CEsmRegion *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -121,9 +142,9 @@ int CEsmRegion::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRegion::Create (void) {
+CEsmRecord *CEsmRegion::Create(void) {
 	DEFINE_FUNCTION("CEsmRegion::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRegion);
 	return (pRecord);
 }
@@ -140,7 +161,7 @@ CEsmRecord *CEsmRegion::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmRegion::CreateNew (CEsmFile* pFile) {
+void CEsmRegion::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -164,7 +185,7 @@ void CEsmRegion::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmRegion::GetFieldString (const int FieldID) {
+const TCHAR *CEsmRegion::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			return GetName();
@@ -187,15 +208,15 @@ const TCHAR *CEsmRegion::GetFieldString (const int FieldID) {
  * Class CEsmRegion Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmRegion::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmRegion::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pNameData = (CEsmSubNameFix *) pSubRecord;
+		m_pNameData = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_BNAM)) {
-		m_pCreatureData = (CEsmSubNameFix *) pSubRecord;
+		m_pCreatureData = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_WEAT)) {
-		m_pWeatherData = (CEsmSubWEAT *) pSubRecord;
+		m_pWeatherData = (CEsmSubWEAT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CNAM)) {
-		m_pColorData = (CEsmSubLong *) pSubRecord;
+		m_pColorData = (CEsmSubLong *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -211,7 +232,7 @@ void CEsmRegion::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Class CEsmRegion Method - void SetCreature (pString);
  *
  *=========================================================================*/
-void CEsmRegion::SetCreature (const TCHAR* pString) {
+void CEsmRegion::SetCreature(const TCHAR *pString) {
 	/* Delete the creature record */
 	if (pString == NULL || *pString == NULL_CHAR) {
 		if (m_pCreatureData != NULL) {

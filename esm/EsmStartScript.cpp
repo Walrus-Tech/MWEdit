@@ -29,9 +29,18 @@ DEFINE_FILE("EsmStartScript.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmStartScript::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_DATA, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_DATA,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -43,7 +52,7 @@ const esmsubreccreate_t CEsmStartScript::s_SubRecCreate[] = {
  * Class CEsmStartScript Constructor
  *
  *=========================================================================*/
-CEsmStartScript::CEsmStartScript () {
+CEsmStartScript::CEsmStartScript() {
 	//DEFINE_FUNCTION("CEsmStartScript::CEsmStartScript()");
 	m_pName = NULL;
 }
@@ -58,7 +67,7 @@ CEsmStartScript::CEsmStartScript () {
  * Class CEsmStartScript Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmStartScript::Destroy (void) {
+void CEsmStartScript::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmStartScript::Destroy()");
 	m_pName = NULL;
 	CEsmRecord::Destroy();
@@ -78,15 +87,15 @@ void CEsmStartScript::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmStartScript::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmStartScript* pStartScript;
+int CEsmStartScript::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmStartScript *pStartScript;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_SSCR)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pStartScript = (CEsmStartScript *) pRecord;
+	pStartScript = (CEsmStartScript *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -109,9 +118,9 @@ int CEsmStartScript::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmStartScript::Create (void) {
+CEsmRecord *CEsmStartScript::Create(void) {
 	DEFINE_FUNCTION("CEsmStartScript::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmStartScript);
 	return (pRecord);
 }
@@ -128,7 +137,7 @@ CEsmRecord *CEsmStartScript::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmStartScript::CreateNew (CEsmFile* pFile) {
+void CEsmStartScript::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -149,7 +158,7 @@ void CEsmStartScript::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmStartScript::GetFieldString (const int FieldID) {
+const TCHAR *CEsmStartScript::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -171,11 +180,11 @@ const TCHAR *CEsmStartScript::GetFieldString (const int FieldID) {
  * Class CEsmStartScript Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmStartScript::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmStartScript::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
-		m_pID = (CEsmSubNameFix *) pSubRecord;
+		m_pID = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_NAME)) {
-		m_pName = (CEsmSubNameFix *) pSubRecord;
+		m_pName = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -194,7 +203,7 @@ void CEsmStartScript::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmStartScript::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmStartScript::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);

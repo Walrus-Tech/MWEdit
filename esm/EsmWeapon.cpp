@@ -29,14 +29,38 @@ DEFINE_FILE("EsmWeapon.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmWeapon::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubName::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubName::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubName::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubName::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubName::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubName::Create },
-	{ MWESM_SUBREC_WPDT, CEsmSubWPDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_WPDT,
+		CEsmSubWPDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -74,7 +98,7 @@ const TCHAR *l_WeaponTypes[] = {
  * Class CEsmWeapon Constructor
  *
  *=========================================================================*/
-CEsmWeapon::CEsmWeapon () {
+CEsmWeapon::CEsmWeapon() {
 	//DEFINE_FUNCTION("CEsmWeapon::CEsmWeapon()");
 	m_pWeaponData = NULL;
 }
@@ -91,7 +115,7 @@ CEsmWeapon::CEsmWeapon () {
  * Description
  *
  *=========================================================================*/
-void CEsmWeapon::Destroy (void) {
+void CEsmWeapon::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmWeapon::Destroy()");
 	m_pWeaponData = NULL;
 	CEsmItem3::Destroy();
@@ -110,16 +134,16 @@ void CEsmWeapon::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmWeapon::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmWeapon::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmWeapon::CompareFields()");
-	CEsmWeapon* pWeapon;
+	CEsmWeapon *pWeapon;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_WEAP)) {
 		return CEsmItem3::CompareFields(FieldID, pRecord);
 	}
 
-	pWeapon = (CEsmWeapon *) pRecord;
+	pWeapon = (CEsmWeapon *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_HEALTH:
@@ -172,9 +196,9 @@ int CEsmWeapon::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmWeapon::Create (void) {
+CEsmRecord *CEsmWeapon::Create(void) {
 	DEFINE_FUNCTION("CEsmWeapon::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmWeapon);
 	return (pRecord);
 }
@@ -191,7 +215,7 @@ CEsmRecord *CEsmWeapon::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmWeapon::CreateNew (CEsmFile* pFile) {
+void CEsmWeapon::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem3::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -212,7 +236,7 @@ void CEsmWeapon::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmWeapon::GetFieldString (const int FieldID) {
+const TCHAR *CEsmWeapon::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmWeapon::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
@@ -221,39 +245,39 @@ const TCHAR *CEsmWeapon::GetFieldString (const int FieldID) {
 			return (GetWeaponType());
 
 		case ESM_FIELD_HEALTH:
-			snprintf (s_Buffer, 31, _T("%d"), GetHealth());
+			snprintf(s_Buffer, 31, _T("%d"), GetHealth());
 			return (s_Buffer);
 
 		case ESM_FIELD_SPEED:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetSpeed());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetSpeed());
 			return (s_Buffer);
 
 		case ESM_FIELD_REACH:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetReach());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetReach());
 			return (s_Buffer);
 
 		case ESM_FIELD_CHOPMIN:
-			snprintf (s_Buffer, 31, _T("%d"), GetChopMin());
+			snprintf(s_Buffer, 31, _T("%d"), GetChopMin());
 			return (s_Buffer);
 
 		case ESM_FIELD_CHOPMAX:
-			snprintf (s_Buffer, 31, _T("%d"), GetChopMax());
+			snprintf(s_Buffer, 31, _T("%d"), GetChopMax());
 			return (s_Buffer);
 
 		case ESM_FIELD_SLASHMIN:
-			snprintf (s_Buffer, 31, _T("%d"), GetSlashMin());
+			snprintf(s_Buffer, 31, _T("%d"), GetSlashMin());
 			return (s_Buffer);
 
 		case ESM_FIELD_SLASHMAX:
-			snprintf (s_Buffer, 31, _T("%d"), GetSlashMax());
+			snprintf(s_Buffer, 31, _T("%d"), GetSlashMax());
 			return (s_Buffer);
 
 		case ESM_FIELD_THRUSTMIN:
-			snprintf (s_Buffer, 31, _T("%d"), GetThrustMin());
+			snprintf(s_Buffer, 31, _T("%d"), GetThrustMin());
 			return (s_Buffer);
 
 		case ESM_FIELD_THRUSTMAX:
-			snprintf (s_Buffer, 31, _T("%d"), GetThrustMax());
+			snprintf(s_Buffer, 31, _T("%d"), GetThrustMax());
 			return (s_Buffer);
 
 		case ESM_FIELD_IGNORERESIST:
@@ -274,9 +298,9 @@ const TCHAR *CEsmWeapon::GetFieldString (const int FieldID) {
  * Class CEsmWeapon Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmWeapon::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmWeapon::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_WPDT)) {
-		m_pWeaponData = (CEsmSubWPDT *) pSubRecord;
+		m_pWeaponData = (CEsmSubWPDT *)pSubRecord;
 	} else {
 		CEsmItem3::OnAddSubRecord(pSubRecord);
 	}
@@ -295,7 +319,7 @@ void CEsmWeapon::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmWeapon::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmWeapon::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE: {
 			int Type = GetESMWeaponType(pString);
@@ -364,7 +388,7 @@ bool CEsmWeapon::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Converts an weapon type value into a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *GetESMWeaponType (const int Type) {
+const TCHAR *GetESMWeaponType(const int Type) {
 	/* Check for a valid input type */
 	if (Type < MWESM_WEAPONTYPE_MIN || Type > MWESM_WEAPONTYPE_MAX) {
 		return _T("Unknown");
@@ -387,7 +411,7 @@ const TCHAR *GetESMWeaponType (const int Type) {
  * MWESM_WEAPONTYPE_SHORT on default.
  *
  *=========================================================================*/
-int GetESMWeaponType (const TCHAR* pString) {
+int GetESMWeaponType(const TCHAR *pString) {
 	int Index;
 
 	/* Check for a valid input type */
@@ -412,7 +436,7 @@ int GetESMWeaponType (const TCHAR* pString) {
  * Returns true if the weapon type is a range type weapon.
  *
  *=========================================================================*/
-bool IsESMWeaponRange (const int Type) {
+bool IsESMWeaponRange(const int Type) {
 	if (Type == MWESM_WEAPONTYPE_THROWN) {
 		return (true);
 	}

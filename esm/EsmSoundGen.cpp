@@ -29,11 +29,26 @@ DEFINE_FILE("EsmSoundGen.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmSoundGen::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DATA, CEsmSubLong::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DATA,
+		CEsmSubLong::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -65,7 +80,7 @@ const TCHAR *l_SoundGenTypes[] = {
  * Class CEsmSoundGen Constructor
  *
  *=========================================================================*/
-CEsmSoundGen::CEsmSoundGen () {
+CEsmSoundGen::CEsmSoundGen() {
 	//DEFINE_FUNCTION("CEsmSoundGen::CEsmSoundGen()");
 	m_pSoundName = NULL;
 	m_pTypeData = NULL;
@@ -82,7 +97,7 @@ CEsmSoundGen::CEsmSoundGen () {
  * Class CEsmSoundGen Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSoundGen::Destroy (void) {
+void CEsmSoundGen::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmSoundGen::Destroy()");
 	m_pSoundName = NULL;
 	m_pTypeData = NULL;
@@ -103,15 +118,15 @@ void CEsmSoundGen::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmSoundGen::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmSoundGen* pSoundGen;
+int CEsmSoundGen::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmSoundGen *pSoundGen;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_SNDG)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pSoundGen = (CEsmSoundGen *) pRecord;
+	pSoundGen = (CEsmSoundGen *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_CREATURE:
@@ -140,9 +155,9 @@ int CEsmSoundGen::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSoundGen::Create (void) {
+CEsmRecord *CEsmSoundGen::Create(void) {
 	DEFINE_FUNCTION("CEsmSoundGen::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSoundGen);
 	return (pRecord);
 }
@@ -159,7 +174,7 @@ CEsmRecord *CEsmSoundGen::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmSoundGen::CreateNew (CEsmFile* pFile) {
+void CEsmSoundGen::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -181,7 +196,7 @@ void CEsmSoundGen::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmSoundGen::GetFieldString (const int FieldID) {
+const TCHAR *CEsmSoundGen::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
 			return GetTypeString();
@@ -207,13 +222,13 @@ const TCHAR *CEsmSoundGen::GetFieldString (const int FieldID) {
  * Class CEsmSoundGen Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSoundGen::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmSoundGen::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_SNAM)) {
-		m_pSoundName = (CEsmSubNameFix *) pSubRecord;
+		m_pSoundName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CNAM)) {
-		m_pCreatureName = (CEsmSubNameFix *) pSubRecord;
+		m_pCreatureName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
-		m_pTypeData = (CEsmSubLong *) pSubRecord;
+		m_pTypeData = (CEsmSubLong *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -232,7 +247,7 @@ void CEsmSoundGen::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmSoundGen::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmSoundGen::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE: {
 			int Type = GetESMSoundGenType(pString);
@@ -267,7 +282,7 @@ bool CEsmSoundGen::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Class CEsmSoundGen Method - void SetCreature (pString);
  *
  *=========================================================================*/
-void CEsmSoundGen::SetCreature (const TCHAR* pString) {
+void CEsmSoundGen::SetCreature(const TCHAR *pString) {
 	/* Delete the creature record */
 	if (pString == NULL || *pString == NULL_CHAR) {
 		if (m_pCreatureName != NULL) {
@@ -295,7 +310,7 @@ void CEsmSoundGen::SetCreature (const TCHAR* pString) {
  * Function - const TCHAR* GetESMSoundGenType (Type);
  *
  *=========================================================================*/
-const TCHAR *GetESMSoundGenType (const int Type) {
+const TCHAR *GetESMSoundGenType(const int Type) {
 	if (Type < MWESM_SNDGEN_MIN || Type > MWESM_SNDGEN_MAX) {
 		return _T("Unknown");
 	}
@@ -304,7 +319,7 @@ const TCHAR *GetESMSoundGenType (const int Type) {
 }
 
 
-int GetESMSoundGenType (const TCHAR* pString) {
+int GetESMSoundGenType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_SNDGEN_MIN; Index <= MWESM_SNDGEN_MAX; Index++) {

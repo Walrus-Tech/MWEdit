@@ -29,13 +29,34 @@ DEFINE_FILE("EsmApparatus.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmApparatus::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_AADT, CEsmSubAADT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_AADT,
+		CEsmSubAADT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -63,7 +84,7 @@ const TCHAR *l_ApparatusTypes[] = {
  * Class CEsmApparatus Constructor
  *
  *=========================================================================*/
-CEsmApparatus::CEsmApparatus () {
+CEsmApparatus::CEsmApparatus() {
 	//DEFINE_FUNCTION("CEsmApparatus::CEsmApparatus()");
 	m_pAppaData = NULL;
 }
@@ -80,7 +101,7 @@ CEsmApparatus::CEsmApparatus () {
  * Description
  *
  *=========================================================================*/
-void CEsmApparatus::Destroy (void) {
+void CEsmApparatus::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmApparatus::Destroy()");
 	m_pAppaData = NULL;
 	CEsmItem2::Destroy();
@@ -99,16 +120,16 @@ void CEsmApparatus::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmApparatus::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmApparatus::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmApparatus::CompareFields()");
-	CEsmApparatus* pApparatus;
+	CEsmApparatus *pApparatus;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_APPA)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pApparatus = (CEsmApparatus *) pRecord;
+	pApparatus = (CEsmApparatus *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
@@ -135,9 +156,9 @@ int CEsmApparatus::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmApparatus::Create (void) {
+CEsmRecord *CEsmApparatus::Create(void) {
 	DEFINE_FUNCTION("CEsmApparatus::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmApparatus);
 	return (pRecord);
 }
@@ -154,7 +175,7 @@ CEsmRecord *CEsmApparatus::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmApparatus::CreateNew (CEsmFile* pFile) {
+void CEsmApparatus::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -175,14 +196,14 @@ void CEsmApparatus::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmApparatus::GetFieldString (const int FieldID) {
+const TCHAR *CEsmApparatus::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmApparatus::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
 			ASSERT(GetAppaData() != NULL);
-			snprintf (s_Buffer, 31, _T("%.2f"), GetAppaData()->Quality);
+			snprintf(s_Buffer, 31, _T("%.2f"), GetAppaData()->Quality);
 			return (s_Buffer);
 
 		case ESM_FIELD_TYPE:
@@ -204,9 +225,9 @@ const TCHAR *CEsmApparatus::GetFieldString (const int FieldID) {
  * Class CEsmApparatus Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmApparatus::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmApparatus::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_AADT)) {
-		m_pAppaData = (CEsmSubAADT *) pSubRecord;
+		m_pAppaData = (CEsmSubAADT *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -225,10 +246,10 @@ void CEsmApparatus::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmApparatus::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmApparatus::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
-			SetQuality((float) atof(pString));
+			SetQuality((float)atof(pString));
 			return (true);
 
 		case ESM_FIELD_TYPE:
@@ -255,7 +276,7 @@ bool CEsmApparatus::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Function - const TCHAR* GetESMAppaType (AppaType);
  *
  *=========================================================================*/
-const TCHAR *GetESMAppaType (const int AppaType) {
+const TCHAR *GetESMAppaType(const int AppaType) {
 	/* Check for a valid apparatus type */
 	if (AppaType < MWESM_APPATYPE_MIN || AppaType > MWESM_APPATYPE_MAX) {
 		return _T("Unknown");
@@ -266,7 +287,7 @@ const TCHAR *GetESMAppaType (const int AppaType) {
 }
 
 
-int GetESMAppaType (const TCHAR* pString) {
+int GetESMAppaType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_APPATYPE_MIN; Index <= MWESM_APPATYPE_MAX; Index++) {

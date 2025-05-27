@@ -83,14 +83,14 @@ class CEsmSubIRDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubIRDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ingredata_t));
 		m_RecordSize = sizeof(ingredata_t);
@@ -110,59 +110,59 @@ class CEsmSubIRDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	ingredata_t *GetIngreData (void) {
-		return ((ingredata_t *) m_pData);
+	ingredata_t *GetIngreData(void) {
+		return ((ingredata_t *)m_pData);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetIngreData()->Weight);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetIngreData()->Value);
 	}
 
-	bool IsValidEffect (const int Index) {
+	bool IsValidEffect(const int Index) {
 		return (Index >= 0 && Index < MWESM_INGRE_NUMEFFECTS);
 	}
 
-	long GetEffectID (const int Index) {
+	long GetEffectID(const int Index) {
 		return (IsValidEffect(Index) ? GetIngreData()->EffectID[Index] : 0);
 	}
 
-	long GetSkillID (const int Index) {
+	long GetSkillID(const int Index) {
 		return (IsValidEffect(Index) ? GetIngreData()->SkillID[Index] : 0);
 	}
 
-	long GetAttributeID (const int Index) {
+	long GetAttributeID(const int Index) {
 		return (IsValidEffect(Index) ? GetIngreData()->AttributeID[Index] : 0);
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID);
+	virtual bool IsUsed(const TCHAR *pID);
 
 	/* Set class members */
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetIngreData()->Weight = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetIngreData()->Value = Value;
 	}
 
-	void SetEffectID (const int Index, const long Value) {
+	void SetEffectID(const int Index, const long Value) {
 		if (IsValidEffect(Index)) {
 			GetIngreData()->EffectID[Index] = Value;
 		}
 	}
 
-	void SetSkillID (const int Index, const long Value) {
+	void SetSkillID(const int Index, const long Value) {
 		if (IsValidEffect(Index)) {
 			GetIngreData()->SkillID[Index] = Value;
 		}
 	}
 
-	void SetAttributeID (const int Index, const long Value) {
+	void SetAttributeID(const int Index, const long Value) {
 		if (IsValidEffect(Index)) {
 			GetIngreData()->AttributeID[Index] = Value;
 		}
@@ -180,7 +180,7 @@ class CEsmSubIRDT : public CEsmSubRecord {
  * Class bool CEsmSubIRDT Method - inline IsUsed (pID) const;
  *
  *=========================================================================*/
-inline bool CEsmSubIRDT::IsUsed (const TCHAR* pID) {
+inline bool CEsmSubIRDT::IsUsed(const TCHAR *pID) {
 	bool Result;
 	int Index;
 

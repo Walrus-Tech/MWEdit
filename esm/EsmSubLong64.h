@@ -53,11 +53,11 @@ class CEsmSubLong64 : public CEsmSubRecord {
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
-	virtual bool ReadData (CGenFile& File) {
+	virtual bool ReadData(CGenFile &File) {
 		return File.ReadLong(m_Long1) & File.ReadLong(m_Long2);
 	}
 
-	virtual bool WriteData (CGenFile& File) {
+	virtual bool WriteData(CGenFile &File) {
 		return File.WriteLong(m_Long1) & File.WriteLong(m_Long2);
 	}
 
@@ -71,23 +71,23 @@ class CEsmSubLong64 : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Copy from another name record */
-	virtual void Copy (CEsmSubRecord* pSubRecord) {
+	virtual void Copy(CEsmSubRecord *pSubRecord) {
 		m_Type.SetType(pSubRecord->GetType());
 		m_RecordSize = pSubRecord->GetRecordSize();
-		m_Long1 = ((CEsmSubLong64 *) pSubRecord)->GetValue1();
-		m_Long2 = ((CEsmSubLong64 *) pSubRecord)->GetValue2();
+		m_Long1 = ((CEsmSubLong64 *)pSubRecord)->GetValue1();
+		m_Long2 = ((CEsmSubLong64 *)pSubRecord)->GetValue2();
 	}
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubLong64);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(long) * 2;
 		m_Long1 = 0;
@@ -95,27 +95,26 @@ class CEsmSubLong64 : public CEsmSubRecord {
 	}
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData) {
+	virtual bool Find(esmfind_t &FindData) {
 		return (false);
 	}
 
 	/* Get/set the long value directly */
-	long GetValue1 (void) {
+	long GetValue1(void) {
 		return (m_Long1);
 	}
 
-	long GetValue2 (void) {
+	long GetValue2(void) {
 		return (m_Long2);
 	}
 
-	void SetValue1 (const long Value) {
+	void SetValue1(const long Value) {
 		m_Long1 = Value;
 	}
 
-	void SetValue2 (const long Value) {
+	void SetValue2(const long Value) {
 		m_Long2 = Value;
 	}
-
 
 };
 

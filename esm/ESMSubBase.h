@@ -45,7 +45,7 @@ union esmrectype_t {
 	TCHAR pType[MWESM_TYPE_SIZE];
 	long lType;
 
-	esmrectype_t () {
+	esmrectype_t() {
 		lType = 0;
 	}
 
@@ -53,39 +53,39 @@ union esmrectype_t {
 		return lType;
 	}
 
-	bool IsType (const esmrectype_t NewType) const {
+	bool IsType(const esmrectype_t NewType) const {
 		return (NewType.lType == lType);
 	}
 
-	bool IsType (const TCHAR* pNewType) const {
-		return (*(const long*)pNewType == lType);
+	bool IsType(const TCHAR *pNewType) const {
+		return (*(const long *)pNewType == lType);
 	}
 
-	bool IsType (const long lNewType) const {
+	bool IsType(const long lNewType) const {
 		return (lNewType == lType);
 	}
 
-	void SetType (const esmrectype_t NewType) {
+	void SetType(const esmrectype_t NewType) {
 		lType = NewType.lType;
 	}
 
-	void SetType (const TCHAR* pNewType) {
+	void SetType(const TCHAR *pNewType) {
 		lType = *(const long *)pNewType;
 	}
 
-	void SetType (const long lNewType) {
+	void SetType(const long lNewType) {
 		lType = lNewType;
 	}
 };
 
-inline bool operator == (const esmrectype_t &Type1, const esmrectype_t &Type2) {
+inline bool operator ==(const esmrectype_t &Type1, const esmrectype_t &Type2) {
 	return Type1.lType == Type2.lType;
 }
 
 /* Find text structure */
 struct esmfind_t {
-	const TCHAR *pText;      /* The text we want to find */
-	int Length;     /* Size of text */
+	const TCHAR *pText; /* The text we want to find */
+	int Length; /* Size of text */
 };
 
 /*===========================================================================
@@ -104,20 +104,20 @@ class CEsmSubRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	esmrectype_t m_Type;         /* Type of sub-record */
-	long m_RecordSize;       /* Size of the record when output */
-	byte *m_pData;        /* The record data for an unknown type */
+	esmrectype_t m_Type; /* Type of sub-record */
+	long m_RecordSize; /* Size of the record when output */
+	byte *m_pData; /* The record data for an unknown type */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData (CGenFile& File);   /* Override in base classes */
+	virtual bool ReadData(CGenFile &File); /* Override in base classes */
 
 	/* Helper output methods */
-	virtual bool WriteData (CGenFile& File);    /* Override in base classes */
-	virtual bool WriteHeader (CGenFile& File);
+	virtual bool WriteData(CGenFile &File); /* Override in base classes */
+	virtual bool WriteHeader(CGenFile &File);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -129,23 +129,23 @@ class CEsmSubRecord {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Copies the values from the given subrecord */
-	virtual void Copy (CEsmSubRecord* pSubRecord);
+	virtual void Copy(CEsmSubRecord *pSubRecord);
 
 	/* Copies the given data into the subrecord */
-	virtual void CopyData (char* pData, const int Size);
+	virtual void CopyData(char *pData, const int Size);
 
 	/* Return a new sub-record object */
-	static CEsmSubRecord *Create (void);
+	static CEsmSubRecord *Create(void);
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		Destroy();
 	}
 
-	virtual void CreateNew (const int Size) {
+	virtual void CreateNew(const int Size) {
 		Destroy();
 		CreateArrayPointerL(m_pData, byte, Size);
 		m_RecordSize = Size;
@@ -153,45 +153,45 @@ class CEsmSubRecord {
 	}
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData);
+	virtual bool Find(esmfind_t &FindData);
 
 	/* Get class members */
-	const TCHAR *GetType (void) const {
+	const TCHAR *GetType(void) const {
 		return (m_Type.pType);
 	}
 
-	virtual long GetRecordSize (void) const {
+	virtual long GetRecordSize(void) const {
 		return (m_RecordSize);
 	}
 
-	byte *GetData (void) {
+	byte *GetData(void) {
 		return (m_pData);
 	}
 
 	/* Type comparison */
-	bool IsType (const TCHAR* pType) const {
+	bool IsType(const TCHAR *pType) const {
 		return (m_Type.IsType(pType));
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (false);
 	}
 
 	/* Read a record from the current position in the file */
-	virtual bool Read (CGenFile& File);
+	virtual bool Read(CGenFile &File);
 
 	/* Set class members */
-	void SetRecordSize (const long Size) {
+	void SetRecordSize(const long Size) {
 		m_RecordSize = Size;
 	}
 
-	void SetType (const TCHAR* pType) {
+	void SetType(const TCHAR *pType) {
 		m_Type.SetType(pType);
 	}
 
 	/* Output the entire sub-record to the given location in the file */
-	virtual bool Write (CGenFile& File);
+	virtual bool Write(CGenFile &File);
 
 
 };
@@ -216,7 +216,7 @@ typedef struct esmsubreccreate {
 	ESMSUBREC_CREATEFUNC CreateMethod;
 
 	/* Simple compare function */
-	bool IsType (const TCHAR* pType) const {
+	bool IsType(const TCHAR *pType) const {
 		return (TSTRNICMP(Type, pType, MWESM_TYPE_SIZE) == 0);
 	}
 } esmsubreccreate_t;

@@ -35,7 +35,7 @@ DEFINE_FILE("MWCommon.cpp");
  * were not found.
  *
  *=========================================================================*/
-const TCHAR *GetMWInstallPath (void) {
+const TCHAR *GetMWInstallPath(void) {
 	static TCHAR Buffer[_MAX_PATH + 8];
 	DWORD BufferSize = _MAX_PATH + 7;
 	DWORD Type;
@@ -72,7 +72,7 @@ const TCHAR *GetMWInstallPath (void) {
  * expected keys were not found.
  *
  *=========================================================================*/
-const TCHAR *GetMWDataFilePath (void) {
+const TCHAR *GetMWDataFilePath(void) {
 	static TCHAR Buffer[_MAX_PATH + 24];
 	TSTRCPY(Buffer, GetMWInstallPath());
 
@@ -98,7 +98,7 @@ const TCHAR *GetMWDataFilePath (void) {
  * expected keys were not found.
  *
  *=========================================================================*/
-const TCHAR *GetMWTexturesPath (void) {
+const TCHAR *GetMWTexturesPath(void) {
 	static TCHAR Buffer[_MAX_PATH + 32];
 	TSTRCPY(Buffer, GetMWInstallPath());
 

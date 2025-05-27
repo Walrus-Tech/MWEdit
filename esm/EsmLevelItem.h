@@ -67,86 +67,86 @@ class CEsmLevelItem : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmLevelItem();
 	//virtual ~CEsmLevelItem() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Adds an item to the list */
-	void AddItem (const TCHAR* pID, const int Value);
+	void AddItem(const TCHAR *pID, const int Value);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Create a string of the items in the levelled list */
-	const TCHAR *GetItemListString (void);
+	const TCHAR *GetItemListString(void);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Level Item");
 	}
 
 	/* Get class members */
-	long GetDataFlag (void) {
+	long GetDataFlag(void) {
 		return (m_pData ? m_pData->GetValue() : 0);
 	}
 
-	int GetNNamFlag (void) {
+	int GetNNamFlag(void) {
 		return (int)(m_pNNam ? m_pNNam->GetValue() : 0);
 	}
 
-	bool IsAllPC (void) {
+	bool IsAllPC(void) {
 		return ((GetDataFlag() & MWESM_LEVITEMFLAG_ALLPC) != 0);
 	}
 
-	bool IsCalcEach (void) {
+	bool IsCalcEach(void) {
 		return ((GetDataFlag() & MWESM_LEVITEMFLAG_CALCEACH) != 0);
 	}
 
-	int GetChanceNone (void) {
+	int GetChanceNone(void) {
 		return (int)(GetNNamFlag());
 	}
 
-	int GetListSize (void) {
+	int GetListSize(void) {
 		return (m_pIndex ? m_pIndex->GetValue() : 0);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetChanceNone (const int Value) {
+	void SetChanceNone(const int Value) {
 		if (m_pNNam) {
 			m_pNNam->SetValue(Value);
 		}
 	}
 
-	void SetCalcEach (const bool Flag) {
+	void SetCalcEach(const bool Flag) {
 		if (m_pData) {
 			m_pData->SetFlag(MWESM_LEVITEMFLAG_CALCEACH, Flag);
 		}
 	}
 
-	void SetAllPC (const bool Flag) {
+	void SetAllPC(const bool Flag) {
 		if (m_pData) {
 			m_pData->SetFlag(MWESM_LEVITEMFLAG_ALLPC, Flag);
 		}
 	}
 
-	void SetListSize (const int Value) {
+	void SetListSize(const int Value) {
 		if (m_pIndex) {
 			m_pIndex->SetValue(Value);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

@@ -29,10 +29,22 @@ DEFINE_FILE("EsmSkill.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmSkill::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_INDX, CEsmSubLong::Create },
-	{ MWESM_SUBREC_DESC, CEsmSubName::Create },
-	{ MWESM_SUBREC_SKDT, CEsmSubSKDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_INDX,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_DESC,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_SKDT,
+		CEsmSubSKDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -44,7 +56,7 @@ const esmsubreccreate_t CEsmSkill::s_SubRecCreate[] = {
  * Class CEsmSkill Constructor
  *
  *=========================================================================*/
-CEsmSkill::CEsmSkill () {
+CEsmSkill::CEsmSkill() {
 	//DEFINE_FUNCTION("CEsmSkill::CEsmSkill()");
 	m_pIndexData = NULL;
 	m_pSkillData = NULL;
@@ -61,7 +73,7 @@ CEsmSkill::CEsmSkill () {
  * Class CEsmSkill Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSkill::Destroy (void) {
+void CEsmSkill::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmSkill::Destroy()");
 	m_pIndexData = NULL;
 	m_pSkillData = NULL;
@@ -82,15 +94,15 @@ void CEsmSkill::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmSkill::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmSkill* pSkill;
+int CEsmSkill::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmSkill *pSkill;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_SKIL)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pSkill = (CEsmSkill *) pRecord;
+	pSkill = (CEsmSkill *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -119,9 +131,9 @@ int CEsmSkill::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSkill::Create (void) {
+CEsmRecord *CEsmSkill::Create(void) {
 	DEFINE_FUNCTION("CEsmSkill::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSkill);
 	return (pRecord);
 }
@@ -138,7 +150,7 @@ CEsmRecord *CEsmSkill::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmSkill::CreateNew (CEsmFile* pFile) {
+void CEsmSkill::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -162,7 +174,7 @@ void CEsmSkill::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmSkill::GetFieldString (const int FieldID) {
+const TCHAR *CEsmSkill::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			return GetName();
@@ -192,13 +204,13 @@ const TCHAR *CEsmSkill::GetFieldString (const int FieldID) {
  * location is checked.
  *
  *=========================================================================*/
-bool CEsmSkill::IsSame (CEsmRecord* pRecord) {
+bool CEsmSkill::IsSame(CEsmRecord *pRecord) {
 	/* Check types */
 	if (!pRecord->IsType(MWESM_REC_SKIL)) {
 		return (false);
 	}
 
-	CEsmSkill* pSkill = (CEsmSkill *) pRecord;
+	CEsmSkill *pSkill = (CEsmSkill *)pRecord;
 
 	/* Check the skill indices */
 	if (GetSkillID() == pSkill->GetSkillID()) {
@@ -218,13 +230,13 @@ bool CEsmSkill::IsSame (CEsmRecord* pRecord) {
  * Class CEsmSkill Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSkill::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmSkill::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_INDX)) {
-		m_pIndexData = (CEsmSubLong *) pSubRecord;
+		m_pIndexData = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DESC)) {
-		m_pDescData = (CEsmSubName *) pSubRecord;
+		m_pDescData = (CEsmSubName *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SKDT)) {
-		m_pSkillData = (CEsmSubSKDT *) pSubRecord;
+		m_pSkillData = (CEsmSubSKDT *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -243,7 +255,7 @@ void CEsmSkill::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmSkill::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmSkill::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_DESC:
 			SetDescription(pString);

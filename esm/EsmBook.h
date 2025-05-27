@@ -60,96 +60,96 @@ class CEsmBook : public CEsmItem3 {
 	/* Class Constructors/Destructors */
 	CEsmBook();
 	//virtual ~CEsmBook() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Book");
 	}
 
 	/* Get class members */
-	bookdata_t *GetBookData (void) {
+	bookdata_t *GetBookData(void) {
 		return (m_pBookData == NULL ? NULL : m_pBookData->GetBookData() );
 	}
 
-	const TCHAR *GetBookText (void) {
+	const TCHAR *GetBookText(void) {
 		return (m_pText ? m_pText->GetName() : _T(""));
 	}
 
-	virtual float GetWeight (void) {
+	virtual float GetWeight(void) {
 		return (m_pBookData == NULL ? 0 : m_pBookData->GetWeight());
 	}
 
-	virtual long GetValue (void) {
+	virtual long GetValue(void) {
 		return (m_pBookData == NULL ? 0 : m_pBookData->GetValue());
 	}
 
-	virtual long GetEnchantPts (void) {
+	virtual long GetEnchantPts(void) {
 		return (m_pBookData == NULL ? 0 : m_pBookData->GetEnchantPts());
 	}
 
-	int GetSkillID (void) {
+	int GetSkillID(void) {
 		return (m_pBookData == NULL ? -1 : m_pBookData->GetSkillID());
 	}
 
-	bool IsScroll (void) {
+	bool IsScroll(void) {
 		return (m_pBookData == NULL ? false : m_pBookData->IsScroll());
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetScroll (const bool Flag) {
+	void SetScroll(const bool Flag) {
 		if (m_pBookData) {
 			m_pBookData->SetScroll(Flag);
 		}
 	}
 
-	void SetSkillID (const int Skill) {
+	void SetSkillID(const int Skill) {
 		if (m_pBookData) {
 			m_pBookData->SetSkillID(Skill);
 		}
 	}
 
-	void SetEnchantPts (const int Value) {
+	void SetEnchantPts(const int Value) {
 		if (m_pBookData) {
 			m_pBookData->SetEnchantPts(Value);
 		}
 	}
 
-	void SetWeight (const float Weight) {
+	void SetWeight(const float Weight) {
 		if (m_pBookData) {
 			m_pBookData->SetWeight(Weight);
 		}
 	}
 
-	void SetBookText (const TCHAR* pText) {
+	void SetBookText(const TCHAR *pText) {
 		if (m_pText) {
 			m_pText->SetName(pText);
 		}
 	}
 
-	virtual void SetValue (const long Value) {
+	virtual void SetValue(const long Value) {
 		if (m_pBookData) {
 			m_pBookData->SetValue(Value);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -165,7 +165,7 @@ class CEsmBook : public CEsmItem3 {
  *=========================================================================*/
 
 /* Convert an armor type to a string */
-const TCHAR *GetESMArmorType (const int ArmorType);
+const TCHAR *GetESMArmorType(const int ArmorType);
 
 /*===========================================================================
  *      End of Function Prototypes

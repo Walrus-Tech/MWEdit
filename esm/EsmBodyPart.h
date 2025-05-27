@@ -30,10 +30,10 @@
  *
  *=========================================================================*/
 
-const TCHAR *GetESMBodyPart (const int Part);
-const TCHAR *GetESMBodyPartType (const int PartType);
-int GetESMBodyPart (const TCHAR* pString);
-int GetESMBodyPartType (const TCHAR* pString);
+const TCHAR *GetESMBodyPart(const int Part);
+const TCHAR *GetESMBodyPartType(const int PartType);
+int GetESMBodyPart(const TCHAR *pString);
+int GetESMBodyPartType(const TCHAR *pString);
 
 /*===========================================================================
  *      End of Function Prototypes
@@ -67,64 +67,64 @@ class CEsmBodyPart : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmBodyPart();
 	//virtual ~CEsmBodyPart() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Body Part");
 	}
 
 	/* Get class members */
-	bodypartdata_t *GetBodyData (void) {
+	bodypartdata_t *GetBodyData(void) {
 		return (m_pBodyData == NULL ? NULL : m_pBodyData->GetBodyData() );
 	}
 
-	int GetBodyPartID (void) {
+	int GetBodyPartID(void) {
 		return (m_pBodyData == NULL ? -1 : m_pBodyData->GetPart());
 	}
 
-	int GetBodyTypeID (void) {
+	int GetBodyTypeID(void) {
 		return (m_pBodyData == NULL ? -1 : m_pBodyData->GetPartType());
 	}
 
-	const TCHAR *GetBodyPart (void) {
+	const TCHAR *GetBodyPart(void) {
 		return GetESMBodyPart(GetBodyPartID());
 	}
 
-	const TCHAR *GetBodyPartType (void) {
+	const TCHAR *GetBodyPartType(void) {
 		return GetESMBodyPartType(GetBodyTypeID());
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (m_pName ? m_pName->GetName() : _T(""));
 	}
 
-	const TCHAR *GetModel (void) {
+	const TCHAR *GetModel(void) {
 		return (m_pModel ? m_pModel->GetName() : _T(""));
 	}
 
-	bool IsFemale (void) {
+	bool IsFemale(void) {
 		return (m_pBodyData == NULL ? false : m_pBodyData->IsFemale());
 	}
 
-	bool IsVampire (void) {
+	bool IsVampire(void) {
 		return (m_pBodyData == NULL ? false : m_pBodyData->IsVampire());
 	}
 
 	/* Get the playable state, but only if the part is the hair or head */
-	bool IsPlayable (void) {
+	bool IsPlayable(void) {
 		if (GetBodyPartID() > MWESM_PART_HAIR) {
 			return (false);
 		}
@@ -133,7 +133,7 @@ class CEsmBodyPart : public CEsmRecord {
 	}
 
 	/* Return the race if the part type is skin, or empty string otherwise */
-	const TCHAR *GetRace (void) {
+	const TCHAR *GetRace(void) {
 		if (GetBodyTypeID() != MWESM_PARTTYPE_SKIN || m_pName == NULL) {
 			return _T("");
 		}
@@ -142,47 +142,47 @@ class CEsmBodyPart : public CEsmRecord {
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class memebers */
-	void SetModel (const TCHAR* pModel) {
+	void SetModel(const TCHAR *pModel) {
 		if (m_pModel) {
 			m_pModel->SetName(pModel);
 		}
 	}
 
-	void SetRace (const TCHAR* pRace) {
+	void SetRace(const TCHAR *pRace) {
 		if (m_pName) {
 			m_pName->SetName(pRace);
 		}
 	}
 
-	void SetFemale (const bool Flag) {
+	void SetFemale(const bool Flag) {
 		if (m_pBodyData) {
 			m_pBodyData->SetFemale(Flag);
 		}
 	}
 
-	void SetPlayable (const bool Flag) {
+	void SetPlayable(const bool Flag) {
 		if (m_pBodyData) {
 			m_pBodyData->SetPlayable(Flag);
 		}
 	}
 
-	void SetBodyPart (const int Type) {
+	void SetBodyPart(const int Type) {
 		if (m_pBodyData) {
 			m_pBodyData->SetPart(Type);
 		}
 	}
 
-	void SetBodyPartType (const int Type) {
+	void SetBodyPartType(const int Type) {
 		if (m_pBodyData) {
 			m_pBodyData->SetPartType(Type);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -195,4 +195,3 @@ class CEsmBodyPart : public CEsmRecord {
 /*===========================================================================
  *      End of File EsmBodyPart.H
  *=========================================================================*/
-

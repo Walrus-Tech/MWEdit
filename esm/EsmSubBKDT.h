@@ -69,14 +69,14 @@ class CEsmSubBKDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubBKDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(bookdata_t));
 		m_RecordSize = sizeof(bookdata_t);
@@ -85,48 +85,48 @@ class CEsmSubBKDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	bookdata_t *GetBookData (void) {
-		return ((bookdata_t *) m_pData);
+	bookdata_t *GetBookData(void) {
+		return ((bookdata_t *)m_pData);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetBookData()->Weight);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetBookData()->Value);
 	}
 
-	long GetEnchantPts (void) {
+	long GetEnchantPts(void) {
 		return (GetBookData()->EnchantPts);
 	}
 
-	long GetSkillID (void) {
+	long GetSkillID(void) {
 		return (GetBookData()->SkillID);
 	}
 
-	bool IsScroll (void) {
+	bool IsScroll(void) {
 		return (GetBookData()->Scroll != 0);
 	}
 
 	/* Set class members */
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetBookData()->Weight = Value;
 	}
 
-	void SetEnchantPts (const long Value) {
+	void SetEnchantPts(const long Value) {
 		GetBookData()->EnchantPts = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetBookData()->Value = Value;
 	}
 
-	void SetSkillID (const long Value) {
+	void SetSkillID(const long Value) {
 		GetBookData()->SkillID = Value;
 	}
 
-	void SetScroll (const bool Flag) {
+	void SetScroll(const bool Flag) {
 		GetBookData()->Scroll = Flag ? 1 : 0;
 	}
 

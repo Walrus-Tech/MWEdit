@@ -70,39 +70,39 @@ class CEsmDoor : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmDoor();
 	//virtual ~CEsmDoor() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Door");
 	}
 
 	/* Get class members */
-	const TCHAR *GetCloseSound (void) {
+	const TCHAR *GetCloseSound(void) {
 		return (m_pCloseSound ? m_pCloseSound->GetName() : _T(""));
 	}
 
-	const TCHAR *GetOpenSound (void) {
+	const TCHAR *GetOpenSound(void) {
 		return (m_pOpenSound ? m_pOpenSound->GetName() : _T(""));
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetCloseSound (const TCHAR* pSound) {
+	void SetCloseSound(const TCHAR *pSound) {
 		if (m_pOpenSound) {
 			m_pOpenSound->SetName(pSound);
 		}
 	}
 
-	void SetOpenSound (const TCHAR* pSound) {
+	void SetOpenSound(const TCHAR *pSound) {
 		if (m_pCloseSound) {
 			m_pCloseSound->SetName(pSound);
 		}

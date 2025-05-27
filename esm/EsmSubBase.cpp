@@ -28,7 +28,7 @@ DEFINE_FILE("EsmSubBase.cpp");
  * Class CEsmSubRecord Constructor
  *
  *=========================================================================*/
-CEsmSubRecord::CEsmSubRecord () {
+CEsmSubRecord::CEsmSubRecord() {
 	//DEFINE_FUNCTION("CEsmSubRecord::CEsmSubRecord()");
 	SetType(_T("????"));
 	m_RecordSize = 0;
@@ -45,7 +45,7 @@ CEsmSubRecord::CEsmSubRecord () {
  * Class CEsmSubRecord Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSubRecord::Destroy (void) {
+void CEsmSubRecord::Destroy(void) {
 	DEFINE_FUNCTION("CEsmSubRecord::Destroy()");
 	DestroyArrayPointer(m_pData);
 }
@@ -60,7 +60,7 @@ void CEsmSubRecord::Destroy (void) {
  * Class CEsmSubRecord Method - void Copy (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSubRecord::Copy (CEsmSubRecord* pSubRecord) {
+void CEsmSubRecord::Copy(CEsmSubRecord *pSubRecord) {
 	DEFINE_FUNCTION("CEsmSubRecord::Copy()");
 	Destroy();
 	m_Type.SetType(pSubRecord->m_Type);
@@ -82,7 +82,7 @@ void CEsmSubRecord::Copy (CEsmSubRecord* pSubRecord) {
  * Class CEsmSubRecord Method - void CopyData (pData, Size);
  *
  *=========================================================================*/
-void CEsmSubRecord::CopyData (char* pData, const int Size) {
+void CEsmSubRecord::CopyData(char *pData, const int Size) {
 	DEFINE_FUNCTION("CEsmSubRecord::CopyData()");
 	/* Delete the current data */
 	DestroyArrayPointer(m_pData);
@@ -109,9 +109,9 @@ void CEsmSubRecord::CopyData (char* pData, const int Size) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmSubRecord::Create (void) {
+CEsmSubRecord *CEsmSubRecord::Create(void) {
 	DEFINE_FUNCTION("CEsmSubRecord::Create()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	CreatePointer(pSubRecord, CEsmSubRecord);
 	return (pSubRecord);
 }
@@ -130,7 +130,7 @@ CEsmSubRecord *CEsmSubRecord::Create (void) {
  * sensitive).  Stops searching on the first match.
  *
  *=========================================================================*/
-bool CEsmSubRecord::Find (esmfind_t &FindData) {
+bool CEsmSubRecord::Find(esmfind_t &FindData) {
 	int iResult;
 
 	/* Ignore if data is invalid or too small */
@@ -162,7 +162,7 @@ bool CEsmSubRecord::Find (esmfind_t &FindData) {
  * the sub-record type).  Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmSubRecord::Read (CGenFile& File) {
+bool CEsmSubRecord::Read(CGenFile &File) {
 	bool Result;
 	/* Delete the current record information, if any */
 	Destroy();
@@ -184,7 +184,7 @@ bool CEsmSubRecord::Read (CGenFile& File) {
  * (after the sub-record size).  Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmSubRecord::ReadData (CGenFile& File) {
+bool CEsmSubRecord::ReadData(CGenFile &File) {
 	DEFINE_FUNCTION("CEsmSubRecord::ReadData()");
 	bool Result;
 
@@ -210,7 +210,7 @@ bool CEsmSubRecord::ReadData (CGenFile& File) {
  * Outputs the entire record to the given file. Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmSubRecord::Write (CGenFile& File) {
+bool CEsmSubRecord::Write(CGenFile &File) {
 	bool Result;
 	Result = WriteHeader (File);
 	Result &= WriteData (File);
@@ -231,7 +231,7 @@ bool CEsmSubRecord::Write (CGenFile& File) {
  * on any error.
  *
  *=========================================================================*/
-bool CEsmSubRecord::WriteData (CGenFile& File) {
+bool CEsmSubRecord::WriteData(CGenFile &File) {
 	bool Result;
 
 	/* Don't output anything if we don't have any data */
@@ -257,7 +257,7 @@ bool CEsmSubRecord::WriteData (CGenFile& File) {
  * position in the file.  Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmSubRecord::WriteHeader (CGenFile& File) {
+bool CEsmSubRecord::WriteHeader(CGenFile &File) {
 	bool Result;
 	Result = File.Write(m_Type.pType, MWESM_TYPE_SIZE);
 	Result &= File.WriteLong(GetRecordSize());

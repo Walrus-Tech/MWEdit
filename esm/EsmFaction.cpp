@@ -29,13 +29,34 @@ DEFINE_FILE("EsmFaction.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmFaction::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_RNAM, CEsmSubName32::Create },
-	{ MWESM_SUBREC_ANAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_INTV, CEsmSubLong::Create },
-	{ MWESM_SUBREC_FADT, CEsmSubFADT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_RNAM,
+		CEsmSubName32::Create
+	},
+	{
+		MWESM_SUBREC_ANAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_INTV,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_FADT,
+		CEsmSubFADT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmFaction::s_SubRecCreate[] = {
  * Class CEsmFaction Constructor
  *
  *=========================================================================*/
-CEsmFaction::CEsmFaction () {
+CEsmFaction::CEsmFaction() {
 	//DEFINE_FUNCTION("CEsmFaction::CEsmFaction()");
 	m_pName = NULL;
 	m_pFactionData = NULL;
@@ -64,7 +85,7 @@ CEsmFaction::CEsmFaction () {
  * Class CEsmFaction Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmFaction::Destroy (void) {
+void CEsmFaction::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmFaction::Destroy()");
 	m_pName = NULL;
 	m_pFactionData = NULL;
@@ -85,15 +106,15 @@ void CEsmFaction::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmFaction::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmFaction* pFaction;
+int CEsmFaction::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmFaction *pFaction;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_FACT)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pFaction = (CEsmFaction *) pRecord;
+	pFaction = (CEsmFaction *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -116,9 +137,9 @@ int CEsmFaction::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmFaction::Create (void) {
+CEsmRecord *CEsmFaction::Create(void) {
 	DEFINE_FUNCTION("CEsmFaction::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmFaction);
 	return (pRecord);
 }
@@ -135,8 +156,8 @@ CEsmRecord *CEsmFaction::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmFaction::CreateNew (CEsmFile* pFile) {
-	CEsmSubRecord* pSubRec;
+void CEsmFaction::CreateNew(CEsmFile *pFile) {
+	CEsmSubRecord *pSubRec;
 	int Index;
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
@@ -165,7 +186,7 @@ void CEsmFaction::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmFaction::GetFieldString (const int FieldID) {
+const TCHAR *CEsmFaction::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -190,7 +211,7 @@ const TCHAR *CEsmFaction::GetFieldString (const int FieldID) {
  * defined.
  *
  *=========================================================================*/
-const TCHAR *CEsmFaction::GetRankName (const int Rank) {
+const TCHAR *CEsmFaction::GetRankName(const int Rank) {
 	if (Rank < 0 || Rank >= m_NumRankNames) {
 		return _T("");
 	}
@@ -212,14 +233,14 @@ const TCHAR *CEsmFaction::GetRankName (const int Rank) {
  * Class CEsmFaction Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmFaction::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmFaction::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pName = (CEsmSubNameFix *) pSubRecord;
+		m_pName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_FADT)) {
-		m_pFactionData = (CEsmSubFADT *) pSubRecord;
+		m_pFactionData = (CEsmSubFADT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_RNAM)) {
 		if (m_NumRankNames < MWESM_FACTION_NUMRANKS) {
-			m_pRankNames[m_NumRankNames] = (CEsmSubName32 *) pSubRecord;
+			m_pRankNames[m_NumRankNames] = (CEsmSubName32 *)pSubRecord;
 			m_NumRankNames++;
 		}
 	} else {
@@ -240,7 +261,7 @@ void CEsmFaction::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmFaction::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmFaction::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
@@ -263,7 +284,7 @@ bool CEsmFaction::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Sets the given rank name (0 to 9).
  *
  *=========================================================================*/
-void CEsmFaction::SetRankName (const int Rank, const TCHAR* pString) {
+void CEsmFaction::SetRankName(const int Rank, const TCHAR *pString) {
 	int Index;
 
 	/* Ignore any invalid input */

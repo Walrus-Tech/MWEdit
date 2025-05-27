@@ -63,62 +63,62 @@ class CEsmBirthSign : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmBirthSign();
 	//virtual ~CEsmBirthSign() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Birth Sign");
 	}
 
 	/* Get class members */
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (m_pNameData ? m_pNameData->GetName() : _T(""));
 	}
 
-	const TCHAR *GetDescription (void) {
+	const TCHAR *GetDescription(void) {
 		return (m_pDescData ? m_pDescData->GetName() : _T(""));
 	}
 
-	const TCHAR *GetTexture (void) {
+	const TCHAR *GetTexture(void) {
 		return (m_pTextureData ? m_pTextureData->GetName() : _T(""));
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		if (m_pNameData) {
 			m_pNameData->SetName(pString);
 		}
 	}
 
-	void SetDescription (const TCHAR* pString) {
+	void SetDescription(const TCHAR *pString) {
 		if (m_pDescData) {
 			m_pDescData->SetName(pString);
 		}
 	}
 
-	void SetTexture (const TCHAR* pString) {
+	void SetTexture(const TCHAR *pString) {
 		if (m_pTextureData) {
 			m_pTextureData->SetName(pString);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -131,4 +131,3 @@ class CEsmBirthSign : public CEsmRecord {
 /*===========================================================================
  *      End of File EsmBodyPart.H
  *=========================================================================*/
-

@@ -30,7 +30,7 @@
 
 /* Morrowind registries */
 #define MWESM_REG_INSTALLPATH _T("SOFTWARE\\Bethesda Softworks\\Morrowind\\Installed Path")
-#define MWESM_REG_PATH    _T("SOFTWARE\\Bethesda Softworks\\Morrowind")
+#define MWESM_REG_PATH        _T("SOFTWARE\\Bethesda Softworks\\Morrowind")
 
 /*===========================================================================
  *      End of Definitions
@@ -44,14 +44,13 @@
  *=========================================================================*/
 
 /* Access Morrowind related absolute paths */
-const TCHAR *GetMWInstallPath (void);
-const TCHAR *GetMWDataFilePath (void);
-const TCHAR *GetMWTexturesPath (void);
+const TCHAR *GetMWInstallPath(void);
+const TCHAR *GetMWDataFilePath(void);
+const TCHAR *GetMWTexturesPath(void);
 
 /*===========================================================================
  *      End of Function Prototypes
  *=========================================================================*/
-
 
 
 #endif

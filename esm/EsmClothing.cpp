@@ -29,17 +29,50 @@ DEFINE_FILE("EsmClothing.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmClothing::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CTDT, CEsmSubCTDT::Create },
-	{ MWESM_SUBREC_INDX, CEsmSubByte::Create },
-	{ MWESM_SUBREC_BNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubNameFix::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CTDT,
+		CEsmSubCTDT::Create
+	},
+	{
+		MWESM_SUBREC_INDX,
+		CEsmSubByte::Create
+	},
+	{
+		MWESM_SUBREC_BNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -73,7 +106,7 @@ const TCHAR *l_ClothTypes[] = {
  * Class CEsmClothing Constructor
  *
  *=========================================================================*/
-CEsmClothing::CEsmClothing () {
+CEsmClothing::CEsmClothing() {
 	//DEFINE_FUNCTION("CEsmClothing::CEsmClothing()");
 	m_pClothData = NULL;
 }
@@ -90,7 +123,7 @@ CEsmClothing::CEsmClothing () {
  * Description
  *
  *=========================================================================*/
-void CEsmClothing::Destroy (void) {
+void CEsmClothing::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmClothing::Destroy()");
 	m_pClothData = NULL;
 	CEsmItem3::Destroy();
@@ -109,16 +142,16 @@ void CEsmClothing::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmClothing::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmClothing::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmClothing::CompareFields()");
-	CEsmClothing* pCloth;
+	CEsmClothing *pCloth;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_CLOT)) {
 		return CEsmItem3::CompareFields(FieldID, pRecord);
 	}
 
-	pCloth = (CEsmClothing *) pRecord;
+	pCloth = (CEsmClothing *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
@@ -141,9 +174,9 @@ int CEsmClothing::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmClothing::Create (void) {
+CEsmRecord *CEsmClothing::Create(void) {
 	DEFINE_FUNCTION("CEsmClothing::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmClothing);
 	return (pRecord);
 }
@@ -160,7 +193,7 @@ CEsmRecord *CEsmClothing::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmClothing::CreateNew (CEsmFile* pFile) {
+void CEsmClothing::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem3::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -180,7 +213,7 @@ void CEsmClothing::CreateNew (CEsmFile* pFile) {
  * Returns the armor type as a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmClothing::GetClothType (void) {
+const TCHAR *CEsmClothing::GetClothType(void) {
 	if (GetClothData() == NULL) {
 		return _T("Unknown");
 	}
@@ -201,7 +234,7 @@ const TCHAR *CEsmClothing::GetClothType (void) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmClothing::GetFieldString (const int FieldID) {
+const TCHAR *CEsmClothing::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
 			return (GetClothType());
@@ -221,9 +254,9 @@ const TCHAR *CEsmClothing::GetFieldString (const int FieldID) {
  * Class CEsmClothing Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmClothing::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmClothing::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_CTDT)) {
-		m_pClothData = (CEsmSubCTDT *) pSubRecord;
+		m_pClothData = (CEsmSubCTDT *)pSubRecord;
 	} else {
 		CEsmItem3::OnAddSubRecord(pSubRecord);
 	}
@@ -242,7 +275,7 @@ void CEsmClothing::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmClothing::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmClothing::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
 			int Type = GetESMClothType(pString);
@@ -270,7 +303,7 @@ bool CEsmClothing::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Converts an cloth type value into a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *GetESMClothType (const int ClothType) {
+const TCHAR *GetESMClothType(const int ClothType) {
 	/* Check for a valid armor type */
 	if (ClothType < MWESM_CLOTHTYPE_MIN || ClothType > MWESM_CLOTHTYPE_MAX) {
 		return _T("Unknown");
@@ -281,12 +314,12 @@ const TCHAR *GetESMClothType (const int ClothType) {
 }
 
 
-bool GetESMClothType (int &OutIndex, const TCHAR* pString) {
+bool GetESMClothType(int &OutIndex, const TCHAR *pString) {
 	int Index;
 
 	/* Check for a valid armor type */
 	for (Index = MWESM_CLOTHTYPE_MIN; Index <= MWESM_CLOTHTYPE_MAX; Index++) {
-		if ( _stricmp(l_ClothTypes[Index], pString) == 0) {
+		if (_stricmp(l_ClothTypes[Index], pString) == 0) {
 			OutIndex = Index;
 			return (true);
 		}
@@ -296,7 +329,7 @@ bool GetESMClothType (int &OutIndex, const TCHAR* pString) {
 }
 
 
-int GetESMClothType (const TCHAR* pString) {
+int GetESMClothType(const TCHAR *pString) {
 	int Index;
 
 	if (!GetESMClothType (Index, pString)) {
@@ -309,5 +342,3 @@ int GetESMClothType (const TCHAR* pString) {
 /*===========================================================================
  *      End of Function TCHAR* GetESMClothType()
  *=========================================================================*/
-
-

@@ -29,17 +29,50 @@ DEFINE_FILE("EsmArmor.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmArmor::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_AODT, CEsmSubAODT::Create },
-	{ MWESM_SUBREC_INDX, CEsmSubByte::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_BNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_AODT,
+		CEsmSubAODT::Create
+	},
+	{
+		MWESM_SUBREC_INDX,
+		CEsmSubByte::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -74,7 +107,7 @@ const TCHAR *l_ArmorTypes[] = {
  * Class CEsmArmor Constructor
  *
  *=========================================================================*/
-CEsmArmor::CEsmArmor () {
+CEsmArmor::CEsmArmor() {
 	//DEFINE_FUNCTION("CEsmArmor::CEsmArmor()");
 	m_pArmorData = NULL;
 }
@@ -91,7 +124,7 @@ CEsmArmor::CEsmArmor () {
  * Description
  *
  *=========================================================================*/
-void CEsmArmor::Destroy (void) {
+void CEsmArmor::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmArmor::Destroy()");
 	m_pArmorData = NULL;
 	CEsmItem3::Destroy();
@@ -110,16 +143,16 @@ void CEsmArmor::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmArmor::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmArmor::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmArmor::CompareFields()");
-	CEsmArmor* pArmor;
+	CEsmArmor *pArmor;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_ARMO)) {
 		return CEsmItem3::CompareFields(FieldID, pRecord);
 	}
 
-	pArmor = (CEsmArmor *) pRecord;
+	pArmor = (CEsmArmor *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_HEALTH:
@@ -150,9 +183,9 @@ int CEsmArmor::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmArmor::Create (void) {
+CEsmRecord *CEsmArmor::Create(void) {
 	DEFINE_FUNCTION("CEsmArmor::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmArmor);
 	return (pRecord);
 }
@@ -169,7 +202,7 @@ CEsmRecord *CEsmArmor::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmArmor::CreateNew (CEsmFile* pFile) {
+void CEsmArmor::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem3::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -189,7 +222,7 @@ void CEsmArmor::CreateNew (CEsmFile* pFile) {
  * Returns the armor type as a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmArmor::GetArmorType (void) {
+const TCHAR *CEsmArmor::GetArmorType(void) {
 	if (GetArmorData() == NULL) {
 		return _T("Unknown");
 	}
@@ -210,7 +243,7 @@ const TCHAR *CEsmArmor::GetArmorType (void) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmArmor::GetFieldString (const int FieldID) {
+const TCHAR *CEsmArmor::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmArmor::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
@@ -224,12 +257,12 @@ const TCHAR *CEsmArmor::GetFieldString (const int FieldID) {
 
 		case ESM_FIELD_HEALTH:
 			ASSERT(GetArmorData() != NULL);
-			snprintf (s_Buffer, 31, _T("%ld"), GetArmorData()->Health);
+			snprintf(s_Buffer, 31, _T("%ld"), GetArmorData()->Health);
 			return (s_Buffer);
 
 		case ESM_FIELD_RATING:
 			ASSERT(GetArmorData() != NULL);
-			snprintf (s_Buffer, 31, _T("%ld"), GetArmorData()->Rating);
+			snprintf(s_Buffer, 31, _T("%ld"), GetArmorData()->Rating);
 			return (s_Buffer);
 
 		default:
@@ -247,9 +280,9 @@ const TCHAR *CEsmArmor::GetFieldString (const int FieldID) {
  * Class CEsmArmor Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmArmor::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmArmor::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_AODT)) {
-		m_pArmorData = (CEsmSubAODT *) pSubRecord;
+		m_pArmorData = (CEsmSubAODT *)pSubRecord;
 	} else {
 		CEsmItem3::OnAddSubRecord(pSubRecord);
 	}
@@ -268,7 +301,7 @@ void CEsmArmor::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmArmor::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmArmor::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE: {
 			int Type = GetESMArmorType(pString);
@@ -305,7 +338,7 @@ bool CEsmArmor::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Converts an armor type value into a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *GetESMArmorType (const int ArmorType) {
+const TCHAR *GetESMArmorType(const int ArmorType) {
 	/* Check for a valid armor type */
 	if (ArmorType < MWESM_ARMORTYPE_MIN || ArmorType > MWESM_ARMORTYPE_MAX) {
 		return _T("Unknown");
@@ -316,12 +349,12 @@ const TCHAR *GetESMArmorType (const int ArmorType) {
 }
 
 
-bool GetESMArmorType (int &OutIndex, const TCHAR* pString) {
+bool GetESMArmorType(int &OutIndex, const TCHAR *pString) {
 	int Index;
 
 	/* Check for a valid armor type */
 	for (Index = MWESM_ARMORTYPE_MIN; Index <= MWESM_ARMORTYPE_MAX; Index++) {
-		if ( _stricmp(l_ArmorTypes[Index], pString) == 0) {
+		if (_stricmp(l_ArmorTypes[Index], pString) == 0) {
 			OutIndex = Index;
 			return (true);
 		}
@@ -331,7 +364,7 @@ bool GetESMArmorType (int &OutIndex, const TCHAR* pString) {
 }
 
 
-int GetESMArmorType (const TCHAR* pString) {
+int GetESMArmorType(const TCHAR *pString) {
 	int Index;
 
 	if (!GetESMArmorType(Index, pString)) {
@@ -344,5 +377,3 @@ int GetESMArmorType (const TCHAR* pString) {
 /*===========================================================================
  *      End of Function TCHAR* GetESMArmorType()
  *=========================================================================*/
-
-

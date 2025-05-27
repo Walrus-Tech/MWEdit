@@ -89,14 +89,14 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubMEDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(magiceffectdata_t));
 		m_RecordSize = sizeof(magiceffectdata_t);
@@ -111,60 +111,60 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	magiceffectdata_t *GetEffectData (void) {
-		return ((magiceffectdata_t *) m_pData);
+	magiceffectdata_t *GetEffectData(void) {
+		return ((magiceffectdata_t *)m_pData);
 	}
 
-	long GetSpellSchool (void) {
+	long GetSpellSchool(void) {
 		return (GetEffectData()->SpellSchool);
 	}
 
-	float GetBaseCost (void) {
+	float GetBaseCost(void) {
 		return (GetEffectData()->BaseCost);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (GetEffectData()->Flags);
 	}
 
-	long GetRed (void) {
+	long GetRed(void) {
 		return (GetEffectData()->Red);
 	}
 
-	long GetGreen (void) {
+	long GetGreen(void) {
 		return (GetEffectData()->Green);
 	}
 
-	long GetBlue (void) {
+	long GetBlue(void) {
 		return (GetEffectData()->Blue);
 	}
 
-	float GetSpeedX (void) {
+	float GetSpeedX(void) {
 		return (GetEffectData()->SpeedX);
 	}
 
-	float GetSizeX (void) {
+	float GetSizeX(void) {
 		return (GetEffectData()->SizeX);
 	}
 
-	float GetSizeCap (void) {
+	float GetSizeCap(void) {
 		return (GetEffectData()->SizeCap);
 	}
 
-	bool IsSpellMaking (void) {
+	bool IsSpellMaking(void) {
 		return ((GetFlags() & MWESM_EFFECTFLAG_SPELLMAKING) != 0);
 	}
 
-	bool IsEnchanting (void) {
+	bool IsEnchanting(void) {
 		return ((GetFlags() & MWESM_EFFECTFLAG_ENCHANTING) != 0);
 	}
 
-	bool IsNegative (void) {
+	bool IsNegative(void) {
 		return ((GetFlags() & MWESM_EFFECTFLAG_NEGATIVE) != 0);
 	}
 
 	/* Set or clear flags */
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetEffectData()->Flags |= Flag;
 		} else {
@@ -173,53 +173,53 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	}
 
 	/* Set class members */
-	void SetSpellSchool (const long Value) {
+	void SetSpellSchool(const long Value) {
 		GetEffectData()->SpellSchool = Value;
 	}
 
-	void SetBaseCost (const float Value) {
+	void SetBaseCost(const float Value) {
 		GetEffectData()->BaseCost = Value;
 	}
 
-	void SetSpeedX (const float Value) {
+	void SetSpeedX(const float Value) {
 		GetEffectData()->SpeedX = Value;
 	}
 
-	void SetSizeX (const float Value) {
+	void SetSizeX(const float Value) {
 		GetEffectData()->SizeX = Value;
 	}
 
-	void SetSizeCap (const float Value) {
+	void SetSizeCap(const float Value) {
 		GetEffectData()->SizeCap = Value;
 	}
 
-	void SetRed (const byte Value) {
-		GetEffectData()->Red = (long) (ulong) Value;
+	void SetRed(const byte Value) {
+		GetEffectData()->Red = (long)(ulong)Value;
 	}
 
-	void SetGreen (const byte Value) {
-		GetEffectData()->Green = (long) (ulong) Value;
+	void SetGreen(const byte Value) {
+		GetEffectData()->Green = (long)(ulong)Value;
 	}
 
-	void SetBlue (const byte Value) {
-		GetEffectData()->Blue = (long) (ulong) Value;
+	void SetBlue(const byte Value) {
+		GetEffectData()->Blue = (long)(ulong)Value;
 	}
 
-	void SetColor (const byte R, const byte G, const byte B) {
+	void SetColor(const byte R, const byte G, const byte B) {
 		SetRed(R);
 		SetGreen(G);
 		SetBlue(B);
 	}
 
-	void SetSpellMaking (const bool Flag) {
+	void SetSpellMaking(const bool Flag) {
 		SetFlag(MWESM_EFFECTFLAG_SPELLMAKING, Flag);
 	}
 
-	void SetEnchanting (const bool Flag) {
+	void SetEnchanting(const bool Flag) {
 		SetFlag(MWESM_EFFECTFLAG_ENCHANTING, Flag);
 	}
 
-	void SetNegative (const bool Flag) {
+	void SetNegative(const bool Flag) {
 		SetFlag(MWESM_EFFECTFLAG_NEGATIVE, Flag);
 	}
 
@@ -234,4 +234,3 @@ class CEsmSubMEDT : public CEsmSubRecord {
 /*===========================================================================
  *      End of File EsmsubINDX.H
  *=========================================================================*/
-

@@ -32,21 +32,21 @@
 #define MWESM_CLASSFLAG_PLAYABLE  1
 
 /* Class Auto-calc Flags */
-#define MWESM_CLASSAUTO_WEAPONS   0x00001
-#define MWESM_CLASSAUTO_ARMOR     0x00002
-#define MWESM_CLASSAUTO_CLOTHING  0x00004
-#define MWESM_CLASSAUTO_BOOKS     0x00008
+#define MWESM_CLASSAUTO_WEAPONS       0x00001
+#define MWESM_CLASSAUTO_ARMOR         0x00002
+#define MWESM_CLASSAUTO_CLOTHING      0x00004
+#define MWESM_CLASSAUTO_BOOKS         0x00008
 #define MWESM_CLASSAUTO_INGREDIANTS   0x00010
-#define MWESM_CLASSAUTO_PICKS     0x00020
-#define MWESM_CLASSAUTO_PROBES    0x00040
-#define MWESM_CLASSAUTO_LIGHTS    0x00080
-#define MWESM_CLASSAUTO_APPARATUS 0x00100
-#define MWESM_CLASSAUTO_REPAIR    0x00200
-#define MWESM_CLASSAUTO_MISC      0x00400
-#define MWESM_CLASSAUTO_SPELLS    0x00800
+#define MWESM_CLASSAUTO_PICKS         0x00020
+#define MWESM_CLASSAUTO_PROBES        0x00040
+#define MWESM_CLASSAUTO_LIGHTS        0x00080
+#define MWESM_CLASSAUTO_APPARATUS     0x00100
+#define MWESM_CLASSAUTO_REPAIR        0x00200
+#define MWESM_CLASSAUTO_MISC          0x00400
+#define MWESM_CLASSAUTO_SPELLS        0x00800
 #define MWESM_CLASSAUTO_MAGICITEMS    0x01000
-#define MWESM_CLASSAUTO_POTIONS   0x02000
-#define MWESM_CLASSAUTO_TRAINING  0x04000
+#define MWESM_CLASSAUTO_POTIONS       0x02000
+#define MWESM_CLASSAUTO_TRAINING      0x04000
 #define MWESM_CLASSAUTO_SPELLMAKING   0x08000
 #define MWESM_CLASSAUTO_ENCHANTING    0x10000
 #define MWESM_CLASSAUTO_REPAIRITEM    0x20000
@@ -113,14 +113,14 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCLDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(classdata_t));
 		m_RecordSize = sizeof(classdata_t);
@@ -140,40 +140,40 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	classdata_t *GetClassData (void) {
-		return ((classdata_t *) m_pData);
+	classdata_t *GetClassData(void) {
+		return ((classdata_t *)m_pData);
 	}
 
-	long GetAttribute1 (void) {
+	long GetAttribute1(void) {
 		return (GetClassData()->AttributeID1);
 	}
 
-	long GetAttribute2 (void) {
+	long GetAttribute2(void) {
 		return (GetClassData()->AttributeID2);
 	}
 
-	long GetSpecialization (void) {
+	long GetSpecialization(void) {
 		return (GetClassData()->Specialization);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (GetClassData()->Flags);
 	}
 
-	long GetAutoCalcFlags (void) {
+	long GetAutoCalcFlags(void) {
 		return (GetClassData()->AutoCalcFlags);
 	}
 
-	bool IsPlayable (void) {
+	bool IsPlayable(void) {
 		return ((GetFlags() & MWESM_CLASSFLAG_PLAYABLE) != 0);
 	}
 
-	bool IsAutoCalcFlag (const long Flag) {
+	bool IsAutoCalcFlag(const long Flag) {
 		return ((GetAutoCalcFlags() & Flag) != 0);
 	}
 
 	/* Get major skills */
-	long GetMajorSkill (const int Index) {
+	long GetMajorSkill(const int Index) {
 		switch (Index) {
 			case 0:
 				return (GetClassData()->MajorID1);
@@ -193,7 +193,7 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	}
 
 	/* Get minor skills */
-	long GetMinorSkill (const int Index) {
+	long GetMinorSkill(const int Index) {
 		switch (Index) {
 			case 0:
 				return (GetClassData()->MinorID1);
@@ -213,7 +213,7 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	}
 
 	/* Set or clear flags */
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetClassData()->Flags |= Flag;
 		} else {
@@ -221,7 +221,7 @@ class CEsmSubCLDT : public CEsmSubRecord {
 		}
 	}
 
-	void SetAutoCalcFlag (const long Flag, const bool Set) {
+	void SetAutoCalcFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetClassData()->AutoCalcFlags |= Flag;
 		} else {
@@ -230,24 +230,24 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	}
 
 	/* Set class members */
-	void SetAttribute1 (const long Value) {
+	void SetAttribute1(const long Value) {
 		GetClassData()->AttributeID1 = Value;
 	}
 
-	void SetAttribute2 (const long Value) {
+	void SetAttribute2(const long Value) {
 		GetClassData()->AttributeID2 = Value;
 	}
 
-	void SetSpecialization (const long Value) {
+	void SetSpecialization(const long Value) {
 		GetClassData()->Specialization = Value;
 	}
 
-	void SetPlayable (const bool Flag) {
+	void SetPlayable(const bool Flag) {
 		SetFlag(MWESM_CLASSFLAG_PLAYABLE, Flag);
 	}
 
 	/* Set major skills */
-	void SetMajorSkill (const int Index, const long Value) {
+	void SetMajorSkill(const int Index, const long Value) {
 		switch (Index) {
 			case 0:
 				GetClassData()->MajorID1 = Value;
@@ -268,7 +268,7 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	}
 
 	/* Set minor skills */
-	void SetMinorSkill (const int Index, const long Value) {
+	void SetMinorSkill(const int Index, const long Value) {
 		switch (Index) {
 			case 0:
 				GetClassData()->MinorID1 = Value;
@@ -287,10 +287,6 @@ class CEsmSubCLDT : public CEsmSubRecord {
 				break;
 		}
 	}
-
-
-
-
 };
 
 /*===========================================================================

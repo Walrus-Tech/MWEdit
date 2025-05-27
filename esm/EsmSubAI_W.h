@@ -80,14 +80,14 @@ class CEsmSubAI_W : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAI_W);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ai_wdata_t));
 		m_RecordSize = sizeof(ai_wdata_t);
@@ -96,52 +96,52 @@ class CEsmSubAI_W : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	ai_wdata_t *GetAIData (void) {
-		return ((ai_wdata_t *) m_pData);
+	ai_wdata_t *GetAIData(void) {
+		return ((ai_wdata_t *)m_pData);
 	}
 
-	short GetDistance (void) {
+	short GetDistance(void) {
 		return (GetAIData()->Distance);
 	}
 
-	short GetDuration (void) {
+	short GetDuration(void) {
 		return (GetAIData()->Duration);
 	}
 
-	byte GetTimeOfDay (void) {
+	byte GetTimeOfDay(void) {
 		return (GetAIData()->TimeOfDay);
 	}
 
-	byte GetUnknown (void) {
+	byte GetUnknown(void) {
 		return (GetAIData()->Unknown);
 	}
 
-	byte GetIdle (const int Index) {
+	byte GetIdle(const int Index) {
 		return (IsValidIndex(Index) ? GetAIData()->Idle[Index] : 0);
 	}
 
-	bool IsValidIndex (const int Index) {
+	bool IsValidIndex(const int Index) {
 		return (Index >= 0 && Index < MWESM_AIW_NUMIDLES);
 	}
 
 	/* Set class members */
-	void SetDistance (const short Value) {
+	void SetDistance(const short Value) {
 		GetAIData()->Distance = Value;
 	}
 
-	void SetDuration (const short Value) {
+	void SetDuration(const short Value) {
 		GetAIData()->Duration = Value;
 	}
 
-	void SetTimeOfDay (const byte Value) {
+	void SetTimeOfDay(const byte Value) {
 		GetAIData()->TimeOfDay = Value;
 	}
 
-	void SetUnknown (const byte Value) {
+	void SetUnknown(const byte Value) {
 		GetAIData()->Unknown = Value;
 	}
 
-	void SetIdle (const int Index, const byte Value) {
+	void SetIdle(const int Index, const byte Value) {
 		if (IsValidIndex(Index)) {
 			GetAIData()->Idle[Index] = Value;
 		}

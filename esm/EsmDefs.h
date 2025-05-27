@@ -613,31 +613,31 @@ typedef struct esmeffectdata {
 	long Flags;
 	const TCHAR *ID;
 
-	bool IsID (const TCHAR* pString) {
+	bool IsID(const TCHAR *pString) {
 		return _stricmp(ID, pString) == 0;
 	}
 
-	bool HasDuration (void) const {
+	bool HasDuration(void) const {
 		return (Flags & MWESM_EFFECTFLAG_HASDUR) != 0;
 	}
 
-	bool HasMagnitude (void) const {
+	bool HasMagnitude(void) const {
 		return (Flags & MWESM_EFFECTFLAG_HASMAG) != 0;
 	}
 
-	bool IsTribunal (void) const {
+	bool IsTribunal(void) const {
 		return (Flags & MWESM_EFFECTFLAG_TRIB) != 0;
 	}
 
-	bool IsAlchemy (void) const {
+	bool IsAlchemy(void) const {
 		return (Flags & MWESM_EFFECTFLAG_ALCHEMY) != 0;
 	}
 
-	bool IsSelfOnly (void) const {
+	bool IsSelfOnly(void) const {
 		return (Flags & MWESM_EFFECTFLAG_SELFONLY) != 0;
 	}
 
-	bool IsNotSelf (void) const {
+	bool IsNotSelf(void) const {
 		return (Flags & MWESM_EFFECTFLAG_NOSELF) != 0;
 	}
 } esmeffectdata_t;
@@ -657,7 +657,7 @@ typedef struct esmanimdata {
 	short ID;
 	short OldID;
 
-	bool IsName (const TCHAR* pString) {
+	bool IsName(const TCHAR *pString) {
 		return _stricmp(pName, pString) == 0;
 	}
 } esmanimdata_t;
@@ -674,42 +674,42 @@ typedef struct esmanimdata {
  *=========================================================================*/
 
 /* Convert skill/effect/attribute/etc... IDs to a string */
-const TCHAR *GetESMSkill (const int SkillID);
-int GetESMSkill (const TCHAR* pString);
-bool GetESMSkill (int &OutSkill, const TCHAR* pString);
-const TCHAR *GetESMEffect (const int EffectID);
-const TCHAR *GetESMAttribute (const int AttributeID);
-bool GetESMAttribute (int &OutAttr, const TCHAR* pString);
-int GetESMAttribute (const TCHAR* pString);
-const TCHAR *GetESMSpellSchool (const int SpellSchool);
-const TCHAR *GetESMClassSpec (const int Spec);
-const TCHAR *GetESMSkillAction (const int SkillID, const int Action);
-const TCHAR *GetMWBipedPartType (const int Type);
+const TCHAR *GetESMSkill(const int SkillID);
+int GetESMSkill(const TCHAR *pString);
+bool GetESMSkill(int &OutSkill, const TCHAR *pString);
+const TCHAR *GetESMEffect(const int EffectID);
+const TCHAR *GetESMAttribute(const int AttributeID);
+bool GetESMAttribute(int &OutAttr, const TCHAR *pString);
+int GetESMAttribute(const TCHAR *pString);
+const TCHAR *GetESMSpellSchool(const int SpellSchool);
+const TCHAR *GetESMClassSpec(const int Spec);
+const TCHAR *GetESMSkillAction(const int SkillID, const int Action);
+const TCHAR *GetMWBipedPartType(const int Type);
 
 /* Get a magic effect data structure from the effect ID */
-const esmeffectdata_t *GetESMEffectData (const int EffectID);
-int GetESMEffectID (const TCHAR* pString);
-bool GetESMEffectID (int &EffectID, const TCHAR* pString);
-int FindESMEffectID (const TCHAR* pEffectID);
+const esmeffectdata_t *GetESMEffectData(const int EffectID);
+int GetESMEffectID(const TCHAR *pString);
+bool GetESMEffectID(int &EffectID, const TCHAR *pString);
+int FindESMEffectID(const TCHAR *pEffectID);
 
 /* Convert a field string to an ID */
-int GetEsmFieldID (const TCHAR* pString);
-const TCHAR *GetEsmFieldName (const int FieldID);
+int GetEsmFieldID(const TCHAR *pString);
+const TCHAR *GetEsmFieldName(const int FieldID);
 
 /* Get animation group data */
-short GetESMAnimGroupID (const TCHAR* pGroup);
-short GetESMAnimGroupOldID (const TCHAR* pGroup);
+short GetESMAnimGroupID(const TCHAR *pGroup);
+short GetESMAnimGroupOldID(const TCHAR *pGroup);
 
 /* Check the record basic type */
-bool IsESMRecordCarryable (const TCHAR* pType);
-bool IsESMRecordModel (const TCHAR* pType);
+bool IsESMRecordCarryable(const TCHAR *pType);
+bool IsESMRecordModel(const TCHAR *pType);
 
 /* Check type of ESM effects */
-bool IsESMAttributeEffect (const int EffectID);
-bool IsESMSkillEffect (const int EffectID);
+bool IsESMAttributeEffect(const int EffectID);
+bool IsESMSkillEffect(const int EffectID);
 
 /* Remove the quotes from an ID string */
-TCHAR *RemoveIDQuotes (TCHAR* pBuffer, const TCHAR* pID);
+TCHAR *RemoveIDQuotes(TCHAR *pBuffer, const TCHAR *pID);
 
 
 
@@ -723,5 +723,3 @@ TCHAR *RemoveIDQuotes (TCHAR* pBuffer, const TCHAR* pID);
 /*===========================================================================
  *      End of File Esmdefs.H
  *=========================================================================*/
-
-

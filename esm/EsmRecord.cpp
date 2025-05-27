@@ -32,9 +32,18 @@ DEFINE_FILE("EsmRecord.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmRecord::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubName::Create },
-	{ MWESM_SUBREC_DELE, CEsmSubLong::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_DELE,
+		CEsmSubLong::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -46,7 +55,7 @@ const esmsubreccreate_t CEsmRecord::s_SubRecCreate[] = {
  * Class CEsmRecord Constructor
  *
  *=========================================================================*/
-CEsmRecord::CEsmRecord () : m_SubRecords(0) {
+CEsmRecord::CEsmRecord() : m_SubRecords(0) {
 	//DEFINE_FUNCTION("CEsmRecord::CEsmRecord()");
 	m_Header1 = 0;
 	m_Flags = 0;
@@ -69,9 +78,9 @@ CEsmRecord::CEsmRecord () : m_SubRecords(0) {
  * Class CEsmRecord Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmRecord::Destroy (void) {
+void CEsmRecord::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmRecord::Destroy()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	int Index;
 
 	/* Delete all allocated sub-records */
@@ -101,9 +110,9 @@ void CEsmRecord::Destroy (void) {
  * Allocates a new subrecord of the given type.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmRecord::AllocNewSubRecord (const TCHAR* pType, const long RecordSize) {
+CEsmSubRecord *CEsmRecord::AllocNewSubRecord(const TCHAR *pType, const long RecordSize) {
 	const esmsubreccreate_t *SubRecCreate = GetSubRecCreate();
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	int Index;
 
 	for (Index = 0; SubRecCreate[Index].Type != NULL; Index++) {
@@ -145,9 +154,9 @@ CEsmSubRecord *CEsmRecord::AllocNewSubRecord (const TCHAR* pType, const long Rec
  * array and sets the record type;
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmRecord::AllocateSubRecord (const TCHAR* pType, const long RecordSize) {
+CEsmSubRecord *CEsmRecord::AllocateSubRecord(const TCHAR *pType, const long RecordSize) {
 	DEFINE_FUNCTION("CEsmRecord::AllocateSubRecord()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	pSubRecord = AllocNewSubRecord(pType, RecordSize);
 	/* Add the subrecord to the subrecord array */
 	m_SubRecords.Add(pSubRecord);
@@ -169,12 +178,13 @@ CEsmSubRecord *CEsmRecord::AllocateSubRecord (const TCHAR* pType, const long Rec
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmRecord::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmRecord::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmRecord::CompareFields()");
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
-			return StringCompare(GetFieldString(ESM_FIELD_NAME), pRecord->GetFieldString(ESM_FIELD_NAME),
+			return StringCompare(GetFieldString(ESM_FIELD_NAME),
+			                     pRecord->GetFieldString(ESM_FIELD_NAME),
 			                     FALSE);
 
 		case ESM_FIELD_ID:
@@ -193,8 +203,8 @@ int CEsmRecord::CompareFields (const int FieldID, CEsmRecord* pRecord) {
 			return (int)IsBlocked() - (int)pRecord->IsBlocked();
 
 		case ESM_FIELD_CHANGED:         /* Note this is reversed on purpose */
-			return ((int)pRecord->GetFile()->IsActive() + pRecord->IsDeleted() * 10) - ((
-			            int)GetFile()->IsActive() + IsDeleted() * 10);
+			return ((int)pRecord->GetFile()->IsActive() + pRecord->IsDeleted() * 10)
+			        - ((int)GetFile()->IsActive() + IsDeleted() * 10);
 
 		case ESM_FIELD_USERDATA:
 			return GetUserData() - pRecord->GetUserData();
@@ -216,9 +226,9 @@ int CEsmRecord::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Copies the values from the given record.
  *
  *=========================================================================*/
-void CEsmRecord::Copy (CEsmRecord* pRecord) {
-	CEsmSubRecord* pSubRecord;
-	CEsmSubRecord* pSourceSubRec;
+void CEsmRecord::Copy(CEsmRecord *pRecord) {
+	CEsmSubRecord *pSubRecord;
+	CEsmSubRecord *pSourceSubRec;
 	int Index;
 	/* Delete the current contents, if any */
 	Destroy();
@@ -251,9 +261,9 @@ void CEsmRecord::Copy (CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRecord::Create (void) {
+CEsmRecord *CEsmRecord::Create(void) {
 	DEFINE_FUNCTION("CEsmRecord::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRecord);
 	return (pRecord);
 }
@@ -268,8 +278,8 @@ CEsmRecord *CEsmRecord::Create (void) {
  * Class CEsmRecord Method - CEsmSubRecord* CreateCopy (pSubRecord);
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmRecord::CreateCopy (CEsmSubRecord* pSubRecord) {
-	CEsmSubRecord* pNewSubRecord = AllocNewSubRecord(pSubRecord->GetType());
+CEsmSubRecord *CEsmRecord::CreateCopy(CEsmSubRecord *pSubRecord) {
+	CEsmSubRecord *pNewSubRecord = AllocNewSubRecord(pSubRecord->GetType());
 	pNewSubRecord->Copy(pSubRecord);
 	return (pNewSubRecord);
 }
@@ -286,7 +296,7 @@ CEsmSubRecord *CEsmRecord::CreateCopy (CEsmSubRecord* pSubRecord) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmRecord::CreateNew (CEsmFile* pFile) {
+void CEsmRecord::CreateNew(CEsmFile *pFile) {
 	/* Delete the current contents of the record */
 	Destroy();
 	/* Set the common record options */
@@ -297,8 +307,12 @@ void CEsmRecord::CreateNew (CEsmFile* pFile) {
 	m_RefCount = 0;
 
 	/* Create the record ID if required */
-	if (!IsType(MWESM_REC_TES3) && !IsType(MWESM_REC_MGEF) && !IsType(MWESM_REC_INFO) &&
-	    !IsType(MWESM_REC_SKIL) && !IsType(MWESM_REC_SCPT) && !IsType(MWESM_REC_SSCR)) {
+	if (!IsType(MWESM_REC_TES3)
+	    && !IsType(MWESM_REC_MGEF)
+	    && !IsType(MWESM_REC_INFO)
+	    && !IsType(MWESM_REC_SKIL)
+	    && !IsType(MWESM_REC_SCPT)
+	    && !IsType(MWESM_REC_SSCR)) {
 		AllocateSubRecord(MWESM_SUBREC_NAME);
 	}
 }
@@ -315,7 +329,7 @@ void CEsmRecord::CreateNew (CEsmFile* pFile) {
  * Deletes or undeletes the record.
  *
  *=========================================================================*/
-void CEsmRecord::DeleteToggle (void) {
+void CEsmRecord::DeleteToggle(void) {
 	DEFINE_FUNCTION("CEsmRecord::DeleteToggle()");
 
 	if (IsDeleted()) {
@@ -341,9 +355,9 @@ void CEsmRecord::DeleteToggle (void) {
  * number of sub-records deleted.
  *
  *=========================================================================*/
-int CEsmRecord::DeleteSubRecords (const TCHAR* pType) {
+int CEsmRecord::DeleteSubRecords(const TCHAR *pType) {
 	DEFINE_FUNCTION("CEsmRecord::DeleteSubRecords()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	int Count = 0;
 	int Index;
 
@@ -374,8 +388,8 @@ int CEsmRecord::DeleteSubRecords (const TCHAR* pType) {
  * Returns NULL if it is not found.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmRecord::FindNext (const TCHAR* pType, int &ArrayIndex) {
-	CEsmSubRecord* pSubRecord;
+CEsmSubRecord *CEsmRecord::FindNext(const TCHAR *pType, int &ArrayIndex) {
+	CEsmSubRecord *pSubRecord;
 
 	for (ArrayIndex++; ArrayIndex < m_SubRecords.GetSize(); ArrayIndex++) {
 		pSubRecord = m_SubRecords.GetAt(ArrayIndex);
@@ -402,8 +416,8 @@ CEsmSubRecord *CEsmRecord::FindNext (const TCHAR* pType, int &ArrayIndex) {
  * at the first match.
  *
  *=========================================================================*/
-bool CEsmRecord::Find (esmfind_t &FindData) {
-	CEsmSubRecord* pSubRec;
+bool CEsmRecord::Find(esmfind_t &FindData) {
+	CEsmSubRecord *pSubRec;
 	bool Result;
 	int Index;
 
@@ -434,7 +448,7 @@ bool CEsmRecord::Find (esmfind_t &FindData) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmRecord::GetFieldString (const int FieldID) {
+const TCHAR *CEsmRecord::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -445,11 +459,11 @@ const TCHAR *CEsmRecord::GetFieldString (const int FieldID) {
 			return (GetItemType());
 
 		case ESM_FIELD_COUNT:
-			snprintf (s_Buffer, 31, _T("%ld"), m_RefCount);
+			snprintf(s_Buffer, 31, _T("%ld"), m_RefCount);
 			return (s_Buffer);
 
 		case ESM_FIELD_USERDATA:
-			snprintf (s_Buffer, 31, _T("%ld"), m_UserData);
+			snprintf(s_Buffer, 31, _T("%ld"), m_UserData);
 			return (s_Buffer);
 
 		case ESM_FIELD_PERSIST:
@@ -460,9 +474,13 @@ const TCHAR *CEsmRecord::GetFieldString (const int FieldID) {
 
 		case ESM_FIELD_CHANGED:
 			if (m_pFile == NULL) {
-				snprintf (s_Buffer, 31, _T("%s"), IsDeleted() ? "D" : "");
+				snprintf(s_Buffer, 31, _T("%s"), IsDeleted() ? "D" : "");
 			} else {
-				snprintf (s_Buffer, 31, _T("%s%s"), m_pFile->IsActive() ? "*" : "", IsDeleted() ? "D" : "");
+				snprintf(s_Buffer,
+				         31,
+				         _T("%s%s"),
+				         m_pFile->IsActive() ? "*" : "",
+				         IsDeleted() ? "D" : "");
 			}
 
 			return s_Buffer;
@@ -485,15 +503,15 @@ const TCHAR *CEsmRecord::GetFieldString (const int FieldID) {
  * merely checks the type and IDs.
  *
  *=========================================================================*/
-bool CEsmRecord::IsSame (CEsmRecord* pRecord) {
+bool CEsmRecord::IsSame(CEsmRecord *pRecord) {
 	/* Check types first */
 	if (!IsType(pRecord->GetType())) {
 		return (false);
 	}
 
 	/* Objects are the same type, not check their IDs */
-	const TCHAR* pName1 = GetID();
-	const TCHAR* pName2 = pRecord->GetID();
+	const TCHAR *pName1 = GetID();
+	const TCHAR *pName2 = pRecord->GetID();
 
 	if (pName1 == NULL || pName2 == NULL) {
 		return (false);
@@ -518,8 +536,8 @@ bool CEsmRecord::IsSame (CEsmRecord* pRecord) {
  * Returns true if the input record Id is used in the current record.
  *
  *=========================================================================*/
-bool CEsmRecord::IsUsed (const TCHAR* pID) {
-	CEsmSubRecord* pSubRecord;
+bool CEsmRecord::IsUsed(const TCHAR *pID) {
+	CEsmSubRecord *pSubRecord;
 	int Index;
 	int Result;
 
@@ -552,11 +570,11 @@ bool CEsmRecord::IsUsed (const TCHAR* pID) {
  * Class CEsmRecord Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmRecord::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmRecord::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_DELE)) {
-		m_pDelete = (CEsmSubLong *) pSubRecord;
+		m_pDelete = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_NAME)) {
-		m_pID = (CEsmSubName *) pSubRecord;
+		m_pID = (CEsmSubName *)pSubRecord;
 	}
 }
 
@@ -573,7 +591,7 @@ void CEsmRecord::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * record type string). Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmRecord::Read (CGenFile& File) {
+bool CEsmRecord::Read(CGenFile &File) {
 	bool Result;
 	/* Delete the current record information, if any */
 	Destroy();
@@ -600,9 +618,9 @@ bool CEsmRecord::Read (CGenFile& File) {
  * position in the file.  Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmRecord::ReadData (CGenFile& File) {
+bool CEsmRecord::ReadData(CGenFile &File) {
 	DEFINE_FUNCTION("CEsmRecord::ReadData()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	bool Result;
 	TCHAR Type[MWESM_TYPE_SIZE];
 	long EndOffset;
@@ -650,7 +668,7 @@ bool CEsmRecord::ReadData (CGenFile& File) {
  * any error.
  *
  *=========================================================================*/
-bool CEsmRecord::ReadHeader (CGenFile& File) {
+bool CEsmRecord::ReadHeader(CGenFile &File) {
 	bool Result;
 	Result = File.ReadLong(m_RecordSize);
 	Result &= File.ReadLong(m_Header1);
@@ -668,7 +686,7 @@ bool CEsmRecord::ReadHeader (CGenFile& File) {
  * Class CEsmRecord Method - bool RemoveSubRecord (pSubRecord);
  *
  *=========================================================================*/
-bool CEsmRecord::RemoveSubRecord (CEsmSubRecord* pSubRecord) {
+bool CEsmRecord::RemoveSubRecord(CEsmSubRecord *pSubRecord) {
 	DEFINE_FUNCTION("CEsmRecord::RemoveSubRecord()");
 
 	/* Ensure valid input */
@@ -693,7 +711,7 @@ bool CEsmRecord::RemoveSubRecord (CEsmSubRecord* pSubRecord) {
  * Deletes or undeletes the record.
  *
  *=========================================================================*/
-void CEsmRecord::SetDelete (const bool Flag) {
+void CEsmRecord::SetDelete(const bool Flag) {
 	DEFINE_FUNCTION("CEsmRecord::SetDelete()");
 
 	if (!Flag) {
@@ -719,7 +737,7 @@ void CEsmRecord::SetDelete (const bool Flag) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmRecord::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmRecord::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ID:
 			if (*pString == NULL_CHAR) {
@@ -768,7 +786,7 @@ bool CEsmRecord::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Output the entire record to the given file. Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmRecord::Write (CGenFile& File) {
+bool CEsmRecord::Write(CGenFile &File) {
 	bool Result;
 	long StartOffset;
 	long EndOffset;
@@ -810,11 +828,10 @@ bool CEsmRecord::Write (CGenFile& File) {
  * false on any error. Protected class virtual method.
  *
  *=========================================================================*/
-bool CEsmRecord::WriteHeader (CGenFile& File) {
+bool CEsmRecord::WriteHeader(CGenFile &File) {
 	bool Result;
 	Result = File.Write(m_Type.pType, MWESM_TYPE_SIZE);
-	Result &= File.WriteLong(
-	              m_RecordSize);       /* This will be updated after the sub-records have been written */
+	Result &= File.WriteLong(m_RecordSize); /* This will be updated after the sub-records have been written */
 	Result &= File.WriteLong(m_Header1);
 	Result &= File.WriteLong(m_Flags);
 	return (Result);
@@ -833,7 +850,7 @@ bool CEsmRecord::WriteHeader (CGenFile& File) {
  * the file.  Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmRecord::WriteData (CGenFile& File) {
+bool CEsmRecord::WriteData(CGenFile &File) {
 	bool Result;
 	int Index;
 
@@ -861,9 +878,9 @@ bool CEsmRecord::WriteData (CGenFile& File) {
  * Compares two Records using their IDs.
  *
  *=========================================================================*/
-int _cdecl EsmRecordSort (const void* pElem1, const void* pElem2, const long lUserData) {
-	CEsmRecord* pRecord1 = (CEsmRecord *) pElem1;
-	CEsmRecord* pRecord2 = (CEsmRecord *) pElem2;
+int _cdecl EsmRecordSort(const void *pElem1, const void *pElem2, const long lUserData) {
+	CEsmRecord *pRecord1 = (CEsmRecord *)pElem1;
+	CEsmRecord *pRecord2 = (CEsmRecord *)pElem2;
 	return StringCompare(pRecord1->GetID(), pRecord2->GetID(), false);
 }
 

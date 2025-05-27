@@ -41,8 +41,8 @@ class CEsmSubName : public CEsmSubRecord {
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData (CGenFile& File);
-	virtual bool WriteData (CGenFile& File) {
+	virtual bool ReadData(CGenFile &File);
+	virtual bool WriteData(CGenFile &File) {
 		if (GetRecordSize() <= 0) {
 			return (true);
 		}
@@ -60,22 +60,22 @@ class CEsmSubName : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Copy from another name record */
-	virtual void Copy (CEsmSubRecord* pSubRecord);
+	virtual void Copy(CEsmSubRecord *pSubRecord);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void);
+	static CEsmSubRecord *Create(void);
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData) {
+	virtual bool Find(esmfind_t &FindData) {
 		return (m_Name.FindI(FindData.pText) >= 0);
 	}
 
 	/* Get class methods */
-	const TCHAR *GetName (void) const {
+	const TCHAR *GetName(void) const {
 		return (m_Name);
 	}
 
-	virtual long GetRecordSize (void) const {
+	virtual long GetRecordSize(void) const {
 		if (m_Name.GetLength() == 32) {
 			return (32);
 		}
@@ -84,12 +84,12 @@ class CEsmSubName : public CEsmSubRecord {
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (m_Name.CompareNoCase(pID) == 0);
 	}
 
 	/* Set class methods */
-	void SetName (const TCHAR* pName) {
+	void SetName(const TCHAR *pName) {
 		m_Name = pName;
 		m_RecordSize = m_Name.GetLength();
 	}
@@ -103,10 +103,10 @@ class CEsmSubNameNull : public CEsmSubName {
   public:
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void);
+	static CEsmSubRecord *Create(void);
 
 	/* Get record length */
-	virtual long GetRecordSize (void) const {
+	virtual long GetRecordSize(void) const {
 		return (m_Name.GetLength() + 1);
 	}
 

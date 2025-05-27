@@ -28,7 +28,7 @@
  * Begin Function Prototypes
  *
  *=========================================================================*/
-const TCHAR *GetESMLightFlicker (const int Flags);
+const TCHAR *GetESMLightFlicker(const int Flags);
 /*===========================================================================
  *      End of Function Prototypes
  *=========================================================================*/
@@ -60,217 +60,217 @@ class CEsmLight : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmLight();
 	//virtual ~CEsmLight() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Light");
 	}
 
 	/* Get class members */
-	lightdata_t *GetLightData (void) {
+	lightdata_t *GetLightData(void) {
 		return (m_pLightData == NULL ? NULL : m_pLightData->GetLightData());
 	}
 
-	const TCHAR *GetSound (void) {
+	const TCHAR *GetSound(void) {
 		return (m_pSound ? m_pSound->GetName() : _T(""));
 	}
 
-	virtual float GetWeight (void) {
+	virtual float GetWeight(void) {
 		return (m_pLightData ? m_pLightData->GetWeight() : 0);
 	}
 
-	virtual long GetValue (void) {
+	virtual long GetValue(void) {
 		return (m_pLightData ? m_pLightData->GetValue() : 0);
 	}
 
-	long GetTime (void) {
+	long GetTime(void) {
 		return (m_pLightData ? m_pLightData->GetTime() : 0);
 	}
 
-	long GetRadius (void) {
+	long GetRadius(void) {
 		return (m_pLightData ? m_pLightData->GetRadius() : 0);
 	}
 
-	long GetColor (void) {
+	long GetColor(void) {
 		return (m_pLightData ? m_pLightData->GetColorRef() : 0);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (m_pLightData ? m_pLightData->GetFlags() : 0);
 	}
 
-	byte GetRed (void) {
+	byte GetRed(void) {
 		return (m_pLightData ? m_pLightData->GetColorRed() : 0);
 	}
 
-	byte GetGreen (void) {
+	byte GetGreen(void) {
 		return (m_pLightData ? m_pLightData->GetColorGreen() : 0);
 	}
 
-	byte GetBlue (void) {
+	byte GetBlue(void) {
 		return (m_pLightData ? m_pLightData->GetColorBlue() : 0);
 	}
 
-	bool IsDynamic (void) {
+	bool IsDynamic(void) {
 		return (m_pLightData ? m_pLightData->IsDynamic() : false);
 	}
 
-	bool IsCanCarry (void) {
+	bool IsCanCarry(void) {
 		return (m_pLightData ? m_pLightData->IsCanCarry() : false);
 	}
 
-	bool IsNegative (void) {
+	bool IsNegative(void) {
 		return (m_pLightData ? m_pLightData->IsNegative() : false);
 	}
 
-	bool IsFlicker (void) {
+	bool IsFlicker(void) {
 		return (m_pLightData ? m_pLightData->IsFlicker() : false);
 	}
 
-	bool IsFire (void) {
+	bool IsFire(void) {
 		return (m_pLightData ? m_pLightData->IsFire() : false);
 	}
 
-	bool IsDefaultOff (void) {
+	bool IsDefaultOff(void) {
 		return (m_pLightData ? m_pLightData->IsDefaultOff() : false);
 	}
 
-	bool IsFlickerSlow (void) {
+	bool IsFlickerSlow(void) {
 		return (m_pLightData ? m_pLightData->IsFlickerSlow() : false);
 	}
 
-	bool IsPulse (void) {
+	bool IsPulse(void) {
 		return (m_pLightData ? m_pLightData->IsPulse() : false);
 	}
 
-	bool IsPulseSlow (void) {
+	bool IsPulseSlow(void) {
 		return (m_pLightData ? m_pLightData->IsPulseSlow() : false);
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetIcon (const TCHAR* pString);
-	void SetName (const TCHAR* pString);
-	void SetSound (const TCHAR* pString);
-	void SetRadius (const long Value) {
+	void SetIcon(const TCHAR *pString);
+	void SetName(const TCHAR *pString);
+	void SetSound(const TCHAR *pString);
+	void SetRadius(const long Value) {
 		if (m_pLightData) {
 			m_pLightData->SetRadius(Value);
 		}
 	}
 
-	void SetTime (const long Value) {
+	void SetTime(const long Value) {
 		if (m_pLightData) {
 			m_pLightData->SetTime(Value);
 		}
 	}
 
-	void SetRed (const byte Value) {
+	void SetRed(const byte Value) {
 		if (m_pLightData) {
 			m_pLightData->SetColorRed(Value);
 		}
 	}
 
-	void SetBlue (const byte Value) {
+	void SetBlue(const byte Value) {
 		if (m_pLightData) {
 			m_pLightData->SetColorBlue(Value);
 		}
 	}
 
-	void SetGreen (const byte Value) {
+	void SetGreen(const byte Value) {
 		if (m_pLightData) {
 			m_pLightData->SetColorGreen(Value);
 		}
 	}
 
-	void SetColor (const byte R, const byte G, const byte B) {
+	void SetColor(const byte R, const byte G, const byte B) {
 		if (m_pLightData) {
 			m_pLightData->SetColor(R, G, B);
 		}
 	}
 
-	void SetDynamic (const bool Flag) {
+	void SetDynamic(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetDynamic(Flag);
 		}
 	}
 
-	void SetCanCarry (const bool Flag) {
+	void SetCanCarry(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetCanCarry(Flag);
 		}
 	}
 
-	void SetNegative (const bool Flag) {
+	void SetNegative(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetNegative(Flag);
 		}
 	}
 
-	void SetFlicker (const bool Flag) {
+	void SetFlicker(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetFlicker(Flag);
 		}
 	}
 
-	void SetFire (const bool Flag) {
+	void SetFire(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetFire(Flag);
 		}
 	}
 
-	void SetDefaultOff (const bool Flag) {
+	void SetDefaultOff(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetDefaultOff(Flag);
 		}
 	}
 
-	void SetFlickerSlow (const bool Flag) {
+	void SetFlickerSlow(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetFlickerSlow(Flag);
 		}
 	}
 
-	void SetPulse (const bool Flag) {
+	void SetPulse(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetPulse(Flag);
 		}
 	}
 
-	void SetPulseSlow (const bool Flag) {
+	void SetPulseSlow(const bool Flag) {
 		if (m_pLightData) {
 			m_pLightData->SetPulseSlow(Flag);
 		}
 	}
 
-	virtual void SetWeight (const float Weight) {
+	virtual void SetWeight(const float Weight) {
 		if (m_pLightData) {
 			m_pLightData->SetWeight(Weight);
 		}
 	}
 
-	virtual void SetValue (const long Value) {
+	virtual void SetValue(const long Value) {
 		if (m_pLightData) {
 			m_pLightData->SetValue(Value);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

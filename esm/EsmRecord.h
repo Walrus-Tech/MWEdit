@@ -77,20 +77,20 @@ class CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmFile *m_pFile;        /* File parent */
-	CEsmRecord *m_pPrevRecord;      /* Previous record in another file */
+	CEsmFile *m_pFile;            /* File parent */
+	CEsmRecord *m_pPrevRecord;    /* Previous record in another file */
 
-	esmrectype_t m_Type;         /* Type of record */
-	long m_Header1;      /* Header data (unknown) */
+	esmrectype_t m_Type;          /* Type of record */
+	long m_Header1;               /* Header data (unknown) */
 	long m_Flags;
-	long m_RecordSize;       /* Record size, used for input/output */
+	long m_RecordSize;            /* Record size, used for input/output */
 	long m_RefCount;
 
-	long m_UserData;     /* Custom user data */
+	long m_UserData;              /* Custom user data */
 
-	CEsmSubRecArray m_SubRecords;       /* Array of sub-record pointers */
+	CEsmSubRecArray m_SubRecords; /* Array of sub-record pointers */
 
-	CEsmSubLong *m_pDelete;      /* Reference to delete subrecord */
+	CEsmSubLong *m_pDelete;       /* Reference to delete subrecord */
 	CEsmSubName *m_pID;
 
 
@@ -98,12 +98,12 @@ class CEsmRecord {
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData (CGenFile& File);
-	virtual bool ReadHeader (CGenFile& File);
+	virtual bool ReadData(CGenFile &File);
+	virtual bool ReadHeader(CGenFile &File);
 
 	/* Helper output methods */
-	virtual bool WriteHeader (CGenFile& File);
-	virtual bool WriteData (CGenFile& File);
+	virtual bool WriteHeader(CGenFile &File);
+	virtual bool WriteData(CGenFile &File);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -115,177 +115,177 @@ class CEsmRecord {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Copy the contents from the given record */
-	virtual void AddSubRecord (CEsmSubRecord* pSubRecord) {
+	virtual void AddSubRecord(CEsmSubRecord *pSubRecord) {
 		m_SubRecords.Add(pSubRecord);
 	}
 
-	virtual CEsmSubRecord *AllocNewSubRecord (const TCHAR* pType, const long RecordSize = 0);
-	CEsmSubRecord *AllocateSubRecord (const TCHAR* pType, const long RecordSize = 0);
-	virtual void Copy (CEsmRecord* pRecord);
-	static CEsmRecord *Create (void);
-	CEsmSubRecord *CreateCopy (CEsmSubRecord* pSubRecord);
+	virtual CEsmSubRecord *AllocNewSubRecord(const TCHAR *pType, const long RecordSize = 0);
+	CEsmSubRecord *AllocateSubRecord(const TCHAR *pType, const long RecordSize = 0);
+	virtual void Copy(CEsmRecord *pRecord);
+	static CEsmRecord *Create(void);
+	CEsmSubRecord *CreateCopy(CEsmSubRecord *pSubRecord);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Compare a specific field of the two record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Undeletes or deletes the record */
-	virtual void DeleteToggle (void);
+	virtual void DeleteToggle(void);
 
 	/* Delete all sub-records of the given type */
-	virtual int DeleteSubRecords (const TCHAR* pType);
-	virtual void DeleteSubRecord (CEsmSubRecord* pSubRec) {
+	virtual int DeleteSubRecords(const TCHAR *pType);
+	virtual void DeleteSubRecord(CEsmSubRecord *pSubRec) {
 		m_SubRecords.DeleteElement(pSubRec);
 	}
 
 	/* Returns true if the record contains the given text */
-	virtual bool Find (esmfind_t &FindData);
+	virtual bool Find(esmfind_t &FindData);
 
 	/* Used to determine the type of derived classes */
-	virtual int GetClassType (void) {
+	virtual int GetClassType(void) {
 		return (MWESM_CLASSTYPE_BASE);
 	}
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("?");
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Access particular records */
-	CEsmSubRecord *FindFirst (const TCHAR* pType, int &ArrayIndex) {
+	CEsmSubRecord *FindFirst(const TCHAR *pType, int &ArrayIndex) {
 		ArrayIndex = -1;
 		return FindNext(pType, ArrayIndex);
 	}
 
-	CEsmSubRecord *FindNext (const TCHAR* pType, int &ArrayIndex);
-	CEsmSubRecord *GetSubRecord (const int Index) {
+	CEsmSubRecord *FindNext(const TCHAR *pType, int &ArrayIndex);
+	CEsmSubRecord *GetSubRecord(const int Index) {
 		return (m_SubRecords.GetAt(Index));
 	}
 
-	int GetNumSubRecords (void) {
+	int GetNumSubRecords(void) {
 		return (m_SubRecords.GetSize());
 	}
 
 	/* Get class members */
-	const TCHAR *GetType (void) {
+	const TCHAR *GetType(void) {
 		return (m_Type.pType);
 	}
 
-	esmrectype_t &GetRawType (void) {
+	esmrectype_t &GetRawType(void) {
 		return (m_Type);
 	}
 
-	bool IsBlocked (void) {
+	bool IsBlocked(void) {
 		return ((m_Flags & MWESM_REC_BLOCKED) != 0);
 	}
 
-	bool IsPersist (void) {
+	bool IsPersist(void) {
 		return ((m_Flags & MWESM_REC_PERSIST) != 0);
 	}
 
-	bool IsDeleted (void) {
+	bool IsDeleted(void) {
 		return (m_pDelete != NULL);
 	}
 
-	long GetRefCount (void) {
+	long GetRefCount(void) {
 		return (m_RefCount);
 	}
 
-	CEsmFile *GetFile (void) {
+	CEsmFile *GetFile(void) {
 		return (m_pFile);
 	}
 
-	CEsmRecord *GetPrevRecord (void) {
+	CEsmRecord *GetPrevRecord(void) {
 		return (m_pPrevRecord);
 	}
 
-	long GetUserData (void) {
+	long GetUserData(void) {
 		return (m_UserData);
 	}
 
 	/* Access the object's ID as a string */
-	virtual const TCHAR *GetID (void) {
+	virtual const TCHAR *GetID(void) {
 		return (m_pID ? m_pID->GetName() : _T(""));
 	}
 
-	virtual void SetID (const TCHAR* pString) {
+	virtual void SetID(const TCHAR *pString) {
 		if (m_pID) {
 			m_pID->SetName(pString);
 		}
 	}
 
 	/* Are the records describing the same item */
-	virtual bool IsSame (CEsmRecord* pRecord);
-	virtual bool IsID (const TCHAR* pID) {
+	virtual bool IsSame(CEsmRecord *pRecord);
+	virtual bool IsID(const TCHAR *pID) {
 		return (StringCompare(GetID(), pID, false) == 0);
 	}
 
 	/* Checks if another record is used in this record */
-	virtual bool IsUsed (const TCHAR* pID);
+	virtual bool IsUsed(const TCHAR *pID);
 
 	/* Type comparison */
-	bool IsType (const TCHAR* pType) const {
+	bool IsType(const TCHAR *pType) const {
 		return m_Type.IsType(pType);
 	}
 
 	/* So derived classes can detect an add event */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Input a record from the file */
-	bool Read (CGenFile& File);
+	bool Read(CGenFile &File);
 
 	/* Remove and delete the given sub-record */
-	bool RemoveSubRecord (CEsmSubRecord* pSubRecord);
+	bool RemoveSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetFile (CEsmFile* pFile) {
+	void SetFile(CEsmFile *pFile) {
 		m_pFile = pFile;
 	}
 
-	void SetPrevRecord (CEsmRecord* pRecord) {
+	void SetPrevRecord(CEsmRecord *pRecord) {
 		m_pPrevRecord = pRecord;
 	}
 
-	void SetType (const TCHAR* pType) {
+	void SetType(const TCHAR *pType) {
 		m_Type.SetType(pType);
 	}
 
-	void SetUserData (const long Value) {
+	void SetUserData(const long Value) {
 		m_UserData = Value;
 	}
 
-	void SetBlocked (const bool Flag) {
+	void SetBlocked(const bool Flag) {
 		m_Flags = (Flag ? m_Flags | (MWESM_REC_BLOCKED) : (m_Flags & (~MWESM_REC_BLOCKED)));
 	}
 
-	void SetPersist (const bool Flag) {
+	void SetPersist(const bool Flag) {
 		m_Flags = (Flag ? m_Flags | (MWESM_REC_PERSIST) : (m_Flags & (~MWESM_REC_PERSIST)));
 	}
 
-	void AddReference (void) {
+	void AddReference(void) {
 		m_RefCount++;
 	}
 
-	void DelReference (void) {
+	void DelReference(void) {
 		m_RefCount--;
 	}
 
-	void SetDelete (const bool Flag);
+	void SetDelete(const bool Flag);
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 
 	/* Output the record to the given file */
-	bool Write (CGenFile& File);
+	bool Write(CGenFile &File);
 
 };
 
@@ -309,13 +309,13 @@ typedef struct esmreccreate {
 	ESMREC_CREATEFUNC CreateMethod;
 
 	/* Simple compare function */
-	bool IsType (const TCHAR* pType) const {
+	bool IsType(const TCHAR *pType) const {
 		return (TSTRNICMP(Type, pType, MWESM_TYPE_SIZE) == 0);
 	}
 } esmreccreate_t;
 
 /* Sort function for the pointer array */
-int _cdecl EsmRecordSort (const void* pElem1, const void* pElem2, const long lUserData);
+int _cdecl EsmRecordSort(const void *pElem1, const void *pElem2, const long lUserData);
 
 /* Simple map of records by ID */
 typedef TGenRefMap<CSString, CEsmRecord *, const char *> CEsmRecordRefMap;

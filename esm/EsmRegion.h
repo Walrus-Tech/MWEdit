@@ -66,54 +66,54 @@ class CEsmRegion : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmRegion();
 	//virtual ~CEsmRegion() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Region");
 	}
 
 	/* Get class members */
-	weatherdata_t *GetWeatherData (void) {
+	weatherdata_t *GetWeatherData(void) {
 		return (m_pWeatherData ? m_pWeatherData->GetWeatherData() : NULL);
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (m_pNameData ? m_pNameData->GetName() : _T(""));
 	}
 
-	const TCHAR *GetCreature (void) {
+	const TCHAR *GetCreature(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetName() : _T(""));
 	}
 
-	long GetColor (void) {
+	long GetColor(void) {
 		return (m_pColorData ? m_pColorData->GetValue() : 0);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		if (m_pNameData) {
 			m_pNameData->SetName(pString);
 		}
 	}
 
-	void SetCreature (const TCHAR* pString);
-	void SetColor (const long Color) {
+	void SetCreature(const TCHAR *pString);
+	void SetColor(const long Color) {
 		if (m_pColorData) {
 			m_pColorData->SetValue(Color);
 		}
@@ -130,4 +130,3 @@ class CEsmRegion : public CEsmRecord {
 /*===========================================================================
  *      End of File EsmBodyPart.H
  *=========================================================================*/
-

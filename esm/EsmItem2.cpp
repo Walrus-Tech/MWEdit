@@ -28,7 +28,7 @@ DEFINE_FILE("EsmItem2.cpp");
  * Class CEsmItem2 Constructor
  *
  *=========================================================================*/
-CEsmItem2::CEsmItem2 () {
+CEsmItem2::CEsmItem2() {
 	//DEFINE_FUNCTION("CEsmItem2::CEsmItem2()");
 	m_pIcon = NULL;
 }
@@ -45,7 +45,7 @@ CEsmItem2::CEsmItem2 () {
  * Description
  *
  *=========================================================================*/
-void CEsmItem2::Destroy (void) {
+void CEsmItem2::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmItem2::Destroy()");
 	/* Clear the references */
 	m_pIcon = NULL;
@@ -66,26 +66,26 @@ void CEsmItem2::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmItem2::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmItem2::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	//DEFINE_FUNCTION("CEsmItem2::CompareFields()");
-	CEsmItem2* pRecord2;
+	CEsmItem2 *pRecord2;
 
 	/* Ensure the correct type */
 	if ((MWESM_CLASSTYPE_ITEM2 & pRecord->GetClassType()) == 0) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pRecord2 = (CEsmItem2 *) pRecord;
+	pRecord2 = (CEsmItem2 *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_ICON:
 			return StringCompare(GetIcon(), pRecord2->GetIcon(), FALSE);
 
 		case ESM_FIELD_WEIGHT:
-			return (int) (GetWeight() * 100 - pRecord2->GetWeight() * 100);
+			return (int)(GetWeight() * 100 - pRecord2->GetWeight() * 100);
 
 		case ESM_FIELD_VALUE:
-			return (int) (GetValue() - pRecord2->GetValue());
+			return (int)(GetValue() - pRecord2->GetValue());
 
 		default:    /* Call the base class method */
 			return CEsmItem1::CompareFields(FieldID, pRecord);
@@ -104,7 +104,7 @@ int CEsmItem2::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmItem2::CreateNew (CEsmFile* pFile) {
+void CEsmItem2::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem1::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -124,7 +124,7 @@ void CEsmItem2::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmItem2::GetFieldString (const int FieldID) {
+const TCHAR *CEsmItem2::GetFieldString(const int FieldID) {
 	//DEFINE_FUNCTION("CEsmItem2::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
@@ -137,11 +137,11 @@ const TCHAR *CEsmItem2::GetFieldString (const int FieldID) {
 			return (m_pIcon->GetName());
 
 		case ESM_FIELD_WEIGHT:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetWeight());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetWeight());
 			return (s_Buffer);
 
 		case ESM_FIELD_VALUE:
-			snprintf (s_Buffer, 31, _T("%lu"), (unsigned long)GetValue());
+			snprintf(s_Buffer, 31, _T("%lu"), (unsigned long)GetValue());
 			return (s_Buffer);
 
 		default:    /* Call the base class record */
@@ -159,9 +159,9 @@ const TCHAR *CEsmItem2::GetFieldString (const int FieldID) {
  * Class CEsmItem2 Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmItem2::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmItem2::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_ITEX)) {
-		m_pIcon = (CEsmSubNameFix *) pSubRecord;
+		m_pIcon = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmItem1::OnAddSubRecord(pSubRecord);
 	}
@@ -180,7 +180,7 @@ void CEsmItem2::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmItem2::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmItem2::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ICON:
 			SetIcon(pString);
@@ -209,7 +209,7 @@ bool CEsmItem2::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Class CEsmItem2 Method - void SetIcon (pIcon);
  *
  *=========================================================================*/
-void CEsmItem2::SetIcon (const TCHAR* pIcon) {
+void CEsmItem2::SetIcon(const TCHAR *pIcon) {
 	DEFINE_FUNCTION("CEsmItem2::SetIcon()");
 
 	/* Should we delete the current enchant? */

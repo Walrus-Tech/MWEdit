@@ -51,11 +51,11 @@ class CEsmSubLong : public CEsmSubRecord {
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
-	virtual bool ReadData (CGenFile& File) {
+	virtual bool ReadData(CGenFile &File) {
 		return File.ReadLong(m_Long);
 	}
 
-	virtual bool WriteData (CGenFile& File) {
+	virtual bool WriteData(CGenFile &File) {
 		return File.WriteLong(m_Long);
 	}
 
@@ -69,55 +69,55 @@ class CEsmSubLong : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Copy from another name record */
-	virtual void Copy (CEsmSubRecord* pSubRecord) {
+	virtual void Copy(CEsmSubRecord *pSubRecord) {
 		m_Type.SetType(pSubRecord->GetType());
 		m_RecordSize = pSubRecord->GetRecordSize();
-		m_Long = ((CEsmSubLong *) pSubRecord)->GetValue();
+		m_Long = ((CEsmSubLong *)pSubRecord)->GetValue();
 	}
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubLong);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(long);
 		m_Long = 0;
 	}
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData) {
+	virtual bool Find(esmfind_t &FindData) {
 		return (false);
 	}
 
 	/* Get/set the long value directly */
-	long GetValue (void) {
+	long GetValue(void) {
 		return (m_Long);
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		m_Long = Value;
 	}
 
 	/* Set/check a bit field flag value */
-	bool IsFlag (const long Flag) {
+	bool IsFlag(const long Flag) {
 		return ((m_Long & Flag) != 0);
 	}
 
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		(Set ? SetFlag(Flag) : ClearFlag(Flag));
 	}
 
-	void SetFlag (const long Flag) {
+	void SetFlag(const long Flag) {
 		m_Long = (m_Long | Flag);
 	}
 
-	void ClearFlag (const long Flag) {
+	void ClearFlag(const long Flag) {
 		m_Long = (m_Long & (~Flag));
 	}
 

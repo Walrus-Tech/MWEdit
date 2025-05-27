@@ -32,30 +32,102 @@ DEFINE_FILE("EsmNpc.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmNpc::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubName::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ANAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_KNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_RNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_NPDT, CEsmSubNPDTL::Create },
-	{ MWESM_SUBREC_FLAG, CEsmSubLong::Create },
-	{ MWESM_SUBREC_NPCO, CEsmSubNPCO::Create },
-	{ MWESM_SUBREC_NPCS, CEsmSubNPCS::Create },
-	{ MWESM_SUBREC_AIDT, CEsmSubAIDT::Create },
-	{ MWESM_SUBREC_AI_A, CEsmSubAI_A::Create },
-	{ MWESM_SUBREC_AI_E, CEsmSubAI_E::Create },
-	{ MWESM_SUBREC_AI_E, CEsmSubAI_F::Create },
-	{ MWESM_SUBREC_AI_T, CEsmSubAI_T::Create },
-	{ MWESM_SUBREC_AI_W, CEsmSubAI_W::Create },
-	{ MWESM_SUBREC_CNDT, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DODT, CEsmSubPos6::Create },
-	{ MWESM_SUBREC_DNAM, CEsmSubName::Create },
-	{ MWESM_SUBREC_XSCL, CEsmSubFloat::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ANAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_BNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_KNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_RNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_NPDT,
+		CEsmSubNPDTL::Create
+	},
+	{
+		MWESM_SUBREC_FLAG,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_NPCO,
+		CEsmSubNPCO::Create
+	},
+	{
+		MWESM_SUBREC_NPCS,
+		CEsmSubNPCS::Create
+	},
+	{
+		MWESM_SUBREC_AIDT,
+		CEsmSubAIDT::Create
+	},
+	{
+		MWESM_SUBREC_AI_A,
+		CEsmSubAI_A::Create
+	},
+	{
+		MWESM_SUBREC_AI_E,
+		CEsmSubAI_E::Create
+	},
+	{
+		MWESM_SUBREC_AI_E,
+		CEsmSubAI_F::Create
+	},
+	{
+		MWESM_SUBREC_AI_T,
+		CEsmSubAI_T::Create
+	},
+	{
+		MWESM_SUBREC_AI_W,
+		CEsmSubAI_W::Create
+	},
+	{
+		MWESM_SUBREC_CNDT,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DODT,
+		CEsmSubPos6::Create
+	},
+	{
+		MWESM_SUBREC_DNAM,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_XSCL,
+		CEsmSubFloat::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -68,26 +140,56 @@ const esmsubreccreate_t CEsmNpc::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 static valuenames_t l_BloodTypes[] = {
-	{ MWESM_NPCFLAG_BLOODRED, _T("Default (Red)") },
-	{ MWESM_NPCFLAG_BLOODSKEL, _T("Skeleton (White)") },
-	{ MWESM_NPCFLAG_BLOODMETAL, _T("Metal (Gold)") },
-	{ MWESM_NPCFLAG_BLOODRED, _T("Default") },
-	{ MWESM_NPCFLAG_BLOODSKEL, _T("Skeleton") },
-	{ MWESM_NPCFLAG_BLOODMETAL, _T("Metal") },
-	{ MWESM_NPCFLAG_BLOODRED, _T("Red") },
-	{ MWESM_NPCFLAG_BLOODSKEL, _T("White") },
-	{ MWESM_NPCFLAG_BLOODMETAL, _T("Gold") },
-	{ -1, NULL }
+	{
+		MWESM_NPCFLAG_BLOODRED,
+		_T("Default (Red)")
+	},
+	{
+		MWESM_NPCFLAG_BLOODSKEL,
+		_T("Skeleton (White)")
+	},
+	{
+		MWESM_NPCFLAG_BLOODMETAL,
+		_T("Metal (Gold)")
+	},
+	{
+		MWESM_NPCFLAG_BLOODRED,
+		_T("Default")
+	},
+	{
+		MWESM_NPCFLAG_BLOODSKEL,
+		_T("Skeleton")
+	},
+	{
+		MWESM_NPCFLAG_BLOODMETAL,
+		_T("Metal")
+	},
+	{
+		MWESM_NPCFLAG_BLOODRED,
+		_T("Red")
+	},
+	{
+		MWESM_NPCFLAG_BLOODSKEL,
+		_T("White")
+	},
+	{
+		MWESM_NPCFLAG_BLOODMETAL,
+		_T("Gold")
+	},
+	{
+		-1,
+		NULL
+	}
 };
 
 
-const TCHAR *GetEsmNpcBloodType (const int Index) {
-	const TCHAR* pString = FindValueName(l_BloodTypes, Index);
+const TCHAR *GetEsmNpcBloodType(const int Index) {
+	const TCHAR *pString = FindValueName(l_BloodTypes, Index);
 	return (pString == NULL ? _T("") : pString);
 }
 
 
-int GetEsmNpcBloodType (const TCHAR* pString) {
+int GetEsmNpcBloodType(const TCHAR *pString) {
 	long lBloodType;
 	bool Result = FindNameValue(lBloodType, l_BloodTypes, pString);
 	return (Result ? lBloodType : MWESM_NPCFLAG_BLOODRED);
@@ -104,7 +206,7 @@ int GetEsmNpcBloodType (const TCHAR* pString) {
  * Class CEsmNpc Constructor
  *
  *=========================================================================*/
-CEsmNpc::CEsmNpc () {
+CEsmNpc::CEsmNpc() {
 	//DEFINE_FUNCTION("CEsmNpc::CEsmNpc()");
 	m_pNpcShortData = NULL;
 	m_pNpcLongData = NULL;
@@ -130,7 +232,7 @@ CEsmNpc::CEsmNpc () {
  * Description
  *
  *=========================================================================*/
-void CEsmNpc::Destroy (void) {
+void CEsmNpc::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmNpc::Destroy()");
 	/* Clear the references */
 	m_pNpcShortData = NULL;
@@ -160,11 +262,11 @@ void CEsmNpc::Destroy (void) {
  * ID is valid or not.
  *
  *=========================================================================*/
-bool CEsmNpc::AddItem (const TCHAR* pItemID) {
+bool CEsmNpc::AddItem(const TCHAR *pItemID) {
 	//DEFINE_FUNCTION("CEsmNpc::AddItem()");
-	CEsmSubNPCO* pNewItem;
+	CEsmSubNPCO *pNewItem;
 	/* Allocate the new item sub-record */
-	pNewItem = (CEsmSubNPCO *) AllocateSubRecord(MWESM_SUBREC_NPCO);
+	pNewItem = (CEsmSubNPCO *)AllocateSubRecord(MWESM_SUBREC_NPCO);
 
 	if (pNewItem == NULL) {
 		return (false);
@@ -177,11 +279,11 @@ bool CEsmNpc::AddItem (const TCHAR* pItemID) {
 }
 
 
-bool CEsmNpc::AddItemCount (const TCHAR* pItemID, const int Count) {
+bool CEsmNpc::AddItemCount(const TCHAR *pItemID, const int Count) {
 	//DEFINE_FUNCTION("CEsmNpc::AddItemCount()");
-	CEsmSubNPCO* pNewItem;
+	CEsmSubNPCO *pNewItem;
 	/* Allocate the new item sub-record */
-	pNewItem = (CEsmSubNPCO *) AllocateSubRecord(MWESM_SUBREC_NPCO);
+	pNewItem = (CEsmSubNPCO *)AllocateSubRecord(MWESM_SUBREC_NPCO);
 
 	if (pNewItem == NULL) {
 		return (false);
@@ -208,10 +310,10 @@ bool CEsmNpc::AddItemCount (const TCHAR* pItemID, const int Count) {
  *      item_id = Count
  *
  *=========================================================================*/
-bool CEsmNpc::AddItemEx (const TCHAR* pString) {
+bool CEsmNpc::AddItemEx(const TCHAR *pString) {
 	//DEFINE_FUNCTION("CEsmNpc::AddItemEx()");
-	CEsmSubNPCO* pNewItem;
-	const TCHAR* pParse;
+	CEsmSubNPCO *pNewItem;
+	const TCHAR *pParse;
 	CSString IDBuffer;
 	int ItemCount = 1;
 	/* Parse the input string */
@@ -230,7 +332,7 @@ bool CEsmNpc::AddItemEx (const TCHAR* pString) {
 	}
 
 	/* Allocate the new item sub-record */
-	pNewItem = (CEsmSubNPCO *) AllocateSubRecord(MWESM_SUBREC_NPCO);
+	pNewItem = (CEsmSubNPCO *)AllocateSubRecord(MWESM_SUBREC_NPCO);
 
 	if (pNewItem == NULL) {
 		return (false);
@@ -255,11 +357,11 @@ bool CEsmNpc::AddItemEx (const TCHAR* pString) {
  * ID is valid or not.
  *
  *=========================================================================*/
-bool CEsmNpc::AddSpell (const TCHAR* pSpellID) {
+bool CEsmNpc::AddSpell(const TCHAR *pSpellID) {
 	//DEFINE_FUNCTION("CEsmNpc::AddSpell()");
-	CEsmSubNPCS* pNewSpell;
+	CEsmSubNPCS *pNewSpell;
 	/* Allocate the new item sub-record */
-	pNewSpell = (CEsmSubNPCS *) AllocateSubRecord(MWESM_SUBREC_NPCS);
+	pNewSpell = (CEsmSubNPCS *)AllocateSubRecord(MWESM_SUBREC_NPCS);
 
 	if (pNewSpell == NULL) {
 		return (false);
@@ -282,8 +384,8 @@ bool CEsmNpc::AddSpell (const TCHAR* pSpellID) {
  * Allocates a new subrecord of the given type.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmNpc::AllocNewSubRecord (const TCHAR* pType, const long RecordSize) {
-	CEsmSubRecord* pSubRecord;
+CEsmSubRecord *CEsmNpc::AllocNewSubRecord(const TCHAR *pType, const long RecordSize) {
+	CEsmSubRecord *pSubRecord;
 
 	/* Check for special case */
 	if ( _stricmp(pType, MWESM_SUBREC_NPDT) != 0) {
@@ -314,9 +416,9 @@ CEsmSubRecord *CEsmNpc::AllocNewSubRecord (const TCHAR* pType, const long Record
  * Class char* CEsmNpc Method - const GetTravelCell (Index);
  *
  *=========================================================================*/
-const char *CEsmNpc::GetTravelCell (const int Index) {
-	CEsmSubRecord* pDoorData;
-	CEsmSubRecord* pCellName;
+const char *CEsmNpc::GetTravelCell(const int Index) {
+	CEsmSubRecord *pDoorData;
+	CEsmSubRecord *pCellName;
 	int FindIndex;
 	int Count = 0;
 
@@ -355,9 +457,9 @@ const char *CEsmNpc::GetTravelCell (const int Index) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmNpc::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmNpc::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	//DEFINE_FUNCTION("CEsmNpc::CompareFields()");
-	CEsmNpc* pNpc;
+	CEsmNpc *pNpc;
 	aidata_t *pAiData1;
 	aidata_t *pAiData2;
 
@@ -366,7 +468,7 @@ int CEsmNpc::CompareFields (const int FieldID, CEsmRecord* pRecord) {
 		return CEsmItem1::CompareFields(FieldID, pRecord);
 	}
 
-	pNpc = (CEsmNpc *) pRecord;
+	pNpc = (CEsmNpc *)pRecord;
 	pAiData1 = GetAIData();
 	pAiData2 = pNpc->GetAIData();
 
@@ -548,9 +650,9 @@ int CEsmNpc::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmNpc::Create (void) {
+CEsmRecord *CEsmNpc::Create(void) {
 	DEFINE_FUNCTION("CEsmNpc::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmNpc);
 	return (pRecord);
 }
@@ -567,7 +669,7 @@ CEsmRecord *CEsmNpc::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmNpc::CreateNew (CEsmFile* pFile) {
+void CEsmNpc::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem1::CreateNew(pFile);
 	DeleteSubRecords(MWESM_SUBREC_MODL);
@@ -597,7 +699,7 @@ void CEsmNpc::CreateNew (CEsmFile* pFile) {
  * Class CEsmNpc Method - void CreateNPCData (IsShort);
  *
  *=========================================================================*/
-void CEsmNpc::CreateNPCData (const bool IsShort) {
+void CEsmNpc::CreateNPCData(const bool IsShort) {
 	/* Ignore if the correct type is already created */
 	if (IsShort && m_pNpcShortData != NULL) {
 		return;
@@ -632,8 +734,8 @@ void CEsmNpc::CreateNPCData (const bool IsShort) {
  * Class CEsmNpc Method - bool DoesInfoApply (pInfo);
  *
  *=========================================================================*/
-bool CEsmNpc::DoesInfoApply (CEsmInfo* pInfo) {
-	const TCHAR* pString;
+bool CEsmNpc::DoesInfoApply(CEsmInfo *pInfo) {
+	const TCHAR *pString;
 	infodata_t *pInfoData = pInfo->GetInfoData();
 	/* Check ID */
 	pString = pInfo->GetActor();
@@ -696,18 +798,18 @@ bool CEsmNpc::DoesInfoApply (CEsmInfo* pInfo) {
  * or NULL if it does not exist.
  *
  *=========================================================================*/
-CEsmSubNPCO *CEsmNpc::FindItem (const TCHAR* pItemID) {
-	CEsmSubNPCO* pItemRec;
+CEsmSubNPCO *CEsmNpc::FindItem(const TCHAR *pItemID) {
+	CEsmSubNPCO *pItemRec;
 	int ArrayIndex;
 	/* Search all NPC items for a match */
-	pItemRec = (CEsmSubNPCO *) FindFirst(MWESM_SUBREC_NPCO, ArrayIndex);
+	pItemRec = (CEsmSubNPCO *)FindFirst(MWESM_SUBREC_NPCO, ArrayIndex);
 
 	while (pItemRec != NULL) {
 		if (_tcsicmp(pItemRec->GetItem(), pItemID) == 0) {
 			return (pItemRec);
 		}
 
-		pItemRec = (CEsmSubNPCO *) FindNext(MWESM_SUBREC_NPCO, ArrayIndex);
+		pItemRec = (CEsmSubNPCO *)FindNext(MWESM_SUBREC_NPCO, ArrayIndex);
 	}
 
 	/* Does not exist */
@@ -727,18 +829,18 @@ CEsmSubNPCO *CEsmNpc::FindItem (const TCHAR* pItemID) {
  * or NULL if it does not exist.
  *
  *=========================================================================*/
-CEsmSubNPCS *CEsmNpc::FindSpell (const TCHAR* pSpellID) {
-	CEsmSubNPCS* pSpellRec;
+CEsmSubNPCS *CEsmNpc::FindSpell(const TCHAR *pSpellID) {
+	CEsmSubNPCS *pSpellRec;
 	int ArrayIndex;
 	/* Search all NPC items for a match */
-	pSpellRec = (CEsmSubNPCS *) FindFirst(MWESM_SUBREC_NPCS, ArrayIndex);
+	pSpellRec = (CEsmSubNPCS *)FindFirst(MWESM_SUBREC_NPCS, ArrayIndex);
 
 	while (pSpellRec != NULL) {
 		if (_tcsicmp(pSpellRec->GetName(), pSpellID) == 0) {
 			return (pSpellRec);
 		}
 
-		pSpellRec = (CEsmSubNPCS *) FindNext(MWESM_SUBREC_NPCS, ArrayIndex);
+		pSpellRec = (CEsmSubNPCS *)FindNext(MWESM_SUBREC_NPCS, ArrayIndex);
 	}
 
 	/* Does not exist */
@@ -758,7 +860,7 @@ CEsmSubNPCS *CEsmNpc::FindSpell (const TCHAR* pSpellID) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
+const TCHAR *CEsmNpc::GetFieldString(const int FieldID) {
 	//DEFINE_FUNCTION("CEsmNpc::GetFieldString()");
 	static TCHAR s_Buffer[32];
 	aidata_t *pAiData;
@@ -777,7 +879,7 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
 			return BOOLTOYESNO(IsRespawn());
 
 		case ESM_FIELD_LEVEL:
-			snprintf (s_Buffer, 31, _T("%ld"), GetLevel());
+			snprintf(s_Buffer, 31, _T("%ld"), GetLevel());
 			return (s_Buffer);
 
 		case ESM_FIELD_CLASS:
@@ -793,14 +895,14 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
 			return GetFaction();
 
 		case ESM_FIELD_RANK:
-			snprintf (s_Buffer, 31, _T("%ld"), GetRank());
+			snprintf(s_Buffer, 31, _T("%ld"), GetRank());
 			return (s_Buffer);
 
 		case ESM_FIELD_BLOOD:
 			return GetEsmNpcBloodType(GetFlag() & MWESM_NPCFLAG_BLOODMASK);
 
 		case ESM_FIELD_DISPOSITION:
-			snprintf (s_Buffer, 31, _T("%ld"), GetDisposition());
+			snprintf(s_Buffer, 31, _T("%ld"), GetDisposition());
 			return (s_Buffer);
 
 		case ESM_FIELD_HAIR:
@@ -810,59 +912,59 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
 			return GetHeadModel();
 
 		case ESM_FIELD_STRENGTH:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_STR));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_STR));
 			return (s_Buffer);
 
 		case ESM_FIELD_AGILITY:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_AGI));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_AGI));
 			return (s_Buffer);
 
 		case ESM_FIELD_SPEED:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_SPD));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_SPD));
 			return (s_Buffer);
 
 		case ESM_FIELD_ENDURANCE:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_END));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_END));
 			return (s_Buffer);
 
 		case ESM_FIELD_WILLPOWER:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_WIL));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_WIL));
 			return (s_Buffer);
 
 		case ESM_FIELD_INTELLIGENCE:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_INT));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_INT));
 			return (s_Buffer);
 
 		case ESM_FIELD_PERSONALITY:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_PER));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_PER));
 			return (s_Buffer);
 
 		case ESM_FIELD_LUCK:
-			snprintf (s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_LUC));
+			snprintf(s_Buffer, 31, _T("%ld"), GetAttribute(MWESM_ATTRIBUTE_LUC));
 			return (s_Buffer);
 
 		case ESM_FIELD_GOLD:
 		case ESM_FIELD_TRADEGOLD:
-			snprintf (s_Buffer, 31, _T("%ld"), GetGold());
+			snprintf(s_Buffer, 31, _T("%ld"), GetGold());
 			return (s_Buffer);
 
 		case ESM_FIELD_HEALTH:
-			snprintf (s_Buffer, 31, _T("%ld"), GetHealth());
+			snprintf(s_Buffer, 31, _T("%ld"), GetHealth());
 			return (s_Buffer);
 
 		case ESM_FIELD_SPELLPTS:
-			snprintf (s_Buffer, 31, _T("%ld"), GetMagic());
+			snprintf(s_Buffer, 31, _T("%ld"), GetMagic());
 			return (s_Buffer);
 
 		case ESM_FIELD_FATIGUE:
-			snprintf (s_Buffer, 31, _T("%ld"), GetFatigue());
+			snprintf(s_Buffer, 31, _T("%ld"), GetFatigue());
 			return (s_Buffer);
 
 		case ESM_FIELD_FIGHT:
 			pAiData = GetAIData();
 
 			if (pAiData) {
-				snprintf (s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Fight);
+				snprintf(s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Fight);
 			} else {
 				s_Buffer[0] = NULL_CHAR;
 			}
@@ -873,7 +975,7 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
 			pAiData = GetAIData();
 
 			if (pAiData) {
-				snprintf (s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Alarm);
+				snprintf(s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Alarm);
 			} else {
 				s_Buffer[0] = NULL_CHAR;
 			}
@@ -884,7 +986,7 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
 			pAiData = GetAIData();
 
 			if (pAiData) {
-				snprintf (s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Flee);
+				snprintf(s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Flee);
 			} else {
 				s_Buffer[0] = NULL_CHAR;
 			}
@@ -895,7 +997,7 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
 			pAiData = GetAIData();
 
 			if (pAiData) {
-				snprintf (s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Hello);
+				snprintf(s_Buffer, 31, _T("%lu"), (unsigned int)pAiData->Hello);
 			} else {
 				s_Buffer[0] = NULL_CHAR;
 			}
@@ -987,7 +1089,7 @@ const TCHAR *CEsmNpc::GetFieldString (const int FieldID) {
  * Class CEsmNpc Method - long GetDisposition (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetDisposition (void) {
+long CEsmNpc::GetDisposition(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Disposition;
 	} else if (m_pNpcShortData != NULL) {
@@ -1007,7 +1109,7 @@ long CEsmNpc::GetDisposition (void) {
  * Class CEsmNpc Method - long GetReputation (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetReputation (void) {
+long CEsmNpc::GetReputation(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Reputation;
 	} else if (m_pNpcShortData != NULL) {
@@ -1027,7 +1129,7 @@ long CEsmNpc::GetReputation (void) {
  * Class CEsmNpc Method - long GetFactionID (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetFactionID (void) {
+long CEsmNpc::GetFactionID(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->FactionID;
 	} else if (m_pNpcShortData != NULL) {
@@ -1047,7 +1149,7 @@ long CEsmNpc::GetFactionID (void) {
  * Class CEsmNpc Method - long GetGold (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetGold (void) {
+long CEsmNpc::GetGold(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Gold;
 	} else if (m_pNpcShortData != NULL) {
@@ -1067,7 +1169,7 @@ long CEsmNpc::GetGold (void) {
  * Class CEsmNpc Method - long GetLevel (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetLevel (void) {
+long CEsmNpc::GetLevel(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Level;
 	} else if (m_pNpcShortData != NULL) {
@@ -1087,7 +1189,7 @@ long CEsmNpc::GetLevel (void) {
  * Class CEsmNpc Method - long GetHealth (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetHealth (void) {
+long CEsmNpc::GetHealth(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Health;
 	}
@@ -1105,7 +1207,7 @@ long CEsmNpc::GetHealth (void) {
  * Class CEsmNpc Method - long GetMagic (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetMagic (void) {
+long CEsmNpc::GetMagic(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->SpellPts;
 	}
@@ -1123,7 +1225,7 @@ long CEsmNpc::GetMagic (void) {
  * Class CEsmNpc Method - long GetFatigue (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetFatigue (void) {
+long CEsmNpc::GetFatigue(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Fatigue;
 	}
@@ -1141,7 +1243,7 @@ long CEsmNpc::GetFatigue (void) {
  * Class CEsmNpc Method - long GetRank (void);
  *
  *=========================================================================*/
-long CEsmNpc::GetRank (void) {
+long CEsmNpc::GetRank(void) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetNPCData()->Rank;
 	} else if (m_pNpcShortData != NULL) {
@@ -1161,7 +1263,7 @@ long CEsmNpc::GetRank (void) {
  * Class CEsmNpc Method - long GetSkill (const TCHAR* pSkill);
  *
  *=========================================================================*/
-long CEsmNpc::GetSkill (const TCHAR* pSkill) {
+long CEsmNpc::GetSkill(const TCHAR *pSkill) {
 	bool Result;
 	int SkillIndex;
 	/* Ensure the skill string is valid */
@@ -1175,7 +1277,7 @@ long CEsmNpc::GetSkill (const TCHAR* pSkill) {
 }
 
 
-long CEsmNpc::GetSkill (const int SkillIndex) {
+long CEsmNpc::GetSkill(const int SkillIndex) {
 	if (m_pNpcLongData != NULL) {
 		return m_pNpcLongData->GetSkill(SkillIndex);
 	} else if (m_pClass != NULL) {
@@ -1195,7 +1297,7 @@ long CEsmNpc::GetSkill (const int SkillIndex) {
  * Class CEsmNpc Method - long GetAttribute (const TCHAR* pAttribute);
  *
  *=========================================================================*/
-long CEsmNpc::GetAttribute (const TCHAR* pAttribute) {
+long CEsmNpc::GetAttribute(const TCHAR *pAttribute) {
 	bool Result;
 	int AttrIndex;
 	/* Ensure the attribute string is valid */
@@ -1209,7 +1311,7 @@ long CEsmNpc::GetAttribute (const TCHAR* pAttribute) {
 }
 
 
-long CEsmNpc::GetAttribute (const int AttrIndex) {
+long CEsmNpc::GetAttribute(const int AttrIndex) {
 	/* Different methods for autocalc data */
 	if (m_pNpcLongData != NULL) {
 		switch (AttrIndex) {
@@ -1258,30 +1360,30 @@ long CEsmNpc::GetAttribute (const int AttrIndex) {
  * Class CEsmNpc Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmNpc::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmNpc::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	/* There are two different NPDT record sizes */
 	if (pSubRecord->IsType(MWESM_SUBREC_NPDT)) {
 		if (pSubRecord->GetRecordSize() == sizeof(npcshortdata_t)) {
-			m_pNpcShortData = (CEsmSubNPDTS *) pSubRecord;
+			m_pNpcShortData = (CEsmSubNPDTS *)pSubRecord;
 		} else if (pSubRecord->GetRecordSize() == sizeof(npclongdata_t)) {
-			m_pNpcLongData = (CEsmSubNPDTL *) pSubRecord;
+			m_pNpcLongData = (CEsmSubNPDTL *)pSubRecord;
 		}
 	} else if (pSubRecord->IsType(MWESM_SUBREC_FLAG)) {
-		m_pFlag = (CEsmSubLong *) pSubRecord;
+		m_pFlag = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_RNAM)) {
-		m_pRace = (CEsmSubNameFix *) pSubRecord;
+		m_pRace = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_MODL)) {
-		m_pAnimation = (CEsmSubNameFix *) pSubRecord;
+		m_pAnimation = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_BNAM)) {
-		m_pHeadModel = (CEsmSubNameFix *) pSubRecord;
+		m_pHeadModel = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CNAM)) {
-		m_pClass = (CEsmSubNameFix *) pSubRecord;
+		m_pClass = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_KNAM)) {
-		m_pHairModel = (CEsmSubNameFix *) pSubRecord;
+		m_pHairModel = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_ANAM)) {
-		m_pFaction = (CEsmSubNameFix *) pSubRecord;
+		m_pFaction = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_AIDT)) {
-		m_pAIData = (CEsmSubAIDT *) pSubRecord;
+		m_pAIData = (CEsmSubAIDT *)pSubRecord;
 	} else {
 		CEsmItem1::OnAddSubRecord(pSubRecord);
 	}
@@ -1300,7 +1402,7 @@ void CEsmNpc::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmNpc::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmNpc::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ITEM:
 			AddItem(pString);
@@ -1441,7 +1543,7 @@ bool CEsmNpc::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Class CEsmNpc Method - void SetAnimation (pString);
  *
  *=========================================================================*/
-void CEsmNpc::SetAnimation (const TCHAR* pString) {
+void CEsmNpc::SetAnimation(const TCHAR *pString) {
 	DEFINE_FUNCTION("CEsmNpc::SetAnimation()");
 
 	if (pString == NULL || *pString == NULL_CHAR) {
@@ -1461,7 +1563,7 @@ void CEsmNpc::SetAnimation (const TCHAR* pString) {
 	}
 }
 
-void CEsmNpc::SetDisposition (const int Value) {
+void CEsmNpc::SetDisposition(const int Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->GetNPCData()->Disposition = Value;
 	} else if (m_pNpcShortData != NULL) {
@@ -1470,7 +1572,7 @@ void CEsmNpc::SetDisposition (const int Value) {
 }
 
 
-void CEsmNpc::SetLevel (const int Value) {
+void CEsmNpc::SetLevel(const int Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->GetNPCData()->Level = Value;
 	} else if (m_pNpcShortData != NULL) {
@@ -1479,7 +1581,7 @@ void CEsmNpc::SetLevel (const int Value) {
 }
 
 
-void CEsmNpc::SetRank (const int Value) {
+void CEsmNpc::SetRank(const int Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->GetNPCData()->Rank = Value;
 	} else if (m_pNpcShortData != NULL) {
@@ -1488,7 +1590,7 @@ void CEsmNpc::SetRank (const int Value) {
 }
 
 
-void CEsmNpc::SetGold (const long Value) {
+void CEsmNpc::SetGold(const long Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->GetNPCData()->Gold = Value;
 	} else if (m_pNpcShortData != NULL) {
@@ -1497,15 +1599,15 @@ void CEsmNpc::SetGold (const long Value) {
 }
 
 
-void CEsmNpc::SetBloodType (const TCHAR* pString) {
+void CEsmNpc::SetBloodType(const TCHAR *pString) {
 	SetFlag(GetFlag() & (~MWESM_NPCFLAG_BLOODMASK) | GetEsmNpcBloodType(pString));
 }
 
 
 /* Expects a string in the format "Skill = Value" */
-void CEsmNpc::SetSkill (const TCHAR* pString) {
-	const TCHAR* pParse;
-	const TCHAR* pSkillPtr = NULL;
+void CEsmNpc::SetSkill(const TCHAR *pString) {
+	const TCHAR *pParse;
+	const TCHAR *pSkillPtr = NULL;
 	CSString SkillBuffer;
 	bool Result;
 	int SkillValue = 15;
@@ -1536,7 +1638,7 @@ void CEsmNpc::SetSkill (const TCHAR* pString) {
 }
 
 
-void CEsmNpc::SetSkill (const TCHAR* pString, const int SkillIndex) {
+void CEsmNpc::SetSkill(const TCHAR *pString, const int SkillIndex) {
 	int SkillValue = 15;
 
 	/* Ignore if auto-calc value is set */
@@ -1563,9 +1665,9 @@ void CEsmNpc::SetSkill (const TCHAR* pString, const int SkillIndex) {
 
 
 /* Expects a string in the format "Attribute = Value" */
-void CEsmNpc::SetAttribute (const TCHAR* pString) {
-	const TCHAR* pParse;
-	const TCHAR* pAttrPtr = NULL;
+void CEsmNpc::SetAttribute(const TCHAR *pString) {
+	const TCHAR *pParse;
+	const TCHAR *pAttrPtr = NULL;
 	CSString AttrBuffer;
 	bool Result;
 	int AttrValue = 15;
@@ -1598,7 +1700,7 @@ void CEsmNpc::SetAttribute (const TCHAR* pString) {
 }
 
 
-void CEsmNpc::SetAttribute (const TCHAR* pString, const int AttrIndex) {
+void CEsmNpc::SetAttribute(const TCHAR *pString, const int AttrIndex) {
 	int AttrValue = 15;
 
 	/* Ignore if auto-calc value is set */
@@ -1655,7 +1757,7 @@ void CEsmNpc::SetAttribute (const TCHAR* pString, const int AttrIndex) {
 }
 
 
-void CEsmNpc::SetAutoCalc (const bool AutoCalcFlag) {
+void CEsmNpc::SetAutoCalc(const bool AutoCalcFlag) {
 	npcshortdata_t *pShortData;
 	npclongdata_t *pLongData;
 
@@ -1711,21 +1813,21 @@ void CEsmNpc::SetAutoCalc (const bool AutoCalcFlag) {
 }
 
 
-void CEsmNpc::SetHealth (const long Value) {
+void CEsmNpc::SetHealth(const long Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->SetHealth((short)Value);
 	}
 }
 
 
-void CEsmNpc::SetSpellPts (const long Value) {
+void CEsmNpc::SetSpellPts(const long Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->SetSpellPts((short)Value);
 	}
 }
 
 
-void CEsmNpc::SetFatigue (const long Value) {
+void CEsmNpc::SetFatigue(const long Value) {
 	if (m_pNpcLongData != NULL) {
 		m_pNpcLongData->SetFatigue((short)Value);
 	}
@@ -1734,6 +1836,3 @@ void CEsmNpc::SetFatigue (const long Value) {
 /*===========================================================================
  *      End of Class Method CEsmNpc::Set....()
  *=========================================================================*/
-
-
-

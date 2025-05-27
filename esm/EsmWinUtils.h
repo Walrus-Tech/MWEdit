@@ -30,7 +30,7 @@
 
 /* Morrowind registries */
 #define MWESM_REG_INSTALLPATH _T("SOFTWARE\\Bethesda Softworks\\Morrowind\\Installed Path")
-#define MWESM_REG_PATH    _T("SOFTWARE\\Bethesda Softworks\\Morrowind")
+#define MWESM_REG_PATH        _T("SOFTWARE\\Bethesda Softworks\\Morrowind")
 
 /*===========================================================================
  *      End of Definitions
@@ -44,21 +44,18 @@
  *=========================================================================*/
 
 /* Path functions */
-const TCHAR *GetMWDataPath (void);
-void SetMWDataPath (const TCHAR* pString);
+const TCHAR *GetMWDataPath(void);
+void SetMWDataPath(const TCHAR *pString);
 
 /* Attempt to update the Morrowind paths from ther registry */
-void FindMWRegistryPath (void);
+void FindMWRegistryPath(void);
 
 /*===========================================================================
  *      End of Function Prototypes
  *=========================================================================*/
 
 
-
-
 #endif
 /*===========================================================================
  *      End of File Esmwinutils.H
  *=========================================================================*/
-

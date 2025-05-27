@@ -76,14 +76,14 @@ class CEsmSubNPCS : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNPCS);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(npcsdata_t));
 		m_RecordSize = sizeof(npcsdata_t);
@@ -91,21 +91,21 @@ class CEsmSubNPCS : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	npcsdata_t *GetData (void) {
-		return (npcsdata_t *) m_pData;
+	npcsdata_t *GetData(void) {
+		return (npcsdata_t *)m_pData;
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (GetData()->Item);
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (StringCompare(GetName(), pID, false) == 0);
 	}
 
 	/* Set class methods */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		TSTRNCPY(GetData()->Item, pString, MWESM_ID_MAXSIZE);
 	}
 

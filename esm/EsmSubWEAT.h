@@ -82,14 +82,14 @@ class CEsmSubWEAT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubWEAT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(weatherdata_t));
 		m_RecordSize = sizeof(weatherdata_t);
@@ -97,72 +97,72 @@ class CEsmSubWEAT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	weatherdata_t *GetWeatherData (void) {
-		return ((weatherdata_t *) m_pData);
+	weatherdata_t *GetWeatherData(void) {
+		return ((weatherdata_t *)m_pData);
 	}
 
-	byte GetClear (void) {
+	byte GetClear(void) {
 		return (GetWeatherData()->Clear);
 	}
 
-	byte GetCloudy (void) {
+	byte GetCloudy(void) {
 		return (GetWeatherData()->Cloudy);
 	}
 
-	byte GetFoggy (void) {
+	byte GetFoggy(void) {
 		return (GetWeatherData()->Foggy);
 	}
 
-	byte GetOvercast (void) {
+	byte GetOvercast(void) {
 		return (GetWeatherData()->Overcast);
 	}
 
-	byte GetRain (void) {
+	byte GetRain(void) {
 		return (GetWeatherData()->Rain);
 	}
 
-	byte GetThunder (void) {
+	byte GetThunder(void) {
 		return (GetWeatherData()->Thunder);
 	}
 
-	byte GetAsh (void) {
+	byte GetAsh(void) {
 		return (GetWeatherData()->Ash);
 	}
 
-	byte GetBlight (void) {
+	byte GetBlight(void) {
 		return (GetWeatherData()->Blight);
 	}
 
 	/* Set class members */
-	void SetClear (const byte Value) {
+	void SetClear(const byte Value) {
 		GetWeatherData()->Clear = Value;
 	}
 
-	void SetCloudy (const byte Value) {
+	void SetCloudy(const byte Value) {
 		GetWeatherData()->Cloudy = Value;
 	}
 
-	void SetFoggy (const byte Value) {
+	void SetFoggy(const byte Value) {
 		GetWeatherData()->Foggy = Value;
 	}
 
-	void SetOvercast (const byte Value) {
+	void SetOvercast(const byte Value) {
 		GetWeatherData()->Overcast = Value;
 	}
 
-	void SetRain (const byte Value) {
+	void SetRain(const byte Value) {
 		GetWeatherData()->Rain = Value;
 	}
 
-	void SetThunder (const byte Value) {
+	void SetThunder(const byte Value) {
 		GetWeatherData()->Thunder = Value;
 	}
 
-	void SetAsh (const byte Value) {
+	void SetAsh(const byte Value) {
 		GetWeatherData()->Ash = Value;
 	}
 
-	void SetBlight (const byte Value) {
+	void SetBlight(const byte Value) {
 		GetWeatherData()->Blight = Value;
 	}
 
@@ -177,4 +177,3 @@ class CEsmSubWEAT : public CEsmSubRecord {
 /*===========================================================================
  *      End of File EsmsubWEAT.H
  *=========================================================================*/
-

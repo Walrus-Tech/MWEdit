@@ -91,7 +91,9 @@
 typedef TPtrArray<CEsmRecord> CEsmRecArray;
 
 /* Callback function type */
-typedef int (*ESMFILE_CALLBACK) (const int Event, const TCHAR* pMessage, const float Percent,
+typedef int (*ESMFILE_CALLBACK) (const int Event,
+                                 const TCHAR *pMessage,
+                                 const float Percent,
                                  long UserData);
 
 /*===========================================================================
@@ -133,88 +135,88 @@ class CEsmFile {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Add a record to the file */
-	void AddRecord (CEsmRecord* pRecord) {
+	void AddRecord(CEsmRecord *pRecord) {
 		m_Records.Add(pRecord);
 	}
 
-	void AddRecord (CEsmRecord* pRecord, CEsmRecord* pInsertAfter);
+	void AddRecord(CEsmRecord *pRecord, CEsmRecord *pInsertAfter);
 
 	/* Allocate a new record */
-	virtual CEsmRecord *AllocNewRecord (const TCHAR* pType);
-	virtual CEsmRecord *AllocateRecord (const TCHAR* pType);
-	virtual CEsmRecord *CreateNewRecord (const TCHAR* pType);
+	virtual CEsmRecord *AllocNewRecord(const TCHAR *pType);
+	virtual CEsmRecord *AllocateRecord(const TCHAR *pType);
+	virtual CEsmRecord *CreateNewRecord(const TCHAR *pType);
 
 	/* Create a copy of a record */
-	CEsmRecord *CopyRecord (CEsmRecord* pRecord);
-	CEsmRecord *CreateCopy (CEsmRecord* pRecord);
+	CEsmRecord *CopyRecord(CEsmRecord *pRecord);
+	CEsmRecord *CreateCopy(CEsmRecord *pRecord);
 
 	/* Create a new, empty, plugin */
-	void CreateNew (void);
+	void CreateNew(void);
 
 	/* Remove a record from the array */
-	void DeleteRecord (CEsmRecord* pRecord) {
+	void DeleteRecord(CEsmRecord *pRecord) {
 		m_Records.DeleteElement(pRecord);
 	}
 
 	/* Access particular records */
-	CEsmRecord *FindFirst (const TCHAR* pType, int &ArrayIndex);
-	CEsmRecord *FindNext (const TCHAR* pType, int &ArrayIndex);
-	CEsmRecord *GetRecord (const int Index) {
+	CEsmRecord *FindFirst(const TCHAR *pType, int &ArrayIndex);
+	CEsmRecord *FindNext(const TCHAR *pType, int &ArrayIndex);
+	CEsmRecord *GetRecord(const int Index) {
 		return (m_Records.GetAt(Index));
 	}
 
-	int FindRecord (CEsmRecord* pRecord) {
+	int FindRecord(CEsmRecord *pRecord) {
 		return (m_Records.FindElement(pRecord));
 	}
 
 	/* Get class members */
-	const TCHAR *GetFilename (void) const {
+	const TCHAR *GetFilename(void) const {
 		return (m_Filename);
 	}
 
-	int GetNumRecords (void) const {
+	int GetNumRecords(void) const {
 		return (m_Records.GetSize());
 	}
 
-	bool IsMaster (void) const {
+	bool IsMaster(void) const {
 		return (m_IsMaster);
 	}
 
-	bool IsActive (void) const {
+	bool IsActive(void) const {
 		return (m_IsActive);
 	}
 
-	long GetFileSize (void) const {
+	long GetFileSize(void) const {
 		return (m_FileSize);
 	}
 
-	CEsmRecArray *GetRecords (void) {
+	CEsmRecArray *GetRecords(void) {
 		return (&m_Records);
 	}
 
 	/* Read the entire file */
-	bool Read (const TCHAR* pFilename);
+	bool Read(const TCHAR *pFilename);
 
 	/* Set the callback function for load/saves */
-	void SetCallback (ESMFILE_CALLBACK CallBack, const long UserData) {
+	void SetCallback(ESMFILE_CALLBACK CallBack, const long UserData) {
 		m_CallBack = CallBack;
 		m_CallBackData = UserData;
 	}
 
 	/* Set class methods */
-	void SetMaster (const bool Flag) {
+	void SetMaster(const bool Flag) {
 		m_IsMaster = Flag;
 	}
 
-	void SetActive (const bool Flag) {
+	void SetActive(const bool Flag) {
 		m_IsActive = Flag;
 	}
 
 	/* Write the entire file */
-	bool Write (const TCHAR* pFilename);
+	bool Write(const TCHAR *pFilename);
 
 
 };

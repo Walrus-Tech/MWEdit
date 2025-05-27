@@ -30,8 +30,8 @@
 
 /* Gender types */
 #define MWESM_INFOGENDER_NONE     -1
-#define MWESM_INFOGENDER_MALE     0
-#define MWESM_INFOGENDER_FEMALE   1
+#define MWESM_INFOGENDER_MALE      0
+#define MWESM_INFOGENDER_FEMALE    1
 
 /*===========================================================================
  *      End of Definitions
@@ -86,14 +86,14 @@ class CEsmSubInfoDATA : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubInfoDATA);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(infodata_t));
 		m_RecordSize = sizeof(infodata_t);
@@ -104,80 +104,80 @@ class CEsmSubInfoDATA : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	infodata_t *GetInfoData (void) {
-		return ((infodata_t *) m_pData);
+	infodata_t *GetInfoData(void) {
+		return ((infodata_t *)m_pData);
 	}
 
-	long GetUnknown1 (void) {
+	long GetUnknown1(void) {
 		return (GetInfoData()->Unknown1);
 	}
 
-	char GetUnknown2 (void) {
+	char GetUnknown2(void) {
 		return (GetInfoData()->Unknown2);
 	}
 
-	long GetDisposition (void) {
+	long GetDisposition(void) {
 		return (GetInfoData()->Disposition);
 	}
 
-	char GetRank (void) {
+	char GetRank(void) {
 		return (GetInfoData()->Rank);
 	}
 
-	char GetPCRank (void) {
+	char GetPCRank(void) {
 		return (GetInfoData()->PCRank);
 	}
 
-	char GetGender (void) {
+	char GetGender(void) {
 		return (GetInfoData()->Gender);
 	}
 
-	bool IsFemale (void) {
+	bool IsFemale(void) {
 		return (GetGender() == MWESM_INFOGENDER_FEMALE);
 	}
 
-	bool IsMale (void) {
+	bool IsMale(void) {
 		return (GetGender() == MWESM_INFOGENDER_MALE);
 	}
 
-	bool IsNoGender (void) {
+	bool IsNoGender(void) {
 		return (GetGender() == MWESM_INFOGENDER_NONE);
 	}
 
 	/* Set class members */
-	void SetUnknown1 (const long Value) {
+	void SetUnknown1(const long Value) {
 		GetInfoData()->Unknown1 = Value;
 	}
 
-	void SetUnknown2 (const char Value) {
+	void SetUnknown2(const char Value) {
 		GetInfoData()->Unknown2 = Value;
 	}
 
-	void SetDisposition (const long Value) {
+	void SetDisposition(const long Value) {
 		GetInfoData()->Disposition = Value;
 	}
 
-	void SetRank (const char Value) {
+	void SetRank(const char Value) {
 		GetInfoData()->Rank = Value;
 	}
 
-	void SetPCRank (const char Value) {
+	void SetPCRank(const char Value) {
 		GetInfoData()->PCRank = Value;
 	}
 
-	void SetGender (const char Value) {
+	void SetGender(const char Value) {
 		GetInfoData()->Gender = Value;
 	}
 
-	void SetFemale (void) {
+	void SetFemale(void) {
 		SetGender(MWESM_INFOGENDER_FEMALE);
 	}
 
-	void SetMale (void) {
+	void SetMale(void) {
 		SetGender(MWESM_INFOGENDER_MALE);
 	}
 
-	void SetNoGender (void) {
+	void SetNoGender(void) {
 		SetGender(MWESM_INFOGENDER_NONE);
 	}
 

@@ -76,7 +76,7 @@ class CEsmSubCellRef : public CEsmSubRecord {
   protected:
 
 	/* Clears all sub-records in the array */
-	void ClearSubRecArray (void);
+	void ClearSubRecArray(void);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -88,95 +88,95 @@ class CEsmSubCellRef : public CEsmSubRecord {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Add a new sub-record to the cell-reference array */
-	void AddSubRec (CEsmSubRecord* pSubRec) {
+	void AddSubRec(CEsmSubRecord *pSubRec) {
 		m_SubRecArray.Add(pSubRec);
 	}
 
 	/* Copy from another cellref sub-record */
-	virtual void Copy (CEsmSubRecord* pSubRecord);
+	virtual void Copy(CEsmSubRecord *pSubRecord);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void);
+	static CEsmSubRecord *Create(void);
 
 	/* Create a new sub-record */
-	virtual void CreateNew (CEsmCell* pCell);
+	virtual void CreateNew(CEsmCell *pCell);
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData);
+	virtual bool Find(esmfind_t &FindData);
 
 	/* Access sub-records */
-	CEsmSubRecord *FindSubRecord (const TCHAR* pType);
+	CEsmSubRecord *FindSubRecord(const TCHAR *pType);
 
 	/* Get class members */
-	int GetNumSubRecs (void) {
+	int GetNumSubRecs(void) {
 		return (m_SubRecArray.GetSize());
 	}
 
-	CEsmSubRecord *GetSubRec (const int Index) {
+	CEsmSubRecord *GetSubRec(const int Index) {
 		return (m_SubRecArray.GetAt(Index));
 	}
 
-	CEsmCell *GetCell (void) {
+	CEsmCell *GetCell(void) {
 		return (m_pCell);
 	}
 
-	esmrecinfo_t *GetRecInfo (void) {
+	esmrecinfo_t *GetRecInfo(void) {
 		return (m_pRecInfo);
 	}
 
-	bool IsActive (void) {
+	bool IsActive(void) {
 		return (m_IsActive);
 	}
 
-	bool IsDeleted (void) {
+	bool IsDeleted(void) {
 		return (FindSubRecord(MWESM_SUBREC_DELE) != NULL);
 	}
 
-	long GetUserData (void) {
+	long GetUserData(void) {
 		return (m_UserData);
 	}
 
-	const TCHAR *GetFieldString (const int FieldID);
-	int GetIndex (void);
-	pos6data_t *GetLocation (void);
+	const TCHAR *GetFieldString(const int FieldID);
+	int GetIndex(void);
+	pos6data_t *GetLocation(void);
 
 	/* Is the cell reference for the given object? */
-	bool IsReference (const TCHAR* pID);
+	bool IsReference(const TCHAR *pID);
 
 	/* Checks for an identical cell reference object */
-	bool IsSame (CEsmSubCellRef* pCellRef);
+	bool IsSame(CEsmSubCellRef *pCellRef);
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID);
+	virtual bool IsUsed(const TCHAR *pID);
 
 	/* Set class members */
-	void SetIsActive (const bool Flag) {
+	void SetIsActive(const bool Flag) {
 		m_IsActive = Flag;
 	}
 
-	void SetRecInfo (esmrecinfo_t* pRecInfo) {
+	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
 
-	void SetCell (CEsmCell* pCell) {
+	void SetCell(CEsmCell *pCell) {
 		m_pCell = pCell;
 	}
 
-	void SetUserData (const long Value) {
+	void SetUserData(const long Value) {
 		m_UserData = Value;
 	}
 
-	void SetRefName (const TCHAR* pName);
-	void SetIndex (const long Index, const byte Flag);
-	void SetFRMRFlag (const byte Flag);
-	void SetFRMRIndex (const long Index);
-	void SetDelete (const bool Flag);
+	void SetRefName(const TCHAR *pName);
+	void SetIndex(const long Index, const byte Flag);
+	void SetFRMRFlag(const byte Flag);
+	void SetFRMRIndex(const long Index);
+	void SetDelete(const bool Flag);
 
 	/* Output the entire sub-record to the given location in the file */
-	virtual bool Write (CGenFile& File);
+	virtual bool Write(CGenFile &File);
 
 };
 

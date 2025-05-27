@@ -29,12 +29,30 @@ DEFINE_FILE("EsmRace.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmRace::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DESC, CEsmSubName::Create },
-	{ MWESM_SUBREC_NPCS, CEsmSubName32::Create },
-	{ MWESM_SUBREC_RADT, CEsmSubRADT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DESC,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_NPCS,
+		CEsmSubName32::Create
+	},
+	{
+		MWESM_SUBREC_RADT,
+		CEsmSubRADT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -46,7 +64,7 @@ const esmsubreccreate_t CEsmRace::s_SubRecCreate[] = {
  * Class CEsmRace Constructor
  *
  *=========================================================================*/
-CEsmRace::CEsmRace () {
+CEsmRace::CEsmRace() {
 	//DEFINE_FUNCTION("CEsmRace::CEsmRace()");
 	m_pNameData = NULL;
 	m_pDescData = NULL;
@@ -63,7 +81,7 @@ CEsmRace::CEsmRace () {
  * Class CEsmRace Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmRace::Destroy (void) {
+void CEsmRace::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmRace::Destroy()");
 	m_pNameData = NULL;
 	m_pDescData = NULL;
@@ -84,15 +102,15 @@ void CEsmRace::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmRace::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmRace* pRace;
+int CEsmRace::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmRace *pRace;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_RACE)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pRace = (CEsmRace *) pRecord;
+	pRace = (CEsmRace *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -118,9 +136,9 @@ int CEsmRace::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRace::Create (void) {
+CEsmRecord *CEsmRace::Create(void) {
 	DEFINE_FUNCTION("CEsmRace::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRace);
 	return (pRecord);
 }
@@ -137,7 +155,7 @@ CEsmRecord *CEsmRace::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmRace::CreateNew (CEsmFile* pFile) {
+void CEsmRace::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -160,7 +178,7 @@ void CEsmRace::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmRace::GetFieldString (const int FieldID) {
+const TCHAR *CEsmRace::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			return GetName();
@@ -183,13 +201,13 @@ const TCHAR *CEsmRace::GetFieldString (const int FieldID) {
  * Class CEsmRace Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmRace::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmRace::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pNameData = (CEsmSubNameFix *) pSubRecord;
+		m_pNameData = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_RADT)) {
-		m_pRaceData = (CEsmSubRADT *) pSubRecord;
+		m_pRaceData = (CEsmSubRADT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DESC)) {
-		m_pDescData = (CEsmSubName *) pSubRecord;
+		m_pDescData = (CEsmSubName *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -208,7 +226,7 @@ void CEsmRace::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmRace::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmRace::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);

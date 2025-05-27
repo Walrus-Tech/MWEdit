@@ -80,14 +80,14 @@ class CEsmSubSCHD : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSCHD);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(scriptheaddata_t));
 		m_RecordSize = sizeof(scriptheaddata_t);
@@ -95,56 +95,56 @@ class CEsmSubSCHD : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	scriptheaddata_t *GetScriptHeadData (void) {
-		return ((scriptheaddata_t *) m_pData);
+	scriptheaddata_t *GetScriptHeadData(void) {
+		return ((scriptheaddata_t *)m_pData);
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (GetScriptHeadData()->Name);
 	}
 
-	long GetNumShorts (void) {
+	long GetNumShorts(void) {
 		return (GetScriptHeadData()->NumShorts);
 	}
 
-	long GetNumLongs (void) {
+	long GetNumLongs(void) {
 		return (GetScriptHeadData()->NumLongs);
 	}
 
-	long GetNumFloats (void) {
+	long GetNumFloats(void) {
 		return (GetScriptHeadData()->NumFloats);
 	}
 
-	long GetScriptDataSize (void) {
+	long GetScriptDataSize(void) {
 		return (GetScriptHeadData()->ScriptDataSize);
 	}
 
-	long GetLocalVarSize (void) {
+	long GetLocalVarSize(void) {
 		return (GetScriptHeadData()->LocalVarSize);
 	}
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		TSTRNCPY(GetScriptHeadData()->Name, pString, MWESM_ID_MAXSIZE);
 	}
 
-	void SetNumShorts (const long Value) {
+	void SetNumShorts(const long Value) {
 		GetScriptHeadData()->NumShorts = Value;
 	}
 
-	void SetNumLongs (const long Value) {
+	void SetNumLongs(const long Value) {
 		GetScriptHeadData()->NumLongs = Value;
 	}
 
-	void SetNumFloats (const long Value) {
+	void SetNumFloats(const long Value) {
 		GetScriptHeadData()->NumFloats = Value;
 	}
 
-	void SetScriptDataSize (const long Value) {
+	void SetScriptDataSize(const long Value) {
 		GetScriptHeadData()->ScriptDataSize = Value;
 	}
 
-	void SetLocalVarSize (const long Value) {
+	void SetLocalVarSize(const long Value) {
 		GetScriptHeadData()->LocalVarSize = Value;
 	}
 

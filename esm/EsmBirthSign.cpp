@@ -29,12 +29,30 @@ DEFINE_FILE("EsmBirthSign.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmBirthSign::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_TNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DESC, CEsmSubName::Create },
-	{ MWESM_SUBREC_NPCS, CEsmSubName32::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_TNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DESC,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_NPCS,
+		CEsmSubName32::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -46,7 +64,7 @@ const esmsubreccreate_t CEsmBirthSign::s_SubRecCreate[] = {
  * Class CEsmBirthSign Constructor
  *
  *=========================================================================*/
-CEsmBirthSign::CEsmBirthSign () {
+CEsmBirthSign::CEsmBirthSign() {
 	//DEFINE_FUNCTION("CEsmBirthSign::CEsmBirthSign()");
 	m_pNameData = NULL;
 	m_pTextureData = NULL;
@@ -63,7 +81,7 @@ CEsmBirthSign::CEsmBirthSign () {
  * Class CEsmBirthSign Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmBirthSign::Destroy (void) {
+void CEsmBirthSign::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmBirthSign::Destroy()");
 	m_pNameData = NULL;
 	m_pDescData = NULL;
@@ -84,15 +102,15 @@ void CEsmBirthSign::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmBirthSign::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmBirthSign* pSign;
+int CEsmBirthSign::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmBirthSign *pSign;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_CLAS)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pSign = (CEsmBirthSign *) pRecord;
+	pSign = (CEsmBirthSign *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -118,9 +136,9 @@ int CEsmBirthSign::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmBirthSign::Create (void) {
+CEsmRecord *CEsmBirthSign::Create(void) {
 	DEFINE_FUNCTION("CEsmBirthSign::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmBirthSign);
 	return (pRecord);
 }
@@ -137,7 +155,7 @@ CEsmRecord *CEsmBirthSign::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmBirthSign::CreateNew (CEsmFile* pFile) {
+void CEsmBirthSign::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -159,7 +177,7 @@ void CEsmBirthSign::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmBirthSign::GetFieldString (const int FieldID) {
+const TCHAR *CEsmBirthSign::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			return GetName();
@@ -182,13 +200,13 @@ const TCHAR *CEsmBirthSign::GetFieldString (const int FieldID) {
  * Class CEsmBirthSign Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmBirthSign::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmBirthSign::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pNameData = (CEsmSubNameFix *) pSubRecord;
+		m_pNameData = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DESC)) {
-		m_pDescData = (CEsmSubName *) pSubRecord;
+		m_pDescData = (CEsmSubName *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_TNAM)) {
-		m_pTextureData = (CEsmSubNameFix *) pSubRecord;
+		m_pTextureData = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -207,7 +225,7 @@ void CEsmBirthSign::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmBirthSign::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmBirthSign::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);

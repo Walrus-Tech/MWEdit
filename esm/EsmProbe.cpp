@@ -29,13 +29,34 @@ DEFINE_FILE("EsmProbe.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmProbe::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_PBDT, CEsmSubPBDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_PBDT,
+		CEsmSubPBDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmProbe::s_SubRecCreate[] = {
  * Class CEsmProbe Constructor
  *
  *=========================================================================*/
-CEsmProbe::CEsmProbe () {
+CEsmProbe::CEsmProbe() {
 	//DEFINE_FUNCTION("CEsmProbe::CEsmProbe()");
 	m_pProbeData = NULL;
 }
@@ -64,7 +85,7 @@ CEsmProbe::CEsmProbe () {
  * Description
  *
  *=========================================================================*/
-void CEsmProbe::Destroy (void) {
+void CEsmProbe::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmProbe::Destroy()");
 	m_pProbeData = NULL;
 	CEsmItem2::Destroy();
@@ -83,16 +104,16 @@ void CEsmProbe::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmProbe::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmProbe::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmProbe::CompareFields()");
-	CEsmProbe* pProbe;
+	CEsmProbe *pProbe;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_PROB)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pProbe = (CEsmProbe *) pRecord;
+	pProbe = (CEsmProbe *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
@@ -118,9 +139,9 @@ int CEsmProbe::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmProbe::Create (void) {
+CEsmRecord *CEsmProbe::Create(void) {
 	DEFINE_FUNCTION("CEsmProbe::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmProbe);
 	return (pRecord);
 }
@@ -137,7 +158,7 @@ CEsmRecord *CEsmProbe::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmProbe::CreateNew (CEsmFile* pFile) {
+void CEsmProbe::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -158,17 +179,17 @@ void CEsmProbe::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmProbe::GetFieldString (const int FieldID) {
+const TCHAR *CEsmProbe::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmProbe::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_USES:
-			snprintf (s_Buffer, 31, _T("%ld"), GetUses());
+			snprintf(s_Buffer, 31, _T("%ld"), GetUses());
 			return (s_Buffer);
 
 		case ESM_FIELD_QUALITY:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetQuality());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetQuality());
 			return (s_Buffer);
 
 		default:
@@ -186,9 +207,9 @@ const TCHAR *CEsmProbe::GetFieldString (const int FieldID) {
  * Class CEsmProbe Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmProbe::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmProbe::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_PBDT)) {
-		m_pProbeData = (CEsmSubPBDT *) pSubRecord;
+		m_pProbeData = (CEsmSubPBDT *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -207,7 +228,7 @@ void CEsmProbe::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmProbe::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmProbe::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			SetUses(atoi(pString));

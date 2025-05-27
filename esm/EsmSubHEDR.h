@@ -77,11 +77,11 @@ class CEsmSubHEDR : public CEsmSubRecord {
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData (CGenFile& File) {
+	virtual bool ReadData(CGenFile &File) {
 		return File.Read((char *)&m_Data, m_RecordSize);
 	}
 
-	virtual bool WriteData (CGenFile& File) {
+	virtual bool WriteData(CGenFile &File) {
 		return File.Write((char *)&m_Data, m_RecordSize);
 	}
 
@@ -95,21 +95,21 @@ class CEsmSubHEDR : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Copy from another name record */
-	virtual void Copy (CEsmSubRecord* pSubRecord) {
+	virtual void Copy(CEsmSubRecord *pSubRecord) {
 		m_Type.SetType(pSubRecord->GetType());
 		m_RecordSize = pSubRecord->GetRecordSize();
-		m_Data = *((CEsmSubHEDR *) pSubRecord)->GetHeaderData();
+		m_Data = *((CEsmSubHEDR *)pSubRecord)->GetHeaderData();
 	}
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubHEDR);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(headerdata_t);
 		memset(&m_Data, 0, sizeof(headerdata_t));
@@ -118,48 +118,48 @@ class CEsmSubHEDR : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	headerdata_t *GetHeaderData (void) {
+	headerdata_t *GetHeaderData(void) {
 		return (&m_Data);
 	}
 
-	float GetVersion (void) {
+	float GetVersion(void) {
 		return (GetHeaderData()->Version);
 	}
 
-	long GetUnknown (void) {
+	long GetUnknown(void) {
 		return (GetHeaderData()->Unknown1);
 	}
 
-	const char *GetAuthor (void) {
+	const char *GetAuthor(void) {
 		return (GetHeaderData()->Author);
 	}
 
-	const char *GetDescription (void) {
+	const char *GetDescription(void) {
 		return (GetHeaderData()->Description);
 	}
 
-	long GetNumRecords (void) {
+	long GetNumRecords(void) {
 		return (GetHeaderData()->NumRecords);
 	}
 
 	/* Set class members */
-	void SetVersion (const float Value) {
+	void SetVersion(const float Value) {
 		GetHeaderData()->Version = Value;
 	}
 
-	void SetNumRecords (const long Value) {
+	void SetNumRecords(const long Value) {
 		GetHeaderData()->NumRecords = Value;
 	}
 
-	void SetUnknown (const long Value) {
+	void SetUnknown(const long Value) {
 		GetHeaderData()->Unknown1 = Value;
 	}
 
-	void SetAuthor (const TCHAR* pValue) {
+	void SetAuthor(const TCHAR *pValue) {
 		TSTRNCPY(GetHeaderData()->Author, pValue, MWESM_HEDR_AUTHORSIZE);
 	}
 
-	void SetDescription (const TCHAR* pValue) {
+	void SetDescription(const TCHAR *pValue) {
 		TSTRNCPY(GetHeaderData()->Description, pValue, MWESM_HEDR_DESCSIZE);
 	}
 
@@ -184,4 +184,3 @@ class CEsmSubHEDR : public CEsmSubRecord {
 /*===========================================================================
  *      End of File Esmsubname.H
  *=========================================================================*/
-

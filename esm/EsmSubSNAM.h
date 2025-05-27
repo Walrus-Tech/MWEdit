@@ -76,14 +76,14 @@ class CEsmSubSNAM : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSNAM);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(snamdata_t));
 		m_RecordSize = sizeof(snamdata_t);
@@ -91,29 +91,29 @@ class CEsmSubSNAM : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	snamdata_t *GetSNAMData (void) {
-		return ((snamdata_t *) m_pData);
+	snamdata_t *GetSNAMData(void) {
+		return ((snamdata_t *)m_pData);
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (GetSNAMData()->Name);
 	}
 
-	byte GetChance (void) {
+	byte GetChance(void) {
 		return (GetSNAMData()->Chance);
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (StringCompare(GetName(), pID, false) == 0);
 	}
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		TSTRNCPY(GetSNAMData()->Name, pString, MWESM_ID_MAXSIZE);
 	}
 
-	void SetChance (const byte Chance) {
+	void SetChance(const byte Chance) {
 		GetSNAMData()->Chance = Chance;
 	}
 

@@ -49,7 +49,7 @@
  * Begin Function Prototypes
  *
  *=========================================================================*/
-const TCHAR *GetESMDialogType (const int Type);
+const TCHAR *GetESMDialogType(const int Type);
 /*===========================================================================
  *      End of Function Prototypes
  *=========================================================================*/
@@ -80,39 +80,39 @@ class CEsmDialogue : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmDialogue();
 	//virtual ~CEsmDialogue() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void);
+	virtual const TCHAR *GetItemType(void);
 
 	/* Get class members */
-	const TCHAR *GetDialogType (void) {
+	const TCHAR *GetDialogType(void) {
 		return (GetESMDialogType(GetDialogTypeID()));
 	}
 
-	int GetDialogTypeID (void) {
-		return (m_pData ? (int) * (m_pData->GetData()) : 0);
+	int GetDialogTypeID(void) {
+		return (m_pData ? (int)*(m_pData->GetData()) : 0);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetDialogType (const int Type) {
+	void SetDialogType(const int Type) {
 		if (m_pData) {
-			*(m_pData->GetData()) = (byte) Type;
+			*(m_pData->GetData()) = (byte)Type;
 		}
 	}
 

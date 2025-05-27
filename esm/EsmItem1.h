@@ -67,55 +67,55 @@ class CEsmItem1 : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmItem1();
 	//virtual ~CEsmArmor() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Used to determine the type of derived classes */
-	virtual int GetClassType (void) {
+	virtual int GetClassType(void) {
 		return (CEsmRecord::GetClassType() | MWESM_CLASSTYPE_ITEM1);
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Get class members */
-	const TCHAR *GetName (void) const {
+	const TCHAR *GetName(void) const {
 		return (m_pName ? m_pName->GetName() : _T(""));
 	}
 
-	const TCHAR *GetModel (void) const {
+	const TCHAR *GetModel(void) const {
 		return (m_pModel ? m_pModel->GetName() : _T(""));
 	}
 
-	const TCHAR *GetScript (void) const {
+	const TCHAR *GetScript(void) const {
 		return (m_pScript ? m_pScript->GetName() : _T(""));
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetName (const TCHAR* pName) {
+	void SetName(const TCHAR *pName) {
 		if (m_pName) {
 			m_pName->SetName(pName);
 		}
 	}
 
-	void SetModel (const TCHAR* pName) {
+	void SetModel(const TCHAR *pName) {
 		if (m_pModel) {
 			m_pModel->SetName(pName);
 		}
 	}
 
-	void SetScript (const TCHAR* pName);
+	void SetScript(const TCHAR *pName);
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -128,4 +128,3 @@ class CEsmItem1 : public CEsmRecord {
 /*===========================================================================
  *      End of File Esmarmor.H
  *=========================================================================*/
-

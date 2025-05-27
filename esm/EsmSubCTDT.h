@@ -84,14 +84,14 @@ class CEsmSubCTDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCTDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(clothdata_t));
 		m_RecordSize = sizeof(clothdata_t);
@@ -99,42 +99,42 @@ class CEsmSubCTDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	clothdata_t *GetClothData (void) {
-		return ((clothdata_t *) m_pData);
+	clothdata_t *GetClothData(void) {
+		return ((clothdata_t *)m_pData);
 	}
 
-	int GetClothType (void) {
+	int GetClothType(void) {
 		return (GetClothData()->Type);
 	}
 
-	ushort GetValue (void) {
+	ushort GetValue(void) {
 		return (GetClothData()->Value);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetClothData()->Weight);
 	}
 
-	short GetEnchantPts (void) {
+	short GetEnchantPts(void) {
 		return (GetClothData()->EnchantPts);
 	}
 
 	/* Set class members */
-	void SetClothType (const int Type) {
+	void SetClothType(const int Type) {
 		if (Type >= MWESM_CLOTHTYPE_MIN && Type <= MWESM_CLOTHTYPE_MAX) {
 			GetClothData()->Type = Type;
 		}
 	}
 
-	void SetValue (const ushort Value) {
+	void SetValue(const ushort Value) {
 		GetClothData()->Value = Value;
 	}
 
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetClothData()->Weight = Value;
 	}
 
-	void SetEnchantPts (const short Value) {
+	void SetEnchantPts(const short Value) {
 		GetClothData()->EnchantPts = Value;
 	}
 

@@ -76,14 +76,14 @@ class CEsmSubAI_A : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAI_A);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ai_adata_t));
 		m_RecordSize = sizeof(ai_adata_t);
@@ -92,31 +92,31 @@ class CEsmSubAI_A : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	ai_adata_t *GetAIData (void) {
-		return ((ai_adata_t *) m_pData);
+	ai_adata_t *GetAIData(void) {
+		return ((ai_adata_t *)m_pData);
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (m_pData ? GetAIData()->Name : _T(""));
 	}
 
-	byte GetUnknown (void) {
+	byte GetUnknown(void) {
 		return (GetAIData()->Unknown);
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (TSTRNICMP(GetAIData()->Name, pID, 32) == 0);
 	}
 
 	/* Set class methods */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		if (m_pData) {
 			TSTRNCPY(GetAIData()->Name, pString, 32);
 		}
 	}
 
-	void SetUnknown (const byte Value) {
+	void SetUnknown(const byte Value) {
 		GetAIData()->Unknown = Value;
 	}
 

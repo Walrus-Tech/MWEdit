@@ -59,56 +59,56 @@ class CEsmMisc : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmMisc();
 	//virtual ~CEsmMisc() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Misc");
 	}
 
 	/* Get class members */
-	miscdata_t *GetMiscData (void) {
+	miscdata_t *GetMiscData(void) {
 		return (m_pMiscData ? m_pMiscData->GetMiscData() : NULL);
 	}
 
-	virtual float GetWeight (void) {
+	virtual float GetWeight(void) {
 		return (m_pMiscData ? m_pMiscData->GetWeight() : 0);
 	}
 
-	virtual long GetValue (void) {
+	virtual long GetValue(void) {
 		return (m_pMiscData ? m_pMiscData->GetValue() : 0);
 	}
 
-	long GetUnknown (void) {
+	long GetUnknown(void) {
 		return (m_pMiscData ? m_pMiscData->GetUnknown() : 0);
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 	/* Set class members */
-	virtual void SetWeight (const float Weight) {
+	virtual void SetWeight(const float Weight) {
 		if (m_pMiscData != NULL) {
 			m_pMiscData->SetWeight(Weight);
 		}
 	}
 
-	virtual void SetValue (const long Value) {
+	virtual void SetValue(const long Value) {
 		if (m_pMiscData != NULL) {
 			m_pMiscData->SetValue(Value);
 		}

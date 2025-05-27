@@ -64,60 +64,60 @@ class CEsmFaction : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmFaction();
 	//virtual ~CEsmFaction() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Faction");
 	}
 
 	/* Get class members */
-	factiondata_t *GetFactionData (void) {
+	factiondata_t *GetFactionData(void) {
 		return (m_pFactionData ? m_pFactionData->GetFactionData() : NULL);
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (m_pName ? m_pName->GetName() : _T(""));
 	}
 
-	bool IsHidden (void) {
+	bool IsHidden(void) {
 		return (m_pFactionData ? m_pFactionData->IsHidden() : false);
 	}
 
-	const TCHAR *GetRankName (const int Rank);
+	const TCHAR *GetRankName(const int Rank);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		if (m_pName) {
 			m_pName->SetName(pString);
 		}
 	}
 
-	void SetHidden (const bool Flag) {
+	void SetHidden(const bool Flag) {
 		if (m_pFactionData) {
 			m_pFactionData->SetHidden(Flag);
 		}
 	}
 
-	void SetRankName (const int Rank, const TCHAR* pString);
+	void SetRankName(const int Rank, const TCHAR *pString);
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -130,4 +130,3 @@ class CEsmFaction : public CEsmRecord {
 /*===========================================================================
  *      End of File EsmBodyPart.H
  *=========================================================================*/
-

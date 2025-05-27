@@ -29,15 +29,42 @@ DEFINE_FILE("EsmBook.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmBook::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BKDT, CEsmSubBKDT::Create },
-	{ MWESM_SUBREC_TEXT, CEsmSubName::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_BKDT,
+		CEsmSubBKDT::Create
+	},
+	{
+		MWESM_SUBREC_TEXT,
+		CEsmSubName::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -49,7 +76,7 @@ const esmsubreccreate_t CEsmBook::s_SubRecCreate[] = {
  * Class CEsmBook Constructor
  *
  *=========================================================================*/
-CEsmBook::CEsmBook () {
+CEsmBook::CEsmBook() {
 	//DEFINE_FUNCTION("CEsmBook::CEsmBook()");
 	m_pBookData = NULL;
 	m_pText = NULL;
@@ -67,7 +94,7 @@ CEsmBook::CEsmBook () {
  * Description
  *
  *=========================================================================*/
-void CEsmBook::Destroy (void) {
+void CEsmBook::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmBook::Destroy()");
 	m_pBookData = NULL;
 	m_pText = NULL;
@@ -87,16 +114,16 @@ void CEsmBook::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmBook::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmBook::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmBook::CompareFields()");
-	CEsmBook* pBook;
+	CEsmBook *pBook;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_BOOK)) {
 		return CEsmItem3::CompareFields(FieldID, pRecord);
 	}
 
-	pBook = (CEsmBook *) pRecord;
+	pBook = (CEsmBook *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_SCROLL:
@@ -123,9 +150,9 @@ int CEsmBook::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmBook::Create (void) {
+CEsmRecord *CEsmBook::Create(void) {
 	DEFINE_FUNCTION("CEsmBook::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmBook);
 	return (pRecord);
 }
@@ -142,7 +169,7 @@ CEsmRecord *CEsmBook::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmBook::CreateNew (CEsmFile* pFile) {
+void CEsmBook::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem3::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -165,13 +192,13 @@ void CEsmBook::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmBook::GetFieldString (const int FieldID) {
+const TCHAR *CEsmBook::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmBook::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANTPTS:
-			snprintf (s_Buffer, 31, _T("%ld"), GetEnchantPts());
+			snprintf(s_Buffer, 31, _T("%ld"), GetEnchantPts());
 			return (s_Buffer);
 
 		case ESM_FIELD_SKILL:
@@ -199,11 +226,11 @@ const TCHAR *CEsmBook::GetFieldString (const int FieldID) {
  * Class CEsmBook Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmBook::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmBook::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_BKDT)) {
-		m_pBookData = (CEsmSubBKDT *) pSubRecord;
+		m_pBookData = (CEsmSubBKDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_TEXT)) {
-		m_pText = (CEsmSubName *) pSubRecord;
+		m_pText = (CEsmSubName *)pSubRecord;
 	} else {
 		CEsmItem3::OnAddSubRecord(pSubRecord);
 	}
@@ -222,7 +249,7 @@ void CEsmBook::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmBook::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmBook::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANTPTS:
 			SetEnchantPts(atoi(pString));

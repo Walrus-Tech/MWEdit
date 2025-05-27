@@ -29,12 +29,12 @@
  *=========================================================================*/
 
 /* Enchant types */
-#define MWESM_ENCHTYPE_MIN        0
-#define MWESM_ENCHTYPE_CASTONCE   0
-#define MWESM_ENCHTYPE_CASTUSED   1
+#define MWESM_ENCHTYPE_MIN            0
+#define MWESM_ENCHTYPE_CASTONCE       0
+#define MWESM_ENCHTYPE_CASTUSED       1
 #define MWESM_ENCHTYPE_CASTSTRIKES    2
-#define MWESM_ENCHTYPE_CONSTANT   3
-#define MWESM_ENCHTYPE_MAX        3
+#define MWESM_ENCHTYPE_CONSTANT       3
+#define MWESM_ENCHTYPE_MAX            3
 
 /*===========================================================================
  *      End of Definitions
@@ -87,14 +87,14 @@ class CEsmSubENDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubENDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(enchantdata_t));
 		m_RecordSize = sizeof(enchantdata_t);
@@ -103,42 +103,42 @@ class CEsmSubENDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	enchantdata_t *GetEnchantData (void) {
-		return (enchantdata_t *) m_pData;
+	enchantdata_t *GetEnchantData(void) {
+		return (enchantdata_t *)m_pData;
 	}
 
-	long GetEnchantType (void) {
+	long GetEnchantType(void) {
 		return (GetEnchantData()->Type);
 	}
 
-	long GetEnchantCost (void) {
+	long GetEnchantCost(void) {
 		return (GetEnchantData()->EnchantCost);
 	}
 
-	long GetCharge (void) {
+	long GetCharge(void) {
 		return (GetEnchantData()->Charge);
 	}
 
-	bool IsAutoCalc (void) {
+	bool IsAutoCalc(void) {
 		return (GetEnchantData()->AutoCalc != 0);
 	}
 
 	/* Set class members */
-	void SetEnchantType (const long Value) {
+	void SetEnchantType(const long Value) {
 		if (Value >= MWESM_ENCHTYPE_MIN && Value <= MWESM_ENCHTYPE_MAX) {
 			GetEnchantData()->Type = Value;
 		}
 	}
 
-	void SetEnchantCost (const long Value) {
+	void SetEnchantCost(const long Value) {
 		GetEnchantData()->EnchantCost = Value;
 	}
 
-	void SetCharge (const long Value) {
+	void SetCharge(const long Value) {
 		GetEnchantData()->Charge = Value;
 	}
 
-	void SetAutoCalc (const bool Flag) {
+	void SetAutoCalc(const bool Flag) {
 		GetEnchantData()->AutoCalc = Flag ? 1 : 0;
 	}
 

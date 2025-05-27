@@ -29,10 +29,22 @@ DEFINE_FILE("EsmSound.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmSound::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubName::Create },
-	{ MWESM_SUBREC_DATA, CEsmSubDATA::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_DATA,
+		CEsmSubDATA::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -44,7 +56,7 @@ const esmsubreccreate_t CEsmSound::s_SubRecCreate[] = {
  * Class CEsmSound Constructor
  *
  *=========================================================================*/
-CEsmSound::CEsmSound () {
+CEsmSound::CEsmSound() {
 	//DEFINE_FUNCTION("CEsmSound::CEsmSound()");
 	m_pData = NULL;
 	m_pName = NULL;
@@ -62,7 +74,7 @@ CEsmSound::CEsmSound () {
  * Description
  *
  *=========================================================================*/
-void CEsmSound::Destroy (void) {
+void CEsmSound::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmSound::Destroy()");
 	m_pData = NULL;
 	m_pName = NULL;
@@ -82,15 +94,15 @@ void CEsmSound::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmSound::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmSound* pSound;
+int CEsmSound::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmSound *pSound;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_SOUN)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pSound = (CEsmSound *) pRecord;
+	pSound = (CEsmSound *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_VOLUME:
@@ -122,9 +134,9 @@ int CEsmSound::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSound::Create (void) {
+CEsmRecord *CEsmSound::Create(void) {
 	DEFINE_FUNCTION("CEsmSound::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSound);
 	return (pRecord);
 }
@@ -141,7 +153,7 @@ CEsmRecord *CEsmSound::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmSound::CreateNew (CEsmFile* pFile) {
+void CEsmSound::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -163,20 +175,20 @@ void CEsmSound::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmSound::GetFieldString (const int FieldID) {
+const TCHAR *CEsmSound::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_VOLUME:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetVolume());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetVolume());
 			return (s_Buffer);
 
 		case ESM_FIELD_MINRANGE:
-			snprintf (s_Buffer, 31, _T("%d"), (int)GetMinRange());
+			snprintf(s_Buffer, 31, _T("%d"), (int)GetMinRange());
 			return (s_Buffer);
 
 		case ESM_FIELD_MAXRANGE:
-			snprintf (s_Buffer, 31, _T("%d"), (int)GetMaxRange());
+			snprintf(s_Buffer, 31, _T("%d"), (int)GetMaxRange());
 			return (s_Buffer);
 
 		case ESM_FIELD_NAME:
@@ -197,11 +209,11 @@ const TCHAR *CEsmSound::GetFieldString (const int FieldID) {
  * Class CEsmSound Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSound::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmSound::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
-		m_pData = (CEsmSubDATA *) pSubRecord;
+		m_pData = (CEsmSubDATA *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pName = (CEsmSubName *) pSubRecord;
+		m_pName = (CEsmSubName *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -220,10 +232,10 @@ void CEsmSound::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmSound::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmSound::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_VOLUME:
-			SetVolume((float) atof(pString));
+			SetVolume((float)atof(pString));
 			return (true);
 
 		case ESM_FIELD_MINRANGE:
@@ -253,7 +265,7 @@ bool CEsmSound::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Begin Set Class Members
  *
  *=========================================================================*/
-void CEsmSound::SetVolume (const float Volume) {
+void CEsmSound::SetVolume(const float Volume) {
 	if (m_pData == NULL) {
 		return;
 	}
@@ -263,12 +275,12 @@ void CEsmSound::SetVolume (const float Volume) {
 	} else if (Volume > 1.0f) {
 		GetSoundData()->Volume = 255;
 	} else {
-		GetSoundData()->Volume = (byte) (Volume * 255);
+		GetSoundData()->Volume = (byte)(Volume * 255);
 	}
 }
 
 
-void CEsmSound::SetMinRange (const int Range) {
+void CEsmSound::SetMinRange(const int Range) {
 	if (m_pData == NULL) {
 		return;
 	}
@@ -278,12 +290,12 @@ void CEsmSound::SetMinRange (const int Range) {
 	} else if (Range > 255) {
 		GetSoundData()->MinRange = 255;
 	} else {
-		GetSoundData()->MinRange = (byte) Range;
+		GetSoundData()->MinRange = (byte)Range;
 	}
 }
 
 
-void CEsmSound::SetMaxRange (const int Range) {
+void CEsmSound::SetMaxRange(const int Range) {
 	if (m_pData == NULL) {
 		return;
 	}
@@ -293,11 +305,10 @@ void CEsmSound::SetMaxRange (const int Range) {
 	} else if (Range > 255) {
 		GetSoundData()->MaxRange = 255;
 	} else {
-		GetSoundData()->MaxRange = (byte) Range;
+		GetSoundData()->MaxRange = (byte)Range;
 	}
 }
 
 /*===========================================================================
  *      End of Set Class Members
  *=========================================================================*/
-

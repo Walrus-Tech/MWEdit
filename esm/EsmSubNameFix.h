@@ -45,14 +45,14 @@ class CEsmSubNameFix : public CEsmSubRecord {
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData (CGenFile& File) {
+	virtual bool ReadData(CGenFile &File) {
 		m_Name.SetSize(m_RecordSize);
-		bool Result = File.Read((TCHAR *)(const TCHAR*)m_Name, m_RecordSize);
+		bool Result = File.Read((TCHAR *)(const TCHAR *)m_Name, m_RecordSize);
 		m_Name.UpdateLength();
 		return (Result);
 	}
 
-	virtual bool WriteData (CGenFile& File) {
+	virtual bool WriteData(CGenFile &File) {
 		if (GetRecordSize() <= 0) {
 			return (true);
 		}
@@ -70,7 +70,7 @@ class CEsmSubNameFix : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Copy from another name record */
-	virtual void Copy (CEsmSubRecord* pSubRecord) {
+	virtual void Copy(CEsmSubRecord *pSubRecord) {
 		Destroy();
 		m_Type.SetType(pSubRecord->GetType());
 		m_RecordSize = pSubRecord->GetRecordSize();
@@ -79,34 +79,34 @@ class CEsmSubNameFix : public CEsmSubRecord {
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNameFix);
 		return (pSubRecord);
 	}
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData) {
+	virtual bool Find(esmfind_t &FindData) {
 		return (m_Name.FindI(FindData.pText));
 	}
 
 	/* Get class methods */
-	const TCHAR *GetName (void) const {
+	const TCHAR *GetName(void) const {
 		return (m_Name);
 	}
 
-	virtual long GetRecordSize (void) const {
+	virtual long GetRecordSize(void) const {
 		return ((m_Name.GetLength() >= MWESM_ID_MAXSIZE - 1) ? MWESM_ID_MAXSIZE :
 		        (m_Name.GetLength() + 1));
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (m_Name.CompareNoCase(pID) == 0);
 	}
 
 	/* Set class methods */
-	void SetName (const TCHAR* pName) {
+	void SetName(const TCHAR *pName) {
 		m_Name = pName;
 		m_RecordSize = m_Name.GetLength();
 	}

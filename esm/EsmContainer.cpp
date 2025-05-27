@@ -29,16 +29,46 @@ DEFINE_FILE("EsmContainer.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmContainer::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNDT, CEsmSubCNDT::Create },
-	{ MWESM_SUBREC_FLAG, CEsmSubLong::Create },
-	{ MWESM_SUBREC_NPCO, CEsmSubNPCO::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNDT,
+		CEsmSubCNDT::Create
+	},
+	{
+		MWESM_SUBREC_FLAG,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_NPCO,
+		CEsmSubNPCO::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -50,7 +80,7 @@ const esmsubreccreate_t CEsmContainer::s_SubRecCreate[] = {
  * Class CEsmContainer Constructor
  *
  *=========================================================================*/
-CEsmContainer::CEsmContainer () {
+CEsmContainer::CEsmContainer() {
 	//DEFINE_FUNCTION("CEsmContainer::CEsmContainer()");
 	m_pContData = NULL;
 	m_pFlag = NULL;
@@ -68,7 +98,7 @@ CEsmContainer::CEsmContainer () {
  * Description
  *
  *=========================================================================*/
-void CEsmContainer::Destroy (void) {
+void CEsmContainer::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmContainer::Destroy()");
 	m_pContData = NULL;
 	m_pFlag = NULL;
@@ -88,15 +118,15 @@ void CEsmContainer::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmContainer::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmContainer* pCont;
+int CEsmContainer::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmContainer *pCont;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_CONT)) {
 		return CEsmItem1::CompareFields(FieldID, pRecord);
 	}
 
-	pCont = (CEsmContainer *) pRecord;
+	pCont = (CEsmContainer *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_WEIGHT:
@@ -128,9 +158,9 @@ int CEsmContainer::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmContainer::Create (void) {
+CEsmRecord *CEsmContainer::Create(void) {
 	DEFINE_FUNCTION("CEsmContainer::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmContainer);
 	return (pRecord);
 }
@@ -147,7 +177,7 @@ CEsmRecord *CEsmContainer::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmContainer::CreateNew (CEsmFile* pFile) {
+void CEsmContainer::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem1::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -171,12 +201,12 @@ void CEsmContainer::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmContainer::GetFieldString (const int FieldID) {
+const TCHAR *CEsmContainer::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_WEIGHT:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetWeight());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetWeight());
 			return (s_Buffer);
 
 		case ESM_FIELD_ORGANIC:
@@ -203,11 +233,11 @@ const TCHAR *CEsmContainer::GetFieldString (const int FieldID) {
  * Class CEsmContainer Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmContainer::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmContainer::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_CNDT)) {
-		m_pContData = (CEsmSubCNDT *) pSubRecord;
+		m_pContData = (CEsmSubCNDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_FLAG)) {
-		m_pFlag = (CEsmSubLong *) pSubRecord;
+		m_pFlag = (CEsmSubLong *)pSubRecord;
 	} else {
 		CEsmItem1::OnAddSubRecord(pSubRecord);
 	}
@@ -226,10 +256,10 @@ void CEsmContainer::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmContainer::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmContainer::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_WEIGHT:
-			SetWeight((float) atof(pString));
+			SetWeight((float)atof(pString));
 			return (true);
 
 		case ESM_FIELD_ORGANIC:

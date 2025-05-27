@@ -32,11 +32,26 @@ DEFINE_FILE("EsmScript.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmScript::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_SCHD, CEsmSubSCHD::Create },
-	{ MWESM_SUBREC_SCVR, CEsmSubRecord::Create },
-	{ MWESM_SUBREC_SCDT, CEsmSubRecord::Create },
-	{ MWESM_SUBREC_SCTX, CEsmSubName::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_SCHD,
+		CEsmSubSCHD::Create
+	},
+	{
+		MWESM_SUBREC_SCVR,
+		CEsmSubRecord::Create
+	},
+	{
+		MWESM_SUBREC_SCDT,
+		CEsmSubRecord::Create
+	},
+	{
+		MWESM_SUBREC_SCTX,
+		CEsmSubName::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -48,7 +63,7 @@ const esmsubreccreate_t CEsmScript::s_SubRecCreate[] = {
  * Class CEsmScript Constructor
  *
  *=========================================================================*/
-CEsmScript::CEsmScript () {
+CEsmScript::CEsmScript() {
 	//DEFINE_FUNCTION("CEsmScript::CEsmScript()");
 	m_pScriptHeader = NULL;
 	m_pScriptVars = NULL;
@@ -68,7 +83,7 @@ CEsmScript::CEsmScript () {
  * Description
  *
  *=========================================================================*/
-void CEsmScript::Destroy (void) {
+void CEsmScript::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmScript::Destroy()");
 	m_pScriptHeader = NULL;
 	m_pScriptVars = NULL;
@@ -89,7 +104,7 @@ void CEsmScript::Destroy (void) {
  * Clears any compiled information in the script.
  *
  *=========================================================================*/
-void CEsmScript::ClearCompileData (void) {
+void CEsmScript::ClearCompileData(void) {
 	/* Reset the header data */
 	if (m_pScriptHeader != NULL) {
 		m_pScriptHeader->GetScriptHeadData()->LocalVarSize = 0;
@@ -118,15 +133,15 @@ void CEsmScript::ClearCompileData (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmScript::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmScript* pScript;
+int CEsmScript::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmScript *pScript;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_SCPT)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pScript = (CEsmScript *) pRecord;
+	pScript = (CEsmScript *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_ID:
@@ -152,9 +167,9 @@ int CEsmScript::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmScript::Create (void) {
+CEsmRecord *CEsmScript::Create(void) {
 	DEFINE_FUNCTION("CEsmScript::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmScript);
 	return (pRecord);
 }
@@ -171,7 +186,7 @@ CEsmRecord *CEsmScript::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmScript::CreateNew (CEsmFile* pFile) {
+void CEsmScript::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -198,11 +213,11 @@ void CEsmScript::CreateNew (CEsmFile* pFile) {
  * any error.
  *
  *=========================================================================*/
-bool CEsmScript::ExportScript (const TCHAR* pPath) {
+bool CEsmScript::ExportScript(const TCHAR *pPath) {
 	bool Result;
 	TCHAR Filename[_MAX_PATH + 64];
 	/* Create the output filename */
-	snprintf (Filename, _MAX_PATH + 40, _T("%s%s.txt"), pPath, GetID());
+	snprintf(Filename, _MAX_PATH + 40, _T("%s%s.txt"), pPath, GetID());
 	/* Output the script text */
 	Result = WriteFile((const byte*)GetScriptText(), GetScriptSize(), Filename, false);
 	return (Result);
@@ -218,7 +233,7 @@ bool CEsmScript::ExportScript (const TCHAR* pPath) {
  * Class CEsmScript Method - short FindLocalVar (pLocalVar, VarType);
  *
  *=========================================================================*/
-short CEsmScript::FindLocalVar (const TCHAR* pLocalVar, char &VarType) {
+short CEsmScript::FindLocalVar(const TCHAR *pLocalVar, char &VarType) {
 	scriptheaddata_t *pHeader;
 	char *pParse;
 	int DataIndex;
@@ -233,7 +248,7 @@ short CEsmScript::FindLocalVar (const TCHAR* pLocalVar, char &VarType) {
 		return (-1);
 	}
 
-	pParse = (char *) m_pScriptVars->GetData();
+	pParse = (char *)m_pScriptVars->GetData();
 	pHeader = m_pScriptHeader->GetScriptHeadData();
 
 	if (pParse == NULL || pHeader == NULL) {
@@ -311,7 +326,7 @@ short CEsmScript::FindLocalVar (const TCHAR* pLocalVar, char &VarType) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmScript::GetFieldString (const int FieldID) {
+const TCHAR *CEsmScript::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -319,7 +334,7 @@ const TCHAR *CEsmScript::GetFieldString (const int FieldID) {
 			return (GetID());
 
 		case ESM_FIELD_VALUE:
-			snprintf (s_Buffer, 31, _T("%d"), GetScriptSize());
+			snprintf(s_Buffer, 31, _T("%d"), GetScriptSize());
 			return s_Buffer;
 
 		default:
@@ -339,7 +354,7 @@ const TCHAR *CEsmScript::GetFieldString (const int FieldID) {
  * Sees if the given ID is used by the given script.
  *
  *=========================================================================*/
-bool CEsmScript::IsUsed (const TCHAR* pID) {
+bool CEsmScript::IsUsed(const TCHAR *pID) {
 	const char *pData;
 	const char *pCheckData;
 	int FindIndex;
@@ -350,7 +365,7 @@ bool CEsmScript::IsUsed (const TCHAR* pID) {
 		return (false);
 	}
 
-	pData = (const char *) m_pScriptData->GetData();
+	pData = (const char *)m_pScriptData->GetData();
 	FindIndex = 0;
 
 	while (FindIndex >= 0) {
@@ -396,9 +411,9 @@ bool CEsmScript::IsUsed (const TCHAR* pID) {
  * Class CEsmScript Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmScript::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmScript::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_SCHD)) {
-		m_pScriptHeader = (CEsmSubSCHD *) pSubRecord;
+		m_pScriptHeader = (CEsmSubSCHD *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SCVR)) {
 		m_pScriptVars = pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SCDT)) {
@@ -413,5 +428,3 @@ void CEsmScript::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
 /*===========================================================================
  *      End of Class Event CEsmArmor::CEsmScript()
  *=========================================================================*/
-
-

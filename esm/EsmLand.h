@@ -119,79 +119,79 @@ class CEsmLand : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmLand();
 	//virtual ~CEsmLand() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get class members */
-	long GetCellX (void) const {
+	long GetCellX(void) const {
 		return (m_pLocation == NULL ? 0 : m_pLocation->GetValue1());
 	}
 
-	long GetCellY (void) const {
+	long GetCellY(void) const {
 		return (m_pLocation == NULL ? 0 : m_pLocation->GetValue2());
 	}
 
-	long GetData (void) const {
+	long GetData(void) const {
 		return (m_pData == NULL ? 0 : m_pData->GetValue());
 	}
 
 	/* Access the sub-record data */
-	mwesm_vnmldata_t *GetNormalData (void) {
-		return (m_pNormalData == NULL ? NULL : (mwesm_vnmldata_t *) m_pNormalData->GetData());
+	mwesm_vnmldata_t *GetNormalData(void) {
+		return (m_pNormalData == NULL ? NULL : (mwesm_vnmldata_t *)m_pNormalData->GetData());
 	}
 
-	mwesm_vhgtdata_t *GetHeightData (void) {
-		return (m_pHeightData == NULL ? NULL : (mwesm_vhgtdata_t *) m_pHeightData->GetData());
+	mwesm_vhgtdata_t *GetHeightData(void) {
+		return (m_pHeightData == NULL ? NULL : (mwesm_vhgtdata_t *)m_pHeightData->GetData());
 	}
 
-	mwesm_wnamdata_t *GetWNAMData (void) {
-		return (m_pWNAMData == NULL ? NULL : (mwesm_wnamdata_t *) m_pWNAMData->GetData());
+	mwesm_wnamdata_t *GetWNAMData(void) {
+		return (m_pWNAMData == NULL ? NULL : (mwesm_wnamdata_t *)m_pWNAMData->GetData());
 	}
 
-	mwesm_vclrdata_t *GetColorData (void) {
-		return (m_pColorData == NULL ? NULL : (mwesm_vclrdata_t *) m_pColorData->GetData());
+	mwesm_vclrdata_t *GetColorData(void) {
+		return (m_pColorData == NULL ? NULL : (mwesm_vclrdata_t *)m_pColorData->GetData());
 	}
 
-	mwesm_vtexdata_t *GetTextureData (void) {
-		return (m_pTextureData == NULL ? NULL : (mwesm_vtexdata_t *) m_pTextureData->GetData());
+	mwesm_vtexdata_t *GetTextureData(void) {
+		return (m_pTextureData == NULL ? NULL : (mwesm_vtexdata_t *)m_pTextureData->GetData());
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Land");
 	}
 
 	/* Check if the given record is the same as this one */
-	virtual bool IsSame (CEsmRecord* pRecord);
+	virtual bool IsSame(CEsmRecord *pRecord);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetCellX (const long Value) {
+	void SetCellX(const long Value) {
 		if (m_pLocation != NULL) {
 			m_pLocation->SetValue1(Value);
 		}
 	}
 
-	void SetCellY (const long Value) {
+	void SetCellY(const long Value) {
 		if (m_pLocation != NULL) {
 			m_pLocation->SetValue2(Value);
 		}
 	}
 
-	void SetData (const long Value) {
+	void SetData(const long Value) {
 		if (m_pData != NULL) {
 			m_pData->SetValue(Value);
 		}
@@ -208,4 +208,3 @@ class CEsmLand : public CEsmRecord {
 /*===========================================================================
  *      End of File EsmLand.H
  *=========================================================================*/
-

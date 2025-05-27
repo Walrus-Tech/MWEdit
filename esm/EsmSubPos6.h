@@ -70,14 +70,14 @@ class CEsmSubPos6 : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubPos6);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(pos6data_t));
 		m_RecordSize = sizeof(pos6data_t);
@@ -85,71 +85,71 @@ class CEsmSubPos6 : public CEsmSubRecord {
 	}
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData) {
+	virtual bool Find(esmfind_t &FindData) {
 		return (false);
 	}
 
 	/* Get class members */
-	pos6data_t *GetPosData (void) {
-		return ((pos6data_t *) m_pData);
+	pos6data_t *GetPosData(void) {
+		return ((pos6data_t *)m_pData);
 	}
 
-	float GetPosX (void) {
+	float GetPosX(void) {
 		return (GetPosData()->PosX);
 	}
 
-	float GetPosY (void) {
+	float GetPosY(void) {
 		return (GetPosData()->PosY);
 	}
 
-	float GetPosZ (void) {
+	float GetPosZ(void) {
 		return (GetPosData()->PosZ);
 	}
 
-	float GetRotX (void) {
+	float GetRotX(void) {
 		return (GetPosData()->RotX);
 	}
 
-	float GetRotY (void) {
+	float GetRotY(void) {
 		return (GetPosData()->RotY);
 	}
 
-	float GetRotZ (void) {
+	float GetRotZ(void) {
 		return (GetPosData()->RotZ);
 	}
 
 	/* Set class members */
-	void SetPosX (const float Value) {
+	void SetPosX(const float Value) {
 		GetPosData()->PosX = Value;
 	}
 
-	void SetPosY (const float Value) {
+	void SetPosY(const float Value) {
 		GetPosData()->PosY = Value;
 	}
 
-	void SetPosZ (const float Value) {
+	void SetPosZ(const float Value) {
 		GetPosData()->PosZ = Value;
 	}
 
-	void SetRotX (const float Value) {
+	void SetRotX(const float Value) {
 		GetPosData()->RotX = Value;
 	}
 
-	void SetRotY (const float Value) {
+	void SetRotY(const float Value) {
 		GetPosData()->RotY = Value;
 	}
 
-	void SetRotZ (const float Value) {
+	void SetRotZ(const float Value) {
 		GetPosData()->RotZ = Value;
 	}
 
-	void SetPos (const float X, const float Y, const float Z) {
+	void SetPos(const float X, const float Y, const float Z) {
 		SetPosX(X);
 		SetPosY(Y);
 		SetPosZ(Z);
 	}
 
-	void SetRot (const float X, const float Y, const float Z) {
+	void SetRot(const float X, const float Y, const float Z) {
 		SetRotX(X);
 		SetRotY(Y);
 		SetRotZ(Z);

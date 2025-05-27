@@ -86,14 +86,14 @@ class CEsmSubAADT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAADT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(appadata_t));
 		m_RecordSize = sizeof(appadata_t);
@@ -101,42 +101,42 @@ class CEsmSubAADT : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	appadata_t *GetAppaData (void) {
-		return ((appadata_t *) m_pData);
+	appadata_t *GetAppaData(void) {
+		return ((appadata_t *)m_pData);
 	}
 
-	long GetAppaType (void) {
+	long GetAppaType(void) {
 		return (GetAppaData()->Type);
 	}
 
-	float GetQuality (void) {
+	float GetQuality(void) {
 		return (GetAppaData()->Quality);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetAppaData()->Weight);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetAppaData()->Value);
 	}
 
 	/* Set class members */
-	void SetAppaType (const long Type) {
+	void SetAppaType(const long Type) {
 		if (Type >= MWESM_APPATYPE_MIN && Type <= MWESM_APPATYPE_MAX) {
 			GetAppaData()->Type = Type;
 		}
 	}
 
-	void SetQuality (const float Value) {
+	void SetQuality(const float Value) {
 		GetAppaData()->Quality = Value;
 	}
 
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetAppaData()->Weight = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetAppaData()->Value = Value;
 	}
 

@@ -29,20 +29,62 @@ DEFINE_FILE("EsmMagicEffect.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmMagicEffect::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_INDX, CEsmSubLong::Create },
-	{ MWESM_SUBREC_MEDT, CEsmSubMEDT::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_PTEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CVFX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BVFX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_HVFX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_AVFX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CSND, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_BSND, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_HSND, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ASND, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DESC, CEsmSubName::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_INDX,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_MEDT,
+		CEsmSubMEDT::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_PTEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CVFX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_BVFX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_HVFX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_AVFX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CSND,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_BSND,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_HSND,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ASND,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DESC,
+		CEsmSubName::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -54,7 +96,7 @@ const esmsubreccreate_t CEsmMagicEffect::s_SubRecCreate[] = {
  * Class CEsmMagicEffect Constructor
  *
  *=========================================================================*/
-CEsmMagicEffect::CEsmMagicEffect () {
+CEsmMagicEffect::CEsmMagicEffect() {
 	//DEFINE_FUNCTION("CEsmMagicEffect::CEsmMagicEffect()");
 	m_pIndexData = NULL;
 	m_pEffectData = NULL;
@@ -83,7 +125,7 @@ CEsmMagicEffect::CEsmMagicEffect () {
  * Description
  *
  *=========================================================================*/
-void CEsmMagicEffect::Destroy (void) {
+void CEsmMagicEffect::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmMagicEffect::Destroy()");
 	m_pIndexData = NULL;
 	m_pEffectData = NULL;
@@ -114,15 +156,15 @@ void CEsmMagicEffect::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmMagicEffect::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmMagicEffect* pEffect;
+int CEsmMagicEffect::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmMagicEffect *pEffect;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_MGEF)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pEffect = (CEsmMagicEffect *) pRecord;
+	pEffect = (CEsmMagicEffect *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_SCHOOL:
@@ -151,9 +193,9 @@ int CEsmMagicEffect::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmMagicEffect::Create (void) {
+CEsmRecord *CEsmMagicEffect::Create(void) {
 	DEFINE_FUNCTION("CEsmMagicEffect::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmMagicEffect);
 	return (pRecord);
 }
@@ -170,7 +212,7 @@ CEsmRecord *CEsmMagicEffect::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmMagicEffect::CreateNew (CEsmFile* pFile) {
+void CEsmMagicEffect::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -200,7 +242,7 @@ void CEsmMagicEffect::CreateNew (CEsmFile* pFile) {
  * given duration and magnitude.  Returns -1 on any error.
  *
  *=========================================================================*/
-float CEsmMagicEffect::GetAlchemyCost (const int Duration, const int Magnitude) {
+float CEsmMagicEffect::GetAlchemyCost(const int Duration, const int Magnitude) {
 	const esmeffectdata_t *pEffectData;
 	float Cost;
 	float BaseCost;
@@ -215,13 +257,13 @@ float CEsmMagicEffect::GetAlchemyCost (const int Duration, const int Magnitude) 
 
 	/* Compute cost based on the effect flags */
 	if (pEffectData->HasDuration() && pEffectData->HasMagnitude()) {
-		Cost = (float) (BaseCost / 10.0 + BaseCost * Duration * Magnitude / 5.0);
+		Cost = (float)(BaseCost / 10.0 + BaseCost * Duration * Magnitude / 5.0);
 	} else if (pEffectData->HasDuration()) {
-		Cost = (float) (BaseCost / 10.0 + BaseCost * Duration / 5.0);
+		Cost = (float)(BaseCost / 10.0 + BaseCost * Duration / 5.0);
 	} else if (pEffectData->HasMagnitude()) {
-		Cost = (float) (BaseCost / 10.0 + BaseCost * Magnitude / 5.0);
+		Cost = (float)(BaseCost / 10.0 + BaseCost * Magnitude / 5.0);
 	} else {
-		Cost = (float) (BaseCost / 10.0 + BaseCost / 5.0);
+		Cost = (float)(BaseCost / 10.0 + BaseCost / 5.0);
 	}
 
 	return (Cost);
@@ -239,7 +281,7 @@ float CEsmMagicEffect::GetAlchemyCost (const int Duration, const int Magnitude) 
  * Computes the spell cost for the given enchant data.
  *
  *=========================================================================*/
-float CEsmMagicEffect::GetEnchantCost (enchanteffect_t &EffectData) {
+float CEsmMagicEffect::GetEnchantCost(enchanteffect_t &EffectData) {
 	const esmeffectdata_t *pEffectData;
 	float Cost;
 	float BaseCost;
@@ -254,19 +296,20 @@ float CEsmMagicEffect::GetEnchantCost (enchanteffect_t &EffectData) {
 
 	/* Compute cost based on the effect flags */
 	if (pEffectData->HasDuration() && pEffectData->HasMagnitude()) {
-		Cost = (float) (BaseCost * EffectData.Duration * ((float)EffectData.MagMax +
-		                                                  (float)EffectData.MagMin) / 40.0);
+		Cost = (float)(BaseCost * EffectData.Duration
+		               * ((float)EffectData.MagMax
+		               +  (float)EffectData.MagMin) / 40.0);
 	} else if (pEffectData->HasDuration()) {
-		Cost = (float) (BaseCost * EffectData.Duration / 20.0);
+		Cost = (float)(BaseCost * EffectData.Duration / 20.0);
 	} else if (pEffectData->HasMagnitude()) {
-		Cost = (float) (BaseCost * ((float)EffectData.MagMax + (float)EffectData.MagMin) / 40.0);
+		Cost = (float)(BaseCost * ((float)EffectData.MagMax + (float)EffectData.MagMin) / 40.0);
 	} else {
-		Cost = (float) (BaseCost / 20.0);
+		Cost = (float)(BaseCost / 20.0);
 	}
 
 	/* Add in the area effect */
 	if (EffectData.RangeType != MWESM_ENCHANTRANGE_SELF) {
-		Cost += (float) (BaseCost * EffectData.Area / 40.0);
+		Cost += (float)(BaseCost * EffectData.Area / 40.0);
 	}
 
 	/* Add in the target type effect */
@@ -290,7 +333,7 @@ float CEsmMagicEffect::GetEnchantCost (enchanteffect_t &EffectData) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmMagicEffect::GetFieldString (const int FieldID) {
+const TCHAR *CEsmMagicEffect::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -301,7 +344,7 @@ const TCHAR *CEsmMagicEffect::GetFieldString (const int FieldID) {
 			return GetEffect();
 
 		case ESM_FIELD_COST:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetBaseCost());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetBaseCost());
 			return (s_Buffer);
 
 		default:
@@ -319,13 +362,13 @@ const TCHAR *CEsmMagicEffect::GetFieldString (const int FieldID) {
  * Class CEsmMagicEffect Method - bool IsSame (pRecord);
  *
  *=========================================================================*/
-bool CEsmMagicEffect::IsSame (CEsmRecord* pRecord) {
+bool CEsmMagicEffect::IsSame(CEsmRecord *pRecord) {
 	/* Check type first */
 	if (!pRecord->IsType(MWESM_REC_MGEF)) {
 		return (false);
 	}
 
-	CEsmMagicEffect* pEffect = (CEsmMagicEffect *) pRecord;
+	CEsmMagicEffect* pEffect = (CEsmMagicEffect *)pRecord;
 
 	if (m_pIndexData == NULL) {
 		return (false);
@@ -344,33 +387,33 @@ bool CEsmMagicEffect::IsSame (CEsmRecord* pRecord) {
  * Class CEsmMagicEffect Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmMagicEffect::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmMagicEffect::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_MEDT)) {
-		m_pEffectData = (CEsmSubMEDT *) pSubRecord;
+		m_pEffectData = (CEsmSubMEDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_INDX)) {
-		m_pIndexData = (CEsmSubLong *) pSubRecord;
+		m_pIndexData = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_ITEX)) {
-		m_pIcon = (CEsmSubNameFix *) pSubRecord;
+		m_pIcon = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_PTEX)) {
-		m_pParticle = (CEsmSubNameFix *) pSubRecord;
+		m_pParticle = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DESC)) {
-		m_pDescription = (CEsmSubName *) pSubRecord;
+		m_pDescription = (CEsmSubName *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CVFX)) {
-		m_pCastVisual = (CEsmSubNameFix *) pSubRecord;
+		m_pCastVisual = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_BVFX)) {
-		m_pBoltVisual = (CEsmSubNameFix *) pSubRecord;
+		m_pBoltVisual = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_AVFX)) {
-		m_pAreaVisual = (CEsmSubNameFix *) pSubRecord;
+		m_pAreaVisual = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_HVFX)) {
-		m_pHitVisual = (CEsmSubNameFix *) pSubRecord;
+		m_pHitVisual = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CSND)) {
-		m_pCastSound = (CEsmSubNameFix *) pSubRecord;
+		m_pCastSound = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_BSND)) {
-		m_pBoltSound = (CEsmSubNameFix *) pSubRecord;
+		m_pBoltSound = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_ASND)) {
-		m_pAreaSound = (CEsmSubNameFix *) pSubRecord;
+		m_pAreaSound = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_HSND)) {
-		m_pHitSound = (CEsmSubNameFix *) pSubRecord;
+		m_pHitSound = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -386,7 +429,7 @@ void CEsmMagicEffect::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Begin Set Methods
  *
  *=========================================================================*/
-void CEsmMagicEffect::SetIcon (const TCHAR* pString) {
+void CEsmMagicEffect::SetIcon(const TCHAR *pString) {
 	if (m_pIcon == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_ITEX);
 	}
@@ -395,7 +438,7 @@ void CEsmMagicEffect::SetIcon (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetParticle (const TCHAR* pString) {
+void CEsmMagicEffect::SetParticle(const TCHAR *pString) {
 	if (m_pParticle == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_PTEX);
 	}
@@ -404,7 +447,7 @@ void CEsmMagicEffect::SetParticle (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetDescription (const TCHAR* pString) {
+void CEsmMagicEffect::SetDescription(const TCHAR *pString) {
 	if (m_pDescription == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_DESC);
 	}
@@ -413,7 +456,7 @@ void CEsmMagicEffect::SetDescription (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetCastSound (const TCHAR* pString) {
+void CEsmMagicEffect::SetCastSound(const TCHAR *pString) {
 	if (m_pCastSound == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_CSND);
 	}
@@ -422,7 +465,7 @@ void CEsmMagicEffect::SetCastSound (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetBoltSound (const TCHAR* pString) {
+void CEsmMagicEffect::SetBoltSound(const TCHAR *pString) {
 	if (m_pBoltSound == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_BSND);
 	}
@@ -431,7 +474,7 @@ void CEsmMagicEffect::SetBoltSound (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetAreaSound (const TCHAR* pString) {
+void CEsmMagicEffect::SetAreaSound(const TCHAR *pString) {
 	if (m_pAreaSound == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_ASND);
 	}
@@ -440,7 +483,7 @@ void CEsmMagicEffect::SetAreaSound (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetHitSound (const TCHAR* pString) {
+void CEsmMagicEffect::SetHitSound(const TCHAR *pString) {
 	if (m_pHitSound == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_HSND);
 	}
@@ -449,7 +492,7 @@ void CEsmMagicEffect::SetHitSound (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetCastVisual (const TCHAR* pString) {
+void CEsmMagicEffect::SetCastVisual(const TCHAR *pString) {
 	if (m_pCastVisual == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_CVFX);
 	}
@@ -458,7 +501,7 @@ void CEsmMagicEffect::SetCastVisual (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetBoltVisual (const TCHAR* pString) {
+void CEsmMagicEffect::SetBoltVisual(const TCHAR *pString) {
 	if (m_pBoltVisual == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_BVFX);
 	}
@@ -467,7 +510,7 @@ void CEsmMagicEffect::SetBoltVisual (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetAreaVisual (const TCHAR* pString) {
+void CEsmMagicEffect::SetAreaVisual(const TCHAR *pString) {
 	if (m_pAreaVisual == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_AVFX);
 	}
@@ -476,7 +519,7 @@ void CEsmMagicEffect::SetAreaVisual (const TCHAR* pString) {
 }
 
 
-void CEsmMagicEffect::SetHitVisual (const TCHAR* pString) {
+void CEsmMagicEffect::SetHitVisual(const TCHAR *pString) {
 	if (m_pHitVisual == NULL) {
 		AllocateSubRecord(MWESM_SUBREC_HVFX);
 	}

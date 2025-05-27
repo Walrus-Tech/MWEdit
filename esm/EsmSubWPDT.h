@@ -29,22 +29,22 @@
  *=========================================================================*/
 
 /* Armor types */
-#define MWESM_WEAPONTYPE_MIN      0
-#define MWESM_WEAPONTYPE_SHORT    0
-#define MWESM_WEAPONTYPE_LONG     1
+#define MWESM_WEAPONTYPE_MIN          0
+#define MWESM_WEAPONTYPE_SHORT        0
+#define MWESM_WEAPONTYPE_LONG         1
 #define MWESM_WEAPONTYPE_LONG2HAND    2
-#define MWESM_WEAPONTYPE_BLUNT    3
+#define MWESM_WEAPONTYPE_BLUNT        3
 #define MWESM_WEAPONTYPE_BLUNT2CLOSE  4
 #define MWESM_WEAPONTYPE_BLUNT2WIDE   5
-#define MWESM_WEAPONTYPE_SPEAR    6
-#define MWESM_WEAPONTYPE_AXE      7
-#define MWESM_WEAPONTYPE_AXE2HAND 8
-#define MWESM_WEAPONTYPE_BOW      9
-#define MWESM_WEAPONTYPE_CROSSBOW 10
-#define MWESM_WEAPONTYPE_THROWN   11
-#define MWESM_WEAPONTYPE_ARROW    12
-#define MWESM_WEAPONTYPE_BOLT     13
-#define MWESM_WEAPONTYPE_MAX      13
+#define MWESM_WEAPONTYPE_SPEAR        6
+#define MWESM_WEAPONTYPE_AXE          7
+#define MWESM_WEAPONTYPE_AXE2HAND     8
+#define MWESM_WEAPONTYPE_BOW          9
+#define MWESM_WEAPONTYPE_CROSSBOW    10
+#define MWESM_WEAPONTYPE_THROWN      11
+#define MWESM_WEAPONTYPE_ARROW       12
+#define MWESM_WEAPONTYPE_BOLT        13
+#define MWESM_WEAPONTYPE_MAX         13
 
 /* Weapon flags */
 #define MWESM_WEAPONFLAG_IGNORERESIST 1
@@ -110,14 +110,14 @@ class CEsmSubWPDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubWPDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(weapondata_t));
 		m_RecordSize = sizeof(weapondata_t);
@@ -125,72 +125,72 @@ class CEsmSubWPDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	weapondata_t *GetWeaponData (void) {
-		return ((weapondata_t *) m_pData);
+	weapondata_t *GetWeaponData(void) {
+		return ((weapondata_t *)m_pData);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetWeaponData()->Weight);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetWeaponData()->Value);
 	}
 
-	short GetWeaponType (void) {
+	short GetWeaponType(void) {
 		return (GetWeaponData()->Type);
 	}
 
-	short GetEnchantPts (void) {
+	short GetEnchantPts(void) {
 		return (GetWeaponData()->EnchantPts);
 	}
 
-	short GetHealth (void) {
+	short GetHealth(void) {
 		return (GetWeaponData()->Health);
 	}
 
-	float GetSpeed (void) {
+	float GetSpeed(void) {
 		return (GetWeaponData()->Speed);
 	}
 
-	float GetReach (void) {
+	float GetReach(void) {
 		return (GetWeaponData()->Reach);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (GetWeaponData()->Flags);
 	}
 
-	byte GetChopMin (void) {
+	byte GetChopMin(void) {
 		return (GetWeaponData()->ChopMin);
 	}
 
-	byte GetChopMax (void) {
+	byte GetChopMax(void) {
 		return (GetWeaponData()->ChopMax);
 	}
 
-	byte GetSlashMin (void) {
+	byte GetSlashMin(void) {
 		return (GetWeaponData()->SlashMin);
 	}
 
-	byte GetSlashMax (void) {
+	byte GetSlashMax(void) {
 		return (GetWeaponData()->SlashMax);
 	}
 
-	byte GetThrustMin (void) {
+	byte GetThrustMin(void) {
 		return (GetWeaponData()->ThrustMin);
 	}
 
-	byte GetThrustMax (void) {
+	byte GetThrustMax(void) {
 		return (GetWeaponData()->ThrustMax);
 	}
 
-	bool IsIgnoreResist (void) {
+	bool IsIgnoreResist(void) {
 		return ((GetFlags() & MWESM_WEAPONFLAG_IGNORERESIST) != 0);
 	}
 
 	/* Set or clear flags */
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetWeaponData()->Flags |= Flag;
 		} else {
@@ -199,61 +199,61 @@ class CEsmSubWPDT : public CEsmSubRecord {
 	}
 
 	/* Set class members */
-	void SetWeaponType (const short Value) {
+	void SetWeaponType(const short Value) {
 		if (Value >= MWESM_WEAPONTYPE_MIN && Value <= MWESM_WEAPONTYPE_MAX) {
 			GetWeaponData()->Type = Value;
 		}
 	}
 
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetWeaponData()->Weight = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetWeaponData()->Value = Value;
 	}
 
-	void SetEnchantPts (const short Value) {
+	void SetEnchantPts(const short Value) {
 		GetWeaponData()->EnchantPts = Value;
 	}
 
-	void SetHealth (const short Value) {
+	void SetHealth(const short Value) {
 		GetWeaponData()->Health = Value;
 	}
 
-	void SetSpeed (const float Value) {
+	void SetSpeed(const float Value) {
 		GetWeaponData()->Speed = Value;
 	}
 
-	void SetReach (const float Value) {
+	void SetReach(const float Value) {
 		GetWeaponData()->Reach = Value;
 	}
 
-	void SetChopMin (const byte Value) {
+	void SetChopMin(const byte Value) {
 		GetWeaponData()->ChopMin = Value;
 	}
 
-	void SetChopMax (const byte Value) {
+	void SetChopMax(const byte Value) {
 		GetWeaponData()->ChopMax = Value;
 	}
 
-	void SetSlashMin (const byte Value) {
+	void SetSlashMin(const byte Value) {
 		GetWeaponData()->SlashMin = Value;
 	}
 
-	void SetSlashMax (const byte Value) {
+	void SetSlashMax(const byte Value) {
 		GetWeaponData()->SlashMax = Value;
 	}
 
-	void SetThrustMin (const byte Value) {
+	void SetThrustMin(const byte Value) {
 		GetWeaponData()->ThrustMin = Value;
 	}
 
-	void SetThrustMax (const byte Value) {
+	void SetThrustMax(const byte Value) {
 		GetWeaponData()->ThrustMax = Value;
 	}
 
-	void SetIgnoreResist (const bool Value) {
+	void SetIgnoreResist(const bool Value) {
 		SetFlag(MWESM_WEAPONFLAG_IGNORERESIST, Value);
 	}
 

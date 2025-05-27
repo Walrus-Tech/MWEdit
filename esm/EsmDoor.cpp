@@ -29,13 +29,34 @@ DEFINE_FILE("EsmDoor.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmDoor::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ANAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SNAM, CEsmSubNameFix::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ANAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmDoor::s_SubRecCreate[] = {
  * Class CEsmDoor Constructor
  *
  *=========================================================================*/
-CEsmDoor::CEsmDoor () {
+CEsmDoor::CEsmDoor() {
 	//DEFINE_FUNCTION("CEsmDoor::CEsmDoor()");
 	m_pCloseSound = NULL;
 	m_pOpenSound = NULL;
@@ -65,7 +86,7 @@ CEsmDoor::CEsmDoor () {
  * Description
  *
  *=========================================================================*/
-void CEsmDoor::Destroy (void) {
+void CEsmDoor::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmDoor::Destroy()");
 	m_pCloseSound = NULL;
 	m_pOpenSound = NULL;
@@ -84,9 +105,9 @@ void CEsmDoor::Destroy (void) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmDoor::Create (void) {
+CEsmRecord *CEsmDoor::Create(void) {
 	DEFINE_FUNCTION("CEsmDoor::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmDoor);
 	return (pRecord);
 }
@@ -103,7 +124,7 @@ CEsmRecord *CEsmDoor::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmDoor::CreateNew (CEsmFile* pFile) {
+void CEsmDoor::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem1::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -121,11 +142,11 @@ void CEsmDoor::CreateNew (CEsmFile* pFile) {
  * Class CEsmDoor Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmDoor::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmDoor::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_SNAM)) {
-		m_pOpenSound = (CEsmSubNameFix *) pSubRecord;
+		m_pOpenSound = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_ANAM)) {
-		m_pCloseSound = (CEsmSubNameFix *) pSubRecord;
+		m_pCloseSound = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmItem1::OnAddSubRecord(pSubRecord);
 	}
@@ -134,4 +155,3 @@ void CEsmDoor::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
 /*===========================================================================
  *      End of Class Event CEsmDoor::OnAddSubRecord()
  *=========================================================================*/
-

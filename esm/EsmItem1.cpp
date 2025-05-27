@@ -28,7 +28,7 @@ DEFINE_FILE("EsmItem1.cpp");
  * Class CEsmItem1 Constructor
  *
  *=========================================================================*/
-CEsmItem1::CEsmItem1 () {
+CEsmItem1::CEsmItem1() {
 	//DEFINE_FUNCTION("CEsmItem1::CEsmItem1()");
 	m_pModel = NULL;
 	m_pName = NULL;
@@ -47,7 +47,7 @@ CEsmItem1::CEsmItem1 () {
  * Description
  *
  *=========================================================================*/
-void CEsmItem1::Destroy (void) {
+void CEsmItem1::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmItem1::Destroy()");
 	/* Clear the references */
 	m_pModel = NULL;
@@ -70,16 +70,16 @@ void CEsmItem1::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmItem1::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmItem1::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	//DEFINE_FUNCTION("CEsmItem1::CompareFields()");
-	CEsmItem1* pRecord1;
+	CEsmItem1 *pRecord1;
 
 	/* Ensure the correct type */
 	if ((MWESM_CLASSTYPE_ITEM1 & pRecord->GetClassType()) == 0) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pRecord1 = (CEsmItem1 *) pRecord;
+	pRecord1 = (CEsmItem1 *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -108,7 +108,7 @@ int CEsmItem1::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmItem1::CreateNew (CEsmFile* pFile) {
+void CEsmItem1::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -129,7 +129,7 @@ void CEsmItem1::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmItem1::GetFieldString (const int FieldID) {
+const TCHAR *CEsmItem1::GetFieldString(const int FieldID) {
 	//DEFINE_FUNCTION("CEsmItem1::GetFieldString()");
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -168,13 +168,13 @@ const TCHAR *CEsmItem1::GetFieldString (const int FieldID) {
  * Class CEsmItem1 Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmItem1::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmItem1::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pName = (CEsmSubNameFix *) pSubRecord;
+		m_pName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_MODL)) {
-		m_pModel = (CEsmSubNameFix *) pSubRecord;
+		m_pModel = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SCRI)) {
-		m_pScript = (CEsmSubNameFix *) pSubRecord;
+		m_pScript = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -190,7 +190,7 @@ void CEsmItem1::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Class CEsmItem1 Method - void SetScript (pScript);
  *
  *=========================================================================*/
-void CEsmItem1::SetScript (const TCHAR* pScript) {
+void CEsmItem1::SetScript(const TCHAR *pScript) {
 	DEFINE_FUNCTION("CEsmItem1::SetScript()");
 
 	/* Should we delete the current enchant? */
@@ -224,7 +224,7 @@ void CEsmItem1::SetScript (const TCHAR* pScript) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmItem1::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmItem1::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);

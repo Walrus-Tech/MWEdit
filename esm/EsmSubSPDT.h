@@ -93,14 +93,14 @@ class CEsmSubSPDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSPDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(spelldata_t));
 		m_RecordSize = sizeof(spelldata_t);
@@ -108,36 +108,36 @@ class CEsmSubSPDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	spelldata_t *GetSpellData (void) {
-		return ((spelldata_t *) m_pData);
+	spelldata_t *GetSpellData(void) {
+		return ((spelldata_t *)m_pData);
 	}
 
-	long GetSpellType (void) {
+	long GetSpellType(void) {
 		return (GetSpellData()->Type);
 	}
 
-	long GetSpellCost (void) {
+	long GetSpellCost(void) {
 		return (GetSpellData()->SpellCost);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (GetSpellData()->Flags);
 	}
 
-	bool IsAutoCalc (void) {
+	bool IsAutoCalc(void) {
 		return ((GetFlags() & MWESM_SPELLFLAG_AUTOCALC) != 0);
 	}
 
-	bool IsPCStart (void) {
+	bool IsPCStart(void) {
 		return ((GetFlags() & MWESM_SPELLFLAG_PCSTART) != 0);
 	}
 
-	bool IsSucceeds (void) {
+	bool IsSucceeds(void) {
 		return ((GetFlags() & MWESM_SPELLFLAG_SUCCEEDS) != 0);
 	}
 
 	/* Set or clear flags */
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetSpellData()->Flags |= Flag;
 		} else {
@@ -146,25 +146,25 @@ class CEsmSubSPDT : public CEsmSubRecord {
 	}
 
 	/* Set class members */
-	void SetSpellType (const long Value) {
+	void SetSpellType(const long Value) {
 		if (Value >= MWESM_SPELLTYPE_MIN && Value <= MWESM_SPELLTYPE_MAX) {
 			GetSpellData()->Type = Value;
 		}
 	}
 
-	void SetSpellCost (const long Value) {
+	void SetSpellCost(const long Value) {
 		GetSpellData()->SpellCost = Value;
 	}
 
-	void SetAutoCalc (const bool Flag) {
+	void SetAutoCalc(const bool Flag) {
 		SetFlag(MWESM_SPELLFLAG_AUTOCALC, Flag);
 	}
 
-	void SetPCStart (const bool Flag) {
+	void SetPCStart(const bool Flag) {
 		SetFlag(MWESM_SPELLFLAG_PCSTART, Flag);
 	}
 
-	void SetSucceeds (const bool Flag) {
+	void SetSucceeds(const bool Flag) {
 		SetFlag(MWESM_SPELLFLAG_SUCCEEDS, Flag);
 	}
 

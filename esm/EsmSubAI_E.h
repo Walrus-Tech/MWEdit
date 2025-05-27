@@ -81,14 +81,14 @@ class CEsmSubAI_E : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAI_E);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ai_edata_t));
 		m_RecordSize = sizeof(ai_edata_t);
@@ -100,56 +100,56 @@ class CEsmSubAI_E : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	ai_edata_t *GetAIData (void) {
-		return ((ai_edata_t *) m_pData);
+	ai_edata_t *GetAIData(void) {
+		return ((ai_edata_t *)m_pData);
 	}
 
-	float GetXPos (void) {
+	float GetXPos(void) {
 		return (GetAIData()->X);
 	}
 
-	float GetYPos (void) {
+	float GetYPos(void) {
 		return (GetAIData()->Y);
 	}
 
-	float GetZPos (void) {
+	float GetZPos(void) {
 		return (GetAIData()->Z);
 	}
 
-	short GetDuration (void) {
+	short GetDuration(void) {
 		return (GetAIData()->Duration);
 	}
 
-	short GetUnknown (void) {
+	short GetUnknown(void) {
 		return (GetAIData()->Unknown);
 	}
 
-	const TCHAR *GetID (void) {
+	const TCHAR *GetID(void) {
 		return (GetAIData()->ID);
 	}
 
 	/* Set class members */
-	void SetXPos (const float Value) {
+	void SetXPos(const float Value) {
 		GetAIData()->X = Value;
 	}
 
-	void SetYPos (const float Value) {
+	void SetYPos(const float Value) {
 		GetAIData()->Y = Value;
 	}
 
-	void SetZPos (const float Value) {
+	void SetZPos(const float Value) {
 		GetAIData()->Z = Value;
 	}
 
-	void SetDuration (const short Value) {
+	void SetDuration(const short Value) {
 		GetAIData()->Duration = Value;
 	}
 
-	void SetUnknown (const short Value) {
+	void SetUnknown(const short Value) {
 		GetAIData()->Unknown = Value;
 	}
 
-	void SetID (const TCHAR* pString) {
+	void SetID(const TCHAR *pString) {
 		TSTRNCPY(GetAIData()->ID, pString, 32);
 	}
 
@@ -164,4 +164,3 @@ class CEsmSubAI_E : public CEsmSubRecord {
 /*===========================================================================
  *      End of File EsmsubAI_A.H
  *=========================================================================*/
-

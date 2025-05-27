@@ -78,14 +78,14 @@ class CEsmSubLKDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubLKDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(lockdata_t));
 		m_RecordSize = sizeof(lockdata_t);
@@ -93,40 +93,40 @@ class CEsmSubLKDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	lockdata_t *GetLockData (void) {
-		return ((lockdata_t *) m_pData);
+	lockdata_t *GetLockData(void) {
+		return ((lockdata_t *)m_pData);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetLockData()->Weight);
 	}
 
-	float GetQuality (void) {
+	float GetQuality(void) {
 		return (GetLockData()->Quality);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetLockData()->Value);
 	}
 
-	long GetUses (void) {
+	long GetUses(void) {
 		return (GetLockData()->Uses);
 	}
 
 	/* Set class members */
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetLockData()->Weight = Value;
 	}
 
-	void SetQuality (const float Value) {
+	void SetQuality(const float Value) {
 		GetLockData()->Quality = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetLockData()->Value = Value;
 	}
 
-	void SetUses (const long Value) {
+	void SetUses(const long Value) {
 		GetLockData()->Uses = Value;
 	}
 

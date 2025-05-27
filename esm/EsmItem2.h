@@ -67,46 +67,46 @@ class CEsmItem2 : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmItem2();
 	//virtual ~CEsmItem2() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Used to determine the type of derived classes */
-	virtual int GetClassType (void) {
+	virtual int GetClassType(void) {
 		return (CEsmItem1::GetClassType() | MWESM_CLASSTYPE_ITEM2);
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Get class members */
-	const TCHAR *GetIcon (void) const {
+	const TCHAR *GetIcon(void) const {
 		return (m_pIcon ? m_pIcon->GetName() : _T(""));
 	}
 
-	virtual float GetWeight (void) {
+	virtual float GetWeight(void) {
 		return (0);
 	}
 
-	virtual long GetValue (void) {
+	virtual long GetValue(void) {
 		return (0);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	virtual void SetIcon (const TCHAR* pIcon);
-	virtual void SetWeight (const float Weight) { }
+	virtual void SetIcon(const TCHAR *pIcon);
+	virtual void SetWeight(const float Weight) { }
 
-	virtual void SetValue (const long Value) { }
+	virtual void SetValue(const long Value) { }
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

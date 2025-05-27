@@ -77,14 +77,14 @@ class CEsmSubDATA : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubDATA);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(sounddata_t));
 		m_RecordSize = sizeof(sounddata_t);
@@ -92,32 +92,32 @@ class CEsmSubDATA : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	sounddata_t *GetSoundData (void) {
-		return ((sounddata_t *) m_pData);
+	sounddata_t *GetSoundData(void) {
+		return ((sounddata_t *)m_pData);
 	}
 
-	byte GetVolume (void) {
+	byte GetVolume(void) {
 		return (GetSoundData()->Volume);
 	}
 
-	byte GetMinRange (void) {
+	byte GetMinRange(void) {
 		return (GetSoundData()->MinRange);
 	}
 
-	byte GetMaxRange (void) {
+	byte GetMaxRange(void) {
 		return (GetSoundData()->MaxRange);
 	}
 
 	/* Set class members */
-	void SetVolume (const byte Value) {
+	void SetVolume(const byte Value) {
 		GetSoundData()->Volume = Value;
 	}
 
-	void SetMinRange (const byte Value) {
+	void SetMinRange(const byte Value) {
 		GetSoundData()->MinRange = Value;
 	}
 
-	void SetMaxRange (const byte Value) {
+	void SetMaxRange(const byte Value) {
 		GetSoundData()->MaxRange = Value;
 	}
 

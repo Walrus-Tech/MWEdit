@@ -32,26 +32,86 @@ DEFINE_FILE("EsmInfo.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmInfo::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_INAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_PNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_NNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DATA, CEsmSubInfoDATA::Create },
-	{ MWESM_SUBREC_ONAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_RNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_CNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ANAM, CEsmSubName::Create },
-	{ MWESM_SUBREC_DNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_NAME, CEsmSubName512::Create },
-	{ MWESM_SUBREC_SNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCVR, CEsmSubSCVR::Create },
-	{ MWESM_SUBREC_INTV, CEsmSubLong::Create },
-	{ MWESM_SUBREC_FLTV, CEsmSubFloat::Create },
-	{ MWESM_SUBREC_BNAM, CEsmSubName::Create },
-	{ MWESM_SUBREC_QSTN, CEsmSubByte::Create },
-	{ MWESM_SUBREC_QSTR, CEsmSubByte::Create },
-	{ MWESM_SUBREC_QSTF, CEsmSubByte::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_INAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_PNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_NNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DATA,
+		CEsmSubInfoDATA::Create
+	},
+	{
+		MWESM_SUBREC_ONAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_RNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_CNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ANAM,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_DNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubName512::Create
+	},
+	{
+		MWESM_SUBREC_SNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCVR,
+		CEsmSubSCVR::Create
+	},
+	{
+		MWESM_SUBREC_INTV,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_FLTV,
+		CEsmSubFloat::Create
+	},
+	{
+		MWESM_SUBREC_BNAM,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_QSTN,
+		CEsmSubByte::Create
+	},
+	{
+		MWESM_SUBREC_QSTR,
+		CEsmSubByte::Create
+	},
+	{
+		MWESM_SUBREC_QSTF,
+		CEsmSubByte::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -64,88 +124,334 @@ const esmsubreccreate_t CEsmInfo::s_SubRecCreate[] = {
  *
  *=========================================================================*/
 esmfuncinfo_t l_InfoFuncData[] = {
-	{ *(short *)"00", "Rank Low" },
-	{ *(short *)"01", "Rank High" },
-	{ *(short *)"02", "Rank Requirement" },
-	{ *(short *)"03", "Reputation" },
-	{ *(short *)"04", "Health Percent" },
-	{ *(short *)"05", "PC Reputation" },
-	{ *(short *)"06", "PC Level" },
-	{ *(short *)"07", "PC Health Percent" },
-	{ *(short *)"08", "PC Magicka" },
-	{ *(short *)"09", "PC Fatigue" },
-	{ *(short *)"10", "PC Strength" },
-	{ *(short *)"11", "PC Block" },
-	{ *(short *)"12", "PC Armorer" },
-	{ *(short *)"13", "PC Medium Armor" },
-	{ *(short *)"14", "PC Heavy Armor" },
-	{ *(short *)"15", "PC Blunt Weapon" },
-	{ *(short *)"16", "PC Long Blade" },
-	{ *(short *)"17", "PC Axe" },
-	{ *(short *)"18", "PC Spear" },
-	{ *(short *)"19", "PC Athletics" },
-	{ *(short *)"20", "PC Enchant" },
-	{ *(short *)"21", "PC Destruction" },
-	{ *(short *)"22", "PC Alteration" },
-	{ *(short *)"23", "PC Illusion" },
-	{ *(short *)"24", "PC Conjuration" },
-	{ *(short *)"25", "PC Mysticism" },
-	{ *(short *)"26", "PC Restoration" },
-	{ *(short *)"27", "PC Alchemy" },
-	{ *(short *)"28", "PC Unarmored" },
-	{ *(short *)"29", "PC Security" },
-	{ *(short *)"30", "PC Sneak" },
-	{ *(short *)"31", "PC Acrobatics" },
-	{ *(short *)"32", "PC Light Armor" },
-	{ *(short *)"33", "PC Short Blade" },
-	{ *(short *)"34", "PC Marksman" },
-	{ *(short *)"35", "PC Mercantile" },
-	{ *(short *)"36", "PC Speechcraft" },
-	{ *(short *)"37", "PC Hand-to-Hand" },
-	{ *(short *)"38", "PC Gender" },
-	{ *(short *)"39", "PC Expelled" },
-	{ *(short *)"40", "PC Common Disease" },
-	{ *(short *)"41", "PC Blight Disease" },
-	{ *(short *)"42", "PC Clothing Modifier" },
-	{ *(short *)"43", "PC Crime Level" },
-	{ *(short *)"44", "Same Gender" },
-	{ *(short *)"45", "Same Race" },
-	{ *(short *)"46", "Same Faction" },
-	{ *(short *)"47", "Faction Rank Diff" },
-	{ *(short *)"48", "Detected" },
-	{ *(short *)"49", "Alarmed" },
-	{ *(short *)"50", "Choice" },
-	{ *(short *)"51", "PC Intelligence" },
-	{ *(short *)"52", "PC Willpower" },
-	{ *(short *)"53", "PC Agility" },
-	{ *(short *)"54", "PC Speed" },
-	{ *(short *)"55", "PC Endurance" },
-	{ *(short *)"56", "PC Personality" },
-	{ *(short *)"57", "PC Luck" },
-	{ *(short *)"58", "PC Corprus" },
-	{ *(short *)"59", "Weather" },
-	{ *(short *)"60", "PC Vampire" },
-	{ *(short *)"61", "Level" },
-	{ *(short *)"62", "Attacked" },
-	{ *(short *)"63", "Talked to PC" },
-	{ *(short *)"64", "PC Health" },
-	{ *(short *)"65", "Creature Target" },
-	{ *(short *)"66", "Friend Hit" },
-	{ *(short *)"67", "Fight" },
-	{ *(short *)"69", "Hello" },
-	{ *(short *)"69", "Alarm" },
-	{ *(short *)"70", "Flee" },
-	{ *(short *)"71", "Should Attack" },
-	{ *(short *)"sX", "Variable" },
-	{ *(short *)"JX", "Journal" },
-	{ *(short *)"IX", "Item" },
-	{ *(short *)"DX", "Dead" },
-	{ *(short *)"XX", "Not ID" },
-	{ *(short *)"FX", "Not Faction" },
-	{ *(short *)"CX", "Not Class" },
-	{ *(short *)"RX", "Not Race" },
-	{ *(short *)"LX", "Not Cell" },
-	{ NULL, NULL }
+	{
+		*(short *)"00",
+		"Rank Low"
+	},
+	{
+		*(short *)"01",
+		"Rank High"
+	},
+	{
+		*(short *)"02",
+		"Rank Requirement"
+	},
+	{
+		*(short *)"03",
+		"Reputation"
+	},
+	{
+		*(short *)"04",
+		"Health Percent"
+	},
+	{
+		*(short *)"05",
+		"PC Reputation"
+	},
+	{
+		*(short *)"06",
+		"PC Level"
+	},
+	{
+		*(short *)"07",
+		"PC Health Percent"
+	},
+	{
+		*(short *)"08",
+		"PC Magicka"
+	},
+	{
+		*(short *)"09",
+		"PC Fatigue"
+	},
+	{
+		*(short *)"10",
+		"PC Strength"
+	},
+	{
+		*(short *)"11",
+		"PC Block"
+	},
+	{
+		*(short *)"12",
+		"PC Armorer"
+	},
+	{
+		*(short *)"13",
+		"PC Medium Armor"
+	},
+	{
+		*(short *)"14",
+		"PC Heavy Armor"
+	},
+	{
+		*(short *)"15",
+		"PC Blunt Weapon"
+	},
+	{
+		*(short *)"16",
+		"PC Long Blade"
+	},
+	{
+		*(short *)"17",
+		"PC Axe"
+	},
+	{
+		*(short *)"18",
+		"PC Spear"
+	},
+	{
+		*(short *)"19",
+		"PC Athletics"
+	},
+	{
+		*(short *)"20",
+		"PC Enchant"
+	},
+	{
+		*(short *)"21",
+		"PC Destruction"
+	},
+	{
+		*(short *)"22",
+		"PC Alteration"
+	},
+	{
+		*(short *)"23",
+		"PC Illusion"
+	},
+	{
+		*(short *)"24",
+		"PC Conjuration"
+	},
+	{
+		*(short *)"25",
+		"PC Mysticism"
+	},
+	{
+		*(short *)"26",
+		"PC Restoration"
+	},
+	{
+		*(short *)"27",
+		"PC Alchemy"
+	},
+	{
+		*(short *)"28",
+		"PC Unarmored"
+	},
+	{
+		*(short *)"29",
+		"PC Security"
+	},
+	{
+		*(short *)"30",
+		"PC Sneak"
+	},
+	{
+		*(short *)"31",
+		"PC Acrobatics"
+	},
+	{
+		*(short *)"32",
+		"PC Light Armor"
+	},
+	{
+		*(short *)"33",
+		"PC Short Blade"
+	},
+	{
+		*(short *)"34",
+		"PC Marksman"
+	},
+	{
+		*(short *)"35",
+		"PC Mercantile"
+	},
+	{
+		*(short *)"36",
+		"PC Speechcraft"
+	},
+	{
+		*(short *)"37",
+		"PC Hand-to-Hand"
+	},
+	{
+		*(short *)"38",
+		"PC Gender"
+	},
+	{
+		*(short *)"39",
+		"PC Expelled"
+	},
+	{
+		*(short *)"40",
+		"PC Common Disease"
+	},
+	{
+		*(short *)"41",
+		"PC Blight Disease"
+	},
+	{
+		*(short *)"42",
+		"PC Clothing Modifier"
+	},
+	{
+		*(short *)"43",
+		"PC Crime Level"
+	},
+	{
+		*(short *)"44",
+		"Same Gender"
+	},
+	{
+		*(short *)"45",
+		"Same Race"
+	},
+	{
+		*(short *)"46",
+		"Same Faction"
+	},
+	{
+		*(short *)"47",
+		"Faction Rank Diff"
+	},
+	{
+		*(short *)"48",
+		"Detected"
+	},
+	{
+		*(short *)"49",
+		"Alarmed"
+	},
+	{
+		*(short *)"50",
+		"Choice"
+	},
+	{
+		*(short *)"51",
+		"PC Intelligence"
+	},
+	{
+		*(short *)"52",
+		"PC Willpower"
+	},
+	{
+		*(short *)"53",
+		"PC Agility"
+	},
+	{
+		*(short *)"54",
+		"PC Speed"
+	},
+	{
+		*(short *)"55",
+		"PC Endurance"
+	},
+	{
+		*(short *)"56",
+		"PC Personality"
+	},
+	{
+		*(short *)"57",
+		"PC Luck"
+	},
+	{
+		*(short *)"58",
+		"PC Corprus"
+	},
+	{
+		*(short *)"59",
+		"Weather"
+	},
+	{
+		*(short *)"60",
+		"PC Vampire"
+	},
+	{
+		*(short *)"61",
+		"Level"
+	},
+	{
+		*(short *)"62",
+		"Attacked"
+	},
+	{
+		*(short *)"63",
+		"Talked to PC"
+	},
+	{
+		*(short *)"64",
+		"PC Health"
+	},
+	{
+		*(short *)"65",
+		"Creature Target"
+	},
+	{
+		*(short *)"66",
+		"Friend Hit"
+	},
+	{
+		*(short *)"67",
+		"Fight"
+	},
+	{
+		*(short *)"69",
+		"Hello"
+	},
+	{
+		*(short *)"69",
+		"Alarm"
+	},
+	{
+		*(short *)"70",
+		"Flee"
+	},
+	{
+		*(short *)"71",
+		"Should Attack"
+	},
+	{
+		*(short *)"sX",
+		"Variable"
+	},
+	{
+		*(short *)"JX",
+		"Journal"
+	},
+	{
+		*(short *)"IX",
+		"Item"
+	},
+	{
+		*(short *)"DX",
+		"Dead"
+	},
+	{
+		*(short *)"XX",
+		"Not ID"
+	},
+	{
+		*(short *)"FX",
+		"Not Faction"
+	},
+	{
+		*(short *)"CX",
+		"Not Class"
+	},
+	{
+		*(short *)"RX",
+		"Not Race"
+	},
+	{
+		*(short *)"LX",
+		"Not Cell"
+	},
+	{
+		NULL,
+		NULL
+	}
 };
 /*===========================================================================
  *      End of Function Array
@@ -157,7 +463,7 @@ esmfuncinfo_t l_InfoFuncData[] = {
  * Class CEsmInfo Constructor
  *
  *=========================================================================*/
-CEsmInfo::CEsmInfo () {
+CEsmInfo::CEsmInfo() {
 	//DEFINE_FUNCTION("CEsmInfo::CEsmInfo()");
 	m_pPrevName = NULL;
 	m_pNextName = NULL;
@@ -184,7 +490,7 @@ CEsmInfo::CEsmInfo () {
  * Class CEsmInfo Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmInfo::Destroy (void) {
+void CEsmInfo::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmInfo::Destroy()");
 	m_pPrevName = NULL;
 	m_pNextName = NULL;
@@ -214,8 +520,8 @@ void CEsmInfo::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmInfo::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmInfo* pInfo;
+int CEsmInfo::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmInfo *pInfo;
 	TCHAR Buffer[128];
 
 	/* Ensure the correct type */
@@ -223,7 +529,7 @@ int CEsmInfo::CompareFields (const int FieldID, CEsmRecord* pRecord) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pInfo = (CEsmInfo *) pRecord;
+	pInfo = (CEsmInfo *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -295,9 +601,9 @@ int CEsmInfo::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmInfo::Create (void) {
+CEsmRecord *CEsmInfo::Create(void) {
 	DEFINE_FUNCTION("CEsmInfo::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmInfo);
 	return (pRecord);
 }
@@ -314,7 +620,7 @@ CEsmRecord *CEsmInfo::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmInfo::CreateNew (CEsmFile* pFile) {
+void CEsmInfo::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -339,7 +645,7 @@ void CEsmInfo::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmInfo::GetFieldString (const int FieldID) {
+const TCHAR *CEsmInfo::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -374,7 +680,7 @@ const TCHAR *CEsmInfo::GetFieldString (const int FieldID) {
 			return GetFuncText(5);
 
 		case ESM_FIELD_DISPOSITION:
-			snprintf (s_Buffer, 31, _T("%d"), GetDisposition());
+			snprintf(s_Buffer, 31, _T("%d"), GetDisposition());
 			return (s_Buffer);
 
 		case ESM_FIELD_NEXT:
@@ -412,10 +718,10 @@ const TCHAR *CEsmInfo::GetFieldString (const int FieldID) {
  * an empty string on any error.  Uses a local static string buffer.
  *
  *=========================================================================*/
-const TCHAR *CEsmInfo::GetFuncText (const int Index) {
+const TCHAR *CEsmInfo::GetFuncText(const int Index) {
 	static TCHAR s_Buffer[128];
-	CEsmSubRecord* pSubRec;
-	CEsmSubSCVR* pFuncRec;
+	CEsmSubRecord *pSubRec;
+	CEsmSubSCVR *pFuncRec;
 	infofuncdata_t *pFuncData;
 	float FuncValue = 0.0f;
 	int ArrayIndex;
@@ -440,7 +746,7 @@ const TCHAR *CEsmInfo::GetFuncText (const int Index) {
 		return _T("");
 	}
 
-	pFuncRec = (CEsmSubSCVR *) pSubRec;
+	pFuncRec = (CEsmSubSCVR *)pSubRec;
 	pFuncData = pFuncRec->GetInfoFuncData();
 
 	if (pFuncData == NULL) {
@@ -453,18 +759,26 @@ const TCHAR *CEsmInfo::GetFuncText (const int Index) {
 	if (pSubRec == NULL) {
 		FuncValue = 0.0f;
 	} else if (pSubRec->IsType(MWESM_SUBREC_FLTV)) {
-		FuncValue = (float) ((CEsmSubFloat *)pSubRec)->GetValue();
+		FuncValue = (float)((CEsmSubFloat *)pSubRec)->GetValue();
 	} else if (pSubRec->IsType(MWESM_SUBREC_INTV)) {
-		FuncValue = (float) ((CEsmSubLong *)pSubRec)->GetValue();
+		FuncValue = (float)((CEsmSubLong *)pSubRec)->GetValue();
 	}
 
 	if (pFuncRec->GetInfoFuncData()->Type == MWESM_SCVRFUNC_FUNCTION) {
-		snprintf (s_Buffer, 127, _T("%s %s %g"), GetESMInfoFunction(pFuncData->Function),
-		          GetESMInfoCompareOp(pFuncData->CompareOp), FuncValue);
+		snprintf(s_Buffer,
+		         127,
+		         _T("%s %s %g"),
+		         GetESMInfoFunction(pFuncData->Function),
+		         GetESMInfoCompareOp(pFuncData->CompareOp),
+		         FuncValue);
 	} else if (pFuncRec->GetInfoFuncData()->Type == MWESM_SCVRFUNC_NONE) {
 		return (_T(""));
 	} else {
-		snprintf (s_Buffer, 127, _T("%s %s %g"), pFuncData->Name, GetESMInfoCompareOp(pFuncData->CompareOp),
+		snprintf(s_Buffer,
+		         127,
+		         _T("%s %s %g"),
+		         pFuncData->Name,
+		         GetESMInfoCompareOp(pFuncData->CompareOp),
 		          FuncValue);
 	}
 
@@ -483,9 +797,9 @@ const TCHAR *CEsmInfo::GetFuncText (const int Index) {
  * Sees if the given ID is used by the given info.
  *
  *=========================================================================*/
-bool CEsmInfo::IsUsed (const TCHAR* pID) {
-	const TCHAR* pResult;
-	const TCHAR* pParse;
+bool CEsmInfo::IsUsed(const TCHAR *pID) {
+	const TCHAR *pResult;
+	const TCHAR *pParse;
 	int IDLength = SafeStrLen(pID);
 
 	/* Ignore if there is no result text to look at */
@@ -498,8 +812,9 @@ bool CEsmInfo::IsUsed (const TCHAR* pID) {
 	pParse = stristr(pResult, pID);
 
 	while (pParse != NULL) {
-		if (iswctype(pParse[-1], _PUNCT | _SPACE) && (iswctype(pParse[IDLength], _PUNCT | _SPACE)
-		                                              || pParse[IDLength] == NULL_CHAR)) {
+		if (iswctype(pParse[-1], _PUNCT | _SPACE)
+		    && (iswctype(pParse[IDLength], _PUNCT | _SPACE)
+		    || pParse[IDLength] == NULL_CHAR)) {
 			return (true);
 		}
 
@@ -520,33 +835,33 @@ bool CEsmInfo::IsUsed (const TCHAR* pID) {
  * Class CEsmInfo Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmInfo::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmInfo::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_INAM)) {
-		m_pID = (CEsmSubName *) pSubRecord;
+		m_pID = (CEsmSubName *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_PNAM)) {
-		m_pPrevName = (CEsmSubNameFix *) pSubRecord;
+		m_pPrevName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_NNAM)) {
-		m_pNextName = (CEsmSubNameFix *) pSubRecord;
+		m_pNextName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_NAME)) {
-		m_pName = (CEsmSubName512 *) pSubRecord;
+		m_pName = (CEsmSubName512 *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
-		m_pData = (CEsmSubInfoDATA *) pSubRecord;
+		m_pData = (CEsmSubInfoDATA *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_ONAM)) {
-		m_pActor = (CEsmSubNameFix *) pSubRecord;
+		m_pActor = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_RNAM)) {
-		m_pRace = (CEsmSubNameFix *) pSubRecord;
+		m_pRace = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_CNAM)) {
-		m_pClass = (CEsmSubNameFix *) pSubRecord;
+		m_pClass = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pFaction = (CEsmSubNameFix *) pSubRecord;
+		m_pFaction = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_ANAM)) {
-		m_pCell = (CEsmSubName *) pSubRecord;
+		m_pCell = (CEsmSubName *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DNAM)) {
-		m_pPCFaction = (CEsmSubNameFix *) pSubRecord;
+		m_pPCFaction = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SNAM)) {
-		m_pSound = (CEsmSubNameFix *) pSubRecord;
+		m_pSound = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_BNAM)) {
-		m_pResult = (CEsmSubName *) pSubRecord;
+		m_pResult = (CEsmSubName *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -562,7 +877,7 @@ void CEsmInfo::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Class CEsmInfo Method - void SetResult (pString);
  *
  *=========================================================================*/
-void CEsmInfo::SetResult (const TCHAR* pString) {
+void CEsmInfo::SetResult(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pResult != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_BNAM);
@@ -578,7 +893,7 @@ void CEsmInfo::SetResult (const TCHAR* pString) {
 	}
 }
 
-void CEsmInfo::SetActor (const TCHAR* pString) {
+void CEsmInfo::SetActor(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pActor != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_ONAM);
@@ -595,7 +910,7 @@ void CEsmInfo::SetActor (const TCHAR* pString) {
 }
 
 
-void CEsmInfo::SetClass (const TCHAR* pString) {
+void CEsmInfo::SetClass(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pClass != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_CNAM);
@@ -612,7 +927,7 @@ void CEsmInfo::SetClass (const TCHAR* pString) {
 }
 
 
-void CEsmInfo::SetRace (const TCHAR* pString) {
+void CEsmInfo::SetRace(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pRace != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_RNAM);
@@ -629,7 +944,7 @@ void CEsmInfo::SetRace (const TCHAR* pString) {
 }
 
 
-void CEsmInfo::SetFaction (const TCHAR* pString) {
+void CEsmInfo::SetFaction(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pFaction != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_FNAM);
@@ -646,7 +961,7 @@ void CEsmInfo::SetFaction (const TCHAR* pString) {
 }
 
 
-void CEsmInfo::SetPCFaction (const TCHAR* pString) {
+void CEsmInfo::SetPCFaction(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pPCFaction != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_DNAM);
@@ -663,7 +978,7 @@ void CEsmInfo::SetPCFaction (const TCHAR* pString) {
 }
 
 
-void CEsmInfo::SetCell (const TCHAR* pString) {
+void CEsmInfo::SetCell(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pCell != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_ANAM);
@@ -679,7 +994,7 @@ void CEsmInfo::SetCell (const TCHAR* pString) {
 	}
 }
 
-void CEsmInfo::SetSound (const TCHAR* pString) {
+void CEsmInfo::SetSound(const TCHAR *pString) {
 	if (pString == NULL || *pString == NULL_CHAR) {
 		if (m_pSound != NULL) {
 			DeleteSubRecords(MWESM_SUBREC_SNAM);
@@ -705,7 +1020,7 @@ void CEsmInfo::SetSound (const TCHAR* pString) {
  * Function - const TCHAR* GetESMInfoGender (Type);
  *
  *=========================================================================*/
-const TCHAR *GetESMInfoGender (const int Type) {
+const TCHAR *GetESMInfoGender(const int Type) {
 	switch (Type) {
 		case MWESM_INFOGENDER_NONE:
 			return _T("");
@@ -731,7 +1046,7 @@ const TCHAR *GetESMInfoGender (const int Type) {
  * Function - const TCHAR* GetESMInfoFunction (FuncType);
  *
  *=========================================================================*/
-const TCHAR *GetESMInfoFunction (const short FuncType) {
+const TCHAR *GetESMInfoFunction(const short FuncType) {
 	int Index;
 
 	for (Index = 0 ; l_InfoFuncData[Index].pName != NULL; Index++) {
@@ -753,7 +1068,7 @@ const TCHAR *GetESMInfoFunction (const short FuncType) {
  * Function - const TCHAR* GetESMInfoFuncType (FuncType);
  *
  *=========================================================================*/
-const TCHAR *GetESMInfoFuncType (const byte FuncType) {
+const TCHAR *GetESMInfoFuncType(const byte FuncType) {
 	switch (FuncType) {
 		case '0':
 			return _T("");
@@ -810,7 +1125,7 @@ const TCHAR *GetESMInfoFuncType (const byte FuncType) {
  * Function - const TCHAR* GetESMInfoCompareOp (Type);
  *
  *=========================================================================*/
-const TCHAR *GetESMInfoCompareOp (const byte Type) {
+const TCHAR *GetESMInfoCompareOp(const byte Type) {
 	switch (Type) {
 		case '0':
 			return _T("=");

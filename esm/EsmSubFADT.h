@@ -101,14 +101,14 @@ class CEsmSubFADT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubFADT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(factiondata_t));
 		m_RecordSize = sizeof(factiondata_t);
@@ -125,64 +125,64 @@ class CEsmSubFADT : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	factiondata_t *GetFactionData (void) {
-		return ((factiondata_t *) m_pData);
+	factiondata_t *GetFactionData(void) {
+		return ((factiondata_t *)m_pData);
 	}
 
-	long GetAttributeID1 (void) {
+	long GetAttributeID1(void) {
 		return (GetFactionData()->AttributeID1);
 	}
 
-	long GetAttributeID2 (void) {
+	long GetAttributeID2(void) {
 		return (GetFactionData()->AttributeID2);
 	}
 
-	long GetSkillID1 (void) {
+	long GetSkillID1(void) {
 		return (GetFactionData()->SkillID1);
 	}
 
-	long GetSkillID2 (void) {
+	long GetSkillID2(void) {
 		return (GetFactionData()->SkillID2);
 	}
 
-	long GetSkillID3 (void) {
+	long GetSkillID3(void) {
 		return (GetFactionData()->SkillID3);
 	}
 
-	long GetSkillID4 (void) {
+	long GetSkillID4(void) {
 		return (GetFactionData()->SkillID4);
 	}
 
-	long GetSkillID5 (void) {
+	long GetSkillID5(void) {
 		return (GetFactionData()->SkillID5);
 	}
 
-	long GetSkillID6 (void) {
+	long GetSkillID6(void) {
 		return (GetFactionData()->SkillID6);
 	}
 
-	long GetUnknown (void) {
+	long GetUnknown(void) {
 		return (GetFactionData()->Unknown);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (GetFactionData()->Flags);
 	}
 
-	rankdata_t *GetRankData (const int Index) {
+	rankdata_t *GetRankData(const int Index) {
 		return (IsValidRank(Index) ? & (GetFactionData()->RankData[Index]) : NULL);
 	}
 
-	bool IsValidRank (const int Index) {
+	bool IsValidRank(const int Index) {
 		return (Index >= 0 && Index < MWESM_FACTION_NUMRANKS);
 	}
 
-	bool IsHidden (void) {
+	bool IsHidden(void) {
 		return ((GetFlags() & MWESM_FACTFLAG_HIDDEN) != 0);
 	}
 
 	/* Set/clear flags */
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetFactionData()->Flags |= Flag;
 		} else {
@@ -191,43 +191,43 @@ class CEsmSubFADT : public CEsmSubRecord {
 	}
 
 	/* Set class members */
-	void SetAttributeID1 (const long Value) {
+	void SetAttributeID1(const long Value) {
 		GetFactionData()->AttributeID1 = Value;
 	}
 
-	void SetAttributeID2 (const long Value) {
+	void SetAttributeID2(const long Value) {
 		GetFactionData()->AttributeID2 = Value;
 	}
 
-	void SetSkillID1 (const long Value) {
+	void SetSkillID1(const long Value) {
 		GetFactionData()->SkillID1 = Value;
 	}
 
-	void SetSkillID2 (const long Value) {
+	void SetSkillID2(const long Value) {
 		GetFactionData()->SkillID2 = Value;
 	}
 
-	void SetSkillID3 (const long Value) {
+	void SetSkillID3(const long Value) {
 		GetFactionData()->SkillID3 = Value;
 	}
 
-	void SetSkillID4 (const long Value) {
+	void SetSkillID4(const long Value) {
 		GetFactionData()->SkillID4 = Value;
 	}
 
-	void SetSkillID5 (const long Value) {
+	void SetSkillID5(const long Value) {
 		GetFactionData()->SkillID5 = Value;
 	}
 
-	void SetSkillID6 (const long Value) {
+	void SetSkillID6(const long Value) {
 		GetFactionData()->SkillID6 = Value;
 	}
 
-	void SetUnknown (const long Value) {
+	void SetUnknown(const long Value) {
 		GetFactionData()->Unknown = Value;
 	}
 
-	void SetHidden (const bool Flag) {
+	void SetHidden(const bool Flag) {
 		SetFlag(MWESM_FACTFLAG_HIDDEN, Flag);
 	}
 

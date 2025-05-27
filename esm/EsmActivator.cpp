@@ -29,11 +29,26 @@ DEFINE_FILE("EsmActivator.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmActivator::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -45,7 +60,7 @@ const esmsubreccreate_t CEsmActivator::s_SubRecCreate[] = {
  * Class CEsmActivator Constructor
  *
  *=========================================================================*/
-CEsmActivator::CEsmActivator () {
+CEsmActivator::CEsmActivator() {
 	//DEFINE_FUNCTION("CEsmActivator::CEsmActivator()");
 }
 
@@ -61,7 +76,7 @@ CEsmActivator::CEsmActivator () {
  * Description
  *
  *=========================================================================*/
-void CEsmActivator::Destroy (void) {
+void CEsmActivator::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmActivator::Destroy()");
 	CEsmItem1::Destroy();
 }
@@ -78,9 +93,9 @@ void CEsmActivator::Destroy (void) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmActivator::Create (void) {
+CEsmRecord *CEsmActivator::Create(void) {
 	DEFINE_FUNCTION("CEsmActivator::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmActivator);
 	return (pRecord);
 }
@@ -98,7 +113,7 @@ CEsmRecord *CEsmActivator::Create (void) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmActivator::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmActivator::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	return CEsmItem1::SetFieldValue(FieldID, pString);
 }
 

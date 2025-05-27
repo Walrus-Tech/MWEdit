@@ -49,24 +49,24 @@ class CEsmTES3 : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmTES3();
 	//virtual ~CEsmArmor() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Adds a master sub-record */
-	void AddMaster (const TCHAR* pFilename, const long FileSize);
+	void AddMaster(const TCHAR *pFilename, const long FileSize);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get class members */
-	headerdata_t *GetHeaderData (void) {
+	headerdata_t *GetHeaderData(void) {
 		return (m_pHeader ? m_pHeader->GetHeaderData() : NULL);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 };
 

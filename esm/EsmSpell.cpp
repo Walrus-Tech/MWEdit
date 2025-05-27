@@ -48,11 +48,26 @@ const TCHAR *l_SpellTypes[] = {
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmSpell::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SPDT, CEsmSubSPDT::Create },
-	{ MWESM_SUBREC_ENAM, CEsmSubENAM::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SPDT,
+		CEsmSubSPDT::Create
+	},
+	{
+		MWESM_SUBREC_ENAM,
+		CEsmSubENAM::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -64,7 +79,7 @@ const esmsubreccreate_t CEsmSpell::s_SubRecCreate[] = {
  * Class CEsmSpell Constructor
  *
  *=========================================================================*/
-CEsmSpell::CEsmSpell () {
+CEsmSpell::CEsmSpell() {
 	//DEFINE_FUNCTION("CEsmSpell::CEsmSpell()");
 	m_pSpellData = NULL;
 	m_pName = NULL;
@@ -82,7 +97,7 @@ CEsmSpell::CEsmSpell () {
  * Description
  *
  *=========================================================================*/
-void CEsmSpell::Destroy (void) {
+void CEsmSpell::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmSpell::Destroy()");
 	m_pSpellData = NULL;
 	m_pName = NULL;
@@ -102,15 +117,15 @@ void CEsmSpell::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmSpell::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmSpell* pSpell;
+int CEsmSpell::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmSpell *pSpell;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_SPEL)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pSpell = (CEsmSpell *) pRecord;
+	pSpell = (CEsmSpell *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -145,9 +160,9 @@ int CEsmSpell::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSpell::Create (void) {
+CEsmRecord *CEsmSpell::Create(void) {
 	DEFINE_FUNCTION("CEsmSpell::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSpell);
 	return (pRecord);
 }
@@ -164,7 +179,7 @@ CEsmRecord *CEsmSpell::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmSpell::CreateNew (CEsmFile* pFile) {
+void CEsmSpell::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -186,7 +201,7 @@ void CEsmSpell::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmSpell::GetFieldString (const int FieldID) {
+const TCHAR *CEsmSpell::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -200,7 +215,7 @@ const TCHAR *CEsmSpell::GetFieldString (const int FieldID) {
 			return BOOLTOYESNO(IsPCStart());
 
 		case ESM_FIELD_COST:
-			snprintf (s_Buffer, 31, _T("%ld"), GetSpellCost());
+			snprintf(s_Buffer, 31, _T("%ld"), GetSpellCost());
 			return (s_Buffer);
 
 		case ESM_FIELD_TYPE:
@@ -221,11 +236,11 @@ const TCHAR *CEsmSpell::GetFieldString (const int FieldID) {
  * Class CEsmSpell Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSpell::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmSpell::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_FNAM)) {
-		m_pName = (CEsmSubNameFix *) pSubRecord;
+		m_pName = (CEsmSubNameFix *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SPDT)) {
-		m_pSpellData = (CEsmSubSPDT *) pSubRecord;
+		m_pSpellData = (CEsmSubSPDT *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -244,7 +259,7 @@ void CEsmSpell::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmSpell::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmSpell::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
@@ -286,7 +301,7 @@ bool CEsmSpell::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Function - const TCHAR* GetESMSpellType (Type);
  *
  *=========================================================================*/
-const TCHAR *GetESMSpellType (const int Type) {
+const TCHAR *GetESMSpellType(const int Type) {
 	/* Check for a valid input type */
 	if (Type < MWESM_SPELLTYPE_MIN || Type > MWESM_SPELLTYPE_MAX) {
 		return _T("Unknown");
@@ -297,7 +312,7 @@ const TCHAR *GetESMSpellType (const int Type) {
 }
 
 
-int GetESMSpellType (const TCHAR* pString) {
+int GetESMSpellType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_SPELLTYPE_MIN; Index <= MWESM_SPELLTYPE_MAX; Index++) {

@@ -64,89 +64,89 @@ class CEsmArmor : public CEsmItem3 {
 	/* Class Constructors/Destructors */
 	CEsmArmor();
 	//virtual ~CEsmArmor() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Armor");
 	}
 
 	/* Get class members */
-	armordata_t *GetArmorData (void) {
+	armordata_t *GetArmorData(void) {
 		return (m_pArmorData == NULL ? NULL : m_pArmorData->GetArmorData() );
 	}
 
-	const TCHAR *GetArmorType (void);
-	int GetArmorTypeID (void) {
+	const TCHAR *GetArmorType(void);
+	int GetArmorTypeID(void) {
 		return (m_pArmorData == NULL ? -1 : m_pArmorData->GetArmorType());
 	}
 
-	virtual float GetWeight (void) {
+	virtual float GetWeight(void) {
 		return (m_pArmorData == NULL ? 0 : m_pArmorData->GetWeight());
 	}
 
-	virtual long GetValue (void) {
+	virtual long GetValue(void) {
 		return (m_pArmorData == NULL ? 0 : m_pArmorData->GetValue());
 	}
 
-	virtual long GetEnchantPts (void) {
+	virtual long GetEnchantPts(void) {
 		return (m_pArmorData == NULL ? 0 : m_pArmorData->GetEnchantPts());
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	virtual void SetWeight (const float Weight) {
+	virtual void SetWeight(const float Weight) {
 		if (m_pArmorData != NULL) {
 			m_pArmorData->SetWeight(Weight);
 		}
 	}
 
-	virtual void SetEnchantPts (const long Points) {
+	virtual void SetEnchantPts(const long Points) {
 		if (m_pArmorData != NULL) {
 			m_pArmorData->SetEnchantPts(Points);
 		}
 	}
 
-	virtual void SetValue (const long Value) {
+	virtual void SetValue(const long Value) {
 		if (m_pArmorData != NULL) {
 			m_pArmorData->SetValue(Value);
 		}
 	}
 
-	void SetArmorType (const int Type) {
+	void SetArmorType(const int Type) {
 		if (m_pArmorData != NULL) {
 			m_pArmorData->SetArmorType(Type);
 		}
 	}
 
-	void SetArmorRating (const int Rating) {
+	void SetArmorRating(const int Rating) {
 		if (m_pArmorData != NULL) {
 			m_pArmorData->SetRating(Rating);
 		}
 	}
 
-	void SetArmorHealth (const int Health) {
+	void SetArmorHealth(const int Health) {
 		if (m_pArmorData != NULL) {
 			m_pArmorData->SetHealth(Health);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -162,9 +162,9 @@ class CEsmArmor : public CEsmItem3 {
  *=========================================================================*/
 
 /* Convert an armor type to a string */
-const TCHAR *GetESMArmorType (const int ArmorType);
-int GetESMArmorType (const TCHAR* pString);
-bool GetESMArmorType (int &OutIndex, const TCHAR* pString);
+const TCHAR *GetESMArmorType(const int ArmorType);
+int GetESMArmorType(const TCHAR *pString);
+bool GetESMArmorType(int &OutIndex, const TCHAR *pString);
 
 /*===========================================================================
  *      End of Function Prototypes

@@ -29,13 +29,34 @@ DEFINE_FILE("EsmRepair.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmRepair::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_RIDT, CEsmSubRIDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_RIDT,
+		CEsmSubRIDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmRepair::s_SubRecCreate[] = {
  * Class CEsmRepair Constructor
  *
  *=========================================================================*/
-CEsmRepair::CEsmRepair () {
+CEsmRepair::CEsmRepair() {
 	//DEFINE_FUNCTION("CEsmRepair::CEsmRepair()");
 	m_pRepairData = NULL;
 }
@@ -64,7 +85,7 @@ CEsmRepair::CEsmRepair () {
  * Description
  *
  *=========================================================================*/
-void CEsmRepair::Destroy (void) {
+void CEsmRepair::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmRepair::Destroy()");
 	m_pRepairData = NULL;
 	CEsmItem2::Destroy();
@@ -83,16 +104,16 @@ void CEsmRepair::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmRepair::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmRepair::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmRepair::CompareFields()");
-	CEsmRepair* pRepair;
+	CEsmRepair *pRepair;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_REPA)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pRepair = (CEsmRepair *) pRecord;
+	pRepair = (CEsmRepair *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
@@ -118,9 +139,9 @@ int CEsmRepair::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRepair::Create (void) {
+CEsmRecord *CEsmRepair::Create(void) {
 	DEFINE_FUNCTION("CEsmRepair::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRepair);
 	return (pRecord);
 }
@@ -137,7 +158,7 @@ CEsmRecord *CEsmRepair::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmRepair::CreateNew (CEsmFile* pFile) {
+void CEsmRepair::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -158,16 +179,16 @@ void CEsmRepair::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmRepair::GetFieldString (const int FieldID) {
+const TCHAR *CEsmRepair::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_USES:
-			snprintf (s_Buffer, 31, _T("%ld"), GetUses());
+			snprintf(s_Buffer, 31, _T("%ld"), GetUses());
 			return (s_Buffer);
 
 		case ESM_FIELD_QUALITY:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetQuality());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetQuality());
 			return (s_Buffer);
 
 		default:
@@ -185,9 +206,9 @@ const TCHAR *CEsmRepair::GetFieldString (const int FieldID) {
  * Class CEsmRepair Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmRepair::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmRepair::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_RIDT)) {
-		m_pRepairData = (CEsmSubRIDT *) pSubRecord;
+		m_pRepairData = (CEsmSubRIDT *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -206,14 +227,14 @@ void CEsmRepair::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmRepair::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmRepair::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			SetUses(atoi(pString));
 			return (true);
 
 		case ESM_FIELD_QUALITY:
-			SetQuality((float) atof(pString));
+			SetQuality((float)atof(pString));
 			return (true);
 	};
 

@@ -28,7 +28,7 @@ DEFINE_FILE("EsmItem3.cpp");
  * Class CEsmItem3 Constructor
  *
  *=========================================================================*/
-CEsmItem3::CEsmItem3 () {
+CEsmItem3::CEsmItem3() {
 	//DEFINE_FUNCTION("CEsmItem3::CEsmItem3()");
 	m_pEnchant = NULL;
 }
@@ -45,7 +45,7 @@ CEsmItem3::CEsmItem3 () {
  * Description
  *
  *=========================================================================*/
-void CEsmItem3::Destroy (void) {
+void CEsmItem3::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmItem3::Destroy()");
 	/* Clear the references */
 	m_pEnchant = NULL;
@@ -66,23 +66,23 @@ void CEsmItem3::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmItem3::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmItem3::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	//DEFINE_FUNCTION("CEsmItem3::CompareFields()");
-	CEsmItem3* pRecord3;
+	CEsmItem3 *pRecord3;
 
 	/* Ensure the correct type */
 	if ((MWESM_CLASSTYPE_ITEM3 & pRecord->GetClassType()) == 0) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pRecord3 = (CEsmItem3 *) pRecord;
+	pRecord3 = (CEsmItem3 *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANT:
 			return StringCompare(GetEnchant(), pRecord3->GetEnchant(), FALSE);
 
 		case ESM_FIELD_ENCHANTPTS:
-			return (int) (GetEnchantPts() - pRecord3->GetEnchantPts());
+			return (int)(GetEnchantPts() - pRecord3->GetEnchantPts());
 
 		default:    /* Call the base class method */
 			return CEsmItem2::CompareFields(FieldID, pRecord);
@@ -101,7 +101,7 @@ int CEsmItem3::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmItem3::CreateNew (CEsmFile* pFile) {
+void CEsmItem3::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -120,7 +120,7 @@ void CEsmItem3::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmItem3::GetFieldString (const int FieldID) {
+const TCHAR *CEsmItem3::GetFieldString(const int FieldID) {
 	//DEFINE_FUNCTION("CEsmItem3::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
@@ -133,7 +133,7 @@ const TCHAR *CEsmItem3::GetFieldString (const int FieldID) {
 			return (m_pEnchant->GetName());
 
 		case ESM_FIELD_ENCHANTPTS:
-			snprintf (s_Buffer, 31, _T("%ld"), GetEnchantPts());
+			snprintf(s_Buffer, 31, _T("%ld"), GetEnchantPts());
 			return (s_Buffer);
 
 		default:    /* Call the base class record */
@@ -151,9 +151,9 @@ const TCHAR *CEsmItem3::GetFieldString (const int FieldID) {
  * Class CEsmItem3 Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmItem3::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmItem3::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_ENAM)) {
-		m_pEnchant = (CEsmSubNameFix *) pSubRecord;
+		m_pEnchant = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -169,7 +169,7 @@ void CEsmItem3::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Class CEsmItem3 Method - void SetEnchant (pEnchant);
  *
  *=========================================================================*/
-void CEsmItem3::SetEnchant (const TCHAR* pEnchant) {
+void CEsmItem3::SetEnchant(const TCHAR *pEnchant) {
 	DEFINE_FUNCTION("CEsmItem3::SetEnchant()");
 
 	/* Should we delete the current enchant? */
@@ -203,7 +203,7 @@ void CEsmItem3::SetEnchant (const TCHAR* pEnchant) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmItem3::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmItem3::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANT:
 			SetEnchant(pString);

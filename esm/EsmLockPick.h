@@ -59,76 +59,76 @@ class CEsmLockPick : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmLockPick();
 	//virtual ~CEsmLockPick() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Lock Pick");
 	}
 
 	/* Get class members */
-	lockdata_t *GetLockData (void) {
+	lockdata_t *GetLockData(void) {
 		return (m_pLockData ? m_pLockData->GetLockData() : NULL);
 	}
 
-	virtual float GetWeight (void) {
+	virtual float GetWeight(void) {
 		return (m_pLockData ? m_pLockData->GetWeight() : 0);
 	}
 
-	virtual long GetValue (void) {
+	virtual long GetValue(void) {
 		return (m_pLockData ? m_pLockData->GetValue() : 0);
 	}
 
-	float GetQuality (void) {
+	float GetQuality(void) {
 		return (m_pLockData ? m_pLockData->GetQuality() : 0);
 	}
 
-	long GetUses (void) {
+	long GetUses(void) {
 		return (m_pLockData ? m_pLockData->GetUses() : 0);
 	}
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	virtual void SetWeight (const float Weight) {
+	virtual void SetWeight(const float Weight) {
 		if (m_pLockData) {
 			m_pLockData->SetWeight(Weight);
 		}
 	}
 
-	virtual void SetValue (const long Value) {
+	virtual void SetValue(const long Value) {
 		if (m_pLockData) {
 			m_pLockData->SetValue(Value);
 		}
 	}
 
-	void SetUses (const long Value) {
+	void SetUses(const long Value) {
 		if (m_pLockData) {
 			m_pLockData->SetUses(Value);
 		}
 	}
 
-	void SetQuality (const float Value) {
+	void SetQuality(const float Value) {
 		if (m_pLockData) {
 			m_pLockData->SetQuality(Value);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

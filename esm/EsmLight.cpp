@@ -29,14 +29,38 @@ DEFINE_FILE("EsmLight.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmLight::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_LHDT, CEsmSubLHDT::Create },
-	{ MWESM_SUBREC_SNAM, CEsmSubNameFix::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_LHDT,
+		CEsmSubLHDT::Create
+	},
+	{
+		MWESM_SUBREC_SNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -58,7 +82,7 @@ const esmsubreccreate_t CEsmLight::s_SubRecCreate[] = {
  * Class CEsmLight Constructor
  *
  *=========================================================================*/
-CEsmLight::CEsmLight () {
+CEsmLight::CEsmLight() {
 	//DEFINE_FUNCTION("CEsmLight::CEsmLight()");
 	m_pLightData = NULL;
 	m_pSound = NULL;
@@ -76,7 +100,7 @@ CEsmLight::CEsmLight () {
  * Description
  *
  *=========================================================================*/
-void CEsmLight::Destroy (void) {
+void CEsmLight::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmLight::Destroy()");
 	m_pLightData = NULL;
 	m_pSound = NULL;
@@ -96,16 +120,16 @@ void CEsmLight::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmLight::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmLight::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmLight::CompareFields()");
-	CEsmLight* pLight;
+	CEsmLight *pLight;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_LIGH)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pLight = (CEsmLight *) pRecord;
+	pLight = (CEsmLight *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_TIME:
@@ -134,9 +158,9 @@ int CEsmLight::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLight::Create (void) {
+CEsmRecord *CEsmLight::Create(void) {
 	DEFINE_FUNCTION("CEsmLight::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLight);
 	return (pRecord);
 }
@@ -153,7 +177,7 @@ CEsmRecord *CEsmLight::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmLight::CreateNew (CEsmFile* pFile) {
+void CEsmLight::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -174,17 +198,17 @@ void CEsmLight::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmLight::GetFieldString (const int FieldID) {
+const TCHAR *CEsmLight::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmLight::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_TIME:
-			snprintf (s_Buffer, 31, _T("%ld"), GetTime());
+			snprintf(s_Buffer, 31, _T("%ld"), GetTime());
 			return (s_Buffer);
 
 		case ESM_FIELD_RADIUS:
-			snprintf (s_Buffer, 31, _T("%ld"), GetRadius());
+			snprintf(s_Buffer, 31, _T("%ld"), GetRadius());
 			return (s_Buffer);
 
 		case ESM_FIELD_SOUND:
@@ -205,11 +229,11 @@ const TCHAR *CEsmLight::GetFieldString (const int FieldID) {
  * Class CEsmLight Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmLight::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmLight::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_LHDT)) {
-		m_pLightData = (CEsmSubLHDT *) pSubRecord;
+		m_pLightData = (CEsmSubLHDT *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_SNAM)) {
-		m_pSound = (CEsmSubNameFix *) pSubRecord;
+		m_pSound = (CEsmSubNameFix *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -228,7 +252,7 @@ void CEsmLight::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmLight::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmLight::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TIME:
 			SetTime(atol(pString));
@@ -257,7 +281,7 @@ bool CEsmLight::SetFieldValue (const int FieldID, const TCHAR* pString) {
  * Begin CEsmLight Set Methods
  *
  *=========================================================================*/
-void CEsmLight::SetIcon (const TCHAR* pString) {
+void CEsmLight::SetIcon(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pIcon == NULL) {
 			return;
@@ -278,7 +302,7 @@ void CEsmLight::SetIcon (const TCHAR* pString) {
 }
 
 
-void CEsmLight::SetName (const TCHAR* pString) {
+void CEsmLight::SetName(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pName == NULL) {
 			return;
@@ -299,7 +323,7 @@ void CEsmLight::SetName (const TCHAR* pString) {
 }
 
 
-void CEsmLight::SetSound (const TCHAR* pString) {
+void CEsmLight::SetSound(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pSound == NULL) {
 			return;
@@ -329,7 +353,7 @@ void CEsmLight::SetSound (const TCHAR* pString) {
  * Function - const TCHAR* GetESMLightFlicker (Flags);
  *
  *=========================================================================*/
-const TCHAR *GetESMLightFlicker (const int Flags) {
+const TCHAR *GetESMLightFlicker(const int Flags) {
 	if ((Flags & MWESM_LIGHTFLAG_FLICKER) != 0) {
 		return _T("Flicker");
 	} else if ((Flags & MWESM_LIGHTFLAG_PULSE) != 0) {

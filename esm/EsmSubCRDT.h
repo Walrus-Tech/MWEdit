@@ -107,14 +107,14 @@ class CEsmSubCRDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCRDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(creaturedata_t));
 		m_RecordSize = sizeof(creaturedata_t);
@@ -122,202 +122,202 @@ class CEsmSubCRDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	creaturedata_t *GetCreatureData (void) {
-		return ((creaturedata_t *) m_pData);
+	creaturedata_t *GetCreatureData(void) {
+		return ((creaturedata_t *)m_pData);
 	}
 
-	long GetCreaType (void) {
+	long GetCreaType(void) {
 		return (GetCreatureData()->Type);
 	}
 
-	long GetLevel (void) {
+	long GetLevel(void) {
 		return (GetCreatureData()->Level);
 	}
 
-	long GetStrength (void) {
+	long GetStrength(void) {
 		return (GetCreatureData()->Strength);
 	}
 
-	long GetIntelligence (void) {
+	long GetIntelligence(void) {
 		return (GetCreatureData()->Intelligence);
 	}
 
-	long GetWillpower (void) {
+	long GetWillpower(void) {
 		return (GetCreatureData()->Willpower);
 	}
 
-	long GetAgility (void) {
+	long GetAgility(void) {
 		return (GetCreatureData()->Agility);
 	}
 
-	long GetSpeed (void) {
+	long GetSpeed(void) {
 		return (GetCreatureData()->Speed);
 	}
 
-	long GetEndurance (void) {
+	long GetEndurance(void) {
 		return (GetCreatureData()->Endurance);
 	}
 
-	long GetPersonality (void) {
+	long GetPersonality(void) {
 		return (GetCreatureData()->Personality);
 	}
 
-	long GetLuck (void) {
+	long GetLuck(void) {
 		return (GetCreatureData()->Luck);
 	}
 
-	long GetHealth (void) {
+	long GetHealth(void) {
 		return (GetCreatureData()->Health);
 	}
 
-	long GetSpellPts (void) {
+	long GetSpellPts(void) {
 		return (GetCreatureData()->SpellPts);
 	}
 
-	long GetFatigue (void) {
+	long GetFatigue(void) {
 		return (GetCreatureData()->Fatigue);
 	}
 
-	long GetSoul (void) {
+	long GetSoul(void) {
 		return (GetCreatureData()->Soul);
 	}
 
-	long GetCombat (void) {
+	long GetCombat(void) {
 		return (GetCreatureData()->Combat);
 	}
 
-	long GetMagic (void) {
+	long GetMagic(void) {
 		return (GetCreatureData()->Magic);
 	}
 
-	long GetStealth (void) {
+	long GetStealth(void) {
 		return (GetCreatureData()->Stealth);
 	}
 
-	long GetAttackMin1 (void) {
+	long GetAttackMin1(void) {
 		return (GetCreatureData()->AttackMin1);
 	}
 
-	long GetAttackMin2 (void) {
+	long GetAttackMin2(void) {
 		return (GetCreatureData()->AttackMin2);
 	}
 
-	long GetAttackMin3 (void) {
+	long GetAttackMin3(void) {
 		return (GetCreatureData()->AttackMin3);
 	}
 
-	long GetAttackMax1 (void) {
+	long GetAttackMax1(void) {
 		return (GetCreatureData()->AttackMax1);
 	}
 
-	long GetAttackMax2 (void) {
+	long GetAttackMax2(void) {
 		return (GetCreatureData()->AttackMax2);
 	}
 
-	long GetAttackMax3 (void) {
+	long GetAttackMax3(void) {
 		return (GetCreatureData()->AttackMax3);
 	}
 
-	long GetGold (void) {
+	long GetGold(void) {
 		return (GetCreatureData()->Gold);
 	}
 
 	/* Set class members */
-	void SetCreaType (const long Type) {
+	void SetCreaType(const long Type) {
 		if (Type >= MWESM_CREATYPE_MIN && Type <= MWESM_CREATYPE_MAX) {
 			GetCreatureData()->Type = Type;
 		}
 	}
 
-	void SetLevel (const long Value) {
+	void SetLevel(const long Value) {
 		GetCreatureData()->Level = Value;
 	}
 
-	void SetStrength (const long Value) {
+	void SetStrength(const long Value) {
 		GetCreatureData()->Strength = Value;
 	}
 
-	void SetIntelligence (const long Value) {
+	void SetIntelligence(const long Value) {
 		GetCreatureData()->Intelligence = Value;
 	}
 
-	void SetWillpower (const long Value) {
+	void SetWillpower(const long Value) {
 		GetCreatureData()->Willpower = Value;
 	}
 
-	void SetAgility (const long Value) {
+	void SetAgility(const long Value) {
 		GetCreatureData()->Agility = Value;
 	}
 
-	void SetSpeed (const long Value) {
+	void SetSpeed(const long Value) {
 		GetCreatureData()->Speed = Value;
 	}
 
-	void SetEndurance (const long Value) {
+	void SetEndurance(const long Value) {
 		GetCreatureData()->Endurance = Value;
 	}
 
-	void SetPersonality (const long Value) {
+	void SetPersonality(const long Value) {
 		GetCreatureData()->Personality = Value;
 	}
 
-	void SetLuck (const long Value) {
+	void SetLuck(const long Value) {
 		GetCreatureData()->Luck = Value;
 	}
 
-	void SetHealth (const long Value) {
+	void SetHealth(const long Value) {
 		GetCreatureData()->Health = Value;
 	}
 
-	void SetSpellPts (const long Value) {
+	void SetSpellPts(const long Value) {
 		GetCreatureData()->SpellPts = Value;
 	}
 
-	void SetFatigue (const long Value) {
+	void SetFatigue(const long Value) {
 		GetCreatureData()->Fatigue = Value;
 	}
 
-	void SetSoul (const long Value) {
+	void SetSoul(const long Value) {
 		GetCreatureData()->Soul = Value;
 	}
 
-	void SetCombat (const long Value) {
+	void SetCombat(const long Value) {
 		GetCreatureData()->Combat = Value;
 	}
 
-	void SetMagic (const long Value) {
+	void SetMagic(const long Value) {
 		GetCreatureData()->Magic = Value;
 	}
 
-	void SetStealth (const long Value) {
+	void SetStealth(const long Value) {
 		GetCreatureData()->Stealth = Value;
 	}
 
-	void SetAttackMin1 (const long Value) {
+	void SetAttackMin1(const long Value) {
 		GetCreatureData()->AttackMin1 = Value;
 	}
 
-	void SetAttackMin2 (const long Value) {
+	void SetAttackMin2(const long Value) {
 		GetCreatureData()->AttackMin2 = Value;
 	}
 
-	void SetAttackMin3 (const long Value) {
+	void SetAttackMin3(const long Value) {
 		GetCreatureData()->AttackMin3 = Value;
 	}
 
-	void SetAttackMax1 (const long Value) {
+	void SetAttackMax1(const long Value) {
 		GetCreatureData()->AttackMax1 = Value;
 	}
 
-	void SetAttackMax2 (const long Value) {
+	void SetAttackMax2(const long Value) {
 		GetCreatureData()->AttackMax2 = Value;
 	}
 
-	void SetAttackMax3 (const long Value) {
+	void SetAttackMax3(const long Value) {
 		GetCreatureData()->AttackMax3 = Value;
 	}
 
-	void SetGold (const long Value) {
+	void SetGold(const long Value) {
 		GetCreatureData()->Gold = Value;
 	}
 
@@ -332,4 +332,3 @@ class CEsmSubCRDT : public CEsmSubRecord {
 /*===========================================================================
  *      End of File EsmsubaCRDT.H
  *=========================================================================*/
-

@@ -27,8 +27,8 @@
  * Begin Definitions
  *
  *=========================================================================*/
-#define MWESM_CELLFLAG_INTERIOR   0x01
-#define MWESM_CELLFLAG_HASWATER   0x02
+#define MWESM_CELLFLAG_INTERIOR       0x01
+#define MWESM_CELLFLAG_HASWATER       0x02
 #define MWESM_CELLFLAG_SLEEPILLEGAL   0x04
 #define MWESM_CELLFLAG_LIKEEXTERIOR   0x80
 /*===========================================================================
@@ -81,14 +81,14 @@ class CEsmSubCellDATA : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCellDATA);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(celldata_t));
 		m_RecordSize = sizeof(celldata_t);
@@ -96,40 +96,40 @@ class CEsmSubCellDATA : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	celldata_t *GetCellData (void) {
-		return ((celldata_t *) m_pData);
+	celldata_t *GetCellData(void) {
+		return ((celldata_t *)m_pData);
 	}
 
-	long GetGridX (void) {
+	long GetGridX(void) {
 		return (GetCellData()->GridX);
 	}
 
-	long GetGridY (void) {
+	long GetGridY(void) {
 		return (GetCellData()->GridY);
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (GetCellData()->Flags);
 	}
 
-	bool IsInterior (void) {
+	bool IsInterior(void) {
 		return ((GetFlags() & MWESM_CELLFLAG_INTERIOR) != 0);
 	}
 
-	bool HasWater (void) {
+	bool HasWater(void) {
 		return ((GetFlags() & MWESM_CELLFLAG_HASWATER) != 0);
 	}
 
-	bool IsSleepIllegal (void) {
+	bool IsSleepIllegal(void) {
 		return ((GetFlags() & MWESM_CELLFLAG_SLEEPILLEGAL) != 0);
 	}
 
-	bool IsLikeExterior (void) {
+	bool IsLikeExterior(void) {
 		return ((GetFlags() & MWESM_CELLFLAG_LIKEEXTERIOR) != 0);
 	}
 
 	/* Set or clear flags */
-	void SetFlag (const long Flag, const bool Set) {
+	void SetFlag(const long Flag, const bool Set) {
 		if (Set) {
 			GetCellData()->Flags |= Flag;
 		} else {
@@ -138,27 +138,27 @@ class CEsmSubCellDATA : public CEsmSubRecord {
 	}
 
 	/* Set class methods */
-	void SetGridX (const long Value) {
+	void SetGridX(const long Value) {
 		GetCellData()->GridX = Value;
 	}
 
-	void SetGridY (const long Value) {
+	void SetGridY(const long Value) {
 		GetCellData()->GridY = Value;
 	}
 
-	void SetInterior (const bool Flag) {
+	void SetInterior(const bool Flag) {
 		SetFlag(MWESM_CELLFLAG_INTERIOR, Flag);
 	}
 
-	void SetHasWater (const bool Flag) {
+	void SetHasWater(const bool Flag) {
 		SetFlag(MWESM_CELLFLAG_HASWATER, Flag);
 	}
 
-	void SetSleepIllegal (const bool Flag) {
+	void SetSleepIllegal(const bool Flag) {
 		SetFlag(MWESM_CELLFLAG_SLEEPILLEGAL, Flag);
 	}
 
-	void SetLikeExterior (const bool Flag) {
+	void SetLikeExterior(const bool Flag) {
 		SetFlag(MWESM_CELLFLAG_LIKEEXTERIOR, Flag);
 	}
 

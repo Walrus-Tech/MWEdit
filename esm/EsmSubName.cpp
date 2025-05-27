@@ -28,7 +28,7 @@ DEFINE_FILE("EsmSubName.cpp");
  * Class CEsmSubName Method - void Copy (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSubName::Copy (CEsmSubRecord* pSubRecord) {
+void CEsmSubName::Copy(CEsmSubRecord *pSubRecord) {
 	Destroy();
 	m_Type.SetType(pSubRecord->GetType());
 	m_RecordSize = pSubRecord->GetRecordSize();
@@ -47,17 +47,17 @@ void CEsmSubName::Copy (CEsmSubRecord* pSubRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmSubName::Create (void) {
+CEsmSubRecord *CEsmSubName::Create(void) {
 	DEFINE_FUNCTION("CEsmSubName::Create()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	CreatePointer(pSubRecord, CEsmSubName);
 	return (pSubRecord);
 }
 
 
-CEsmSubRecord *CEsmSubNameNull::Create (void) {
+CEsmSubRecord *CEsmSubNameNull::Create(void) {
 	DEFINE_FUNCTION("CEsmSubNameNull::Create()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	CreatePointer(pSubRecord, CEsmSubNameNull);
 	return (pSubRecord);
 }
@@ -72,7 +72,7 @@ CEsmSubRecord *CEsmSubNameNull::Create (void) {
  * Class CEsmSubName Method - bool ReadData (File);
  *
  *=========================================================================*/
-bool CEsmSubName::ReadData (CGenFile& File) {
+bool CEsmSubName::ReadData(CGenFile &File) {
 	//DEFINE_FUNCTION("CEsmSubName::ReadData()");
 	bool Result;
 	m_Name.SetSize(m_RecordSize);
@@ -88,4 +88,3 @@ bool CEsmSubName::ReadData (CGenFile& File) {
 /*===========================================================================
  *      End of Class Method CEsmSubName::Read()
  *=========================================================================*/
-

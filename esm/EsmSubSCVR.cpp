@@ -31,7 +31,7 @@ DEFINE_FILE("EsmSubSCVR.cpp");
  * Class CEsmSubSCVR Method - void Copy (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSubSCVR::Copy (CEsmSubRecord* pSubRecord) {
+void CEsmSubSCVR::Copy(CEsmSubRecord* pSubRecord) {
 	Destroy();
 	m_Type.SetType(pSubRecord->GetType());
 	m_RecordSize = pSubRecord->GetRecordSize();
@@ -53,7 +53,7 @@ void CEsmSubSCVR::Copy (CEsmSubRecord* pSubRecord) {
  * sensitive).  Stops searching on the first match.
  *
  *=========================================================================*/
-bool CEsmSubSCVR::Find (esmfind_t &FindData) {
+bool CEsmSubSCVR::Find(esmfind_t &FindData) {
 	int iResult;
 
 	/* Ignore if data is invalid or too small */
@@ -82,7 +82,7 @@ bool CEsmSubSCVR::Find (esmfind_t &FindData) {
  * Class CEsmSubSCVR Method - bool IsUsed (pID);
  *
  *=========================================================================*/
-bool CEsmSubSCVR::IsUsed (const TCHAR* pID) {
+bool CEsmSubSCVR::IsUsed(const TCHAR *pID) {
 	return (StringCompare(GetName(), pID, false) == 0);
 }
 
@@ -96,7 +96,7 @@ bool CEsmSubSCVR::IsUsed (const TCHAR* pID) {
  * Class CEsmSubSCVR Method - bool ReadData (File);
  *
  *=========================================================================*/
-bool CEsmSubSCVR::ReadData (CGenFile& File) {
+bool CEsmSubSCVR::ReadData(CGenFile &File) {
 	//DEFINE_FUNCTION("CEsmSubSCVR::ReadData()");
 	bool Result;
 	Result = File.Read((char *)&m_FuncData, m_RecordSize);
@@ -115,7 +115,7 @@ bool CEsmSubSCVR::ReadData (CGenFile& File) {
  * Class CEsmSubSCVR Method - void SetName (pString);
  *
  *=========================================================================*/
-void CEsmSubSCVR::SetName (const TCHAR* pString) {
+void CEsmSubSCVR::SetName(const TCHAR *pString) {
 	if (pString == NULL) {
 		m_StringLength = 0;
 		m_FuncData.Name[0] = NULL_CHAR;
@@ -140,7 +140,7 @@ void CEsmSubSCVR::SetName (const TCHAR* pString) {
  * Class CEsmSubSCVR Method - bool WriteData (File);
  *
  *=========================================================================*/
-bool CEsmSubSCVR::WriteData (CGenFile& File) {
+bool CEsmSubSCVR::WriteData(CGenFile &File) {
 	//DEFINE_FUNCTION("CEsmSubSCVR::WriteData()");
 	bool Result;
 	m_RecordSize = MWESM_SCVR_BASESIZE + m_StringLength;

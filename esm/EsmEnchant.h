@@ -44,12 +44,12 @@
  * Begin Function Prototypes
  *
  *=========================================================================*/
-const TCHAR *GetESMEnchantType (const int Type);
-int GetESMEnchantType (const TCHAR* pString);
-bool GetESMEnchantType (int &OutType, const TCHAR* pString);
-const TCHAR *GetESMEnchantRangeType (const int Type);
-int GetESMEnchantRangeType (const TCHAR* pString);
-bool GetESMEnchantRangeType (int &OutType, const TCHAR* pString);
+const TCHAR *GetESMEnchantType(const int Type);
+int GetESMEnchantType(const TCHAR *pString);
+bool GetESMEnchantType(int &OutType, const TCHAR *pString);
+const TCHAR *GetESMEnchantRangeType(const int Type);
+int GetESMEnchantRangeType(const TCHAR *pString);
+bool GetESMEnchantRangeType(int &OutType, const TCHAR *pString);
 /*===========================================================================
  *      End of Function Prototypes
  *=========================================================================*/
@@ -80,80 +80,80 @@ class CEsmEnchant : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmEnchant();
 	//virtual ~CEsmEnchant() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Enchant");
 	}
 
 	/* Get class members */
-	const TCHAR *GetEnchantType (void) {
+	const TCHAR *GetEnchantType(void) {
 		return (GetESMEnchantType(GetEnchantTypeID()));
 	}
 
-	int GetEnchantTypeID (void) {
+	int GetEnchantTypeID(void) {
 		return (m_pEnchantData ? m_pEnchantData->GetEnchantType() : 0);
 	}
 
-	enchantdata_t *GetEnchantData (void) {
+	enchantdata_t *GetEnchantData(void) {
 		return (m_pEnchantData ? m_pEnchantData->GetEnchantData() : NULL);
 	}
 
-	long GetEnchantCost (void) {
+	long GetEnchantCost(void) {
 		return (m_pEnchantData ? m_pEnchantData->GetEnchantCost() : 0);
 	}
 
-	long GetCharge (void) {
+	long GetCharge(void) {
 		return (m_pEnchantData ? m_pEnchantData->GetCharge() : 0);
 	}
 
-	bool IsAutoCalc (void) {
+	bool IsAutoCalc(void) {
 		return (m_pEnchantData ? m_pEnchantData->IsAutoCalc() : false);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetEnchantType (const int Type) {
+	void SetEnchantType(const int Type) {
 		if (m_pEnchantData) {
 			m_pEnchantData->SetEnchantType(Type);
 		}
 	}
 
-	void SetAutoCalc (const bool Flag) {
+	void SetAutoCalc(const bool Flag) {
 		if (m_pEnchantData) {
 			m_pEnchantData->SetAutoCalc(Flag);
 		}
 	}
 
-	void SetEnchantCost (const int Value) {
+	void SetEnchantCost(const int Value) {
 		if (m_pEnchantData) {
 			m_pEnchantData->SetEnchantCost(Value);
 		}
 	}
 
-	void SetCharge (const int Value) {
+	void SetCharge(const int Value) {
 		if (m_pEnchantData) {
 			m_pEnchantData->SetCharge(Value);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

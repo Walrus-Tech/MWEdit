@@ -96,14 +96,14 @@ class CEsmSubAODT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAODT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(armordata_t));
 		m_RecordSize = sizeof(armordata_t);
@@ -111,58 +111,58 @@ class CEsmSubAODT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	armordata_t *GetArmorData (void) {
-		return ((armordata_t *) m_pData);
+	armordata_t *GetArmorData(void) {
+		return ((armordata_t *)m_pData);
 	}
 
-	long GetArmorType (void) {
+	long GetArmorType(void) {
 		return (GetArmorData()->Type);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetArmorData()->Weight);
 	}
 
-	long GetHealth (void) {
+	long GetHealth(void) {
 		return (GetArmorData()->Health);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetArmorData()->Value);
 	}
 
-	long GetEnchantPts (void) {
+	long GetEnchantPts(void) {
 		return (GetArmorData()->EnchantPts);
 	}
 
-	long GetRating (void) {
+	long GetRating(void) {
 		return (GetArmorData()->Rating);
 	}
 
 	/* Set class members */
-	void SetArmorType (const int Type) {
+	void SetArmorType(const int Type) {
 		if (Type >= MWESM_ARMORTYPE_MIN && Type <= MWESM_ARMORTYPE_MAX) {
 			GetArmorData()->Type = Type;
 		}
 	}
 
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetArmorData()->Weight = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetArmorData()->Value = Value;
 	}
 
-	void SetHealth (const long Value) {
+	void SetHealth(const long Value) {
 		GetArmorData()->Health = Value;
 	}
 
-	void SetEnchantPts (const long Value) {
+	void SetEnchantPts(const long Value) {
 		GetArmorData()->EnchantPts = Value;
 	}
 
-	void SetRating (const long Value) {
+	void SetRating(const long Value) {
 		GetArmorData()->Rating = Value;
 	}
 

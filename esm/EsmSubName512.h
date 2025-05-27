@@ -41,18 +41,19 @@ class CEsmSubName512 : public CEsmSubRecord {
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData (CGenFile& File) {
+	virtual bool ReadData(CGenFile &File) {
 		if (m_RecordSize > 512) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid CEsmSubName512 record size of '%d'!"),
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("Invalid CEsmSubName512 record size of '%d'!"),
 			                      m_RecordSize);
 			return (false);
 		}
 
 		memset(m_NameData, 0, 513);
-		return File.Read((TCHAR *)(const TCHAR*)m_NameData, m_RecordSize);
+		return File.Read((TCHAR *)(const TCHAR *)m_NameData, m_RecordSize);
 	}
 
-	virtual bool WriteData (CGenFile& File) {
+	virtual bool WriteData(CGenFile &File) {
 		return File.Write((const TCHAR *)m_NameData, m_RecordSize);
 	}
 
@@ -69,7 +70,7 @@ class CEsmSubName512 : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Copy from another name record */
-	virtual void Copy (CEsmSubRecord* pSubRecord) {
+	virtual void Copy(CEsmSubRecord *pSubRecord) {
 		Destroy();
 		m_Type.SetType(pSubRecord->GetType());
 		m_RecordSize = pSubRecord->GetRecordSize();
@@ -78,39 +79,39 @@ class CEsmSubName512 : public CEsmSubRecord {
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubName512);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = 0;
 	}
 
 	/* Finds text in the sub-record */
-	virtual bool Find (esmfind_t &FindData) {
+	virtual bool Find(esmfind_t &FindData) {
 		return (stristr(m_NameData, FindData.pText) != NULL);
 	}
 
 	/* Get class methods */
-	const TCHAR *GetName (void) const {
+	const TCHAR *GetName(void) const {
 		return (&m_NameData[0]);
 	}
 
-	virtual long GetRecordSize (void) const {
+	virtual long GetRecordSize(void) const {
 		return (m_RecordSize);
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (TSTRNICMP(m_NameData, pID, 512) == 0);
 	}
 
 	/* Set class methods */
-	void SetName (const TCHAR* pName) {
+	void SetName(const TCHAR *pName) {
 		memset(m_NameData, 0, 513);
 		TSTRNCPY(m_NameData, pName, 512);
 		m_RecordSize = TSTRLEN(m_NameData);

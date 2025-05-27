@@ -66,73 +66,73 @@ class CEsmScript : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmScript();
 	//virtual ~CEsmScript() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Clear any of the compiled data information */
-	void ClearCompileData (void);
+	void ClearCompileData(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Export a script to a text file */
-	bool ExportScript (const TCHAR* pPath);
+	bool ExportScript(const TCHAR *pPath);
 
 	/* Find a local variable info */
-	short FindLocalVar (const TCHAR* pLocalVar, char &VarType);
+	short FindLocalVar(const TCHAR *pLocalVar, char &VarType);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Script");
 	}
 
 	/* Get class members */
-	virtual const TCHAR *GetID (void) {
+	virtual const TCHAR *GetID(void) {
 		return (m_pScriptHeader ? m_pScriptHeader->GetName() : _T(""));
 	}
 
-	virtual void SetID (const TCHAR* pString) {
+	virtual void SetID(const TCHAR *pString) {
 		if (m_pScriptHeader) {
 			m_pScriptHeader->SetName(pString);
 		}
 	}
 
-	CEsmSubSCHD *GetScriptHeader (void) {
+	CEsmSubSCHD *GetScriptHeader(void) {
 		return (m_pScriptHeader);
 	}
 
-	CEsmSubRecord *GetScriptVars (void) {
+	CEsmSubRecord *GetScriptVars(void) {
 		return (m_pScriptVars);
 	}
 
-	CEsmSubRecord *GetScriptData (void) {
+	CEsmSubRecord *GetScriptData(void) {
 		return (m_pScriptData);
 	}
 
-	const TCHAR *GetScriptText (void) {
+	const TCHAR *GetScriptText(void) {
 		return (m_pScriptText ? m_pScriptText->GetName() : _T(""));
 	}
 
-	int GetScriptSize (void) {
+	int GetScriptSize(void) {
 		return (m_pScriptText ? m_pScriptText->GetRecordSize() : 0);
 	}
 
 	/* Checks if another record is used in this record */
-	virtual bool IsUsed (const TCHAR* pID);
+	virtual bool IsUsed(const TCHAR *pID);
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetScriptText (const TCHAR* pName) {
+	void SetScriptText(const TCHAR *pName) {
 		if (m_pScriptText) {
 			m_pScriptText->SetName(pName);
 		}

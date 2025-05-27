@@ -77,14 +77,14 @@ class CEsmSubNPCO : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNPCO);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(npcodata_t));
 		m_RecordSize = sizeof(npcodata_t);
@@ -92,29 +92,29 @@ class CEsmSubNPCO : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	npcodata_t *GetData (void) {
-		return (npcodata_t *) m_pData;
+	npcodata_t *GetData(void) {
+		return (npcodata_t *)m_pData;
 	}
 
-	const TCHAR *GetItem (void) {
+	const TCHAR *GetItem(void) {
 		return (GetData()->Item);
 	}
 
-	int GetCount (void) {
+	int GetCount(void) {
 		return (GetData()->Count);
 	}
 
 	/* Checks if the sub-record uses the given ID */
-	virtual bool IsUsed (const TCHAR* pID) {
+	virtual bool IsUsed(const TCHAR *pID) {
 		return (StringCompare(GetItem(), pID, false) == 0);
 	}
 
 	/* Set item data */
-	void SetCount (const int Count) {
+	void SetCount(const int Count) {
 		GetData()->Count = Count;
 	}
 
-	void SetItem (const TCHAR* pString) {
+	void SetItem(const TCHAR *pString) {
 		TSTRNCPY(GetData()->Item, pString, MWESM_ID_MAXSIZE);
 	}
 

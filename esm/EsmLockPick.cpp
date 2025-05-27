@@ -29,13 +29,34 @@ DEFINE_FILE("EsmLockPick.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmLockPick::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubName::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_LKDT, CEsmSubLKDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubName::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_LKDT,
+		CEsmSubLKDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmLockPick::s_SubRecCreate[] = {
  * Class CEsmLockPick Constructor
  *
  *=========================================================================*/
-CEsmLockPick::CEsmLockPick () {
+CEsmLockPick::CEsmLockPick() {
 	//DEFINE_FUNCTION("CEsmLockPick::CEsmLockPick()");
 	m_pLockData = NULL;
 }
@@ -64,7 +85,7 @@ CEsmLockPick::CEsmLockPick () {
  * Description
  *
  *=========================================================================*/
-void CEsmLockPick::Destroy (void) {
+void CEsmLockPick::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmLockPick::Destroy()");
 	m_pLockData = NULL;
 	CEsmItem2::Destroy();
@@ -83,16 +104,16 @@ void CEsmLockPick::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmLockPick::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmLockPick::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmLockPick::CompareFields()");
-	CEsmLockPick* pLock;
+	CEsmLockPick *pLock;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_LOCK)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pLock = (CEsmLockPick *) pRecord;
+	pLock = (CEsmLockPick *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
@@ -118,9 +139,9 @@ int CEsmLockPick::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLockPick::Create (void) {
+CEsmRecord *CEsmLockPick::Create(void) {
 	DEFINE_FUNCTION("CEsmLockPick::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLockPick);
 	return (pRecord);
 }
@@ -137,7 +158,7 @@ CEsmRecord *CEsmLockPick::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmLockPick::CreateNew (CEsmFile* pFile) {
+void CEsmLockPick::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -158,17 +179,17 @@ void CEsmLockPick::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmLockPick::GetFieldString (const int FieldID) {
+const TCHAR *CEsmLockPick::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmLockPick::GetFieldString()");
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_USES:
-			snprintf (s_Buffer, 31, _T("%ld"), GetUses());
+			snprintf(s_Buffer, 31, _T("%ld"), GetUses());
 			return (s_Buffer);
 
 		case ESM_FIELD_QUALITY:
-			snprintf (s_Buffer, 31, _T("%.2f"), GetQuality());
+			snprintf(s_Buffer, 31, _T("%.2f"), GetQuality());
 			return (s_Buffer);
 
 		default:
@@ -186,9 +207,9 @@ const TCHAR *CEsmLockPick::GetFieldString (const int FieldID) {
  * Class CEsmLockPick Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmLockPick::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmLockPick::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_LKDT)) {
-		m_pLockData = (CEsmSubLKDT *) pSubRecord;
+		m_pLockData = (CEsmSubLKDT *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -207,14 +228,14 @@ void CEsmLockPick::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmLockPick::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmLockPick::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			SetUses(atol(pString));
 			return (true);
 
 		case ESM_FIELD_QUALITY:
-			SetQuality((float) atof(pString));
+			SetQuality((float)atof(pString));
 			return (true);
 	};
 

@@ -28,14 +28,38 @@ DEFINE_FILE("EsmLand.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmLand::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_INTV, CEsmSubLong64::Create },
-	{ MWESM_SUBREC_DATA, CEsmSubLong::Create },
-	{ MWESM_SUBREC_VNML, CEsmSubRecord::Create },
-	{ MWESM_SUBREC_VHGT, CEsmSubRecord::Create },
-	{ MWESM_SUBREC_WNAM, CEsmSubRecord::Create },
-	{ MWESM_SUBREC_VCLR, CEsmSubRecord::Create },
-	{ MWESM_SUBREC_VTEX, CEsmSubRecord::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_INTV,
+		CEsmSubLong64::Create
+	},
+	{
+		MWESM_SUBREC_DATA,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_VNML,
+		CEsmSubRecord::Create
+	},
+	{
+		MWESM_SUBREC_VHGT,
+		CEsmSubRecord::Create
+	},
+	{
+		MWESM_SUBREC_WNAM,
+		CEsmSubRecord::Create
+	},
+	{
+		MWESM_SUBREC_VCLR,
+		CEsmSubRecord::Create
+	},
+	{
+		MWESM_SUBREC_VTEX,
+		CEsmSubRecord::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +71,7 @@ const esmsubreccreate_t CEsmLand::s_SubRecCreate[] = {
  * Class CEsmLand Constructor
  *
  *=========================================================================*/
-CEsmLand::CEsmLand () {
+CEsmLand::CEsmLand() {
 	//DEFINE_FUNCTION("CEsmLand::CEsmLand()");
 	m_pData = NULL;
 	m_pLocation = NULL;
@@ -68,7 +92,7 @@ CEsmLand::CEsmLand () {
  * Class CEsmLand Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmLand::Destroy (void) {
+void CEsmLand::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmLand::Destroy()");
 	m_pData = NULL;
 	m_pLocation = NULL;
@@ -93,15 +117,15 @@ void CEsmLand::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmLand::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmLand* pLand;
+int CEsmLand::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmLand *pLand;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_LAND)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pLand = (CEsmLand *) pRecord;
+	pLand = (CEsmLand *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_DATA:
@@ -134,9 +158,9 @@ int CEsmLand::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLand::Create (void) {
+CEsmRecord *CEsmLand::Create(void) {
 	DEFINE_FUNCTION("CEsmLand::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLand);
 	return (pRecord);
 }
@@ -153,7 +177,7 @@ CEsmRecord *CEsmLand::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmLand::CreateNew (CEsmFile* pFile) {
+void CEsmLand::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the required sub-records */
@@ -190,25 +214,25 @@ void CEsmLand::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmLand::GetFieldString (const int FieldID) {
+const TCHAR *CEsmLand::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
 		case ESM_FIELD_CELLX:
-			snprintf (s_Buffer, 31, _T("%ld"), GetCellX());
+			snprintf(s_Buffer, 31, _T("%ld"), GetCellX());
 			return s_Buffer;
 
 		case ESM_FIELD_CELLY:
-			snprintf (s_Buffer, 31, _T("%ld"), GetCellY());
+			snprintf(s_Buffer, 31, _T("%ld"), GetCellY());
 			return s_Buffer;
 
 		case ESM_FIELD_CELL:
 		case ESM_FIELD_GRID:
-			snprintf (s_Buffer, 31, _T("%ld, %ld"), GetCellX(), GetCellY());
+			snprintf(s_Buffer, 31, _T("%ld, %ld"), GetCellX(), GetCellY());
 			return s_Buffer;
 
 		case ESM_FIELD_DATA:
-			snprintf (s_Buffer, 31, _T("%ld"), GetData());
+			snprintf(s_Buffer, 31, _T("%ld"), GetData());
 			return s_Buffer;
 
 		default:
@@ -229,13 +253,13 @@ const TCHAR *CEsmLand::GetFieldString (const int FieldID) {
  * The grid/cell location is checked.
  *
  *=========================================================================*/
-bool CEsmLand::IsSame (CEsmRecord* pRecord) {
+bool CEsmLand::IsSame(CEsmRecord *pRecord) {
 	/* Check types */
 	if (!pRecord->IsType(MWESM_REC_LAND)) {
 		return (false);
 	}
 
-	CEsmLand* pLand = (CEsmLand *) pRecord;
+	CEsmLand* pLand = (CEsmLand *)pRecord;
 
 	/* Check the grid location otherwise */
 	if (GetCellX() == pLand->GetCellX() && GetCellY() == pLand->GetCellY()) {
@@ -255,21 +279,21 @@ bool CEsmLand::IsSame (CEsmRecord* pRecord) {
  * Class CEsmLand Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmLand::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmLand::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
-		m_pData = (CEsmSubLong *) pSubRecord;
+		m_pData = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_INTV)) {
-		m_pLocation = (CEsmSubLong64 *) pSubRecord;
+		m_pLocation = (CEsmSubLong64 *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_VNML)) {
-		m_pNormalData = (CEsmSubRecord *) pSubRecord;
+		m_pNormalData = (CEsmSubRecord *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_VHGT)) {
-		m_pHeightData = (CEsmSubRecord *) pSubRecord;
+		m_pHeightData = (CEsmSubRecord *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_WNAM)) {
-		m_pWNAMData = (CEsmSubRecord *) pSubRecord;
+		m_pWNAMData = (CEsmSubRecord *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_VCLR)) {
-		m_pColorData = (CEsmSubRecord *) pSubRecord;
+		m_pColorData = (CEsmSubRecord *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_VTEX)) {
-		m_pTextureData = (CEsmSubRecord *) pSubRecord;
+		m_pTextureData = (CEsmSubRecord *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -278,5 +302,3 @@ void CEsmLand::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
 /*===========================================================================
  *      End of Class Event CEsmLand::OnAddSubRecord()
  *=========================================================================*/
-
-

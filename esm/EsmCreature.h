@@ -56,8 +56,8 @@
  * Begin Function Prototypes
  *
  *=========================================================================*/
-const TCHAR *GetESMCreatureType (const int CreaType);
-int GetESMCreatureType (const TCHAR* pString);
+const TCHAR *GetESMCreatureType(const int CreaType);
+int GetESMCreatureType(const TCHAR *pString);
 /*===========================================================================
  *      End of Function Prototypes
  *=========================================================================*/
@@ -91,248 +91,248 @@ class CEsmCreature : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmCreature();
 	//virtual ~CEsmCreature() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Creature");
 	}
 
 	/* Get class members */
-	aidata_t *GetAIData (void) {
+	aidata_t *GetAIData(void) {
 		return (m_pAIData ? m_pAIData->GetAIData() : NULL);
 	}
 
-	creaturedata_t *GetCreatureData (void) {
+	creaturedata_t *GetCreatureData(void) {
 		return (m_pCreatureData == NULL ? NULL : m_pCreatureData->GetCreatureData());
 	}
 
-	long GetCreaTypeID (void) {
+	long GetCreaTypeID(void) {
 		return (m_pCreatureData == NULL ? -1 : m_pCreatureData->GetCreaType());
 	}
 
-	const TCHAR *GetCreaType (void) {
+	const TCHAR *GetCreaType(void) {
 		return GetESMCreatureType(GetCreaTypeID());
 	}
 
-	const TCHAR *GetMoveType (void);
-	const TCHAR *GetSound (void) {
+	const TCHAR *GetMoveType(void);
+	const TCHAR *GetSound(void) {
 		return (m_pSound ? m_pSound->GetName() : _T(""));
 	}
 
-	long GetFlag (void) {
+	long GetFlag(void) {
 		return (m_pFlag == NULL ? 0 : m_pFlag->GetValue());
 	}
 
 	/* Get creature data */
-	long GetLevel (void) {
+	long GetLevel(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetLevel() : 0);
 	}
 
-	long GetStrength (void) {
+	long GetStrength(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetStrength() : 0);
 	}
 
-	long GetIntelligence (void) {
+	long GetIntelligence(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetIntelligence() : 0);
 	}
 
-	long GetWillPower (void) {
+	long GetWillPower(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetWillpower() : 0);
 	}
 
-	long GetAgility (void) {
+	long GetAgility(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAgility() : 0);
 	}
 
-	long GetSpeed (void) {
+	long GetSpeed(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetSpeed() : 0);
 	}
 
-	long GetEndurance (void) {
+	long GetEndurance(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetEndurance() : 0);
 	}
 
-	long GetPersonality (void) {
+	long GetPersonality(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetPersonality() : 0);
 	}
 
-	long GetLuck (void) {
+	long GetLuck(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetLuck() : 0);
 	}
 
-	long GetHealth (void) {
+	long GetHealth(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetHealth() : 0);
 	}
 
-	long GetSpellPts (void) {
+	long GetSpellPts(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetSpellPts() : 0);
 	}
 
-	long GetFatigue (void) {
+	long GetFatigue(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetFatigue() : 0);
 	}
 
-	long GetSoul (void) {
+	long GetSoul(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetSoul() : 0);
 	}
 
-	long GetCombat (void) {
+	long GetCombat(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetCombat() : 0);
 	}
 
-	long GetMagic (void) {
+	long GetMagic(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetMagic() : 0);
 	}
 
-	long GetStealth (void) {
+	long GetStealth(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetStealth() : 0);
 	}
 
-	long GetAttackMin1 (void) {
+	long GetAttackMin1(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAttackMin1() : 0);
 	}
 
-	long GetAttackMin2 (void) {
+	long GetAttackMin2(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAttackMin2() : 0);
 	}
 
-	long GetAttackMin3 (void) {
+	long GetAttackMin3(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAttackMin3() : 0);
 	}
 
-	long GetAttackMax1 (void) {
+	long GetAttackMax1(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAttackMax1() : 0);
 	}
 
-	long GetAttackMax2 (void) {
+	long GetAttackMax2(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAttackMax2() : 0);
 	}
 
-	long GetAttackMax3 (void) {
+	long GetAttackMax3(void) {
 		return (m_pCreatureData ? m_pCreatureData->GetAttackMax3() : 0);
 	}
 
 	/* Get creature flags */
-	bool IsEssential (void) {
+	bool IsEssential(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_ESSENTIAL) != 0);
 	}
 
-	bool IsRespawn (void) {
+	bool IsRespawn(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_RESPAWN) != 0);
 	}
 
-	bool IsBiped (void) {
+	bool IsBiped(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_BIPED) != 0);
 	}
 
-	bool IsWeapShield (void) {
+	bool IsWeapShield(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_WEAPSHIELD) != 0);
 	}
 
-	bool IsSwims (void) {
+	bool IsSwims(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_SWIMS) != 0);
 	}
 
-	bool IsFlies (void) {
+	bool IsFlies(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_FLIES) != 0);
 	}
 
-	bool IsWalks (void) {
+	bool IsWalks(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_WALKS) != 0);
 	}
 
-	bool IsNone (void) {
+	bool IsNone(void) {
 		return ((GetFlag() & MWESM_CREAFLAG_NONE) != 0);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetFlag (const long Value) {
+	void SetFlag(const long Value) {
 		if (m_pFlag) {
 			m_pFlag->SetValue(Value);
 		}
 	}
 
-	void SetSound (const TCHAR* pString);
-	void SetCreaType (const int Type) {
+	void SetSound(const TCHAR *pString);
+	void SetCreaType(const int Type) {
 		if (m_pCreatureData) {
 			m_pCreatureData->SetCreaType(Type);
 		}
 	}
 
-	void SetLevel (const int Level) {
+	void SetLevel(const int Level) {
 		if (m_pCreatureData) {
 			m_pCreatureData->SetLevel(Level);
 		}
 	}
 
-	void SetEssential (const bool Flag) {
+	void SetEssential(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_ESSENTIAL, Flag);
 		}
 	}
 
-	void SetRespawn (const bool Flag) {
+	void SetRespawn(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_RESPAWN, Flag);
 		}
 	}
 
-	void SetBipedal (const bool Flag) {
+	void SetBipedal(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_BIPED, Flag);
 		}
 	}
 
-	void SetWeapShield (const bool Flag) {
+	void SetWeapShield(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_WEAPSHIELD, Flag);
 		}
 	}
 
-	void SetSwims (const bool Flag) {
+	void SetSwims(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_SWIMS, Flag);
 		}
 	}
 
-	void SetFlies (const bool Flag) {
+	void SetFlies(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_FLIES, Flag);
 		}
 	}
 
-	void SetWalks (const bool Flag) {
+	void SetWalks(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_WALKS, Flag);
 		}
 	}
 
-	void SetNone (const bool Flag) {
+	void SetNone(const bool Flag) {
 		if (m_pFlag) {
 			m_pFlag->SetFlag(MWESM_CREAFLAG_NONE, Flag);
 		}
 	}
 
-	void SetMoveType (const TCHAR* pString);
+	void SetMoveType(const TCHAR *pString);
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 

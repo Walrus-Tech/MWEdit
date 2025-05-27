@@ -68,14 +68,14 @@ class CEsmSubPBDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubPBDT);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(probedata_t));
 		m_RecordSize = sizeof(probedata_t);
@@ -83,40 +83,40 @@ class CEsmSubPBDT : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	probedata_t *GetProbeData (void) {
-		return ((probedata_t *) m_pData);
+	probedata_t *GetProbeData(void) {
+		return ((probedata_t *)m_pData);
 	}
 
-	float GetWeight (void) {
+	float GetWeight(void) {
 		return (GetProbeData()->Weight);
 	}
 
-	float GetQuality (void) {
+	float GetQuality(void) {
 		return (GetProbeData()->Quality);
 	}
 
-	long GetValue (void) {
+	long GetValue(void) {
 		return (GetProbeData()->Value);
 	}
 
-	long GetUses (void) {
+	long GetUses(void) {
 		return (GetProbeData()->Uses);
 	}
 
 	/* Set class members */
-	void SetWeight (const float Value) {
+	void SetWeight(const float Value) {
 		GetProbeData()->Weight = Value;
 	}
 
-	void SetQuality (const float Value) {
+	void SetQuality(const float Value) {
 		GetProbeData()->Quality = Value;
 	}
 
-	void SetValue (const long Value) {
+	void SetValue(const long Value) {
 		GetProbeData()->Value = Value;
 	}
 
-	void SetUses (const long Value) {
+	void SetUses(const long Value) {
 		GetProbeData()->Uses = Value;
 	}
 

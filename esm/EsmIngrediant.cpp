@@ -29,13 +29,34 @@ DEFINE_FILE("EsmIngrediant.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmIngrediant::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_FNAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_MODL, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_ITEX, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_SCRI, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_IRDT, CEsmSubIRDT::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_FNAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_MODL,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_ITEX,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_SCRI,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_IRDT,
+		CEsmSubIRDT::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmIngrediant::s_SubRecCreate[] = {
  * Class CEsmIngrediant Constructor
  *
  *=========================================================================*/
-CEsmIngrediant::CEsmIngrediant () {
+CEsmIngrediant::CEsmIngrediant() {
 	//DEFINE_FUNCTION("CEsmIngrediant::CEsmIngrediant()");
 	m_pIngreData = NULL;
 }
@@ -64,7 +85,7 @@ CEsmIngrediant::CEsmIngrediant () {
  * Description
  *
  *=========================================================================*/
-void CEsmIngrediant::Destroy (void) {
+void CEsmIngrediant::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmIngrediant::Destroy()");
 	m_pIngreData = NULL;
 	CEsmItem2::Destroy();
@@ -83,16 +104,16 @@ void CEsmIngrediant::Destroy (void) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmIngrediant::CompareFields (const int FieldID, CEsmRecord* pRecord) {
+int CEsmIngrediant::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	DEFINE_FUNCTION("CEsmIngrediant::CompareFields()");
-	CEsmIngrediant* pIngre;
+	CEsmIngrediant *pIngre;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_INGR)) {
 		return CEsmItem2::CompareFields(FieldID, pRecord);
 	}
 
-	pIngre = (CEsmIngrediant *) pRecord;
+	pIngre = (CEsmIngrediant *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_EFFECT1:
@@ -124,9 +145,9 @@ int CEsmIngrediant::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmIngrediant::Create (void) {
+CEsmRecord *CEsmIngrediant::Create(void) {
 	DEFINE_FUNCTION("CEsmIngrediant::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmIngrediant);
 	return (pRecord);
 }
@@ -143,7 +164,7 @@ CEsmRecord *CEsmIngrediant::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmIngrediant::CreateNew (CEsmFile* pFile) {
+void CEsmIngrediant::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmItem2::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -164,7 +185,7 @@ void CEsmIngrediant::CreateNew (CEsmFile* pFile) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmIngrediant::GetFieldString (const int FieldID) {
+const TCHAR *CEsmIngrediant::GetFieldString(const int FieldID) {
 	DEFINE_FUNCTION("CEsmIngrediant::GetFieldString()");
 
 	switch (FieldID) {
@@ -195,9 +216,9 @@ const TCHAR *CEsmIngrediant::GetFieldString (const int FieldID) {
  * Class CEsmIngrediant Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmIngrediant::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmIngrediant::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_IRDT)) {
-		m_pIngreData = (CEsmSubIRDT *) pSubRecord;
+		m_pIngreData = (CEsmSubIRDT *)pSubRecord;
 	} else {
 		CEsmItem2::OnAddSubRecord(pSubRecord);
 	}
@@ -216,7 +237,7 @@ void CEsmIngrediant::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmIngrediant::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmIngrediant::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_EFFECT1: {
 			int Effect = GetESMEffectID(pString);

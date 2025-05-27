@@ -29,13 +29,34 @@ DEFINE_FILE("EsmLevelItem.cpp");
  *
  *=========================================================================*/
 const esmsubreccreate_t CEsmLevelItem::s_SubRecCreate[] = {
-	{ MWESM_SUBREC_NAME, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_DATA, CEsmSubLong::Create },
-	{ MWESM_SUBREC_NNAM, CEsmSubByte::Create },
-	{ MWESM_SUBREC_INAM, CEsmSubNameFix::Create },
-	{ MWESM_SUBREC_INTV, CEsmSubShort::Create },
-	{ MWESM_SUBREC_INDX, CEsmSubLong::Create },
-	{ NULL, CEsmSubRecord::Create } /* Must be last record */
+	{
+		MWESM_SUBREC_NAME,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_DATA,
+		CEsmSubLong::Create
+	},
+	{
+		MWESM_SUBREC_NNAM,
+		CEsmSubByte::Create
+	},
+	{
+		MWESM_SUBREC_INAM,
+		CEsmSubNameFix::Create
+	},
+	{
+		MWESM_SUBREC_INTV,
+		CEsmSubShort::Create
+	},
+	{
+		MWESM_SUBREC_INDX,
+		CEsmSubLong::Create
+	},
+	{
+		NULL,
+		CEsmSubRecord::Create
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -47,7 +68,7 @@ const esmsubreccreate_t CEsmLevelItem::s_SubRecCreate[] = {
  * Class CEsmLevelItem Constructor
  *
  *=========================================================================*/
-CEsmLevelItem::CEsmLevelItem () {
+CEsmLevelItem::CEsmLevelItem() {
 	//DEFINE_FUNCTION("CEsmLevelItem::CEsmLevelItem()");
 	m_pID = NULL;
 	m_pData = NULL;
@@ -67,7 +88,7 @@ CEsmLevelItem::CEsmLevelItem () {
  * Description
  *
  *=========================================================================*/
-void CEsmLevelItem::Destroy (void) {
+void CEsmLevelItem::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmLevelItem::Destroy()");
 	m_pID = NULL;
 	m_pData = NULL;
@@ -88,13 +109,13 @@ void CEsmLevelItem::Destroy (void) {
  * Adds an item to the levelled list.
  *
  *=========================================================================*/
-void CEsmLevelItem::AddItem (const TCHAR* pID, const int Value) {
-	CEsmSubNameFix* pName;
-	CEsmSubShort* pValue;
+void CEsmLevelItem::AddItem(const TCHAR *pID, const int Value) {
+	CEsmSubNameFix *pName;
+	CEsmSubShort *pValue;
 	/* Allocate the new subrecords */
-	pName = (CEsmSubNameFix *) AllocateSubRecord(MWESM_SUBREC_INAM);
+	pName = (CEsmSubNameFix *)AllocateSubRecord(MWESM_SUBREC_INAM);
 	pName->CreateNew();
-	pValue = (CEsmSubShort *) AllocateSubRecord(MWESM_SUBREC_INTV);
+	pValue = (CEsmSubShort *)AllocateSubRecord(MWESM_SUBREC_INTV);
 	pValue->CreateNew();
 	/* Set the values */
 	pName->SetName(pID);
@@ -116,15 +137,15 @@ void CEsmLevelItem::AddItem (const TCHAR* pID, const int Value) {
  * Returns a value which can be used for sorting the records..
  *
  *=========================================================================*/
-int CEsmLevelItem::CompareFields (const int FieldID, CEsmRecord* pRecord) {
-	CEsmLevelItem* pLevelItem;
+int CEsmLevelItem::CompareFields(const int FieldID, CEsmRecord *pRecord) {
+	CEsmLevelItem *pLevelItem;
 
 	/* Ensure the correct type */
 	if (!pRecord->IsType(MWESM_REC_LEVI)) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pLevelItem = (CEsmLevelItem *) pRecord;
+	pLevelItem = (CEsmLevelItem *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_ID:
@@ -159,9 +180,9 @@ int CEsmLevelItem::CompareFields (const int FieldID, CEsmRecord* pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLevelItem::Create (void) {
+CEsmRecord *CEsmLevelItem::Create(void) {
 	DEFINE_FUNCTION("CEsmLevelItem::Create()");
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLevelItem);
 	return (pRecord);
 }
@@ -178,7 +199,7 @@ CEsmRecord *CEsmLevelItem::Create (void) {
  * Creates a new, empty, record.
  *
  *=========================================================================*/
-void CEsmLevelItem::CreateNew (CEsmFile* pFile) {
+void CEsmLevelItem::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
 	/* Create the item sub-records */
@@ -203,15 +224,15 @@ void CEsmLevelItem::CreateNew (CEsmFile* pFile) {
  * in the levelled list (up to 256 bytes).
  *
  *=========================================================================*/
-const TCHAR *CEsmLevelItem::GetItemListString (void) {
+const TCHAR *CEsmLevelItem::GetItemListString(void) {
 	static TCHAR s_Buffer[256];
 	TCHAR TempBuffer[32];
-	CEsmSubNameFix* pNameSubRec;
-	CEsmSubRecord* pLevelSubRec;
+	CEsmSubNameFix *pNameSubRec;
+	CEsmSubRecord *pLevelSubRec;
 	int ArrayIndex;
 	int BufferLength;
 	int StringLength;
-	pNameSubRec = (CEsmSubNameFix *) FindFirst(MWESM_SUBREC_INAM, ArrayIndex);
+	pNameSubRec = (CEsmSubNameFix *)FindFirst(MWESM_SUBREC_INAM, ArrayIndex);
 	s_Buffer[0] = NULL_CHAR;
 	BufferLength = 0;
 
@@ -227,7 +248,10 @@ const TCHAR *CEsmLevelItem::GetItemListString (void) {
 
 			TSTRCPY(s_Buffer + BufferLength, pNameSubRec->GetName());
 			BufferLength += StringLength;
-			snprintf (TempBuffer, 31, _T(" (%d),   "), (int)((CEsmSubShort *)pLevelSubRec)->GetValue());
+			snprintf(TempBuffer,
+			         31,
+			         _T(" (%d),   "),
+			         (int)((CEsmSubShort *)pLevelSubRec)->GetValue());
 			StringLength = TSTRLEN(TempBuffer);
 
 			if (StringLength + BufferLength > 255) {
@@ -238,7 +262,7 @@ const TCHAR *CEsmLevelItem::GetItemListString (void) {
 			BufferLength += StringLength;
 		}
 
-		pNameSubRec = (CEsmSubNameFix *) FindNext(MWESM_SUBREC_INAM, ArrayIndex);
+		pNameSubRec = (CEsmSubNameFix *)FindNext(MWESM_SUBREC_INAM, ArrayIndex);
 	}
 
 	return (s_Buffer);
@@ -257,7 +281,7 @@ const TCHAR *CEsmLevelItem::GetItemListString (void) {
  * a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmLevelItem::GetFieldString (const int FieldID) {
+const TCHAR *CEsmLevelItem::GetFieldString(const int FieldID) {
 	static TCHAR s_Buffer[32];
 
 	switch (FieldID) {
@@ -271,7 +295,7 @@ const TCHAR *CEsmLevelItem::GetFieldString (const int FieldID) {
 			return GetItemListString();
 
 		case ESM_FIELD_CHANCENONE:
-			snprintf (s_Buffer, 31, _T("%d"), GetChanceNone());
+			snprintf(s_Buffer, 31, _T("%d"), GetChanceNone());
 			return (s_Buffer);
 
 		case ESM_FIELD_CALCEACH:
@@ -292,15 +316,15 @@ const TCHAR *CEsmLevelItem::GetFieldString (const int FieldID) {
  * Class CEsmLevelItem Event - void OnAddSubRecord (pSubRecord);
  *
  *=========================================================================*/
-void CEsmLevelItem::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
+void CEsmLevelItem::OnAddSubRecord(CEsmSubRecord *pSubRecord) {
 	if (pSubRecord->IsType(MWESM_SUBREC_NAME)) {
-		m_pID = (CEsmSubName *) pSubRecord;
+		m_pID = (CEsmSubName *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_DATA)) {
-		m_pData = (CEsmSubLong *) pSubRecord;
+		m_pData = (CEsmSubLong *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_NNAM)) {
-		m_pNNam = (CEsmSubByte *) pSubRecord;
+		m_pNNam = (CEsmSubByte *)pSubRecord;
 	} else if (pSubRecord->IsType(MWESM_SUBREC_INDX)) {
-		m_pIndex = (CEsmSubLong *) pSubRecord;
+		m_pIndex = (CEsmSubLong *)pSubRecord;
 	} else {
 		CEsmRecord::OnAddSubRecord(pSubRecord);
 	}
@@ -319,7 +343,7 @@ void CEsmLevelItem::OnAddSubRecord (CEsmSubRecord* pSubRecord) {
  * Assumes that the input string is non-NULL.
  *
  *=========================================================================*/
-bool CEsmLevelItem::SetFieldValue (const int FieldID, const TCHAR* pString) {
+bool CEsmLevelItem::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ALLPC:
 			SetAllPC(StringToBoolean(pString));

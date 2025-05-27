@@ -119,14 +119,14 @@ class CEsmSubNPDTS : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNPDTS);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(npcshortdata_t));
 		m_RecordSize = sizeof(npcshortdata_t);
@@ -134,72 +134,72 @@ class CEsmSubNPDTS : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	npcshortdata_t *GetNPCData (void) {
-		return ((npcshortdata_t *) m_pData);
+	npcshortdata_t *GetNPCData(void) {
+		return ((npcshortdata_t *)m_pData);
 	}
 
-	short GetLevel (void) {
+	short GetLevel(void) {
 		return (GetNPCData()->Level);
 	}
 
-	char GetDisposition (void) {
+	char GetDisposition(void) {
 		return (GetNPCData()->Disposition);
 	}
 
-	char GetFactionID (void) {
+	char GetFactionID(void) {
 		return (GetNPCData()->FactionID);
 	}
 
-	char GetRank (void) {
+	char GetRank(void) {
 		return (GetNPCData()->Rank);
 	}
 
-	char GetUnknown1 (void) {
+	char GetUnknown1(void) {
 		return (GetNPCData()->Unknown1);
 	}
 
-	char GetUnknown2 (void) {
+	char GetUnknown2(void) {
 		return (GetNPCData()->Unknown2);
 	}
 
-	char GetUnknown3 (void) {
+	char GetUnknown3(void) {
 		return (GetNPCData()->Unknown3);
 	}
 
-	long GetGold (void) {
+	long GetGold(void) {
 		return (GetNPCData()->Gold);
 	}
 
 	/* Set class members */
-	void SetLevel (const short Value) {
+	void SetLevel(const short Value) {
 		GetNPCData()->Level = Value;
 	}
 
-	void SetGold (const long Value) {
+	void SetGold(const long Value) {
 		GetNPCData()->Gold = Value;
 	}
 
-	void SetDisposition (const char Value) {
+	void SetDisposition(const char Value) {
 		GetNPCData()->Disposition = Value;
 	}
 
-	void SetFactionID (const char Value) {
+	void SetFactionID(const char Value) {
 		GetNPCData()->FactionID = Value;
 	}
 
-	void SetRank (const char Value) {
+	void SetRank(const char Value) {
 		GetNPCData()->Rank = Value;
 	}
 
-	void SetUnknown1 (const char Value) {
+	void SetUnknown1(const char Value) {
 		GetNPCData()->Unknown1 = Value;
 	}
 
-	void SetUnknown2 (const char Value) {
+	void SetUnknown2(const char Value) {
 		GetNPCData()->Unknown2 = Value;
 	}
 
-	void SetUnknown3 (const char Value) {
+	void SetUnknown3(const char Value) {
 		GetNPCData()->Unknown3 = Value;
 	}
 
@@ -236,14 +236,14 @@ class CEsmSubNPDTL : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create (void) {
-		CEsmSubRecord* pSubRecord;
+	static CEsmSubRecord *Create(void) {
+		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNPDTL);
 		return (pSubRecord);
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew (void) {
+	virtual void CreateNew(void) {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(npclongdata_t));
 		m_RecordSize = sizeof(npclongdata_t);
@@ -251,164 +251,164 @@ class CEsmSubNPDTL : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	npclongdata_t *GetNPCData (void) {
-		return ((npclongdata_t *) m_pData);
+	npclongdata_t *GetNPCData(void) {
+		return ((npclongdata_t *)m_pData);
 	}
 
-	short GetLevel (void) {
+	short GetLevel(void) {
 		return (GetNPCData()->Level);
 	}
 
-	char GetDisposition (void) {
+	char GetDisposition(void) {
 		return (GetNPCData()->Disposition);
 	}
 
-	char GetFactionID (void) {
+	char GetFactionID(void) {
 		return (GetNPCData()->FactionID);
 	}
 
-	char GetRank (void) {
+	char GetRank(void) {
 		return (GetNPCData()->Rank);
 	}
 
-	char GetUnknown1 (void) {
+	char GetUnknown1(void) {
 		return (GetNPCData()->Unknown1);
 	}
 
-	long GetGold (void) {
+	long GetGold(void) {
 		return (GetNPCData()->Gold);
 	}
 
-	char GetStrength (void) {
+	char GetStrength(void) {
 		return (GetNPCData()->Strength);
 	}
 
-	char GetIntelligence (void) {
+	char GetIntelligence(void) {
 		return (GetNPCData()->Intelligence);
 	}
 
-	char GetWillpower (void) {
+	char GetWillpower(void) {
 		return (GetNPCData()->Willpower);
 	}
 
-	char GetAgility (void) {
+	char GetAgility(void) {
 		return (GetNPCData()->Agility);
 	}
 
-	char GetSpeed (void) {
+	char GetSpeed(void) {
 		return (GetNPCData()->Speed);
 	}
 
-	char GetEndurance (void) {
+	char GetEndurance(void) {
 		return (GetNPCData()->Endurance);
 	}
 
-	char GetPersonality (void) {
+	char GetPersonality(void) {
 		return (GetNPCData()->Personality);
 	}
 
-	char GetLuck (void) {
+	char GetLuck(void) {
 		return (GetNPCData()->Luck);
 	}
 
-	char GetReputation (void) {
+	char GetReputation(void) {
 		return (GetNPCData()->Reputation);
 	}
 
-	short GetHealth (void) {
+	short GetHealth(void) {
 		return (GetNPCData()->Health);
 	}
 
-	short GetSpellPts (void) {
+	short GetSpellPts(void) {
 		return (GetNPCData()->SpellPts);
 	}
 
-	short GetFatigue (void) {
+	short GetFatigue(void) {
 		return (GetNPCData()->Fatigue);
 	}
 
-	bool IsValidSkill (const int Index) {
+	bool IsValidSkill(const int Index) {
 		return (Index >= 0 && Index < MWESM_MAX_SKILLS);
 	}
 
-	char GetSkill (const int Index) {
+	char GetSkill(const int Index) {
 		return (IsValidSkill(Index) ? GetNPCData()->Skills[Index] : 0);
 	}
 
 	/* Set class members */
-	void SetLevel (const short Value) {
+	void SetLevel(const short Value) {
 		GetNPCData()->Level = Value;
 	}
 
-	void SetGold (const long Value) {
+	void SetGold(const long Value) {
 		GetNPCData()->Gold = Value;
 	}
 
-	void SetDisposition (const char Value) {
+	void SetDisposition(const char Value) {
 		GetNPCData()->Disposition = Value;
 	}
 
-	void SetFactionID (const char Value) {
+	void SetFactionID(const char Value) {
 		GetNPCData()->FactionID = Value;
 	}
 
-	void SetRank (const char Value) {
+	void SetRank(const char Value) {
 		GetNPCData()->Rank = Value;
 	}
 
-	void SetUnknown1 (const char Value) {
+	void SetUnknown1(const char Value) {
 		GetNPCData()->Unknown1 = Value;
 	}
 
-	void SetStrength (const char Value) {
+	void SetStrength(const char Value) {
 		GetNPCData()->Strength = Value;
 	}
 
-	void SetIntelligence (const char Value) {
+	void SetIntelligence(const char Value) {
 		GetNPCData()->Intelligence = Value;
 	}
 
-	void SetWillpower (const char Value) {
+	void SetWillpower(const char Value) {
 		GetNPCData()->Willpower = Value;
 	}
 
-	void SetAgility (const char Value) {
+	void SetAgility(const char Value) {
 		GetNPCData()->Agility = Value;
 	}
 
-	void SetSpeed (const char Value) {
+	void SetSpeed(const char Value) {
 		GetNPCData()->Speed = Value;
 	}
 
-	void SetEndurance (const char Value) {
+	void SetEndurance(const char Value) {
 		GetNPCData()->Endurance = Value;
 	}
 
-	void SetPersonality (const char Value) {
+	void SetPersonality(const char Value) {
 		GetNPCData()->Personality = Value;
 	}
 
-	void SetLuck (const char Value) {
+	void SetLuck(const char Value) {
 		GetNPCData()->Luck = Value;
 	}
 
-	void SetReputation (const char Value) {
+	void SetReputation(const char Value) {
 		GetNPCData()->Reputation = Value;
 	}
 
-	void SetHealth (const short Value) {
+	void SetHealth(const short Value) {
 		GetNPCData()->Health = Value;
 	}
 
-	void SetSpellPts (const short Value) {
+	void SetSpellPts(const short Value) {
 		GetNPCData()->SpellPts = Value;
 	}
 
-	void SetFatigue (const short Value) {
+	void SetFatigue(const short Value) {
 		GetNPCData()->Fatigue = Value;
 	}
 
-	void SetSkill (const int Index, const char Value) {
+	void SetSkill(const int Index, const char Value) {
 		if (IsValidSkill(Index)) {
 			GetNPCData()->Skills[Index] = Value;
 		}

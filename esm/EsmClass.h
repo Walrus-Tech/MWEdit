@@ -62,147 +62,147 @@ class CEsmClass : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmClass();
 	//virtual ~CEsmClass() { Destroy(); }
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compare two fields of the record */
-	virtual int CompareFields (const int FieldID, CEsmRecord* pRecord);
+	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create (void);
+	static CEsmRecord *Create(void);
 
 	/* Create a new, empty, record */
-	virtual void CreateNew (CEsmFile* pFile);
+	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get a string representation of a particular field */
-	virtual const TCHAR *GetFieldString (const int FieldID);
+	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType (void) {
+	virtual const TCHAR *GetItemType(void) {
 		return _T("Class");
 	}
 
 	/* Get class members */
-	classdata_t *GetClassData (void) {
+	classdata_t *GetClassData(void) {
 		return (m_pData ? m_pData->GetClassData() : NULL);
 	}
 
-	const TCHAR *GetName (void) {
+	const TCHAR *GetName(void) {
 		return (m_pName ? m_pName->GetName() : _T(""));
 	}
 
-	const TCHAR *GetDescription (void) {
+	const TCHAR *GetDescription(void) {
 		return (m_pDescription ? m_pDescription->GetName() : _T(""));
 	}
 
-	long GetFlags (void) {
+	long GetFlags(void) {
 		return (m_pData ? m_pData->GetFlags() : 0);
 	}
 
-	long GetAutoCalcFlags (void) {
+	long GetAutoCalcFlags(void) {
 		return (m_pData ? m_pData->GetAutoCalcFlags() : 0);
 	}
 
-	bool IsPlayable (void) {
+	bool IsPlayable(void) {
 		return (m_pData ? m_pData->IsPlayable() : false);
 	}
 
 	/* Get autocalc flags */
-	bool IsAutoWeapon (void) {
+	bool IsAutoWeapon(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_WEAPONS) : false);
 	}
 
-	bool IsAutoArmor (void) {
+	bool IsAutoArmor(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_ARMOR) : false);
 	}
 
-	bool IsAutoClothing (void) {
+	bool IsAutoClothing(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_CLOTHING) : false);
 	}
 
-	bool IsAutoBook (void) {
+	bool IsAutoBook(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_BOOKS) : false);
 	}
 
-	bool IsAutoIngrediant (void) {
+	bool IsAutoIngrediant(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_INGREDIANTS) : false);
 	}
 
-	bool IsAutoPick (void) {
+	bool IsAutoPick(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_PICKS) : false);
 	}
 
-	bool IsAutoProbe (void) {
+	bool IsAutoProbe(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_PROBES) : false);
 	}
 
-	bool IsAutoLight (void) {
+	bool IsAutoLight(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_LIGHTS) : false);
 	}
 
-	bool IsAutoApparatus (void) {
+	bool IsAutoApparatus(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_APPARATUS) : false);
 	}
 
-	bool IsAutoRepair (void) {
+	bool IsAutoRepair(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_REPAIR) : false);
 	}
 
-	bool IsAutoMisc (void) {
+	bool IsAutoMisc(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_MISC) : false);
 	}
 
-	bool IsAutoSpell (void) {
+	bool IsAutoSpell(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_SPELLS) : false);
 	}
 
-	bool IsAutoMagicItem (void) {
+	bool IsAutoMagicItem(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_MAGICITEMS) : false);
 	}
 
-	bool IsAutoPotion (void) {
+	bool IsAutoPotion(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_POTIONS) : false);
 	}
 
-	bool IsAutoTraining (void) {
+	bool IsAutoTraining(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_TRAINING) : false);
 	}
 
-	bool IsAutoSpellMaking (void) {
+	bool IsAutoSpellMaking(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_SPELLMAKING) : false);
 	}
 
-	bool IsAutoEnchanting (void) {
+	bool IsAutoEnchanting(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_ENCHANTING) : false);
 	}
 
-	bool IsAutoRepairItem (void) {
+	bool IsAutoRepairItem(void) {
 		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_REPAIRITEM) : false);
 	}
 
 	/* Used to save the various record elements */
-	virtual void OnAddSubRecord (CEsmSubRecord* pSubRecord);
+	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 
 	/* Set class members */
-	void SetName (const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		if (m_pName) {
 			m_pName->SetName(pString);
 		}
 	}
 
-	void SetDescription (const TCHAR* pString) {
+	void SetDescription(const TCHAR *pString) {
 		if (m_pDescription) {
 			m_pDescription->SetName(pString);
 		}
 	}
 
-	void SetPlayable (const bool Flag) {
+	void SetPlayable(const bool Flag) {
 		if (m_pData) {
 			m_pData->SetPlayable(Flag);
 		}
 	}
 
 	/* Set a certain field of the record */
-	virtual bool SetFieldValue (const int FieldID, const TCHAR* pString);
+	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 
 };
 
@@ -215,4 +215,3 @@ class CEsmClass : public CEsmRecord {
 /*===========================================================================
  *      End of File EsmBodyPart.H
  *=========================================================================*/
-
