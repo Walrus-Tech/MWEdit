@@ -20,9 +20,9 @@
 
 // Basic Palette struct
 typedef struct ILpal {
-	ILubyte *Palette;       // the image palette (if any)
-	ILuint PalSize;        // size of the palette (in bytes)
-	ILenum PalType;        // the palette types below (0x0500 range)
+	ILubyte *Palette; // the image palette (if any)
+	ILuint PalSize;   // size of the palette (in bytes)
+	ILenum PalType;   // the palette types below (0x0500 range)
 } ILpal;
 
 
@@ -31,16 +31,16 @@ typedef struct ILimage {
 	ILuint Width;              // the image's width
 	ILuint Height;             // the image's height
 	ILuint Depth;              // the image's depth
-	ILubyte Bpp;                // bytes per pixel (now number of channels)
-	ILubyte Bpc;                // bytes per channel
+	ILubyte Bpp;               // bytes per pixel (now number of channels)
+	ILubyte Bpc;               // bytes per channel
 	ILuint Bps;                // bytes per scanline (components for IL)
-	ILubyte *Data;              // the image data
+	ILubyte *Data;             // the image data
 	ILuint SizeOfData;         // the total size of the data (in bytes)
 	ILuint SizeOfPlane;        // SizeOfData in a 2d image, size of each plane slice in a 3d image (in bytes)
 	ILenum Format;             // image format (in IL enum style)
 	ILenum Type;               // image type (in IL enum style)
 	ILenum Origin;             // origin of the image
-	ILpal Pal;                // palette details
+	ILpal Pal;                 // palette details
 	ILuint Duration;           // length of the time to display this "frame"
 	ILenum CubeFlags;          // cube map flags for sides present in chain
 	struct ILimage *Mipmaps;   // mipmapped versions of this image terminated by a NULL - usu. NULL
@@ -54,7 +54,7 @@ typedef struct ILimage {
 	ILvoid *Profile;           // colour profile
 	ILuint ProfileSize;        // colour profile size
 	ILuint OffX, OffY;         // offset of the image
-	ILubyte *DxtcData;          // compressed data
+	ILubyte *DxtcData;         // compressed data
 	ILenum DxtcFormat;         // compressed data format
 	ILuint DxtcSize;           // compressed data size
 } ILimage;
@@ -97,15 +97,32 @@ ILAPI ILimage *ILAPIENTRY ilCopyImage_(ILimage *Src);
 ILAPI ILvoid ILAPIENTRY ilGetClear(ILvoid *Colours, ILenum Format, ILenum Type);
 ILAPI ILuint ILAPIENTRY ilGetCurName(ILvoid);
 ILAPI ILboolean ILAPIENTRY ilIsValidPal(ILpal *Palette);
-ILAPI ILimage *ILAPIENTRY ilNewImage(ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp,
-                                       ILubyte Bpc);
-ILAPI ILboolean ILAPIENTRY ilResizeImage(ILimage *Image, ILuint Width, ILuint Height, ILuint Depth,
-                                          ILubyte Bpp, ILubyte Bpc);
-ILAPI ILboolean ILAPIENTRY ilTexImage_(ILimage *Image, ILuint Width, ILuint Height, ILuint Depth,
-                                        ILubyte Bpp, ILenum Format, ILenum Type, ILvoid *Data);
+ILAPI ILimage *ILAPIENTRY ilNewImage(ILuint Width,
+                                     ILuint Height,
+                                     ILuint Depth,
+                                     ILubyte Bpp,
+                                     ILubyte Bpc);
+ILAPI ILboolean ILAPIENTRY ilResizeImage(ILimage *Image,
+                                         ILuint Width,
+                                         ILuint Height,
+                                         ILuint Depth,
+                                         ILubyte Bpp,
+                                         ILubyte Bpc);
+ILAPI ILboolean ILAPIENTRY ilTexImage_(ILimage *Image,
+                                       ILuint Width,
+                                       ILuint Height,
+                                       ILuint Depth,
+                                       ILubyte Bpp,
+                                       ILenum Format,
+                                       ILenum Type,
+                                       ILvoid *Data);
 ILAPI ILboolean ILAPIENTRY ilTexSubImage_(ILimage *Image, ILvoid *Data);
-ILAPI ILvoid *ILAPIENTRY ilConvertBuffer(ILuint SizeOfData, ILenum SrcFormat, ILenum DestFormat,
-                                            ILenum SrcType, ILenum DestType, ILvoid *Buffer);
+ILAPI ILvoid *ILAPIENTRY ilConvertBuffer(ILuint SizeOfData,
+                                         ILenum SrcFormat,
+                                         ILenum DestFormat,
+                                         ILenum SrcType,
+                                         ILenum DestType,
+                                         ILvoid *Buffer);
 ILAPI ILimage *ILAPIENTRY iConvertImage(ILimage *Image, ILenum DestFormat, ILenum DestType);
 ILAPI ILpal *ILAPIENTRY iConvertPal(ILpal *Pal, ILenum DestFormat);
 ILAPI ILubyte *ILAPIENTRY iGetFlipped(ILimage *Image);
@@ -113,9 +130,12 @@ ILAPI ILubyte *ILAPIENTRY iGetFlipped(ILimage *Image);
 
 // Internal library functions in ILU
 ILAPI ILimage *ILAPIENTRY iluRotate_(ILimage *Image, ILfloat Angle);
-ILAPI ILimage *ILAPIENTRY iluRotate3D_(ILimage *Image, ILfloat x, ILfloat y, ILfloat z,
+ILAPI ILimage *ILAPIENTRY iluRotate3D_(ILimage *Image,
+                                       ILfloat x,
+                                       ILfloat y,
+                                       ILfloat z,
                                        ILfloat Angle);
 ILAPI ILimage *ILAPIENTRY iluScale_(ILimage *Image, ILuint Width, ILuint Height, ILuint Depth);
 
 
-#endif//IL_EXPORTS_H
+#endif //IL_EXPORTS_H

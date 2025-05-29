@@ -24,18 +24,18 @@ extern "C" {
 #endif
 
 #if defined(_WIN32) && !defined(NODEVILLIB)
-#ifndef IL_STATIC_LIB
-#if defined(_MSC_VER) || defined(__BORLANDC__)
-#ifndef _ILU_BUILD_LIBRARY
-#ifdef IL_DEBUG
-#pragma comment(lib, "ilu-d.lib")
-#else
-#pragma comment(lib, "ilu.lib")
-#endif//_DEBUG
-#endif//_ILU_BUILD_LIBRARY
-#endif//_MSC_VER || __BORLANDC__
-#endif//IL_STATIC_LIB
-#endif//_WIN32
+	#ifndef IL_STATIC_LIB
+		#if defined(_MSC_VER) || defined(__BORLANDC__)
+			#ifndef _ILU_BUILD_LIBRARY
+				#ifdef IL_DEBUG
+					#pragma comment(lib, "ilu-d.lib")
+				#else
+					#pragma comment(lib, "ilu.lib")
+				#endif //_DEBUG
+			#endif //_ILU_BUILD_LIBRARY
+		#endif //_MSC_VER || __BORLANDC__
+	#endif //IL_STATIC_LIB
+#endif //_WIN32
 
 #define ILU_VERSION_1_6_1                   1
 #define ILU_VERSION                         161
@@ -92,16 +92,16 @@ extern "C" {
 
 typedef struct ILinfo {
 	ILuint Id;                 // the image's id
-	ILubyte *Data;              // the image's data
+	ILubyte *Data;             // the image's data
 	ILuint Width;              // the image's width
 	ILuint Height;             // the image's height
 	ILuint Depth;              // the image's depth
-	ILubyte Bpp;                // bytes per pixel (not bits) of the image
+	ILubyte Bpp;               // bytes per pixel (not bits) of the image
 	ILuint SizeOfData;         // the total size of the data (in bytes)
 	ILenum Format;             // image format (in IL enum style)
 	ILenum Type;               // image type (in IL enum style)
 	ILenum Origin;             // origin of the image
-	ILubyte *Palette;           // the image's palette
+	ILubyte *Palette;          // the image's palette
 	ILenum PalType;            // palette type
 	ILuint PalSize;            // palette size
 	ILenum CubeFlags;          // flags for what cube map sides are present
@@ -128,8 +128,12 @@ ILAPI ILboolean ILAPIENTRY iluBuildMipmaps(ILvoid);
 ILAPI ILuint ILAPIENTRY iluColoursUsed(ILvoid);
 ILAPI ILboolean ILAPIENTRY iluCompareImage(ILuint Comp);
 ILAPI ILboolean ILAPIENTRY iluContrast(ILfloat Contrast);
-ILAPI ILboolean ILAPIENTRY iluCrop(ILuint XOff, ILuint YOff, ILuint ZOff, ILuint Width,
-                                           ILuint Height, ILuint Depth);
+ILAPI ILboolean ILAPIENTRY iluCrop(ILuint XOff,
+                                   ILuint YOff,
+                                   ILuint ZOff,
+                                   ILuint Width,
+                                   ILuint Height,
+                                   ILuint Depth);
 ILAPI ILvoid ILAPIENTRY iluDeleteImage(ILuint Id);
 ILAPI ILboolean ILAPIENTRY iluEdgeDetectE(ILvoid);
 ILAPI ILboolean ILAPIENTRY iluEdgeDetectP(ILvoid);
@@ -156,13 +160,17 @@ ILAPI ILboolean ILAPIENTRY iluNoisify(ILclampf Tolerance);
 ILAPI ILboolean ILAPIENTRY iluPixelize(ILuint PixSize);
 ILAPI ILvoid ILAPIENTRY iluRegionfv(ILpointf *Points, ILuint n);
 ILAPI ILvoid ILAPIENTRY iluRegioniv(ILpointi *Points, ILuint n);
-ILAPI ILboolean ILAPIENTRY iluReplaceColour(ILubyte Red, ILubyte Green, ILubyte Blue,
-                                                    ILfloat Tolerance);
+ILAPI ILboolean ILAPIENTRY iluReplaceColour(ILubyte Red,
+                                            ILubyte Green,
+                                            ILubyte Blue,
+                                            ILfloat Tolerance);
 ILAPI ILboolean ILAPIENTRY iluRotate(ILfloat Angle);
 ILAPI ILboolean ILAPIENTRY iluRotate3D(ILfloat x, ILfloat y, ILfloat z, ILfloat Angle);
 ILAPI ILboolean ILAPIENTRY iluSaturate1f(ILfloat Saturation);
-ILAPI ILboolean ILAPIENTRY iluSaturate4f(ILfloat r, ILfloat g, ILfloat b,
-                                                 ILfloat Saturation);
+ILAPI ILboolean ILAPIENTRY iluSaturate4f(ILfloat r,
+                                         ILfloat g,
+                                         ILfloat b,
+                                         ILfloat Saturation);
 ILAPI ILboolean ILAPIENTRY iluScale(ILuint Width, ILuint Height, ILuint Depth);
 ILAPI ILboolean ILAPIENTRY iluScaleColours(ILfloat r, ILfloat g, ILfloat b);
 ILAPI ILboolean ILAPIENTRY iluSharpen(ILfloat Factor, ILuint Iter);

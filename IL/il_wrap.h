@@ -3,7 +3,7 @@
 
 /*#include <il/il.h>
 #include <il/ilu.h>*/
-#include <il/ilut.h>  // Probably only have to #include this one
+#include <il/ilut.h> // Probably only have to #include this one
 
 #ifdef _MSC_VER
 	#ifndef _IL_WRAP_BUILD_LIB
@@ -36,7 +36,7 @@ class ilImage {
 	ILboolean Flip(ILvoid);
 	ILboolean SwapColours(ILvoid);
 	ILboolean Resize(ILuint, ILuint, ILuint);
-	ILboolean TexImage(ILuint, ILuint, ILuint, ILubyte, ILenum, ILenum, ILvoid*);
+	ILboolean TexImage(ILuint, ILuint, ILuint, ILubyte, ILenum, ILenum, ILvoid *);
 
 
 	// Image handling
@@ -119,7 +119,7 @@ class ilOgl {
 	static ILboolean Screenie(ILvoid);
 };
 
-#endif//ILUT_USE_OPENGL
+#endif //ILUT_USE_OPENGL
 
 
 #ifdef ILUT_USE_ALLEGRO
@@ -129,7 +129,7 @@ class ilAlleg {
 	static BITMAP *Convert(ilImage &);
 };
 
-#endif//ILUT_USE_ALLEGRO
+#endif //ILUT_USE_ALLEGRO
 
 
 #ifdef ILUT_USE_WIN32
@@ -142,12 +142,15 @@ class ilWin32 {
 	static ILubyte *GetPadData(ilImage &);
 	static HPALETTE GetPal(ilImage &);
 	static ILboolean GetResource(ilImage &, HINSTANCE hInst, ILint ID, char *ResourceType);
-	static ILboolean GetResource(ilImage &, HINSTANCE hInst, ILint ID, char *ResourceType,
-	                                ILenum Type);
+	static ILboolean GetResource(ilImage &,
+	                             HINSTANCE hInst,
+	                             ILint ID,
+	                             char *ResourceType,
+	                             ILenum Type);
 	static ILboolean SetClipboard(ilImage &);
 };
 
-#endif//ILUT_USE_WIN32
+#endif //ILUT_USE_WIN32
 
 
 class ilValidate {
@@ -201,4 +204,4 @@ class ilError {
 };
 
 
-#endif//WRAPPER_H
+#endif //WRAPPER_H

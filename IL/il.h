@@ -55,26 +55,26 @@ extern "C" {
 //#define IL_STATIC_LIB
 //#define IL_NO_LCMS
 #ifdef _WIN32
-#define IL_USE_JPEGLIB_UNMODIFIED
+	#define IL_USE_JPEGLIB_UNMODIFIED
 #endif
 
 #ifdef _WIN32_WCE
-#define IL_NO_GIF
-#define IL_NO_JPG
-#define IL_NO_MNG
-#define IL_NO_PNG
-#define IL_NO_TIF
-#define IL_NO_LCMS
-#endif//_WIN32_WCE
+	#define IL_NO_GIF
+	#define IL_NO_JPG
+	#define IL_NO_MNG
+	#define IL_NO_PNG
+	#define IL_NO_TIF
+	#define IL_NO_LCMS
+#endif //_WIN32_WCE
 
 #ifdef DJGPP
-#define IL_NO_GIF
-#define IL_NO_JPG
-#define IL_NO_MNG
-#define IL_NO_PNG
-#define IL_NO_TIF
-#define IL_NO_LCMS
-#endif//DJGPP
+	#define IL_NO_GIF
+	#define IL_NO_JPG
+	#define IL_NO_MNG
+	#define IL_NO_PNG
+	#define IL_NO_TIF
+	#define IL_NO_LCMS
+#endif //DJGPP
 
 /*#ifdef __APPLE__
     #define IL_NO_GIF
@@ -88,18 +88,18 @@ extern "C" {
 
 #if defined(_WIN32) && !defined(NODEVILLIB)
 //#define IL_USE_IJL  // Whether we use the Intel Jpeg Library (else use libjpeg).
-#ifndef IL_STATIC_LIB
-#if defined(_MSC_VER) || defined(__BORLANDC__)
-#ifndef _IL_BUILD_LIBRARY
-#ifdef  IL_DEBUG
-#pragma comment(lib, "devil-d.lib")
-#else
-#pragma comment(lib, "devil.lib")
-#endif//IL_DEBUG
-#endif//_IL_BUILD_LIBRARY
-#endif//_MSC_VER || __BORLANDC__
-#endif//IL_STATIC_LIB
-#endif//_WIN32
+	#ifndef IL_STATIC_LIB
+		#if defined(_MSC_VER) || defined(__BORLANDC__)
+			#ifndef _IL_BUILD_LIBRARY
+				#ifdef  IL_DEBUG
+					#pragma comment(lib, "devil-d.lib")
+				#else
+					#pragma comment(lib, "devil.lib")
+				#endif //IL_DEBUG
+			#endif //_IL_BUILD_LIBRARY
+		#endif //_MSC_VER || __BORLANDC__
+	#endif //IL_STATIC_LIB
+#endif //_WIN32
 
 #include <stdio.h>
 
@@ -120,43 +120,43 @@ typedef double ILclampd;
 typedef void ILvoid;
 
 #ifdef _UNICODE
-#ifndef _WIN32_WCE
-#include <wchar.h>
-#endif
+	#ifndef _WIN32_WCE
+		#include <wchar.h>
+	#endif
 typedef wchar_t *ILstring;
 #else
 typedef char *ILstring;
-#endif//_UNICODE
+#endif //_UNICODE
 
 
-#define IL_FALSE                            0
-#define IL_TRUE                             1
+#define IL_FALSE                0
+#define IL_TRUE                 1
 
 
 // Matches OpenGL's right now.
-#define IL_COLOUR_INDEX                     0x1900
-#define IL_COLOR_INDEX                      0x1900
-#define IL_RGB                              0x1907
-#define IL_RGBA                             0x1908
-#define IL_BGR                              0x80E0
-#define IL_BGRA                             0x80E1
-#define IL_LUMINANCE                        0x1909
-#define IL_LUMINANCE_ALPHA                  0x190A
+#define IL_COLOUR_INDEX         0x1900
+#define IL_COLOR_INDEX          0x1900
+#define IL_RGB                  0x1907
+#define IL_RGBA                 0x1908
+#define IL_BGR                  0x80E0
+#define IL_BGRA                 0x80E1
+#define IL_LUMINANCE            0x1909
+#define IL_LUMINANCE_ALPHA      0x190A
 
 
-#define IL_BYTE                             0x1400
-#define IL_UNSIGNED_BYTE                    0x1401
-#define IL_SHORT                            0x1402
-#define IL_UNSIGNED_SHORT                   0x1403
-#define IL_INT                              0x1404
-#define IL_UNSIGNED_INT                     0x1405
-#define IL_FLOAT                            0x1406
-#define IL_DOUBLE                           0x140A
+#define IL_BYTE                 0x1400
+#define IL_UNSIGNED_BYTE        0x1401
+#define IL_SHORT                0x1402
+#define IL_UNSIGNED_SHORT       0x1403
+#define IL_INT                  0x1404
+#define IL_UNSIGNED_INT         0x1405
+#define IL_FLOAT                0x1406
+#define IL_DOUBLE               0x140A
 
 
-#define IL_VENDOR                           0x1F00
-#define IL_LOAD_EXT                         0x1F01
-#define IL_SAVE_EXT                         0x1F02
+#define IL_VENDOR               0x1F00
+#define IL_LOAD_EXT             0x1F01
+#define IL_SAVE_EXT             0x1F02
 
 
 //
@@ -246,7 +246,7 @@ typedef char *ILstring;
 #define IL_STACK_UNDERFLOW                  0x050F
 #define IL_INVALID_CONVERSION               0x0510
 #define IL_BAD_DIMENSIONS                   0x0511
-#define IL_FILE_READ_ERROR                  0x0512  // 05/12/2002: Addition by Sam.
+#define IL_FILE_READ_ERROR                  0x0512 // 05/12/2002: Addition by Sam.
 #define IL_FILE_WRITE_ERROR                 0x0512
 
 #define IL_LIB_GIF_ERROR                    0x05E1
@@ -405,42 +405,42 @@ typedef char *ILstring;
 
 // This is from Win32's <windef.h>
 #if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__) || defined(__LCC__)
-#define ILAPIENTRY __stdcall
-#define IL_PACKSTRUCT
+	#define ILAPIENTRY __stdcall
+	#define IL_PACKSTRUCT
 #elif linux
-#define ILAPIENTRY
-#define IL_PACKSTRUCT __attribute__ ((packed))
+	#define ILAPIENTRY
+	#define IL_PACKSTRUCT __attribute__ ((packed))
 #else
-#define ILAPIENTRY
-#define IL_PACKSTRUCT
+	#define ILAPIENTRY
+	#define IL_PACKSTRUCT
 #endif
 
 // This is from Win32's <wingdi.h> and <winnt.h>
 #if defined(__LCC__)
-#define ILAPI __stdcall
+	#define ILAPI __stdcall
 #elif defined(NODEVILLIB)
-#define ILAPI
+	#define ILAPI
 #elif _WIN32
-#ifdef IL_STATIC_LIB
-#define ILAPI
-#else
-#ifdef _IL_BUILD_LIBRARY
-#define ILAPI __declspec(dllexport)
-#else
-#define ILAPI __declspec(dllimport)
-#endif
-#endif
+	#ifdef IL_STATIC_LIB
+		#define ILAPI
+	#else
+		#ifdef _IL_BUILD_LIBRARY
+			#define ILAPI __declspec(dllexport)
+		#else
+			#define ILAPI __declspec(dllimport)
+		#endif
+	#endif
 #elif __APPLE__
-#define ILAPI extern
+	#define ILAPI extern
 #else
-#define ILAPI
+	#define ILAPI
 #endif
 
 
 #define IL_SEEK_SET 0
 #define IL_SEEK_CUR 1
 #define IL_SEEK_END 2
-#define IL_EOF      -1
+#define IL_EOF     -1
 
 
 // Callback functions for file reading
@@ -477,18 +477,35 @@ ILAPI ILboolean ILAPIENTRY ilActiveMipmap(ILuint Number);
 ILAPI ILboolean ILAPIENTRY ilApplyPal(const ILstring FileName);
 ILAPI ILboolean ILAPIENTRY ilApplyProfile(const ILstring InProfile, const ILstring OutProfile);
 ILAPI ILvoid ILAPIENTRY ilBindImage(ILuint Image);
-ILAPI ILboolean ILAPIENTRY ilBlit(ILuint Source, ILint DestX, ILint DestY, ILint DestZ,
-                                      ILuint SrcX, ILuint SrcY, ILuint SrcZ, ILuint Width, ILuint Height, ILuint Depth);
-ILAPI ILvoid ILAPIENTRY ilClearColour(ILclampf Red, ILclampf Green, ILclampf Blue,
-                                             ILclampf Alpha);
+ILAPI ILboolean ILAPIENTRY ilBlit(ILuint Source,
+                                  ILint DestX,
+                                  ILint DestY,
+                                  ILint DestZ,
+                                  ILuint SrcX,
+                                  ILuint SrcY,
+                                  ILuint SrcZ,
+                                  ILuint Width,
+                                  ILuint Height,
+                                  ILuint Depth);
+ILAPI ILvoid ILAPIENTRY ilClearColour(ILclampf Red,
+                                      ILclampf Green,
+                                      ILclampf Blue,
+                                      ILclampf Alpha);
 ILAPI ILboolean ILAPIENTRY ilClearImage(ILvoid);
 ILAPI ILuint ILAPIENTRY ilCloneCurImage(ILvoid);
 ILAPI ILboolean ILAPIENTRY ilCompressFunc(ILenum Mode);
 ILAPI ILboolean ILAPIENTRY ilConvertImage(ILenum DestFormat, ILenum DestType);
 ILAPI ILboolean ILAPIENTRY ilConvertPal(ILenum DestFormat);
 ILAPI ILboolean ILAPIENTRY ilCopyImage(ILuint Src);
-ILAPI ILuint ILAPIENTRY ilCopyPixels(ILuint XOff, ILuint YOff, ILuint ZOff, ILuint Width,
-                                            ILuint Height, ILuint Depth, ILenum Format, ILenum Type, ILvoid *Data);
+ILAPI ILuint ILAPIENTRY ilCopyPixels(ILuint XOff,
+                                     ILuint YOff,
+                                     ILuint ZOff,
+                                     ILuint Width,
+                                     ILuint Height,
+                                     ILuint Depth,
+                                     ILenum Format,
+                                     ILenum Type,
+                                     ILvoid *Data);
 ILAPI ILuint ILAPIENTRY ilCreateSubImage(ILenum Type, ILuint Num);
 ILAPI ILboolean ILAPIENTRY ilDefaultImage(ILvoid);
 ILAPI ILvoid ILAPIENTRY ilDeleteImages(ILsizei Num, const ILuint *Images);
@@ -515,16 +532,20 @@ ILAPI ILboolean ILAPIENTRY ilIsImage(ILuint Image);
 ILAPI ILboolean ILAPIENTRY ilIsValid(ILenum Type, const ILstring FileName);
 ILAPI ILboolean ILAPIENTRY ilIsValidF(ILenum Type, ILHANDLE File);
 ILAPI ILboolean ILAPIENTRY ilIsValidL(ILenum Type, ILvoid *Lump, ILuint Size);
-ILAPI ILvoid ILAPIENTRY ilKeyColour(ILclampf Red, ILclampf Green, ILclampf Blue,
-                                           ILclampf Alpha);
+ILAPI ILvoid ILAPIENTRY ilKeyColour(ILclampf Red,
+                                    ILclampf Green,
+                                    ILclampf Blue,
+                                    ILclampf Alpha);
 ILAPI ILboolean ILAPIENTRY ilLoad(ILenum Type, const ILstring FileName);
 ILAPI ILboolean ILAPIENTRY ilLoadF(ILenum Type, ILHANDLE File);
 ILAPI ILboolean ILAPIENTRY ilLoadImage(const ILstring FileName);
 ILAPI ILboolean ILAPIENTRY ilLoadL(ILenum Type, ILvoid *Lump, ILuint Size);
 ILAPI ILboolean ILAPIENTRY ilLoadPal(const ILstring FileName);
 ILAPI ILboolean ILAPIENTRY ilOriginFunc(ILenum Mode);
-ILAPI ILboolean ILAPIENTRY ilOverlayImage(ILuint Source, ILint XCoord, ILint YCoord,
-                                              ILint ZCoord);
+ILAPI ILboolean ILAPIENTRY ilOverlayImage(ILuint Source,
+                                          ILint XCoord,
+                                          ILint YCoord,
+                                          ILint ZCoord);
 ILAPI ILvoid ILAPIENTRY ilPopAttrib(ILvoid);
 ILAPI ILvoid ILAPIENTRY ilPushAttrib(ILuint Bits);
 ILAPI ILvoid ILAPIENTRY ilRegisterFormat(ILenum Format);
@@ -549,28 +570,59 @@ ILAPI ILboolean ILAPIENTRY ilSetData(ILvoid *Data);
 ILAPI ILboolean ILAPIENTRY ilSetDuration(ILuint Duration);
 ILAPI ILvoid ILAPIENTRY ilSetInteger(ILenum Mode, ILint Param);
 ILAPI ILvoid ILAPIENTRY ilSetMemory(mAlloc, mFree);
-ILAPI ILvoid ILAPIENTRY ilSetPixels(ILint XOff, ILint YOff, ILint ZOff, ILuint Width,
-                                           ILuint Height, ILuint Depth, ILenum Format, ILenum Type, ILvoid *Data);
-ILAPI ILvoid ILAPIENTRY ilSetRead(fOpenRProc, fCloseRProc, fEofProc, fGetcProc, fReadProc,
-                                         fSeekRProc, fTellRProc);
+ILAPI ILvoid ILAPIENTRY ilSetPixels(ILint XOff,
+                                    ILint YOff,
+                                    ILint ZOff,
+                                    ILuint Width,
+                                    ILuint Height,
+                                    ILuint Depth,
+                                    ILenum Format,
+                                    ILenum Type,
+                                    ILvoid *Data);
+ILAPI ILvoid ILAPIENTRY ilSetRead(fOpenRProc,
+                                  fCloseRProc,
+                                  fEofProc,
+                                  fGetcProc,
+                                  fReadProc,
+                                  fSeekRProc,
+                                  fTellRProc);
 ILAPI ILvoid ILAPIENTRY ilSetString(ILenum Mode, const char *String);
-ILAPI ILvoid ILAPIENTRY ilSetWrite(fOpenWProc, fCloseWProc, fPutcProc, fSeekWProc,
-                                          fTellWProc, fWriteProc);
+ILAPI ILvoid ILAPIENTRY ilSetWrite(fOpenWProc,
+                                   fCloseWProc,
+                                   fPutcProc,
+                                   fSeekWProc,
+                                   fTellWProc,
+                                   fWriteProc);
 ILAPI ILvoid ILAPIENTRY ilShutDown(ILvoid);
-ILAPI ILboolean ILAPIENTRY ilTexImage(ILuint Width, ILuint Height, ILuint Depth, ILubyte Bpp,
-                                          ILenum Format, ILenum Type, ILvoid *Data);
+ILAPI ILboolean ILAPIENTRY ilTexImage(ILuint Width,
+                                      ILuint Height,
+                                      ILuint Depth,
+                                      ILubyte Bpp,
+                                      ILenum Format,
+                                      ILenum Type,
+                                      ILvoid *Data);
 ILAPI ILboolean ILAPIENTRY ilTypeFunc(ILenum Mode);
 
-ILAPI ILboolean ILAPIENTRY ilLoadData(const ILstring FileName, ILuint Width, ILuint Height,
-                                          ILuint Depth, ILubyte Bpp);
-ILAPI ILboolean ILAPIENTRY ilLoadDataF(ILHANDLE File, ILuint Width, ILuint Height, ILuint Depth,
-                                           ILubyte Bpp);
-ILAPI ILboolean ILAPIENTRY ilLoadDataL(ILvoid *Lump, ILuint Size, ILuint Width, ILuint Height,
-                                           ILuint Depth, ILubyte Bpp);
+ILAPI ILboolean ILAPIENTRY ilLoadData(const ILstring FileName,
+                                      ILuint Width,
+                                      ILuint Height,
+                                      ILuint Depth,
+                                      ILubyte Bpp);
+ILAPI ILboolean ILAPIENTRY ilLoadDataF(ILHANDLE File,
+                                       ILuint Width,
+                                       ILuint Height,
+                                       ILuint Depth,
+                                       ILubyte Bpp);
+ILAPI ILboolean ILAPIENTRY ilLoadDataL(ILvoid *Lump,
+                                       ILuint Size,
+                                       ILuint Width,
+                                       ILuint Height,
+                                       ILuint Depth,
+                                       ILubyte Bpp);
 ILAPI ILboolean ILAPIENTRY ilSaveData(const ILstring FileName);
 
-ILAPI ILboolean ILAPIENTRY ilLoadFromJpegStruct(ILvoid* JpegDecompressorPtr);
-ILAPI ILboolean ILAPIENTRY ilSaveFromJpegStruct(ILvoid* JpegCompressorPtr);
+ILAPI ILboolean ILAPIENTRY ilLoadFromJpegStruct(ILvoid *JpegDecompressorPtr);
+ILAPI ILboolean ILAPIENTRY ilSaveFromJpegStruct(ILvoid *JpegCompressorPtr);
 
 // For all those weirdos that spell "colour" without the 'u'.
 #define ilClearColor    ilClearColour
@@ -584,4 +636,3 @@ ILAPI ILboolean ILAPIENTRY ilSaveFromJpegStruct(ILvoid* JpegCompressorPtr);
 
 #endif // __IL_H__
 #endif // __il_h__
-
