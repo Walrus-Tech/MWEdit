@@ -48,24 +48,27 @@ class CDxfFile : public CGenFile {
 	//virtual void Destroy (void);
 
 
-	bool StartEntities (void);
-	bool EndEntities (void);
-	bool EndFile (void);
+	bool StartEntities(void);
+	bool EndEntities(void);
+	bool EndFile(void);
 
 	/* Polyline commands */
-	bool StartPolyline (const int Flags);
-	bool StartPolyline (void);
-	bool Start3DPolyline (void);
-	bool EndPolyline (void);
-	bool WriteVertexL (const float X, const float Y, const float Z, const int Flags,
-	                      const int LayerNumber);
-	bool WriteVertex (const float X, const float Y, const float Z, const int Flags);
-	bool WriteVertex (const float X, const float Y, const float Z);
-	bool Write3DVertex (const float X, const float Y, const float Z);
-	bool Write3DVertexL (const float X, const float Y, const float Z, const int LayerNumber);
+	bool StartPolyline(const int Flags);
+	bool StartPolyline(void);
+	bool Start3DPolyline(void);
+	bool EndPolyline(void);
+	bool WriteVertexL(const float X,
+	                  const float Y,
+	                  const float Z,
+	                  const int Flags,
+	                  const int LayerNumber);
+	bool WriteVertex(const float X, const float Y, const float Z, const int Flags);
+	bool WriteVertex const float X, const float Y, const float Z);
+	bool Write3DVertex(const float X, const float Y, const float Z);
+	bool Write3DVertexL(const float X, const float Y, const float Z, const int LayerNumber);
 
 	/* Layer commands */
-	bool WriteLayer (const int LayerNumber);
+	bool WriteLayer(const int LayerNumber);
 
 };
 
@@ -81,61 +84,72 @@ class CDxfFile : public CGenFile {
  *=========================================================================*/
 
 /* Polyline commands */
-inline bool CDxfFile::StartPolyline (const int Flags) {
+inline bool CDxfFile::StartPolyline(const int Flags) {
 	return Printf("  0\nPOLYLINE\n  6\nCONTINUOUS\n 66\n  1\n 70\n%d\n", Flags);
 }
 
-inline bool CDxfFile::Start3DPolyline (void) {
+inline bool CDxfFile::Start3DPolyline(void) {
 	return StartPolyline(8);
 }
 
-inline bool CDxfFile::StartPolyline (void) {
+inline bool CDxfFile::StartPolyline(void) {
 	return Printf("  0\nPOLYLINE\n  6\nCONTINUOUS\n 66\n  1\n");
 }
 
-inline bool CDxfFile::EndPolyline (void) {
+inline bool CDxfFile::EndPolyline(void) {
 	return Printf("  0\nSEQEND\n");
 }
 
-inline bool CDxfFile::WriteVertex (const float X, const float Y, const float Z,
-                                       const int Flags) {
+inline bool CDxfFile::WriteVertex(const float X,
+                                  const float Y,
+                                  const float Z,
+                                  const int Flags) {
 	return Printf ("  0\nVERTEX\n 70\n%d\n 10\n%f\n 20\n%f\n 30\n%f\n", Flags, X, Y, Z);
 }
 
-inline bool CDxfFile::WriteVertexL (const float X, const float Y, const float Z, const int Flags,
-                                       const int LayerNumber) {
-	return Printf ("  0\nVERTEX\n 70\n%d\n  8\n%d\n 10\n%f\n 20\n%f\n 30\n%f\n", Flags, LayerNumber, X,
-	               Y, Z);
+inline bool CDxfFile::WriteVertexL(const float X,
+                                   const float Y,
+                                   const float Z,
+                                   const int Flags,
+                                   const int LayerNumber) {
+	return Printf ("  0\nVERTEX\n 70\n%d\n  8\n%d\n 10\n%f\n 20\n%f\n 30\n%f\n",
+	               Flags,
+	               LayerNumber,
+	               X,
+	               Y,
+	               Z);
 }
 
-inline bool CDxfFile::WriteVertex (const float X, const float Y, const float Z) {
+inline bool CDxfFile::WriteVertex(const float X, const float Y, const float Z) {
 	return Printf ("  0\nVERTEX\n 10\n%f\n 20\n%f\n 30\n%f\n", X, Y, Z);
 }
 
-inline bool CDxfFile::Write3DVertex (const float X, const float Y, const float Z) {
+inline bool CDxfFile::Write3DVertex(const float X, const float Y, const float Z) {
 	return WriteVertex(X, Y, Z, 32);
 }
 
-inline bool CDxfFile::Write3DVertexL (const float X, const float Y, const float Z,
-                                       const int LayerNumber) {
+inline bool CDxfFile::Write3DVertexL(const float X,
+                                     const float Y,
+                                     const float Z,
+                                     const int LayerNumber) {
 	return WriteVertexL(X, Y, Z, 32, LayerNumber);
 }
 
 /* Section commands */
-inline bool CDxfFile::StartEntities (void) {
+inline bool CDxfFile::StartEntities(void) {
 	return Printf("  0\nSECTION\n  2\nENTITIES\n");
 }
 
-inline bool CDxfFile::EndEntities (void) {
+inline bool CDxfFile::EndEntities(void) {
 	return Printf("  0\nENDSEC\n");
 }
 
-inline bool CDxfFile::EndFile (void) {
+inline bool CDxfFile::EndFile(void) {
 	return Printf("  0\nEOF\n");
 }
 
 /* Layer commands */
-inline bool CDxfFile::WriteLayer (const int LayerNumber) {
+inline bool CDxfFile::WriteLayer(const int LayerNumber) {
 	return Printf("  8\n%d\n", LayerNumber);
 }
 

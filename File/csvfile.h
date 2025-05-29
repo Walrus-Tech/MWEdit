@@ -70,10 +70,10 @@ class CCsvFile {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	CCsvRowArray m_Rows;     /* CSV file rows */
+	CCsvRowArray m_Rows; /* CSV file rows */
 	CSString m_Filename; /* The last known filename */
 
-	bool m_KeepQuotes;   /* Keep or parse quote files */
+	bool m_KeepQuotes; /* Keep or parse quote files */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -89,56 +89,56 @@ class CCsvFile {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Adds a row to the end of the csv file */
-	CCsvRow *AddRow (void);
+	CCsvRow *AddRow(void);
 
 	/* Delete all row objects */
-	void ClearRows (void);
+	void ClearRows(void);
 
 	/* Find a specific column index */
-	int FindHeaderCol (const TCHAR* pString);
+	int FindHeaderCol(const TCHAR *pString);
 
 	/* Access a CSV element text */
-	const TCHAR *GetElement (const int Row, const int Col);
-	CCsvRow *GetRow (const int Row) {
+	const TCHAR *GetElement(const int Row, const int Col);
+	CCsvRow *GetRow(const int Row) {
 		return (IsValidRow(Row) ? m_Rows.GetAt(Row) : NULL);
 	}
 
 	/* Get class members */
-	int GetNumLines (void) const {
+	int GetNumLines(void) const {
 		return (m_Rows.GetNumElements());
 	}
 
-	const TCHAR *GetFilename (void) const {
+	const TCHAR *GetFilename(void) const {
 		return (m_Filename);
 	}
 
 	/* Is the element indices valid? */
-	bool IsValidElement (const int Row, const int Col);
-	bool IsValidRow (const int Row) {
+	bool IsValidElement(const int Row, const int Col);
+	bool IsValidRow(const int Row) {
 		return (m_Rows.IsValidIndex(Row));
 	}
 
 	/* Check for missing/empty cells */
-	bool IsMissingCells (void);
-	bool IsRowMissingCells (const int RowIndex);
+	bool IsMissingCells(void);
+	bool IsRowMissingCells(const int RowIndex);
 
 	/* Attempt to load a new CSV file */
-	bool Load (const TCHAR* pFilename);
+	bool Load(const TCHAR *pFilename);
 
 	/* Parse a CSV text buffer */
-	bool ParseText (const TCHAR* pBuffer, const int Size);
+	bool ParseText(const TCHAR *pBuffer, const int Size);
 
 	/* Attempt to save the CSV file */
-	bool Save (const TCHAR* pFilename);
+	bool Save(const TCHAR *pFilename);
 
 	/* Set a specific string */
-	CSString *SetString (const int Row, const int Col, const TCHAR* pString);
+	CSString *SetString(const int Row, const int Col, const TCHAR *pString);
 
 	/* Set class members */
-	void SetKeepQuotes (const bool Flag) {
+	void SetKeepQuotes(const bool Flag) {
 		m_KeepQuotes = Flag;
 	}
 
@@ -147,9 +147,6 @@ class CCsvFile {
 /*===========================================================================
  *      End of Class CCsvFile Definition
  *=========================================================================*/
-
-
-
 
 
 #endif

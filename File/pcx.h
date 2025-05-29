@@ -34,7 +34,7 @@
 #define PCXERR_IMAGESIZE 2002
 
 /* Compression constant */
-#define PCX_RLE_VALUE 192
+#define PCX_RLE_VALUE    192
 
 /*===========================================================================
  *      End of Definitions
@@ -65,7 +65,7 @@ typedef struct {
 	char NumColorPlanes;
 	short BytesPerLine;
 	short PaletteType;
-	char Padding[58];      /* Padding for future use */
+	char Padding[58]; /* Padding for future use */
 } pcxheader_t;
 
 #pragma pack(pop)
@@ -86,12 +86,12 @@ class CPcxFile : public CGenFile {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	pcxheader_t m_Header;       /* Header information */
+	pcxheader_t m_Header; /* Header information */
 
-	byte *m_pData;        /* Raw image data (uncompressed) */
+	byte *m_pData; /* Raw image data (uncompressed) */
 	long m_ImageSize;
 
-	rgbpal_t *m_pPalette;     /* Palette data */
+	rgbpal_t *m_pPalette; /* Palette data */
 	int m_PaletteSize;
 
 
@@ -99,15 +99,15 @@ class CPcxFile : public CGenFile {
   protected:
 
 	/* Sets header values to default values */
-	void CreateStandardHeader (void);
+	void CreateStandardHeader(void);
 
 	/* Helper input and output methods */
-	bool ReadHeader (void);
-	bool ReadImage (void);
-	bool ReadPalette (void);
-	bool WriteHeader (void);
-	bool WriteImage (void);
-	bool WritePalette (void);
+	bool ReadHeader(void);
+	bool ReadImage(void);
+	bool ReadPalette(void);
+	bool WriteHeader(void);
+	bool WriteImage(void);
+	bool WritePalette(void);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -119,15 +119,18 @@ class CPcxFile : public CGenFile {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Saves LBM image data to a standard 256 color PCX file */
-	bool ExportLBM (const char* pFilename, const int Width, const int Height,
-	                const byte* pImage, const byte* pPalette);
+	bool ExportLBM(const char *pFilename,
+	               const int Width,
+	               const int Height,
+	               const byte *pImage,
+	               const byte *pPalette);
 
 	/* Attempt to load/save the specified PCX image */
-	bool Load (const char* pFilename);
-	bool Save (const char* pFilename);
+	bool Load(const char *pFilename);
+	bool Save(const char *pFilename);
 
 };
 
@@ -136,10 +139,7 @@ class CPcxFile : public CGenFile {
  *=========================================================================*/
 
 
-
 #endif
 /*=========================================================================
  *      End of File PCX.H
  *=======================================================================*/
-
-

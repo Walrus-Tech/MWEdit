@@ -34,10 +34,10 @@
 #define BMPFILE_TYPE_WORD ((ushort)0x4D42)
 
 /* BMP Compression values */
-#define BMPCOMPRESS_RGB   ((uint) 0)
-#define BMPCOMPRESS_RLE8  ((uint) 1)
-#define BMPCOMPRESS_RLE4  ((uint) 2)
-#define BMPCOMPRESS_BIT   ((uint) 3)
+#define BMPCOMPRESS_RGB   ((uint)0)
+#define BMPCOMPRESS_RLE8  ((uint)1)
+#define BMPCOMPRESS_RLE4  ((uint)2)
+#define BMPCOMPRESS_BIT   ((uint)3)
 
 /*===========================================================================
  *      End of Definitions
@@ -95,10 +95,10 @@ class CBmpFile : virtual public CGenFile {
 	/*---------- Begin Private Class Members ----------------------*/
   private:
 
-	bmpfileheader_t m_FileHeader;   /* Image header data */
+	bmpfileheader_t m_FileHeader; /* Image header data */
 	bmpinfoheader_t m_InfoHeader;
 
-	byte *m_pData;    /* Raw image data (uncompressed) */
+	byte *m_pData; /* Raw image data (uncompressed) */
 	long m_ImageSize;
 
 	rgbpal_t *m_pPalette; /* Palette data */
@@ -109,7 +109,7 @@ class CBmpFile : virtual public CGenFile {
   protected:
 
 	/* Helper output functions */
-	bool WriteQuadPalette (void);
+	bool WriteQuadPalette(void);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -117,18 +117,21 @@ class CBmpFile : virtual public CGenFile {
 
 	/* Class Constructors/Destructors */
 	CBmpFile();
-	virtual void Destroy (void);
+	virtual void Destroy(void);
 
 	/* Compute various sizes/offset */
-	uint ComputeSize (void) const;
-	uint ComputeOffsetBits (void) const;
+	uint ComputeSize(void) const;
+	uint ComputeOffsetBits(void) const;
 
 	/* Saves LBM image data to a standard 256 color BMP file */
-	bool ExportLBM (const char* pFilename, const int Width, const int Height,
-	                const byte* pImage, const byte* pPalette);
+	bool ExportLBM(const char *pFilename,
+	               const int Width,
+	               const int Height,
+	               const byte *pImage,
+	               const byte *pPalette);
 
 	/* Save the current BMP image to a file */
-	bool Save (const char* pFilename);
+	bool Save(const char *pFilename);
 
 
 };
@@ -145,14 +148,17 @@ class CBmpFile : virtual public CGenFile {
  *=========================================================================*/
 
 /* Compute various file offsets and sizes */
-inline uint CBmpFile::ComputeSize (void) const {
-	return ( (uint)sizeof(bmpfileheader_t) + (uint)sizeof(bmpinfoheader_t) +
-	         (uint)(m_PaletteSize * 4) + (uint)m_InfoHeader.SizeImage );
+inline uint CBmpFile::ComputeSize(void) const {
+	return ((uint)sizeof(bmpfileheader_t)
+	        + (uint)sizeof(bmpinfoheader_t)
+	        + (uint)(m_PaletteSize * 4)
+	        + (uint)m_InfoHeader.SizeImage);
 }
 
-inline uint CBmpFile::ComputeOffsetBits (void) const {
-	return ( (uint)sizeof(bmpfileheader_t) + (uint)sizeof(bmpinfoheader_t) +
-	         (uint)(m_PaletteSize * 4) );
+inline uint CBmpFile::ComputeOffsetBits(void) const {
+	return ((uint)sizeof(bmpfileheader_t)
+	        + (uint)sizeof(bmpinfoheader_t)
+	        + (uint)(m_PaletteSize * 4) );
 }
 
 /*===========================================================================
@@ -167,8 +173,8 @@ inline uint CBmpFile::ComputeOffsetBits (void) const {
  *=========================================================================*/
 
 /* Initialize the header structures with default values */
-void InitBMPFileHeader (bmpfileheader_t &FileHeader);
-void InitBMPInfoHeader (bmpinfoheader_t &InfoHeader);
+void InitBMPFileHeader(bmpfileheader_t &FileHeader);
+void InitBMPInfoHeader(bmpinfoheader_t &InfoHeader);
 
 /*===========================================================================
  *      End of Function Definitions

@@ -28,7 +28,7 @@ DEFINE_FILE("bmpfile.cpp");
  * Class CBmpFile Constructor
  *
  *=========================================================================*/
-CBmpFile::CBmpFile () {
+CBmpFile::CBmpFile() {
 	//DEFINE_FUNCTION("CBmpFile::CBmpFile()");
 	/* Initialize the BMP headers */
 	InitBMPInfoHeader(m_InfoHeader);
@@ -51,7 +51,7 @@ CBmpFile::CBmpFile () {
  * Delete the contents of the BMP file.
  *
  *=========================================================================*/
-void CBmpFile::Destroy (void) {
+void CBmpFile::Destroy(void) {
 	DEFINE_FUNCTION("CBmpFile::Destroy()");
 	/* Clear the BMP headers */
 	InitBMPInfoHeader(m_InfoHeader);
@@ -81,22 +81,25 @@ void CBmpFile::Destroy (void) {
  * data is assumed to be a regular RGB triplet array of 256 colors (768 bytes).
  *
  *=========================================================================*/
-bool CBmpFile::ExportLBM (const char* pFilename, const int Width, const int Height,
-                          const byte* pImageData, const byte* pPalette) {
+bool CBmpFile::ExportLBM(const char *pFilename,
+                         const int Width,
+                         const int Height,
+                         const byte *pImageData,
+                         const byte *pPalette) {
 	DEFINE_FUNCTION("CBmpFile::ExportLBM()");
 	bool Result;
 	/* Ensure valid input */
 	ASSERT(pImageData != NULL && pPalette != NULL);
 	/* Delete the current BMP data, and initialize members */
 	Destroy();
-	m_pData = (byte *) pImageData;
-	m_ImageSize = (long) Width * (long) Height;
-	m_pPalette = (rgbpal_t *) pPalette;
+	m_pData = (byte *)pImageData;
+	m_ImageSize = (long)Width * (long)Height;
+	m_pPalette = (rgbpal_t *)pPalette;
 	m_PaletteSize = 256;
 	/* Initialize the file headers */
 	m_InfoHeader.Height = Height;
 	m_InfoHeader.Width = Width;
-	m_InfoHeader.SizeImage = (uint) m_ImageSize;
+	m_InfoHeader.SizeImage = (uint)m_ImageSize;
 	m_InfoHeader.BitCount = 8;
 	m_FileHeader.Size = ComputeSize();
 	m_FileHeader.OffsetBits = ComputeOffsetBits();
@@ -121,7 +124,7 @@ bool CBmpFile::ExportLBM (const char* pFilename, const int Width, const int Heig
  * FALSE on any error.
  *
  *=========================================================================*/
-bool CBmpFile::Save (const char* pFilename) {
+bool CBmpFile::Save(const char *pFilename) {
 	DEFINE_FUNCTION("CBmpFile::Save()");
 	bool Result;
 	/* Ensure valid object state */
@@ -169,7 +172,7 @@ bool CBmpFile::Save (const char* pFilename) {
  * Palette entries should be byte values ranging from 0 to 255.
  *
  *=========================================================================*/
-bool CBmpFile::WriteQuadPalette (void) {
+bool CBmpFile::WriteQuadPalette(void) {
 	//DEFINE_FUNCTION("CBmpFile::WriteQuadPalette()");
 	int LoopCounter;
 	bool Result;
@@ -203,7 +206,7 @@ bool CBmpFile::WriteQuadPalette (void) {
  * Initializes the given BMP file header with the default values.
  *
  *=========================================================================*/
-void InitBMPFileHeader (bmpfileheader_t &FileHeader) {
+void InitBMPFileHeader(bmpfileheader_t &FileHeader) {
 	FileHeader.Type = BMPFILE_TYPE_WORD;
 	FileHeader.OffsetBits = 0;
 	FileHeader.Size = 0;
@@ -223,7 +226,7 @@ void InitBMPFileHeader (bmpfileheader_t &FileHeader) {
  * Initializes the given BMP info header with the default values.
  *
  *=========================================================================*/
-void InitBMPInfoHeader (bmpinfoheader_t &InfoHeader) {
+void InitBMPInfoHeader(bmpinfoheader_t &InfoHeader) {
 	InfoHeader.Size = sizeof(bmpinfoheader_t);
 	InfoHeader.SizeImage = 0;
 	InfoHeader.Height = 0;

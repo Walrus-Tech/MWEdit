@@ -28,7 +28,7 @@ DEFINE_FILE("pcx.cpp");
  * Class CPcxFile Constructor
  *
  *=========================================================================*/
-CPcxFile::CPcxFile () {
+CPcxFile::CPcxFile() {
 	//DEFINE_FUNCTION("CPcxFile::CPcxFile()");
 	m_pData = NULL;
 	m_pPalette = NULL;
@@ -48,7 +48,7 @@ CPcxFile::CPcxFile () {
  * Class CPcxFile Destructor
  *
  *=======================================================================*/
-void CPcxFile::Destroy (void) {
+void CPcxFile::Destroy(void) {
 	DEFINE_FUNCTION("CPcxFile::Destroy()");
 	/* Delete the allocated data */
 	DestroyArrayPointer(m_pData);
@@ -70,7 +70,7 @@ void CPcxFile::Destroy (void) {
  * Initializes the PCX header with default values.  Protected class method.
  *
  *=========================================================================*/
-void CPcxFile::CreateStandardHeader (void) {
+void CPcxFile::CreateStandardHeader(void) {
 	/* Clear header */
 	memset(&m_Header, 0, sizeof(pcxheader_t));
 	/* Set header defaults */
@@ -103,8 +103,11 @@ void CPcxFile::CreateStandardHeader (void) {
  * The current PCX image, if any, is destroyed.
  *
  *=======================================================================*/
-bool CPcxFile::ExportLBM (const char* pFilename, const int Width, const int Height,
-                          const byte* pImage, const byte* pPalette) {
+bool CPcxFile::ExportLBM(const char *pFilename,
+                         const int Width,
+                         const int Height,
+                         const byte *pImage,
+                         const byte *pPalette) {
 	DEFINE_FUNCTION("CPcxFile::ExportLBM()");
 	bool Result;
 	/* Ensure valid input */
@@ -118,10 +121,10 @@ bool CPcxFile::ExportLBM (const char* pFilename, const int Width, const int Heig
 	m_Header.Width = Width;
 	m_Header.Height = Height;
 	m_Header.BytesPerLine = Width;
-	m_ImageSize = (long) Width * (long) Height;
+	m_ImageSize = (long)Width * (long)Height;
 	/* Temporarily use the image and palette data pointers */
-	m_pData = (byte *) pImage;
-	m_pPalette = (rgbpal_t *) pPalette;
+	m_pData = (byte *)pImage;
+	m_pPalette = (rgbpal_t *)pPalette;
 	m_PaletteSize = 256;
 	/* Attempt to save the image */
 	Result = Save(pFilename);
@@ -145,11 +148,11 @@ bool CPcxFile::ExportLBM (const char* pFilename, const int Width, const int Heig
  * Attempts to read in the specified PCX file.  Returns FALSE on any error.
  *
  *=======================================================================*/
-bool CPcxFile::Load (const char* pFilename) {
+bool CPcxFile::Load(const char *pFilename) {
 	DEFINE_FUNCTION("CPcxFile::Load()");
 	bool Result;
 	/* Attempt to open the file for input */
-	Result = Open (pFilename, "rb");
+	Result = Open(pFilename, "rb");
 
 	if (!Result) {
 		return (FALSE);
@@ -186,11 +189,11 @@ bool CPcxFile::Load (const char* pFilename) {
  * method.
  *
  *=======================================================================*/
-bool CPcxFile::ReadHeader (void) {
+bool CPcxFile::ReadHeader(void) {
 	//DEFINE_FUNCTION("CPcxFile::ReadHeader()");
 	bool Result;
 	/* Load the header all at once */
-	Result = CGenFile::Read((char*)&m_Header, sizeof(pcxheader_t));
+	Result = CGenFile::Read((char *)&m_Header, sizeof(pcxheader_t));
 
 	if (!Result) {
 		return (FALSE);
@@ -215,7 +218,7 @@ bool CPcxFile::ReadHeader (void) {
  * the current position in the file stream.  Returns FALSE on any error.
  *
  *=========================================================================*/
-bool CPcxFile::ReadImage (void) {
+bool CPcxFile::ReadImage(void) {
 	DEFINE_FUNCTION("CPcxFile::ReadImage()");
 	size_t Count = 0;
 	size_t BytesInput;
@@ -229,7 +232,7 @@ bool CPcxFile::ReadImage (void) {
 	m_ImageSize = (long)m_Header.Width * (long)m_Header.Height;
 
 	/* Check for size overflow */
-	if ((ulong)m_ImageSize >= (long) UINT_MAX) {
+	if ((ulong)m_ImageSize >= (long)UINT_MAX) {
 		ErrorHandler.AddError(PCXERR_BIGIMAGE);
 		return (FALSE);
 	}
@@ -295,13 +298,13 @@ bool CPcxFile::ReadImage (void) {
 
 				/* Replicate data in image buffer */
 				while (NumBytes-- > 0) {
-					m_pData[DataIndex] = (byte) InputChar;
+					m_pData[DataIndex] = (byte)InputChar;
 					DataIndex++;
 					Column++;
 				}
 			}        /* Copy uncompressed data into image buffer */
 			else {
-				m_pData[DataIndex] = (byte) InputChar;
+				m_pData[DataIndex] = (byte)InputChar;
 				DataIndex++;
 				Column++;
 			}
@@ -329,7 +332,7 @@ bool CPcxFile::ReadImage (void) {
  * the PCX file. Returns FALSE on any error.  Protected class method.
  *
  *=========================================================================*/
-bool CPcxFile::ReadPalette (void) {
+bool CPcxFile::ReadPalette(void) {
 	DEFINE_FUNCTION("CPcxFile::ReadPalette()");
 	bool Result;
 
@@ -344,7 +347,7 @@ bool CPcxFile::ReadPalette (void) {
 	Result = Seek(-768l, SEEK_END);
 
 	if (Result) {
-		Result = CGenFile::Read((char*) m_pPalette, 256 * sizeof(rgbpal_t));
+		Result = CGenFile::Read((char *)m_pPalette, 256 * sizeof(rgbpal_t));
 	}
 
 	return (Result);
@@ -363,7 +366,7 @@ bool CPcxFile::ReadPalette (void) {
  * on any error.
  *
  *=======================================================================*/
-bool CPcxFile::Save (const char *pFilename) {
+bool CPcxFile::Save(const char *pFilename) {
 	DEFINE_FUNCTION("CPcxFile::Save()");
 	bool Result;
 	/* Attempt to open file for output */
@@ -400,14 +403,14 @@ bool CPcxFile::Save (const char *pFilename) {
  * file stream.  Returns FALSE on any error.  Protected class method.
  *
  *=======================================================================*/
-bool CPcxFile::WriteHeader (void) {
+bool CPcxFile::WriteHeader(void) {
 	//DEFINE_FUNCTION("CPcxFile::WriteHeader()");
 	bool Result;
 	/* Adjust image size temporarily */
 	m_Header.Width--;
 	m_Header.Height--;
 	/* Write the header all at once */
-	Result = CGenFile::Write((char*)&m_Header, sizeof(pcxheader_t));
+	Result = CGenFile::Write((char *)&m_Header, sizeof(pcxheader_t));
 	/* Reset image size */
 	m_Header.Width++;
 	m_Header.Height++;
@@ -427,9 +430,9 @@ bool CPcxFile::WriteHeader (void) {
  * to the current position in the file stream.  Returns FALSE on any error.
  *
  *=========================================================================*/
-bool CPcxFile::WriteImage (void) {
+bool CPcxFile::WriteImage(void) {
 	DEFINE_FUNCTION("CPcxFile::WriteImage()");
-	byte* pDataPtr;
+	byte *pDataPtr;
 	byte PrevData;
 	int ByteCount;
 	int Column;
@@ -469,7 +472,7 @@ bool CPcxFile::WriteImage (void) {
 		}
 		/* Output RLE encoded bytes */
 		else {
-			fputc ((byte)(PCX_RLE_VALUE + ByteCount), GetHandle());
+			fputc((byte)(PCX_RLE_VALUE + ByteCount), GetHandle());
 			fputc(PrevData, GetHandle());
 		}
 
@@ -503,7 +506,7 @@ bool CPcxFile::WriteImage (void) {
  * position in the file stream.  Returns FALSE on any error.
  *
  *=========================================================================*/
-bool CPcxFile::WritePalette (void) {
+bool CPcxFile::WritePalette(void) {
 	DEFINE_FUNCTION("CPcxFile::WritePalette()");
 	bool Result;
 
@@ -517,7 +520,7 @@ bool CPcxFile::WritePalette (void) {
 
 	/* Write palette data */
 	if (Result) {
-		Result = CGenFile::Write((char*) m_pPalette, m_PaletteSize * sizeof(rgbpal_t));
+		Result = CGenFile::Write((char *) m_pPalette, m_PaletteSize * sizeof(rgbpal_t));
 	}
 
 	return (Result);
@@ -535,7 +538,7 @@ bool CPcxFile::WritePalette (void) {
  * Adds the PCX error messages to the error database.
  *
  *=========================================================================*/
-bool CreatePCXErrors (void) {
+bool CreatePCXErrors(void) {
 	ErrorDatabase.Add(PCXERR_BIGIMAGE,
 	                  "PCX image size exceeds the maximum allocation size for this system!");
 	ErrorDatabase.Add(PCXERR_IMAGESIZE, "PCX image size is not valid!");
