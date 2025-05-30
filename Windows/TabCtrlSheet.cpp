@@ -85,7 +85,7 @@ CTabCtrlSheet::~CTabCtrlSheet() {
  * any error.
  *
  *=========================================================================*/
-bool CTabCtrlSheet::AddTab (const TCHAR* pTitle, CPropertyPage* pPage) {
+bool CTabCtrlSheet::AddTab(const TCHAR *pTitle, CPropertyPage *pPage) {
 	DEFINE_FUNCTION("CTabCtrlSheet::AddTab()");
 	int Result;
 	/* Ensure valid input */
@@ -121,12 +121,16 @@ bool CTabCtrlSheet::AddTab (const TCHAR* pTitle, CPropertyPage* pPage) {
  * repositions the page to fit within the current tab display area.
  *
  *=========================================================================*/
-void CTabCtrlSheet::DisplayPage (const int PageIndex) {
+void CTabCtrlSheet::DisplayPage(const int PageIndex) {
 	CRect PageRect;
 	/* Adjust the size/position of page and display it */
 	PageRect = GetPageRect();
-	m_pPages[PageIndex]->SetWindowPos(NULL, PageRect.left, PageRect.top,
-	                                  PageRect.Width(), PageRect.Height(), SWP_SHOWWINDOW);
+	m_pPages[PageIndex]->SetWindowPos(NULL,
+	                                  PageRect.left,
+	                                  PageRect.top,
+	                                  PageRect.Width(),
+	                                  PageRect.Height(),
+	                                  SWP_SHOWWINDOW);
 }
 
 /*===========================================================================
@@ -142,7 +146,7 @@ void CTabCtrlSheet::DisplayPage (const int PageIndex) {
  * display area.
  *
  *=========================================================================*/
-RECT CTabCtrlSheet::GetPageRect (void) {
+RECT CTabCtrlSheet::GetPageRect(void) {
 	RECT PageRect;
 	GetClientRect(&PageRect);
 	AdjustRect(FALSE, &PageRect);
@@ -173,7 +177,7 @@ UINT CTabCtrlSheet::OnGetDlgCode() {
  * Class CTabCtrlSheet Event - void OnSelchange (pNMHDR, pResult);
  *
  *=========================================================================*/
-void CTabCtrlSheet::OnSelchange(NMHDR* pNMHDR, LRESULT* pResult) {
+void CTabCtrlSheet::OnSelchange(NMHDR *pNMHDR, LRESULT *pResult) {
 	int CurrentTab;
 	CurrentTab = GetCurSel();
 	SetCurrentPage(CurrentTab);
@@ -193,7 +197,7 @@ void CTabCtrlSheet::OnSelchange(NMHDR* pNMHDR, LRESULT* pResult) {
  * true on success.  Protected class method.
  *
  *=========================================================================*/
-bool CTabCtrlSheet::SetCurrentPage (const int PageIndex) {
+bool CTabCtrlSheet::SetCurrentPage(const int PageIndex) {
 	/* Ignore if nothing changed */
 	if (m_CurrentPage == PageIndex) {
 		return (false);
@@ -232,7 +236,7 @@ bool CTabCtrlSheet::SetCurrentPage (const int PageIndex) {
  * Returns true on success.
  *
  *=========================================================================*/
-bool CTabCtrlSheet::SetPage (const int PageIndex) {
+bool CTabCtrlSheet::SetPage(const int PageIndex) {
 	int iResult;
 	bool Result;
 
@@ -260,9 +264,6 @@ bool CTabCtrlSheet::SetPage (const int PageIndex) {
 void CTabCtrlSheet::OnSysCommand(UINT nID, LPARAM lParam) {
 	CTabCtrl::OnSysCommand(nID, lParam);
 }
-
-
-
 
 
 void CTabCtrlSheet::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {

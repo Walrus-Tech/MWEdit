@@ -47,7 +47,7 @@ DEFINE_FILE("WinUtil.cpp");
  * on any error.
  *
  *=========================================================================*/
-bool AddComboString (CComboBox& ComboBox, const TCHAR* pString, const int Data) {
+bool AddComboString(CComboBox &ComboBox, const TCHAR *pString, const int Data) {
 	int ListIndex;
 	ListIndex = ComboBox.AddString(pString);
 
@@ -73,7 +73,7 @@ bool AddComboString (CComboBox& ComboBox, const TCHAR* pString, const int Data) 
  * on any error.
  *
  *=========================================================================*/
-bool AddListString (CListBox& ListBox, const TCHAR* pString, const int Data) {
+bool AddListString(CListBox &ListBox, const TCHAR *pString, const int Data) {
 	int ListIndex;
 	ListIndex = ListBox.AddString(pString);
 
@@ -100,7 +100,7 @@ bool AddListString (CListBox& ListBox, const TCHAR* pString, const int Data) {
  * that the input string is at least _MAX_PATH characters long.
  *
  *=========================================================================*/
-bool BrowseForFolder (CString& Path, HWND hWnd, const TCHAR* pTitle) {
+bool BrowseForFolder(CString &Path, HWND hWnd, const TCHAR *pTitle) {
 	bool Result;
 	Result = BrowseForFolder(Path.GetBuffer(_MAX_PATH + 1), hWnd, pTitle);
 	Path.ReleaseBuffer();
@@ -108,7 +108,7 @@ bool BrowseForFolder (CString& Path, HWND hWnd, const TCHAR* pTitle) {
 }
 
 
-bool BrowseForFolder (TCHAR* pPath, HWND hWnd, const TCHAR* pTitle) {
+bool BrowseForFolder(TCHAR *pPath, HWND hWnd, const TCHAR *pTitle) {
 	DEFINE_FUNCTION("BrowseForFolder()");
 	BOOL Result;
 	LPITEMIDLIST pItemIDList;
@@ -152,8 +152,8 @@ bool BrowseForFolder (TCHAR* pPath, HWND hWnd, const TCHAR* pTitle) {
  * Attempts to copy text in the given window. Returns false on any error.
  *
  *=========================================================================*/
-bool ClipCopyFromWnd (CWnd* pWnd) {
-	CEdit* pEditWnd;
+bool ClipCopyFromWnd(CWnd *pWnd) {
+	CEdit *pEditWnd;
 
 	/* Ignore if no control currently has the focus */
 	if (pWnd == NULL) {
@@ -182,8 +182,8 @@ bool ClipCopyFromWnd (CWnd* pWnd) {
  *  Attempts to cut text in the given window. Returns false on any error.
  *
  *=========================================================================*/
-bool ClipCutFromWnd (CWnd* pWnd) {
-	CEdit* pEditWnd;
+bool ClipCutFromWnd(CWnd *pWnd) {
+	CEdit *pEditWnd;
 
 	/* Ignore if no control currently has the focus */
 	if (pWnd == NULL) {
@@ -212,8 +212,8 @@ bool ClipCutFromWnd (CWnd* pWnd) {
  * Attempts to paste text to the given window. Returns false on any error.
  *
  *=========================================================================*/
-bool ClipPasteToWnd (CWnd* pWnd) {
-	CEdit* pEditWnd;
+bool ClipPasteToWnd(CWnd *pWnd) {
+	CEdit *pEditWnd;
 
 	/* Ignore if no control currently has the focus */
 	if (pWnd == NULL) {
@@ -242,9 +242,9 @@ bool ClipPasteToWnd (CWnd* pWnd) {
  * Copies text to the clipboard returning false on any error.
  *
  *=========================================================================*/
-bool CopyTextToClipboard (const TCHAR* pString, const int Length) {
+bool CopyTextToClipboard(const TCHAR *pString, const int Length) {
 	HANDLE hText;
-	TCHAR* pText;
+	TCHAR *pText;
 	BOOL Result;
 	/* Allocate the clipboard data buffer */
 	hText = GlobalAlloc(GMEM_MOVEABLE | GMEM_DDESHARE, Length + 2);
@@ -306,13 +306,20 @@ bool CopyTextToClipboard (const TCHAR* pString, const int Length) {
  *  pDesc     - The description of the shell link.
  *
  *=========================================================================*/
-bool CreateShortcut (LPTSTR pPathObj, LPTSTR pWorkingPath, LPTSTR pArgs, LPTSTR pIconPath,
-                     LPTSTR pPathLink, LPTSTR pDesc) {
+bool CreateShortcut(LPTSTR pPathObj,
+                    LPTSTR pWorkingPath,
+                    LPTSTR pArgs,
+                    LPTSTR pIconPath,
+                    LPTSTR pPathLink,
+                    LPTSTR pDesc) {
 	HRESULT hResult;
-	IShellLink* pShellLink;
-	IPersistFile* pPersistFile;
+	IShellLink *pShellLink;
+	IPersistFile *pPersistFile;
 	/* Get a pointer to the IShellLink interface.  */
-	hResult = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink,
+	hResult = CoCreateInstance(CLSID_ShellLink,
+	                           NULL,
+	                           CLSCTX_INPROC_SERVER,
+	                           IID_IShellLink,
 	                           (void **)&pShellLink);
 
 	if (SUCCEEDED(hResult)) {
@@ -367,7 +374,7 @@ bool CreateShortcut (LPTSTR pPathObj, LPTSTR pWorkingPath, LPTSTR pArgs, LPTSTR 
  * Saves just the path portion of the gven path to the string variable.
  *
  *=========================================================================*/
-CString &ExtractPath (CString& PathBuffer, const TCHAR* pPath) {
+CString &ExtractPath(CString &PathBuffer, const TCHAR *pPath) {
 	ExtractPath(PathBuffer.GetBuffer(_MAX_PATH), pPath, _MAX_PATH);
 	PathBuffer.ReleaseBuffer(-1);
 	return (PathBuffer);
@@ -386,7 +393,7 @@ CString &ExtractPath (CString& PathBuffer, const TCHAR* pPath) {
  * items index or -1 on any error.
  *
  *=========================================================================*/
-int FindComboListItem (CComboBox& ComboBox, const DWORD ItemData, const bool Select) {
+int FindComboListItem(CComboBox &ComboBox, const DWORD ItemData, const bool Select) {
 	int Index;
 
 	for (Index = 0; Index < ComboBox.GetCount(); Index++) {
@@ -420,7 +427,7 @@ int FindComboListItem (CComboBox& ComboBox, const DWORD ItemData, const bool Sel
  * items index or -1 on any error.
  *
  *=========================================================================*/
-int FindListItem (CListBox& ListBox, const DWORD ItemData, const bool Select) {
+int FindListItem(CListBox &ListBox, const DWORD ItemData, const bool Select) {
 	int Index;
 
 	for (Index = 0; Index < ListBox.GetCount(); Index++) {
@@ -456,7 +463,7 @@ int FindListItem (CListBox& ListBox, const DWORD ItemData, const bool Select) {
  * the tree item if found, or NULL otherwise.
  *
  *=========================================================================*/
-HTREEITEM FindTreeItem (const TCHAR* pName, CTreeCtrl& TreeCtrl, HTREEITEM Root) {
+HTREEITEM FindTreeItem(const TCHAR *pName, CTreeCtrl &TreeCtrl, HTREEITEM Root) {
 	DEFINE_FUNCTION("FindTreeItem()");
 	HTREEITEM hFind = Root;
 	CString Buffer;
@@ -493,7 +500,7 @@ HTREEITEM FindTreeItem (const TCHAR* pName, CTreeCtrl& TreeCtrl, HTREEITEM Root)
  * handle. Returns NULL on any error.
  *
  *=========================================================================*/
-HWND FindWindowHandle (HINSTANCE hInstance) {
+HWND FindWindowHandle(HINSTANCE hInstance) {
 	HWND hWnd;
 	/* Enumerate through all windows */
 	hWnd = FindWindow(NULL, NULL);
@@ -502,7 +509,7 @@ HWND FindWindowHandle (HINSTANCE hInstance) {
 		/* Only bother with top-level windows */
 		if (::GetParent(hWnd) == NULL) {
 			/* Check the instance handle for the app */
-			if (hInstance == (HINSTANCE) ::GetWindowLong(hWnd, GWL_HINSTANCE)) {
+			if (hInstance == (HINSTANCE)::GetWindowLong(hWnd, GWL_HINSTANCE)) {
 				return (hWnd);
 			}
 		}
@@ -527,7 +534,7 @@ HWND FindWindowHandle (HINSTANCE hInstance) {
  * single selected lists.
  *
  *=========================================================================*/
-bool GetCurSelListItemData (long &Data, CListBox& ListBox) {
+bool GetCurSelListItemData(long &Data, CListBox &ListBox) {
 	int CurSel;
 	/* Get the selected item index, if any */
 	CurSel = ListBox.GetCurSel();
@@ -555,7 +562,7 @@ bool GetCurSelListItemData (long &Data, CListBox& ListBox) {
  * single selected lists.
  *
  *=========================================================================*/
-bool GetCurSelComboItemData (long &Data, CComboBox& ComboBox) {
+bool GetCurSelComboItemData(long &Data, CComboBox &ComboBox) {
 	int CurSel;
 	/* Get the selected item index, if any */
 	CurSel = ComboBox.GetCurSel();
@@ -583,11 +590,11 @@ bool GetCurSelComboItemData (long &Data, CComboBox& ComboBox) {
  * error.
  *
  *======================================================================*/
-CDocument *GetActiveDocument (void) {
-	CWinApp* pApp = AfxGetApp();
-	CWnd* pFrame = pApp->GetMainWnd();
-	CDocument* pDoc;
-	CMDIFrameWnd* pMDIFrame;
+CDocument *GetActiveDocument(void) {
+	CWinApp *pApp = AfxGetApp();
+	CWnd *pFrame = pApp->GetMainWnd();
+	CDocument *pDoc;
+	CMDIFrameWnd *pMDIFrame;
 
 	/* Ensure the main window is the valid type */
 	if (pFrame == NULL) {
@@ -598,7 +605,7 @@ CDocument *GetActiveDocument (void) {
 		return (NULL);
 	}
 
-	pMDIFrame = (CMDIFrameWnd *) pFrame;
+	pMDIFrame = (CMDIFrameWnd *)pFrame;
 	/* Get the active document of mdi frame */
 	pDoc = GetActiveFrameDocument(pMDIFrame);
 
@@ -622,12 +629,12 @@ CDocument *GetActiveDocument (void) {
  * error.
  *
  *======================================================================*/
-CView *GetActiveView (void) {
-	CWinApp* pApp = AfxGetApp();
-	CWnd* pFrame = pApp->GetMainWnd();
-	CMDIChildWnd* pChild;
-	CView* pView;
-	CMDIFrameWnd* pMDIFrame;
+CView *GetActiveView(void) {
+	CWinApp *pApp = AfxGetApp();
+	CWnd *pFrame = pApp->GetMainWnd();
+	CMDIChildWnd *pChild;
+	CView *pView;
+	CMDIFrameWnd *pMDIFrame;
 
 	/* Ensure the main window is the valid type */
 	if (pFrame == NULL) {
@@ -638,8 +645,8 @@ CView *GetActiveView (void) {
 		return (NULL);
 	}
 
-	pMDIFrame = (CMDIFrameWnd*) pFrame;
-	pChild = (CMDIChildWnd *) pMDIFrame->GetActiveFrame();
+	pMDIFrame = (CMDIFrameWnd *)pFrame;
+	pChild = (CMDIChildWnd *)pMDIFrame->GetActiveFrame();
 
 	if (pChild == NULL) {
 		return (NULL);
@@ -662,10 +669,10 @@ CView *GetActiveView (void) {
  * on any error.
  *
  *=========================================================================*/
-bool GetClipboardText (CString& Buffer) {
+bool GetClipboardText(CString &Buffer) {
 	BOOL Result;
 	HANDLE hText;
-	TCHAR* pText;
+	TCHAR *pText;
 	/* Attempt to open the clipboard */
 	Result = ::OpenClipboard(NULL);
 
@@ -711,9 +718,9 @@ bool GetClipboardText (CString& Buffer) {
  * of the current document.  Returns NULL on error or no view found.
  *
  *======================================================================*/
-CView *GetView (const CRuntimeClass* pRunTimeClass) {
-	CDocument* pDoc;
-	CView* pView;
+CView *GetView(const CRuntimeClass *pRunTimeClass) {
+	CDocument *pDoc;
+	CView *pView;
 	POSITION ViewPos;
 	/* Get the currently active document */
 	pDoc = GetActiveDocument();
@@ -754,10 +761,10 @@ CView *GetView (const CRuntimeClass* pRunTimeClass) {
  * Returns the proper currently active document in frame.
  *
  *======================================================================*/
-CDocument *GetActiveFrameDocument (CFrameWnd* pFrame) {
+CDocument *GetActiveFrameDocument(CFrameWnd *pFrame) {
 	DEFINE_FUNCTION("GetActiveFrameDocument()");
-	CView* pView;
-	CDocument* pDoc;
+	CView *pView;
+	CDocument *pDoc;
 	/* Ensure valid input */
 	ASSERT(pFrame != NULL);
 	pView = GetActiveFrameView(pFrame);
@@ -782,11 +789,11 @@ CDocument *GetActiveFrameDocument (CFrameWnd* pFrame) {
  * Returns the proper currently active view for a frame.
  *
  *======================================================================*/
-CView *GetActiveFrameView (CFrameWnd* pFrame) {
+CView *GetActiveFrameView(CFrameWnd *pFrame) {
 	DEFINE_FUNCTION("GetActiveFrameView()");
-	CFrameWnd* pActiveFrame;
-	CMDIChildWnd* pChild;
-	CView* pView;
+	CFrameWnd *pActiveFrame;
+	CMDIChildWnd *pChild;
+	CView *pView;
 	/* Ensure valid input */
 	ASSERT(pFrame != NULL);
 	pActiveFrame = pFrame->GetActiveFrame();
@@ -799,7 +806,7 @@ CView *GetActiveFrameView (CFrameWnd* pFrame) {
 		return (NULL);
 	}
 
-	pChild = (CMDIChildWnd *) pActiveFrame;
+	pChild = (CMDIChildWnd *)pActiveFrame;
 	pView = pChild->GetActiveView();
 	return (pView);
 }
@@ -816,7 +823,7 @@ CView *GetActiveFrameView (CFrameWnd* pFrame) {
  * Formats the given string with the time/data depending on the input options.
  *
  *=========================================================================*/
-void MakeTimeString (CString& Buffer, const int Options) {
+void MakeTimeString(CString &Buffer, const int Options) {
 	CString TempString;
 	CTime CurrentTime = CTime::GetCurrentTime();
 	bool HasTime;
@@ -862,7 +869,7 @@ void MakeTimeString (CString& Buffer, const int Options) {
  * word is available. Ignores whitespace.
  *
  *=========================================================================*/
-bool GetStringWord (CString& OutputString, const TCHAR* pBuffer, int &StartPos) {
+bool GetStringWord(CString &OutputString, const TCHAR *pBuffer, int &StartPos) {
 	int BeginPos;
 
 	/* Ignore initial whitespace */
@@ -886,7 +893,7 @@ bool GetStringWord (CString& OutputString, const TCHAR* pBuffer, int &StartPos) 
 
 		//OutputString = CString(pBuffer + BeginPos, StartPos - BeginPos);
 		int Size = StartPos - BeginPos;
-		TCHAR* pString = OutputString.GetBuffer(Size + 1);
+		TCHAR *pString = OutputString.GetBuffer(Size + 1);
 		strnncpy(pString, pBuffer + BeginPos, Size);
 		OutputString.ReleaseBuffer(Size);
 	}
@@ -930,9 +937,9 @@ bool GetStringWord (CString& OutputString, const TCHAR* pBuffer, int &StartPos) 
  * false on any error.
  *
  *=========================================================================*/
-bool OpenContextMenu (CWnd* pParent, CWnd* pWnd, CPoint Point, const DWORD MenuResource) {
+bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuResource) {
 	CMenu Menu;
-	CMenu* pPopup;
+	CMenu *pPopup;
 	BOOL Result;
 	CCmdUI MenuState;
 	int Index;
@@ -983,7 +990,7 @@ bool OpenContextMenu (CWnd* pParent, CWnd* pWnd, CPoint Point, const DWORD MenuR
  * application instance on success.
  *
  *=========================================================================*/
-HINSTANCE OpenWebPage (const TCHAR* pSiteAddress) {
+HINSTANCE OpenWebPage(const TCHAR *pSiteAddress) {
 	BOOL Result;
 	SHELLEXECUTEINFO ShellInfo;
 	/* Initialize the shellinfo structure */
@@ -1021,13 +1028,13 @@ HINSTANCE OpenWebPage (const TCHAR* pSiteAddress) {
  * error.
  *
  *=========================================================================*/
-int RunDOSCommand (const TCHAR* pFilename) {
+int RunDOSCommand(const TCHAR *pFilename) {
 	int ProcessHandle;
-	const TCHAR* Args[4];
+	const TCHAR *Args[4];
 	/* Setup the program arguments */
 	Args[0] = _tgetenv(_T("COMSPEC"));
 	Args[1] = _T("/c");
-	Args[2] = (TCHAR *) pFilename;
+	Args[2] = (TCHAR *)pFilename;
 	Args[3] = NULL;
 
 	/* Start the program depending on whether we found the COMSPEC variable */
@@ -1057,14 +1064,14 @@ int RunDOSCommand (const TCHAR* pFilename) {
  * any error.
  *
  *=========================================================================*/
-bool StringToInteger (const TCHAR* pString, int &DestValue) {
+bool StringToInteger(const TCHAR *pString, int &DestValue) {
 	DEFINE_FUNCTION("StringToInteger()");
 	int iValue;
-	TCHAR* pEndPtr;
+	TCHAR *pEndPtr;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
 	/* Convert the string to an integer */
-	iValue = (int) TSTRTOL(pString, &pEndPtr, 0);
+	iValue = (int)TSTRTOL(pString, &pEndPtr, 0);
 
 	/* Check for conversion errors */
 	if (*pEndPtr != (TCHAR) 0 && !TISSPACE(*pEndPtr)) {
@@ -1078,14 +1085,14 @@ bool StringToInteger (const TCHAR* pString, int &DestValue) {
 }
 
 
-bool StringToFloat (const TCHAR* pString, float &DestValue) {
+bool StringToFloat(const TCHAR *pString, float &DestValue) {
 	DEFINE_FUNCTION("StringToFloat()");
 	float fValue;
-	TCHAR* pEndPtr;
+	TCHAR *pEndPtr;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
 	/* Convert the string to a floating point value */
-	fValue = (float) TSTRTOD(pString, &pEndPtr);
+	fValue = (float)TSTRTOD(pString, &pEndPtr);
 
 	/* Check for conversion errors */
 	if (*pEndPtr != (TCHAR) 0 && !TISSPACE(*pEndPtr)) {
@@ -1099,23 +1106,23 @@ bool StringToFloat (const TCHAR* pString, float &DestValue) {
 }
 
 
-bool StringToBool (const TCHAR* pString, bool& DestValue) {
+bool StringToBool(const TCHAR *pString, bool &DestValue) {
 	DEFINE_FUNCTION("StringToBool()");
 	bool bValue;
 	int iValue;
-	TCHAR* pEndPtr;
+	TCHAR *pEndPtr;
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
 
 	/* Check for an exact true/false string */
-	if ( _stricmp(pString, _T("true")) == 0) {
+	if (_stricmp(pString, _T("true")) == 0) {
 		bValue = true;
-	} else if ( _stricmp(pString, _T("false")) == 0) {
+	} else if (_stricmp(pString, _T("false")) == 0) {
 		bValue = false;
 	}
 	/* Check for a numeric boolean value */
 	else {
-		iValue = (int) TSTRTOL(pString, &pEndPtr, 0);
+		iValue = (int)TSTRTOL(pString, &pEndPtr, 0);
 
 		if ((*pEndPtr != (TCHAR) 0 && !TISSPACE(*pEndPtr)) || iValue < 0 || iValue > 1) {
 			ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid boolean parameter string!"));
@@ -1171,8 +1178,8 @@ void WINAPI SetInternalWindowText(HWND hwnd, LPCTSTR lpText) {
  * Ensures that the given string ends with a '\' character.
  *
  *=========================================================================*/
-CString &TerminatePathString (CString& PathBuffer) {
-	TCHAR* pBuffer = PathBuffer.GetBuffer(PathBuffer.GetLength() + 1);
+CString &TerminatePathString(CString &PathBuffer) {
+	TCHAR *pBuffer = PathBuffer.GetBuffer(PathBuffer.GetLength() + 1);
 	TerminatePath(pBuffer);
 	PathBuffer.ReleaseBuffer(-1);
 	return (PathBuffer);

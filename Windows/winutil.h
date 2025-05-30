@@ -85,92 +85,96 @@
  *=========================================================================*/
 
 /* Adds a string data value pair to a combo or list box */
-bool AddComboString (CComboBox& ComboBox, const TCHAR* pString, const int Data);
-bool AddListString (CListBox& ListBox, const TCHAR* pString, const int Data);
+bool AddComboString(CComboBox &ComboBox, const TCHAR *pString, const int Data);
+bool AddListString(CListBox &ListBox, const TCHAR *pString, const int Data);
 
 /* Display a browse folder dialog */
-bool BrowseForFolder (TCHAR* pPath, HWND hWnd, const TCHAR* pTitle);
-bool BrowseForFolder (CString& Path, HWND hWnd, const TCHAR* pTitle);
+bool BrowseForFolder(TCHAR *pPath, HWND hWnd, const TCHAR *pTitle);
+bool BrowseForFolder(CString &Path, HWND hWnd, const TCHAR *pTitle);
 
 /* Clipboard functions */
-bool CopyTextToClipboard (const TCHAR* pString, const int Length);
+bool CopyTextToClipboard(const TCHAR *pString, const int Length);
 
 /* Creates a new shortcut */
-bool CreateShortcut (LPTSTR lpszPathObj, LPTSTR pWorkingPath, LPTSTR pArgs, LPTSTR pIconPath,
-                     LPTSTR lpszPathLink, LPTSTR lpszDesc);
+bool CreateShortcut(LPTSTR lpszPathObj,
+                    LPTSTR pWorkingPath,
+                    LPTSTR pArgs,
+                    LPTSTR pIconPath,
+                    LPTSTR lpszPathLink,
+                    LPTSTR lpszDesc);
 
 /* Find a tree control item */
-HTREEITEM FindTreeItem (const char* pName, CTreeCtrl& TreeCtrl, HTREEITEM Root);
+HTREEITEM FindTreeItem(const char *pName, CTreeCtrl &TreeCtrl, HTREEITEM Root);
 
 /* Find a window based on its instance handle */
-HWND FindWindowHandle (HINSTANCE hInstance);
+HWND FindWindowHandle(HINSTANCE hInstance);
 
 /* Get the item data from the currently selected list item, if any */
-bool GetCurSelListItemData (long &Data, CListBox& ListBox);
-bool GetCurSelComboItemData (long &Data, CComboBox& ComboBox);
+bool GetCurSelListItemData(long &Data, CListBox &ListBox);
+bool GetCurSelComboItemData(long &Data, CComboBox &ComboBox);
 
 /* Attempt to open a web page */
-HINSTANCE OpenWebPage (const TCHAR* pSiteAddress);
+HINSTANCE OpenWebPage(const TCHAR *pSiteAddress);
 
 /* Execute a simple DOS command */
-int RunDOSCommand (const TCHAR* pFilename);
+int RunDOSCommand(const TCHAR *pFilename);
 
 /* String conversion functions */
-bool StringToInteger (const TCHAR* pString, int &DestValue);
-bool StringToFloat (const TCHAR* pString, float &DestValue);
-bool StringToBool (const TCHAR* pString, bool& DestValue);
+bool StringToInteger(const TCHAR *pString, int &DestValue);
+bool StringToFloat(const TCHAR *pString, float &DestValue);
+bool StringToBool(const TCHAR *pString, bool &DestValue);
 
 /* Trim whitespace from a string object */
-inline CString &TrimStringSpace (CString& String) {
+inline CString &TrimStringSpace(CString &String) {
 	String.TrimRight(_T(" \n\r\t"));
 	String.TrimLeft(_T(" \n\r\t"));
 	return (String);
 }
 
 /* Find an item in a combobox/listbox based on its item data */
-int FindComboListItem (CComboBox& ComboBox, const DWORD ItemData, const bool Select = false);
-int FindListItem (CListBox& ListBox, const DWORD ItemData, const bool Select = false);
+int FindComboListItem(CComboBox &ComboBox, const DWORD ItemData, const bool Select = false);
+int FindListItem(CListBox &ListBox, const DWORD ItemData, const bool Select = false);
 
 /* Get the currently active view/document */
 #if !defined(UNDER_CE) && !defined(__BORLANDC__)
 
 /* Clipboard functions */
-bool ClipCopyFromWnd (CWnd* pWnd);
-bool ClipCutFromWnd (CWnd* pWnd);
-bool ClipPasteToWnd (CWnd* pWnd);
+bool ClipCopyFromWnd(CWnd *pWnd);
+bool ClipCutFromWnd(CWnd *pWnd);
+bool ClipPasteToWnd(CWnd *pWnd);
 
 /* CString clipboard versions */
-inline bool CopyTextToClipboard (CString& String) {
+inline bool CopyTextToClipboard(CString &String) {
 	return CopyTextToClipboard(String, String.GetLength());
 }
 
-bool GetClipboardText (CString& Buffer);
+bool GetClipboardText(CString &Buffer);
 
-CDocument *GetActiveDocument (void);
-CView *GetActiveView (void);
-CDocument *GetActiveFrameDocument (CFrameWnd* pFrame);
-CView *GetActiveFrameView (CFrameWnd* pFrame);
+CDocument *GetActiveDocument(void);
+CView *GetActiveView(void);
+CDocument *GetActiveFrameDocument(CFrameWnd *pFrame);
+CView *GetActiveFrameView(CFrameWnd *pFrame);
 
 /* Attempt to find a currently open view */
-CView *GetView (const CRuntimeClass* pRunTimeClass);
+CView *GetView(const CRuntimeClass *pRunTimeClass);
 
 /* Create a time/date string */
-void MakeTimeString (CString& Buffer, const int Options);
+void MakeTimeString(CString &Buffer, const int Options);
 
 /* Path functions for string objects */
-CString &ExtractPath (CString& PathBuffer, const TCHAR* pPath);
-CString &TerminatePathString (CString& PathBuffer);
+CString &ExtractPath(CString &PathBuffer, const TCHAR *pPath);
+CString &TerminatePathString(CString &PathBuffer);
 
 /* Parse a word from a character buffer */
-bool GetStringWord (CString& OutputString, const TCHAR* pBuffer, int &StartPos);
+bool GetStringWord(CString &OutputString, const TCHAR *pBuffer, int &StartPos);
 
 /* Open a context menu */
-bool OpenContextMenu (CWnd* pParent, CWnd* pWnd, CPoint Point, const DWORD MenuResource);
+bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuResource);
 
 #endif
 
 /* Set the internal window text directly */
-void WINAPI SetInternalWindowText (HWND hwnd, LPCTSTR lpText);
+void WINAPI SetInternalWindowText(HWND hwnd, LPCTSTR lpText);
 
 /*===========================================================================
  *      End of Function Prototypes
@@ -180,4 +184,3 @@ void WINAPI SetInternalWindowText (HWND hwnd, LPCTSTR lpText);
 /*===========================================================================
  *      End of File Winutil.H
  *=========================================================================*/
-

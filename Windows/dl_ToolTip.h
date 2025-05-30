@@ -58,7 +58,7 @@ class CDlToolTip : CWnd {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	LPCTSTR m_szClass;  /* Window class */
+	LPCTSTR m_szClass; /* Window class */
 	CPoint m_ptOrigin;
 	int m_nShowDelay;
 	UINT m_nTimer;
@@ -71,7 +71,7 @@ class CDlToolTip : CWnd {
   protected:
 
 	/* Compute the window region */
-	BOOL GetWindowRegion (CDC *pDC, HRGN* phRegion, CSize* pSize = NULL);
+	BOOL GetWindowRegion(CDC *pDC, HRGN *phRegion, CSize *pSize = NULL);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -85,28 +85,28 @@ class CDlToolTip : CWnd {
 	BOOL Create(CWnd *parent);
 
 	/* Get class members */
-	bool IsOpen (void) {
+	bool IsOpen(void) {
 		return (m_IsOpen);
 	}
 
-	CPoint &GetToolTipPoint (void) {
+	CPoint &GetToolTipPoint(void) {
 		return (m_ptOrigin);
 	}
 
 	/* Show or hide the tool tip */
-	void Hide (void) {
+	void Hide(void) {
 		ShowWindow(SW_HIDE);
 		m_IsOpen = false;
 	}
 
-	void Show (const TCHAR* pszText, CPoint *pPoint = NULL);
+	void Show(const TCHAR *pszText, CPoint *pPoint = NULL);
 
 	/* Set class member */
-	void SetShowDelay (int nDelay) {
+	void SetShowDelay(int nDelay) {
 		m_nShowDelay = nDelay;
 	}
 
-	void SetFont (CFont *pFont) {
+	void SetFont(CFont *pFont) {
 		m_pFont = pFont;
 
 		if (IsWindow(m_hWnd)) {

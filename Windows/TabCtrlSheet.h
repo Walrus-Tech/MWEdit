@@ -49,20 +49,20 @@ class CTabCtrlSheet : public CTabCtrl {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CPropertyPage *m_pPages[TCS_ARRAYSIZE];    /* Array of pages to display */
-	int m_NumPages;     /* Number of sheets currently defined */
+	CPropertyPage *m_pPages[TCS_ARRAYSIZE]; /* Array of pages to display */
+	int m_NumPages; /* Number of sheets currently defined */
 
-	int m_CurrentPage;      /* The currently displayed sheet */
+	int m_CurrentPage; /* The currently displayed sheet */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Displays the given page, resizing/repositioning as required */
-	void DisplayPage (const int PageIndex);
+	void DisplayPage(const int PageIndex);
 
 	/* Change the currently displayed page */
-	bool SetCurrentPage (const int PageIndex);
+	bool SetCurrentPage(const int PageIndex);
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -73,23 +73,23 @@ class CTabCtrlSheet : public CTabCtrl {
 	virtual ~CTabCtrlSheet();
 
 	/* Adds a page/tab to the end of the current tab list */
-	bool AddTab (const TCHAR* pTitle, CPropertyPage* pPage);
+	bool AddTab(const TCHAR *pTitle, CPropertyPage *pPage);
 
 	/* Return the currently displayed page */
-	CPropertyPage *GetCurrentPage (void) {
+	CPropertyPage *GetCurrentPage(void) {
 		return (m_CurrentPage >= 0 ? m_pPages[m_CurrentPage] : NULL);
 	}
 
 	/* Return the coordinates of the page for moving/resizing */
-	RECT GetPageRect (void);
+	RECT GetPageRect(void);
 
 	/* Checks the validity of a page index */
-	bool IsValidPage (const int Index) const {
+	bool IsValidPage(const int Index) const {
 		return (Index >= 0 && Index < m_NumPages);
 	}
 
 	/* Sets the current tab/page to the given index */
-	bool SetPage (const int PageIndex);
+	bool SetPage(const int PageIndex);
 
 
 	/* ClassWizard generated virtual function overrides */
@@ -100,7 +100,7 @@ class CTabCtrlSheet : public CTabCtrl {
   protected:
 	//{{AFX_MSG(CTabCtrlSheet)
   public:
-	afx_msg void OnSelchange(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnSelchange(NMHDR *pNMHDR, LRESULT *pResult);
   protected:
 	afx_msg UINT OnGetDlgCode ();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);

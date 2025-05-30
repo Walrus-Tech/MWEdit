@@ -53,7 +53,7 @@ END_MESSAGE_MAP()
  * Class CDlToolTip Constructor
  *
  *=========================================================================*/
-CDlToolTip::CDlToolTip () {
+CDlToolTip::CDlToolTip() {
 	//DEFINE_FUNCTION("CDlToolTip::CDlToolTip()");
 	/* Register the window class */
 	m_szClass = AfxRegisterWndClass(0);
@@ -73,7 +73,7 @@ CDlToolTip::CDlToolTip () {
  * Class CDlToolTip Destructor
  *
  *=========================================================================*/
-CDlToolTip::~CDlToolTip () {
+CDlToolTip::~CDlToolTip() {
 	//DEFINE_FUNCTION("CDlToolTip::~CDlToolTip()");
 }
 
@@ -87,12 +87,21 @@ CDlToolTip::~CDlToolTip () {
  * Class CDlToolTip Method - BOOL Create (pParentWnd);
  *
  *=========================================================================*/
-BOOL CDlToolTip::Create (CWnd* pParentWnd) {
+BOOL CDlToolTip::Create(CWnd *pParentWnd) {
 	BOOL bSuccess;
 	/* Must have a parent */
 	ASSERT(pParentWnd != NULL);
 	/* Attempt to create the custom window */
-	bSuccess = CreateEx(NULL, m_szClass, NULL, WS_POPUP, 0, 0, 0, 0, pParentWnd->GetSafeHwnd(), NULL,
+	bSuccess = CreateEx(NULL,
+	                    m_szClass,
+	                    NULL,
+	                    WS_POPUP,
+	                    0,
+	                    0,
+	                    0,
+	                    0,
+	                    pParentWnd->GetSafeHwnd(),
+	                    NULL,
 	                    NULL);
 	/* Use default GUI font for default font */
 	m_pFont = CFont::FromHandle((HFONT)::GetStockObject(ANSI_FIXED_FONT));
@@ -111,7 +120,7 @@ BOOL CDlToolTip::Create (CWnd* pParentWnd) {
  * Computes the tooltip window region.
  *
  *=========================================================================*/
-BOOL CDlToolTip::GetWindowRegion (CDC* pDC, HRGN* phRegion, CSize* pSize) {
+BOOL CDlToolTip::GetWindowRegion(CDC *pDC, HRGN *phRegion, CSize *pSize) {
 	CRect rcWnd;
 	CFont *pSysFont;
 	/* Ensure valid input */
@@ -145,7 +154,7 @@ BOOL CDlToolTip::GetWindowRegion (CDC* pDC, HRGN* phRegion, CSize* pSize) {
  * Class CDlToolTip Event - int OnCreate (lpCreateStruct);
  *
  *=========================================================================*/
-int CDlToolTip::OnCreate (LPCREATESTRUCT lpCreateStruct) {
+int CDlToolTip::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	if (CWnd::OnCreate(lpCreateStruct) == -1 ) {
 		return (-1);
 	}
@@ -206,7 +215,7 @@ void CDlToolTip::OnPaint() {
 	/* Set the font */
 	pSysFont = (CFont *)dc.SelectObject(m_pFont);
 	/* Draw the tip text */
-	dc.SetBkMode( TRANSPARENT );
+	dc.SetBkMode(TRANSPARENT);
 	dc.DrawText(m_szText, &ClientRect, DT_TOP | DT_LEFT);
 	/* Clean up GDI */
 	::DeleteObject(hRegion);
@@ -223,7 +232,7 @@ void CDlToolTip::OnPaint() {
  * Class CDlToolTip Event - void OnTimer (nIDEvent);
  *
  *=========================================================================*/
-void CDlToolTip::OnTimer (UINT nIDEvent) {
+void CDlToolTip::OnTimer(UINT nIDEvent) {
 	HRGN hRegion;
 	CSize WindowSize;
 	CDC *pDC;
@@ -237,9 +246,12 @@ void CDlToolTip::OnTimer (UINT nIDEvent) {
 			GetWindowRegion(pDC, &hRegion, &WindowSize);
 			ReleaseDC(pDC);
 			::SetWindowRgn(m_hWnd, hRegion, TRUE);
-			SetWindowPos(&wndTop, m_ptOrigin.x + DLTOOLTIP_CX_ROUNDED,
+			SetWindowPos(&wndTop,
+			             m_ptOrigin.x + DLTOOLTIP_CX_ROUNDED,
 			             m_ptOrigin.y + DLTOOLTIP_CY_ROUNDED,
-			             WindowSize.cx, WindowSize.cy, SWP_NOACTIVATE | SWP_SHOWWINDOW);
+			             WindowSize.cx,
+			             WindowSize.cy,
+			             SWP_NOACTIVATE | SWP_SHOWWINDOW);
 			m_IsOpen = true;
 			//m_nTimer = SetTimer(DLTOOLTIP_TIMER_HIDE, DLTOOLTIP_HIDE_DELAY, NULL);
 			break;
@@ -272,7 +284,7 @@ void CDlToolTip::OnTimer (UINT nIDEvent) {
  * Shows the tooltip at the given position in the parent window.
  *
  *=========================================================================*/
-void CDlToolTip::Show (const TCHAR* pszText, CPoint *pPoint) {
+void CDlToolTip::Show(const TCHAR *pszText, CPoint *pPoint) {
 	/* Determine where to show the tooltip */
 	if (pPoint != NULL) {
 		m_ptOrigin = *pPoint;
@@ -288,4 +300,3 @@ void CDlToolTip::Show (const TCHAR* pszText, CPoint *pPoint) {
 /*===========================================================================
  *      End of Class Method CDlToolTip::Show()
  *=========================================================================*/
-

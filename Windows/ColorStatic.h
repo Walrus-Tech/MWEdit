@@ -31,27 +31,27 @@ class CColorStatic : public CStatic {
 	virtual ~CColorStatic();
 
 	/* Get class members */
-	COLORREF GetColor (void) {
+	COLORREF GetColor(void) {
 		return (m_Color);
 	}
 
-	bool IsModified (void) {
+	bool IsModified(void) {
 		return (m_Modified);
 	}
 
 	/* Set class members */
-	void SetModified (const bool Flag) {
+	void SetModified(const bool Flag) {
 		m_Modified = Flag;
 	}
 
-	void SetColor (int Red, int Green, int Blue) {
+	void SetColor(int Red, int Green, int Blue) {
 		m_Red = Red;
 		m_Green = Green;
 		m_Blue = Blue;
 		m_Color = RGB(m_Red, m_Green, m_Blue);
 	}
 
-	void SetColor (const long ColorRef) {
+	void SetColor(const long ColorRef) {
 		m_Red = GetRValue(ColorRef);
 		m_Green = GetGValue(ColorRef);
 		m_Blue = GetBValue(ColorRef);
