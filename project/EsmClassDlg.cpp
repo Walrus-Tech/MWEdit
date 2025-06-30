@@ -1,127 +1,70 @@
 /*===========================================================================
-
  *
-
  * File:    Esmclassdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 17, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmClassDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmClassDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmClassDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmClassDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmClassDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmClassDlg)
-
 	ON_CBN_SELCHANGE(IDC_MAJORLIST1, OnSelchangeMajorlist1)
-
 	ON_CBN_SELCHANGE(IDC_MAJORLIST2, OnSelchangeMajorlist2)
-
 	ON_CBN_SELCHANGE(IDC_MAJORLIST3, OnSelchangeMajorlist3)
-
 	ON_CBN_SELCHANGE(IDC_MAJORLIST4, OnSelchangeMajorlist4)
-
 	ON_CBN_SELCHANGE(IDC_MAJORLIST5, OnSelchangeMajorlist5)
-
 	ON_CBN_SELCHANGE(IDC_MINORLIST1, OnSelchangeMinorlist1)
-
 	ON_CBN_SELCHANGE(IDC_MINORLIST2, OnSelchangeMinorlist2)
-
 	ON_CBN_SELCHANGE(IDC_MINORLIST3, OnSelchangeMinorlist3)
-
 	ON_CBN_SELCHANGE(IDC_MINORLIST4, OnSelchangeMinorlist4)
-
 	ON_CBN_SELCHANGE(IDC_MINORLIST5, OnSelchangeMinorlist5)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmClassDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmClassDlg::CEsmClassDlg() : CEsmRecDialog(CEsmClassDlg::IDD) {
@@ -131,26 +74,17 @@ CEsmClassDlg::CEsmClassDlg() : CEsmRecDialog(CEsmClassDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmClassDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmClassDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmClassDlg)
 	DDX_Control(pDX, IDC_MINORLIST5, m_MinorList5);
@@ -192,31 +126,22 @@ void CEsmClassDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClassDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmClassDlg::GetControlData (void) {
+void CEsmClassDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmClassDlg::GetControlData()");
 	classdata_t *pClassData;
 	CString Buffer;
 	/* Update the armor pointer and data */
-	m_pClass = (CEsmClass *) GetRecInfo()->pRecord;
+	m_pClass = (CEsmClass *)GetRecInfo()->pRecord;
 	ASSERT(m_pClass != NULL);
 	pClassData = m_pClass->GetClassData();
 
@@ -234,12 +159,15 @@ void CEsmClassDlg::GetControlData (void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pClass->SetName(TrimStringSpace(Buffer));
+
 	/* Item description */
 	m_DescText.GetWindowText(Buffer);
 	m_pClass->SetDescription(TrimStringSpace(Buffer));
+
 	/* Attribute lists */
 	GETLISTDATA(m_AttributeList1, pClassData->AttributeID1);
 	GETLISTDATA(m_AttributeList2, pClassData->AttributeID2);
+
 	/* Skill lists */
 	GETLISTDATA(m_MajorList1, pClassData->MajorID1);
 	GETLISTDATA(m_MajorList2, pClassData->MajorID2);
@@ -251,8 +179,10 @@ void CEsmClassDlg::GetControlData (void) {
 	GETLISTDATA(m_MinorList3, pClassData->MinorID3);
 	GETLISTDATA(m_MinorList4, pClassData->MinorID4);
 	GETLISTDATA(m_MinorList5, pClassData->MinorID5);
+
 	/* Specialization list */
 	GETLISTDATA(m_SpecialList, pClassData->Specialization);
+
 	/* Checkboxes */
 	pClassData->Flags = 0;
 	pClassData->AutoCalcFlags = 0;
@@ -335,26 +265,17 @@ void CEsmClassDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClassDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmClassDlg::IsModified (void) {
+bool CEsmClassDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -377,31 +298,24 @@ bool CEsmClassDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClassDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmClassDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pClass = (CEsmClass *) GetRecInfo()->pRecord;
+	m_pClass = (CEsmClass *)GetRecInfo()->pRecord;
+
 	/* Initialize the lists */
 	FillEsmAttributesCombo(m_AttributeList1);
 	FillEsmAttributesCombo(m_AttributeList2);
@@ -416,35 +330,28 @@ void CEsmClassDlg::OnInitialUpdate() {
 	FillEsmSkillsCombo(m_MinorList4);
 	FillEsmSkillsCombo(m_MinorList5);
 	FillEsmClassSpecCombo(m_SpecialList);
+
 	/* Initialize the text controls */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_DescText.SetLimitText(256);
+
 	/* Update the UI data */
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClassDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmClassDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmClassDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
 	}
@@ -453,26 +360,17 @@ int CEsmClassDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClassDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmClassDlg::SetControlData (void) {
+void CEsmClassDlg::SetControlData(void) {
 	classdata_t *pClassData;
 
 	/* Ignore if the current item is not valid */
@@ -491,15 +389,19 @@ void CEsmClassDlg::SetControlData (void) {
 	m_IDText.SetWindowText(m_pClass->GetID());
 	UpdateTitle(m_pClass->GetID());
 	m_IDText.SetModify(FALSE);
+
 	/* Item name */
 	m_NameText.SetWindowText(m_pClass->GetName());
 	m_NameText.SetModify(FALSE);
+
 	/* Item description */
 	m_DescText.SetWindowText(m_pClass->GetDescription());
 	m_DescText.SetModify(FALSE);
+
 	/* Attribute lists */
 	FindComboListItem(m_AttributeList1, pClassData->AttributeID1, true);
 	FindComboListItem(m_AttributeList2, pClassData->AttributeID2, true);
+
 	/* Skill lists */
 	FindComboListItem(m_MajorList1, pClassData->MajorID1, true);
 	FindComboListItem(m_MajorList2, pClassData->MajorID2, true);
@@ -511,8 +413,10 @@ void CEsmClassDlg::SetControlData (void) {
 	FindComboListItem(m_MinorList3, pClassData->MinorID3, true);
 	FindComboListItem(m_MinorList4, pClassData->MinorID4, true);
 	FindComboListItem(m_MinorList5, pClassData->MinorID5, true);
+
 	/* Specialization list */
 	FindComboListItem(m_SpecialList, pClassData->Specialization, true);
+
 	/* Checkboxes */
 	m_PlayableCheck.SetCheck((pClassData->Flags & MWESM_CLASSFLAG_PLAYABLE) != 0);
 	m_WeaponCheck.SetCheck((pClassData->AutoCalcFlags & MWESM_CLASSAUTO_WEAPONS) != 0);
@@ -536,30 +440,30 @@ void CEsmClassDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClassDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClassDlg Event - void OnSelChangeSkillList (pComboBox);
-
  *
-
  *=========================================================================*/
 
-void CEsmClassDlg::OnSelChangeSkillList (CComboBox* pComboBox) {
-	CComboBox* Boxes[] = { &m_MajorList1, &m_MajorList2, &m_MajorList3, &m_MajorList4, &m_MajorList5,
-
-	                       &m_MinorList1, &m_MinorList2, &m_MinorList3, &m_MinorList4, &m_MinorList5, NULL
-	                     };
+void CEsmClassDlg::OnSelChangeSkillList(CComboBox *pComboBox) {
+	CComboBox *Boxes[] = {
+		&m_MajorList1,
+		&m_MajorList2,
+		&m_MajorList3,
+		&m_MajorList4,
+		&m_MajorList5,
+		&m_MinorList1,
+		&m_MinorList2,
+		&m_MinorList3,
+		&m_MinorList4,
+		&m_MinorList5,
+		NULL
+	};
 	int SkillIDArray[MWESM_MAX_SKILLS];
 	int SkillID;
 	int CurrentSkillID;
@@ -617,8 +521,5 @@ void CEsmClassDlg::OnSelChangeSkillList (CComboBox* pComboBox) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClassDlg::OnSelChangeSkillList()
-
  *=========================================================================*/
-

@@ -64,7 +64,7 @@ END_MESSAGE_MAP()
  * Class CEsmOptionsDlg Constructor
  *
  *=========================================================================*/
-CEsmOptionsDlg::CEsmOptionsDlg(CWnd* pParent) : CDialog(CEsmOptionsDlg::IDD, pParent) {
+CEsmOptionsDlg::CEsmOptionsDlg(CWnd *pParent) : CDialog(CEsmOptionsDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmOptionsDlg)
 	//}}AFX_DATA_INIT
 	m_pOrigOptions = NULL;
@@ -81,34 +81,46 @@ CEsmOptionsDlg::CEsmOptionsDlg(CWnd* pParent) : CDialog(CEsmOptionsDlg::IDD, pPa
  * Class CEsmOptionsDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CEsmOptionsDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmOptionsDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmOptionsDlg)
 	DDX_Control(pDX, IDC_ALLOWTRIBUNAL, m_AllowTribunal);
 	DDX_Control(pDX, IDC_ALLOWBLOODMOON, m_AllowBloodmoon);
+
 	DDX_Control(pDX, IDC_INDENTCOMMENTSMORE, m_IndentCommentsMore);
 	DDX_Control(pDX, IDC_INDENTSPACES_TEXT, m_IndentSpacesText);
 	DDX_Control(pDX, IDC_INDENTSPACES, m_IndentSpace);
 	DDX_Control(pDX, IDC_INDENTTABS, m_IndentTab);
+
 	DDX_Control(pDX, IDC_INITIALINDENTLEVEL, m_InitialIndentLevel);
+
 	DDX_Control(pDX, IDC_STRICTIDS, m_StrictIDs);
+
 	DDX_Control(pDX, IDC_USEEXTRAFILE, m_UseExtraFile);
 	DDX_Control(pDX, IDC_EXTRAFILE_TEXT, m_ExtraFile);
+
 	DDX_Control(pDX, IDC_NOSCRIPTPROMPT_CHECK, m_NoScriptPrompt);
 	DDX_Control(pDX, IDC_ALLOWEXTFUNCS_CHECK, m_AllowExtFuncs);
+
 	DDX_Control(pDX, IDC_BACKUPSAVES, m_BackupSaves);
+
 	DDX_Control(pDX, IDC_AUTHOR_TEXT2, m_GamePath);
+
 	DDX_Control(pDX, IDC_NOTOOLTIP_CHECK, m_NoToolTipCheck);
 	DDX_Control(pDX, IDC_AUTHOR_TEXT, m_AuthorText);
+
 	DDX_Control(pDX, IDC_BGCOLOR, m_BGColor);
 	DDX_Control(pDX, IDC_FORMATCOLOR, m_FormatColor);
+
 	DDX_Control(pDX, IDC_SAMPLE_TEXT, m_SampleText);
+
 	DDX_Control(pDX, IDC_FONTITALIC_CHECK, m_FontItalicCheck);
 	DDX_Control(pDX, IDC_FONTBOLD_CHECK, m_FontBoldCheck);
 	DDX_Control(pDX, IDC_FONTFACE_LIST, m_FontFaceList);
 	DDX_Control(pDX, IDC_FONTSIZE_LIST, m_FontSizeList);
 	DDX_Control(pDX, IDC_FORMAT_LIST, m_FormatList);
 	DDX_Control(pDX, IDC_NOFORMAT_CHECK, m_NoFormatCheck);
+
 	DDX_Control(pDX, IDC_WARNLEVEL_LIST, m_WarnLevelList);
 	//}}AFX_DATA_MAP
 }
@@ -129,6 +141,7 @@ void CEsmOptionsDlg::FillFormatList(void) {
 	/* Clear the current list */
 	m_FormatList.ResetContent();
 	m_CurrentFormat = -1;
+
 	/* Add the script format types */
 	AddListString(m_FormatList, _T("Text"), ESMSCRIPT_FORMAT_DEFAULT);
 	AddListString(m_FormatList, _T("Symbol"), ESMSCRIPT_FORMAT_SYMBOL);
@@ -157,6 +170,7 @@ void CEsmOptionsDlg::FillFormatList(void) {
 void CEsmOptionsDlg::FillFontSizeList(void) {
 	/* Clear the current list */
 	m_FontSizeList.ResetContent();
+
 	/* Add the font sizes */
 	AddComboString(m_FontSizeList, _T("6"), 6);
 	AddComboString(m_FontSizeList, _T("7"), 7);
@@ -188,6 +202,7 @@ void CEsmOptionsDlg::FillFontSizeList(void) {
 void CEsmOptionsDlg::FillFontNameList(void) {
 	/* Clear the current list */
 	m_FontFaceList.ResetContent();
+
 	/* Add the font names (fixed for now) */
 	m_FontFaceList.AddString(_T("Fixedsys"));
 	m_FontFaceList.AddString(_T("Courier"));
@@ -275,6 +290,7 @@ void CEsmOptionsDlg::GetControlData(void) {
 	m_pOrigOptions->SetStrictIDs(m_StrictIDs.GetCheck() != 0);
 	m_pOrigOptions->SetAllowBloodmoon(m_AllowBloodmoon.GetCheck() != 0);
 	m_pOrigOptions->SetAllowTribunal(m_AllowTribunal.GetCheck() != 0);
+
 	/* Save the script no-format flag and script warning level */
 	m_pOrigOptions->SetNoScriptFormat(m_NoFormatCheck.GetCheck() != 0);
 	m_pOrigOptions->SetNoScriptPrompt(m_NoScriptPrompt.GetCheck() != 0);
@@ -339,7 +355,8 @@ void CEsmOptionsDlg::GetControlData(void) {
 
 	/* Update the current format data */
 	GetFormatData();
-	memcpy(m_pOrigOptions->GetUserFormat()->GetCharFormat(0), m_ScriptOptions.GetCharFormat(0),
+	memcpy(m_pOrigOptions->GetUserFormat()->GetCharFormat(0),
+	       m_ScriptOptions.GetCharFormat(0),
 	       sizeof(CHARFORMAT2) * ESMSCRIPT_NUMFORMATS);
 	m_pOrigOptions->GetUserFormat()->SetBGColor(m_BGColor.m_Color);
 	/* Update the font data */
@@ -359,7 +376,7 @@ void CEsmOptionsDlg::GetControlData(void) {
  *
  *=========================================================================*/
 void CEsmOptionsDlg::GetFormatData(void) {
-	CHARFORMAT2* pFormat;
+	CHARFORMAT2 *pFormat;
 	int FormatIndex;
 
 	/* Ignore if the current format is not valid */
@@ -385,7 +402,7 @@ void CEsmOptionsDlg::GetFormatData(void) {
  * font object.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::GetFontData(CFont* pFont) {
+void CEsmOptionsDlg::GetFontData(CFont *pFont) {
 	int Size;
 	int Italic = 0;
 	int Bold = FW_NORMAL;
@@ -457,7 +474,10 @@ void CEsmOptionsDlg::OnBgcolor() {
 void CEsmOptionsDlg::OnBrowseextrafile() {
 	CString Buffer;
 	m_ExtraFile.GetWindowText(Buffer);
-	CFileDialog BrowseDlg(TRUE, _T("esp"), Buffer, OFN_FILEMUSTEXIST | OFN_HIDEREADONLY,
+	CFileDialog BrowseDlg(TRUE,
+	                      _T("esp"),
+	                      Buffer,
+	                      OFN_FILEMUSTEXIST | OFN_HIDEREADONLY,
 	                      _T("Plugin Files (*.esp)|*.esp|Master Files (*.esm)|*.esm|All Files (*.*)|*.*||"), this);
 	int Result;
 	BrowseDlg.m_ofn.lpstrTitle = _T("Select Extra File for Script Compiling");
@@ -546,7 +566,8 @@ void CEsmOptionsDlg::OnBlueformatButton() {
 	int Result;
 	/* Prompt user to make sure they want to change formats */
 	Result = MessageBox(_T("Lose the current format settings and use the default blue format?"),
-	                    _T("Set Blue Format"), MB_YESNO | MB_ICONQUESTION);
+	                    _T("Set Blue Format"),
+	                    MB_YESNO | MB_ICONQUESTION);
 
 	if (Result != IDYES) {
 		return;
@@ -554,6 +575,7 @@ void CEsmOptionsDlg::OnBlueformatButton() {
 
 	/* Copy the default blue format into the current script options */
 	m_ScriptOptions.CreateDefaultBlueFormat();
+
 	/* Update the dialog */
 	m_BGColor.SetColor(m_ScriptOptions.GetBGColor());
 	m_BGColor.RedrawWindow();
@@ -575,7 +597,8 @@ void CEsmOptionsDlg::OnWhiteformatButton() {
 	int Result;
 	/* Prompt user to make sure they want to change formats */
 	Result = MessageBox(_T("Lose the current format settings and use the default white format?"),
-	                    _T("Set White Format"), MB_YESNO | MB_ICONQUESTION);
+	                    _T("Set White Format"),
+	                    MB_YESNO | MB_ICONQUESTION);
 
 	if (Result != IDYES) {
 		return;
@@ -583,6 +606,7 @@ void CEsmOptionsDlg::OnWhiteformatButton() {
 
 	/* Copy the default white format into the current script options */
 	m_ScriptOptions.CreateDefaultWhiteFormat();
+
 	/* Update the dialog */
 	m_BGColor.SetColor(m_ScriptOptions.GetBGColor());
 	m_BGColor.RedrawWindow();
@@ -680,6 +704,7 @@ void CEsmOptionsDlg::SetControlData(void) {
 	m_StrictIDs.SetCheck(m_pOrigOptions->GetStrictIDs());
 	m_AllowBloodmoon.SetCheck(m_pOrigOptions->GetAllowBloodmoon());
 	m_AllowTribunal.SetCheck(m_pOrigOptions->GetAllowTribunal());
+
 	/* Format and warning level type */
 	m_NoFormatCheck.SetCheck(m_pOrigOptions->GetNoScriptFormat());
 	m_NoScriptPrompt.SetCheck(m_pOrigOptions->GetNoScriptPrompt());
@@ -689,6 +714,7 @@ void CEsmOptionsDlg::SetControlData(void) {
 	FindComboListItem(m_WarnLevelList, m_pOrigOptions->GetScriptWarnLevel(), true);
 	m_BGColor.SetColor(m_pOrigOptions->GetUserFormat()->GetBGColor());
 	m_BGColor.RedrawWindow();
+
 	/* Indentation values */
 	m_InitialIndentLevel.SetCheck(m_pOrigOptions->GetInitialIndentLevel());
 	m_IndentCommentsMore.SetCheck(m_pOrigOptions->GetIndentCommentsMore());
@@ -726,12 +752,14 @@ void CEsmOptionsDlg::SetFontData(void) {
 	int ListIndex;
 	/* Get the font information */
 	m_pOrigOptions->GetUserFormat()->GetTextFont()->GetLogFont(&LogFont);
+
 	/* Update the font controls */
 	FindComboListItem(m_FontSizeList, (int)(LogFont.lfHeight), true);
 	ListIndex = m_FontFaceList.FindStringExact(0, LogFont.lfFaceName);
 	m_FontFaceList.SetCurSel(ListIndex);
 	m_FontBoldCheck.SetCheck(LogFont.lfWeight > FW_NORMAL);
 	m_FontItalicCheck.SetCheck(LogFont.lfItalic);
+
 	/* Update the font display in the sample textbox */
 	UpdateSampleFontText();
 }
@@ -750,7 +778,7 @@ void CEsmOptionsDlg::SetFontData(void) {
  *=========================================================================*/
 void CEsmOptionsDlg::SetFormatData(const int Index) {
 	int FormatIndex;
-	CHARFORMAT2* pFormat;
+	CHARFORMAT2 *pFormat;
 
 	/* Ensure a valid input list index and format index */
 	if (Index < 0 || Index >= m_FormatList.GetCount()) {

@@ -1,105 +1,60 @@
 /*===========================================================================
-
  *
-
  * File:    Esmcelldlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 21, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmCellDlg.h"
 
 
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmCellDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmCellDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmCellDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmCellDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmCellDlg)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmCellDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmCellDlg::CEsmCellDlg() : CEsmRecDialog(CEsmCellDlg::IDD) {
@@ -109,26 +64,17 @@ CEsmCellDlg::CEsmCellDlg() : CEsmRecDialog(CEsmCellDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmCellDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmCellDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmCellDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmCellDlg)
 	DDX_Control(pDX, IDC_GRIDTEXT, m_GridText);
@@ -138,30 +84,21 @@ void CEsmCellDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCellDlg::GetControlData (void) {
+void CEsmCellDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmCellDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
-	m_pCell = (CEsmCell *) GetRecInfo()->pRecord;
+	m_pCell = (CEsmCell *)GetRecInfo()->pRecord;
 	ASSERT(m_pCell != NULL);
 
 	/* Item ID, if changed */
@@ -183,26 +120,17 @@ void CEsmCellDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmCellDlg::IsModified (void) {
+bool CEsmCellDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -217,23 +145,14 @@ bool CEsmCellDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmCellDlg::OnInitialUpdate() {
@@ -241,7 +160,7 @@ void CEsmCellDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the cell record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pCell = (CEsmCell *) GetRecInfo()->pRecord;
+	m_pCell = (CEsmCell *)GetRecInfo()->pRecord;
 	/* Create the tab control pages according to the cell type */
 	m_RefCellPage.Create(IDD_REFCELL_PAGE, &m_TabControl);
 	m_TabControl.AddTab("Objects", &m_RefCellPage);
@@ -268,26 +187,17 @@ void CEsmCellDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCellDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmCellDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmCellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_REGN)) {
 		if (m_pCell->IsInterior()) {
@@ -299,26 +209,17 @@ int CEsmCellDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCellDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCellDlg::SetControlData (void) {
+void CEsmCellDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pCell == NULL) {
 		return;
@@ -340,12 +241,5 @@ void CEsmCellDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
-
-

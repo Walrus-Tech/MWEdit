@@ -18,7 +18,7 @@
 /*===========================================================================
  *
  * Begin Local Definitions
- *misc_dwrv_Ark_key00
+ * misc_dwrv_Ark_key00
  *=========================================================================*/
 
 /* Debug defines */
@@ -94,7 +94,7 @@ CChildFrmScript::~CChildFrmScript() {
  * Class CChildFrmScript Event - BOOL OnCreateClient (CreateStruct, pContext);
  *
  *=========================================================================*/
-BOOL CChildFrmScript::OnCreateClient(LPCREATESTRUCT, CCreateContext* pContext) {
+BOOL CChildFrmScript::OnCreateClient(LPCREATESTRUCT, CCreateContext *pContext) {
 	m_Created = false;
 
 	/* Create a splitter with 2 rows, 1 column */
@@ -120,12 +120,12 @@ BOOL CChildFrmScript::OnCreateClient(LPCREATESTRUCT, CCreateContext* pContext) {
 	m_wndSplitter.SetRowInfo(1, 51, 0);
 	m_wndSplitter.RecalcLayout();
 	m_wndSplitter.SetScrollStyle(0);
-	m_pErrorView = (CScriptErrorView*)m_wndSplitter.GetPane(1, 0);
-	m_pScriptView = (CEsmScriptDlg*)m_wndSplitter.GetPane(0, 0);
+	m_pErrorView = (CScriptErrorView *)m_wndSplitter.GetPane(1, 0);
+	m_pScriptView = (CEsmScriptDlg *)m_wndSplitter.GetPane(0, 0);
 	ASSERT(m_pErrorView->IsKindOf(RUNTIME_CLASS(CScriptErrorView)));
 	ASSERT(m_pScriptView->IsKindOf(RUNTIME_CLASS(CEsmScriptDlg)));
 	/* Activate the default view */
-	SetActiveView((CView*)m_wndSplitter.GetPane(0, 0));
+	SetActiveView((CView *)m_wndSplitter.GetPane(0, 0));
 	//m_wndSplitter.SetWindowPos(NULL, 0, 0, 640, 400, SWP_NOMOVE | SWP_NOZORDER);
 	m_Created = true;
 	return TRUE;
@@ -174,8 +174,8 @@ void CChildFrmScript::OnClose(void) {
  *
  *=========================================================================*/
 LRESULT CChildFrmScript::OnGotoError(LPARAM lParam, WPARAM wParam) {
-	SetActiveView((CView*)m_wndSplitter.GetPane(0, 0));
-	CWnd* pWnd = m_wndSplitter.GetPane(0, 0);
+	SetActiveView((CView *)m_wndSplitter.GetPane(0, 0));
+	CWnd *pWnd = m_wndSplitter.GetPane(0, 0);
 
 	if (pWnd != NULL) {
 		pWnd->SendMessage(MSG_SCRIPTFRM_GOTOLINE, lParam, wParam);
@@ -194,7 +194,7 @@ LRESULT CChildFrmScript::OnGotoError(LPARAM lParam, WPARAM wParam) {
  * Class CChildFrmScript Event - void OnKillFocus (pWnd);
  *
  *=========================================================================*/
-void CChildFrmScript::OnKillFocus(CWnd* pWnd) {
+void CChildFrmScript::OnKillFocus(CWnd *pWnd) {
 	if (m_pScriptView != NULL) {
 		m_pScriptView->CloseToolTips();
 	}
@@ -212,7 +212,7 @@ void CChildFrmScript::OnKillFocus(CWnd* pWnd) {
  * Class CChildFrmScript Event - void OnMDIActivate (bActivate, pActivateWnd, pDeactivateWnd);
  *
  *=========================================================================*/
-void CChildFrmScript::OnMDIActivate(BOOL bActivate, CWnd* pActivateWnd, CWnd* pDeactivateWnd) {
+void CChildFrmScript::OnMDIActivate(BOOL bActivate, CWnd *pActivateWnd, CWnd *pDeactivateWnd) {
 	if (m_pScriptView != NULL) {
 		m_pScriptView->CloseToolTips();
 	}
@@ -295,7 +295,7 @@ void CChildFrmScript::OnSize(UINT nType, int cx, int cy) {
  *=========================================================================*/
 LRESULT CChildFrmScript::OnUpdateError(LPARAM lParam, WPARAM wParam) {
 	if (m_pErrorView != NULL) {
-		m_pErrorView->UpdateErrors((CEsmScriptErrArray*)lParam);
+		m_pErrorView->UpdateErrors((CEsmScriptErrArray *)lParam);
 	}
 
 	return (0);
@@ -311,7 +311,7 @@ LRESULT CChildFrmScript::OnUpdateError(LPARAM lParam, WPARAM wParam) {
  * Class CChildFrmScript Method - BOOL PreCreateWindow (cs);
  *
  *=========================================================================*/
-BOOL CChildFrmScript::PreCreateWindow(CREATESTRUCT& cs) {
+BOOL CChildFrmScript::PreCreateWindow(CREATESTRUCT &cs) {
 	cs.style &= ~WS_MAXIMIZE;
 
 	if (!CMDIChildWnd::PreCreateWindow(cs)) {
@@ -336,8 +336,12 @@ void CChildFrmScript::FakeMaximize(void) {
 	CRect RestoreRect;
 
 	if (m_IsFakeMaximized) {
-		SetWindowPos(NULL, m_RestoreRect.left, m_RestoreRect.top, m_RestoreRect.Width(),
-		             m_RestoreRect.Height(), SWP_NOZORDER);
+		SetWindowPos(NULL,
+		             m_RestoreRect.left,
+		             m_RestoreRect.top,
+		             m_RestoreRect.Width(),
+		             m_RestoreRect.Height(),
+		             SWP_NOZORDER);
 		m_IsFakeMaximized = false;
 	} else {
 		if (IsIconic()) {

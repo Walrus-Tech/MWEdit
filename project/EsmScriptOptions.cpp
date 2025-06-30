@@ -65,8 +65,10 @@ void CEsmScriptOptions::CreateDefaultWhiteFormat(void) {
 	/* Create the default font */
 	m_TextFont.Detach();
 	CFONT_CREATE(m_TextFont, 8, FW_NORMAL, FALSE, "FixedSys");
+
 	/* Set the background color */
 	m_BackgroundColor = RGB(255, 255, 255);
+
 	/* Set the default formats */
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_DEFAULT], RGB(0, 0, 0));
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_SYMBOL], RGB(255, 0, 0));
@@ -78,6 +80,7 @@ void CEsmScriptOptions::CreateDefaultWhiteFormat(void) {
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_COMMENT], RGB(128, 128, 128));
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_OPERATOR], RGB(64, 64, 64));
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_ERROR], RGB(255, 128, 128));
+
 	m_Formats[ESMSCRIPT_FORMAT_ERROR].dwMask |= CFM_BACKCOLOR;
 	m_Formats[ESMSCRIPT_FORMAT_ERROR].crBackColor = RGB(128, 128, 128);
 	m_Formats[ESMSCRIPT_FORMAT_COMMENT].dwMask |= CFM_BACKCOLOR;
@@ -98,8 +101,10 @@ void CEsmScriptOptions::CreateDefaultBlueFormat(void) {
 	/* Create the default font */
 	m_TextFont.Detach();
 	CFONT_CREATE(m_TextFont, 8, FW_NORMAL, FALSE, "FixedSys");
+
 	/* Set the background color */
 	m_BackgroundColor = RGB(0, 0, 128);
+
 	/* Set the default formats */
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_DEFAULT], RGB(0, 255, 0));
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_SYMBOL], RGB(128, 128, 255));
@@ -111,6 +116,7 @@ void CEsmScriptOptions::CreateDefaultBlueFormat(void) {
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_COMMENT], RGB(0, 128, 128));
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_OPERATOR], RGB(255, 255, 0));
 	InitCharFormat(m_Formats[ESMSCRIPT_FORMAT_ERROR], RGB(255, 0, 0));
+
 	m_Formats[ESMSCRIPT_FORMAT_ERROR].dwMask |= CFM_BACKCOLOR;
 	m_Formats[ESMSCRIPT_FORMAT_ERROR].crBackColor = RGB(255, 0, 0);
 }
@@ -128,7 +134,7 @@ void CEsmScriptOptions::CreateDefaultBlueFormat(void) {
  * color.
  *
  *=========================================================================*/
-void CEsmScriptOptions::InitCharFormat(CHARFORMAT2& Format, COLORREF Color) {
+void CEsmScriptOptions::InitCharFormat(CHARFORMAT2 &Format, COLORREF Color) {
 	Format.cbSize = sizeof(Format);
 	Format.dwMask = CFM_COLOR | CFM_BACKCOLOR;
 	Format.crTextColor = Color;
@@ -149,12 +155,14 @@ void CEsmScriptOptions::InitCharFormat(CHARFORMAT2& Format, COLORREF Color) {
  *
  *=========================================================================*/
 bool CEsmScriptOptions::ReadFromRegistry(void) {
-	CWinApp* pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	bool Result;
 	/* Input the background color */
-	m_BackgroundColor = pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_BGCOLOR,
+	m_BackgroundColor = pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                        ESMSCR_REGENTRY_BGCOLOR,
 	                                        m_BackgroundColor);
-	m_NoToolTips = (pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_NOTOOLTIPS,
+	m_NoToolTips = (pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                    ESMSCR_REGENTRY_NOTOOLTIPS,
 	                                    (int)m_NoToolTips) != 0);
 	/* Input the various char format and font options */
 	Result = ReadRegCharFormat();
@@ -175,10 +183,10 @@ bool CEsmScriptOptions::ReadFromRegistry(void) {
  *
  *=========================================================================*/
 bool CEsmScriptOptions::ReadRegCharFormat(void) {
-	CWinApp* pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	CString RegName;
 	CHARFORMAT2 CharFormat;
-	BYTE* pData = (BYTE*)&CharFormat;
+	BYTE *pData = (BYTE *)&CharFormat;
 	UINT Size;
 	BOOL Result;
 	int Index;
@@ -211,16 +219,19 @@ bool CEsmScriptOptions::ReadRegCharFormat(void) {
  *
  *=========================================================================*/
 bool CEsmScriptOptions::ReadRegFont(void) {
-	CWinApp* pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	CString FontName = _T("FixedSys");
+
 	int FontSize = 8;
 	int FontBold = FW_NORMAL;
 	int FontItalic = FALSE;
+
 	/* Read the font options from the registry */
 	FontSize = pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTSIZE, FontSize);
 	FontBold = pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTBOLD, FontBold);
 	FontItalic = pApp->GetProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTITALIC, FontItalic);
 	FontName = pApp->GetProfileString(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTNAME, FontName);
+
 	/* Create the font object */
 	m_TextFont.Detach();
 	CFONT_CREATE(m_TextFont, FontSize, FontBold, FontItalic, FontName);
@@ -240,12 +251,16 @@ bool CEsmScriptOptions::ReadRegFont(void) {
  *
  *=========================================================================*/
 bool CEsmScriptOptions::WriteToRegistry(void) {
-	CWinApp* pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	bool Result;
 	int iResult;
+
 	/* Output the background color */
-	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_BGCOLOR, m_BackgroundColor);
-	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_NOTOOLTIPS,
+	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                 ESMSCR_REGENTRY_BGCOLOR,
+	                                 m_BackgroundColor);
+	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                 ESMSCR_REGENTRY_NOTOOLTIPS,
 	                                 (int)m_NoToolTips);
 	/* Output the various char format and font options */
 	Result = WriteRegCharFormat();
@@ -266,7 +281,7 @@ bool CEsmScriptOptions::WriteToRegistry(void) {
  *
  *=========================================================================*/
 bool CEsmScriptOptions::WriteRegCharFormat(void) {
-	CWinApp* pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	CString RegName;
 	BOOL Result = TRUE;
 	int Index;
@@ -274,7 +289,9 @@ bool CEsmScriptOptions::WriteRegCharFormat(void) {
 	/* Output all the script formats */
 	for (Index = 0; Index < ESMSCRIPT_NUMFORMATS; Index++) {
 		RegName.Format(_T("%s%d"), ESMSCR_REGENTRY_CHARFORMAT, Index);
-		Result &= pApp->WriteProfileBinary(ESMSCR_REGSEC_SCRIPT, RegName, (BYTE*)&m_Formats[Index],
+		Result &= pApp->WriteProfileBinary(ESMSCR_REGSEC_SCRIPT,
+		                                   RegName,
+		                                   (BYTE *)&m_Formats[Index],
 		                                   sizeof(m_Formats[Index]));
 	}
 
@@ -294,7 +311,7 @@ bool CEsmScriptOptions::WriteRegCharFormat(void) {
  *
  *=========================================================================*/
 bool CEsmScriptOptions::WriteRegFont(void) {
-	CWinApp* pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	LOGFONT LogFont;
 	int iResult;
 	/* Attempt to get the font information */
@@ -305,11 +322,17 @@ bool CEsmScriptOptions::WriteRegFont(void) {
 	}
 
 	/* Write the font options to the registry */
-	iResult = pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTSIZE, LogFont.lfHeight);
-	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTBOLD, LogFont.lfWeight);
-	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTITALIC,
+	iResult = pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                ESMSCR_REGENTRY_FONTSIZE,
+	                                LogFont.lfHeight);
+	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                 ESMSCR_REGENTRY_FONTBOLD,
+	                                 LogFont.lfWeight);
+	iResult &= pApp->WriteProfileInt(ESMSCR_REGSEC_SCRIPT,
+	                                 ESMSCR_REGENTRY_FONTITALIC,
 	                                 LogFont.lfItalic);
-	iResult &= pApp->WriteProfileString(ESMSCR_REGSEC_SCRIPT, ESMSCR_REGENTRY_FONTNAME,
+	iResult &= pApp->WriteProfileString(ESMSCR_REGSEC_SCRIPT,
+	                                    ESMSCR_REGENTRY_FONTNAME,
 	                                    LogFont.lfFaceName);
 	return (iResult != 0);
 }
@@ -324,12 +347,14 @@ bool CEsmScriptOptions::WriteRegFont(void) {
  * Class CEsmScriptOptions& CEsmScriptOptions Method - const operator= (Options);
  *
  *=========================================================================*/
-const CEsmScriptOptions &CEsmScriptOptions::operator= (CEsmScriptOptions& Options) {
+const CEsmScriptOptions &CEsmScriptOptions::operator= (CEsmScriptOptions &Options) {
 	LOGFONT LogFont;
+
 	/* Copy the font object */
 	m_TextFont.Detach();
 	Options.m_TextFont.GetLogFont(&LogFont);
 	m_TextFont.CreateFontIndirect(&LogFont);
+
 	/* Copy the rest of the class members */
 	m_BackgroundColor = Options.m_BackgroundColor;
 	m_NoToolTips = Options.m_NoToolTips;

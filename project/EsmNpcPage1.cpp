@@ -1,154 +1,87 @@
 /*===========================================================================
-
  *
-
  * File:    Esmnpcpage1.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 25, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmNpcPage1.h"
-
 #include "dl_Err.h"
-
 #include "MWEditDoc.h"
-
 #include "EsmDlgArray.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmNpcPage1, CPropertyPage);
-
 DEFINE_FILE("EsmNpcPage1.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmNpcPage1 Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmNpcPage1, CPropertyPage)
-
 	//{{AFX_MSG_MAP(CEsmNpcPage1)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONSORT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordSort)
-
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_SKILLLIST, OnEndlabeleditItemlist)
-
 	ON_BN_CLICKED(IDC_ANIMATIONBUTTON, OnAnimationbutton)
-
 	ON_BN_CLICKED(IDC_AUTOCALCCHECK, OnAutocalccheck)
-
 	ON_BN_CLICKED(IDC_FEMALECHECK, OnFemalecheck)
-
 	ON_CBN_SELCHANGE(IDC_RACELIST, OnSelchangeRacelist)
-
 	ON_BN_CLICKED(IDC_SCRIPTEDIT, OnScriptEdit)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmNpcPage1 Message Map
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Function - int l_SortCallback (lParam1, lParam2, lUserData);
-
  *
-
  *=========================================================================*/
 
-int __stdcall l_SortCallback (LPARAM lParam1, LPARAM lParam2, LPARAM lUserData) {
-	CEsmNpcPage1* pPage = (CEsmNpcPage1 *) lUserData;
+int __stdcall l_SortCallback(LPARAM lParam1, LPARAM lParam2, LPARAM lUserData) {
+	CEsmNpcPage1 *pPage = (CEsmNpcPage1 *)lUserData;
 	return pPage->SortCallback(lParam1, lParam2);
 }
 
 /*===========================================================================
-
  *      End of Function l_SortCallback()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmNpcPage1::CEsmNpcPage1() : CPropertyPage(CEsmNpcPage1::IDD) {
@@ -161,49 +94,31 @@ CEsmNpcPage1::CEsmNpcPage1() : CPropertyPage(CEsmNpcPage1::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmNpcPage1 Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmNpcPage1::~CEsmNpcPage1() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmNpcPage1 Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage1::DoDataExchange(CDataExchange* pDX) {
+void CEsmNpcPage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmNpcPage1)
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
@@ -212,10 +127,13 @@ void CEsmNpcPage1::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_RESPAWNCHECK1, m_RespawnCheck);
 	DDX_Control(pDX, IDC_ESSENTIALCHECK, m_EssentialCheck);
 	DDX_Control(pDX, IDC_FEMALECHECK, m_FemaleCheck);
+
 	DDX_Control(pDX, IDC_ANIMATIONBUTTON, m_AnimButton);
+
 	DDX_Control(pDX, IDC_BLOODLIST, m_BloodList);
 	DDX_Control(pDX, IDC_HAIRLIST, m_HairList);
 	DDX_Control(pDX, IDC_HEADLIST, m_HeadList);
+
 	DDX_Control(pDX, IDC_REPUTATIONTEXT, m_RepText);
 	DDX_Control(pDX, IDC_FAQTIGUETEXT, m_FatigueText);
 	DDX_Control(pDX, IDC_MAGICTEXT, m_MagicText);
@@ -230,38 +148,32 @@ void CEsmNpcPage1::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_STRTEXT, m_StrText);
 	DDX_Control(pDX, IDC_LEVELTEXT2, m_DispText);
 	DDX_Control(pDX, IDC_LEVELTEXT, m_LevelText);
+
 	DDX_Control(pDX, IDC_RANKLIST, m_RankList);
 	DDX_Control(pDX, IDC_FACTIONLIST, m_FactionList);
 	DDX_Control(pDX, IDC_CLASSLIST, m_ClassList);
 	DDX_Control(pDX, IDC_RACELIST, m_RaceList);
 	DDX_Control(pDX, IDC_SCRIPTLIST, m_ScriptList);
+
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
+
 	DDX_Control(pDX, IDC_SKILLLIST, m_SkillList);
 	//}}AFX_DATA_MAP
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage1::GetControlData (void) {
-	CEsmNpc* pNpc;
+void CEsmNpcPage1::GetControlData(void) {
+	CEsmNpc *pNpc;
 	npclongdata_t *pLongData;
 	CString Buffer;
 	long Flag;
@@ -272,9 +184,10 @@ void CEsmNpcPage1::GetControlData (void) {
 		return;
 	}
 
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	pLongData = pNpc->GetLongData();
 	Flag = 0;
+
 	/* Common texts */
 	m_NameText.GetWindowText(Buffer);
 	pNpc->SetName(Buffer);
@@ -292,9 +205,11 @@ void CEsmNpcPage1::GetControlData (void) {
 	pNpc->SetDisposition(atoi(Buffer));
 	m_LevelText.GetWindowText(Buffer);
 	pNpc->SetLevel(atoi(Buffer));
+
 	/* Animation button */
 	m_AnimButton.GetWindowText(Buffer);
 	pNpc->SetAnimation(Buffer);
+
 	/* Head/hair list */
 	m_HeadList.GetWindowText(Buffer);
 	pNpc->SetHeadModel(Buffer);
@@ -309,51 +224,63 @@ void CEsmNpcPage1::GetControlData (void) {
 	if (!m_AutoCalcCheck.GetCheck() && pLongData != NULL) {
 		m_StrText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Strength = (byte) Value;
+		pLongData->Strength = (byte)Value;
 		m_IntText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Intelligence = (byte) Value;
+		pLongData->Intelligence = (byte)Value;
 		m_WilText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Willpower = (byte) Value;
+		pLongData->Willpower = (byte)Value;
 		m_SpdText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Speed = (byte) Value;
+		pLongData->Speed = (byte)Value;
 		m_AgiText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Agility = (byte) Value;
+		pLongData->Agility = (byte)Value;
 		m_EndText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Endurance = (byte) Value;
+		pLongData->Endurance = (byte)Value;
 		m_PerText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Personality = (byte) Value;
+		pLongData->Personality = (byte)Value;
 		m_LucText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
+
 		FIXLIMIT(Value, 0, 255);
-		pLongData->Luck = (byte) Value;
+		pLongData->Luck = (byte)Value;
 		m_HealthText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
-		pLongData->Health = (short) Value;
+
+		pLongData->Health = (short)Value;
 		m_MagicText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
-		pLongData->SpellPts = (short) Value;
+
+		pLongData->SpellPts = (short)Value;
 		m_FatigueText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
-		pLongData->Fatigue = (short) Value;
+
+		pLongData->Fatigue = (short)Value;
 		m_RepText.GetWindowText(Buffer);
 		Value = atoi(Buffer);
-		pLongData->Reputation = (byte) Value;
+
+		pLongData->Reputation = (byte)Value;
 
 		for (Index = 0; Index < MWESM_MAX_SKILLS; Index++) {
-			pLongData->Skills[Index] = (char) m_SkillValues[Index];
+			pLongData->Skills[Index] = (char)m_SkillValues[Index];
 		}
 	} else {
 		Flag |= MWESM_NPCFLAG_AUTOCALC;
@@ -379,52 +306,34 @@ void CEsmNpcPage1::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - CMWEditDoc* GetDocument (void);
-
  *
-
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage1::GetDocument (void) {
+CMWEditDoc *CEsmNpcPage1::GetDocument(void) {
 	DEFINE_FUNCTION("CEsmNpcPage1::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::GetDocument()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - bool IsAutoCalc (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmNpcPage1::IsAutoCalc (void) {
+bool CEsmNpcPage1::IsAutoCalc(void) {
 	if (!::IsWindow(m_AutoCalcCheck.m_hWnd)) {
 		return (false);
 	}
@@ -433,23 +342,14 @@ bool CEsmNpcPage1::IsAutoCalc (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::IsAutoCalc()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - void OnAnimationbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmNpcPage1::OnAnimationbutton() {
@@ -464,23 +364,14 @@ void CEsmNpcPage1::OnAnimationbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnAnimationbutton()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - void OnAutocalccheck ();
-
  *
-
  *=========================================================================*/
 
 void CEsmNpcPage1::OnAutocalccheck() {
@@ -488,27 +379,18 @@ void CEsmNpcPage1::OnAutocalccheck() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnAutocalccheck()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - void OnEndlabeleditItemlist (pNMHDR, pResult);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage1::OnEndlabeleditItemlist (NMHDR* pNMHDR, LRESULT* pResult) {
-	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)pNMHDR;
+void CEsmNpcPage1::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
+	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
 	int Count;
 	int SkillIndex;
@@ -540,27 +422,19 @@ void CEsmNpcPage1::OnEndlabeleditItemlist (NMHDR* pNMHDR, LRESULT* pResult) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnEndlabeleditItemlist()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmNpcPage1::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Spell List */
 	m_SkillList.OnInitCtrl();
 	m_SkillList.SetDlgHandler(m_pDlgHandler);
@@ -572,6 +446,7 @@ BOOL CEsmNpcPage1::OnInitDialog() {
 	m_SkillList.SetActNormal(true);
 	m_SkillList.InsertColumn(0, _T("Value"), LVCFMT_CENTER, 50, 0);
 	m_SkillList.InsertColumn(1, _T("Skill"), LVCFMT_LEFT, 100, 1);
+
 	/* Text controls */
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_StrText.SetLimitText(8);
@@ -588,6 +463,7 @@ BOOL CEsmNpcPage1::OnInitDialog() {
 	m_RepText.SetLimitText(8);
 	m_FatigueText.SetLimitText(8);
 	m_LevelText.SetLimitText(8);
+
 	/* Lists */
 	FillEsmRankCombo(m_RankList, true);
 	FillEsmScriptCombo(m_ScriptList);
@@ -595,30 +471,22 @@ BOOL CEsmNpcPage1::OnInitDialog() {
 	FillEsmRaceCombo(m_RaceList, false);
 	FillEsmFactionCombo(m_FactionList, true);
 	FillEsmBloodTypeCombo(m_BloodList);
+
 	return (TRUE);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnInitDialog()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmNpcPage1::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmNpcPage1::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
 	int SkillIndex;
@@ -649,79 +517,52 @@ LRESULT CEsmNpcPage1::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnRecordKey()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - LRESULT OnRecordSort (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmNpcPage1::OnRecordSort (LPARAM lParam, LPARAM wParam) {
-	esmlistsortdata_t *pSortData = (esmlistsortdata_t *) lParam;
+LRESULT CEsmNpcPage1::OnRecordSort(LPARAM lParam, LPARAM wParam) {
+	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	m_SortCol = pSortData->iSubItem;
 	m_SortReverse = pSortData->Reverse;
-	m_SkillList.SortItems(l_SortCallback, (DWORD) this);
+	m_SkillList.SortItems(l_SortCallback, (DWORD)this);
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnRecordSort()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmNpcPage1::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmNpcPage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage1::SetControlData (void) {
-	CEsmNpc* pNpc;
+void CEsmNpcPage1::SetControlData(void) {
+	CEsmNpc *pNpc;
 	CString Buffer;
 	CString Race;
 	npclongdata_t *pLongData;
@@ -732,7 +573,7 @@ void CEsmNpcPage1::SetControlData (void) {
 		return;
 	}
 
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	pLongData = pNpc->GetLongData();
 	/* Common texts */
 	m_NameText.SetWindowText(pNpc->GetName());
@@ -760,8 +601,10 @@ void CEsmNpcPage1::SetControlData (void) {
 	m_DispText.SetWindowText(Buffer);
 	Buffer.Format(_T("%d"), pNpc->GetLevel());
 	m_LevelText.SetWindowText(Buffer);
+
 	/* Animation button */
 	m_AnimButton.SetWindowText(pNpc->GetAnimation());
+
 	/* Head/hair list */
 	m_RaceList.GetWindowText(Buffer);
 	FillEsmBodyRaceCombo(m_HeadList, MWESM_PART_HEAD, pNpc->IsFemale(), Race, false);
@@ -783,36 +626,48 @@ void CEsmNpcPage1::SetControlData (void) {
 
 	if (!pNpc->IsAutoCalc() && pLongData != NULL) {
 		m_AutoCalcCheck.SetCheck(FALSE);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Strength);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Strength);
 		m_StrText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Intelligence);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Intelligence);
 		m_IntText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Willpower);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Willpower);
 		m_WilText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Speed);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Speed);
 		m_SpdText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Agility);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Agility);
 		m_AgiText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Endurance);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Endurance);
 		m_EndText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Personality);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Personality);
 		m_PerText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Luck);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Luck);
 		m_LucText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte)pLongData->Health);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Health);
 		m_HealthText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->SpellPts);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->SpellPts);
 		m_MagicText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) (byte) pLongData->Fatigue);
+
+		Buffer.Format(_T("%d"), (int)(byte)pLongData->Fatigue);
 		m_FatigueText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) pLongData->Reputation);
+
+		Buffer.Format(_T("%d"), (int)pLongData->Reputation);
 		m_RepText.SetWindowText(Buffer);
 
 		for (Index = 0; Index < MWESM_MAX_SKILLS; Index++) {
 			ListIndex = m_SkillList.InsertItem(Index, _T(""), -1);
 			m_SkillList.SetItemText(ListIndex, 1, GetESMSkill(Index));
 			m_SkillList.SetItemData(ListIndex, Index);
-			m_SkillValues[Index] = (int) (byte) pLongData->Skills[Index];
+			m_SkillValues[Index] = (int)(byte)pLongData->Skills[Index];
 			Buffer.Format(_T("%d"), m_SkillValues[Index]);
 			m_SkillList.SetItemText(ListIndex, 0, Buffer);
 		}
@@ -840,26 +695,17 @@ void CEsmNpcPage1::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - int SortCallback (lParam1, lParam2);
-
  *
-
  *=========================================================================*/
 
-int CEsmNpcPage1::SortCallback (LPARAM lParam1, LPARAM lParam2) {
+int CEsmNpcPage1::SortCallback(LPARAM lParam1, LPARAM lParam2) {
 	int Result = 0;
 
 	if (m_SortCol == 0) {
@@ -876,26 +722,17 @@ int CEsmNpcPage1::SortCallback (LPARAM lParam1, LPARAM lParam2) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::SortCallback()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Method - void UpdateAutoCalc (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage1::UpdateAutoCalc (void) {
+void CEsmNpcPage1::UpdateAutoCalc(void) {
 	BOOL Result = !m_AutoCalcCheck.GetCheck();
 	m_StrText.EnableWindow(Result);
 	m_IntText.EnableWindow(Result);
@@ -912,23 +749,14 @@ void CEsmNpcPage1::UpdateAutoCalc (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage1::UpdateAutoCalc()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage1 Event - void OnScriptEdit ();
-
  *
-
  *=========================================================================*/
 
 void CEsmNpcPage1::OnScriptEdit() {
@@ -943,47 +771,37 @@ void CEsmNpcPage1::OnScriptEdit() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage1::OnScriptEdit()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Body Part Rebuild Events
-
  *
-
  *=========================================================================*/
 
 void CEsmNpcPage1::OnFemalecheck() {
 	CString RaceName;
 	m_RaceList.GetWindowText(RaceName);
-	FillEsmBodyRaceCombo(m_HeadList, MWESM_PART_HEAD, (m_FemaleCheck.GetCheck() != 0), RaceName, false);
-	FillEsmBodyRaceCombo(m_HairList, MWESM_PART_HAIR, (m_FemaleCheck.GetCheck() != 0), RaceName, false);
+	FillEsmBodyRaceCombo(m_HeadList,
+	                     MWESM_PART_HEAD,
+	                     (m_FemaleCheck.GetCheck() != 0),
+	                     RaceName,
+	                     false);
+	FillEsmBodyRaceCombo(m_HairList,
+	                     MWESM_PART_HAIR,
+	                     (m_FemaleCheck.GetCheck() != 0),
+	                     RaceName,
+	                     false);
 	m_HeadList.SetCurSel(0);
 	m_HairList.SetCurSel(0);
 }
-
-
-
-
 
 void CEsmNpcPage1::OnSelchangeRacelist() {
 	OnFemalecheck();
 }
 
 /*===========================================================================
-
  *      End of Body Part Rebuild Events
-
  *=========================================================================*/
-
-
-

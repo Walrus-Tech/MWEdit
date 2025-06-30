@@ -1,135 +1,74 @@
 /*===========================================================================
-
  *
-
  * File:    Esmcreaturepage4.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  March 1, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmCreaturePage4.h"
-
 #include "EsmAiActivateDlg.h"
-
 #include "EsmAiEscortDlg.h"
-
 #include "EsmAiTravelDlg.h"
-
 #include "EsmAiWanderDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmCreaturePage4, CPropertyPage);
-
 DEFINE_FILE("EsmCreaturePage4.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmCreaturePage4 Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmCreaturePage4, CPropertyPage)
-
 	//{{AFX_MSG_MAP(CEsmCreaturePage4)
-
 	ON_BN_CLICKED(IDC_ACTIVATEBUTTON, OnActivatebutton)
-
 	ON_BN_CLICKED(IDC_ESCORTBUTTON, OnEscortbutton)
-
 	ON_BN_CLICKED(IDC_FOLLOWBUTTON, OnFollowbutton)
-
 	ON_BN_CLICKED(IDC_TRAVELBUTTON, OnTravelbutton)
-
 	ON_BN_CLICKED(IDC_WANDERBUTTON, OnWanderbutton)
-
 	ON_BN_CLICKED(IDC_EDITBUTTON, OnEditbutton)
-
 	ON_BN_CLICKED(IDC_DELETEBUTTON, OnDeletebutton)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONEDIT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnEditRecord)
-
 	ON_NOTIFY(LVN_ITEMCHANGING, IDC_PACKAGELIST, OnItemchangingPackagelist)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmCreaturePage4 Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmCreaturePage4::CEsmCreaturePage4() : CPropertyPage(CEsmCreaturePage4::IDD), m_PackageArray(0) {
@@ -138,23 +77,14 @@ CEsmCreaturePage4::CEsmCreaturePage4() : CPropertyPage(CEsmCreaturePage4::IDD), 
 }
 
 /*===========================================================================
-
  *      End of Class CEsmCreaturePage4 Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmCreaturePage4::~CEsmCreaturePage4() {
@@ -162,42 +92,30 @@ CEsmCreaturePage4::~CEsmCreaturePage4() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmCreaturePage4 Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void AddAIRecords (pType);
-
  *
-
  * Protected class method that copies and saves all the AI sub-records
-
  * of the given type in the current NPC record.
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::AddAIRecords (const TCHAR* pType) {
-	CEsmCreature* pCreature;
-	CEsmSubRecord* pSubRecord;
-	CEsmSubRecord* pNewSubRec;
+void CEsmCreaturePage4::AddAIRecords(const TCHAR *pType) {
+	CEsmCreature *pCreature;
+	CEsmSubRecord *pSubRecord;
+	CEsmSubRecord *pNewSubRec;
 	int ArrayIndex;
 
 	if (m_pRecInfo == NULL) {
 		return;
 	}
 
-	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
+	pCreature = (CEsmCreature *)m_pRecInfo->pRecord;
 	pSubRecord = pCreature->FindFirst(pType, ArrayIndex);
 
 	while (pSubRecord != NULL) {
@@ -218,28 +136,19 @@ void CEsmCreaturePage4::AddAIRecords (const TCHAR* pType) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::AddAIRecords()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void ClearPackageArray (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::ClearPackageArray (void) {
+void CEsmCreaturePage4::ClearPackageArray(void) {
 	DEFINE_FUNCTION("CEsmCreaturePage4::ClearPackageArray()");
-	CEsmSubRecord* pSubRec;
+	CEsmSubRecord *pSubRec;
 	int Index;
 
 	for (Index = 0; Index < m_PackageArray.GetSize(); Index++) {
@@ -251,33 +160,24 @@ void CEsmCreaturePage4::ClearPackageArray (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::ClearPackageArray()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void DeleteSelectedItems (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::DeleteSelectedItems (void) {
-	CEsmSubRecord* pSubRec;
-	CEsmSubRecord* pSubNameRec;
+void CEsmCreaturePage4::DeleteSelectedItems(void) {
+	CEsmSubRecord *pSubRec;
+	CEsmSubRecord *pSubNameRec;
 	int ListIndex;
 	ListIndex = m_PackageList.GetNextItem(-1, LVNI_SELECTED);
 
 	while (ListIndex >= 0) {
-		pSubRec = (CEsmSubRecord *) m_PackageList.GetItemData(ListIndex);
+		pSubRec = (CEsmSubRecord *)m_PackageList.GetItemData(ListIndex);
 		pSubNameRec = FindCNDTSubRec(pSubRec);
 		m_PackageArray.DeleteElement(pSubRec);
 		DestroyPointer(pSubRec);
@@ -293,26 +193,17 @@ void CEsmCreaturePage4::DeleteSelectedItems (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::DeleteSelectedItems()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::DoDataExchange(CDataExchange* pDX) {
+void CEsmCreaturePage4::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmCreaturePage4)
 	DDX_Control(pDX, IDC_PACKAGEEDIT, m_PackageText);
@@ -325,28 +216,19 @@ void CEsmCreaturePage4::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::GetControlData (void) {
-	CEsmCreature* pCreature;
-	CEsmSubRecord* pSubRec;
+void CEsmCreaturePage4::GetControlData(void) {
+	CEsmCreature *pCreature;
+	CEsmSubRecord *pSubRec;
 	CString Buffer;
 	aidata_t *pAiData;
 	int Index;
@@ -355,19 +237,19 @@ void CEsmCreaturePage4::GetControlData (void) {
 		return;
 	}
 
-	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
+	pCreature = (CEsmCreature *)m_pRecInfo->pRecord;
 	/* Save the basic AI settings */
 	pAiData = pCreature->GetAIData();
 
 	if (pAiData != NULL) {
 		m_AlarmText.GetWindowText(Buffer);
-		pAiData->Alarm = (byte) atoi(Buffer);
+		pAiData->Alarm = (byte)atoi(Buffer);
 		m_FleeText.GetWindowText(Buffer);
-		pAiData->Flee = (byte) atoi(Buffer);
+		pAiData->Flee = (byte)atoi(Buffer);
 		m_FightText.GetWindowText(Buffer);
-		pAiData->Fight = (byte) atoi(Buffer);
+		pAiData->Fight = (byte)atoi(Buffer);
 		m_HelloText.GetWindowText(Buffer);
-		pAiData->Hello = (byte) atoi(Buffer);
+		pAiData->Hello = (byte)atoi(Buffer);
 	}
 
 	/* Delete the current AI package sub-records */
@@ -389,33 +271,21 @@ void CEsmCreaturePage4::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - CEsmSubNameFix* FindCNDTSubRec (pSubRecord);
-
  *
-
  * Finds and returns the CNDT record associated with the given subrecord,
-
  * or NULL if none is found.
-
  *
-
  *=========================================================================*/
 
-CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec (CEsmSubRecord* pSubRecord) {
-	CEsmSubRecord* pSubRec;
+CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
+	CEsmSubRecord *pSubRec;
 	int Index;
 
 	for (Index = 0; Index < m_PackageArray.GetSize(); Index++) {
@@ -429,7 +299,7 @@ CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec (CEsmSubRecord* pSubRecord) {
 			pSubRec = m_PackageArray.GetAt(Index + 1);
 
 			if (pSubRec->IsType(MWESM_SUBREC_CNDT)) {
-				return (CEsmSubNameFix *) pSubRec;
+				return (CEsmSubNameFix *)pSubRec;
 			}
 
 			return (NULL);
@@ -440,54 +310,36 @@ CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec (CEsmSubRecord* pSubRecord) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::FindCNDTSubRec()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - CMWEditDoc* GetDocument (void);
-
  *
-
  *=========================================================================*/
 
-CMWEditDoc *CEsmCreaturePage4::GetDocument (void) {
+CMWEditDoc *CEsmCreaturePage4::GetDocument(void) {
 	DEFINE_FUNCTION("CEsmCreaturePage4::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::GetDocument()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Event - LRESULT OnDblclkObjectlist (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
 LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnEditRecord()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	bool Result = false;
 	int ListIndex;
 
@@ -498,7 +350,7 @@ LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	}
 
 	/* Display the model reference dialog */
-	pSubRecord = (CEsmSubRecord *) m_PackageList.GetItemData(lParam);
+	pSubRecord = (CEsmSubRecord *)m_PackageList.GetItemData(lParam);
 
 	if (pSubRecord->IsType(MWESM_SUBREC_AI_A)) {
 		CEsmAiActivateDlg Dialog;
@@ -509,9 +361,10 @@ LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	} else if (pSubRecord->IsType(MWESM_SUBREC_AI_E) || pSubRecord->IsType(MWESM_SUBREC_AI_F)) {
 		CEsmAiEscortDlg Dialog;
 		CString CellName;
-		CEsmSubNameFix* pCellName;
+		CEsmSubNameFix *pCellName;
 		pCellName = FindCNDTSubRec(pSubRecord);
-		Result = Dialog.DoModal((CEsmSubAI_E *)pSubRecord, pCellName ? pCellName->GetName() : NULL,
+		Result = Dialog.DoModal((CEsmSubAI_E *)pSubRecord,
+		                        pCellName ? pCellName->GetName() : NULL,
 		                        pSubRecord->IsType(MWESM_SUBREC_AI_E) ? _T("Escort") : _T("Follow"));
 
 		if (Result) {
@@ -544,27 +397,19 @@ LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage4::OnDblclkObjectlist()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmCreaturePage4::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Spell List */
 	m_PackageList.OnInitCtrl();
 	m_PackageList.SetEnableDrag(false);
@@ -573,35 +418,27 @@ BOOL CEsmCreaturePage4::OnInitDialog() {
 	m_PackageList.SetActNormal(true);
 	m_PackageList.SetWantEditMsg(true);
 	m_PackageList.InsertColumn(0, _T("Package"), LVCFMT_LEFT, 120, 0);
+
 	return (TRUE);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage4::OnInitDialog()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Event - void OnItemchangingPackagelist (pNMHDR, pResult);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::OnItemchangingPackagelist (NMHDR* pNMHDR, LRESULT* pResult) {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW *) pNMHDR;
+void CEsmCreaturePage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResult) {
+	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
 
 	if ((pNMListView->uChanged & LVIF_STATE) != 0 && (pNMListView->uNewState & LVIS_SELECTED ) != 0) {
-		CEsmSubRecord* pSubRec = (CEsmSubRecord *) m_PackageList.GetItemData(pNMListView->iItem);
+		CEsmSubRecord *pSubRec = (CEsmSubRecord *)m_PackageList.GetItemData(pNMListView->iItem);
 		OutputAIData(pSubRec);
 	} else if ((pNMListView->uChanged & LVIF_STATE) != 0 ) {
 		OutputAIData(NULL);
@@ -611,24 +448,17 @@ void CEsmCreaturePage4::OnItemchangingPackagelist (NMHDR* pNMHDR, LRESULT* pResu
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage4::OnItemchangingPackagelist()
-
  *=========================================================================*/
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmCreaturePage4::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmCreaturePage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Delete all currently selected items */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
 		DeleteSelectedItems();
@@ -639,64 +469,66 @@ LRESULT CEsmCreaturePage4::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage4::OnRecordKey()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void OutputAIData (pSubRec);
-
  *
-
  * Attempts to output the given AI package sub-record to the text control.
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::OutputAIData (CEsmSubRecord* pSubRec) {
+void CEsmCreaturePage4::OutputAIData(CEsmSubRecord *pSubRec) {
 	CString Buffer;
 
 	if (pSubRec == NULL) {
 		m_PackageText.SetWindowText(_T(""));
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_T)) {
-		ai_tdata_t *pAiData = ((CEsmSubAI_T *) pSubRec)->GetAIData();
+		ai_tdata_t *pAiData = ((CEsmSubAI_T *)pSubRec)->GetAIData();
 		Buffer.Format(_T("X = %g\r\nY = %g\r\nZ = %g"), pAiData->X, pAiData->Y, pAiData->Z);
 		m_PackageText.SetWindowText(Buffer);
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_W)) {
-		ai_wdata_t *pAiData = ((CEsmSubAI_W *) pSubRec)->GetAIData();
+		ai_wdata_t *pAiData = ((CEsmSubAI_W *)pSubRec)->GetAIData();
 		Buffer.Format(
 		    _T("Distance = %d\r\nDuration = %g hours\r\nTime of Day = %g:00\r\nIdle2 = %d\r\nIdle3 = %d\r\nIdle4 = %d\r\nIdle5 = %d\r\nIdle6 = %d\r\nIdle7 = %d\r\nIdle8 = %d\r\nIdle9 = %d"),
-		    (int)pAiData->Distance, (int)pAiData->Duration, (int)pAiData->TimeOfDay, (int)pAiData->Idle[0],
+		    (int)pAiData->Distance,
+		    (int)pAiData->Duration,
+		    (int)pAiData->TimeOfDay,
+		    (int)pAiData->Idle[0],
 		    (int)pAiData->Idle[1],
-		    (int)pAiData->Idle[2], (int)pAiData->Idle[3], (int)pAiData->Idle[4], (int)pAiData->Idle[5],
-		    (int)pAiData->Idle[6], (int)pAiData->Idle[7]);
+		    (int)pAiData->Idle[2],
+		    (int)pAiData->Idle[3],
+		    (int)pAiData->Idle[4],
+		    (int)pAiData->Idle[5],
+		    (int)pAiData->Idle[6],
+		    (int)pAiData->Idle[7]);
 		m_PackageText.SetWindowText(Buffer);
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_A)) {
-		ai_adata_t *pAiData = ((CEsmSubAI_A *) pSubRec)->GetAIData();
+		ai_adata_t *pAiData = ((CEsmSubAI_A *)pSubRec)->GetAIData();
 		Buffer.Format(_T("Name = %s"), pAiData->Name);
 		m_PackageText.SetWindowText(Buffer);
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_E) || pSubRec->IsType(MWESM_SUBREC_AI_F)) {
-		ai_edata_t *pAiData = ((CEsmSubAI_E *) pSubRec)->GetAIData();
+		ai_edata_t *pAiData = ((CEsmSubAI_E *)pSubRec)->GetAIData();
 		int ListIndex = m_PackageArray.FindElement(pSubRec);
 		CEsmSubRecord* pCellName = m_PackageArray.GetAt(ListIndex + 1);
 
 		if (pCellName != NULL && pCellName->IsType(MWESM_SUBREC_CNDT)) {
 			if (pAiData->X != FLT_MAX)
 				Buffer.Format(_T("Name = %s\n\rDuration = %d\r\nCell = %s\r\nX = %.0g\r\nY = %.0g\r\nZ = %.0g"),
-				              pAiData->ID, (int) pAiData->Duration, ((CEsmSubNameFix *) pCellName)->GetName(),
-				              pAiData->X, pAiData->Y, pAiData->Z);
+				              pAiData->ID,
+				              (int)pAiData->Duration,
+				              ((CEsmSubNameFix *)pCellName)->GetName(),
+				              pAiData->X,
+				              pAiData->Y,
+				              pAiData->Z);
 			else {
-				Buffer.Format(_T("Name = %s\r\nDuration = %d\r\nCell = %s"), pAiData->ID, (int) pAiData->Duration,
-				              ((CEsmSubNameFix *) pCellName)->GetName());
+				Buffer.Format(_T("Name = %s\r\nDuration = %d\r\nCell = %s"),
+				              pAiData->ID,
+				              (int) pAiData->Duration,
+				              ((CEsmSubNameFix *)pCellName)->GetName());
 			}
 		} else {
 			Buffer.Format(_T("Name = %s\r\nDuration = %d"), pAiData->ID, (int) pAiData->Duration);
@@ -707,27 +539,18 @@ void CEsmCreaturePage4::OutputAIData (CEsmSubRecord* pSubRec) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::OutputAIData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::SetControlData (void) {
-	CEsmCreature* pCreature;
+void CEsmCreaturePage4::SetControlData(void) {
+	CEsmCreature *pCreature;
 	CString Buffer;
 	aidata_t *pAiData;
 
@@ -736,7 +559,7 @@ void CEsmCreaturePage4::SetControlData (void) {
 	}
 
 	m_PackageList.SetDlgHandler(m_pDlgHandler);
-	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
+	pCreature = (CEsmCreature *)m_pRecInfo->pRecord;
 	pAiData = pCreature->GetAIData();
 
 	if (pAiData != NULL) {
@@ -759,28 +582,19 @@ void CEsmCreaturePage4::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::SetControlData()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Package Event Buttons
-
  *
-
  *=========================================================================*/
 
 void CEsmCreaturePage4::OnActivatebutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnActivatebutton()");
-	CEsmSubAI_A* pNewSubRec;
+	CEsmSubAI_A *pNewSubRec;
 	bool Result;
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_A);
@@ -802,12 +616,10 @@ void CEsmCreaturePage4::OnActivatebutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmCreaturePage4::OnEscortbutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnEscortbutton()");
-	CEsmSubAI_E* pNewSubRec;
-	CEsmSubNameFix* pCellName;
+	CEsmSubAI_E *pNewSubRec;
+	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
 	/* Create the new sub-record */
@@ -841,12 +653,10 @@ void CEsmCreaturePage4::OnEscortbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmCreaturePage4::OnFollowbutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnEscortbutton()");
-	CEsmSubAI_E* pNewSubRec;
-	CEsmSubNameFix* pCellName;
+	CEsmSubAI_E *pNewSubRec;
+	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
 	/* Create the new sub-record */
@@ -880,11 +690,9 @@ void CEsmCreaturePage4::OnFollowbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmCreaturePage4::OnTravelbutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnTravelbutton()");
-	CEsmSubAI_T* pNewSubRec;
+	CEsmSubAI_T *pNewSubRec;
 	bool Result;
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_T);
@@ -906,11 +714,9 @@ void CEsmCreaturePage4::OnTravelbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmCreaturePage4::OnWanderbutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnWanderbutton()");
-	CEsmSubAI_W* pNewSubRec;
+	CEsmSubAI_W *pNewSubRec;
 	bool Result;
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_W);
@@ -932,8 +738,6 @@ void CEsmCreaturePage4::OnWanderbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmCreaturePage4::OnEditbutton() {
 	POSITION SelPos;
 	SelPos = m_PackageList.GetFirstSelectedItemPosition();
@@ -945,34 +749,23 @@ void CEsmCreaturePage4::OnEditbutton() {
 	OnEditRecord(m_PackageList.GetNextSelectedItem(SelPos), 0);
 }
 
-
-
 void CEsmCreaturePage4::OnDeletebutton() {
 	DeleteSelectedItems();
 }
 
 /*===========================================================================
-
  *      End of Package Event Buttons
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage4 Method - void UpdatePackageList (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage4::UpdatePackageList (void) {
-	CEsmSubRecord* pSubRecord;
+void CEsmCreaturePage4::UpdatePackageList(void) {
+	CEsmSubRecord *pSubRecord;
 	int Index;
 	int ListIndex;
 	/* Clear the current list */
@@ -998,20 +791,11 @@ void CEsmCreaturePage4::UpdatePackageList (void) {
 		}
 
 		if (ListIndex >= 0) {
-			m_PackageList.SetItemData(ListIndex, (DWORD) pSubRecord);
+			m_PackageList.SetItemData(ListIndex, (DWORD)pSubRecord);
 		}
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage4::UpdatePackageList()
-
  *=========================================================================*/
-
-
-
-
-
-
-

@@ -40,13 +40,13 @@ class CCustRichEdit : public CRichEditCtrl {
 	virtual ~CCustRichEdit();
 
 	/* Get the current line of text */
-	const TCHAR *GetCurLineText(CString& Buffer);
+	const TCHAR *GetCurLineText(CString &Buffer);
 	int GetCurLineCharPos(void);
 
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CCustRichEdit)
   public:
-	virtual BOOL Create(DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID);
+	virtual BOOL Create(DWORD dwStyle, const RECT &rect, CWnd *pParentWnd, UINT nID);
 	//}}AFX_VIRTUAL
 
 	/* Generated message map functions */
@@ -59,11 +59,10 @@ class CCustRichEdit : public CRichEditCtrl {
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
-	afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar *pScrollBar);
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
-
 };
 
 /*===========================================================================

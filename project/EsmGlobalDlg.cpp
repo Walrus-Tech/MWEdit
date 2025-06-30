@@ -1,109 +1,61 @@
 /*===========================================================================
-
  *
-
  * File:    Esmglobaldlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 12, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmGlobalDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmGlobalDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmApparatusDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmGlobalDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmGlobalDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmGlobalDlg)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST, OnSelchangeTypelist)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmGlobalDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmGlobalDlg::CEsmGlobalDlg() : CEsmRecDialog(CEsmGlobalDlg::IDD) {
@@ -113,26 +65,17 @@ CEsmGlobalDlg::CEsmGlobalDlg() : CEsmRecDialog(CEsmGlobalDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmGlobalDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmGlobalDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmGlobalDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmGlobalDlg)
 	DDX_Control(pDX, IDC_VALUETEXT, m_ValueText);
@@ -142,32 +85,23 @@ void CEsmGlobalDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmGlobalDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmGlobalDlg::GetControlData (void) {
+void CEsmGlobalDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmGlobalDlg::GetControlData()");
 	CString Buffer;
 	float Value;
 	int Index;
 	/* Update the record pointer and data */
-	m_pGlobal = (CEsmGlobal *) GetRecInfo()->pRecord;
+	m_pGlobal = (CEsmGlobal *)GetRecInfo()->pRecord;
 
 	if (m_pGlobal == NULL) {
 		return;
@@ -189,7 +123,7 @@ void CEsmGlobalDlg::GetControlData (void) {
 
 	/* Item value */
 	m_ValueText.GetWindowText(Buffer);
-	Value = (float) atof(Buffer);
+	Value = (float)atof(Buffer);
 
 	if (m_pGlobal->GetType() == MWESM_GLOBAL_SHORT) {
 		if (Value < SHRT_MIN) {
@@ -201,11 +135,11 @@ void CEsmGlobalDlg::GetControlData (void) {
 		}
 	} else if (m_pGlobal->GetType() == MWESM_GLOBAL_LONG) {
 		if (Value < LONG_MIN) {
-			Value = (float) LONG_MIN;
+			Value = (float)LONG_MIN;
 		}
 
 		if (Value > LONG_MAX) {
-			Value = (float) LONG_MAX;
+			Value = (float)LONG_MAX;
 		}
 	}
 
@@ -213,26 +147,17 @@ void CEsmGlobalDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmGlobalDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmGlobalDlg::IsModified (void) {
+bool CEsmGlobalDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -251,57 +176,42 @@ bool CEsmGlobalDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmGlobalDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmGlobalDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pGlobal = (CEsmGlobal *) GetRecInfo()->pRecord;
+	m_pGlobal = (CEsmGlobal *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmGlobalTypeCombo(m_TypeList);
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_ValueText.SetLimitText(16);
+
 	/* Update the UI data */
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmGlobalDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Event - void OnSelchangeTypelist ();
-
  *
-
  *=========================================================================*/
 
 void CEsmGlobalDlg::OnSelchangeTypelist() {
@@ -309,26 +219,17 @@ void CEsmGlobalDlg::OnSelchangeTypelist() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmGlobalDlg::OnSelchangeTypelist()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmGlobalDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmGlobalDlg::SetControlData (void) {
+void CEsmGlobalDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pGlobal == NULL) {
 		return;
@@ -337,21 +238,16 @@ void CEsmGlobalDlg::SetControlData (void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pGlobal->GetID());
 	UpdateTitle(m_pGlobal->GetID());
+
 	/* Item strings and values */
 	m_ValueText.SetWindowText(m_pGlobal->GetFieldString(ESM_FIELD_VALUE));
 	m_IDText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
+
 	/* Item lists */
 	FindComboListItem(m_TypeList, m_pGlobal->GetType(), true);
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmGlobalDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
-
-

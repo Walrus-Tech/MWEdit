@@ -1,190 +1,118 @@
 /*===========================================================================
-
  *
-
  * File:    Esmspelldlg.H
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 16, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
 
 #ifndef __ESMSPELLDLG_H
-
 #define __ESMSPELLDLG_H
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Required Includes
-
  *
-
  *=========================================================================*/
 
 #include "EsmRecDialog.h"
-
 #include "Resource.h"
 
 /*===========================================================================
-
  *      End of Required Includes
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Class CEsmSpellDlg Definition
-
  *
-
  *=========================================================================*/
 
 class CEsmSpellDlg : public CEsmRecDialog {
 
 	DECLARE_DYNCREATE(CEsmSpellDlg);
 
-
-
 	/*---------- Begin Protected Class Members ------------------------*/
 
   protected:
 
 	CEsmSpell *m_pSpell;
-
 	esmrecinfo_t *m_pEffectInfo[MWESM_ENCHANT_NUMENCHANTS];
-
 	bool m_DisableCost;
-
-
-
 
 
 	/*---------- Begin Protected Class Methods ------------------------*/
 
   protected:
 
-
-
 	/* Helper set/get methods */
 
-	void GetEffectData (void);
+	void GetEffectData(void);
+	void GetEffectData(const int EffectIndex);
+	void SetEffectData(void);
+	void SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRecord);
 
-	void GetEffectData (const int EffectIndex);
-
-	void SetEffectData (void);
-
-	void SetEffectData (const int EffectIndex, CEsmSubENAM* pEffectRecord);
-
-
-
-	void OnSelChangeEffectList (const int EffectIndex);
-
-	void OnSelChangeSkillList (const int EffectIndex);
-
-	void OnSelChangeRangeList (const int EffectIndex);
-
-
+	void OnSelChangeEffectList(const int EffectIndex);
+	void OnSelChangeSkillList(const int EffectIndex);
+	void OnSelChangeRangeList(const int EffectIndex);
 
 	/* Update item data */
 
-	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
+	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
-
-
-	void UpdateSpellCost (const int Index);
-
-	void UpdateTotalSpellCost (void);
-
-
-
+	void UpdateSpellCost(const int Index);
+	void UpdateTotalSpellCost(void);
 
 
 	/*---------- Begin Public Class Methods ---------------------------*/
 
   public:
 
-
-
 	/* Construction */
 
 	CEsmSpellDlg();
 
-
-
 	/* Get class members */
 
-	virtual bool IsModified (void);
-
-
+	virtual bool IsModified(void);
 
 	/* Set or update the record data */
 
-	virtual void GetControlData (void);
-
-	virtual void SetControlData (void);
-
-
+	virtual void GetControlData(void);
+	virtual void SetControlData(void);
 
 	/* Dialog Data */
 
 	//{{AFX_DATA(CEsmSpellDlg)
-
-	enum { IDD = IDD_SPELL_DLG };
+	enum {
+		IDD = IDD_SPELL_DLG
+	};
 
 	CButton m_AutoCalcCheck;
-
 	CButton m_SucceedCheck;
-
 	CButton m_BlockedCheck;
-
 	CButton m_PCStartCheck;
 
 	CEdit m_CostText;
-
 	CEdit m_NameText;
 
 	CComboBox m_TypeList;
-
 	//}}AFX_DATA
 
 	CComboBox m_EffectList[MWESM_ENCHANT_NUMENCHANTS];
-
 	CComboBox m_SkillList[MWESM_ENCHANT_NUMENCHANTS];
-
 	CComboBox m_RangeList[MWESM_ENCHANT_NUMENCHANTS];
 
 	CEdit m_CostLabel[MWESM_ENCHANT_NUMENCHANTS];
-
 	CEdit m_AreaText[MWESM_ENCHANT_NUMENCHANTS];
-
 	CEdit m_DurationText[MWESM_ENCHANT_NUMENCHANTS];
-
 	CEdit m_Magnitude1Text[MWESM_ENCHANT_NUMENCHANTS];
-
 	CEdit m_Magnitude2Text[MWESM_ENCHANT_NUMENCHANTS];
-
 	CEdit m_TotalCostText[MWESM_ENCHANT_NUMENCHANTS];
-
-
 
 	/* ClassWizard generated virtual function overrides */
 
@@ -193,28 +121,18 @@ class CEsmSpellDlg : public CEsmRecDialog {
   protected:
 
 	virtual void OnInitialUpdate();
-
-	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
-
-
   protected:
-
-
 
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmSpellDlg)
-
 	afx_msg void OnAutocalccheck();
-
 	afx_msg void OnSelchangeTypelist();
-
 	//}}AFX_MSG
-
-
 
 	afx_msg void OnChangeDurationtext1() {
 		UpdateSpellCost (0);
@@ -344,29 +262,16 @@ class CEsmSpellDlg : public CEsmRecDialog {
 		OnSelChangeSkillList(7);
 	}
 
-
-
 	DECLARE_MESSAGE_MAP();
-
-
-
 };
 
 /*===========================================================================
-
  *      End of Class CEsmSpellDlg Definition
-
  *=========================================================================*/
-
-
-
 
 
 #endif
 
 /*===========================================================================
-
  *      End of File Esmspelldlg.H
-
  *=========================================================================*/
-

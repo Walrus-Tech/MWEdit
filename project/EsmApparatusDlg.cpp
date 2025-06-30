@@ -1,107 +1,60 @@
 /*===========================================================================
-
  *
-
  * File:    Esmapparatusdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 16, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmApparatusDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmApparatusDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmApparatusDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmApparatusDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmApparatusDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmApparatusDlg)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmApparatusDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmApparatusDlg::CEsmApparatusDlg() : CEsmRecDialog(CEsmApparatusDlg::IDD) {
@@ -111,26 +64,17 @@ CEsmApparatusDlg::CEsmApparatusDlg() : CEsmRecDialog(CEsmApparatusDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmApparatusDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmApparatusDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmApparatusDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmApparatusDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
@@ -149,32 +93,23 @@ void CEsmApparatusDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmApparatusDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmApparatusDlg::GetControlData (void) {
+void CEsmApparatusDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmApparatusDlg::GetControlData()");
 	appadata_t *pAppaData;
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pApparatus = (CEsmApparatus *) GetRecInfo()->pRecord;
+	m_pApparatus = (CEsmApparatus *)GetRecInfo()->pRecord;
 
 	if (m_pApparatus == NULL) {
 		return;
@@ -202,10 +137,10 @@ void CEsmApparatusDlg::GetControlData (void) {
 
 	/* Item quality */
 	m_QualityText.GetWindowText(Buffer);
-	pAppaData->Quality = (float) atof(Buffer);
+	pAppaData->Quality = (float)atof(Buffer);
 	/* Item weight */
 	m_WeightText.GetWindowText(Buffer);
-	pAppaData->Weight = (float) atof(Buffer);
+	pAppaData->Weight = (float)atof(Buffer);
 	/* Item value */
 	m_ValueText.GetWindowText(Buffer);
 	pAppaData->Value = atoi(Buffer);
@@ -224,26 +159,17 @@ void CEsmApparatusDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmApparatusDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmApparatusDlg::IsModified (void) {
+bool CEsmApparatusDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -274,23 +200,14 @@ bool CEsmApparatusDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmApparatusDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmApparatusDlg::OnInitialUpdate() {
@@ -298,7 +215,7 @@ void CEsmApparatusDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pApparatus = (CEsmApparatus *) GetRecInfo()->pRecord;
+	m_pApparatus = (CEsmApparatus *)GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
 	FillEsmApparatusTypeCombo(m_TypeList);
 	FillEsmScriptCombo(m_ScriptList);
@@ -310,26 +227,17 @@ void CEsmApparatusDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmApparatusDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmApparatusDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmApparatusDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
 		esmrecinfo_t *pRecInfo = NULL;
@@ -337,37 +245,28 @@ int CEsmApparatusDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 		Index = m_ScriptList.GetCurSel();
 
 		if (Index >= 0) {
-			pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
+			pRecInfo = (esmrecinfo_t *)m_ScriptList.GetItemData(Index);
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmApparatusDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmApparatusDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmApparatusDlg::SetControlData (void) {
+void CEsmApparatusDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pApparatus == NULL) {
 		return;
@@ -398,8 +297,5 @@ void CEsmApparatusDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmApparatusDlg::SetControlData()
-
  *=========================================================================*/
-

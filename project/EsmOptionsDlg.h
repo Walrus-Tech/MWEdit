@@ -32,11 +32,11 @@ class CEsmOptionsDlg : public CDialog {
 
 	/*---------- Begin Protected Class Members -------------------------*/
   protected:
-	CEsmOptions *m_pOrigOptions;        /* Reference to the original options object */
-	CEsmScriptOptions m_ScriptOptions;    /* Temporary script options */
-	int m_CurrentFormat;    /* Currently displayed format for editting */
+	CEsmOptions *m_pOrigOptions;       /* Reference to the original options object */
+	CEsmScriptOptions m_ScriptOptions; /* Temporary script options */
+	int m_CurrentFormat;               /* Currently displayed format for editting */
 
-	CFont m_SampleFont;       /* Sample font object for output */
+	CFont m_SampleFont;                /* Sample font object for output */
 
 
 	/*---------- Begin Protected Class Methods -------------------------*/
@@ -53,12 +53,12 @@ class CEsmOptionsDlg : public CDialog {
   public:
 
 	/* Construction */
-	CEsmOptionsDlg(CWnd* pParent = NULL);
+	CEsmOptionsDlg(CWnd *pParent = NULL);
 
 	/* Save the control data to the options object */
 	void GetControlData(void);
 	void GetFormatData(void);
-	void GetFontData(CFont* pFont);
+	void GetFontData(CFont *pFont);
 
 	/* Set the control data from the options object */
 	void SetControlData(void);
@@ -66,7 +66,7 @@ class CEsmOptionsDlg : public CDialog {
 	void SetFontData(void);
 
 	/* Set class members */
-	void SetOptions(CEsmOptions* pOptions) {
+	void SetOptions(CEsmOptions *pOptions) {
 		m_pOrigOptions = pOptions;
 	}
 
@@ -75,39 +75,56 @@ class CEsmOptionsDlg : public CDialog {
 
 	/* Dialog Data */
 	//{{AFX_DATA(CEsmOptionsDlg)
-	enum { IDD = IDD_OPTIONS_DLG };
+	enum {
+		IDD = IDD_OPTIONS_DLG
+	};
+
 	CButton m_AllowTribunal;
 	CButton m_AllowBloodmoon;
 	CButton m_IndentCommentsMore;
+
 	CEdit m_IndentSpacesText;
+
 	CButton m_IndentSpace;
 	CButton m_IndentTab;
 	CButton m_InitialIndentLevel;
 	CButton m_StrictIDs;
 	CButton m_UseExtraFile;
+
 	CEdit m_ExtraFile;
+
 	CButton m_NoScriptPrompt;
 	CButton m_AllowExtFuncs;
 	CButton m_BackupSaves;
+
 	CEdit m_GamePath;
+
 	CButton m_NoToolTipCheck;
+
 	CEdit m_AuthorText;
+
 	CColorStatic m_BGColor;
 	CColorStatic m_FormatColor;
+
 	CEdit m_SampleText;
+
 	CButton m_FontItalicCheck;
 	CButton m_FontBoldCheck;
+
 	CComboBox m_FontFaceList;
 	CComboBox m_FontSizeList;
+
 	CListBox m_FormatList;
+
 	CButton m_NoFormatCheck;
+
 	CComboBox m_WarnLevelList;
 	//}}AFX_DATA
 
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CEsmOptionsDlg)
   protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
@@ -131,7 +148,6 @@ class CEsmOptionsDlg : public CDialog {
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
-
 };
 
 /*===========================================================================

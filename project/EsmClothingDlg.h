@@ -1,66 +1,40 @@
 /*===========================================================================
-
  *
-
  * File:    Esmclothingdlg.H
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 14, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
 
 #ifndef __ESMCLOTHINGDLG_H
-
 #define __ESMCLOTHINGDLG_H
 
 
-
 /*===========================================================================
-
  *
-
  * Begin Required Includes
-
  *
-
  *=========================================================================*/
 
 #include "EsmRecDialog.h"
-
 #include "Resource.h"
 
 /*===========================================================================
-
  *      End of Required Includes
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Class CEsmClothingDlg Definition
-
  *
-
  *=========================================================================*/
 
 class CEsmClothingDlg : public CEsmRecDialog {
 
 	DECLARE_DYNCREATE(CEsmClothingDlg);
-
-
 
 	/*---------- Begin Protected Class Members ------------------------*/
 
@@ -69,102 +43,66 @@ class CEsmClothingDlg : public CEsmRecDialog {
 	CEsmClothing *m_pClothing;
 
 
-
-
-
 	/*---------- Begin Protected Class Methods ------------------------*/
 
   protected:
 
-
-
 	/* Handles selchange events in all the biped lists */
 
-	void OnSelChangeBipedList (const int Index);
-
-
+	void OnSelChangeBipedList(const int Index);
 
 	/* Update item data */
 
-	virtual int OnUpdateItem (esmrecinfo_t* pRecInfo);
-
-
+	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Sets the values for a biped object */
 
-	void SetBipedObject (const int Index);
-
-
+	void SetBipedObject(const int Index);
 
 	/* Helper get/set methods */
 
-	void GetBipedData (void);
-
-	void SetBipedData (void);
-
-	void SetBipedData (const int BipedIndex, CEsmSubByte* pIndexRecord, const int RecordIndex);
-
-
-
+	void GetBipedData(void);
+	void SetBipedData(void);
+	void SetBipedData(const int BipedIndex, CEsmSubByte *pIndexRecord, const int RecordIndex);
 
 
 	/*---------- Begin Public Class Methods ---------------------------*/
 
   public:
 
-
-
 	/* Construction */
 
 	CEsmClothingDlg();
 
-
-
 	/* Get class members */
 
-	virtual bool IsModified (void);
-
-
+	virtual bool IsModified(void);
 
 	/* Set or update the record data */
 
-	virtual void GetControlData (void);
-
-	virtual void SetControlData (void);
-
-
+	virtual void GetControlData(void);
+	virtual void SetControlData(void);
 
 	/* Dialog Data */
 
 	//{{AFX_DATA(CEsmClothingDlg)
-
-	enum { IDD = IDD_CLOTHING_DLG };
+	enum {
+		IDD = IDD_CLOTHING_DLG
+	};
 
 	CButton m_PersistCheck;
-
 	CButton m_BlockedCheck;
-
 	CEdit m_EnchantText;
-
 	CComboBox m_EnchantList;
-
 	CEdit m_ValueText;
-
 	CEdit m_WeightText;
-
 	CComboBox m_TypeList;
-
 	CEdit m_NameText;
-
 	//}}AFX_DATA
 
 	CComboBox m_MClothList[MWESM_CLOTH_MAXBODYPARTS];
-
 	CComboBox m_FClothList[MWESM_CLOTH_MAXBODYPARTS];
-
 	CComboBox m_BipedList[MWESM_CLOTH_MAXBODYPARTS];
-
-
 
 	/* ClassWizard generated virtual function overrides */
 
@@ -173,23 +111,15 @@ class CEsmClothingDlg : public CEsmRecDialog {
   protected:
 
 	virtual void OnInitialUpdate();
-
-	virtual void DoDataExchange(CDataExchange* pDX);
-
+	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
-
-
   protected:
-
-
 
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmClothingDlg)
-
 	afx_msg void OnEnchantedit();
-
 	//}}AFX_MSG
 
 	void OnSelchangeBipedlist1() {
@@ -224,37 +154,20 @@ class CEsmClothingDlg : public CEsmRecDialog {
 		m_Modified = true;
 	}
 
-
-
 	DECLARE_MESSAGE_MAP();
-
-
-
 };
 
 /*===========================================================================
-
  *      End of Class CEsmClothingDlg Definition
-
  *=========================================================================*/
 
 
-
-
-
 //{{AFX_INSERT_LOCATION}}
-
 //}}AFX_INSERT_LOCATION
-
-
-
 
 
 #endif
 
 /*===========================================================================
-
  *      End of File Esmclothingdlg.H
-
  *=========================================================================*/
-

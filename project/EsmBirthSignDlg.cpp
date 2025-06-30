@@ -1,149 +1,120 @@
 /*===========================================================================
-
  *
-
  * File:    Esmbirthsigndlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 19, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmBirthSignDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmBirthSignDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmBirthSignDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Begin Spell Column Data
-
  *
-
  *=========================================================================*/
 
 static esmcoldata_t l_SpellColData[] = {
-
-	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, NULL },
-
-	{ _T("Mod"), ESM_FIELD_CHANGED, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
-
-	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
-
-	{ _T("Type"), ESM_FIELD_TYPE, LVCFMT_CENTER, ESMLIST_WIDTH_TYPE, ESMLIST_SUBITEM_TYPE },
-
-	{ _T("Cost"), ESM_FIELD_COST, LVCFMT_CENTER, ESMLIST_WIDTH_COST, ESMLIST_SUBITEM_COST },
-
-	{ NULL, 0, 0, 0 }   /* Must be last record */
+	{
+		_T("ID"),
+		ESM_FIELD_ID,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ID,
+		ESMLIST_SUBITEM_ID,
+		NULL
+	},
+	{
+		_T("Mod"),
+		ESM_FIELD_CHANGED,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_CHANGED,
+		ESMLIST_SUBITEM_CHANGED
+	},
+	{
+		_T("Name"),
+		ESM_FIELD_NAME,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_NAME,
+		ESMLIST_SUBITEM_NAME
+	},
+	{
+		_T("Type"),
+		ESM_FIELD_TYPE,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_TYPE,
+		ESMLIST_SUBITEM_TYPE
+	},
+	{
+		_T("Cost"),
+		ESM_FIELD_COST,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_COST,
+		ESMLIST_SUBITEM_COST
+	},
+	{
+		NULL,
+		0,
+		0,
+		0
+	} /* Must be last record */
 
 };
 
 /*===========================================================================
-
  *      End of Spell Column Data
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmBirthSignDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmBirthSignDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmBirthSignDlg)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_BN_CLICKED(IDC_TEXTUREBUTTON, OnTexturebutton)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmBirthSignDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmBirthSignDlg::CEsmBirthSignDlg() : CEsmRecDialog(CEsmBirthSignDlg::IDD) {
@@ -153,26 +124,17 @@ CEsmBirthSignDlg::CEsmBirthSignDlg() : CEsmRecDialog(CEsmBirthSignDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmBirthSignDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmBirthSignDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmBirthSignDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmBirthSignDlg)
 	DDX_Control(pDX, IDC_DESCTEXT, m_DescText);
@@ -184,33 +146,24 @@ void CEsmBirthSignDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBirthSignDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmBirthSignDlg::GetControlData (void) {
+void CEsmBirthSignDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmBirthSignDlg::GetControlData()");
-	CEsmSubName32* pSpellRec;
+	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pBirthSign = (CEsmBirthSign *) GetRecInfo()->pRecord;
+	m_pBirthSign = (CEsmBirthSign *)GetRecInfo()->pRecord;
 	ASSERT(m_pBirthSign != NULL);
 
 	/* Item ID, if changed */
@@ -233,39 +186,30 @@ void CEsmBirthSignDlg::GetControlData (void) {
 	m_pBirthSign->DeleteSubRecords(MWESM_SUBREC_NPCS);
 
 	for (Index = 0; Index < m_SpellList.GetItemCount(); Index++) {
-		pRecInfo = (esmrecinfo_t *) m_SpellList.GetItemData(Index);
+		pRecInfo = (esmrecinfo_t *)m_SpellList.GetItemData(Index);
 
 		if (pRecInfo == NULL) {
 			continue;
 		}
 
-		pSpellRec = (CEsmSubName32 *) m_pBirthSign->AllocateSubRecord(MWESM_SUBREC_NPCS);
+		pSpellRec = (CEsmSubName32 *)m_pBirthSign->AllocateSubRecord(MWESM_SUBREC_NPCS);
 		pSpellRec->CreateNew();
 		pSpellRec->SetName(pRecInfo->pRecord->GetID());
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBirthSignDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmBirthSignDlg::IsModified (void) {
+bool CEsmBirthSignDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -288,23 +232,14 @@ bool CEsmBirthSignDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBirthSignDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmBirthSignDlg::OnInitialUpdate() {
@@ -312,7 +247,7 @@ void CEsmBirthSignDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pBirthSign = (CEsmBirthSign *) GetRecInfo()->pRecord;
+	m_pBirthSign = (CEsmBirthSign *)GetRecInfo()->pRecord;
 	/* Spell List */
 	m_SpellList.OnInitCtrl();
 	m_SpellList.SetDlgHandler(m_pParent);
@@ -329,29 +264,20 @@ void CEsmBirthSignDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBirthSignDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Event - LRESULT OnRecordDrop (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmBirthSignDlg::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmBirthSignDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
-	CMWEditDoc* pSourceDoc = (CMWEditDoc *) lParam;
-	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
+	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
+	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)wParam;
 	int ListIndex;
 
 	/* Ensure we only drag from the current document */
@@ -378,26 +304,17 @@ LRESULT CEsmBirthSignDlg::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBirthSignDlg::OnRecordDrop()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmBirthSignDlg::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmBirthSignDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	int ListIndex;
 
 	/* Delete all currently selected items */
@@ -417,23 +334,14 @@ LRESULT CEsmBirthSignDlg::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBirthSignDlg::OnRecordKey()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Event - void OnTexturebutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmBirthSignDlg::OnTexturebutton() {
@@ -447,26 +355,17 @@ void CEsmBirthSignDlg::OnTexturebutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBirthSignDlg::OnTexturebutton()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmBirthSignDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmBirthSignDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
 		m_SpellList.UpdateItem(pRecInfo);
@@ -476,27 +375,18 @@ int CEsmBirthSignDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBirthSignDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBirthSignDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmBirthSignDlg::SetControlData (void) {
-	CEsmSubName32* pSpellRec;
+void CEsmBirthSignDlg::SetControlData(void) {
+	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int Index;
@@ -520,7 +410,7 @@ void CEsmBirthSignDlg::SetControlData (void) {
 	/* Texture button */
 	m_TextureButton.SetWindowText(m_pBirthSign->GetTexture());
 	/* Spells and abilities */
-	pSpellRec = (CEsmSubName32 *) m_pBirthSign->FindFirst(MWESM_SUBREC_NPCS, Index);
+	pSpellRec = (CEsmSubName32 *)m_pBirthSign->FindFirst(MWESM_SUBREC_NPCS, Index);
 
 	while (pSpellRec != NULL) {
 		pRecInfo = GetDocument()->FindRecord(pSpellRec->GetName());
@@ -529,15 +419,10 @@ void CEsmBirthSignDlg::SetControlData (void) {
 			m_SpellList.AddItem(pRecInfo);
 		}
 
-		pSpellRec = (CEsmSubName32 *) m_pBirthSign->FindNext(MWESM_SUBREC_NPCS, Index);
+		pSpellRec = (CEsmSubName32 *)m_pBirthSign->FindNext(MWESM_SUBREC_NPCS, Index);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBirthSignDlg::SetControlData()
-
  *=========================================================================*/
-
-
-

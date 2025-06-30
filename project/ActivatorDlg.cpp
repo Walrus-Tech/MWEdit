@@ -1,107 +1,62 @@
 /*===========================================================================
-
  *
-
  * File:    Activatordlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 10, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
 
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "ActivatorDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
 
-
 DEFINE_FILE("ActivatorDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmActivatorDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmActivatorDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmActivatorDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmActivatorDlg)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmActivatorDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmActivatorDlg::CEsmActivatorDlg() : CEsmRecDialog(CEsmActivatorDlg::IDD) {
@@ -111,26 +66,17 @@ CEsmActivatorDlg::CEsmActivatorDlg() : CEsmRecDialog(CEsmActivatorDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmActivatorDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmActivatorDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmActivatorDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmActivatorDlg)
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -143,30 +89,21 @@ void CEsmActivatorDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmActivatorDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmActivatorDlg::GetControlData (void) {
+void CEsmActivatorDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmActivatorDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
-	m_pActivator = (CEsmActivator *) GetRecInfo()->pRecord;
+	m_pActivator = (CEsmActivator *)GetRecInfo()->pRecord;
 	ASSERT(m_pActivator != NULL);
 
 	/* Armor ID, if changed */
@@ -191,26 +128,17 @@ void CEsmActivatorDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmActivatorDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmActivatorDlg::IsModified (void) {
+bool CEsmActivatorDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -229,23 +157,14 @@ bool CEsmActivatorDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmActivatorDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmActivatorDlg::OnInitialUpdate() {
@@ -253,7 +172,7 @@ void CEsmActivatorDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pActivator = (CEsmActivator *) GetRecInfo()->pRecord;
+	m_pActivator = (CEsmActivator *)GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
 	FillEsmScriptCombo(m_ScriptList);
 	/* Update the UI data */
@@ -261,26 +180,17 @@ void CEsmActivatorDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmActivatorDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmActivatorDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmActivatorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
 		esmrecinfo_t *pRecInfo = NULL;
@@ -288,7 +198,7 @@ int CEsmActivatorDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 		Index = m_ScriptList.GetCurSel();
 
 		if (Index >= 0) {
-			pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
+			pRecInfo = (esmrecinfo_t *)m_ScriptList.GetItemData(Index);
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
@@ -299,26 +209,17 @@ int CEsmActivatorDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmActivatorDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmActivatorDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmActivatorDlg::SetControlData (void) {
+void CEsmActivatorDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pActivator == NULL) {
 		return;
@@ -340,10 +241,5 @@ void CEsmActivatorDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmActivatorDlg::SetControlData()
-
  *=========================================================================*/
-
-
-

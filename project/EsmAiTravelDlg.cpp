@@ -1,134 +1,80 @@
 /*===========================================================================
-
  *
-
  * File:    Esmaitraveldlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 24, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmAiTravelDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
 
 
 DEFINE_FILE("EsmAiTravelDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmAiTravelDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmAiTravelDlg, CDialog)
-
 	//{{AFX_MSG_MAP(CEsmAiTravelDlg)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmAiTravelDlg Message Map
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiTravelDlg Constructor
-
  *
-
  *=========================================================================*/
 
-CEsmAiTravelDlg::CEsmAiTravelDlg(CWnd* pParent) : CDialog(CEsmAiTravelDlg::IDD, pParent) {
+CEsmAiTravelDlg::CEsmAiTravelDlg(CWnd *pParent) : CDialog(CEsmAiTravelDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmAiTravelDlg)
 	//}}AFX_DATA_INIT
 	m_pSubRecord = NULL;
 }
 
 /*===========================================================================
-
  *      End of Class CEsmAiTravelDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiTravelDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmAiTravelDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmAiTravelDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmAiTravelDlg)
 	DDX_Control(pDX, IDC_ZTEXT, m_ZText);
@@ -138,26 +84,17 @@ void CEsmAiTravelDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmAiTravelDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiTravelDlg Method - bool DoModal (pSubRecord);
-
  *
-
  *=========================================================================*/
 
-bool CEsmAiTravelDlg::DoModal (CEsmSubAI_T* pSubRecord) {
+bool CEsmAiTravelDlg::DoModal(CEsmSubAI_T *pSubRecord) {
 	int Result;
 	m_pSubRecord = pSubRecord;
 
@@ -175,23 +112,14 @@ bool CEsmAiTravelDlg::DoModal (CEsmSubAI_T* pSubRecord) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmAiTravelDlg::DoModal()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiTravelDlg Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmAiTravelDlg::OnInitDialog() {
@@ -218,23 +146,14 @@ BOOL CEsmAiTravelDlg::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmAiTravelDlg::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiTravelDlg Event - void OnOK ();
-
  *
-
  *=========================================================================*/
 
 void CEsmAiTravelDlg::OnOK() {
@@ -246,19 +165,16 @@ void CEsmAiTravelDlg::OnOK() {
 
 	if (pAiData != NULL) {
 		m_XText.GetWindowText(Buffer);
-		pAiData->X = (float) atof(Buffer);
+		pAiData->X = (float)atof(Buffer);
 		m_YText.GetWindowText(Buffer);
-		pAiData->Y = (float) atof(Buffer);
+		pAiData->Y = (float)atof(Buffer);
 		m_ZText.GetWindowText(Buffer);
-		pAiData->Z = (float) atof(Buffer);
+		pAiData->Z = (float)atof(Buffer);
 	}
 
 	CDialog::OnOK();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmAiTravelDlg::OnOK()
-
  *=========================================================================*/
-

@@ -53,7 +53,7 @@ END_MESSAGE_MAP()
  * Class CEsmCsvImportDlg Constructor
  *
  *=========================================================================*/
-CEsmCsvImportDlg::CEsmCsvImportDlg(CWnd* pParent) : CDialog(CEsmCsvImportDlg::IDD, pParent) {
+CEsmCsvImportDlg::CEsmCsvImportDlg(CWnd *pParent) : CDialog(CEsmCsvImportDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmCsvImportDlg)
 	//}}AFX_DATA_INIT
 	m_pDocument = NULL;
@@ -87,8 +87,8 @@ CEsmCsvImportDlg::~CEsmCsvImportDlg() {
  *
  *=========================================================================*/
 bool CEsmCsvImportDlg::CheckData(void) {
-	CCsvRow* pRow;
-	CSString* pString;
+	CCsvRow *pRow;
+	CSString *pString;
 	bool Result;
 	int RowIndex;
 	int FieldID;
@@ -126,8 +126,9 @@ bool CEsmCsvImportDlg::CheckData(void) {
 		FieldID = GetEsmFieldID(*pString);
 
 		if (FieldID < 0) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("Unknown header column '%s' found in te CSV file!"),
-			                      (const TCHAR*)*pString);
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("Unknown header column '%s' found in te CSV file!"),
+			                      (const TCHAR *)*pString);
 			return (false);
 		}
 	}
@@ -158,8 +159,8 @@ bool CEsmCsvImportDlg::CheckData(void) {
  *=========================================================================*/
 bool CEsmCsvImportDlg::CheckRow(const int RowIndex) {
 	//DEFINE_FUNCTION("CEsmCsvImportDlg::CheckRow()");
-	CSString* pString;
-	CCsvRow* pRow;
+	CSString *pString;
+	CCsvRow *pRow;
 	pRow = m_CsvFile.GetRow(RowIndex);
 
 	/* Ensure the row is valid */
@@ -173,7 +174,9 @@ bool CEsmCsvImportDlg::CheckRow(const int RowIndex) {
 		pString = pRow->GetAt(m_TypeColIndex);
 
 		if (pString == NULL || pString->GetLength() == 0) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("The column TYPE in row %d is not valid!"), RowIndex + 1);
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("The column TYPE in row %d is not valid!"),
+			                      RowIndex + 1);
 			return (false);
 		}
 
@@ -182,7 +185,8 @@ bool CEsmCsvImportDlg::CheckRow(const int RowIndex) {
 
 		if (pRecType == NULL) {
 			ErrorHandler.AddError(ERR_BADINPUT,
-			                      _T("The record type '%s' is not valid or not supported for import!"), *pString);
+			                      _T("The record type '%s' is not valid or not supported for import!"),
+			                      *pString);
 			return (false);
 		}
 	}
@@ -192,7 +196,9 @@ bool CEsmCsvImportDlg::CheckRow(const int RowIndex) {
 		pString = pRow->GetAt(m_IDColIndex);
 
 		if (pString == NULL || pString->GetLength() == 0) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("The column ID in row %d is not valid!"), RowIndex + 1);
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("The column ID in row %d is not valid!"),
+			                      RowIndex + 1);
 			return (false);
 		}
 	}
@@ -237,7 +243,7 @@ void CEsmCsvImportDlg::ClearCsvList(void) {
  *
  *=========================================================================*/
 bool CEsmCsvImportDlg::CreateRecords(void) {
-	CCsvRow* pRow;
+	CCsvRow *pRow;
 	int RowIndex;
 	bool Result;
 
@@ -277,15 +283,15 @@ bool CEsmCsvImportDlg::CreateRecords(void) {
  * Assumes that the given row and csv file are valid.
  *
  *=========================================================================*/
-bool CEsmCsvImportDlg::CreateRecord(CCsvRow* pRow) {
-	CEsmRecord* pNewRecord;
-	CSString* pTypeCol;
-	CSString* pIDCol;
-	CSString* pString;
-	CSString* pHeaderString;
+bool CEsmCsvImportDlg::CreateRecord(CCsvRow *pRow) {
+	CEsmRecord *pNewRecord;
+	CSString *pTypeCol;
+	CSString *pIDCol;
+	CSString *pString;
+	CSString *pHeaderString;
 	esmrecinfo_t *pRecInfo;
 	CCsvRow* pHeaderRow;
-	const TCHAR* pRecordType;
+	const TCHAR *pRecordType;
 	bool Result;
 	int ColIndex;
 	int FieldID;
@@ -312,7 +318,8 @@ bool CEsmCsvImportDlg::CreateRecord(CCsvRow* pRow) {
 	}
 	/* Existing record is incorrect type */
 	else if (!pRecInfo->pRecord->IsType(pRecordType)) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("The previous record '%s' is not the correct type (%s)!"),
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("The previous record '%s' is not the correct type (%s)!"),
 		                      *pIDCol, pRecInfo->pRecord->GetItemType());
 		return (false);
 	}
@@ -371,7 +378,7 @@ bool CEsmCsvImportDlg::CreateRecord(CCsvRow* pRow) {
  * Class CEsmCsvImportDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CEsmCsvImportDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmCsvImportDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmCsvImportDlg)
 	DDX_Control(pDX, IDC_CSVLIST, m_CsvList);
@@ -392,8 +399,8 @@ void CEsmCsvImportDlg::DoDataExchange(CDataExchange* pDX) {
  *
  *=========================================================================*/
 void CEsmCsvImportDlg::FillCsvList(void) {
-	CCsvRow* pRow;
-	CSString* pString;
+	CCsvRow *pRow;
+	CSString *pString;
 	CString Buffer;
 	int ColIndex;
 	int RowIndex;
@@ -411,8 +418,11 @@ void CEsmCsvImportDlg::FillCsvList(void) {
 
 	for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
 		pString = pRow->GetAt(ColIndex);
-		m_CsvList.InsertColumn(ColIndex + 1, pString == NULL ? _T("?") : static_cast<const char*>(*pString),
-		                       LVCFMT_CENTER, ESMCSVIMP_LIST_COLWIDTH, ColIndex + 1);
+		m_CsvList.InsertColumn(ColIndex + 1,
+		                       pString == NULL ? _T("?") : static_cast<const char *>(*pString),
+		                       LVCFMT_CENTER,
+		                       ESMCSVIMP_LIST_COLWIDTH,
+		                       ColIndex + 1);
 	}
 
 	/* Add the remaining row data */
@@ -451,10 +461,10 @@ void CEsmCsvImportDlg::FillCsvList(void) {
  *
  *=========================================================================*/
 bool CEsmCsvImportDlg::FindColumns(void) {
-	CCsvRow* pRow = m_CsvFile.GetRow(0);
-	CSString* pString;
-	const TCHAR* pIDString;
-	const TCHAR* pTypeString;
+	CCsvRow *pRow = m_CsvFile.GetRow(0);
+	CSString *pString;
+	const TCHAR *pIDString;
+	const TCHAR *pTypeString;
 	int ColIndex;
 	/* Reset the current indices */
 	m_IDColIndex = -1;
@@ -484,7 +494,8 @@ bool CEsmCsvImportDlg::FindColumns(void) {
 	}
 
 	if (m_TypeColIndex < 0) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("Record TYPE column was not found in the CSV file!"));
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("Record TYPE column was not found in the CSV file!"));
 		return (false);
 	}
 
@@ -504,7 +515,12 @@ bool CEsmCsvImportDlg::FindColumns(void) {
  *
  *=========================================================================*/
 bool CEsmCsvImportDlg::LoadCsvFile(void) {
-	CFileDialog FileDlg(TRUE, ESMCSVIMP_CSV_EXT, NULL, OFN_HIDEREADONLY, ESMCSVIMP_CSV_FILTER, this);
+	CFileDialog FileDlg(TRUE,
+	                    ESMCSVIMP_CSV_EXT,
+	                    NULL,
+	                    OFN_HIDEREADONLY,
+	                    ESMCSVIMP_CSV_FILTER,
+	                    this);
 	int Result;
 	/* Display the modal open dialog */
 	FileDlg.m_ofn.lpstrTitle = _T("Open CSV File");
@@ -636,4 +652,3 @@ void CEsmCsvImportDlg::SetControlData(void) {
 /*===========================================================================
  *      End of Class Method CEsmCsvImportDlg::SetControlData()
  *=========================================================================*/
-

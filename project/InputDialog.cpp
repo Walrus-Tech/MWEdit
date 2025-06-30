@@ -1,111 +1,62 @@
 /*===========================================================================
-
  *
-
  * File:    Inputdialog.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  April 5, 2003
-
  *
-
  * Description
-
  *
-
  * 14 September 2003
-
  *  - Input textbox has initial focus.
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "InputDialog.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Debug Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
-
 
 DEFINE_FILE("InputDialog.cpp");
 
 /*===========================================================================
-
  *      End of Debug Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CInputDialog Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CInputDialog, CDialog)
-
 	//{{AFX_MSG_MAP(CInputDialog)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CInputDialog Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CInputDialog Constructor
-
  *
-
  *=========================================================================*/
 
 CInputDialog::CInputDialog(CWnd* pParent) : CDialog(CInputDialog::IDD, pParent) {
@@ -114,26 +65,17 @@ CInputDialog::CInputDialog(CWnd* pParent) : CDialog(CInputDialog::IDD, pParent) 
 }
 
 /*===========================================================================
-
  *      End of Class CInputDialog Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CInputDialog Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CInputDialog::DoDataExchange (CDataExchange* pDX) {
+void CInputDialog::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CInputDialog)
 	DDX_Control(pDX, IDC_MAINLABEL, m_MainLabel);
@@ -142,26 +84,17 @@ void CInputDialog::DoDataExchange (CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CInputDialog::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CInputDialog Method - bool DoModal (pResult, pLabel, pTitle);
-
  *
-
  *=========================================================================*/
 
-bool CInputDialog::DoModal (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle) {
+bool CInputDialog::DoModal(CString *pResult, const TCHAR *pLabel, const TCHAR *pTitle) {
 	int Result;
 	m_pLabel = pLabel;
 	m_pTitle = pTitle;
@@ -176,23 +109,14 @@ bool CInputDialog::DoModal (CString* pResult, const TCHAR* pLabel, const TCHAR* 
 }
 
 /*===========================================================================
-
  *      End of Class Method CInputDialog::DoModal()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CInputDialog Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CInputDialog::OnInitDialog() {
@@ -205,23 +129,14 @@ BOOL CInputDialog::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CInputDialog::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CInputDialog Event - void OnOK ();
-
  *
-
  *=========================================================================*/
 
 void CInputDialog::OnOK() {
@@ -233,37 +148,23 @@ void CInputDialog::OnOK() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CInputDialog::OnInitDialog()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Function - bool InputDialog (pResult, pLabel, pTitle);
-
  *
-
  * Main access function for displaying a standard input dialog box.
-
  *
-
  *=========================================================================*/
 
-bool InputDialog (CString* pResult, const TCHAR* pLabel, const TCHAR* pTitle) {
+bool InputDialog(CString *pResult, const TCHAR *pLabel, const TCHAR *pTitle) {
 	CInputDialog Dlg;
 	return Dlg.DoModal(pResult, pLabel, pTitle);
 }
 
 /*===========================================================================
-
  *      End of Function InputDialog()
-
  *=========================================================================*/
-

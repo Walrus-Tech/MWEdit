@@ -64,8 +64,20 @@ CEsmFuncHelpView::CEsmFuncHelpView() : CFormView(CEsmFuncHelpView::IDD) {
 	m_CurrentFunc = -1;
 	m_Font.CreatePointFont(90, _T("Arial Bold"), NULL);
 	m_NameFont.CreatePointFont(160, _T("Arial Bold"), NULL);
-	m_LinkFont.CreateFont(16, 0, 0, 0, FW_NORMAL, 0, TRUE, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
-	                      CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Arial"));
+	m_LinkFont.CreateFont(16,
+	                      0,
+	                      0,
+	                      0,
+	                      FW_NORMAL,
+	                      0,
+	                      TRUE,
+	                      0,
+	                      DEFAULT_CHARSET,
+	                      OUT_DEFAULT_PRECIS,
+	                      CLIP_DEFAULT_PRECIS,
+	                      DEFAULT_QUALITY,
+	                      DEFAULT_PITCH,
+	                      _T("Arial"));
 	/*m_Font.CreateFont(100, 0, 0, 0, FW_BOLD, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
 	      CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Arial")); //*/
 }
@@ -96,7 +108,7 @@ CEsmFuncHelpView::~CEsmFuncHelpView() {
  *
  *=========================================================================*/
 void CEsmFuncHelpView::DisplayFunction(const int Index) {
-	CEsmScrFuncData* pFunction;
+	CEsmScrFuncData *pFunction;
 
 	/* Ignore if the function hasn't changed */
 	if (m_CurrentFunc == Index) {
@@ -109,7 +121,7 @@ void CEsmFuncHelpView::DisplayFunction(const int Index) {
 	}
 
 	/* Update the display */
-	pFunction = (CEsmScrFuncData*)m_FunctionList.GetItemDataPtr(Index);
+	pFunction = (CEsmScrFuncData *)m_FunctionList.GetItemDataPtr(Index);
 	SetFuncTitle(pFunction);
 	SetReturnText(pFunction);
 	SetDescText(pFunction);
@@ -127,7 +139,7 @@ void CEsmFuncHelpView::DisplayFunction(const int Index) {
  * Class CEsmFuncHelpView Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CEsmFuncHelpView::DoDataExchange(CDataExchange* pDX) {
+void CEsmFuncHelpView::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmFuncHelpView)
 	DDX_Control(pDX, IDC_DETAILLABEL, m_DetailLabel);
@@ -158,8 +170,7 @@ void CEsmFuncHelpView::AssertValid() const {
 	CFormView::AssertValid();
 }
 
-
-void CEsmFuncHelpView::Dump(CDumpContext& dc) const {
+void CEsmFuncHelpView::Dump(CDumpContext &dc) const {
 	CFormView::Dump(dc);
 }
 
@@ -177,7 +188,7 @@ void CEsmFuncHelpView::Dump(CDumpContext& dc) const {
  *
  *=========================================================================*/
 void CEsmFuncHelpView::FillFunctionList(void) {
-	CEsmScrFuncData* pFunction;
+	CEsmScrFuncData *pFunction;
 	int Index;
 	int Result;
 	/* Clear the current list */
@@ -192,7 +203,7 @@ void CEsmFuncHelpView::FillFunctionList(void) {
 		Result = m_FunctionList.AddString(pFunction->GetFunction());
 
 		if (Result >= 0) {
-			m_FunctionList.SetItemDataPtr(Result, (void*)pFunction);
+			m_FunctionList.SetItemDataPtr(Result, (void *)pFunction);
 		}
 	}
 
@@ -210,7 +221,7 @@ void CEsmFuncHelpView::FillFunctionList(void) {
  *
  *=========================================================================*/
 CMWEditApp *CEsmFuncHelpView::GetApp(void) {
-	return (CMWEditApp*)AfxGetApp();
+	return (CMWEditApp *)AfxGetApp();
 }
 
 /*===========================================================================
@@ -223,7 +234,7 @@ CMWEditApp *CEsmFuncHelpView::GetApp(void) {
  * Class CEsmFuncHelpView Event - HBRUSH OnCtlColor (pDC, pWnd, nCtlColor);
  *
  *=========================================================================*/
-HBRUSH CEsmFuncHelpView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) {
+HBRUSH CEsmFuncHelpView::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor) {
 	HBRUSH hbr = CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
 
 	if (pWnd->GetDlgCtrlID() == IDC_WIKILINK) {
@@ -247,11 +258,13 @@ void CEsmFuncHelpView::OnInitialUpdate() {
 	CFormView::OnInitialUpdate();
 	ResizeParentToFit(FALSE);
 	m_pFuncArray = GetApp()->GetFunctionArray();
+
 	/* Change the control fonts */
 	m_ReturnText.SetFont(&m_Font, FALSE);
 	m_FuncTitle.SetFont(&m_Font, FALSE);
 	m_FuncName.SetFont(&m_NameFont, FALSE);
 	m_WikiLink.SetFont(&m_LinkFont, FALSE);
+
 	/* Initialize the controls */
 	FillFunctionList();
 	DisplayFunction(0);
@@ -283,7 +296,7 @@ void CEsmFuncHelpView::OnSelchangeFuncList() {
  *
  *=========================================================================*/
 LRESULT CEsmFuncHelpView::OnViewError(WPARAM wParam, LPARAM lParam) {
-	const TCHAR* pName = (const TCHAR*)wParam;
+	const TCHAR *pName = (const TCHAR *)wParam;
 	int ListIndex;
 
 	/* Ensure valid input */
@@ -355,14 +368,14 @@ void CEsmFuncHelpView::OnSize(UINT nType, int CX, int CY) {
  *
  *=========================================================================*/
 void CEsmFuncHelpView::OnWikilink() {
-	CEsmScrFuncData* pFunction = NULL;
+	CEsmScrFuncData *pFunction = NULL;
 	CString Buffer;
 	CString FuncName;
 	int ListIndex;
 	ListIndex = m_FunctionList.GetCurSel();
 
 	if (ListIndex >= 0) {
-		pFunction = (CEsmScrFuncData*)m_FunctionList.GetItemData(ListIndex);
+		pFunction = (CEsmScrFuncData *)m_FunctionList.GetItemData(ListIndex);
 	}
 
 	Buffer = _T("http://www.uesp.net/wiki/Tes3Mod:");
@@ -388,7 +401,7 @@ void CEsmFuncHelpView::OnWikilink() {
  * Sets the description text control for the given function.
  *
  *=========================================================================*/
-void CEsmFuncHelpView::SetDescText(CEsmScrFuncData* pFunction) {
+void CEsmFuncHelpView::SetDescText(CEsmScrFuncData *pFunction) {
 	m_DescText.SetWindowText(pFunction->GetDescription());
 }
 
@@ -404,7 +417,7 @@ void CEsmFuncHelpView::SetDescText(CEsmScrFuncData* pFunction) {
  * Sets the detail text control for the given function.
  *
  *=========================================================================*/
-void CEsmFuncHelpView::SetDetailText(CEsmScrFuncData* pFunction) {
+void CEsmFuncHelpView::SetDetailText(CEsmScrFuncData *pFunction) {
 	CString Buffer;
 	int Index;
 	Buffer = _T("Type(s):\t");
@@ -431,7 +444,7 @@ void CEsmFuncHelpView::SetDetailText(CEsmScrFuncData* pFunction) {
  * Sets the complete function title using the input function data.
  *
  *=========================================================================*/
-void CEsmFuncHelpView::SetFuncTitle(CEsmScrFuncData* pFunction) {
+void CEsmFuncHelpView::SetFuncTitle(CEsmScrFuncData *pFunction) {
 	m_FuncName.SetWindowText(pFunction->GetFunction());
 	m_FuncTitle.SetWindowText(pFunction->GetFuncForm());
 }
@@ -448,7 +461,7 @@ void CEsmFuncHelpView::SetFuncTitle(CEsmScrFuncData* pFunction) {
  * Sets the return text control for the given function.
  *
  *=========================================================================*/
-void CEsmFuncHelpView::SetReturnText(CEsmScrFuncData* pFunction) {
+void CEsmFuncHelpView::SetReturnText(CEsmScrFuncData *pFunction) {
 	CString Buffer;
 	m_ReturnText.SetWindowText(pFunction->GetReturnDesc());
 }

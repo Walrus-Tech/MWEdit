@@ -36,7 +36,7 @@
 
 /* Csv file definitions */
 #define ESMSCRTEMP_CSV_EXT      _T("csv")
-#define ESMSCRTEMP_CSV_FILTER       _T("CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
+#define ESMSCRTEMP_CSV_FILTER   _T("CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
 
 
 /*===========================================================================
@@ -53,11 +53,11 @@
 /* Template options */
 typedef struct esmscrtempoptions {
 	bool OnlyCompleteRows;   /* Ignore any incomplete row */
-	bool KeepQuotes;     /* Keep quotes in CSV files */
+	bool KeepQuotes;         /* Keep quotes in CSV files */
 	bool AutoScriptName;     /* Auto name scripts */
 	TCHAR ScriptName[ESMSCRTEMP_SCRIPTNAMESIZE + 1];
 
-	void SetScriptName(const TCHAR* pString) {
+	void SetScriptName(const TCHAR *pString) {
 		strnncpy(ScriptName, pString, ESMSCRTEMP_SCRIPTNAMESIZE);
 	}
 } esmscrtempoptions_t;
@@ -79,18 +79,18 @@ class CEsmScrTempView : public CFormView {
 
 	/*---------- Begin Protected Class Members -------------------------*/
   protected:
-	CEsmDlgHandler *m_pDlgHandler;      /* Parent dialog handler */
-	CMWEditDoc *m_pDocument;        /* Parent document */
+	CEsmDlgHandler *m_pDlgHandler;         /* Parent dialog handler */
+	CMWEditDoc *m_pDocument;               /* Parent document */
 
 	CEsmScriptTemplate m_ScriptTemplate;   /* Handles the template files */
-	CCsvFile m_CsvFile;      /* Csv file for the variable list */
+	CCsvFile m_CsvFile;                    /* Csv file for the variable list */
 	esmscrtempoptions_t m_Options;
 
-	CEsmScrTempPage1 m_Page1;        /* Tab control pages */
+	CEsmScrTempPage1 m_Page1;              /* Tab control pages */
 	CEsmScrTempPage2 m_Page2;
 	CEsmScrTempPage3 m_Page3;
 
-	int m_CreatedScripts;   /* Used during script creation */
+	int m_CreatedScripts;                  /* Used during script creation */
 	CString m_NewScriptText;
 
 	HACCEL m_hAccelerator;
@@ -106,7 +106,10 @@ class CEsmScrTempView : public CFormView {
 
   public:
 	//{{AFX_DATA(CEsmScrTempView)
-	enum { IDD = IDD_SCRTEMPLATE_DLG };
+	enum {
+		IDD = IDD_SCRTEMPLATE_DLG
+	};
+
 	CTabCtrlSheet m_TabControl;
 	//}}AFX_DATA
 
@@ -121,8 +124,8 @@ class CEsmScrTempView : public CFormView {
 
 	/* Creates the required scripts */
 	bool CreateScripts(void);
-	bool CreateScript(CCsvRow* pRow);
-	bool ParseScriptText(CCsvRow* pRow, const TCHAR* pScriptName);
+	bool CreateScript(CCsvRow *pRow);
+	bool ParseScriptText(CCsvRow *pRow, const TCHAR *pScriptName);
 
 	/* Get class members */
 	CEsmScriptTemplate *GetScriptTemplate(void) {
@@ -145,7 +148,7 @@ class CEsmScrTempView : public CFormView {
 	void GetControlData(void);
 
 	/* Get or create the script name */
-	const TCHAR *MakeScriptName(CCsvRow* pRow);
+	const TCHAR *MakeScriptName(CCsvRow *pRow);
 
 	/* Events */
 	void OnLoadTemplate(void);
@@ -156,11 +159,11 @@ class CEsmScrTempView : public CFormView {
 	void OnCheckTemplate(void);
 
 	/* Set class members */
-	void SetDlgHandler(CEsmDlgHandler* pHandler) {
+	void SetDlgHandler(CEsmDlgHandler *pHandler) {
 		m_pDlgHandler = pHandler;
 	}
 
-	void SetDocument(CMWEditDoc* pDoc) {
+	void SetDocument(CMWEditDoc *pDoc) {
 		m_pDocument = pDoc;
 	}
 
@@ -171,9 +174,9 @@ class CEsmScrTempView : public CFormView {
 	//{{AFX_VIRTUAL(CEsmScrTempView)
   public:
 	virtual void OnInitialUpdate();
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	virtual BOOL PreTranslateMessage(MSG *pMsg);
   protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
@@ -181,7 +184,7 @@ class CEsmScrTempView : public CFormView {
 
 #ifdef _DEBUG
 	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext &dc) const;
 #endif
 
 	/* Generated message map functions */
@@ -195,7 +198,6 @@ class CEsmScrTempView : public CFormView {
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
-
 };
 
 /*===========================================================================
@@ -211,4 +213,3 @@ class CEsmScrTempView : public CFormView {
 /*===========================================================================
  *      End of File Esmscrtempview.H
  *=========================================================================*/
-

@@ -1,4 +1,3 @@
-
 /*===========================================================================
  *
  * File:    EsmScriptDlg.CPP
@@ -56,6 +55,7 @@ BEGIN_MESSAGE_MAP(CEsmScriptDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmScriptDlg)
 	ON_EN_CHANGE(IDC_SCRIPTTEXT, OnChangeScriptText)
 	ON_EN_UPDATE(IDC_SCRIPTTEXT, OnUpdateScriptText)
+
 	ON_WM_SIZE()
 	ON_WM_MOVE()
 	ON_WM_LBUTTONDOWN()
@@ -63,10 +63,12 @@ BEGIN_MESSAGE_MAP(CEsmScriptDlg, CEsmRecDialog)
 	ON_WM_KILLFOCUS()
 	ON_WM_SETFOCUS()
 	ON_WM_SHOWWINDOW()
+
 	ON_BN_CLICKED(IDC_SAVE, OnSave)
 	ON_MESSAGE(CRE_UPDATEPOS, OnUpdateScriptPos)
 	ON_MESSAGE(CRE_UPDATESCROLL, OnUpdateScriptScroll)
 	ON_WM_CONTEXTMENU()
+
 	ON_COMMAND(ID_SCRIPT_COPY, OnScriptCopy)
 	ON_COMMAND(ID_SCRIPT_COMPILE, OnScriptCompile)
 	ON_COMMAND(ID_SCRIPT_CUT, OnScriptCut)
@@ -74,11 +76,15 @@ BEGIN_MESSAGE_MAP(CEsmScriptDlg, CEsmRecDialog)
 	ON_COMMAND(ID_SCRIPT_PASTE, OnScriptPaste)
 	ON_COMMAND(ID_SCRIPT_REPLACETEXT, OnScriptReplacetext)
 	ON_COMMAND(ID_SCRIPT_FUNCHELP, OnScriptFuncHelp)
+
 	ON_REGISTERED_MESSAGE(WM_FINDREPLACE, OnFindReplace)
+
 	ON_COMMAND(ID_SCRIPT_UNDO, OnScriptUndo)
 	ON_UPDATE_COMMAND_UI(ID_SCRIPT_UNDO, OnUpdateScriptUndo)
+
 	ON_BN_CLICKED(IDC_WHITEBUTTON, OnWhitebutton)
 	ON_BN_CLICKED(IDC_BLUEBUTTON, OnBluebutton)
+
 	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateEditCopy)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_CUT, OnUpdateEditCut)
@@ -92,6 +98,7 @@ BEGIN_MESSAGE_MAP(CEsmScriptDlg, CEsmRecDialog)
 	ON_COMMAND(IDC_FINDBUTTON, OnScriptFindtext)
 	ON_COMMAND(IDC_REPLACEBUTTON, OnScriptReplacetext)
 	ON_COMMAND(IDC_INDENTBUTTON, AutoIndent)
+
 	ON_BN_CLICKED(IDC_COMPILEBUTTON, OnScriptCompile)
 	ON_BN_CLICKED(IDC_NOFORMATCHECK, OnNoformatcheck)
 	ON_MESSAGE(MSG_SCRIPTFRM_GOTOLINE, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnGotoError)
@@ -160,29 +167,37 @@ void CEsmScriptDlg::AutoIndent(void) {
 	CString FirstWord;
 	CString Spaces;
 	CString IndentPartString;
+
 	long LineStart;
 	long LineEnd;
+
 	int LineLength;
 	int Index;
 	int i;
 	int IndentLevel = 0;
 	int NextIndentLevel = 0;
+
 	long DeltaSel = 0;
 	long StartSel;
 	long EndSel;
+
 	int StartSelLine;
 	int EndSelLine;
 	int DeltaStartSel;
 	int DeltaEndSel;
+
 	bool IdentCommentMore = ::GetEsmOptIndentCommentsMore();
 	bool IdentInitialLevel = ::GetEsmOptInitialIndentLevel();
+
 	IndentPartString = ::GetEsmOptScriptIndentString();
 	m_UpdatingRichEdit = true;
+
 	m_ScriptText.SetRedraw(FALSE);
 	m_ScriptText.HideSelection(TRUE, FALSE);
 	m_ScriptText.GetWindowText(Buffer);
 	m_UndoStack.CreateEntireText(Buffer);
 	m_ScriptText.GetSel(StartSel, EndSel);
+
 	StartSelLine = m_ScriptText.LineFromChar(StartSel);
 	EndSelLine = m_ScriptText.LineFromChar(EndSel);
 	DeltaStartSel = StartSel - m_ScriptText.LineIndex(StartSelLine);
@@ -192,6 +207,7 @@ void CEsmScriptDlg::AutoIndent(void) {
 		LineStart = m_ScriptText.LineIndex(Index);
 		LineEnd = m_ScriptText.LineIndex(Index + 1);
 		LineLength = m_ScriptText.LineLength(LineStart);
+
 		DeltaSel = 0;
 		m_ScriptText.GetLine(Index, Buffer.GetBuffer(LineLength + 4), LineLength);
 		Buffer.ReleaseBuffer(LineLength);
@@ -271,7 +287,7 @@ void CEsmScriptDlg::AutoIndent(void) {
  * Class CEsmScriptDlg Method - void ChangeScriptFormat (pNewFormat);
  *
  *=========================================================================*/
-void CEsmScriptDlg::ChangeScriptFormat(CEsmScriptOptions* pNewFormat) {
+void CEsmScriptDlg::ChangeScriptFormat(CEsmScriptOptions *pNewFormat) {
 	if (pNewFormat != NULL) {
 		m_pCurrentScriptOptions = pNewFormat;
 		m_ScriptText.SetBackgroundColor(FALSE, m_pCurrentScriptOptions->GetBGColor());
@@ -291,7 +307,7 @@ void CEsmScriptDlg::ChangeScriptFormat(CEsmScriptOptions* pNewFormat) {
  * Class CEsmScriptDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CEsmScriptDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmScriptDlg::DoDataExchange(CDataExchange *pDX) {
 	CEsmRecDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmScriptDlg)
 	DDX_Control(pDX, IDC_NOFORMATCHECK, m_NoFormatCheck);
@@ -323,8 +339,8 @@ void CEsmScriptDlg::DoDataExchange(CDataExchange* pDX) {
  *=========================================================================*/
 void CEsmScriptDlg::FindScriptID(void) {
 	CString Buffer;
-	TCHAR* pString;
-	TCHAR* pString2;
+	TCHAR *pString;
+	TCHAR *pString2;
 	m_ScriptText.GetWindowText(Buffer);
 	pString = stristr(Buffer, _T("begin "));
 
@@ -361,6 +377,7 @@ void CEsmScriptDlg::FormatText(void) {
 	double EndTime;
 	long StartChar;
 	long EndChar;
+
 	StartTime = GetHiClockTime();
 	m_UpdatingRichEdit = true;
 	m_ScriptText.SetRedraw(FALSE);
@@ -373,9 +390,7 @@ void CEsmScriptDlg::FormatText(void) {
 		m_ScriptText.SetSel(0, -1);
 		m_ScriptText.SetSelectionCharFormat(*m_pCurrentScriptOptions->GetCharFormat(
 		                                        ESMSCRIPT_FORMAT_DEFAULT));
-	}
-	/* Parse each line of the rich edit box */
-	else {
+	} else { /* Parse each line of the rich edit box */
 		for (LineCount = 0; LineCount < m_ScriptText.GetLineCount(); LineCount++) {
 			ParseLine(LineCount);
 		}
@@ -402,10 +417,10 @@ void CEsmScriptDlg::FormatText(void) {
  *=========================================================================*/
 void CEsmScriptDlg::GetControlData(void) {
 	CString Buffer;
-	CEsmSubRecord* pSubRec;
-	CEsmSubSCHD* pScriptHeader;
+	CEsmSubRecord *pSubRec;
+	CEsmSubSCHD *pScriptHeader;
 	/* Update the record pointer and data */
-	m_pScript = (CEsmScript*)GetRecInfo()->pRecord;
+	m_pScript = (CEsmScript *)GetRecInfo()->pRecord;
 	ASSERT(m_pScript != NULL);
 
 	/* Change ID if required */
@@ -419,7 +434,7 @@ void CEsmScriptDlg::GetControlData(void) {
 	pScriptHeader = m_pScript->GetScriptHeader();
 
 	if (pScriptHeader == NULL) {
-		pScriptHeader = (CEsmSubSCHD*)m_pScript->AllocateSubRecord(MWESM_SUBREC_SCHD);
+		pScriptHeader = (CEsmSubSCHD *)m_pScript->AllocateSubRecord(MWESM_SUBREC_SCHD);
 	}
 
 	pScriptHeader->GetScriptHeadData()->LocalVarSize = m_Compiler.GetLocalVarDataSize();
@@ -427,6 +442,7 @@ void CEsmScriptDlg::GetControlData(void) {
 	pScriptHeader->GetScriptHeadData()->NumShorts = m_Compiler.GetNumShortLocals();
 	pScriptHeader->GetScriptHeadData()->NumLongs = m_Compiler.GetNumLongLocals();
 	pScriptHeader->GetScriptHeadData()->NumFloats = m_Compiler.GetNumFloatLocals();
+
 	/* Set the local variable data */
 	pSubRec = m_pScript->GetScriptVars();
 
@@ -457,9 +473,11 @@ void CEsmScriptDlg::GetControlData(void) {
  * Description
  *
  *=========================================================================*/
-int GetESMScriptWord(CString& WordBuffer, const TCHAR* pEditBuffer,
-                     int &CharIndex, int &StartIndex) {
-	TCHAR* pBuffer;
+int GetESMScriptWord(CString &WordBuffer,
+                     const TCHAR *pEditBuffer,
+                     int &CharIndex,
+                     int &StartIndex) {
+	TCHAR *pBuffer;
 	TCHAR TempOp[4] = "\0\0\0";
 	int WordLength;
 	int WordType;
@@ -552,7 +570,7 @@ int GetESMScriptWord(CString& WordBuffer, const TCHAR* pEditBuffer,
  * if the word/type combination has no special formatting.
  *
  *=========================================================================*/
-CHARFORMAT2 *CEsmScriptDlg::GetScriptWordFormat(CString& ScriptWord, const int WordType) {
+CHARFORMAT2 *CEsmScriptDlg::GetScriptWordFormat(CString &ScriptWord, const int WordType) {
 	switch (WordType) {
 		case ESMSCRIPT_WORDTYPE_END:
 			return (NULL);
@@ -629,14 +647,18 @@ bool CEsmScriptDlg::IsModified(void) {
 void CEsmScriptDlg::ParseLine(const int LineIndex) {
 	CString WordBuffer;
 	TCHAR LineBuffer[256];
+
 	int CharIndex;
 	int StartIndex;
 	int WordType;
 	int LineSize;
 	int LineCharPos;
-	CHARFORMAT2* pCharFormat;
+
+	CHARFORMAT2 *pCharFormat;
+
 	double StartTime;
 	double EndTime;
+
 	StartTime = GetHiClockTime();
 	//MessageBox("ParseLine");
 	/* Get the line text */
@@ -644,6 +666,7 @@ void CEsmScriptDlg::ParseLine(const int LineIndex) {
 	LineBuffer[LineSize] = NULL_CHAR;
 	LineCharPos = m_ScriptText.LineIndex(LineIndex);
 	CharIndex = 0;
+
 	/* Clear the current line format */
 	m_ScriptText.SetSel(LineCharPos, m_ScriptText.LineIndex(LineIndex + 1));
 	m_ScriptText.SetSelectionCharFormat(*m_pCurrentScriptOptions->GetCharFormat(
@@ -688,17 +711,21 @@ void CEsmScriptDlg::OnChangeScriptText() {
 	int LineIndex;
 	//double StartTime;
 	//double EndTime;
+
 	/* Get the current s */
 	//StartTime = GetHiClockTime();
 	m_ScriptText.SetRedraw(FALSE);
 	m_ScriptText.GetSel(StartChar, EndChar);
 	m_ScriptText.HideSelection(TRUE, FALSE);
+
 	/* Format the line */
 	ParseLine(m_ScriptText.LineFromChar(-1));
+
 	/* Reset the previous selection */
 	m_ScriptText.SetSel(StartChar, EndChar);
 	m_ScriptText.SetRedraw(TRUE);
 	m_ScriptText.HideSelection(FALSE, FALSE);
+
 	/* Determine the update area */
 	m_ScriptText.GetClientRect(&Rect);
 	LineIndex = m_ScriptText.LineIndex(-1);
@@ -761,9 +788,9 @@ void CEsmScriptDlg::CloseToolTips(void) {
  * Class CEsmScriptDlg Event - void OnContextMenu (pWnd, Point);
  *
  *=========================================================================*/
-void CEsmScriptDlg::OnContextMenu(CWnd* pWnd, CPoint Point) {
+void CEsmScriptDlg::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	CMenu Menu;
-	CMenu* pPopup;
+	CMenu *pPopup;
 	BOOL Result;
 	int Index;
 	CCmdUI MenuState;
@@ -820,9 +847,10 @@ void CEsmScriptDlg::OnContextMenu(CWnd* pWnd, CPoint Point) {
 
  *=========================================================================*/
 LONG CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
-	CFindReplaceDialog* pDialog = CFindReplaceDialog::GetNotifier(lParam);
+	CFindReplaceDialog *pDialog = CFindReplaceDialog::GetNotifier(lParam);
 	FINDTEXTEX FindTextData;
 	CString Buffer;
+
 	long Flags = 0;
 	long StartSel;
 	long EndSel;
@@ -923,10 +951,13 @@ void CEsmScriptDlg::OnInitialUpdate() {
 	//GetParentFrame()->RecalcLayout();
 	//ResizeParentToFit();
 	SetScrollSizes(MM_TEXT, CSize(0, 0));
+
 	/* This stops the richedit control from selecting all text at startup */
 	GetParentFrame()->SetWindowPos(NULL, 0, 0, 640, 400, SWP_NOMOVE | SWP_NOZORDER);
+
 	/* Initialize the script accelerator table */
 	m_ScriptAccel = LoadAccelerators(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDR_SCRIPTACCEL));
+
 	/* Initialize the tooltip */
 	m_ToolTip.Create(GetParentFrame());
 	m_ToolTip.SetFont(&m_ToolTipFont);
@@ -939,6 +970,7 @@ void CEsmScriptDlg::OnInitialUpdate() {
 	  SystemLog.Printf ("Time = %g secs", EndTime-StartTime); */
 	//m_DefaultScriptOptions.SetNoFormat(true);
 	m_Compiler.SetDocument(GetDocument());
+
 	/* Initialize the script text control */
 	m_ScriptText.SetFont(m_pCurrentScriptOptions->GetTextFont());
 	m_ScriptText.SetBackgroundColor(FALSE, m_pCurrentScriptOptions->GetBGColor());
@@ -948,6 +980,7 @@ void CEsmScriptDlg::OnInitialUpdate() {
 	VERIFY(m_ScriptText.SetOLECallback(&m_xRichEditOleCallback));
 	//m_lpRichEditOle = m_ScriptText.GetIRichEditOle();
 	//m_ScriptText.SendMessage(EM_SETUNDOLIMIT, 0, 0);
+
 	/* Initialize the script text tab-stops */
 	m_ScriptText.SetSel(0, -1);
 	PARAFORMAT pf;
@@ -961,6 +994,7 @@ void CEsmScriptDlg::OnInitialUpdate() {
 
 	m_ScriptText.SetParaFormat(pf);
 	m_ScriptText.SetSel(0, 0);
+
 	/* Initialize the buttons/toolbar */
 	m_CopyBmp.LoadBitmap(IDB_COPYBMP);
 	m_CutBmp.LoadBitmap(IDB_CUTBMP);
@@ -982,6 +1016,7 @@ void CEsmScriptDlg::OnInitialUpdate() {
 	m_CompileButton.SetBitmap(m_CompileBmp);
 	m_WhiteButton.SetBitmap(m_WhiteBmp);
 	m_BlueButton.SetBitmap(m_BlueBmp);
+
 	m_ToolbarTip.Create(this, 0);
 	m_ToolbarTip.AddTool(&m_CopyButton, _T("Copy    Ctrl+C"));
 	m_ToolbarTip.AddTool(&m_PasteButton, _T("Paste   Ctrl+V"));
@@ -992,6 +1027,7 @@ void CEsmScriptDlg::OnInitialUpdate() {
 	m_ToolbarTip.AddTool(&m_CompileButton, _T("Compile    Ctrl+F7"));
 	m_ToolbarTip.AddTool(&m_IndentButton, _T("Indent"));
 	m_ToolbarTip.Activate(TRUE);
+
 	UpdateSizeStatus();
 	UpdatePosStatus();
 	SetControlData();
@@ -1011,17 +1047,15 @@ void CEsmScriptDlg::OnInitialUpdate() {
  * Class CEsmScriptDlg Event - void OnKillFocus (pWnd);
  *
  *=========================================================================*/
-void CEsmScriptDlg::OnKillFocus(CWnd* pWnd) {
+void CEsmScriptDlg::OnKillFocus(CWnd *pWnd) {
 	CloseToolTips();
 	CEsmRecDialog::OnKillFocus(pWnd);
 }
 
-
-void CEsmScriptDlg::OnSetFocus(CWnd* pWnd) {
+void CEsmScriptDlg::OnSetFocus(CWnd *pWnd) {
 	//m_ScriptText.SetSel(1,2);
 	CEsmRecDialog::OnSetFocus(pWnd);
 }
-
 
 void CEsmScriptDlg::OnShowWindow(BOOL bShow, UINT Status) {
 	//m_ScriptText.SetSel(3,4);
@@ -1057,6 +1091,7 @@ void CEsmScriptDlg::OnSize(UINT nType, int cx, int cy) {
 	RECT WndRect;
 	int Width;
 	int Height;
+
 	/* Close any tool tips */
 	CloseToolTips();
 	/* Call the base class event first */
@@ -1086,11 +1121,19 @@ void CEsmScriptDlg::OnSize(UINT nType, int cx, int cy) {
 	/* Set the script control size */
 	m_ScriptText.SetWindowPos(NULL, 0, 0, Width, Height, SWP_NOMOVE | SWP_NOZORDER);
 	/* Change the position of the status labels */
-	m_StatusLabel1.SetWindowPos(NULL, 0, Height + ESMSCR_VIEW_TOPMARGIN, 0, 0,
+	m_StatusLabel1.SetWindowPos(NULL,
+	                            0,
+	                            Height + ESMSCR_VIEW_TOPMARGIN,
+	                            0,
+	                            0,
 	                            SWP_NOSIZE | SWP_NOZORDER);
 	m_StatusLabel2.GetWindowRect(&WndRect);
 	ScreenToClient(&WndRect);
-	m_StatusLabel2.SetWindowPos(NULL, WndRect.left, Height + ESMSCR_VIEW_TOPMARGIN, 0, 0,
+	m_StatusLabel2.SetWindowPos(NULL,
+	                            WndRect.left,
+	                            Height + ESMSCR_VIEW_TOPMARGIN,
+	                            0,
+	                            0,
 	                            SWP_NOSIZE | SWP_NOZORDER);
 }
 
@@ -1171,7 +1214,7 @@ void CEsmScriptDlg::OnUpdateScriptText() {
  * Class CEsmScriptDlg Method - BOOL PreCreateWindow (cs);
  *
  *=========================================================================*/
-BOOL CEsmScriptDlg::PreCreateWindow(CREATESTRUCT& cs) {
+BOOL CEsmScriptDlg::PreCreateWindow(CREATESTRUCT &cs) {
 	return CEsmRecDialog::PreCreateWindow(cs);
 }
 
@@ -1185,7 +1228,7 @@ BOOL CEsmScriptDlg::PreCreateWindow(CREATESTRUCT& cs) {
  * Class CEsmScriptDlg Method - BOOL PreTranslateMessage (MSG* pMsg);
  *
  *=========================================================================*/
-BOOL CEsmScriptDlg::PreTranslateMessage(MSG* pMsg) {
+BOOL CEsmScriptDlg::PreTranslateMessage(MSG *pMsg) {
 	int Result;
 	m_ToolbarTip.RelayEvent(pMsg);
 
@@ -1210,11 +1253,14 @@ BOOL CEsmScriptDlg::PreTranslateMessage(MSG* pMsg) {
 void CEsmScriptDlg::SetControlData(void) {
 	CString Buffer;
 	m_UpdatingRichEdit = true;
+
 	/* Update the record pointer and data */
-	m_pScript = (CEsmScript*)GetRecInfo()->pRecord;
+	m_pScript = (CEsmScript *)GetRecInfo()->pRecord;
 	ASSERT(m_pScript != NULL);
+
 	/* Update the dialog title */
 	UpdateTitle(m_pScript->GetID());
+
 	/* Set the main text */
 	m_ScriptText.SetWindowText(m_pScript->GetScriptText());
 	m_ScriptText.SetModify(FALSE);
@@ -1299,10 +1345,12 @@ void CEsmScriptDlg::PasteText(void) {
  *=========================================================================*/
 void CEsmScriptDlg::UpdatePosStatus(void) {
 	CString Buffer;
+
 	long StartSel;
 	long EndSel;
 	long CurrentLine;
 	long CurrentChar;
+
 	m_ScriptText.GetSel(StartSel, EndSel);
 	CurrentLine = m_ScriptText.LineFromChar(-1);
 	CurrentChar = EndSel - m_ScriptText.LineIndex(CurrentLine);
@@ -1322,7 +1370,9 @@ void CEsmScriptDlg::UpdatePosStatus(void) {
  *=========================================================================*/
 void CEsmScriptDlg::UpdateSizeStatus(void) {
 	CString Buffer;
-	Buffer.Format(_T("%ld Lines, %d bytes"), m_ScriptText.GetLineCount(), m_ScriptText.GetTextLength());
+	Buffer.Format(_T("%ld Lines, %d bytes"),
+	              m_ScriptText.GetLineCount(),
+	              m_ScriptText.GetTextLength());
 	m_StatusLabel2.SetWindowText(Buffer);
 }
 
@@ -1360,35 +1410,41 @@ void CEsmScriptDlg::OnScriptCopy() {
 	m_ScriptText.SetFocus();
 }
 
-
 void CEsmScriptDlg::OnScriptCompile() {
 	DEFINE_FUNCTION("CEsmScriptDlg::OnScriptCompile()");
-	CEsmScriptError* pError;
+	CEsmScriptError *pError;
 	CString ScriptBuffer;
+
 	int Result;
 	double StartTime;
 	double EndTime;
+
 	//#if FALSE
 	/* Update the error window */
 	GetParentFrame()->SendMessage(MSG_SCRIPTFRM_CLEARERROR, 0, 0);
 	/* Retrieve the current script text */
 	m_ScriptText.GetWindowText(ScriptBuffer);
+
 	/* Initialize the compiler */
 	m_Compiler.Destroy();
 	m_Compiler.SetMsgLevel(GetEsmOptScriptWarnLevel());
 	m_Compiler.SetScriptText(ScriptBuffer, ScriptBuffer.GetLength());
 	ErrorHandler.ClearErrorCount();
+
 	/* Perform the compile */
 	StartTime = GetHiClockTime();
 	Result = m_Compiler.Compile();
 	EndTime = GetHiClockTime();
+
 	/* Add the last status message */
 	CreatePointer(pError, CEsmScriptError);
 	m_Compiler.GetErrorArray()->Add(pError);
 	pError->SetLine(0);
 	ScriptBuffer.Format(_T("%s: Compiled %ld lines in %.3g secs! (%d Warnings, %d Errors)"),
 	                    (Result < 0) ? _T("Error") : _T("Success"),
-	                    m_ScriptText.GetLineCount(), EndTime - StartTime, m_Compiler.GetNumWarnings(),
+	                    m_ScriptText.GetLineCount(),
+	                    EndTime - StartTime,
+	                    m_Compiler.GetNumWarnings(),
 	                    m_Compiler.GetNumErrors());
 	pError->SetMessage(ScriptBuffer);
 	/* Display any errors or warnings in the error view */
@@ -1423,12 +1479,10 @@ void CEsmScriptDlg::OnScriptCompile() {
 	//#endif
 }
 
-
 void CEsmScriptDlg::OnScriptCut() {
 	CutText();
 	m_ScriptText.SetFocus();
 }
-
 
 void CEsmScriptDlg::OnScriptFindtext() {
 	CString Buffer;
@@ -1446,12 +1500,10 @@ void CEsmScriptDlg::OnScriptFindtext() {
 	m_pFindReplaceDlg->Create(TRUE, Buffer, "", FR_DOWN, this);
 }
 
-
 void CEsmScriptDlg::OnScriptPaste() {
 	PasteText();
 	m_ScriptText.SetFocus();
 }
-
 
 void CEsmScriptDlg::OnScriptReplacetext() {
 	CString Buffer;
@@ -1470,7 +1522,6 @@ void CEsmScriptDlg::OnScriptReplacetext() {
 	m_pFindReplaceDlg->Create(FALSE, Buffer, "", FR_DOWN, this);
 }
 
-
 void CEsmScriptDlg::OnScriptUndo() {
 	int Result;
 	Result = m_UndoStack.OnUndo(&m_ScriptText);
@@ -1483,21 +1534,17 @@ void CEsmScriptDlg::OnScriptUndo() {
 	m_ScriptText.SetFocus();
 }
 
-
-void CEsmScriptDlg::OnUpdateScriptUndo(CCmdUI* pCmdUI) {
+void CEsmScriptDlg::OnUpdateScriptUndo(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(!m_UndoStack.IsEmpty());
 }
-
 
 void CEsmScriptDlg::OnWhitebutton() {
 	//ChangeScriptFormat(&m_DefaultScriptOptions);
 }
 
-
 void CEsmScriptDlg::OnBluebutton() {
 	//ChangeScriptFormat(&m_UserScriptOptions);
 }
-
 
 void CEsmScriptDlg::OnNoformatcheck() {
 	//m_DefaultScriptOptions.SetNoFormat(m_NoFormatCheck.GetCheck() != 0);
@@ -1506,17 +1553,19 @@ void CEsmScriptDlg::OnNoformatcheck() {
 	m_ScriptText.Invalidate();
 }
 
-
 CString CEsmScriptDlg::GetCurrentScriptWord(void) {
 	CString Buffer;
 	TCHAR Char;
+
 	long StartSel;
 	long EndSel;
 	long CurrentPos;
 	long CurrentLine;
+
 	int LineStart;
 	int LineLength;
 	int Index;
+
 	/* Find the current location of the selection/cursor */
 	m_ScriptText.GetSel(StartSel, EndSel);
 	CurrentPos = StartSel;
@@ -1581,7 +1630,6 @@ CString CEsmScriptDlg::GetCurrentScriptWord(void) {
 	return (Buffer);
 }
 
-
 void CEsmScriptDlg::OnScriptFuncHelp() {
 	CString Buffer;
 	Buffer = GetCurrentScriptWord();
@@ -1602,7 +1650,7 @@ void CEsmScriptDlg::OnEditCopy() {
 	OnScriptCopy();
 }
 
-void CEsmScriptDlg::OnUpdateEditCopy(CCmdUI* pCmdUI) {
+void CEsmScriptDlg::OnUpdateEditCopy(CCmdUI *pCmdUI) {
 	if (m_ScriptText.GetSelectionType() != SEL_EMPTY) {
 		pCmdUI->Enable(TRUE);
 	} else {
@@ -1610,7 +1658,7 @@ void CEsmScriptDlg::OnUpdateEditCopy(CCmdUI* pCmdUI) {
 	}
 }
 
-void CEsmScriptDlg::OnUpdateEditCut(CCmdUI* pCmdUI) {
+void CEsmScriptDlg::OnUpdateEditCut(CCmdUI *pCmdUI) {
 	OnUpdateEditCopy(pCmdUI);
 }
 
@@ -1622,7 +1670,7 @@ void CEsmScriptDlg::OnEditPaste() {
 	OnScriptPaste();
 }
 
-void CEsmScriptDlg::OnUpdateEditPaste(CCmdUI* pCmdUI) {
+void CEsmScriptDlg::OnUpdateEditPaste(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(IsClipboardFormatAvailable(CF_TEXT));
 }
 
@@ -1638,11 +1686,13 @@ void CEsmScriptDlg::OnUpdateEditPaste(CCmdUI* pCmdUI) {
  *=========================================================================*/
 void CEsmScriptDlg::OnSave() {
 	CString ScriptBuffer;
+
 	/* Compile the script, no error/warning output though */
 	m_ScriptText.GetWindowText(ScriptBuffer);
 	m_Compiler.Destroy();
 	m_Compiler.SetScriptText(ScriptBuffer, ScriptBuffer.GetLength());
 	m_Compiler.Compile();
+
 	/* Update the script ID */
 	FindScriptID();
 	m_RecEditInfo.NewID = m_ScriptID;
@@ -1670,12 +1720,14 @@ void CEsmScriptDlg::OnSave() {
  *
  *=========================================================================*/
 bool CEsmScriptDlg::OpenFunctionToolTip(void) {
-	CEsmScrFuncData* pFunction;
+	CEsmScrFuncData *pFunction;
 	TCHAR LineBuffer[256];
-	TCHAR* pParse;
-	TCHAR* pEndString;
+	TCHAR *pParse;
+	TCHAR *pEndString;
+
 	int LineSize;
 	int CharPos;
+
 	long StartChar;
 	long EndChar;
 	long LineIndex;
@@ -1725,7 +1777,7 @@ bool CEsmScriptDlg::OpenFunctionToolTip(void) {
 
 	/* See if the word is a function */
 	*pEndString = NULL_CHAR;
-	pFunction = ((CMWEditApp*)AfxGetApp())->GetFunctionArray()->FindFunction(pParse + 1);
+	pFunction = ((CMWEditApp *)AfxGetApp())->GetFunctionArray()->FindFunction(pParse + 1);
 	SystemLog.Printf("Parse = '%s', Function = %d", pParse + 1, pFunction);
 
 	if (pFunction == NULL && GetEsmOptAllowExtFuncs()) {
@@ -1757,19 +1809,22 @@ bool CEsmScriptDlg::OpenFunctionToolTip(void) {
  * function tool tip. Returns false on any error.
  *
  *=========================================================================*/
-int CEsmScriptDlg::ParseFuncToolTip(const TCHAR* pLineBuffer, const int CharPos) {
+int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos) {
 	esmscrfuncinfo_t *pFuncInfo;
 	esmscrfuncinfo_t *pCurFuncInfo;
-	CEsmScrFuncData* pFuncData;
+	CEsmScrFuncData *pFuncData;
 	CString WordBuffer;
+
 	int ParsePos;
 	int StartPos;
 	int ArgCount;
 	int TokenID;
+
 	bool Result;
 	bool StopFunc;
 	bool HasFunc;
 	bool LastComma;
+
 	/* Initialize loop variables */
 	ParsePos = 0;
 	HasFunc = false;
@@ -1862,7 +1917,7 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR* pLineBuffer, const int CharPos)
 	/* Check for a current function */
 	if (pCurFuncInfo != NULL) {
 		/* Attempt to get the function information */
-		pFuncData = ((CMWEditApp*)AfxGetApp())->GetFunctionArray()->FindFunction(pCurFuncInfo->Name);
+		pFuncData = ((CMWEditApp *)AfxGetApp())->GetFunctionArray()->FindFunction(pCurFuncInfo->Name);
 
 		if (pFuncData == NULL) {
 			return (ESMSCR_PARSETTFUNC_NOFUNC);
@@ -1973,7 +2028,6 @@ void CEsmScriptDlg::OnLButtonDown(UINT nFlags, CPoint Point) {
 	//UpdateFuncToolTip();
 }
 
-
 void CEsmScriptDlg::OnRButtonDown(UINT nFlags, CPoint Point) {
 	CEsmRecDialog::OnRButtonDown(nFlags, Point);
 	//UpdateFuncToolTip();
@@ -1989,8 +2043,8 @@ void CEsmScriptDlg::OnRButtonDown(UINT nFlags, CPoint Point) {
  * Class CEsmScriptDlg Event - void OnMsgfilterScripttext (NMHDR* pNMHDR, LRESULT* pResult);
  *
  *=========================================================================*/
-void CEsmScriptDlg::OnMsgfilterScripttext(NMHDR* pNMHDR, LRESULT* pResult) {
-	MSGFILTER* pMsgFilter = reinterpret_cast<MSGFILTER *>(pNMHDR);
+void CEsmScriptDlg::OnMsgfilterScripttext(NMHDR *pNMHDR, LRESULT *pResult) {
+	MSGFILTER *pMsgFilter = reinterpret_cast<MSGFILTER *>(pNMHDR);
 
 	switch (pMsgFilter->msg) {
 		case WM_KEYDOWN:
@@ -2032,19 +2086,18 @@ STDMETHODIMP_(ULONG) CEsmScriptDlg::XRichEditOleCallback::Release() {
 	return (ULONG)pThis->InternalRelease();
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::QueryInterface(
-    REFIID iid, LPVOID* ppvObj) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::QueryInterface(REFIID iid, LPVOID *ppvObj) {
 	METHOD_PROLOGUE_EX_(CEsmScriptDlg, RichEditOleCallback)
 	return (HRESULT)pThis->InternalQueryInterface(&iid, ppvObj);
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetNewStorage(LPSTORAGE* ppstg) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetNewStorage(LPSTORAGE *ppstg) {
 	return E_NOTIMPL;
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetInPlaceContext(
-    LPOLEINPLACEFRAME* lplpFrame, LPOLEINPLACEUIWINDOW* lplpDoc,
-    LPOLEINPLACEFRAMEINFO lpFrameInfo) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetInPlaceContext(LPOLEINPLACEFRAME *lplpFrame,
+                                                                    LPOLEINPLACEUIWINDOW *lplpDoc,
+                                                                    LPOLEINPLACEFRAMEINFO lpFrameInfo) {
 	return E_NOTIMPL;
 }
 
@@ -2061,9 +2114,11 @@ STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::DeleteObject(LPOLEOBJECT /*lpo
 	return E_NOTIMPL;
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::QueryAcceptData(
-    LPDATAOBJECT lpdataobj, CLIPFORMAT* lpcfFormat, DWORD reco,
-    BOOL fReally, HGLOBAL hMetaPict) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::QueryAcceptData(LPDATAOBJECT lpdataobj,
+                                                                  CLIPFORMAT *lpcfFormat,
+                                                                  DWORD reco,
+                                                                  BOOL fReally,
+                                                                  HGLOBAL hMetaPict) {
 	METHOD_PROLOGUE_EX_(CEsmScriptDlg, RichEditOleCallback)
 
 	if (fReally && reco == RECO_DROP) {
@@ -2078,7 +2133,8 @@ STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::QueryAcceptData(
 				StartSel -= pThis->m_DragBuffer.GetLength();
 			}
 
-			pThis->m_UndoStack.CreateDeleteString(pThis->m_DragBuffer, pThis->m_LastDragStartSel,
+			pThis->m_UndoStack.CreateDeleteString(pThis->m_DragBuffer,
+			                                      pThis->m_LastDragStartSel,
 			                                      pThis->m_LastDragEndSel);
 			pThis->m_UndoStack.CreateInsertString(pThis->m_DragBuffer, StartSel, StartSel);
 		}
@@ -2091,13 +2147,15 @@ STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::ContextSensitiveHelp(BOOL /*fE
 	return E_NOTIMPL;
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetClipboardData(
-    CHARRANGE* lpchrg, DWORD reco, LPDATAOBJECT* lplpdataobj) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetClipboardData(CHARRANGE *lpchrg,
+                                                                   DWORD reco,
+                                                                   LPDATAOBJECT *lplpdataobj) {
 	return E_NOTIMPL;
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetDragDropEffect(
-    BOOL fDrag, DWORD grfKeyState, LPDWORD pdwEffect) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetDragDropEffect(BOOL fDrag,
+                                                                    DWORD grfKeyState,
+                                                                    LPDWORD pdwEffect) {
 	METHOD_PROLOGUE_EX_(CEsmScriptDlg, RichEditOleCallback)
 	pThis->m_ScriptText.GetSel(pThis->m_LastDragStartSel, pThis->m_LastDragEndSel);
 	pThis->m_DragBuffer = pThis->m_ScriptText.GetSelText();
@@ -2108,17 +2166,11 @@ STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetDragDropEffect(
 		// check for force link
 		if ((grfKeyState & (MK_CONTROL | MK_SHIFT)) == (MK_CONTROL | MK_SHIFT)) {
 			dwEffect = DROPEFFECT_LINK;
-		}
-		// check for force copy
-		else if ((grfKeyState & MK_CONTROL) == MK_CONTROL) {
+		} else if ((grfKeyState & MK_CONTROL) == MK_CONTROL) { // check for force copy
 			dwEffect = DROPEFFECT_COPY;
-		}
-		// check for force move
-		else if ((grfKeyState & MK_ALT) == MK_ALT) {
+		} else if ((grfKeyState & MK_ALT) == MK_ALT) { // check for force move
 			dwEffect = DROPEFFECT_MOVE;
-		}
-		// default -- recommended action is move
-		else {
+		} else { // default -- recommended action is move
 			dwEffect = DROPEFFECT_MOVE;
 		}
 
@@ -2130,9 +2182,10 @@ STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetDragDropEffect(
 	return S_OK;
 }
 
-STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetContextMenu(
-    WORD seltype, LPOLEOBJECT lpoleobj, CHARRANGE* lpchrg,
-    HMENU* lphmenu) {
+STDMETHODIMP CEsmScriptDlg::XRichEditOleCallback::GetContextMenu(WORD seltype,
+                                                                 LPOLEOBJECT lpoleobj,
+                                                                 CHARRANGE *lpchrg,
+                                                                 HMENU *lphmenu) {
 	METHOD_PROLOGUE_EX_(CEsmScriptDlg, RichEditOleCallback)
 	HMENU TempMenu = LoadMenu(::AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_SCRIPTMENU));
 

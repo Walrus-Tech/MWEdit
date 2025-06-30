@@ -1,121 +1,67 @@
 /*===========================================================================
-
  *
-
  * File:    Esmingrediantdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 15, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmIngrediantDlg.h"
 
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmIngrediantDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmIngrediantDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmIngrediantDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmIngrediantDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmIngrediantDlg)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST1, OnSelchangeEffectlist1)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST2, OnSelchangeEffectlist2)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST3, OnSelchangeEffectlist3)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST4, OnSelchangeEffectlist4)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST1, OnSelchangeSkilllist1)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST2, OnSelchangeSkilllist2)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST3, OnSelchangeSkilllist3)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST4, OnSelchangeSkilllist4)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmIngrediantDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmIngrediantDlg::CEsmIngrediantDlg() : CEsmRecDialog(CEsmIngrediantDlg::IDD) {
@@ -130,27 +76,19 @@ CEsmIngrediantDlg::CEsmIngrediantDlg() : CEsmRecDialog(CEsmIngrediantDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmIngrediantDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmIngrediantDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmIngrediantDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -163,10 +101,12 @@ void CEsmIngrediantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_EFFECTLIST1, m_EffectList[0]);
 	DDX_Control(pDX, IDC_EFFECTLIST2, m_EffectList[1]);
 	DDX_Control(pDX, IDC_EFFECTLIST3, m_EffectList[2]);
 	DDX_Control(pDX, IDC_EFFECTLIST4, m_EffectList[3]);
+
 	DDX_Control(pDX, IDC_SKILLLIST1, m_SkillList[0]);
 	DDX_Control(pDX, IDC_SKILLLIST2, m_SkillList[1]);
 	DDX_Control(pDX, IDC_SKILLLIST3, m_SkillList[2]);
@@ -174,31 +114,22 @@ void CEsmIngrediantDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::GetControlData (void) {
+void CEsmIngrediantDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmIngrediantDlg::GetControlData()");
 	ingredata_t *pIngreData;
 	CString Buffer;
 	/* Update the armor pointer and data */
-	m_pIngrediant = (CEsmIngrediant *) GetRecInfo()->pRecord;
+	m_pIngrediant = (CEsmIngrediant *)GetRecInfo()->pRecord;
 
 	if (m_pIngrediant == NULL) {
 		return;
@@ -217,21 +148,27 @@ void CEsmIngrediantDlg::GetControlData (void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pIngrediant->SetName(TrimStringSpace(Buffer));
+
 	/* Item weight */
 	m_WeightText.GetWindowText(Buffer);
-	pIngreData->Weight = (float) atof(Buffer);
+	pIngreData->Weight = (float)atof(Buffer);
+
 	/* Item value */
 	m_ValueText.GetWindowText(Buffer);
 	pIngreData->Value = atoi(Buffer);
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pIngrediant->SetScript(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pIngrediant->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pIngrediant->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pIngrediant->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pIngrediant->SetBlocked(m_BlockedCheck.GetCheck() != 0);
@@ -239,32 +176,23 @@ void CEsmIngrediantDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void GetEffectData (ListIndex, EffectIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::GetEffectData (const int ListIndex, const int EffectIndex) {
+void CEsmIngrediantDlg::GetEffectData(const int ListIndex, const int EffectIndex) {
 	ingredata_t *pIngreData = m_pIngrediant->GetIngreData();
 	CString Buffer;
 	int Index;
 	/* Get the effect ID */
 	Index = m_EffectList[ListIndex].GetCurSel();
-	pIngreData->EffectID[EffectIndex] = (short) m_EffectList[ListIndex].GetItemData(Index);
+	pIngreData->EffectID[EffectIndex] = (short)m_EffectList[ListIndex].GetItemData(Index);
 
 	/* Get any the skill/attribute ids */
 
@@ -290,26 +218,17 @@ void CEsmIngrediantDlg::GetEffectData (const int ListIndex, const int EffectInde
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::GetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void GetEffectData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::GetEffectData (void) {
+void CEsmIngrediantDlg::GetEffectData(void) {
 	//DEFINE_FUNCTION("CEsmIngrediantDlg::GetEffectData()");
 	ingredata_t *pIngreData = m_pIngrediant->GetIngreData();
 	int Index;
@@ -335,26 +254,17 @@ void CEsmIngrediantDlg::GetEffectData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::GetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmIngrediantDlg::IsModified (void) {
+bool CEsmIngrediantDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -381,23 +291,14 @@ bool CEsmIngrediantDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmIngrediantDlg::OnInitialUpdate() {
@@ -406,7 +307,7 @@ void CEsmIngrediantDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pIngrediant = (CEsmIngrediant *) GetRecInfo()->pRecord;
+	m_pIngrediant = (CEsmIngrediant *)GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
 	FillEsmScriptCombo(m_ScriptList);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
@@ -421,26 +322,17 @@ void CEsmIngrediantDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmIngrediantDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Event - void OnSelChangeEffectList (ListIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::OnSelChangeEffectList (const int ListIndex) {
+void CEsmIngrediantDlg::OnSelChangeEffectList(const int ListIndex) {
 	const esmeffectdata_t *pEffectData = NULL;
 	int EffectIndex;
 	int EffectID = -1;
@@ -480,50 +372,32 @@ void CEsmIngrediantDlg::OnSelChangeEffectList (const int ListIndex) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmIngrediantDlg::OnSelChangeEffectList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Event - void OnSelChangeSkillList (ListIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::OnSelChangeSkillList (const int ListIndex) {
+void CEsmIngrediantDlg::OnSelChangeSkillList(const int ListIndex) {
 	m_Modified = true;
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmIngrediantDlg::OnSelChangeSkillList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmIngrediantDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmIngrediantDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
 	/* Refill the script list if required */
@@ -538,26 +412,17 @@ int CEsmIngrediantDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmIngrediantDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::SetControlData (void) {
+void CEsmIngrediantDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pIngrediant == NULL) {
 		return;
@@ -566,6 +431,7 @@ void CEsmIngrediantDlg::SetControlData (void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pIngrediant->GetID());
 	UpdateTitle(m_pIngrediant->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pIngrediant->GetName());
 	m_WeightText.SetWindowText(m_pIngrediant->GetFieldString(ESM_FIELD_WEIGHT));
@@ -573,40 +439,35 @@ void CEsmIngrediantDlg::SetControlData (void) {
 	m_NameText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pIngrediant->GetModel());
 	m_IconButton.SetWindowText(m_pIngrediant->GetIcon());
 	m_IconPicture.SetEsmIcon(m_pIngrediant->GetIcon());
+
 	/* Item lists */
 	m_ScriptList.SelectString(-1, m_pIngrediant->GetScript());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pIngrediant->IsBlocked());
 	m_PersistCheck.SetCheck(m_pIngrediant->IsPersist());
+
 	/* Set the effect data */
 	SetEffectData();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void SetEffectData (EffectIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::SetEffectData (const int EffectIndex) {
+void CEsmIngrediantDlg::SetEffectData(const int EffectIndex) {
 	DEFINE_FUNCTION("CEsmIngrediantDlg::SetEffectData()");
 	const esmeffectdata_t *pEffectData = NULL;
 	ingredata_t *pIngreData = m_pIngrediant->GetIngreData();
@@ -643,26 +504,17 @@ void CEsmIngrediantDlg::SetEffectData (const int EffectIndex) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::SetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIngrediantDlg Method - void SetEffectData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmIngrediantDlg::SetEffectData (void) {
+void CEsmIngrediantDlg::SetEffectData(void) {
 	int EffectIndex;
 
 	for (EffectIndex = 0; EffectIndex < MWESM_INGRE_NUMENCHANTS; EffectIndex++) {
@@ -671,10 +523,5 @@ void CEsmIngrediantDlg::SetEffectData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIngrediantDlg::SetEffectData()
-
  *=========================================================================*/
-
-
-

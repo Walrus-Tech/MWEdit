@@ -66,9 +66,9 @@ END_MESSAGE_MAP()
  * Function - int l_FindRecNameSort (pElem1, pElem2, UserData);
  *
  *=========================================================================*/
-int l_FindRecNameSort(const void* pElem1, const void* pElem2, const long UserData) {
-	esmrecinfo_t *pRec1 = (esmrecinfo_t*)pElem1;
-	TCHAR* pName = (TCHAR*)pElem2;
+int l_FindRecNameSort(const void *pElem1, const void *pElem2, const long UserData) {
+	esmrecinfo_t *pRec1 = (esmrecinfo_t *)pElem1;
+	TCHAR *pName = (TCHAR *)pElem2;
 
 	if (pRec1 == NULL) {
 		return (0);
@@ -77,17 +77,16 @@ int l_FindRecNameSort(const void* pElem1, const void* pElem2, const long UserDat
 	return StringCompare(pRec1->pRecord->GetID(), pName, false);
 }
 
-
-int l_FindRecSort1(const void* pElem1, const void* pElem2, const long UserData) {
-	esmrecinfo_t *pRec1 = (esmrecinfo_t*)pElem1;
-	CEsmRecord* pRecord = (CEsmRecord*)pElem2;
+int l_FindRecSort1(const void *pElem1, const void *pElem2, const long UserData) {
+	esmrecinfo_t *pRec1 = (esmrecinfo_t *)pElem1;
+	CEsmRecord *pRecord = (CEsmRecord *)pElem2;
 
 	if (pRec1 == NULL || pRecord == NULL) {
 		return (0);
 	}
 
-	long *pType1 = (long*)pRec1->pRecord->GetType();
-	long *pType2 = (long*)pRecord->GetType();
+	long *pType1 = (long *)pRec1->pRecord->GetType();
+	long *pType2 = (long *)pRecord->GetType();
 
 	if (*pType1 == *pType2) {
 		return StringCompare(pRec1->pRecord->GetID(), pRecord->GetID(), false);
@@ -96,17 +95,16 @@ int l_FindRecSort1(const void* pElem1, const void* pElem2, const long UserData) 
 	}
 }
 
-
-int l_FindRecSort2(const void* pElem1, const void* pElem2, const long UserData) {
-	esmrecinfo_t *pRec1 = (esmrecinfo_t*)pElem1;
-	esmrecsortfind_t *pSortData = (esmrecsortfind_t*)pElem2;
+int l_FindRecSort2(const void *pElem1, const void *pElem2, const long UserData) {
+	esmrecinfo_t *pRec1 = (esmrecinfo_t *)pElem1;
+	esmrecsortfind_t *pSortData = (esmrecsortfind_t *)pElem2;
 
 	if (pRec1 == NULL || pSortData == NULL) {
 		return (0);
 	}
 
-	long *pType1 = (long*)pRec1->pRecord->GetType();
-	long *pType2 = (long*)pSortData->pType;
+	long *pType1 = (long *)pRec1->pRecord->GetType();
+	long *pType2 = (long *)pSortData->pType;
 
 	if (*pType1 == *pType2) {
 		return StringCompare(pRec1->pRecord->GetID(), pSortData->pID, false);
@@ -115,10 +113,9 @@ int l_FindRecSort2(const void* pElem1, const void* pElem2, const long UserData) 
 	}
 }
 
-
-static int l_RecSortPtr(const void* pElem1, const void* pElem2) {
-	TCHAR* pString = (TCHAR*)pElem1;
-	esmrecinfo_t *pRec2 = *(esmrecinfo_t**)pElem2;
+static int l_RecSortPtr(const void *pElem1, const void *pElem2) {
+	TCHAR *pString = (TCHAR *)pElem1;
+	esmrecinfo_t *pRec2 = *(esmrecinfo_t **)pElem2;
 
 	if (pRec2 == NULL) {
 		return (0);
@@ -137,9 +134,9 @@ static int l_RecSortPtr(const void* pElem1, const void* pElem2) {
  * Function - int l_RecInfoSort (pElem1, pElem2, UserData);
  *
  *=========================================================================*/
-int l_RecInfoSort(const void* pElem1, const void* pElem2, const long UserData) {
-	esmrecinfo_t *pRec1 = (esmrecinfo_t*)pElem1;
-	esmrecinfo_t *pRec2 = (esmrecinfo_t*)pElem2;
+int l_RecInfoSort(const void *pElem1, const void *pElem2, const long UserData) {
+	esmrecinfo_t *pRec1 = (esmrecinfo_t *)pElem1;
+	esmrecinfo_t *pRec2 = (esmrecinfo_t *)pElem2;
 
 	if (pRec1 == NULL || pRec2 == NULL) {
 		return (0);
@@ -148,17 +145,16 @@ int l_RecInfoSort(const void* pElem1, const void* pElem2, const long UserData) {
 	return StringCompare(pRec1->pRecord->GetID(), pRec2->pRecord->GetID(), false);
 }
 
-
-int l_RecInfoSortType(const void* pElem1, const void* pElem2, const long UserData) {
-	esmrecinfo_t *pRec1 = (esmrecinfo_t*)pElem1;
-	esmrecinfo_t *pRec2 = (esmrecinfo_t*)pElem2;
+int l_RecInfoSortType(const void *pElem1, const void *pElem2, const long UserData) {
+	esmrecinfo_t *pRec1 = (esmrecinfo_t *)pElem1;
+	esmrecinfo_t *pRec2 = (esmrecinfo_t *)pElem2;
 
 	if (pRec1 == NULL || pRec2 == NULL) {
 		return (0);
 	}
 
-	long *pType1 = (long*)pRec1->pRecord->GetType();
-	long *pType2 = (long*)pRec2->pRecord->GetType();
+	long *pType1 = (long *)pRec1->pRecord->GetType();
+	long *pType2 = (long *)pRec2->pRecord->GetType();
 
 	if (*pType1 == *pType2) {
 		return StringCompare(pRec1->pRecord->GetID(), pRec2->pRecord->GetID(), false);
@@ -177,9 +173,9 @@ int l_RecInfoSortType(const void* pElem1, const void* pElem2, const long UserDat
  * Function - int l_RecInfoSortPtr (pElem1, pElem2, UserData);
  *
  *=========================================================================*/
-int l_RecInfoSortPtr(const void* pElem1, const void* pElem2, const long UserData) {
-	esmrecinfo_t *pRec1 = *(esmrecinfo_t**)pElem1;
-	esmrecinfo_t *pRec2 = *(esmrecinfo_t**)pElem2;
+int l_RecInfoSortPtr(const void *pElem1, const void *pElem2, const long UserData) {
+	esmrecinfo_t *pRec1 = *(esmrecinfo_t **)pElem1;
+	esmrecinfo_t *pRec2 = *(esmrecinfo_t **)pElem2;
 
 	if (pRec1 == NULL || pRec2 == NULL) {
 		return (0);
@@ -235,11 +231,12 @@ CMWEditDoc::~CMWEditDoc() {
  * is added to the end of the info array.
  *
  *=========================================================================*/
-void CMWEditDoc::AddRecInfo(CEsmFile* pFile) {
+void CMWEditDoc::AddRecInfo(CEsmFile *pFile) {
 	DEFINE_FUNCTION("CMWEditDoc::AddRecInfo()");
 	esmrecinfo_t *pRecInfo = NULL;
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	int Index;
+
 	m_LoadDlg.SetProgress(100.0f);
 	m_LoadDlg.SetSubLabel(_T("Adding records..."));
 
@@ -279,9 +276,7 @@ void CMWEditDoc::AddRecInfo(CEsmFile* pFile) {
 			m_RecInfo.Add(pRecInfo);
 			m_RecInfoSort.SetAt(pRecInfo);
 			pRecord->SetPrevRecord(NULL);
-		}
-		/* Set the previous record pointers */
-		else {
+		} else { /* Set the previous record pointers */
 			pRecord->SetPrevRecord(pRecInfo->pRecord);
 			pRecInfo->pFile = pFile;
 			pRecInfo->pRecord = pRecord;
@@ -309,7 +304,7 @@ void CMWEditDoc::AddRecInfo(CEsmFile* pFile) {
  *         Plugin.esp.001
  *
  *=========================================================================*/
-bool CMWEditDoc::BackupPlugin(const TCHAR* pFilename) {
+bool CMWEditDoc::BackupPlugin(const TCHAR *pFilename) {
 	TCHAR BackupBuffer[_MAX_PATH + 8];
 	int Index;
 	BOOL Result;
@@ -356,7 +351,7 @@ bool CMWEditDoc::BackupPlugin(const TCHAR* pFilename) {
  * type.
  *
  *=========================================================================*/
-bool CMWEditDoc::CanCreateNew(const TCHAR* pType) {
+bool CMWEditDoc::CanCreateNew(const TCHAR *pType) {
 	if (_stricmp(pType, MWESM_REC_MGEF) == 0) {
 		return (false);
 	}
@@ -388,10 +383,10 @@ bool CMWEditDoc::CanCreateNew(const TCHAR* pType) {
  * Removes the given record from the active file.
  *
  *=========================================================================*/
-int CMWEditDoc::CleanRecord(esmrecinfo_t* pRecInfo) {
+int CMWEditDoc::CleanRecord(esmrecinfo_t *pRecInfo) {
 	DEFINE_FUNCTION("CMWEditDoc::CleanRecord()");
-	CEsmRecord* pPrevRecord;
-	CEsmRecord* pTmpRecord;
+	CEsmRecord *pPrevRecord;
+	CEsmRecord *pTmpRecord;
 
 	/* Ignore if the record's file is not the active file */
 	if (!pRecInfo->pFile->IsActive()) {
@@ -432,8 +427,8 @@ int CMWEditDoc::CleanRecord(esmrecinfo_t* pRecInfo) {
  * Class CMWEditDoc Method - bool MakeActive (pRecInfo);
  *
  *=========================================================================*/
-bool CMWEditDoc::MakeActive(esmrecinfo_t* pRecInfo) {
-	CEsmRecord* pRecord;
+bool CMWEditDoc::MakeActive(esmrecinfo_t *pRecInfo) {
+	CEsmRecord *pRecord;
 
 	if (pRecInfo == NULL) {
 		return (false);
@@ -470,7 +465,7 @@ bool CMWEditDoc::MakeActive(esmrecinfo_t* pRecInfo) {
  *
  *=========================================================================*/
 void CMWEditDoc::ClearFileArray(void) {
-	CEsmFile* pFile;
+	CEsmFile *pFile;
 	int Index;
 
 	for (Index = 0; Index < m_EsmFiles.GetSize(); Index++) {
@@ -511,16 +506,18 @@ void CMWEditDoc::ClearRecInfoArray(void) {
  *
  *=========================================================================*/
 void CMWEditDoc::CompareScripts(void) {
-	CEsmScript* pScript1;
-	CEsmScript* pScript2;
+	CEsmScript *pScript1;
+	CEsmScript *pScript2;
 	int RecordPos;
 	int Count = 0;
 	double StartTime;
 	double EndTime;
+
 	StartTime = GetHiClockTime();
-	pScript1 = (CEsmScript*)m_ActiveFile.FindFirst("SCPT", RecordPos);
+	pScript1 = (CEsmScript *)m_ActiveFile.FindFirst("SCPT", RecordPos);
 	SystemLog.Printf("===== Comparing scripts in active file '%s' to scripts in '%s'...",
-	                 m_ActiveFile.GetFilename(), m_ScriptFilename);
+	                 m_ActiveFile.GetFilename(),
+	                 m_ScriptFilename);
 
 	while (pScript1 != NULL) {
 		pScript2 = FindScriptRecord(pScript1->GetID());
@@ -532,11 +529,13 @@ void CMWEditDoc::CompareScripts(void) {
 			SystemLog.Printf("Script '%s' not found in source plugin!", pScript1->GetID());
 		}
 
-		pScript1 = (CEsmScript*)m_ActiveFile.FindNext("SCPT", RecordPos);
+		pScript1 = (CEsmScript *)m_ActiveFile.FindNext("SCPT", RecordPos);
 	}
 
 	EndTime = GetHiClockTime();
-	SystemLog.Printf("===== Finished Comparing %d Scripts in %g seconds", Count, EndTime - StartTime);
+	SystemLog.Printf("===== Finished Comparing %d Scripts in %g seconds",
+	                 Count,
+	                 EndTime - StartTime);
 }
 
 /*===========================================================================
@@ -551,7 +550,7 @@ void CMWEditDoc::CompareScripts(void) {
  * Compares the two scripts.
  *
  *=========================================================================*/
-void CMWEditDoc::CompareScripts(CEsmScript* pScript1, CEsmScript* pScript2) {
+void CMWEditDoc::CompareScripts(CEsmScript *pScript1, CEsmScript *pScript2) {
 	int Result;
 
 	/* Ensure valid input */
@@ -582,8 +581,10 @@ void CMWEditDoc::CompareScripts(CEsmScript* pScript1, CEsmScript* pScript2) {
 		return;
 	}
 
-	CompareScriptData(pScript1->GetScriptData()->GetData(), pScript1->GetScriptData()->GetRecordSize(),
-	                  pScript2->GetScriptData()->GetData(), pScript2->GetScriptData()->GetRecordSize());
+	CompareScriptData(pScript1->GetScriptData()->GetData(),
+	                  pScript1->GetScriptData()->GetRecordSize(),
+	                  pScript2->GetScriptData()->GetData(),
+	                  pScript2->GetScriptData()->GetRecordSize());
 }
 
 /*===========================================================================
@@ -599,10 +600,12 @@ void CMWEditDoc::CompareScripts(CEsmScript* pScript1, CEsmScript* pScript2) {
  * Assumes valid inputs.
  *
  *=========================================================================*/
-void CMWEditDoc::CompareScriptData(const byte* pData1, const long Size1, const byte* pData2,
+void CMWEditDoc::CompareScriptData(const byte *pData1,
+                                   const long Size1,
+                                   const byte *pData2,
                                    const long Size2) {
-	const byte* pParse1 = pData1;
-	const byte* pParse2 = pData2;
+	const byte *pParse1 = pData1;
+	const byte *pParse2 = pData2;
 	long Index1 = 0;
 	long Index2 = 0;
 	long MismatchCount = 0;
@@ -616,7 +619,9 @@ void CMWEditDoc::CompareScriptData(const byte* pData1, const long Size1, const b
 			if (tolower(*pParse1) == tolower(*pParse2)) {
 				SystemLog.Printf("\t\t0x%04X: Case mismatch (%c, %c)", Index1, *pParse1, *pParse2);
 			} else if (pParse1[1] == pParse2[1]) {
-				SystemLog.Printf("\t\t0x%04X: %02X != %02X (single byte change)", Index1, (dword)*pParse1,
+				SystemLog.Printf("\t\t0x%04X: %02X != %02X (single byte change)",
+				                 Index1,
+				                 (dword)*pParse1,
 				                 (dword)*pParse2);
 				++MismatchCount;
 			} else if (pParse1[0] == pParse2[1]) {
@@ -630,7 +635,10 @@ void CMWEditDoc::CompareScriptData(const byte* pData1, const long Size1, const b
 				--pParse2;
 				++MismatchCount;
 			} else {
-				SystemLog.Printf("\t\t0x%04X: %02X != %02X", Index1, (dword)*pParse1, (dword)*pParse2);
+				SystemLog.Printf("\t\t0x%04X: %02X != %02X",
+				                 Index1,
+				                 (dword)*pParse1,
+				                 (dword)*pParse2);
 				++MismatchCount;
 			}
 		}
@@ -661,7 +669,7 @@ void CMWEditDoc::CompareScriptData(const byte* pData1, const long Size1, const b
  *
  *=========================================================================*/
 bool CMWEditDoc::CompileAllActiveScripts(void) {
-	CEsmScript* pScript;
+	CEsmScript *pScript;
 	CString Buffer;
 	int RecordPos;
 	int SuccessCount = 0;
@@ -670,9 +678,11 @@ bool CMWEditDoc::CompileAllActiveScripts(void) {
 	double StartTime;
 	double DeltaTime;
 	CErrorDialog ErrorDlg;
+
 	StartTime = GetHiClockTime();
-	pScript = (CEsmScript*)m_ActiveFile.FindFirst("SCPT", RecordPos);
-	SystemLog.Printf("===== Compiling all scripts in active file '%s'...", m_ActiveFile.GetFilename());
+	pScript = (CEsmScript *)m_ActiveFile.FindFirst("SCPT", RecordPos);
+	SystemLog.Printf("===== Compiling all scripts in active file '%s'...",
+	                 m_ActiveFile.GetFilename());
 	ErrorHandler.ClearErrorCount();
 
 	while (pScript != NULL) {
@@ -688,11 +698,15 @@ bool CMWEditDoc::CompileAllActiveScripts(void) {
 	}
 
 	DeltaTime = GetHiClockTime() - StartTime;
-	SystemLog.Printf("===== Finished Compiling %d of %d Scripts in %g seconds", SuccessCount,
-	                 ErrorCount + SuccessCount, DeltaTime);
+	SystemLog.Printf("===== Finished Compiling %d of %d Scripts in %g seconds",
+	                 SuccessCount,
+	                 ErrorCount + SuccessCount,
+	                 DeltaTime);
 	Buffer.Format(
 	    _T("Compiled %d of %d scripts in %g seconds.\r\nThe following errors or warnings occurred:"),
-	    SuccessCount, ErrorCount + SuccessCount, DeltaTime);
+	    SuccessCount,
+	    ErrorCount + SuccessCount,
+	    DeltaTime);
 
 	if (ErrorHandler.GetErrorCount() <= 0) {
 		//AfxMessageBox(Buffer, MB_OK);
@@ -726,21 +740,25 @@ bool CMWEditDoc::CompileAllActiveScripts(void) {
  * location if not in the active file.
  *
  *=========================================================================*/
-bool CMWEditDoc::CompileActiveScript(CEsmScript* pScript) {
+bool CMWEditDoc::CompileActiveScript(CEsmScript *pScript) {
 	CEsmScriptCompile Compiler;
 	CString Buffer;
-	CEsmSubRecord* pSubRec;
-	CEsmSubSCHD* pScriptHeader;
+	CEsmSubRecord *pSubRec;
+	CEsmSubSCHD *pScriptHeader;
 	int Result;
+
 	/* Initialize the compiler */
 	Compiler.SetDocument(this);
 	Compiler.SetMsgLevel(GetEsmOptScriptWarnLevel());
 	Compiler.SetScriptText(pScript->GetScriptText(), pScript->GetScriptSize());
+
 	/* Perform the compile */
 	Result = Compiler.Compile();
 
 	if (Result < 0) {
-		ErrorHandler.AddError(MWEDIT_ERR_COMPILEALL, "%s: Failed to compile script!", pScript->GetID());
+		ErrorHandler.AddError(MWEDIT_ERR_COMPILEALL,
+		                      "%s: Failed to compile script!",
+		                      pScript->GetID());
 		return (false);
 	}
 
@@ -798,17 +816,17 @@ bool CMWEditDoc::CompileActiveScript(CEsmScript* pScript) {
  * script file. Returns NULL if not found.
  *
  *=========================================================================*/
-CEsmScript *CMWEditDoc::FindScriptRecord(const TCHAR* pID) {
-	CEsmScript* pScript;
+CEsmScript *CMWEditDoc::FindScriptRecord(const TCHAR *pID) {
+	CEsmScript *pScript;
 	int RecordPos;
-	pScript = (CEsmScript*)m_ScriptFile.FindFirst("SCPT", RecordPos);
+	pScript = (CEsmScript *)m_ScriptFile.FindFirst("SCPT", RecordPos);
 
 	while (pScript != NULL) {
 		if (pScript->IsID(pID)) {
 			return (pScript);
 		}
 
-		pScript = (CEsmScript*)m_ScriptFile.FindNext("SCPT", RecordPos);
+		pScript = (CEsmScript *)m_ScriptFile.FindNext("SCPT", RecordPos);
 	}
 
 	/* Nothing found */
@@ -828,17 +846,18 @@ CEsmScript *CMWEditDoc::FindScriptRecord(const TCHAR* pID) {
  * copied into the destination cell. Returns the destination cell object.
  *
  *=========================================================================*/
-CEsmRecord *CMWEditDoc::CopyCELLRefs(CMWEditDoc* pDocument, CEsmCell* pSourceCell,
-                                     CEsmCell* pDestCell) {
+CEsmRecord *CMWEditDoc::CopyCELLRefs(CMWEditDoc *pDocument,
+                                     CEsmCell *pSourceCell,
+                                     CEsmCell *pDestCell) {
 	DEFINE_FUNCTION("CMWEditDoc::CopyCELLRefs()");
-	CEsmCell* pCell = pSourceCell;
-	CEsmSubCellRef* pCellRef;
-	CEsmSubCellRef* pNewCellRef;
+	CEsmCell *pCell = pSourceCell;
+	CEsmSubCellRef *pCellRef;
+	CEsmSubCellRef *pNewCellRef;
 	int ArrayIndex;
 
 	/* Iterate through all files that have a copy of the cell */
 	while (pCell != NULL) {
-		pCellRef = (CEsmSubCellRef*)pCell->FindFirst(MWESM_SUBREC_CREF, ArrayIndex);
+		pCellRef = (CEsmSubCellRef *)pCell->FindFirst(MWESM_SUBREC_CREF, ArrayIndex);
 
 		/* Copy all available unique cell reference objects */
 		while (pCellRef != NULL) {
@@ -848,10 +867,10 @@ CEsmRecord *CMWEditDoc::CopyCELLRefs(CMWEditDoc* pDocument, CEsmCell* pSourceCel
 				pDestCell->AddCellRef(pCellRef);
 			}
 
-			pCellRef = (CEsmSubCellRef*)pCell->FindNext(MWESM_SUBREC_CREF, ArrayIndex);
+			pCellRef = (CEsmSubCellRef *)pCell->FindNext(MWESM_SUBREC_CREF, ArrayIndex);
 		}
 
-		pCell = (CEsmCell*)pCell->GetPrevRecord();
+		pCell = (CEsmCell *)pCell->GetPrevRecord();
 	}
 
 	return (pDestCell);
@@ -874,13 +893,13 @@ CEsmRecord *CMWEditDoc::CopyCELLRefs(CMWEditDoc* pDocument, CEsmCell* pSourceCel
  * Also, certain record types are ignored:
  *
  *=========================================================================*/
-bool CMWEditDoc::CopyRecord(CMWEditDoc* pSourceDoc, esmrecinfo_t* pRecInfo) {
+bool CMWEditDoc::CopyRecord(CMWEditDoc *pSourceDoc, esmrecinfo_t *pRecInfo) {
 	DEFINE_FUNCTION("CMWEditDoc::CopyRecord()");
 	esmrecinfo_t *pOrigRecInfo;
 	esmrecinfo_t *pSameRecInfo;
 	esmrecinfo_t *pNewRecInfo;
-	CEsmRecord* pNewRecord;
-	CEsmRecord* pPrevRecord = NULL;
+	CEsmRecord *pNewRecord;
+	CEsmRecord *pPrevRecord = NULL;
 	CString Buffer;
 	int Result;
 
@@ -909,7 +928,8 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc* pSourceDoc, esmrecinfo_t* pRecInfo) {
 
 		/* Prompt user if they wish to overwrite */
 		Buffer.Format(_T("The %s item '%s' already exists?. Do you wish to overwrite?"),
-		              pRecInfo->pRecord->GetItemType(), pRecInfo->pRecord->GetID());
+		              pRecInfo->pRecord->GetItemType(),
+		              pRecInfo->pRecord->GetID());
 		Result = AfxMessageBox(Buffer, MB_YESNO | MB_ICONQUESTION, 0);
 
 		if (Result != IDYES) {
@@ -927,9 +947,11 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc* pSourceDoc, esmrecinfo_t* pRecInfo) {
 
 	/* Special case for DIAL and CELL records */
 	if (pNewRecord->IsType(MWESM_REC_DIAL)) {
-		CreateCopyINFO(pSourceDoc, (CEsmDialogue*)pRecInfo->pRecord, (CEsmDialogue*)pNewRecInfo->pRecord);
+		CreateCopyINFO(pSourceDoc,
+		               (CEsmDialogue *)pRecInfo->pRecord,
+		               (CEsmDialogue *)pNewRecInfo->pRecord);
 	} else if (pNewRecord->IsType(MWESM_REC_CELL)) {
-		CopyCELLRefs(pSourceDoc, (CEsmCell*)pRecInfo->pRecord, (CEsmCell*)pNewRecInfo->pRecord);
+		CopyCELLRefs(pSourceDoc, (CEsmCell *)pRecInfo->pRecord, (CEsmCell *)pNewRecInfo->pRecord);
 	}
 
 	return (true);
@@ -948,23 +970,28 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc* pSourceDoc, esmrecinfo_t* pRecInfo) {
  * currently exist.  The new recinfo object is returned.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::CopyNewRecord(esmrecinfo_t* pOrigRecInfo) {
+esmrecinfo_t *CMWEditDoc::CopyNewRecord(esmrecinfo_t *pOrigRecInfo) {
 	DEFINE_FUNCTION("CMWEditDoc::CopyNewRecord()");
 	esmrecinfo_t *pNewRecInfo;
-	CEsmRecord* pNewRecord;
+	CEsmRecord * pNewRecord;
+
 	/* Create the new rec info object */
 	CreatePointer(pNewRecInfo, esmrecinfo_t);
+
 	/* Create the new record */
 	pNewRecord = m_ActiveFile.CreateCopy(pOrigRecInfo->pRecord);
 	pNewRecord->SetFile(&m_ActiveFile);
 	pNewRecord->SetPrevRecord(NULL);
+
 	/* Initialize the new recinfo */
 	pNewRecInfo->pFile = &m_ActiveFile;
 	pNewRecInfo->pRecord = pNewRecord;
+
 	/* Add the record/recinfo to the array and file */
 	m_RecInfo.Add(pNewRecInfo);
 	m_RecInfoSort.SetAt(pNewRecInfo);
 	m_ActiveFile.AddRecord(pNewRecInfo->pRecord);
+
 	return (pNewRecInfo);
 }
 
@@ -981,9 +1008,9 @@ esmrecinfo_t *CMWEditDoc::CopyNewRecord(esmrecinfo_t* pOrigRecInfo) {
  * same recinfo.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::CopyToActive(esmrecinfo_t* pRecInfo) {
+esmrecinfo_t *CMWEditDoc::CopyToActive(esmrecinfo_t *pRecInfo) {
 	DEFINE_FUNCTION("CMWEditDoc::CopyToActive()");
-	CEsmRecord* pNewRecord;
+	CEsmRecord *pNewRecord;
 
 	/* Is the record already active? */
 	if (!pRecInfo->pFile->IsActive()) {
@@ -991,6 +1018,7 @@ esmrecinfo_t *CMWEditDoc::CopyToActive(esmrecinfo_t* pRecInfo) {
 		pNewRecord = m_ActiveFile.CreateCopy(pRecInfo->pRecord);
 		pNewRecord->SetFile(&m_ActiveFile);
 		pNewRecord->SetPrevRecord(pRecInfo->pRecord);
+
 		/* Initialize the new recinfo */
 		pRecInfo->pFile = &m_ActiveFile;
 		pRecInfo->pRecord = pNewRecord;
@@ -1014,14 +1042,13 @@ esmrecinfo_t *CMWEditDoc::CopyToActive(esmrecinfo_t* pRecInfo) {
  * new Dialogue record is returned.
  *
  *=========================================================================*/
-CEsmRecord *CMWEditDoc::CreateCopyDIAL(CEsmDialogue* pDialRecord) {
+CEsmRecord *CMWEditDoc::CreateCopyDIAL(CEsmDialogue *pDialRecord) {
 	return CreateCopyDIAL(this, pDialRecord);
 }
 
-
-CEsmRecord *CMWEditDoc::CreateCopyDIAL(CMWEditDoc* pDocument, CEsmDialogue* pDialRecord) {
+CEsmRecord *CMWEditDoc::CreateCopyDIAL(CMWEditDoc *pDocument, CEsmDialogue *pDialRecord) {
 	DEFINE_FUNCTION("CMWEditDoc::CreateCopyDIAL");
-	CEsmRecord* pNewRecord;
+	CEsmRecord *pNewRecord;
 	/* Create the new record */
 	pNewRecord = m_ActiveFile.AllocNewRecord(pDialRecord->GetType());
 
@@ -1030,32 +1057,39 @@ CEsmRecord *CMWEditDoc::CreateCopyDIAL(CMWEditDoc* pDocument, CEsmDialogue* pDia
 	}
 
 	m_ActiveFile.AddRecord(pNewRecord);
+
 	/* Initialize the new dialogue record */
 	pNewRecord->Copy(pDialRecord);
 	pNewRecord->SetFile(&m_ActiveFile);
+
 	/* Add all the dialogue info records */
-	CreateCopyINFO(pDocument, pDialRecord, (CEsmDialogue*)pNewRecord);
+	CreateCopyINFO(pDocument, pDialRecord, (CEsmDialogue *)pNewRecord);
+
 	return (pNewRecord);
 }
 
 
-CEsmRecord *CMWEditDoc::CreateCopyINFO(CMWEditDoc* pDocument, CEsmDialogue* pDialRecord,
-                                       CEsmDialogue* pNewDialRecord) {
+CEsmRecord *CMWEditDoc::CreateCopyINFO(CMWEditDoc *pDocument,
+                                       CEsmDialogue *pDialRecord,
+                                       CEsmDialogue *pNewDialRecord) {
 	DEFINE_FUNCTION("CMWEditDoc::CreateCopyINFO");
 	esmrecinfo_t *pRecInfo;
 	esmrecinfo_t *pNewRecInfo;
-	CEsmInfo* pInfo;
-	CEsmInfo* pNewInfo;
-	CEsmInfo* pLastInfo;
+	CEsmInfo *pInfo;
+	CEsmInfo *pNewInfo;
+	CEsmInfo *pLastInfo;
+
 	/* Add all the dialogue info records */
 	pRecInfo = pDocument->GetInfoStart(pDialRecord);
 	pLastInfo = NULL;
 
 	while (pRecInfo != NULL) {
-		pInfo = (CEsmInfo*)pRecInfo->pRecord;
+		pInfo = (CEsmInfo *)pRecInfo->pRecord;
+
 		/* Create the record/recinfo data */
 		CreatePointer(pNewRecInfo, esmrecinfo_t);
-		pNewInfo = (CEsmInfo*)m_ActiveFile.AllocNewRecord(MWESM_REC_INFO);
+		pNewInfo = (CEsmInfo *)m_ActiveFile.AllocNewRecord(MWESM_REC_INFO);
+
 		/* Initialize the new data */
 		pNewRecInfo->pFile = &m_ActiveFile;
 		pNewRecInfo->pRecord = pNewInfo;
@@ -1102,12 +1136,12 @@ CEsmRecord *CMWEditDoc::CreateCopyINFO(CMWEditDoc* pDocument, CEsmDialogue* pDia
  * file. Returns the new record or NULL on any error.
  *
  *=========================================================================*/
-CEsmRecord *CMWEditDoc::CreateCopy(CEsmRecord* pRecord) {
-	CEsmRecord* pNewRecord;
+CEsmRecord *CMWEditDoc::CreateCopy(CEsmRecord *pRecord) {
+	CEsmRecord *pNewRecord;
 
 	/* Special case for dialogue records */
 	if (pRecord->IsType(MWESM_REC_DIAL)) {
-		return CreateCopyDIAL((CEsmDialogue*)pRecord);
+		return CreateCopyDIAL((CEsmDialogue *)pRecord);
 	}
 
 	/* Create the new record */
@@ -1118,13 +1152,14 @@ CEsmRecord *CMWEditDoc::CreateCopy(CEsmRecord* pRecord) {
 	}
 
 	m_ActiveFile.AddRecord(pNewRecord);
+
 	/* Initialize the new record */
 	pNewRecord->Copy(pRecord);
 	pNewRecord->SetFile(&m_ActiveFile);
 
 	/* Special case for CELL records */
 	if (pRecord->IsType(MWESM_REC_CELL)) {
-		CopyCELLRefs(this, (CEsmCell*)pRecord, (CEsmCell*)pNewRecord);
+		CopyCELLRefs(this, (CEsmCell *)pRecord, (CEsmCell *)pNewRecord);
 	}
 
 	return (pNewRecord);
@@ -1145,8 +1180,8 @@ CEsmRecord *CMWEditDoc::CreateCopy(CEsmRecord* pRecord) {
  * records.
  *
  *=========================================================================*/
-CEsmRecord *CMWEditDoc::CreateEditCopy(CEsmRecord* pRecord) {
-	CEsmRecord* pNewRecord;
+CEsmRecord *CMWEditDoc::CreateEditCopy(CEsmRecord *pRecord) {
+	CEsmRecord *pNewRecord;
 	/* Create the new record */
 	pNewRecord = m_ActiveFile.AllocNewRecord(pRecord->GetType());
 
@@ -1155,13 +1190,14 @@ CEsmRecord *CMWEditDoc::CreateEditCopy(CEsmRecord* pRecord) {
 	}
 
 	m_ActiveFile.AddRecord(pNewRecord);
+
 	/* Initialize the new record */
 	pNewRecord->Copy(pRecord);
 	pNewRecord->SetFile(&m_ActiveFile);
 
 	/* Special case for CELL records */
 	if (pRecord->IsType(MWESM_REC_CELL)) {
-		CopyCELLRefs(this, (CEsmCell*)pRecord, (CEsmCell*)pNewRecord);
+		CopyCELLRefs(this, (CEsmCell *)pRecord, (CEsmCell *)pNewRecord);
 	}
 
 	return (pNewRecord);
@@ -1180,14 +1216,15 @@ CEsmRecord *CMWEditDoc::CreateEditCopy(CEsmRecord* pRecord) {
  * the new recinfo or NULL on any error.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t* pRecInfo, const TCHAR* pNewID) {
+esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
 	DEFINE_FUNCTION("CMWEditDoc::CreateCopy()");
 	esmrecinfo_t *pNewRecInfo;
 	bool Result;
 
 	/* Can we create new copies of the record? */
 	if (!CanCreateNew(pRecInfo->pRecord->GetType())) {
-		ErrorHandler.AddError(ERR_CUSTOM, _T("Cannot create new %s records!"),
+		ErrorHandler.AddError(ERR_CUSTOM,
+		                      _T("Cannot create new %s records!"),
 		                      pRecInfo->pRecord->GetItemType());
 		return (NULL);
 	}
@@ -1210,6 +1247,7 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t* pRecInfo, const TCHAR* pNewID
 
 	/* Create the new rec info object */
 	CreatePointer(pNewRecInfo, esmrecinfo_t);
+
 	/* Copy and initialize the new record */
 	pNewRecInfo->pFile = &m_ActiveFile;
 	pNewRecInfo->pRecord = CreateCopy(pRecInfo->pRecord);
@@ -1218,6 +1256,7 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t* pRecInfo, const TCHAR* pNewID
 	pNewRecInfo->pRecord->SetID(pNewID);
 	m_RecInfo.Add(pNewRecInfo);
 	m_RecInfoSort.SetAt(pNewRecInfo);
+
 	return (pNewRecInfo);
 }
 
@@ -1234,8 +1273,8 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t* pRecInfo, const TCHAR* pNewID
  * error. Does not add the record to the current active plugin.
  *
  *=========================================================================*/
-CEsmRecord *CMWEditDoc::CreateNewRecord(const TCHAR* pType) {
-	CEsmRecord* pRecord;
+CEsmRecord *CMWEditDoc::CreateNewRecord(const TCHAR *pType) {
+	CEsmRecord *pRecord;
 
 	/* Cannot create some types of records */
 	if (!CanCreateNew(pType)) {
@@ -1269,10 +1308,10 @@ CEsmRecord *CMWEditDoc::CreateNewRecord(const TCHAR* pType) {
  * already exist.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::CreateNewRecord(const TCHAR* pType, const TCHAR* pID) {
+esmrecinfo_t *CMWEditDoc::CreateNewRecord(const TCHAR *pType, const TCHAR *pID) {
 	DEFINE_FUNCTION("CMWEditDoc::CreateNewRecord()");
 	esmrecinfo_t *pNewRecInfo;
-	CEsmRecord* pNewRecord;
+	CEsmRecord *pNewRecord;
 	bool Result;
 	/* Is the new ID valid? */
 	Result = IsValidESMID(pID);
@@ -1298,6 +1337,7 @@ esmrecinfo_t *CMWEditDoc::CreateNewRecord(const TCHAR* pType, const TCHAR* pID) 
 	m_ActiveFile.AddRecord(pNewRecord);
 	m_RecInfo.Add(pNewRecInfo);
 	m_RecInfoSort.SetAt(pNewRecInfo);
+
 	return (pNewRecInfo);
 }
 
@@ -1330,8 +1370,9 @@ void CMWEditDoc::DeleteContents() {
  * could be deleted/undeleted.
  *
  *=========================================================================*/
-bool CMWEditDoc::DeleteRecord(esmrecinfo_t* pRecInfo) {
-	CEsmRecord* pRecord;
+bool CMWEditDoc::DeleteRecord(esmrecinfo_t *pRecInfo) {
+	CEsmRecord *pRecord;
+
 	/* Can we delete this type of record? */ /*
 	if (!CanCreateNew(pRecInfo->pRecord->GetType())) {
 	ErrorHandler.AddError(ERR_BADINPUT, _T("Cannot delete '%4.4s' records!"), pRecInfo->pRecord->GetType());
@@ -1360,8 +1401,8 @@ bool CMWEditDoc::DeleteRecord(esmrecinfo_t* pRecInfo) {
 
 		if (pRecord != NULL) {
 			CString CurrentID = pRecInfo->pRecord->GetID(); /* Save current ID */
-			pRecInfo->pRecord->Copy(pRecord);           /* copy old contents */
-			pRecInfo->pRecord->SetID(CurrentID);        /* Restore ID */
+			pRecInfo->pRecord->Copy(pRecord);               /* copy old contents */
+			pRecInfo->pRecord->SetID(CurrentID);            /* Restore ID */
 		}
 	}
 
@@ -1381,13 +1422,14 @@ bool CMWEditDoc::DeleteRecord(esmrecinfo_t* pRecInfo) {
  * overwritten if it exists. Returns false on any error.
  *
  *=========================================================================*/
-bool CMWEditDoc::ExportSpellMerchants(const TCHAR* pFilename) {
-	CEsmNpc* pNpc;
+bool CMWEditDoc::ExportSpellMerchants(const TCHAR *pFilename) {
+	CEsmNpc *pNpc;
 	esmrecinfo_t *pRecInfo;
 	CGenFile File;
 	int ArrayIndex;
 	bool SellSpells;
 	bool Result;
+
 	/* Attempt to initialize the given output file */
 	m_NumEffectsOutput = 0;
 	Result = File.Open(pFilename, "wb");
@@ -1407,7 +1449,7 @@ bool CMWEditDoc::ExportSpellMerchants(const TCHAR* pFilename) {
 	pRecInfo = FindFirstRecord(MWESM_REC_NPC_, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pNpc = (CEsmNpc*)pRecInfo->pRecord;
+		pNpc = (CEsmNpc *)pRecInfo->pRecord;
 		//SystemLog.Printf(_T("Merchant NPC = %s"), pNpc->GetID());
 		/* Get the ai flags from the class or npc */
 		SellSpells = ((GetNPCAiFlags(pNpc) & MWESM_AIFLAG_SPELL) != 0);
@@ -1442,13 +1484,15 @@ bool CMWEditDoc::ExportSpellMerchants(const TCHAR* pFilename) {
  * false on any error.
  *
  *=========================================================================*/
-bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CGenFile& File) {
-	CEsmSubCellRef* pCellRef;
-	CEsmSubNPCS* pSpellName;
-	CEsmSpell* pSpell;
+bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc, CGenFile &File) {
+	CEsmSubCellRef *pCellRef;
+	CEsmSubNPCS *pSpellName;
+	CEsmSpell *pSpell;
 	esmrecinfo_t *pRecInfo;
+
 	int ArrayIndex;
 	bool Result;
+
 	/* Clear the effects array */
 	memset(m_OutputEffects, 0, sizeof(int) * MWESM_MAX_EFFECTS);
 	/* Get the first reference for the NPC, if any */
@@ -1460,7 +1504,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CGenFile& File) {
 
 	//SystemLog.Printf(_T("\tFound Cell Ref '%s'"), pCellRef->GetCell()->GetName());
 	/* Enumerate through all spells the NPC knows */
-	pSpellName = (CEsmSubNPCS*)pNpc->FindFirst(MWESM_SUBREC_NPCS, ArrayIndex);
+	pSpellName = (CEsmSubNPCS *)pNpc->FindFirst(MWESM_SUBREC_NPCS, ArrayIndex);
 
 	while (pSpellName != NULL) {
 		//SystemLog.Printf(_T("\tFound Spell '%s'"), pSpellName->GetName());
@@ -1469,7 +1513,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CGenFile& File) {
 
 		if (pRecInfo != NULL) {
 			//SystemLog.Printf(_T("\t\tFound Spell Record"));
-			pSpell = (CEsmSpell*)pRecInfo->pRecord;
+			pSpell = (CEsmSpell *)pRecInfo->pRecord;
 			Result = ExportSpellMerchant(pNpc, pSpell, pCellRef, File);
 
 			if (!Result) {
@@ -1478,7 +1522,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CGenFile& File) {
 		}
 
 		/* Get the next spell the NPC knows */
-		pSpellName = (CEsmSubNPCS*)pNpc->FindNext(MWESM_SUBREC_NPCS, ArrayIndex);
+		pSpellName = (CEsmSubNPCS *)pNpc->FindNext(MWESM_SUBREC_NPCS, ArrayIndex);
 	}
 
 	return (true);
@@ -1497,14 +1541,17 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CGenFile& File) {
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CEsmSpell* pSpell,
-                                     CEsmSubCellRef* pCellRef, CGenFile& File) {
-	CEsmSubENAM* pEnchant;
+bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc,
+                                     CEsmSpell *pSpell,
+                                     CEsmSubCellRef *pCellRef,
+                                     CGenFile &File) {
+	CEsmSubENAM *pEnchant;
 	int ArrayIndex;
 	int EffectID;
 	bool Result;
+
 	/* Enumerate through all enchantments in the spell */
-	pEnchant = (CEsmSubENAM*)pSpell->FindFirst(MWESM_SUBREC_ENAM, ArrayIndex);
+	pEnchant = (CEsmSubENAM *)pSpell->FindFirst(MWESM_SUBREC_ENAM, ArrayIndex);
 
 	while (pEnchant != NULL) {
 		EffectID = pEnchant->GetEffectID();
@@ -1521,7 +1568,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CEsmSpell* pSpell,
 			m_OutputEffects[EffectID]++;
 		}
 
-		pEnchant = (CEsmSubENAM*)pSpell->FindNext(MWESM_SUBREC_ENAM, ArrayIndex);
+		pEnchant = (CEsmSubENAM *)pSpell->FindNext(MWESM_SUBREC_ENAM, ArrayIndex);
 	}
 
 	return (true);
@@ -1539,16 +1586,22 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CEsmSpell* pSpell,
  * Outputs a single effect to the given CSV spell merchant file.
  *
  *=========================================================================*/
-bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CEsmSpell* pSpell,
-                                     CEsmSubCellRef* pCellRef, const int EffectID, CGenFile& File) {
+bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc,
+                                     CEsmSpell *pSpell,
+                                     CEsmSubCellRef *pCellRef,
+                                     const int EffectID,
+                                     CGenFile &File) {
 	bool Result;
 	pos6data_t *pPosData = pCellRef->GetLocation();
+
 	Result = File.Printf(_T("\"%s\",\"%s\","), pNpc->GetID(), pNpc->GetName());
 	Result &= File.Printf(_T("\"%s\",\"%s\","), pSpell->GetName(), GetESMEffect(EffectID));
 	Result &= File.Printf(_T("\"%s\","), pCellRef->GetCell()->GetName());
 
 	if (pPosData != NULL) {
-		Result &= File.Printf(_T("\"(%.0f,%.0f,%.0f)\"\n"), pPosData->PosX, pPosData->PosY,
+		Result &= File.Printf(_T("\"(%.0f,%.0f,%.0f)\"\n"),
+		                      pPosData->PosX,
+		                      pPosData->PosY,
 		                      pPosData->PosZ);
 	} else {
 		Result &= File.Printf(_T("\"(0,0,0)\"\n"));
@@ -1571,16 +1624,17 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc* pNpc, CEsmSpell* pSpell,
  * Returns NULL on any error.
  *
  *=========================================================================*/
-CEsmSubCellRef *CMWEditDoc::FindFirstCellRef(CEsmRecord* pRecord) {
-	CEsmCell* pCell;
-	CEsmSubCellRef* pCellRef;
+CEsmSubCellRef *CMWEditDoc::FindFirstCellRef(CEsmRecord *pRecord) {
+	CEsmCell *pCell;
+	CEsmSubCellRef *pCellRef;
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
+
 	/* Look through all cell records */
 	pRecInfo = FindFirstRecord(MWESM_REC_CELL, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pCell = (CEsmCell*)pRecInfo->pRecord;
+		pCell = (CEsmCell *)pRecInfo->pRecord;
 		/* Try and find a reference for the record in the cell */
 		pCellRef = pCell->FindFirstCellRef(pRecord);
 
@@ -1609,11 +1663,12 @@ CEsmSubCellRef *CMWEditDoc::FindFirstCellRef(CEsmRecord* pRecord) {
  * of the given type, the record is still returned.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::FindExistingRecord(const TCHAR* pID, const TCHAR* pType) {
+esmrecinfo_t *CMWEditDoc::FindExistingRecord(const TCHAR *pID, const TCHAR *pType) {
 	esmrecinfo_t *pRecInfo;
 	TCHAR TempBuffer[MWESM_ID_MAXSIZE * 2 + 1];
-	TCHAR* pTempID = RemoveIDQuotes(TempBuffer, pID);
+	TCHAR *pTempID = RemoveIDQuotes(TempBuffer, pID);
 	//int           Index;
+
 	pRecInfo = m_RecInfoSort.Get(pTempID);
 
 	if (pRecInfo == NULL) {
@@ -1653,7 +1708,7 @@ esmrecinfo_t *CMWEditDoc::FindExistingRecord(const TCHAR* pID, const TCHAR* pTyp
  * if the record of the given type is not found.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::FindNextRecord(const TCHAR* pType, int &ArrayIndex) {
+esmrecinfo_t *CMWEditDoc::FindNextRecord(const TCHAR *pType, int &ArrayIndex) {
 	esmrecinfo_t *pRecInfo;
 
 	for (ArrayIndex++; ArrayIndex < m_RecInfo.GetSize(); ArrayIndex++) {
@@ -1709,7 +1764,7 @@ esmrecinfo_t *CMWEditDoc::FindNextItem(int &ArrayIndex) {
  * Class CMWEditDoc Method - esmrecinfo_t* FindRecInfoByPtr (pRecord);
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::FindRecInfoByPtr(CEsmRecord* pRecord) {
+esmrecinfo_t *CMWEditDoc::FindRecInfoByPtr(CEsmRecord *pRecord) {
 	esmrecinfo_t *pRecInfo;
 	int Index;
 
@@ -1737,7 +1792,7 @@ esmrecinfo_t *CMWEditDoc::FindRecInfoByPtr(CEsmRecord* pRecord) {
  * Returns NULL if it is not found.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::FindRecInfo(CEsmRecord* pRecord) {
+esmrecinfo_t *CMWEditDoc::FindRecInfo(CEsmRecord *pRecord) {
 	esmrecinfo_t *pRecInfo;
 	//const TCHAR*  pID1;
 	//const TCHAR*  pID2;
@@ -1773,8 +1828,7 @@ esmrecinfo_t *CMWEditDoc::FindRecInfo(CEsmRecord* pRecord) {
 	return (NULL);
 }
 
-
-esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR* pID) {
+esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR *pID) {
 	//int   Index;
 	int Length;
 	TCHAR TempBuffer[MWESM_ID_MAXSIZE * 2 + 1];
@@ -1802,10 +1856,10 @@ esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR* pID) {
 }
 
 /* Looks for a given ID of the given type */
-esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR* pID, const TCHAR* pType) {
+esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR *pID, const TCHAR *pType) {
 	TCHAR TempBuffer[MWESM_ID_MAXSIZE * 2 + 1];
 	esmrecinfo_t *pRecInfo;
-	const TCHAR* pNewID = pID;
+	const TCHAR *pNewID = pID;
 	int Length;
 	int Index;
 
@@ -1847,12 +1901,11 @@ esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR* pID, const TCHAR* pType) {
 	return (NULL);
 }
 
-
 /* Looks for a given ID which is carryable */
-esmrecinfo_t *CMWEditDoc::FindRecordCarryable(const TCHAR* pID) {
+esmrecinfo_t *CMWEditDoc::FindRecordCarryable(const TCHAR *pID) {
 	TCHAR TempBuffer[MWESM_ID_MAXSIZE * 2 + 1];
 	esmrecinfo_t *pRecInfo;
-	const TCHAR* pNewID = pID;
+	const TCHAR *pNewID = pID;
 	int Length;
 	int Index;
 
@@ -1893,19 +1946,17 @@ esmrecinfo_t *CMWEditDoc::FindRecordCarryable(const TCHAR* pID) {
 	return (NULL);
 }
 
-
-esmrecinfo_t *CMWEditDoc::FindRecordSort(CEsmRecord* pRecord) {
+esmrecinfo_t *CMWEditDoc::FindRecordSort(CEsmRecord *pRecord) {
 	return m_RecInfoSort.Get(pRecord->GetID());
 	//int Index = m_RecInfoSort.FindFastFunc(l_FindRecSort1, (void*) pRecord);
 	//if (Index < 0) return (NULL);
 	//return (m_RecInfo[Index]);
 }
 
-
 /* Looks for a given ID of the given type with the given dialogue parent */
-esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR* pID, const TCHAR* pDialID) {
+esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR *pID, const TCHAR *pDialID) {
 	//MWMAPPOS      Position;
-	CEsmInfo* pInfo;
+	CEsmInfo *pInfo;
 	esmrecinfo_t *pRecInfo;
 	int Index;
 
@@ -1921,7 +1972,7 @@ esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR* pID, const TCHAR* pDialID)
 			continue;
 		}
 
-		pInfo = (CEsmInfo*)pRecInfo->pRecord;
+		pInfo = (CEsmInfo *)pRecInfo->pRecord;
 
 		if (pInfo->GetDialParent() && pInfo->GetDialParent()->IsID(pDialID)) {
 			return (pRecInfo);
@@ -1975,7 +2026,7 @@ esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR* pID, const TCHAR* pDialID)
  * auto-calc.
  *
  *=========================================================================*/
-long CMWEditDoc::GetNPCAiFlags(CEsmNpc* pNpc) {
+long CMWEditDoc::GetNPCAiFlags(CEsmNpc *pNpc) {
 	/* Ignore invalid input */
 	if (pNpc == NULL) {
 		return (0);
@@ -1993,7 +2044,7 @@ long CMWEditDoc::GetNPCAiFlags(CEsmNpc* pNpc) {
 		return (0);
 	}
 
-	CEsmClass* pClass = (CEsmClass*)pRecInfo->pRecord;
+	CEsmClass *pClass = (CEsmClass *)pRecInfo->pRecord;
 	return (pClass->GetAutoCalcFlags());
 }
 
@@ -2008,13 +2059,13 @@ long CMWEditDoc::GetNPCAiFlags(CEsmNpc* pNpc) {
  *
  *=========================================================================*/
 esmrecinfo_t *CMWEditDoc::GetEffectRecord(const int EffectID) {
-	CEsmMagicEffect* pEffect;
+	CEsmMagicEffect *pEffect;
 	esmrecinfo_t *pRecInfo;
 	int RecordIndex;
 	pRecInfo = FindFirstRecord(MWESM_REC_MGEF, RecordIndex);
 
 	while (pRecInfo != NULL) {
-		pEffect = (CEsmMagicEffect*)pRecInfo->pRecord;
+		pEffect = (CEsmMagicEffect *)pRecInfo->pRecord;
 
 		if (pEffect->IsEffect(EffectID)) {
 			return (pRecInfo);
@@ -2039,7 +2090,7 @@ esmrecinfo_t *CMWEditDoc::GetEffectRecord(const int EffectID) {
  * Attempt to return the given global record, or NULL if it is not found.
  *
  *=========================================================================*/
-CEsmGlobal *CMWEditDoc::GetGlobal(const TCHAR* pName) {
+CEsmGlobal *CMWEditDoc::GetGlobal(const TCHAR *pName) {
 	esmrecinfo_t *pRecInfo;
 	/* Attempt to find a record with the given ID */
 	pRecInfo = FindRecord(pName, MWESM_REC_GLOB);
@@ -2053,7 +2104,7 @@ CEsmGlobal *CMWEditDoc::GetGlobal(const TCHAR* pName) {
 		return (NULL);
 	}
 
-	return ((CEsmGlobal*)pRecInfo->pRecord);
+	return ((CEsmGlobal *)pRecInfo->pRecord);
 }
 
 /*===========================================================================
@@ -2069,17 +2120,20 @@ CEsmGlobal *CMWEditDoc::GetGlobal(const TCHAR* pName) {
  * Returns if the dialog has no INFO records.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::GetInfoStart(esmrecinfo_t* pDialog) {
-	return GetInfoStart((CEsmDialogue*)pDialog->pRecord);
+esmrecinfo_t *CMWEditDoc::GetInfoStart(esmrecinfo_t *pDialog) {
+	return GetInfoStart((CEsmDialogue *)pDialog->pRecord);
 }
 
-esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue* pDialRecord) {
+esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue *pDialRecord) {
 	esmrecinfo_t *pRecInfo;
 	esmrecinfo_t *pPrevRecInfo;
-	CEsmRecord* pRecord;
-	CEsmRecord* pInfoRecord = NULL;
-	CEsmInfo* pInfo;
-	CEsmInfo* pLastValidInfo;
+
+	CEsmRecord *pRecord;
+	CEsmRecord *pInfoRecord = NULL;
+
+	CEsmInfo *pInfo;
+	CEsmInfo *pLastValidInfo;
+
 	esmrecinfo_t *pLastValidRecInfo;
 	int Index;
 	pRecord = pDialRecord;
@@ -2103,7 +2157,7 @@ esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue* pDialRecord) {
 		pRecord = pRecord->GetPrevRecord();
 	}
 
-	pInfo = (CEsmInfo*)pInfoRecord;
+	pInfo = (CEsmInfo *)pInfoRecord;
 
 	/*
 	  if (pInfoRecord != NULL)
@@ -2141,7 +2195,7 @@ esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue* pDialRecord) {
 			return (pLastValidRecInfo);
 		}
 
-		pInfo = (CEsmInfo*)pRecInfo->pRecord;
+		pInfo = (CEsmInfo *)pRecInfo->pRecord;
 		pPrevRecInfo = pRecInfo;
 		/* Ensure the dialogue parent IDs match */
 		//if (pInfo->GetDialParent() != NULL && pInfo->GetDialParent()->IsID(pDialRecord->GetID())) {
@@ -2167,12 +2221,13 @@ esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue* pDialRecord) {
  * record on success, or NULL on any error.
  *
  *=========================================================================*/
-esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR* pFilename) {
+esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 	CEsmScriptCompile ScriptCompiler;
 	CSString Buffer;
-	CEsmScript* pScript;
-	CEsmSubSCHD* pScriptHeader;
+	CEsmScript *pScript;
+	CEsmSubSCHD *pScriptHeader;
 	esmrecinfo_t *pRecInfo;
+
 	bool Result;
 	int iResult;
 	/* Attempt to input the file */
@@ -2184,7 +2239,8 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR* pFilename) {
 
 	/* Check for a too large of a script */
 	if (Buffer.GetLength() > ESM_SCRIPT_MAXTEXT) {
-		ErrorHandler.AddError(ERR_MAXINDEX, _T("Script text exceeds the maximum length of %d!"),
+		ErrorHandler.AddError(ERR_MAXINDEX,
+		                      _T("Script text exceeds the maximum length of %d!"),
 		                      ESM_SCRIPT_MAXTEXT);
 		return (NULL);
 	}
@@ -2205,7 +2261,8 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR* pFilename) {
 
 	/* Ignore if an existing record of the incorrect type exists */
 	if (pRecInfo != NULL && !pRecInfo->pRecord->IsType(MWESM_REC_SCPT)) {
-		ErrorHandler.AddError(ERR_CUSTOM, _T("The existing record '%s' is not a script!"),
+		ErrorHandler.AddError(ERR_CUSTOM,
+		                      _T("The existing record '%s' is not a script!"),
 		                      ScriptCompiler.GetScriptName());
 		return (NULL);
 	}
@@ -2222,18 +2279,21 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR* pFilename) {
 	}
 
 	/* Update the script data */
-	pScript = (CEsmScript*)pRecInfo->pRecord;
+	pScript = (CEsmScript *)pRecInfo->pRecord;
 	pScriptHeader = pScript->GetScriptHeader();
 	pScript->SetScriptText(Buffer);
+
 	pScriptHeader->GetScriptHeadData()->LocalVarSize = ScriptCompiler.GetLocalVarDataSize();
 	pScriptHeader->GetScriptHeadData()->ScriptDataSize = ScriptCompiler.GetScriptDataSize();
 	pScriptHeader->GetScriptHeadData()->NumShorts = ScriptCompiler.GetNumShortLocals();
 	pScriptHeader->GetScriptHeadData()->NumLongs = ScriptCompiler.GetNumLongLocals();
 	pScriptHeader->GetScriptHeadData()->NumFloats = ScriptCompiler.GetNumFloatLocals();
+
 	pScript->GetScriptVars()->CopyData(ScriptCompiler.GetLocalVarData(),
 	                                   ScriptCompiler.GetLocalVarDataSize());;
 	pScript->GetScriptData()->CopyData(ScriptCompiler.GetScriptData(),
 	                                   ScriptCompiler.GetScriptDataSize());
+
 	return (pRecInfo);
 }
 
@@ -2251,7 +2311,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR* pFilename) {
  * true if the ID currently exists.
  *
  *=========================================================================*/
-bool CMWEditDoc::IsExistingIDDup(const TCHAR* pID) {
+bool CMWEditDoc::IsExistingIDDup(const TCHAR *pID) {
 	esmrecinfo_t *pRecInfo;
 	MWMAPPOS Position;
 
@@ -2264,7 +2324,7 @@ bool CMWEditDoc::IsExistingIDDup(const TCHAR* pID) {
 
 		/* Special case for Exterior CELLS which can have non-unique IDs */
 		if (pRecInfo->pRecord->IsType(MWESM_REC_CELL)) {
-			CEsmCell* pCell = (CEsmCell*)pRecInfo->pRecord;
+			CEsmCell* pCell = (CEsmCell *)pRecInfo->pRecord;
 
 			if (!pCell->IsInterior()) {
 				continue;
@@ -2294,11 +2354,13 @@ bool CMWEditDoc::IsExistingIDDup(const TCHAR* pID) {
  * error.
  *
  *=========================================================================*/
-bool CMWEditDoc::LoadScriptFile(const TCHAR* pFilename) {
+bool CMWEditDoc::LoadScriptFile(const TCHAR *pFilename) {
 	bool Result;
+
 	/* Clear the current script comparison data */
 	m_ScriptFilename.Empty();
 	m_ScriptFile.Destroy();
+
 	/* Attempt to load the plugin */
 	Result = m_ScriptFile.Read(pFilename);
 
@@ -2321,7 +2383,7 @@ bool CMWEditDoc::LoadScriptFile(const TCHAR* pFilename) {
  *
  *=========================================================================*/
 BOOL CMWEditDoc::OnNewDocument() {
-	CEsmTES3* pHeader;
+	CEsmTES3 *pHeader;
 	int ArrayIndex;
 
 	/* Call the base class method first */
@@ -2332,11 +2394,14 @@ BOOL CMWEditDoc::OnNewDocument() {
 	/* Setup the active plugin */
 	m_ActiveFile.CreateNew();
 	m_ActiveFile.SetActive(true);
+
 	/* Set the default author name */
-	pHeader = (CEsmTES3*)m_ActiveFile.FindFirst(MWESM_REC_TES3, ArrayIndex);
+	pHeader = (CEsmTES3 *)m_ActiveFile.FindFirst(MWESM_REC_TES3, ArrayIndex);
 
 	if (pHeader != NULL) {
-		strnncpy(pHeader->GetHeaderData()->Author, GetEsmOptDefaultAuthor(), MWESM_HEDR_AUTHORSIZE - 1);
+		strnncpy(pHeader->GetHeaderData()->Author,
+		         GetEsmOptDefaultAuthor(),
+		         MWESM_HEDR_AUTHORSIZE - 1);
 	}
 
 	return (TRUE);
@@ -2354,7 +2419,7 @@ BOOL CMWEditDoc::OnNewDocument() {
  * Description
  *
  *=========================================================================*/
-void CMWEditDoc::Serialize(CArchive& ar) {
+void CMWEditDoc::Serialize(CArchive &ar) {
 }
 
 /*===========================================================================
@@ -2372,7 +2437,7 @@ void CMWEditDoc::AssertValid() const {
 	CDocument::AssertValid();
 }
 
-void CMWEditDoc::Dump(CDumpContext& dc) const {
+void CMWEditDoc::Dump(CDumpContext &dc) const {
 	CDocument::Dump(dc);
 }
 
@@ -2388,12 +2453,13 @@ void CMWEditDoc::Dump(CDumpContext& dc) const {
  *=========================================================================*/
 bool CMWEditDoc::LoadAppMasters(void) {
 	DEFINE_FUNCTION("CMWEditDoc::LoadAppMasters()");
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	POSITION FilePos;
-	CEsmFile* pFile;
+	CEsmFile *pFile;
 
 	/* Add all the master plugins from the application data */
-	for (FilePos = pApp->m_Masters.GetHeadPosition(); FilePos != NULL;
+	for (FilePos = pApp->m_Masters.GetHeadPosition();
+	     FilePos != NULL;
 	     pApp->m_Masters.GetNext(FilePos)) {
 		pFile = GetApp()->LoadMaster(pApp->m_Masters.GetAt(FilePos), &m_LoadDlg);
 
@@ -2420,20 +2486,23 @@ bool CMWEditDoc::LoadAppMasters(void) {
  *=========================================================================*/
 bool CMWEditDoc::LoadAppPlugins(void) {
 	DEFINE_FUNCTION("CMWEditDoc::LoadAppPlugins()");
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	POSITION FilePos;
-	CEsmFile* pFile;
+	CEsmFile *pFile;
 	bool Result;
 
 	/* Add all the regular plugins */
-	for (FilePos = pApp->m_Plugins.GetHeadPosition(); FilePos != NULL;
+	for (FilePos = pApp->m_Plugins.GetHeadPosition();
+	     FilePos != NULL;
 	     pApp->m_Plugins.GetNext(FilePos)) {
 		CreatePointer(pFile, CEsmFile);
 		m_EsmFiles.Add(pFile);
+
 		/* Initialize the load callback */
 		m_LoadDlg.SetFilename(pApp->m_Plugins.GetAt(FilePos));
 		m_LoadDlg.SetSubLabel(_T("Loading..."));
 		m_LoadDlg.SetProgress(0.0f);
+
 		pFile->SetCallback(g_EsmLoadDlgCallback, (long)&m_LoadDlg);
 		Result = pFile->Read(pApp->m_Plugins.GetAt(FilePos));
 
@@ -2459,7 +2528,7 @@ bool CMWEditDoc::LoadAppPlugins(void) {
  *
  *=========================================================================*/
 bool CMWEditDoc::LoadAppActive(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	bool Result;
 
 	/* If no active plugin, create an empty one */
@@ -2518,6 +2587,7 @@ const TCHAR *CMWEditDoc::MakeNewINFOId(void) {
 	time_t CurrentTime = time(NULL);
 	BOOL Result;
 	DWORD SerialNumber;
+
 	/* Attempt to get a drive serial number */
 	Result = GetVolumeInformation(_T("c:\\"), NULL, 0, &SerialNumber, NULL, NULL, NULL, 0);
 
@@ -2549,12 +2619,13 @@ const TCHAR *CMWEditDoc::MakeNewINFOId(void) {
  * Class CMWEditDoc Event - int OnCheckNewID (pRecEditInfo);
  *
  *=========================================================================*/
-int CMWEditDoc::OnCheckNewID(esmreceditinfo_t* pRecEditInfo) {
+int CMWEditDoc::OnCheckNewID(esmreceditinfo_t *pRecEditInfo) {
 	DEFINE_FUNCTION("CEsmRecDialog::OnCheckNewID()");
 	esmrecinfo_t *pRecInfo;
-	CEsmRecord* pRecord;
+	CEsmRecord *pRecord;
 	CString Buffer;
 	int Result;
+
 	/* Is the new ID valid? */
 	Result = IsValidESMID(pRecEditInfo->NewID);
 
@@ -2581,8 +2652,10 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t* pRecEditInfo) {
 	/* Prompt user to create new or rename (or cancel) */
 	Buffer.Format(
 	    _T("Object '%s' has been changed to '%s'!\n\r\n\rDo you wish to create a new object?\n\rChoose Yes to create a new object, or No to rename."),
-	    pRecEditInfo->OldID, pRecEditInfo->NewID);
-	Result = MessageBox(AfxGetMainWnd()->m_hWnd, Buffer, _T("Create New Object?"),
+	    pRecEditInfo->OldID,
+	    pRecEditInfo->NewID);
+	Result = MessageBox(AfxGetMainWnd()->m_hWnd,
+	                    Buffer, _T("Create New Object?"),
 	                    MB_YESNOCANCEL | MB_ICONQUESTION);
 
 	if (Result == IDCANCEL) {
@@ -2601,6 +2674,7 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t* pRecEditInfo) {
 		pRecord->SetPrevRecord(NULL);
 		pRecInfo->pRecord = pRecord;
 		pRecInfo->pFile = pRecord->GetFile();
+
 		pRecEditInfo->pRecInfo = pRecInfo;
 		pRecEditInfo->IsNew = true;
 		pRecEditInfo->IsCopied = true;
@@ -2629,13 +2703,16 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t* pRecEditInfo) {
 BOOL CMWEditDoc::OnOpenDocument(LPCTSTR lpszPathName) {
 	DEFINE_FUNCTION("CMWEditDoc::OnOpenDocument()");
 	bool Result;
+
 	/* Clear any current info */
 	ClearRecInfoArray();
 	ClearFileArray();
 	m_NumFiles = 0;
+
 	/* Display the load dialog */
 	m_LoadDlg.Create(IDD_LOAD_DLG, GetActiveView());
 	m_LoadDlg.ShowWindow(SW_SHOWNORMAL);
+
 	/* Load all the required plugins */
 	Result = LoadAppMasters();
 
@@ -2675,15 +2752,15 @@ BOOL CMWEditDoc::OnOpenDocument(LPCTSTR lpszPathName) {
  * Called after the given record is updated.
  *
  *=========================================================================*/
-int CMWEditDoc::OnPostSaveRecord(esmreceditinfo_t* pRecEditInfo) {
+int CMWEditDoc::OnPostSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 	/* Attempt to add the record if it is new */
 	if (pRecEditInfo->IsNew) {
 		pRecEditInfo->IsNew = false;
-		UpdateAllViews(NULL, MWEDITDOC_HINT_NEWITEM, (CObject*)(void*)pRecEditInfo->pRecInfo);
+		UpdateAllViews(NULL, MWEDITDOC_HINT_NEWITEM, (CObject *)(void *)pRecEditInfo->pRecInfo);
 	}
 	/* Update the document views */
 	else {
-		UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATEITEM, (CObject*)(void*)pRecEditInfo->pRecInfo);
+		UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATEITEM, (CObject *)(void *)pRecEditInfo->pRecInfo);
 	}
 
 	SetModifiedFlag(TRUE);
@@ -2703,15 +2780,15 @@ int CMWEditDoc::OnPostSaveRecord(esmreceditinfo_t* pRecEditInfo) {
  * active plugin if required.
  *
  *=========================================================================*/
-int CMWEditDoc::OnPreSaveRecord(esmreceditinfo_t* pRecEditInfo) {
-	CEsmRecord* pRecord;
+int CMWEditDoc::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
+	CEsmRecord *pRecord;
 	int Result;
 
 	/* Check if the record's ID has been changed */
 	if (pRecEditInfo->HasNewID || pRecEditInfo->IsNew) {
 		/* Special case for exterior cells which can have any ID */
 		if (pRecEditInfo->pRecInfo->pRecord->IsType(MWESM_REC_CELL)) {
-			CEsmCell* pCell = (CEsmCell*)pRecEditInfo->pRecInfo->pRecord;
+			CEsmCell* pCell = (CEsmCell *)pRecEditInfo->pRecInfo->pRecord;
 
 			if (pCell->IsInterior()) {
 				Result = OnCheckNewID(pRecEditInfo);
@@ -2851,14 +2928,15 @@ void CMWEditDoc::OnFileSaveAs(void) {
  * on any error.
  *
  *=========================================================================*/
-bool CMWEditDoc::RenameRecord(esmrecinfo_t* pRecInfo, const TCHAR* pNewID) {
+bool CMWEditDoc::RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
 	DEFINE_FUNCTION("CMWEditDoc::RenameRecord()");
-	CEsmRecord* pNewRecord;
+	CEsmRecord *pNewRecord;
 	bool Result;
 
 	/* Can we create new copies of the record? */
 	if (!CanCreateNew(pRecInfo->pRecord->GetType())) {
-		ErrorHandler.AddError(ERR_CUSTOM, _T("Cannot rename %s records!"),
+		ErrorHandler.AddError(ERR_CUSTOM,
+		                      _T("Cannot rename %s records!"),
 		                      pRecInfo->pRecord->GetItemType());
 		return (NULL);
 	}
@@ -2911,13 +2989,14 @@ bool CMWEditDoc::RenameRecord(esmrecinfo_t* pRecInfo, const TCHAR* pNewID) {
  *
  *=========================================================================*/
 void CMWEditDoc::UpdateMasters(void) {
-	CEsmTES3* pHeader;
+	CEsmTES3 *pHeader;
 	int Index;
 	int ArrayIndex;
-	CEsmFileArray* pMasters = GetApp()->GetMasters();
-	CEsmFile* pFile;
+	CEsmFileArray *pMasters = GetApp()->GetMasters();
+	CEsmFile *pFile;
+
 	/* Get the active file header record */
-	pHeader = (CEsmTES3*)m_ActiveFile.FindFirst(MWESM_REC_TES3, ArrayIndex);
+	pHeader = (CEsmTES3 *)m_ActiveFile.FindFirst(MWESM_REC_TES3, ArrayIndex);
 
 	if (pHeader == NULL) {
 		return;

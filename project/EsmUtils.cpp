@@ -29,7 +29,7 @@
  *=========================================================================*/
 DEFINE_FILE("EsmUtils.cpp");
 
-CString l_MWDataPath = _T("");  /* Absolute path to the Morrowind data files */
+CString l_MWDataPath = _T(""); /* Absolute path to the Morrowind data files */
 
 /*===========================================================================
  *      End of Local Definitions
@@ -42,7 +42,33 @@ CString l_MWDataPath = _T("");  /* Absolute path to the Morrowind data files */
  *
  *=========================================================================*/
 int l_BipedToBody[] = {
-	0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, -1, 14
+	0,
+	1,
+	2,
+	3,
+	4,
+	4,
+	5,
+	5,
+	6,
+	6,
+	6,
+	7,
+	7,
+	8,
+	8,
+	9,
+	9,
+	10,
+	10,
+	11,
+	11,
+	12,
+	12,
+	13,
+	13,
+	-1,
+	14
 };
 /*===========================================================================
  *      End of Array to Convert from a Biped to a Bodypart Type
@@ -75,7 +101,7 @@ int ConvertBipedToBodyPart(const int BipedType) {
  * Function - void FillEsmArmorTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmArmorTypeCombo(CComboBox& ComboBox) {
+void FillEsmArmorTypeCombo(CComboBox &ComboBox) {
 	//DEFINE_FUNCTION("FillEsmArmorTypeCombo()");
 	int Index;
 	int ResultIndex;
@@ -100,43 +126,43 @@ void FillEsmArmorTypeCombo(CComboBox& ComboBox) {
  * document.
  *
  *=========================================================================*/
-void FillEsmScriptCombo(CComboBox& ComboBox) {
+void FillEsmScriptCombo(CComboBox &ComboBox) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_SCPT, true);
 }
 
-void FillEsmSoundCombo(CComboBox& ComboBox) {
+void FillEsmSoundCombo(CComboBox &ComboBox) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_SOUN);
 }
 
-void FillEsmRaceCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmRaceCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_RACE, IncludeEmpty);
 }
 
-void FillEsmEnchantCombo(CComboBox& ComboBox) {
+void FillEsmEnchantCombo(CComboBox &ComboBox) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_ENCH);
 }
 
-void FillEsmRegionCombo(CComboBox& ComboBox) {
+void FillEsmRegionCombo(CComboBox &ComboBox) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_REGN);
 }
 
-void FillEsmGlobalCombo(CComboBox& ComboBox) {
+void FillEsmGlobalCombo(CComboBox &ComboBox) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_GLOB, false);
 }
 
-void FillEsmCellCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmCellCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_CELL, IncludeEmpty);
 }
 
-void FillEsmClassCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmClassCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_CLAS, IncludeEmpty);
 }
 
-void FillEsmNpcCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmNpcCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_NPC_, IncludeEmpty);
 }
 
-void FillEsmFactionCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmFactionCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	FillEsmRecordCombo(ComboBox, MWESM_REC_FACT, IncludeEmpty);
 }
 
@@ -153,8 +179,8 @@ void FillEsmFactionCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
  * active document.
  *
  *=========================================================================*/
-void FillEsmRecordCombo(CComboBox& ComboBox, const TCHAR* pType, const bool IncludeEmpty) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
+void FillEsmRecordCombo(CComboBox &ComboBox, const TCHAR *pType, const bool IncludeEmpty) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
 	int ListIndex;
@@ -197,7 +223,7 @@ void FillEsmRecordCombo(CComboBox& ComboBox, const TCHAR* pType, const bool Incl
  * Function - void FillEsmApparatusTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmApparatusTypeCombo(CComboBox& ComboBox) {
+void FillEsmApparatusTypeCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -219,7 +245,7 @@ void FillEsmApparatusTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmBodyPartsCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmBodyPartsCombo(CComboBox& ComboBox) {
+void FillEsmBodyPartsCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -228,7 +254,7 @@ void FillEsmBodyPartsCombo(CComboBox& ComboBox) {
 	ResultIndex = ComboBox.AddString(_T(""));
 
 	if (ResultIndex >= 0) {
-		ComboBox.SetItemData(ResultIndex, (DWORD) -1);
+		ComboBox.SetItemData(ResultIndex, (DWORD)-1);
 	}
 
 	for (Index = MWESM_BIPEDPART_MIN; Index <= MWESM_BIPEDPART_MAX; Index++) {
@@ -250,11 +276,14 @@ void FillEsmBodyPartsCombo(CComboBox& ComboBox) {
  * and gender.
  *
  *=========================================================================*/
-void FillEsmBodyPartsCombo(CComboBox& ComboBox, const int BodyPart, const bool IsFemale,
-                           const int BodyPartType, const bool AddEmpty) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
+void FillEsmBodyPartsCombo(CComboBox &ComboBox,
+                           const int BodyPart,
+                           const bool IsFemale,
+                           const int BodyPartType,
+                           const bool AddEmpty) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
 	esmrecinfo_t *pRecInfo;
-	CEsmBodyPart* pBodyPart;
+	CEsmBodyPart *pBodyPart;
 	int ArrayIndex;
 	int ListIndex;
 	ComboBox.ResetContent();
@@ -276,12 +305,14 @@ void FillEsmBodyPartsCombo(CComboBox& ComboBox, const int BodyPart, const bool I
 	pRecInfo = pDocument->FindFirstRecord(MWESM_REC_BODY, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pBodyPart = (CEsmBodyPart*)pRecInfo->pRecord;
+		pBodyPart = (CEsmBodyPart *)pRecInfo->pRecord;
 
 		/* Determine if the current body part is the correct type */
-		if ((pBodyPart->IsFemale() == IsFemale) && (pBodyPart->GetBodyPartID() == BodyPart)
-		    && BodyPart >= 0 &&
-		    (pBodyPart->GetBodyTypeID() == BodyPartType) && BodyPartType >= 0) {
+		if ((pBodyPart->IsFemale() == IsFemale)
+		    && (pBodyPart->GetBodyPartID() == BodyPart)
+		    && BodyPart >= 0
+		    && (pBodyPart->GetBodyTypeID() == BodyPartType)
+		    && BodyPartType >= 0) {
 			ListIndex = ComboBox.AddString(pRecInfo->pRecord->GetID());
 
 			if (ListIndex >= 0) {
@@ -306,11 +337,14 @@ void FillEsmBodyPartsCombo(CComboBox& ComboBox, const int BodyPart, const bool I
  * and gender and race.
  *
  *=========================================================================*/
-void FillEsmBodyRaceCombo(CComboBox& ComboBox, const int BodyPart, const bool IsFemale,
-                          const TCHAR* pRace, const bool AddEmpty) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
+void FillEsmBodyRaceCombo(CComboBox &ComboBox,
+                          const int BodyPart,
+                          const bool IsFemale,
+                          const TCHAR *pRace,
+                          const bool AddEmpty) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
 	esmrecinfo_t *pRecInfo;
-	CEsmBodyPart* pBodyPart;
+	CEsmBodyPart *pBodyPart;
 	int ArrayIndex;
 	int ListIndex;
 	ComboBox.ResetContent();
@@ -332,12 +366,13 @@ void FillEsmBodyRaceCombo(CComboBox& ComboBox, const int BodyPart, const bool Is
 	pRecInfo = pDocument->FindFirstRecord(MWESM_REC_BODY, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pBodyPart = (CEsmBodyPart*)pRecInfo->pRecord;
+		pBodyPart = (CEsmBodyPart *)pRecInfo->pRecord;
 
 		/* Determine if the current body part is the correct type */
-		if ((pBodyPart->IsFemale() == IsFemale) && (pBodyPart->GetBodyPartID() == BodyPart)
-		    && BodyPart >= 0 &&
-		    _stricmp(pRace, pBodyPart->GetRace()) == 0) {
+		if ((pBodyPart->IsFemale() == IsFemale)
+		    && (pBodyPart->GetBodyPartID() == BodyPart)
+		    && BodyPart >= 0
+		    && _stricmp(pRace, pBodyPart->GetRace()) == 0) {
 			ListIndex = ComboBox.AddString(pRecInfo->pRecord->GetID());
 
 			if (ListIndex >= 0) {
@@ -359,7 +394,7 @@ void FillEsmBodyRaceCombo(CComboBox& ComboBox, const int BodyPart, const bool Is
  * Function - void FillEsmAttributesCombo (CComboBox& ComboBox);
  *
  *=========================================================================*/
-void FillEsmAttributesCombo(CComboBox& ComboBox) {
+void FillEsmAttributesCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -381,7 +416,7 @@ void FillEsmAttributesCombo(CComboBox& ComboBox) {
  * Function - void FillEsmClothTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmClothTypeCombo(CComboBox& ComboBox) {
+void FillEsmClothTypeCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -403,7 +438,7 @@ void FillEsmClothTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmSkillsCombo (CComboBox& ComboBox, IncludeEmpty);
  *
  *=========================================================================*/
-void FillEsmSkillsCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmSkillsCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -431,7 +466,7 @@ void FillEsmSkillsCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
  * Function - void FillEsmEffectsCombo (ComboBox, IsAlchemy);
  *
  *=========================================================================*/
-void FillEsmEffectsCombo(CComboBox& ComboBox, const bool IsAlchemy) {
+void FillEsmEffectsCombo(CComboBox &ComboBox, const bool IsAlchemy) {
 	const esmeffectdata_t *pEffectData;
 	int Index;
 	int ResultIndex;
@@ -464,7 +499,7 @@ void FillEsmEffectsCombo(CComboBox& ComboBox, const bool IsAlchemy) {
  * Function - void FillEsmSpellSchoolCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmSpellSchoolCombo(CComboBox& ComboBox) {
+void FillEsmSpellSchoolCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -486,7 +521,7 @@ void FillEsmSpellSchoolCombo(CComboBox& ComboBox) {
  * Function - void FillEsmGlobalTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmGlobalTypeCombo(CComboBox& ComboBox) {
+void FillEsmGlobalTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	ComboBox.ResetContent();
 	ListIndex = ComboBox.AddString(_T("short"));
@@ -518,7 +553,7 @@ void FillEsmGlobalTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmBodyPartCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmBodyPartCombo(CComboBox& ComboBox) {
+void FillEsmBodyPartCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -540,7 +575,7 @@ void FillEsmBodyPartCombo(CComboBox& ComboBox) {
  * Function - void FillEsmBodyPartTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmBodyPartTypeCombo(CComboBox& ComboBox) {
+void FillEsmBodyPartTypeCombo(CComboBox &ComboBox) {
 	int Index;
 	int ResultIndex;
 	/* Delete the current contents, if any */
@@ -562,7 +597,7 @@ void FillEsmBodyPartTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmEnchantTypeCombo (ComboBox, NoSelf);
  *
  *=========================================================================*/
-void FillEsmEnchantTypeCombo(CComboBox& ComboBox) {
+void FillEsmEnchantTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -583,7 +618,7 @@ void FillEsmEnchantTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmEnchantRangeCombo (ComboBox, NoSelf);
  *
  *=========================================================================*/
-void FillEsmEnchantRangeCombo(CComboBox& ComboBox, const bool NoSelf) {
+void FillEsmEnchantRangeCombo(CComboBox &ComboBox, const bool NoSelf) {
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -606,7 +641,7 @@ void FillEsmEnchantRangeCombo(CComboBox& ComboBox, const bool NoSelf) {
  * Function - void FillEsmSpellTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmSpellTypeCombo(CComboBox& ComboBox) {
+void FillEsmSpellTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -627,7 +662,7 @@ void FillEsmSpellTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmLightFlickerCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmLightFlickerCombo(CComboBox& ComboBox) {
+void FillEsmLightFlickerCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	ComboBox.ResetContent();
 	ListIndex = ComboBox.AddString(GetESMLightFlicker(MWESM_LIGHTFLAG_FLICKER));
@@ -671,8 +706,8 @@ void FillEsmLightFlickerCombo(CComboBox& ComboBox) {
  * Function - void FillEsmVisualCombo (ComboBox, IsBolt);
  *
  *=========================================================================*/
-void FillEsmVisualCombo(CComboBox& ComboBox, const bool IsBolt) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
+void FillEsmVisualCombo(CComboBox &ComboBox, const bool IsBolt) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
 	int ListIndex;
@@ -707,7 +742,7 @@ void FillEsmVisualCombo(CComboBox& ComboBox, const bool IsBolt) {
  * Function - void FillEsmWeaponTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmWeaponTypeCombo(CComboBox& ComboBox) {
+void FillEsmWeaponTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -728,7 +763,7 @@ void FillEsmWeaponTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmClassSpecCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmClassSpecCombo(CComboBox& ComboBox) {
+void FillEsmClassSpecCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	ComboBox.ResetContent();
 	ListIndex = ComboBox.AddString(GetESMClassSpec(MWESM_CLASSSPEC_COMBAT));
@@ -760,8 +795,8 @@ void FillEsmClassSpecCombo(CComboBox& ComboBox) {
  * Function - void FillEsmCreatureCombo (ComboBox, IncludeEmpty, IncludeLevel);
  *
  *=========================================================================*/
-void FillEsmCreatureCombo(CComboBox& ComboBox, const bool IncludeEmpty, const bool IncludeLevel) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
+void FillEsmCreatureCombo(CComboBox &ComboBox, const bool IncludeEmpty, const bool IncludeLevel) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
 	int ListIndex;
@@ -817,9 +852,9 @@ void FillEsmCreatureCombo(CComboBox& ComboBox, const bool IncludeEmpty, const bo
  * Function - void FillEsmJournalCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmJournalCombo(CComboBox& ComboBox) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
-	CEsmDialogue* pDialogue;
+void FillEsmJournalCombo(CComboBox &ComboBox) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
+	CEsmDialogue *pDialogue;
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
 	int ListIndex;
@@ -834,7 +869,7 @@ void FillEsmJournalCombo(CComboBox& ComboBox) {
 	pRecInfo = pDocument->FindFirstRecord(MWESM_REC_DIAL, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pDialogue = (CEsmDialogue*)pRecInfo->pRecord;
+		pDialogue = (CEsmDialogue *)pRecInfo->pRecord;
 
 		if (pDialogue->GetDialogTypeID() == MWESM_DIALTYPE_JOURNAL) {
 			ListIndex = ComboBox.AddString(pRecInfo->pRecord->GetID());
@@ -858,11 +893,12 @@ void FillEsmJournalCombo(CComboBox& ComboBox) {
  * Function - void FillEsmLocalCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmLocalCombo(CComboBox& ComboBox) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
-	CEsmScript* pScript;
-	CEsmSubRecord* pScriptVars;
+void FillEsmLocalCombo(CComboBox &ComboBox) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
+	CEsmScript *pScript;
+	CEsmSubRecord *pScriptVars;
 	esmrecinfo_t *pRecInfo;
+
 	int ArrayIndex;
 	int ListIndex;
 	int TotalVarLength;
@@ -880,12 +916,12 @@ void FillEsmLocalCombo(CComboBox& ComboBox) {
 	pRecInfo = pDocument->FindFirstRecord(MWESM_REC_SCPT, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pScript = (CEsmScript*)pRecInfo->pRecord;
+		pScript = (CEsmScript *)pRecInfo->pRecord;
 		pScriptVars = pScript->GetScriptVars();
 
 		if (pScriptVars != NULL && pScriptVars->GetData() != NULL) {
 			TotalVarLength = pScriptVars->GetRecordSize();
-			pVar = (char*)pScriptVars->GetData();
+			pVar = (char *)pScriptVars->GetData();
 			Length = 0;
 
 			while (Length < TotalVarLength) {
@@ -923,8 +959,8 @@ void FillEsmLocalCombo(CComboBox& ComboBox) {
  * Function - void FillEsmItemCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmItemCombo(CComboBox& ComboBox) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
+void FillEsmItemCombo(CComboBox &ComboBox) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
 	int ListIndex;
@@ -959,19 +995,82 @@ void FillEsmItemCombo(CComboBox& ComboBox) {
  * Function - void FillEsmFunctionCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmFunctionCombo(CComboBox& ComboBox) {
-	static short s_Functions[] = { *(short*)"00", *(short*)"01", *(short*)"02", *(short*)"03", *(short*)"04",
-	                               *(short*)"05", *(short*)"06", *(short*)"07", *(short*)"08", *(short*)"09", *(short*)"10", *(short*)"11",
-	                               *(short*)"12", *(short*)"13", *(short*)"14", *(short*)"15", *(short*)"16", *(short*)"17", *(short*)"18",
-	                               *(short*)"19", *(short*)"20", *(short*)"21", *(short*)"22", *(short*)"23", *(short*)"24", *(short*)"25",
-	                               *(short*)"26", *(short*)"27", *(short*)"28", *(short*)"29", *(short*)"30", *(short*)"31", *(short*)"32",
-	                               *(short*)"33", *(short*)"34", *(short*)"35", *(short*)"36", *(short*)"37", *(short*)"38", *(short*)"39",
-	                               *(short*)"40", *(short*)"41", *(short*)"42", *(short*)"43", *(short*)"44", *(short*)"45", *(short*)"46",
-	                               *(short*)"47", *(short*)"48", *(short*)"49", *(short*)"50", *(short*)"51", *(short*)"52", *(short*)"53",
-	                               *(short*)"54", *(short*)"55", *(short*)"56", *(short*)"57", *(short*)"58", *(short*)"59", *(short*)"60",
-	                               *(short*)"61", *(short*)"62", *(short*)"63", *(short*)"64", *(short*)"65", *(short*)"66", *(short*)"67",
-	                               *(short*)"68", *(short*)"69", *(short*)"70", *(short*)"71", 0
-	                             };
+void FillEsmFunctionCombo(CComboBox &ComboBox) {
+	static short s_Functions[] = {
+		*(short *)"00",
+		*(short *)"01",
+		*(short *)"02",
+		*(short *)"03",
+		*(short *)"04",
+		*(short *)"05",
+		*(short *)"06",
+		*(short *)"07",
+		*(short *)"08",
+		*(short *)"09",
+		*(short *)"10",
+		*(short *)"11",
+		*(short *)"12",
+		*(short *)"13",
+		*(short *)"14",
+		*(short *)"15",
+		*(short *)"16",
+		*(short *)"17",
+		*(short *)"18",
+		*(short *)"19",
+		*(short *)"20",
+		*(short *)"21",
+		*(short *)"22",
+		*(short *)"23",
+		*(short *)"24",
+		*(short *)"25",
+		*(short *)"26",
+		*(short *)"27",
+		*(short *)"28",
+		*(short *)"29",
+		*(short *)"30",
+		*(short *)"31",
+		*(short *)"32",
+		*(short *)"33",
+		*(short *)"34",
+		*(short *)"35",
+		*(short *)"36",
+		*(short *)"37",
+		*(short *)"38",
+		*(short *)"39",
+		*(short *)"40",
+		*(short *)"41",
+		*(short *)"42",
+		*(short *)"43",
+		*(short *)"44",
+		*(short *)"45",
+		*(short *)"46",
+		*(short *)"47",
+		*(short *)"48",
+		*(short *)"49",
+		*(short *)"50",
+		*(short *)"51",
+		*(short *)"52",
+		*(short *)"53",
+		*(short *)"54",
+		*(short *)"55",
+		*(short *)"56",
+		*(short *)"57",
+		*(short *)"58",
+		*(short *)"59",
+		*(short *)"60",
+		*(short *)"61",
+		*(short *)"62",
+		*(short *)"63",
+		*(short *)"64",
+		*(short *)"65",
+		*(short *)"66",
+		*(short *)"67",
+		*(short *)"68",
+		*(short *)"69",
+		*(short *)"70",
+		*(short *)"71",
+		0
+	};
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -995,7 +1094,7 @@ void FillEsmFunctionCombo(CComboBox& ComboBox) {
  * Function - void FillEsmGenderCombo (ComboBox, IncludeEmpty);
  *
  *=========================================================================*/
-void FillEsmGenderCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmGenderCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	int ListIndex;
 	ComboBox.ResetContent();
 
@@ -1030,7 +1129,7 @@ void FillEsmGenderCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
  * Function - void FillEsmSoundGenTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmSoundGenTypeCombo(CComboBox& ComboBox) {
+void FillEsmSoundGenTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -1051,7 +1150,7 @@ void FillEsmSoundGenTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmBloodTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmBloodTypeCombo(CComboBox& ComboBox) {
+void FillEsmBloodTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	ComboBox.ResetContent();
 	ListIndex = ComboBox.AddString(_T("Default (Red)"));
@@ -1083,9 +1182,9 @@ void FillEsmBloodTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmSoundGenCreaCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmSoundGenCreaCombo(CComboBox& ComboBox) {
-	CMWEditDoc* pDocument = (CMWEditDoc*)GetActiveDocument();
-	CEsmSoundGen* pSoundGen;
+void FillEsmSoundGenCreaCombo(CComboBox &ComboBox) {
+	CMWEditDoc *pDocument = (CMWEditDoc *)GetActiveDocument();
+	CEsmSoundGen *pSoundGen;
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
 	int ListIndex;
@@ -1105,7 +1204,7 @@ void FillEsmSoundGenCreaCombo(CComboBox& ComboBox) {
 	pRecInfo = pDocument->FindFirstRecord(MWESM_REC_SNDG, ArrayIndex);
 
 	while (pRecInfo != NULL) {
-		pSoundGen = (CEsmSoundGen*)pRecInfo->pRecord;
+		pSoundGen = (CEsmSoundGen *)pRecInfo->pRecord;
 		/* Don't add multiple creature names */
 		ListIndex = ComboBox.FindString(-1, pSoundGen->GetCreature());
 
@@ -1131,7 +1230,7 @@ void FillEsmSoundGenCreaCombo(CComboBox& ComboBox) {
  * Function - void FillEsmCreatureListCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmCreatureListCombo(CComboBox& ComboBox) {
+void FillEsmCreatureListCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	int Index;
 	ComboBox.ResetContent();
@@ -1155,7 +1254,7 @@ void FillEsmCreatureListCombo(CComboBox& ComboBox) {
  * Function - void FillEsmRankCombo (ComboBox, IncludeEmpty);
  *
  *=========================================================================*/
-void FillEsmRankCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
+void FillEsmRankCombo(CComboBox &ComboBox, const bool IncludeEmpty) {
 	int ResultIndex;
 	ComboBox.ResetContent();
 
@@ -1244,7 +1343,7 @@ void FillEsmRankCombo(CComboBox& ComboBox, const bool IncludeEmpty) {
  * Function - void FillEsmInfoFuncTypeCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmInfoFuncTypeCombo(CComboBox& ComboBox) {
+void FillEsmInfoFuncTypeCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	ComboBox.ResetContent();
 	ListIndex = ComboBox.AddString(GetESMInfoFuncType(MWESM_SCVRFUNC_NONE));
@@ -1336,7 +1435,7 @@ void FillEsmInfoFuncTypeCombo(CComboBox& ComboBox) {
  * Function - void FillEsmInfoCompareOpCombo (ComboBox);
  *
  *=========================================================================*/
-void FillEsmInfoCompareOpCombo(CComboBox& ComboBox) {
+void FillEsmInfoCompareOpCombo(CComboBox &ComboBox) {
 	int ListIndex;
 	ComboBox.ResetContent();
 	ListIndex = ComboBox.AddString(GetESMInfoCompareOp(MWESM_SCVROP_EQUALS));
@@ -1430,7 +1529,7 @@ const TCHAR *GetMWDataPath(void) {
 	return (l_MWDataPath);
 }
 
-void SetMWDataPath(const TCHAR* pString) {
+void SetMWDataPath(const TCHAR *pString) {
 	l_MWDataPath = pString;
 }
 
@@ -1446,7 +1545,7 @@ void SetMWDataPath(const TCHAR* pString) {
  * Description
  *
  *=========================================================================*/
-bool IsValidESMID(const TCHAR* pID) {
+bool IsValidESMID(const TCHAR *pID) {
 	/* Check for a NULL or empty ID */
 	if (pID == NULL) {
 		return (false);
@@ -1485,10 +1584,11 @@ bool IsValidESMID(const TCHAR* pID) {
  * Function - bool SelectEsmIcon (IconString, pTitle, pParent);
  *
  *=========================================================================*/
-bool SelectEsmIcon(CString& IconString, const TCHAR* pTitle, CWnd* pParent) {
+bool SelectEsmIcon(CString &IconString, const TCHAR *pTitle, CWnd *pParent) {
 	CString IconPath = GetMWDataPath();
 	CString Buffer;
 	int Result;
+
 	/* Get the current model path and filename */
 	IconPath += MWPATH_ICONS;
 	Buffer = IconPath + IconString;
@@ -1499,11 +1599,14 @@ bool SelectEsmIcon(CString& IconString, const TCHAR* pTitle, CWnd* pParent) {
 	}
 
 	/* Initialize the file dialog */
-	CFileDialog OpenDlg(TRUE, MWESM_ICON_EXT, FindFilename(IconString),
+	CFileDialog OpenDlg(TRUE,
+	                    MWESM_ICON_EXT,
+	                    FindFilename(IconString),
 	                    OFN_HIDEREADONLY | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR,
-	                    MWESM_ICON_FILTER, pParent);
+	                    MWESM_ICON_FILTER,
+	                    pParent);
 	OpenDlg.m_ofn.lpstrInitialDir = Buffer;
-	OpenDlg.m_ofn.lpstrTitle = (char*)pTitle;
+	OpenDlg.m_ofn.lpstrTitle = (char *)pTitle;
 	/* Display the modal file dialog */
 	Result = OpenDlg.DoModal();
 
@@ -1521,7 +1624,8 @@ bool SelectEsmIcon(CString& IconString, const TCHAR* pTitle, CWnd* pParent) {
 
 	/* Check the string length */
 	if (IconString.GetLength() >= MWESM_ID_MAXSIZE) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("Icon filename exceeds the %d byte size limit!"),
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("Icon filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
 		return (true);
@@ -1540,10 +1644,11 @@ bool SelectEsmIcon(CString& IconString, const TCHAR* pTitle, CWnd* pParent) {
  * Function - bool SelectEsmModel (ModelString, pTitle, pParent);
  *
  *=========================================================================*/
-bool SelectEsmModel(CString& ModelString, const TCHAR* pTitle, CWnd* pParent) {
+bool SelectEsmModel(CString &ModelString, const TCHAR *pTitle, CWnd *pParent) {
 	CString ModelPath = GetMWDataPath();
 	CString Buffer;
 	int Result;
+
 	/* Get the current model path and filename */
 	ModelPath += MWPATH_MODELS;
 	Buffer = ModelPath + ModelString;
@@ -1554,12 +1659,16 @@ bool SelectEsmModel(CString& ModelString, const TCHAR* pTitle, CWnd* pParent) {
 	}
 
 	/* Initialize the file dialog */
-	CFileDialog OpenDlg(TRUE, MWESM_MODEL_EXT, FindFilename(ModelString),
+	CFileDialog OpenDlg(TRUE,
+	                    MWESM_MODEL_EXT,
+	                    FindFilename(ModelString),
 	                    OFN_HIDEREADONLY | OFN_PATHMUSTEXIST,
-	                    MWESM_MODEL_FILTER, pParent);
+	                    MWESM_MODEL_FILTER,
+	                    pParent);
 	//SetCurrentDirectory(Buffer);
 	OpenDlg.m_ofn.lpstrInitialDir = Buffer;
 	OpenDlg.m_ofn.lpstrTitle = pTitle;
+
 	/* Display the modal file dialog */
 	Result = OpenDlg.DoModal();
 	SetCurrentDirectory(GetMWDataPath());
@@ -1580,7 +1689,8 @@ bool SelectEsmModel(CString& ModelString, const TCHAR* pTitle, CWnd* pParent) {
 
 	/* Check the string length */
 	if (ModelString.GetLength() >= MWESM_ID_MAXSIZE) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("Model filename exceeds the %d byte size limit!"),
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("Model filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
 		return (false);
@@ -1599,10 +1709,11 @@ bool SelectEsmModel(CString& ModelString, const TCHAR* pTitle, CWnd* pParent) {
  * Function - bool SelectEsmSound (SoundString, pTitle, pParent);
  *
  *=========================================================================*/
-bool SelectEsmSound(CString& SoundString, const TCHAR* pTitle, CWnd* pParent) {
+bool SelectEsmSound(CString &SoundString, const TCHAR *pTitle, CWnd *pParent) {
 	CString SoundPath = GetMWDataPath();
 	CString Buffer;
 	int Result;
+
 	/* Get the current model path and filename */
 	SoundPath += MWPATH_SOUNDS;
 	Buffer = SoundPath + SoundString;
@@ -1613,12 +1724,16 @@ bool SelectEsmSound(CString& SoundString, const TCHAR* pTitle, CWnd* pParent) {
 	}
 
 	/* Initialize the file dialog */
-	CFileDialog OpenDlg(TRUE, MWESM_SOUND_EXT, FindFilename(SoundString),
+	CFileDialog OpenDlg(TRUE,
+	                    MWESM_SOUND_EXT,
+	                    FindFilename(SoundString),
 	                    OFN_HIDEREADONLY | OFN_PATHMUSTEXIST,
-	                    MWESM_SOUND_FILTER, pParent);
+	                    MWESM_SOUND_FILTER,
+	                    pParent);
 	//SetCurrentDirectory(Buffer);
 	OpenDlg.m_ofn.lpstrInitialDir = Buffer;
 	OpenDlg.m_ofn.lpstrTitle = pTitle;
+
 	/* Display the modal file dialog */
 	Result = OpenDlg.DoModal();
 	SetCurrentDirectory(GetMWDataPath());
@@ -1637,7 +1752,8 @@ bool SelectEsmSound(CString& SoundString, const TCHAR* pTitle, CWnd* pParent) {
 
 	/* Check the string length */
 	if (SoundString.GetLength() >= MWESM_ID_MAXSIZE) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("Sound filename exceeds the %d byte size limit!"),
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("Sound filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
 		return (false);
@@ -1656,10 +1772,11 @@ bool SelectEsmSound(CString& SoundString, const TCHAR* pTitle, CWnd* pParent) {
  * Function - bool SelectEsmTexture (TextureString, pTitle, pParent);
  *
  *=========================================================================*/
-bool SelectEsmTexture(CString& TextureString, const TCHAR* pTitle, CWnd* pParent) {
+bool SelectEsmTexture(CString &TextureString, const TCHAR *pTitle, CWnd *pParent) {
 	CString TexturePath = GetMWDataPath();
 	CString Buffer;
 	int Result;
+
 	/* Get the current model path and filename */
 	TexturePath += MWPATH_TEXTURES;
 	Buffer = TexturePath + TextureString;
@@ -1670,9 +1787,12 @@ bool SelectEsmTexture(CString& TextureString, const TCHAR* pTitle, CWnd* pParent
 	}
 
 	/* Initialize the file dialog */
-	CFileDialog OpenDlg(TRUE, MWESM_TEXTURE_EXT, FindFilename(TextureString),
+	CFileDialog OpenDlg(TRUE,
+	                    MWESM_TEXTURE_EXT,
+	                    FindFilename(TextureString),
 	                    OFN_HIDEREADONLY | OFN_PATHMUSTEXIST,
-	                    MWESM_TEXTURE_FILTER, pParent);
+	                    MWESM_TEXTURE_FILTER,
+	                    pParent);
 	OpenDlg.m_ofn.lpstrInitialDir = Buffer;
 	OpenDlg.m_ofn.lpstrTitle = pTitle;
 	/* Display the modal file dialog */
@@ -1692,7 +1812,8 @@ bool SelectEsmTexture(CString& TextureString, const TCHAR* pTitle, CWnd* pParent
 
 	/* Check the string length */
 	if (TextureString.GetLength() >= MWESM_ID_MAXSIZE) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("Texture filename exceeds the %d byte size limit!"),
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("Texture filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
 		return (false);
@@ -1714,10 +1835,11 @@ bool SelectEsmTexture(CString& TextureString, const TCHAR* pTitle, CWnd* pParent
  * any error.
  *
  *=========================================================================*/
-bool ReadFile(CSString& Buffer, const TCHAR* pFilename) {
-	FILE* pFileHandle;
+bool ReadFile(CSString &Buffer, const TCHAR *pFilename) {
+	FILE *pFileHandle;
 	long FileSize;
 	int Result;
+
 	/* Attempt to open the file for input */
 	pFileHandle = OpenFile(pFilename, "rb");
 
@@ -1727,9 +1849,10 @@ bool ReadFile(CSString& Buffer, const TCHAR* pFilename) {
 
 	/* Get filesize */
 	FileSize = GetFileSize(pFileHandle);
+
 	/* Input file */
 	Buffer.SetSize(FileSize);
-	Result = fread((TCHAR*)(const TCHAR*)Buffer, 1, FileSize, pFileHandle);
+	Result = fread((TCHAR *)(const TCHAR *)Buffer, 1, FileSize, pFileHandle);
 	fclose(pFileHandle);
 
 	/* Check for errors */

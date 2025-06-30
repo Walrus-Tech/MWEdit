@@ -59,8 +59,9 @@ END_MESSAGE_MAP()
  *
  *=========================================================================*/
 int CALLBACK l_SortFiles(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
-	esmfileinfo_t *pFileInfo1 = (esmfileinfo_t*)lParam1;
-	esmfileinfo_t *pFileInfo2 = (esmfileinfo_t*)lParam2;
+	esmfileinfo_t *pFileInfo1 = (esmfileinfo_t *)lParam1;
+	esmfileinfo_t *pFileInfo2 = (esmfileinfo_t *)lParam2;
+
 	int SortType = lParamSort & 0xFFFF;
 	int Flags = lParamSort >> 16;
 	int Result = 0;
@@ -91,7 +92,7 @@ int CALLBACK l_SortFiles(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
  * Class COpenPluginDlg Constructor
  *
  *=========================================================================*/
-COpenPluginDlg::COpenPluginDlg(CWnd* pParent) : CDialog(COpenPluginDlg::IDD, pParent),
+COpenPluginDlg::COpenPluginDlg(CWnd *pParent) : CDialog(COpenPluginDlg::IDD, pParent),
 	m_FileArray(0) {
 	//{{AFX_DATA_INIT(COpenPluginDlg)
 	//}}AFX_DATA_INIT
@@ -153,7 +154,7 @@ void COpenPluginDlg::CreateFileList(void) {
 	DEFINE_FUNCTION("COpenPluginDlg::CreateFileList()");
 	esmfileinfo_t *pFile;
 	CFindFile FindFile;
-	const TCHAR* pExtension;
+	const TCHAR *pExtension;
 	int Index;
 	int ListIndex;
 	bool FindResult;
@@ -161,11 +162,13 @@ void COpenPluginDlg::CreateFileList(void) {
 	CString FileType;
 	TCHAR TempDate[64];
 	bool AddFile;
-	struct tm* pFileTime;
+	struct tm *pFileTime;
+
 	/* Create the two columns */
 	m_FileList.InsertColumn(0, _T("Filename"), LVCFMT_LEFT, 180, OPENPLUG_SUBITEM_FILENAME);
 	m_FileList.InsertColumn(1, _T("Type"), LVCFMT_CENTER, 100, OPENPLUG_SUBITEM_TYPE);
 	m_FileList.InsertColumn(2, _T("Date"), LVCFMT_CENTER, 120, OPENPLUG_SUBITEM_DATE);
+
 	/* Find and insert the files */
 	FindResult = FindFile.FindFirst("*.es?", FA_NORMAL);
 	Index = 0;
@@ -228,7 +231,7 @@ void COpenPluginDlg::CreateFileList(void) {
  * Class COpenPluginDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void COpenPluginDlg::DoDataExchange(CDataExchange* pDX) {
+void COpenPluginDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(COpenPluginDlg)
 	DDX_Control(pDX, IDC_FILE_LIST, m_FileList);
@@ -245,8 +248,8 @@ void COpenPluginDlg::DoDataExchange(CDataExchange* pDX) {
  * Class COpenPluginDlg Event - void OnColumnclickFileList (pNMHDR, pResult);
  *
  *=========================================================================*/
-void COpenPluginDlg::OnColumnclickFileList(NMHDR* pNMHDR, LRESULT* pResult) {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+void COpenPluginDlg::OnColumnclickFileList(NMHDR *pNMHDR, LRESULT *pResult) {
+	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	long Flags = 0;
 	*pResult = 0;
 	Flags = pNMListView->iSubItem;
@@ -272,7 +275,7 @@ void COpenPluginDlg::OnColumnclickFileList(NMHDR* pNMHDR, LRESULT* pResult) {
  * Class COpenPluginDlg Event - void OnDblclkFileList (pNMHDR, pResult);
  *
  *=========================================================================*/
-void COpenPluginDlg::OnDblclkFileList(NMHDR* pNMHDR, LRESULT* pResult) {
+void COpenPluginDlg::OnDblclkFileList(NMHDR *pNMHDR, LRESULT *pResult) {
 	bool Checked;
 	int ListIndex;
 	POSITION FilePos;
@@ -310,6 +313,7 @@ BOOL COpenPluginDlg::OnInitDialog() {
 	/* Set title */
 	Buffer.Format(_T("Open Morrowind Plugin -- %s"), GetMWDataPath());
 	SetWindowText(Buffer);
+
 	/* Fill the file list */
 	CreateFileList();
 	m_FileList.SortItems(l_SortFiles, OPENPLUG_SUBITEM_FILENAME);
@@ -338,7 +342,7 @@ void COpenPluginDlg::OnOK() {
 
 	/* Save the currently checked files */
 	for (Index = 0; Index < m_FileList.GetItemCount(); Index++) {
-		pFile = (esmfileinfo_t*)m_FileList.GetItemData(Index);
+		pFile = (esmfileinfo_t *)m_FileList.GetItemData(Index);
 		Checked = (ListView_GetCheckState(m_FileList.m_hWnd, Index) != 0);
 		//SystemLog.Printf("File %s: %ld", pFile->Filename, pFile->Flags);
 
@@ -380,7 +384,7 @@ void COpenPluginDlg::OnSetactive() {
 	}
 
 	ListIndex = m_FileList.GetNextSelectedItem(FilePos);
-	pFile = (esmfileinfo_t*)m_FileList.GetItemData(ListIndex);
+	pFile = (esmfileinfo_t *)m_FileList.GetItemData(ListIndex);
 
 	if ((pFile->Flags & OPENPLUG_FLAG_MASTER) != 0) {
 		return;
@@ -409,5 +413,3 @@ void COpenPluginDlg::OnSetactive() {
 /*===========================================================================
  *      End of Class Event COpenPluginDlg::OnSetactive()
  *=========================================================================*/
-
-

@@ -1,117 +1,65 @@
 /*===========================================================================
-
  *
-
  * File:    Esmsoundgendlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 19, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmSoundGenDlg.h"
-
 #include "mmsystem.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmSoundGenDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmSoundGenDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmSoundGenDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmSoundGenDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmSoundGenDlg)
-
 	ON_BN_CLICKED(IDC_PLAYSOUND, OnPlaysound)
-
 	ON_CBN_SELCHANGE(IDC_CREATURELIST, OnSelchangeList)
-
 	ON_CBN_SELCHANGE(IDC_SOUNDLIST, OnSelchangeList)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST, OnSelchangeList)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmSoundGenDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmSoundGenDlg::CEsmSoundGenDlg() : CEsmRecDialog(CEsmSoundGenDlg::IDD) {
@@ -121,26 +69,17 @@ CEsmSoundGenDlg::CEsmSoundGenDlg() : CEsmRecDialog(CEsmSoundGenDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmSoundGenDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundGenDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmSoundGenDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmSoundGenDlg)
 	DDX_Control(pDX, IDC_TYPELIST, m_TypeList);
@@ -151,31 +90,22 @@ void CEsmSoundGenDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundGenDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundGenDlg::GetControlData (void) {
+void CEsmSoundGenDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmSoundGenDlg::GetControlData()");
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pSoundGen = (CEsmSoundGen *) GetRecInfo()->pRecord;
+	m_pSoundGen = (CEsmSoundGen *)GetRecInfo()->pRecord;
 	ASSERT(m_pSoundGen != NULL);
 
 	/* Item ID, if changed */
@@ -188,9 +118,11 @@ void CEsmSoundGenDlg::GetControlData (void) {
 	/* Sound ID */
 	m_SoundList.GetWindowText(Buffer);
 	m_pSoundGen->SetSound(Buffer);
+
 	/* Creature list */
 	m_CreatureList.GetWindowText(Buffer);
 	m_pSoundGen->SetCreature(Buffer);
+
 	/* Type list */
 	Index = m_TypeList.GetCurSel();
 
@@ -200,26 +132,17 @@ void CEsmSoundGenDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundGenDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmSoundGenDlg::IsModified (void) {
+bool CEsmSoundGenDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -234,64 +157,49 @@ bool CEsmSoundGenDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundGenDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmSoundGenDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pSoundGen = (CEsmSoundGen *) GetRecInfo()->pRecord;
+	m_pSoundGen = (CEsmSoundGen *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	FillEsmSoundCombo(m_SoundList);
 	FillEsmCreatureCombo(m_CreatureList);
 	FillEsmSoundGenTypeCombo(m_TypeList);
+
 	/* Update the UI data */
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundGenDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Event - void OnPlaysound ();
-
  *
-
  *=========================================================================*/
 
 void CEsmSoundGenDlg::OnPlaysound() {
 	CString SoundFile;
 	CString Buffer;
-	CEsmSound* pSound;
+	CEsmSound *pSound;
 	esmrecinfo_t *pRecInfo;
 	int Index;
 	Index = m_SoundList.GetCurSel();
@@ -300,8 +208,8 @@ void CEsmSoundGenDlg::OnPlaysound() {
 		return;
 	}
 
-	pRecInfo = (esmrecinfo_t *) m_SoundList.GetItemData(Index);
-	pSound = (CEsmSound *) pRecInfo->pRecord;
+	pRecInfo = (esmrecinfo_t *)m_SoundList.GetItemData(Index);
+	pSound = (CEsmSound *)pRecInfo->pRecord;
 	SoundFile = GetMWDataPath();
 	SoundFile += MWPATH_SOUNDS;
 	SoundFile += pSound->GetName();
@@ -309,23 +217,14 @@ void CEsmSoundGenDlg::OnPlaysound() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundGenDlg::OnPlaysound()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Event - void OnSelchangeList ();
-
  *
-
  *=========================================================================*/
 
 void CEsmSoundGenDlg::OnSelchangeList() {
@@ -333,26 +232,17 @@ void CEsmSoundGenDlg::OnSelchangeList() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundGenDlg::OnSelchangeList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmSoundGenDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmSoundGenDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	esmrecinfo_t *pOldRecInfo = NULL;
 	int Index;
 
@@ -360,46 +250,37 @@ int CEsmSoundGenDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 		Index = m_CreatureList.GetCurSel();
 
 		if (Index >= 0) {
-			pOldRecInfo = (esmrecinfo_t *) m_CreatureList.GetItemData(Index);
+			pOldRecInfo = (esmrecinfo_t *)m_CreatureList.GetItemData(Index);
 		}
 
 		FillEsmCreatureCombo(m_CreatureList);
-		FindComboListItem(m_CreatureList, (DWORD) pOldRecInfo, true);
+		FindComboListItem(m_CreatureList, (DWORD)pOldRecInfo, true);
 	} else if (pRecInfo->pRecord->IsType(MWESM_REC_SOUN)) {
 		Index = m_SoundList.GetCurSel();
 
 		if (Index >= 0) {
-			pOldRecInfo = (esmrecinfo_t *) m_SoundList.GetItemData(Index);
+			pOldRecInfo = (esmrecinfo_t *)m_SoundList.GetItemData(Index);
 		}
 
 		FillEsmSoundCombo(m_SoundList);
-		FindComboListItem(m_SoundList, (DWORD) pOldRecInfo, true);
+		FindComboListItem(m_SoundList, (DWORD)pOldRecInfo, true);
 	}
 
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundGenDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundGenDlg::SetControlData (void) {
+void CEsmSoundGenDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pSoundGen == NULL) {
 		return;
@@ -408,6 +289,7 @@ void CEsmSoundGenDlg::SetControlData (void) {
 	/* Item ID, update title as well */
 	m_IDText.SetWindowText(m_pSoundGen->GetID());
 	UpdateTitle(m_pSoundGen->GetID());
+
 	/* Item lists */
 	FindComboListItem(m_TypeList, m_pSoundGen->GetSoundType(), true);
 	m_SoundList.SelectString(-1, m_pSoundGen->GetSound());
@@ -419,26 +301,17 @@ void CEsmSoundGenDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundGenDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundGenDlg Method - void UpdateID (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundGenDlg::UpdateID (void) {
+void CEsmSoundGenDlg::UpdateID(void) {
 	//DEFINE_FUNCTION("CEsmSoundGenDlg::UpdateID()");
 	CString CreatureName;
 	CString NewID;
@@ -469,10 +342,5 @@ void CEsmSoundGenDlg::UpdateID (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundGenDlg::SetControlData()
-
  *=========================================================================*/
-
-
-

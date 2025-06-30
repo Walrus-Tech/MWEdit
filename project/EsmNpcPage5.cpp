@@ -84,18 +84,21 @@ CEsmNpcPage5::~CEsmNpcPage5() {
  * Class CEsmNpcPage5 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CEsmNpcPage5::DoDataExchange(CDataExchange* pDX) {
+void CEsmNpcPage5::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmNpcPage5)
 	DDX_Control(pDX, IDC_CELLLIST4, m_CellList4);
 	DDX_Control(pDX, IDC_CELLLIST3, m_CellList3);
 	DDX_Control(pDX, IDC_CELLLIST2, m_CellList2);
 	DDX_Control(pDX, IDC_CELLLIST1, m_CellList1);
+
 	DDX_Control(pDX, IDC_REPAIRSCHECK, m_RepairsItemsCheck);
 	DDX_Control(pDX, IDC_TRAINCHECK, m_TrainCheck);
 	DDX_Control(pDX, IDC_SPELLMAKECHECK, m_SpellmakeCheck);
 	DDX_Control(pDX, IDC_ENCHANTCHECK, m_EnchantCheck);
+
 	DDX_Control(pDX, IDC_GOLDTEXT, m_GoldText);
+
 	DDX_Control(pDX, IDC_WEAPONCHECK, m_WeaponCheck);
 	DDX_Control(pDX, IDC_SPELLCHECK, m_SpellCheck);
 	DDX_Control(pDX, IDC_MAGICITEMCHECK, m_MagicCheck);
@@ -124,7 +127,7 @@ void CEsmNpcPage5::DoDataExchange(CDataExchange* pDX) {
  *
  *=========================================================================*/
 void CEsmNpcPage5::GetControlData(void) {
-	CEsmNpc* pNpc;
+	CEsmNpc *pNpc;
 	aidata_t *pAiData;
 	CString Buffer;
 
@@ -132,7 +135,7 @@ void CEsmNpcPage5::GetControlData(void) {
 		return;
 	}
 
-	pNpc = (CEsmNpc*)m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	pAiData = pNpc->GetAIData();
 	/* Gold */
 	m_GoldText.GetWindowText(Buffer);
@@ -258,7 +261,7 @@ BOOL CEsmNpcPage5::OnInitDialog() {
  * Class CEsmNpcPage5 Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-int CEsmNpcPage5::OnUpdateItem(esmrecinfo_t* pRecInfo) {
+int CEsmNpcPage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return (0);
 }
 
@@ -273,22 +276,22 @@ int CEsmNpcPage5::OnUpdateItem(esmrecinfo_t* pRecInfo) {
  *
  *=========================================================================*/
 void CEsmNpcPage5::SetControlData(void) {
-	CEsmNpc* pNpc;
+	CEsmNpc *pNpc;
 	aidata_t *pAiData;
 	CString Buffer;
-#pragma warning( push )
-#pragma warning( disable : 4101 )
-	CEsmSubPos6* pDoorData;
-	CEsmSubRecord* pCellName;
+#pragma warning(push)
+#pragma warning(disable : 4101)
+	CEsmSubPos6 *pDoorData;
+	CEsmSubRecord *pCellName;
 	int ArrayIndex;
 	int Count;
-#pragma warning( pop )
+#pragma warning(pop)
 
 	if (m_pRecInfo == NULL || m_pDlgHandler == NULL) {
 		return;
 	}
 
-	pNpc = (CEsmNpc*)m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	pAiData = pNpc->GetAIData();
 	/* Gold */
 	Buffer.Format(_T("%ld"), pNpc->GetGold());

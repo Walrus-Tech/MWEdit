@@ -85,9 +85,9 @@ CEsmScrTempPage3::~CEsmScrTempPage3() {
  * file. Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmScrTempPage3::AddCsvColumns(CCsvFile* pCsvFile) {
-	CCsvRow* pRow;
-	CSString* pString;
+bool CEsmScrTempPage3::AddCsvColumns(CCsvFile *pCsvFile) {
+	CCsvRow *pRow;
+	CSString *pString;
 	int Index;
 	/* Get the header row */
 	pRow = pCsvFile->GetRow(0);
@@ -105,9 +105,17 @@ bool CEsmScrTempPage3::AddCsvColumns(CCsvFile* pCsvFile) {
 		pString = pRow->GetAt(Index);
 
 		if (pString == NULL) {
-			m_CsvList.InsertColumn(Index + 1, _T("?"), LVCFMT_CENTER, ESMSCRTEMP_CSVLIST_COLWIDTH, Index + 1);
+			m_CsvList.InsertColumn(Index + 1,
+			                       _T("?"),
+			                       LVCFMT_CENTER,
+			                       ESMSCRTEMP_CSVLIST_COLWIDTH,
+			                       Index + 1);
 		} else {
-			m_CsvList.InsertColumn(Index + 1, *pString, LVCFMT_CENTER, ESMSCRTEMP_CSVLIST_COLWIDTH, Index + 1);
+			m_CsvList.InsertColumn(Index + 1,
+			                       *pString,
+			                       LVCFMT_CENTER,
+			                       ESMSCRTEMP_CSVLIST_COLWIDTH,
+			                       Index + 1);
 		}
 	}
 
@@ -151,7 +159,7 @@ void CEsmScrTempPage3::ClearCsvList(void) {
  * Class CEsmScrTempPage3 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CEsmScrTempPage3::DoDataExchange(CDataExchange* pDX) {
+void CEsmScrTempPage3::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmScrTempPage3)
 	DDX_Control(pDX, IDC_CSVLIST, m_CsvList);
@@ -171,9 +179,9 @@ void CEsmScrTempPage3::DoDataExchange(CDataExchange* pDX) {
  * false on any error.
  *
  *=========================================================================*/
-bool CEsmScrTempPage3::FillCsvList(CCsvFile* pCsvFile) {
-	CCsvRow* pRow;
-	CSString* pString;
+bool CEsmScrTempPage3::FillCsvList(CCsvFile *pCsvFile) {
+	CCsvRow *pRow;
+	CSString *pString;
 	CString Buffer;
 	int RowIndex;
 	int ColIndex;
@@ -199,8 +207,9 @@ bool CEsmScrTempPage3::FillCsvList(CCsvFile* pCsvFile) {
 
 		for (ColIndex = 0; ColIndex < pRow->GetNumElements() && ColIndex < m_NumColumns; ColIndex++) {
 			pString = pRow->GetAt(ColIndex);
-			m_CsvList.SetItemText(ListIndex, ColIndex + 1,
-			                      pString == NULL ? _T("") : static_cast<const char*>(*pString));
+			m_CsvList.SetItemText(ListIndex,
+			                      ColIndex + 1,
+			                      pString == NULL ? _T("") : static_cast<const char *>(*pString));
 		}
 
 		ItemIndex++;

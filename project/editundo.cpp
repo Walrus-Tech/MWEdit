@@ -1,67 +1,38 @@
 /*===========================================================================
-
  *
-
  * File:    Editundo.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  August 22, 2006
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "editundo.h"
-
 #include "dl_str.h"
-
 #include "windows/winutil.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 DEFINE_FILE("EditUndo.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEditUndo Constructor
-
  *
-
  *=========================================================================*/
 
 CEditUndo::CEditUndo () {
@@ -75,26 +46,17 @@ CEditUndo::CEditUndo () {
 }
 
 /*===========================================================================
-
  *      End of Class CEditUndo Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndo Method - void Destroy (void);
-
  *
-
  *=========================================================================*/
 
-void CEditUndo::Destroy (void) {
+void CEditUndo::Destroy(void) {
 	DestroyArrayPointer(m_pString);
 	m_StringLength = 0;
 	m_Action = EDITUNDO_NONE;
@@ -103,26 +65,17 @@ void CEditUndo::Destroy (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndo::Destroy()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndo Method - void SetString (pString);
-
  *
-
  *=========================================================================*/
 
-void CEditUndo::SetString (const TCHAR* pString) {
+void CEditUndo::SetString(const TCHAR *pString) {
 	DEFINE_FUNCTION("CEditUndo::SetString()");
 	DestroyArrayPointer(m_pString);
 	m_StringLength = 0;
@@ -135,23 +88,14 @@ void CEditUndo::SetString (const TCHAR* pString) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndo::SetString()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Constructor
-
  *
-
  *=========================================================================*/
 
 CEditUndoStack::CEditUndoStack() {
@@ -160,54 +104,37 @@ CEditUndoStack::CEditUndoStack() {
 }
 
 /*===========================================================================
-
  *      End of Class CEditUndoStack Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - void Destroy (void);
-
  *
-
  *=========================================================================*/
 
-void CEditUndoStack::Destroy (void) {
+void CEditUndoStack::Destroy(void) {
 	m_UndoStack.Destroy();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::Destroy()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - void CreateInsertChar (Char, StartSel, EndSel);
-
  *
-
  *=========================================================================*/
 
-void CEditUndoStack::CreateInsertChar (const TCHAR Char, const int StartSel, const int EndSel) {
+void CEditUndoStack::CreateInsertChar(const TCHAR Char, const int StartSel, const int EndSel) {
 	DEFINE_FUNCTION("CEditUndoStack::CreateInsertChar()");
-	CEditUndo* pUndo;
+	CEditUndo *pUndo;
 	CreatePointer(pUndo, CEditUndo);
 	m_UndoStack.Add(pUndo);
+
 	pUndo->SetChar(Char);
 	pUndo->SetAction(EDITUNDO_INSERTCHAR);
 	pUndo->SetSelStart(StartSel);
@@ -219,31 +146,24 @@ void CEditUndoStack::CreateInsertChar (const TCHAR Char, const int StartSel, con
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::CreateInsertChar()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - void CreateInsertString (pString, StartSel, EndSel);
-
  *
-
  *=========================================================================*/
 
-void CEditUndoStack::CreateInsertString (const TCHAR* pString, const int StartSel,
-                                         const int EndSel) {
+void CEditUndoStack::CreateInsertString(const TCHAR *pString,
+                                        const int StartSel,
+                                        const int EndSel) {
 	DEFINE_FUNCTION("CEditUndoStack::CreateInsertString()");
-	CEditUndo* pUndo;
+	CEditUndo *pUndo;
 	CreatePointer(pUndo, CEditUndo);
 	m_UndoStack.Add(pUndo);
+
 	pUndo->SetString(pString);
 	pUndo->SetAction(EDITUNDO_INSERTSTRING);
 	pUndo->SetSelStart(StartSel);
@@ -255,30 +175,22 @@ void CEditUndoStack::CreateInsertString (const TCHAR* pString, const int StartSe
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::CreateInsertString()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - void CreateDeleteChar (Char, StartSel, EndSel);
-
  *
-
  *=========================================================================*/
 
-void CEditUndoStack::CreateDeleteChar (const TCHAR Char, const int StartSel, const int EndSel) {
+void CEditUndoStack::CreateDeleteChar(const TCHAR Char, const int StartSel, const int EndSel) {
 	DEFINE_FUNCTION("CEditUndoStack::CreateDeleteChar()");
-	CEditUndo* pUndo;
+	CEditUndo *pUndo;
 	CreatePointer(pUndo, CEditUndo);
 	m_UndoStack.Add(pUndo);
+
 	pUndo->SetChar(Char);
 	pUndo->SetAction(EDITUNDO_DELETECHAR);
 	pUndo->SetSelStart(StartSel);
@@ -290,31 +202,24 @@ void CEditUndoStack::CreateDeleteChar (const TCHAR Char, const int StartSel, con
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::CreateDeleteChar()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - void CreateDeleteString (pString, StartSel, EndSel);
-
  *
-
  *=========================================================================*/
 
-void CEditUndoStack::CreateDeleteString (const TCHAR* pString, const int StartSel,
-                                         const int EndSel) {
+void CEditUndoStack::CreateDeleteString(const TCHAR *pString,
+                                        const int StartSel,
+                                        const int EndSel) {
 	DEFINE_FUNCTION("CEditUndoStack::CreateDeleteString()");
-	CEditUndo* pUndo;
+	CEditUndo *pUndo;
 	CreatePointer(pUndo, CEditUndo);
 	m_UndoStack.Add(pUndo);
+
 	pUndo->SetString(pString);
 	pUndo->SetAction(EDITUNDO_DELETESTRING);
 	pUndo->SetSelStart(StartSel);
@@ -326,30 +231,22 @@ void CEditUndoStack::CreateDeleteString (const TCHAR* pString, const int StartSe
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::CreateDeleteString()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - void CreateEntireText (pString);
-
  *
-
  *=========================================================================*/
 
-void CEditUndoStack::CreateEntireText (const TCHAR* pString) {
+void CEditUndoStack::CreateEntireText(const TCHAR *pString) {
 	DEFINE_FUNCTION("CEditUndoStack::CreateDeleteString()");
-	CEditUndo* pUndo;
+	CEditUndo *pUndo;
 	CreatePointer(pUndo, CEditUndo);
 	m_UndoStack.Add(pUndo);
+
 	pUndo->SetString(pString);
 	pUndo->SetAction(EDITUNDO_ENTIRETEXT);
 	pUndo->SetSelStart(0);
@@ -361,26 +258,17 @@ void CEditUndoStack::CreateEntireText (const TCHAR* pString) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::CreateEntireText()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - bool GroupUndoInsertChar (pCtrl);
-
  *
-
  *=========================================================================*/
 
-bool CEditUndoStack::GroupUndoInsertChar (CRichEditCtrl* pCtrl, CEditUndo* pUndo) {
+bool CEditUndoStack::GroupUndoInsertChar(CRichEditCtrl *pCtrl, CEditUndo *pUndo) {
 	DEFINE_FUNCTION("CEditUndoStack::GroupUndoInsertChar()");
 	int SelStart;
 	int SelEnd;
@@ -417,26 +305,17 @@ bool CEditUndoStack::GroupUndoInsertChar (CRichEditCtrl* pCtrl, CEditUndo* pUndo
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::GroupUndoInsertChar()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Event - bool OnChar (pCtrl, CharCode);
-
  *
-
  *=========================================================================*/
 
-bool CEditUndoStack::OnChar (CRichEditCtrl* pCtrl, const int CharCode) {
+bool CEditUndoStack::OnChar(CRichEditCtrl *pCtrl, const int CharCode) {
 	CString Buffer;
 	long StartSel;
 	long EndSel;
@@ -489,26 +368,17 @@ bool CEditUndoStack::OnChar (CRichEditCtrl* pCtrl, const int CharCode) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEditUndoStack::OnChar()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Event - bool OnCut (pCtrl);
-
  *
-
  *=========================================================================*/
 
-bool CEditUndoStack::OnCut (CRichEditCtrl* pCtrl) {
+bool CEditUndoStack::OnCut(CRichEditCtrl *pCtrl) {
 	CString Buffer;
 	long StartSel;
 	long EndSel;
@@ -532,26 +402,17 @@ bool CEditUndoStack::OnCut (CRichEditCtrl* pCtrl) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEditUndoStack::OnCut()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Event - bool OnKeyDown (pCtrl, CharCode);
-
  *
-
  *=========================================================================*/
 
-bool CEditUndoStack::OnKeyDown (CRichEditCtrl* pCtrl, const int CharCode) {
+bool CEditUndoStack::OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode) {
 	CString Buffer;
 	long StartSel;
 	long EndSel;
@@ -626,26 +487,17 @@ bool CEditUndoStack::OnKeyDown (CRichEditCtrl* pCtrl, const int CharCode) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEditUndoStack::OnKeyDown()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Event - bool OnPaste (pCtrl);
-
  *
-
  *=========================================================================*/
 
-bool CEditUndoStack::OnPaste (CRichEditCtrl* pCtrl) {
+bool CEditUndoStack::OnPaste(CRichEditCtrl *pCtrl) {
 	CString Buffer;
 	long StartSel;
 	long EndSel;
@@ -679,28 +531,19 @@ bool CEditUndoStack::OnPaste (CRichEditCtrl* pCtrl) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEditUndoStack::OnPaste()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Event - int OnUndo (pCtrl);
-
  *
-
  *=========================================================================*/
 
-int CEditUndoStack::OnUndo (CRichEditCtrl* pCtrl) {
+int CEditUndoStack::OnUndo(CRichEditCtrl *pCtrl) {
 	DEFINE_FUNCTION("CEditUndoStack::OnUndo()");
-	CEditUndo* pUndo;
+	CEditUndo *pUndo;
 	CString Buffer;
 	int UndoType = EDITUNDO_NONE;
 
@@ -753,6 +596,7 @@ int CEditUndoStack::OnUndo (CRichEditCtrl* pCtrl) {
 		case EDITUNDO_ENTIRETEXT: {
 			long StartSel;
 			long EndSel;
+
 			pCtrl->HideSelection(TRUE, FALSE);
 			pCtrl->SetRedraw(FALSE);
 			pCtrl->GetSel(StartSel, EndSel);
@@ -772,27 +616,18 @@ int CEditUndoStack::OnUndo (CRichEditCtrl* pCtrl) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEditUndoStack::OnUndo()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEditUndoStack Method - CEditUndo* Pop (void);
-
  *
-
  *=========================================================================*/
 
-CEditUndo *CEditUndoStack::Pop (void) {
-	CEditUndo* pUndo;
+CEditUndo *CEditUndoStack::Pop(void) {
+	CEditUndo *pUndo;
 
 	if (m_UndoStack.GetNumElements() == 0) {
 		return (NULL);
@@ -809,8 +644,5 @@ CEditUndo *CEditUndoStack::Pop (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEditUndoStack::Pop()
-
  *=========================================================================*/
-

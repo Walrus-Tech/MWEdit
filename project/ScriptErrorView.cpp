@@ -1,131 +1,72 @@
 /*===========================================================================
-
  *
-
  * File:    Scripterrorview.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  September 3, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "ScriptErrorView.h"
-
 #include "ScriptErrorDlg.h"
 
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
 
-
-
-
 IMPLEMENT_DYNCREATE(CScriptErrorView, CFormView);
-
 DEFINE_FILE("ScriptErrorView.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CScriptErrorView Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CScriptErrorView, CFormView)
-
 	//{{AFX_MSG_MAP(CScriptErrorView)
-
 	ON_WM_SIZE()
-
 	ON_LBN_DBLCLK(IDC_ERRORLIST, OnDblclkErrorlist)
-
 	ON_COMMAND(ID_SCRERROR_GOTO, OnScrerrorGoto)
-
 	ON_UPDATE_COMMAND_UI(ID_SCRERROR_GOTO, OnUpdateScrerrorGoto)
-
 	ON_COMMAND(ID_SCRERROR_DETAILS, OnScrerrorDetails)
-
 	ON_UPDATE_COMMAND_UI(ID_SCRERROR_DETAILS, OnUpdateScrerrorDetails)
-
 	ON_COMMAND(ID_SCRERROR_COPY, OnScrerrorCopy)
-
 	ON_UPDATE_COMMAND_UI(ID_SCRERROR_COPY, OnUpdateScrerrorCopy)
-
 	ON_WM_CONTEXTMENU()
-
 	ON_COMMAND(ID_SCRERROR_FUNCHELP, OnScrerrorFunchelp)
-
 	ON_UPDATE_COMMAND_UI(ID_SCRERROR_FUNCHELP, OnUpdateScrerrorFunchelp)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CScriptErrorView Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Constructor
-
  *
-
  *=========================================================================*/
 
 CScriptErrorView::CScriptErrorView() : CFormView(CScriptErrorView::IDD) {
@@ -134,49 +75,31 @@ CScriptErrorView::CScriptErrorView() : CFormView(CScriptErrorView::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CScriptErrorView Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Destructor
-
  *
-
  *=========================================================================*/
 
 CScriptErrorView::~CScriptErrorView() {
 }
 
 /*===========================================================================
-
  *      End of Class CScriptErrorView Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::DoDataExchange(CDataExchange* pDX) {
+void CScriptErrorView::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CScriptErrorView)
 	DDX_Control(pDX, IDC_ERRORLIST, m_ErrorList);
@@ -184,90 +107,57 @@ void CScriptErrorView::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CScriptErrorView::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Begin CScriptErrorView Diagnostics
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
-
 
 void CScriptErrorView::AssertValid() const {
 	CFormView::AssertValid();
 }
 
-
-
-void CScriptErrorView::Dump(CDumpContext& dc) const {
+void CScriptErrorView::Dump(CDumpContext &dc) const {
 	CFormView::Dump(dc);
 }
-
-
 
 #endif
 
 /*===========================================================================
-
  *      End of CScriptErrorView Diagnostics
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Method - void ClearErrors (void);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::ClearErrors (void) {
+void CScriptErrorView::ClearErrors(void) {
 	m_ErrorList.ResetContent();
 }
 
 /*===========================================================================
-
  *      End of Class Method CScriptErrorView::ClearErrors()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnContextMenu (pWnd, Point);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::OnContextMenu(CWnd* pWnd, CPoint Point) {
+void CScriptErrorView::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	CMenu Menu;
-	CMenu* pPopup;
+	CMenu *pPopup;
 	CCmdUI MenuState;
 	int Result;
 	int Index;
@@ -287,7 +177,7 @@ void CScriptErrorView::OnContextMenu(CWnd* pWnd, CPoint Point) {
 
 		/* Force the update of the menu commands */
 
-		for (Index = 0; Index < (int) pPopup->GetMenuItemCount(); Index++) {
+		for (Index = 0; Index < (int)pPopup->GetMenuItemCount(); Index++) {
 			MenuState.m_nID = pPopup->GetMenuItemID(Index);
 			MenuState.m_nIndex = Index;
 			MenuState.m_pMenu = pPopup;
@@ -305,27 +195,18 @@ void CScriptErrorView::OnContextMenu(CWnd* pWnd, CPoint Point) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnContextMenu()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnDblclkErrorlist ();
-
  *
-
  *=========================================================================*/
 
 void CScriptErrorView::OnDblclkErrorlist() {
-	CEsmScriptError* pError;
+	CEsmScriptError *pError;
 	int ListIndex;
 	/* Get the currently selected error */
 	ListIndex = m_ErrorList.GetCurSel();
@@ -334,29 +215,20 @@ void CScriptErrorView::OnDblclkErrorlist() {
 		return;
 	}
 
-	pError = (CEsmScriptError *) m_ErrorList.GetItemDataPtr(ListIndex);
+	pError = (CEsmScriptError *)m_ErrorList.GetItemDataPtr(ListIndex);
 	/* Send a message to the parent frame */
 	GetParentFrame()->SendMessage(MSG_SCRIPTFRM_GOTOLINE, pError->GetLine(), pError->GetCharacter());
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnDblclkErrorlist()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CScriptErrorView::OnInitialUpdate() {
@@ -366,60 +238,50 @@ void CScriptErrorView::OnInitialUpdate() {
 	if (IsWindow(m_ErrorList.m_hWnd)) {
 		CRect WndRect;
 		GetWindowRect(&WndRect);
-		m_ErrorList.SetWindowPos(NULL, 0, 0, WndRect.Width(), WndRect.Height(),
+		m_ErrorList.SetWindowPos(NULL,
+		                         0,
+		                         0,
+		                         WndRect.Width(),
+		                         WndRect.Height(),
 		                         SWP_NOMOVE | SWP_NOZORDER | SWP_SHOWWINDOW);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnSize (nType, cx, cy);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::OnSize (UINT nType, int cx, int cy) {
+void CScriptErrorView::OnSize(UINT nType, int cx, int cy) {
 	CFormView::OnSize(nType, cx, cy);
 
 	if (IsWindow(m_ErrorList.m_hWnd)) {
 		CRect WndRect;
 		GetWindowRect(&WndRect);
-		m_ErrorList.SetWindowPos(NULL, 0, 0, WndRect.Width(), WndRect.Height(),
+		m_ErrorList.SetWindowPos(NULL,
+		                         0,
+		                         0,
+		                         WndRect.Width(),
+		                         WndRect.Height(),
 		                         SWP_NOMOVE | SWP_NOZORDER | SWP_SHOWWINDOW);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnSize()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnScrerrorGoto ();
-
  *
-
  *=========================================================================*/
 
 void CScriptErrorView::OnScrerrorGoto() {
@@ -427,27 +289,18 @@ void CScriptErrorView::OnScrerrorGoto() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnScrerrorGoto()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnScrerrorDetails ();
-
  *
-
  *=========================================================================*/
 
 void CScriptErrorView::OnScrerrorDetails() {
-	CEsmScriptError* pError;
+	CEsmScriptError *pError;
 	int ListIndex;
 	int Result;
 	/* Get the currently selected error */
@@ -457,7 +310,7 @@ void CScriptErrorView::OnScrerrorDetails() {
 		return;
 	}
 
-	pError = (CEsmScriptError *) m_ErrorList.GetItemDataPtr(ListIndex);
+	pError = (CEsmScriptError *)m_ErrorList.GetItemDataPtr(ListIndex);
 
 	if (pError->GetLine() == 0) {
 		return;
@@ -478,31 +331,23 @@ void CScriptErrorView::OnScrerrorDetails() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnScrerrorDetails()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnScrerrorCopy ();
-
  *
-
  *=========================================================================*/
 
 void CScriptErrorView::OnScrerrorCopy() {
 	CString ErrorString;
 	int ListIndex;
 	HGLOBAL hMemory;
-	TCHAR* pData;
+	TCHAR *pData;
 	int Result;
+
 	/* Get the error to copy */
 	ListIndex = m_ErrorList.GetCurSel();
 
@@ -538,29 +383,21 @@ void CScriptErrorView::OnScrerrorCopy() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnScrerrorCopy()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnScrerrorFunchelp ();
-
  *
-
  *=========================================================================*/
 
 void CScriptErrorView::OnScrerrorFunchelp() {
-	CMWEditApp* pApp = (CMWEditApp *) AfxGetApp();
-	CEsmScriptError* pError;
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
+	CEsmScriptError *pError;
 	int ListIndex;
+
 	/* Get the currently selected error */
 	ListIndex = m_ErrorList.GetCurSel();
 
@@ -568,7 +405,7 @@ void CScriptErrorView::OnScrerrorFunchelp() {
 		return;
 	}
 
-	pError = (CEsmScriptError *) m_ErrorList.GetItemDataPtr(ListIndex);
+	pError = (CEsmScriptError *)m_ErrorList.GetItemDataPtr(ListIndex);
 
 	if (pError->GetFunction() != NULL) {
 		pApp->OpenFuncHelpView(pError->GetFunction()->Name);
@@ -578,140 +415,96 @@ void CScriptErrorView::OnScrerrorFunchelp() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnScrerrorFunchelp()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnUpdateScrerrorFunchelp (pCmdUI);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::OnUpdateScrerrorFunchelp(CCmdUI* pCmdUI) {
+void CScriptErrorView::OnUpdateScrerrorFunchelp(CCmdUI *pCmdUI) {
 	int ListIndex;
 	ListIndex = m_ErrorList.GetCurSel();
 
 	if (ListIndex < 0) {
 		pCmdUI->Enable(FALSE);
 	} else {
-		CEsmScriptError* pError = (CEsmScriptError *) m_ErrorList.GetItemDataPtr(ListIndex);
+		CEsmScriptError* pError = (CEsmScriptError *)m_ErrorList.GetItemDataPtr(ListIndex);
 		pCmdUI->Enable(pError->GetFunction() != NULL);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnUpdateScrerrorFunchelp()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnUpdateScrerrorCopy (pCmdUI);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::OnUpdateScrerrorCopy(CCmdUI* pCmdUI) {
+void CScriptErrorView::OnUpdateScrerrorCopy(CCmdUI *pCmdUI) {
 	int ListIndex;
 	ListIndex = m_ErrorList.GetCurSel();
 	pCmdUI->Enable(ListIndex >= 0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnUpdateScrerrorCopy()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnUpdateScrerrorDetails (pCmdUI);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::OnUpdateScrerrorDetails(CCmdUI* pCmdUI) {
+void CScriptErrorView::OnUpdateScrerrorDetails(CCmdUI *pCmdUI) {
 	int ListIndex;
 	ListIndex = m_ErrorList.GetCurSel();
 	pCmdUI->Enable(ListIndex >= 0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnUpdateScrerrorDetails()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Event - void OnUpdateScrerrorGoto (pCmdUI);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::OnUpdateScrerrorGoto(CCmdUI* pCmdUI) {
+void CScriptErrorView::OnUpdateScrerrorGoto(CCmdUI *pCmdUI) {
 	int ListIndex;
 	ListIndex = m_ErrorList.GetCurSel();
 	pCmdUI->Enable(ListIndex >= 0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CScriptErrorView::OnUpdateScrerrorGoto()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CScriptErrorView Method - void UpdateErrors (pErrorArray);
-
  *
-
  *=========================================================================*/
 
-void CScriptErrorView::UpdateErrors (CEsmScriptErrArray* pErrorArray) {
-	CEsmScriptError* pError;
+void CScriptErrorView::UpdateErrors(CEsmScriptErrArray *pErrorArray) {
+	CEsmScriptError *pError;
 	CString Buffer;
 	int Index;
 	int ListResult;
+
 	/* Clear the current list */
 	m_ErrorList.ResetContent();
 
@@ -725,8 +518,12 @@ void CScriptErrorView::UpdateErrors (CEsmScriptErrArray* pErrorArray) {
 		if (pError->GetLine() == 0) {
 			Buffer.Format(_T("%s"), pError->GetMessage());
 		} else {
-			Buffer.Format(_T("Line %4d (%3d): %s %4d: %s"), pError->GetLine(), pError->GetCharacter(),
-			              pError->GetTypeString(), pError->GetErrorCode(), pError->GetMessage());
+			Buffer.Format(_T("Line %4d (%3d): %s %4d: %s"),
+			              pError->GetLine(),
+			              pError->GetCharacter(),
+			              pError->GetTypeString(),
+			              pError->GetErrorCode(),
+			              pError->GetMessage());
 
 			if (pError->GetFunction() != NULL) {
 				Buffer += _T(" (");
@@ -744,10 +541,5 @@ void CScriptErrorView::UpdateErrors (CEsmScriptErrArray* pErrorArray) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CScriptErrorView::UpdateErrors()
-
  *=========================================================================*/
-
-
-

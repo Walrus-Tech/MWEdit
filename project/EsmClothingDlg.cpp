@@ -1,159 +1,85 @@
 /*===========================================================================
-
  *
-
  * File:    Esmclothingdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 14, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "Resource.h"
-
 #include "EsmClothingDlg.h"
-
 #include "EsmDlgArray.h"
-
 #include "ChildFrmFix.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmClothingDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmClothingDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmClothingDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmClothingDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmClothingDlg)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST1, OnSelchangeBipedlist1)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST2, OnSelchangeBipedlist2)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST3, OnSelchangeBipedlist3)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST4, OnSelchangeBipedlist4)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST5, OnSelchangeBipedlist5)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST6, OnSelchangeBipedlist6)
-
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST7, OnSelchangeBipedlist7)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST1, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST2, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST3, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST4, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST5, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST6, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST7, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST1, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST2, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST3, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST4, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST5, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST6, OnSelchangeClothList)
-
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST7, OnSelchangeClothList)
-
 	ON_BN_CLICKED(IDC_ENCHANTEDIT, OnEnchantedit)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmClothingDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmClothingDlg::CEsmClothingDlg() : CEsmRecDialog(CEsmClothingDlg::IDD) {
@@ -163,27 +89,19 @@ CEsmClothingDlg::CEsmClothingDlg() : CEsmRecDialog(CEsmClothingDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmClothingDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmClothingDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmClothingDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -199,6 +117,7 @@ void CEsmClothingDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_MCLOTHLIST1, m_MClothList[0]);
 	DDX_Control(pDX, IDC_MCLOTHLIST2, m_MClothList[1]);
 	DDX_Control(pDX, IDC_MCLOTHLIST3, m_MClothList[2]);
@@ -213,6 +132,7 @@ void CEsmClothingDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_FCLOTHLIST5, m_FClothList[4]);
 	DDX_Control(pDX, IDC_FCLOTHLIST6, m_FClothList[5]);
 	DDX_Control(pDX, IDC_FCLOTHLIST7, m_FClothList[6]);
+
 	DDX_Control(pDX, IDC_BIPEDLIST1, m_BipedList[0]);
 	DDX_Control(pDX, IDC_BIPEDLIST2, m_BipedList[1]);
 	DDX_Control(pDX, IDC_BIPEDLIST3, m_BipedList[2]);
@@ -223,28 +143,19 @@ void CEsmClothingDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void GetBipedData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::GetBipedData (void) {
-	CEsmSubByte* pIndexRecord;
-	CEsmSubName* pNameRecord;
+void CEsmClothingDlg::GetBipedData(void) {
+	CEsmSubByte *pIndexRecord;
+	CEsmSubName *pNameRecord;
 	CString Buffer;
 	int BipedIndex;
 	int BipedPart;
@@ -269,7 +180,7 @@ void CEsmClothingDlg::GetBipedData (void) {
 		}
 
 		/* Create the new index sub-record */
-		pIndexRecord = (CEsmSubByte *) m_pClothing->AllocateSubRecord(MWESM_SUBREC_INDX);
+		pIndexRecord = (CEsmSubByte *)m_pClothing->AllocateSubRecord(MWESM_SUBREC_INDX);
 		pIndexRecord->CreateNew();
 		pIndexRecord->SetValue((byte)BipedPart);
 		/* Create the male part record, if any */
@@ -277,7 +188,7 @@ void CEsmClothingDlg::GetBipedData (void) {
 		m_MClothList[BipedIndex].GetWindowText(Buffer);
 
 		if (Index >= 0 && !Buffer.IsEmpty()) {
-			pNameRecord = (CEsmSubName *) m_pClothing->AllocateSubRecord(MWESM_SUBREC_BNAM);
+			pNameRecord = (CEsmSubName *)m_pClothing->AllocateSubRecord(MWESM_SUBREC_BNAM);
 			pNameRecord->CreateNew();
 			pNameRecord->SetName(Buffer);
 		}
@@ -287,7 +198,7 @@ void CEsmClothingDlg::GetBipedData (void) {
 		m_FClothList[BipedIndex].GetWindowText(Buffer);
 
 		if (Index >= 0 && !Buffer.IsEmpty()) {
-			pNameRecord = (CEsmSubName *) m_pClothing->AllocateSubRecord(MWESM_SUBREC_CNAM);
+			pNameRecord = (CEsmSubName *)m_pClothing->AllocateSubRecord(MWESM_SUBREC_CNAM);
 			pNameRecord->CreateNew();
 			pNameRecord->SetName(Buffer);
 		}
@@ -295,31 +206,22 @@ void CEsmClothingDlg::GetBipedData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::GetBipedData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::GetControlData (void) {
+void CEsmClothingDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmClothingDlg::GetControlData()");
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pClothing = (CEsmClothing *) GetRecInfo()->pRecord;
+	m_pClothing = (CEsmClothing *)GetRecInfo()->pRecord;
 
 	if (m_pClothing == NULL) {
 		return;
@@ -344,52 +246,51 @@ void CEsmClothingDlg::GetControlData (void) {
 
 	/* Armor weight */
 	m_WeightText.GetWindowText(Buffer);
-	m_pClothing->SetWeight((float) atof(Buffer));
+	m_pClothing->SetWeight((float)atof(Buffer));
+
 	/* Armor value */
 	m_ValueText.GetWindowText(Buffer);
 	m_pClothing->SetValue(atoi(Buffer));
+
 	/* Enchant points */
 	m_EnchantText.GetWindowText(Buffer);
 	m_pClothing->SetEnchantPts(atoi(Buffer));
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pClothing->SetScript(TrimStringSpace(Buffer));
+
 	/* Item enchant */
 	m_EnchantList.GetWindowText(Buffer);
 	m_pClothing->SetEnchant(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pClothing->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pClothing->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pClothing->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pClothing->SetBlocked(m_BlockedCheck.GetCheck() != 0);
+
 	GetBipedData();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmClothingDlg::IsModified (void) {
+bool CEsmClothingDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -420,23 +321,14 @@ bool CEsmClothingDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmClothingDlg::OnInitialUpdate() {
@@ -445,7 +337,7 @@ void CEsmClothingDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pClothing = (CEsmClothing *) GetRecInfo()->pRecord;
+	m_pClothing = (CEsmClothing *)GetRecInfo()->pRecord;
 	/* Initialize the ui controls/lists */
 	FillEsmClothTypeCombo(m_TypeList);
 	FillEsmScriptCombo(m_ScriptList);
@@ -464,51 +356,33 @@ void CEsmClothingDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClothingDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Event - void OnSelChangeBipedList (BipedIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::OnSelChangeBipedList (const int BipedIndex) {
+void CEsmClothingDlg::OnSelChangeBipedList(const int BipedIndex) {
 	SetBipedObject(BipedIndex);
 	m_Modified = true;
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClothingDlg::OnSelChangeBipedList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmClothingDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmClothingDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
 		esmrecinfo_t *pRecInfo = NULL;
@@ -516,43 +390,35 @@ int CEsmClothingDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 		Index = m_ScriptList.GetCurSel();
 
 		if (Index >= 0) {
-			pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
+			pRecInfo = (esmrecinfo_t *)m_ScriptList.GetItemData(Index);
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClothingDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void SetBipedData (BipedIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::SetBipedData (const int BipedIndex, CEsmSubByte* pIndexRecord,
-                                    const int RecordIndex) {
+void CEsmClothingDlg::SetBipedData(const int BipedIndex,
+                                   CEsmSubByte *pIndexRecord,
+                                   const int RecordIndex) {
 	//DEFINE_FUNCTION("CEsmClothingDlg::SetBipedData()");
-	CEsmSubRecord* pPartName1;
-	CEsmSubRecord* pPartName2;
-	CEsmSubName* pMalePart = NULL;
-	CEsmSubName* pFemalePart = NULL;
+	CEsmSubRecord *pPartName1;
+	CEsmSubRecord *pPartName2;
+	CEsmSubName *pMalePart = NULL;
+	CEsmSubName *pFemalePart = NULL;
 
 	/* Is the biped data valid? */
 
@@ -574,16 +440,16 @@ void CEsmClothingDlg::SetBipedData (const int BipedIndex, CEsmSubByte* pIndexRec
 
 	if (pPartName1 != NULL) {
 		if (pPartName1->IsType(MWESM_SUBREC_BNAM)) {
-			pMalePart = (CEsmSubName *) pPartName1;
+			pMalePart = (CEsmSubName *)pPartName1;
 		}
 
 		if (pPartName1->IsType(MWESM_SUBREC_CNAM)) {
-			pFemalePart = (CEsmSubName *) pPartName1;
+			pFemalePart = (CEsmSubName *)pPartName1;
 		}
 	}
 
 	if (pPartName2 != NULL && pPartName2->IsType(MWESM_SUBREC_CNAM)) {
-		pFemalePart = (CEsmSubName *) pPartName2;
+		pFemalePart = (CEsmSubName *)pPartName2;
 	}
 
 	/* Update the female part list */
@@ -604,30 +470,21 @@ void CEsmClothingDlg::SetBipedData (const int BipedIndex, CEsmSubByte* pIndexRec
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::SetBipedData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void SetBipedData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::SetBipedData (void) {
-	CEsmSubByte* pIndexRecord;
+void CEsmClothingDlg::SetBipedData(void) {
+	CEsmSubByte *pIndexRecord;
 	int RecordIndex;
 	int BipedIndex;
-	pIndexRecord = (CEsmSubByte *) m_pClothing->FindFirst(MWESM_SUBREC_INDX, RecordIndex);
+	pIndexRecord = (CEsmSubByte *)m_pClothing->FindFirst(MWESM_SUBREC_INDX, RecordIndex);
 
 	/* Set the body part controls */
 
@@ -638,26 +495,17 @@ void CEsmClothingDlg::SetBipedData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::SetBipedData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void SetBipedObject (BipedIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::SetBipedObject (const int BipedIndex) {
+void CEsmClothingDlg::SetBipedObject(const int BipedIndex) {
 	int BipedPart = -1;
 	int BodyPart;
 	int ListIndex;
@@ -691,26 +539,17 @@ void CEsmClothingDlg::SetBipedObject (const int BipedIndex) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::SetBipedObject()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmClothingDlg::SetControlData (void) {
+void CEsmClothingDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pClothing == NULL) {
 		return;
@@ -744,23 +583,14 @@ void CEsmClothingDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmClothingDlg::SetControlData()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmClothingDlg Event - void OnEnchantedit ();
-
  *
-
  *=========================================================================*/
 
 void CEsmClothingDlg::OnEnchantedit() {
@@ -772,13 +602,10 @@ void CEsmClothingDlg::OnEnchantedit() {
 		return;
 	}
 
-	pRecInfo = (esmrecinfo_t *) m_EnchantList.GetItemData(Index);
+	pRecInfo = (esmrecinfo_t *)m_EnchantList.GetItemData(Index);
 	m_pParent->EditRecord(pRecInfo, false);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmClothingDlg::OnEnchantedit()
-
  *=========================================================================*/
-

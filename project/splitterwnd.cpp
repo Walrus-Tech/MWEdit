@@ -59,8 +59,13 @@ END_MESSAGE_MAP()
  * Function - void _AfxDeferClientPos (lpLayout, pWnd, x, y, cx, cy, bScrollBar;
  *
  *=========================================================================*/
-AFX_STATIC void AFXAPI _AfxDeferClientPos(AFX_SIZEPARENTPARAMS* lpLayout, CWnd* pWnd,
-                                          int x, int y, int cx, int cy, BOOL bScrollBar) {
+AFX_STATIC void AFXAPI _AfxDeferClientPos(AFX_SIZEPARENTPARAMS *lpLayout,
+                                          CWnd *pWnd,
+                                          int x,
+                                          int y,
+                                          int cx,
+                                          int cy,
+                                          BOOL bScrollBar) {
 	ASSERT(pWnd != NULL);
 	ASSERT(pWnd->m_hWnd != NULL);
 
@@ -114,12 +119,15 @@ AFX_STATIC void AFXAPI _AfxDeferClientPos(AFX_SIZEPARENTPARAMS* lpLayout, CWnd* 
  * for Y direction: pInfo = m_pRowInfo, nMax = m_nMaxRows, nSize = cy
  *
  *=========================================================================*/
-void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo* pInfoArray, int nMax,
-                      int nSize, int nSizeSplitter) {
+void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo *pInfoArray,
+                      int nMax,
+                      int nSize,
+                      int nSizeSplitter) {
 	ASSERT(pInfoArray != NULL);
 	ASSERT(nMax > 0);
 	ASSERT(nSizeSplitter > 0);
 	CSplitterWnd::CRowColInfo* pInfo;
+
 	int i;
 	int TotalSize = 0;
 	bool bNoSize = false;
@@ -128,7 +136,7 @@ void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo* pInfoArray, int nMax,
 	// 480 == 480 x
 
 	if (nSize < 0) {
-		nSize = 0;    // if really too small, layout as zero size
+		nSize = 0; // if really too small, layout as zero size
 	}
 
 	// start with ideal sizes
@@ -140,7 +148,7 @@ void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo* pInfoArray, int nMax,
 		}
 
 		if (pInfo->nIdealSize < pInfo->nMinSize) {
-			pInfo->nIdealSize = 0;    // too small to see
+			pInfo->nIdealSize = 0; // too small to see
 		}
 
 		pInfo->nCurSize = pInfo->nIdealSize;
@@ -151,7 +159,7 @@ void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo* pInfoArray, int nMax,
 	}
 
 	TotalSize += pInfo->nCurSize;
-	pInfo->nCurSize = INT_MAX;  // last row/column takes the rest
+	pInfo->nCurSize = INT_MAX; // last row/column takes the rest
 
 	if (TotalSize < nSize && !bNoSize && nMax > 1) {
 		pInfoArray[0].nCurSize += nSize - TotalSize;
@@ -163,7 +171,7 @@ void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo* pInfoArray, int nMax,
 		if (nSize == 0) {
 			// no more room (set pane to be invisible)
 			pInfo->nCurSize = 0;
-			continue;       // don't worry about splitters
+			continue; // don't worry about splitters
 		} else if (nSize < pInfo->nMinSize && i != 0) {
 			// additional panes below the recommended minimum size
 			// aren't shown and the size goes to the previous pane
@@ -261,6 +269,7 @@ CMwSplitterWnd::~CMwSplitterWnd() {
 void CMwSplitterWnd::RecalcLayout() {
 	ASSERT_VALID(this);
 	ASSERT(m_nRows > 0 && m_nCols > 0); // must have at least one pane
+
 	/* Force no scroll bars */
 	m_bHasHScroll = FALSE;
 	m_bHasVScroll = FALSE;
@@ -269,20 +278,23 @@ void CMwSplitterWnd::RecalcLayout() {
 	rectClient.InflateRect(-m_cxBorder, -m_cyBorder);
 	CRect rectInside;
 	GetInsideRect(rectInside);
+
 	/* layout columns (restrict to possible sizes) */
 	l_ObLayoutRowCol(m_pColInfo, m_nCols, rectInside.Width(), m_cxSplitterGap);
 	l_ObLayoutRowCol(m_pRowInfo, m_nRows, rectInside.Height(), m_cySplitterGap);
+
 	// adjust the panes (and optionally scroll bars)
 	// give the hint for the maximum number of HWNDs
 	AFX_SIZEPARENTPARAMS layout;
 	layout.hDWP = ::BeginDeferWindowPos((m_nCols + 1) * (m_nRows + 1) + 1);
+
 	// size of scrollbars
 	int cx = (rectClient.right - rectInside.right) /*- (1 - s_bWin4)*/;
 	int cy = (rectClient.bottom - rectInside.bottom) /*- (1 - s_bWin4)*/;
 
 	// reposition size box
 	if (m_bHasHScroll && m_bHasVScroll) {
-		CWnd* pScrollBar = GetDlgItem(AFX_IDW_SIZE_BOX);
+		CWnd *pScrollBar = GetDlgItem(AFX_IDW_SIZE_BOX);
 		ASSERT(pScrollBar != NULL);
 		// fix style if necessary
 		BOOL bSizingParent = (GetSizingParent() != NULL);
@@ -295,9 +307,13 @@ void CMwSplitterWnd::RecalcLayout() {
 
 		pScrollBar->EnableWindow(bSizingParent);
 		// reposition the size box
-		_AfxDeferClientPos(&layout, pScrollBar,
+		_AfxDeferClientPos(&layout,
+		                   pScrollBar,
 		                   rectInside.right /*+ 1 - s_bWin4*/,
-		                   rectInside.bottom /*+ 1 - s_bWin4*/, cx, cy, TRUE);
+		                   rectInside.bottom /*+ 1 - s_bWin4*/,
+		                   cx,
+		                   cy,
+		                   TRUE);
 	}
 
 	// reposition scroll bars
@@ -307,7 +323,7 @@ void CMwSplitterWnd::RecalcLayout() {
 		int y = rectInside.bottom /*+ 1 - s_bWin4*/;
 
 		for (int col = 0; col < m_nCols; col++) {
-			CWnd* pScrollBar = GetDlgItem(AFX_IDW_HSCROLL_FIRST + col);
+			CWnd *pScrollBar = GetDlgItem(AFX_IDW_HSCROLL_FIRST + col);
 			ASSERT(pScrollBar != NULL);
 			int cx = m_pColInfo[col].nCurSize;
 
@@ -326,7 +342,7 @@ void CMwSplitterWnd::RecalcLayout() {
 		int y = rectClient.top;
 
 		for (int row = 0; row < m_nRows; row++) {
-			CWnd* pScrollBar = GetDlgItem(AFX_IDW_VSCROLL_FIRST + row);
+			CWnd *pScrollBar = GetDlgItem(AFX_IDW_VSCROLL_FIRST + row);
 			ASSERT(pScrollBar != NULL);
 			int cy = m_pRowInfo[row].nCurSize;
 

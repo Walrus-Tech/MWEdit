@@ -1,113 +1,63 @@
 /*===========================================================================
-
  *
-
  * File:    Esmiconframe.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  Thursday, February 13, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "EsmIconFrame.h"
-
 #include "il/il.h"
-
 #include "il/ilut.h"
-
 #include "EsmUtils.h"
-
 #include "EsmDefs.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
-
 
 DEFINE_FILE("EsmIconFrame.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmIconFrame Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmIconFrame, CStatic)
-
 	//{{AFX_MSG_MAP(CEsmIconFrame)
-
 	ON_WM_PAINT()
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmIconFrame Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmIconFrame Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmIconFrame::CEsmIconFrame() {
@@ -115,23 +65,14 @@ CEsmIconFrame::CEsmIconFrame() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmIconFrame Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmIconFrame Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmIconFrame::~CEsmIconFrame() {
@@ -142,33 +83,23 @@ CEsmIconFrame::~CEsmIconFrame() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmIconFrame Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIconFrame Event - void OnInitialUpdate (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmIconFrame::OnInitialUpdate (void) {
+void CEsmIconFrame::OnInitialUpdate(void) {
 	CRect ClientRect;
-	CDC* pDC;
+	CDC *pDC;
 	/* Get the output area */
 	GetClientRect(&ClientRect);
 	pDC = GetDC();
 	/* Create the bitmap of the desired size that is compatible
-
 	 * with the current output DC */
 	m_Bitmap.CreateCompatibleBitmap(pDC, MWESM_ICON_DEFAULTWIDTH, MWESM_ICON_DEFAULTHEIGHT);
 	ReleaseDC(pDC);
@@ -176,23 +107,14 @@ void CEsmIconFrame::OnInitialUpdate (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmIconFrame::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmIconFrame Event - void OnPaint ();
-
  *
-
  *=========================================================================*/
 
 void CEsmIconFrame::OnPaint() {
@@ -205,34 +127,33 @@ void CEsmIconFrame::OnPaint() {
 	BitmapDC.CreateCompatibleDC(&DC);
 	BitmapDC.SelectObject(&m_Bitmap);
 	/* Output the stretched bitmap to the frame */
-	DC.StretchBlt(0, 0, ClientRect.Width(), ClientRect.Height(), &BitmapDC,
-	              0, 0, MWESM_ICON_DEFAULTWIDTH, MWESM_ICON_DEFAULTHEIGHT, SRCCOPY);
+	DC.StretchBlt(0,
+	              0,
+	              ClientRect.Width(),
+	              ClientRect.Height(),
+	              &BitmapDC,
+	              0,
+	              0,
+	              MWESM_ICON_DEFAULTWIDTH,
+	              MWESM_ICON_DEFAULTHEIGHT,
+	              SRCCOPY);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmIconFrame::OnPaint()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIconFrame Method - void SetEsmIcon (pFilename, RelativePath);
-
  *
-
  *=========================================================================*/
 
-void CEsmIconFrame::SetEsmIcon (const TCHAR* pFilename, const bool RelativePath) {
+void CEsmIconFrame::SetEsmIcon(const TCHAR *pFilename, const bool RelativePath) {
 	HBITMAP hBMP;
 	CBitmap TempBitmap;
-	CDC* pDC;
+	CDC *pDC;
 
 	/* Ensure things are initialized */
 
@@ -255,7 +176,7 @@ void CEsmIconFrame::SetEsmIcon (const TCHAR* pFilename, const bool RelativePath)
 		//_makepath(FileBuffer, NULL, "c:\\temp\\test\\", pFilename, NULL);
 		hBMP = ilutWinLoadImage(FileBuffer, pDC->GetSafeHdc());
 	} else {
-		hBMP = ilutWinLoadImage((char *const) pFilename, pDC->GetSafeHdc());
+		hBMP = ilutWinLoadImage((char *const)pFilename, pDC->GetSafeHdc());
 	}
 
 	ReleaseDC(pDC);
@@ -263,40 +184,34 @@ void CEsmIconFrame::SetEsmIcon (const TCHAR* pFilename, const bool RelativePath)
 	/* Copy the bitmap to the local bitmap object */
 
 	if (hBMP != NULL) {
-		;
 		TempBitmap.Attach(hBMP);
 		SetIconBitmap(&TempBitmap);
-	} else {  /* Create a black bitmap */
+	} else { /* Create a black bitmap */
 		CDC OutDC;
 		OutDC.CreateCompatibleDC(NULL);
 		OutDC.SelectObject(&m_Bitmap);
-		OutDC.FillSolidRect(0, 0, MWESM_ICON_DEFAULTWIDTH, MWESM_ICON_DEFAULTHEIGHT, RGB(0, 0, 0));
+		OutDC.FillSolidRect(0,
+		                    0,
+		                    MWESM_ICON_DEFAULTWIDTH,
+		                    MWESM_ICON_DEFAULTHEIGHT,
+		                    RGB(0, 0, 0));
 	}
 
 	RedrawWindow();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmIconFrame::SetEsmIcon()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmIconFrame Method - void SetIconBitmap (pBitmap);
-
  *
-
  *=========================================================================*/
 
-void CEsmIconFrame::SetIconBitmap (CBitmap* pBitmap) {
+void CEsmIconFrame::SetIconBitmap(CBitmap *pBitmap) {
 	DEFINE_FUNCTION("CEsmIconFrame::SetIconBitmap()");
 	BITMAP BmpInfo;
 	CDC OutDC;
@@ -308,8 +223,16 @@ void CEsmIconFrame::SetIconBitmap (CBitmap* pBitmap) {
 	InDC.SelectObject(pBitmap);
 	pBitmap->GetBitmap(&BmpInfo);
 	/* Copy the bitmap */
-	OutDC.StretchBlt(0, 0, MWESM_ICON_DEFAULTWIDTH, MWESM_ICON_DEFAULTHEIGHT, &InDC,
-	                 0, 0, BmpInfo.bmWidth, BmpInfo.bmHeight, SRCCOPY);
+	OutDC.StretchBlt(0,
+	                 0,
+	                 MWESM_ICON_DEFAULTWIDTH,
+	                 MWESM_ICON_DEFAULTHEIGHT,
+	                 &InDC,
+	                 0,
+	                 0,
+	                 BmpInfo.bmWidth,
+	                 BmpInfo.bmHeight,
+	                 SRCCOPY);
 }
 
 /*===========================================================================
@@ -317,6 +240,3 @@ void CEsmIconFrame::SetIconBitmap (CBitmap* pBitmap) {
  *      End of Class Method CEsmIconFrame::SetIconBitmap()
 
  *=========================================================================*/
-
-
-

@@ -1,193 +1,148 @@
 /*===========================================================================
-
  *
-
  * File:    Esmracedlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 18, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmRaceDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmRaceDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmRaceDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Spell Column Data
-
  *
-
  *=========================================================================*/
 
 static esmcoldata_t l_SpellColData[] = {
-
-	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, NULL },
-
-	{ _T("Mod"), ESM_FIELD_CHANGED, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
-
-	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
-
-	{ _T("Type"), ESM_FIELD_TYPE, LVCFMT_CENTER, ESMLIST_WIDTH_TYPE, ESMLIST_SUBITEM_TYPE },
-
-	{ _T("Cost"), ESM_FIELD_COST, LVCFMT_CENTER, ESMLIST_WIDTH_COST, ESMLIST_SUBITEM_COST },
-
-	{ NULL, 0, 0, 0 }   /* Must be last record */
-
+	{
+		_T("ID"),
+		ESM_FIELD_ID,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ID,
+		ESMLIST_SUBITEM_ID,
+		NULL
+	},
+	{
+		_T("Mod"),
+		ESM_FIELD_CHANGED,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_CHANGED,
+		ESMLIST_SUBITEM_CHANGED
+	},
+	{
+		_T("Name"),
+		ESM_FIELD_NAME,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_NAME,
+		ESMLIST_SUBITEM_NAME
+	},
+	{
+		_T("Type"),
+		ESM_FIELD_TYPE,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_TYPE,
+		ESMLIST_SUBITEM_TYPE
+	},
+	{
+		_T("Cost"),
+		ESM_FIELD_COST,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_COST,
+		ESMLIST_SUBITEM_COST
+	},
+	{
+		NULL,
+		0,
+		0,
+		0
+	} /* Must be last record */
 };
 
 /*===========================================================================
-
  *      End of Spell Column Data
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmRaceDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmRaceDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmRaceDlg)
-
 	ON_EN_CHANGE(IDC_STRTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_STRTEXT2, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_INTTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_INTTEXT2, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_WILTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_WILTEXT2, OnChangeAttribText)
 
 	ON_EN_CHANGE(IDC_ENDTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_ENDTEXT2, OnChangeAttribText)
 
 	ON_EN_CHANGE(IDC_PERTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_PERTEXT2, OnChangeAttribText)
 
 	ON_EN_CHANGE(IDC_LUCTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_LUCTEXT2, OnChangeAttribText)
 
 	ON_EN_CHANGE(IDC_SPDTEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_SPDTEXT2, OnChangeAttribText)
 
 	ON_EN_CHANGE(IDC_AGITEXT1, OnChangeAttribText)
-
 	ON_EN_CHANGE(IDC_AGITEXT2, OnChangeAttribText)
 
 	ON_CBN_SELCHANGE(IDC_SKILLLIST1, OnSelchangeSkilllist1)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST2, OnSelchangeSkilllist2)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST3, OnSelchangeSkilllist3)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST4, OnSelchangeSkilllist4)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST5, OnSelchangeSkilllist5)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST6, OnSelchangeSkilllist6)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST7, OnSelchangeSkilllist7)
 
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmRaceDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmRaceDlg::CEsmRaceDlg() : CEsmRecDialog(CEsmRaceDlg::IDD) {
@@ -197,32 +152,26 @@ CEsmRaceDlg::CEsmRaceDlg() : CEsmRecDialog(CEsmRaceDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmRaceDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmRaceDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmRaceDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmRaceDlg)
 	DDX_Control(pDX, IDC_FEMALETOTAL, m_FemaleTotal);
 	DDX_Control(pDX, IDC_MALETOTAL, m_MaleTotal);
+
 	DDX_Control(pDX, IDC_DESCTEXT, m_DescText);
+
 	DDX_Control(pDX, IDC_SPELLLIST, m_SpellList);
+
 	DDX_Control(pDX, IDC_BONUSTEXT7, m_BonusText7);
 	DDX_Control(pDX, IDC_BONUSTEXT6, m_BonusText6);
 	DDX_Control(pDX, IDC_BONUSTEXT5, m_BonusText5);
@@ -230,6 +179,7 @@ void CEsmRaceDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_BONUSTEXT3, m_BonusText3);
 	DDX_Control(pDX, IDC_BONUSTEXT2, m_BonusText2);
 	DDX_Control(pDX, IDC_BONUSTEXT1, m_BonusText1);
+
 	DDX_Control(pDX, IDC_SKILLLIST7, m_SkillList7);
 	DDX_Control(pDX, IDC_SKILLLIST6, m_SkillList6);
 	DDX_Control(pDX, IDC_SKILLLIST5, m_SkillList5);
@@ -237,62 +187,64 @@ void CEsmRaceDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_SKILLLIST3, m_SkillList3);
 	DDX_Control(pDX, IDC_SKILLLIST2, m_SkillList2);
 	DDX_Control(pDX, IDC_SKILLLIST1, m_SkillList1);
+
 	DDX_Control(pDX, IDC_BEASTCHECK, m_BeastCheck);
 	DDX_Control(pDX, IDC_PLAYABLECHECK, m_PlayableCheck);
+
 	DDX_Control(pDX, IDC_WEIGHTTEXT2, m_WeightText2);
 	DDX_Control(pDX, IDC_WEIGHTTEXT1, m_WeightText1);
 	DDX_Control(pDX, IDC_HEIGHTTEXT2, m_HeightText2);
 	DDX_Control(pDX, IDC_HEIGHTTEXT1, m_HeightText1);
+
 	DDX_Control(pDX, IDC_LUCTEXT2, m_LucText2);
 	DDX_Control(pDX, IDC_LUCTEXT1, m_LucText1);
+
 	DDX_Control(pDX, IDC_PERTEXT2, m_PerText2);
 	DDX_Control(pDX, IDC_PERTEXT1, m_PerText1);
+
 	DDX_Control(pDX, IDC_ENDTEXT2, m_EndText2);
 	DDX_Control(pDX, IDC_ENDTEXT1, m_EndText1);
+
 	DDX_Control(pDX, IDC_SPDTEXT2, m_SpdText2);
 	DDX_Control(pDX, IDC_SPDTEXT1, m_SpdText1);
+
 	DDX_Control(pDX, IDC_AGITEXT2, m_AgiText2);
 	DDX_Control(pDX, IDC_AGITEXT1, m_AgiText1);
+
 	DDX_Control(pDX, IDC_WILTEXT2, m_WilText2);
 	DDX_Control(pDX, IDC_WILTEXT1, m_WilText1);
+
 	DDX_Control(pDX, IDC_INTTEXT2, m_IntText2);
 	DDX_Control(pDX, IDC_INTTEXT1, m_IntText1);
+
 	DDX_Control(pDX, IDC_STRTEXT2, m_StrText2);
 	DDX_Control(pDX, IDC_STRTEXT1, m_StrText1);
+
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRaceDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRaceDlg::GetControlData (void) {
+void CEsmRaceDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmRaceDlg::GetControlData()");
-	CEsmSubName32* pSpellRec;
+	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	racedata_t *pRaceData;
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pRace = (CEsmRace *) GetRecInfo()->pRecord;
+	m_pRace = (CEsmRace *)GetRecInfo()->pRecord;
 	ASSERT(m_pRace != NULL);
 	pRaceData = m_pRace->GetRaceData();
 
@@ -310,9 +262,11 @@ void CEsmRaceDlg::GetControlData (void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pRace->SetName(TrimStringSpace(Buffer));
+
 	/* Item description */
 	m_DescText.GetWindowText(Buffer);
 	m_pRace->SetDescription(TrimStringSpace(Buffer));
+
 	/* Skill lists */
 	GETLISTDATA(m_SkillList1, pRaceData->SkillBonuses[0].SkillID);
 	GETLISTDATA(m_SkillList2, pRaceData->SkillBonuses[1].SkillID);
@@ -335,6 +289,7 @@ void CEsmRaceDlg::GetControlData (void) {
 	pRaceData->SkillBonuses[5].Bonus = atoi(Buffer);
 	m_BonusText7.GetWindowText(Buffer);
 	pRaceData->SkillBonuses[6].Bonus = atoi(Buffer);
+
 	/* Attributes */
 	m_StrText1.GetWindowText(Buffer);
 	pRaceData->Strength[0] = atoi(Buffer);
@@ -368,15 +323,17 @@ void CEsmRaceDlg::GetControlData (void) {
 	pRaceData->Luck[0] = atoi(Buffer);
 	m_LucText2.GetWindowText(Buffer);
 	pRaceData->Luck[1] = atoi(Buffer);
+
 	/* Weight and height */
 	m_WeightText1.GetWindowText(Buffer);
-	pRaceData->Weight[0] = (float) atof(Buffer);
+	pRaceData->Weight[0] = (float)atof(Buffer);
 	m_WeightText2.GetWindowText(Buffer);
-	pRaceData->Weight[1] = (float) atof(Buffer);
+	pRaceData->Weight[1] = (float)atof(Buffer);
 	m_HeightText1.GetWindowText(Buffer);
-	pRaceData->Height[0] = (float) atof(Buffer);
+	pRaceData->Height[0] = (float)atof(Buffer);
 	m_HeightText2.GetWindowText(Buffer);
-	pRaceData->Height[1] = (float) atof(Buffer);
+	pRaceData->Height[1] = (float)atof(Buffer);
+
 	/* Race Flags */
 	pRaceData->Flags = 0;
 
@@ -392,39 +349,30 @@ void CEsmRaceDlg::GetControlData (void) {
 	m_pRace->DeleteSubRecords(MWESM_SUBREC_NPCS);
 
 	for (Index = 0; Index < m_SpellList.GetItemCount(); Index++) {
-		pRecInfo = (esmrecinfo_t *) m_SpellList.GetItemData(Index);
+		pRecInfo = (esmrecinfo_t *)m_SpellList.GetItemData(Index);
 
 		if (pRecInfo == NULL) {
 			continue;
 		}
 
-		pSpellRec = (CEsmSubName32 *) m_pRace->AllocateSubRecord(MWESM_SUBREC_NPCS);
+		pSpellRec = (CEsmSubName32 *)m_pRace->AllocateSubRecord(MWESM_SUBREC_NPCS);
 		pSpellRec->CreateNew();
 		pSpellRec->SetName(pRecInfo->pRecord->GetID());
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRaceDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmRaceDlg::IsModified (void) {
+bool CEsmRaceDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -447,23 +395,14 @@ bool CEsmRaceDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRaceDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Event - void OnChangeAttribText ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRaceDlg::OnChangeAttribText() {
@@ -471,31 +410,24 @@ void CEsmRaceDlg::OnChangeAttribText() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRaceDlg::OnChangeAttribText()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRaceDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pRace = (CEsmRace *) GetRecInfo()->pRecord;
+	m_pRace = (CEsmRace *)GetRecInfo()->pRecord;
+
 	/* Initialize the lists */
 	FillEsmSkillsCombo(m_SkillList1, true);
 	FillEsmSkillsCombo(m_SkillList2, true);
@@ -504,6 +436,7 @@ void CEsmRaceDlg::OnInitialUpdate() {
 	FillEsmSkillsCombo(m_SkillList5, true);
 	FillEsmSkillsCombo(m_SkillList6, true);
 	FillEsmSkillsCombo(m_SkillList7, true);
+
 	/* Spell List */
 	m_SpellList.OnInitCtrl();
 	m_SpellList.SetDlgHandler(m_pParent);
@@ -511,6 +444,7 @@ void CEsmRaceDlg::OnInitialUpdate() {
 	m_SpellList.SetAcceptDrag(true);
 	m_SpellList.SetWantKeys(true);
 	m_SpellList.InitObjectList(&l_SpellColData[0]);
+
 	/* Initialize the text controls */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
@@ -542,34 +476,26 @@ void CEsmRaceDlg::OnInitialUpdate() {
 	m_BonusText5.SetLimitText(4);
 	m_BonusText6.SetLimitText(4);
 	m_BonusText7.SetLimitText(4);
+
 	/* Update the UI data */
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRaceDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Event - LRESULT OnRecordDrop (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmRaceDlg::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmRaceDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
-	CMWEditDoc* pSourceDoc = (CMWEditDoc *) lParam;
-	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
+	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
+	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)wParam;
 	int ListIndex;
 
 	/* Ensure we only drag from the current document */
@@ -596,26 +522,17 @@ LRESULT CEsmRaceDlg::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRaceDlg::OnRecordDrop()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmRaceDlg::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmRaceDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	int ListIndex;
 
 	/* Delete all currently selected items */
@@ -635,26 +552,17 @@ LRESULT CEsmRaceDlg::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRaceDlg::OnRecordKey()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmRaceDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmRaceDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
 		m_SpellList.UpdateItem(pRecInfo);
@@ -664,27 +572,18 @@ int CEsmRaceDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRaceDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRaceDlg::SetControlData (void) {
-	CEsmSubName32* pSpellRec;
+void CEsmRaceDlg::SetControlData(void) {
+	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	racedata_t *pRaceData;
@@ -706,12 +605,15 @@ void CEsmRaceDlg::SetControlData (void) {
 	m_IDText.SetWindowText(m_pRace->GetID());
 	UpdateTitle(m_pRace->GetID());
 	m_IDText.SetModify(FALSE);
+
 	/* Item name */
 	m_NameText.SetWindowText(m_pRace->GetName());
 	m_NameText.SetModify(FALSE);
+
 	/* Item description */
 	m_DescText.SetWindowText(m_pRace->GetDescription());
 	m_DescText.SetModify(FALSE);
+
 	/* Skill lists */
 	FindComboListItem(m_SkillList1, pRaceData->SkillBonuses[0].SkillID, true);
 	FindComboListItem(m_SkillList2, pRaceData->SkillBonuses[1].SkillID, true);
@@ -720,6 +622,7 @@ void CEsmRaceDlg::SetControlData (void) {
 	FindComboListItem(m_SkillList5, pRaceData->SkillBonuses[4].SkillID, true);
 	FindComboListItem(m_SkillList6, pRaceData->SkillBonuses[5].SkillID, true);
 	FindComboListItem(m_SkillList7, pRaceData->SkillBonuses[6].SkillID, true);
+
 	m_BonusText1.EnableWindow(pRaceData->SkillBonuses[0].SkillID != -1);
 	m_BonusText2.EnableWindow(pRaceData->SkillBonuses[1].SkillID != -1);
 	m_BonusText3.EnableWindow(pRaceData->SkillBonuses[2].SkillID != -1);
@@ -796,6 +699,7 @@ void CEsmRaceDlg::SetControlData (void) {
 	m_LucText1.SetWindowText(Buffer);
 	Buffer.Format(_T("%d"), pRaceData->Luck[1]);
 	m_LucText2.SetWindowText(Buffer);
+
 	/* Weight and height */
 	Buffer.Format(_T("%.2f"), pRaceData->Weight[0]);
 	m_WeightText1.SetWindowText(Buffer);
@@ -805,11 +709,13 @@ void CEsmRaceDlg::SetControlData (void) {
 	m_HeightText1.SetWindowText(Buffer);
 	Buffer.Format(_T("%.2f"), pRaceData->Height[1]);
 	m_HeightText2.SetWindowText(Buffer);
+
 	/* Race Flags */
 	m_PlayableCheck.SetCheck(m_pRace->IsPlayable());
 	m_BeastCheck.SetCheck(m_pRace->IsBeastRace());
+
 	/* Spells and abilities */
-	pSpellRec = (CEsmSubName32 *) m_pRace->FindFirst(MWESM_SUBREC_NPCS, Index);
+	pSpellRec = (CEsmSubName32 *)m_pRace->FindFirst(MWESM_SUBREC_NPCS, Index);
 
 	while (pSpellRec != NULL) {
 		pRecInfo = GetDocument()->FindRecord(pSpellRec->GetName());
@@ -818,36 +724,28 @@ void CEsmRaceDlg::SetControlData (void) {
 			m_SpellList.AddItem(pRecInfo);
 		}
 
-		pSpellRec = (CEsmSubName32 *) m_pRace->FindNext(MWESM_SUBREC_NPCS, Index);
+		pSpellRec = (CEsmSubName32 *)m_pRace->FindNext(MWESM_SUBREC_NPCS, Index);
 	}
 
 	UpdateAttribTotals();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRaceDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRaceDlg Method - void UpdateAttribTotals (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRaceDlg::UpdateAttribTotals (void) {
+void CEsmRaceDlg::UpdateAttribTotals(void) {
 	CString Buffer;
 	int MaleTotal = 0;
 	int FemaleTotal = 0;
+
 	m_StrText1.GetWindowText(Buffer);
 	MaleTotal += atoi(Buffer);
 	m_IntText1.GetWindowText(Buffer);
@@ -880,6 +778,7 @@ void CEsmRaceDlg::UpdateAttribTotals (void) {
 	FemaleTotal += atoi(Buffer);
 	m_LucText2.GetWindowText(Buffer);
 	FemaleTotal += atoi(Buffer);
+
 	Buffer.Format(_T("%d"), MaleTotal);
 	m_MaleTotal.SetWindowText(Buffer);
 	Buffer.Format(_T("%d"), FemaleTotal);
@@ -887,25 +786,14 @@ void CEsmRaceDlg::UpdateAttribTotals (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRaceDlg::UpdateAttribTotals()
-
  *=========================================================================*/
 
 
-
-
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Skill List Sel Change Events
-
  *
-
  *=========================================================================*/
 
 void CEsmRaceDlg::OnSelchangeSkilllist1() {
@@ -920,8 +808,6 @@ void CEsmRaceDlg::OnSelchangeSkilllist1() {
 	}
 }
 
-
-
 void CEsmRaceDlg::OnSelchangeSkilllist2() {
 	int Index;
 	Index = m_SkillList2.GetCurSel();
@@ -933,8 +819,6 @@ void CEsmRaceDlg::OnSelchangeSkilllist2() {
 		m_BonusText2.EnableWindow(TRUE);
 	}
 }
-
-
 
 void CEsmRaceDlg::OnSelchangeSkilllist3() {
 	int Index;
@@ -948,8 +832,6 @@ void CEsmRaceDlg::OnSelchangeSkilllist3() {
 	}
 }
 
-
-
 void CEsmRaceDlg::OnSelchangeSkilllist4() {
 	int Index;
 	Index = m_SkillList4.GetCurSel();
@@ -961,8 +843,6 @@ void CEsmRaceDlg::OnSelchangeSkilllist4() {
 		m_BonusText4.EnableWindow(TRUE);
 	}
 }
-
-
 
 void CEsmRaceDlg::OnSelchangeSkilllist5() {
 	int Index;
@@ -976,8 +856,6 @@ void CEsmRaceDlg::OnSelchangeSkilllist5() {
 	}
 }
 
-
-
 void CEsmRaceDlg::OnSelchangeSkilllist6() {
 	int Index;
 	Index = m_SkillList6.GetCurSel();
@@ -989,8 +867,6 @@ void CEsmRaceDlg::OnSelchangeSkilllist6() {
 		m_BonusText6.EnableWindow(TRUE);
 	}
 }
-
-
 
 void CEsmRaceDlg::OnSelchangeSkilllist7() {
 	int Index;
@@ -1005,10 +881,5 @@ void CEsmRaceDlg::OnSelchangeSkilllist7() {
 }
 
 /*===========================================================================
-
  *      End of Skill List Sel Change Events
-
  *=========================================================================*/
-
-
-

@@ -1,113 +1,63 @@
 /*===========================================================================
-
  *
-
  * File:    Esmsounddlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 16, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmSoundDlg.h"
-
 #include "mmsystem.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmSoundDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmSoundDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmSoundDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmSoundDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmSoundDlg)
-
 	ON_BN_CLICKED(IDC_SOUNDBUTTON, OnSoundbutton)
-
 	ON_BN_CLICKED(IDC_PLAYSOUND, OnPlaysound)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmSoundDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmSoundDlg::CEsmSoundDlg() : CEsmRecDialog(CEsmSoundDlg::IDD) {
@@ -117,61 +67,44 @@ CEsmSoundDlg::CEsmSoundDlg() : CEsmRecDialog(CEsmSoundDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmSoundDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmSoundDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmSoundDlg)
 	DDX_Control(pDX, IDC_VOLUMETEXT, m_VolumeText);
 	DDX_Control(pDX, IDC_MINRANGETEXT, m_MinRangeText);
 	DDX_Control(pDX, IDC_MAXRANGETEXT, m_MaxRangeText);
+
 	DDX_Control(pDX, IDC_SOUNDBUTTON, m_SoundButton);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundDlg::GetControlData (void) {
+void CEsmSoundDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmSoundDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
-	m_pSound = (CEsmSound *) GetRecInfo()->pRecord;
+	m_pSound = (CEsmSound *)GetRecInfo()->pRecord;
 	ASSERT(m_pSound != NULL);
 
 	/* Item ID, if changed */
@@ -184,37 +117,30 @@ void CEsmSoundDlg::GetControlData (void) {
 	/* Sound volume */
 	m_VolumeText.GetWindowText(Buffer);
 	m_pSound->SetVolume((float)atof(Buffer));
+
 	/* Range */
 	m_MinRangeText.GetWindowText(Buffer);
 	m_pSound->SetMinRange(atoi(Buffer));
 	m_MaxRangeText.GetWindowText(Buffer);
 	m_pSound->SetMaxRange(atoi(Buffer));
+
 	/* Sound filename */
 	m_SoundButton.GetWindowText(Buffer);
 	m_pSound->SetName(TrimStringSpace(Buffer));
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmSoundDlg::IsModified (void) {
+bool CEsmSoundDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -241,58 +167,43 @@ bool CEsmSoundDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmSoundDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pSound = (CEsmSound *) GetRecInfo()->pRecord;
+	m_pSound = (CEsmSound *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_VolumeText.SetLimitText(8);
 	m_MinRangeText.SetLimitText(8);
 	m_MaxRangeText.SetLimitText(8);
+
 	/* Update the UI data */
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Event - void OnPlaysound ();
-
  *
-
  *=========================================================================*/
 
 void CEsmSoundDlg::OnPlaysound() {
@@ -306,23 +217,14 @@ void CEsmSoundDlg::OnPlaysound() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundDlg::OnPlaysound()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Event - void OnSoundbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmSoundDlg::OnSoundbutton() {
@@ -337,50 +239,32 @@ void CEsmSoundDlg::OnSoundbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundDlg::OnSoundbutton()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmSoundDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmSoundDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmSoundDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmSoundDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmSoundDlg::SetControlData (void) {
+void CEsmSoundDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pSound == NULL) {
 		return;
@@ -389,6 +273,7 @@ void CEsmSoundDlg::SetControlData (void) {
 	/* Item ID, update title as well */
 	m_IDText.SetWindowText(m_pSound->GetID());
 	UpdateTitle(m_pSound->GetID());
+
 	/* Item texts */
 	m_SoundButton.SetWindowText(m_pSound->GetName());
 	m_MinRangeText.SetWindowText(m_pSound->GetFieldString(ESM_FIELD_MINRANGE));
@@ -397,8 +282,5 @@ void CEsmSoundDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmSoundDlg::SetControlData()
-
  *=========================================================================*/
-

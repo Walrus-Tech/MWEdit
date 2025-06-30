@@ -1,67 +1,38 @@
 /*===========================================================================
-
  *
-
  * File:    Mwcustomfunc.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  August 21, 2006
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "mwcustomfunc.h"
 
-
-
 /*===========================================================================
-
  *
-
  * Begin Global Definitions
-
  *
-
  *=========================================================================*/
 
 DEFINE_FILE("MwCustomFunc.cpp");
-
-
 
 /* Global custom function map */
 
 CMwCustomFunctions g_CustomFunctions;
 
-
-
 /*===========================================================================
-
  *      End of Global Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CMwCustomFunction Constructor
-
  *
-
  *=========================================================================*/
 
 CMwCustomFunction::CMwCustomFunction () {
@@ -70,35 +41,23 @@ CMwCustomFunction::CMwCustomFunction () {
 }
 
 /*===========================================================================
-
  *      End of Class CMwCustomFunction Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CMwCustomFunction Method - bool Read (File, LineCount);
-
  *
-
  * Input function parameters from the current position in the given text
-
  * file. Returns false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CMwCustomFunction::Read (CGenFile& File, dword& LineCount) {
+bool CMwCustomFunction::Read(CGenFile &File, dword &LineCount) {
 	TCHAR Buffer[512];
-	TCHAR* pVar;
-	TCHAR* pValue;
+	TCHAR *pVar;
+	TCHAR *pValue;
 	int Result;
 
 	while (!File.IsEOF()) {
@@ -127,35 +86,23 @@ bool CMwCustomFunction::Read (CGenFile& File, dword& LineCount) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CMwCustomFunction::Read()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CMwCustomFunction Method - dword ParseFuncOptions (Options, pValue);
-
  *
-
  * Parse and return function options from the given string. Returns false
-
  * on any error.
-
  *
-
  *=========================================================================*/
 
-bool CMwCustomFunction::ParseFuncOptions (dword& Options, const char* pValue) {
+bool CMwCustomFunction::ParseFuncOptions(dword &Options, const char *pValue) {
 	bool ReturnValue = true;
 	TCHAR Buffer[512];
-	TCHAR* pParse;
+	TCHAR *pParse;
 	Options = 0;
 	strnncpy(Buffer, pValue, 500);
 	pParse = strtok(Buffer, "|");
@@ -187,7 +134,10 @@ bool CMwCustomFunction::ParseFuncOptions (dword& Options, const char* pValue) {
 		} else if (stricmp(pParse, "mwe") == 0 || stricmp(pParse, "mwenhanced") == 0) {
 			Options |= ESMSCR_FUNC_MWE;
 		} else {
-			ErrorHandler.AddError(ERR_BADINPUT, "%05d: Unknown function option '%s'!", m_LineCount, pParse);
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      "%05d: Unknown function option '%s'!",
+			                      m_LineCount,
+			                      pParse);
 			ReturnValue = false;
 		}
 
@@ -198,35 +148,23 @@ bool CMwCustomFunction::ParseFuncOptions (dword& Options, const char* pValue) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CMwCustomFunction::ParseFuncOptions()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CMwCustomFunction Method - dword ParseFuncArgOptions (Options, pValue);
-
  *
-
  * Parse and return function argument options from the given string. Returns
-
  * false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CMwCustomFunction::ParseFuncArgOptions (dword& Options, const char* pValue) {
+bool CMwCustomFunction::ParseFuncArgOptions(dword &Options, const char *pValue) {
 	bool ReturnValue = true;
 	TCHAR Buffer[512];
-	TCHAR* pParse;
+	TCHAR *pParse;
 	Options = 0;
 	strnncpy(Buffer, pValue, 500);
 	pParse = strtok(Buffer, "|");
@@ -302,7 +240,9 @@ bool CMwCustomFunction::ParseFuncArgOptions (dword& Options, const char* pValue)
 		} else if (stricmp(pParse, "npcid") == 0) {
 			Options |= ESMSCR_FUNC_NPCID;
 		} else {
-			ErrorHandler.AddError(ERR_BADINPUT, "%05d: Unknown function argument option '%s'!", m_LineCount,
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      "%05d: Unknown function argument option '%s'!",
+			                      m_LineCount,
 			                      pParse);
 			ReturnValue = false;
 		}
@@ -314,35 +254,23 @@ bool CMwCustomFunction::ParseFuncArgOptions (dword& Options, const char* pValue)
 }
 
 /*===========================================================================
-
  *      End of Class Method CMwCustomFunction::ParseFuncArgOptions()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CMwCustomFunction Method - dword ParseReturnOptions (Options, pValue);
-
  *
-
  * Parse and return function return options from the given string. Returns
-
  * false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CMwCustomFunction::ParseReturnOptions (dword& Options, const char* pValue) {
+bool CMwCustomFunction::ParseReturnOptions(dword &Options, const char *pValue) {
 	bool ReturnValue = true;
 	TCHAR Buffer[512];
-	TCHAR* pParse;
+	TCHAR *pParse;
 	Options = 0;
 	strnncpy(Buffer, pValue, 500);
 	pParse = strtok(Buffer, "|");
@@ -364,7 +292,9 @@ bool CMwCustomFunction::ParseReturnOptions (dword& Options, const char* pValue) 
 		} else if (stricmp(pParse, "many") == 0) {
 			Options |= ESMSCR_FUNC_MANY;
 		} else {
-			ErrorHandler.AddError(ERR_BADINPUT, "%05d: Unknown function return option '%s'!", m_LineCount,
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      "%05d: Unknown function return option '%s'!",
+			                      m_LineCount,
 			                      pParse);
 			ReturnValue = false;
 		}
@@ -376,32 +306,20 @@ bool CMwCustomFunction::ParseReturnOptions (dword& Options, const char* pValue) 
 }
 
 /*===========================================================================
-
  *      End of Class Method CMwCustomFunction::ParseReturnOptions()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CMwCustomFunction Method - bool SetParameter (pVariable, pValue);
-
  *
-
  * Attempts to set a function parameter using the given inputs. Returns
-
  * false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CMwCustomFunction::SetParameter (const char* pVariable, const char* pValue) {
+bool CMwCustomFunction::SetParameter(const char *pVariable, const char *pValue) {
 	dword Options;
 	bool Result;
 
@@ -475,38 +393,29 @@ bool CMwCustomFunction::SetParameter (const char* pVariable, const char* pValue)
 }
 
 /*===========================================================================
-
  *      End of Class Method CMwCustomFunction::SetParameter()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Function - bool ReadMwCustomFunctions (Functions, pFilename);
-
  *
-
  * Input custom functions from the given file. Returns false on any error.
-
  *
-
  *=========================================================================*/
 
-bool ReadMwCustomFunctions (CMwCustomFunctions& Functions, const char* pFilename) {
+bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename) {
 	DEFINE_FUNCTION("ReadMwCustomFunctions()");
-	CMwCustomFunction* pFunction;
+	CMwCustomFunction *pFunction;
 	CGenFile File;
 	dword LineCount = 0;
+
 	char Buffer[512];
 	char *pVar;
 	char *pValue;
 	int Result;
+
 	/* Clear the current content */
 	Functions.RemoveAll();
 	Result = File.Open(pFilename, "rb");
@@ -546,8 +455,5 @@ bool ReadMwCustomFunctions (CMwCustomFunctions& Functions, const char* pFilename
 }
 
 /*===========================================================================
-
  *      End of Function ReadMwCustomFunctions()
-
  *=========================================================================*/
-

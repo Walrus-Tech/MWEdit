@@ -1,119 +1,66 @@
 /*===========================================================================
-
  *
-
  * File:    Esmscrtempview.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  October 8, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmScrTempView.h"
-
 #include "EsmScriptCompile.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmScrTempView, CFormView);
-
 DEFINE_FILE("EsmScrTempView.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Class CEsmScrTempView Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmScrTempView, CFormView)
-
 	//{{AFX_MSG_MAP(CEsmScrTempView)
-
 	ON_WM_DESTROY()
-
 	ON_COMMAND(ID_SCRTEMP_LOADCSV, OnScrtempLoadcsv)
-
 	ON_COMMAND(ID_EDIT_COPY, OnEditCopy)
-
 	ON_COMMAND(ID_EDIT_CUT, OnEditCut)
-
 	ON_COMMAND(ID_EDIT_PASTE, OnEditPaste)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of Class CEsmScrTempView Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmScrTempView::CEsmScrTempView() : CFormView(CEsmScrTempView::IDD) {
@@ -130,55 +77,34 @@ CEsmScrTempView::CEsmScrTempView() : CFormView(CEsmScrTempView::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmScrTempView Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmScrTempView::~CEsmScrTempView() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmScrTempView Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool CheckCsvFile (void);
-
  *
-
  * Checks the csv specific parameters and returns false if anu
-
  * are invalid.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::CheckCsvFile (void) {
+bool CEsmScrTempView::CheckCsvFile(void) {
 	int iResult;
 	bool Result;
 
@@ -188,7 +114,8 @@ bool CEsmScrTempView::CheckCsvFile (void) {
 		iResult = m_CsvFile.FindHeaderCol(ESMSCRTEMP_CSV_SCRIPTNAME);
 
 		if (iResult < 0) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("No %s column found in the CSV file!"),
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("No %s column found in the CSV file!"),
 			                      ESMSCRTEMP_CSV_SCRIPTNAME);
 			return (false);
 		}
@@ -200,7 +127,8 @@ bool CEsmScrTempView::CheckCsvFile (void) {
 		Result = m_CsvFile.IsMissingCells();
 
 		if (Result) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("Missing or empty cells found in the CSV file!"));
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("Missing or empty cells found in the CSV file!"));
 			return (false);
 		}
 	}
@@ -209,30 +137,19 @@ bool CEsmScrTempView::CheckCsvFile (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::CheckCsvFile()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool CheckTemplate (void);
-
  *
-
  * Returns false if any script template parameters are not valid.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::CheckTemplate (void) {
+bool CEsmScrTempView::CheckTemplate(void) {
 	bool Result;
 
 	/* Do we have a template file? */
@@ -267,32 +184,20 @@ bool CEsmScrTempView::CheckTemplate (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::CheckTemplate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool CheckTemplateFile (void);
-
  *
-
  * Checks the template specific parameters and returns false if anu
-
  * are invalid.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::CheckTemplateFile (void) {
+bool CEsmScrTempView::CheckTemplateFile(void) {
 	esmscrtempvar_t *pTempVar;
 	int Index;
 	int iResult;
@@ -305,7 +210,9 @@ bool CEsmScrTempView::CheckTemplateFile (void) {
 		iResult = m_CsvFile.FindHeaderCol(pTempVar->Name);
 
 		if (iResult < 0) {
-			ErrorHandler.AddError(ERR_BADINPUT, _T("No '%s' column found in the CSV file!"), pTempVar->Name);
+			ErrorHandler.AddError(ERR_BADINPUT,
+			                      _T("No '%s' column found in the CSV file!"),
+			                      pTempVar->Name);
 			return (false);
 		}
 	}
@@ -314,33 +221,21 @@ bool CEsmScrTempView::CheckTemplateFile (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::CheckTemplateFile()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool CreateScripts (void);
-
  *
-
  * Creates all the required scripts. Returns false on any error. Assumes
-
  * that all template parameters have been checked and are valid.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::CreateScripts (void) {
-	CCsvRow* pRow;
+bool CEsmScrTempView::CreateScripts(void) {
+	CCsvRow *pRow;
 	bool Result;
 	int RowIndex;
 	/* Update the CSV column indices for the template variables */
@@ -367,33 +262,21 @@ bool CEsmScrTempView::CreateScripts (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::CreateScripts()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool CreateScript (pRow);
-
  *
-
  * Creates a script using the given data row which is assumed to be
-
  * valid. Returns false on any errors.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::CreateScript (CCsvRow* pRow) {
-	CEsmScript* pScript;
+bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
+	CEsmScript *pScript;
 	esmrecinfo_t *pRecInfo;
 	CEsmScriptCompile Compiler;
 	CString ScriptName;
@@ -416,12 +299,12 @@ bool CEsmScrTempView::CreateScript (CCsvRow* pRow) {
 	}
 	/* Existing record is incorrect type */
 	else if (!pRecInfo->pRecord->IsType(MWESM_REC_SCPT)) {
-		ErrorHandler.AddError(ERR_BADINPUT, _T("The previous record '%s' is not a script (%s)!"),
-		                      ScriptName, pRecInfo->pRecord->GetItemType());
+		ErrorHandler.AddError(ERR_BADINPUT,
+		                      _T("The previous record '%s' is not a script (%s)!"),
+		                      ScriptName,
+		                      pRecInfo->pRecord->GetItemType());
 		return (false);
-	}
-	/* Use an existing script record */
-	else {
+	} else { /* Use an existing script record */
 		pRecInfo = m_pDocument->CopyToActive(pRecInfo);
 
 		if (pRecInfo == NULL) {
@@ -430,7 +313,7 @@ bool CEsmScrTempView::CreateScript (CCsvRow* pRow) {
 	}
 
 	/* The script object we will edit */
-	pScript = (CEsmScript *) pRecInfo->pRecord;
+	pScript = (CEsmScript *)pRecInfo->pRecord;
 	pScript->ClearCompileData();
 	/* Create the new script text */
 	Result = ParseScriptText(pRow, ScriptName);
@@ -441,14 +324,16 @@ bool CEsmScrTempView::CreateScript (CCsvRow* pRow) {
 
 	/* Update the script text */
 	pScript->SetScriptText(m_NewScriptText);
+
 	/* Attempt to compile the script */
 	Compiler.SetScriptText(m_NewScriptText, m_NewScriptText.GetLength());
 	Compiler.SetDocument(m_pDocument);
 	iResult = Compiler.Compile();
 
 	if (iResult == ESMSCR_RESULT_OK) {
-		CEsmSubRecord* pSubRec;
-		CEsmSubSCHD* pScriptHeader;
+		CEsmSubRecord *pSubRec;
+		CEsmSubSCHD *pScriptHeader;
+
 		/* Set the script header */
 		pScriptHeader = pScript->GetScriptHeader();
 		pScriptHeader->GetScriptHeadData()->LocalVarSize = Compiler.GetLocalVarDataSize();
@@ -456,9 +341,11 @@ bool CEsmScrTempView::CreateScript (CCsvRow* pRow) {
 		pScriptHeader->GetScriptHeadData()->NumShorts = Compiler.GetNumShortLocals();
 		pScriptHeader->GetScriptHeadData()->NumLongs = Compiler.GetNumLongLocals();
 		pScriptHeader->GetScriptHeadData()->NumFloats = Compiler.GetNumFloatLocals();
+
 		/* Set the local variable data */
 		pSubRec = pScript->GetScriptVars();
 		pSubRec->CopyData(Compiler.GetLocalVarData(), Compiler.GetLocalVarDataSize());
+
 		/* Set the compiled script data */
 		pSubRec = pScript->GetScriptData();
 		pSubRec->CopyData(Compiler.GetScriptData(), Compiler.GetScriptDataSize());
@@ -467,31 +354,22 @@ bool CEsmScrTempView::CreateScript (CCsvRow* pRow) {
 	}
 
 	/* Update any record view */
-	m_pDocument->UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATEITEM, (CObject *) pRecInfo);
+	m_pDocument->UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATEITEM, (CObject *)pRecInfo);
 	return (true);
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::CreateScript()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::DoDataExchange(CDataExchange* pDX) {
+void CEsmScrTempView::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmScrTempView)
 	DDX_Control(pDX, IDC_TAB1, m_TabControl);
@@ -499,136 +377,84 @@ void CEsmScrTempView::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - void GetControlData (void);
-
  *
-
  * Get the current control data.
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::GetControlData (void) {
+void CEsmScrTempView::GetControlData(void) {
 	m_Page1.GetControlData();
 	OnUpdateText();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool HasCsvFile (void);
-
  *
-
  * Checks if there is a current valid csv/template file.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::HasCsvFile (void) {
+bool CEsmScrTempView::HasCsvFile(void) {
 	return !(*m_CsvFile.GetFilename() == NULL_CHAR);
 }
 
-
-
-
-
-bool CEsmScrTempView::HasTemplateFile (void) {
+bool CEsmScrTempView::HasTemplateFile(void) {
 	return !(*m_ScriptTemplate.GetFilename() == NULL_CHAR);
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::HasCsvFile()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Begin Class CEsmScrTempView Diagnostics
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
-
 
 void CEsmScrTempView::AssertValid() const {
 	CFormView::AssertValid();
 }
 
-
-
-void CEsmScrTempView::Dump(CDumpContext& dc) const {
+void CEsmScrTempView::Dump(CDumpContext &dc) const {
 	CFormView::Dump(dc);
 }
-
-
 
 #endif
 
 /*===========================================================================
-
  *      End of Class CEsmScrTempView Diagnostics
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrTempView Method - const MakeScriptName (pRow);
-
  *
-
  * Gets or creates the script name for the given csv row.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrTempView::MakeScriptName (CCsvRow* pRow) {
+const TCHAR *CEsmScrTempView::MakeScriptName(CCsvRow *pRow) {
 	static CString s_Buffer;
 	esmscrtempvar_t *pTempVar;
-	CSString* pString;
+	CSString *pString;
 
 	/* Attempt to get the supplied script name */
 
@@ -639,7 +465,7 @@ const TCHAR *CEsmScrTempView::MakeScriptName (CCsvRow* pRow) {
 			pString = pRow->GetAt(pTempVar->CsvColIndex);
 
 			if (pString != NULL && !pString->IsEmpty()) {
-				s_Buffer = (const TCHAR *) *pString;
+				s_Buffer = (const TCHAR *)*pString;
 				return (s_Buffer);
 			}
 		}
@@ -651,26 +477,17 @@ const TCHAR *CEsmScrTempView::MakeScriptName (CCsvRow* pRow) {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrTempView::MakeScriptName()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnCheckTemplate (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::OnCheckTemplate (void) {
+void CEsmScrTempView::OnCheckTemplate(void) {
 	bool Result;
 	/* Update the control data */
 	GetControlData();
@@ -680,32 +497,24 @@ void CEsmScrTempView::OnCheckTemplate (void) {
 	if (!Result) {
 		ErrorHandler.Notify(_T("Template Check Failed!"));
 	} else {
-		MessageBox(_T("Template check was successfull."), _T("Template Check Success"),
+		MessageBox(_T("Template check was successfull."),
+		           _T("Template Check Success"),
 		           MB_OK | MB_ICONINFORMATION);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnCheckTemplate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnCreateTemplate (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::OnCreateTemplate (void) {
+void CEsmScrTempView::OnCreateTemplate(void) {
 	bool Result;
 	/* Update the control data */
 	GetControlData();
@@ -732,23 +541,14 @@ void CEsmScrTempView::OnCreateTemplate (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnCreateTemplate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnDestroy ();
-
  *
-
  *=========================================================================*/
 
 void CEsmScrTempView::OnDestroy() {
@@ -760,88 +560,69 @@ void CEsmScrTempView::OnDestroy() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnDestroy()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnEditCopy ();
-
  *
-
  *=========================================================================*/
 
 void CEsmScrTempView::OnEditCopy() {
 	ClipCopyFromWnd(GetFocus());
 }
 
-
-
-
-
 void CEsmScrTempView::OnEditCut() {
 	ClipCutFromWnd(GetFocus());
 }
-
-
-
-
 
 void CEsmScrTempView::OnEditPaste() {
 	ClipPasteToWnd(GetFocus());
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnEditPaste()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmScrTempView::OnInitialUpdate() {
 	CString Buffer;
 	CFormView::OnInitialUpdate();
 	ResizeParentToFit(FALSE);
+
 	/* Initialize the tab control */
 	m_Page1.Create(IDD_SCRTEMP_PAGE1, &m_TabControl);
 	m_Page2.Create(IDD_SCRTEMP_PAGE2, &m_TabControl);
 	m_Page3.Create(IDD_SCRTEMP_PAGE3, &m_TabControl);
+
 	m_Page1.SetDlgHandler(m_pDlgHandler);
 	m_Page2.SetDlgHandler(m_pDlgHandler);
 	m_Page3.SetDlgHandler(m_pDlgHandler);
+
 	m_Page1.SetParentView(this);
 	m_Page2.SetParentView(this);
 	m_Page3.SetParentView(this);
+
 	m_TabControl.AddTab(_T("Main Info"), &m_Page1);
 	m_TabControl.AddTab(_T("Template Text"), &m_Page2);
 	m_TabControl.AddTab(_T("CSV File"), &m_Page3);
 	m_TabControl.SetPage(0);
+
 	/* Load the accelerator table */
 	m_hAccelerator = ::LoadAccelerators(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDR_RECORD_ACCEL));
+
 	/* Update the frame title */
 	Buffer.Format(_T("%s -- Script Template"), m_pDlgHandler->GetDocument()->GetTitle());
 	GetParentFrame()->SetWindowText(Buffer);
+
 	/* Update the display */
 	m_Page1.UpdatePage();
 	m_Page2.UpdatePage();
@@ -849,26 +630,17 @@ void CEsmScrTempView::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnReloadCsvFile (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::OnReloadCsvFile (void) {
+void CEsmScrTempView::OnReloadCsvFile(void) {
 	CString Buffer;
 	bool Result;
 	/* See if there is a file to reload */
@@ -895,26 +667,17 @@ void CEsmScrTempView::OnReloadCsvFile (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnReloadCsvFile()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnReloadScrTemp (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::OnReloadScrTemp (void) {
+void CEsmScrTempView::OnReloadScrTemp(void) {
 	CString Buffer;
 	bool Result;
 	/* See if there is a file to reload */
@@ -937,28 +700,23 @@ void CEsmScrTempView::OnReloadScrTemp (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnReloadScrTemp()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnScrtempLoadcsv ();
-
  *
-
  *=========================================================================*/
 
 void CEsmScrTempView::OnScrtempLoadcsv() {
-	CFileDialog FileDlg(TRUE, ESMSCRTEMP_CSV_EXT, NULL, OFN_HIDEREADONLY, ESMSCRTEMP_CSV_FILTER,
-	                      this);
+	CFileDialog FileDlg(TRUE,
+	                    ESMSCRTEMP_CSV_EXT,
+	                    NULL,
+	                    OFN_HIDEREADONLY,
+	                    ESMSCRTEMP_CSV_FILTER,
+	                    this);
 	int Result;
 	/* Display the modal open dialog */
 	FileDlg.m_ofn.lpstrTitle = _T("Open CSV File");
@@ -985,27 +743,22 @@ void CEsmScrTempView::OnScrtempLoadcsv() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnScrtempLoadcsv()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnLoadTemplate (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::OnLoadTemplate (void) {
-	CFileDialog FileDlg(TRUE, ESM_SCRTEMP_FILEEXT, NULL, OFN_HIDEREADONLY, ESM_SCRTEMP_FILEFILTER,
+void CEsmScrTempView::OnLoadTemplate(void) {
+	CFileDialog FileDlg(TRUE,
+	                    ESM_SCRTEMP_FILEEXT,
+	                    NULL,
+	                    OFN_HIDEREADONLY,
+	                    ESM_SCRTEMP_FILEFILTER,
 	                    this);
 	bool Result;
 	int iResult;
@@ -1030,59 +783,38 @@ void CEsmScrTempView::OnLoadTemplate (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnLoadTemplate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Event - void OnUpdateText (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScrTempView::OnUpdateText (void) {
+void CEsmScrTempView::OnUpdateText(void) {
 	m_Page2.UpdateText();
 	m_ScriptTemplate.ParseText();
 	m_Page1.UpdatePage();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmScrTempView::OnUpdateText()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool ParseScriptText (pRow, pScriptName);
-
  *
-
  * Parse the script text updating the class member variables. Returns
-
  * false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::ParseScriptText (CCsvRow* pRow, const TCHAR* pScriptName) {
-	TCHAR* pBuffer;
+bool CEsmScrTempView::ParseScriptText(CCsvRow *pRow, const TCHAR *pScriptName) {
+	TCHAR *pBuffer;
 	bool Result;
 	/* Initialize the text buffer */
 	pBuffer = m_NewScriptText.GetBufferSetLength(ESM_SCRTEMP_MAXTEMPSIZE + 1);
@@ -1094,26 +826,17 @@ bool CEsmScrTempView::ParseScriptText (CCsvRow* pRow, const TCHAR* pScriptName) 
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::ParseScriptText()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - BOOL PreTranslateMessage (pMsg);
-
  *
-
  *=========================================================================*/
 
-BOOL CEsmScrTempView::PreTranslateMessage(MSG* pMsg) {
+BOOL CEsmScrTempView::PreTranslateMessage(MSG *pMsg) {
 	int Result;
 
 	if (m_hAccelerator != NULL && pMsg->message >= WM_KEYFIRST && pMsg->message <= WM_KEYLAST) {
@@ -1128,32 +851,20 @@ BOOL CEsmScrTempView::PreTranslateMessage(MSG* pMsg) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::PreTranslateMessage()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrTempView Method - bool UpdateColIndices (void);
-
  *
-
  * Updates the CSV column indices for all the template variables. Returns
-
  * false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrTempView::UpdateColIndices (void) {
+bool CEsmScrTempView::UpdateColIndices(void) {
 	esmscrtempvar_t *pTempVar;
 	int iResult;
 	int Index;
@@ -1171,8 +882,5 @@ bool CEsmScrTempView::UpdateColIndices (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrTempView::UpdateColIndices()
-
  *=========================================================================*/
-

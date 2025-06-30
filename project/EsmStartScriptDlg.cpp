@@ -1,115 +1,64 @@
 /*===========================================================================
-
  *
-
  * File:    Esmstartscriptdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  September 13, 2003
-
  *
-
  * Description
-
  *
-
  * 3 November 2003
-
  *  - Used the base class script list member.
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmStartScriptDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmStartScriptDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmStartScriptDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmStartScriptDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmStartScriptDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmStartScriptDlg)
-
 	ON_CBN_SELCHANGE(IDC_SCRIPTLIST, OnSelchangeScriptlist)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmStartScriptDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmStartScriptDlg::CEsmStartScriptDlg (CWnd* pParent) : CEsmRecDialog(CEsmStartScriptDlg::IDD) {
@@ -119,26 +68,17 @@ CEsmStartScriptDlg::CEsmStartScriptDlg (CWnd* pParent) : CEsmRecDialog(CEsmStart
 }
 
 /*===========================================================================
-
  *      End of Class CEsmStartScriptDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmStartScriptDlg::DoDataExchange (CDataExchange* pDX) {
+void CEsmStartScriptDlg::DoDataExchange(CDataExchange *pDX) {
 	CEsmRecDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmStartScriptDlg)
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
@@ -149,30 +89,21 @@ void CEsmStartScriptDlg::DoDataExchange (CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmStartScriptDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmStartScriptDlg::GetControlData (void) {
+void CEsmStartScriptDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmStartScriptDlg::GetControlData()");
 	CString Buffer;
 	/* Update the record pointer and data */
-	m_pStartScript = (CEsmStartScript *) GetRecInfo()->pRecord;
+	m_pStartScript = (CEsmStartScript *)GetRecInfo()->pRecord;
 
 	if (m_pStartScript == NULL) {
 		return;
@@ -194,26 +125,17 @@ void CEsmStartScriptDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmStartScriptDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmStartScriptDlg::IsModified (void) {
+bool CEsmStartScriptDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -228,23 +150,14 @@ bool CEsmStartScriptDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmStartScriptDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmStartScriptDlg::OnInitialUpdate() {
@@ -252,7 +165,7 @@ void CEsmStartScriptDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pStartScript = (CEsmStartScript *) GetRecInfo()->pRecord;
+	m_pStartScript = (CEsmStartScript *)GetRecInfo()->pRecord;
 
 	/* Generate the auto ID if it is a new record */
 
@@ -267,23 +180,14 @@ void CEsmStartScriptDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmStartScriptDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Event - void OnSelchangeScriptlist ();
-
  *
-
  *=========================================================================*/
 
 void CEsmStartScriptDlg::OnSelchangeScriptlist() {
@@ -291,26 +195,17 @@ void CEsmStartScriptDlg::OnSelchangeScriptlist() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmStartScriptDlg::OnSelchangeScriptlist()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmStartScriptDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmStartScriptDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
 	/* Refill the script list if required */
@@ -321,37 +216,28 @@ int CEsmStartScriptDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 		Index = m_ScriptList.GetCurSel();
 
 		if (Index >= 0) {
-			pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
+			pRecInfo = (esmrecinfo_t *)m_ScriptList.GetItemData(Index);
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmStartScriptDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmStartScriptDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmStartScriptDlg::SetControlData (void) {
+void CEsmStartScriptDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pStartScript == NULL) {
 		return;
@@ -368,10 +254,5 @@ void CEsmStartScriptDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmStartScriptDlg::SetControlData()
-
  *=========================================================================*/
-
-
-

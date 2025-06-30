@@ -1,117 +1,65 @@
 /*===========================================================================
-
  *
-
  * File:    Esmcreaturepage1.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  March 1, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmCreaturePage1.h"
-
 #include "dl_Err.h"
-
 #include "MWEditDoc.h"
-
 #include "EsmDlgArray.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmCreaturePage1, CPropertyPage);
-
 DEFINE_FILE("EsmCreaturePage1.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmCreaturePage1 Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmCreaturePage1, CPropertyPage)
-
 	//{{AFX_MSG_MAP(CEsmCreaturePage1)
-
 	ON_BN_CLICKED(IDC_ANIMATIONBUTTON, OnAnimationbutton)
-
 	ON_BN_CLICKED(IDC_SCRIPTEDIT, OnScriptEdit)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmCreaturePage1 Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmCreaturePage1::CEsmCreaturePage1() : CPropertyPage(CEsmCreaturePage1::IDD) {
@@ -124,49 +72,31 @@ CEsmCreaturePage1::CEsmCreaturePage1() : CPropertyPage(CEsmCreaturePage1::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmCreaturePage1 Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmCreaturePage1::~CEsmCreaturePage1() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmCreaturePage1 Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage1::DoDataExchange(CDataExchange* pDX) {
+void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmCreaturePage1)
 	DDX_Control(pDX, IDC_SCRIPTLIST, m_ScriptList);
@@ -211,27 +141,18 @@ void CEsmCreaturePage1::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage1::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage1::GetControlData (void) {
-	CEsmCreature* pCreature;
+void CEsmCreaturePage1::GetControlData(void) {
+	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
 	CString Buffer;
 	long Flag;
@@ -242,9 +163,10 @@ void CEsmCreaturePage1::GetControlData (void) {
 		return;
 	}
 
-	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
+	pCreature = (CEsmCreature *)m_pRecInfo->pRecord;
 	pCreaData = pCreature->GetCreatureData();
 	Flag = 0;
+
 	/* Common texts */
 	m_NameText.GetWindowText(Buffer);
 	pCreature->SetName(Buffer);
@@ -252,9 +174,11 @@ void CEsmCreaturePage1::GetControlData (void) {
 	pCreature->SetScript(Buffer);
 	m_LevelText.GetWindowText(Buffer);
 	pCreaData->Level = atoi(Buffer);
+
 	/* Animation button */
 	m_AnimButton.GetWindowText(Buffer);
 	pCreature->SetModel(Buffer);
+
 	/* Blood list */
 	Index = m_BloodList.GetCurSel();
 
@@ -272,71 +196,73 @@ void CEsmCreaturePage1::GetControlData (void) {
 	/* Sound list */
 	m_SoundList.GetWindowText(Buffer);
 	pCreature->SetSound(Buffer);
+
 	/* Statistics */
 	m_StrText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Strength = (long) Value;
+	pCreaData->Strength = (long)Value;
 	m_IntText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Intelligence = (long) Value;
+	pCreaData->Intelligence = (long)Value;
 	m_WilText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Willpower = (long) Value;
+	pCreaData->Willpower = (long)Value;
 	m_SpdText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Speed = (long) Value;
+	pCreaData->Speed = (long)Value;
 	m_AgiText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Agility = (long) Value;
+	pCreaData->Agility = (long)Value;
 	m_EndText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Endurance = (long) Value;
+	pCreaData->Endurance = (long)Value;
 	m_PerText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Personality = (long) Value;
+	pCreaData->Personality = (long)Value;
 	m_LucText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Luck = (long) Value;
+	pCreaData->Luck = (long)Value;
 	m_HealthText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Health = (long) Value;
+	pCreaData->Health = (long)Value;
 	m_MagicText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->SpellPts = (long) Value;
+	pCreaData->SpellPts = (long)Value;
 	m_FatigueText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Fatigue = (long) Value;
+	pCreaData->Fatigue = (long)Value;
 	m_SoulText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Soul = (long) Value;
+	pCreaData->Soul = (long)Value;
 	m_CombatText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Combat = (long) Value;
+	pCreaData->Combat = (long)Value;
 	m_MagicSkillText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Magic = (long) Value;
+	pCreaData->Magic = (long)Value;
 	m_StealthText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->Stealth = (long) Value;
+	pCreaData->Stealth = (long)Value;
+
 	/* Attacks */
 	m_AttMin1Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->AttackMin1 = (long) Value;
+	pCreaData->AttackMin1 = (long)Value;
 	m_AttMax1Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->AttackMax1 = (long) Value;
+	pCreaData->AttackMax1 = (long)Value;
 	m_AttMin2Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->AttackMin2 = (long) Value;
+	pCreaData->AttackMin2 = (long)Value;
 	m_AttMax2Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->AttackMax2 = (long) Value;
+	pCreaData->AttackMax2 = (long)Value;
 	m_AttMin3Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->AttackMin3 = (long) Value;
+	pCreaData->AttackMin3 = (long)Value;
 	m_AttMax3Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
-	pCreaData->AttackMax3 = (long) Value;
+	pCreaData->AttackMax3 = (long)Value;
 
 	/* Movement */
 
@@ -380,49 +306,31 @@ void CEsmCreaturePage1::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage1::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Method - CMWEditDoc* GetDocument (void);
-
  *
-
  *=========================================================================*/
 
-CMWEditDoc *CEsmCreaturePage1::GetDocument (void) {
+CMWEditDoc *CEsmCreaturePage1::GetDocument(void) {
 	DEFINE_FUNCTION("CEsmCreaturePage1::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage1::GetDocument()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Event - void OnAnimationbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmCreaturePage1::OnAnimationbutton() {
@@ -437,27 +345,19 @@ void CEsmCreaturePage1::OnAnimationbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage1::OnAnimationbutton()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmCreaturePage1::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Text controls */
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_StrText.SetLimitText(8);
@@ -475,32 +375,25 @@ BOOL CEsmCreaturePage1::OnInitDialog() {
 	m_CombatText.SetLimitText(8);
 	m_FatigueText.SetLimitText(8);
 	m_LevelText.SetLimitText(8);
+
 	/* Lists */
 	FillEsmScriptCombo(m_ScriptList);
 	FillEsmBloodTypeCombo(m_BloodList);
 	FillEsmSoundGenCreaCombo(m_SoundList);
 	FillEsmCreatureListCombo(m_TypeList);
+
 	return (TRUE);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage1::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Event - void OnScriptEdit ();
-
  *
-
  *=========================================================================*/
 
 void CEsmCreaturePage1::OnScriptEdit() {
@@ -515,51 +408,33 @@ void CEsmCreaturePage1::OnScriptEdit() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage1::OnScriptEdit()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmCreaturePage1::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmCreaturePage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCreaturePage1::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCreaturePage1 Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCreaturePage1::SetControlData (void) {
-	CEsmCreature* pCreature;
+void CEsmCreaturePage1::SetControlData(void) {
+	CEsmCreature *pCreature;
 	CString Buffer;
 	creaturedata_t *pCreaData;
 
@@ -567,65 +442,73 @@ void CEsmCreaturePage1::SetControlData (void) {
 		return;
 	}
 
-	pCreature = (CEsmCreature *) m_pRecInfo->pRecord;
+	pCreature = (CEsmCreature *)m_pRecInfo->pRecord;
 	pCreaData = pCreature->GetCreatureData();
+
 	/* Common texts */
 	m_NameText.SetWindowText(pCreature->GetName());
 	m_ScriptList.SelectString(-1, pCreature->GetScript());
 	Buffer.Format(_T("%d"), pCreature->GetLevel());
 	m_LevelText.SetWindowText(Buffer);
+
 	/* Animation button */
 	m_AnimButton.SetWindowText(pCreature->GetModel());
+
 	/* Statistics */
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Strength);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Strength);
 	m_StrText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Intelligence);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Intelligence);
 	m_IntText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Willpower);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Willpower);
 	m_WilText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Speed);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Speed);
 	m_SpdText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Agility);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Agility);
 	m_AgiText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Endurance);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Endurance);
 	m_EndText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Personality);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Personality);
 	m_PerText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Luck);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Luck);
 	m_LucText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte)pCreaData->Health);
+	Buffer.Format(_T("%d"), (int)(byte)pCreaData->Health);
 	m_HealthText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->SpellPts);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->SpellPts);
 	m_MagicText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) (byte) pCreaData->Fatigue);
+	Buffer.Format(_T("%d"), (int)(byte) pCreaData->Fatigue);
 	m_FatigueText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->Soul);
+	Buffer.Format(_T("%d"), (int)pCreaData->Soul);
 	m_SoulText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->Combat);
+	Buffer.Format(_T("%d"), (int)pCreaData->Combat);
 	m_CombatText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->Magic);
+	Buffer.Format(_T("%d"), (int)pCreaData->Magic);
 	m_MagicSkillText.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->Stealth);
+	Buffer.Format(_T("%d"), (int)pCreaData->Stealth);
 	m_StealthText.SetWindowText(Buffer);
+
 	/* Blood list */
 	FindComboListItem(m_BloodList, pCreature->GetFlag() & MWESM_CREAFLAG_BLOODMASK, true);
+
 	/* Sound list */
 	m_SoundList.SelectString(-1, pCreature->GetSound());
+
 	/* Type list */
 	FindComboListItem(m_TypeList, pCreaData->Type, true);
+
 	/* Damage */
-	Buffer.Format(_T("%d"), (int) pCreaData->AttackMin1);
+	Buffer.Format(_T("%d"), (int)pCreaData->AttackMin1);
 	m_AttMin1Text.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->AttackMax1);
+	Buffer.Format(_T("%d"), (int)pCreaData->AttackMax1);
 	m_AttMax1Text.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->AttackMin2);
+	Buffer.Format(_T("%d"), (int)pCreaData->AttackMin2);
 	m_AttMin2Text.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->AttackMax2);
+	Buffer.Format(_T("%d"), (int)pCreaData->AttackMax2);
 	m_AttMax2Text.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->AttackMin3);
+	Buffer.Format(_T("%d"), (int)pCreaData->AttackMin3);
 	m_AttMin3Text.SetWindowText(Buffer);
-	Buffer.Format(_T("%d"), (int) pCreaData->AttackMax3);
+	Buffer.Format(_T("%d"), (int)pCreaData->AttackMax3);
 	m_AttMax3Text.SetWindowText(Buffer);
+
 	/* NPC flags */
 	m_PersistCheck.SetCheck(pCreature->IsPersist());
 	m_RespawnCheck.SetCheck(pCreature->IsRespawn());
@@ -640,10 +523,5 @@ void CEsmCreaturePage1::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCreaturePage1::SetControlData()
-
  *=========================================================================*/
-
-
-

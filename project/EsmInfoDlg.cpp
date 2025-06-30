@@ -1,127 +1,70 @@
 /*===========================================================================
-
  *
-
  * File:    Esminfodlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 22, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmInfoDlg.h"
-
 #include "MWEditDoc.h"
-
 #include "EsmUtils.h"
-
 #include "windows/WinUtil.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
-
 
 DEFINE_FILE("EsmInfoDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmInfoDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmInfoDlg, CDialog)
-
 	//{{AFX_MSG_MAP(CEsmInfoDlg)
-
 	ON_CBN_SELCHANGE(IDC_IDLIST, OnSelchangeIdlist)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST1, OnSelchangeTypelist1)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST2, OnSelchangeTypelist2)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST3, OnSelchangeTypelist3)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST4, OnSelchangeTypelist4)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST5, OnSelchangeTypelist5)
-
 	ON_CBN_SELCHANGE(IDC_TYPELIST6, OnSelchangeTypelist6)
-
 	ON_BN_CLICKED(IDC_SOUNDBUTTON, OnSoundbutton)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmInfoDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmInfoDlg::CEsmInfoDlg(CWnd* pParent) : CDialog(CEsmInfoDlg::IDD, pParent) {
@@ -134,26 +77,17 @@ CEsmInfoDlg::CEsmInfoDlg(CWnd* pParent) : CDialog(CEsmInfoDlg::IDD, pParent) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmInfoDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmInfoDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmInfoDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmInfoDlg)
 	DDX_Control(pDX, IDC_SOUNDBUTTON, m_SoundButton);
@@ -172,24 +106,28 @@ void CEsmInfoDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_VALUETEXT1, m_ValueText[0]);
 	DDX_Control(pDX, IDC_VALUETEXT2, m_ValueText[1]);
 	DDX_Control(pDX, IDC_VALUETEXT3, m_ValueText[2]);
 	DDX_Control(pDX, IDC_VALUETEXT4, m_ValueText[3]);
 	DDX_Control(pDX, IDC_VALUETEXT5, m_ValueText[4]);
 	DDX_Control(pDX, IDC_VALUETEXT6, m_ValueText[5]);
+
 	DDX_Control(pDX, IDC_COMPARELIST1, m_CompareList[0]);
 	DDX_Control(pDX, IDC_COMPARELIST2, m_CompareList[1]);
 	DDX_Control(pDX, IDC_COMPARELIST3, m_CompareList[2]);
 	DDX_Control(pDX, IDC_COMPARELIST4, m_CompareList[3]);
 	DDX_Control(pDX, IDC_COMPARELIST5, m_CompareList[4]);
 	DDX_Control(pDX, IDC_COMPARELIST6, m_CompareList[5]);
+
 	DDX_Control(pDX, IDC_VARFUNCLIST1, m_FuncVarList[0]);
 	DDX_Control(pDX, IDC_VARFUNCLIST2, m_FuncVarList[1]);
 	DDX_Control(pDX, IDC_VARFUNCLIST3, m_FuncVarList[2]);
 	DDX_Control(pDX, IDC_VARFUNCLIST4, m_FuncVarList[3]);
 	DDX_Control(pDX, IDC_VARFUNCLIST5, m_FuncVarList[4]);
 	DDX_Control(pDX, IDC_VARFUNCLIST6, m_FuncVarList[5]);
+
 	DDX_Control(pDX, IDC_TYPELIST1, m_TypeList[0]);
 	DDX_Control(pDX, IDC_TYPELIST2, m_TypeList[1]);
 	DDX_Control(pDX, IDC_TYPELIST3, m_TypeList[2]);
@@ -199,30 +137,19 @@ void CEsmInfoDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmInfoDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Method - bool DoModal (pInfo, IsNew, pDocument);
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
 
-bool CEsmInfoDlg::DoModal (CEsmInfo* pInfo, const bool IsNew, CMWEditDoc* pDocument) {
+bool CEsmInfoDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDocument) {
 	int Result;
 	/* Initialize the class members */
 	m_pInfo = pInfo;
@@ -245,29 +172,20 @@ bool CEsmInfoDlg::DoModal (CEsmInfo* pInfo, const bool IsNew, CMWEditDoc* pDocum
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmInfoDlg::DoModal()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmInfoDlg::GetControlData (void) {
+void CEsmInfoDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmInfoDlg::GetControlData()");
 	CString Buffer;
-	CEsmInfo* pNewInfo;
+	CEsmInfo *pNewInfo;
 	infodata_t *pInfoData = m_pInfo->GetInfoData();
 	int Index;
 	int FuncIndex = 0;
@@ -286,10 +204,12 @@ void CEsmInfoDlg::GetControlData (void) {
 	/* Get the main text */
 	m_NameText.GetWindowText(Buffer);
 	m_pInfo->SetResponse(Buffer);
+
 	/* Result text, if any */
 	m_ResultText.GetWindowText(Buffer);
 	TrimStringSpace(Buffer);
 	m_pInfo->SetResult(Buffer.IsEmpty() ? NULL : (const TCHAR *)Buffer);
+
 	/* Disposition */
 	m_DispText.GetWindowText(Buffer);
 	pInfoData->Disposition = atoi(Buffer);
@@ -304,12 +224,13 @@ void CEsmInfoDlg::GetControlData (void) {
 
 	/* Gender */
 	Index = m_GenderList.GetCurSel();
-	pInfoData->Gender = (byte) ((Index < 0) ? 0 : m_GenderList.GetItemData(Index));
+	pInfoData->Gender = (byte)((Index < 0) ? 0 : m_GenderList.GetItemData(Index));
+
 	/* Ranks */
 	Index = m_RankList.GetCurSel();
-	pInfoData->Rank = (byte) ((Index < 0) ? -1 : m_RankList.GetItemData(Index));
+	pInfoData->Rank = (byte)((Index < 0) ? -1 : m_RankList.GetItemData(Index));
 	Index = m_PCRankList.GetCurSel();
-	pInfoData->PCRank = (byte) ((Index < 0) ? -1 : m_PCRankList.GetItemData(Index));
+	pInfoData->PCRank = (byte)((Index < 0) ? -1 : m_PCRankList.GetItemData(Index));
 
 	/* Sound button if required */
 
@@ -332,6 +253,7 @@ void CEsmInfoDlg::GetControlData (void) {
 	m_pInfo->SetFaction(Buffer.IsEmpty() ? NULL : (const TCHAR *)Buffer);
 	m_PCFactionList.GetWindowText(Buffer);
 	m_pInfo->SetPCFaction(Buffer.IsEmpty() ? NULL : (const TCHAR *)Buffer);
+
 	/* Function data */
 	m_pInfo->DeleteSubRecords(MWESM_SUBREC_SCVR);
 	m_pInfo->DeleteSubRecords(MWESM_SUBREC_INTV);
@@ -343,29 +265,20 @@ void CEsmInfoDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmInfoDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Method - void GetFuncData (Index, const int FuncIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmInfoDlg::GetFuncData (const int Index, int &FuncIndex) {
+void CEsmInfoDlg::GetFuncData(const int Index, int &FuncIndex) {
 	infofuncdata_t *pData;
-	CEsmSubSCVR* pFuncData;
-	CEsmSubFloat* pValueData;
+	CEsmSubSCVR *pFuncData;
+	CEsmSubFloat *pValueData;
 	CString Buffer;
 	int ListIndex;
 	int NewType;
@@ -381,16 +294,16 @@ void CEsmInfoDlg::GetFuncData (const int Index, int &FuncIndex) {
 		return;
 	}
 
-	pFuncData = (CEsmSubSCVR *) m_pInfo->AllocateSubRecord(MWESM_SUBREC_SCVR);
+	pFuncData = (CEsmSubSCVR *)m_pInfo->AllocateSubRecord(MWESM_SUBREC_SCVR);
 	pFuncData->CreateNew();
 	pData = pFuncData->GetInfoFuncData();
 	/* Basic function data */
 	ListIndex = m_CompareList[Index].GetCurSel();
-	pData->CompareOp = (byte) ((ListIndex < 0) ? MWESM_SCVROP_EQUALS : m_CompareList[Index].GetItemData(
-	                               ListIndex));
+	pData->CompareOp = (byte)((ListIndex < 0) ? MWESM_SCVROP_EQUALS
+	                          : m_CompareList[Index].GetItemData(ListIndex));
 	ListIndex = m_TypeList[Index].GetCurSel();
-	pData->Type = (byte) ((ListIndex < 0) ? MWESM_SCVRFUNC_NONE : m_TypeList[Index].GetItemData(
-	                          ListIndex));
+	pData->Type = (byte)((ListIndex < 0) ? MWESM_SCVRFUNC_NONE
+	                     : m_TypeList[Index].GetItemData(ListIndex));
 	pData->Index = MWESM_SCVR_INDEX0 + FuncIndex;
 	FuncIndex++;
 	m_FuncVarList[Index].GetWindowText(Buffer);
@@ -398,8 +311,8 @@ void CEsmInfoDlg::GetFuncData (const int Index, int &FuncIndex) {
 	switch (NewType) {
 		case MWESM_SCVRFUNC_FUNCTION:
 			ListIndex = m_FuncVarList[Index].GetCurSel();
-			pData->Function = (short) ((ListIndex < 0) ? MWESM_SCVRFUNCCODE_VARIABLE :
-			                           m_FuncVarList[Index].GetItemData(ListIndex));
+			pData->Function = (short)((ListIndex < 0) ? MWESM_SCVRFUNCCODE_VARIABLE :
+			                          m_FuncVarList[Index].GetItemData(ListIndex));
 			break;
 
 		case MWESM_SCVRFUNC_GLOBAL:
@@ -459,30 +372,20 @@ void CEsmInfoDlg::GetFuncData (const int Index, int &FuncIndex) {
 	}
 
 	m_ValueText[Index].GetWindowText(Buffer);
-	pValueData = (CEsmSubFloat *) m_pInfo->AllocateSubRecord(
-	                 MWESM_SUBREC_FLTV);  /* Use floats all the time by default */
+	pValueData = (CEsmSubFloat *)m_pInfo->AllocateSubRecord(MWESM_SUBREC_FLTV); /* Use floats all the time by default */
 	pValueData->CreateNew();
 	pValueData->SetValue((float)atof(Buffer));
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmInfoDlg::GetFuncData()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Event - void OnCancel ();
-
  *
-
  *=========================================================================*/
 
 void CEsmInfoDlg::OnCancel() {
@@ -490,28 +393,20 @@ void CEsmInfoDlg::OnCancel() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmInfoDlg::OnCancel()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmInfoDlg::OnInitDialog() {
 	int ArrayIndex;
 	CDialog::OnInitDialog();
+
 	/* Initilaize the text controls */
 	m_NameText.SetLimitText(512);
 	m_ResultText.SetLimitText(1024);
@@ -552,23 +447,14 @@ BOOL CEsmInfoDlg::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmInfoDlg::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Event - void OnOK ();
-
  *
-
  *=========================================================================*/
 
 void CEsmInfoDlg::OnOK() {
@@ -577,26 +463,17 @@ void CEsmInfoDlg::OnOK() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmInfoDlg::OnOK()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Event - void OnSelChangeTypeList (Index);
-
  *
-
  *=========================================================================*/
 
-void CEsmInfoDlg::OnSelChangeTypeList (const int Index) {
+void CEsmInfoDlg::OnSelChangeTypeList(const int Index) {
 	int ListIndex;
 	int NewType = MWESM_SCVRFUNC_NONE;
 	/* Get the new type */
@@ -673,23 +550,14 @@ void CEsmInfoDlg::OnSelChangeTypeList (const int Index) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmInfoDlg::OnSelChangeTypeList()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Event - void OnSoundbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmInfoDlg::OnSoundbutton() {
@@ -704,41 +572,36 @@ void CEsmInfoDlg::OnSoundbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmInfoDlg::OnSoundbutton()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmInfoDlg::SetControlData (void) {
+void CEsmInfoDlg::SetControlData(void) {
 	CString Buffer;
-	CEsmSubSCVR* pFuncData;
+	CEsmSubSCVR *pFuncData;
 	infodata_t *pInfoData = m_pInfo->GetInfoData();
 	int ArrayIndex;
 	int Index;
+
 	/* Set the info ID and dialog title */
 	m_IDText.SetWindowText(m_pInfo->GetID());
 	Buffer.Format(_T("%s -- Dialogue Info"), m_pDocument->GetTitle());
 	SetWindowText(Buffer);
+
 	/* Name/result text */
 	m_NameText.SetWindowText(m_pInfo->GetResponse());
 	m_ResultText.SetWindowText(m_pInfo->GetResult());
+
 	/* Disposition */
 	Buffer.Format(_T("%d"), m_pInfo->GetDisposition());
 	m_DispText.SetWindowText(Buffer);
+
 	/* Lists */
 	FindComboListItem(m_GenderList, pInfoData->Gender, true);
 	m_IDList.SelectString(-1, m_pInfo->GetActor());
@@ -779,26 +642,17 @@ void CEsmInfoDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmInfoDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Method - void SetFuncData (Index, pFuncData, pValue);
-
  *
-
  *=========================================================================*/
 
-void CEsmInfoDlg::SetFuncData (const int Index, CEsmSubSCVR* pFuncData, CEsmSubRecord* pValue) {
+void CEsmInfoDlg::SetFuncData(const int Index, CEsmSubSCVR *pFuncData, CEsmSubRecord *pValue) {
 	infofuncdata_t *pData;
 	CString Buffer;
 
@@ -840,23 +694,14 @@ void CEsmInfoDlg::SetFuncData (const int Index, CEsmSubSCVR* pFuncData, CEsmSubR
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmInfoDlg::SetFuncData()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmInfoDlg Event - void OnSelchangeIdlist ();
-
  *
-
  *=========================================================================*/
 
 void CEsmInfoDlg::OnSelchangeIdlist() {
@@ -879,10 +724,5 @@ void CEsmInfoDlg::OnSelchangeIdlist() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmInfoDlg::OnSelchangeIdlist()
-
  *=========================================================================*/
-
-
-

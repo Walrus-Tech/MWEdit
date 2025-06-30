@@ -1,129 +1,71 @@
 /*===========================================================================
-
  *
-
  * File:    Esmeffectdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 16, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmEffectDlg.h"
-
 #include "mmsystem.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmEffectDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmEffectDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmEffectDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmEffectDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmEffectDlg)
-
 	ON_BN_CLICKED(IDC_CASTPLAY, OnCastPlay)
-
 	ON_BN_CLICKED(IDC_AREAPLAY, OnAreaPlay)
-
 	ON_BN_CLICKED(IDC_HITPLAY, OnHitPlay)
-
 	ON_BN_CLICKED(IDC_BOLTPLAY, OnBoltPlay)
-
 	ON_EN_CHANGE(IDC_REDTEXT, OnChangeColor)
-
 	ON_BN_CLICKED(IDC_COLORBUTTON, OnColorbutton)
-
 	ON_BN_CLICKED(IDC_PARTICLEBUTTON, OnParticlebutton)
-
 	ON_EN_CHANGE(IDC_GREENTEXT, OnChangeColor)
-
 	ON_EN_CHANGE(IDC_BLUETEXT, OnChangeColor)
-
 	ON_BN_CLICKED(IDC_ICONBUTTON, OnIconbutton)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmEffectDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmEffectDlg::CEsmEffectDlg() : CEsmRecDialog(CEsmEffectDlg::IDD) {
@@ -134,26 +76,17 @@ CEsmEffectDlg::CEsmEffectDlg() : CEsmRecDialog(CEsmEffectDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmEffectDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmEffectDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmEffectDlg)
 	DDX_Control(pDX, IDC_ENCHANTCHECK, m_EnchantCheck);
@@ -189,31 +122,22 @@ void CEsmEffectDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEffectDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEffectDlg::GetControlData (void) {
+void CEsmEffectDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmEffectDlg::GetControlData()");
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pEffect = (CEsmMagicEffect *) GetRecInfo()->pRecord;
+	m_pEffect = (CEsmMagicEffect *)GetRecInfo()->pRecord;
 
 	if (m_pEffect == NULL) {
 		return;
@@ -222,18 +146,23 @@ void CEsmEffectDlg::GetControlData (void) {
 	/* Item description */
 	m_DescText.GetWindowText(Buffer);
 	m_pEffect->SetDescription(TrimStringSpace(Buffer));
+
 	/* Base cost */
 	m_BaseCostText.GetWindowText(Buffer);
-	m_pEffect->SetBaseCost((float) atof(Buffer));
+	m_pEffect->SetBaseCost((float)atof(Buffer));
+
 	/* Size */
 	m_SizeText.GetWindowText(Buffer);
-	m_pEffect->SetSize((float) atof(Buffer));
+	m_pEffect->SetSize((float)atof(Buffer));
+
 	/* Max Size */
 	m_MaxSizeText.GetWindowText(Buffer);
-	m_pEffect->SetMaxSize((float) atof(Buffer));
+	m_pEffect->SetMaxSize((float)atof(Buffer));
+
 	/* Speed */
 	m_SpeedText.GetWindowText(Buffer);
-	m_pEffect->SetSpeed((float) atof(Buffer));
+	m_pEffect->SetSpeed((float)atof(Buffer));
+
 	/* Speel school */
 	Index = m_SchoolList.GetCurSel();
 
@@ -246,26 +175,31 @@ void CEsmEffectDlg::GetControlData (void) {
 	m_pEffect->SetCastSound(TrimStringSpace(Buffer));
 	m_CastVisualList.GetWindowText(Buffer);
 	m_pEffect->SetCastVisual(TrimStringSpace(Buffer));
+
 	/* Bolt sound/visual */
 	m_BoltSoundList.GetWindowText(Buffer);
 	m_pEffect->SetBoltSound(TrimStringSpace(Buffer));
 	m_BoltVisualList.GetWindowText(Buffer);
 	m_pEffect->SetBoltVisual(TrimStringSpace(Buffer));
+
 	/* Area sound/visual */
 	m_AreaSoundList.GetWindowText(Buffer);
 	m_pEffect->SetAreaSound(TrimStringSpace(Buffer));
 	m_AreaVisualList.GetWindowText(Buffer);
 	m_pEffect->SetAreaVisual(TrimStringSpace(Buffer));
+
 	/* Hit sound/visual */
 	m_HitSoundList.GetWindowText(Buffer);
 	m_pEffect->SetHitSound(TrimStringSpace(Buffer));
 	m_HitVisualList.GetWindowText(Buffer);
 	m_pEffect->SetHitVisual(TrimStringSpace(Buffer));
+
 	/* Particle/effect icons */
 	m_ParticleButton.GetWindowText(Buffer);
 	m_pEffect->SetParticle(TrimStringSpace(Buffer));
 	m_IconButton.GetWindowText(Buffer);
 	m_pEffect->SetIcon(TrimStringSpace(Buffer));
+
 	/* Set the lighting color */
 	m_RedText.GetWindowText(Buffer);
 	m_pEffect->SetRed(atoi(Buffer));
@@ -273,6 +207,7 @@ void CEsmEffectDlg::GetControlData (void) {
 	m_pEffect->SetGreen(atoi(Buffer));
 	m_BlueText.GetWindowText(Buffer);
 	m_pEffect->SetBlue(atoi(Buffer));
+
 	/* Record flags */
 	m_pEffect->SetEnchanting(m_EnchantCheck.GetCheck() != 0);
 	m_pEffect->SetSpellMaking(m_SpellCheck.GetCheck() != 0);
@@ -280,26 +215,17 @@ void CEsmEffectDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEffectDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmEffectDlg::IsModified (void) {
+bool CEsmEffectDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -342,35 +268,26 @@ bool CEsmEffectDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEffectDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - void OnCastPlay ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEffectDlg::OnCastPlay() {
 	CString SoundFile;
-	CEsmSound* pSound;
+	CEsmSound *pSound;
 	esmrecinfo_t *pRecInfo;
 	int ListIndex;
 	ListIndex = m_CastSoundList.GetCurSel();
 
 	if (ListIndex >= 0) {
-		pRecInfo = (esmrecinfo_t *) m_CastSoundList.GetItemData(ListIndex);
-		pSound = (CEsmSound *) pRecInfo->pRecord;
+		pRecInfo = (esmrecinfo_t *)m_CastSoundList.GetItemData(ListIndex);
+		pSound = (CEsmSound *)pRecInfo->pRecord;
 		SoundFile = GetMWDataPath();
 		SoundFile += MWPATH_SOUNDS;
 		SoundFile += pSound->GetName();
@@ -378,18 +295,16 @@ void CEsmEffectDlg::OnCastPlay() {
 	}
 }
 
-
-
 void CEsmEffectDlg::OnHitPlay() {
 	CString SoundFile;
-	CEsmSound* pSound;
+	CEsmSound *pSound;
 	esmrecinfo_t *pRecInfo;
 	int ListIndex;
 	ListIndex = m_HitSoundList.GetCurSel();
 
 	if (ListIndex >= 0) {
-		pRecInfo = (esmrecinfo_t *) m_HitSoundList.GetItemData(ListIndex);
-		pSound = (CEsmSound *) pRecInfo->pRecord;
+		pRecInfo = (esmrecinfo_t *)m_HitSoundList.GetItemData(ListIndex);
+		pSound = (CEsmSound *)pRecInfo->pRecord;
 		SoundFile = GetMWDataPath();
 		SoundFile += MWPATH_SOUNDS;
 		SoundFile += pSound->GetName();
@@ -397,18 +312,16 @@ void CEsmEffectDlg::OnHitPlay() {
 	}
 }
 
-
-
 void CEsmEffectDlg::OnBoltPlay() {
 	CString SoundFile;
-	CEsmSound* pSound;
+	CEsmSound *pSound;
 	esmrecinfo_t *pRecInfo;
 	int ListIndex;
 	ListIndex = m_BoltSoundList.GetCurSel();
 
 	if (ListIndex >= 0) {
-		pRecInfo = (esmrecinfo_t *) m_BoltSoundList.GetItemData(ListIndex);
-		pSound = (CEsmSound *) pRecInfo->pRecord;
+		pRecInfo = (esmrecinfo_t *)m_BoltSoundList.GetItemData(ListIndex);
+		pSound = (CEsmSound *)pRecInfo->pRecord;
 		SoundFile = GetMWDataPath();
 		SoundFile += MWPATH_SOUNDS;
 		SoundFile += pSound->GetName();
@@ -416,18 +329,16 @@ void CEsmEffectDlg::OnBoltPlay() {
 	}
 }
 
-
-
 void CEsmEffectDlg::OnAreaPlay() {
 	CString SoundFile;
-	CEsmSound* pSound;
+	CEsmSound *pSound;
 	esmrecinfo_t *pRecInfo;
 	int ListIndex;
 	ListIndex = m_AreaSoundList.GetCurSel();
 
 	if (ListIndex >= 0) {
-		pRecInfo = (esmrecinfo_t *) m_AreaSoundList.GetItemData(ListIndex);
-		pSound = (CEsmSound *) pRecInfo->pRecord;
+		pRecInfo = (esmrecinfo_t *)m_AreaSoundList.GetItemData(ListIndex);
+		pSound = (CEsmSound *)pRecInfo->pRecord;
 		SoundFile = GetMWDataPath();
 		SoundFile += MWPATH_SOUNDS;
 		SoundFile += pSound->GetName();
@@ -436,23 +347,14 @@ void CEsmEffectDlg::OnAreaPlay() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnCastPlay()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - void OnChangeColor ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEffectDlg::OnChangeColor() {
@@ -503,23 +405,14 @@ void CEsmEffectDlg::OnChangeColor() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnChangeColor()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - void OnColorbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEffectDlg::OnColorbutton() {
@@ -582,23 +475,14 @@ void CEsmEffectDlg::OnColorbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnColorbutton()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - void OnIconbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEffectDlg::OnIconbutton() {
@@ -613,41 +497,37 @@ void CEsmEffectDlg::OnIconbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnIconbutton()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEffectDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pEffect = (CEsmMagicEffect *) GetRecInfo()->pRecord;
+	m_pEffect = (CEsmMagicEffect *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmSpellSchoolCombo(m_SchoolList);
+
 	FillEsmSoundCombo(m_CastSoundList);
 	FillEsmSoundCombo(m_AreaSoundList);
 	FillEsmSoundCombo(m_BoltSoundList);
 	FillEsmSoundCombo(m_HitSoundList);
+
 	FillEsmVisualCombo(m_CastVisualList, false);
 	FillEsmVisualCombo(m_BoltVisualList, true);
 	FillEsmVisualCombo(m_AreaVisualList, false);
 	FillEsmVisualCombo(m_HitVisualList, false);
+
 	m_SizeText.SetLimitText(16);
 	m_MaxSizeText.SetLimitText(16);
 	m_SpeedText.SetLimitText(16);
@@ -659,27 +539,19 @@ void CEsmEffectDlg::OnInitialUpdate() {
 	m_RedSpin.SetRange32(0, 255);
 	m_GreenSpin.SetRange32(0, 255);
 	m_BlueSpin.SetRange32(0, 255);
+
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - void OnParticlebutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEffectDlg::OnParticlebutton() {
@@ -694,26 +566,17 @@ void CEsmEffectDlg::OnParticlebutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnParticlebutton()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmEffectDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmEffectDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
 	/* Refill the script list if required */
@@ -737,28 +600,19 @@ int CEsmEffectDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEffectDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEffectDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEffectDlg::SetControlData (void) {
+void CEsmEffectDlg::SetControlData(void) {
 	CString Buffer;
-	const TCHAR* pString;
+	const TCHAR *pString;
 
 	/* Ignore if the current item is not valid */
 
@@ -767,25 +621,32 @@ void CEsmEffectDlg::SetControlData (void) {
 	}
 
 	UpdateTitle(m_pEffect->GetName());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pEffect->GetName());
 	m_NameText.SetModify(FALSE);
+
 	/* Base cost/size/etc... */
 	Buffer.Format(_T("%.2f"), m_pEffect->GetBaseCost());
 	m_BaseCostText.SetWindowText(Buffer);
 	m_BaseCostText.SetModify(FALSE);
+
 	Buffer.Format(_T("%.2f"), m_pEffect->GetSize());
 	m_SizeText.SetWindowText(Buffer);
 	m_SizeText.SetModify(FALSE);
+
 	Buffer.Format(_T("%.2f"), m_pEffect->GetMaxSize());
 	m_MaxSizeText.SetWindowText(Buffer);
 	m_MaxSizeText.SetModify(FALSE);
+
 	Buffer.Format(_T("%.2f"), m_pEffect->GetSpeed());
 	m_SpeedText.SetWindowText(Buffer);
 	m_SpeedText.SetModify(FALSE);
+
 	/* Description */
 	m_DescText.SetWindowText(m_pEffect->GetDescription());
 	m_DescText.SetModify(FALSE);
+
 	/* Model/sound buttons */
 	pString = m_pEffect->GetCastSound();
 
@@ -860,19 +721,24 @@ void CEsmEffectDlg::SetControlData (void) {
 	m_ParticleButton.SetWindowText(m_pEffect->GetParticle());
 	m_IconBox.SetEsmIcon(m_pEffect->GetIcon());
 	m_ParticleBox.SetEsmIcon(m_pEffect->GetParticle());
+
 	/* Color */
 	Buffer.Format(_T("%d"), m_pEffect->GetRed());
 	m_RedText.SetWindowText(Buffer);
 	m_RedText.SetModify(FALSE);
+
 	Buffer.Format(_T("%d"), m_pEffect->GetGreen());
 	m_GreenText.SetWindowText(Buffer);
 	m_GreenText.SetModify(FALSE);
+
 	Buffer.Format(_T("%d"), m_pEffect->GetBlue());
 	m_BlueText.SetWindowText(Buffer);
 	m_BlueText.SetModify(FALSE);
 	m_ColorBox.SetColor(m_pEffect->GetRed(), m_pEffect->GetGreen(), m_pEffect->GetBlue());
+
 	/* Spell school */
 	FindComboListItem(m_SchoolList, m_pEffect->GetSchoolID(), true);
+
 	/* Record flags */
 	m_EnchantCheck.SetCheck(m_pEffect->IsSpellMaking());
 	m_SpellCheck.SetCheck(m_pEffect->IsEnchanting());
@@ -880,14 +746,5 @@ void CEsmEffectDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEffectDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
-
-
-
-

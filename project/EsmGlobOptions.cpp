@@ -33,7 +33,7 @@ DEFINE_FILE("EsmGlobOptions.cpp");
  *
  *=========================================================================*/
 bool GetEsmOptAllowBloodmoon(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetAllowBloodmoon());
 }
 
@@ -48,7 +48,7 @@ bool GetEsmOptAllowBloodmoon(void) {
  *
  *=========================================================================*/
 bool GetEsmOptAllowTribunal(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetAllowTribunal());
 }
 
@@ -65,7 +65,7 @@ bool GetEsmOptAllowTribunal(void) {
  *
  *=========================================================================*/
 bool GetEsmOptNoScriptFormat(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetNoScriptFormat());
 }
 
@@ -80,7 +80,7 @@ bool GetEsmOptNoScriptFormat(void) {
  *
  *=========================================================================*/
 bool GetEsmOptBackupSaves(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetBackupSaves());
 }
 
@@ -95,7 +95,7 @@ bool GetEsmOptBackupSaves(void) {
  *
  *=========================================================================*/
 bool GetEsmOptStrictIDs(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetStrictIDs());
 }
 
@@ -110,7 +110,7 @@ bool GetEsmOptStrictIDs(void) {
  *
  *=========================================================================*/
 bool GetEsmOptInitialIndentLevel(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetInitialIndentLevel());
 }
 
@@ -125,7 +125,7 @@ bool GetEsmOptInitialIndentLevel(void) {
  *
  *=========================================================================*/
 bool GetEsmOptIndentCommentsMore(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetIndentCommentsMore());
 }
 
@@ -140,7 +140,7 @@ bool GetEsmOptIndentCommentsMore(void) {
  *
  *=========================================================================*/
 bool GetEsmOptNoScriptPrompt(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetNoScriptPrompt());
 }
 
@@ -155,7 +155,7 @@ bool GetEsmOptNoScriptPrompt(void) {
  *
  *=========================================================================*/
 bool GetEsmOptUseExtraFile(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetUseExtraFile());
 }
 
@@ -170,7 +170,7 @@ bool GetEsmOptUseExtraFile(void) {
  *
  *=========================================================================*/
 bool GetEsmOptAllowExtFuncs(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetAllowExtFuncs());
 }
 
@@ -187,7 +187,7 @@ bool GetEsmOptAllowExtFuncs(void) {
  *
  *=========================================================================*/
 int GetEsmOptScriptWarnLevel(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetScriptWarnLevel());
 }
 
@@ -204,7 +204,7 @@ int GetEsmOptScriptWarnLevel(void) {
  *
  *=========================================================================*/
 int GetEsmOptScriptFormatType(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetFormatType());
 }
 
@@ -221,7 +221,7 @@ int GetEsmOptScriptFormatType(void) {
  *
  *=========================================================================*/
 CEsmScriptOptions *GetEsmOptScriptOptions(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetScriptOptions());
 }
 
@@ -238,7 +238,7 @@ CEsmScriptOptions *GetEsmOptScriptOptions(void) {
  *
  *=========================================================================*/
 const TCHAR *GetEsmOptDefaultAuthor(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetAuthorName());
 }
 
@@ -253,7 +253,7 @@ const TCHAR *GetEsmOptDefaultAuthor(void) {
  *
  *=========================================================================*/
 const TCHAR *GetEsmOptExtraFile(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetExtraFile());
 }
 
@@ -268,11 +268,10 @@ const TCHAR *GetEsmOptExtraFile(void) {
  *
  *=========================================================================*/
 const TCHAR *GetEsmOptScriptIndentString(void) {
-	CMWEditApp* pApp = (CMWEditApp*)AfxGetApp();
+	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	return (pApp->GetOptions()->GetScriptIndentString());
 }
 
 /*===========================================================================
  *      End of Function TCHAR* GetEsmOptScriptIndentString()
  *=========================================================================*/
-

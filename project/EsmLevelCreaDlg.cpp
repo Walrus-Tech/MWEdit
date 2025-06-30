@@ -1,84 +1,49 @@
 /*===========================================================================
-
  *
-
  * File:    Esmlevelcreadlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 15, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmLevelCreaDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmLevelCreaDlg.cpp");
-
 IMPLEMENT_DYNCREATE(CEsmLevelCreaDlg, CEsmRecDialog);
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Function - int CALLBACK l_CreaSortCallBack (lParam1, lParam2, lParamSort);
-
  *
-
  *=========================================================================*/
 
-int CALLBACK l_CreaSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
-	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*) lParam1;
-	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*) lParam2;
+int CALLBACK l_CreaSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
+	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*)lParam1;
+	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*)lParam2;
 	int SortType = lParamSort & 0xFFFF;
 	int Flags = lParamSort >> 16;
 	int Result;
@@ -96,16 +61,10 @@ int CALLBACK l_CreaSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lParamSo
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
 }
 
-
-
-
-
-
-
-int CALLBACK l_CreaSortCallBack1 (LPARAM lParam1, LPARAM lParam2, LPARAM lParamData) {
-	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*) lParam1;
-	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*) lParam2;
-	CEsmLevelCreaDlg* pDialog = (CEsmLevelCreaDlg *) lParamData;
+int CALLBACK l_CreaSortCallBack1(LPARAM lParam1, LPARAM lParam2, LPARAM lParamData) {
+	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*)lParam1;
+	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*)lParam2;
+	CEsmLevelCreaDlg *pDialog = (CEsmLevelCreaDlg *)lParamData;
 	int SortType = pDialog->GetSortData() & 0xFFFF;
 	int Flags = pDialog->GetSortData() >> 16;
 	int Result;
@@ -124,95 +83,90 @@ int CALLBACK l_CreaSortCallBack1 (LPARAM lParam1, LPARAM lParam2, LPARAM lParamD
 }
 
 /*===========================================================================
-
  *      End of Function CALLBACK l_CreaSortCallBack()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Item List Display Data Array
-
  *
-
  *=========================================================================*/
 
 static esmcoldata_t l_CreatureColData[] = {
-
-	{ _T("Level"), ESM_FIELD_CUSTOM, LVCFMT_CENTER, ESMLIST_WIDTH_COUNT + 20, ESMLIST_SUBITEM_COUNT, l_CreaSortCallBack },
-
-	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, },
-
-	{ _T("Mod"), ESM_FIELD_CHANGED, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
-
-	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
-
-	{ _T("Type"), ESM_FIELD_ITEMTYPE, LVCFMT_LEFT, ESMLIST_WIDTH_ITEMTYPE, ESMLIST_SUBITEM_ITEMTYPE },
-
-	{ NULL, 0, 0, 0 }   /* Must be last record */
-
+	{
+		_T("Level"),
+		ESM_FIELD_CUSTOM,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_COUNT + 20,
+		ESMLIST_SUBITEM_COUNT,
+		l_CreaSortCallBack
+	},
+	{
+		_T("ID"),
+		ESM_FIELD_ID,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ID,
+		ESMLIST_SUBITEM_ID,
+	},
+	{
+		_T("Mod"),
+		ESM_FIELD_CHANGED,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_CHANGED,
+		ESMLIST_SUBITEM_CHANGED
+	},
+	{
+		_T("Name"),
+		ESM_FIELD_NAME,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_NAME,
+		ESMLIST_SUBITEM_NAME
+	},
+	{
+		_T("Type"),
+		ESM_FIELD_ITEMTYPE,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ITEMTYPE,
+		ESMLIST_SUBITEM_ITEMTYPE
+	},
+	{
+		NULL,
+		0,
+		0,
+		0
+	} /* Must be last record */
 };
 
 /*===========================================================================
-
  *      End of Item List Display Data Array
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmLevelCreaDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmLevelCreaDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmLevelCreaDlg)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_CREATURELIST, OnEndlabeleditlist)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONSORT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordSort)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmLevelCreaDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmLevelCreaDlg::CEsmLevelCreaDlg() : CEsmRecDialog(CEsmLevelCreaDlg::IDD) {
@@ -222,26 +176,17 @@ CEsmLevelCreaDlg::CEsmLevelCreaDlg() : CEsmRecDialog(CEsmLevelCreaDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmLevelCreaDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmLevelCreaDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmLevelCreaDlg)
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
@@ -253,31 +198,22 @@ void CEsmLevelCreaDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::GetControlData (void) {
+void CEsmLevelCreaDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmLevelCreaDlg::GetControlData()");
 	CString Buffer;
 	int Chance;
 	/* Update the armor pointer and data */
-	m_pLevelCrea = (CEsmLevelCrea *) GetRecInfo()->pRecord;
+	m_pLevelCrea = (CEsmLevelCrea *)GetRecInfo()->pRecord;
 	ASSERT(m_pLevelCrea != NULL);
 
 	/* Item ID, if changed */
@@ -307,32 +243,20 @@ void CEsmLevelCreaDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - int GetSortCount (pRecInfo);
-
  *
-
  * Return the current count/level for the given recinfo in the list. Returns
-
  * 0 on any error.
-
  *
-
  *=========================================================================*/
 
-int CEsmLevelCreaDlg::GetSortCount (esmrecinfo_t* pRecInfo) {
+int CEsmLevelCreaDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 	int ListIndex;
 	int Count;
@@ -355,28 +279,19 @@ int CEsmLevelCreaDlg::GetSortCount (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::GetSortCount()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - void GetCreatureData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::GetCreatureData (void) {
-	CEsmSubNameFix* pNameSubRec;
-	CEsmSubShort* pLevelSubRec;
+void CEsmLevelCreaDlg::GetCreatureData(void) {
+	CEsmSubNameFix *pNameSubRec;
+	CEsmSubShort *pLevelSubRec;
 	CString Buffer;
 	int Index;
 	int Level;
@@ -389,9 +304,10 @@ void CEsmLevelCreaDlg::GetCreatureData (void) {
 		Buffer = m_CreatureList.GetItemText(Index, 0);
 		Level = atoi(Buffer);
 		Buffer = m_CreatureList.GetItemText(Index, 1);
+
 		/* Create the new index sub-record */
-		pNameSubRec = (CEsmSubNameFix *) m_pLevelCrea->AllocateSubRecord(MWESM_SUBREC_CNAM);
-		pLevelSubRec = (CEsmSubShort *) m_pLevelCrea->AllocateSubRecord(MWESM_SUBREC_INTV);
+		pNameSubRec = (CEsmSubNameFix *)m_pLevelCrea->AllocateSubRecord(MWESM_SUBREC_CNAM);
+		pLevelSubRec = (CEsmSubShort *)m_pLevelCrea->AllocateSubRecord(MWESM_SUBREC_INTV);
 		pNameSubRec->CreateNew();
 		pLevelSubRec->CreateNew();
 		pNameSubRec->SetName(Buffer);
@@ -403,27 +319,18 @@ void CEsmLevelCreaDlg::GetCreatureData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::GetCreatureData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Event - void OnEndlabeleditlist (pNMHDR, pResult);
-
  *
-
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::OnEndlabeleditlist(NMHDR* pNMHDR, LRESULT* pResult) {
-	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)pNMHDR;
+void CEsmLevelCreaDlg::OnEndlabeleditlist(NMHDR *pNMHDR, LRESULT *pResult) {
+	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
 	int Count;
 
@@ -448,26 +355,17 @@ void CEsmLevelCreaDlg::OnEndlabeleditlist(NMHDR* pNMHDR, LRESULT* pResult) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLevelCreaDlg::OnEndlabeleditlist()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmLevelCreaDlg::IsModified (void) {
+bool CEsmLevelCreaDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -486,28 +384,20 @@ bool CEsmLevelCreaDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmLevelCreaDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the list control */
 	m_CreatureList.OnInitCtrl();
 	m_CreatureList.SetDlgHandler(m_pParent);
@@ -516,41 +406,35 @@ void CEsmLevelCreaDlg::OnInitialUpdate() {
 	m_CreatureList.SetAcceptDrag(true);
 	m_CreatureList.SetEnableDrag(true);
 	m_CreatureList.SetWantSortMsg(true);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pLevelCrea = (CEsmLevelCrea *) GetRecInfo()->pRecord;
+	m_pLevelCrea = (CEsmLevelCrea *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_ChanceNoneText.SetLimitText(4);
+
 	/* Update the UI data */
 	SetControlData();
 	m_CreatureList.SortItems(l_CreaSortCallBack, ESM_FIELD_CUSTOM);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLevelCreaDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Event - LRESULT OnRecordDrop (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmLevelCreaDlg::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmLevelCreaDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
-	CMWEditDoc* pSourceDoc = (CMWEditDoc *) lParam;
-	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
+	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
+	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)wParam;
 	int ListIndex;
 
 	/* Ensure we only drag from the current document */
@@ -568,31 +452,22 @@ LRESULT CEsmLevelCreaDlg::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
 
 	/* Add a new creature to the list */
 	ListIndex = m_CreatureList.AddItem(pRecInfo);
-	m_CreatureList.SetItemText(ListIndex, 0, _T("1"));    /* Default level 1 */
+	m_CreatureList.SetItemText(ListIndex, 0, _T("1")); /* Default level 1 */
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLevelCreaDlg::OnRecordDrop()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Event - LRESULT  OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmLevelCreaDlg::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmLevelCreaDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
 	int AddCount;
@@ -633,53 +508,35 @@ LRESULT CEsmLevelCreaDlg::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLevelCreaDlg::OnRecordKey()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Event - LRESULT OnRecordSort (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmLevelCreaDlg::OnRecordSort (LPARAM lParam, LPARAM wParam) {
-	esmlistsortdata_t *pSortData = (esmlistsortdata_t *) lParam;
+LRESULT CEsmLevelCreaDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
+	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	m_SortData = pSortData->iField | (pSortData->Reverse << 16);
 	m_CreatureList.SortItems(l_CreaSortCallBack1, (DWORD) this);
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLevelCreaDlg::OnRecordSort()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmLevelCreaDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmLevelCreaDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 	int Index;
 	/* Update an item inside the container */
@@ -693,26 +550,17 @@ int CEsmLevelCreaDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLevelCreaDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::SetControlData (void) {
+void CEsmLevelCreaDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pLevelCrea == NULL) {
 		return;
@@ -721,9 +569,11 @@ void CEsmLevelCreaDlg::SetControlData (void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pLevelCrea->GetID());
 	UpdateTitle(m_pLevelCrea->GetID());
+
 	/* Item strings and values */
 	m_ChanceNoneText.SetWindowText(m_pLevelCrea->GetFieldString(ESM_FIELD_CHANCENONE));
 	m_ChanceNoneText.SetModify(FALSE);
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pLevelCrea->IsBlocked());
 	m_PCLevelCheck.SetCheck(m_pLevelCrea->IsAllPC());
@@ -731,37 +581,28 @@ void CEsmLevelCreaDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLevelCreaDlg Method - void SetCreatureData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::SetCreatureData (void) {
-	CEsmSubNameFix* pNameSubRec;
-	CEsmSubShort* pLevelSubRec;
+void CEsmLevelCreaDlg::SetCreatureData(void) {
+	CEsmSubNameFix *pNameSubRec;
+	CEsmSubShort *pLevelSubRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int ArrayIndex;
 	int ListIndex;
-	pNameSubRec = (CEsmSubNameFix *) m_pLevelCrea->FindFirst(MWESM_SUBREC_CNAM, ArrayIndex);
+	pNameSubRec = (CEsmSubNameFix *)m_pLevelCrea->FindFirst(MWESM_SUBREC_CNAM, ArrayIndex);
 
 	while (pNameSubRec != NULL) {
 		SystemLog.Printf ("Found '%s'", pNameSubRec->GetName());
-		pLevelSubRec = (CEsmSubShort *) m_pLevelCrea->GetSubRecord(ArrayIndex + 1);
+		pLevelSubRec = (CEsmSubShort *)m_pLevelCrea->GetSubRecord(ArrayIndex + 1);
 		pRecInfo = GetDocument()->FindRecord(pNameSubRec->GetName());
 
 		if (pRecInfo != NULL && pLevelSubRec != NULL && pLevelSubRec->IsType(MWESM_SUBREC_INTV)) {
@@ -771,17 +612,10 @@ void CEsmLevelCreaDlg::SetCreatureData (void) {
 			m_CreatureList.SetItemText(ListIndex, 0, Buffer);
 		}
 
-		pNameSubRec = (CEsmSubNameFix *) m_pLevelCrea->FindNext(MWESM_SUBREC_CNAM, ArrayIndex);
+		pNameSubRec = (CEsmSubNameFix *)m_pLevelCrea->FindNext(MWESM_SUBREC_CNAM, ArrayIndex);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLevelCreaDlg::SetCreatureData()
-
  *=========================================================================*/
-
-
-
-
-

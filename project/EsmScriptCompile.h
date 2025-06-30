@@ -40,69 +40,69 @@
 *=========================================================================*/
 
 /* Token flags */
-#define ESTF_ONE    1
-#define ESTF_MANY   2
-#define ESTF_OPT    4
-#define ESTF_STOP   8
+#define ESTF_ONE                        1
+#define ESTF_MANY                       2
+#define ESTF_OPT                        4
+#define ESTF_STOP                       8
 
 /* Used to detect the special 34th local variable bug */
 #define ESMSCR_SPECIALLOCALVAR_INDEX    33
 
 /* Return codes */
-#define ESMSCR_RESULT_OK     0
-#define ESMSCR_RESULT_ERROR -1
-#define ESMSCR_RESULT_WARNING  1
-#define ESMSCR_RESULT_BLOCKEND 2
-#define ESMSCR_RESULT_TABLEEND 3
-#define ESMSCR_RESULT_NOTOKEN  4
+#define ESMSCR_RESULT_OK                0
+#define ESMSCR_RESULT_ERROR            -1
+#define ESMSCR_RESULT_WARNING           1
+#define ESMSCR_RESULT_BLOCKEND          2
+#define ESMSCR_RESULT_TABLEEND          3
+#define ESMSCR_RESULT_NOTOKEN           4
 
 /* Special function opcodes */
 #define ESMSCR_FUNCOPCODE_MESSAGEBOX 0x1000
 
 /* Flags for custom character types */
-#define ESMSCR_CHARTYPE_SPACE       1
-#define ESMSCR_CHARTYPE_PUNCT       2
-#define ESMSCR_CHARTYPE_DIGIT       4
-#define ESMSCR_CHARTYPE_SYMBOLF 8
-#define ESMSCR_CHARTYPE_SYMBOL  16
+#define ESMSCR_CHARTYPE_SPACE           1
+#define ESMSCR_CHARTYPE_PUNCT           2
+#define ESMSCR_CHARTYPE_DIGIT           4
+#define ESMSCR_CHARTYPE_SYMBOLF         8
+#define ESMSCR_CHARTYPE_SYMBOL         16
 
 /* Special characters */
-#define ESMSCR_CHAR_EOL '\r'
-#define ESMSCR_CHAR_COMMENT ';'
-#define ESMSCR_CHAR_STRING  '"'
+#define ESMSCR_CHAR_EOL                '\r'
+#define ESMSCR_CHAR_COMMENT            ';'
+#define ESMSCR_CHAR_STRING             '"'
 
 /* Max defined variable length */
-#define ESMSCR_VAR_MAXLENGTH 32
+#define ESMSCR_VAR_MAXLENGTH            32
 
 /* Maximum compiled script data length */
-#define ESMSCR_DATA_SIZE 65535
+#define ESMSCR_DATA_SIZE                65535
 
 /* Number of local variables allowed (game limited?) */
-#define ESMSCR_MAX_LOCALVARS 255
+#define ESMSCR_MAX_LOCALVARS            255
 
 /* Variable types */
-#define ESMSCR_VAR_UNKNOWN -1
-#define ESMSCR_VAR_SHORT    0
-#define ESMSCR_VAR_LONG     1
-#define ESMSCR_VAR_FLOAT    2
+#define ESMSCR_VAR_UNKNOWN             -1
+#define ESMSCR_VAR_SHORT                0
+#define ESMSCR_VAR_LONG                 1
+#define ESMSCR_VAR_FLOAT                2
 
 /* Compiler message levels */
-#define ESMSCR_MSGLEVEL_ERROR       -1
-#define ESMSCR_MSGLEVEL_NONE        0
-#define ESMSCR_MSGLEVEL_WARNING  1
+#define ESMSCR_MSGLEVEL_ERROR          -1
+#define ESMSCR_MSGLEVEL_NONE            0
+#define ESMSCR_MSGLEVEL_WARNING         1
 
 #define ESMSCR_MAX_FUNCARGS MWESM_SCRIPT_MAXARGS
 
 /* Return values for checking function arguments */
-#define ESMSC_FUNCARG_OK     0
-#define ESMSC_FUNCARG_ERROR  -1
-#define ESMSC_FUNCARG_ENDTABLE -2
+#define ESMSC_FUNCARG_OK                0
+#define ESMSC_FUNCARG_ERROR            -1
+#define ESMSC_FUNCARG_ENDTABLE         -2
 
 /* Number of message IDs */
-#define ESMSCR_MAX_MESSAGES 64
+#define ESMSCR_MAX_MESSAGES            64
 
 /* Max token string length for stack */
-#define ESMSCR_STACK_MAXTOKENSIZE   63
+#define ESMSCR_STACK_MAXTOKENSIZE      63
 
 /*===========================================================================
  *      End of Definitions
@@ -136,7 +136,7 @@ typedef struct esmscrtypeinfo {
 	TCHAR Name[ESMSCR_VAR_MAXLENGTH + 1];
 	int Type;
 
-	void SetName(const TCHAR* pString) {
+	void SetName(const TCHAR *pString) {
 		strnncpy(Name, pString, ESMSCR_VAR_MAXLENGTH);
 	}
 } esmscrtypeinfo_t;
@@ -178,16 +178,16 @@ class CEsmScriptCompile {
   protected:
 	CMWEditDoc *m_pDocument;        /* Parent document */
 
-	static CEsmFile m_ExtraFile;      /* Used to find 'extra' records */
+	static CEsmFile m_ExtraFile;    /* Used to find 'extra' records */
 	static CEsmRecordRefMap m_ExtraRecords;
 
-	TCHAR *m_pScriptText;       /* Raw script text buffer */
-	byte *m_pOutBuffer;     /* Compiled script output buffer */
-	CSString m_ScriptName;       /* Script ID */
+	TCHAR *m_pScriptText;           /* Raw script text buffer */
+	byte *m_pOutBuffer;             /* Compiled script output buffer */
+	CSString m_ScriptName;          /* Script ID */
 
-	TCHAR *m_pParse;        /* Current parsing buffer position */
+	TCHAR *m_pParse;                /* Current parsing buffer position */
 
-	CSString m_Token;        /* Current token parsing information */
+	CSString m_Token;               /* Current token parsing information */
 	CSString m_LastToken;
 	int m_TokenID;
 	int m_CurrentLine;
@@ -201,19 +201,19 @@ class CEsmScriptCompile {
 	bool m_LastTokenNegative;
 	bool m_LastSetNegative;
 
-	esmscrfuncinfo_t *m_pCurrentFunc;       /* Used when parsing a function statement block */
+	esmscrfuncinfo_t *m_pCurrentFunc; /* Used when parsing a function statement block */
 	int m_NumFuncArgs;
 	int m_LastFuncArg;
 	int m_FuncArgIndex;
 
-	CSString m_ErrorMessage;     /* Holds the last compiler error message */
+	CSString m_ErrorMessage;          /* Holds the last compiler error message */
 	bool m_HasErrorMsg;
 	int m_NumErrors;
 	int m_NumWarnings;
 
-	CEsmScriptErrArray m_ErrorArray;       /* Array of script errors from last compile */
+	CEsmScriptErrArray m_ErrorArray;  /* Array of script errors from last compile */
 
-	int *m_pCharTypes;      /* Pointer to a character type array */
+	int *m_pCharTypes;                /* Pointer to a character type array */
 
 	/* Holds the script local variable definitions */
 	esmscrtypeinfo_t m_ShortVars[ESMSCR_MAX_LOCALVARS];
@@ -276,27 +276,27 @@ class CEsmScriptCompile {
   protected:
 
 	/* Add a local variable to the defined array */
-	bool AddLocalVar(const TCHAR* pName, const int Type);
+	bool AddLocalVar(const TCHAR *pName, const int Type);
 
 	/* Add compiled script data */
-	bool AddScriptData(const void* pData, const int Size);
-	bool InsertScriptDataRef(const TCHAR* pData, int Size);
+	bool AddScriptData(const void *pData, const int Size);
+	bool InsertScriptDataRef(const TCHAR *pData, int Size);
 
 	/* Adds an if statement block data to the stack */
 	bool AddIfBlock(const int StatementCount, const int ScriptPos);
 
 	/* Add error or warning messages */
-	void AddError(const TCHAR* pString, ...);
-	void AddWarning(const TCHAR* pString, ...);
-	bool AddMessage(const int MessageID, const TCHAR* pString, ...);
+	void AddError(const TCHAR *pString, ...);
+	void AddWarning(const TCHAR *pString, ...);
+	bool AddMessage(const int MessageID, const TCHAR *pString, ...);
 
 	/* Ensure that the current token is the given type */
 	int AssertToken(const int Token);
 	int AssertToken(const int Token1, const int Token2);
 
 	/* Checks to see if given function argument ID is valid */
-	bool CheckFuncID(const long long ArgFlags, const TCHAR* pID, const bool Optional);
-	bool CheckFuncID1(const long long ArgFlags, const TCHAR* pID, const bool Optional);
+	bool CheckFuncID(const long long ArgFlags, const TCHAR *pID, const bool Optional);
+	bool CheckFuncID1(const long long ArgFlags, const TCHAR *pID, const bool Optional);
 
 	/* Checks if the current function parameter/argument is valid */
 	int CheckFuncArg(void);
@@ -306,17 +306,17 @@ class CEsmScriptCompile {
 	void ClearIfStatementStack(void);
 
 	/* Find a record in the parent document or extra file */
-	CEsmRecord *FindRecord(const char* pID);
-	CEsmRecord *FindRecord(const char* pID, const char* pType);
-	CEsmRecord *FindRecordCarryable(const char* pID);
+	CEsmRecord *FindRecord(const char *pID);
+	CEsmRecord *FindRecord(const char *pID, const char *pType);
+	CEsmRecord *FindRecordCarryable(const char *pID);
 
 	/* Find various symbols */
-	bool FindLocalVar(const TCHAR* pName);
-	int FindLocalVarIndex(const TCHAR* pName, char &Type);
-	int GetGlobalType(const TCHAR* pName);
-	CEsmGlobal *GetGlobal(const TCHAR* pName);
+	bool FindLocalVar(const TCHAR *pName);
+	int FindLocalVarIndex(const TCHAR *pName, char &Type);
+	int GetGlobalType(const TCHAR *pName);
+	CEsmGlobal *GetGlobal(const TCHAR *pName);
 	bool IsSymbolID(CSString& Token);
-	short GetAnimGroupID(const TCHAR* pString);
+	short GetAnimGroupID(const TCHAR *pString);
 
 	/* Converts a function argument ID type flags to a string */
 	const TCHAR *GetFuncArgIDType(const long long FuncArgs);
@@ -596,14 +596,14 @@ class CEsmScriptCompile {
 	/* Output extended function params from the stack */
 	int OutputFuncOp(void);
 	int OutputStoredFuncOp(void);
-	int WriteFuncOp(const TCHAR* ident);
-	int OutputFuncXArgLocal(const TCHAR* name);
-	int OutputFuncXArgNum(int type, const TCHAR* token);
-	char *OutputFuncXArgStringCat(char* buf, const void* newdata, int newdatalen);
+	int WriteFuncOp(const TCHAR *ident);
+	int OutputFuncXArgLocal(const TCHAR *name);
+	int OutputFuncXArgNum(int type, const TCHAR *token);
+	char *OutputFuncXArgStringCat(char *buf, const void *newdata, int newdatalen);
 	int OutputFuncXArgString(const TCHAR* token);
 	int OutputFuncXBlock(void);
 	int OutputLetEnd(void);
-	int PushFuncXArg(int type, const TCHAR* token);
+	int PushFuncXArg(int type, const TCHAR *token);
 
 	/* Output extended if commands */
 	int OutputXIf(void);
@@ -617,7 +617,7 @@ class CEsmScriptCompile {
 	int OutputXEndWhile(void);
 
 	/* Parse the given table */
-	int ParseTable(esmscrparsetable_t* pTable);
+	int ParseTable(esmscrparsetable_t *pTable);
 	int ParseTableMany(esmscrparsetable_t &TableEntry);
 	int ParseTableOne(esmscrparsetable_t &TableEntry);
 
@@ -627,10 +627,10 @@ class CEsmScriptCompile {
 	void SetStrongMsgLevels(void);
 
 	/* Set the script text to be compiled */
-	void SetScriptText(const TCHAR* pString, const int Size);
+	void SetScriptText(const TCHAR *pString, const int Size);
 
 	/* Set class members */
-	void SetDocument(CMWEditDoc* pDoc) {
+	void SetDocument(CMWEditDoc *pDoc) {
 		m_pDocument = pDoc;
 	}
 

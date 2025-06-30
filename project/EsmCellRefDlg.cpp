@@ -1,108 +1,62 @@
 /*===========================================================================
-
  *
-
  * File:    Esmcellrefdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 22, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmCellRefDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
-
 
 DEFINE_FILE("EsmCellRefDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmCellRefDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmCellRefDlg, CDialog)
-
 	//{{AFX_MSG_MAP(CEsmCellRefDlg)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmCellRefDlg Message Map
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Constructor
-
  *
-
  *=========================================================================*/
 
-CEsmCellRefDlg::CEsmCellRefDlg(CWnd* pParent) : CDialog(CEsmCellRefDlg::IDD, pParent) {
+CEsmCellRefDlg::CEsmCellRefDlg(CWnd *pParent) : CDialog(CEsmCellRefDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmCellRefDlg)
 	//}}AFX_DATA_INIT
 	m_HasNewCellRef = true;
@@ -112,26 +66,17 @@ CEsmCellRefDlg::CEsmCellRefDlg(CWnd* pParent) : CDialog(CEsmCellRefDlg::IDD, pPa
 }
 
 /*===========================================================================
-
  *      End of Class CEsmCellRefDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmCellRefDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmCellRefDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmCellRefDlg)
 	DDX_Control(pDX, IDC_SCALETEXT, m_ScaleText);
@@ -145,30 +90,19 @@ void CEsmCellRefDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellRefDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Method - bool DoModal (pCellRef, IsNew, pCell);
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
 
-bool CEsmCellRefDlg::DoModal (CEsmSubCellRef* pCellRef, const bool IsNew, CEsmCell* pCell) {
+bool CEsmCellRefDlg::DoModal(CEsmSubCellRef *pCellRef, const bool IsNew, CEsmCell *pCell) {
 	//DEFINE_FUNCTION("CEsmCellRefDlg::DoModal()");
 	int Result;
 	/* Initialize the dialog members */
@@ -192,33 +126,24 @@ bool CEsmCellRefDlg::DoModal (CEsmSubCellRef* pCellRef, const bool IsNew, CEsmCe
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellRefDlg::DoModal()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCellRefDlg::GetControlData (void) {
+void CEsmCellRefDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmCellRefDlg::GetControlData()");
-	CEsmSubPos6* pPosition;
-	CEsmSubFloat* pScale;
+	CEsmSubPos6 *pPosition;
+	CEsmSubFloat *pScale;
 	pos6data_t *pPosData;
 	CString Buffer;
-	CEsmSubCellRef* pNewCellRef;
-	CEsmSubFRMR* pIndexData;
+	CEsmSubCellRef *pNewCellRef;
+	CEsmSubFRMR *pIndexData;
 
 	/* Create a new cell ref if the current one is not active */
 
@@ -227,7 +152,7 @@ void CEsmCellRefDlg::GetControlData (void) {
 		pNewCellRef->Copy(m_pCellRef);
 		m_pCellRef = pNewCellRef;
 		m_HasNewCellRef = true;
-		pIndexData = (CEsmSubFRMR *) m_pCellRef->FindSubRecord(MWESM_SUBREC_FRMR);
+		pIndexData = (CEsmSubFRMR *)m_pCellRef->FindSubRecord(MWESM_SUBREC_FRMR);
 
 		if (pIndexData != NULL) {
 			pIndexData->SetFlag(1);
@@ -235,61 +160,52 @@ void CEsmCellRefDlg::GetControlData (void) {
 	}
 
 	/* Set the position data */
-	pPosition = (CEsmSubPos6 *) m_pCellRef->FindSubRecord(MWESM_SUBREC_DATA);
+	pPosition = (CEsmSubPos6 *)m_pCellRef->FindSubRecord(MWESM_SUBREC_DATA);
 
 	if (pPosition == NULL) {
-		pPosition = (CEsmSubPos6 *) m_pCell->AllocNewSubRecord(MWESM_SUBREC_DATA);
+		pPosition = (CEsmSubPos6 *)m_pCell->AllocNewSubRecord(MWESM_SUBREC_DATA);
 		m_pCellRef->AddSubRec(pPosition);
 	}
 
 	if (pPosition != NULL) {
 		pPosData = pPosition->GetPosData();
 		m_XPosText.GetWindowText(Buffer);
-		pPosData->PosX = (float) atof(Buffer);
+		pPosData->PosX = (float)atof(Buffer);
 		m_YPosText.GetWindowText(Buffer);
-		pPosData->PosY = (float) atof(Buffer);
+		pPosData->PosY = (float)atof(Buffer);
 		m_ZPosText.GetWindowText(Buffer);
-		pPosData->PosZ = (float) atof(Buffer);
+		pPosData->PosZ = (float)atof(Buffer);
 		m_XRotText.GetWindowText(Buffer);
-		pPosData->RotX = (float) atof(Buffer);
+		pPosData->RotX = (float)atof(Buffer);
 		m_YRotText.GetWindowText(Buffer);
-		pPosData->RotY = (float) atof(Buffer);
+		pPosData->RotY = (float)atof(Buffer);
 		m_ZRotText.GetWindowText(Buffer);
-		pPosData->RotZ = (float) atof(Buffer);
+		pPosData->RotZ = (float)atof(Buffer);
 	}
 
 	/* Set the scale data */
-	pScale = (CEsmSubFloat *) m_pCellRef->FindSubRecord(MWESM_SUBREC_XSCL);
+	pScale = (CEsmSubFloat *)m_pCellRef->FindSubRecord(MWESM_SUBREC_XSCL);
 
 	if (pScale == NULL) {
-		pScale = (CEsmSubFloat *) m_pCell->AllocNewSubRecord(MWESM_SUBREC_XSCL);
+		pScale = (CEsmSubFloat *)m_pCell->AllocNewSubRecord(MWESM_SUBREC_XSCL);
 		m_pCellRef->AddSubRec(pScale);
 	}
 
 	if (pScale != NULL) {
 		m_ScaleText.GetWindowText(Buffer);
-		pScale->SetValue((float) atof(Buffer));
+		pScale->SetValue((float)atof(Buffer));
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellRefDlg::GetControlData()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Event - void OnCancel ();
-
  *
-
  *=========================================================================*/
 
 void CEsmCellRefDlg::OnCancel() {
@@ -297,23 +213,14 @@ void CEsmCellRefDlg::OnCancel() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCellRefDlg::OnCancel()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmCellRefDlg::OnInitDialog() {
@@ -323,23 +230,14 @@ BOOL CEsmCellRefDlg::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCellRefDlg::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Event - void OnOK ();
-
  *
-
  *=========================================================================*/
 
 void CEsmCellRefDlg::OnOK() {
@@ -348,32 +246,23 @@ void CEsmCellRefDlg::OnOK() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmCellRefDlg::OnOK()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmCellRefDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmCellRefDlg::SetControlData (void) {
-	CEsmSubPos6* pPosition;
-	CEsmSubFloat* pScale;
+void CEsmCellRefDlg::SetControlData(void) {
+	CEsmSubPos6 *pPosition;
+	CEsmSubFloat *pScale;
 	pos6data_t *pPosData;
 	CString Buffer;
 	/* Set the position data */
-	pPosition = (CEsmSubPos6 *) m_pCellRef->FindSubRecord(MWESM_SUBREC_DATA);
+	pPosition = (CEsmSubPos6 *)m_pCellRef->FindSubRecord(MWESM_SUBREC_DATA);
 
 	if (pPosition != NULL) {
 		pPosData = pPosition->GetPosData();
@@ -399,7 +288,7 @@ void CEsmCellRefDlg::SetControlData (void) {
 	}
 
 	/* Set the scale data */
-	pScale = (CEsmSubFloat *) m_pCellRef->FindSubRecord(MWESM_SUBREC_XSCL);
+	pScale = (CEsmSubFloat *)m_pCellRef->FindSubRecord(MWESM_SUBREC_XSCL);
 
 	if (pScale != NULL) {
 		Buffer.Format(_T("%f"), pScale->GetValue());
@@ -410,10 +299,5 @@ void CEsmCellRefDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmCellRefDlg::SetControlData()
-
  *=========================================================================*/
-
-
-

@@ -58,7 +58,7 @@ const TCHAR *l_Reserved[] = {
 	_T("Y"),
 	_T("Z"),
 	// _T("reset"),
-	NULL    /* Must be last entry */
+	NULL /* Must be last entry */
 };
 /*===========================================================================
  *      End of Reserved String Array
@@ -77,7 +77,7 @@ const TCHAR *l_Reserved[] = {
  * This is ~7 times faster than the brute IsESMScriptFunction1() function.
  *
  *=========================================================================*/
-bool IsESMScriptFunction(const TCHAR* pString) {
+bool IsESMScriptFunction(const TCHAR *pString) {
 	//DEFINE_FUNCTION("IsESMScriptFunction()");
 	int FirstChar = toupper(*pString) - (int)'A';
 	esmscrfuncinfo_t *pStartSearch;
@@ -122,8 +122,8 @@ bool IsESMScriptFunction(const TCHAR* pString) {
  * Returns true if the given string is a custom function.
  *
  *=========================================================================*/
-bool IsESMScriptCustomFunction(const TCHAR* pString) {
-	CMwCustomFunction* pFunction;
+bool IsESMScriptCustomFunction(const TCHAR *pString) {
+	CMwCustomFunction *pFunction;
 	return g_CustomFunctions.Lookup(pString, pFunction);
 }
 
@@ -137,8 +137,8 @@ bool IsESMScriptCustomFunction(const TCHAR* pString) {
  * Function - esmscrfuncinfo_t* GetESMScriptCustomFuncInfo (pString);
  *
  *=========================================================================*/
-esmscrfuncinfo_t *GetESMScriptCustomFuncInfo(const TCHAR* pString) {
-	CMwCustomFunction* pFunction;
+esmscrfuncinfo_t *GetESMScriptCustomFuncInfo(const TCHAR *pString) {
+	CMwCustomFunction *pFunction;
 	bool Result;
 	Result = g_CustomFunctions.Lookup(pString, pFunction);
 
@@ -159,7 +159,7 @@ esmscrfuncinfo_t *GetESMScriptCustomFuncInfo(const TCHAR* pString) {
  * Function - esmscrfuncinfo_t* GetESMScriptFuncInfo (pString);
  *
  *=========================================================================*/
-esmscrfuncinfo_t *GetESMScriptFuncInfo(const TCHAR* pString) {
+esmscrfuncinfo_t *GetESMScriptFuncInfo(const TCHAR *pString) {
 	int FirstChar = toupper(*pString) - (int)'A';
 	esmscrfuncinfo_t *pStartSearch;
 	int Result;
@@ -206,7 +206,7 @@ esmscrfuncinfo_t *GetESMScriptFuncInfo(const TCHAR* pString) {
  * Typical speed is 0.5 secs for 1000 runs checking various strings.
  *
  *=========================================================================*/
-bool IsESMScriptFunction1(const TCHAR* pString) {
+bool IsESMScriptFunction1(const TCHAR *pString) {
 	//DEFINE_FUNCTION("IsESMScriptFunction1()");
 	int Result;
 	int Index;
@@ -272,7 +272,7 @@ bool IsESMScriptOperator(const TCHAR Char) {
  * on any error.
  *
  *=========================================================================*/
-int GetESMScriptOpToken(const TCHAR* pString) {
+int GetESMScriptOpToken(const TCHAR *pString) {
 	/* 1-byte operators */
 	if (pString[1] == NULL_CHAR) {
 		switch (pString[0]) {
@@ -486,7 +486,7 @@ const TCHAR *GetESMTokenName(const int Token) {
  * Returns true if the given operator is a valid ESM script operator.
  *
  *=========================================================================*/
-bool IsESMScriptOperator(const TCHAR* pString) {
+bool IsESMScriptOperator(const TCHAR *pString) {
 	//DEFINE_FUNCTION("IsESMScriptOperator()");
 	switch (pString[0]) {
 		case '(':
@@ -552,13 +552,12 @@ bool IsESMScriptOperator(const TCHAR* pString) {
  * reserved words (RELEASE).
  *
  *=========================================================================*/
-bool IsESMScriptReserved(const TCHAR* pString) {
+bool IsESMScriptReserved(const TCHAR *pString) {
 	//DEFINE_FUNCTION("IsESMScriptReserved()");
 	return (GetESMScriptResToken(pString) != ESMSCR_TOKEN_UNKNOWN);
 }
 
-
-int GetESMScriptResToken(const TCHAR* pString) {
+int GetESMScriptResToken(const TCHAR *pString) {
 	switch (toupper(pString[0])) {
 		case 'B':
 			if (_stricmp(pString + 1, _T("egin")) == 0) {
@@ -623,7 +622,9 @@ int GetESMScriptResToken(const TCHAR* pString) {
 				return (ESMSCR_TOKEN_RETURN);
 			}
 
-			// if ( _stricmp(pString+1, _T("eset"))    == 0) return (ESMSCR_TOKEN_RESET);
+//			if (_stricmp(pString+1, _T("eset")) == 0) {
+//				return (ESMSCR_TOKEN_RESET);
+//			}
 			break;
 
 		case 'S':
@@ -697,7 +698,7 @@ int GetESMScriptResToken(const TCHAR* pString) {
  * Roughly 0.82 secs for 100000 runs with 15 reserved words (RELEASE).
  *
  *=========================================================================*/
-bool IsESMScriptReserved1(const TCHAR* pString) {
+bool IsESMScriptReserved1(const TCHAR *pString) {
 	//DEFINE_FUNCTION("IsESMScriptReserved1()");
 	int Index;
 	int Result;
@@ -718,4 +719,3 @@ bool IsESMScriptReserved1(const TCHAR* pString) {
 /*===========================================================================
  *      End of Function IsESMScriptReserved1()
  *=========================================================================*/
-

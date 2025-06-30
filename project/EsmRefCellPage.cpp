@@ -1,191 +1,141 @@
 /*===========================================================================
-
  *
-
  * File:    Esmrefcellpage.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 25, 2003
-
  *
-
  * Description
-
  *
-
  * 5 October 2003
-
  *  - Added the 'Index' column to the reference list.
-
  *  - Redid the overall design so that changes to any cell reference
-
  *    are not 'saved' to the active file until the user presses the
-
  *    'Save' button in the dialog.
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmRefCellPage.h"
-
 #include "EsmRecDialog.h"
-
 #include "EsmCellRefDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmRefCellPage, CPropertyPage);
-
 DEFINE_FILE("EsmRefCellPage.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Item List Display Data Array
-
  *
-
  *=========================================================================*/
 
 static esmcoldata_t l_ItemColData[] = {
-
-	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, },
-
-	{ _T("Mod"), ESMSUBLIST_FIELD_MOD, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
-
-	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
-
-	{ _T("Type"), ESM_FIELD_ITEMTYPE, LVCFMT_LEFT, ESMLIST_WIDTH_ITEMTYPE, ESMLIST_SUBITEM_ITEMTYPE },
-
-	{ _T("Index"), ESMSUBLIST_FIELD_INDEX, LVCFMT_LEFT, ESMLIST_WIDTH_INDEX, ESMLIST_SUBITEM_INDEX },
-
-	{ NULL, 0, 0, 0 }   /* Must be last record */
-
+	{
+		_T("ID"),
+		ESM_FIELD_ID,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ID,
+		ESMLIST_SUBITEM_ID,
+	},
+	{
+		_T("Mod"),
+		ESMSUBLIST_FIELD_MOD,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_CHANGED,
+		ESMLIST_SUBITEM_CHANGED
+	},
+	{
+		_T("Name"),
+		ESM_FIELD_NAME,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_NAME,
+		ESMLIST_SUBITEM_NAME
+	},
+	{
+		_T("Type"),
+		ESM_FIELD_ITEMTYPE,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ITEMTYPE,
+		ESMLIST_SUBITEM_ITEMTYPE
+	},
+	{
+		_T("Index"),
+		ESMSUBLIST_FIELD_INDEX,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_INDEX,
+		ESMLIST_SUBITEM_INDEX
+	},
+	{
+		NULL,
+		0,
+		0,
+		0
+	} /* Must be last record */
 };
 
 /*===========================================================================
-
  *      End of Item List Display Data Array
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Begin CEsmRefCellPage Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmRefCellPage, CPropertyPage)
-
 	//{{AFX_MSG_MAP(CEsmRefCellPage)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONEDIT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordEdit)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
 
 	ON_WM_CONTEXTMENU()
 
 	ON_COMMAND(ID_EDIT_CLEAN, OnEditClean)
-
 	ON_COMMAND(ID_CELLREF_EDITREF, OnCellrefEditref)
-
 	ON_UPDATE_COMMAND_UI(ID_CELLREF_EDITREF, OnUpdateCellrefEditref)
-
 	ON_COMMAND(ID_CELLREF_EDIT, OnCellrefEdit)
-
 	ON_UPDATE_COMMAND_UI(ID_CELLREF_EDIT, OnUpdateCellrefEdit)
-
 	ON_COMMAND(ID_CELLREF_DELETE, OnCellrefDelete)
-
 	ON_UPDATE_COMMAND_UI(ID_CELLREF_DELETE, OnUpdateCellrefDelete)
-
 	ON_UPDATE_COMMAND_UI(ID_EDIT_CLEAN, OnUpdateEditClean)
-
 	ON_COMMAND(ID_CELLREF_UNDELETE, OnCellrefUndelete)
-
 	ON_UPDATE_COMMAND_UI(ID_CELLREF_UNDELETE, OnUpdateCellrefUndelete)
-
 	ON_COMMAND(ID_CELLREF_CREATECOPY, OnCellrefCreatecopy)
-
 	ON_UPDATE_COMMAND_UI(ID_CELLREF_CREATECOPY, OnUpdateCellrefCreatecopy)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmRefCellPage Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmRefCellPage::CEsmRefCellPage() : CPropertyPage(CEsmRefCellPage::IDD), m_ModCellRefs(0) {
@@ -196,23 +146,14 @@ CEsmRefCellPage::CEsmRefCellPage() : CPropertyPage(CEsmRefCellPage::IDD), m_ModC
 }
 
 /*===========================================================================
-
  *      End of Class CEsmRefCellPage Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmRefCellPage::~CEsmRefCellPage() {
@@ -220,37 +161,27 @@ CEsmRefCellPage::~CEsmRefCellPage() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmRefCellPage Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - cellrefdata_t* AddNewCellRef (pCellRef);
-
  *
-
  * Attempt to add a new cell reference to the modified reference array.
-
  * Does not create a new cell reference sub-record.
-
  *
-
  *=========================================================================*/
 
-cellrefdata_t *CEsmRefCellPage::AddNewCellRef (CEsmSubCellRef* pCellRef) {
+cellrefdata_t *CEsmRefCellPage::AddNewCellRef(CEsmSubCellRef *pCellRef) {
 	DEFINE_FUNCTION("CEsmRefCellPage::CleanCellRef()");
 	cellrefdata_t *pCellRefData;
+
 	/* Add a new record to the modified array */
 	CreatePointer(pCellRefData, cellrefdata_t);
 	m_ModCellRefs.AddElement(pCellRefData);
+
 	/* Initialize the new cell ref data */
 	pCellRefData->IsNew = true;
 	pCellRefData->Type = ESMCELLREF_MODTYPE_NEW;
@@ -260,31 +191,20 @@ cellrefdata_t *CEsmRefCellPage::AddNewCellRef (CEsmSubCellRef* pCellRef) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::AddNewCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - bool AddNewCellRef (pCellRefData);
-
  *
-
  * Attempt to add a new cell reference to the cell.
-
  *
-
  *=========================================================================*/
 
-bool CEsmRefCellPage::AddNewCellRef (cellrefdata_t* pCellRefData) {
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
+bool CEsmRefCellPage::AddNewCellRef(cellrefdata_t *pCellRefData) {
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
 	/* Remove the cell reference from the cell */
 	pCell->AddCellRef(pCellRefData->pNewCellRef);
 
@@ -298,32 +218,20 @@ bool CEsmRefCellPage::AddNewCellRef (cellrefdata_t* pCellRefData) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::AddNewCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - cellrefdata_t* CleanCellRef (pCellRef);
-
  *
-
  * Updates the modified cell reference array to clean the selected cell
-
  * reference.
-
  *
-
  *=========================================================================*/
 
-cellrefdata_t *CEsmRefCellPage::CleanCellRef (CEsmSubCellRef* pCellRef) {
+cellrefdata_t *CEsmRefCellPage::CleanCellRef(CEsmSubCellRef *pCellRef) {
 	DEFINE_FUNCTION("CEsmRefCellPage::CleanCellRef()");
 	cellrefdata_t *pCellRefData;
 	/* See if the record already exists in array */
@@ -346,6 +254,7 @@ cellrefdata_t *CEsmRefCellPage::CleanCellRef (CEsmSubCellRef* pCellRef) {
 	/* Add a new record to the modified array */
 	CreatePointer(pCellRefData, cellrefdata_t);
 	m_ModCellRefs.AddElement(pCellRefData);
+
 	/* Initialize the new cell ref data */
 	pCellRefData->IsNew = false;
 	pCellRefData->Type = ESMCELLREF_MODTYPE_CLEAN;
@@ -355,31 +264,20 @@ cellrefdata_t *CEsmRefCellPage::CleanCellRef (CEsmSubCellRef* pCellRef) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::CleanCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - bool CleanCellRef (pCellRefData);
-
  *
-
  * Attempt to clean the given cell reference from the active file.
-
  *
-
  *=========================================================================*/
 
-bool CEsmRefCellPage::CleanCellRef (cellrefdata_t* pCellRefData) {
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
+bool CEsmRefCellPage::CleanCellRef(cellrefdata_t *pCellRefData) {
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
 	/* Remove the cell reference from the cell */
 	pCell->DeleteSubRecord(pCellRefData->pOldCellRef);
 
@@ -394,26 +292,17 @@ bool CEsmRefCellPage::CleanCellRef (cellrefdata_t* pCellRefData) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::CleanCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - void ClearCellRefArray (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::ClearCellRefArray (void) {
+void CEsmRefCellPage::ClearCellRefArray(void) {
 	DEFINE_FUNCTION("CEsmRefCellPage::ClearCellRefArray()");
 	cellrefdata_t *pCellRefData;
 	int Index;
@@ -427,30 +316,19 @@ void CEsmRefCellPage::ClearCellRefArray (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::ClearCellRefArray()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - cellrefdata_t* DeleteCellRef (pCellRef);
-
  *
-
  * Adds a delete entry to the reference modified array.
-
  *
-
  *=========================================================================*/
 
-cellrefdata_t *CEsmRefCellPage::DeleteCellRef (CEsmSubCellRef* pCellRef) {
+cellrefdata_t *CEsmRefCellPage::DeleteCellRef(CEsmSubCellRef *pCellRef) {
 	DEFINE_FUNCTION("CEsmRefCellPage::DeleteCellRef()");
 	cellrefdata_t *pCellRefData;
 	/* See if the record already exists in array */
@@ -464,6 +342,7 @@ cellrefdata_t *CEsmRefCellPage::DeleteCellRef (CEsmSubCellRef* pCellRef) {
 	/* Add a new record to the modified array */
 	CreatePointer(pCellRefData, cellrefdata_t);
 	m_ModCellRefs.AddElement(pCellRefData);
+
 	/* Initialize the new cell ref data */
 	pCellRefData->IsNew = false;
 	pCellRefData->Type = ESMCELLREF_MODTYPE_DEL;
@@ -473,37 +352,26 @@ cellrefdata_t *CEsmRefCellPage::DeleteCellRef (CEsmSubCellRef* pCellRef) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::DeleteCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - void DeleteIndex (ListIndex, Delete);
-
  *
-
  * Deletes or undeletes the given list record.
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::DeleteIndex (const int ListIndex, const bool Delete) {
+void CEsmRefCellPage::DeleteIndex(const int ListIndex, const bool Delete) {
 	DEFINE_FUNCTION("CEsmRefCellPage::DeleteIndex()");
-	CEsmSubCellRef* pOldCellRef;
-	CEsmSubCellRef* pNewCellRef;
+	CEsmSubCellRef *pOldCellRef;
+	CEsmSubCellRef *pNewCellRef;
 	CEsmCellRefDlg RefDialog;
 	cellrefdata_t *pCellRefData;
 	/* Get the given cell reference object */
-	pOldCellRef = (CEsmSubCellRef *) m_CellRefList.GetItemData(ListIndex);
+	pOldCellRef = (CEsmSubCellRef *)m_CellRefList.GetItemData(ListIndex);
 
 	if (pOldCellRef == NULL) {
 		return;
@@ -535,32 +403,21 @@ void CEsmRefCellPage::DeleteIndex (const int ListIndex, const bool Delete) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::DeleteIndex()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - bool DeleteCellRef (pCellRefData);
-
  *
-
  * Attempt to delete the given cell reference entirely from the cell.
-
  *
-
  *=========================================================================*/
 
-bool CEsmRefCellPage::DeleteCellRef (cellrefdata_t* pCellRefData) {
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
-	CEsmSubCellRef* pCellRef;
+bool CEsmRefCellPage::DeleteCellRef(cellrefdata_t *pCellRefData) {
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
+	CEsmSubCellRef *pCellRef;
 
 	if (pCellRefData->pOldCellRef == NULL) {
 		pCellRef = NULL;
@@ -597,26 +454,17 @@ bool CEsmRefCellPage::DeleteCellRef (cellrefdata_t* pCellRefData) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::DeleteCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::DoDataExchange(CDataExchange* pDX) {
+void CEsmRefCellPage::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmRefCellPage)
 	DDX_Control(pDX, IDC_OBJECTLIST, m_CellRefList);
@@ -624,32 +472,20 @@ void CEsmRefCellPage::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - cellrefdata_t* FindNewCellRef (pCellRef);
-
  *
-
  * Attempt to find the given cell reference object in the current modified
-
  * reference array. Returns NULL if it is not found.
-
  *
-
  *=========================================================================*/
 
-cellrefdata_t *CEsmRefCellPage::FindNewCellRef (CEsmSubCellRef* pCellRef) {
+cellrefdata_t *CEsmRefCellPage::FindNewCellRef(CEsmSubCellRef *pCellRef) {
 	cellrefdata_t *pCellRefData;
 	int Index;
 
@@ -668,32 +504,20 @@ cellrefdata_t *CEsmRefCellPage::FindNewCellRef (CEsmSubCellRef* pCellRef) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::FindNewCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - cellrefdata_t* FindOldCellRef (pCellRef);
-
  *
-
  * Attempt to find the given cell reference object in the current modified
-
  * reference array. Returns NULL if it is not found.
-
  *
-
  *=========================================================================*/
 
-cellrefdata_t *CEsmRefCellPage::FindOldCellRef (CEsmSubCellRef* pCellRef) {
+cellrefdata_t *CEsmRefCellPage::FindOldCellRef(CEsmSubCellRef *pCellRef) {
 	cellrefdata_t *pCellRefData;
 	int Index;
 
@@ -712,27 +536,18 @@ cellrefdata_t *CEsmRefCellPage::FindOldCellRef (CEsmSubCellRef* pCellRef) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::FindOldCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::GetControlData (void) {
-	CEsmCell* pCell;
+void CEsmRefCellPage::GetControlData(void) {
+	CEsmCell *pCell;
 	cellrefdata_t *pCellRefData;
 	bool Result;
 	int Index;
@@ -743,7 +558,7 @@ void CEsmRefCellPage::GetControlData (void) {
 		return;
 	}
 
-	pCell = (CEsmCell *) m_pRecInfo->pRecord;
+	pCell = (CEsmCell *)m_pRecInfo->pRecord;
 
 	/* Clean/delete/modify/add the required records */
 
@@ -774,56 +589,36 @@ void CEsmRefCellPage::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - CMWEditDoc* GetDocument (void);
-
  *
-
  *=========================================================================*/
 
-CMWEditDoc *CEsmRefCellPage::GetDocument (void) {
+CMWEditDoc *CEsmRefCellPage::GetDocument(void) {
 	DEFINE_FUNCTION("CEsmRefCellPage::GetDocument()");
 	ASSERT(m_pDlgParent != NULL);
 	return m_pDlgParent->GetDocument();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::GetDocument()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - cellrefdata_t* ModifyCellRef (pCellRef);
-
  *
-
  * Adds the given record to the modified reference array.
-
  *
-
  *=========================================================================*/
 
-cellrefdata_t *CEsmRefCellPage::ModifyCellRef (CEsmSubCellRef* pCellRef) {
+cellrefdata_t *CEsmRefCellPage::ModifyCellRef(CEsmSubCellRef *pCellRef) {
 	DEFINE_FUNCTION("CEsmRefCellPage::DeleteCellRef()");
 	cellrefdata_t *pCellRefData;
 	/* See if the record already exists in array */
@@ -837,6 +632,7 @@ cellrefdata_t *CEsmRefCellPage::ModifyCellRef (CEsmSubCellRef* pCellRef) {
 	/* Add a new record to the modified array */
 	CreatePointer(pCellRefData, cellrefdata_t);
 	m_ModCellRefs.AddElement(pCellRefData);
+
 	/* Initialize the new cell ref data */
 	pCellRefData->IsNew = false;
 	pCellRefData->Type = ESMCELLREF_MODTYPE_MOD;
@@ -846,32 +642,21 @@ cellrefdata_t *CEsmRefCellPage::ModifyCellRef (CEsmSubCellRef* pCellRef) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::ModifyCellRef()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - bool ModifyCellRef (pCellRefData);
-
  *
-
  * Attempt to modify and existing cell reference in the cell.
-
  *
-
  *=========================================================================*/
 
-bool CEsmRefCellPage::ModifyCellRef (cellrefdata_t* pCellRefData) {
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
-	CEsmSubCellRef* pCellRef;
+bool CEsmRefCellPage::ModifyCellRef(cellrefdata_t *pCellRefData) {
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
+	CEsmSubCellRef *pCellRef;
 	pCellRef = pCell->FindActiveCellRef(pCellRefData->pOldCellRef);
 
 	/* Don't recreate an active cell reference */
@@ -891,33 +676,22 @@ bool CEsmRefCellPage::ModifyCellRef (cellrefdata_t* pCellRefData) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::ModifyCellRef()
-
  *=========================================================================*/
 
 
-
-
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnCellrefCreatecopy ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRefCellPage::OnCellrefCreatecopy() {
 	DEFINE_FUNCTION("CEsmRefCellPage::OnCellrefDelete()");
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
 	POSITION SelPos;
-	CEsmSubCellRef* pOldCellRef;
-	CEsmSubCellRef* pNewCellRef;
+	CEsmSubCellRef *pOldCellRef;
+	CEsmSubCellRef *pNewCellRef;
 	cellrefdata_t *pCellRefData;
 	int SelectedIndex;
 	/* Copy all selected records */
@@ -925,7 +699,7 @@ void CEsmRefCellPage::OnCellrefCreatecopy() {
 
 	while (SelPos != NULL) {
 		SelectedIndex = m_CellRefList.GetNextSelectedItem(SelPos);
-		pOldCellRef = (CEsmSubCellRef *) m_CellRefList.GetItemData(SelectedIndex);
+		pOldCellRef = (CEsmSubCellRef *)m_CellRefList.GetItemData(SelectedIndex);
 
 		if (pOldCellRef == NULL) {
 			continue;
@@ -936,6 +710,7 @@ void CEsmRefCellPage::OnCellrefCreatecopy() {
 		pNewCellRef->SetIsActive(true);
 		pNewCellRef->SetIndex(pCell->GetNextRefIndex(), 0);
 		pCellRefData = AddNewCellRef(pNewCellRef);
+
 		/* Update the reference list */
 		m_CellRefList.AddItem(pNewCellRef);
 	}
@@ -945,23 +720,14 @@ void CEsmRefCellPage::OnCellrefCreatecopy() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnCellrefCreatecopy()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnCellrefEditref ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRefCellPage::OnCellrefEditref() {
@@ -978,23 +744,14 @@ void CEsmRefCellPage::OnCellrefEditref() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnCellrefEditref()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnCellrefEdit ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRefCellPage::OnCellrefEdit() {
@@ -1011,23 +768,14 @@ void CEsmRefCellPage::OnCellrefEdit() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnCellrefEdit()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnCellrefDelete ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRefCellPage::OnCellrefDelete() {
@@ -1047,23 +795,14 @@ void CEsmRefCellPage::OnCellrefDelete() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnCellrefDelete()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnCellrefUndelete ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRefCellPage::OnCellrefUndelete() {
@@ -1083,28 +822,19 @@ void CEsmRefCellPage::OnCellrefUndelete() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnCellrefUndelete()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnContextMenu (pWnd, point);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::OnContextMenu(CWnd* pWnd, CPoint Point) {
+void CEsmRefCellPage::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	CMenu Menu;
-	CMenu* pPopup;
+	CMenu *pPopup;
 	BOOL Result;
 	CCmdUI MenuState;
 	int Index;
@@ -1123,7 +853,7 @@ void CEsmRefCellPage::OnContextMenu(CWnd* pWnd, CPoint Point) {
 
 	/* Force the update of the menu commands */
 
-	for (Index = 0; Index < (int) pPopup->GetMenuItemCount(); Index++) {
+	for (Index = 0; Index < (int)pPopup->GetMenuItemCount(); Index++) {
 		MenuState.m_nID = pPopup->GetMenuItemID(Index);
 		MenuState.m_nIndex = Index;
 		MenuState.m_pMenu = pPopup;
@@ -1142,28 +872,19 @@ void CEsmRefCellPage::OnContextMenu(CWnd* pWnd, CPoint Point) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnContextMenu()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnEditClean ();
-
  *
-
  *=========================================================================*/
 
 void CEsmRefCellPage::OnEditClean() {
 	POSITION SelPos;
-	CEsmSubCellRef* pCellRef;
+	CEsmSubCellRef *pCellRef;
 	cellrefdata_t *pCellRefData;
 	CString Buffer;
 	int ListIndex;
@@ -1188,7 +909,7 @@ void CEsmRefCellPage::OnEditClean() {
 
 	while (SelPos != NULL) {
 		ListIndex = m_CellRefList.GetNextSelectedItem(SelPos);
-		pCellRef = (CEsmSubCellRef *) m_CellRefList.GetItemData(ListIndex);
+		pCellRef = (CEsmSubCellRef *)m_CellRefList.GetItemData(ListIndex);
 
 		/* Only need to clean active cell references */
 
@@ -1202,23 +923,14 @@ void CEsmRefCellPage::OnEditClean() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnEditClean()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmRefCellPage::OnInitDialog() {
@@ -1234,32 +946,23 @@ BOOL CEsmRefCellPage::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnInitDialog()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - LRESULT OnRecordDrop (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmRefCellPage::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmRefCellPage::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	DEFINE_FUNCTION("CEsmRefCellPage::OnRecordDrop()");
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
 	CString Buffer;
-	CMWEditDoc* pSourceDoc = (CMWEditDoc *) lParam;
-	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
-	CEsmSubCellRef* pNewCellRef;
+	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
+	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)wParam;
+	CEsmSubCellRef *pNewCellRef;
 	cellrefdata_t *pCellRefData;
 
 	/* Ensure we only drag from the current document */
@@ -1277,40 +980,32 @@ LRESULT CEsmRefCellPage::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
 	//return (0);
 	/* Add a new item to the cell */
 	CreatePointer(pNewCellRef, CEsmSubCellRef);
-	pNewCellRef->CreateNew((CEsmCell *) m_pRecInfo->pRecord);
+	pNewCellRef->CreateNew((CEsmCell *)m_pRecInfo->pRecord);
 	pNewCellRef->SetIsActive(true);
 	pNewCellRef->SetIndex(pCell->GetNextRefIndex(), 0);
 	pNewCellRef->SetRefName(pRecInfo->pRecord->GetID());
 	pCellRefData = AddNewCellRef(pNewCellRef);
+
 	/* Update the reference list */
 	m_CellRefList.AddItem(pNewCellRef);
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnRecordDrop()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - LRESULT OnRecordEdit (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmRefCellPage::OnRecordEdit (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
 	DEFINE_FUNCTION("CEsmRefCellPage::OnRecordEdit()");
-	CEsmSubCellRef* pOldCellRef;
-	CEsmSubCellRef* pNewCellRef;
+	CEsmSubCellRef *pOldCellRef;
+	CEsmSubCellRef *pNewCellRef;
 	CEsmCellRefDlg RefDialog;
 	cellrefdata_t *pCellRefData;
 	bool Result;
@@ -1323,7 +1018,7 @@ LRESULT CEsmRefCellPage::OnRecordEdit (LPARAM lParam, LPARAM wParam) {
 		return (0);
 	}
 
-	pOldCellRef = (CEsmSubCellRef *) m_CellRefList.GetItemData(lParam);
+	pOldCellRef = (CEsmSubCellRef *)m_CellRefList.GetItemData(lParam);
 
 	if (pOldCellRef == NULL) {
 		return (0);
@@ -1356,7 +1051,7 @@ LRESULT CEsmRefCellPage::OnRecordEdit (LPARAM lParam, LPARAM wParam) {
 	}
 
 	/* Display the modal edit dialogue */
-	Result = RefDialog.DoModal(pNewCellRef, true, (CEsmCell *) m_pRecInfo->pRecord);
+	Result = RefDialog.DoModal(pNewCellRef, true, (CEsmCell *)m_pRecInfo->pRecord);
 
 	if (!Result) {
 		if (NewAllocated) {
@@ -1382,166 +1077,101 @@ LRESULT CEsmRefCellPage::OnRecordEdit (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnRecordEdit()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmRefCellPage::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmRefCellPage::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event OnRecordKey::OnRecordEdit()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmRefCellPage::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmRefCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnUpdateItem()
-
  *========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Event - void OnUpdateCellrefDelete (pCmdUI);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::OnUpdateCellrefDelete(CCmdUI* pCmdUI) {
+void CEsmRefCellPage::OnUpdateCellrefDelete(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_CellRefList.GetSelectedCount() > 0);
 }
 
-
-
-
-
-void CEsmRefCellPage::OnUpdateEditClean(CCmdUI* pCmdUI) {
+void CEsmRefCellPage::OnUpdateEditClean(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_CellRefList.GetSelectedCount() > 0);
 }
 
-
-
-
-
-void CEsmRefCellPage::OnUpdateCellrefEdit(CCmdUI* pCmdUI) {
+void CEsmRefCellPage::OnUpdateCellrefEdit(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_CellRefList.GetSelectedCount() > 0);
 }
 
-
-
-
-
-void CEsmRefCellPage::OnUpdateCellrefEditref(CCmdUI* pCmdUI) {
+void CEsmRefCellPage::OnUpdateCellrefEditref(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_CellRefList.GetSelectedCount() > 0);
 }
 
-
-
-
-
-void CEsmRefCellPage::OnUpdateCellrefUndelete(CCmdUI* pCmdUI) {
+void CEsmRefCellPage::OnUpdateCellrefUndelete(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_CellRefList.GetSelectedCount() > 0);
 }
 
-
-
-
-
-void CEsmRefCellPage::OnUpdateCellrefCreatecopy(CCmdUI* pCmdUI) {
+void CEsmRefCellPage::OnUpdateCellrefCreatecopy(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_CellRefList.GetSelectedCount() > 0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmRefCellPage::OnUpdateCellrefDelete()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::SetControlData (void) {
+void CEsmRefCellPage::SetControlData(void) {
 	m_CellRefList.SetDlgHandler(m_pDlgParent->GetParentDlg());
 	UpdateCellRefList();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmRefCellPage Method - void UpdateCellRefList (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmRefCellPage::UpdateCellRefList (void) {
-	CEsmSubCellRef* pCellRef;
+void CEsmRefCellPage::UpdateCellRefList(void) {
+	CEsmSubCellRef *pCellRef;
 	cellrefdata_t *pCellRefData;
-	CEsmCell* pCell = (CEsmCell *) m_pRecInfo->pRecord;
+	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;
 	CString Buffer;
 	int ArrayIndex;
 	/* Clear the current list */
@@ -1554,7 +1184,7 @@ void CEsmRefCellPage::UpdateCellRefList (void) {
 	/* Add all existing cell references to the list */
 
 	while (pCell != NULL) {
-		pCellRef = (CEsmSubCellRef *) pCell->FindFirst(MWESM_SUBREC_CREF, ArrayIndex);
+		pCellRef = (CEsmSubCellRef *)pCell->FindFirst(MWESM_SUBREC_CREF, ArrayIndex);
 
 		while (pCellRef != NULL) {
 			pCellRefData = FindOldCellRef(pCellRef);
@@ -1570,10 +1200,10 @@ void CEsmRefCellPage::UpdateCellRefList (void) {
 				m_CellRefList.AddItem(pCellRefData->pNewCellRef);
 			}
 
-			pCellRef = (CEsmSubCellRef *) pCell->FindNext(MWESM_SUBREC_CREF, ArrayIndex);
+			pCellRef = (CEsmSubCellRef *)pCell->FindNext(MWESM_SUBREC_CREF, ArrayIndex);
 		}
 
-		pCell = (CEsmCell *) pCell->GetPrevRecord();
+		pCell = (CEsmCell *)pCell->GetPrevRecord();
 	}
 
 	/* Add any new cell references */
@@ -1590,10 +1220,5 @@ void CEsmRefCellPage::UpdateCellRefList (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmRefCellPage::UpdateCellRefList()
-
  *=========================================================================*/
-
-
-

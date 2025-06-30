@@ -1,104 +1,59 @@
 /*===========================================================================
-
  *
-
  * File:    Esmnpcpage3.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 25, 2003
-
  *
-
  * Description
-
  *
-
  * 14 September 2003
-
  *  - Properly implemented the item count mechanism. The item count is
-
  *    now held only in the actual list. The RecInfo->UserData member is
-
  *    only updated just before a sort.
-
  *  - Added the ability to increment/decrement item counts using the
-
  *    +/- key.
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmNpcPage3.h"
-
 #include "dl_Err.h"
-
 #include "MWEditDoc.h"
-
 #include "EsmDlgArray.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmNpcPage3, CPropertyPage);
-
 DEFINE_FILE("EsmNpcPage3.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Function - int CALLBACK l_ContSortCallBack (lParam1, lParam2, lParamSort);
-
  *
-
  *=========================================================================*/
 
 int CALLBACK l_NPCItemSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
-	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*) lParam1;
-	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*) lParam2;
+	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t *)lParam1;
+	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t *)lParam2;
 	int SortType = lParamSort & 0xFFFF;
 	int Flags = lParamSort >> 16;
 	int Result;
@@ -117,95 +72,90 @@ int CALLBACK l_NPCItemSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lPara
 }
 
 /*===========================================================================
-
  *      End of Function CALLBACK l_ContSortCallBack()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Item List Display Data Array
-
  *
-
  *=========================================================================*/
 
 static esmcoldata_t l_ItemColData[] = {
-
-	{ _T("Count"), ESM_FIELD_CUSTOM, LVCFMT_CENTER, ESMLIST_WIDTH_COUNT + 20, ESMLIST_SUBITEM_COUNT, l_NPCItemSortCallBack },
-
-	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, },
-
-	{ _T("Mod"), ESM_FIELD_CHANGED, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
-
-	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
-
-	{ _T("Type"), ESM_FIELD_ITEMTYPE, LVCFMT_LEFT, ESMLIST_WIDTH_ITEMTYPE, ESMLIST_SUBITEM_ITEMTYPE },
-
-	{ NULL, 0, 0, 0 }   /* Must be last record */
-
+	{
+		_T("Count"),
+		ESM_FIELD_CUSTOM,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_COUNT + 20,
+		ESMLIST_SUBITEM_COUNT,
+		l_NPCItemSortCallBack
+	},
+	{
+		_T("ID"),
+		ESM_FIELD_ID,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ID,
+		ESMLIST_SUBITEM_ID,
+	},
+	{
+		_T("Mod"),
+		ESM_FIELD_CHANGED,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_CHANGED,
+		ESMLIST_SUBITEM_CHANGED
+	},
+	{
+		_T("Name"),
+		ESM_FIELD_NAME,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_NAME,
+		ESMLIST_SUBITEM_NAME
+	},
+	{
+		_T("Type"),
+		ESM_FIELD_ITEMTYPE,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ITEMTYPE,
+		ESMLIST_SUBITEM_ITEMTYPE
+	},
+	{
+		NULL,
+		0,
+		0,
+		0
+	} /* Must be last record */
 };
 
 /*===========================================================================
-
  *      End of Item List Display Data Array
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmNpcPage3 Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmNpcPage3, CPropertyPage)
-
 	//{{AFX_MSG_MAP(CEsmNpcPage3)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_NOTIFY(LVN_ENDLABELEDIT, IDC_ITEMLIST, OnEndlabeleditItemlist)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONSORT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordSort)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmNpcPage3 Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmNpcPage3::CEsmNpcPage3() : CPropertyPage(CEsmNpcPage3::IDD) {
@@ -216,49 +166,31 @@ CEsmNpcPage3::CEsmNpcPage3() : CPropertyPage(CEsmNpcPage3::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmNpcPage3 Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmNpcPage3::~CEsmNpcPage3() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmNpcPage3 Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage3::DoDataExchange(CDataExchange* pDX) {
+void CEsmNpcPage3::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmNpcPage3)
 	DDX_Control(pDX, IDC_ENCUMLABEL, m_WeightLabel);
@@ -267,28 +199,19 @@ void CEsmNpcPage3::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage3::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage3::GetControlData (void) {
-	CEsmNpc* pNpc;
-	CEsmSubNPCO* pItemName;
+void CEsmNpcPage3::GetControlData(void) {
+	CEsmNpc *pNpc;
+	CEsmSubNPCO *pItemName;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int ListIndex;
@@ -297,7 +220,7 @@ void CEsmNpcPage3::GetControlData (void) {
 		return;
 	}
 
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	/* Delete all current spell records */
 	pNpc->DeleteSubRecords(MWESM_SUBREC_NPCO);
 
@@ -305,7 +228,7 @@ void CEsmNpcPage3::GetControlData (void) {
 
 	for (ListIndex = 0; ListIndex < m_ItemList.GetItemCount(); ListIndex++) {
 		pRecInfo = m_ItemList.GetRecInfo(ListIndex);
-		pItemName = (CEsmSubNPCO *) pNpc->AllocateSubRecord(MWESM_SUBREC_NPCO);
+		pItemName = (CEsmSubNPCO *)pNpc->AllocateSubRecord(MWESM_SUBREC_NPCO);
 		pItemName->CreateNew();
 		pItemName->SetItem(pRecInfo->pRecord->GetID());
 		Buffer = m_ItemList.GetItemText(ListIndex, 0);
@@ -314,53 +237,35 @@ void CEsmNpcPage3::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage3::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Method - CMWEditDoc* GetDocument (void);
-
  *
-
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage3::GetDocument (void) {
+CMWEditDoc *CEsmNpcPage3::GetDocument(void) {
 	DEFINE_FUNCTION("CEsmNpcPage3::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage3::GetDocument()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Event - void OnEndlabeleditItemlist (pNMHDR, pResult);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage3::OnEndlabeleditItemlist(NMHDR* pNMHDR, LRESULT* pResult) {
-	LV_DISPINFO* pDispInfo = (LV_DISPINFO*)pNMHDR;
+void CEsmNpcPage3::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
+	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
 	int Count;
 
@@ -384,23 +289,14 @@ void CEsmNpcPage3::OnEndlabeleditItemlist(NMHDR* pNMHDR, LRESULT* pResult) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage3::OnEndlabeleditItemlist()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmNpcPage3::OnInitDialog() {
@@ -418,28 +314,19 @@ BOOL CEsmNpcPage3::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage3::OnInitDialog()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Event - LRESULT OnRecordDrop (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmNpcPage3::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmNpcPage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
-	CMWEditDoc* pSourceDoc = (CMWEditDoc *) lParam;
+	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
 	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
 	int ListIndex;
 	int Count;
@@ -462,7 +349,7 @@ LRESULT CEsmNpcPage3::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
 
 	if (ListIndex < 0) {
 		ListIndex = m_ItemList.AddItem(pRecInfo);
-		m_ItemList.SetItemText(ListIndex, 0, _T("1"));  /* Default 1 item */
+		m_ItemList.SetItemText(ListIndex, 0, _T("1")); /* Default 1 item */
 	}
 	/* Update an existing item in the npc */
 	else {
@@ -477,26 +364,17 @@ LRESULT CEsmNpcPage3::OnRecordDrop (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage3::OnRecordDrop()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmNpcPage3::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmNpcPage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
 	int AddCount;
@@ -535,80 +413,53 @@ LRESULT CEsmNpcPage3::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage3::OnRecordKey()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Event - LRESULT OnRecordSort (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmNpcPage3::OnRecordSort (LPARAM lParam, LPARAM wParam) {
-	esmlistsortdata_t *pSortData = (esmlistsortdata_t *) lParam;
+LRESULT CEsmNpcPage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
+	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	UpdateUserData();
 	m_ItemList.SortItems(l_NPCItemSortCallBack, pSortData->iField | (pSortData->Reverse << 16));
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage3::OnRecordSort()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmNpcPage3::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmNpcPage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	m_ItemList.UpdateItem(pRecInfo);
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage3::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage3::SetControlData (void) {
-	CEsmNpc* pNpc;
-	CEsmSubNPCO* pItemName;
+void CEsmNpcPage3::SetControlData(void) {
+	CEsmNpc *pNpc;
+	CEsmSubNPCO *pItemName;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int ArrayIndex;
@@ -619,8 +470,8 @@ void CEsmNpcPage3::SetControlData (void) {
 	}
 
 	m_ItemList.SetDlgHandler(m_pDlgHandler);
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
-	pItemName = (CEsmSubNPCO *) pNpc->FindFirst(MWESM_SUBREC_NPCO, ArrayIndex);
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
+	pItemName = (CEsmSubNPCO *)pNpc->FindFirst(MWESM_SUBREC_NPCO, ArrayIndex);
 
 	while (pItemName != NULL) {
 		pRecInfo = GetDocument()->FindRecord(pItemName->GetItem());
@@ -635,7 +486,7 @@ void CEsmNpcPage3::SetControlData (void) {
 			SystemLog.Printf ("\t\tItem '%s' not found!", pItemName->GetItem());
 		}
 
-		pItemName = (CEsmSubNPCO *) pNpc->FindNext(MWESM_SUBREC_NPCO, ArrayIndex);
+		pItemName = (CEsmSubNPCO *)pNpc->FindNext(MWESM_SUBREC_NPCO, ArrayIndex);
 	}
 
 	UpdateTotalWeight();
@@ -643,26 +494,17 @@ void CEsmNpcPage3::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage3::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Method - void UpdateTotalWeight (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage3::UpdateTotalWeight (void) {
+void CEsmNpcPage3::UpdateTotalWeight(void) {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int Index;
@@ -670,7 +512,7 @@ void CEsmNpcPage3::UpdateTotalWeight (void) {
 	float Weight;
 
 	for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
-		pRecInfo = (esmrecinfo_t*) m_ItemList.GetItemData(Index);
+		pRecInfo = (esmrecinfo_t *)m_ItemList.GetItemData(Index);
 		Weight = (float)atof(pRecInfo->pRecord->GetFieldString(ESM_FIELD_WEIGHT));
 		Buffer = m_ItemList.GetItemText(Index, 0);
 		Total += Weight * abs(atoi(Buffer));
@@ -681,32 +523,20 @@ void CEsmNpcPage3::UpdateTotalWeight (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage3::UpdateTotalWeight()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage3 Method - void UpdateUserData (void);
-
  *
-
  * Updates the user data in the recinfo pointers to match the current item
-
  * count for sorting.
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage3::UpdateUserData (void) {
+void CEsmNpcPage3::UpdateUserData(void) {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
 	int Index;
@@ -717,14 +547,11 @@ void CEsmNpcPage3::UpdateUserData (void) {
 	for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
 		Buffer = m_ItemList.GetItemText(Index, 0);
 		Count = atoi(Buffer);
-		pRecInfo = (esmrecinfo_t *) m_ItemList.GetItemData(Index);
+		pRecInfo = (esmrecinfo_t *)m_ItemList.GetItemData(Index);
 		pRecInfo->UserData = Count;
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage3::UpdateUserData()
-
  *=========================================================================*/
-

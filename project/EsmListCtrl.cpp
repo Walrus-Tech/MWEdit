@@ -78,8 +78,8 @@ END_MESSAGE_MAP()
  *
  *=========================================================================*/
 int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
-	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*)lParam1;
-	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*)lParam2;
+	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t *)lParam1;
+	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t *)lParam2;
 	int SortType = lParamSort & 0xFFFF;
 	int Flags = lParamSort >> 16;
 	int Result;
@@ -145,7 +145,7 @@ CEsmListCtrl::~CEsmListCtrl() {
 		delete m_pDragImage;
 	}
 
-	byte* pArray = (byte*)m_ppDragRecords;
+	byte* pArray = (byte *)m_ppDragRecords;
 	DestroyArrayPointer(pArray);
 	m_ppDragRecords = NULL;
 }
@@ -162,7 +162,7 @@ CEsmListCtrl::~CEsmListCtrl() {
  * Add an item to the end of the list.
  *
  *=========================================================================*/
-int CEsmListCtrl::AddItem(esmrecinfo_t* pRecInfo) {
+int CEsmListCtrl::AddItem(esmrecinfo_t *pRecInfo) {
 	int ListIndex;
 	/* Add the item to the end of the list */
 	ListIndex = InsertItem(GetItemCount(), "", GetImageIndex(pRecInfo->pRecord));
@@ -191,7 +191,7 @@ int CEsmListCtrl::AddItem(esmrecinfo_t* pRecInfo) {
  *=========================================================================*/
 #if !defined(NO_ESMLIST_EDIT)
 
-void CEsmListCtrl::DropItemOnList(CEsmListCtrl* pDropList) {
+void CEsmListCtrl::DropItemOnList(CEsmListCtrl *pDropList) {
 	int Index;
 
 	/* Ignore if we are just dropping onto itself */
@@ -290,7 +290,7 @@ void CEsmListCtrl::EditSelectedItem(void) {
  * Class CEsmListCtrl Method - int FindRecord (pRecInfo);
  *
  *=========================================================================*/
-int CEsmListCtrl::FindRecord(esmrecinfo_t* pRecInfo) {
+int CEsmListCtrl::FindRecord(esmrecinfo_t *pRecInfo) {
 	LVFINDINFO FindInfo;
 	FindInfo.flags = LVFI_PARAM;
 	FindInfo.lParam = (DWORD)pRecInfo;
@@ -340,7 +340,7 @@ esmrecinfo_t *CEsmListCtrl::GetRecInfo(const int Item) {
 		return (NULL);
 	}
 
-	return (esmrecinfo_t*)GetItemData(Item);
+	return (esmrecinfo_t *)GetItemData(Item);
 }
 
 /*===========================================================================
@@ -355,7 +355,7 @@ esmrecinfo_t *CEsmListCtrl::GetRecInfo(const int Item) {
  * Description
  *
  *=========================================================================*/
-int CEsmListCtrl::GetImageIndex(CEsmRecord* pRecord) {
+int CEsmListCtrl::GetImageIndex(CEsmRecord *pRecord) {
 	if (pRecord->IsType(MWESM_REC_ACTI)) {
 		return ESMLIST_IMAGE_ACTIVATOR;
 	} else if (pRecord->IsType(MWESM_REC_ARMO)) {
@@ -451,7 +451,7 @@ int CEsmListCtrl::GetImageIndex(CEsmRecord* pRecord) {
  * Initializes the object list with the given array of column data.
  *
  *=========================================================================*/
-void CEsmListCtrl::InitObjectList(esmcoldata_t* pColData) {
+void CEsmListCtrl::InitObjectList(esmcoldata_t *pColData) {
 	int Index = 0;
 	BOOL Result;
 	/* Remove all items and columns from the list */
@@ -469,7 +469,10 @@ void CEsmListCtrl::InitObjectList(esmcoldata_t* pColData) {
 
 	/* Add the required columns */
 	while (pColData[Index].pName != NULL) {
-		InsertColumn(Index, pColData[Index].pName, pColData[Index].Format, pColData[Index].Width,
+		InsertColumn(Index,
+		             pColData[Index].pName,
+		             pColData[Index].Format,
+		             pColData[Index].Width,
 		             pColData[Index].SubItem);
 		m_ColSubItems[pColData[Index].SubItem] = Index;
 		Index++;
@@ -492,7 +495,7 @@ void CEsmListCtrl::InitObjectList(esmcoldata_t* pColData) {
  * Add an item to the given index in the list.
  *
  *=========================================================================*/
-int CEsmListCtrl::InsertRecord(const int Index, esmrecinfo_t* pRecInfo) {
+int CEsmListCtrl::InsertRecord(const int Index, esmrecinfo_t *pRecInfo) {
 	int ListIndex;
 	/* Add the item to the end of the list */
 	ListIndex = InsertItem(Index, "", GetImageIndex(pRecInfo->pRecord));
@@ -517,9 +520,9 @@ int CEsmListCtrl::InsertRecord(const int Index, esmrecinfo_t* pRecInfo) {
  * Class CEsmListCtrl Event - void OnBeginDrag (pNMHDR, pResult);
  *
  *=========================================================================*/
-void CEsmListCtrl::OnBeginDrag(NMHDR* pNMHDR, LRESULT* pResult) {
+void CEsmListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
 	DEFINE_FUNCTION("CEsmListCtrl::OnBeginDrag()");
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	LVITEM ItemInfo;
 	POINT DragPoint;
 	BOOL Result;
@@ -540,8 +543,8 @@ void CEsmListCtrl::OnBeginDrag(NMHDR* pNMHDR, LRESULT* pResult) {
 	}
 
 	/* Copy the records we wish to drag */
-	CreateArrayPointer(pArray, byte, sizeof(esmrecinfo_t*) * GetSelectedCount());
-	m_ppDragRecords = (esmrecinfo_t**)pArray;
+	CreateArrayPointer(pArray, byte, sizeof(esmrecinfo_t *) * GetSelectedCount());
+	m_ppDragRecords = (esmrecinfo_t **)pArray;
 	SelPos = GetFirstSelectedItemPosition();
 	m_NumDragRecords = GetSelectedCount();
 	Index = 0;
@@ -560,6 +563,7 @@ void CEsmListCtrl::OnBeginDrag(NMHDR* pNMHDR, LRESULT* pResult) {
 	m_DropIndex = 0;
 	m_pDropWnd = this;
 	m_pDropList = NULL;
+
 	/* Create the image for dragging */
 	ItemInfo.mask = LVIF_IMAGE;
 	ItemInfo.iItem = pNMListView->iItem;
@@ -616,8 +620,8 @@ void CEsmListCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
  * Class CEsmListCtrl Event - void OnColumnclick (pNMHDR, pResult);
  *
  *=========================================================================*/
-void CEsmListCtrl::OnColumnclick(NMHDR* pNMHDR, LRESULT* pResult) {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+void CEsmListCtrl::OnColumnclick(NMHDR *pNMHDR, LRESULT *pResult) {
+	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	int Data;
 	int FieldType;
 	*pResult = 0;
@@ -686,8 +690,8 @@ void CEsmListCtrl::OnColumnclick(NMHDR* pNMHDR, LRESULT* pResult) {
  * Class CEsmListCtrl Event - void OnCustomdraw (pNMHDR, pResult);
  *
  *=========================================================================*/
-void CEsmListCtrl::OnCustomdraw(NMHDR* pNMHDR, LRESULT* pResult) {
-	NMLVCUSTOMDRAW* pLVCD = reinterpret_cast<NMLVCUSTOMDRAW *>(pNMHDR);
+void CEsmListCtrl::OnCustomdraw(NMHDR *pNMHDR, LRESULT *pResult) {
+	NMLVCUSTOMDRAW *pLVCD = reinterpret_cast<NMLVCUSTOMDRAW *>(pNMHDR);
 	/* Take the default processing unless we set this to something else below. */
 	*pResult = CDRF_DODEFAULT;
 
@@ -729,7 +733,7 @@ void CEsmListCtrl::OnCustomdraw(NMHDR* pNMHDR, LRESULT* pResult) {
  * Class CEsmListCtrl Event - void OnDblclk (pNMHDR, pResult);
  *
  *=========================================================================*/
-void CEsmListCtrl::OnDblclk(NMHDR* pNMHDR, LRESULT* pResult) {
+void CEsmListCtrl::OnDblclk(NMHDR *pNMHDR, LRESULT *pResult) {
 #if !defined(NO_ESMLIST_EDIT)
 	esmrecinfo_t *pRecInfo;
 	LPNMLISTVIEW pListView = (LPNMLISTVIEW)pNMHDR;
@@ -775,7 +779,7 @@ void CEsmListCtrl::OnDblclk(NMHDR* pNMHDR, LRESULT* pResult) {
  *=========================================================================*/
 #if !defined(NO_ESMLIST_EDIT)
 
-int CEsmListCtrl::OnDropRecord(CMWEditDoc* pDocument, esmrecinfo_t* pRecInfo) {
+int CEsmListCtrl::OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo) {
 	//GetParent()->SendNotifyMessage(ESMLIST_NOTIFY_ONDROP, 0, (LPARAM) pRecInfo);
 	GetParent()->SendMessage(ESMLIST_NOTIFY_ONDROP, (LPARAM)pDocument, (LPARAM)pRecInfo);
 	return (0);
@@ -826,8 +830,8 @@ void CEsmListCtrl::OnInitCtrl(void) {
  * Class CEsmListCtrl Event - void OnItemchanged (pNMHDR, pResult);
  *
  *=========================================================================*/
-void CEsmListCtrl::OnItemchanged(NMHDR* pNMHDR, LRESULT* pResult) {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+void CEsmListCtrl::OnItemchanged(NMHDR *pNMHDR, LRESULT *pResult) {
+	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	POSITION SelPos;
 	int SelIndex;
 	*pResult = 0;
@@ -926,14 +930,14 @@ void CEsmListCtrl::OnLButtonUp(UINT nFlags, CPoint Point) {
 
 	/* If window is CListCtrl, we perform the drop */
 	if (pDropWnd->IsKindOf(RUNTIME_CLASS(CEsmListCtrl))) {
-		m_pDropList = (CEsmListCtrl*)pDropWnd;
+		m_pDropList = (CEsmListCtrl *)pDropWnd;
 #if !defined(NO_ESMLIST_EDIT)
 		DropItemOnList(m_pDropList);
 #endif
 	}
 
 	/* Delete the drag array of records */
-	byte* pArray = (byte*)m_ppDragRecords;
+	byte *pArray = (byte *)m_ppDragRecords;
 	DestroyArrayPointer(pArray);
 	m_ppDragRecords = NULL;
 	m_NumDragRecords = 0;
@@ -963,9 +967,9 @@ void CEsmListCtrl::OnMouseMove(UINT nFlags, CPoint Point) {
 	ClientToScreen(&MousePt);
 	/* Move the drag image to those coordinates */
 	m_pDragImage->DragMove(MousePt);
-	m_pDragImage->DragShowNolock(false);    /* Smoother updates */
+	m_pDragImage->DragShowNolock(false); /* Smoother updates */
 	/* Get the CWnd pointer of the window that is under the mouse cursor */
-	CWnd* pDropWnd = WindowFromPoint(MousePt);
+	CWnd *pDropWnd = WindowFromPoint(MousePt);
 	ASSERT(pDropWnd);
 	/* Save current window pointer as the CListCtrl we are dropping onto */
 	m_pDropWnd = pDropWnd;
@@ -973,7 +977,7 @@ void CEsmListCtrl::OnMouseMove(UINT nFlags, CPoint Point) {
 
 	/* If we are hovering over a CEsmListCtrl we need to adjust the highlights */
 	if (pDropWnd->IsKindOf(RUNTIME_CLASS(CEsmListCtrl))) {
-		CEsmListCtrl* pList = (CEsmListCtrl*)pDropWnd;
+		CEsmListCtrl *pList = (CEsmListCtrl *)pDropWnd;
 		UINT uFlags;
 
 		/* Get the item that is below cursor, highlight, and redraw it */
@@ -1005,15 +1009,16 @@ void CEsmListCtrl::OnMouseMove(UINT nFlags, CPoint Point) {
  * Description
  *
  *=========================================================================*/
-void CEsmListCtrl::SetItem(const int ListIndex, esmrecinfo_t* pRecInfo, esmcoldata_t* pColInfo) {
-	CEsmRecord* pRecord = pRecInfo->pRecord;
+void CEsmListCtrl::SetItem(const int ListIndex, esmrecinfo_t *pRecInfo, esmcoldata_t *pColInfo) {
+	CEsmRecord *pRecord = pRecInfo->pRecord;
 	int ColIndex;
 	bool ClearFields = false;
 
 	for (ColIndex = 0; pColInfo[ColIndex].pName != NULL; ColIndex++) {
 		if (pColInfo[ColIndex].SubItem != ESM_FIELD_CUSTOM) {
 			if (!ClearFields) {
-				SetItemText(ListIndex, m_ColSubItems[pColInfo[ColIndex].SubItem],
+				SetItemText(ListIndex,
+				            m_ColSubItems[pColInfo[ColIndex].SubItem],
 				            pRecord->GetFieldString(pColInfo[ColIndex].FieldType));
 
 				if (pColInfo[ColIndex].SubItem == ESM_FIELD_CHANGED && pRecord->IsDeleted()) {
@@ -1076,7 +1081,7 @@ void CEsmListCtrl::UpdateItem(const int Index) {
 	//RedrawItems(Index, Index);
 }
 
-void CEsmListCtrl::UpdateItem(esmrecinfo_t* pRecInfo) {
+void CEsmListCtrl::UpdateItem(esmrecinfo_t *pRecInfo) {
 	int Index;
 	Index = FindRecord(pRecInfo);
 
@@ -1088,4 +1093,3 @@ void CEsmListCtrl::UpdateItem(esmrecinfo_t* pRecInfo) {
 /*===========================================================================
  *      End of Class Method CEsmListCtrl::UpdateItem()
  *=========================================================================*/
-

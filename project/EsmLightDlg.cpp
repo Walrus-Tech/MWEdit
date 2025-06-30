@@ -1,121 +1,67 @@
 /*===========================================================================
-
  *
-
  * File:    Esmlightdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 16, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmLightDlg.h"
-
 #include "mmsystem.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmLightDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmLightDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmLightDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmLightDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmLightDlg)
-
 	ON_BN_CLICKED(IDC_COLORBUTTON, OnColorbutton)
-
 	ON_BN_CLICKED(IDC_CANCARRYCHECK, OnCancarrycheck)
-
 	ON_EN_CHANGE(IDC_REDTEXT, OnChangeColor)
-
 	ON_EN_CHANGE(IDC_GREENTEXT, OnChangeColor)
-
 	ON_EN_CHANGE(IDC_BLUETEXT, OnChangeColor)
-
 	ON_BN_CLICKED(IDC_SOUNDPLAY, OnSoundPlay)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmLightDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmLightDlg::CEsmLightDlg() : CEsmRecDialog(CEsmLightDlg::IDD) {
@@ -125,33 +71,26 @@ CEsmLightDlg::CEsmLightDlg() : CEsmRecDialog(CEsmLightDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmLightDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmLightDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmLightDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmLightDlg)
 	DDX_Control(pDX, IDC_RSPIN, m_RedSpin);
 	DDX_Control(pDX, IDC_GSPIN, m_GreenSpin);
 	DDX_Control(pDX, IDC_BSPIN, m_BlueSpin);
+
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 	DDX_Control(pDX, IDC_COLORBOX, m_ColorBox);
+
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
 	DDX_Control(pDX, IDC_CANCARRYCHECK, m_CanCarryCheck);
@@ -159,50 +98,46 @@ void CEsmLightDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_FIRECHECK, m_FireCheck);
 	DDX_Control(pDX, IDC_DYNAMICCHECK, m_DynamicCheck);
 	DDX_Control(pDX, IDC_NEGATIVECHECK, m_NegativeCheck);
+
 	DDX_Control(pDX, IDC_VALUETEXT, m_ValueText);
 	DDX_Control(pDX, IDC_WEIGHTTEXT, m_WeightText);
+
 	DDX_Control(pDX, IDC_FLICKERLIST, m_FlickerList);
 	DDX_Control(pDX, IDC_SOUNDLIST, m_SoundList);
+
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_RADIUSTEXT, m_RadiusText);
 	DDX_Control(pDX, IDC_TIMETEXT, m_TimeText);
 	DDX_Control(pDX, IDC_REDTEXT, m_RedText);
 	DDX_Control(pDX, IDC_GREENTEXT, m_GreenText);
 	DDX_Control(pDX, IDC_BLUETEXT, m_BlueText);
+
 	DDX_Control(pDX, IDC_ICONBUTTON, m_IconButton);
 	DDX_Control(pDX, IDC_MODELBUTTON, m_ModelButton);
+
 	DDX_Control(pDX, IDC_SCRIPTLIST, m_ScriptList);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLightDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmLightDlg::GetControlData (void) {
+void CEsmLightDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmLightDlg::GetControlData()");
 	lightdata_t *pLightData;
 	CString Buffer;
 	int Index;
 	/* Update the armor pointer and data */
-	m_pLight = (CEsmLight *) GetRecInfo()->pRecord;
+	m_pLight = (CEsmLight *)GetRecInfo()->pRecord;
 
 	if (m_pLight == NULL) {
 		return;
@@ -221,18 +156,22 @@ void CEsmLightDlg::GetControlData (void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pLight->SetName(TrimStringSpace(Buffer));
+
 	/* Item weight */
 	m_WeightText.GetWindowText(Buffer);
-	pLightData->Weight = (float) atof(Buffer);
+	pLightData->Weight = (float)atof(Buffer);
+
 	/* Item value */
 	m_ValueText.GetWindowText(Buffer);
 	pLightData->Value = atoi(Buffer);
+
 	/* Light radius */
 	m_RadiusText.GetWindowText(Buffer);
 	pLightData->Radius = atoi(Buffer);
+
 	/* Flicker list */
 	Index = m_FlickerList.GetCurSel();
-	pLightData->Flags &= ~pLightData->Flags;  /* Clear flicker flags */
+	pLightData->Flags &= ~pLightData->Flags; /* Clear flicker flags */
 
 	if (Index >= 0) {
 		pLightData->Flags = m_FlickerList.GetItemData(Index);
@@ -245,7 +184,7 @@ void CEsmLightDlg::GetControlData (void) {
 		m_TimeText.GetWindowText(Buffer);
 		pLightData->Time = atoi(Buffer);
 		m_WeightText.GetWindowText(Buffer);
-		pLightData->Weight = (float) atof(Buffer);
+		pLightData->Weight = (float)atof(Buffer);
 		m_ValueText.GetWindowText(Buffer);
 		pLightData->Value = atoi(Buffer);
 		m_IconButton.GetWindowText(Buffer);
@@ -275,18 +214,23 @@ void CEsmLightDlg::GetControlData (void) {
 	pLightData->Green = (byte)atoi(Buffer);
 	m_BlueText.GetWindowText(Buffer);
 	pLightData->Blue = (byte)atoi(Buffer);
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pLight->SetScript(TrimStringSpace(Buffer));
+
 	/* Item sound */
 	m_SoundList.GetWindowText(Buffer);
 	m_pLight->SetSound(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pLight->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pLight->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pLight->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pLight->SetBlocked(m_BlockedCheck.GetCheck() != 0);
@@ -311,26 +255,17 @@ void CEsmLightDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLightDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmLightDlg::IsModified (void) {
+bool CEsmLightDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -357,23 +292,14 @@ bool CEsmLightDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLightDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Event - void OnCancarrycheck ();
-
  *
-
  *=========================================================================*/
 
 void CEsmLightDlg::OnCancarrycheck() {
@@ -387,23 +313,14 @@ void CEsmLightDlg::OnCancarrycheck() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLightDlg::OnCancarrycheck()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Event - void OnChangeColor ();
-
  *
-
  *=========================================================================*/
 
 void CEsmLightDlg::OnChangeColor() {
@@ -454,23 +371,14 @@ void CEsmLightDlg::OnChangeColor() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLightDlg::OnChangeColor()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Event - void OnColorbutton ();
-
  *
-
  *=========================================================================*/
 
 void CEsmLightDlg::OnColorbutton() {
@@ -533,35 +441,29 @@ void CEsmLightDlg::OnColorbutton() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLightDlg::OnColorbutton()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmLightDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pLight = (CEsmLight *) GetRecInfo()->pRecord;
+	m_pLight = (CEsmLight *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmLightFlickerCombo(m_FlickerList);
 	FillEsmScriptCombo(m_ScriptList);
 	FillEsmSoundCombo(m_SoundList);
+
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_WeightText.SetLimitText(16);
@@ -571,43 +473,36 @@ void CEsmLightDlg::OnInitialUpdate() {
 	m_GreenText.SetLimitText(3);
 	m_BlueText.SetLimitText(3);
 	m_RadiusText.SetLimitText(8);
+
 	m_RedSpin.SetRange32(0, 255);
 	m_GreenSpin.SetRange32(0, 255);
 	m_BlueSpin.SetRange32(0, 255);
+
 	/* Update the UI data */
 	SetControlData();
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLightDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Event - void OnSoundPlay ();
-
  *
-
  *=========================================================================*/
 
 void CEsmLightDlg::OnSoundPlay() {
 	CString SoundFile;
-	CEsmSound* pSound;
+	CEsmSound *pSound;
 	esmrecinfo_t *pRecInfo;
 	int ListIndex;
 	ListIndex = m_SoundList.GetCurSel();
 
 	if (ListIndex >= 0) {
-		pRecInfo = (esmrecinfo_t *) m_SoundList.GetItemData(ListIndex);
-		pSound = (CEsmSound *) pRecInfo->pRecord;
+		pRecInfo = (esmrecinfo_t *)m_SoundList.GetItemData(ListIndex);
+		pSound = (CEsmSound *)pRecInfo->pRecord;
 		SoundFile = GetMWDataPath();
 		SoundFile += MWPATH_SOUNDS;
 		SoundFile += pSound->GetName();
@@ -616,26 +511,17 @@ void CEsmLightDlg::OnSoundPlay() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLightDlg::OnSoundPlay()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmLightDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmLightDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
 	/* Refill the script list if required */
@@ -646,11 +532,11 @@ int CEsmLightDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 		Index = m_ScriptList.GetCurSel();
 
 		if (Index >= 0) {
-			pRecInfo = (esmrecinfo_t *) m_ScriptList.GetItemData(Index);
+			pRecInfo = (esmrecinfo_t *)m_ScriptList.GetItemData(Index);
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 	/* Refill the sound list if required */
 	else if (pRecInfo->pRecord->IsType(MWESM_REC_SOUN)) {
@@ -663,26 +549,17 @@ int CEsmLightDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmLightDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmLightDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmLightDlg::SetControlData (void) {
+void CEsmLightDlg::SetControlData(void) {
 	CString Buffer;
 	lightdata_t *pLightData;
 
@@ -693,11 +570,14 @@ void CEsmLightDlg::SetControlData (void) {
 	}
 
 	pLightData = m_pLight->GetLightData();
+
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pLight->GetID());
 	UpdateTitle(m_pLight->GetID());
+
 	/* Model buttons */
 	m_ModelButton.SetWindowText(m_pLight->GetModel());
+
 	/* Light radius */
 	Buffer.Format(_T("%d"), pLightData->Radius);
 	m_RadiusText.SetWindowText(Buffer);
@@ -731,6 +611,7 @@ void CEsmLightDlg::SetControlData (void) {
 	m_NameText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
+
 	/* Light color */
 	Buffer.Format(_T("%d"), (int)pLightData->Red);
 	m_RedText.SetWindowText(Buffer);
@@ -739,6 +620,7 @@ void CEsmLightDlg::SetControlData (void) {
 	Buffer.Format(_T("%d"), (int)pLightData->Blue);
 	m_BlueText.SetWindowText(Buffer);
 	m_ColorBox.SetColor(pLightData->Red, pLightData->Green, pLightData->Blue);
+
 	/* Script and sound lists */
 	m_ScriptList.SelectString(-1, m_pLight->GetScript());
 	m_SoundList.SelectString(-1, m_pLight->GetSound());
@@ -767,8 +649,5 @@ void CEsmLightDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmLightDlg::SetControlData()
-
  *=========================================================================*/
-

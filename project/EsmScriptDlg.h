@@ -38,7 +38,7 @@
 *=========================================================================*/
 
 /* Word Types */
-#define ESMSCRIPT_WORDTYPE_END  -1
+#define ESMSCRIPT_WORDTYPE_END     -1
 #define ESMSCRIPT_WORDTYPE_UNKNOWN  0
 #define ESMSCRIPT_WORDTYPE_ALPHA    1
 #define ESMSCRIPT_WORDTYPE_INTEGER  2
@@ -48,13 +48,13 @@
 #define ESMSCRIPT_WORDTYPE_COMMENT  6
 
 /* Used when resizing the view */
-#define ESMSCR_VIEW_TOPMARGIN       24
-#define ESMSCR_VIEW_BOTTOMMARGIN    16
-#define ESMSCR_VIEW_RIGHTMARGIN 0
-#define ESMSCR_VIEW_LEFTMARGIN  0
-#define ESMSCR_VIEW_MINSIZE     50
+#define ESMSCR_VIEW_TOPMARGIN      24
+#define ESMSCR_VIEW_BOTTOMMARGIN   16
+#define ESMSCR_VIEW_RIGHTMARGIN     0
+#define ESMSCR_VIEW_LEFTMARGIN      0
+#define ESMSCR_VIEW_MINSIZE        50
 
-#define ESMSCR_PARSETTFUNC_NOFUNC   -1
+#define ESMSCR_PARSETTFUNC_NOFUNC  -1
 #define ESMSCR_PARSETTFUNC_NOCHANGE 0
 #define ESMSCR_PARSETTFUNC_UPDATE   1
 #define ESMSCR_PARSETTFUNC_NEWFUNC  2
@@ -86,7 +86,6 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	/*---------- Begin Protected Class Members ----------------------*/
   protected:
 	CEsmScript *m_pScript;
-
 	CEsmScriptCompile m_Compiler;
 
 	bool m_UpdatingRichEdit;
@@ -128,7 +127,6 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	long m_LastDragEndSel;
 
 
-
 	/*---------- Begin Protected Class Methods ----------------------*/
   protected:
 
@@ -143,7 +141,10 @@ class CEsmScriptDlg : public CEsmRecDialog {
 
   public:
 	//{{AFX_DATA(CEsmScriptDlg)
-	enum { IDD = IDD_SCRIPT_DLG };
+	enum {
+		IDD = IDD_SCRIPT_DLG
+	};
+
 	CButton m_NoFormatCheck;
 	CButton m_BlueButton;
 	CButton m_WhiteButton;
@@ -155,8 +156,10 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	CButton m_CopyButton;
 	CButton m_CompileButton;
 	CButton m_IndentButton;
+
 	CStatic m_StatusLabel2;
 	CStatic m_StatusLabel1;
+
 	CCustRichEdit m_ScriptText;
 	//}}AFX_DATA
 
@@ -171,13 +174,13 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	void AutoIndent(void);
 
 	/* Change the display format to the given format */
-	void ChangeScriptFormat(CEsmScriptOptions* pNewFormat);
+	void ChangeScriptFormat(CEsmScriptOptions *pNewFormat);
 
 	/* Close any open tool tips */
 	void CloseToolTips(void);
 
 	/* Return a format to display a token word with */
-	CHARFORMAT2 *GetScriptWordFormat(CString& ScriptWord, const int WordType);
+	CHARFORMAT2 *GetScriptWordFormat(CString &ScriptWord, const int WordType);
 
 	/* Get class members */
 	virtual bool IsModified(void);
@@ -197,7 +200,7 @@ class CEsmScriptDlg : public CEsmRecDialog {
 
 	/* Attempt to find and open a function tool tip */
 	bool OpenFunctionToolTip(void);
-	int ParseFuncToolTip(const TCHAR* pLineBuffer, const int CharPos);
+	int ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos);
 	bool UpdateFuncToolTip(void);
 
 	/* Update the current position status bar */
@@ -207,10 +210,10 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CEsmScriptDlg)
   public:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
+	virtual BOOL PreTranslateMessage(MSG *pMsg);
   protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange *pDX);
 	virtual void OnInitialUpdate();
 	//}}AFX_VIRTUAL
 
@@ -223,7 +226,7 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg LRESULT OnUpdateScriptPos(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUpdateScriptScroll(WPARAM wParam, LPARAM lParam);
-	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+	afx_msg void OnContextMenu(CWnd *pWnd, CPoint point);
 	afx_msg void OnScriptCopy();
 	afx_msg void OnScriptCompile();
 	afx_msg void OnScriptCut();
@@ -233,25 +236,25 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	afx_msg void OnScriptReplacetext();
 	afx_msg LONG OnFindReplace(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnScriptUndo();
-	afx_msg void OnUpdateScriptUndo(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateScriptUndo(CCmdUI *pCmdUI);
 	afx_msg void OnPastebutton();
 	afx_msg void OnWhitebutton();
 	afx_msg void OnBluebutton();
 	afx_msg void OnEditCopy();
-	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
-	afx_msg void OnUpdateEditCut(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateEditCopy(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateEditCut(CCmdUI *pCmdUI);
 	afx_msg void OnEditCut();
 	afx_msg void OnEditPaste();
-	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
 	afx_msg void OnNoformatcheck();
 	afx_msg void OnSave();
 	afx_msg void OnMove(int cx, int cy);
-	afx_msg void OnKillFocus(CWnd* pWnd);
+	afx_msg void OnKillFocus(CWnd *pWnd);
 	afx_msg LRESULT OnGotoError(LPARAM lParam, WPARAM wParam);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint Point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint Point);
-	afx_msg void OnMsgfilterScripttext(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnSetFocus(CWnd*);
+	afx_msg void OnMsgfilterScripttext(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnSetFocus(CWnd *);
 	afx_msg void OnShowWindow(BOOL, UINT);
 	//}}AFX_MSG
 
@@ -278,7 +281,6 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	END_INTERFACE_PART(RichEditOleCallback)
 
 	DECLARE_INTERFACE_MAP()
-
 };
 
 /*===========================================================================

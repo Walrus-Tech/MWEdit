@@ -1,134 +1,79 @@
 /*===========================================================================
-
  *
-
  * File:    Esmaiwanderdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 24, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmAiWanderDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
-
 
 DEFINE_FILE("EsmAiWanderDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmAiWanderDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmAiWanderDlg, CDialog)
-
 	//{{AFX_MSG_MAP(CEsmAiWanderDlg)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmAiWanderDlg Message Map
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiWanderDlg Constructor
-
  *
-
  *=========================================================================*/
 
-CEsmAiWanderDlg::CEsmAiWanderDlg(CWnd* pParent) : CDialog(CEsmAiWanderDlg::IDD, pParent) {
+CEsmAiWanderDlg::CEsmAiWanderDlg(CWnd *pParent) : CDialog(CEsmAiWanderDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmAiWanderDlg)
 	//}}AFX_DATA_INIT
 	m_pSubRecord = NULL;
 }
 
 /*===========================================================================
-
  *      End of Class CEsmAiWanderDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiWanderDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmAiWanderDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmAiWanderDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmAiWanderDlg)
 	DDX_Control(pDX, IDC_TIMETEXT, m_TimeText);
@@ -146,26 +91,17 @@ void CEsmAiWanderDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmAiWanderDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiWanderDlg Method - bool DoModal (pSubRecord);
-
  *
-
  *=========================================================================*/
 
-bool CEsmAiWanderDlg::DoModal (CEsmSubAI_W* pSubRecord) {
+bool CEsmAiWanderDlg::DoModal(CEsmSubAI_W *pSubRecord) {
 	int Result;
 	m_pSubRecord = pSubRecord;
 
@@ -183,23 +119,14 @@ bool CEsmAiWanderDlg::DoModal (CEsmSubAI_W* pSubRecord) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmAiWanderDlg::DoModal()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiWanderDlg Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmAiWanderDlg::OnInitDialog() {
@@ -215,15 +142,15 @@ BOOL CEsmAiWanderDlg::OnInitDialog() {
 	/* Set the text values */
 
 	if (pAiData != NULL) {
-		Buffer.Format(_T("%d"), (int) pAiData->Distance);
+		Buffer.Format(_T("%d"), (int)pAiData->Distance);
 		m_DistanceText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) pAiData->Duration);
+		Buffer.Format(_T("%d"), (int)pAiData->Duration);
 		m_DurationText.SetWindowText(Buffer);
-		Buffer.Format(_T("%d"), (int) pAiData->TimeOfDay);
+		Buffer.Format(_T("%d"), (int)pAiData->TimeOfDay);
 		m_TimeText.SetWindowText(Buffer);
 
 		for (Index = 0; Index < MWESM_AIW_NUMIDLES; Index++) {
-			Buffer.Format(_T("%d"), (int) pAiData->Idle[Index]);
+			Buffer.Format(_T("%d"), (int)pAiData->Idle[Index]);
 			m_IdleText[Index].SetWindowText(Buffer);
 			m_IdleText[Index].LimitText(4);
 		}
@@ -233,23 +160,14 @@ BOOL CEsmAiWanderDlg::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmAiWanderDlg::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiWanderDlg Event - void OnOK ();
-
  *
-
  *=========================================================================*/
 
 void CEsmAiWanderDlg::OnOK() {
@@ -279,8 +197,5 @@ void CEsmAiWanderDlg::OnOK() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmAiWanderDlg::OnOK()
-
  *=========================================================================*/
-

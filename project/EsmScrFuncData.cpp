@@ -1,63 +1,36 @@
 /*===========================================================================
-
  *
-
  * File:    Esmscrfuncdata.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  September 1, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "esmscrfuncdata.h"
-
 #include "string/sstring.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 DEFINE_FILE("EsmScrFuncData.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScrFuncData Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmScrFuncData::CEsmScrFuncData () {
@@ -71,32 +44,25 @@ CEsmScrFuncData::CEsmScrFuncData () {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmScrFuncData Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrFuncData Destructor
-
  *
-
  *=========================================================================*/
 
-void CEsmScrFuncData::Destroy (void) {
+void CEsmScrFuncData::Destroy(void) {
 	int Index;
+
 	/* Clear strings */
 	m_Description.Empty();
 	m_Function[0] = NULL_CHAR;
 	m_ReturnDesc[0] = NULL_CHAR;
 	m_WikiLink[0] = NULL_CHAR;
+
 	/* Clear flags */
 	m_ReturnFlags = 0;
 	m_Flags = 0;
@@ -113,32 +79,20 @@ void CEsmScrFuncData::Destroy (void) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmScrFuncData Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrFuncData Method - const CreateParamString (Index) const;
-
  *
-
  * Creates and returns a string for the given parameter. Returns an empty
-
  * string on any error. Uses a local static string buffer.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::CreateParamString (const int Index) const {
+const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
 	static TCHAR s_Buffer[64];
 
 	/* Ensure the input parameter index is valid */
@@ -148,7 +102,7 @@ const TCHAR *CEsmScrFuncData::CreateParamString (const int Index) const {
 		return (s_Buffer);
 	}
 
-	snprintf(s_Buffer, 60, _T("[%s]"), static_cast<const TCHAR*>(m_ParamDesc[Index]));
+	snprintf(s_Buffer, 60, _T("[%s]"), static_cast<const TCHAR *>(m_ParamDesc[Index]));
 
 	if ((m_ParamFlags[Index] & ESMSCR_FUNC_OPTIONAL) != 0) {
 		chrcat(s_Buffer, '*');
@@ -158,32 +112,20 @@ const TCHAR *CEsmScrFuncData::CreateParamString (const int Index) const {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrFuncData::CreateParamString()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrFuncData Method - const TCHAR* GetFuncForm (void) const;
-
  *
-
  * Returns the complete function format including name and parameters.
-
  * Uses a local static string buffer.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetFuncForm (void) const {
+const TCHAR *CEsmScrFuncData::GetFuncForm(void) const {
 	static CSString s_Buffer;
 	int Index;
 	s_Buffer = GetFunction();
@@ -199,34 +141,21 @@ const TCHAR *CEsmScrFuncData::GetFuncForm (void) const {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrFuncData::GetFuncForm()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrFuncData Method - const TCHAR* GetExFuncForm (ParamIndex, LineLength) const;
-
  *
-
  * Returns the complete function format including name and parameters.
-
  * Uses a local static string buffer. If the input LineLength is positive
-
  * a carriage return will be inserted after that many characters.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetExFuncForm (const int ParamIndex, const int LineLength) const {
+const TCHAR *CEsmScrFuncData::GetExFuncForm(const int ParamIndex, const int LineLength) const {
 	static CSString s_Buffer;
 	int Index;
 	int MaxLength;
@@ -257,32 +186,20 @@ const TCHAR *CEsmScrFuncData::GetExFuncForm (const int ParamIndex, const int Lin
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrFuncData::GetExFuncForm()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrFuncData Method - const GetParamDetail (Index) const;
-
  *
-
  * Creates and returns a detailed string for the given parameter. Returns an
-
  * empty  string on any error. Uses a local static string buffer.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetParamDetail (const int Index) const {
+const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
 	static TCHAR s_Buffer[256];
 	CSString Buffer;
 
@@ -405,32 +322,20 @@ const TCHAR *CEsmScrFuncData::GetParamDetail (const int Index) const {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrFuncData::GetParamDetail()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrFuncData Method - const GetFlagString (void) const;
-
  *
-
  * Returns a string representing the function flags, if any. Uses a local
-
  * static string buffer.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetFlagString (void) const {
+const TCHAR *CEsmScrFuncData::GetFlagString(void) const {
 	static TCHAR s_Buffer[128];
 	CSString Buffer;
 
@@ -508,30 +413,19 @@ const TCHAR *CEsmScrFuncData::GetFlagString (void) const {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrFuncData::GetFlagString()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScrFuncData Method - const TCHAR* GetReturnString (void) const;
-
  *
-
  * Returns a description of the return string.
-
  *
-
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetReturnString (void) const {
+const TCHAR *CEsmScrFuncData::GetReturnString(void) const {
 	static TCHAR s_Buffer[32];
 
 	if ((m_ReturnFlags & ESMSCR_FUNC_BYTE) != 0) {
@@ -552,35 +446,23 @@ const TCHAR *CEsmScrFuncData::GetReturnString (void) const {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScrFuncData::GetReturnString()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrFuncData Method - bool ReadData (File);
-
  *
-
  * Inputs the function data section from the current location in the
-
  * given file. Returns false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrFuncData::ReadData (CGenFile& File) {
+bool CEsmScrFuncData::ReadData(CGenFile &File) {
 	TCHAR LineBuffer[ESM_SFDATA_LINELENGTH + 1];
-	TCHAR* pVariable;
-	TCHAR* pValue;
+	TCHAR *pVariable;
+	TCHAR *pValue;
 	bool Result;
 	int LineResult;
 
@@ -601,7 +483,7 @@ bool CEsmScrFuncData::ReadData (CGenFile& File) {
 		/* Seperate the input line into its basic two components */
 		Result = SeperateVarValue(&pVariable, &pValue, LineBuffer);
 
-		if ( _stricmp(pVariable, _T("End")) == 0) {
+		if (_stricmp(pVariable, _T("End")) == 0) {
 			return (true);
 		}
 
@@ -616,37 +498,23 @@ bool CEsmScrFuncData::ReadData (CGenFile& File) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrFuncData::ReadData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrFuncData Method - void SetParamValue (ParamIndex, pValue);
-
  *
-
  * Sets the given parameter flag/description from the input string. The input
-
  * string is modified and is assumed to have the format:
-
  *
-
  *      Flags, "Description"
-
  *
-
  *=========================================================================*/
 
-void CEsmScrFuncData::SetParamValue (const int ParamIndex, TCHAR* pValue) {
-	TCHAR* pParse;
+void CEsmScrFuncData::SetParamValue(const int ParamIndex, TCHAR *pValue) {
+	TCHAR *pParse;
 
 	/* Ensure a valid input parameter index */
 
@@ -669,46 +537,31 @@ void CEsmScrFuncData::SetParamValue (const int ParamIndex, TCHAR* pValue) {
 		*pParse = NULL_CHAR;
 		SetParamFlags(ParamIndex, strtoul(pValue, NULL, 0));
 		SetParamDesc(ParamIndex, UnquoteString(pParse + 1));
-	}
-	/* Input string doesn't have any comma */
-	else {
+	} else {
+		/* Input string doesn't have any comma */
 		SetParamFlags(ParamIndex, strtoul(pValue, NULL, 0));
 		SetParamDesc(ParamIndex, _T(""));
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrFuncData::SetParamValue()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrFuncData Method - void SetReturnValue (pValue);
-
  *
-
  * Sets the return flags/description from the input string. The input
-
  * string is modified  and is assumed to have the format:
-
  *
-
  *      Flags, "Description"
-
  *
-
  *=========================================================================*/
 
-void CEsmScrFuncData::SetReturnValue (TCHAR* pValue) {
-	TCHAR* pParse;
+void CEsmScrFuncData::SetReturnValue(TCHAR *pValue) {
+	TCHAR *pParse;
 	/* Try and find the comma seperating character */
 	pParse = TSTRCHR(pValue, ',');
 
@@ -718,70 +571,57 @@ void CEsmScrFuncData::SetReturnValue (TCHAR* pValue) {
 		*pParse = NULL_CHAR;
 		m_ReturnFlags = strtoul(pValue, NULL, 0);
 		SetReturnDesc(UnquoteString(pParse + 1));
-	}
-	/* String doesn't contain a comma character */
-	else {
+	} else {
+		/* String doesn't contain a comma character */
 		m_ReturnFlags = strtoul(pValue, NULL, 0);
 		SetReturnDesc(_T(""));
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrFuncData::SetReturnValue()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScrFuncData Method - bool SetValue (pVariable, pValue);
-
  *
-
  * Sets a class member based on the input data. Returns false on any error.
-
  *
-
  *=========================================================================*/
 
-bool CEsmScrFuncData::SetValue (const TCHAR* pVariable, TCHAR* pValue) {
+bool CEsmScrFuncData::SetValue(const TCHAR *pVariable, TCHAR *pValue) {
 	int ParamIndex;
 
-	if ( _stricmp(pVariable, _T("function")) == 0) {
+	if (_stricmp(pVariable, _T("function")) == 0) {
 		SetFunction(pValue);
-	} else if ( _stricmp(pVariable, _T("wikilink")) == 0) {
+	} else if (_stricmp(pVariable, _T("wikilink")) == 0) {
 		SetWikiLink(pValue);
-	} else if ( _stricmp(pVariable, _T("options")) == 0) {
+	} else if (_stricmp(pVariable, _T("options")) == 0) {
 		m_Flags = strtoul(pValue, NULL, 0);
-	} else if ( _stricmp(pVariable, _T("opcode")) == 0) {
+	} else if (_stricmp(pVariable, _T("opcode")) == 0) {
 		m_OpCode = strtoul(pValue, NULL, 0);
-	} else if ( _stricmp(pVariable, _T("return")) == 0) {
+	} else if (_stricmp(pVariable, _T("return")) == 0) {
 		SetReturnValue(pValue);
 	} else if (TSTRNICMP(pVariable, _T("param"), 5) == 0) {
 		ParamIndex = atoi(pVariable + 5) - 1;
 		SetParamValue(ParamIndex, pValue);
-	} else if ( _stricmp(pVariable, _T("desc")) == 0) {
+	} else if (_stricmp(pVariable, _T("desc")) == 0) {
 		m_Description += UnquoteString(pValue);
 		m_Description += _T(" ");
-	} else if ( _stricmp(pVariable, _T("descl")) == 0) {
+	} else if (_stricmp(pVariable, _T("descl")) == 0) {
 		m_Description += UnquoteString(pValue);
 		m_Description += _T("\r\n");
 	} else {
-		ErrorHandler.AddError(ERR_CUSTOM, _T("Unknown script function variable '%s' found!"), pVariable);
+		ErrorHandler.AddError(ERR_CUSTOM,
+		                      _T("Unknown script function variable '%s' found!"),
+		                      pVariable);
 	}
 
 	return (true);
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScrFuncData::SetValue()
-
  *=========================================================================*/
-

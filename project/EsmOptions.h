@@ -52,21 +52,21 @@ class CEsmOptions {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	CEsmScriptOptions m_BlueScriptOptions;        /* Standard/user script settings */
+	CEsmScriptOptions m_BlueScriptOptions; /* Standard/user script settings */
 	CEsmScriptOptions m_WhiteScriptOptions;
 	CEsmScriptOptions m_UserScriptOptions;
 	int m_ScriptFormatType;
 
-	bool m_StrictIDs;            /* Only only certain IDs */
+	bool m_StrictIDs;      /* Only only certain IDs */
 
-	bool m_BackupSaves;          /* Backup plugins when saving */
+	bool m_BackupSaves;    /* Backup plugins when saving */
 
-	bool m_AllowExtFuncs;        /* Allow extended MWSE functions */
+	bool m_AllowExtFuncs;  /* Allow extended MWSE functions */
 
-	bool m_NoScriptFormat;       /* Display script format or not? */
-	bool m_NoScriptPrompt;       /* No script compile prompt */
+	bool m_NoScriptFormat; /* Display script format or not? */
+	bool m_NoScriptPrompt; /* No script compile prompt */
 
-	int m_ScriptWarnLevel;      /* The warning level of the compiler */
+	int m_ScriptWarnLevel; /* The warning level of the compiler */
 
 	TCHAR m_ScriptIndentString[ESMSCR_OPTION_NAMESIZE + 1];
 	bool m_InitialIndentLevel;
@@ -78,10 +78,10 @@ class CEsmOptions {
 	/* Optional custom game path */
 	TCHAR m_DataPath[_MAX_PATH + 4];
 
-	bool m_UseExtraFile;         /* Use extra file for script compilations */
+	bool m_UseExtraFile; /* Use extra file for script compilations */
 	TCHAR m_ExtraFile[_MAX_PATH + 4];
 
-	bool m_AllowBloodmoon;       /* Enable game specific features */
+	bool m_AllowBloodmoon; /* Enable game specific features */
 	bool m_AllowTribunal;
 
 
@@ -239,19 +239,19 @@ class CEsmOptions {
 		m_AllowTribunal = Flag;
 	}
 
-	void SetScriptIndentString(const TCHAR* pString) {
+	void SetScriptIndentString(const TCHAR *pString) {
 		strnncpy(m_ScriptIndentString, pString, ESMSCR_OPTION_NAMESIZE);
 	}
 
-	void SetAuthorName(const TCHAR* pString) {
+	void SetAuthorName(const TCHAR *pString) {
 		strnncpy(m_AuthorName, pString, ESMSCR_OPTION_NAMESIZE);
 	}
 
-	void SetDataPath(const TCHAR* pString) {
+	void SetDataPath(const TCHAR *pString) {
 		strnncpy(m_DataPath, pString, _MAX_PATH);
 	}
 
-	void SetExtraFile(const TCHAR* pString) {
+	void SetExtraFile(const TCHAR *pString) {
 		strnncpy(m_ExtraFile, pString, _MAX_PATH);
 	}
 

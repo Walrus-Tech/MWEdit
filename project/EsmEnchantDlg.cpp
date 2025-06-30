@@ -1,207 +1,116 @@
 /*===========================================================================
-
  *
-
  * File:    Esmenchantdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 15, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmEnchantDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmEnchantDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmEnchantDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmEnchantDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmEnchantDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmEnchantDlg)
-
 	ON_BN_CLICKED(IDC_AUTOCALCCHECK, OnAutocalccheck)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST1, OnSelchangeEffectlist1)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST2, OnSelchangeEffectlist2)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST3, OnSelchangeEffectlist3)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST4, OnSelchangeEffectlist4)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST5, OnSelchangeEffectlist5)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST6, OnSelchangeEffectlist6)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST7, OnSelchangeEffectlist7)
-
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST8, OnSelchangeEffectlist8)
 
 	ON_CBN_SELCHANGE(IDC_SKILLLIST1, OnSelchangeSkilllist1)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST2, OnSelchangeSkilllist2)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST3, OnSelchangeSkilllist3)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST4, OnSelchangeSkilllist4)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST5, OnSelchangeSkilllist5)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST6, OnSelchangeSkilllist6)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST7, OnSelchangeSkilllist7)
-
 	ON_CBN_SELCHANGE(IDC_SKILLLIST8, OnSelchangeSkilllist8)
 
 	ON_EN_CHANGE(IDC_DURATIONTEXT1, OnChangeDurationtext1)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT2, OnChangeDurationtext2)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT3, OnChangeDurationtext3)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT4, OnChangeDurationtext4)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT5, OnChangeDurationtext5)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT6, OnChangeDurationtext6)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT7, OnChangeDurationtext7)
-
 	ON_EN_CHANGE(IDC_DURATIONTEXT8, OnChangeDurationtext8)
 
 	ON_EN_CHANGE(IDC_AREATEXT1, OnChangeAreatext1)
-
 	ON_EN_CHANGE(IDC_AREATEXT2, OnChangeAreatext2)
-
 	ON_EN_CHANGE(IDC_AREATEXT3, OnChangeAreatext3)
-
 	ON_EN_CHANGE(IDC_AREATEXT4, OnChangeAreatext4)
-
 	ON_EN_CHANGE(IDC_AREATEXT5, OnChangeAreatext5)
-
 	ON_EN_CHANGE(IDC_AREATEXT6, OnChangeAreatext6)
-
 	ON_EN_CHANGE(IDC_AREATEXT7, OnChangeAreatext7)
-
 	ON_EN_CHANGE(IDC_AREATEXT8, OnChangeAreatext8)
 
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT1, OnChangeDurationtext1)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT2, OnChangeDurationtext2)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT3, OnChangeDurationtext3)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT4, OnChangeDurationtext4)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT5, OnChangeDurationtext5)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT6, OnChangeDurationtext6)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT7, OnChangeDurationtext7)
-
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT8, OnChangeDurationtext8)
 
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT1, OnChangeDurationtext1)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT2, OnChangeDurationtext2)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT3, OnChangeDurationtext3)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT4, OnChangeDurationtext4)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT5, OnChangeDurationtext5)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT6, OnChangeDurationtext6)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT7, OnChangeDurationtext7)
-
 	ON_EN_CHANGE(IDC_MAGNITUDE2TEXT8, OnChangeDurationtext8)
 
 	ON_CBN_SELCHANGE(IDC_TYPELIST, OnSelchangeTypelist)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmEnchantDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmEnchantDlg::CEsmEnchantDlg() : CEsmRecDialog(CEsmEnchantDlg::IDD) {
@@ -217,27 +126,19 @@ CEsmEnchantDlg::CEsmEnchantDlg() : CEsmRecDialog(CEsmEnchantDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmEnchantDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmEnchantDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmEnchantDlg)
 	DDX_Control(pDX, IDC_COSTTEXT, m_CostText);
 	DDX_Control(pDX, IDC_CHARGETEXT, m_ChargeText);
@@ -245,6 +146,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	DDX_Control(pDX, IDC_TYPELIST, m_TypeList);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_EFFECTLIST1, m_EffectList[0]);
 	DDX_Control(pDX, IDC_EFFECTLIST2, m_EffectList[1]);
 	DDX_Control(pDX, IDC_EFFECTLIST3, m_EffectList[2]);
@@ -253,6 +155,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_EFFECTLIST6, m_EffectList[5]);
 	DDX_Control(pDX, IDC_EFFECTLIST7, m_EffectList[6]);
 	DDX_Control(pDX, IDC_EFFECTLIST8, m_EffectList[7]);
+
 	DDX_Control(pDX, IDC_SKILLLIST1, m_SkillList[0]);
 	DDX_Control(pDX, IDC_SKILLLIST2, m_SkillList[1]);
 	DDX_Control(pDX, IDC_SKILLLIST3, m_SkillList[2]);
@@ -261,6 +164,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_SKILLLIST6, m_SkillList[5]);
 	DDX_Control(pDX, IDC_SKILLLIST7, m_SkillList[6]);
 	DDX_Control(pDX, IDC_SKILLLIST8, m_SkillList[7]);
+
 	DDX_Control(pDX, IDC_COSTLABEL1, m_CostLabel[0]);
 	DDX_Control(pDX, IDC_COSTLABEL2, m_CostLabel[1]);
 	DDX_Control(pDX, IDC_COSTLABEL3, m_CostLabel[2]);
@@ -269,6 +173,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_COSTLABEL6, m_CostLabel[5]);
 	DDX_Control(pDX, IDC_COSTLABEL7, m_CostLabel[6]);
 	DDX_Control(pDX, IDC_COSTLABEL8, m_CostLabel[7]);
+
 	DDX_Control(pDX, IDC_RANGELIST1, m_RangeList[0]);
 	DDX_Control(pDX, IDC_RANGELIST2, m_RangeList[1]);
 	DDX_Control(pDX, IDC_RANGELIST3, m_RangeList[2]);
@@ -277,6 +182,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_RANGELIST6, m_RangeList[5]);
 	DDX_Control(pDX, IDC_RANGELIST7, m_RangeList[6]);
 	DDX_Control(pDX, IDC_RANGELIST8, m_RangeList[7]);
+
 	DDX_Control(pDX, IDC_AREATEXT1, m_AreaText[0]);
 	DDX_Control(pDX, IDC_AREATEXT2, m_AreaText[1]);
 	DDX_Control(pDX, IDC_AREATEXT3, m_AreaText[2]);
@@ -285,6 +191,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_AREATEXT6, m_AreaText[5]);
 	DDX_Control(pDX, IDC_AREATEXT7, m_AreaText[6]);
 	DDX_Control(pDX, IDC_AREATEXT8, m_AreaText[7]);
+
 	DDX_Control(pDX, IDC_DURATIONTEXT1, m_DurationText[0]);
 	DDX_Control(pDX, IDC_DURATIONTEXT2, m_DurationText[1]);
 	DDX_Control(pDX, IDC_DURATIONTEXT3, m_DurationText[2]);
@@ -293,6 +200,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_DURATIONTEXT6, m_DurationText[5]);
 	DDX_Control(pDX, IDC_DURATIONTEXT7, m_DurationText[6]);
 	DDX_Control(pDX, IDC_DURATIONTEXT8, m_DurationText[7]);
+
 	DDX_Control(pDX, IDC_MAGNITUDETEXT1, m_Magnitude1Text[0]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT2, m_Magnitude1Text[1]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT3, m_Magnitude1Text[2]);
@@ -301,6 +209,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_MAGNITUDETEXT6, m_Magnitude1Text[5]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT7, m_Magnitude1Text[6]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT8, m_Magnitude1Text[7]);
+
 	DDX_Control(pDX, IDC_MAGNITUDE2TEXT1, m_Magnitude2Text[0]);
 	DDX_Control(pDX, IDC_MAGNITUDE2TEXT2, m_Magnitude2Text[1]);
 	DDX_Control(pDX, IDC_MAGNITUDE2TEXT3, m_Magnitude2Text[2]);
@@ -309,6 +218,7 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 	DDX_Control(pDX, IDC_MAGNITUDE2TEXT6, m_Magnitude2Text[5]);
 	DDX_Control(pDX, IDC_MAGNITUDE2TEXT7, m_Magnitude2Text[6]);
 	DDX_Control(pDX, IDC_MAGNITUDE2TEXT8, m_Magnitude2Text[7]);
+
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL1, m_TotalCostText[0]);
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL2, m_TotalCostText[1]);
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL3, m_TotalCostText[2]);
@@ -320,32 +230,23 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::GetControlData (void) {
+void CEsmEnchantDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmEnchantDlg::GetControlData()");
 	enchantdata_t *pEnchantData;
 	CString Buffer;
 	int ListIndex;
 	/* Update the armor pointer and data */
-	m_pEnchant = (CEsmEnchant *) GetRecInfo()->pRecord;
+	m_pEnchant = (CEsmEnchant *)GetRecInfo()->pRecord;
 
 	if (m_pEnchant == NULL) {
 		return;
@@ -371,36 +272,29 @@ void CEsmEnchantDlg::GetControlData (void) {
 	/* Item cost */
 	m_CostText.GetWindowText(Buffer);
 	pEnchantData->EnchantCost = atoi(Buffer);
+
 	/* Item charge */
 	m_ChargeText.GetWindowText(Buffer);
 	pEnchantData->Charge = atoi(Buffer);
+
 	/* Record flags */
 	pEnchantData->AutoCalc = (m_AutoCalcCheck.GetCheck() != 0);
 	GetEffectData();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void GetEffectData (EffectIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::GetEffectData (const int EffectIndex) {
-	CEsmSubENAM* pEnchantSubRec;
+void CEsmEnchantDlg::GetEffectData(const int EffectIndex) {
+	CEsmSubENAM *pEnchantSubRec;
 	enchanteffect_t *pEnchantData;
 	CString Buffer;
 	int ListIndex;
@@ -412,14 +306,16 @@ void CEsmEnchantDlg::GetEffectData (const int EffectIndex) {
 	}
 
 	/* Create the new index sub-record */
-	pEnchantSubRec = (CEsmSubENAM *) m_pEnchant->AllocateSubRecord(MWESM_SUBREC_ENAM);
+	pEnchantSubRec = (CEsmSubENAM *)m_pEnchant->AllocateSubRecord(MWESM_SUBREC_ENAM);
 	pEnchantSubRec->CreateNew();
 	pEnchantData = pEnchantSubRec->GetEnchantData();
+
 	/* Set the enchant effect */
-	pEnchantData->EffectID = (short) m_EffectList[EffectIndex].GetItemData(ListIndex);
+	pEnchantData->EffectID = (short)m_EffectList[EffectIndex].GetItemData(ListIndex);
+
 	/* Set the enchant duration */
 	m_DurationText[EffectIndex].GetWindowText(Buffer);
-	pEnchantData->Duration = (short) (atoi(Buffer));
+	pEnchantData->Duration = (short)(atoi(Buffer));
 
 	if (pEnchantData->Duration < 0) {
 		pEnchantData->Duration = 0;
@@ -434,7 +330,7 @@ void CEsmEnchantDlg::GetEffectData (const int EffectIndex) {
 
 	/* Set the enchant area */
 	m_AreaText[EffectIndex].GetWindowText(Buffer);
-	pEnchantData->Area = (short) (atoi(Buffer));
+	pEnchantData->Area = (short)(atoi(Buffer));
 
 	if (pEnchantData->Area < 0) {
 		pEnchantData->Area = 0;
@@ -442,14 +338,14 @@ void CEsmEnchantDlg::GetEffectData (const int EffectIndex) {
 
 	/* Get the enchant magnitude */
 	m_Magnitude1Text[EffectIndex].GetWindowText(Buffer);
-	pEnchantData->MagMin = (short) (atoi(Buffer));
+	pEnchantData->MagMin = (short)(atoi(Buffer));
 
 	if (pEnchantData->MagMin < 0) {
 		pEnchantData->MagMin = 0;
 	}
 
 	m_Magnitude2Text[EffectIndex].GetWindowText(Buffer);
-	pEnchantData->MagMax = (short) (atoi(Buffer));
+	pEnchantData->MagMax = (short)(atoi(Buffer));
 
 	if (pEnchantData->MagMax < 0) {
 		pEnchantData->MagMax = 0;
@@ -461,38 +357,29 @@ void CEsmEnchantDlg::GetEffectData (const int EffectIndex) {
 		ListIndex = m_SkillList[EffectIndex].GetCurSel();
 
 		if (ListIndex >= 0) {
-			pEnchantData->SkillID = (byte) m_SkillList[EffectIndex].GetItemData(ListIndex);
+			pEnchantData->SkillID = (byte)m_SkillList[EffectIndex].GetItemData(ListIndex);
 		}
 	} else if (IsESMAttributeEffect(pEnchantData->EffectID)) {
 		ListIndex = m_SkillList[EffectIndex].GetCurSel();
 
 		if (ListIndex >= 0) {
-			pEnchantData->AttributeID = (byte) m_SkillList[EffectIndex].GetItemData(ListIndex);
+			pEnchantData->AttributeID = (byte)m_SkillList[EffectIndex].GetItemData(ListIndex);
 		}
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::GetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void GetEffectData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::GetEffectData (void) {
+void CEsmEnchantDlg::GetEffectData(void) {
 	//DEFINE_FUNCTION("CEsmEnchantDlg::GetEffectData()");
 	int Index;
 	/* Delete all the enchant ub-records from the alchemy record */
@@ -504,26 +391,17 @@ void CEsmEnchantDlg::GetEffectData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::GetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmEnchantDlg::IsModified (void) {
+bool CEsmEnchantDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -546,23 +424,14 @@ bool CEsmEnchantDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEnchantDlg::OnInitialUpdate() {
@@ -571,13 +440,13 @@ void CEsmEnchantDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pEnchant = (CEsmEnchant *) GetRecInfo()->pRecord;
+	m_pEnchant = (CEsmEnchant *)GetRecInfo()->pRecord;
 	FillEsmEnchantTypeCombo(m_TypeList);
 
 	for (Index = 0; Index < MWESM_ENCHANT_NUMENCHANTS; Index++) {
 		FillEsmEffectsCombo(m_EffectList[Index], false);
 		FillEsmEnchantRangeCombo(m_RangeList[Index]);
-		m_DurationText[Index].SetLimitText(5);  /* Are shorts so only need 5 digits at most */
+		m_DurationText[Index].SetLimitText(5); /* Are shorts so only need 5 digits at most */
 		m_Magnitude1Text[Index].SetLimitText(5);
 		m_Magnitude2Text[Index].SetLimitText(5);
 		m_AreaText[Index].SetLimitText(5);
@@ -587,26 +456,17 @@ void CEsmEnchantDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEnchantDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Event - void OnSelChangeEffectList (ListIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::OnSelChangeEffectList (const int ListIndex) {
+void CEsmEnchantDlg::OnSelChangeEffectList(const int ListIndex) {
 	const esmeffectdata_t *pEffectData = NULL;
 	int EffectIndex;
 	int EffectID = -1;
@@ -617,7 +477,10 @@ void CEsmEnchantDlg::OnSelChangeEffectList (const int ListIndex) {
 		EffectID = m_EffectList[ListIndex].GetItemData(EffectIndex);
 		m_pEffectInfo[ListIndex] = GetDocument()->GetEffectRecord(EffectID);
 		pEffectData = GetESMEffectData(EffectID);
-		SystemLog.Printf ("EffectID = %d (%p, %p)", EffectID, m_pEffectInfo[ListIndex], pEffectData);
+		SystemLog.Printf("EffectID = %d (%p, %p)",
+		                 EffectID,
+		                 m_pEffectInfo[ListIndex],
+		                 pEffectData);
 	}
 
 	/* Disable the controls if no effect is selected */
@@ -707,75 +570,48 @@ void CEsmEnchantDlg::OnSelChangeEffectList (const int ListIndex) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEnchantDlg::OnSelChangeEffectList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Event - void OnSelChangeSkillList (ListIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::OnSelChangeSkillList (const int ListIndex) {
+void CEsmEnchantDlg::OnSelChangeSkillList(const int ListIndex) {
 	UpdateSpellCost(ListIndex);
 	m_Modified = true;
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEnchantDlg::OnSelChangeSkillList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Event - int OnUpdateItem (pRecInfo);
-
  *
-
  *=========================================================================*/
 
-int CEsmEnchantDlg::OnUpdateItem (esmrecinfo_t* pRecInfo) {
+int CEsmEnchantDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return (0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEnchantDlg::OnUpdateItem()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::SetControlData (void) {
+void CEsmEnchantDlg::SetControlData(void) {
 	/* Ignore if the current item is not valid */
 	if (m_pEnchant == NULL) {
 		return;
@@ -784,9 +620,11 @@ void CEsmEnchantDlg::SetControlData (void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pEnchant->GetID());
 	UpdateTitle(m_pEnchant->GetID());
+
 	/* Enchant type */
 	FindComboListItem(m_TypeList, m_pEnchant->GetEnchantTypeID(), true);
 	m_IsConstantEffect = (m_pEnchant->GetEnchantTypeID() == MWESM_ENCHTYPE_CONSTANT);
+
 	/* Item strings and values */
 	m_ChargeText.SetWindowText(m_pEnchant->GetFieldString(ESM_FIELD_CHARGE));
 	m_CostText.SetWindowText(m_pEnchant->GetFieldString(ESM_FIELD_COST));
@@ -794,33 +632,26 @@ void CEsmEnchantDlg::SetControlData (void) {
 	m_ChargeText.EnableWindow(!m_pEnchant->IsAutoCalc() && !m_IsConstantEffect);
 	m_CostText.SetModify(FALSE);
 	m_ChargeText.SetModify(FALSE);
+
 	/* Record flags */
 	m_AutoCalcCheck.SetCheck(m_pEnchant->IsAutoCalc());
+
 	/* Set the effect data */
 	SetEffectData();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void SetEffectData (EffectIndex, pEffectRecord);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::SetEffectData (const int EffectIndex, CEsmSubENAM* pEffectRecord) {
+void CEsmEnchantDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRecord) {
 	DEFINE_FUNCTION("CEsmEnchantDlg::SetEffectData()");
 	const esmeffectdata_t *pEffectData = NULL;
 	CString Buffer;
@@ -863,6 +694,7 @@ void CEsmEnchantDlg::SetEffectData (const int EffectIndex, CEsmSubENAM* pEffectR
 		m_Magnitude1Text[EffectIndex].EnableWindow(TRUE);
 		m_Magnitude1Text[EffectIndex].SetWindowText(Buffer);
 		m_Magnitude1Text[EffectIndex].SetModify(FALSE);
+
 		Buffer.Format(_T("%d"), (int)pEnchantData->MagMax);
 		m_Magnitude2Text[EffectIndex].EnableWindow(TRUE);
 		m_Magnitude2Text[EffectIndex].SetWindowText(Buffer);
@@ -913,6 +745,7 @@ void CEsmEnchantDlg::SetEffectData (const int EffectIndex, CEsmSubENAM* pEffectR
 	Buffer.Format(_T("%d"), (int)pEnchantData->Area);
 	m_AreaText[EffectIndex].SetWindowText(Buffer);
 	m_AreaText[EffectIndex].SetModify(FALSE);
+
 	/* Set the initial effect cost and total cost labels */
 	Buffer.Format(_T("%d"), 0);
 	m_CostLabel[EffectIndex].SetWindowText(Buffer);
@@ -937,58 +770,40 @@ void CEsmEnchantDlg::SetEffectData (const int EffectIndex, CEsmSubENAM* pEffectR
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::SetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void SetEffectData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::SetEffectData (void) {
-	CEsmSubENAM* pEffectRecord;
+void CEsmEnchantDlg::SetEffectData(void) {
+	CEsmSubENAM *pEffectRecord;
 	int RecordIndex;
 	int EffectIndex;
-	pEffectRecord = (CEsmSubENAM *) m_pEnchant->FindFirst(MWESM_SUBREC_ENAM, RecordIndex);
+	pEffectRecord = (CEsmSubENAM *)m_pEnchant->FindFirst(MWESM_SUBREC_ENAM, RecordIndex);
 
 	for (EffectIndex = 0; EffectIndex < MWESM_ENCHANT_NUMENCHANTS; EffectIndex++) {
 		SetEffectData(EffectIndex, pEffectRecord);
-		pEffectRecord = (CEsmSubENAM *) m_pEnchant->FindNext(MWESM_SUBREC_ENAM, RecordIndex);
+		pEffectRecord = (CEsmSubENAM *)m_pEnchant->FindNext(MWESM_SUBREC_ENAM, RecordIndex);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::SetEffectData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void UpdateSpellCost (EffectIndex);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::UpdateSpellCost (const int EffectIndex) {
+void CEsmEnchantDlg::UpdateSpellCost(const int EffectIndex) {
 	CString Buffer;
 	enchanteffect_t EffectData;
 	int ListIndex;
@@ -1021,7 +836,8 @@ void CEsmEnchantDlg::UpdateSpellCost (const int EffectIndex) {
 		m_AreaText[EffectIndex].GetWindowText(Buffer);
 		EffectData.Area = atoi(Buffer);
 		Cost = ((CEsmMagicEffect *)m_pEffectInfo[EffectIndex]->pRecord)->GetEnchantCost(EffectData);
-		Buffer.Format(_T("%.2f"), ((CEsmMagicEffect *)m_pEffectInfo[EffectIndex]->pRecord)->GetBaseCost());
+		Buffer.Format(_T("%.2f"),
+		              ((CEsmMagicEffect *)m_pEffectInfo[EffectIndex]->pRecord)->GetBaseCost());
 		m_CostLabel[EffectIndex].SetWindowText(Buffer);
 	} else {
 		m_CostLabel[EffectIndex].SetWindowText(_T("???"));
@@ -1041,26 +857,17 @@ void CEsmEnchantDlg::UpdateSpellCost (const int EffectIndex) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::UpdateSpellCost()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Method - void UpdateTotalSpellCost (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmEnchantDlg::UpdateTotalSpellCost (void) {
+void CEsmEnchantDlg::UpdateTotalSpellCost(void) {
 	CString Buffer;
 	int Index;
 	int EnchantType = MWESM_ENCHTYPE_CASTONCE;
@@ -1081,12 +888,12 @@ void CEsmEnchantDlg::UpdateTotalSpellCost (void) {
 	if (EnchantType != MWESM_ENCHTYPE_CONSTANT) {
 		for (Index = 0; Index < MWESM_ENCHANT_NUMENCHANTS; Index++) {
 			m_TotalCostText[Index].GetWindowText(Buffer);
-			SumValue += (float) atof(Buffer);
+			SumValue += (float)atof(Buffer);
 		}
 	}
 
 	/* Set the cost text */
-	Buffer.Format(_T("%d"), (int) SumValue);
+	Buffer.Format(_T("%d"), (int)SumValue);
 	m_CostText.SetWindowText(Buffer);
 
 	switch (EnchantType) {
@@ -1100,28 +907,19 @@ void CEsmEnchantDlg::UpdateTotalSpellCost (void) {
 	}
 
 	/* Set the charge text */
-	Buffer.Format(_T("%d"), (int) SumValue);
+	Buffer.Format(_T("%d"), (int)SumValue);
 	m_ChargeText.SetWindowText(Buffer);
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmEnchantDlg::UpdateTotalSpellCost()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Event - void OnAutocalccheck ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEnchantDlg::OnAutocalccheck() {
@@ -1131,23 +929,14 @@ void CEsmEnchantDlg::OnAutocalccheck() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEnchantDlg::OnAutocalccheck()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmEnchantDlg Event - void OnSelchangeTypelist ();
-
  *
-
  *=========================================================================*/
 
 void CEsmEnchantDlg::OnSelchangeTypelist() {
@@ -1173,8 +962,5 @@ void CEsmEnchantDlg::OnSelchangeTypelist() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmEnchantDlg::OnSelchangeTypelist()
-
  *=========================================================================*/
-

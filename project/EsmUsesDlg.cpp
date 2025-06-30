@@ -1,159 +1,124 @@
 /*===========================================================================
-
  *
-
  * File:    Esmusesdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  October 7, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmUsesDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 DEFINE_FILE("EsmUsesDlg.CPP");
-
 IMPLEMENT_DYNCREATE(CEsmUsesDlg, CFormView)
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CESmUsesDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmUsesDlg, CFormView)
-
 	//{{AFX_MSG_MAP(CEsmUsesDlg)
-
 	ON_WM_DESTROY()
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONEDIT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnEditRecord)
-
 	ON_COMMAND(ID_EDIT_INFO, OnEditInfo)
-
 	ON_UPDATE_COMMAND_UI(ID_EDIT_INFO, OnUpdateEditInfo)
 
 	ON_WM_CONTEXTMENU()
-
 	ON_BN_CLICKED(IDCANCEL, OnCancel)
-
 	ON_COMMAND(ID_EDIT_SELECTRECORD, OnEditSelectrecord)
-
 	ON_UPDATE_COMMAND_UI(ID_EDIT_SELECTRECORD, OnUpdateEditSelectrecord)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CESmUsesDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Record List Display Data Array
-
  *
-
  *=========================================================================*/
 
 static esmcoldata_t l_ItemColData[] = {
-
-	{ _T("ID"), ESM_FIELD_ID, LVCFMT_LEFT, ESMLIST_WIDTH_ID, ESMLIST_SUBITEM_ID, },
-
-	{ _T("Mod"), ESM_FIELD_CHANGED, LVCFMT_CENTER, ESMLIST_WIDTH_CHANGED, ESMLIST_SUBITEM_CHANGED },
-
-	{ _T("Name"), ESM_FIELD_NAME, LVCFMT_LEFT, ESMLIST_WIDTH_NAME, ESMLIST_SUBITEM_NAME },
-
-	{ _T("Type"), ESM_FIELD_ITEMTYPE, LVCFMT_LEFT, ESMLIST_WIDTH_ITEMTYPE, ESMLIST_SUBITEM_ITEMTYPE },
-
-	{ _T("Topic"), ESM_FIELD_TOPIC, LVCFMT_LEFT, ESMLIST_WIDTH_TOPIC, ESMLIST_SUBITEM_TOPIC },
-
-	{ NULL, 0, 0, 0 }   /* Must be last record */
-
+	{
+		_T("ID"),
+		ESM_FIELD_ID,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ID,
+		ESMLIST_SUBITEM_ID,
+	},
+	{
+		_T("Mod"),
+		ESM_FIELD_CHANGED,
+		LVCFMT_CENTER,
+		ESMLIST_WIDTH_CHANGED,
+		ESMLIST_SUBITEM_CHANGED
+	},
+	{
+		_T("Name"),
+		ESM_FIELD_NAME,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_NAME,
+		ESMLIST_SUBITEM_NAME
+	},
+	{
+		_T("Type"),
+		ESM_FIELD_ITEMTYPE,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_ITEMTYPE,
+		ESMLIST_SUBITEM_ITEMTYPE
+	},
+	{
+		_T("Topic"),
+		ESM_FIELD_TOPIC,
+		LVCFMT_LEFT,
+		ESMLIST_WIDTH_TOPIC,
+		ESMLIST_SUBITEM_TOPIC
+	},
+	{
+		NULL,
+		0,
+		0,
+		0
+	} /* Must be last record */
 };
 
 /*===========================================================================
-
  *      End of Record List Display Data Array
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmUsesDlg::CEsmUsesDlg() : CFormView(CEsmUsesDlg::IDD) {
@@ -166,49 +131,31 @@ CEsmUsesDlg::CEsmUsesDlg() : CFormView(CEsmUsesDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmUsesDlg Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmUsesDlg::~CEsmUsesDlg() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmUsesDlg Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmUsesDlg::DoDataExchange (CDataExchange* pDX) {
+void CEsmUsesDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmUsesDlg)
 	DDX_Control(pDX, IDC_COUNTLABEL, m_UsesLabel);
@@ -218,61 +165,37 @@ void CEsmUsesDlg::DoDataExchange (CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmUsesDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Begin Class Diagnostics
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
-
 
 void CEsmUsesDlg::AssertValid() const {
 	CFormView::AssertValid();
 }
 
-
-
-void CEsmUsesDlg::Dump(CDumpContext& dc) const {
+void CEsmUsesDlg::Dump(CDumpContext &dc) const {
 	CFormView::Dump(dc);
 }
-
-
 
 #endif
 
 /*===========================================================================
-
  *      End of Class Diagnostics
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnCancel ();
-
  *
-
  *=========================================================================*/
 
 void CEsmUsesDlg::OnCancel() {
@@ -280,49 +203,31 @@ void CEsmUsesDlg::OnCancel() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnCancel()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnContextMenu (pWnd, Point);
-
  *
-
  *=========================================================================*/
 
-void CEsmUsesDlg::OnContextMenu (CWnd* pWnd, CPoint Point) {
+void CEsmUsesDlg::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	if (pWnd->GetDlgCtrlID() == IDC_RECORDLIST) {
 		OpenContextMenu(this, pWnd, Point, IDR_FIND_MENU);
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnContextMenu()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnDestroy();
-
  *
-
  *=========================================================================*/
 
 void CEsmUsesDlg::OnDestroy() {
@@ -331,23 +236,14 @@ void CEsmUsesDlg::OnDestroy() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnDestroy()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnEditInfo ();
-
  *
-
  *=========================================================================*/
 
 void CEsmUsesDlg::OnEditInfo() {
@@ -364,56 +260,36 @@ void CEsmUsesDlg::OnEditInfo() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnEditInfo()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnUpdateEditInfo (pCmdUI);
-
  *
-
  *=========================================================================*/
 
-void CEsmUsesDlg::OnUpdateEditInfo(CCmdUI* pCmdUI) {
+void CEsmUsesDlg::OnUpdateEditInfo(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_RecordList.GetSelectedCount() > 0);
 }
 
-
-
-void CEsmUsesDlg::OnUpdateEditSelectrecord(CCmdUI* pCmdUI) {
+void CEsmUsesDlg::OnUpdateEditSelectrecord(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_RecordList.GetSelectedCount() > 0);
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnUpdateEditInfo()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - LRESULT OnEditRecord (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmUsesDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmUsesDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 	POSITION ListPos;
 	int ListIndex;
 	esmrecinfo_t *pRecInfo;
@@ -434,7 +310,7 @@ LRESULT CEsmUsesDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
 	/* Check for special case of INFO record type */
 
 	if (pRecInfo->pRecord->IsType(MWESM_REC_INFO)) {
-		CEsmInfo* pInfo = (CEsmInfo *) pRecInfo->pRecord;
+		CEsmInfo* pInfo = (CEsmInfo *)pRecInfo->pRecord;
 		esmrecinfo_t *pNewRecInfo = m_pDlgHandler->GetDocument()->FindRecInfo(pInfo->GetDialParent());
 
 		if (pNewRecInfo != NULL) {
@@ -442,7 +318,10 @@ LRESULT CEsmUsesDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
 			CFrameWnd* pWnd = m_pDlgHandler->FindDialog(pNewRecInfo);
 
 			if (pWnd != NULL) {
-				pWnd->SendMessageToDescendants(ESMDLG_MSG_ONINFOEDIT, (LPARAM) pRecInfo, -1, FALSE);
+				pWnd->SendMessageToDescendants(ESMDLG_MSG_ONINFOEDIT,
+				                               (LPARAM)pRecInfo,
+				                               -1,
+				                               FALSE);
 			}
 		}
 	} else {
@@ -453,55 +332,42 @@ LRESULT CEsmUsesDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnEditRecord()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnEditSelectrecord ();
-
  *
-
  *=========================================================================*/
 
 void CEsmUsesDlg::OnEditSelectrecord() {
-	m_pDlgHandler->GetDocument()->UpdateAllViews(NULL, MWEDITDOC_HINT_SELECTITEM,
+	m_pDlgHandler->GetDocument()->UpdateAllViews(NULL,
+	                                             MWEDITDOC_HINT_SELECTITEM,
 	                                             (CObject *)m_RecordList.GetCurrentRecord());
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnEditSelectrecord()
-
  *=========================================================================*/
 
 
-
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmUsesDlg::OnInitialUpdate() {
 	CFormView::OnInitialUpdate();
 	ResizeParentToFit(FALSE);
 	UpdateTitle();
+
 	/* Initialize the progress bar */
 	m_ProgressBar.SetRange(0, 100);
 	m_ProgressBar.SetPos(0);
+
 	/* Initialize the record list */
 	m_RecordList.OnInitCtrl();
 	m_RecordList.SetDlgHandler(m_pDlgHandler);
@@ -518,75 +384,56 @@ void CEsmUsesDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmUsesDlg::OnInitialUpdate()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Method - void UpdateLabel (void);
-
  *
-
  * Updates the uses label.
-
  *
-
  *=========================================================================*/
 
-void CEsmUsesDlg::UpdateLabel (void) {
+void CEsmUsesDlg::UpdateLabel(void) {
 	CString Buffer;
 
-	if (m_pRecInfo != NULL)
+	if (m_pRecInfo != NULL) {
 		Buffer.Format(_T("Record %s (%s) is found in the following objects (%d of %d records)..."),
 		              m_pRecInfo->pRecord->GetID(),
-		              m_pRecInfo->pRecord->GetItemType(), m_UsedRecords, m_TotalRecords);
-	else {
+		              m_pRecInfo->pRecord->GetItemType(),
+		              m_UsedRecords,
+		              m_TotalRecords);
+	} else {
 		Buffer.Format(_T("Record ?? (???) is found in the following objects (%d of %d records)..."),
-		              m_UsedRecords, m_TotalRecords);
+		              m_UsedRecords,
+		              m_TotalRecords);
 	}
 
 	m_UsesLabel.SetWindowText(Buffer);
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmUsesDlg::UpdateLabel()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Method - void UpdateTitle (void);
-
  *
-
  * Updates the parent frame title based on the current document and
-
  * record information.
-
  *
-
  *=========================================================================*/
 
-void CEsmUsesDlg::UpdateTitle (void) {
+void CEsmUsesDlg::UpdateTitle(void) {
 	CString Buffer;
 
 	if (m_pRecInfo != NULL) {
-		Buffer.Format(_T("%s -- Uses -- %s"), m_pDlgHandler->GetDocument()->GetTitle(),
+		Buffer.Format(_T("%s -- Uses -- %s"),
+		              m_pDlgHandler->GetDocument()->GetTitle(),
 		              m_pRecInfo->pRecord->GetID());
 	} else {
 		Buffer.Format(_T("%s -- Uses --"), m_pDlgHandler->GetDocument()->GetTitle());
@@ -596,38 +443,27 @@ void CEsmUsesDlg::UpdateTitle (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmUsesDlg::UpdateTitle()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmUsesDlg Method - bool UpdateUses (void);
-
  *
-
  * Updates the uses information for the current record. Returns false on
-
  * any error.
-
  *
-
  *=========================================================================*/
 
-bool CEsmUsesDlg::UpdateUses (void) {
-	CEsmRecInfoArray* pRecInfoArray = m_pDlgHandler->GetDocument()->GetRecInfoArray();
+bool CEsmUsesDlg::UpdateUses(void) {
+	CEsmRecInfoArray *pRecInfoArray = m_pDlgHandler->GetDocument()->GetRecInfoArray();
 	esmrecinfo_t *pRecInfo;
-	const TCHAR* pRecordID;
+	const TCHAR *pRecordID;
 	bool Result;
 	int iResult;
 	int Index;
+
 	/* Reset variables */
 	m_RecordList.DeleteAllItems();
 	m_TotalRecords = pRecInfoArray->GetSize();
@@ -692,16 +528,5 @@ bool CEsmUsesDlg::UpdateUses (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmUsesDlg::UpdateUses()
-
  *=========================================================================*/
-
-
-
-
-
-
-
-
-

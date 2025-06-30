@@ -117,10 +117,11 @@ CMWEditApp::~CMWEditApp() {
  * Saves a new find history string to the registry.
  *
  *=========================================================================*/
-bool CMWEditApp::AddFindHistory(const TCHAR* pString) {
+bool CMWEditApp::AddFindHistory(const TCHAR *pString) {
 	CString LastFind = pString;
 	CString TempFind;
 	CString RegName;
+
 	int Result;
 	int Index;
 	/* See if the find string already exists */
@@ -159,7 +160,7 @@ bool CMWEditApp::AddFindHistory(const TCHAR* pString) {
  *
  *=========================================================================*/
 void CMWEditApp::ClearFileArray(void) {
-	CEsmFile* pFile;
+	CEsmFile *pFile;
 	int Index;
 
 	for (Index = 0; Index < m_EsmMasters.GetSize(); Index++) {
@@ -183,7 +184,7 @@ void CMWEditApp::ClearFileArray(void) {
  * find history. Returns -1 if it was not found.
  *
  *=========================================================================*/
-int CMWEditApp::FindFindHistory(const TCHAR* pString) {
+int CMWEditApp::FindFindHistory(const TCHAR *pString) {
 	CString RegName;
 	CString Buffer;
 	int Index;
@@ -218,9 +219,9 @@ int CMWEditApp::FindFindHistory(const TCHAR* pString) {
  * Class CMWEditApp Method - CEsmFile* FindMaster (pPathname);
  *
  *=========================================================================*/
-CEsmFile *CMWEditApp::FindMaster(const TCHAR* pPathname) {
-	const TCHAR* pFilename = FindFilename(pPathname);
-	CEsmFile* pFile;
+CEsmFile *CMWEditApp::FindMaster(const TCHAR *pPathname) {
+	const TCHAR *pFilename = FindFilename(pPathname);
+	CEsmFile *pFile;
 	int Index;
 
 	for (Index = 0; Index < m_EsmMasters.GetSize(); Index++) {
@@ -250,27 +251,30 @@ BOOL CMWEditApp::InitInstance() {
 	AfxEnableControlContainer();
 	AfxInitRichEdit();
 	SystemLog.Open("mwedit.log");
-	/*  int Index;
-	  int RandomValue;
-	  int RandCount[101];
-	  memset(RandCount, 0, sizeof(int)*101);
+	/*int Index;
+	int RandomValue;
+	int RandCount[101];
+	memset(RandCount, 0, sizeof(int) * 101);
 
-	  for (Index = 0; Index < 1000000; Index++) {
-	    RandomValue = Random(100);
-	    RandCount[RandomValue]++;
-	   }
+	for (Index = 0; Index < 1000000; Index++) {
+		RandomValue = Random(100);
+		RandCount[RandomValue]++;
+	}
 
-	  int Total = 0;
-	  for (Index = 0; Index < 101; Index++) {
-	    SystemLog.Printf ("%3d = %d", Index, RandCount[Index]);
-	    Total += RandCount[Index];
-	   }
+	int Total = 0;
+	for (Index = 0; Index < 101; Index++) {
+		SystemLog.Printf ("%3d = %d", Index, RandCount[Index]);
+		Total += RandCount[Index];
+	}
 
-	  SystemLog.Printf ("Total = %d", Total); //*/
+	SystemLog.Printf ("Total = %d", Total);*/
+
 	/* Attempt to load the default function help definitions */
 	m_FunctionArray.LoadDefault();
+
 	/* Attempt to load the custom function definitions */
 	ReadMwCustomFunctions(g_CustomFunctions, MWEDIT_DEFAULT_CUSTOMFUNCS);
+
 	/* Initialize the image list */
 	m_IconBitmap[ESMLIST_IMAGE_ARMOR].LoadBitmap(IDB_ARMOR);
 	m_IconBitmap[ESMLIST_IMAGE_ALCHEMY].LoadBitmap(IDB_ALCHEMY);
@@ -310,55 +314,59 @@ BOOL CMWEditApp::InitInstance() {
 	m_IconBitmap[ESMLIST_IMAGE_REGION].LoadBitmap(IDB_REGION);
 	m_IconBitmap[ESMLIST_IMAGE_CELL].LoadBitmap(IDB_CELL);
 	m_IconBitmap[ESMLIST_IMAGE_STARTSCRIPT].LoadBitmap(IDB_STARTSCRIPT);
+
 	CEsmListCtrl::m_ImageList.Create(16, 16, ILC_COLOR16, 64, 8);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ACTIVATOR], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ALCHEMY], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_APPARATUS], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ARMOR], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_BODYPART], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_BOOK], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CLOTHING], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CONTAINER], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CREATURE], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_DOOR], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ENCHANT], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_INGREDIANT], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LEVELCREA], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LEVELITEM], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LIGHT], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LOCKPICK], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_MISC], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_NPC], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_PROBE], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_REPAIR], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SPELL], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_STATIC], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_WEAPON], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_GLOBAL], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SOUND], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_EFFECT], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_DIALOG], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SETTING], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CLASS], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_FACTION], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_RACE], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SKILL], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SCRIPT], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_BIRTHSIGN], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SOUNDGEN], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_REGION], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CELL], (CBitmap*)NULL);
-	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_STARTSCRIPT], (CBitmap*)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ACTIVATOR], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ALCHEMY], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_APPARATUS], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ARMOR], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_BODYPART], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_BOOK], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CLOTHING], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CONTAINER], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CREATURE], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_DOOR], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_ENCHANT], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_INGREDIANT], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LEVELCREA], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LEVELITEM], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LIGHT], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_LOCKPICK], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_MISC], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_NPC], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_PROBE], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_REPAIR], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SPELL], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_STATIC], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_WEAPON], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_GLOBAL], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SOUND], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_EFFECT], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_DIALOG], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SETTING], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CLASS], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_FACTION], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_RACE], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SKILL], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SCRIPT], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_BIRTHSIGN], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_SOUNDGEN], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_REGION], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_CELL], (CBitmap *)NULL);
+	CEsmListCtrl::m_ImageList.Add(&m_IconBitmap[ESMLIST_IMAGE_STARTSCRIPT], (CBitmap *)NULL);
+
 	/* Initialize the TGA/DDS image library */
 	ilInit();
+
 	/* Change the registry key under which our settings are stored. */
 	//SetRegistryKey(_T("MWEdit"));
 	//FindMWRegistryPath();
-	//create the .ini file in application's folder
+
+	//Create the .ini file in application's folder
 	CString path = "E:\\GitHub\\MWEdit\\project\\Debug\\MWEdit.ini";
 	//First free the string allocated by MFC at CWinApp startup
 	//The string is allocated before InitInstance is called..
-	free((void*)m_pszProfileName);
+	free((void *)m_pszProfileName);
 	//Change the name of the .INI file.
 	//The CWinApp destructor will free the memory.
 	m_pszProfileName = _tcsdup(_T(path));
@@ -374,14 +382,14 @@ BOOL CMWEditApp::InitInstance() {
 	}
 
 	/* Register document templates */
-	CMultiDocTemplate* pDocTemplate;
+	CMultiDocTemplate *pDocTemplate;
 	pDocTemplate = new CMultiDocTemplate(IDR_MWEDITTYPE,
 	                                     RUNTIME_CLASS(CMWEditDoc),
 	                                     RUNTIME_CLASS(CChildFrame), /* Custom MDI child frame */
 	                                     RUNTIME_CLASS(CMWEditView));
 	AddDocTemplate(pDocTemplate);
 	/* Create main MDI Frame window */
-	CMainFrame* pMainFrame = new CMainFrame;
+	CMainFrame *pMainFrame = new CMainFrame;
 
 	if (!pMainFrame->LoadFrame(IDR_MAINFRAME)) {
 		return FALSE;
@@ -420,9 +428,9 @@ BOOL CMWEditApp::InitInstance() {
  * new/existing file pointer.
  *
  *=========================================================================*/
-CEsmFile *CMWEditApp::LoadMaster(const TCHAR* pString, CEsmLoadDlg* pLoadDlg) {
+CEsmFile *CMWEditApp::LoadMaster(const TCHAR *pString, CEsmLoadDlg *pLoadDlg) {
 	DEFINE_FUNCTION("CMWEditApp::LoadMaster()");
-	CEsmFile* pFile;
+	CEsmFile *pFile;
 	bool Result;
 	/* Find an existing file */
 	pFile = FindMaster(pString);
@@ -437,11 +445,13 @@ CEsmFile *CMWEditApp::LoadMaster(const TCHAR* pString, CEsmLoadDlg* pLoadDlg) {
 	CreatePointer(pFile, CEsmFile);
 	m_EsmMasters.Add(pFile);
 	pFile->SetMaster(true);
+
 	/* Progress dialog initialization */
 	pLoadDlg->SetFilename(pString);
 	pLoadDlg->SetSubLabel(_T("Loading..."));
 	pLoadDlg->SetProgress(0.0f);
 	pFile->SetCallback(g_EsmLoadDlgCallback, (long)pLoadDlg);
+
 	/* Attempt to read the file */
 	Result = pFile->Read(pString);
 
@@ -469,7 +479,10 @@ class CAboutDlg : public CDialog {
 
 	/* Dialog Data */
 	//{{AFX_DATA(CAboutDlg)
-	enum { IDD = IDD_ABOUTBOX };
+	enum {
+		IDD = IDD_ABOUTBOX
+	};
+
 	CStatic m_SiteLink;
 	//}}AFX_DATA
 	CFont m_Font;
@@ -477,7 +490,7 @@ class CAboutDlg : public CDialog {
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CAboutDlg)
   protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
 	/* Implementation */
@@ -485,11 +498,10 @@ class CAboutDlg : public CDialog {
 	//{{AFX_MSG(CAboutDlg)
 	afx_msg void OnSitelink();
 	virtual BOOL OnInitDialog();
-	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	afx_msg HBRUSH OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor);
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
-
 };
 
 /*===========================================================================
@@ -521,9 +533,20 @@ END_MESSAGE_MAP()
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD) {
 	//{{AFX_DATA_INIT(CAboutDlg)
 	//}}AFX_DATA_INIT
-	m_Font.CreateFont(9, 0, 0, 0, FW_NORMAL, 0, 1, 0,
-	                  DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
-	                  DEFAULT_QUALITY, DEFAULT_PITCH, _T("MS Sans Serif"));
+	m_Font.CreateFont(9,
+	                  0,
+	                  0,
+	                  0,
+	                  FW_NORMAL,
+	                  0,
+	                  1,
+	                  0,
+	                  DEFAULT_CHARSET,
+	                  OUT_DEFAULT_PRECIS,
+	                  CLIP_DEFAULT_PRECIS,
+	                  DEFAULT_QUALITY,
+	                  DEFAULT_PITCH,
+	                  _T("MS Sans Serif"));
 }
 
 /*===========================================================================
@@ -536,7 +559,7 @@ CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD) {
  * Class CAboutDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-void CAboutDlg::DoDataExchange(CDataExchange* pDX) {
+void CAboutDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAboutDlg)
 	DDX_Control(pDX, IDC_SITELINK, m_SiteLink);
@@ -587,6 +610,7 @@ CDocument *CMWEditApp::OpenDocumentFile(LPCTSTR lpszFileName) {
 void CMWEditApp::OnFileOpen(void) {
 	COpenPluginDlg OpenDlg;
 	int Result;
+
 	ChangeDirectory(GetMWDataPath());
 	m_Masters.RemoveAll();
 	m_Plugins.RemoveAll();
@@ -623,7 +647,7 @@ void CMWEditApp::OnFileOpen(void) {
  * Class CMWEditApp Method - void OpenFuncHelpView (void);
  *
  *=========================================================================*/
-void CMWEditApp::OpenFuncHelpView(const TCHAR* pFunction) {
+void CMWEditApp::OpenFuncHelpView(const TCHAR *pFunction) {
 	CCreateContext Context;
 
 	/* If the window is already open, just activate it */
@@ -638,10 +662,12 @@ void CMWEditApp::OpenFuncHelpView(const TCHAR* pFunction) {
 	Context.m_pCurrentFrame = NULL;
 	Context.m_pNewDocTemplate = NULL;
 	Context.m_pLastView = NULL;
+
 	/* Create the dialog parent frame */
 	Context.m_pNewViewClass = RUNTIME_CLASS(CEsmFuncHelpView);
-	m_pFuncHelpView = (CFrameWnd*)RUNTIME_CLASS(CChildFrame)->CreateObject();
+	m_pFuncHelpView = (CFrameWnd *)RUNTIME_CLASS(CChildFrame)->CreateObject();
 	ASSERT_KINDOF(CFrameWnd, m_pFuncHelpView);
+
 	/* Create form view new from resource */
 	m_pFuncHelpView->LoadFrame(CEsmFuncHelpView::IDD, WS_OVERLAPPEDWINDOW, NULL, &Context);
 
@@ -676,7 +702,7 @@ void CMWEditApp::OpenFuncHelpView(const TCHAR* pFunction) {
  * Returns false on any error.
  *
  *=========================================================================*/
-bool CMWEditApp::ReadFindHistory(CString& Buffer, const int FindIndex) {
+bool CMWEditApp::ReadFindHistory(CString &Buffer, const int FindIndex) {
 	CString RegName;
 	RegName.Format(_T("%s%d"), ESMSCR_REGENTRY_FIND, FindIndex);
 	Buffer = AfxGetApp()->GetProfileString(ESMSCR_REGSEC_FINDHISTORY, RegName, NULL);
@@ -723,7 +749,7 @@ BOOL CAboutDlg::OnInitDialog() {
  * Class CAboutDlg Event - HBRUSH OnCtlColor (CDC* pDC, CWnd* pWnd, UINT nCtlColor);
  *
  *=========================================================================*/
-HBRUSH CAboutDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) {
+HBRUSH CAboutDlg::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor) {
 	HBRUSH hBrush = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 
 	if (pWnd != NULL && pWnd->GetDlgCtrlID() == IDC_SITELINK) {

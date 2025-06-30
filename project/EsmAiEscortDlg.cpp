@@ -1,111 +1,63 @@
 /*===========================================================================
-
  *
-
  * File:    Esmaiescortdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 24, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
 
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmAiEscortDlg.h"
-
 #include "EsmUtils.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
-
-
 
 DEFINE_FILE("EsmAiEscortDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmAiEscortDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmAiEscortDlg, CDialog)
-
 	//{{AFX_MSG_MAP(CEsmAiEscortDlg)
-
 	ON_BN_CLICKED(IDC_ESCORTCHECK, OnEscortcheck)
-
 	ON_BN_CLICKED(IDC_POINTCHECK, OnPointcheck)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmAiEscortDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiEscortDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmAiEscortDlg::CEsmAiEscortDlg(CWnd* pParent) : CDialog(CEsmAiEscortDlg::IDD, pParent) {
@@ -115,26 +67,17 @@ CEsmAiEscortDlg::CEsmAiEscortDlg(CWnd* pParent) : CDialog(CEsmAiEscortDlg::IDD, 
 }
 
 /*===========================================================================
-
  *      End of Class CEsmAiEscortDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiEscortDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmAiEscortDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmAiEscortDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmAiEscortDlg)
 	DDX_Control(pDX, IDC_ZTEXT, m_ZText);
@@ -149,27 +92,19 @@ void CEsmAiEscortDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmAiEscortDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmAiEscortDlg Method - bool DoModal (pSubRecord, pCellName, pTitle);
-
  *
-
  *=========================================================================*/
 
-bool CEsmAiEscortDlg::DoModal (CEsmSubAI_E* pSubRecord, const TCHAR* pCellName,
-                               const TCHAR* pTitle) {
+bool CEsmAiEscortDlg::DoModal(CEsmSubAI_E *pSubRecord,
+                              const TCHAR *pCellName,
+                              const TCHAR *pTitle) {
 	int Result;
 	m_pSubRecord = pSubRecord;
 	m_Title = (pTitle == NULL) ? _T("") : pTitle;
@@ -194,23 +129,14 @@ bool CEsmAiEscortDlg::DoModal (CEsmSubAI_E* pSubRecord, const TCHAR* pCellName,
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmAiEscortDlg::DoModal()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiEscortDlg Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmAiEscortDlg::OnInitDialog() {
@@ -257,23 +183,14 @@ BOOL CEsmAiEscortDlg::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmAiEscortDlg::OnInitDialog()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmAiEscortDlg Event - void OnOK ();
-
  *
-
  *=========================================================================*/
 
 void CEsmAiEscortDlg::OnOK() {
@@ -294,11 +211,11 @@ void CEsmAiEscortDlg::OnOK() {
 
 			if (m_PointCheck.GetCheck()) {
 				m_XText.GetWindowText(Buffer);
-				pAiData->X = (float) atof(Buffer);
+				pAiData->X = (float)atof(Buffer);
 				m_YText.GetWindowText(Buffer);
-				pAiData->Y = (float) atof(Buffer);
+				pAiData->Y = (float)atof(Buffer);
 				m_ZText.GetWindowText(Buffer);
-				pAiData->Z = (float) atof(Buffer);
+				pAiData->Z = (float)atof(Buffer);
 			} else {
 				pAiData->X = FLT_MAX;
 				pAiData->Y = FLT_MAX;
@@ -316,23 +233,14 @@ void CEsmAiEscortDlg::OnOK() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmAiEscortDlg::OnOK()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CheckBox Events
-
  *
-
  *=========================================================================*/
 
 void CEsmAiEscortDlg::OnEscortcheck() {
@@ -343,8 +251,6 @@ void CEsmAiEscortDlg::OnEscortcheck() {
 	m_ZText.EnableWindow(m_EscortCheck.GetCheck() != 0 && m_PointCheck.GetCheck() != 0);
 }
 
-
-
 void CEsmAiEscortDlg::OnPointcheck() {
 	m_XText.EnableWindow(m_EscortCheck.GetCheck() != 0 && m_PointCheck.GetCheck() != 0);
 	m_YText.EnableWindow(m_EscortCheck.GetCheck() != 0 && m_PointCheck.GetCheck() != 0);
@@ -352,10 +258,5 @@ void CEsmAiEscortDlg::OnPointcheck() {
 }
 
 /*===========================================================================
-
  *      End of CheckBox Events
-
  *=========================================================================*/
-
-
-

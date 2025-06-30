@@ -1,135 +1,74 @@
 /*===========================================================================
-
  *
-
  * File:    Esmnpcpage4.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 24, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmNpcPage4.h"
-
 #include "EsmAiActivateDlg.h"
-
 #include "EsmAiEscortDlg.h"
-
 #include "EsmAiTravelDlg.h"
-
 #include "EsmAiWanderDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmNpcPage4, CPropertyPage);
-
 DEFINE_FILE("EsmNpcPage4.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmNpcPage4 Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmNpcPage4, CPropertyPage)
-
 	//{{AFX_MSG_MAP(CEsmNpcPage4)
-
 	ON_BN_CLICKED(IDC_ACTIVATEBUTTON, OnActivatebutton)
-
 	ON_BN_CLICKED(IDC_ESCORTBUTTON, OnEscortbutton)
-
 	ON_BN_CLICKED(IDC_FOLLOWBUTTON, OnFollowbutton)
-
 	ON_BN_CLICKED(IDC_TRAVELBUTTON, OnTravelbutton)
-
 	ON_BN_CLICKED(IDC_WANDERBUTTON, OnWanderbutton)
-
 	ON_BN_CLICKED(IDC_EDITBUTTON, OnEditbutton)
-
 	ON_BN_CLICKED(IDC_DELETEBUTTON, OnDeletebutton)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
-
 	ON_MESSAGE(ESMLIST_NOTIFY_ONEDIT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnEditRecord)
-
 	ON_NOTIFY(LVN_ITEMCHANGING, IDC_PACKAGELIST, OnItemchangingPackagelist)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmNpcPage4 Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmNpcPage4::CEsmNpcPage4() : CPropertyPage(CEsmNpcPage4::IDD), m_PackageArray(0) {
@@ -138,23 +77,14 @@ CEsmNpcPage4::CEsmNpcPage4() : CPropertyPage(CEsmNpcPage4::IDD), m_PackageArray(
 }
 
 /*===========================================================================
-
  *      End of Class CEsmNpcPage4 Constructor
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Destructor
-
  *
-
  *=========================================================================*/
 
 CEsmNpcPage4::~CEsmNpcPage4() {
@@ -162,42 +92,30 @@ CEsmNpcPage4::~CEsmNpcPage4() {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmNpcPage4 Destructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void AddAIRecords (pType);
-
  *
-
  * Protected class method that copies and saves all the AI sub-records
-
  * of the given type in the current NPC record.
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::AddAIRecords (const TCHAR* pType) {
-	CEsmNpc* pNpc;
-	CEsmSubRecord* pSubRecord;
-	CEsmSubRecord* pNewSubRec;
+void CEsmNpcPage4::AddAIRecords(const TCHAR *pType) {
+	CEsmNpc *pNpc;
+	CEsmSubRecord *pSubRecord;
+	CEsmSubRecord *pNewSubRec;
 	int ArrayIndex;
 
 	if (m_pRecInfo == NULL) {
 		return;
 	}
 
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	pSubRecord = pNpc->FindFirst(pType, ArrayIndex);
 
 	while (pSubRecord != NULL) {
@@ -218,28 +136,19 @@ void CEsmNpcPage4::AddAIRecords (const TCHAR* pType) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::AddAIRecords()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void ClearPackageArray (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::ClearPackageArray (void) {
+void CEsmNpcPage4::ClearPackageArray(void) {
 	DEFINE_FUNCTION("CEsmNpcPage4::ClearPackageArray()");
-	CEsmSubRecord* pSubRec;
+	CEsmSubRecord *pSubRec;
 	int Index;
 
 	for (Index = 0; Index < m_PackageArray.GetSize(); Index++) {
@@ -251,33 +160,24 @@ void CEsmNpcPage4::ClearPackageArray (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::ClearPackageArray()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void DeleteSelectedItems (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::DeleteSelectedItems (void) {
-	CEsmSubRecord* pSubRec;
-	CEsmSubRecord* pSubNameRec;
+void CEsmNpcPage4::DeleteSelectedItems(void) {
+	CEsmSubRecord *pSubRec;
+	CEsmSubRecord *pSubNameRec;
 	int ListIndex;
 	ListIndex = m_PackageList.GetNextItem(-1, LVNI_SELECTED);
 
 	while (ListIndex >= 0) {
-		pSubRec = (CEsmSubRecord *) m_PackageList.GetItemData(ListIndex);
+		pSubRec = (CEsmSubRecord *)m_PackageList.GetItemData(ListIndex);
 		pSubNameRec = FindCNDTSubRec(pSubRec);
 		m_PackageArray.DeleteElement(pSubRec);
 		DestroyPointer(pSubRec);
@@ -293,26 +193,17 @@ void CEsmNpcPage4::DeleteSelectedItems (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::DeleteSelectedItems()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::DoDataExchange(CDataExchange* pDX) {
+void CEsmNpcPage4::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmNpcPage4)
 	DDX_Control(pDX, IDC_PACKAGEEDIT, m_PackageText);
@@ -325,28 +216,19 @@ void CEsmNpcPage4::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::GetControlData (void) {
-	CEsmNpc* pNpc;
-	CEsmSubRecord* pSubRec;
+void CEsmNpcPage4::GetControlData(void) {
+	CEsmNpc *pNpc;
+	CEsmSubRecord *pSubRec;
 	CString Buffer;
 	aidata_t *pAiData;
 	int Index;
@@ -355,19 +237,22 @@ void CEsmNpcPage4::GetControlData (void) {
 		return;
 	}
 
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	/* Save the basic AI settings */
 	pAiData = pNpc->GetAIData();
 
 	if (pAiData != NULL) {
 		m_AlarmText.GetWindowText(Buffer);
-		pAiData->Alarm = (byte) atoi(Buffer);
+		pAiData->Alarm = (byte)atoi(Buffer);
+
 		m_FleeText.GetWindowText(Buffer);
-		pAiData->Flee = (byte) atoi(Buffer);
+		pAiData->Flee = (byte)atoi(Buffer);
+
 		m_FightText.GetWindowText(Buffer);
-		pAiData->Fight = (byte) atoi(Buffer);
+		pAiData->Fight = (byte)atoi(Buffer);
+
 		m_HelloText.GetWindowText(Buffer);
-		pAiData->Hello = (byte) atoi(Buffer);
+		pAiData->Hello = (byte)atoi(Buffer);
 	}
 
 	/* Delete the current AI package sub-records */
@@ -389,33 +274,21 @@ void CEsmNpcPage4::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::GetControlData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - CEsmSubNameFix* FindCNDTSubRec (pSubRecord);
-
  *
-
  * Finds and returns the CNDT record associated with the given subrecord,
-
  * or NULL if none is found.
-
  *
-
  *=========================================================================*/
 
-CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec (CEsmSubRecord* pSubRecord) {
-	CEsmSubRecord* pSubRec;
+CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
+	CEsmSubRecord *pSubRec;
 	int Index;
 
 	for (Index = 0; Index < m_PackageArray.GetSize(); Index++) {
@@ -429,7 +302,7 @@ CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec (CEsmSubRecord* pSubRecord) {
 			pSubRec = m_PackageArray.GetAt(Index + 1);
 
 			if (pSubRec->IsType(MWESM_SUBREC_CNDT)) {
-				return (CEsmSubNameFix *) pSubRec;
+				return (CEsmSubNameFix *)pSubRec;
 			}
 
 			return (NULL);
@@ -440,54 +313,36 @@ CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec (CEsmSubRecord* pSubRecord) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::FindCNDTSubRec()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - CMWEditDoc* GetDocument (void);
-
  *
-
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage4::GetDocument (void) {
+CMWEditDoc *CEsmNpcPage4::GetDocument(void) {
 	DEFINE_FUNCTION("CEsmNpcPage4::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::GetDocument()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Event - LRESULT OnDblclkObjectlist (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
 LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnEditRecord()");
-	CEsmSubRecord* pSubRecord;
+	CEsmSubRecord *pSubRecord;
 	bool Result = false;
 	int ListIndex;
 
@@ -498,7 +353,7 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	}
 
 	/* Display the model reference dialog */
-	pSubRecord = (CEsmSubRecord *) m_PackageList.GetItemData(lParam);
+	pSubRecord = (CEsmSubRecord *)m_PackageList.GetItemData(lParam);
 
 	if (pSubRecord->IsType(MWESM_SUBREC_AI_A)) {
 		CEsmAiActivateDlg Dialog;
@@ -511,7 +366,8 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 		CString CellName;
 		CEsmSubNameFix* pCellName;
 		pCellName = FindCNDTSubRec(pSubRecord);
-		Result = Dialog.DoModal((CEsmSubAI_E *)pSubRecord, pCellName ? pCellName->GetName() : NULL,
+		Result = Dialog.DoModal((CEsmSubAI_E *)pSubRecord,
+		                        pCellName ? pCellName->GetName() : NULL,
 		                        pSubRecord->IsType(MWESM_SUBREC_AI_E) ? _T("Escort") : _T("Follow"));
 
 		if (Result) {
@@ -544,23 +400,14 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage4::OnDblclkObjectlist()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Event - BOOL OnInitDialog ();
-
  *
-
  *=========================================================================*/
 
 BOOL CEsmNpcPage4::OnInitDialog() {
@@ -577,31 +424,23 @@ BOOL CEsmNpcPage4::OnInitDialog() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage4::OnInitDialog()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Event - void OnItemchangingPackagelist (pNMHDR, pResult);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::OnItemchangingPackagelist (NMHDR* pNMHDR, LRESULT* pResult) {
-	NM_LISTVIEW* pNMListView = (NM_LISTVIEW *) pNMHDR;
+void CEsmNpcPage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResult) {
+	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
 
-	if ((pNMListView->uChanged & LVIF_STATE) != 0 && (pNMListView->uNewState & LVIS_SELECTED ) != 0) {
-		CEsmSubRecord* pSubRec = (CEsmSubRecord *) m_PackageList.GetItemData(pNMListView->iItem);
+	if ((pNMListView->uChanged & LVIF_STATE) != 0
+	    && (pNMListView->uNewState & LVIS_SELECTED ) != 0) {
+		CEsmSubRecord *pSubRec = (CEsmSubRecord *)m_PackageList.GetItemData(pNMListView->iItem);
 		OutputAIData(pSubRec);
 	} else if ((pNMListView->uChanged & LVIF_STATE) != 0 ) {
 		OutputAIData(NULL);
@@ -611,24 +450,17 @@ void CEsmNpcPage4::OnItemchangingPackagelist (NMHDR* pNMHDR, LRESULT* pResult) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage4::OnItemchangingPackagelist()
-
  *=========================================================================*/
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Event - LRESULT OnRecordKey (lParam, wParam);
-
  *
-
  *=========================================================================*/
 
-LRESULT CEsmNpcPage4::OnRecordKey (LPARAM lParam, LPARAM wParam) {
+LRESULT CEsmNpcPage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Delete all currently selected items */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
 		DeleteSelectedItems();
@@ -639,67 +471,69 @@ LRESULT CEsmNpcPage4::OnRecordKey (LPARAM lParam, LPARAM wParam) {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmNpcPage4::OnRecordKey()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void OutputAIData (pSubRec);
-
  *
-
  * Attempts to output the given AI package sub-record to the text control.
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::OutputAIData (CEsmSubRecord* pSubRec) {
+void CEsmNpcPage4::OutputAIData(CEsmSubRecord *pSubRec) {
 	CString Buffer;
 
 	if (pSubRec == NULL) {
 		m_PackageText.SetWindowText(_T(""));
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_T)) {
-		ai_tdata_t *pAiData = ((CEsmSubAI_T *) pSubRec)->GetAIData();
+		ai_tdata_t *pAiData = ((CEsmSubAI_T *)pSubRec)->GetAIData();
 		Buffer.Format(_T("X = %g\r\nY = %g\r\nZ = %g"), pAiData->X, pAiData->Y, pAiData->Z);
 		m_PackageText.SetWindowText(Buffer);
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_W)) {
-		ai_wdata_t *pAiData = ((CEsmSubAI_W *) pSubRec)->GetAIData();
+		ai_wdata_t *pAiData = ((CEsmSubAI_W *)pSubRec)->GetAIData();
 		Buffer.Format(
 		    _T("Distance = %d\n\rDuration = %g hours\r\nTime of Day = %g:00\r\nIdle2 = %d\r\nIdle3 = %d\r\nIdle4 = %d\r\nIdle5 = %d\r\nIdle6 = %d\r\nIdle7 = %d\r\nIdle8 = %d\r\nIdle9 = %d"),
-		    (int)pAiData->Distance, (int)pAiData->Duration, (int)pAiData->TimeOfDay, (int)pAiData->Idle[0],
+		    (int)pAiData->Distance,
+		    (int)pAiData->Duration,
+		    (int)pAiData->TimeOfDay,
+		    (int)pAiData->Idle[0],
 		    (int)pAiData->Idle[1],
-		    (int)pAiData->Idle[2], (int)pAiData->Idle[3], (int)pAiData->Idle[4], (int)pAiData->Idle[5],
-		    (int)pAiData->Idle[6], (int)pAiData->Idle[7]);
+		    (int)pAiData->Idle[2],
+		    (int)pAiData->Idle[3],
+		    (int)pAiData->Idle[4],
+		    (int)pAiData->Idle[5],
+		    (int)pAiData->Idle[6],
+		    (int)pAiData->Idle[7]);
 		m_PackageText.SetWindowText(Buffer);
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_A)) {
-		ai_adata_t *pAiData = ((CEsmSubAI_A *) pSubRec)->GetAIData();
+		ai_adata_t *pAiData = ((CEsmSubAI_A *)pSubRec)->GetAIData();
 		Buffer.Format(_T("Name = %s"), pAiData->Name);
 		m_PackageText.SetWindowText(Buffer);
 	} else if (pSubRec->IsType(MWESM_SUBREC_AI_E) || pSubRec->IsType(MWESM_SUBREC_AI_F)) {
-		ai_edata_t *pAiData = ((CEsmSubAI_E *) pSubRec)->GetAIData();
+		ai_edata_t *pAiData = ((CEsmSubAI_E *)pSubRec)->GetAIData();
 		int ListIndex = m_PackageArray.FindElement(pSubRec);
 		CEsmSubRecord* pCellName = m_PackageArray.GetAt(ListIndex + 1);
 
 		if (pCellName != NULL && pCellName->IsType(MWESM_SUBREC_CNDT)) {
 			if (pAiData->X != FLT_MAX)
 				Buffer.Format(_T("Name = %s\n\rDuration = %d\r\nCell = %s\r\nX = %.0g\r\nY = %.0g\r\nZ = %.0g"),
-				              pAiData->ID, (int) pAiData->Duration, ((CEsmSubNameFix *) pCellName)->GetName(),
-				              pAiData->X, pAiData->Y, pAiData->Z);
+				              pAiData->ID,
+				              (int)pAiData->Duration,
+				              ((CEsmSubNameFix *)pCellName)->GetName(),
+				              pAiData->X,
+				              pAiData->Y,
+				              pAiData->Z);
 			else {
-				Buffer.Format(_T("Name = %s\r\nDuration = %d\r\nCell = %s"), pAiData->ID, (int) pAiData->Duration,
-				              ((CEsmSubNameFix *) pCellName)->GetName());
+				Buffer.Format(_T("Name = %s\r\nDuration = %d\r\nCell = %s"),
+				              pAiData->ID,
+				              (int)pAiData->Duration,
+				              ((CEsmSubNameFix *)pCellName)->GetName());
 			}
 		} else {
-			Buffer.Format(_T("Name = %s\r\nDuration = %d"), pAiData->ID, (int) pAiData->Duration);
+			Buffer.Format(_T("Name = %s\r\nDuration = %d"),pAiData->ID, (int)pAiData->Duration);
 		}
 
 		m_PackageText.SetWindowText(Buffer);
@@ -707,27 +541,18 @@ void CEsmNpcPage4::OutputAIData (CEsmSubRecord* pSubRec) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::OutputAIData()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::SetControlData (void) {
-	CEsmNpc* pNpc;
+void CEsmNpcPage4::SetControlData(void) {
+	CEsmNpc *pNpc;
 	CString Buffer;
 	aidata_t *pAiData;
 
@@ -736,7 +561,7 @@ void CEsmNpcPage4::SetControlData (void) {
 	}
 
 	m_PackageList.SetDlgHandler(m_pDlgHandler);
-	pNpc = (CEsmNpc *) m_pRecInfo->pRecord;
+	pNpc = (CEsmNpc *)m_pRecInfo->pRecord;
 	pAiData = pNpc->GetAIData();
 
 	if (pAiData != NULL) {
@@ -759,28 +584,19 @@ void CEsmNpcPage4::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::SetControlData()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Package Event Buttons
-
  *
-
  *=========================================================================*/
 
 void CEsmNpcPage4::OnActivatebutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnActivatebutton()");
-	CEsmSubAI_A* pNewSubRec;
+	CEsmSubAI_A *pNewSubRec;
 	bool Result;
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_A);
@@ -802,12 +618,10 @@ void CEsmNpcPage4::OnActivatebutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmNpcPage4::OnEscortbutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnEscortbutton()");
-	CEsmSubAI_E* pNewSubRec;
-	CEsmSubNameFix* pCellName;
+	CEsmSubAI_E *pNewSubRec;
+	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
 	/* Create the new sub-record */
@@ -841,12 +655,10 @@ void CEsmNpcPage4::OnEscortbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmNpcPage4::OnFollowbutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnEscortbutton()");
-	CEsmSubAI_E* pNewSubRec;
-	CEsmSubNameFix* pCellName;
+	CEsmSubAI_E *pNewSubRec;
+	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
 	/* Create the new sub-record */
@@ -880,11 +692,9 @@ void CEsmNpcPage4::OnFollowbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmNpcPage4::OnTravelbutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnTravelbutton()");
-	CEsmSubAI_T* pNewSubRec;
+	CEsmSubAI_T *pNewSubRec;
 	bool Result;
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_T);
@@ -906,11 +716,9 @@ void CEsmNpcPage4::OnTravelbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmNpcPage4::OnWanderbutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnWanderbutton()");
-	CEsmSubAI_W* pNewSubRec;
+	CEsmSubAI_W *pNewSubRec;
 	bool Result;
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_W);
@@ -932,8 +740,6 @@ void CEsmNpcPage4::OnWanderbutton() {
 	UpdatePackageList();
 }
 
-
-
 void CEsmNpcPage4::OnEditbutton() {
 	POSITION SelPos;
 	SelPos = m_PackageList.GetFirstSelectedItemPosition();
@@ -945,34 +751,23 @@ void CEsmNpcPage4::OnEditbutton() {
 	OnEditRecord(m_PackageList.GetNextSelectedItem(SelPos), 0);
 }
 
-
-
 void CEsmNpcPage4::OnDeletebutton() {
 	DeleteSelectedItems();
 }
 
 /*===========================================================================
-
  *      End of Package Event Buttons
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmNpcPage4 Method - void UpdatePackageList (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmNpcPage4::UpdatePackageList (void) {
-	CEsmSubRecord* pSubRecord;
+void CEsmNpcPage4::UpdatePackageList(void) {
+	CEsmSubRecord *pSubRecord;
 	int Index;
 	int ListIndex;
 	/* Clear the current list */
@@ -998,20 +793,11 @@ void CEsmNpcPage4::UpdatePackageList (void) {
 		}
 
 		if (ListIndex >= 0) {
-			m_PackageList.SetItemData(ListIndex, (DWORD) pSubRecord);
+			m_PackageList.SetItemData(ListIndex, (DWORD)pSubRecord);
 		}
 	}
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmNpcPage4::UpdatePackageList()
-
  *=========================================================================*/
-
-
-
-
-
-
-

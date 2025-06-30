@@ -1,121 +1,67 @@
 /*===========================================================================
-
  *
-
  * File:    Esmbodypartdlg.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  February 12, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
-
 #include "EsmBodyPartDlg.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
-
 	#undef THIS_FILE
-
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
-
-
 IMPLEMENT_DYNCREATE(CEsmBodyPartDlg, CEsmRecDialog);
-
 DEFINE_FILE("EsmBodyPartDlg.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin CEsmBodyPartDlg Message Map
-
  *
-
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CEsmBodyPartDlg, CEsmRecDialog)
-
 	//{{AFX_MSG_MAP(CEsmBodyPartDlg)
-
 	ON_CBN_SELCHANGE(IDC_PARTTYPELIST, OnSelchangeParttypelist)
-
 	ON_CBN_SELCHANGE(IDC_RACELIST, OnSelchangeList)
-
 	ON_CBN_SELCHANGE(IDC_PARTLIST, OnSelchangeList)
-
 	ON_BN_CLICKED(IDC_VAMPIRECHECK, OnSelchangeList)
-
 	ON_BN_CLICKED(IDC_PLAYABLECHECK, OnSelchangeList)
-
 	ON_BN_CLICKED(IDC_FEMALECHECK, OnSelchangeList)
-
 	ON_BN_CLICKED(IDC_BLOCKEDCHECK, OnSelchangeList)
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
-
  *      End of CEsmBodyPartDlg Message Map
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmBodyPartDlg::CEsmBodyPartDlg() : CEsmRecDialog(CEsmBodyPartDlg::IDD) {
@@ -125,26 +71,17 @@ CEsmBodyPartDlg::CEsmBodyPartDlg() : CEsmRecDialog(CEsmBodyPartDlg::IDD) {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmBodyPartDlg Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Method - void DoDataExchange (pDX);
-
  *
-
  *=========================================================================*/
 
-void CEsmBodyPartDlg::DoDataExchange(CDataExchange* pDX) {
+void CEsmBodyPartDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmBodyPartDlg)
 	DDX_Control(pDX, IDC_VAMPIRECHECK, m_VampireCheck);
@@ -160,32 +97,23 @@ void CEsmBodyPartDlg::DoDataExchange(CDataExchange* pDX) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBodyPartDlg::DoDataExchange()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Method - void GetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmBodyPartDlg::GetControlData (void) {
+void CEsmBodyPartDlg::GetControlData(void) {
 	DEFINE_FUNCTION("CEsmBodyPartDlg::GetControlData()");
 	bodypartdata_t *pBodyData;
 	CString Buffer;
 	int ListIndex;
 	/* Update the armor pointer and data */
-	m_pBodyPart = (CEsmBodyPart *) GetRecInfo()->pRecord;
+	m_pBodyPart = (CEsmBodyPart *)GetRecInfo()->pRecord;
 
 	if (m_pBodyPart == NULL) {
 		return;
@@ -232,24 +160,17 @@ void CEsmBodyPartDlg::GetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBodyPartDlg::GetControlData()
-
  *=========================================================================*/
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Method - bool IsModified (void);
-
  *
-
  *=========================================================================*/
 
-bool CEsmBodyPartDlg::IsModified (void) {
+bool CEsmBodyPartDlg::IsModified(void) {
 	if (m_Modified) {
 		return (true);
 	}
@@ -264,23 +185,14 @@ bool CEsmBodyPartDlg::IsModified (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBodyPartDlg::IsModified()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Event - void OnInitialUpdate ();
-
  *
-
  *=========================================================================*/
 
 void CEsmBodyPartDlg::OnInitialUpdate() {
@@ -288,7 +200,7 @@ void CEsmBodyPartDlg::OnInitialUpdate() {
 	UpdateTitle(NULL);
 	/* Initialize the record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pBodyPart = (CEsmBodyPart *) GetRecInfo()->pRecord;
+	m_pBodyPart = (CEsmBodyPart *)GetRecInfo()->pRecord;
 	/* Set text limits */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	/* Disable controls */
@@ -301,23 +213,14 @@ void CEsmBodyPartDlg::OnInitialUpdate() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBodyPartDlg::OnInitialUpdate()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Event - void OnSelchangeParttypelist ();
-
  *
-
  *=========================================================================*/
 
 void CEsmBodyPartDlg::OnSelchangeParttypelist() {
@@ -336,23 +239,14 @@ void CEsmBodyPartDlg::OnSelchangeParttypelist() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBodyPartDlg::OnSelchangeParttypelist()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Event - void OnSelchangeList ();
-
  *
-
  *=========================================================================*/
 
 void CEsmBodyPartDlg::OnSelchangeList() {
@@ -360,26 +254,17 @@ void CEsmBodyPartDlg::OnSelchangeList() {
 }
 
 /*===========================================================================
-
  *      End of Class Event CEsmBodyPartDlg::OnSelchangeList()
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmBodyPartDlg Method - void SetControlData (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmBodyPartDlg::SetControlData (void) {
+void CEsmBodyPartDlg::SetControlData(void) {
 	bodypartdata_t *pBodyData;
 
 	/* Ignore if the current item is not valid */
@@ -414,12 +299,5 @@ void CEsmBodyPartDlg::SetControlData (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmBodyPartDlg::SetControlData()
-
  *=========================================================================*/
-
-
-
-
-

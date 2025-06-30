@@ -1,61 +1,35 @@
 /*===========================================================================
-
  *
-
  * File:    Esmscripterror.CPP
-
  * Author:  Dave Humphrey (uesp@m0use.net)
-
  * Created On:  September 3, 2003
-
  *
-
  * Description
-
  *
-
  *=========================================================================*/
-
-
 
 /* Include Files */
 
 #include "esmscripterror.h"
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Begin Local Definitions
-
  *
-
  *=========================================================================*/
 
 DEFINE_FILE("EsmScriptError.cpp");
 
 /*===========================================================================
-
  *      End of Local Definitions
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class CEsmScriptError Constructor
-
  *
-
  *=========================================================================*/
 
 CEsmScriptError::CEsmScriptError () {
@@ -71,26 +45,17 @@ CEsmScriptError::CEsmScriptError () {
 }
 
 /*===========================================================================
-
  *      End of Class CEsmScriptError Constructor
-
  *=========================================================================*/
-
-
-
 
 
 /*===========================================================================
-
  *
-
  * Class CEsmScriptError Method - void Destroy (void);
-
  *
-
  *=========================================================================*/
 
-void CEsmScriptError::Destroy (void) {
+void CEsmScriptError::Destroy(void) {
 	//DEFINE_FUNCTION("CEsmScriptError::Destroy()");
 	m_pFunction = NULL;
 	m_Code = 0;
@@ -104,31 +69,18 @@ void CEsmScriptError::Destroy (void) {
 }
 
 /*===========================================================================
-
  *      End of Class Method CEsmScriptError::Destroy()
-
  *=========================================================================*/
 
 
-
-
-
 /*===========================================================================
-
  *
-
  * Class TCHAR* CEsmScriptError Method - const GetFuncArgString (void) const;
-
  *
-
  * Return a string of the current function argument, if any and if it is
-
  * valid. Returns an "Invalid" string in any error. Uses a local static string
-
  * buffer;
-
  *
-
  *=========================================================================*/
 
 const TCHAR *CEsmScriptError::GetFuncArgString(void) const {
@@ -148,8 +100,5 @@ const TCHAR *CEsmScriptError::GetFuncArgString(void) const {
 }
 
 /*===========================================================================
-
  *      End of Class Method TCHAR* CEsmScriptError::GetFuncArgString()
-
  *=========================================================================*/
-
