@@ -803,7 +803,7 @@ esmskilldata_t l_Skills[] = {
 	},
 	{
 		_T("Blunt Weapon"),
-	 _	T("Hit by Opponent"),
+	 	_T("Hit by Opponent"),
 		NULL,
 		NULL,
 		NULL
