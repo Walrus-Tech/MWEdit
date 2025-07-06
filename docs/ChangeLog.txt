@@ -484,3 +484,18 @@ v0.6.1 (28 Nov 2006)
 	  Script and dialogue windows operate in the same manner.
 	- 'reset' is no longer a reserved word in scripts. Added a few more checks to allow
 	  local/global variables named 'reset'.
+
+
+v0.6.3 (06 Jul 2025)
+=======================================
+	- Fix some encoding issues [deathssoul]
+	- Fix some special characters in Functions.dat and customfunctions.dat [deathssoul]
+	- Reformat the code for better consistency [deathssoul]
+	- Set up build automation on GitHub [deathssoul]
+	- Update README.md [deathssoul]
+	- Convert Features.txt to Markdown [deathssoul]
+	- Correct line endings [deathssoul]
+	- Windows API updates [rfuzzo]
+	- Update project to newer Visual Studio versions [rfuzzo, NimrodPSI]
+	- Fixed a bug in the magic effect's RGB data [NimrodPSI]
+	- Added missing magic effects from Bloodmoon and fixed Tribunal's effect [NimrodPSI]
