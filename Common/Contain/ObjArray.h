@@ -37,14 +37,14 @@ template <class CObjType> class TObjArray {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	TPtrArray<CObjType> m_Array;        /* Array of object pointers */
+	TPtrArray<CObjType> m_Array; /* Array of object pointers */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Helper function to delete all elements */
-	void DeleteElements_Priv(void);
+	void DeleteElements_Priv();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -57,8 +57,8 @@ template <class CObjType> class TObjArray {
 	}
 
 	/* Delete the array */
-	virtual void Destroy(void);
-	void RemoveAll(void) {
+	virtual void Destroy();
+	void RemoveAll() {
 		Destroy();
 	}
 
@@ -83,7 +83,7 @@ template <class CObjType> class TObjArray {
 		m_Array.AddSortFast(pObject);
 	}
 
-	CObjType *AddNew(void);
+	CObjType *AddNew();
 
 	/* Delete elements */
 	void DeleteElement(CObjType *pObject);
@@ -114,7 +114,7 @@ template <class CObjType> class TObjArray {
 	}
 
 	/* Frees any extra allocated memory */
-	void FreeExtra(void) {
+	void FreeExtra() {
 		m_Array.FreeExtra();
 	}
 
@@ -128,29 +128,29 @@ template <class CObjType> class TObjArray {
 	}
 
 	/* Get class members */
-	int GetNumElements(void) const {
-		return (m_Array.GetNumElements());
+	int GetNumElements() const {
+		return m_Array.GetNumElements();
 	}
 
-	int GetMaxElements(void) const {
-		return (m_Array.GetMaxElements());
+	int GetMaxElements() const {
+		return m_Array.GetMaxElements();
 	}
 
-	int GetUpperBound(void) const {
-		return (m_Array.GetUpperBound())
+	int GetUpperBound() const {
+		return m_Array.GetUpperBound();
 	}
 
-	int GetGrowSize(void) const {
-		return (m_Array.GetGrowSize())
+	int GetGrowSize() const {
+		return m_Array.GetGrowSize();
 	}
 
-	int GetSize(void) const {
-		return (m_Array.GetSize())
+	int GetSize() const {
+		return m_Array.GetSize();
 	}
 
 	/* Ensures the given array index is valid */
 	bool IsValidIndex(const int Index) const {
-		return (m_Array.IsValidIndex(Index));
+		return m_Array.IsValidIndex(Index);
 	}
 
 	/* Inserts an element after the given index */
@@ -172,7 +172,7 @@ template <class CObjType> class TObjArray {
 
 	/* Attempts to get the specified array element */
 	CObjType *operator[](const int Index) const {
-		return (m_Array[Index]);
+		return m_Array[Index];
 	}
 
 	/* Change the grow size */
@@ -198,7 +198,6 @@ template <class CObjType> class TObjArray {
 	void Sort(const long lUserData) {
 		m_Array.Sort(lUserData);
 	}
-
 };
 
 /*===========================================================================
@@ -230,7 +229,7 @@ template <class CObjType> TObjArray<CObjType>::TObjArray(const int MaxSize, cons
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray<CObjType>::Destroy(void) {
+void TObjArray<CObjType>::Destroy() {
 	//DEFINE_FUNCTION("TObjArray::Destroy()");
 	DeleteElements_Priv();
 }
@@ -248,13 +247,13 @@ void TObjArray<CObjType>::Destroy(void) {
  *
  *=========================================================================*/
 template <class CObjType>
-CObjType *TObjArray<CObjType>::AddNew(void) {
+CObjType *TObjArray<CObjType>::AddNew() {
 	DEFINE_FUNCTION("CObjType::AddNew()");
 	CObjType *pNewObject;
 	/* Allocate the new object and add it to the end of the array */
 	CreatePointer(pNewObject, CObjType);
 	m_Array.Add(pNewObject);
-	return (pNewObject);
+	return pNewObject;
 }
 
 /*===========================================================================
@@ -270,7 +269,7 @@ CObjType *TObjArray<CObjType>::AddNew(void) {
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray<CObjType>::DeleteElement (CObjType *pObject) {
+void TObjArray<CObjType>::DeleteElement(CObjType *pObject) {
 	int Index;
 	/* Attempt to find the element in the array */
 	Index = m_Array.FindElement(pObject);
@@ -324,7 +323,7 @@ void TObjArray<CObjType>::DeleteElement(const int Index) {
  *
  *=========================================================================*/
 template <class CObjType>
-void TObjArray<CObjType>::DeleteElements_Priv(void) {
+void TObjArray<CObjType>::DeleteElements_Priv() {
 	DEFINE_FUNCTION("TObjArray::DeleteElements_Priv()");
 	CObjType *pObject;
 	int Index;

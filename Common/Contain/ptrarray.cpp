@@ -74,7 +74,10 @@ void Test_StressPtrArray(const size_t NumTests) {
 		TestSize = (size_t)((float)rand() * 100000l / RAND_MAX) + 1;
 		CPCharArray StringArray2(TestSize, 0);
 		NumAllocs = (size_t)((float)rand() * 1100 / RAND_MAX) + 1;
-		SystemLog.Printf(stdout, "\t%u) Adding %u random sized strings...", LoopCounter, NumAllocs);
+		SystemLog.Printf(stdout,
+		                 "\t%u) Adding %u random sized strings...",
+		                 LoopCounter,
+		                 NumAllocs);
 		TestSize = (size_t)((float)rand() * 24000 / RAND_MAX);
 		pBuffer = CreateString(TestSize);
 
@@ -130,7 +133,7 @@ void Test_StressPtrArray(const size_t NumTests) {
 
  *
  *=========================================================================*/
-void Test_PtrArray(void) {
+void Test_PtrArray() {
 	DEFINE_FUNCTION("Test_PtrArray()");
 	long TestInt;
 	long *pTestInt;
@@ -139,19 +142,23 @@ void Test_PtrArray(void) {
 	testdata_t TestData;
 	testdata_t *pTestData;
 	SystemLog.Printf(stdout, "================ Testing the TPtrArray Class ====================");
+
 	/* Test construction of sample templates */
 	TPtrArray<long> IntArray(100);
 	TPtrArray<char> StringArray2(2, 0);
 	TPtrArray<char> StringArray(2, 0);
 	CTestDataArray TestDataArray(1, 10);
+
 	/* Test the GetMaxElements() method */
 	ASSERT(IntArray.GetMaxElements() == 100);
 	ASSERT(StringArray.GetMaxElements() == 2);
 	ASSERT(TestDataArray.GetMaxElements() == 1);
+
 	/* Test the GetNumElements() methods */
 	ASSERT(IntArray.GetNumElements() == 0);
 	ASSERT(StringArray.GetNumElements() == 0);
 	ASSERT(TestDataArray.GetNumElements() == 0);
+
 	/* Test the AddElement() method */
 	TestInt = 12345678l;
 	ASSERT(IntArray.AddElement(&TestInt) == TRUE);
@@ -166,16 +173,19 @@ void Test_PtrArray(void) {
 	TestData.lNumber = 222222l;
 	strcpy(TestData.Message, "Test Message");
 	ASSERT(TestDataArray.AddElement(&TestData) == TRUE);
+
 	/* Test the GetNumElements() methods */
 	ASSERT(IntArray.GetNumElements() == 3);
 	ASSERT(StringArray.GetNumElements() == 2);
 	ASSERT(TestDataArray.GetNumElements() == 1);
+
 	/* Test the IsValidIndex() method */
 	ASSERT(IntArray.IsValidIndex(0) == TRUE);
 	ASSERT(IntArray.IsValidIndex(1) == TRUE);
 	ASSERT(IntArray.IsValidIndex(2) == TRUE);
 	ASSERT(IntArray.IsValidIndex(3) == FALSE);
 	ASSERT(IntArray.IsValidIndex(-1) == FALSE);
+
 	/* Test the GetElement() method */
 	ASSERT(IntArray.GetElement(&pTestInt, 0) == TRUE);
 	ASSERT(*pTestInt == 32345678l);
@@ -191,6 +201,7 @@ void Test_PtrArray(void) {
 	ASSERT(pTestData->Number == 123);
 	ASSERT(pTestData->lNumber == 222222l);
 	ASSERT(strcmp(pTestData->Message, "Test Message") == 0);
+
 	/* Test the [] operator */
 	ASSERT(*IntArray[0] == 32345678l);
 	ASSERT(*IntArray[1] == 32345678l);
@@ -201,6 +212,7 @@ void Test_PtrArray(void) {
 	ASSERT(pTestData->Number == 123);
 	ASSERT(pTestData->lNumber == 222222l);
 	ASSERT(strcmp(pTestData->Message, "Test Message") == 0);
+
 	/* Test the DeleteElement() method */
 	IntArray.DeleteElement(1);
 	ASSERT(IntArray.GetNumElements() == 2);
@@ -211,12 +223,15 @@ void Test_PtrArray(void) {
 	ASSERT(*IntArray[0] == 32345678l);
 	IntArray.DeleteElement(0);
 	ASSERT(IntArray.GetNumElements() == 0);
+
 	/* Test the Destroy() method */
 	StringArray.Destroy();
 	ASSERT(StringArray.GetNumElements() == 0);
+
 	/* Test the IsValidIndex() method again */
 	ASSERT(IntArray.IsValidIndex(0) == FALSE);
 	ASSERT(StringArray.IsValidIndex(0) == FALSE);
+
 	/* Test the SetGrowSize() method */
 	ASSERT(StringArray2.AddElement(TestString) == TRUE);
 	ASSERT(StringArray2.AddElement(TestString) == TRUE);
@@ -228,6 +243,7 @@ void Test_PtrArray(void) {
 	StringArray2.SetGrowSize(-1);
 	ASSERT(StringArray2.AddElement(TestString) == TRUE);
 	ASSERT(StringArray2.AddElement(TestString) == TRUE);
+
 	/* Test the FreeExtra() method */
 	ASSERT(StringArray2.GetMaxElements() > StringArray2.GetNumElements());
 	StringArray2.FreeExtra();

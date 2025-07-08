@@ -84,7 +84,7 @@ CListFile::~CListFile() {
  * Clears the contents of the object.
  *
  *=========================================================================*/
-void CListFile::Destroy(void) {
+void CListFile::Destroy() {
 	//DEFINE_FUNCTION("CListFile::Destroy()");
 	/* Clear the line buffer */
 	*pCurrentLine = NULL_CHAR;
@@ -106,7 +106,7 @@ void CListFile::Destroy(void) {
  * Closes the current list file if it is open.
  *
  *=========================================================================*/
-void CListFile::Close(void) {
+void CListFile::Close() {
 	//DEFINE_FUNCTION("CListFile::Close()");
 
 	/* Don't close the file unless it is valid */
@@ -146,11 +146,11 @@ boolean CListFile::Open(const char *pFilename) {
 	pFileHandle = OpenFile(pFilename, "rb");
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to read the first line from file */
-	return (ReadNextLine());
+	return ReadNextLine();
 }
 
 /*===========================================================================
@@ -167,14 +167,14 @@ boolean CListFile::Open(const char *pFilename) {
  * the extra characters on the line are ignored.
  *
  *=========================================================================*/
-boolean CListFile::ReadNextLine(void) {
+boolean CListFile::ReadNextLine() {
 	DEFINE_FUNCTION("CListFile::ReadNextLine()");
 	int Result;
 	/* Ensure the list file is currently open */
 	BufferValid = FALSE;
 
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to input one line from file */
@@ -187,7 +187,7 @@ boolean CListFile::ReadNextLine(void) {
 			break;
 
 		case READLINE_ERROR:
-			return (FALSE);
+			return FALSE;
 
 		case READLINE_EOF:
 			if (IgnoreBlankLines && *pCurrentLine == NULL_CHAR) {
@@ -196,18 +196,18 @@ boolean CListFile::ReadNextLine(void) {
 				BufferValid = TRUE;
 			}
 
-			return (TRUE);
+			return TRUE;
 
 		default:
 			if (IgnoreBlankLines && *pCurrentLine == NULL_CHAR) {
-				return (ReadNextLine());
+				return ReadNextLine();
 			}
 
 			break;
 	}
 
 	BufferValid = TRUE;
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -239,9 +239,10 @@ boolean CListFile::ReadNextLine(void) {
  *  9. Test the autodestruction of the class objects
  *
  *=========================================================================*/
-void Test_ListFile(void) {
+void Test_ListFile() {
 	DEFINE_FUNCTION("Test_ListFile()");
 	SystemLog.Printf(stdout, "================= Testing CListFile =========================");
+
 	/* Test the CListFile construction */
 	CListFile TestFile1;
 	CListFile TestFile2(10);
@@ -249,18 +250,22 @@ void Test_ListFile(void) {
 	ASSERT(TestFile1.GetMaxLineLength() == LISTFILE_LINE_LENGTH);
 	ASSERT(TestFile2.GetMaxLineLength() == 10);
 	ASSERT(TestFile3.GetMaxLineLength() == LISTFILE_LINE_LENGTH);
+
 	/* Test the IsValidLine() method */
 	ASSERT(TestFile1.IsValidLine() == FALSE);
 	ASSERT(TestFile2.IsValidLine() == FALSE);
 	ASSERT(TestFile3.IsValidLine() == FALSE);
+
 	/* Test the Open() method */
 	ASSERT(TestFile1.Open("test1.lst") == TRUE);
 	ASSERT(TestFile2.Open("test2.lst") == TRUE);
 	ASSERT(TestFile3.Open("nofile.lst") == FALSE);
+
 	/* Test the IsValidLine() method again */
 	ASSERT(TestFile1.IsValidLine() == TRUE);
 	ASSERT(TestFile2.IsValidLine() == TRUE);
 	ASSERT(TestFile3.IsValidLine() == FALSE);
+
 	/* Test the GetCurrentLine() method */
 	ASSERT(strcmp(TestFile1.GetCurrentLine(), "Test1, Line1") == 0);
 	ASSERT(strcmp(TestFile2.GetCurrentLine(), "Test2, Lin") == 0);
@@ -273,10 +278,12 @@ void Test_ListFile(void) {
 	} while (TestFile1.ReadNextLine());
 
 	ASSERT(TestFile1.IsValidLine() == FALSE);
+
 	/* Test reopening an open file */
 	ASSERT(TestFile1.Open("test1.lst") == TRUE);
 	ASSERT(TestFile1.IsValidLine() == TRUE);
 	ASSERT(strcmp(TestFile1.GetCurrentLine(), "Test1, Line1") == 0);
+
 	/* Test the Close() and IsOpen() methods */
 	ASSERT(TestFile1.IsOpen() == TRUE);
 	TestFile1.Close();
