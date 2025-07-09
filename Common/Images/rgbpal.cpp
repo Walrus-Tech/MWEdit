@@ -65,7 +65,7 @@ rgbpal_t ConvertRawRGBPal(const rgbpalraw_t &RawPal) {
 	NewPal.Red <<= 2;
 	NewPal.Green <<= 2;
 	NewPal.Blue <<= 4;
-	return (NewPal);
+	return NewPal;
 }
 
 /*===========================================================================
@@ -85,7 +85,9 @@ rgbpal_t ConvertRawRGBPal(const rgbpalraw_t &RawPal) {
  * Flag options can be OR'd for multiple operations.
  *
  *=========================================================================*/
-void CopyRGBPalette(rgbpal_t *pDestPal, rgbpal_t *pSourcePal, const int PaletteSize,
+void CopyRGBPalette(rgbpal_t *pDestPal,
+                    rgbpal_t *pSourcePal,
+                    const int PaletteSize,
                     const int Flags) {
 	DEFINE_FUNCTION("CopyRGBPalette()");
 	/* Ensure valid input */
