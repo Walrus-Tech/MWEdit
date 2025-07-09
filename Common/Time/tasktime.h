@@ -60,12 +60,12 @@ typedef int HTIMERTASK;
 
 /* Holds the information for one task */
 typedef struct {
-	HTIMERTASK Handle;      /* Used to identify the task */
-	boolean Active;      /* Is the task currently active? */
+	HTIMERTASK Handle; /* Used to identify the task */
+	boolean Active;    /* Is the task currently active? */
 	ulong TaskRate;    /* How many ms between task calls? */
 	ulong LastCalled;  /* Number of ms since last call */
-	PTASK_FUNC pFunc;       /* The task function to call */
-	long UserData;    /* User data to pass to function */
+	PTASK_FUNC pFunc;  /* The task function to call */
+	long UserData;     /* User data to pass to function */
 } task_t;
 
 /*===========================================================================
@@ -88,11 +88,11 @@ class CTaskTimer {
 	task_t m_Tasks[MAX_TIMER_TASKS]; /* Array of task information */
 	int m_NumTasks;
 
-	boolean m_Active;          /* Are we processing tasks? */
-	boolean m_Initialized;     /* Is the timer initialized? */
-	HTIMERTASK m_FreeTaskHandle;      /* Keeps track of available task handle */
+	boolean m_Active;                /* Are we processing tasks? */
+	boolean m_Initialized;           /* Is the timer initialized? */
+	HTIMERTASK m_FreeTaskHandle;     /* Keeps track of available task handle */
 
-	SYS_WIN32(uint m_TimerID;)        /* The timer ID in Win32 */
+	SYS_WIN32(uint m_TimerID;)       /* The timer ID in Win32 */
 
 
 	/* To store the previous timer in DOS */
@@ -117,27 +117,29 @@ class CTaskTimer {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add a new task to the list */
-	virtual boolean AddTask(HTIMERTASK &hTask, const ulong Rate, PTASK_FUNC pFunc,
+	virtual boolean AddTask(HTIMERTASK &hTask,
+	                        const ulong Rate,
+	                        PTASK_FUNC pFunc,
 	                        const long UserData);
 
 	/* Main task function */
 	virtual boolean DoTasks(const ulong Count);
 
 	/* Get class members */
-	virtual int GetNumTasks(void) const;
-	virtual boolean IsActive(void) const;
+	virtual int GetNumTasks() const;
+	virtual boolean IsActive() const;
 	virtual ulong GetTaskRate(const HTIMERTASK hTask) const;
 	virtual ulong GetLastCalled(const HTIMERTASK hTask) const;
 	virtual boolean IsActive(const HTIMERTASK hTask) const;
 	virtual boolean IsValidTask(const HTIMERTASK hTask) const;
 	virtual boolean IsValidTaskIndex(const int iTask) const;
-	virtual boolean IsInitialized(void) const;
+	virtual boolean IsInitialized() const;
 
 	/* Attempt to intialize the task timer */
-	virtual boolean Initialize(void);
+	virtual boolean Initialize();
 
 	/* Attempt to remove a task from the task array */
 	virtual boolean RemoveTask(const HTIMERTASK hTask);
@@ -148,7 +150,6 @@ class CTaskTimer {
 	virtual void SetTaskRate(const HTIMERTASK hTask, const ulong Rate);
 	virtual void SetTaskFunc(const HTIMERTASK hTask, const PTASK_FUNC pFunc);
 	virtual void SetUserData(const HTIMERTASK hTask, const long UserData);
-
 };
 
 /*===========================================================================
@@ -163,20 +164,20 @@ class CTaskTimer {
  *=========================================================================*/
 
 /* Get class members */
-inline int CTaskTimer::GetNumTasks(void) const {
-	return (m_NumTasks);
+inline int CTaskTimer::GetNumTasks() const {
+	return m_NumTasks;
 }
 
-inline boolean CTaskTimer::IsActive(void) const {
-	return (m_Active);
+inline boolean CTaskTimer::IsActive() const {
+	return m_Active;
 }
 
-inline boolean CTaskTimer::IsInitialized(void) const {
-	return (m_Initialized);
+inline boolean CTaskTimer::IsInitialized() const {
+	return m_Initialized;
 }
 
 inline boolean CTaskTimer::IsValidTaskIndex(const int TaskIndex) const {
-	return ((TaskIndex >= 0 && TaskIndex < m_NumTasks) ? TRUE : FALSE);
+	return (TaskIndex >= 0 && TaskIndex < m_NumTasks) ? TRUE : FALSE;
 }
 
 /* Set class members */
@@ -201,7 +202,6 @@ extern CTaskTimer TaskTimer;
 /*===========================================================================
  *      End of External Variable Definitions
  *=========================================================================*/
-
 
 
 #endif

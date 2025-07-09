@@ -51,7 +51,6 @@ CTaskTimer TaskTimer;
  *
  *=========================================================================*/
 #if defined(__MSDOS__)
-
 /* The new timer interrupt for MSDOS */
 void interrupt far l_DosTimerProc(...) {
 	TaskTimer.DoTasks((ulong)(1000.0 / (float)CLK_TCK));
@@ -59,10 +58,7 @@ void interrupt far l_DosTimerProc(...) {
 	TaskTimer.m_PrevTimerFunc();
 }
 
-
-
 #elif defined(_WIN32)
-
 /* The callback function for the timeSetEvent() Windows function */
 VOID CALLBACK l_Win32TimerProc(UINT, UINT, DWORD, DWORD, DWORD) {
 	static DWORD LastTime = timeGetTime();
@@ -70,7 +66,6 @@ VOID CALLBACK l_Win32TimerProc(UINT, UINT, DWORD, DWORD, DWORD) {
 	TaskTimer.DoTasks((ulong)(CurrentTime - LastTime));
 	LastTime = CurrentTime;
 }
-
 #endif
 /*===========================================================================
  *      End of Local System-Specific Timer Functions
@@ -104,14 +99,14 @@ CTaskTimer::CTaskTimer() {
  * Uninstalls any set timers and deletes tasks.
  *
  *=========================================================================*/
-void CTaskTimer::Destroy(void) {
+void CTaskTimer::Destroy() {
 	//DEFINE_FUNCTION("CTaskTimer::Destroy()");
 
 	/* Restore the previous timer int in DOS or
 	 * kill the timer in Win32. */
 	if (m_Initialized) {
-		SYS_MSDOS( _dos_setvect(DOS_TIMER_INT, m_PrevTimerFunc) );
-		SYS_WIN32( timeKillEvent(m_TimerID) );
+		SYS_MSDOS(_dos_setvect(DOS_TIMER_INT, m_PrevTimerFunc));
+		SYS_WIN32(timeKillEvent(m_TimerID));
 	}
 
 	m_NumTasks = 0;
@@ -134,14 +129,16 @@ void CTaskTimer::Destroy(void) {
  * success the set task Handle can be used to identify the task.
  *
  *=========================================================================*/
-boolean CTaskTimer::AddTask(HTIMERTASK &hTask, const ulong Rate, PTASK_FUNC pFunc,
+boolean CTaskTimer::AddTask(HTIMERTASK &hTask,
+                            const ulong Rate,
+                            PTASK_FUNC pFunc,
                             const long UserData) {
 	/* Ensure the array size is not exceeded */
 	if (m_NumTasks >= MAX_TIMER_TASKS) {
 		ErrorHandler.AddError(ERR_MAXINDEX,
 		                      "Exceeded the maximum task list size of %d!",
 		                      MAX_TIMER_TASKS);
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Initialize the new task */
@@ -154,7 +151,7 @@ boolean CTaskTimer::AddTask(HTIMERTASK &hTask, const ulong Rate, PTASK_FUNC pFun
 	hTask = m_FreeTaskHandle;
 	m_FreeTaskHandle++;
 	m_NumTasks++;
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -174,11 +171,11 @@ boolean CTaskTimer::DoTasks(const ulong ElaspedTime) {
 
 	/* Ignore if not active or initialized */
 	if (!IsInitialized()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	if (!m_Active) {
-		return (TRUE);
+		return TRUE;
 	}
 
 	/* To prevent method from being called twice from the timer */
@@ -201,7 +198,7 @@ boolean CTaskTimer::DoTasks(const ulong ElaspedTime) {
 	}
 
 	m_Active = TRUE;
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -222,12 +219,12 @@ int CTaskTimer::GetTaskIndex(const HTIMERTASK hTask) const {
 
 	for (LoopCounter = 0; LoopCounter < m_NumTasks; LoopCounter++) {
 		if (hTask == m_Tasks[LoopCounter].Handle) {
-			return (LoopCounter);
+			return LoopCounter;
 		}
 	}
 
 	/* No match found */
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -242,22 +239,22 @@ int CTaskTimer::GetTaskIndex(const HTIMERTASK hTask) const {
  *=========================================================================*/
 ulong CTaskTimer::GetTaskRate(const HTIMERTASK hTask) const {
 	int TaskIndex = GetTaskIndex(hTask);
-	return (IsValidTaskIndex(TaskIndex) ? m_Tasks[TaskIndex].TaskRate : 0);
+	return IsValidTaskIndex(TaskIndex) ? m_Tasks[TaskIndex].TaskRate : 0;
 }
 
 ulong CTaskTimer::GetLastCalled(const HTIMERTASK hTask) const {
 	int TaskIndex = GetTaskIndex(hTask);
-	return (IsValidTaskIndex(TaskIndex) ? m_Tasks[TaskIndex].LastCalled : 0);
+	return IsValidTaskIndex(TaskIndex) ? m_Tasks[TaskIndex].LastCalled : 0;
 }
 
 boolean CTaskTimer::IsActive(const HTIMERTASK hTask) const {
 	int TaskIndex = GetTaskIndex(hTask);
-	return (IsValidTaskIndex(TaskIndex) ? m_Tasks[TaskIndex].Active : FALSE);
+	return IsValidTaskIndex(TaskIndex) ? m_Tasks[TaskIndex].Active : FALSE;
 }
 
 boolean CTaskTimer::IsValidTask(const HTIMERTASK hTask) const {
 	int TaskIndex = GetTaskIndex(hTask);
-	return ((TaskIndex >= 0 && TaskIndex < m_NumTasks) ? TRUE : FALSE);
+	return (TaskIndex >= 0 && TaskIndex < m_NumTasks) ? TRUE : FALSE;
 }
 
 /*===========================================================================
@@ -285,10 +282,10 @@ boolean CTaskTimer::IsValidTask(const HTIMERTASK hTask) const {
  * The task timer is initially not active.
  *
  *=========================================================================*/
-boolean CTaskTimer::Initialize(void) {
+boolean CTaskTimer::Initialize() {
 	/* Ignore if already intialized */
 	if (IsInitialized()) {
-		return (TRUE);
+		return TRUE;
 	}
 
 	/* Setup a Win32 timer */
@@ -296,19 +293,20 @@ boolean CTaskTimer::Initialize(void) {
 
 	SYS_WIN32(if (m_TimerID == 0) {
 	         )
-	SYS_WIN32( ErrorHandler.AddError(ERR_BADINPUT,
-	                                  "Failed to initialize the timer using SetTimer()!") );
-		SYS_WIN32( return (FALSE) );
+	SYS_WIN32(ErrorHandler.AddError(ERR_BADINPUT,
+	                                 "Failed to initialize the timer using SetTimer()!"));
+		SYS_WIN32(return FALSE);
 		SYS_WIN32(
-	} )
+	})
 	/* Replace the DOS timer interrupt */
 	SYS_MSDOS(m_PrevTimerFunc = _dos_getvect(DOS_TIMER_INT));
 	SYS_MSDOS(_dos_setvect(DOS_TIMER_INT, l_DosTimerProc));
 	/* Unknown system! */
-	SYS_NONE(ErrorHandler.AddError(ERR_BADINPUT, "Unknown system, failed to initialize task timer!"));
-	SYS_NONE(return (FALSE));
+	SYS_NONE(ErrorHandler.AddError(ERR_BADINPUT,
+	                               "Unknown system, failed to initialize task timer!"));
+	SYS_NONE(return FALSE);
 	m_Initialized = TRUE;
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -332,7 +330,7 @@ boolean CTaskTimer::RemoveTask(const HTIMERTASK hTask) {
 	Index = GetTaskIndex(hTask);
 
 	if (!IsValidTaskIndex(Index)) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Prevent the tasker from being called during array manipulation */
@@ -346,7 +344,7 @@ boolean CTaskTimer::RemoveTask(const HTIMERTASK hTask) {
 	}
 
 	m_Active = PrevActive;
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
