@@ -59,7 +59,6 @@
 	#define FA_NORMAL   FILE_ATTRIBUTE_NORMAL
 
 #elif defined(_WIN32)
-
 	/* Define the base file block type */
 	typedef struct _finddata_t fileblock_t;
 
@@ -74,7 +73,6 @@
 
 
 #elif defined(__MSDOS__)
-
 	/* Define the base file block type */
 	typedef struct ffblk fileblock_t;
 #endif
@@ -102,105 +100,102 @@ class CFileBlock {
   public:
 
 	/* Class Constructor */
-	CFileBlock(void) {
+	CFileBlock() {
 		Destroy();
 	}
 
 	/* Class Destructor */
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Return various members of the file block data */
-	fileblock_t &GetBlock(void) {
-		return (BlockData);
+	fileblock_t &GetBlock() {
+		return BlockData;
 	}
 
-	fileblock_t *GetBlockPtr(void) {
-		return (&BlockData);
+	fileblock_t *GetBlockPtr() {
+		return &BlockData;
 	}
 
 	/* Define the get methods depending on the platform */
 #if defined (_WIN32) && defined(__BORLANDC__)
 	time_t ConvertFileTime(const FILETIME &FileTime) const;
 
-	char *GetName(void) {
-		return (&BlockData.cFileName[0]);
+	char *GetName() {
+		return &BlockData.cFileName[0];
 	}
 
-	int GetAttribute(void) const {
-		return (BlockData.dwFileAttributes);
+	int GetAttribute() const {
+		return BlockData.dwFileAttributes;
 	}
 
-	time_t GetCreationTime(void) const {
-		return (ConvertFileTime(BlockData.ftCreationTime));
+	time_t GetCreationTime() const {
+		return ConvertFileTime(BlockData.ftCreationTime);
 	}
 
-	time_t GetAccessTime(void) const {
-		return (ConvertFileTime(BlockData.ftLastAccessTime ));
+	time_t GetAccessTime() const {
+		return ConvertFileTime(BlockData.ftLastAccessTime);
 	}
 
-	time_t GetWriteTime(void) const {
-		return (ConvertFileTime(BlockData.ftLastWriteTime ));
+	time_t GetWriteTime() const {
+		return ConvertFileTime(BlockData.ftLastWriteTime);
 	}
 
-	ulong GetSize(void) const {
-		return (BlockData.nFileSizeLow );
+	ulong GetSize() const {
+		return BlockData.nFileSizeLow;
 	}
 
 #elif defined(_WIN32)
-	char *GetName(void) {
-		return (&BlockData.name[0]);
+	char *GetName() {
+		return &BlockData.name[0];
 	}
 
-	int GetAttribute(void) const {
-		return (BlockData.attrib);
+	int GetAttribute() const {
+		return BlockData.attrib;
 	}
 
-	time_t GetCreationTime(void) const {
-		return (BlockData.time_create);
+	time_t GetCreationTime() const {
+		return BlockData.time_create;
 	}
 
-	time_t GetAccessTime(void) const {
-		return (BlockData.time_access);
+	time_t GetAccessTime() const {
+		return BlockData.time_access;
 	}
 
-	time_t GetWriteTime(void) const {
-		return (BlockData.time_write);
+	time_t GetWriteTime() const {
+		return BlockData.time_write;
 	}
 
-	ulong GetSize(void) const {
-		return (BlockData.size);
+	ulong GetSize() const {
+		return BlockData.size;
 	}
 
 #elif defined(__MSDOS__)
-	char *GetName(void) const {
-		return (char *)(&BlockData.ff_name[0]);
+	char *GetName() const {
+		return (char *)&BlockData.ff_name[0];
 	}
 
-	int GetAttribute(void) const {
-		return (BlockData.ff_attrib);
+	int GetAttribute() const {
+		return BlockData.ff_attrib;
 	}
 
-	time_t GetCreationTime(void) const {
-		return (-1l);
+	time_t GetCreationTime() const {
+		return -1l;
 	}
 
-	time_t GetAccessTime(void) const {
-		return (-1l);
+	time_t GetAccessTime() const {
+		return -1l;
 	}
 
-	time_t GetWriteTime(void) const;
-	ulong GetSize(void) const {
-		return (BlockData.ff_fsize);
+	time_t GetWriteTime() const;
+	ulong GetSize() const {
+		return BlockData.ff_fsize;
 	}
-
 #endif
-
 };
 
 /*=========================================================================
  *      End of Class CFileBlock Definition
  *=======================================================================*/
-
 
 
 /*=========================================================================
@@ -214,78 +209,77 @@ class CFindFile {
 
 	/* Begin protected class members */
   protected:
-	long FindHandle;    /* Handle for the current find */
-	CFileBlock FileBlock;     /* Block for holding file info */
+	long FindHandle;      /* Handle for the current find */
+	CFileBlock FileBlock; /* Block for holding file info */
 
 
 	/* Begin public class methods */
   public:
 
 	/* Class Constructor */
-	CFindFile(void);
+	CFindFile();
 
 	/* Class Destructors */
-	~CFindFile(void) {
+	~CFindFile() {
 		Destroy();
 	}
 
-	void Destroy(void);
+	void Destroy();
 
 	/* Closes the file find */
-	bool Close(void);
+	bool Close();
 
 	/* Find the first occurence of a given file spec */
 	bool FindFirst(const char *pFileSpec, const int Attributes = FA_NORMAL);
 
 	/* Find the next occurence of the previous file spec */
-	bool FindNext(void);
+	bool FindNext();
 
 	/* Used to get information on a found file */
-	char *GetName(void) {
-		return (FileBlock.GetName());
+	char *GetName() {
+		return FileBlock.GetName();
 	}
 
-	int GetAttribute(void) {
-		return (FileBlock.GetAttribute());
+	int GetAttribute() {
+		return FileBlock.GetAttribute();
 	}
 
-	time_t GetCreationTime(void) {
-		return (FileBlock.GetCreationTime());
+	time_t GetCreationTime() {
+		return FileBlock.GetCreationTime();
 	}
 
-	time_t GetAccessTime(void) {
-		return (FileBlock.GetAccessTime());
+	time_t GetAccessTime() {
+		return FileBlock.GetAccessTime();
 	}
 
-	time_t GetWriteTime(void) {
-		return (FileBlock.GetWriteTime());
+	time_t GetWriteTime() {
+		return FileBlock.GetWriteTime();
 	}
 
-	ulong GetSize(void) {
-		return (FileBlock.GetSize());
+	ulong GetSize() {
+		return FileBlock.GetSize();
 	}
 
 	/* Check the type of the current file */
-	bool IsDirectory(void) {
+	bool IsDirectory() {
 		return (FileBlock.GetAttribute() & FA_DIREC) == FA_DIREC;
 	}
 
-	bool IsSystem(void) {
+	bool IsSystem() {
 		return (FileBlock.GetAttribute() & FA_SYSTEM) == FA_SYSTEM;
 	}
 
-	bool IsHidden(void) {
+	bool IsHidden() {
 		return (FileBlock.GetAttribute() & FA_HIDDEN) == FA_HIDDEN;
 	}
 
-	bool IsReadOnly(void) {
+	bool IsReadOnly() {
 		return (FileBlock.GetAttribute() & FA_RDONLY) == FA_RDONLY;
 	}
 
-	bool IsArchive(void) {
+	bool IsArchive() {
 		return (FileBlock.GetAttribute() & FA_ARCH) == FA_ARCH;
 	}
-
 };
 
 /*=========================================================================

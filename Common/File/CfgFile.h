@@ -64,18 +64,18 @@ class CConfigEntry {
 		Destroy();
 	}
 
-	virtual void Destroy(void) {
+	virtual void Destroy() {
 		m_Variable.Empty();
 		m_Value.Empty();
 	}
 
 	/* Get class members */
-	const TCHAR *GetVariable(void) const {
-		return (m_Variable);
+	const TCHAR *GetVariable() const {
+		return m_Variable;
 	}
 
-	const TCHAR *GetValue(void) const {
-		return (m_Value);
+	const TCHAR *GetValue() const {
+		return m_Value;
 	}
 
 	/* Set class members */
@@ -89,7 +89,6 @@ class CConfigEntry {
 
 	/* Output entry to file */
 	bool Write(CGenFile &File);
-
 };
 
 typedef TPtrArray<CConfigEntry> CCfgEntryArray;
@@ -109,8 +108,8 @@ class CConfigGroup {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	CSString m_Name;        /* Group name */
-	CCfgEntryArray m_Entries;     /* Array of config entries */
+	CSString m_Name;          /* Group name */
+	CCfgEntryArray m_Entries; /* Array of config entries */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -127,7 +126,7 @@ class CConfigGroup {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Adds a new entry to the group */
 	CConfigEntry *AddEntry(const TCHAR *pVar, const TCHAR *pValue);
@@ -139,8 +138,8 @@ class CConfigGroup {
 	CConfigEntry *GetEntry(const TCHAR *pVariable);
 
 	/* Get class members */
-	const TCHAR *GetName(void) const {
-		return (m_Name);
+	const TCHAR *GetName() const {
+		return m_Name;
 	}
 
 	/* Find a variable value */
@@ -156,7 +155,6 @@ class CConfigGroup {
 
 	/* Output the group to the given file */
 	bool Write(CGenFile &File);
-
 };
 
 typedef TPtrArray<CConfigGroup> CCfgGroupArray;
@@ -176,7 +174,7 @@ class CConfigFile : public CGenFile {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	CCfgGroupArray m_Groups;      /* Array of config groups */
+	CCfgGroupArray m_Groups; /* Array of config groups */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -197,7 +195,7 @@ class CConfigFile : public CGenFile {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add a group to the array */
 	CConfigGroup *AddGroup(const TCHAR *pName);
@@ -212,7 +210,9 @@ class CConfigFile : public CGenFile {
 	const TCHAR *GetValue(const TCHAR *pVariable);
 	const TCHAR *GetValue(const TCHAR *pGroup, const TCHAR *pVariable);
 	const TCHAR *GetArrayValue(const TCHAR *pGroup, const TCHAR *pVariable, const int ID);
-	const TCHAR *GetArrayValue(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1,
+	const TCHAR *GetArrayValue(const TCHAR *pGroup,
+	                           const TCHAR *pVariable,
+	                           const int ID1,
 	                           const TCHAR *pID2);
 
 	/* Attempt to load and parse the given config file */
@@ -223,39 +223,70 @@ class CConfigFile : public CGenFile {
 
 	/* Set a variable value */
 	bool SetValue(const TCHAR *pGroupName, const TCHAR *pVariable, const TCHAR *pValue);
-	bool SetArrayValue(const TCHAR *pGroupName, const TCHAR *pVariable, const int ID,
+	bool SetArrayValue(const TCHAR *pGroupName,
+	                   const TCHAR *pVariable,
+	                   const int ID,
 	                   const TCHAR *pValue);
-	bool SetArrayValue(const TCHAR *pGroupName, const TCHAR *pVariable, const int ID1,
-	                   const TCHAR *pID2, const TCHAR *pValue);
+	bool SetArrayValue(const TCHAR *pGroupName,
+	                   const TCHAR *pVariable,
+	                   const int ID1,
+	                   const TCHAR *pID2,
+	                   const TCHAR *pValue);
 
 	/* Get numeric values */
-	float GetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID, const float Default);
-	float GetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1, const TCHAR *pID2,
+	float GetArrayReal(const TCHAR *pGroup,
+	                   const TCHAR *pVariable,
+	                   const int ID,
+	                   const float Default);
+	float GetArrayReal(const TCHAR *pGroup,
+	                   const TCHAR *pVariable,
+	                   const int ID1,
+	                   const TCHAR *pID2,
 	                   const float Default);
 	int GetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID, const int Default);
-	int GetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1, const int ID2,
+	int GetArrayInt(const TCHAR *pGroup,
+	                const TCHAR *pVariable,
+	                const int ID1,
+	                const int ID2,
 	                const int Default);
-	int GetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1, const TCHAR *pID2,
+	int GetArrayInt(const TCHAR *pGroup,
+	                const TCHAR *pVariable,
+	                const int ID1,
+	                const TCHAR *pID2,
 	                const int Default);
-	bool GetArrayBool(const TCHAR *pGroup, const TCHAR *pVariable, const int ID, const bool Default);
+	bool GetArrayBool(const TCHAR *pGroup,
+	                  const TCHAR *pVariable,
+	                  const int ID,
+	                  const bool Default);
 	float GetReal(const TCHAR *pGroup, const TCHAR *pVariable, const float Default);
 	int GetInt(const TCHAR *pGroup, const TCHAR *pVariable, const int Default);
 	bool GetBool(const TCHAR *pGroup, const TCHAR *pVariable, const bool Default);
 
 	/* Set numeric values */
-	bool SetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID, const float Value);
-	bool SetArrayReal(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1, const TCHAR *pID2,
+	bool SetArrayReal(const TCHAR *pGroup,
+	                  const TCHAR *pVariable,
+	                  const int ID,
+	                  const float Value);
+	bool SetArrayReal(const TCHAR *pGroup,
+	                  const TCHAR *pVariable,
+	                  const int ID1,
+	                  const TCHAR *pID2,
 	                  const float Value);
 	bool SetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID, const int Value);
-	bool SetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1, const TCHAR *pID2,
+	bool SetArrayInt(const TCHAR *pGroup,
+	                 const TCHAR *pVariable,
+	                 const int ID1,
+	                 const TCHAR *pID2,
 	                 const int Value);
-	bool SetArrayInt(const TCHAR *pGroup, const TCHAR *pVariable, const int ID1, const int ID2,
+	bool SetArrayInt(const TCHAR *pGroup,
+	                 const TCHAR *pVariable,
+	                 const int ID1,
+	                 const int ID2,
 	                 const int Value);
 	bool SetArrayBool(const TCHAR *pGroup, const TCHAR *pVariable, const int ID, const bool Value);
 	bool SetReal(const TCHAR *pGroup, const TCHAR *pVariable, const float Value);
 	bool SetInt(const TCHAR *pGroup, const TCHAR *pVariable, const int Value);
 	bool SetBool(const TCHAR *pGroup, const TCHAR *pVariable, const bool Value);
-
 };
 
 /*===========================================================================

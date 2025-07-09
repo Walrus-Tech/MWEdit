@@ -49,9 +49,9 @@ class CGenFile {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	FILE *m_pFileHandle;      /* The file stream handle */
+	FILE *m_pFileHandle; /* The file stream handle */
 	bool m_Attached;     /* Indicates the stream should not be closed */
-	long m_LineCount;        /* Used to track lines in file */
+	long m_LineCount;    /* Used to track lines in file */
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -64,51 +64,51 @@ class CGenFile {
 
 	/* Class destructors */
 	virtual ~CGenFile();
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Attach to an existing file stream */
 	void Attach(FILE *pFileHandle);
-	void Detach(void);
+	void Detach();
 
 	/* Clears the error flag of the stream */
-	void ClearError(void);
+	void ClearError();
 
 	/* Close an opened file stream */
-	virtual void Close(void);
+	virtual void Close();
 
 	/* Creates a new temporary file */
-	bool CreateTemp(void);
+	bool CreateTemp();
 
 	/* Attempt to flush a file stream buffer */
-	bool Flush(void);
+	bool Flush();
 
 	/* Return the file handle for object */
-	FILE *GetHandle(void);
+	FILE *GetHandle();
 
 	/* Return the file size for the current file */
-	long GetFileSize(void);
+	long GetFileSize();
 	bool GetFileSize(long &FileSize);
 
 	/* Class status methods */
-	bool IsOpen(void);
-	bool IsEOF(void);
-	bool IsError(void);
+	bool IsOpen();
+	bool IsEOF();
+	bool IsError();
 
 	/* Line count methods */
-	long DecLineCount(void) {
-		return (--m_LineCount);
+	long DecLineCount() {
+		return --m_LineCount;
 	}
 
-	long IncLineCount(void) {
-		return (++m_LineCount);
+	long IncLineCount() {
+		return ++m_LineCount;
 	}
 
 	void SetLineCount(const long Value) {
 		m_LineCount = Value;
 	}
 
-	long GetLineCount(void) const {
-		return (m_LineCount);
+	long GetLineCount() const {
+		return m_LineCount;
 	}
 
 	/* Attempt to open the given filename */
@@ -136,13 +136,13 @@ class CGenFile {
 	bool ReadFloat(float &Value);
 
 	/* Move the file position to the file beginning */
-	void Rewind(void);
+	void Rewind();
 
 	/* Move the current file position */
 	bool Seek(const filepos_t Position, const int SeekType);
 
 	/* Get the current file position */
-	filepos_t Tell(void);
+	filepos_t Tell();
 	bool Tell(filepos_t &Position);
 
 	/* Attempt to write a section to the file */
@@ -160,8 +160,7 @@ class CGenFile {
 	bool WriteFloat(const float Value);
 
 	/* FILE* type conversion operator */
-	operator FILE *(void);
-
+	operator FILE *();
 };
 
 /*===========================================================================
@@ -199,7 +198,7 @@ inline CGenFile::~CGenFile() {
 }
 
 /* Class pseudo-destructor */
-inline void CGenFile::Destroy (void) {
+inline void CGenFile::Destroy () {
 	Close();
 }
 
@@ -212,7 +211,7 @@ inline void CGenFile::Attach (FILE *pFileHandle) {
 }
 
 /* Unattached to an existing file stream */
-inline void CGenFile::Detach(void) {
+inline void CGenFile::Detach() {
 	if (m_Attached) {
 		m_Attached = FALSE;
 		m_pFileHandle = NULL;
@@ -220,13 +219,13 @@ inline void CGenFile::Detach(void) {
 }
 
 /* Clears the error flag of the file stream */
-inline void CGenFile::ClearError(void) {
+inline void CGenFile::ClearError() {
 	IASSERT(m_pFileHandle != NULL);
 	clearerr(m_pFileHandle);
 }
 
 /* Close the file stream, if it is open */
-inline void CGenFile::Close(void) {
+inline void CGenFile::Close() {
 	if (IsOpen()) {
 		if (!m_Attached) {
 			fclose(m_pFileHandle);
@@ -239,36 +238,36 @@ inline void CGenFile::Close(void) {
 }
 
 /* Creates a new temporary file for output */
-inline bool CGenFile::CreateTemp(void) {
+inline bool CGenFile::CreateTemp() {
 	Close();
 	m_pFileHandle = tmpfile();
 
 	if (m_pFileHandle == NULL) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to create temporary file!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
-inline bool CGenFile::Flush(void) {
+inline bool CGenFile::Flush() {
 	IASSERT(IsOpen());
 
 	if (fflush(m_pFileHandle) != 0) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to flush file stream!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /* Return the file handle for object */
-inline FILE *CGenFile::GetHandle(void) {
-	return (m_pFileHandle);
+inline FILE *CGenFile::GetHandle() {
+	return m_pFileHandle;
 }
 
 /* Return the file size */
-inline long CGenFile::GetFileSize(void) {
+inline long CGenFile::GetFileSize() {
 	IASSERT(IsOpen());
 	return ::GetFileSize(m_pFileHandle);
 }
@@ -280,25 +279,25 @@ inline bool CGenFile::GetFileSize(long &FileSize) {
 }
 
 /* Returns TRUE if the EOF has been reached */
-inline bool CGenFile::IsEOF(void) {
+inline bool CGenFile::IsEOF() {
 	if (!IsOpen() || feof(m_pFileHandle)) {
-		return (TRUE);
+		return TRUE;
 	}
 
-	return (FALSE);
+	return FALSE;
 }
 
 /* Returns TRUE if the file stream has an error */
-inline bool CGenFile::IsError(void) {
+inline bool CGenFile::IsError() {
 	if (!IsOpen() || ferror(m_pFileHandle)) {
-		return (TRUE);
+		return TRUE;
 	}
 
-	return (FALSE);
+	return FALSE;
 }
 
 /* Returns TRUE if the file stream is currently open */
-inline bool CGenFile::IsOpen(void) {
+inline bool CGenFile::IsOpen() {
 	return (bool)((m_pFileHandle == NULL) ? FALSE : TRUE);
 }
 
@@ -317,7 +316,7 @@ inline bool CGenFile::Printf(const char *pString, ...) {
 	va_start(Args, pString);
 	Result = VPrintf(pString, Args);
 	va_end(Args);
-	return (Result);
+	return Result;
 }
 
 /* Output a formatted string to file using a variable argument list */
@@ -327,16 +326,16 @@ inline bool CGenFile::VPrintf(const char *pString, va_list Args) {
 	/* Ensure file is open for output */
 	if (!IsOpen()) {
 		ErrorHandler.AddError(ERR_WRITEFILE, "File is not open!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output formatted string to file */
 	if (vfprintf(m_pFileHandle, pString, Args) < 0) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Error outputting a formatted string to file!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (Flush());
+	return Flush();
 }
 
 /* Read a section from the file */
@@ -346,12 +345,15 @@ inline bool CGenFile::Read(char *pBuffer, size_t &BytesRead, const size_t NumByt
 	BytesRead = fread(pBuffer, 1, NumBytes, m_pFileHandle);
 
 	if (BytesRead != NumBytes) {
-		ErrorHandler.AddError(ERR_SYSTEM, errno,
-		                      "Failed to read section from file, only %u of %u bytes received!", BytesRead, NumBytes);
-		return (FALSE);
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      errno,
+		                      "Failed to read section from file, only %u of %u bytes received!",
+		                      BytesRead,
+		                      NumBytes);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /* Read a section from the file */
@@ -367,8 +369,10 @@ inline bool CGenFile::ReadEx(char *pBuffer, const size_t Size, const size_t Coun
 
 	/* Ensure valid input size */
 	if (NumBytes >= (ulong)UINT_MAX) {
-		ErrorHandler.AddError(ERR_OVERFLOW, "Exceeded the maximum input size of %ud bytes!", UINT_MAX);
-		return (FALSE);
+		ErrorHandler.AddError(ERR_OVERFLOW,
+		                      "Exceeded the maximum input size of %ud bytes!",
+		                      UINT_MAX);
+		return FALSE;
 	}
 
 	return Read(pBuffer, BytesRead, (size_t)NumBytes);
@@ -384,17 +388,17 @@ inline bool CGenFile::ReadChar(char &InputChar) {
 	if (Input < 0) {
 		InputChar = NULL_CHAR;
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to read character from file!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	InputChar = (char) Input;
-	return (TRUE);
+	InputChar = (char)Input;
+	return TRUE;
 }
 
 /* Read one line from the file */
 inline int CGenFile::ReadLine(char *pBuffer, const size_t MaxStringLength) {
 	IASSERT(IsOpen());
-	return (::ReadLine(m_pFileHandle, pBuffer, MaxStringLength));
+	return ::ReadLine(m_pFileHandle, pBuffer, MaxStringLength);
 }
 
 /* Read binary short integer (16 bit) */
@@ -419,7 +423,7 @@ inline bool CGenFile::ReadFloat(float &Value) {
 
 
 /* Move to the fiel beginning and clear the stream errors */
-inline void CGenFile::Rewind(void) {
+inline void CGenFile::Rewind() {
 	IASSERT(IsOpen());
 	rewind(m_pFileHandle);
 }
@@ -430,10 +434,10 @@ inline bool CGenFile::Seek(const filepos_t Position, const int SeekType) {
 
 	if (fseek(m_pFileHandle, Position, SeekType) != 0) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to change the current file position!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /* Retrieve the current file position as per ftell() */
@@ -443,17 +447,17 @@ inline bool CGenFile::Tell(filepos_t &Position) {
 
 	if (Position < 0) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to retrieve the current file position!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /* Retrieve the current file position as per ftell() */
-inline filepos_t CGenFile::Tell(void) {
+inline filepos_t CGenFile::Tell() {
 	filepos_t Position;
 	Tell(Position);
-	return (Position);
+	return Position;
 }
 
 /* Write a section to the file */
@@ -463,12 +467,15 @@ inline bool CGenFile::Write(const char *pBuffer, size_t &BytesWritten, const siz
 	BytesWritten = fwrite(pBuffer, 1, NumBytes, m_pFileHandle);
 
 	if (BytesWritten != NumBytes) {
-		ErrorHandler.AddError(ERR_SYSTEM, errno,
-		                      "Failed to write section to file, only %u of %u bytes output!", BytesWritten, NumBytes);
-		return (FALSE);
+		ErrorHandler.AddError(ERR_SYSTEM,
+		                      errno,
+		                      "Failed to write section to file, only %u of %u bytes output!",
+		                      BytesWritten,
+		                      NumBytes);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /* Write a section to the file */
@@ -484,8 +491,10 @@ inline bool CGenFile::WriteEx(const char *pBuffer, const size_t Size, const size
 
 	/* Ensure valid input size */
 	if (NumBytes >= (ulong)UINT_MAX) {
-		ErrorHandler.AddError(ERR_OVERFLOW, "Exceeded the maximum output size of %ud bytes!", UINT_MAX);
-		return (FALSE);
+		ErrorHandler.AddError(ERR_OVERFLOW,
+		                      "Exceeded the maximum output size of %ud bytes!",
+		                      UINT_MAX);
+		return FALSE;
 	}
 
 	return Write(pBuffer, BytesWritten, (size_t)NumBytes);
@@ -498,10 +507,10 @@ inline bool CGenFile::WriteChar(const char Char) {
 	/* Attempt to write character */
 	if (fputc((int)Char, m_pFileHandle) < 0 ) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Failed to write character to file!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /* Write binary short integer (16 bit) */
@@ -530,7 +539,7 @@ inline bool CGenFile::WriteFloat(const float Value) {
 
 /* Class FILE* type conversion operator */
 inline CGenFile::operator FILE *(void) {
-	return (m_pFileHandle);
+	return m_pFileHandle;
 }
 
 /*===========================================================================
@@ -551,13 +560,12 @@ inline CGenFile::operator FILE *(void) {
 	void Test_RWCharGenFile(const size_t NumTests = 20);
 	void Test_GenFileRWNumbers(const size_t NumTests = 1000);
 	void Test_GenFileSeekTell(const size_t NumTests = 1000);
-	void Test_GenFilePrint(void);
-	void Test_GenFile(void);
+	void Test_GenFilePrint();
+	void Test_GenFile();
 #endif
 /*===========================================================================
  *      End of Test Routine Prototypes
  *=========================================================================*/
-
 
 
 #endif
