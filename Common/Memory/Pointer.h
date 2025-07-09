@@ -37,7 +37,7 @@ template <class TPtr> class CSPointer {
 	/*---------- Begin Private Class Members ----------------------*/
   private:
 	TPtr *m_pPointer;   /* The pointer to the template class object */
-	boolean AutoDelete;   /* Determines whether pointer is deleted when destructed */
+	boolean AutoDelete; /* Determines whether pointer is deleted when destructed */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -62,7 +62,7 @@ template <class TPtr> class CSPointer {
 		Destroy();
 	}
 
-	virtual void Destroy(void) {
+	virtual void Destroy() {
 		if (AutoDelete) {
 			DestroyPointer(m_pPointer);
 		} else {
@@ -75,31 +75,31 @@ template <class TPtr> class CSPointer {
 		Destroy();
 		m_pPointer = pSourcePtr;
 		AutoDelete = FALSE;
-		return (*this);
+		return *this;
 	}
 
 	CSPointer &Clone(TPtr &Source) {
 		Destroy();
 		m_pPointer = &Source;
 		AutoDelete = FALSE;
-		return (*this);
+		return *this;
 	}
 
 	/* Access the class object pointer */
-	virtual TPtr *Get(void) {
-		return (m_pPointer);
+	virtual TPtr *Get() {
+		return m_pPointer;
 	}
 
-	operator TPtr *(void) {
-		return (m_pPointer);
+	operator TPtr *() {
+		return m_pPointer;
 	}
 
-	TPtr &operator *(void) {
-		return (*m_pPointer);
+	TPtr &operator *() {
+		return *m_pPointer;
 	}
 
-	TPtr *operator ->(void) {
-		return (m_pPointer);
+	TPtr *operator ->() {
+		return m_pPointer;
 	}
 
 	CSPointer &operator =(CSPointer<TPtr> &pSourcePtr) {
@@ -110,9 +110,8 @@ template <class TPtr> class CSPointer {
 		Destroy();
 		m_pPointer = pSourcePtr;
 		AutoDelete = TRUE;
-		return (*this);
+		return *this;
 	}
-
 };
 
 /*===========================================================================
