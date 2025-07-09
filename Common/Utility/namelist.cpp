@@ -44,16 +44,16 @@ bool FindNameValue(long &lValue, const valuenames_t *pValueArray, const TCHAR *p
 	/* Ignore NULL input */
 	if (pName == NULL) {
 		ErrorHandler.AddError(ERR_BADINPUT, "Value name string was not specified!");
-		return (false);
+		return false;
 	}
 
 	/* Search array until an empty string or null is found */
 	Index = 0;
 
 	while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-		if ( _stricmp(pValueArray[Index].pName, pName) == 0) {
+		if (_stricmp(pValueArray[Index].pName, pName) == 0) {
 			lValue = pValueArray[Index].lValue;
-			return (true);
+			return true;
 		}
 
 		Index++;
@@ -61,7 +61,7 @@ bool FindNameValue(long &lValue, const valuenames_t *pValueArray, const TCHAR *p
 
 	/* No match found */
 	ErrorHandler.AddError(ERR_BADINPUT, "Value for the string '%s' was not found!", pName);
-	return (FALSE);
+	return FALSE;
 }
 
 /*===========================================================================
@@ -87,22 +87,22 @@ long FindNameValue(const valuenames_t *pValueArray, const TCHAR *pName) {
 	/* Ignore NULL input */
 	if (pName == NULL) {
 		ErrorHandler.AddError(ERR_BADINPUT, "Value name string was not specified!");
-		return (false);
+		return false;
 	}
 
 	/* Search array until an empty string or null is found */
 	Index = 0;
 
 	while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
-		if ( _stricmp(pValueArray[Index].pName, pName) == 0) {
-			return ( pValueArray[Index].lValue);
+		if (_stricmp(pValueArray[Index].pName, pName) == 0) {
+			return pValueArray[Index].lValue;
 		}
 
 		Index++;
 	}
 
 	/* No match found */
-	return (pValueArray[Index].lValue);
+	return pValueArray[Index].lValue;
 }
 
 /*===========================================================================
@@ -128,7 +128,7 @@ const TCHAR *FindValueName(const valuenames_t *pValueArray, const long lValue) {
 
 	while (pValueArray[Index].pName != NULL && pValueArray[Index].pName[0] != NULL_CHAR) {
 		if (pValueArray[Index].lValue == lValue) {
-			return (pValueArray[Index].pName);
+			return pValueArray[Index].pName;
 		}
 
 		Index++;
