@@ -334,7 +334,8 @@ const TCHAR *CConfigFile::CreateArrayString(const TCHAR *pVariable, const int ID
 }
 
 const TCHAR *CConfigFile::CreateArrayString(const TCHAR *pVariable,
-                                            const int ID1, const int ID2) {
+                                            const int ID1,
+                                            const int ID2) {
 	static TCHAR Buffer[CONFIG_LINE_LENGTH + 1];
 	snprintf(Buffer, CONFIG_LINE_LENGTH, "%s[%d,%d]", pVariable, ID1, ID2);
 	return Buffer;
