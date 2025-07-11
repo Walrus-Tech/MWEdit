@@ -110,7 +110,7 @@ class TTemplateArray {
 
 	/* Frees any extra allocated memory */
 	void FreeExtra() {
-		ResizeArrayfalse;
+		ResizeArray(false);
 	}
 
 	/* Get the array size */
