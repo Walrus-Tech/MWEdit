@@ -56,7 +56,7 @@ DEFINE_FILE("DL_log.cpp");
  * Class CLogFile Constructor (Default)
  *
  *=========================================================================*/
-CLogFile::CLogFile(void) {
+CLogFile::CLogFile() {
 	TabLevel = 0;
 	pLogFileHandle = NULL;
 	pHookProc = NULL;
@@ -97,13 +97,13 @@ CLogFile::CLogFile(const TCHAR *pFilename, const logmode_t AppendFile) {
  * if no log file is currently open.
  *
  *=========================================================================*/
-bool CLogFile::Close(void) {
+bool CLogFile::Close() {
 	//DEFINE_FUNCTION("CLogFile::Close()");
 	int Result;
 
 	/* Is the log file currently open? */
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output status messages to log file */
@@ -115,10 +115,10 @@ bool CLogFile::Close(void) {
 	TabLevel = 0;
 
 	if (Result < 0) {
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -171,7 +171,7 @@ void CLogFile::DebugPrintf(const TCHAR *pString, ...) {
  *      CLogFile::SetTabLevel(NewTabLevel);
  *
  *=========================================================================*/
-void CLogFile::DecrementTabs(void) {
+void CLogFile::DecrementTabs() {
 	if (TabLevel > 0) {
 		TabLevel--;
 	}
@@ -194,7 +194,7 @@ void CLogFile::DecrementTabs(void) {
  *      CLogFile::SetTabLevel(NewTabLevel);
  *
  *=========================================================================*/
-void CLogFile::IncrementTabs(void) {
+void CLogFile::IncrementTabs() {
 	if (TabLevel < LOGFILE_MAX_TABS) {
 		TabLevel++;
 	}
@@ -229,7 +229,7 @@ bool CLogFile::Open(const TCHAR *pFilename, const logmode_t AppendFile) {
 		Result = Close();
 
 		if (!Result) {
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
@@ -237,17 +237,17 @@ bool CLogFile::Open(const TCHAR *pFilename, const logmode_t AppendFile) {
 	pLogFileHandle = TFOPEN(pFilename, AppendFile ? _T("at") : _T("wt"));
 
 	if (pLogFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the filename and full date to log file */
 	Result = Printf(_T("==================== Opened Logfile %s ================"), pFilename);
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (OutputDate());
+	return OutputDate();
 }
 
 /*===========================================================================
@@ -263,7 +263,7 @@ bool CLogFile::Open(const TCHAR *pFilename, const logmode_t AppendFile) {
  * error.
  *
  *=========================================================================*/
-bool CLogFile::OutputDate(void) {
+bool CLogFile::OutputDate() {
 	//DEFINE_FUNCTION("CLogFile::OutputDate()");
 	TCHAR DateString[33] = _T("");
 	struct tm *pCurrentTime;
@@ -271,7 +271,7 @@ bool CLogFile::OutputDate(void) {
 
 	/* Ensure the log file is currently open */
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Get the current Date and convert it to local time */
@@ -279,12 +279,12 @@ bool CLogFile::OutputDate(void) {
 	pCurrentTime = localtime(&Today);
 
 	if (pCurrentTime == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the date line to the file */
 	TSTRFTIME(DateString, 32, _T("%A, %d of %B, %Y"), pCurrentTime);
-	return (Printf(_T("The current date is %s."), DateString));
+	return Printf(_T("The current date is %s."), DateString);
 }
 
 /*===========================================================================
@@ -301,7 +301,7 @@ bool CLogFile::OutputDate(void) {
  * Assumes that the log file is currently open and valid.
  *
  *=========================================================================*/
-bool CLogFile::OutputCurrentTime(void) {
+bool CLogFile::OutputCurrentTime() {
 	DEFINE_FUNCTION("CLogFile::OutputCurrentTime()()");
 	TCHAR TimeString[17] = _T("");
 	int Result;
@@ -314,7 +314,7 @@ bool CLogFile::OutputCurrentTime(void) {
 	pToday = localtime(&CurrentTime);
 
 	if (pToday == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the formatted time to log file */
@@ -322,10 +322,10 @@ bool CLogFile::OutputCurrentTime(void) {
 	Result = TFPRINTF(pLogFileHandle, _T("%s (%ld) - "), TimeString, clock());
 
 	if (Result < 0) {
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -340,7 +340,7 @@ bool CLogFile::OutputCurrentTime(void) {
  * Outputs the current memory status to the log file.
  *
  *=========================================================================*/
-void CLogFile::OutputMemoryStatus(void) {
+void CLogFile::OutputMemoryStatus() {
 	//DEFINE_FUNCTION("CLogFile::OutputMemoryStatus()");
 	bool MemResult;
 	long UsedMemory = 0;
@@ -389,7 +389,7 @@ void CLogFile::OutputMemoryStatus(void) {
  * open and valid.  Returns FALSE on any error.
  *
  *=========================================================================*/
-bool CLogFile::OutputTabs(void) {
+bool CLogFile::OutputTabs() {
 	DEFINE_FUNCTION("CLogFile::OutputTabs()");
 	int LoopCounter;
 	int Result;
@@ -401,11 +401,11 @@ bool CLogFile::OutputTabs(void) {
 		Result = TFPUTC((TCHAR)'\t', pLogFileHandle);
 
 		if (Result == EOF) {
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -430,20 +430,19 @@ bool CLogFile::Printf(const TCHAR *pString, ...) {
 
 	/* Ensure the log file is currently open */
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Print the line to the file */
 	va_start(Args, pString);
 	Result = PrintLine(pString, Args);
 	va_end(Args);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
  *      End of Class Method CLogFile::Printf()
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -471,7 +470,7 @@ bool CLogFile::Printf(FILE *pFileHandle, const TCHAR *pString, ...) {
 
 		if (!Result) {
 			va_end (Args);
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
@@ -482,7 +481,7 @@ bool CLogFile::Printf(FILE *pFileHandle, const TCHAR *pString, ...) {
 			Result = TFPUTC((TCHAR)'\t', pFileHandle);
 
 			if (Result == EOF) {
-				return (FALSE);
+				return FALSE;
 			}
 		}
 
@@ -490,25 +489,25 @@ bool CLogFile::Printf(FILE *pFileHandle, const TCHAR *pString, ...) {
 		va_end(Args);
 
 		if (Result < 0) {
-			return (FALSE);
+			return FALSE;
 		}
 
 		/* Terminate line with a line feed character */
 		Result = TFPRINTF(pFileHandle, _T("\n"));
 
 		if (Result < 0) {
-			return (FALSE);
+			return FALSE;
 		}
 
 		/* Flush output stream */
 		Result = fflush (pFileHandle);
 
 		if (Result == EOF) {
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -534,21 +533,21 @@ bool CLogFile::PrintLine(const TCHAR *pString, va_list Args) {
 	Result = OutputCurrentTime();
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the tabs, if any */
 	Result = OutputTabs();
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Print the variable argument list to the file */
 	Result = TVFPRINTF(pLogFileHandle, pString, Args);
 
 	if (Result < 0) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output to the optional hook procedure */
@@ -560,7 +559,7 @@ bool CLogFile::PrintLine(const TCHAR *pString, va_list Args) {
 	Result = TFPRINTF(pLogFileHandle, _T("\n"));
 
 	if (Result < 0) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Flush the file stream to make sure the written characters are written
@@ -570,10 +569,10 @@ bool CLogFile::PrintLine(const TCHAR *pString, va_list Args) {
 	Result = fflush(pLogFileHandle);
 
 	if (Result == EOF) {
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -606,7 +605,6 @@ void CLogFile::SetTabLevel(const int NewTabLevel) {
 /*===========================================================================
  *      End of Class Method CLogFile::SetTabLevel()
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -658,21 +656,24 @@ void Test_LogHook(const TCHAR *pString, va_list Args) {
  *  - Tests DebugPrintf() method.
  *
  *=========================================================================*/
-void Test_LogFile(void) {
+void Test_LogFile() {
 	DEFINE_FUNCTION("Test_LogFile()");
-	CLogFile TestLog1(_T("test1.log"));       /* Check constructors */
+	CLogFile TestLog1(_T("test1.log")); /* Check constructors */
 	CLogFile TestLog2;
 	CLogFile TestLog3;
 	int LoopCounter;
 	int TabLevel;
+
 	/* Check standard open method */
 	TestLog2.Open(_T("test2.log"));
+
 	/* Test appending logs */
 	TestLog3.Open(_T("test3.log"), LOG_OPEN);
 	TestLog3.Printf(_T("Test1"));
 	TestLog3.Close();
 	TestLog3.Open(_T("test3.log"), LOG_APPEND);
 	TestLog3.Printf(_T("Append Test1"));
+
 	/* Attempt to open an invalid file (both should ASSERT) */
 	//TestLog2.Open("");
 	//TestLog2.Open(NULL);
@@ -682,32 +683,35 @@ void Test_LogFile(void) {
 	/* Check tab level incrementation */
 	for (LoopCounter = 0; LoopCounter < 100; LoopCounter++) {
 		TestLog1.IncrementTabs();
-		TestLog1.Printf (_T("TabLevel = %d"), LoopCounter);
+		TestLog1.Printf(_T("TabLevel = %d"), LoopCounter);
 	}
 
 	/* Check tab level decrementation */
 	for (LoopCounter = 0; LoopCounter < 110; LoopCounter++) {
 		TestLog1.DecrementTabs();
-		TestLog1.Printf (_T("TabLevel = %d"), LoopCounter);
+		TestLog1.Printf(_T("TabLevel = %d"), LoopCounter);
 	}
 
 	/* Check random tab levels with SetTabLevel() method */
 	for (LoopCounter = 0; LoopCounter < 100; LoopCounter++) {
-		TabLevel = (int) ((float)rand() * 201 / RAND_MAX) - 100;
+		TabLevel = (int)((float)rand() * 201 / RAND_MAX) - 100;
 		TestLog1.SetTabLevel(TabLevel);
-		TestLog1.Printf (_T("SetTabLevel = %d"), TabLevel);
+		TestLog1.Printf(_T("SetTabLevel = %d"), TabLevel);
 	}
 
 	/* Reset the tab level for the log */
 	TestLog1.SetTabLevel();
+
 	/* Check the hook procedures */
 	TestLog1.SetHookProc(Test_LogHook);
 	TestLog1.Printf(_T("Testing hook proc..."));
 	TestLog1.SetHookProc();
 	TestLog1.Printf(_T("Removed hook proc..."));
+
 	/* Test splitting output to file stream */
 	TestLog1.Printf(TestLog2.GetFileHandle(), _T("Testing split output to file stream..."));
 	TestLog1.Printf(stdout, _T("Testing split output to stdout..."));
+
 	/* Test debug output */
 	TestLog1.DebugPrintf(_T("Testing debug print...%d, %s"), 1001, _T("adedr"));
 	ASSERT(DebugHeapCheckMemory());

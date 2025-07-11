@@ -39,7 +39,7 @@ DEFINE_FILE("dl_math.cpp");
 
 /* Variables for custom random number generation */
 ulong RandomSeed = 1;
-ulong RandomAdd = 1725;
+ulong RandomAdd  = 1725;
 ulong RandomMult = 621;
 
 /*===========================================================================
@@ -56,14 +56,134 @@ ulong RandomMult = 621;
  *
  *=========================================================================*/
 char HexCharValues[128] = {
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0,
-	0, 10, 11, 12, 13, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 10, 11, 12, 13, 14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	10,
+	11,
+	12,
+	13,
+	14,
+	15,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 };
 /*===========================================================================
  *      End of Global Hexadecimal Value Array
@@ -82,23 +202,91 @@ const static int NumUnitPrefixes = 17;
 
 /* LogBase10, PrefixChar, Prefix */
 unit_prefix_t UnitPrefixes[] = {
-	{ -24, (TCHAR) 'y', _T("yocto") },
-	{ -21, (TCHAR) 'z', _T("zepto") },
-	{ -18, (TCHAR) 'a', _T("atto") },
-	{ -15, (TCHAR) 'f', _T("femto") },
-	{ -12, (TCHAR) 'p', _T("pico") },
-	{ -9, (TCHAR) 'n', _T("nano") },
-	//{  -6,  (TCHAR)230,       _T("micro") },
-	{ -3, (TCHAR) 'm', _T("milli") },
-	{ 0, (TCHAR) ' ', _T("") },
-	{ 3, (TCHAR) 'k', _T("kilo") },
-	{ 6, (TCHAR) 'M', _T("Mega") },
-	{ 9, (TCHAR) 'G', _T("Giga") },
-	{ 12, (TCHAR) 'T', _T("Tera") },
-	{ 15, (TCHAR) 'P', _T("Peta") },
-	{ 18, (TCHAR) 'E', _T("Exa") },
-	{ 21, (TCHAR) 'Z', _T("Zetta") },
-	{ 24, (TCHAR) 'Y', _T("Yotto") }
+	{
+		-24,
+		(TCHAR)'y',
+		_T("yocto")
+	},
+	{
+		-21,
+		(TCHAR)'z',
+		_T("zepto")
+	},
+	{
+		-18,
+		(TCHAR)'a',
+		_T("atto")
+	},
+	{
+		-15,
+		(TCHAR)'f',
+		_T("femto")
+	},
+	{
+		-12,
+		(TCHAR)'p',
+		_T("pico")
+	},
+	{
+		-9,
+		(TCHAR)'n',
+		_T("nano")
+	},
+//	{
+//		-6,
+//		(TCHAR)230,
+//		_T("micro")
+//	},
+	{
+		-3,
+		(TCHAR)'m',
+		_T("milli")
+	},
+	{
+		0,
+		(TCHAR)' ',
+		_T("")
+	},
+	{
+		3,
+		(TCHAR)'k',
+		_T("kilo")
+	},
+	{
+		6,
+		(TCHAR)'M',
+		_T("Mega")
+	},
+	{
+		9,
+		(TCHAR)'G',
+		_T("Giga")
+	},
+	{
+		12,
+		(TCHAR)'T',
+		_T("Tera")
+	},
+	{
+		15,
+		(TCHAR)'P',
+		_T("Peta")
+	},
+	{
+		18,
+		(TCHAR)'E',
+		_T("Exa")
+	},
+	{
+		21,
+		(TCHAR)'Z',
+		_T("Zetta")
+	},
+	{
+		24,
+		(TCHAR)'Y',
+		_T("Yotto")
+	}
 };
 /*===========================================================================
  *      End of Unit Prefixes Array
@@ -127,19 +315,21 @@ double GetNiceTickLength(double &AxisStart, double &AxisEnd, const int NumTicks)
 	AxisWidth = AxisEnd - AxisStart;
 
 	if (AxisWidth == 0.0) {
-		return (0.0);
+		return 0.0;
 	}
 
 	/* Compute the new nice range and ticks */
 	NiceRange = NiceNumber(AxisEnd - AxisStart, 0);
 	NiceTick = NiceNumber(NiceRange / (NumTicks - 1), 1);
+
 	/* Compute the new nice start and end values */
 	NewAxisStart = floor(AxisStart / NiceTick) * NiceTick;
 	NewAxisEnd = ceil(AxisEnd / NiceTick) * NiceTick;
+
 	//NumFrac = MAX(-floor(log10(NiceTick)), 0);
 	AxisStart = NewAxisStart;
 	AxisEnd = NewAxisEnd;
-	return (NiceTick);
+	return NiceTick;
 }
 
 /*===========================================================================
@@ -168,17 +358,18 @@ double GetNiceTickLengthC(const double AxisStart, const double AxisEnd, const in
 	AxisWidth = AxisEnd - AxisStart;
 
 	if (AxisWidth == 0.0) {
-		return (0.0);
+		return 0.0;
 	}
 
 	/* Compute the new nice range and ticks */
 	NiceRange = NiceNumber(AxisEnd - AxisStart, 0);
 	NiceTick = NiceNumber(NiceRange / (NumTicks - 1), 1);
+
 	/* Compute the new nice start and end values */
 	NewAxisStart = floor(AxisStart / NiceTick) * NiceTick;
 	NewAxisEnd = ceil(AxisEnd / NiceTick) * NiceTick;
 	//NumFrac = MAX(-floor(log10(NiceTick)), 0);
-	return (NiceTick);
+	return NiceTick;
 }
 
 /*===========================================================================
@@ -203,7 +394,7 @@ unit_prefix_t *GetUnitPrefix(boolean &OverFlow, const double Value) {
 
 	/* Compute the proper base-10 of input value */
 	if (Value != 0.0) {
-		Base10 = (int) floor(log10(fabs(Value)));
+		Base10 = (int)floor(log10(fabs(Value)));
 	}
 
 	OverFlow = FALSE;
@@ -211,13 +402,13 @@ unit_prefix_t *GetUnitPrefix(boolean &OverFlow, const double Value) {
 	/* Check special small cases */
 	if (Base10 < UnitPrefixes[0].LogBase10) {
 		OverFlow = TRUE;
-		return (&UnitPrefixes[0]);
+		return &UnitPrefixes[0];
 	}
 
 	/* Find the best prefix in the array for the value */
 	for (LoopCounter = 1; LoopCounter < NumUnitPrefixes; LoopCounter++) {
 		if (Base10 < UnitPrefixes[LoopCounter].LogBase10) {
-			return (&UnitPrefixes[LoopCounter - 1]);
+			return &UnitPrefixes[LoopCounter - 1];
 		}
 	}
 
@@ -226,13 +417,12 @@ unit_prefix_t *GetUnitPrefix(boolean &OverFlow, const double Value) {
 		OverFlow = TRUE;
 	}
 
-	return (&UnitPrefixes[NumUnitPrefixes - 1]);
+	return &UnitPrefixes[NumUnitPrefixes - 1];
 }
 
 /*===========================================================================
  *      End of Function GetUnitPrefix()
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -253,7 +443,6 @@ TCHAR *Metricize(const double Value, const TCHAR *pUnits) {
 	static TCHAR OutputBuffer[256];
 	return Metricize(OutputBuffer, 255, Value, pUnits);
 }
-
 
 TCHAR *Metricize(TCHAR *Buffer, const int BufferSize, const double Value, const TCHAR *pUnits) {
 	DEFINE_FUNCTION("Metricize()");
@@ -291,10 +480,10 @@ TCHAR *Metricize(TCHAR *Buffer, const int BufferSize, const double Value, const 
 	/* Check for errors */
 	if (Result < 0) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, _T("Error creating string buffer!"));
-		return (Buffer);
+		return Buffer;
 	}
 
-	return (Buffer);
+	return Buffer;
 }
 
 /*===========================================================================
@@ -313,9 +502,9 @@ TCHAR *Metricize(TCHAR *Buffer, const int BufferSize, const double Value, const 
  *
  *=========================================================================*/
 double NiceNumber(const double Value, const int Round) {
-	int Exponent;      /* Exponent of x */
-	double Fraction;      /* Fractional part of x */
-	double NiceFraction;      /* Nice, rounded fraction */
+	int Exponent;                               /* Exponent of x */
+	double Fraction;                            /* Fractional part of x */
+	double NiceFraction;                        /* Nice, rounded fraction */
 	Exponent = (int)floor(log10(Value));
 	Fraction = Value / pow10((double)Exponent); /* between 1 and 10 */
 
@@ -357,11 +546,11 @@ double NiceNumber(const double Value, const int Round) {
  * long integer in the sequence (0 to ULONG_MAX).
  *
  *=========================================================================*/
-ulong Random(void) {
+ulong Random() {
 	//DEFINE_FUNCTION("Random()");
 	RandomSeed *= RandomMult;
 	RandomSeed += RandomAdd;
-	return (RandomSeed);
+	return RandomSeed;
 }
 
 /*===========================================================================
@@ -378,8 +567,9 @@ ulong Random(void) {
  *=========================================================================*/
 int Random(const int MaxNumber) {
 	//DEFINE_FUNCTION("Random()");
-	return (int)((double)Random() * ((double)sign(MaxNumber) + (double) MaxNumber) /
-	             (double) ULONG_MAX);
+	return (int)((double)Random()
+	             * ((double)sign(MaxNumber) + (double)MaxNumber)
+	             / (double)ULONG_MAX);
 }
 
 /*===========================================================================
@@ -415,8 +605,10 @@ ulong Random(const ulong MaxNumber) {
 int Random(const int MinNumber, const int MaxNumber) {
 	//DEFINE_FUNCTION("Random()");
 	double Range = (double)MaxNumber - (double)MinNumber;
-	return (int)((double) Random() * ((double)sign(Range) + Range) / (double)ULONG_MAX +
-	             (double) MinNumber);
+	return (int)((double) Random()
+	             * ((double)sign(Range) + Range)
+	             / (double)ULONG_MAX
+	             + (double)MinNumber);
 }
 
 /*===========================================================================
@@ -434,7 +626,7 @@ int Random(const int MinNumber, const int MaxNumber) {
  * as well as the custom Random() functions.
  *
  *=========================================================================*/
-void RandomizeTimer(void) {
+void RandomizeTimer() {
 	//DEFINE_FUNCTION("RandomizeTimer()");
 	srand((uint)time(NULL));
 	SeedRandom((ulong)time(NULL));
@@ -485,9 +677,10 @@ void SeedRandom(const ulong NewSeed) {
  *  1. Test all hex characters to ensure success
  *
  *=========================================================================*/
-void Test_HexCharToInt(void) {
+void Test_HexCharToInt() {
 	DEFINE_FUNCTION("Test_HexCharToInt()");
 	SystemLog.Printf(stdout, _T("================= Testing Test_HexCharToInt() ==================="));
+
 	/* Test all hex characters to ensure success */
 	ASSERT(HexCharToInt((TCHAR)'0') == 0);
 	ASSERT(HexCharToInt((TCHAR)'1') == 1);
@@ -530,10 +723,11 @@ void Test_HexCharToInt(void) {
  *  5. Test with different unit strings
  *
  *=========================================================================*/
-void Test_Metricize(void) {
+void Test_Metricize() {
 	DEFINE_FUNCTION("Test_Metricize()");
 	TCHAR *pString;
 	SystemLog.Printf(stdout, _T("================= Testing Metricize() ==================="));
+
 	/* Test with typical strings */
 	pString = Metricize(123456789.0f, _T("m"));
 	ASSERT(pString != NULL);
@@ -586,10 +780,12 @@ void Test_Metricize(void) {
 	pString = Metricize(0.000000012345f, _T("m"));
 	ASSERT(pString != NULL);
 	SystemLog.Printf(stdout, _T("\tMetricize(0.000000012345) = '%s'"), pString);
+
 	/* Test 0 input */
 	pString = Metricize(0.0f, _T("m"));
 	ASSERT(pString != NULL);
 	SystemLog.Printf(stdout, _T("\tMetricize(0) = '%s'"), pString);
+
 	/* Test some negative inputs */
 	pString = Metricize(-12345.6f, _T("m"));
 	ASSERT(pString != NULL);
@@ -600,6 +796,7 @@ void Test_Metricize(void) {
 	pString = Metricize(-0.00000123456f, _T("m"));
 	ASSERT(pString != NULL);
 	SystemLog.Printf(stdout, _T("\tMetricize(-0.00000123456) = '%s'"), pString);
+
 	/* Test some very small/large values */
 	pString = Metricize(1.23456e30f, _T("m"));
 	ASSERT(pString != NULL);
@@ -607,6 +804,7 @@ void Test_Metricize(void) {
 	pString = Metricize(1.23456e-30f, _T("m"));
 	ASSERT(pString != NULL);
 	SystemLog.Printf(stdout, _T("\tMetricize(1.23456e-30) = '%s'"), pString);
+
 	/* Test with various unit strings */
 	pString = Metricize(-12345.6e12f, _T(""));
 	ASSERT(pString != NULL);
@@ -646,13 +844,15 @@ void Test_Random(const size_t NumTests) {
 	size_t *NumberCount1;
 	size_t LoopCounter;
 	ulong RandNumber;
-	FILE* pFileHandle;
+	FILE *pFileHandle;
+
 	/* Allocate arrays due to problem with large stack variables in Win16 */
 	NumberCount = (size_t *)CreateString(ArraySize * sizeof(size_t));
 	NumberCount1 = (size_t *)CreateString(ArraySize * sizeof(size_t));
 	SystemLog.Printf(stdout, _T("================= Testing Random() ==================="));
 	memset(NumberCount, 0, sizeof(size_t) * (size_t)ArraySize);
 	memset(NumberCount1, 0, sizeof(size_t) * (size_t)ArraySize);
+
 	/* Output random number data */
 	pFileHandle = TFOPEN(_T("c:\\temp\\rand1.dat"), _T("wt"));
 	ASSERT(pFileHandle != NULL);
@@ -713,6 +913,7 @@ void Test_Random1(const size_t NumTests) {
 	size_t NumberCount3[4];
 	FILE* pFileHandle;
 	int RandNumber;
+
 	SystemLog.Printf(stdout, _T("================= Testing Random(int) ==================="));
 	memset(NumberCount1, 0, sizeof(size_t) * (size_t)1001);
 	memset(NumberCount2, 0, sizeof(size_t) * (size_t)3);
@@ -794,6 +995,7 @@ void Test_Random2(const size_t NumTests) {
 	size_t NumberCount3[4];
 	FILE* pFileHandle;
 	int RandNumber;
+
 	SystemLog.Printf(stdout, _T("================= Testing Random(int, int) ==================="));
 	memset(NumberCount1, 0, sizeof(size_t) * (size_t)1001);
 	memset(NumberCount2, 0, sizeof(size_t) * (size_t)3);
@@ -874,6 +1076,7 @@ void Test_RandomRate(const size_t NumTests) {
 	size_t LoopCounter;
 	ulong Counter;
 	ulong InitialSeed;
+
 	SystemLog.Printf(stdout, _T("================= Testing Random Turnover Rate ==================="));
 	Random();
 	SeedRandom(Random());
@@ -915,9 +1118,10 @@ void Test_RandomRate(const size_t NumTests) {
  *  1. Ensures each version gives a valid -1/0/1 result.
  *
  *=========================================================================*/
-void Test_sign(void) {
+void Test_sign() {
 	DEFINE_FUNCTION("Test_sign()");
 	SystemLog.Printf(stdout, _T("================= Testing sign() Functions ==================="));
+
 	/* Test positive numbers */
 	ASSERT(sign((int)10) == 1);
 	ASSERT(sign((int)INT_MAX) == 1);
@@ -929,22 +1133,24 @@ void Test_sign(void) {
 	ASSERT(sign((double)10381.1) == 1.0);
 	ASSERT(sign((double)DBL_MAX) == 1.0);
 	ASSERT(sign((double)DBL_MIN) == 1.0);
+
 	/* Test zero numbers */
 	ASSERT(sign((int)0) == 0);
 	ASSERT(sign((long)0) == 0);
 	ASSERT(sign((float)0.0) == 0.0);
 	ASSERT(sign((double)0.0) == 0.0);
+
 	/* Test negative numbers */
-	ASSERT(sign((int) -10) == -1);
+	ASSERT(sign((int)-10) == -1);
 	ASSERT(sign((int)INT_MIN) == -1);
-	ASSERT(sign((long) -101) == -1);
+	ASSERT(sign((long)-101) == -1);
 	ASSERT(sign((long)LONG_MIN) == -1);
-	ASSERT(sign((float) -1012.9) == -1.0);
-	ASSERT(sign((float) - FLT_MAX) == -1.0);
-	ASSERT(sign((float) - FLT_MIN) == -1.0);
-	ASSERT(sign((double) -10381.1) == -1.0);
-	ASSERT(sign((double) - DBL_MAX) == -1.0);
-	ASSERT(sign((double) - DBL_MIN) == -1.0);
+	ASSERT(sign((float)-1012.9) == -1.0);
+	ASSERT(sign((float)-FLT_MAX) == -1.0);
+	ASSERT(sign((float)-FLT_MIN) == -1.0);
+	ASSERT(sign((double)-10381.1) == -1.0);
+	ASSERT(sign((double)-DBL_MAX) == -1.0);
+	ASSERT(sign((double)-DBL_MIN) == -1.0);
 }
 
 /*===========================================================================
@@ -964,11 +1170,12 @@ void Test_sign(void) {
  *  5. Tests the Metricize() function
  *
  *=========================================================================*/
-void Test_DL_Math(void) {
+void Test_DL_Math() {
 	//DEFINE_FUNCTION("Test_DL_Math()");
 	Test_sign();
 	Test_HexCharToInt();
 	Test_Metricize();
+
 	//RandomizeTimer();
 	Test_Random();
 	Test_Random1();

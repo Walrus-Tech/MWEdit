@@ -68,13 +68,13 @@ class TTemplateArray {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	TArrayPtr **m_ppArray; /* Contains the array of pointers to objects */
-	int m_MaxElements; /* Maximum size of array */
-	int m_NumElements; /* Current number of elements in array */
-	int m_GrowSize;    /* Amount to grow array when limit reached */
+	TArrayPtr **m_ppArray;     /* Contains the array of pointers to objects */
+	int m_MaxElements;         /* Maximum size of array */
+	int m_NumElements;         /* Current number of elements in array */
+	int m_GrowSize;            /* Amount to grow array when limit reached */
 
-	PQSORT_CMPFUNC m_pCmpFunc;    /* Pointer to a user supplied compare function */
-	long m_CmpFuncData; /* User supplied data for the compare function */
+	PQSORT_CMPFUNC m_pCmpFunc; /* Pointer to a user supplied compare function */
+	long m_CmpFuncData;        /* User supplied data for the compare function */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -90,11 +90,11 @@ class TTemplateArray {
 	/* Class Constructors/Destructors */
 	TTemplateArray(const int MaxSize = 0, const int GrowSize = -1);
 	virtual ~TTemplateArray();
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Tests the contents to ensure they are valid */
 #if defined(_DEBUG)
-	bool AssertValid(void);
+	bool AssertValid();
 #endif
 
 	/* Attempts to add a new object to the end of the array */
@@ -109,21 +109,21 @@ class TTemplateArray {
 	void DeleteElement(const int Index, const bool Delete = true);
 
 	/* Frees any extra allocated memory */
-	void FreeExtra(void) {
-		ResizeArray(false);
+	void FreeExtra() {
+		ResizeArrayfalse;
 	}
 
 	/* Get the array size */
-	int GetMaxElements(void) const {
-		return (m_MaxElements);
+	int GetMaxElements() const {
+		return m_MaxElements;
 	}
 
-	int GetNumElements(void) const {
-		return (m_NumElements);
+	int GetNumElements() const {
+		return m_NumElements;
 	}
 
-	int GetGrowSize(void) const {
-		return (m_GrowSize);
+	int GetGrowSize() const {
+		return m_GrowSize;
 	}
 
 	/* Attempt to retrieve an array element */
@@ -134,7 +134,7 @@ class TTemplateArray {
 
 	/* Ensures the given array index is valid */
 	bool IsValidIndex(const int Index) const {
-		return ((Index >= 0 && Index < m_NumElements) ? true : false);
+		return (Index >= 0 && Index < m_NumElements) ? true : false;
 	}
 
 	/* Attempts to get the specified array element */
@@ -160,7 +160,6 @@ class TTemplateArray {
 
 	/* Sorts the array using the current compare function */
 	void Sort(const long lUserData);
-
 };
 
 /*===========================================================================
@@ -205,7 +204,7 @@ template <class TArrayPtr> TTemplateArray<TArrayPtr>::TTemplateArray(const int M
  * Class TTemplateArray Destructor
  *
  *=========================================================================*/
-template <class TArrayPtr> TTemplateArray<TArrayPtr>::~TTemplateArray(void) {
+template <class TArrayPtr> TTemplateArray<TArrayPtr>::~TTemplateArray() {
 	//DEFINE_FUNCTION("TTemplateArray::~CGenArray()");
 	/* Delete all the valid pointers in array */
 	Destroy();
@@ -226,7 +225,7 @@ template <class TArrayPtr> TTemplateArray<TArrayPtr>::~TTemplateArray(void) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-void TTemplateArray<TArrayPtr>::Destroy(void) {
+void TTemplateArray<TArrayPtr>::Destroy() {
 	//DEFINE_FUNCTION("TTemplateArray::Destroy()");
 	int LoopCounter;
 
@@ -269,15 +268,16 @@ bool TTemplateArray<TArrayPtr>::AddElement(TArrayPtr *pNewElement) {
 
 	/* Ensure array can hold one more element */
 	if (m_NumElements >= m_MaxElements) {
-		ErrorHandler.AddError(ERR_MAXINDEX, "A maximum of %u array elements has been reached!",
+		ErrorHandler.AddError(ERR_MAXINDEX,
+		                      "A maximum of %u array elements has been reached!",
 		                      m_MaxElements);
-		return (false);
+		return false;
 	}
 
 	/* Add element to array */
 	m_ppArray[m_NumElements] = pNewElement;
 	m_NumElements++;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -312,7 +312,9 @@ bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 	/* Find the position to insert the new element */
 	if (m_pCmpFunc != NULL) {
 		for (LoopCounter = 0; LoopCounter < m_NumElements; LoopCounter++) {
-			if (m_pCmpFunc((void *)(m_ppArray + LoopCounter), (void *)(&pNewElement), m_CmpFuncData) > 0) {
+			if (m_pCmpFunc((void *)(m_ppArray + LoopCounter),
+			               (void *)(&pNewElement),
+			               m_CmpFuncData) > 0) {
 				break;
 			}
 		}
@@ -327,7 +329,7 @@ bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 	if (m_NumElements >= m_MaxElements) {
 		/* Ignore new element if it doesn't 'fit' in array */
 		if (LoopCounter == m_NumElements) {
-			return (false);
+			return false;
 		}
 
 		DestroyPointer(m_ppArray[m_NumElements - 1]);
@@ -342,7 +344,7 @@ bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 	/* Insert the new element to array */
 	m_ppArray[LoopCounter] = pNewElement;
 	m_NumElements++;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -360,7 +362,7 @@ bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
  *
  *=========================================================================*/
 template <class TArrayPtr>
-bool TTemplateArray<TArrayPtr>::AssertValid(void) {
+bool TTemplateArray<TArrayPtr>::AssertValid() {
 	DEFINE_FUNCTION("TTemplateArray::AssertValid()");
 	int LoopCounter;
 	/* Ensure valid input */
@@ -377,7 +379,7 @@ bool TTemplateArray<TArrayPtr>::AssertValid(void) {
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -436,14 +438,14 @@ bool TTemplateArray<TArrayPtr>::GetElement(TArrayPtr **ppElement, const int Inde
 	/* Ensure the index is valid */
 	if (IsValidIndex(Index)) {
 		*ppElement = m_ppArray[Index];
-		return (true);
+		return true;
 	}
 
 	/* Assert in debug builds */
 	ABORT("TTemplateArray::GetElement() - Invalid array index received!");
 	/* Return NULL in release builds */
 	*ppElement = NULL;
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -556,12 +558,12 @@ inline TArrayPtr *TTemplateArray<TArrayPtr>::operator[](const int Index) const {
 
 	/* Ensure the index is valid */
 	if (IsValidIndex(Index)) {
-		return (m_ppArray[Index]);
+		return m_ppArray[Index];
 	}
 
 	/* Assert in debug builds */
 	ABORT("TTemplateArray::operator[]() - Invalid array index received!");
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -576,7 +578,7 @@ inline TArrayPtr *TTemplateArray<TArrayPtr>::operator[](const int Index) const {
  *=========================================================================*/
 #if defined(_DEBUG)
 	void Test_StressTemplateArray(const int NumTests = 100);
-	void Test_TemplateArray(void);
+	void Test_TemplateArray();
 #endif
 /*===========================================================================
  *      End of Module Test Function Prototypes

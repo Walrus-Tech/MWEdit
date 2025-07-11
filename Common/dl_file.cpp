@@ -104,10 +104,10 @@ bool ChangeDirectory(const TCHAR *pPath) {
 		                      (errcode_t)errno,
 		                      _T("Directory '%s' is not valid!"),
 		                      pPath);
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -148,7 +148,7 @@ TCHAR *ChangeExtension(TCHAR *pDestFilename,
 
 	/* Add the new extension to the destination filename */
 	TSTRNCAT(pDestFilename, pNewExtension, MaxStringLength - DestLength);
-	return (pDestFilename);
+	return pDestFilename;
 }
 
 /*===========================================================================
@@ -178,12 +178,12 @@ bool CompareExtension(const TCHAR *pFilename, const TCHAR *pExtension) {
 		Result = _stricmp(pFileExt, pExtension);
 
 		if (Result == 0) {
-			return (TRUE);
+			return TRUE;
 		}
 	}
 
 	/* No extension found */
-	return (FALSE);
+	return FALSE;
 }
 
 /*===========================================================================
@@ -207,21 +207,21 @@ bool CompareFiles(const TCHAR *pFilename1, const TCHAR *pFilename2) {
 
 	/* Ignore invalid input */
 	if (pFilename1 == NULL || pFilename2 == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Attempt to open both files for input */
 	pFileHandle1 = TFOPEN(pFilename1, _T("rb"));
 
 	if (pFileHandle1 == NULL) {
-		return (false);
+		return false;
 	}
 
 	pFileHandle2 = TFOPEN(pFilename2, _T("rb"));
 
 	if (pFileHandle2 == NULL) {
 		fclose(pFileHandle1);
-		return (false);
+		return false;
 	}
 
 	/* Compare each file, byte by byte */
@@ -245,7 +245,7 @@ bool CompareFiles(const TCHAR *pFilename1, const TCHAR *pFilename2) {
 
 	fclose(pFileHandle1);
 	fclose(pFileHandle2);
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -277,7 +277,7 @@ bool CopyOneFile(const TCHAR *pInputFile, const TCHAR *pOutputFile) {
 	pInputHandle = OpenFile(pInputFile, _T("rb"));
 
 	if (pInputHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to open output file */
@@ -285,7 +285,7 @@ bool CopyOneFile(const TCHAR *pInputFile, const TCHAR *pOutputFile) {
 
 	if (pOutputHandle == NULL) {
 		fclose(pInputHandle);
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Allocate the transfer buffer */
@@ -313,7 +313,7 @@ bool CopyOneFile(const TCHAR *pInputFile, const TCHAR *pOutputFile) {
 	DestroyPointer(Buffer);
 	fclose(pInputHandle);
 	fclose(pOutputHandle);
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*=========================================================================
@@ -336,14 +336,14 @@ TCHAR *CreatePath(TCHAR *pNewPath, const TCHAR *pString, const size_t MaxStringL
 	/* Ensure all input is valid */
 	ASSERT(pNewPath != NULL && pString != NULL);
 	/* Copy the given string into the new path */
-	strnncpy (pNewPath, pString, MaxStringLength);
+	strnncpy(pNewPath, pString, MaxStringLength);
 
 	/* Ensure the path ends with a path TCHARacter */
 	if ((size_t)TSTRLEN(pNewPath) < MaxStringLength) {
 		TerminatePath(pNewPath);
 	}
 
-	return (pNewPath);
+	return pNewPath;
 }
 
 /*=========================================================================
@@ -366,13 +366,13 @@ bool DelOneFile(const TCHAR *pFilename) {
 
 	if (!Result) {
 		ErrorHandler.AddError(ERR_WINDOWS, _T("Failed to delete file '%s'!"), pFilename);
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 #else
 	ASSERT(false);
-	return (false);
+	return false;
 #endif
 }
 
@@ -401,10 +401,10 @@ TCHAR *ExtractFilename(TCHAR *pFilename, const TCHAR *pPath, const size_t MaxStr
 	if (pPath == NULL) {
 		*pFilename = NULL_CHAR;
 	} else {
-		strnncpy (pFilename, pPath, MaxStringLength);
+		strnncpy(pFilename, pPath, MaxStringLength);
 	}
 
-	return (pFilename);
+	return pFilename;
 }
 
 /*=========================================================================
@@ -435,7 +435,7 @@ TCHAR *ExtractPath(TCHAR *pPath, const TCHAR *pString, const size_t MaxStringLen
 	/* Copy the string into the new path */
 	strnncpy(pPath, pString, MaxStringLength);
 	/* Remove any filename from the new path string, if any */
-	pFilePtr = (TCHAR *) FindFilename(pPath);
+	pFilePtr = (TCHAR *)FindFilename(pPath);
 	*pFilePtr = NULL_CHAR;
 
 	/* Ensure the path terminates properly, if possible */
@@ -443,7 +443,7 @@ TCHAR *ExtractPath(TCHAR *pPath, const TCHAR *pString, const size_t MaxStringLen
 		TerminatePath(pPath);
 	}
 
-	return (pPath);
+	return pPath;
 }
 
 /*=========================================================================
@@ -467,19 +467,19 @@ bool FileExists(const TCHAR *pFilename) {
 
 	/* Test for empty string (prevents _wfopen() from asserting in UNICODE debug builds */
 	if (pFilename[0] == NULL_CHAR) {
-		return (false);
+		return false;
 	}
 
 	/* Attempt to open file for reading */
 	pFileHandle = TFOPEN(pFilename, _T("r"));
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* File was opened and therefore exists, close and return success */
 	fclose(pFileHandle);
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -507,19 +507,19 @@ const TCHAR *FindExtension(const TCHAR *pFilename) {
 	StringIndex = TSTRLEN(pFilename);
 
 	/* Find the last '.' TCHARacter before the path/drive starts */
-	while (pFilename[StringIndex] != LocalePathChar &&
-	       pFilename[StringIndex] != (TCHAR)':' &&
-	       StringIndex != 0) {
+	while (pFilename[StringIndex] != LocalePathChar
+	       && pFilename[StringIndex] != (TCHAR)':'
+	       && StringIndex != 0) {
 		StringIndex--;
 
 		/* Check for the extension marker TCHARaacter */
 		if (pFilename[StringIndex] == (TCHAR)'.') {
-			return (pFilename + StringIndex + 1);
+			return pFilename + StringIndex + 1;
 		}
 	}
 
 	/* No extension found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -555,7 +555,7 @@ const TCHAR *FindFilename(const TCHAR *pPath) {
 		}
 	}
 
-	return (pPath + StringIndex);
+	return pPath + StringIndex;
 }
 
 /*=========================================================================
@@ -581,7 +581,7 @@ TCHAR *GetDirString(TCHAR *pString, const int MaxLength) {
 	getcwd(pString, MaxLength - 1);
 #endif
 	TerminatePath(pString);
-	return (pString);
+	return pString;
 }
 
 /*===========================================================================
@@ -604,10 +604,10 @@ long GetFileSize(const TCHAR *pFilename) {
 	Result = GetFileSize(FileSize, pFilename);
 
 	if (!Result) {
-		return (0);
+		return 0;
 	}
 
-	return (FileSize);
+	return FileSize;
 }
 
 /*===========================================================================
@@ -631,10 +631,10 @@ long GetFileSize(FILE *pFileHandle) {
 	Result = GetFileSize(FileSize, pFileHandle);
 
 	if (!Result) {
-		return (0);
+		return 0;
 	}
 
-	return (FileSize);
+	return FileSize;
 }
 
 /*===========================================================================
@@ -671,12 +671,12 @@ bool GetFileSize(long &FileSize, const TCHAR *pFilename) {
 		                      (errcode_t)errno,
 		                      _T("Could not open the file '%s'!"),
 		                      pFilename);
-		return (FALSE);
+		return FALSE;
 	}
 
 	Result = GetFileSize(FileSize, pFileHandle);
 	fclose(pFileHandle);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -708,7 +708,7 @@ bool GetFileSize(long &FileSize, FILE *pFileHandle) {
 		ErrorHandler.AddError(ERR_SYSTEM,
 		                      (errcode_t)errno,
 		                      _T("Could not retrieve current position in file!"));
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to move to the end of the file */
@@ -718,7 +718,7 @@ bool GetFileSize(long &FileSize, FILE *pFileHandle) {
 		ErrorHandler.AddError(ERR_SYSTEM,
 		                      (errcode_t)errno,
 		                      _T("Could not move file position to end of file!"));
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Get the size of the file in bytes */
@@ -728,7 +728,7 @@ bool GetFileSize(long &FileSize, FILE *pFileHandle) {
 		ErrorHandler.AddError(ERR_SYSTEM,
 		                      (errcode_t)errno,
 		                      _T("Could not retrieve current position in file!"));
-		return (FALSE);
+		return FALSE;
 	}
 
 	Result = fseek(pFileHandle, PrevFilePos, SEEK_SET);
@@ -737,10 +737,10 @@ bool GetFileSize(long &FileSize, FILE *pFileHandle) {
 		ErrorHandler.AddError(ERR_SYSTEM,
 		                      (errcode_t)errno,
 		                      _T("Could not move file position to previous location!"));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -762,10 +762,10 @@ bool HasExtension(const TCHAR *pFilename) {
 	ASSERT(pFilename != NULL);
 
 	if (FindExtension(pFilename) == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -790,13 +790,13 @@ bool HasPath(const TCHAR *pFilename) {
 	/* Look for any drive/path TCHARacters in filename */
 	while (*pFilename != NULL_CHAR) {
 		if (*pFilename == LocalePathChar || *pFilename == ':') {
-			return (TRUE);
+			return TRUE;
 		}
 
 		pFilename++;
 	}
 
-	return (FALSE);
+	return FALSE;
 }
 
 /*===========================================================================
@@ -831,19 +831,19 @@ bool IsDirectory(const TCHAR *pPath) {
 		ErrorHandler.AddError(ERR_SYSTEM,
 		                      (errcode_t)errno,
 		                      _T("Failed to retrieve the current directory!"));
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to change directories */
 	Result = ChangeDirectory(pPath);
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Restore the initial path and return success */
 	ChangeDirectory(InitialPath);
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -867,19 +867,19 @@ bool IsFileWriteable(const TCHAR *pFilename) {
 
 	/* Test for empty string (prevents _wfopen() from asserting in UNICODE debug builds */
 	if (pFilename[0] == NULL_CHAR) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to open the file for appending */
 	pFileHandle = TFOPEN (pFilename, _T("ab"));
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Close the now open file and return success */
 	fclose (pFileHandle);
-	return (TRUE);
+	return TRUE;
 }
 
 /*========================================================================
@@ -903,14 +903,14 @@ bool IsWildCard(const TCHAR *pFilename) {
 	/* Search entire string for a wildcard TCHARacter */
 	while (*pFilename != NULL_CHAR) {
 		if (*pFilename == (TCHAR)'*' || *pFilename == (TCHAR)'?') {
-			return (TRUE);
+			return TRUE;
 		}
 
 		pFilename++;
 	}
 
 	/* No wildcard TCHARacters found */
-	return (FALSE);
+	return FALSE;
 }
 
 /*=========================================================================
@@ -942,13 +942,12 @@ TCHAR *MakeSpaceLabel(TCHAR *Buffer, const int BufferSize, const double Value) {
 		snprintf(Buffer, BufferSize, _T("%.1f Gb"), Value / 1000000000.0);
 	}
 
-	return (Buffer);
+	return Buffer;
 }
 
 /*===========================================================================
  *      End of Function MakeSpaceLabel()
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -968,7 +967,7 @@ bool MakePathEx(const TCHAR *pPath) {
 
 	/* Ignore invalid input */
 	if (pPath == NULL) {
-		return (false);
+		return false;
 	}
 
 	strnncpy(TempPath, pPath, _MAX_PATH);
@@ -993,13 +992,13 @@ bool MakePathEx(const TCHAR *pPath) {
 				ErrorHandler.AddError(ERR_OPENFILE,
 				                      _T("Failed to create the directory '%s'!"),
 				                      pParse);
-				return (false);
+				return false;
 			}
 
 			Result = ChangeDirectory(pParse);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 
@@ -1008,7 +1007,7 @@ bool MakePathEx(const TCHAR *pPath) {
 
 	/* Restore the initial path and return success */
 	ChangeDirectory(InitialPath);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1063,7 +1062,7 @@ FILE *OpenFile (const TCHAR *pFilename, const TCHAR *pMode) {
 		SystemLog.Printf(_T("Opened file '%s' in mode '%s'..."), pFilename, l_GetFileMode(pMode));
 	}
 
-	return (pFileHandle);
+	return pFileHandle;
 }
 
 /*===========================================================================
@@ -1087,10 +1086,10 @@ bool OpenFile(FILE **ppFileHandle, const TCHAR *pFilename, const TCHAR *pMode) {
 	*ppFileHandle = OpenFile(pFilename, pMode);
 
 	if (*ppFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -1128,12 +1127,12 @@ bool ReadFile(byte **ppBuffer, size_t &BytesRead, const TCHAR *pFilename, const 
 	pFileHandle = OpenFile(pFilename, TextMode ? _T("rt") : _T("rb"));
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to get the file size in bytes */
 	Result = GetFileSize(FileSize, pFileHandle);
-	BufferSize = (size_t) FileSize;
+	BufferSize = (size_t)FileSize;
 
 	/* If an error occured getting the file size, do nothing */
 	if (!Result) {
@@ -1166,7 +1165,7 @@ bool ReadFile(byte **ppBuffer, size_t &BytesRead, const TCHAR *pFilename, const 
 	}
 
 	fclose(pFileHandle);
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -1197,6 +1196,7 @@ bool ReadFileCB(byte **ppBuffer,
 	bool Result;
 	bool ReturnValue = TRUE;
 	int CBResult;
+
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL && ppBuffer != NULL);
 	BytesRead = 0;
@@ -1205,7 +1205,7 @@ bool ReadFileCB(byte **ppBuffer,
 	pFileHandle = OpenFile(pFilename, _T("rb"));
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to get the file size in bytes */
@@ -1215,16 +1215,16 @@ bool ReadFileCB(byte **ppBuffer,
 	/* If an error occured getting the file size, do nothing */
 	if (!Result) {
 		fclose(pFileHandle);
-		return (false);
+		return false;
 	}
 
 	/* For systems with long/int having different bit sizes */
-	if (FileSize != (long) BufferSize) {
+	if (FileSize != (long)BufferSize) {
 		ErrorHandler.AddError(ERR_MEM,
 		                      _T("Cannot read the file '%s' as it's size exceeds the maximum allocation size!"),
 		                      pFilename);
 		fclose(pFileHandle);
-		return (false);
+		return false;
 	}
 
 	/* Allocate input buffer */
@@ -1278,7 +1278,7 @@ bool ReadFileCB(byte **ppBuffer,
 
 	BytesRead = TotalBytes;
 	fclose(pFileHandle);
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -1312,6 +1312,7 @@ bool ReadFileBuffer(byte **ppBuffer,
 	size_t BufferSize;
 	bool Result;
 	bool ReturnValue = TRUE;
+
 	/* Ensure valid input */
 	ASSERT(pFilename != NULL && ppBuffer != NULL && *ppBuffer != NULL);
 	BytesRead = 0;
@@ -1319,7 +1320,7 @@ bool ReadFileBuffer(byte **ppBuffer,
 	pFileHandle = OpenFile(pFilename, TextMode ? _T("rt") : _T("rb"));
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to get the file size in bytes */
@@ -1367,7 +1368,7 @@ bool ReadFileBuffer(byte **ppBuffer,
 	}
 
 	fclose(pFileHandle);
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -1403,7 +1404,7 @@ int ReadLine(FILE *pFileHandle, TCHAR *pString, const size_t MaxStringLength) {
 	if (feof(pFileHandle)) {
 		ErrorHandler.AddError(ERR_READFILE,
 		                      _T("Could not read line, already at the end of the file!"));
-		return (READLINE_ERROR);
+		return READLINE_ERROR;
 	}
 
 	/* Main input loop (infinite) */
@@ -1423,13 +1424,9 @@ int ReadLine(FILE *pFileHandle, TCHAR *pString, const size_t MaxStringLength) {
 			}
 
 			break;
-		}
-		/* Check for end of line */
-		else if (InputChar == LF_CHAR) {
+		} else if (InputChar == LF_CHAR) { /* Check for end of line */
 			break;
-		}
-		/* Add character to string buffer */
-		else if (pString != NULL) {
+		} else if (pString != NULL) { /* Add character to string buffer */
 			pString[StringLength] = (TCHAR)InputChar;
 			StringLength++;
 
@@ -1442,14 +1439,14 @@ int ReadLine(FILE *pFileHandle, TCHAR *pString, const size_t MaxStringLength) {
 				break;
 			}
 		}
-	} while (TRUE);   /* Loop is exited using break */
+	} while TRUE; /* Loop is exited using break */
 
 	/* Ensure the string is NULL terminated */
 	if (pString != NULL) {
 		pString[StringLength] = NULL_CHAR;
 	}
 
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*=========================================================================
@@ -1482,10 +1479,10 @@ bool read_int(FILE *pFileHandle, int &Value) {
 		                      _T("Error reading binary integer value (read only %u of %u bytes)!"),
 		                      InputSize,
 		                      sizeof(int));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1518,10 +1515,10 @@ bool read_long(FILE *pFileHandle, long &Value) {
 		                      _T("Error reading binary long integer value (read only %u of %u bytes)!"),
 		                      InputSize,
 		                      sizeof(long));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1554,10 +1551,10 @@ bool read_short(FILE *pFileHandle, short &Value) {
 		                      _T("Error reading binary short integer value (read only %u of %u bytes)!"),
 		                      InputSize,
 		                      sizeof(short));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1591,13 +1588,14 @@ bool read_motlong(FILE *pFileHandle, long &Value) {
 		                      _T("Error reading binary motorola long value (read only %u of %u bytes)!"),
 		                      InputSize,
 		                      sizeof(long));
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Compute the proper long integer value */
-	Value = (long)(((unsigned long)InputData[3]) + (((unsigned long)InputData[2]) << 8) +
-	               (((unsigned long)InputData[1]) << 16) + (((unsigned long)InputData[0]) << 24));
-	return (TRUE);
+	Value = (long)(((unsigned long)InputData[3]) + (((unsigned long)InputData[2]) << 8)
+	               + (((unsigned long)InputData[1]) << 16)
+	               + (((unsigned long)InputData[0]) << 24));
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1624,7 +1622,7 @@ TCHAR *RemoveExtension(TCHAR *pFilename) {
 		pExtPtr[-1] = NULL_CHAR;
 	}
 
-	return (pFilename);
+	return pFilename;
 }
 
 /*===========================================================================
@@ -1655,7 +1653,7 @@ TCHAR *TerminatePath(TCHAR *pPath) {
 		pPath[PathLength + 1] = NULL_CHAR;
 	}
 
-	return (pPath);
+	return pPath;
 }
 
 /*===========================================================================
@@ -1680,7 +1678,7 @@ bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter) {
 					Result = WildcardCompare(pFilename, pFilter + 1);
 
 					if (Result) {
-						return (true);
+						return true;
 					}
 
 					pFilename++;
@@ -1688,7 +1686,7 @@ bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter) {
 
 				/* Special case for * matching no characters */
 				if (*pFilename == NULL_CHAR && pFilter[1] == NULL_CHAR) {
-					return (true);
+					return true;
 				}
 			}
 
@@ -1699,7 +1697,7 @@ bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter) {
 
 			default:
 				if (toupper(*pFilename) != toupper(*pFilter)) {
-					return (false);
+					return false;
 				}
 
 				pFilename++;
@@ -1708,7 +1706,7 @@ bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter) {
 		}
 	}
 
-	return (*pFilename == *pFilter);
+	return *pFilename == *pFilter;
 }
 
 /*===========================================================================
@@ -1742,7 +1740,7 @@ bool WriteFile(const byte *pBuffer,
 	pFileHandle = OpenFile(pFilename, TextMode ? _T("wt") : _T("wb"));
 
 	if (pFileHandle == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to output string buffer to file */
@@ -1759,7 +1757,7 @@ bool WriteFile(const byte *pBuffer,
 	}
 
 	fclose(pFileHandle);
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -1792,10 +1790,10 @@ bool write_short(FILE *pFileHandle, const short OutputValue) {
 		                      _T("Error writing binary short integer to file (%u of %u bytes output)!"),
 		                      OutputSize,
 		                      sizeof(short));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1828,10 +1826,10 @@ bool write_int(FILE *pFileHandle, const int OutputValue) {
 		                      _T("Error writing binary integer to file (%u of %u bytes output)!"),
 		                      OutputSize,
 		                      sizeof(int));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1864,10 +1862,10 @@ bool write_long(FILE *pFileHandle, const long OutputValue) {
 		                      _T("Error writing binary long integer to file (%u of %u bytes output)!"),
 		                      OutputSize,
 		                      sizeof(long));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -1892,6 +1890,7 @@ bool write_motlong(FILE *pFileHandle, const long OutputValue) {
 	size_t OutputSize;
 	/* Ensure valid input */
 	ASSERT(pFileHandle != NULL);
+
 	/* Create the output buffer */
 	OutputData[0] = (unsigned char)((OutputValue >> 24) & 0xFF);
 	OutputData[1] = (unsigned char)((OutputValue >> 16) & 0xFF);
@@ -1907,10 +1906,10 @@ bool write_motlong(FILE *pFileHandle, const long OutputValue) {
 		                      _T("Error writing binary motorola long integer to file (%u of %u bytes output)!"),
 		                      OutputSize,
 		                      sizeof(long));
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================

@@ -37,7 +37,7 @@
 		return AppName.StartConsoleApp(ArgCount, &pArgs[0]); }
 
 /* Custom class errors */
-#define ERRCONAPP_NOHELP 2001
+#define ERRCONAPP_NOHELP          2001
 #define ERRCONAPP_BADLINESPERPAGE 2002
 
 /*===========================================================================
@@ -84,43 +84,43 @@ class CConsoleApp {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	FILE *pOutputStream;      /* Destination of output */
-	int NumArguments;       /* The program arguments data */
-	char **pArguments;     /* Pointer to array of arguments */
-	char *pProgramName;       /* Program name as given by argv[0] */
+	FILE *pOutputStream;  /* Destination of output */
+	int NumArguments;     /* The program arguments data */
+	char **pArguments;    /* Pointer to array of arguments */
+	char *pProgramName;   /* Program name as given by argv[0] */
 
 	char *pAppName;       /* Program information */
 	char *pAppDate;
 	char *pAppAuthor;
 	char *pCompiledDate;
 
-	int MajorVersion;       /* Versioning information */
+	int MajorVersion;     /* Versioning information */
 	int MinorVersion;
 	release_t ReleaseType;
 	int BuildNumber;
 
-	bool DoParseCommands;    /* Command line argument options */
+	bool DoParseCommands; /* Command line argument options */
 	bool DoParseParameters;
 	bool DoFlagParsing;
 
-	bool DisplayTitle;       /* Display optioms */
+	bool DisplayTitle;    /* Display optioms */
 	bool DoOpenLog;
 
-	bool DoPaging;       /* Paging options */
+	bool DoPaging;        /* Paging options */
 	int LinesPerPage;
 	int OutputLineCount;
 
-	char **ppHelpText;     /* Help text for the application */
+	char **ppHelpText;    /* Help text for the application */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Registers any custom class errors */
-	static bool AddClassErrors(void);
+	static bool AddClassErrors();
 
 	/* Parses all the command line parameters */
-	virtual bool ParseAllParameters(void);
+	virtual bool ParseAllParameters();
 
 	/* Parse the given command string */
 	virtual cmdparse_t ParseCommand(char *pCommand, const bool Flag = TRUE);
@@ -131,7 +131,7 @@ class CConsoleApp {
 	virtual cmdparse_t ParseParameter(char *pString);
 
 	/* Main override for derived classes */
-	virtual int StartApp(void);
+	virtual int StartApp();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -143,13 +143,13 @@ class CConsoleApp {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Aborts the program outputting an error message */
-	virtual void AbortProgram(void);
+	virtual void AbortProgram();
 
 	/* Get class members */
-	virtual char *GetAppName(void);
+	virtual char *GetAppName();
 //	virtual char *GetAppDate(void);
 //	virtual char *GetAppAuthor(void);
 //	virtual char *GetCompiledDate(void);
@@ -159,14 +159,14 @@ class CConsoleApp {
 //	virtual release_t GetBuildType(void);
 
 	/* Opens the standard log file for debug builds */
-	virtual bool OpenLog(void);
+	virtual bool OpenLog();
 
 	/* Outputs the help screen for the program */
-	virtual bool OutputHelp(void);
+	virtual bool OutputHelp();
 
 	/* Outputs a title information to the current output stream */
-	virtual bool OutputTitle(void);
-	virtual bool OutputVersion(void);
+	virtual bool OutputTitle();
+	virtual bool OutputVersion();
 
 	/* Outputs a line printf() style to the desired output stream */
 	virtual bool PrintLine(const char *pString = NULL, ...);
@@ -187,7 +187,6 @@ class CConsoleApp {
 
 	/* Entry point for the class from main() */
 	virtual int StartConsoleApp(const int ArgC, char *Argv[]);
-
 };
 
 /*===========================================================================
@@ -202,13 +201,13 @@ class CConsoleApp {
  *=========================================================================*/
 
 /* Get class members */
-inline char *CConsoleApp::GetAppName(void) {
-	return (pAppName);
+inline char *CConsoleApp::GetAppName() {
+	return pAppName;
 }
 
 /* Main protected override for derived classes */
-inline int CConsoleApp::StartApp(void) {
-	return (EXIT_SUCCESS);
+inline int CConsoleApp::StartApp() {
+	return EXIT_SUCCESS;
 }
 
 /* Set the application version information */
@@ -282,7 +281,7 @@ inline void CConsoleApp::SetDoOpenLog(const bool Flag) {
  *=========================================================================*/
 
 /* Return the current console application object */
-CConsoleApp *GetConsoleApp(void);
+CConsoleApp *GetConsoleApp();
 
 /* Converts a release type to a printable output character */
 char ReleaseTypeToChar(const release_t ReleaseType);

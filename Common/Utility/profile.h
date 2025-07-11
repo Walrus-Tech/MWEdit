@@ -99,14 +99,14 @@
 
 /* Main profile type */
 typedef struct {
-	hiclock_t StartClock;   /* Start time for last profile block */
-	hiclock_t EndClock;     /* End time for last profile block */
-	hiclock_t DiffClock;    /* Time taken in clock periods for last profile */
-	double DiffTime;     /* Time taken in seconds for last profile */
+	hiclock_t StartClock; /* Start time for last profile block */
+	hiclock_t EndClock;   /* End time for last profile block */
+	hiclock_t DiffClock;  /* Time taken in clock periods for last profile */
+	double DiffTime;      /* Time taken in seconds for last profile */
 
-	hiclock_t TotalClock;   /* Total time for multiple profiles */
-	double TotalTime;    /* Total seconds for multiple profiles */
-	ulong Count;        /* Used for multiple profiling */
+	hiclock_t TotalClock; /* Total time for multiple profiles */
+	double TotalTime;     /* Total seconds for multiple profiles */
+	ulong Count;          /* Used for multiple profiling */
 } profile_t;
 
 
@@ -120,7 +120,7 @@ extern profile_t *g_pLastStaticProfile;
 
 class CProfileEndFunc {
   protected:
-	profile_t &m_rProfile;      /* Referenced profile object */
+	profile_t &m_rProfile; /* Referenced profile object */
 
   public:
 

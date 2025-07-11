@@ -27,8 +27,8 @@
  *
  *=========================================================================*/
 #if defined(_WIN32)
-	#pragma warning( disable : 4514 )
-	#pragma warning( disable : 4512 )
+	#pragma warning(disable : 4514)
+	#pragma warning(disable : 4512)
 #endif
 /*===========================================================================
  *      End of Windows Pragmas
@@ -55,11 +55,11 @@
  * Definitions for identifying the file.
  *
  *=========================================================================*/
-#define DL_BASE_NAME "DL_Base.cpp"
+#define DL_BASE_NAME    "DL_Base.cpp"
 #define DL_BASE_VERSION "0.01d"
-#define DL_BASE_AUTHOR "Dave Humphrey"
-#define DL_BASE_EMAIL "uesp@m0use.net"
-#define DL_BASE_DATE "1 April 2001"
+#define DL_BASE_AUTHOR  "Dave Humphrey"
+#define DL_BASE_EMAIL   "uesp@m0use.net"
+#define DL_BASE_DATE    "1 April 2001"
 /*===========================================================================
  *      End of File Identification
  *=========================================================================*/
@@ -313,7 +313,8 @@ typedef unsigned long dword;
 #endif
 
 /* The type for the new qsort() user compare function */
-typedef int (_cdecl *PQSORT_CMPFUNC)(const void *pElem1, const void *pElem2,
+typedef int (_cdecl *PQSORT_CMPFUNC)(const void *pElem1,
+                                     const void *pElem2,
                                      const long lUserData );
 typedef int (_cdecl *PQSORT_CMPFUNC_ORIG)(const void *pElem1, const void *pElem2);
 
@@ -454,7 +455,6 @@ extern TCHAR ThisFile[];
  *
  *=========================================================================*/
 #if !defined(ASSERT)
-
 	#if defined(DEBUG) || defined(__DEBUG) || defined(_DEBUG)
 		#define ASSERT(exp)  { if (!(exp)) { CustomAssert(_T(#exp), ThisFile, ThisFunction, __LINE__); } }
 		#undef TRACE
@@ -466,7 +466,6 @@ extern TCHAR ThisFile[];
 		#define TRACE(msg)   { }
 		#define TRACE1(msg, exp)   { }
 	#endif
-
 #endif
 
 #if defined(DEBUG) || defined(__DEBUG) || defined(_DEBUG)
@@ -490,8 +489,10 @@ extern TCHAR ThisFile[];
  *=========================================================================*/
 
 /* A custom assert procedure used by the ASSERT macro */
-void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
-                  const TCHAR *pFunction, const long Line);
+void CustomAssert(const TCHAR *pString,
+                  const TCHAR *pFile,
+                  const TCHAR *pFunction,
+                  const long Line);
 
 /* Create the exception 'throw' function for DOS systems */
 #if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
@@ -499,8 +500,11 @@ void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
 #endif
 
 /* Standard qsort() replacement */
-void qsort(void *pBase, size_t NumElements, size_t ElementWidth,
-           PQSORT_CMPFUNC pCmpFunc, long lUserData );
+void qsort(void *pBase,
+           size_t NumElements,
+           size_t ElementWidth,
+           PQSORT_CMPFUNC pCmpFunc,
+           long lUserData);
 
 /*===========================================================================
  *      End of Function Prototypes

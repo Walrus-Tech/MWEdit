@@ -24,7 +24,6 @@ DEFINE_FILE("GenFile.cpp");
  *=========================================================================*/
 
 
-
 /*===========================================================================
  *
  * Begin Module Test Routines
@@ -44,10 +43,11 @@ DEFINE_FILE("GenFile.cpp");
  *  3. Also indirectly tests the Close() method and destructor
  *
  *=========================================================================*/
-void Test_GenFileOpen(void) {
+void Test_GenFileOpen() {
 	DEFINE_FUNCTION("Test_GenFileOpen()");
 	SystemLog.Printf(stdout, "================= Testing Open Method of CGenFile ================");
 	Test_CreateRandomFile ("c:\\temp\\test1.dat", 10, FILE_BINARY);
+
 	/* Test the constructor open version */
 	CGenFile File1("c:\\temp\\test1.dat", "rb");
 	CGenFile File2("c:\\tempxyt\\test1.dat", "rb");
@@ -61,6 +61,7 @@ void Test_GenFileOpen(void) {
 	ASSERT(File4.IsOpen() == TRUE);
 	ASSERT(File5.IsOpen() == FALSE);
 	ASSERT(File6.IsOpen() == FALSE);
+
 	/* Test the open method with a variety of inputs */
 	ASSERT(File1.Open("c:\\temp\\test1.dat", "rb") == TRUE);
 	ASSERT(File2.Open("c:\\tempxyt\\test1.dat", "rb") == FALSE);
@@ -83,12 +84,13 @@ void Test_GenFileOpen(void) {
  *  1. Test with typical inputs
  *
  *=========================================================================*/
-void Test_GenFilePrint(void) {
+void Test_GenFilePrint() {
 	DEFINE_FUNCTION("Test_GenFilePrint()");
 	CGenFile File1("c:\\temp\\test1.dat", "wt");
 	SystemLog.Printf(stdout,
 	                 "================= Testing Printf/VPrintf Methods of CGenFile ================");
 	ASSERT(File1.IsOpen());
+
 	/* Test with typical inputs */
 	ASSERT(File1.Printf("Testing with no vars") == TRUE);
 	ASSERT(File1.Printf("Next string is blank") == TRUE);
@@ -134,6 +136,7 @@ void Test_GenFileSeekTell(const size_t NumTests) {
 		SystemLog.Printf(stdout, "\t%u of %u Tell/Seek/Rewind test", LoopCounter + 1, NumTests);
 		FilePos = (filepos_t)Random(TEST_GENFILE_SEEKFILESIZE);
 		FilePos1 = FilePos - TEST_GENFILE_SEEKFILESIZE / 2;
+
 		/* Seek to valid file positions and test with Tell */
 		ASSERT(TestFile.Seek(-FilePos, SEEK_END) == TRUE);
 		ASSERT(TestFile.Tell(TellPos) == TRUE);
@@ -147,6 +150,7 @@ void Test_GenFileSeekTell(const size_t NumTests) {
 		ASSERT(TellPos == FilePos);
 		ASSERT(TestFile.IsEOF() == FALSE);
 		ASSERT(TestFile.IsError() == FALSE);
+
 		/* Attempt seeking to invalid positions */
 		ASSERT(TestFile.Seek(-1, SEEK_SET) == FALSE);
 		ASSERT(TestFile.Tell(TellPos) == TRUE);
@@ -160,6 +164,7 @@ void Test_GenFileSeekTell(const size_t NumTests) {
 		ASSERT(TestFile.IsEOF() == FALSE);
 		ASSERT(TestFile.IsError() == FALSE);
 		ASSERT(TellPos == TEST_GENFILE_SEEKFILESIZE + 10000);
+
 		/* Test the rewind method */
 		TestFile.Rewind();
 		ASSERT(TestFile.Tell(TellPos) == TRUE);
@@ -201,6 +206,7 @@ void Test_RWGenFile(const size_t NumTests) {
 		FileSize = Random((int)TEST_RWFILE_MAXFILESIZE);
 		SystemLog.Printf(stdout, "\t%u) Testing file with size %u...", LoopCounter + 1, FileSize);
 		Test_CreateRandomFile ("c:\\temp\\test1.dat", FileSize, FILE_BINARY);
+
 		/* Attempt to open and read file */
 		ASSERT(InputFile.Open("c:\\temp\\test1.dat", "rb") == TRUE);
 		ASSERT(InputFile.Read(pBuffer, BytesIO, FileSize) == TRUE);
@@ -211,12 +217,14 @@ void Test_RWGenFile(const size_t NumTests) {
 		ASSERT(InputFile.IsEOF() == TRUE);
 		ASSERT(InputFile.IsError() == FALSE);
 		InputFile.Close();
+
 		/* Attempt to open and write file */
 		ASSERT(OutputFile.Open("c:\\temp\\test2.dat", "wb") == TRUE);
 		ASSERT(OutputFile.Write(pBuffer, BytesIO, FileSize) == TRUE);
 		ASSERT(BytesIO == FileSize);
 		ASSERT(OutputFile.IsError() == FALSE);
 		OutputFile.Close();
+
 		/* Attempt to open and read file */
 		ASSERT(InputFile.Open("c:\\temp\\test2.dat", "rb") == TRUE);
 		ASSERT(InputFile.Read(pBuffer, FileSize) == TRUE);
@@ -226,11 +234,13 @@ void Test_RWGenFile(const size_t NumTests) {
 		ASSERT(InputFile.IsEOF() == TRUE);
 		ASSERT(InputFile.IsError() == FALSE);
 		InputFile.Close();
+
 		/* Attempt to open and write file */
 		ASSERT(OutputFile.Open("c:\\temp\\test3.dat", "wb") == TRUE);
 		ASSERT(OutputFile.Write(pBuffer, FileSize) == TRUE);
 		ASSERT(OutputFile.IsError() == FALSE);
 		OutputFile.Close();
+
 		/* Ensure the files were successfully read and output */
 		ASSERT(Test_CompareFiles("c:\\temp\\test1.dat", "c:\\temp\\test2.dat") == TRUE);
 		ASSERT(Test_CompareFiles("c:\\temp\\test1.dat", "c:\\temp\\test3.dat") == TRUE);
@@ -315,10 +325,43 @@ void Test_RWCharGenFile(const size_t NumTests) {
 
 void Test_GenFileRWNumbers(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_GenFileRWNumbers()");
-	static short ShortNumbers[] = { 1, -1, SHRT_MIN, SHRT_MAX, (short)USHRT_MAX, 0, 0 };
-	static int IntNumbers[] = { 1, -1, INT_MIN, INT_MAX, (int)UINT_MAX, 0, 0 };
-	static long LongNumbers[] = { 1, -1, LONG_MIN, LONG_MAX, (long)ULONG_MAX, 0, 0 };
-	static float FloatNumbers[] = { 1, -1, SHRT_MIN, SHRT_MAX, USHRT_MAX, 0, 0 };
+	static short ShortNumbers[] = {
+		1,
+		-1,
+		SHRT_MIN,
+		SHRT_MAX,
+		(short)USHRT_MAX,
+		0,
+		0
+	};
+	static int IntNumbers[] = {
+		1,
+		-1,
+		INT_MIN,
+		INT_MAX,
+		(int)UINT_MAX,
+		0,
+		0
+	};
+	static long LongNumbers[] = {
+		1,
+		-1,
+		LONG_MIN,
+		LONG_MAX,
+		(long)ULONG_MAX,
+		0,
+		0
+	};
+	static float FloatNumbers[] = {
+		1,
+		-1,
+		SHRT_MIN,
+		SHRT_MAX,
+		USHRT_MAX,
+		0,
+		0
+	};
+
 	CGenFile InputFile;
 	CGenFile OutputFile;
 	size_t NumCounter;
@@ -340,6 +383,7 @@ void Test_GenFileRWNumbers(const size_t NumTests) {
 		RandomSeed = Random((ulong)0x7FFFFFFFul);
 		NumRandomNumbers = Random((int)TEST_GENFILE_RWNUMSIZE);
 		SeedRandom(RandomSeed);
+
 		/* Output set numbers */
 		OUTPUTSET(ShortNumbers, WriteShort);
 		OUTPUTSET(IntNumbers, WriteInt);
@@ -363,6 +407,7 @@ void Test_GenFileRWNumbers(const size_t NumTests) {
 		ASSERT(InputFile.Open("c:\\temp\\gfnum1.dat", "rb"));
 		ASSERT(OutputFile.Open("c:\\temp\\gfnum2.dat", "wb"));
 		SeedRandom(RandomSeed);
+
 		/* Input and verify set numbers */
 		INPUTSET(ShortNumbers, InputShort, Short);
 		INPUTSET(IntNumbers, InputInt, Int);
@@ -412,7 +457,7 @@ void Test_GenFileRWNumbers(const size_t NumTests) {
  *  4. Repeatedly tests the Read/Write number methods
  *
  *=========================================================================*/
-void Test_GenFile(void) {
+void Test_GenFile() {
 	//DEFINE_FUNCTION("Test_GenFile()");
 	Test_GenFileOpen();
 	Test_GenFilePrint();

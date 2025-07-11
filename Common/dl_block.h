@@ -28,13 +28,12 @@
  *
  *=========================================================================*/
 
-#define BLOCK_INITIAL_ARRAYSIZE 256
+#define BLOCK_INITIAL_ARRAYSIZE  256
 #define BLOCK_RESIZEARRAY_FACTOR 2
 
 /*===========================================================================
  *      End of Definitions
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -46,10 +45,10 @@
  *=========================================================================*/
 typedef struct BLOCKINFO {
 	//struct BLOCKINFO* pNext;    /* Pointer to the next block info structure */
-	byte *pPointer;   /* Pointer to the start of block */
-	TCHAR *pName;  /* The name of the pointer (optional) */
-	TCHAR *pFunc;  /* Calling function name, optional */
-	size_t Size;   /* Size of the memory block */
+	byte *pPointer;     /* Pointer to the start of block */
+	TCHAR *pName;       /* The name of the pointer (optional) */
+	TCHAR *pFunc;       /* Calling function name, optional */
+	size_t Size;        /* Size of the memory block */
 	boolean Referenced; /* Used to track dangling pointers */
 } blockinfo_t;
 
@@ -65,21 +64,23 @@ typedef struct BLOCKINFO {
  *=========================================================================*/
 
 /* Check for dangling, unreferenced pointers */
-void CheckMemoryRefs(void);
+void CheckMemoryRefs();
 
 /* Reset all the referenced flags of blocks */
-void ClearMemoryRefs(void);
+void ClearMemoryRefs();
 
 /* Create a new block info node */
 boolean CreateBlockInfo(void *pNewBlock, const size_t NewSize);
-boolean CreateBlockInfo(void *pNewBlock, const size_t NewSize, const TCHAR *pName,
+boolean CreateBlockInfo(void *pNewBlock,
+                        const size_t NewSize,
+                        const TCHAR *pName,
                         const TCHAR *pFunc);
 
 /* Delete a block info node */
 void FreeBlockInfo(void *pBlock);
 
 /* Return the current number of allocated blocks */
-size_t GetNumBlocks(void);
+size_t GetNumBlocks();
 
 /* Checks for the given memory block in the current block list */
 boolean IsValidPointer(void *pBlock, const size_t MinSize);
@@ -89,7 +90,7 @@ boolean IsValidPointer(void *pBlock);
 void NoteMemoryRef(void *pBlock);
 
 /* Outputs all the block information to the system log file */
-void OutputBlockInfo(void);
+void OutputBlockInfo();
 
 /* Retrieve the size of a block */
 size_t SizeOfBlock(void *pBlock);
@@ -102,7 +103,7 @@ void UpdateBlockInfo(void *pOldBlock, void *pNewBlock, const size_t NewSize);
  *=========================================================================*/
 
 #endif
-#endif  /* End of if defined(_DEBUG) */
+#endif /* End of if defined(_DEBUG) */
 /*===========================================================================
  *      End of File DL_Block.H
  *=========================================================================*/

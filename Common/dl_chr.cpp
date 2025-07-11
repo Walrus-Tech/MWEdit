@@ -109,7 +109,7 @@ int chrcount(const TCHAR *pString, const TCHAR Char) {
 		pString++;
 	}
 
-	return (Count);
+	return Count;
 }
 
 /*===========================================================================
@@ -194,12 +194,12 @@ boolean chrrpunc(size_t &CharIndex, const TCHAR *pString) {
 
 		if (ispunct(pString[StringPosition])) {
 			CharIndex = StringPosition;
-			return (TRUE);
+			return TRUE;
 		}
 	}
 
 	/* character not found in string */
-	return (FALSE);
+	return FALSE;
 }
 
 /*===========================================================================
@@ -234,7 +234,7 @@ TCHAR *chrtok(TCHAR *pString, const TCHAR TokenChar) {
 
 	/* Check for end of parsed token string */
 	if (pString == NULL && pParse == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Start parsing a new string */
@@ -249,14 +249,14 @@ TCHAR *chrtok(TCHAR *pString, const TCHAR TokenChar) {
 	if (pSearchChar == NULL) {
 		pResult = pParse;
 		pParse = NULL;
-		return (pResult);
+		return pResult;
 	}
 
 	/* Terminate substring */
 	*pSearchChar = NULL_CHAR;
 	pResult = pParse;
 	pParse = pSearchChar + 1;
-	return (pResult);
+	return pResult;
 }
 
 /*===========================================================================
@@ -284,7 +284,7 @@ TCHAR *chrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
 		*pFindChar = NULL_CHAR;
 	}
 
-	return (pString);
+	return pString;
 }
 
 /*===========================================================================
@@ -312,7 +312,7 @@ TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
 		*pFindChar = NULL_CHAR;
 	}
 
-	return (pString);
+	return pString;
 }
 
 /*===========================================================================
@@ -341,7 +341,7 @@ TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
  *  3. Check adding characters at end of string
  *
  *=========================================================================*/
-void Test_chradd(void) {
+void Test_chradd() {
 	DEFINE_FUNCTION("Test_chradd()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chradd() ===================="));
@@ -370,7 +370,7 @@ void Test_chradd(void) {
  *  2. Tests adding a character to an empty string.
  *
  *=========================================================================*/
-void Test_chrcat(void) {
+void Test_chrcat() {
 	DEFINE_FUNCTION("Test_chrcat()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrcat() ===================="));
@@ -398,7 +398,7 @@ void Test_chrcat(void) {
  *  3. Test empty string deletion
  *
  *=========================================================================*/
-void Test_chrdel(void) {
+void Test_chrdel() {
 	DEFINE_FUNCTION("Test_chrdel()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrdel() ===================="));
@@ -431,7 +431,7 @@ void Test_chrdel(void) {
  *  2. Delete character from empty string.
  *
  *=========================================================================*/
-void Test_chrdellast(void) {
+void Test_chrdellast() {
 	DEFINE_FUNCTION("Test_chrdellast()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrdellast() ===================="));
@@ -458,7 +458,7 @@ void Test_chrdellast(void) {
  *  2. Check the function enhanced cabapility.
  *
  *=========================================================================*/
-void Test_chrtok(void) {
+void Test_chrtok() {
 	DEFINE_FUNCTION("Test_chrtok()");
 	TCHAR TestString1[] = _T("111x222x333x444x555");
 	TCHAR TestString2[] = _T("111x222x333x444x555");
@@ -511,35 +511,41 @@ void Test_chrtok(void) {
  *  4. Check empty string case.
  *
  *=========================================================================*/
-void Test_chrrpunc(void) {
+void Test_chrrpunc() {
 	DEFINE_FUNCTION("Test_chrrpunc()");
 	TCHAR TestString[101] = _T("0123=5678");
 	boolean Result;
 	size_t TCHARIndex;
 	SystemLog.Printf(stdout, _T("============= Testing chrrpunc() ===================="));
+
 	/* Test for punctuation in middle of string */
 	Result = chrrpunc(TCHARIndex, TestString);
 	ASSERT(Result);
 	ASSERT(TCHARIndex == 4);
+
 	/* Test for punctuation at end of string */
 	TSTRCPY (TestString, _T("012345678."));
 	Result = chrrpunc(TCHARIndex, TestString);
 	ASSERT(Result);
 	ASSERT(TCHARIndex == 9);
+
 	/* Test for punctuation at start of string */
 	TSTRCPY (TestString, _T(".123456789"));
 	Result = chrrpunc(TCHARIndex, TestString);
 	ASSERT(Result);
 	ASSERT(TCHARIndex == 0);
+
 	/* Test for multiple punctuations in of string */
 	TSTRCPY (TestString, _T("01234.67.0"));
 	Result = chrrpunc(TCHARIndex, TestString);
 	ASSERT(Result);
 	ASSERT(TCHARIndex == 8);
+
 	/* Test for no punctuation in string */
 	TSTRCPY (TestString, _T("0123456789"));
 	Result = chrrpunc(TCHARIndex, TestString);
 	ASSERT(Result == FALSE);
+
 	/* Test empty string case */
 	TSTRCPY (TestString, _T(""));
 	Result = chrrpunc(TCHARIndex, TestString);
@@ -562,26 +568,31 @@ void Test_chrrpunc(void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_chrtrunc(void) {
+void Test_chrtrunc() {
 	DEFINE_FUNCTION("Test_chrtrunc()");
 	TCHAR TestString[101];
 	SystemLog.Printf(stdout, _T("============= Testing chrtrunc() ===================="));
+
 	/* Check with truncation character in middle of string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrtrunc(TestString, '5');
 	ASSERT(TSTRCMP(TestString, _T("1234")) == 0);
+
 	/* Check with truncation character at end of string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrtrunc(TestString, '9');
 	ASSERT(TSTRCMP(TestString, _T("12345678")) == 0);
+
 	/* Check with truncation character at start of string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrtrunc(TestString, '1');
 	ASSERT(TSTRCMP(TestString, _T("")) == 0);
+
 	/* Check with no truncation character in string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrtrunc(TestString, 'a');
 	ASSERT(TSTRCMP(TestString, _T("123456789")) == 0);
+
 	/* Check with empty string */
 	TSTRCPY(TestString, _T(""));
 	chrtrunc(TestString, '5');
@@ -604,26 +615,31 @@ void Test_chrtrunc(void) {
  *  3. Test with empty string
  *
  *=========================================================================*/
-void Test_chrrtrunc(void) {
+void Test_chrrtrunc() {
 	DEFINE_FUNCTION("Test_chrrtrunc()");
 	TCHAR TestString[101];
 	SystemLog.Printf(stdout, _T("============= Testing chrrtrunc() ===================="));
+
 	/* Check with truncation character in middle of string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrrtrunc(TestString, '5');
 	ASSERT(TSTRCMP(TestString, _T("1234")) == 0);
+
 	/* Check with truncation character at end of string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrrtrunc(TestString, '9');
 	ASSERT(TSTRCMP(TestString, _T("12345678")) == 0);
+
 	/* Check with truncation character at start of string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrrtrunc(TestString, '1');
 	ASSERT(TSTRCMP(TestString, _T("")) == 0);
+
 	/* Check with no truncation character in string */
 	TSTRCPY(TestString, _T("123456789"));
 	chrrtrunc(TestString, 'a');
 	ASSERT(TSTRCMP(TestString, _T("123456789")) == 0);
+
 	/* Check with empty string */
 	TSTRCPY(TestString, _T(""));
 	chrrtrunc(TestString, '5');
@@ -633,7 +649,6 @@ void Test_chrrtrunc(void) {
 /*===========================================================================
  *      End of Function Test_chrrtrunc()
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -649,7 +664,7 @@ void Test_chrrtrunc(void) {
  *  6. Tests the chrtrunc() and chrrtrunc() functions
  *
  *=========================================================================*/
-void Test_DLChr(void) {
+void Test_DLChr() {
 	//DEFINE_FUNCTION("Test_DLChr()");
 	Test_chradd();
 	Test_chrcat();

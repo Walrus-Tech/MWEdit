@@ -47,8 +47,8 @@
 
 class CSStringData {
   public:
-	int Length;     /* Size of string in characters */
-	int AllocLength;    /* Allocated size of string in characters */
+	int Length;      /* Size of string in characters */
+	int AllocLength; /* Allocated size of string in characters */
 	TCHAR *GetData() {
 		return (TCHAR *)(this + 1);
 	}
@@ -70,7 +70,7 @@ class CSString {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	TCHAR *m_pString;  /* The string data */
+	TCHAR *m_pString; /* The string data */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -81,20 +81,22 @@ class CSString {
 	void AllocCopy(const int StringSize);
 
 	/* Create a string buffer from two source strings */
-	void ConcatStrings(const int String1Size, const TCHAR *pString1,
-	                   const int String2Size, const TCHAR *pString2);
+	void ConcatStrings(const int String1Size,
+	                   const TCHAR *pString1,
+	                   const int String2Size,
+	                   const TCHAR *pString2);
 
 	/* Free the current string data */
-	void FreeData(void);
+	void FreeData();
 
 	/* Access the string data */
-	CSStringData *GetData(void) const {
+	CSStringData *GetData() const {
 		IASSERT(m_pString != NULL);
-		return (((CSStringData *)m_pString) - 1);
+		return ((CSStringData *)m_pString) - 1;
 	}
 
 	/* Initializes the string data */
-	void Init(void);
+	void Init();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -110,7 +112,7 @@ class CSString {
 
 	/* Class Destructors */
 	~CSString();
-	void Destroy(void);
+	void Destroy();
 
 	/* String comparison */
 	int Compare(const TCHAR *pString) const;
@@ -121,21 +123,21 @@ class CSString {
 	void Copy(const CSString &String, const int Count);
 
 	/* Empties the string contents */
-	void Empty(void);
+	void Empty();
 
 	/* Search for sub-strings */
 	int Find(const TCHAR *pSearch);
 	int FindI(const TCHAR *pSearch);
 
 	/* Frees any extra memory allocated for the string */
-	void FreeExtra(void);
+	void FreeExtra();
 
 	/* Get the length, in bytes, of the string */
-	int GetLength(void) const;
-	int GetAllocLength(void) const;
+	int GetLength() const;
+	int GetAllocLength() const;
 
 	/* Checks for an empty (zero sized) string */
-	bool IsEmpty(void);
+	bool IsEmpty();
 
 	/* Extract sub-strings from string */
 	CSString Left(const int Count) const;
@@ -144,8 +146,8 @@ class CSString {
 	CSString Right(const int Count) const;
 
 	/* Makes the string lower/upper case */
-	void MakeLower(void);
-	void MakeUpper(void);
+	void MakeLower();
+	void MakeUpper();
 
 	/* Set a specific character in the string */
 	void SetAt(const int Index, const TCHAR Char);
@@ -154,14 +156,14 @@ class CSString {
 	void SetSize(const int Size);
 
 	/* Trims whitespace from left/right sides of string */
-	CSString &TrimLeft(void);
-	CSString &TrimRight(void);
-	CSString &Trim(void);
+	CSString &TrimLeft();
+	CSString &TrimRight();
+	CSString &Trim();
 
 	/* Truncate the string at the given index */
 	void Truncate(const int Index);
 
-	void UpdateLength(void);
+	void UpdateLength();
 
 	/* Overloaded copy operators */
 	const CSString &operator=(const CSString &SrcString);
@@ -186,8 +188,7 @@ class CSString {
 	TCHAR GetAt(const int Index) const;
 
 	/* Return a const pointer to the string buffer */
-	operator const TCHAR *(void) const;
-
+	operator const TCHAR *() const;
 };
 
 /*===========================================================================
@@ -204,26 +205,26 @@ class CSString {
 
 inline CSString &TerminatePathString (CSString &PathBuffer) {
 	if (PathBuffer.GetLength() == 0) {
-		return (PathBuffer);
+		return PathBuffer;
 	}
 
 	if (PathBuffer.GetAt(PathBuffer.GetLength() - 1) != '\\') {
 		PathBuffer += '\\';
 	}
 
-	return (PathBuffer);
+	return PathBuffer;
 }
 
 /* String comparison, case sensitive, returns as per strcmp() */
 inline int CSString::Compare(const TCHAR *pString) const {
 	IASSERT(pString != NULL);
-	return (strcmp(m_pString, pString));
+	return strcmp(m_pString, pString);
 }
 
 /* String comparison, case insensitive, returns as per stricmp() */
 inline int CSString::CompareNoCase(const TCHAR *pString) const {
 	IASSERT(pString != NULL);
-	return (_stricmp(m_pString, pString));
+	return _stricmp(m_pString, pString);
 }
 
 /* Creates a new string at most Count bytes in size */
@@ -252,45 +253,45 @@ inline void CSString::Copy(const TCHAR *pString, const int Count) {
 
 inline int CSString::Find(const TCHAR *pString) {
 	if (pString == NULL || *pString == NULL_CHAR) {
-		return (-1);
+		return -1;
 	}
 
 	TCHAR *pFind = TSTRSTR(m_pString, pString);
 
 	if (pFind == NULL) {
-		return (-1);
+		return -1;
 	}
 
-	return (pFind - m_pString);
+	return pFind - m_pString;
 }
 
 inline int CSString::FindI(const TCHAR *pString) {
 	if (pString == NULL || *pString == NULL_CHAR) {
-		return (-1);
+		return -1;
 	}
 
 	TCHAR *pFind = stristr(m_pString, pString);
 
 	if (pFind == NULL) {
-		return (-1);
+		return -1;
 	}
 
-	return (pFind - m_pString);
+	return pFind - m_pString;
 }
 
 /* Return the current string size */
-inline int CSString::GetLength(void) const {
-	return (GetData()->Length);
+inline int CSString::GetLength() const {
+	return GetData()->Length;
 }
 
 /* Get the current allocated size of string */
-inline int CSString::GetAllocLength(void) const {
-	return (GetData()->AllocLength);
+inline int CSString::GetAllocLength() const {
+	return GetData()->AllocLength;
 }
 
 /* Returns TRUE if the string is empty, "" */
-inline bool CSString::IsEmpty(void) {
-	return ((GetLength() == 0) ? TRUE : FALSE);
+inline bool CSString::IsEmpty() {
+	return (GetLength() == 0) ? TRUE : FALSE;
 }
 
 /* Returns a string containing the first Count characters from the
@@ -311,11 +312,11 @@ inline CSString CSString::Left(const int Count) const {
 }
 
 /* Makes the string all lower/upper case */
-inline void CSString::MakeLower(void) {
+inline void CSString::MakeLower() {
 	_strlwr(m_pString);
 }
 
-inline void CSString::MakeUpper(void) {
+inline void CSString::MakeUpper() {
 	_strupr(m_pString);
 }
 
@@ -383,15 +384,15 @@ inline void CSString::SetSize(const int Size) {
 }
 
 /* Trim whitespace from right and left sides of string */
-inline CSString &CSString::Trim(void) {
+inline CSString &CSString::Trim() {
 	TrimLeft();
 	TrimRight();
-	return (*this);
+	return *this;
 }
 
 /* Access the (const TCHAR*) string */
-inline CSString::operator const TCHAR*(void) const {
-	return (m_pString);
+inline CSString::operator const TCHAR*() const {
+	return m_pString;
 }
 
 /* Get the specified character from the string.  ASSERTs if given an
@@ -403,7 +404,7 @@ inline TCHAR CSString::operator[](const int Index) const {
 /* Same as operator[], return a specific character in string */
 inline TCHAR CSString::GetAt(const int Index) const {
 	IASSERT(Index < GetLength() && Index >= 0);
-	return (m_pString[Index]);
+	return m_pString[Index];
 }
 
 /* Sets a specific character in the string.  ASSERTs if an invalid
@@ -424,7 +425,7 @@ inline void CSString::Truncate(const int Index) {
 }
 
 
-inline void CSString::UpdateLength(void) {
+inline void CSString::UpdateLength() {
 	int Index = GetLength() - 1;
 
 	while (Index > 0) {
@@ -440,78 +441,76 @@ inline void CSString::UpdateLength(void) {
 
 /* String comparisons */
 inline bool operator==(const CSString &String1, const CSString &String2) {
-	return (String1.Compare(String2) == 0);
+	return String1.Compare(String2) == 0;
 }
 
 inline bool operator==(const TCHAR *String1, const CSString &String2) {
-	return (String2.Compare(String1) == 0);
+	return String2.Compare(String1) == 0;
 }
 
 inline bool operator==(const CSString &String1, const TCHAR *String2) {
-	return (String1.Compare(String2) == 0);
+	return String1.Compare(String2) == 0;
 }
 
 inline bool operator!=(const CSString &String1, const CSString &String2) {
-	return (String1.Compare(String2) != 0);
+	return String1.Compare(String2) != 0;
 }
 
 inline bool operator!=(const TCHAR *String1, const CSString &String2) {
-	return (String2.Compare(String1) != 0);
+	return String2.Compare(String1) != 0;
 }
 
 inline bool operator!=(const CSString &String1, const TCHAR *String2) {
-	return (String1.Compare(String2) != 0);
+	return String1.Compare(String2) != 0;
 }
 
 inline bool operator<=(const CSString &String1, const CSString &String2) {
-	return (String1.Compare(String2) <= 0);
+	return String1.Compare(String2) <= 0;
 }
 
 inline bool operator<=(const TCHAR *String1, const CSString &String2) {
-	return (String2.Compare(String1) >= 0);
+	return String2.Compare(String1) >= 0;
 }
 
 inline bool operator<=(const CSString &String1, const TCHAR *String2) {
-	return (String1.Compare(String2) <= 0);
+	return String1.Compare(String2) <= 0;
 }
 
 inline bool operator>=(const CSString &String1, const CSString &String2) {
-	return (String1.Compare(String2) >= 0);
+	return String1.Compare(String2) >= 0;
 }
 
 inline bool operator>=(const TCHAR *String1, const CSString &String2) {
-	return (String2.Compare(String1) <= 0);
+	return String2.Compare(String1) <= 0;
 }
 
 inline bool operator>=(const CSString &String1, const TCHAR *String2) {
-	return (String1.Compare(String2) >= 0);
+	return String1.Compare(String2) >= 0;
 }
 
 inline bool operator<(const CSString &String1, const CSString &String2) {
-	return (String1.Compare(String2) < 0);
+	return String1.Compare(String2) < 0;
 }
 
 inline bool operator<(const TCHAR *String1, const CSString &String2) {
-	return (String2.Compare(String1) > 0);
+	return String2.Compare(String1) > 0;
 }
 
 inline bool operator<(const CSString &String1, const TCHAR *String2) {
-	return (String1.Compare(String2) < 0);
+	return String1.Compare(String2) < 0;
 }
 
 inline bool operator>(const CSString &String1, const CSString &String2) {
-	return (String1.Compare(String2) > 0);
+	return String1.Compare(String2) > 0;
 }
 
 inline bool operator>(const TCHAR *String1, const CSString &String2) {
-	return (String2.Compare(String1) < 0);
+	return String2.Compare(String1) < 0;
 }
 
 inline bool operator>(const CSString &String1, const TCHAR *String2) {
-	return (String1.Compare(String2) > 0);
+	return String1.Compare(String2) > 0;
 }
-
-
 
 /*===========================================================================
  *      End of Begin Inline CSString Methods

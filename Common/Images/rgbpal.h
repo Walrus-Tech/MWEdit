@@ -97,7 +97,9 @@ rgbpal_t ConvertRawRGBPal(const rgbpalraw_t &RawPal);
 long ConvertRawRGBToLong(const rgbpalraw_t &RawPal);
 
 /* Copy RGB palettes */
-void CopyRGBPalette(rgbpal_t *pDestPal, rgbpal_t *pSourcePal, const int PaletteSize,
+void CopyRGBPalette(rgbpal_t *pDestPal,
+                    rgbpal_t *pSourcePal,
+                    const int PaletteSize,
                     const int Flags = 0);
 
 /*===========================================================================

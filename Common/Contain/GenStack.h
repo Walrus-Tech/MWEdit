@@ -48,7 +48,7 @@ class CGenStack {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	void **m_ppStack;  /* Pointer to array of void pointers */
+	void **m_ppStack;   /* Pointer to array of void pointers */
 	int m_NumElements;  /* Number of elements on the stack */
 	int m_NumAllocated; /* Size of allocated array */
 
@@ -69,32 +69,30 @@ class CGenStack {
 	virtual ~CGenStack();
 
 	/* Get class members */
-	int GetSize(void) const {
-		return (m_NumElements);
+	int GetSize() const {
+		return m_NumElements;
 	}
 
-	bool IsEmpty(void) const {
-		return (m_NumElements == 0);
+	bool IsEmpty() const {
+		return m_NumElements == 0;
 	}
 
 	/* Stack access */
-	void *Peek(void);
-	void *Pop(void);
+	void *Peek();
+	void *Pop();
 	void *GetAt(const int Index);
 	void Push(void *pData);
 
 	/* Remove all elements from the stack */
-	void RemoveAll(void);
+	void RemoveAll();
 
 	/* Changes the size of the stack */
 	bool SetSize(const int Size);
-
 };
 
 /*===========================================================================
  *      End of Class CGenStack Definition
  *=========================================================================*/
-
 
 
 #endif

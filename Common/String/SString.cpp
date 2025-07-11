@@ -22,8 +22,12 @@
 DEFINE_FILE("SString.cpp");
 
 /* Defines an empty string */
-static int s_SSData[] = {0, 0, 0};
-static CSStringData *s_pSDataNull = (CSStringData *) &s_SSData;
+static int s_SSData[] = {
+	0,
+	0,
+	0
+};
+static CSStringData *s_pSDataNull = (CSStringData *)&s_SSData;
 static const TCHAR *s_pSStringNull = (const TCHAR *)(((byte *)s_pSDataNull) + sizeof(CSStringData));
 
 /*===========================================================================
@@ -190,7 +194,7 @@ CSString::~CSString() {
  * Class CSString Method - void Destroy (void);
  *
  *=========================================================================*/
-void CSString::Destroy(void) {
+void CSString::Destroy() {
 	Empty();
 }
 
@@ -291,8 +295,10 @@ void CSString::AllocCopy(const int StringSize) {
  * zero length strings.
  *
  *=========================================================================*/
-void CSString::ConcatStrings(const int String1Size, const TCHAR *pString1,
-                             const int String2Size, const TCHAR *pString2) {
+void CSString::ConcatStrings(const int String1Size,
+                             const TCHAR *pString1,
+                             const int String2Size,
+                             const TCHAR *pString2) {
 	DEFINE_FUNCTION("CSString::ConcatStrings()");
 	int NewSize;
 	/* Ensure the strings can combine to produce a valid size */
@@ -325,7 +331,7 @@ void CSString::ConcatStrings(const int String1Size, const TCHAR *pString1,
  * Deletes the current string contents, reallocating an empty string.
  *
  *=========================================================================*/
-void CSString::Empty(void) {
+void CSString::Empty() {
 	DEFINE_FUNCTION("CSString::Empty()");
 	FreeData();
 	/* Ensure success */
@@ -343,7 +349,7 @@ void CSString::Empty(void) {
  * Class CSString Method - void FreeData (void);
  *
  *=========================================================================*/
-void CSString::FreeData(void) {
+void CSString::FreeData() {
 	if (GetData() != s_pSDataNull) {
 		TCHAR *pStringData = (TCHAR *)GetData();
 		DestroyArrayPointer(pStringData);
@@ -364,7 +370,7 @@ void CSString::FreeData(void) {
  * extra allocated buffer from the end of the string.
  *
  *=========================================================================*/
-void CSString::FreeExtra(void) {
+void CSString::FreeExtra() {
 	DEFINE_FUNCTION("CSString::FreeExtra()");
 	CSStringData *pData;
 	int nAllocLength;
@@ -396,7 +402,7 @@ void CSString::FreeExtra(void) {
  * Protected class method to intialize the string at creation.
  *
  *=========================================================================*/
-void CSString::Init(void) {
+void CSString::Init() {
 	//DEFINE_FUNCTION("CSString::Init()");
 	m_pString = (TCHAR *)s_pSStringNull;
 }
@@ -414,7 +420,7 @@ void CSString::Init(void) {
  * isspace() function).
  *
  *=========================================================================*/
-CSString &CSString::TrimLeft(void) {
+CSString &CSString::TrimLeft() {
 	DEFINE_FUNCTION("CSString::TrimLeft()");
 	int StringIndex = 0;
 
@@ -429,14 +435,16 @@ CSString &CSString::TrimLeft(void) {
 
 	/* Shift the string, if required, to remove whitespace */
 	if (StringIndex != 0) {
-		memmove(m_pString, m_pString + StringIndex, (GetLength() - StringIndex + 1) * sizeof(TCHAR));
+		memmove(m_pString,
+		        m_pString + StringIndex,
+		        (GetLength() - StringIndex + 1) * sizeof(TCHAR));
 		GetData()->Length -= StringIndex;
 		ASSERT(GetLength() >= 0);
 		m_pString[GetLength()] = NULL_CHAR;
 	}
 
 	ASSERT(m_pString[GetLength()] == NULL_CHAR);
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -452,7 +460,7 @@ CSString &CSString::TrimLeft(void) {
  * isspace() function).
  *
  *=========================================================================*/
-CSString &CSString::TrimRight(void) {
+CSString &CSString::TrimRight() {
 	DEFINE_FUNCTION("CSString::TrimRight()");
 	int StringIndex = GetLength();
 
@@ -472,7 +480,7 @@ CSString &CSString::TrimRight(void) {
 	}
 
 	ASSERT(m_pString[GetLength()] == NULL_CHAR);
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -496,7 +504,7 @@ const CSString &CSString::operator=(const CSString &SrcString) {
 
 	memcpy(m_pString, (const TCHAR *)SrcString, (SrcString.GetLength() + 1) * sizeof(TCHAR));
 	GetData()->Length = SrcString.GetLength();
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -521,7 +529,7 @@ const CSString &CSString::operator=(const TCHAR Char) {
 	m_pString[0] = Char;
 	m_pString[1] = NULL_CHAR;
 	GetData()->Length = 1;
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -555,7 +563,7 @@ const CSString &CSString::operator=(const TCHAR *pSrcString) {
 		GetData()->Length = Length;
 	}
 
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -578,7 +586,7 @@ const CSString &CSString::operator+=(const TCHAR *pString) {
 
 	/* Ignore NULL inputs */
 	if (pString == NULL) {
-		return (*this);
+		return *this;
 	}
 
 	/* Ensure an allocated buffer of the correct length */
@@ -589,7 +597,7 @@ const CSString &CSString::operator+=(const TCHAR *pString) {
 	memmove(m_pString + OldLength, pString, (NewLength + 1) * sizeof(TCHAR));
 	/* Ensure valid output */
 	ASSERT(m_pString[GetLength()] == NULL_CHAR);
-	return (*this);
+	return *this;
 }
 
 
@@ -599,7 +607,7 @@ const CSString &CSString::Append(const TCHAR *pString, const int Length) {
 
 	/* Ignore NULL inputs */
 	if (pString == NULL) {
-		return (*this);
+		return *this;
 	}
 
 	/* Ensure an allocated buffer of the correct length */
@@ -609,7 +617,7 @@ const CSString &CSString::Append(const TCHAR *pString, const int Length) {
 	memmove(m_pString + OldLength, pString, (Length + 1) * sizeof(TCHAR));
 	/* Ensure valid output */
 	ASSERT(m_pString[GetLength()] == NULL_CHAR);
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -632,11 +640,12 @@ const CSString &CSString::operator+=(const CSString &SourceString) {
 	OldLength = GetLength();
 	AllocCopy(SourceString.GetLength() + OldLength);
 	/* Add the source string to the end of the buffer */
-	memmove(m_pString + OldLength, (const TCHAR *)SourceString,
+	memmove(m_pString + OldLength,
+	        (const TCHAR *)SourceString,
 	        sizeof(TCHAR) * (SourceString.GetLength() + 1));
 	/* Ensure valid output */
 	ASSERT(m_pString[GetLength()] == NULL_CHAR);
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -662,7 +671,7 @@ const CSString &CSString::operator+=(const TCHAR SourceChar) {
 	m_pString[OldLength + 1] = NULL_CHAR;
 	/* Ensure valid output */
 	ASSERT(m_pString[GetLength()] == NULL_CHAR);
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================
@@ -680,9 +689,11 @@ const CSString &CSString::operator+=(const TCHAR SourceChar) {
 CSString operator+(const CSString &String1, const CSString &String2) {
 	DEFINE_FUNCTION("operator+(CSString, CSString)");
 	CSString NewString;
-	NewString.ConcatStrings(String1.GetLength(), (const TCHAR *)String1,
-	                        String2.GetLength(), (const TCHAR *)String2);
-	return (NewString);
+	NewString.ConcatStrings(String1.GetLength(),
+	                        (const TCHAR *)String1,
+	                        String2.GetLength(),
+	                        (const TCHAR *)String2);
+	return NewString;
 }
 
 /*===========================================================================
@@ -701,9 +712,11 @@ CSString operator+(const CSString &String1, const CSString &String2) {
 CSString operator+(const TCHAR *pString1, const CSString &String2) {
 	DEFINE_FUNCTION("operator+(TCHAR*, CSString)");
 	CSString NewString;
-	NewString.ConcatStrings(SafeStrLen(pString1), pString1,
-	                        String2.GetLength(), (const TCHAR *)String2);
-	return (NewString);
+	NewString.ConcatStrings(SafeStrLen(pString1),
+	                        pString1,
+	                        String2.GetLength(),
+	                        (const TCHAR *)String2);
+	return NewString;
 }
 
 /*===========================================================================
@@ -722,9 +735,11 @@ CSString operator+(const TCHAR *pString1, const CSString &String2) {
 CSString operator+(const CSString &String1, const TCHAR *pString2) {
 	DEFINE_FUNCTION("operator+(CSString, TCHAR*)");
 	CSString NewString;
-	NewString.ConcatStrings(String1.GetLength(), (const TCHAR *)String1,
-	                        SafeStrLen(pString2), pString2);
-	return (NewString);
+	NewString.ConcatStrings(String1.GetLength(),
+	                        (const TCHAR *)String1,
+	                        SafeStrLen(pString2),
+	                        pString2);
+	return NewString;
 }
 
 /*===========================================================================
@@ -743,9 +758,11 @@ CSString operator+(const CSString &String1, const TCHAR *pString2) {
 CSString operator+(const CSString &String1, const TCHAR Char2) {
 	DEFINE_FUNCTION("operator+(CSString, TCHAR)");
 	CSString NewString;
-	NewString.ConcatStrings(String1.GetLength(), (const TCHAR *)String1,
-	                        1, &Char2);
-	return (NewString);
+	NewString.ConcatStrings(String1.GetLength(),
+	                        (const TCHAR *)String1,
+	                        1,
+	                        &Char2);
+	return NewString;
 }
 
 /*===========================================================================
@@ -764,9 +781,11 @@ CSString operator+(const CSString &String1, const TCHAR Char2) {
 CSString operator+(const TCHAR Char1, const CSString &String2) {
 	DEFINE_FUNCTION("operator+(TCHAR, CSString)");
 	CSString NewString;
-	NewString.ConcatStrings(1, &Char1,
-	                        String2.GetLength(), (const TCHAR *)String2);
-	return (NewString);
+	NewString.ConcatStrings(1,
+	                        &Char1,
+	                        String2.GetLength(),
+	                        (const TCHAR *)String2);
+	return NewString;
 }
 
 /*===========================================================================

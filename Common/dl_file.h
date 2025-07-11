@@ -43,7 +43,7 @@
 #endif
 
 /* Number of bytes read at a time for the ReadFileCB() function */
-#define READFILECB_NUMBYTES   32000
+#define READFILECB_NUMBYTES     32000
 
 /*===========================================================================
  *      End of Definitions
@@ -246,33 +246,33 @@ bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter);
 	bool Test_CompareFiles(const TCHAR *pFilename1, const TCHAR *pFilename2);
 
 	/* Test routines */
-	void Test_ChangeExtension(void);
-	void Test_ChangeDirectory(void);
-	void Test_CompareExtension(void);
-	void Test_CopyFile(void);
-	void Test_CreatePath(void);
-	void Test_ExtractFilename(void);
-	void Test_ExtractPath(void);
-	void Test_FileExists(void);
-	void Test_GetFileSize(void);
-	void Test_HasExtension(void);
-	void Test_HasPath(void);
-	void Test_IsDirectory(void);
-	void Test_IsFileWriteable(void);
-	void Test_IsWildCard(void);
-	void Test_ReadFile(void);
-	void Test_ReadFileBuffer(void);
-	void Test_read_int(void);
-	void Test_read_long(void);
-	void Test_read_motlong(void);
-	void Test_read_short(void);
-	void Test_ReadLine(void);
-	void Text_RemoveExtension(void);
+	void Test_ChangeExtension();
+	void Test_ChangeDirectory();
+	void Test_CompareExtension();
+	void Test_CopyFile();
+	void Test_CreatePath();
+	void Test_ExtractFilename();
+	void Test_ExtractPath();
+	void Test_FileExists();
+	void Test_GetFileSize();
+	void Test_HasExtension();
+	void Test_HasPath();
+	void Test_IsDirectory();
+	void Test_IsFileWriteable();
+	void Test_IsWildCard();
+	void Test_ReadFile();
+	void Test_ReadFileBuffer();
+	void Test_read_int();
+	void Test_read_long();
+	void Test_read_motlong();
+	void Test_read_short();
+	void Test_ReadLine();
+	void Text_RemoveExtension();
 	void Test_RWFile(const size_t NumTests = 100);
 	void Test_RWNumbers(const size_t NumTests = 1000);
-	void Test_TerminatePath(void);
-	void Test_WriteFile(void);
-	void Test_DL_File(void);
+	void Test_TerminatePath();
+	void Test_WriteFile();
+	void Test_DL_File();
 
 #endif
 /*===========================================================================

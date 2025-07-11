@@ -48,11 +48,11 @@ typedef void *MAPPOSITION;
  *
  *=========================================================================*/
 inline bool CompareKeys(dword Key1, dword Key2) {
-	return (Key1 == Key2);
+	return Key1 == Key2;
 }
 
 inline bool CompareKeys(const char *Key1, const char *Key2) {
-	return (StringCompare(Key1, Key2, false) == 0);
+	return StringCompare(Key1, Key2, false) == 0;
 }
 
 /*===========================================================================
@@ -66,7 +66,7 @@ inline bool CompareKeys(const char *Key1, const char *Key2) {
  *
  *=========================================================================*/
 inline dword HashKey(dword Key) {
-	return (Key >> 4);
+	return Key >> 4;
 }
 
 
@@ -106,7 +106,7 @@ class TGenMap {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CGenMapAssoc **m_ppHashTable;     /* Array of hash records */
+	CGenMapAssoc **m_ppHashTable; /* Array of hash records */
 	dword m_RecordCount;
 	dword m_HashTableSize;
 	bool m_DeleteValues;
@@ -119,7 +119,7 @@ class TGenMap {
 	virtual CGenMapAssoc *GetAssocNode (TKeyArg Key, dword &Hash);
 
 	/* Create a new node */
-	virtual CGenMapAssoc *NewAssocNode (void);
+	virtual CGenMapAssoc *NewAssocNode ();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -131,36 +131,35 @@ class TGenMap {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy();
 
 	/* Delete a specified key */
-	virtual void Delete (TKeyArg Key);
+	virtual void Delete(TKeyArg Key);
 
 	/* Iterate through records in the map */
-	virtual TValue GetFirstRecord (MAPPOSITION &Position);
-	virtual TValue GetNextRecord (MAPPOSITION &Position);
+	virtual TValue GetFirstRecord(MAPPOSITION &Position);
+	virtual TValue GetNextRecord(MAPPOSITION &Position);
 
 	/* Iterate through records in the map */
-	virtual TValue GetFirstRecordKey (TKeyArg Key, MAPPOSITION &Position);
-	virtual TValue GetNextRecordKey (TKeyArg Key, MAPPOSITION &Position);
+	virtual TValue GetFirstRecordKey(TKeyArg Key, MAPPOSITION &Position);
+	virtual TValue GetNextRecordKey(TKeyArg Key, MAPPOSITION &Position);
 
 	/* Get class members */
-	virtual dword GetNumRecords (void) {
-		return (m_RecordCount);
+	virtual dword GetNumRecords() {
+		return m_RecordCount;
 	}
 
 	/* Initialize the hash table to a specific size */
-	virtual void InitHashTable (const dword Size);
+	virtual void InitHashTable(const dword Size);
 
 	/* Find an existing value by its key */
-	virtual bool Lookup (TKeyArg Key, TValue &Record);
+	virtual bool Lookup(TKeyArg Key, TValue &Record);
 
 	/* Delete all hash table entries */
-	virtual void RemoveAll (void);
+	virtual void RemoveAll();
 
 	/* Set a value */
-	virtual void SetAt (TKeyArg Key, TValue &Record);
-
+	virtual void SetAt(TKeyArg Key, TValue &Record);
 };
 
 /*===========================================================================
@@ -180,7 +179,9 @@ template<class TKey, class TValue, class TKeyArg>
 class TGenRefMap : public TGenMap<TKey, TValue, TKeyArg> {
   public:
 
-	TGenRefMap() {/* m_DeleteValues = false;*/ }
+	TGenRefMap() {
+		/* m_DeleteValues = false;*/
+	}
 };
 
 /*===========================================================================
@@ -211,7 +212,7 @@ template<class TKey, class TValue, class TKeyArg> TGenMap<TKey, TValue, TKeyArg>
  *
  *=========================================================================*/
 template<class TKey, class TValue, class TKeyArg>
-inline void TGenMap<TKey, TValue, TKeyArg>::Destroy(void) {
+inline void TGenMap<TKey, TValue, TKeyArg>::Destroy() {
 	RemoveAll();
 }
 
@@ -275,7 +276,7 @@ typename TGenMap<TKey, TValue, TKeyArg>::CGenMapAssoc
 	Hash = HashKey(Key) % m_HashTableSize;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	for (pAssoc = m_ppHashTable[Hash]; pAssoc != NULL; pAssoc = pAssoc->pNext) {
@@ -284,7 +285,7 @@ typename TGenMap<TKey, TValue, TKeyArg>::CGenMapAssoc
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -301,23 +302,23 @@ template<class TKey, class TValue, class TKeyArg>
 TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecord(MAPPOSITION &Position) {
 	CGenMapAssoc *pAssoc;
 	dword Index;
-	Position = (MAPPOSITION) NULL;
+	Position = (MAPPOSITION)NULL;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	for (Index = 0; Index < m_HashTableSize; ++Index) {
 		pAssoc = m_ppHashTable[Index];
 
 		if (pAssoc != NULL) {
-			Position = (MAPPOSITION) pAssoc;
-			return (pAssoc->Value);
+			Position = (MAPPOSITION)pAssoc;
+			return pAssoc->Value;
 		}
 	}
 
 	/* Nothing to return */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -334,35 +335,35 @@ template<class TKey, class TValue, class TKeyArg>
 TValue TGenMap<TKey, TValue, TKeyArg>::GetNextRecord(MAPPOSITION &Position) {
 	CGenMapAssoc *pAssoc;
 	dword Index;
-	pAssoc = (CGenMapAssoc *) Position;
+	pAssoc = (CGenMapAssoc *)Position;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (pAssoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pAssoc = pAssoc->pNext;
 
 	if (pAssoc != NULL) {
-		Position = (MAPPOSITION) pAssoc;
-		return (pAssoc->Value);
+		Position = (MAPPOSITION)pAssoc;
+		return pAssoc->Value;
 	}
 
 	for (Index = pAssoc->HashValue + 1; Index < m_HashTableSize; ++Index) {
 		pAssoc = m_ppHashTable[Index];
 
 		if (pAssoc != NULL) {
-			Position = (MAPPOSITION) pAssoc;
-			return (pAssoc->Value);
+			Position = (MAPPOSITION)pAssoc;
+			return pAssoc->Value;
 		}
 	}
 
 	/* Nothing to return */
-	Position = (MAPPOSITION) NULL;
-	return (NULL);
+	Position = (MAPPOSITION)NULL;
+	return NULL;
 }
 
 /*===========================================================================
@@ -376,23 +377,23 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetNextRecord(MAPPOSITION &Position) {
  *
  *=========================================================================*/
 template<class TKey, class TValue, class TKeyArg>
-TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecordKey (TKeyArg Key, MAPPOSITION &Position) {
+TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecordKey(TKeyArg Key, MAPPOSITION &Position) {
 	CGenMapAssoc *pAssoc;
 	dword Hash;
-	Position = (MAPPOSITION) NULL;
+	Position = (MAPPOSITION)NULL;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	Hash = HashKey(Key) % m_HashTableSize;
 	pAssoc = m_ppHashTable[Hash];
 
 	while (pAssoc) {
-		Position = (MAPPOSITION) pAssoc;
+		Position = (MAPPOSITION)pAssoc;
 
 		if (CompareKeys(pAssoc->Key, Key)) {
-			return (pAssoc->Value);
+			return pAssoc->Value;
 		}
 
 		pAssoc = pAssoc->pNext;
@@ -400,7 +401,7 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecordKey (TKeyArg Key, MAPPOSITI
 
 	/* No match */
 	Position = NULL;
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -416,23 +417,23 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecordKey (TKeyArg Key, MAPPOSITI
 template<class TKey, class TValue, class TKeyArg>
 TValue TGenMap<TKey, TValue, TKeyArg>::GetNextRecordKey(TKeyArg Key, MAPPOSITION &Position) {
 	CGenMapAssoc *pAssoc;
-	pAssoc = (CGenMapAssoc *) Position;
+	pAssoc = (CGenMapAssoc *)Position;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (pAssoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pAssoc = pAssoc->pNext;
 
 	while (pAssoc) {
-		Position = (MAPPOSITION) pAssoc;
+		Position = (MAPPOSITION)pAssoc;
 
 		if (CompareKeys(pAssoc->Key, Key)) {
-			return (pAssoc->Value);
+			return pAssoc->Value;
 		}
 
 		pAssoc = pAssoc->pNext;
@@ -440,7 +441,7 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetNextRecordKey(TKeyArg Key, MAPPOSITION
 
 	/* Nothing to return */
 	Position = NULL;
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -484,11 +485,11 @@ bool TGenMap<TKey, TValue, TKeyArg>::Lookup(TKeyArg Key, TValue &Record) {
 
 	if (pAssoc == NULL) {
 		Record = NULL;
-		return (false);
+		return false;
 	}
 
 	Record = pAssoc->Value;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -503,11 +504,11 @@ bool TGenMap<TKey, TValue, TKeyArg>::Lookup(TKeyArg Key, TValue &Record) {
  *=========================================================================*/
 template<class TKey, class TValue, class TKeyArg>
 typename TGenMap<TKey, TValue, TKeyArg>::CGenMapAssoc
-*TGenMap<TKey, TValue, TKeyArg>::NewAssocNode(void) {
+*TGenMap<TKey, TValue, TKeyArg>::NewAssocNode() {
 	DEFINE_FUNCTION("TGenMap::NewAssocNode()");
 	TGenMap::CGenMapAssoc *pAssoc;
 	CreatePointer(pAssoc, CGenMapAssoc);
-	return (pAssoc);
+	return pAssoc;
 }
 
 /*===========================================================================
@@ -521,7 +522,7 @@ typename TGenMap<TKey, TValue, TKeyArg>::CGenMapAssoc
  *
  *=========================================================================*/
 template<class TKey, class TValue, class TKeyArg>
-void TGenMap<TKey, TValue, TKeyArg>::RemoveAll(void) {
+void TGenMap<TKey, TValue, TKeyArg>::RemoveAll() {
 	DEFINE_FUNCTION("TGenMap::RemoveAll()");
 	CGenMapAssoc *pAssoc;
 	CGenMapAssoc *pAssoc1;
@@ -585,8 +586,6 @@ void TGenMap<TKey, TValue, TKeyArg>::SetAt(TKeyArg Key, TValue &Record) {
 /*===========================================================================
  *      End of Class Method TGenMap::SetAt()
  *=========================================================================*/
-
-
 
 
 #endif

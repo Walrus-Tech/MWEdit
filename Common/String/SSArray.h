@@ -54,7 +54,7 @@ class CSStringArray {
   protected:
 
 	/* Helper function to delete all elements */
-	void DeleteStrings(void);
+	void DeleteStrings();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -66,8 +66,8 @@ class CSStringArray {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
-	void RemoveAll(void) {
+	virtual void Destroy();
+	void RemoveAll() {
 		Destroy();
 	}
 
@@ -80,18 +80,17 @@ class CSStringArray {
 
 	/* Access elements */
 	CSString *GetAt(const int Index) {
-		return (m_Strings.GetAt(Index));
+		return m_Strings.GetAt(Index);
 	}
 
 	/* Get class members */
-	int GetNumElements(void) const {
-		return (m_Strings.GetNumElements());
+	int GetNumElements() const {
+		return m_Strings.GetNumElements();
 	}
 
 	bool IsValidIndex(const int Index) const {
-		return (m_Strings.IsValidIndex(Index));
+		return m_Strings.IsValidIndex(Index);
 	}
-
 };
 
 /*===========================================================================

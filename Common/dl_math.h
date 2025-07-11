@@ -88,50 +88,50 @@ typedef struct {
  *=========================================================================*/
 inline int sign(const int Number) {
 	if (Number == 0) {
-		return (0);
+		return 0;
 	}
 
 	if (Number > 0) {
-		return (1);
+		return 1;
 	}
 
-	return (-1);
+	return -1;
 }
 
 inline long sign(const long Number) {
 	if (Number == 0) {
-		return (0);
+		return 0;
 	}
 
 	if (Number > 0) {
-		return (1);
+		return 1;
 	}
 
-	return (-1);
+	return -1;
 }
 
 inline float sign(const float Number) {
 	if (Number == 0) {
-		return (0.0);
+		return 0.0;
 	}
 
 	if (Number > 0) {
-		return (1.0);
+		return 1.0;
 	}
 
-	return (-1.0);
+	return -1.0;
 }
 
 inline double sign(const double Number) {
 	if (Number == 0) {
-		return (0.0);
+		return 0.0;
 	}
 
 	if (Number > 0) {
-		return (1.0);
+		return 1.0;
 	}
 
-	return (-1.0);
+	return -1.0;
 }
 
 /*===========================================================================
@@ -179,7 +179,7 @@ TCHAR *Metricize(TCHAR *Buffer, const int BufferSize, const double Value, const 
 double NiceNumber(const double Value, const int Round);
 
 /* Returns a random number from 0 to ULONG_MAX */
-ulong Random(void);
+ulong Random();
 
 /* Generate a range of random integers */
 int Random(const int MaxNumber);
@@ -187,7 +187,7 @@ ulong Random(const ulong MaxNumber);
 int Random(const int MinNumber, const int MaxNumber);
 
 /* Seeds the random number generator with the current time */
-void RandomizeTimer(void);
+void RandomizeTimer();
 
 /* Seeds the custom random number generator */
 void SeedRandom(const ulong NewSeed = 1);
@@ -203,16 +203,14 @@ void SeedRandom(const ulong NewSeed = 1);
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-
 	void Test_Random(const size_t NumTests = 1000);
 	void Test_Random1(const size_t NumTests = 1000);
 	void Test_Random2(const size_t NumTests = 1000);
 	void Test_RandomRate(const size_t NumTests = 100);
-	void Test_sign(void);
-	void Test_HexCharToInt(void);
-	void Test_Metricize(void);
-	void Test_DL_Math(void);
-
+	void Test_sign();
+	void Test_HexCharToInt();
+	void Test_Metricize();
+	void Test_DL_Math();
 #endif
 /*===========================================================================
  *      End of Test Function Prototypes

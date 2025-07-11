@@ -64,8 +64,8 @@ bool IsStringPrint(const TCHAR *pString);
 bool IsStringFloat(const TCHAR *pString);
 
 /* Strip whitespace from left/right side of string */
-TCHAR* ltrim(TCHAR *pString);
-TCHAR* rtrim(TCHAR *pString);
+TCHAR *ltrim(TCHAR *pString);
+TCHAR *rtrim(TCHAR *pString);
 
 /* A strlen() function which can handle NULL strings */
 size_t SafeStrLen(const TCHAR *pString);
@@ -94,7 +94,7 @@ bool StringToBoolean(const TCHAR *pString);
 size_t strhgt(const TCHAR *pString);
 
 /* Find a substring in a string with case insensitivity */
-TCHAR* stristr(const TCHAR *pString, const TCHAR *pSubString);
+TCHAR *stristr(const TCHAR *pString, const TCHAR *pSubString);
 
 /* Compares two strings up to the length of the shortest, case insensitive */
 int strlicmp(const TCHAR *pString1, const TCHAR *pString2);
@@ -106,13 +106,13 @@ size_t strlinelen(const TCHAR *pString);
 size_t strmaxlinelen(const TCHAR *pString);
 
 /* Copies a maximum number of TCHARacter ensuring string is NULL terminated */
-TCHAR* strnncpy(TCHAR *pDestString, const TCHAR *pSourceString, const size_t MaxStringLength);
+TCHAR *strnncpy(TCHAR *pDestString, const TCHAR *pSourceString, const size_t MaxStringLength);
 
 /* Output printf() formatted message to a string buffer */
 int snprintf(TCHAR *pBuffer, const size_t MaxLength, const TCHAR *pFormat, ...);
 
 /* Removes quotes from the string */
-TCHAR* UnquoteString(TCHAR *pString);
+TCHAR *UnquoteString(TCHAR *pString);
 
 /* String argument formatter with length checking */
 int vsnprintf(TCHAR *pBuffer, const size_t MaxLength, const TCHAR *pFormat, va_list Args);
@@ -131,7 +131,7 @@ int vsnprintf(TCHAR *pBuffer, const size_t MaxLength, const TCHAR *pFormat, va_l
 
 /* A strlen() function which can handle NULL strings */
 inline size_t SafeStrLen(const TCHAR *pString) {
-	return ((pString == NULL) ? 0 : TSTRLEN(pString));
+	return (pString == NULL) ? 0 : TSTRLEN(pString);
 }
 
 /*===========================================================================
@@ -148,14 +148,12 @@ inline size_t SafeStrLen(const TCHAR *pString) {
  *
  *=========================================================================*/
 #if !defined(__TURBOC__) && !defined(_WIN32)
-
 	/* Standard uppercase/lowercase conversion functions */
-	TCHAR* strlwr(TCHAR *pString);
-	TCHAR* strupr(TCHAR *pString);
+	TCHAR *strlwr(TCHAR *pString);
+	TCHAR *strupr(TCHAR *pString);
 
 	/* Compare a portion of a string with case insensitivity */
 	int strnicmp(const TCHAR *pString1, const TCHAR *pString2, const size_t MaxStringLength);
-
 #endif
 /*===========================================================================
  *      End of Standard Replacement Function Prototypes
@@ -170,30 +168,28 @@ inline size_t SafeStrLen(const TCHAR *pString) {
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_vsnprintf(void);
-	void Test_CountSubstrings(void);
-	void Test_ltrim(void);
-	void Test_rtrim(void);
-	void Test_strlinelen(void);
-	void Test_SeperateVarValue(void);
-	void Test_StringToBoolean(void);
-	void Test_StringChanged(void);
-	void Test_IsStringNumber(void);
-	void Test_stristr(void);
-	void Test_strlicmp(void);
-	void Test_strnncpy(void);
-	void Test_strproper(void);
-	void Test_strhgt(void);
-	void Test_strmaxlinelen(void);
-	void Test_strupr(void);
-	void Test_strnicmp(void);
-	void Test_DLStr(void);
+	void Test_vsnprintf();
+	void Test_CountSubstrings();
+	void Test_ltrim();
+	void Test_rtrim();
+	void Test_strlinelen();
+	void Test_SeperateVarValue();
+	void Test_StringToBoolean();
+	void Test_StringChanged();
+	void Test_IsStringNumber();
+	void Test_stristr();
+	void Test_strlicmp();
+	void Test_strnncpy();
+	void Test_strproper();
+	void Test_strhgt();
+	void Test_strmaxlinelen();
+	void Test_strupr();
+	void Test_strnicmp();
+	void Test_DLStr();
 #endif
 /*===========================================================================
  *      End of Testing Routine Prototypes
  *=========================================================================*/
-
-
 
 
 #endif

@@ -59,8 +59,8 @@
  *=========================================================================*/
 
 /* Logfile hook callback function type */
-typedef void (*PLOGFILE_HOOKPROC) (const TCHAR* pString, va_list Args);
-typedef void (LOGFILE_HOOKPROC) (const TCHAR* pString, va_list Args);
+typedef void (*PLOGFILE_HOOKPROC) (const TCHAR *pString, va_list Args);
+typedef void (LOGFILE_HOOKPROC) (const TCHAR *pString, va_list Args);
 
 /* Parameters for the log file Open() method */
 typedef enum {
@@ -85,37 +85,37 @@ class CLogFile {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	FILE *pLogFileHandle; /* The pointer to the log file steam */
-	int TabLevel;       /* Number of tabs to pad output with */
-	PLOGFILE_HOOKPROC pHookProc;      /* The optional hook function */
+	FILE *pLogFileHandle;        /* The pointer to the log file steam */
+	int TabLevel;                /* Number of tabs to pad output with */
+	PLOGFILE_HOOKPROC pHookProc; /* The optional hook function */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Outputs the current time to the log file */
-	bool OutputCurrentTime(void);
+	bool OutputCurrentTime();
 
 	/* Outputs any tabs required by the current TabLevel */
-	bool OutputTabs(void);
+	bool OutputTabs();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
   public:
 
 	/* Class Constructor and Destructor */
-	CLogFile(void);
+	CLogFile();
 	CLogFile(const TCHAR *pFilename, const logmode_t AppendFile = LOG_OPEN);
-	virtual ~CLogFile(void) {
+	virtual ~CLogFile() {
 		Close();
 	}
 
 	/* Closes the log file if it's currently open */
-	bool Close(void);
+	bool Close();
 
 	/* Access the file handle */
-	FILE *GetFileHandle(void) {
-		return (pLogFileHandle);
+	FILE *GetFileHandle() {
+		return pLogFileHandle;
 	}
 
 	/* Same as the Printf() method except it only works in debug builds.
@@ -128,11 +128,11 @@ class CLogFile {
 #endif
 
 	/* Increase or decrease the current tab level of log file */
-	void DecrementTabs(void);
-	void IncrementTabs(void);
+	void DecrementTabs();
+	void IncrementTabs();
 
 	/* Returns the open status of the log file */
-	bool IsOpen(void) {
+	bool IsOpen() {
 		return (bool)((pLogFileHandle == NULL) ? FALSE : TRUE);
 	}
 
@@ -140,10 +140,10 @@ class CLogFile {
 	bool Open(const TCHAR *pFilename, const logmode_t AppendFile = LOG_OPEN);
 
 	/* Output the current date/time to the log file */
-	bool OutputDate(void);
+	bool OutputDate();
 
 	/* Prints the current memory status to the log file */
-	void OutputMemoryStatus(void);
+	void OutputMemoryStatus();
 
 	/* Output a log entry */
 	bool Printf(const TCHAR *pString, ...);
@@ -161,7 +161,6 @@ class CLogFile {
 
 	/* Change the current tab level */
 	void SetTabLevel(const int NewTabLevel = 0);
-
 };
 
 /*===========================================================================
@@ -177,7 +176,7 @@ class CLogFile {
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_LogFile(void);
+	void Test_LogFile();
 #endif
 /*===========================================================================
  *      End of Test Function Prototypes
@@ -196,7 +195,6 @@ extern CLogFile SystemLog;
 /*===========================================================================
  *      End of External Variable Definitions
  *=========================================================================*/
-
 
 
 #endif

@@ -42,7 +42,7 @@ CSStringArray::CSStringArray() {
  * Class CSStringArray Method - void Destroy (void);
  *
  *=========================================================================*/
-void CSStringArray::Destroy(void) {
+void CSStringArray::Destroy() {
 	//DEFINE_FUNCTION("CSStringArray::Destroy()");
 	DeleteStrings();
 }
@@ -66,7 +66,7 @@ CSString *CSStringArray::Add(const TCHAR *pString) {
 	/* Allocate and initialize the new object */
 	CreateClassPointer(pNewString, CSString, pString);
 	m_Strings.Add(pNewString);
-	return (pNewString);
+	return pNewString;
 }
 
 /*===========================================================================
@@ -133,7 +133,7 @@ void CSStringArray::DeleteElement(const int Index) {
  * Protected class method to delete all strings in the array.
  *
  *=========================================================================*/
-void CSStringArray::DeleteStrings(void) {
+void CSStringArray::DeleteStrings() {
 	DEFINE_FUNCTION("CSStringArray::DeleteStrings()");
 	CSString *pString;
 	int Index;

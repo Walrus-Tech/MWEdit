@@ -76,13 +76,14 @@ bool CGenStack::AllocSize(const int Size) {
 	/* Check for valid input */
 	if (Size <= 0) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid stack size to %d!"), Size);
-		return (false);
+		return false;
 	}
 	/* Ensure we don't truncate existing stack elements */
 	else if (m_NumElements > Size) {
 		ErrorHandler.AddError(ERR_BADINPUT,
-		                      _T("Cannot set the stack size to %d, %d elements would be lost!"), Size, m_NumElements - Size);
-		return (false);
+		                      _T("Cannot set the stack size to %d, %d elements would be lost!"),
+		                      Size, m_NumElements - Size);
+		return false;
 	}
 
 	/* Allocate the new stack data */
@@ -97,7 +98,7 @@ bool CGenStack::AllocSize(const int Size) {
 	DestroyArrayPointer(m_ppStack);
 	m_ppStack = ppNewData;
 	m_NumAllocated = Size;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -115,10 +116,10 @@ bool CGenStack::AllocSize(const int Size) {
  *=========================================================================*/
 void *CGenStack::GetAt(const int Index) {
 	if (Index >= m_NumElements || Index < 0) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (m_ppStack[m_NumElements - 1 - Index]);
+	return m_ppStack[m_NumElements - 1 - Index];
 }
 
 /*===========================================================================
@@ -134,12 +135,12 @@ void *CGenStack::GetAt(const int Index) {
  * if no item is available.
  *
  *=========================================================================*/
-void *CGenStack::Peek(void) {
+void *CGenStack::Peek() {
 	if (m_NumElements == 0) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (m_ppStack[m_NumElements - 1]);
+	return m_ppStack[m_NumElements - 1];
 }
 
 /*===========================================================================
@@ -155,13 +156,13 @@ void *CGenStack::Peek(void) {
  * uis empty.
  *
  *=========================================================================*/
-void *CGenStack::Pop(void) {
+void *CGenStack::Pop() {
 	if (m_NumElements == 0) {
-		return (NULL);
+		return NULL;
 	}
 
 	m_NumElements--;
-	return (m_ppStack[m_NumElements]);
+	return m_ppStack[m_NumElements];
 }
 
 /*===========================================================================
@@ -201,7 +202,7 @@ void CGenStack::Push(void *pData) {
  * Remove all pointers from the stack.
  *
  *=========================================================================*/
-void CGenStack::RemoveAll(void) {
+void CGenStack::RemoveAll() {
 	m_NumElements = 0;
 }
 

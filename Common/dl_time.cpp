@@ -63,10 +63,10 @@ void GetHiClock(hiclock_t &Counter) {
  * Returns the time of the system clock in seconds.
  *
  *=========================================================================*/
-double GetHiClockTime(void) {
+double GetHiClockTime() {
 	hiclock_t CurrentClock;
 	GetHiClock(CurrentClock);
-	return (((double)CurrentClock) / GetHiClockFreq());
+	return ((double)CurrentClock) / GetHiClockFreq();
 }
 
 /*===========================================================================
@@ -81,7 +81,7 @@ double GetHiClockTime(void) {
  * Returns the frequency of the system's high-resolution counter in Hz.
  *
  *=========================================================================*/
-double GetHiClockFreq(void) {
+double GetHiClockFreq() {
 	/* Attempt to use the performance counter */
 #if defined(_WIN32)
 	LARGE_INTEGER Freq;
@@ -89,13 +89,13 @@ double GetHiClockFreq(void) {
 	Result = QueryPerformanceFrequency(&Freq);
 
 	if (!Result || Freq.QuadPart == 0) {
-		return (double)(1.0);
+		return (double)1.0;
 	}
 
-	return ((double)Freq.QuadPart);
+	return (double)Freq.QuadPart;
 	/* Use the clock() frequency */
 #else
-	return ((double) CLOCKS_PER_SEC);
+	return (double) CLOCKS_PER_SEC;
 #endif
 }
 
