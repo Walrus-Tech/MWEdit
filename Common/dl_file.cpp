@@ -1439,7 +1439,7 @@ int ReadLine(FILE *pFileHandle, TCHAR *pString, const size_t MaxStringLength) {
 				break;
 			}
 		}
-	} while TRUE; /* Loop is exited using break */
+	} while (TRUE); /* Loop is exited using break */
 
 	/* Ensure the string is NULL terminated */
 	if (pString != NULL) {
