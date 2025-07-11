@@ -61,7 +61,7 @@ CXmlFile::CXmlFile() {
  * Class CXmlFile Method - void Destroy (void);
  *
  *=========================================================================*/
-void CXmlFile::Destroy(void) {
+void CXmlFile::Destroy() {
 	//DEFINE_FUNCTION("CXmlFile::Destroy()");
 	m_RootElement.Destroy();
 	m_File.Destroy();
@@ -92,7 +92,7 @@ int CXmlFile::OnReadCallback(const long FileSize, const long BytesRead) {
 		return m_CallBackFunc(&m_CallBackInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -129,7 +129,7 @@ bool CXmlFile::Read(const TCHAR *pFilename) {
 		CBResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CBResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
@@ -138,7 +138,7 @@ bool CXmlFile::Read(const TCHAR *pFilename) {
 
 	//Result = ReadFile((byte**)&pFileBuffer, BytesRead, pFilename, false);
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	m_Filename = pFilename;
@@ -150,7 +150,7 @@ bool CXmlFile::Read(const TCHAR *pFilename) {
 		CBResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CBResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
@@ -171,12 +171,12 @@ bool CXmlFile::Read(const TCHAR *pFilename) {
 		CBResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CBResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
 	DestroyArrayPointer(pFileBuffer);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -207,7 +207,7 @@ bool CXmlFile::Write(const TCHAR *pFilename) {
 		CBResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CBResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
@@ -226,12 +226,12 @@ bool CXmlFile::Write(const TCHAR *pFilename) {
 		CBResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CBResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
 	m_File.Close();
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================

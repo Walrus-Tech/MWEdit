@@ -67,7 +67,7 @@ typedef struct {
 } xmlcallbackinfo_t;
 
 /* Load/write callback function */
-typedef int (*XMLFILE_CALLBACK) (xmlcallbackinfo_t* pCallbackInfo);
+typedef int (*XMLFILE_CALLBACK) (xmlcallbackinfo_t *pCallbackInfo);
 
 /*===========================================================================
  *      End of Type Definitions
@@ -85,20 +85,20 @@ class CXmlElement {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CXmlElement *m_pParent; /* Parent element */
+	CXmlElement *m_pParent;       /* Parent element */
 
-	static bool m_OutputCR; /* Output a CR at ends of elements, etc... */
+	static bool m_OutputCR;       /* Output a CR at ends of elements, etc... */
 
-	CSString m_Name; /* Element name */
-	bool m_IsEmpty; /* Element is empty */
-	bool m_IsRoot; /* Is special root element */
-	int m_Level; /* Use for 'tabbing' output files */
+	CSString m_Name;              /* Element name */
+	bool m_IsEmpty;               /* Element is empty */
+	bool m_IsRoot;                /* Is special root element */
+	int m_Level;                  /* Use for 'tabbing' output files */
 
-	long m_StartLine; /* Start/end line of element */
+	long m_StartLine;             /* Start/end line of element */
 	long m_EndLine;
 
-	CSString m_Content; /* Element content, if any */
-	CElementArray m_Elements; /* Array of child elements */
+	CSString m_Content;           /* Element content, if any */
+	CElementArray m_Elements;     /* Array of child elements */
 	CAttributeArray m_Attributes; /* Array of attributes */
 
 	/* Static callback information for load/save */
@@ -130,7 +130,7 @@ class CXmlElement {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add attributes and child elements */
 	CXmlElement *AddChildHead(const TCHAR *pName, const bool IsEmpty = false);
@@ -155,36 +155,36 @@ class CXmlElement {
 	CXmlElement *FindChild(const TCHAR *pName, const TCHAR *pAttribute, const TCHAR *pValue);
 
 	/* Get class members */
-	CXmlElement *GetParent(void) {
-		return (m_pParent);
+	CXmlElement *GetParent() {
+		return m_pParent;
 	}
 
-	const TCHAR *GetName(void) const {
-		return (m_Name);
+	const TCHAR *GetName() const {
+		return m_Name;
 	}
 
-	const TCHAR *GetContent(void) const {
-		return (m_Content);
+	const TCHAR *GetContent() const {
+		return m_Content;
 	}
 
-	bool IsEmpty(void) const {
-		return (m_IsEmpty);
+	bool IsEmpty() const {
+		return m_IsEmpty;
 	}
 
-	bool IsRoot(void) const {
-		return (m_IsRoot);
+	bool IsRoot() const {
+		return m_IsRoot;
 	}
 
-	int GetLevel(void) const {
-		return (m_Level);
+	int GetLevel() const {
+		return m_Level;
 	}
 
-	CSString &GetContentString(void) {
-		return (m_Content);
+	CSString &GetContentString() {
+		return m_Content;
 	}
 
-	int GetContentSize(void) const {
-		return (m_Content.GetLength());
+	int GetContentSize() const {
+		return m_Content.GetLength();
 	}
 
 	/* Compare element strings */
@@ -193,25 +193,25 @@ class CXmlElement {
 	}
 
 	/* Access the child elements */
-	int GetNumChildren(void) const {
-		return (m_Elements.GetSize());
+	int GetNumChildren() const {
+		return m_Elements.GetSize();
 	}
 
 	CXmlElement *GetChild(const int Index) {
-		return (m_Elements.GetAt(Index));
+		return m_Elements.GetAt(Index);
 	}
 
 	/* Access the element attributes */
-	int GetNumAttributes(void) const {
-		return (m_Attributes.GetSize());
+	int GetNumAttributes() const {
+		return m_Attributes.GetSize();
 	}
 
 	CXmlAttribute *GetAttribute(const int Index) {
-		return (m_Attributes.GetAt(Index));
+		return m_Attributes.GetAt(Index);
 	}
 
 	/* Initialize the default root element */
-	void InitRoot(void);
+	void InitRoot();
 
 	/* Inputs element from the given file */
 	bool Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
@@ -253,7 +253,6 @@ class CXmlElement {
 
 	/* Output element to the file */
 	bool Write (CGenFile &File);
-
 };
 
 /*===========================================================================

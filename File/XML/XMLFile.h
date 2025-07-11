@@ -76,19 +76,19 @@ class CXmlFile {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-	CXmlElement *GetRootElement(void) {
-		return (&m_RootElement);
+	CXmlElement *GetRootElement() {
+		return &m_RootElement;
 	}
 
-	const TCHAR *GetFilename(void) const {
-		return (m_Filename);
+	const TCHAR *GetFilename() const {
+		return m_Filename;
 	}
 
-	long GetLineCount(void) const {
-		return (m_LineCount);
+	long GetLineCount() const {
+		return m_LineCount;
 	}
 
 	/* Set the callback function and data */

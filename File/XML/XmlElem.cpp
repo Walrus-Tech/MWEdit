@@ -65,7 +65,7 @@ CXmlElement::CXmlElement() : m_Elements(XMLFILE_DEFAULT_ELEMENTS),
  * Class CXmlElement Method - void Destroy (void);
  *
  *=========================================================================*/
-void CXmlElement::Destroy(void) {
+void CXmlElement::Destroy() {
 	//DEFINE_FUNCTION("CXmlElement::Destroy()");
 	CXmlElement *pElement;
 	CXmlAttribute *pAttribute;
@@ -111,7 +111,7 @@ CXmlAttribute *CXmlElement::AddAttribute(const TCHAR *pName, const TCHAR *pValue
 	pNewAttribute->SetName(pName);
 	pNewAttribute->SetValue(pValue);
 	m_Attributes.Add(pNewAttribute);
-	return (pNewAttribute);
+	return pNewAttribute;
 }
 
 
@@ -158,7 +158,7 @@ CXmlElement *CXmlElement::AddChild(const TCHAR *pName, const bool IsEmpty) {
 	pNewElement->SetIsEmpty(IsEmpty);
 	pNewElement->SetParent(this);
 	m_Elements.Add(pNewElement);
-	return (pNewElement);
+	return pNewElement;
 }
 
 CXmlElement *CXmlElement::AddChildHead(const TCHAR *pName, const bool IsEmpty) {
@@ -169,7 +169,7 @@ CXmlElement *CXmlElement::AddChildHead(const TCHAR *pName, const bool IsEmpty) {
 	pNewElement->SetIsEmpty(IsEmpty);
 	pNewElement->SetParent(this);
 	m_Elements.AddHead(pNewElement);
-	return (pNewElement);
+	return pNewElement;
 }
 
 /*===========================================================================
@@ -193,7 +193,7 @@ CXmlAttribute *CXmlElement::FindAttribute(const TCHAR *pName) {
 		pAttribute = m_Attributes.GetAt(Index);
 
 		if (pAttribute->IsName(pName)) {
-			return (pAttribute);
+			return pAttribute;
 		}
 	}
 
@@ -202,7 +202,7 @@ CXmlAttribute *CXmlElement::FindAttribute(const TCHAR *pName) {
 	                      _T("%05ld: Element '%s' does not have an attribute '%s'!"),
 	                      m_StartLine + 1,
 	                      m_Name, pName);
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -223,7 +223,7 @@ CXmlElement *CXmlElement::FindChild(const TCHAR *pName) {
 
 	for (Index = 0; Index < m_Elements.GetSize(); Index++) {
 		if (m_Elements.GetAt(Index)->IsName(pName)) {
-			return (m_Elements.GetAt(Index));
+			return m_Elements.GetAt(Index);
 		}
 	}
 
@@ -232,7 +232,7 @@ CXmlElement *CXmlElement::FindChild(const TCHAR *pName) {
 	                      _T("%05ld: Element '%s' does not have a child element '%s'!"),
 	                      m_StartLine + 1,
 	                      m_Name, pName);
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -262,7 +262,7 @@ CXmlElement *CXmlElement::FindChild(const TCHAR *pName,
 
 		if (pAttribute != NULL) {
 			if (pAttribute->IsValue(pValue)) {
-				return (pElement);
+				return pElement;
 			}
 		}
 
@@ -270,7 +270,7 @@ CXmlElement *CXmlElement::FindChild(const TCHAR *pName,
 	}
 
 	/* Not found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -294,12 +294,12 @@ CXmlElement *CXmlElement::FindNextChild(const TCHAR *pName, int &ElemIndex) {
 		pElement = m_Elements.GetAt(ElemIndex);
 
 		if (pElement->IsName(pName)) {
-			return (pElement);
+			return pElement;
 		}
 	}
 
 	/* Child element not found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -313,7 +313,7 @@ CXmlElement *CXmlElement::FindNextChild(const TCHAR *pName, int &ElemIndex) {
  * Initializes the default root element.
  *
  *=========================================================================*/
-void CXmlElement::InitRoot(void) {
+void CXmlElement::InitRoot() {
 	SetName(_T("?xml"));
 	AddAttribute(_T("version"), _T("1.0"));
 	AddAttribute(_T("encoding"), _T("UTF-8"));
@@ -342,11 +342,11 @@ bool CXmlElement::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long 
 	Result = ReadOpen(pBuffer, BufferPos, FileSize, LineCount);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	if (m_IsEmpty) {
-		return (true);
+		return true;
 	}
 
 	m_Content.Empty();
@@ -366,7 +366,7 @@ bool CXmlElement::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long 
 		CallBackResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CallBackResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
@@ -388,7 +388,7 @@ bool CXmlElement::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long 
 					Result = ReadChild(pBuffer, BufferPos, FileSize, LineCount);
 
 					if (!Result) {
-						return (false);
+						return false;
 					}
 
 					pContentStart = NULL;
@@ -416,14 +416,14 @@ bool CXmlElement::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, long 
 
 	/* Unexpected end of file unless we are in the root */
 	if (IsRoot()) {
-		return (true);
+		return true;
 	}
 
 	ErrorHandler.AddError(ERR_READFILE,
 	                      _T("%05ld: End of file reached in element %s!"),
 	                      m_StartLine + 1,
 	                      GetName());
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -471,7 +471,7 @@ bool CXmlElement::ReadChild(TCHAR *pBuffer, int &BufferPos, const int FileSize, 
 	m_Elements.Add(pElement);
 	pElement->SetLevel(m_Level + 1);
 	Result = pElement->Read(pBuffer, BufferPos, FileSize, LineCount);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -499,7 +499,7 @@ bool CXmlElement::ReadEnd(TCHAR *pBuffer, int &BufferPos, const int FileSize, lo
 			case '>':
 				BufferPos++;
 				m_EndLine = LineCount;
-				return (true);
+				return true;
 
 			case '\n':
 				LineCount++; /* Fall through */
@@ -510,7 +510,7 @@ bool CXmlElement::ReadEnd(TCHAR *pBuffer, int &BufferPos, const int FileSize, lo
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -546,7 +546,7 @@ bool CXmlElement::ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize, l
 				}
 
 				m_StartLine = LineCount;
-				return (true);
+				return true;
 
 			default:
 				if (pStartPos == NULL) {
@@ -561,7 +561,7 @@ bool CXmlElement::ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize, l
 	}
 
 	m_StartLine = LineCount;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -591,7 +591,7 @@ bool CXmlElement::ReadOpen(TCHAR *pBuffer, int &BufferPos, const int FileSize, l
 				Result = ReadName(pBuffer, BufferPos, FileSize, LineCount);
 
 				if (!Result) {
-					return (false);
+					return false;
 				}
 
 				FoundName = true;
@@ -605,16 +605,16 @@ bool CXmlElement::ReadOpen(TCHAR *pBuffer, int &BufferPos, const int FileSize, l
 					                      _T("%05ld: Invalid character sequence '/%c' found in element!"),
 					                      m_StartLine + 1,
 					                      pBuffer[BufferPos]);
-					return (false);
+					return false;
 				}
 
 				BufferPos++;
 				m_IsEmpty = true;
-				return (true);
+				return true;
 
 			case '>':
 				BufferPos++;
-				return (true);
+				return true;
 
 			case '\n':
 				LineCount++; /* Fall through */
@@ -632,7 +632,7 @@ bool CXmlElement::ReadOpen(TCHAR *pBuffer, int &BufferPos, const int FileSize, l
 					Result = ReadAttribute(pBuffer, BufferPos, FileSize, LineCount);
 
 					if (!Result) {
-						return (false);
+						return false;
 					}
 				} else {
 					BufferPos++;
@@ -646,7 +646,7 @@ bool CXmlElement::ReadOpen(TCHAR *pBuffer, int &BufferPos, const int FileSize, l
 	ErrorHandler.AddError(ERR_READFILE,
 	                      _T("%05ld: End of file reached in element!"),
 	                      m_StartLine + 1);
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -678,7 +678,7 @@ bool CXmlElement::Write(CGenFile &File) {
 		CallBackResult = m_CallBackFunc(&m_CallBackInfo);
 
 		if (CallBackResult < 0) {
-			return (false);
+			return false;
 		}
 	}
 
@@ -714,7 +714,7 @@ bool CXmlElement::Write(CGenFile &File) {
 		}
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -737,7 +737,7 @@ bool CXmlElement::WriteAttributes(CGenFile &File) {
 		Result &= m_Attributes.GetAt(Index)->Write(File);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -760,7 +760,7 @@ bool CXmlElement::WriteChildren(CGenFile &File) {
 		Result &= m_Elements.GetAt(Index)->Write(File);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================

@@ -77,15 +77,15 @@ class CXmlAttribute {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-	const TCHAR *GetName(void) const {
-		return (m_Name);
+	const TCHAR *GetName() const {
+		return m_Name;
 	}
 
-	const TCHAR *GetValue(void) const {
-		return (m_Value);
+	const TCHAR *GetValue() const {
+		return m_Value;
 	}
 
 	/* Compare name/value */

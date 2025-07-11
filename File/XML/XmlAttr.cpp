@@ -42,7 +42,7 @@ CXmlAttribute::CXmlAttribute() {
  * Class CXmlAttribute Method - void Destroy (void);
  *
  *=========================================================================*/
-void CXmlAttribute::Destroy(void) {
+void CXmlAttribute::Destroy() {
 	//DEFINE_FUNCTION("CXmlAttribute::Destroy()");
 	m_Name.Empty();
 	m_Value.Empty();
@@ -69,7 +69,7 @@ bool CXmlAttribute::Read(TCHAR *pBuffer, int &BufferPos, const int FileSize, lon
 		Result = ReadValue(pBuffer, BufferPos, FileSize, LineCount);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -101,11 +101,11 @@ bool CXmlAttribute::ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize,
 					m_Name.Copy(pBuffer + StartPos, BufferPos - StartPos);
 				}
 
-				return (true);
+				return true;
 
 			case '>':
 			case '/':
-				return (true);
+				return true;
 
 			default: /* Add character to element name */
 				BufferPos++;
@@ -113,7 +113,7 @@ bool CXmlAttribute::ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize,
 		} /* End of switch */
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -149,7 +149,7 @@ bool CXmlAttribute::ReadValue(TCHAR *pBuffer,
 				if (QuoteType == pBuffer[BufferPos]) {
 					m_Value.Copy(pBuffer + StartPos, BufferPos - StartPos);
 					BufferPos++;
-					return (true);
+					return true;
 				} else if (QuoteType == 0 && FoundStart) {
 					QuoteType = pBuffer[BufferPos];
 					StartPos = BufferPos + 1;
@@ -161,7 +161,7 @@ bool CXmlAttribute::ReadValue(TCHAR *pBuffer,
 			case '>':
 			case '/':
 				if (QuoteType == 0) {
-					return (true);
+					return true;
 				}
 
 				BufferPos++;
@@ -176,7 +176,7 @@ bool CXmlAttribute::ReadValue(TCHAR *pBuffer,
 		} /* End of switch */
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -210,7 +210,7 @@ void CXmlAttribute::SetValue(const long Value) {
 bool CXmlAttribute::Write(CGenFile &File) {
 	bool Result;
 	Result = File.Printf(" %s=\"%s\"", m_Name, m_Value);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
