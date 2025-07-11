@@ -48,8 +48,10 @@ PQSORT_CMPFUNC l_QSortCmpFunc = NULL;
  * Exits program with abort().
  *
  *=========================================================================*/
-void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
-                  const TCHAR *pFunction, const long Line) {
+void CustomAssert(const TCHAR *pString,
+                  const TCHAR *pFile,
+                  const TCHAR *pFunction,
+                  const long Line) {
 	//DEFINE_FUNCTION("CustomAssert()");
 	/* TODO: Hack to ensure we reset to text mode under MSDOS in
 	 * case we are in a graphics mode. */
@@ -72,7 +74,10 @@ void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
 #if defined(__BCPLUSPLUS__) || defined(_WIN32)
 	ErrorHandler.Printf(_T("Application Assert!"),
 	                    _T("ASSERTION FAILED: '%s'\r\n\tFile: '%s'\r\n\tFunc: '%s'\r\n\tLine: %ld\r\nAborting Program!"),
-	                    pString, pFile, pFunction, Line);
+	                    pString,
+	                    pFile,
+	                    pFunction,
+	                    Line);
 #else
 	fprintf(stderr, _T("ASSERTION FAILED: '%s'\r\n"), pString);
 	fprintf(stderr, _T("\tFile: '%s'\r\n"), pFile);
@@ -91,7 +96,6 @@ void CustomAssert(const TCHAR *pString, const TCHAR *pFile,
 /*===========================================================================
  *      End of Function CustomAssert()
  *=========================================================================*/
-
 
 
 #if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
@@ -125,8 +129,11 @@ void throw(const TCHAR *pString) {
  * algorithim and local variables.
  *
  *=========================================================================*/
-void qsort(void *pBase, size_t NumElements, size_t ElementWidth,
-           PQSORT_CMPFUNC pCmpFunc, long lUserData) {
+void qsort(void *pBase,
+           size_t NumElements,
+           size_t ElementWidth,
+           PQSORT_CMPFUNC pCmpFunc,
+           long lUserData) {
 	DEFINE_FUNCTION("qsort()");
 	/* Ensure valid input */
 	ASSERT(pCmpFunc != NULL);

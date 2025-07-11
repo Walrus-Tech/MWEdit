@@ -19,7 +19,6 @@
 
 #if !defined(_WIN32_WCE)
 	#include <time.h>
-
 	#if defined(_MSC_VER)
 		//#include <alloc.h>
 	#endif
@@ -69,7 +68,7 @@ void *AllocateMemory(const size_t Size) {
 #if defined(_DEBUG)
 	memset(pNewObject, GARBAGE_CHAR, Size * sizeof(TCHAR));
 #endif
-	return (pNewObject);
+	return pNewObject;
 }
 
 /*===========================================================================
@@ -94,7 +93,7 @@ TCHAR *CreateString(const TCHAR *pString) {
 
 	/* Ensure valid input */
 	if (pString == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Get the length of the new string and allocate it */
@@ -102,7 +101,7 @@ TCHAR *CreateString(const TCHAR *pString) {
 	CreateArrayPointer(pNewString, TCHAR, NewSize);
 	/* Copy the string to the new location */
 	TSTRCPY(pNewString, pString);
-	return (pNewString);
+	return pNewString;
 }
 
 /*=========================================================================
@@ -127,7 +126,7 @@ TCHAR *CreateString(const size_t StringSize) {
 	CreateArrayPointer(pNewString, TCHAR, StringSize + 1);
 	*pNewString = NULL_CHAR;
 	pNewString[StringSize] = NULL_CHAR;
-	return (pNewString);
+	return pNewString;
 }
 
 /*=========================================================================
@@ -153,12 +152,12 @@ bool CreateString(TCHAR **ppNewString, const TCHAR *pSourceString) {
 	/* Special case for a NULL input string */
 	if (pSourceString == NULL) {
 		*ppNewString = NULL;
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Create the new string */
 	*ppNewString = CreateString(pSourceString);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -182,7 +181,7 @@ bool CreateString(TCHAR **ppNewString, const size_t StringSize) {
 	ASSERT(ppNewString != NULL);
 	/* Create the new string */
 	*ppNewString = CreateString(StringSize);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -204,21 +203,21 @@ bool GetFreeMemory(long &Memory) {
 	/*---------- Borland 16 bit ---------------------------------------------*/
 #if defined (__BCPLUSPLUS__)
 	Memory = 0;
-	return (TRUE);
+	return TRUE;
 	/*---------- DOS real mode implementation -------------------------------*/
 #elif defined (__MSDOS__)
 	Memory = farcoreleft();
-	return (TRUE);
+	return TRUE;
 	/*---------- Windows implementation -------------------------------------*/
 #elif defined(_WIN32)
 	MEMORYSTATUS Status;
 	GlobalMemoryStatus(&Status);
-	Memory = (long) Status.dwAvailVirtual;
-	return (TRUE);
+	Memory = (long)Status.dwAvailVirtual;
+	return TRUE;
 	/*---------- Any unknown system implementation --------------------------*/
 #else
 	ASSERT(FALSE);
-	return (FALSE);
+	return FALSE;
 #endif
 }
 
@@ -240,7 +239,7 @@ bool GetTotalMemory(long &Memory) {
 	/*---------- Borland 16 bit ---------------------------------------------*/
 #if defined (__BCPLUSPLUS__)
 	Memory = 0;
-	return (TRUE);
+	return TRUE;
 	/*---------- DOS real mode implementation -------------------------------*/
 #elif defined(__TURBOC__)
 	struct heapinfo HeapInfo;
@@ -248,7 +247,7 @@ bool GetTotalMemory(long &Memory) {
 
 	/* Make sure the heap is not corrupt */
 	if (heapcheck() != _HEAPOK) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	GetFreeMemory(MemorySize);
@@ -261,17 +260,17 @@ bool GetTotalMemory(long &Memory) {
 		}
 	}
 
-	return (TRUE);
+	return TRUE;
 	/*---------- Windows implementation -------------------------------------*/
 #elif defined(_WIN32)
 	MEMORYSTATUS Status;
 	GlobalMemoryStatus(&Status);
 	Memory = (long)Status.dwAvailVirtual;
-	return (TRUE);
+	return TRUE;
 	/*---------- Any unknown system implementation --------------------------*/
 #else
 	ASSERT(FALSE);
-	return (FALSE);
+	return FALSE;
 #endif
 }
 
@@ -301,12 +300,12 @@ bool GetUsedMemory(long &Memory) {
 	}
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Compute the difference in memory */
 	Memory = MemoryTotal - MemoryFree;
-	return (TRUE);
+	return TRUE;
 }
 
 /*=========================================================================
@@ -327,30 +326,30 @@ bool GetUsedMemory(long &Memory) {
  * Not all values are defined in all systems.
  *
  *=======================================================================*/
-int GetHeapStatus(void) {
+int GetHeapStatus() {
 	DEFINE_FUNCTION("GetHeapStatus()");
 	/*---------- Borland 16 bit ---------------------------------------------*/
 #if defined (__BCPLUSPLUS__)
-	return (HEAP_NOTDEFINED);
+	return HEAP_NOTDEFINED;
 	/*---------- DOS real mode implementation -------------------------------*/
 #elif defined(__MSDOS__)
-	return (heapcheck());
+	return heapcheck();
 	/*---------- Windows implementation -------------------------------------*/
 #elif defined(_WIN32)
 #if defined(_DEBUG)
 
 	if (_CrtCheckMemory()) {
-		return (HEAP_OK);
+		return HEAP_OK;
 	}
 
-	return (HEAP_CORRUPT);
+	return HEAP_CORRUPT;
 #else
-	return (HEAP_NOTDEFINED);
+	return HEAP_NOTDEFINED;
 #endif
 	/*---------- Any unknown system implementation --------------------------*/
 #else
 	ASSERT(FALSE);
-	return (HEAP_NOTDEFINED);
+	return HEAP_NOTDEFINED;
 #endif
 }
 
@@ -367,22 +366,22 @@ int GetHeapStatus(void) {
  * valid string, never NULL.
  *
  *=======================================================================*/
-const TCHAR *GetHeapStatusString(void) {
+const TCHAR *GetHeapStatusString() {
 	switch (GetHeapStatus()) {
 		case HEAP_OK:
-			return (_T("Ok"));
+			return _T("Ok");
 
 		case HEAP_CORRUPT:
-			return (_T("Corrupt"));
+			return _T("Corrupt");
 
 		case HEAP_EMPTY:
-			return (_T("Empty or not Initialized" ));
+			return _T("Empty or not Initialized" );
 
 		case HEAP_NOTDEFINED:
-			return (_T("Status Not Defined in Current System"));
+			return _T("Status Not Defined in Current System");
 
 		default:
-			return (_T("Error, Invalid Heap Status"));
+			return _T("Error, Invalid Heap Status");
 	}
 }
 
@@ -408,7 +407,7 @@ TCHAR *memsearch(const TCHAR *pBuffer,
                  const size_t SearchLength,
                  const size_t StartIndex) {
 	DEFINE_FUNCTION("memsearch()");
-	size_t BufferIndex;       /* Loop counters */
+	size_t BufferIndex; /* Loop counters */
 	size_t SearchIndex;
 	/* Ensure valid input */
 	ASSERT(pBuffer != NULL && pSearchBuffer != NULL);
@@ -417,7 +416,7 @@ TCHAR *memsearch(const TCHAR *pBuffer,
 	if (BufferLength < StartIndex ||
 	    SearchLength == 0 ||
 	    SearchLength > BufferLength - StartIndex) {
-		return (NULL);
+		return NULL;
 	}
 
 	BufferIndex = StartIndex;
@@ -440,7 +439,7 @@ TCHAR *memsearch(const TCHAR *pBuffer,
 	}
 
 	/* Nothing found... */
-	return (NULL);
+	return NULL;
 }
 
 /*=========================================================================
@@ -465,7 +464,7 @@ int memisearch(const TCHAR *pBuffer,
                const size_t SearchLength,
                const size_t StartIndex) {
 	DEFINE_FUNCTION("memisearch()");
-	size_t BufferIndex;       /* Loop counters */
+	size_t BufferIndex; /* Loop counters */
 	size_t SearchIndex;
 	/* Ensure valid input */
 	ASSERT(pBuffer != NULL && pSearchBuffer != NULL);
@@ -474,7 +473,7 @@ int memisearch(const TCHAR *pBuffer,
 	if (BufferLength < StartIndex ||
 	    SearchLength == 0 ||
 	    SearchLength > BufferLength - StartIndex) {
-		return (-1);
+		return -1;
 	}
 
 	BufferIndex = StartIndex;
@@ -486,7 +485,7 @@ int memisearch(const TCHAR *pBuffer,
 			SearchIndex++;
 
 			if (SearchIndex >= SearchLength) {
-				return (BufferIndex - SearchLength + 1);
+				return BufferIndex - SearchLength + 1;
 			}
 		} else if (SearchIndex != 0) {
 			BufferIndex -= SearchIndex;
@@ -497,7 +496,7 @@ int memisearch(const TCHAR *pBuffer,
 	}
 
 	/* Nothing found... */
-	return (-1);
+	return -1;
 }
 
 /*=========================================================================
@@ -523,12 +522,12 @@ bool ReplaceString(TCHAR **ppNewString, const TCHAR *pSourceString) {
 
 	/* Check for NULL inputs */
 	if (*ppNewString == NULL && pSourceString == NULL) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Check for same input/output objects */
 	if (*ppNewString == pSourceString) {
-		return (TRUE);
+		return TRUE;
 	}
 
 	/* Delete the destination string if required */
@@ -575,7 +574,7 @@ bool ReplaceString(TCHAR **ppNewString, const size_t Length) {
  * Dumps the heap blocks to the SystemLog under TurboC.
  *
  *=========================================================================*/
-void _DosMemDumpHeap(void) {
+void _DosMemDumpHeap() {
 	struct heapinfo HeapInfo;
 	long MemorySize = 0l;
 	long UnusedSize = 0l;
@@ -628,8 +627,6 @@ void _DosMemDumpHeap(void) {
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-
-
 #define CREATESTRING1_BUFFERSIZE 11000
 
 /* Turn off compiler warning options */
@@ -646,13 +643,19 @@ void _DosMemDumpHeap(void) {
  * 2. Tests the allocation of random sized strings (from 1 to 10000 bytes).
  *
  *=========================================================================*/
-void Test_CreateString1(void) {
+void Test_CreateString1() {
 	DEFINE_FUNCTION("Test_CreateString1()");
 	TCHAR *Buffer;
-	TCHAR *pTestStrings[4] = { _T(""), _T("\0"), _T("testing"), _T("asdadasd") };
+	TCHAR *pTestStrings[4] = {
+		_T(""),
+		_T("\0"),
+		_T("testing"),
+		_T("asdadasd")
+	};
 	TCHAR *pTestPtr;
 	int LoopCounter;
 	size_t RandomSize;
+
 	/* Test the set string allocation */
 	SystemLog.Printf(stderr,
 	                 _T("========== Testing CreateString(TCHAR*) with set strings =========="));
@@ -661,10 +664,12 @@ void Test_CreateString1(void) {
 
 	for (LoopCounter = 0; LoopCounter < 4; LoopCounter++) {
 		pTestPtr = CreateString(pTestStrings[LoopCounter]);
+
 		/* Ensure the string was properly allocated */
 		ASSERT(pTestPtr != NULL);
 		ASSERT(TSTRCMP(pTestStrings[LoopCounter], pTestPtr) == 0);
 		ASSERT(IsValidPointer(pTestPtr, TSTRLEN(pTestStrings[LoopCounter]) + 1));
+
 		/* Delete the test string */
 		DestroyPointer(pTestPtr);
 		SystemLog.Printf(stderr,
@@ -682,10 +687,12 @@ void Test_CreateString1(void) {
 		RandomSize = (size_t)((float)rand() * 10000 / RAND_MAX);
 		Buffer[RandomSize] = NULL_CHAR;
 		pTestPtr = CreateString(Buffer);
+
 		/* Ensure the string was properly allocated */
 		ASSERT(pTestPtr != NULL);
 		ASSERT(TSTRCMP(pTestPtr, Buffer) == 0);
 		ASSERT(IsValidPointer(pTestPtr, RandomSize + 1));
+
 		/* Delete the test string */
 		DestroyPointer(pTestPtr);
 		SystemLog.Printf(stderr,
@@ -713,12 +720,18 @@ void Test_CreateString1(void) {
  *    TEST_MAXSTRING_SIZE bytes).
  *
  *=========================================================================*/
-void Test_CreateString2(void) {
+void Test_CreateString2() {
 	DEFINE_FUNCTION("Test_CreateString2()");
-	size_t TestSizes[4] = { 10, 1, 2, 200 };
+	size_t TestSizes[4] = {
+		10,
+		1,
+		2,
+		200
+	};
 	size_t RandomSize;
 	int LoopCounter;
 	TCHAR *pTestPtr;
+
 	/* Test the allocation of set sized strings */
 	SystemLog.Printf(stderr,
 	                 _T("========== Testing CreateString(size_t) with set sized strings =========="));
@@ -770,12 +783,14 @@ void Test_CreateString2(void) {
  *  2. Check allocation of set strings
  *
  *=========================================================================*/
-void Test_CreateString3(void) {
+void Test_CreateString3() {
 	DEFINE_FUNCTION("Test_CreateString3()");
-	TCHAR* pStrings[4] = {_T("asldkja;lkdj;asd"),
-		                  _T("123785"),
-		                  _T(""),
-		                  _T("o[ijopiap98dfp9hsadfp98ashf9as8fh")};
+	TCHAR* pStrings[4] = {
+		_T("asldkja;lkdj;asd"),
+		_T("123785"),
+		_T(""),
+		_T("o[ijopiap98dfp9hsadfp98ashf9as8fh")
+	};
 	TCHAR *pTestString1 = NULL;
 	int LoopCounter;
 	SystemLog.Printf(stdout,
@@ -810,7 +825,7 @@ void Test_CreateString3(void) {
  *  4. Tests overlapping data buffers
  *
  *=========================================================================*/
-void Test_memsearch(void) {
+void Test_memsearch() {
 	DEFINE_FUNCTION("Test_memsearch()");
 	TCHAR TestBuffer[101] = _T("Test buffer 1234567890");
 	TCHAR TestSearch[18] = _T("uff");
@@ -827,6 +842,7 @@ void Test_memsearch(void) {
 	ASSERT(pResult == NULL);
 	iResult = memisearch(TestBuffer, _T("aaa"), 20, 3, 0);
 	ASSERT(iResult == -1);
+
 	/* Test typical buffers with start index */
 	pResult = memsearch(TestBuffer, TestSearch, 20, 3, 4);
 	ASSERT(TSTRNCMP(pResult, _T("uffer"), 5) == 0);
@@ -836,17 +852,20 @@ void Test_memsearch(void) {
 	ASSERT(pResult == NULL);
 	iResult = memisearch(TestBuffer, TestSearch, 20, 3, 14);
 	ASSERT(iResult == -1);
+
 	/* Test typical buffers with case differences */
 	TSTRCPY(TestSearch, _T("UfF"));
 	pResult = memsearch(TestBuffer, TestSearch, 20, 3, 0);
 	ASSERT(pResult == NULL);
 	iResult = memisearch(TestBuffer, TestSearch, 20, 3, 0);
 	ASSERT(TSTRNICMP(TestBuffer + iResult, _T("uffer"), 5) == 0);
+
 	/* Test search buffer longer than main buffer */
 	pResult = memsearch(TestBuffer, TestSearch, 3, 20, 0);
 	ASSERT(pResult == NULL);
 	iResult = memisearch(TestBuffer, TestSearch, 3, 20, 0);
 	ASSERT(iResult == -1);
+
 	/* Test empty buffers */
 	pResult = memsearch(TestBuffer, TestSearch, 20, 0, 0);
 	ASSERT(pResult == NULL);
@@ -863,7 +882,6 @@ void Test_memsearch(void) {
  *=========================================================================*/
 
 
-
 /*===========================================================================
  *
  * Function - void Test_ReplaceString (void);
@@ -874,12 +892,14 @@ void Test_memsearch(void) {
  *  2. Check allocation of set strings
  *
  *=========================================================================*/
-void Test_ReplaceString(void) {
+void Test_ReplaceString() {
 	DEFINE_FUNCTION("Test_ReplaceString()");
-	TCHAR *pStrings[4] = {_T("asldkja;lkdj;asd"),
-		                  _T("123385"),
-		                  _T(""),
-		                  _T("o[ijopiap98dfp9hsadfp98ashf9as8fh")};
+	TCHAR *pStrings[4] = {
+		_T("asldkja;lkdj;asd"),
+		_T("123385"),
+		_T(""),
+		_T("o[ijopiap98dfp9hsadfp98ashf9as8fh")
+	};
 	TCHAR *pTestString1;
 	int LoopCounter;
 	SystemLog.Printf(stdout, _T("================ Testing ReplaceString() ==================="));
@@ -925,7 +945,7 @@ void Test_ReplaceString(void) {
  *  - Tests the memsearch() and memisearch() functions
  *
  *=========================================================================*/
-void Test_DL_Mem(void) {
+void Test_DL_Mem() {
 	DEFINE_FUNCTION("Test_DL_Mem()");
 	long Memory;
 	Test_CreateString1();

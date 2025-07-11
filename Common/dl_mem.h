@@ -283,19 +283,19 @@
  *
  *=========================================================================*/
 #if defined(__BCPLUSPLUS__)
-	#define HEAP_OK   (_HEAPOK)
+	#define HEAP_OK       (_HEAPOK)
 	#define HEAP_CORRUPT  (-5)
 	#define HEAP_EMPTY    (_HEAPEMPTY)
 #elif defined(_WIN32)
-	#define HEAP_OK   (1)
+	#define HEAP_OK       (1)
 	#define HEAP_CORRUPT  (0)
 	#define HEAP_EMPTY    (-9)
 #elif defined(__MSDOS__) &&  defined(__BCPLUSPLUS__)
-	#define HEAP_OK   (_HEAPOK)
+	#define HEAP_OK       (_HEAPOK)
 	#define HEAP_CORRUPT  (_HEAPCORRUPT)
 	#define HEAP_EMPTY    (_HEAPEMPTY)
 #else
-	#define HEAP_OK   (1)
+	#define HEAP_OK       (1)
 	#define HEAP_CORRUPT  (0)
 	#define HEAP_EMPTY    (-9)
 #endif
@@ -329,8 +329,8 @@ bool CreateString(TCHAR **pNewString, const size_t StringSize);
 bool GetTotalMemory(long &Memory);
 bool GetFreeMemory(long &Memory);
 bool GetUsedMemory(long &Memory);
-int GetHeapStatus(void);
-const TCHAR *GetHeapStatusString(void);
+int GetHeapStatus();
+const TCHAR *GetHeapStatusString();
 
 /* Search binary memory buffer for a sub-buffer */
 TCHAR *memsearch(const TCHAR *pBuffer,
@@ -364,17 +364,13 @@ bool ReplaceString(TCHAR **pNewString, const size_t Length);
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-
 	#if defined(_MSDOS)
 		#define DebugHeapCheckMemory() true
-
 		/* Output all objects on the heap to the SystemLog */
-		void _DosMemDumpHeap(void);
-
+		void _DosMemDumpHeap();
 	#elif defined(_WIN32)
 		#define DebugHeapCheckMemory() (_CrtDumpMemoryLeaks() == TRUE)
 	#endif
-
 #endif
 /*===========================================================================
  *      End of Debug Heap Definition
@@ -389,24 +385,21 @@ bool ReplaceString(TCHAR **pNewString, const size_t Length);
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-
 	#if defined(__TURBOC__) || defined(__BCPLUSPLUS__)
 		#define TEST_MAXSTRING_SIZE 64000u
 	#else
 		#define TEST_MAXSTRING_SIZE 100000u
 	#endif
-
-	void Test_DL_Mem(void);
-	void Test_CreateString1(void);
-	void Test_CreateString2(void);
-	void Test_CreateString3(void);
-	void Test_memsearch(void);
-	void Test_ReplaceString(void);
+	void Test_DL_Mem();
+	void Test_CreateString1();
+	void Test_CreateString2();
+	void Test_CreateString3();
+	void Test_memsearch();
+	void Test_ReplaceString();
 #endif
 /*===========================================================================
  *      End of Test Routine Definitions
  *=========================================================================*/
-
 
 
 #endif

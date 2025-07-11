@@ -86,15 +86,15 @@ TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateTCHAR);
  *
  *=========================================================================*/
 #if defined(_DEBUG)
-	void Test_chradd(void);
-	void Test_chrcat(void);
-	void Test_chrdel(void);
-	void Test_chrdellast(void);
-	void Test_chrtok(void);
-	void Test_chrrpunc(void);
-	void Test_chrtrunc(void);
-	void Test_chrrtrunc(void);
-	void Test_DLChr(void);
+	void Test_chradd();
+	void Test_chrcat();
+	void Test_chrdel();
+	void Test_chrdellast();
+	void Test_chrtok();
+	void Test_chrrpunc();
+	void Test_chrtrunc();
+	void Test_chrrtrunc();
+	void Test_DLChr();
 #endif
 /*===========================================================================
  *      End of Testing Routine Prototypes

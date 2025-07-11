@@ -42,7 +42,6 @@
 
 #if !defined(_WIN32_WCE)
 	#include <errno.h>
-
 	/* Include TC graphic error messages */
 	#if defined(_TCGRAPHERRORS)
 		#include <graphics.h>
@@ -85,7 +84,7 @@ CErrorHandler ErrorHandler(ErrorDatabase);
  * Class CErrorRecord Constructor
  *
  *=========================================================================*/
-CErrorRecord::CErrorRecord(void) {
+CErrorRecord::CErrorRecord() {
 	pMessage = NULL;
 	CustomErrFunction = NULL;
 	Code = ERR_NONE;
@@ -105,7 +104,7 @@ CErrorRecord::CErrorRecord(void) {
  * Deletes the contents of the object.
  *
  *=========================================================================*/
-void CErrorRecord::Destroy(void) {
+void CErrorRecord::Destroy() {
 	DEFINE_FUNCTION("CErrorRecord::Destroy()");
 	DestroyPointer(pMessage);
 	Code = ERR_NONE;
@@ -152,7 +151,7 @@ const TCHAR *CErrorRecord::GetMsg(const errcode_t SubCode) const {
  * Class CErrorDatabase Constructor
  *
  *=========================================================================*/
-CErrorDatabase::CErrorDatabase(void) {
+CErrorDatabase::CErrorDatabase() {
 	pHead = NULL;
 	AddedDefaultErrors = FALSE;
 	NumErrors = 0;
@@ -171,7 +170,7 @@ CErrorDatabase::CErrorDatabase(void) {
  * Deletes the current contents of the object.
  *
  *=========================================================================*/
-void CErrorDatabase::Destroy(void) {
+void CErrorDatabase::Destroy() {
 	//DEFINE_FUNCTION("CErrorDatabase::Destroy()");
 	/* Delete the singly linked list */
 	ClearErrors();
@@ -249,7 +248,7 @@ void CErrorDatabase::AddCustomError(const errcode_t Code, PERR_CUSTOM_FUNCTION E
  * Deletes the entire singly linked list.
  *
  *=========================================================================*/
-void CErrorDatabase::ClearErrors(void) {
+void CErrorDatabase::ClearErrors() {
 	DEFINE_FUNCTION("CErrorDatabase::ClearErrors()");
 	CErrorRecord *pListPtr;
 
@@ -284,7 +283,7 @@ CErrorRecord *CErrorDatabase::Find(const errcode_t Code) {
 	/* Search the entire linked list */
 	for (pSearchPtr = pHead; pSearchPtr != NULL; pSearchPtr = pSearchPtr->GetNext()) {
 		if (pSearchPtr->GetCode() == Code) {
-			return (pSearchPtr);
+			return pSearchPtr;
 		}
 	}
 
@@ -292,7 +291,7 @@ CErrorRecord *CErrorDatabase::Find(const errcode_t Code) {
 	SystemLog.DebugPrintf(_T("%s - Failed to find error record with code %ld!"),
 	                      ThisFunction,
 	                      Code);
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -308,7 +307,7 @@ CErrorRecord *CErrorDatabase::Find(const errcode_t Code) {
  * errors if they were previously added.
  *
  *=========================================================================*/
-void CErrorDatabase::InitDefaultErrors(void) {
+void CErrorDatabase::InitDefaultErrors() {
 	//DEFINE_FUNCTION("CErrorDatabase::InitDefaultErrors()");
 
 	/* Ignore if the default errors have already been added */
@@ -327,6 +326,7 @@ void CErrorDatabase::InitDefaultErrors(void) {
 	Add(ERR_BADINPUT, _T("Invalid input was received!"), ERRLEVEL_WARNING);
 	Add(ERR_OVERFLOW, _T("Received input that would result in an overflow!"), ERRLEVEL_ERROR);
 	Add(ERR_CUSTOM, _T("Custom application error!"), ERRLEVEL_ERROR);
+
 	/* Add the system error messages */
 	AddCustomError(ERR_SYSTEM, SystemErrorFunction);
 	/* Add the graphic error messages under DOS if required */
@@ -350,7 +350,7 @@ void CErrorDatabase::InitDefaultErrors(void) {
  * Class CErrorIncident Constructor
  *
  *=========================================================================*/
-CErrorIncident::CErrorIncident(void) {
+CErrorIncident::CErrorIncident() {
 	pNext = NULL;
 	pMessage = NULL;
 	Code = ERR_NONE;
@@ -369,7 +369,7 @@ CErrorIncident::CErrorIncident(void) {
  * Clears the contents of the object.
  *
  *=========================================================================*/
-void CErrorIncident::Destroy(void) {
+void CErrorIncident::Destroy() {
 	DEFINE_FUNCTION("CErrorIncident::Destroy()");
 	DestroyPointer(pMessage);
 	Code = ERR_NONE;
@@ -435,7 +435,7 @@ CErrorHandler::CErrorHandler(CErrorDatabase &ErrDB) : refErrorDatabase(ErrDB) {
  * Clears the contents of the object.
  *
  *=========================================================================*/
-void CErrorHandler::Destroy(void) {
+void CErrorHandler::Destroy() {
 	//DEFINE_FUNCTION("CErrorHandler::Destroy()");
 	/* Delete the current errors */
 	ClearErrors();
@@ -564,9 +564,9 @@ void CErrorHandler::AddErrorV(const errcode_t Code,
  * Deletes all the errors currently in the linked list.
  *
  *=========================================================================*/
-void CErrorHandler::ClearErrors(void) {
+void CErrorHandler::ClearErrors() {
 	DEFINE_FUNCTION("CErrorHandler::ClearErrors()");
-	CErrorIncident* pListPtr;
+	CErrorIncident *pListPtr;
 
 	/* Delete all elements in the singly linked list */
 	while (pIncidentHead != NULL) {
@@ -651,7 +651,7 @@ CErrorIncident *CErrorHandler::GetError(const int Index) {
 
 	/* Ensure a valid list element was found */
 	ASSERT(pListPtr != NULL);
-	return (pListPtr);
+	return pListPtr;
 }
 
 /*===========================================================================
@@ -669,21 +669,21 @@ CErrorIncident *CErrorHandler::GetError(const int Index) {
  * message for that error.  Always returns a valid string, never NULL.
  *
  *=========================================================================*/
-const TCHAR *CErrorHandler::GetLastErrorMsg(void) {
+const TCHAR *CErrorHandler::GetLastErrorMsg() {
 	//DEFINE_FUNCTION("CErrorHandler::GetLastErrorMsg()");
 
 	/* Ensure there is at least one incident recorded in list */
 	if (NumErrors == 0) {
-		return (_T("No recorded errors."));
+		return _T("No recorded errors.");
 	}
 
 	/* Check for a valid incident message */
 	if (pIncidentHead->GetMsg() != NULL) {
-		return (pIncidentHead->GetMsg());
+		return pIncidentHead->GetMsg();
 	}
 
 	/* Return the message from the error database */
-	return (GetLastErrorDBMsg());
+	return GetLastErrorDBMsg();
 }
 
 /*===========================================================================
@@ -700,27 +700,27 @@ const TCHAR *CErrorHandler::GetLastErrorMsg(void) {
  * string.  Always returns a valid string, never NULL.
  *
  *=========================================================================*/
-const TCHAR *CErrorHandler::GetLastErrorDBMsg(void) {
+const TCHAR *CErrorHandler::GetLastErrorDBMsg() {
 	//DEFINE_FUNCTION("CErrorHandler::GetLastDBErrorMsg()");
 	CErrorRecord *pErrRecord;
 
 	/* Ensure there is at least one incident recorded in list */
 	if (NumErrors == 0) {
-		return (_T("No recorded errors."));
+		return _T("No recorded errors.");
 	}
 
 	/* Attempt to retrieve database message for error */
 	pErrRecord = refErrorDatabase.Find(pIncidentHead->GetCode());
 
 	if (pErrRecord != NULL) {
-		return (pErrRecord->GetMsg(pIncidentHead->GetSubCode()));
+		return pErrRecord->GetMsg(pIncidentHead->GetSubCode());
 	}
 
 	/* No error message available for the incident! */
 	SystemLog.Printf(_T("No message available for error %ld/%ld"),
 	                 pIncidentHead->GetCode(),
 	                 pIncidentHead->GetSubCode());
-	return (_T("No message available for the error!"));
+	return _T("No message available for the error!");
 }
 
 /*===========================================================================
@@ -836,7 +836,9 @@ void CErrorHandler::NotifyList(const TCHAR *pMsg, const TCHAR *pTitle) {
 	pError = pIncidentHead;
 
 	/* Output all required errors */
-	while (pError != NULL && OutputErrors < MAX_ERROR_NOTIFYLIST && OutputErrors < m_LastErrorCount) {
+	while (pError != NULL
+	       && OutputErrors < MAX_ERROR_NOTIFYLIST
+	       && OutputErrors < m_LastErrorCount) {
 		pErrorRecord = refErrorDatabase.Find(pError->GetCode());
 
 		if (pErrorRecord == NULL) {
@@ -895,7 +897,9 @@ void CErrorHandler::NotifyListCode(const int ErrCode, const TCHAR *pMsg, const T
 	pError = pIncidentHead;
 
 	/* Output all required errors */
-	while (pError != NULL && OutputErrors < MAX_ERROR_NOTIFYLIST && OutputErrors < m_LastErrorCount) {
+	while (pError != NULL
+	       && OutputErrors < MAX_ERROR_NOTIFYLIST
+	       && OutputErrors < m_LastErrorCount) {
 		pErrorRecord = refErrorDatabase.Find(pError->GetCode());
 
 		/* Ignore all errors that don't have the given error code */
@@ -952,7 +956,9 @@ void CErrorHandler::NotifyListType(const int ErrType, const TCHAR *pMsg, const T
 	pError = pIncidentHead;
 
 	/* Output all required errors */
-	while (pError != NULL && OutputErrors < MAX_ERROR_NOTIFYLIST && OutputErrors < m_LastErrorCount) {
+	while (pError != NULL
+	       && OutputErrors < MAX_ERROR_NOTIFYLIST
+	       && OutputErrors < m_LastErrorCount) {
 		pErrorRecord = refErrorDatabase.Find(pError->GetCode());
 
 		/* Ignore all errors that don't have a valid error level */
@@ -989,7 +995,7 @@ void CErrorHandler::NotifyListType(const int ErrType, const TCHAR *pMsg, const T
  * SystemLog.
  *
  *=========================================================================*/
-void CErrorHandler::OutputLastErrorToLog(void) {
+void CErrorHandler::OutputLastErrorToLog() {
 	//DEFINE_FUNCTION("CErrorHandler::OutputLastErrorToLog()");
 	CErrorRecord *pErrorRecord;
 
@@ -1023,20 +1029,20 @@ void CErrorHandler::OutputLastErrorToLog(void) {
  * See Also: GetError(int), PeekError()
  *
  *=========================================================================*/
-CErrorIncident *CErrorHandler::PopError(void) {
+CErrorIncident *CErrorHandler::PopError() {
 	//DEFINE_FUNCTION("CErrorHandler::PopError()");
 	CErrorIncident *pLastError;
 
 	/* Check if there are any errors left to return */
 	if (pIncidentHead == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Remove the head from the singly linked list */
 	pLastError = pIncidentHead;
 	pIncidentHead = pLastError->GetNext();
 	NumErrors--;
-	return (pLastError);
+	return pLastError;
 }
 
 /*===========================================================================
@@ -1054,15 +1060,15 @@ CErrorIncident *CErrorHandler::PopError(void) {
  * See Also: GetError(int), PopError()
  *
  *=========================================================================*/
-CErrorIncident *CErrorHandler::PeekError(void) {
+CErrorIncident *CErrorHandler::PeekError() {
 	//DEFINE_FUNCTION("CErrorHandler::PopError()");
 
 	/* Check if there are any errors left to return */
 	if (pIncidentHead == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (pIncidentHead);
+	return pIncidentHead;
 }
 
 /*===========================================================================
@@ -1159,12 +1165,12 @@ const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	DEFINE_FUNCTION("SystemErrorFunction()");
 	TCHAR *pErrMessage;
 #if defined(_WIN32_WCE)
-	return (_T("No system errors in WinCE!"));
+	return _T("No system errors in WinCE!");
 #else
 
 	/* Check to ensure that it is a valid system error code */
 	if (Code < 0 || ((int)Code) >= _sys_nerr) {
-		return (_T("Invalid system error code!"));
+		return _T("Invalid system error code!");
 	}
 
 	/* Retrieve the error message from the system, ensuring its valid */
@@ -1178,7 +1184,7 @@ const TCHAR *SystemErrorFunction(const errcode_t Code) {
 #endif
 	ASSERT(pErrMessage != NULL);
 	//SystemLog.Printf ("SystemErrorFunction(%s)", pErrMessage);
-	return (pErrMessage);
+	return pErrMessage;
 #endif
 }
 
@@ -1204,10 +1210,10 @@ const TCHAR *TCGraphErrorFunction(const errcode_t Code) {
 
 	/* Ensure the message is valid */
 	if (pErrMessage == NULL) {
-		return (_T("Invalid graphics error code!"));
+		return _T("Invalid graphics error code!");
 	}
 
-	return (pErrMessage);
+	return pErrMessage;
 }
 
 /*===========================================================================
@@ -1244,17 +1250,16 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
 
 	/* Ensure the message is valid */
 	if (Result == 0) {
-		return (_T("Error creating Windows error message!"));
+		return _T("Error creating Windows error message!");
 	}
 
-	return (ErrMessage);
+	return ErrMessage;
 }
 
 /*===========================================================================
  *      End of Function WindowsErrorFunction()
  *=========================================================================*/
 #endif
-
 
 
 /*===========================================================================
@@ -1285,19 +1290,19 @@ const TCHAR *Test_CustomErrorFunc(const errcode_t Code) {
 	//DEFINE_FUNCTION("Test_CustomErrorFunc()");
 	switch (Code) {
 		case TEST_ERR1:
-			return (_T("Test Error 1"));
+			return _T("Test Error 1");
 
 		case TEST_ERR2:
-			return (_T("Test Error 2"));
+			return _T("Test Error 2");
 
 		case TEST_ERR3:
-			return (_T("Test Error 3"));
+			return _T("Test Error 3");
 
 		case TEST_ERR4:
-			return (_T("Test Error 4"));
+			return _T("Test Error 4");
 
 		default:
-			return (_T("Unknown Test Error Code"));
+			return _T("Unknown Test Error Code");
 	}
 }
 
@@ -1317,24 +1322,28 @@ const TCHAR *Test_CustomErrorFunc(const errcode_t Code) {
  * Function ASSERTs on any error. Results are output to the SystemLog.
  *
  *=========================================================================*/
-void Test_AddError(void) {
+void Test_AddError() {
 	DEFINE_FUNCTION("Test_AddError()");
 	CErrorRecord *pFindRecord;
 	SystemLog.Printf(stdout, _T("================ Test_AddError() ==================="));
+
 	/* Test the addition of errors to the database */
 	ErrorDatabase.Add(TEST_ERR1, _T("Test error code 1 message"));
 	ErrorDatabase.Add(TEST_ERR2, _T("Test error code 2 message"), ERRLEVEL_WARNING);
+
 	/* Check to ensure TEST_ERR1 was correctly stored */
 	pFindRecord = ErrorDatabase.Find(TEST_ERR1);
 	ASSERT(pFindRecord != NULL);
 	ASSERT(pFindRecord->GetCode() == TEST_ERR1);
 	SystemLog.Printf(_T("TEST_ERR1 = '%s'"), pFindRecord->GetMsg());
+
 	/* Check to ensure TEST_ERR2 was correctly stored */
 	pFindRecord = ErrorDatabase.Find(TEST_ERR2);
 	ASSERT(pFindRecord != NULL);
 	ASSERT(pFindRecord->GetCode() == TEST_ERR2);
 	ASSERT(pFindRecord->GetLevel() == ERRLEVEL_WARNING);
 	SystemLog.Printf(_T("TEST_ERR2 = '%s'"), pFindRecord->GetMsg());
+
 	/* Attempt to add a duplicate error code */
 	ErrorDatabase.Add(TEST_ERR2, _T("Test error code 2a message"), ERRLEVEL_CRITICAL);
 	pFindRecord = ErrorDatabase.Find(TEST_ERR2);
@@ -1357,14 +1366,16 @@ void Test_AddError(void) {
  *  3. Indirectly tests the Find() method.
  *
  *=========================================================================*/
-void Test_AddCustomError(void) {
+void Test_AddCustomError() {
 	DEFINE_FUNCTION("Test_AddCustomError()");
 	CErrorRecord *pFindRecord;
 	SystemLog.Printf(stdout, _T("================ Test_AddCustomError() ==================="));
+
 	/* Add the custom error */
 	ErrorDatabase.AddCustomError(TEST_ERR3, Test_CustomErrorFunc);
 	pFindRecord = ErrorDatabase.Find(TEST_ERR3);
 	ASSERT(pFindRecord != NULL);
+
 	/* Test the retrieval of various custom error messages */
 	SystemLog.Printf(_T("CustomError(ERR_NONE) = '%s'"), pFindRecord->GetMsg(ERR_NONE));
 	SystemLog.Printf(_T("CustomError(TEST_ERR1) = '%s'"), pFindRecord->GetMsg(TEST_ERR1));
@@ -1388,21 +1399,23 @@ void Test_AddCustomError(void) {
  * Function ASSERTs on any error.  Results are output to the SystemLog.
  *
  *=========================================================================*/
-void Test_DefaultErrors(void) {
+void Test_DefaultErrors() {
 	DEFINE_FUNCTION("Test_DefaultErrors()");
 	CErrorRecord *pFindRecord;
 	signed int ErrorCounter;
 	/* Default errors to test, ERR_NONE must be last in array */
-	errcode_t DefaultErrors[] = {ERR_MEM,
-	                             ERR_OPENFILE,
-	                             ERR_READFILE,
-	                             ERR_WRITEFILE,
-	                             ERR_OVERFLOW,
-	                             ERR_BADINPUT,
-	                             ERR_BADARRAYINDEX,
-	                             ERR_MAXINDEX,
-	                             ERR_SYSTEM,
-	                             ERR_NONE};
+	errcode_t DefaultErrors[] = {
+		ERR_MEM,
+		ERR_OPENFILE,
+		ERR_READFILE,
+		ERR_WRITEFILE,
+		ERR_OVERFLOW,
+		ERR_BADINPUT,
+		ERR_BADARRAYINDEX,
+		ERR_MAXINDEX,
+		ERR_SYSTEM,
+		ERR_NONE
+	};
 	SystemLog.Printf(stdout, _T("================ Test_DefaultErrors() ==================="));
 	/* Test all error codes in the DefaultErrors[] array */
 	ErrorCounter = -1;
@@ -1423,6 +1436,7 @@ void Test_DefaultErrors(void) {
 	ASSERT(ErrorDatabase.GetNumErrors() == 0);
 	ErrorDatabase.InitDefaultErrors();
 	ASSERT(ErrorDatabase.GetNumErrors() == ErrorCounter);
+
 	/* Attempt to re-add the default errors to database */
 	ErrorDatabase.InitDefaultErrors();
 	ASSERT(ErrorDatabase.GetNumErrors() == ErrorCounter);
@@ -1443,9 +1457,10 @@ void Test_DefaultErrors(void) {
  *  3. Test with invalid incidents
  *
  *=========================================================================*/
-void Test_GetLastErrorMsg(void) {
+void Test_GetLastErrorMsg() {
 	//DEFINE_FUNCTION("Test_GetLastErrorMsg()");
 	SystemLog.Printf(stdout, _T("================ Testing GetLastErrorMsg() ==================="));
+
 	/* Test with valid incidents/errors */
 	ErrorHandler.AddError(ERR_OPENFILE,
 	                      _T("Test incident error message, %s, %d"),
@@ -1459,6 +1474,7 @@ void Test_GetLastErrorMsg(void) {
 	SystemLog.Printf(_T("\t***System Code With Msg = %s"), ErrorHandler.GetLastErrorMsg());
 	ErrorHandler.AddError(ERR_SYSTEM, ENOENT, NULL);
 	SystemLog.Printf(_T("\t***System Code no Msg = %s"), ErrorHandler.GetLastErrorMsg());
+
 	/* Test with invalid error codes */
 	ErrorHandler.AddError(1414,
 	                      111,
@@ -1466,6 +1482,7 @@ void Test_GetLastErrorMsg(void) {
 	                      _T("test string"),
 	                      10101);
 	SystemLog.Printf(_T("\t***Bad Code with Msg = %s"), ErrorHandler.GetLastErrorMsg());
+
 	/* Test with invalid error incidents */
 	ErrorHandler.ClearErrors();
 	SystemLog.Printf(_T("\t***No Errors = %s"), ErrorHandler.GetLastErrorMsg());
@@ -1489,9 +1506,10 @@ void Test_GetLastErrorMsg(void) {
  *
  *
  *=========================================================================*/
-void Test_HandlerAddError(void) {
+void Test_HandlerAddError() {
 	//DEFINE_FUNCTION("Test_HandlerAddError()");
 	SystemLog.Printf(stdout, _T("================ Test_HandlerAddError() ==================="));
+
 	/* Test the standard AddError() method */
 	ErrorHandler.AddError(ERR_MEM, _T("Testing...Failed to allocate memory"));
 	ErrorHandler.AddError(ERR_BADINPUT,
@@ -1504,6 +1522,7 @@ void Test_HandlerAddError(void) {
 	ErrorHandler.AddError(TEST_ERR5, _T("Testing invalid error code TEST_ERR5"));
 	ErrorHandler.AddError(ERR_MEM, NULL);
 	ErrorHandler.AddError(ERR_MEM, (TCHAR *)NULL);
+
 	/* Test the sub-code AddError() method */
 	ErrorHandler.AddError(ERR_MEM, ERR_MEM, _T("Testing ERR_MEM subcode version"));
 	ErrorHandler.AddError(ERR_NONE,
@@ -1541,7 +1560,7 @@ void Test_HandlerAddError(void) {
  *  2. Tests the PopError() method to remove errors from handler.
  *
  *=========================================================================*/
-void Test_HandlerNotify(void) {
+void Test_HandlerNotify() {
 	DEFINE_FUNCTION("Test_HandlerNotify()");
 	CErrorIncident *pErrorIncident;
 	/* Test the Notify() method with a given title */
@@ -1573,7 +1592,7 @@ void Test_HandlerNotify(void) {
  *  4. Check a number of invalid system error codes
  *
  *=========================================================================*/
-void Test_SystemErrors(void) {
+void Test_SystemErrors() {
 	DEFINE_FUNCTION("Test_SystemErrors()");
 	CErrorRecord *pSystemError;
 	int LoopCounter;
@@ -1610,7 +1629,7 @@ void Test_SystemErrors(void) {
  * in the long term.
  *
  *=========================================================================*/
-void Test_Allocation(void) {
+void Test_Allocation() {
 	DEFINE_FUNCTION("Test_Allocation()");
 	TCHAR MsgBuffer[101];
 	int LoopCounter;
@@ -1677,7 +1696,7 @@ void Test_Allocation(void) {
  *  9. Tests the GetLastErrorMsg() and GetLastErrorDBMsg() methods
  *
  *=========================================================================*/
-void Test_DLErr(void) {
+void Test_DLErr() {
 	DEFINE_FUNCTION("Test_DLErr()");
 	ASSERT(DebugHeapCheckMemory());
 	SystemLog.Printf(stdout, _T("================ Test_DLErr() ==================="));

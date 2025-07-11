@@ -109,7 +109,7 @@ CConsoleApp::CConsoleApp() {
  * Destroys or resets any class members.
  *
  *=========================================================================*/
-void CConsoleApp::Destroy(void) {
+void CConsoleApp::Destroy() {
 	//DEFINE_FUNCTION("CConsoleApp::Destroy()");
 	int LoopCounter;
 
@@ -141,11 +141,11 @@ void CConsoleApp::Destroy(void) {
  * Static function which registers the custom errors for the class.
  *
  *=========================================================================*/
-bool CConsoleApp::AddClassErrors(void) {
+bool CConsoleApp::AddClassErrors() {
 	//DEFINE_FUNCTION("CConsoleApp::AddClassErrors()");
 	ErrorDatabase.Add(ERRCONAPP_NOHELP, "No help text was defined!", ERRLEVEL_WARNING);
 	ErrorDatabase.Add(ERRCONAPP_BADLINESPERPAGE, "Bad lines per page value specified!");
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -161,7 +161,7 @@ bool CConsoleApp::AddClassErrors(void) {
  * object.  Method does not return.
  *
  *=========================================================================*/
-void CConsoleApp::AbortProgram(void) {
+void CConsoleApp::AbortProgram() {
 	//DEFINE_FUNCTION("CConsoleApp::AbortProgram()");
 	fprintf(pOutputStream, "   Program Error...Aborting!\n");
 	fprintf(pOutputStream, "\t%s\n\n", ErrorHandler.GetLastErrorMsg());
@@ -182,15 +182,15 @@ void CConsoleApp::AbortProgram(void) {
  * for any debug builds.
  *
  *=========================================================================*/
-bool CConsoleApp::OpenLog(void) {
+bool CConsoleApp::OpenLog() {
 	//DEFINE_FUNCTION("CConsoleApp::OpenLog()");
 #if defined(_DEBUG)
 	char LogFilename[_MAX_FNAME + 5] = "temp.log";
 	/* Create a file with the new extension and attempt to open log */
 	ChangeExtension(LogFilename, pProgramName, ".log", _MAX_FNAME + 4);
-	return (SystemLog.Open(LogFilename));
+	return SystemLog.Open(LogFilename);
 #else
-	return (TRUE);
+	return TRUE;
 #endif
 }
 
@@ -206,7 +206,7 @@ bool CConsoleApp::OpenLog(void) {
  * Output the application's help text.
  *
  *=========================================================================*/
-bool CConsoleApp::OutputHelp(void) {
+bool CConsoleApp::OutputHelp() {
 	//DEFINE_FUNCTION( "CConsoleApp::OutputHelp()");
 	bool Result = TRUE;
 	int LoopCounter = 0;
@@ -223,7 +223,7 @@ bool CConsoleApp::OutputHelp(void) {
 		}
 
 		ErrorHandler.AddError(ERRCONAPP_NOHELP);
-		return (Result);
+		return Result;
 	}
 
 	/* Output the help text */
@@ -231,13 +231,13 @@ bool CConsoleApp::OutputHelp(void) {
 		Result = PrintLine(ppHelpText[LoopCounter]);
 
 		if (!Result) {
-			return (FALSE);
+			return FALSE;
 		}
 
 		LoopCounter++;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -253,7 +253,7 @@ bool CConsoleApp::OutputHelp(void) {
  * Returns FALSE on any output error.
  *
  *=========================================================================*/
-bool CConsoleApp::OutputTitle(void) {
+bool CConsoleApp::OutputTitle() {
 	DEFINE_FUNCTION("CConsoleApp::OutputTitle()");
 	int Result = 0;
 	/* Ensure valid input */
@@ -289,12 +289,12 @@ bool CConsoleApp::OutputTitle(void) {
 	/* Check for an error condition */
 	if (Result < 0 || ferror(pOutputStream)) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Error writing to the output file stream!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Increase the number of lines output and return success */
 	OutputLineCount++;
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -309,12 +309,15 @@ bool CConsoleApp::OutputTitle(void) {
  * Outputs the version information to the current output stream.
  *
  *=========================================================================*/
-bool CConsoleApp::OutputVersion(void) {
+bool CConsoleApp::OutputVersion() {
 	DEFINE_FUNCTION("CConsoleApp::OutputVersion()");
 	int Result;
 	/* Ensure a valid output stream handle */
 	ASSERT(pOutputStream != NULL);
-	Result = fprintf(pOutputStream, "v%0d.%0d%c", MajorVersion, MinorVersion,
+	Result = fprintf(pOutputStream,
+	                 "v%0d.%0d%c",
+	                 MajorVersion,
+	                 MinorVersion,
 	                 ReleaseTypeToChar(ReleaseType));
 
 	if (Result >= 0 && ReleaseType != RELEASE_FINAL && BuildNumber >= 0) {
@@ -324,10 +327,10 @@ bool CConsoleApp::OutputVersion(void) {
 	/* Check for an error condition */
 	if (Result < 0) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Error writing to the output file stream!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -343,7 +346,7 @@ bool CConsoleApp::OutputVersion(void) {
  * Protected class method.
  *
  *=========================================================================*/
-bool CConsoleApp::ParseAllParameters(void) {
+bool CConsoleApp::ParseAllParameters() {
 	//DEFINE_FUNCTION("CConsoleApp::ParseAllParameters()");
 	cmdparse_t Result;
 	int LoopCounter;
@@ -352,11 +355,11 @@ bool CConsoleApp::ParseAllParameters(void) {
 		Result = ParseOneParameter(pArguments[LoopCounter]);
 
 		if (Result == CMDPARSE_FAILED) {
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -388,7 +391,7 @@ cmdparse_t CConsoleApp::ParseCommand(char *pCommand, const bool Flag) {
 
 		/* Unknown command option */
 		default:
-			return (CMDPARSE_NOTPARSED);
+			return CMDPARSE_NOTPARSED;
 	}
 }
 
@@ -439,11 +442,11 @@ cmdparse_t CConsoleApp::ParseOneParameter(char *pString) {
 		}
 
 		/* Parse the command parameter */
-		return (ParseCommand(pString, CommandFlag));
+		return ParseCommand(pString, CommandFlag);
 	}
 
 	/* Default to parsing it as a regular parameter */
-	return (ParseParameter(pString));
+	return ParseParameter(pString);
 }
 
 /*===========================================================================
@@ -465,7 +468,7 @@ cmdparse_t CConsoleApp::ParsePagingCommand(char *pString, const bool Flag) {
 	/* Do we want to turn off paging? */
 	if (!Flag) {
 		DoPaging = FALSE;
-		return (CMDPARSE_SUCCESS);
+		return CMDPARSE_SUCCESS;
 	}
 
 	/* Parse the number of lines per page from the string */
@@ -477,11 +480,11 @@ cmdparse_t CConsoleApp::ParsePagingCommand(char *pString, const bool Flag) {
 		ErrorHandler.AddError(ERRCONAPP_BADLINESPERPAGE,
 		                      "\tInvalid lines per page value specified (%d)!",
 		                      LinesPerPage);
-		return (CMDPARSE_FAILED);
+		return CMDPARSE_FAILED;
 	}
 
 	DoPaging = TRUE;
-	return (CMDPARSE_SUCCESS);
+	return CMDPARSE_SUCCESS;
 }
 
 /*===========================================================================
@@ -501,7 +504,7 @@ cmdparse_t CConsoleApp::ParsePagingCommand(char *pString, const bool Flag) {
 cmdparse_t CConsoleApp::ParseParameter(char */*pString*/ ) {
 	//DEFINE_FUNCTION("CConsoleApp::ParseParameter()");
 	/* Default to not parsing the parameter */
-	return (CMDPARSE_NOTPARSED);
+	return CMDPARSE_NOTPARSED;
 }
 
 /*===========================================================================
@@ -556,10 +559,10 @@ bool CConsoleApp::PrintLine(const char *pString, ...) {
 	/* Check for an error */
 	if (Result < 0 || ferror(pOutputStream)) {
 		ErrorHandler.AddError(ERR_SYSTEM, errno, "Error writing to the output file stream!");
-		return (FALSE);
+		return FALSE;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -610,11 +613,11 @@ int CConsoleApp::StartConsoleApp(const int ArgCount, char *pArgs[]) {
 	}
 
 	if (!Result) {
-		return (EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
 
 	/* Call the user's overridden method */
-	return (StartApp());
+	return StartApp();
 }
 
 /*===========================================================================
@@ -629,10 +632,10 @@ int CConsoleApp::StartConsoleApp(const int ArgCount, char *pArgs[]) {
  * Returns the global console application object.
  *
  *=========================================================================*/
-CConsoleApp *GetConsoleApp(void) {
+CConsoleApp *GetConsoleApp() {
 	DEFINE_FUNCTION("GetConsoleApp()");
 	ASSERT(pTheConsoleApp != NULL);
-	return (pTheConsoleApp);
+	return pTheConsoleApp;
 }
 
 /*===========================================================================
@@ -651,22 +654,22 @@ char ReleaseTypeToChar(const release_t ReleaseType) {
 	//DEFINE_FUNCTION("ReleaseTypeToChar()");
 	switch (ReleaseType) {
 		case RELEASE_UNKNOWN:
-			return ('?');
+			return '?';
 
 		case RELEASE_DEBUG:
-			return ('d');
+			return 'd';
 
 		case RELEASE_ALPHA:
-			return ('a');
+			return 'a';
 
 		case RELEASE_BETA:
-			return ('b');
+			return 'b';
 
 		case RELEASE_FINAL:
-			return (' ');
+			return ' ';
 
 		default:
-			return ('?');
+			return '?';
 	}
 }
 

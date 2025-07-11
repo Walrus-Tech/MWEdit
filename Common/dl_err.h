@@ -30,13 +30,13 @@
  *=========================================================================*/
 
 /* Maximum size of a message string for the error message strings */
-#define MAX_ERROR_MESSAGESIZE 1024
+#define MAX_ERROR_MESSAGESIZE   1024
 
 /* Number of error incidents allowed at a time */
-#define MAX_ERROR_INCIDENTS 50
+#define MAX_ERROR_INCIDENTS     50
 
 /* Maximum number of errors to output to a notify list */
-#define MAX_ERROR_NOTIFYLIST 10
+#define MAX_ERROR_NOTIFYLIST    10
 #define ERROR_NOTIFYLIST_BUFFER 1024
 
 /*===========================================================================
@@ -49,8 +49,8 @@
  * Begin Custom Error Code Defines
  *
  *=========================================================================*/
-#define ERR_NONE      ((errcode_t) 0)
-#define ERR_MEM       ((errcode_t) 1)
+#define ERR_NONE          ((errcode_t) 0)
+#define ERR_MEM           ((errcode_t) 1)
 #define ERR_OPENFILE      ((errcode_t) 2)
 #define ERR_READFILE      ((errcode_t) 3)
 #define ERR_WRITEFILE     ((errcode_t) 4)
@@ -59,8 +59,8 @@
 #define ERR_BADARRAYINDEX ((errcode_t) 7)
 #define ERR_MAXINDEX      ((errcode_t) 8)
 #define ERR_SYSTEM        ((errcode_t) 9)
-#define ERR_TCGRAPH       ((errcode_t) 10)    /* Only in TC-DOS */
-#define ERR_WINDOWS       ((errcode_t) 11)    /* Only under windows */
+#define ERR_TCGRAPH       ((errcode_t) 10) /* Only in TC-DOS */
+#define ERR_WINDOWS       ((errcode_t) 11) /* Only under windows */
 #define ERR_CUSTOM        ((errcode_t) 12)
 /*===========================================================================
  *      End of Custom Error Code Defines
@@ -126,8 +126,8 @@ class CErrorRecord {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	errcode_t Code;  /* The custom code for this error */
-	TCHAR *pMessage;    /* the custom message string for the error */
+	errcode_t Code;   /* The custom code for this error */
+	TCHAR *pMessage;  /* the custom message string for the error */
 	errlevel_t Level; /* The severity level for the custom error */
 
 	/* The optional function for retrieving the error message for
@@ -151,29 +151,29 @@ class CErrorRecord {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-	errcode_t GetCode(void) const {
-		return (Code);
+	errcode_t GetCode() const {
+		return Code;
 	}
 
-	errlevel_t GetLevel(void) const {
-		return (Level);
+	errlevel_t GetLevel() const {
+		return Level;
 	}
 
-	CErrorRecord *GetNext(void) const {
-		return (pNext);
+	CErrorRecord *GetNext() const {
+		return pNext;
 	}
 
 	const TCHAR *GetMsg(const errcode_t SubCode = ERR_NONE) const;
 
 	/* Is this record the last in the linked list? */
-	boolean IsLast(void) {
+	boolean IsLast() {
 		if (pNext == NULL) {
-			return (TRUE);
+			return TRUE;
 		} else {
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
@@ -197,7 +197,6 @@ class CErrorRecord {
 	void SetFunction(PERR_CUSTOM_FUNCTION NewFunction) {
 		CustomErrFunction = NewFunction;
 	}
-
 };
 
 /*===========================================================================
@@ -218,9 +217,9 @@ class CErrorDatabase {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	CErrorRecord *pHead;          /* Start of the singly linked list */
+	CErrorRecord *pHead;        /* Start of the singly linked list */
 	boolean AddedDefaultErrors; /* Have the default custom errors been loaded? */
-	int NumErrors;      /* Number of custom errors in list */
+	int NumErrors;              /* Number of custom errors in list */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -236,7 +235,7 @@ class CErrorDatabase {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add a new custom error to the head of the linked list */
 	void Add(const errcode_t Code,
@@ -247,19 +246,18 @@ class CErrorDatabase {
 	void AddCustomError(const errcode_t Code, PERR_CUSTOM_FUNCTION ErrFunction);
 
 	/* Deletes the entire singly linked list of custom errors */
-	void ClearErrors(void);
+	void ClearErrors();
 
 	/* Attempt to find a specific custom error record in the linked list */
 	CErrorRecord *Find(const errcode_t Code);
 
 	/* Get class members */
-	int GetNumErrors(void) {
-		return (NumErrors);
+	int GetNumErrors() {
+		return NumErrors;
 	}
 
 	/* Add the default custom errors to the database */
-	void InitDefaultErrors(void);
-
+	void InitDefaultErrors();
 };
 
 /*===========================================================================
@@ -279,10 +277,10 @@ class CErrorIncident {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	errcode_t Code;         /* The custom error code */
+	errcode_t Code;        /* The custom error code */
 	errcode_t SubCode;
-	TCHAR *pMessage;     /* The optional error message */
-	CErrorIncident *pNext;        /* Pointer to the next record in linked list */
+	TCHAR *pMessage;       /* The optional error message */
+	CErrorIncident *pNext; /* Pointer to the next record in linked list */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -298,23 +296,23 @@ class CErrorIncident {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-	errcode_t GetCode(void) const {
-		return (Code);
+	errcode_t GetCode() const {
+		return Code;
 	}
 
-	errcode_t GetSubCode(void) const {
-		return (SubCode);
+	errcode_t GetSubCode() const {
+		return SubCode;
 	}
 
-	TCHAR *GetMsg(void) const {
-		return (pMessage);
+	TCHAR *GetMsg() const {
+		return pMessage;
 	}
 
-	CErrorIncident *GetNext(void) const {
-		return (pNext);
+	CErrorIncident *GetNext() const {
+		return pNext;
 	}
 
 	/* Set class members */
@@ -335,7 +333,6 @@ class CErrorIncident {
 	}
 
 	void SetMsg(const TCHAR *pString, va_list Args);
-
 };
 
 /*===========================================================================
@@ -354,23 +351,23 @@ class CErrorHandler {
 
 	/*---------- Begin Private Class Members ----------------------*/
   private:
-	CErrorIncident *pIncidentHead;      /* The current errors recorded */
+	CErrorIncident *pIncidentHead;    /* The current errors recorded */
 	int NumErrors;
 
-	CErrorDatabase &refErrorDatabase;   /* The referenced database object */
+	CErrorDatabase &refErrorDatabase; /* The referenced database object */
 
-	PERR_NOTIFY_FUNCTION pNotifyFunc;        /* The optional notify function supplied by user */
-	PERROR_HOOKPROC pHookFunc;      /* Optional users hook function */
+	PERR_NOTIFY_FUNCTION pNotifyFunc; /* The optional notify function supplied by user */
+	PERROR_HOOKPROC pHookFunc;        /* Optional users hook function */
 	void *pHookData;
 
-	int m_LastErrorCount;       /* Used to keep track of errors since last reset */
+	int m_LastErrorCount;             /* Used to keep track of errors since last reset */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Outputs the most recent error to the SystemLog */
-	void OutputLastErrorToLog(void);
+	void OutputLastErrorToLog();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -382,18 +379,21 @@ class CErrorHandler {
 		Destroy();
 	}
 
-	virtual void Destroy (void);
+	virtual void Destroy ();
 
 	/* Add an error to the top of the list */
 	void AddError(const errcode_t Code, const TCHAR *pString = NULL, ...);
 	void AddError(const errcode_t Code, const errcode_t SubCode, const TCHAR *pString, ...);
-	void AddErrorV(const errcode_t Code, const errcode_t SubCode, const TCHAR *pString, va_list Args);
+	void AddErrorV(const errcode_t Code,
+	               const errcode_t SubCode,
+	               const TCHAR *pString,
+	               va_list Args);
 
 	/* Delete all errors in the list */
-	void ClearErrors(void);
+	void ClearErrors();
 
 	/* Clears the error count for tracking errors */
-	void ClearErrorCount(void) {
+	void ClearErrorCount() {
 		m_LastErrorCount = 0;
 	}
 
@@ -405,16 +405,16 @@ class CErrorHandler {
 	CErrorIncident *GetError(const int Index = 0);
 
 	/* Gets the error message of the most recent error incident */
-	const TCHAR *GetLastErrorMsg(void);
-	const TCHAR *GetLastErrorDBMsg(void);
+	const TCHAR *GetLastErrorMsg();
+	const TCHAR *GetLastErrorDBMsg();
 
 	/* Get class members */
-	int GetNumErrors(void) {
-		return (NumErrors);
+	int GetNumErrors() {
+		return NumErrors;
 	}
 
-	int GetErrorCount(void) {
-		return (m_LastErrorCount);
+	int GetErrorCount() {
+		return m_LastErrorCount;
 	}
 
 	/* Notifies the user of the most recent error */
@@ -425,8 +425,8 @@ class CErrorHandler {
 	void NotifyListType(const int ErrType, const TCHAR *pMsg, const TCHAR *pTitle);
 
 	/* Retrieve the most recent error incident */
-	CErrorIncident *PopError(void);
-	CErrorIncident *PeekError(void);
+	CErrorIncident *PopError();
+	CErrorIncident *PeekError();
 
 	/* Standard error message output function */
 	void Printf(const TCHAR *pTitle, const TCHAR *pString, ...);
@@ -441,7 +441,6 @@ class CErrorHandler {
 		pHookFunc = NewFunc;
 		pHookData = pData;
 	}
-
 };
 
 /*===========================================================================
@@ -459,7 +458,6 @@ extern CErrorDatabase ErrorDatabase;
 /*===========================================================================
  *      End of Global Variable Definitions
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -498,19 +496,18 @@ const TCHAR *TCGraphErrorFunction(const errcode_t Code);
 #define TEST_ERR5 105
 
 /* Test routines for the module */
-void Test_DefaultErrors(void);
-void Test_SystemErrors(void);
-void Test_AddError(void);
-void Test_AddCustomError(void);
-void Test_HandlerAddError(void);
-void Test_HandlerNotify(void);
-void Test_DLErr(void);
+void Test_DefaultErrors();
+void Test_SystemErrors();
+void Test_AddError();
+void Test_AddCustomError();
+void Test_HandlerAddError();
+void Test_HandlerNotify();
+void Test_DLErr();
 const TCHAR *Test_CustomErrFunc(const errcode_t Code);
 
 /*===========================================================================
  *      End of Test Routine Definitions
  *=========================================================================*/
-
 
 
 #endif
