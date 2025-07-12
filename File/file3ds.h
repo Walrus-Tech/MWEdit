@@ -175,14 +175,14 @@ class C3dsFile : public CGenFile {
 	bool DumpContents(FILE *pFileHandle);
 
 	/* End writing major chunk sections */
-	bool EndMainChunk(void);
-	bool EndEditChunk(void);
-	bool EndObjectChunk(void);
-	bool EndTrimeshChunk(void);
-	bool EndFaceChunk(void);
-	bool EndPointChunk(void);
+	bool EndMainChunk();
+	bool EndEditChunk();
+	bool EndObjectChunk();
+	bool EndTrimeshChunk();
+	bool EndFaceChunk();
+	bool EndPointChunk();
 	bool EndChunk(const ushort ID);
-	bool EndMatGroupChunk(void);
+	bool EndMatGroupChunk();
 	bool EndTexVertChunk(const short Count);
 
 	/* Attempts to find a chunk info structure */
@@ -191,15 +191,15 @@ class C3dsFile : public CGenFile {
 	static chunk3ds_t *FindChunk(const ushort ChunkID);
 
 	/* Start writing major chunk sections */
-	bool StartMainChunk(void);
-	bool StartEditChunk(void);
+	bool StartMainChunk();
+	bool StartEditChunk();
 	bool StartObjectChunk(const char *pName);
-	bool StartTrimeshChunk(void);
-	bool StartFaceChunk(void);
-	bool StartPointChunk(void);
+	bool StartTrimeshChunk();
+	bool StartFaceChunk();
+	bool StartPointChunk();
 	bool StartChunk(const ushort ID);
 	bool StartMatGroupChunk(const char *pMatName, const short Count);
-	bool StartTexVertChunk(void);
+	bool StartTexVertChunk();
 
 	/* Output a standard material section */
 	bool OutputMatEntry(const char *pMatName, const char *pTextureName);
@@ -221,7 +221,6 @@ class C3dsFile : public CGenFile {
 	bool WriteChunkFloat(const ushort ChunkID, const float Value);
 	bool WriteString(const ushort ChunkID, const char *pString);
 	bool WriteTexVert(const float X, const float Y);
-
 };
 
 /*===========================================================================
@@ -240,31 +239,31 @@ inline bool C3dsFile::EndTexVertChunk(const short Count) {
 	return PopChunkStack(CHUNK3DS_ID_TEX_VERTS, Count);
 }
 
-inline bool C3dsFile::EndEditChunk(void) {
+inline bool C3dsFile::EndEditChunk() {
 	return PopChunkStack(CHUNK3DS_ID_EDIT);
 }
 
-inline bool C3dsFile::EndFaceChunk(void) {
+inline bool C3dsFile::EndFaceChunk() {
 	return PopChunkStack(CHUNK3DS_ID_FACEARRAY, m_NumFaces);
 }
 
-inline bool C3dsFile::EndMainChunk(void) {
+inline bool C3dsFile::EndMainChunk() {
 	return PopChunkStack(CHUNK3DS_ID_MAIN);
 }
 
-inline bool C3dsFile::EndMatGroupChunk(void) {
+inline bool C3dsFile::EndMatGroupChunk() {
 	return PopChunkStack(CHUNK3DS_ID_MATGROUP);
 }
 
-inline bool C3dsFile::EndObjectChunk(void) {
+inline bool C3dsFile::EndObjectChunk() {
 	return PopChunkStack(CHUNK3DS_ID_NAMEDOBJECT);
 }
 
-inline bool C3dsFile::EndPointChunk(void) {
+inline bool C3dsFile::EndPointChunk() {
 	return PopChunkStack(CHUNK3DS_ID_POINTARRAY, m_NumPoints);
 }
 
-inline bool C3dsFile::EndTrimeshChunk(void) {
+inline bool C3dsFile::EndTrimeshChunk() {
 	return PopChunkStack(CHUNK3DS_ID_TRIMESH);
 }
 

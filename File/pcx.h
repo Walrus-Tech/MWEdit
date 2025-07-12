@@ -54,17 +54,21 @@ typedef struct {
 	char Version;
 	char Encoding;
 	char BitsPerPixel;
+
 	short X;
 	short Y;
 	short Width;
 	short Height;
 	short HorzResolution;
 	short VertResolution;
+
 	char EGAPalette[48];
 	char Reserved;
 	char NumColorPlanes;
+
 	short BytesPerLine;
 	short PaletteType;
+
 	char Padding[58]; /* Padding for future use */
 } pcxheader_t;
 
@@ -88,7 +92,7 @@ class CPcxFile : public CGenFile {
   private:
 	pcxheader_t m_Header; /* Header information */
 
-	byte *m_pData; /* Raw image data (uncompressed) */
+	byte *m_pData;        /* Raw image data (uncompressed) */
 	long m_ImageSize;
 
 	rgbpal_t *m_pPalette; /* Palette data */
@@ -99,15 +103,15 @@ class CPcxFile : public CGenFile {
   protected:
 
 	/* Sets header values to default values */
-	void CreateStandardHeader(void);
+	void CreateStandardHeader();
 
 	/* Helper input and output methods */
-	bool ReadHeader(void);
-	bool ReadImage(void);
-	bool ReadPalette(void);
-	bool WriteHeader(void);
-	bool WriteImage(void);
-	bool WritePalette(void);
+	bool ReadHeader();
+	bool ReadImage();
+	bool ReadPalette();
+	bool WriteHeader();
+	bool WriteImage();
+	bool WritePalette();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -119,7 +123,7 @@ class CPcxFile : public CGenFile {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Saves LBM image data to a standard 256 color PCX file */
 	bool ExportLBM(const char *pFilename,
@@ -131,7 +135,6 @@ class CPcxFile : public CGenFile {
 	/* Attempt to load/save the specified PCX image */
 	bool Load(const char *pFilename);
 	bool Save(const char *pFilename);
-
 };
 
 /*===========================================================================

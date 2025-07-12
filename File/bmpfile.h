@@ -98,10 +98,10 @@ class CBmpFile : virtual public CGenFile {
 	bmpfileheader_t m_FileHeader; /* Image header data */
 	bmpinfoheader_t m_InfoHeader;
 
-	byte *m_pData; /* Raw image data (uncompressed) */
+	byte *m_pData;                /* Raw image data (uncompressed) */
 	long m_ImageSize;
 
-	rgbpal_t *m_pPalette; /* Palette data */
+	rgbpal_t *m_pPalette;         /* Palette data */
 	int m_PaletteSize;
 
 
@@ -109,7 +109,7 @@ class CBmpFile : virtual public CGenFile {
   protected:
 
 	/* Helper output functions */
-	bool WriteQuadPalette(void);
+	bool WriteQuadPalette();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -117,11 +117,11 @@ class CBmpFile : virtual public CGenFile {
 
 	/* Class Constructors/Destructors */
 	CBmpFile();
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compute various sizes/offset */
-	uint ComputeSize(void) const;
-	uint ComputeOffsetBits(void) const;
+	uint ComputeSize() const;
+	uint ComputeOffsetBits() const;
 
 	/* Saves LBM image data to a standard 256 color BMP file */
 	bool ExportLBM(const char *pFilename,
@@ -132,8 +132,6 @@ class CBmpFile : virtual public CGenFile {
 
 	/* Save the current BMP image to a file */
 	bool Save(const char *pFilename);
-
-
 };
 
 /*===========================================================================
@@ -148,14 +146,14 @@ class CBmpFile : virtual public CGenFile {
  *=========================================================================*/
 
 /* Compute various file offsets and sizes */
-inline uint CBmpFile::ComputeSize(void) const {
+inline uint CBmpFile::ComputeSize() const {
 	return ((uint)sizeof(bmpfileheader_t)
 	        + (uint)sizeof(bmpinfoheader_t)
 	        + (uint)(m_PaletteSize * 4)
 	        + (uint)m_InfoHeader.SizeImage);
 }
 
-inline uint CBmpFile::ComputeOffsetBits(void) const {
+inline uint CBmpFile::ComputeOffsetBits() const {
 	return ((uint)sizeof(bmpfileheader_t)
 	        + (uint)sizeof(bmpinfoheader_t)
 	        + (uint)(m_PaletteSize * 4) );

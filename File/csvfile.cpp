@@ -43,7 +43,7 @@ CCsvFile::CCsvFile() : m_Rows(0) {
  * Class CCsvFile Method - void Destroy (void);
  *
  *=========================================================================*/
-void CCsvFile::Destroy(void) {
+void CCsvFile::Destroy() {
 	//DEFINE_FUNCTION("CCsvFile::Destroy()");
 	m_Filename.Empty();
 	ClearRows();
@@ -62,12 +62,12 @@ void CCsvFile::Destroy(void) {
  * NULL on any error.
  *
  *=========================================================================*/
-CCsvRow *CCsvFile::AddRow(void) {
+CCsvRow *CCsvFile::AddRow() {
 	DEFINE_FUNCTION("CCsvFile::AddRow()");
 	CCsvRow *pRow;
 	CreateClassPointer(pRow, CCsvRow, 0);
 	m_Rows.Add(pRow);
-	return (pRow);
+	return pRow;
 }
 
 /*===========================================================================
@@ -82,7 +82,7 @@ CCsvRow *CCsvFile::AddRow(void) {
  * Deletes all defined row objects.
  *
  *=========================================================================*/
-void CCsvFile::ClearRows(void) {
+void CCsvFile::ClearRows() {
 	DEFINE_FUNCTION("CCsvFile::ClearRows()");
 	CCsvRow *pRow;
 	int Index;
@@ -116,7 +116,7 @@ int CCsvFile::FindHeaderCol(const TCHAR *pString) {
 	pRow = GetRow(0);
 
 	if (pRow == NULL) {
-		return (-1);
+		return -1;
 	}
 
 	for (ColIndex = 0; ColIndex < pRow->GetNumElements(); ColIndex++) {
@@ -127,12 +127,12 @@ int CCsvFile::FindHeaderCol(const TCHAR *pString) {
 		}
 
 		if (pColString->CompareNoCase(pString) == 0) {
-			return (ColIndex);
+			return ColIndex;
 		}
 	}
 
 	/* No match */
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -149,7 +149,7 @@ int CCsvFile::FindHeaderCol(const TCHAR *pString) {
  *=========================================================================*/
 const TCHAR *CCsvFile::GetElement(const int Row, const int Col) {
 	if (!IsValidElement(Row, Col)) {
-		return (NULL);
+		return NULL;
 	}
 
 	return (const TCHAR *)*((m_Rows.GetAt(Row))->GetAt(Col));
@@ -167,7 +167,7 @@ const TCHAR *CCsvFile::GetElement(const int Row, const int Col) {
  * Returns true if there are any missing or empty cells in the file.
  *
  *=========================================================================*/
-bool CCsvFile::IsMissingCells(void) {
+bool CCsvFile::IsMissingCells() {
 	int RowIndex;
 	bool Result;
 
@@ -176,12 +176,12 @@ bool CCsvFile::IsMissingCells(void) {
 		Result = IsRowMissingCells(RowIndex);
 
 		if (Result) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* No missing/empty cells found */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -203,7 +203,7 @@ bool CCsvFile::IsRowMissingCells(const int RowIndex) {
 	pRow = GetRow(RowIndex);
 
 	if (pRow == NULL) {
-		return (true);
+		return true;
 	}
 
 	/* Check all columns in the row */
@@ -211,15 +211,15 @@ bool CCsvFile::IsRowMissingCells(const int RowIndex) {
 		pColString = pRow->GetAt(ColIndex);
 
 		if (pColString == NULL) {
-			return (true);
+			return true;
 		}
 
 		if (pColString->IsEmpty()) {
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -236,24 +236,24 @@ bool CCsvFile::IsRowMissingCells(const int RowIndex) {
  *=========================================================================*/
 bool CCsvFile::IsValidElement(const int Row, const int Col) {
 	if (!m_Rows.IsValidIndex(Row)) {
-		return (false);
+		return false;
 	}
 
 	CCsvRow *pRow = m_Rows.GetAt(Row);
 
 	if (pRow == NULL) {
-		return (false);
+		return false;
 	}
 
 	if (!pRow->IsValidIndex(Col)) {
-		return (false);
+		return false;
 	}
 
 	if (pRow->GetAt(Col) == NULL) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -280,7 +280,7 @@ bool CCsvFile::Load(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, "rb");
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	m_Filename = pFilename;
@@ -290,12 +290,12 @@ bool CCsvFile::Load(const TCHAR *pFilename) {
 	Result = File.Read((TCHAR *)(const TCHAR *)Buffer, FileSize);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Parse the file text */
 	Result = ParseText(Buffer, FileSize);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -317,15 +317,18 @@ bool CCsvFile::ParseText(const TCHAR *pBuffer, const int BufferSize) {
 	const TCHAR *pQuoteStart;
 	const TCHAR *pRowStart;
 	const TCHAR *pColStart;
+
 	CSString QuoteBuffer;
 	CSString CellBuffer;
 	CSString *pNewString;
 	CCsvRow *pRow;
+
 	bool InQuote;
 	bool HasQuote;
 	bool EndCell;
 	bool EndRow;
 	int Index;
+
 	/* Initialize the loop variables */
 	pParse = pBuffer;
 	pQuoteStart = NULL;
@@ -426,7 +429,7 @@ bool CCsvFile::ParseText(const TCHAR *pBuffer, const int BufferSize) {
 		DestroyPointer(pRow);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -453,7 +456,7 @@ bool CCsvFile::Save(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, "wb");
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	m_Filename = pFilename;
@@ -478,14 +481,14 @@ bool CCsvFile::Save(const TCHAR *pFilename) {
 			}
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 
 		File.Printf(_T("\n"));
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -507,7 +510,7 @@ CSString *CCsvFile::SetString(const int Row, const int Col, const TCHAR *pString
 
 	/* Ignore invalid input */
 	if (Row < 0 || Col < 0) {
-		return (NULL);
+		return NULL;
 	}
 
 	pRow = GetRow(Row);
@@ -531,7 +534,7 @@ CSString *CCsvFile::SetString(const int Row, const int Col, const TCHAR *pString
 
 	/* Set the string value */
 	(*pNewString) = pString;
-	return (pNewString);
+	return pNewString;
 }
 
 /*===========================================================================

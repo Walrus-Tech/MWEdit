@@ -48,15 +48,15 @@ class CDxfFile : public CGenFile {
 	//virtual void Destroy (void);
 
 
-	bool StartEntities(void);
-	bool EndEntities(void);
-	bool EndFile(void);
+	bool StartEntities();
+	bool EndEntities();
+	bool EndFile();
 
 	/* Polyline commands */
 	bool StartPolyline(const int Flags);
-	bool StartPolyline(void);
-	bool Start3DPolyline(void);
-	bool EndPolyline(void);
+	bool StartPolyline();
+	bool Start3DPolyline();
+	bool EndPolyline();
 	bool WriteVertexL(const float X,
 	                  const float Y,
 	                  const float Z,
@@ -69,7 +69,6 @@ class CDxfFile : public CGenFile {
 
 	/* Layer commands */
 	bool WriteLayer(const int LayerNumber);
-
 };
 
 /*===========================================================================
@@ -88,15 +87,15 @@ inline bool CDxfFile::StartPolyline(const int Flags) {
 	return Printf("  0\nPOLYLINE\n  6\nCONTINUOUS\n 66\n  1\n 70\n%d\n", Flags);
 }
 
-inline bool CDxfFile::Start3DPolyline(void) {
+inline bool CDxfFile::Start3DPolyline() {
 	return StartPolyline(8);
 }
 
-inline bool CDxfFile::StartPolyline(void) {
+inline bool CDxfFile::StartPolyline() {
 	return Printf("  0\nPOLYLINE\n  6\nCONTINUOUS\n 66\n  1\n");
 }
 
-inline bool CDxfFile::EndPolyline(void) {
+inline bool CDxfFile::EndPolyline() {
 	return Printf("  0\nSEQEND\n");
 }
 
@@ -136,15 +135,15 @@ inline bool CDxfFile::Write3DVertexL(const float X,
 }
 
 /* Section commands */
-inline bool CDxfFile::StartEntities(void) {
+inline bool CDxfFile::StartEntities() {
 	return Printf("  0\nSECTION\n  2\nENTITIES\n");
 }
 
-inline bool CDxfFile::EndEntities(void) {
+inline bool CDxfFile::EndEntities() {
 	return Printf("  0\nENDSEC\n");
 }
 
-inline bool CDxfFile::EndFile(void) {
+inline bool CDxfFile::EndFile() {
 	return Printf("  0\nEOF\n");
 }
 

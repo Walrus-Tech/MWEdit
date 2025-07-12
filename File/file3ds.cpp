@@ -75,16 +75,19 @@ void C3dsFile::CreateMeshMatrix(float *pMeshMatrix,
 	ASSERT(pMeshMatrix != NULL);
 	/* Initialize the matrix */
 	memset(pMeshMatrix, 0, sizeof(float) * 12);
+
 	/* Set just the z-axis rotation transform for now */
 	pMeshMatrix[0] = (float)cos(ZAngle);
 	pMeshMatrix[4] = pMeshMatrix[0];
 	pMeshMatrix[1] = (float)sin(ZAngle);
 	pMeshMatrix[3] = -pMeshMatrix[1];
 	pMeshMatrix[8] = (float)1.0;
+
 	/* Set the scale components */
 	pMeshMatrix[0] *= XScale;
 	pMeshMatrix[4] *= YScale;
 	pMeshMatrix[8] *= ZScale;
+
 	/* Set the position components */
 	pMeshMatrix[9] = XPos;
 	pMeshMatrix[10] = YPos;
@@ -120,7 +123,7 @@ bool C3dsFile::DumpChunk(FILE *pFileHandle) {
 
 	if (!Result) {
 		SystemLog.Printf(pFileHandle, "\tError reading 3DS chunk header data!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output chunk information */
@@ -136,16 +139,14 @@ bool C3dsFile::DumpChunk(FILE *pFileHandle) {
 		Result = ReadName(NULL);
 
 		if (!Result) {
-			return (FALSE);
+			return FALSE;
 		}
 	} else if (ChunkID == CHUNK3DS_ID_MESHMATRIX) {
 		Result = DumpMeshMatrix(pFileHandle);
-		return (Result);
-	}
-	/* Skip unknown-sized chunk */
-	else if ((GetChunkFlag(ChunkID) & CHUNK3DS_FLAG_SIMPLECONTAINER) == 0) {
+		return Result;
+	} else if ((GetChunkFlag(ChunkID) & CHUNK3DS_FLAG_SIMPLECONTAINER) == 0) { /* Skip unknown-sized chunk */
 		Result = Seek(ChunkSize - 6, SEEK_CUR);
-		return (Result);
+		return Result;
 	}
 
 	SystemLog.IncrementTabs();
@@ -166,7 +167,7 @@ bool C3dsFile::DumpChunk(FILE *pFileHandle) {
 	}
 
 	SystemLog.DecrementTabs();
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -189,7 +190,7 @@ bool C3dsFile::DumpContents(FILE *pFileHandle) {
 	/* Ensure file is open */
 	if (!IsOpen()) {
 		SystemLog.Printf(pFileHandle, "3DS file must be open to dump its contents!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Move to start of file */
@@ -197,14 +198,14 @@ bool C3dsFile::DumpContents(FILE *pFileHandle) {
 
 	if (!Result) {
 		SystemLog.Printf(pFileHandle, "Failed to move to start of 3DS file!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Start recursively reading chunks */
 	SystemLog.IncrementTabs();
 	Result = DumpChunk(pFileHandle);
 	SystemLog.DecrementTabs();
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -238,7 +239,7 @@ bool C3dsFile::DumpMeshMatrix(FILE *pFileHandle) {
 			Result = ReadFloat(InputFloat);
 
 			if (!Result) {
-				return (FALSE);
+				return FALSE;
 			}
 
 			sprintf(NumBuffer, "%8.3f  ", InputFloat);
@@ -248,7 +249,7 @@ bool C3dsFile::DumpMeshMatrix(FILE *pFileHandle) {
 		SystemLog.Printf(stdout, "%s", Buffer);
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -270,13 +271,13 @@ chunk3ds_t *C3dsFile::FindChunk(const ushort ChunkID) {
 	/* Search entire array for ID match */
 	for (Index = 0; ChunkInfo[Index].ID != CHUNK3DS_ID_LAST; Index++) {
 		if (ChunkInfo[Index].ID == ChunkID) {
-			return ( &(ChunkInfo[Index]) );
+			return &(ChunkInfo[Index]);
 		}
 	}
 
 	/* No match found! */
 	ErrorHandler.AddError(ERR_BADINPUT, "3DS chunk id 0x%04hX not found!", ChunkID);
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -296,10 +297,10 @@ int C3dsFile::GetChunkFlag(const ushort ChunkID) {
 	chunk3ds_t *pChunk = FindChunk(ChunkID);
 
 	if (pChunk == NULL) {
-		return (0);
+		return 0;
 	}
 
-	return (pChunk->Flags);
+	return pChunk->Flags;
 }
 
 /*===========================================================================
@@ -320,14 +321,14 @@ char *C3dsFile::GetChunkName(const ushort ChunkID) {
 	chunk3ds_t *pChunk = FindChunk(ChunkID);
 
 	if (pChunk == NULL) {
-		return ("Invalid Chunk ID");
+		return "Invalid Chunk ID";
 	}
 
 	if (pChunk->pName == NULL) {
-		return ("Invalid Chunk Name");
+		return "Invalid Chunk Name";
 	}
 
-	return (pChunk->pName);
+	return pChunk->pName;
 }
 
 /*===========================================================================
@@ -353,15 +354,17 @@ bool C3dsFile::OutputMatEntry(const char *pMatName, const char *pTextureName) {
 	Result = StartChunk(CHUNK3DS_MAT_ENTRY);
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the material name */
 	Result = WriteString(CHUNK3DS_MAT_NAME, pMatName);
+
 	/* Output default object colors */
 	Result &= WriteCharColor(CHUNK3DS_MAT_AMBIENT, 0x96, 0x96, 0x96);
 	Result &= WriteCharColor(CHUNK3DS_MAT_DIFFUSE, 0x96, 0x96, 0x96);
 	Result &= WriteCharColor(CHUNK3DS_MAT_SPECULAR, 0xE5, 0xE5, 0xE5);
+
 	/* Output default material properties */
 	Result &= WriteIntPercent(CHUNK3DS_MAT_SHININESS, 10);
 	Result &= WriteIntPercent(CHUNK3DS_MAT_SHIN2PCT, 0);
@@ -371,6 +374,7 @@ bool C3dsFile::OutputMatEntry(const char *pMatName, const char *pTextureName) {
 	Result &= WriteChunkShort(CHUNK3DS_MAT_SHADING, 3);
 	Result &= WriteIntPercent(CHUNK3DS_MAT_SELF_ILPCT, 0);
 	Result &= WriteChunkFloat(CHUNK3DS_MAT_WIRESIZE, 1.0f);
+
 	/* Output the texture map chunk */
 	Result &= StartChunk(CHUNK3DS_MAT_TEXMAP);
 	Result &= WriteIntPercent(100);
@@ -378,9 +382,10 @@ bool C3dsFile::OutputMatEntry(const char *pMatName, const char *pTextureName) {
 	Result &= WriteChunkShort(CHUNK3DS_MAT_MAP_TILING, 0);
 	Result &= WriteChunkFloat(CHUNK3DS_MAT_MAP_TEXBLUR, 0);
 	Result &= EndChunk(CHUNK3DS_MAT_TEXMAP);
+
 	/* End the material entry chunk */
 	Result &= EndChunk(CHUNK3DS_MAT_ENTRY);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -405,15 +410,17 @@ bool C3dsFile::OutputMatEntry(const char *pMatName, const rgbpal_t &PalEntry) {
 	Result = StartChunk(CHUNK3DS_MAT_ENTRY);
 
 	if (!Result) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the material name */
 	Result = WriteString(CHUNK3DS_MAT_NAME, pMatName);
+
 	/* Output default object colors */
 	Result &= WriteCharColor(CHUNK3DS_MAT_AMBIENT, PalEntry.R, PalEntry.G, PalEntry.B);
 	Result &= WriteCharColor(CHUNK3DS_MAT_DIFFUSE, PalEntry.R, PalEntry.G, PalEntry.B);
 	Result &= WriteCharColor(CHUNK3DS_MAT_SPECULAR, 0xE5, 0xE5, 0xE5);
+
 	/* Output default material properties */
 	Result &= WriteIntPercent(CHUNK3DS_MAT_SHININESS, 10);
 	Result &= WriteIntPercent(CHUNK3DS_MAT_SHIN2PCT, 0);
@@ -423,9 +430,10 @@ bool C3dsFile::OutputMatEntry(const char *pMatName, const rgbpal_t &PalEntry) {
 	Result &= WriteChunkShort(CHUNK3DS_MAT_SHADING, 3);
 	Result &= WriteIntPercent(CHUNK3DS_MAT_SELF_ILPCT, 0);
 	Result &= WriteChunkFloat(CHUNK3DS_MAT_WIRESIZE, 1.0f);
+
 	/* End the material entry chunk */
 	Result &= EndChunk(CHUNK3DS_MAT_ENTRY);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -452,7 +460,7 @@ bool C3dsFile::PopChunkStack(const ushort ID) {
 	if (m_ChunkStackSize <= 0) {
 		ASSERT(m_ChunkStackSize > 0);
 		ErrorHandler.AddError(ERR_BADARRAYINDEX, "No items on 3DS chunk stack to pop!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Remove item */
@@ -465,7 +473,7 @@ bool C3dsFile::PopChunkStack(const ushort ID) {
 		                      "3DS chunk ID of 0x%04X does not match chunk stack ID of 0x%04X",
 		                      (int)ID,
 		                      (int)m_ChunkStack[m_ChunkStackSize].ID);
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Update the chunk size */
@@ -483,7 +491,7 @@ bool C3dsFile::PopChunkStack(const ushort ID) {
 		Result = Seek(Offset, SEEK_SET);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -511,7 +519,7 @@ bool C3dsFile::PopChunkStack(const ushort ID, const short Value) {
 	if (m_ChunkStackSize <= 0) {
 		ASSERT(m_ChunkStackSize > 0);
 		ErrorHandler.AddError(ERR_BADARRAYINDEX, "No items on 3DS chunk stack to pop!");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Remove item */
@@ -524,7 +532,7 @@ bool C3dsFile::PopChunkStack(const ushort ID, const short Value) {
 		                      "3DS chunk ID of 0x%04X does not match chunk stack ID of 0x%04X",
 		                      (int)ID,
 		                      (int)m_ChunkStack[m_ChunkStackSize].ID);
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Update the chunk size */
@@ -546,7 +554,7 @@ bool C3dsFile::PopChunkStack(const ushort ID, const short Value) {
 		Result = Seek(Offset, SEEK_SET);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -571,7 +579,7 @@ bool C3dsFile::PushChunkStack(const ushort ID) {
 		ErrorHandler.AddError(ERR_MAXINDEX,
 		                      "Maximum of %d 3DS chunk stack items exceeded!",
 		                      CHUNK3DS_STACK_SIZE);
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Store stack data */
@@ -592,7 +600,7 @@ bool C3dsFile::PushChunkStack(const ushort ID) {
 		m_ChunkStackSize++;
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -617,7 +625,7 @@ bool C3dsFile::ReadName(char *pBuffer) {
 		Result = ReadChar(InputChar);
 
 		if (!Result) {
-			return (FALSE);
+			return FALSE;
 		}
 
 		/* Add character to buffer if required */
@@ -625,7 +633,7 @@ bool C3dsFile::ReadName(char *pBuffer) {
 		}
 	} while (InputChar != NULL_CHAR);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -641,7 +649,7 @@ bool C3dsFile::ReadName(char *pBuffer) {
  * error.
  *
  *=========================================================================*/
-bool C3dsFile::StartEditChunk(void) {
+bool C3dsFile::StartEditChunk() {
 	bool Result;
 	/* Output the edit chunk header and version */
 	Result = PushChunkStack(CHUNK3DS_ID_EDIT);
@@ -671,7 +679,7 @@ bool C3dsFile::StartEditChunk(void) {
 		Result = WriteFloat(1.0);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -687,7 +695,7 @@ bool C3dsFile::StartEditChunk(void) {
  * error.
  *
  *=========================================================================*/
-bool C3dsFile::StartFaceChunk(void) {
+bool C3dsFile::StartFaceChunk() {
 	//DEFINE_FUNCTION("C3dsFile::StartFaceChunk()");
 	bool Result;
 	/* Output the face chunk header */
@@ -698,7 +706,7 @@ bool C3dsFile::StartFaceChunk(void) {
 	}
 
 	m_NumFaces = 0;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -714,7 +722,7 @@ bool C3dsFile::StartFaceChunk(void) {
  * error.
  *
  *=========================================================================*/
-bool C3dsFile::StartMainChunk(void) {
+bool C3dsFile::StartMainChunk() {
 	bool Result;
 	/* Reset the stack contents */
 	m_ChunkStackSize = 0;
@@ -733,7 +741,7 @@ bool C3dsFile::StartMainChunk(void) {
 		Result = WriteLong(3l);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -767,7 +775,7 @@ bool C3dsFile::StartMatGroupChunk(const char *pMatName, const short Count) {
 		Result = WriteShort(Count);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -797,7 +805,7 @@ bool C3dsFile::StartObjectChunk(const char *pName) {
 		Result = Write(pName, NameLength);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -813,7 +821,7 @@ bool C3dsFile::StartObjectChunk(const char *pName) {
  * error.
  *
  *=========================================================================*/
-bool C3dsFile::StartPointChunk(void) {
+bool C3dsFile::StartPointChunk() {
 	//DEFINE_FUNCTION("C3dsFile::StartPointChunk()");
 	bool Result;
 	/* Output the point chunk header */
@@ -824,13 +832,12 @@ bool C3dsFile::StartPointChunk(void) {
 	}
 
 	m_NumPoints = 0;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
  *      End of Class Method C3dsFile::StartPointChunk()
  *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -841,7 +848,7 @@ bool C3dsFile::StartPointChunk(void) {
  * on any error.
  *
  *=========================================================================*/
-bool C3dsFile::StartTexVertChunk(void) {
+bool C3dsFile::StartTexVertChunk() {
 	//DEFINE_FUNCTION("C3dsFile::StartTexVertChunk()");
 	bool Result;
 	/* Output the face chunk header */
@@ -851,7 +858,7 @@ bool C3dsFile::StartTexVertChunk(void) {
 		Result = WriteShort(0);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -867,7 +874,7 @@ bool C3dsFile::StartTexVertChunk(void) {
  * error.
  *
  *=========================================================================*/
-bool C3dsFile::StartTrimeshChunk(void) {
+bool C3dsFile::StartTrimeshChunk() {
 	return PushChunkStack(CHUNK3DS_ID_TRIMESH);
 }
 
@@ -915,7 +922,7 @@ bool C3dsFile::WriteCharColor(const ushort ChunkID,
 		Result = WriteChar(Blue);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -943,7 +950,7 @@ bool C3dsFile::WriteChunkFloat(const ushort ChunkID, const float Value) {
 		Result = WriteFloat(Value);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -971,7 +978,7 @@ bool C3dsFile::WriteChunkShort(const ushort ChunkID, const short Value) {
 		Result = WriteShort(Value);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -993,7 +1000,7 @@ bool C3dsFile::WriteFace(const short Point1,
 	bool Result;
 
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the 3 face points and the face default flags */
@@ -1012,7 +1019,7 @@ bool C3dsFile::WriteFace(const short Point1,
 	}
 
 	m_NumFaces++;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -1040,7 +1047,7 @@ bool C3dsFile::WriteIntPercent(const ushort ChunkID, const short Percentage) {
 		Result = WriteIntPercent(Percentage);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -1067,7 +1074,7 @@ bool C3dsFile::WriteIntPercent(const short Percentage) {
 		Result = WriteShort(Percentage);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -1100,7 +1107,7 @@ bool C3dsFile::WriteString(const ushort ChunkID, const char *pString) {
 		Result = Write(pString, StringLength);
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -1119,7 +1126,7 @@ bool C3dsFile::WritePoint(const float X, const float Y, const float Z) {
 	bool Result;
 
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Output the 3 points */
@@ -1134,7 +1141,7 @@ bool C3dsFile::WritePoint(const float X, const float Y, const float Z) {
 	}
 
 	m_NumPoints++;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -1163,7 +1170,7 @@ bool C3dsFile::WriteMeshMatrix(const float *pMeshMatrix) {
 
 	/* Ensure file is open */
 	if (!IsOpen()) {
-		return (FALSE);
+		return FALSE;
 	}
 
 	if (pMeshMatrix == NULL) {
@@ -1181,7 +1188,7 @@ bool C3dsFile::WriteMeshMatrix(const float *pMeshMatrix) {
 		Result = Write((char *)pMeshMatrix, sizeof(float) * 12);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -1206,7 +1213,7 @@ bool C3dsFile::WriteTexVert(const float X, const float Y) {
 		Result = WriteFloat(Y);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================

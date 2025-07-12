@@ -51,7 +51,7 @@ CBmpFile::CBmpFile() {
  * Delete the contents of the BMP file.
  *
  *=========================================================================*/
-void CBmpFile::Destroy(void) {
+void CBmpFile::Destroy() {
 	DEFINE_FUNCTION("CBmpFile::Destroy()");
 	/* Clear the BMP headers */
 	InitBMPInfoHeader(m_InfoHeader);
@@ -90,12 +90,14 @@ bool CBmpFile::ExportLBM(const char *pFilename,
 	bool Result;
 	/* Ensure valid input */
 	ASSERT(pImageData != NULL && pPalette != NULL);
+
 	/* Delete the current BMP data, and initialize members */
 	Destroy();
 	m_pData = (byte *)pImageData;
 	m_ImageSize = (long)Width * (long)Height;
 	m_pPalette = (rgbpal_t *)pPalette;
 	m_PaletteSize = 256;
+
 	/* Initialize the file headers */
 	m_InfoHeader.Height = Height;
 	m_InfoHeader.Width = Width;
@@ -103,12 +105,13 @@ bool CBmpFile::ExportLBM(const char *pFilename,
 	m_InfoHeader.BitCount = 8;
 	m_FileHeader.Size = ComputeSize();
 	m_FileHeader.OffsetBits = ComputeOffsetBits();
+
 	/* Attempt to save the BMP file */
 	Result = Save(pFilename);
 	/* Reset the image data */
 	m_pData = NULL;
 	m_pPalette = NULL;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -150,7 +153,7 @@ bool CBmpFile::Save(const char *pFilename) {
 	}
 
 	Close();
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -172,7 +175,7 @@ bool CBmpFile::Save(const char *pFilename) {
  * Palette entries should be byte values ranging from 0 to 255.
  *
  *=========================================================================*/
-bool CBmpFile::WriteQuadPalette(void) {
+bool CBmpFile::WriteQuadPalette() {
 	//DEFINE_FUNCTION("CBmpFile::WriteQuadPalette()");
 	int LoopCounter;
 	bool Result;
@@ -187,11 +190,11 @@ bool CBmpFile::WriteQuadPalette(void) {
 		pPal++;
 
 		if (!Result) {
-			return (FALSE);
+			return FALSE;
 		}
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -233,9 +236,11 @@ void InitBMPInfoHeader(bmpinfoheader_t &InfoHeader) {
 	InfoHeader.Width = 0;
 	InfoHeader.XPelsPerMeter = 6000;
 	InfoHeader.YPelsPerMeter = 6000;
+
 	/* Use all colors in BMP */
 	InfoHeader.ColorImportant = 0;
 	InfoHeader.ColorUsed = 0;
+
 	/* Standard RGB uncompressed */
 	InfoHeader.Compression = BMPCOMPRESS_RGB;
 	InfoHeader.BitCount = 24;

@@ -73,7 +73,7 @@ class CCsvFile {
 	CCsvRowArray m_Rows; /* CSV file rows */
 	CSString m_Filename; /* The last known filename */
 
-	bool m_KeepQuotes; /* Keep or parse quote files */
+	bool m_KeepQuotes;   /* Keep or parse quote files */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -89,13 +89,13 @@ class CCsvFile {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Adds a row to the end of the csv file */
-	CCsvRow *AddRow(void);
+	CCsvRow *AddRow();
 
 	/* Delete all row objects */
-	void ClearRows(void);
+	void ClearRows();
 
 	/* Find a specific column index */
 	int FindHeaderCol(const TCHAR *pString);
@@ -103,26 +103,26 @@ class CCsvFile {
 	/* Access a CSV element text */
 	const TCHAR *GetElement(const int Row, const int Col);
 	CCsvRow *GetRow(const int Row) {
-		return (IsValidRow(Row) ? m_Rows.GetAt(Row) : NULL);
+		return IsValidRow(Row) ? m_Rows.GetAt(Row) : NULL;
 	}
 
 	/* Get class members */
-	int GetNumLines(void) const {
-		return (m_Rows.GetNumElements());
+	int GetNumLines() const {
+		return m_Rows.GetNumElements();
 	}
 
-	const TCHAR *GetFilename(void) const {
-		return (m_Filename);
+	const TCHAR *GetFilename() const {
+		return m_Filename;
 	}
 
 	/* Is the element indices valid? */
 	bool IsValidElement(const int Row, const int Col);
 	bool IsValidRow(const int Row) {
-		return (m_Rows.IsValidIndex(Row));
+		return m_Rows.IsValidIndex(Row);
 	}
 
 	/* Check for missing/empty cells */
-	bool IsMissingCells(void);
+	bool IsMissingCells();
 	bool IsRowMissingCells(const int RowIndex);
 
 	/* Attempt to load a new CSV file */
@@ -141,7 +141,6 @@ class CCsvFile {
 	void SetKeepQuotes(const bool Flag) {
 		m_KeepQuotes = Flag;
 	}
-
 };
 
 /*===========================================================================
