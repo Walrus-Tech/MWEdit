@@ -85,16 +85,16 @@ class CDlToolTip : CWnd {
 	BOOL Create(CWnd *parent);
 
 	/* Get class members */
-	bool IsOpen(void) {
-		return (m_IsOpen);
+	bool IsOpen() {
+		return m_IsOpen;
 	}
 
-	CPoint &GetToolTipPoint(void) {
-		return (m_ptOrigin);
+	CPoint &GetToolTipPoint() {
+		return m_ptOrigin;
 	}
 
 	/* Show or hide the tool tip */
-	void Hide(void) {
+	void Hide() {
 		ShowWindow(SW_HIDE);
 		m_IsOpen = false;
 	}
@@ -112,7 +112,7 @@ class CDlToolTip : CWnd {
 		if (IsWindow(m_hWnd)) {
 			RedrawWindow();
 		}
-	};
+	}
 
 
   protected:
@@ -125,13 +125,11 @@ class CDlToolTip : CWnd {
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
-
 };
 
 /*===========================================================================
  *      End of Class CDlToolTip Definition
  *=========================================================================*/
-
 
 
 #endif

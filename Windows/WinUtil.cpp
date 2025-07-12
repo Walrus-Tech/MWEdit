@@ -54,10 +54,10 @@ bool AddComboString(CComboBox &ComboBox, const TCHAR *pString, const int Data) {
 	if (ListIndex >= 0) {
 		ComboBox.SetItemData(ListIndex, Data);
 	} else {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -80,10 +80,10 @@ bool AddListString(CListBox &ListBox, const TCHAR *pString, const int Data) {
 	if (ListIndex >= 0) {
 		ListBox.SetItemData(ListIndex, Data);
 	} else {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -104,17 +104,18 @@ bool BrowseForFolder(CString &Path, HWND hWnd, const TCHAR *pTitle) {
 	bool Result;
 	Result = BrowseForFolder(Path.GetBuffer(_MAX_PATH + 1), hWnd, pTitle);
 	Path.ReleaseBuffer();
-	return (Result);
+	return Result;
 }
-
 
 bool BrowseForFolder(TCHAR *pPath, HWND hWnd, const TCHAR *pTitle) {
 	DEFINE_FUNCTION("BrowseForFolder()");
 	BOOL Result;
 	LPITEMIDLIST pItemIDList;
 	BROWSEINFO BrowseInfo;
+
 	/* Ensure valid input */
 	ASSERT(pPath != NULL);
+
 	/* Set the browse data structure */
 	BrowseInfo.hwndOwner = hWnd;
 	BrowseInfo.lpszTitle = pTitle == NULL ? _T("Select Folder") : pTitle;
@@ -123,21 +124,22 @@ bool BrowseForFolder(TCHAR *pPath, HWND hWnd, const TCHAR *pTitle) {
 	BrowseInfo.pszDisplayName = pPath;
 	BrowseInfo.lpfn = NULL;
 	BrowseInfo.iImage = 0;
+
 	/* Display the shell folder browse dialog */
 	pItemIDList = SHBrowseForFolder(&BrowseInfo);
 
 	if (pItemIDList == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Retrieve the pathname */
 	Result = SHGetPathFromIDList(pItemIDList, pPath);
 
 	if (Result) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -157,17 +159,17 @@ bool ClipCopyFromWnd(CWnd *pWnd) {
 
 	/* Ignore if no control currently has the focus */
 	if (pWnd == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Only support copying from certain types of controls */
 	if (!pWnd->IsKindOf(RUNTIME_CLASS(CEdit))) {
-		return (false);
+		return false;
 	}
 
 	pEditWnd = (CEdit *)pWnd;
 	pEditWnd->Copy();
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -187,17 +189,17 @@ bool ClipCutFromWnd(CWnd *pWnd) {
 
 	/* Ignore if no control currently has the focus */
 	if (pWnd == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Only support cutting from certain types of controls */
 	if (!pWnd->IsKindOf(RUNTIME_CLASS(CEdit))) {
-		return (false);
+		return false;
 	}
 
 	pEditWnd = (CEdit *)pWnd;
 	pEditWnd->Cut();
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -217,17 +219,17 @@ bool ClipPasteToWnd(CWnd *pWnd) {
 
 	/* Ignore if no control currently has the focus */
 	if (pWnd == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Only support pasting to certain types of controls */
 	if (!pWnd->IsKindOf(RUNTIME_CLASS(CEdit))) {
-		return (false);
+		return false;
 	}
 
 	pEditWnd = (CEdit *)pWnd;
 	pEditWnd->Paste();
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -251,16 +253,16 @@ bool CopyTextToClipboard(const TCHAR *pString, const int Length) {
 
 	if (hText == NULL) {
 		ErrorHandler.AddError(ERR_MEM, _T("Failed to globally allocated %d bytes!"), Length);
-		return (false);
+		return false;
 	}
 
 	/* Attempt to copy the text */
-	pText = (TCHAR *) GlobalLock(hText);
+	pText = (TCHAR *)GlobalLock(hText);
 
 	if (pText == NULL) {
 		ErrorHandler.AddError(ERR_MEM, _T("Failed to lock the global memory!"));
 		GlobalFree(hText);
-		return (false);
+		return false;
 	}
 
 	strnncpy(pText, pString, Length);
@@ -269,7 +271,7 @@ bool CopyTextToClipboard(const TCHAR *pString, const int Length) {
 	if (Result) {
 		ErrorHandler.AddError(ERR_MEM, _T("Failed to unlock the global memory handle!"));
 		GlobalFree(hText);
-		return (false);
+		return false;
 	}
 
 	/* Attempt to open the clipboard */
@@ -278,13 +280,13 @@ bool CopyTextToClipboard(const TCHAR *pString, const int Length) {
 	if (!Result) {
 		ErrorHandler.AddError(ERR_WINDOWS, _T("Failed to open the clipboard!"));
 		GlobalFree(hText);
-		return (false);
+		return false;
 	}
 
 	EmptyClipboard();
 	SetClipboardData(CF_TEXT, hText);
 	CloseClipboard();
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -315,7 +317,7 @@ bool CreateShortcut(LPTSTR pPathObj,
 	HRESULT hResult;
 	IShellLink *pShellLink;
 	IPersistFile *pPersistFile;
-	/* Get a pointer to the IShellLink interface.  */
+	/* Get a pointer to the IShellLink interface. */
 	hResult = CoCreateInstance(CLSID_ShellLink,
 	                           NULL,
 	                           CLSCTX_INPROC_SERVER,
@@ -356,10 +358,10 @@ bool CreateShortcut(LPTSTR pPathObj,
 	}
 
 	if (SUCCEEDED(hResult)) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -377,7 +379,7 @@ bool CreateShortcut(LPTSTR pPathObj,
 CString &ExtractPath(CString &PathBuffer, const TCHAR *pPath) {
 	ExtractPath(PathBuffer.GetBuffer(_MAX_PATH), pPath, _MAX_PATH);
 	PathBuffer.ReleaseBuffer(-1);
-	return (PathBuffer);
+	return PathBuffer;
 }
 
 /*===========================================================================
@@ -402,7 +404,7 @@ int FindComboListItem(CComboBox &ComboBox, const DWORD ItemData, const bool Sele
 				ComboBox.SetCurSel(Index);
 			}
 
-			return (Index);
+			return Index;
 		}
 	}
 
@@ -411,7 +413,7 @@ int FindComboListItem(CComboBox &ComboBox, const DWORD ItemData, const bool Sele
 		ComboBox.SetCurSel(-1);
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -436,7 +438,7 @@ int FindListItem(CListBox &ListBox, const DWORD ItemData, const bool Select) {
 				ListBox.SetCurSel(Index);
 			}
 
-			return (Index);
+			return Index;
 		}
 	}
 
@@ -445,7 +447,7 @@ int FindListItem(CListBox &ListBox, const DWORD ItemData, const bool Select) {
 		ListBox.SetCurSel(-1);
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -478,13 +480,13 @@ HTREEITEM FindTreeItem(const TCHAR *pName, CTreeCtrl &TreeCtrl, HTREEITEM Root) 
 		Buffer = TreeCtrl.GetItemText(hFind);
 
 		if (Buffer.CompareNoCase(pName) == 0) {
-			return (hFind);
+			return hFind;
 		}
 
 		hFind = TreeCtrl.GetNextItem(hFind, TVGN_NEXT);
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -510,14 +512,14 @@ HWND FindWindowHandle(HINSTANCE hInstance) {
 		if (::GetParent(hWnd) == NULL) {
 			/* Check the instance handle for the app */
 			if (hInstance == (HINSTANCE)::GetWindowLong(hWnd, GWL_HINSTANCE)) {
-				return (hWnd);
+				return hWnd;
 			}
 		}
 
 		hWnd = ::GetWindow(hWnd, GW_HWNDNEXT);
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -540,12 +542,12 @@ bool GetCurSelListItemData(long &Data, CListBox &ListBox) {
 	CurSel = ListBox.GetCurSel();
 
 	if (CurSel == LB_ERR) {
-		return (false);
+		return false;
 	}
 
 	/* Access the selected item data */
 	Data = ListBox.GetItemData(CurSel);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -568,12 +570,12 @@ bool GetCurSelComboItemData(long &Data, CComboBox &ComboBox) {
 	CurSel = ComboBox.GetCurSel();
 
 	if (CurSel == LB_ERR) {
-		return (false);
+		return false;
 	}
 
 	/* Access the selected item data */
 	Data = ComboBox.GetItemData(CurSel);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -590,7 +592,7 @@ bool GetCurSelComboItemData(long &Data, CComboBox &ComboBox) {
  * error.
  *
  *======================================================================*/
-CDocument *GetActiveDocument(void) {
+CDocument *GetActiveDocument() {
 	CWinApp *pApp = AfxGetApp();
 	CWnd *pFrame = pApp->GetMainWnd();
 	CDocument *pDoc;
@@ -598,11 +600,11 @@ CDocument *GetActiveDocument(void) {
 
 	/* Ensure the main window is the valid type */
 	if (pFrame == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (!pFrame->IsKindOf(RUNTIME_CLASS(CMDIFrameWnd))) {
-		return (NULL);
+		return NULL;
 	}
 
 	pMDIFrame = (CMDIFrameWnd *)pFrame;
@@ -610,10 +612,10 @@ CDocument *GetActiveDocument(void) {
 	pDoc = GetActiveFrameDocument(pMDIFrame);
 
 	if (pDoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (pDoc);
+	return pDoc;
 }
 
 /*========================================================================
@@ -629,7 +631,7 @@ CDocument *GetActiveDocument(void) {
  * error.
  *
  *======================================================================*/
-CView *GetActiveView(void) {
+CView *GetActiveView() {
 	CWinApp *pApp = AfxGetApp();
 	CWnd *pFrame = pApp->GetMainWnd();
 	CMDIChildWnd *pChild;
@@ -638,22 +640,22 @@ CView *GetActiveView(void) {
 
 	/* Ensure the main window is the valid type */
 	if (pFrame == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (!pFrame->IsKindOf(RUNTIME_CLASS(CMDIFrameWnd))) {
-		return (NULL);
+		return NULL;
 	}
 
 	pMDIFrame = (CMDIFrameWnd *)pFrame;
 	pChild = (CMDIChildWnd *)pMDIFrame->GetActiveFrame();
 
 	if (pChild == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pView = pChild->GetActiveView();
-	return (pView);
+	return pView;
 }
 
 /*========================================================================
@@ -678,7 +680,7 @@ bool GetClipboardText(CString &Buffer) {
 
 	if (!Result) {
 		ErrorHandler.AddError(ERR_WINDOWS, _T("Failed to open the clipboard!"));
-		return (false);
+		return false;
 	}
 
 	/* Attempt to retrieve some text data from the clipboard */
@@ -687,22 +689,22 @@ bool GetClipboardText(CString &Buffer) {
 	if (hText == NULL) {
 		ErrorHandler.AddError(ERR_WINDOWS, _T("Failed to get the clipboard text data!"));
 		CloseClipboard();
-		return (false);
+		return false;
 	}
 
-	pText = (TCHAR *) GlobalLock(hText);
+	pText = (TCHAR *)GlobalLock(hText);
 
 	if (pText == NULL) {
 		ErrorHandler.AddError(ERR_WINDOWS, _T("Failed to get the clipboard text pointer!"));
 		CloseClipboard();
-		return (false);
+		return false;
 	}
 
 	/* Copy the clipboard text */
 	Buffer = pText;
 	GlobalUnlock(hText);
 	CloseClipboard();
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -726,7 +728,7 @@ CView *GetView(const CRuntimeClass *pRunTimeClass) {
 	pDoc = GetActiveDocument();
 
 	if (pDoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Look through all views in current document */
@@ -741,12 +743,12 @@ CView *GetView(const CRuntimeClass *pRunTimeClass) {
 
 		/* Is this view the correct type? */
 		if (pView->IsKindOf(pRunTimeClass)) {
-			return (pView);
+			return pView;
 		}
 	}
 
 	/* No matching view found */
-	return (NULL);
+	return NULL;
 }
 
 /*========================================================================
@@ -770,11 +772,11 @@ CDocument *GetActiveFrameDocument(CFrameWnd *pFrame) {
 	pView = GetActiveFrameView(pFrame);
 
 	if (pView == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pDoc = pView->GetDocument();
-	return (pDoc);
+	return pDoc;
 }
 
 /*========================================================================
@@ -799,16 +801,16 @@ CView *GetActiveFrameView(CFrameWnd *pFrame) {
 	pActiveFrame = pFrame->GetActiveFrame();
 
 	if (pActiveFrame == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (!pActiveFrame->IsKindOf(RUNTIME_CLASS(CMDIChildWnd))) {
-		return (NULL);
+		return NULL;
 	}
 
 	pChild = (CMDIChildWnd *)pActiveFrame;
 	pView = pChild->GetActiveView();
-	return (pView);
+	return pView;
 }
 
 /*========================================================================
@@ -879,7 +881,7 @@ bool GetStringWord(CString &OutputString, const TCHAR *pBuffer, int &StartPos) {
 
 	/* Ignore if at the end of the string */
 	if (pBuffer[StartPos] == NULL_CHAR) {
-		return (false);
+		return false;
 	}
 
 	/* Start parsing */
@@ -911,7 +913,7 @@ bool GetStringWord(CString &OutputString, const TCHAR *pBuffer, int &StartPos) {
 
 		//OutputString = CString(pBuffer + BeginPos, StartPos - BeginPos);
 		int Size = StartPos - BeginPos;
-		TCHAR* pString = OutputString.GetBuffer(Size + 1);
+		TCHAR *pString = OutputString.GetBuffer(Size + 1);
 		strnncpy(pString, pBuffer + BeginPos, Size);
 		OutputString.ReleaseBuffer(Size);
 	}
@@ -921,7 +923,7 @@ bool GetStringWord(CString &OutputString, const TCHAR *pBuffer, int &StartPos) {
 		StartPos++;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -947,17 +949,17 @@ bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuRe
 	Result = Menu.LoadMenu(MenuResource);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	pPopup = Menu.GetSubMenu(0);
 
 	if (pPopup == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Force the update of the menu commands */
-	for (Index = 0; Index < (int) pPopup->GetMenuItemCount(); Index++) {
+	for (Index = 0; Index < (int)pPopup->GetMenuItemCount(); Index++) {
 		MenuState.m_nID = pPopup->GetMenuItemID(Index);
 		MenuState.m_nIndex = Index;
 		MenuState.m_pMenu = pPopup;
@@ -971,7 +973,7 @@ bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuRe
 	}
 
 	pPopup->TrackPopupMenu(TPM_RIGHTBUTTON | TPM_LEFTALIGN, Point.x, Point.y, pParent);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -993,6 +995,7 @@ bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuRe
 HINSTANCE OpenWebPage(const TCHAR *pSiteAddress) {
 	BOOL Result;
 	SHELLEXECUTEINFO ShellInfo;
+
 	/* Initialize the shellinfo structure */
 	ShellInfo.cbSize = sizeof(SHELLEXECUTEINFO);
 	ShellInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
@@ -1004,15 +1007,16 @@ HINSTANCE OpenWebPage(const TCHAR *pSiteAddress) {
 	ShellInfo.lpIDList = NULL;
 	ShellInfo.lpParameters = NULL;
 	ShellInfo.nShow = SW_SHOWNORMAL;
+
 	/* Attempt to open the file/page */
 	Result = ShellExecuteEx(&ShellInfo);
 
 	if (!Result) {
-		return (NULL);
+		return NULL;
 	}
 
 	//hResult = ShellExecute (NULL, _T("open"), pSiteAddress, NULL, NULL, SW_SHOWNORMAL);
-	return (ShellInfo.hInstApp);
+	return ShellInfo.hInstApp;
 }
 
 /*===========================================================================
@@ -1045,7 +1049,7 @@ int RunDOSCommand(const TCHAR *pFilename) {
 		ProcessHandle = _tspawnve(_P_NOWAIT, Args[0], Args, NULL);
 	}
 
-	return (ProcessHandle);
+	return ProcessHandle;
 }
 
 /*===========================================================================
@@ -1076,14 +1080,13 @@ bool StringToInteger(const TCHAR *pString, int &DestValue) {
 	/* Check for conversion errors */
 	if (*pEndPtr != (TCHAR) 0 && !TISSPACE(*pEndPtr)) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid integer parameter string!"));
-		return (false);
+		return false;
 	}
 
 	/* Save the number and return success */
 	DestValue = iValue;
-	return (true);
+	return true;
 }
-
 
 bool StringToFloat(const TCHAR *pString, float &DestValue) {
 	DEFINE_FUNCTION("StringToFloat()");
@@ -1097,14 +1100,13 @@ bool StringToFloat(const TCHAR *pString, float &DestValue) {
 	/* Check for conversion errors */
 	if (*pEndPtr != (TCHAR) 0 && !TISSPACE(*pEndPtr)) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid float parameter string!"));
-		return (false);
+		return false;
 	}
 
 	/* Store the value and return success */
 	DestValue = fValue;
-	return (true);
+	return true;
 }
-
 
 bool StringToBool(const TCHAR *pString, bool &DestValue) {
 	DEFINE_FUNCTION("StringToBool()");
@@ -1119,22 +1121,20 @@ bool StringToBool(const TCHAR *pString, bool &DestValue) {
 		bValue = true;
 	} else if (_stricmp(pString, _T("false")) == 0) {
 		bValue = false;
-	}
-	/* Check for a numeric boolean value */
-	else {
+	} else { /* Check for a numeric boolean value */
 		iValue = (int)TSTRTOL(pString, &pEndPtr, 0);
 
 		if ((*pEndPtr != (TCHAR) 0 && !TISSPACE(*pEndPtr)) || iValue < 0 || iValue > 1) {
 			ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid boolean parameter string!"));
-			return (false);
+			return false;
 		}
 
-		bValue = (iValue != 0);
+		bValue = iValue != 0;
 	}
 
 	/* Store the value and return success */
 	DestValue = bValue;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1182,7 +1182,7 @@ CString &TerminatePathString(CString &PathBuffer) {
 	TCHAR *pBuffer = PathBuffer.GetBuffer(PathBuffer.GetLength() + 1);
 	TerminatePath(pBuffer);
 	PathBuffer.ReleaseBuffer(-1);
-	return (PathBuffer);
+	return PathBuffer;
 }
 
 /*===========================================================================

@@ -11,7 +11,6 @@
 #define __COLORSTATIC_H
 
 
-
 /*===========================================================================
  *
  * Begin Class CColorStatic Definition
@@ -31,12 +30,12 @@ class CColorStatic : public CStatic {
 	virtual ~CColorStatic();
 
 	/* Get class members */
-	COLORREF GetColor(void) {
-		return (m_Color);
+	COLORREF GetColor() {
+		return m_Color;
 	}
 
-	bool IsModified(void) {
-		return (m_Modified);
+	bool IsModified() {
+		return m_Modified;
 	}
 
 	/* Set class members */
@@ -69,7 +68,6 @@ class CColorStatic : public CStatic {
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
-
 };
 
 /*===========================================================================

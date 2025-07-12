@@ -93,7 +93,7 @@ bool CTabCtrlSheet::AddTab(const TCHAR *pTitle, CPropertyPage *pPage) {
 
 	/* Ensure the maximum number of sheets hasn't been reached */
 	if (m_NumPages >= TCS_ARRAYSIZE) {
-		return (false);
+		return false;
 	}
 
 	/* Attempt to add the tab and sheet */
@@ -101,11 +101,11 @@ bool CTabCtrlSheet::AddTab(const TCHAR *pTitle, CPropertyPage *pPage) {
 	Result = InsertItem(m_NumPages, pTitle);
 
 	if (Result < 0) {
-		return (false);
+		return false;
 	}
 
 	m_NumPages++;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -146,11 +146,11 @@ void CTabCtrlSheet::DisplayPage(const int PageIndex) {
  * display area.
  *
  *=========================================================================*/
-RECT CTabCtrlSheet::GetPageRect(void) {
+RECT CTabCtrlSheet::GetPageRect() {
 	RECT PageRect;
 	GetClientRect(&PageRect);
 	AdjustRect(FALSE, &PageRect);
-	return (PageRect);
+	return PageRect;
 }
 
 /*===========================================================================
@@ -200,12 +200,12 @@ void CTabCtrlSheet::OnSelchange(NMHDR *pNMHDR, LRESULT *pResult) {
 bool CTabCtrlSheet::SetCurrentPage(const int PageIndex) {
 	/* Ignore if nothing changed */
 	if (m_CurrentPage == PageIndex) {
-		return (false);
+		return false;
 	}
 
 	/* Ensure valid input */
 	if (PageIndex >= m_NumPages) {
-		return (false);
+		return false;
 	}
 
 	/* Hide the currently display page, if any */
@@ -220,7 +220,7 @@ bool CTabCtrlSheet::SetCurrentPage(const int PageIndex) {
 		DisplayPage(m_CurrentPage);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -242,29 +242,26 @@ bool CTabCtrlSheet::SetPage(const int PageIndex) {
 
 	/* Ensure valid input */
 	if (!IsValidPage(PageIndex)) {
-		return (false);
+		return false;
 	}
 
 	iResult = SetCurSel(PageIndex);
 
 	if (iResult < 0) {
-		return (false);
+		return false;
 	}
 
 	Result = SetCurrentPage(PageIndex);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
  *      End of Class Method CTabCtrlSheet::SetPage()
  *=========================================================================*/
 
-
-
 void CTabCtrlSheet::OnSysCommand(UINT nID, LPARAM lParam) {
 	CTabCtrl::OnSysCommand(nID, lParam);
 }
-
 
 void CTabCtrlSheet::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	CTabCtrl::OnKeyDown(nChar, nRepCnt, nFlags);

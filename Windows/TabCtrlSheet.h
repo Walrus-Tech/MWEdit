@@ -50,9 +50,9 @@ class CTabCtrlSheet : public CTabCtrl {
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CPropertyPage *m_pPages[TCS_ARRAYSIZE]; /* Array of pages to display */
-	int m_NumPages; /* Number of sheets currently defined */
+	int m_NumPages;                         /* Number of sheets currently defined */
 
-	int m_CurrentPage; /* The currently displayed sheet */
+	int m_CurrentPage;                      /* The currently displayed sheet */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -76,16 +76,16 @@ class CTabCtrlSheet : public CTabCtrl {
 	bool AddTab(const TCHAR *pTitle, CPropertyPage *pPage);
 
 	/* Return the currently displayed page */
-	CPropertyPage *GetCurrentPage(void) {
-		return (m_CurrentPage >= 0 ? m_pPages[m_CurrentPage] : NULL);
+	CPropertyPage *GetCurrentPage() {
+		return m_CurrentPage >= 0 ? m_pPages[m_CurrentPage] : NULL;
 	}
 
 	/* Return the coordinates of the page for moving/resizing */
-	RECT GetPageRect(void);
+	RECT GetPageRect();
 
 	/* Checks the validity of a page index */
 	bool IsValidPage(const int Index) const {
-		return (Index >= 0 && Index < m_NumPages);
+		return Index >= 0 && Index < m_NumPages;
 	}
 
 	/* Sets the current tab/page to the given index */
@@ -108,7 +108,6 @@ class CTabCtrlSheet : public CTabCtrl {
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP()
-
 };
 
 /*===========================================================================

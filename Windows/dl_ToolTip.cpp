@@ -105,7 +105,7 @@ BOOL CDlToolTip::Create(CWnd *pParentWnd) {
 	                    NULL);
 	/* Use default GUI font for default font */
 	m_pFont = CFont::FromHandle((HFONT)::GetStockObject(ANSI_FIXED_FONT));
-	return (bSuccess);
+	return bSuccess;
 }
 
 /*===========================================================================
@@ -123,13 +123,16 @@ BOOL CDlToolTip::Create(CWnd *pParentWnd) {
 BOOL CDlToolTip::GetWindowRegion(CDC *pDC, HRGN *phRegion, CSize *pSize) {
 	CRect rcWnd;
 	CFont *pSysFont;
+
 	/* Ensure valid input */
 	ASSERT(pDC != NULL);
 	ASSERT(phRegion != NULL);
+
 	/* Calculate thea are for the tip text */
 	pSysFont = (CFont *)pDC->SelectObject(m_pFont);
 	pDC->DrawText(m_szText, &rcWnd, DT_CALCRECT);
 	pDC->SelectObject(pSysFont);
+
 	/* Adjust for the rounded corners */
 	rcWnd.InflateRect(DLTOOLTIP_CX_ROUNDED, DLTOOLTIP_CY_ROUNDED);
 	/* Create the region */
@@ -141,7 +144,7 @@ BOOL CDlToolTip::GetWindowRegion(CDC *pDC, HRGN *phRegion, CSize *pSize) {
 		pSize->cy = rcWnd.Height() + DLTOOLTIP_CY_LEADER;
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -156,10 +159,10 @@ BOOL CDlToolTip::GetWindowRegion(CDC *pDC, HRGN *phRegion, CSize *pSize) {
  *=========================================================================*/
 int CDlToolTip::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	if (CWnd::OnCreate(lpCreateStruct) == -1 ) {
-		return (-1);
+		return -1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -197,26 +200,34 @@ void CDlToolTip::OnPaint() {
 	HRGN hRegion;
 	CRgn *pRegion;
 	CFont *pSysFont;
+
 	/* Get the client rectangle */
 	GetClientRect(ClientRect);
+
 	/* Create the brushes */
 	InnerFrameBrush.CreateSolidBrush(::GetSysColor(COLOR_SCROLLBAR));
 	FrameBrush.CreateSolidBrush(::GetSysColor(COLOR_WINDOWTEXT));
 	WindowBrush.CreateSolidBrush(::GetSysColor(COLOR_INFOBK));
+
 	/* Get the window region */
 	GetWindowRegion(&dc, &hRegion);
 	pRegion = CRgn::FromHandle(hRegion);
+
 	/* Draw the frame */
 	dc.FillRgn(pRegion, &WindowBrush);
 	//dc.FrameRgn(pRegion, &InnerFrameBrush, 3, 3);
 	dc.FrameRgn(pRegion, &FrameBrush, 1, 1);
+
 	/* Adjust the area for the icon */
 	ClientRect.DeflateRect(DLTOOLTIP_CX_ROUNDED, DLTOOLTIP_CY_ROUNDED, 0, 0);
+
 	/* Set the font */
 	pSysFont = (CFont *)dc.SelectObject(m_pFont);
+
 	/* Draw the tip text */
 	dc.SetBkMode(TRANSPARENT);
 	dc.DrawText(m_szText, &ClientRect, DT_TOP | DT_LEFT);
+
 	/* Clean up GDI */
 	::DeleteObject(hRegion);
 	dc.SelectObject(pSysFont);

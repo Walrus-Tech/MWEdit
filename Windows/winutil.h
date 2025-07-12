@@ -128,7 +128,7 @@ bool StringToBool(const TCHAR *pString, bool &DestValue);
 inline CString &TrimStringSpace(CString &String) {
 	String.TrimRight(_T(" \n\r\t"));
 	String.TrimLeft(_T(" \n\r\t"));
-	return (String);
+	return String;
 }
 
 /* Find an item in a combobox/listbox based on its item data */
@@ -150,8 +150,8 @@ inline bool CopyTextToClipboard(CString &String) {
 
 bool GetClipboardText(CString &Buffer);
 
-CDocument *GetActiveDocument(void);
-CView *GetActiveView(void);
+CDocument *GetActiveDocument();
+CView *GetActiveView();
 CDocument *GetActiveFrameDocument(CFrameWnd *pFrame);
 CView *GetActiveFrameView(CFrameWnd *pFrame);
 
