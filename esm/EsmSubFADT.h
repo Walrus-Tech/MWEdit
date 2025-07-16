@@ -101,18 +101,19 @@ class CEsmSubFADT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubFADT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(factiondata_t));
 		m_RecordSize = sizeof(factiondata_t);
 		memset(m_pData, 0, sizeof(factiondata_t));
+
 		GetFactionData()->AttributeID1 = 0;
 		GetFactionData()->AttributeID2 = 1;
 		GetFactionData()->SkillID1 = 0;
@@ -125,60 +126,60 @@ class CEsmSubFADT : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	factiondata_t *GetFactionData(void) {
-		return ((factiondata_t *)m_pData);
+	factiondata_t *GetFactionData() {
+		return (factiondata_t *)m_pData;
 	}
 
-	long GetAttributeID1(void) {
-		return (GetFactionData()->AttributeID1);
+	long GetAttributeID1() {
+		return GetFactionData()->AttributeID1;
 	}
 
-	long GetAttributeID2(void) {
-		return (GetFactionData()->AttributeID2);
+	long GetAttributeID2() {
+		return GetFactionData()->AttributeID2;
 	}
 
-	long GetSkillID1(void) {
-		return (GetFactionData()->SkillID1);
+	long GetSkillID1() {
+		return GetFactionData()->SkillID1;
 	}
 
-	long GetSkillID2(void) {
-		return (GetFactionData()->SkillID2);
+	long GetSkillID2() {
+		return GetFactionData()->SkillID2;
 	}
 
-	long GetSkillID3(void) {
-		return (GetFactionData()->SkillID3);
+	long GetSkillID3() {
+		return GetFactionData()->SkillID3;
 	}
 
-	long GetSkillID4(void) {
-		return (GetFactionData()->SkillID4);
+	long GetSkillID4() {
+		return GetFactionData()->SkillID4;
 	}
 
-	long GetSkillID5(void) {
-		return (GetFactionData()->SkillID5);
+	long GetSkillID5() {
+		return GetFactionData()->SkillID5;
 	}
 
-	long GetSkillID6(void) {
-		return (GetFactionData()->SkillID6);
+	long GetSkillID6() {
+		return GetFactionData()->SkillID6;
 	}
 
-	long GetUnknown(void) {
-		return (GetFactionData()->Unknown);
+	long GetUnknown() {
+		return GetFactionData()->Unknown;
 	}
 
-	long GetFlags(void) {
-		return (GetFactionData()->Flags);
+	long GetFlags() {
+		return GetFactionData()->Flags;
 	}
 
 	rankdata_t *GetRankData(const int Index) {
-		return (IsValidRank(Index) ? & (GetFactionData()->RankData[Index]) : NULL);
+		return IsValidRank(Index) ? & (GetFactionData()->RankData[Index]) : NULL;
 	}
 
 	bool IsValidRank(const int Index) {
-		return (Index >= 0 && Index < MWESM_FACTION_NUMRANKS);
+		return Index >= 0 && Index < MWESM_FACTION_NUMRANKS;
 	}
 
-	bool IsHidden(void) {
-		return ((GetFlags() & MWESM_FACTFLAG_HIDDEN) != 0);
+	bool IsHidden() {
+		return (GetFlags() & MWESM_FACTFLAG_HIDDEN) != 0;
 	}
 
 	/* Set/clear flags */
@@ -230,13 +231,11 @@ class CEsmSubFADT : public CEsmSubRecord {
 	void SetHidden(const bool Flag) {
 		SetFlag(MWESM_FACTFLAG_HIDDEN, Flag);
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubFADT Definition
  *=========================================================================*/
-
 
 
 #endif

@@ -85,7 +85,7 @@ CEsmFaction::CEsmFaction() {
  * Class CEsmFaction Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmFaction::Destroy(void) {
+void CEsmFaction::Destroy() {
 	//DEFINE_FUNCTION("CEsmFaction::Destroy()");
 	m_pName = NULL;
 	m_pFactionData = NULL;
@@ -137,11 +137,11 @@ int CEsmFaction::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmFaction::Create(void) {
+CEsmRecord *CEsmFaction::Create() {
 	DEFINE_FUNCTION("CEsmFaction::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmFaction);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -265,7 +265,7 @@ bool CEsmFaction::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

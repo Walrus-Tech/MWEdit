@@ -119,14 +119,14 @@ class CEsmSubNPDTS : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNPDTS);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(npcshortdata_t));
 		m_RecordSize = sizeof(npcshortdata_t);
@@ -134,40 +134,40 @@ class CEsmSubNPDTS : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	npcshortdata_t *GetNPCData(void) {
-		return ((npcshortdata_t *)m_pData);
+	npcshortdata_t *GetNPCData() {
+		return (npcshortdata_t *)m_pData;
 	}
 
-	short GetLevel(void) {
-		return (GetNPCData()->Level);
+	short GetLevel() {
+		return GetNPCData()->Level;
 	}
 
-	char GetDisposition(void) {
-		return (GetNPCData()->Disposition);
+	char GetDisposition() {
+		return GetNPCData()->Disposition;
 	}
 
-	char GetFactionID(void) {
-		return (GetNPCData()->FactionID);
+	char GetFactionID() {
+		return GetNPCData()->FactionID;
 	}
 
-	char GetRank(void) {
-		return (GetNPCData()->Rank);
+	char GetRank() {
+		return GetNPCData()->Rank;
 	}
 
-	char GetUnknown1(void) {
-		return (GetNPCData()->Unknown1);
+	char GetUnknown1() {
+		return GetNPCData()->Unknown1;
 	}
 
-	char GetUnknown2(void) {
-		return (GetNPCData()->Unknown2);
+	char GetUnknown2() {
+		return GetNPCData()->Unknown2;
 	}
 
-	char GetUnknown3(void) {
-		return (GetNPCData()->Unknown3);
+	char GetUnknown3() {
+		return GetNPCData()->Unknown3;
 	}
 
-	long GetGold(void) {
-		return (GetNPCData()->Gold);
+	long GetGold() {
+		return GetNPCData()->Gold;
 	}
 
 	/* Set class members */
@@ -202,7 +202,6 @@ class CEsmSubNPDTS : public CEsmSubRecord {
 	void SetUnknown3(const char Value) {
 		GetNPCData()->Unknown3 = Value;
 	}
-
 };
 
 /*===========================================================================
@@ -236,14 +235,14 @@ class CEsmSubNPDTL : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubNPDTL);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(npclongdata_t));
 		m_RecordSize = sizeof(npclongdata_t);
@@ -251,88 +250,88 @@ class CEsmSubNPDTL : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	npclongdata_t *GetNPCData(void) {
-		return ((npclongdata_t *)m_pData);
+	npclongdata_t *GetNPCData() {
+		return (npclongdata_t *)m_pData;
 	}
 
-	short GetLevel(void) {
-		return (GetNPCData()->Level);
+	short GetLevel() {
+		return GetNPCData()->Level;
 	}
 
-	char GetDisposition(void) {
-		return (GetNPCData()->Disposition);
+	char GetDisposition() {
+		return GetNPCData()->Disposition;
 	}
 
-	char GetFactionID(void) {
-		return (GetNPCData()->FactionID);
+	char GetFactionID() {
+		return GetNPCData()->FactionID;
 	}
 
-	char GetRank(void) {
-		return (GetNPCData()->Rank);
+	char GetRank() {
+		return GetNPCData()->Rank;
 	}
 
-	char GetUnknown1(void) {
-		return (GetNPCData()->Unknown1);
+	char GetUnknown1() {
+		return GetNPCData()->Unknown1;
 	}
 
-	long GetGold(void) {
-		return (GetNPCData()->Gold);
+	long GetGold() {
+		return GetNPCData()->Gold;
 	}
 
-	char GetStrength(void) {
-		return (GetNPCData()->Strength);
+	char GetStrength() {
+		return GetNPCData()->Strength;
 	}
 
-	char GetIntelligence(void) {
-		return (GetNPCData()->Intelligence);
+	char GetIntelligence() {
+		return GetNPCData()->Intelligence;
 	}
 
-	char GetWillpower(void) {
-		return (GetNPCData()->Willpower);
+	char GetWillpower() {
+		return GetNPCData()->Willpower;
 	}
 
-	char GetAgility(void) {
-		return (GetNPCData()->Agility);
+	char GetAgility() {
+		return GetNPCData()->Agility;
 	}
 
-	char GetSpeed(void) {
-		return (GetNPCData()->Speed);
+	char GetSpeed() {
+		return GetNPCData()->Speed;
 	}
 
-	char GetEndurance(void) {
-		return (GetNPCData()->Endurance);
+	char GetEndurance() {
+		return GetNPCData()->Endurance;
 	}
 
-	char GetPersonality(void) {
-		return (GetNPCData()->Personality);
+	char GetPersonality() {
+		return GetNPCData()->Personality;
 	}
 
-	char GetLuck(void) {
-		return (GetNPCData()->Luck);
+	char GetLuck() {
+		return GetNPCData()->Luck;
 	}
 
-	char GetReputation(void) {
-		return (GetNPCData()->Reputation);
+	char GetReputation() {
+		return GetNPCData()->Reputation;
 	}
 
-	short GetHealth(void) {
-		return (GetNPCData()->Health);
+	short GetHealth() {
+		return GetNPCData()->Health;
 	}
 
-	short GetSpellPts(void) {
-		return (GetNPCData()->SpellPts);
+	short GetSpellPts() {
+		return GetNPCData()->SpellPts;
 	}
 
-	short GetFatigue(void) {
-		return (GetNPCData()->Fatigue);
+	short GetFatigue() {
+		return GetNPCData()->Fatigue;
 	}
 
 	bool IsValidSkill(const int Index) {
-		return (Index >= 0 && Index < MWESM_MAX_SKILLS);
+		return Index >= 0 && Index < MWESM_MAX_SKILLS;
 	}
 
 	char GetSkill(const int Index) {
-		return (IsValidSkill(Index) ? GetNPCData()->Skills[Index] : 0);
+		return IsValidSkill(Index) ? GetNPCData()->Skills[Index] : 0;
 	}
 
 	/* Set class members */
@@ -413,7 +412,6 @@ class CEsmSubNPDTL : public CEsmSubRecord {
 			GetNPCData()->Skills[Index] = Value;
 		}
 	}
-
 };
 
 /*===========================================================================

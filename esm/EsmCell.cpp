@@ -23,7 +23,7 @@
  *=========================================================================*/
 DEFINE_FILE("EsmCell.cpp");
 
-int g_NextCellRefIndex = 1;       /* Used for cell reference indices */
+int g_NextCellRefIndex = 1; /* Used for cell reference indices */
 /*===========================================================================
  *      End of Local Definitions
  *=========================================================================*/
@@ -126,11 +126,11 @@ const esmsubreccreate_t CEsmCell::s_SubRecCreate[] = {
 	{
 		MWESM_SUBREC_CREF,
 		CEsmSubCellRef::Create
-	},   /* Not a 'real' sub-record */
+	}, /* Not a 'real' sub-record */
 	{
 		NULL,
 		CEsmSubRecord::Create
-	}     /* Must be last record */
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Sub-Record Create Array
@@ -163,7 +163,7 @@ CEsmCell::CEsmCell() {
  * Class CEsmCell Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmCell::Destroy(void) {
+void CEsmCell::Destroy() {
 	//DEFINE_FUNCTION("CEsmCell::Destroy()");
 	m_pCellData = NULL;
 	m_pCountData = NULL;
@@ -203,10 +203,10 @@ CEsmSubRecord *CEsmCell::AllocNewSubRecord(const TCHAR *pType, const long Record
 
 		pSubRecord->SetType(pType);
 		pSubRecord->SetRecordSize(RecordSize);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
-	return (CEsmRecord::AllocNewSubRecord(pType, RecordSize));
+	return CEsmRecord::AllocNewSubRecord(pType, RecordSize);
 }
 
 /*===========================================================================
@@ -230,7 +230,7 @@ int CEsmCell::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 		return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 
-	pCell = (CEsmCell *) pRecord;
+	pCell = (CEsmCell *)pRecord;
 
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
@@ -240,7 +240,7 @@ int CEsmCell::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 			return StringCompare(GetRegion(), pCell->GetRegion(), false);
 
 		case ESM_FIELD_GRID:
-			return (GetGridX() * 100 - pCell->GetGridX() * 100 + GetGridY() - pCell->GetGridY());
+			return GetGridX() * 100 - pCell->GetGridX() * 100 + GetGridY() - pCell->GetGridY();
 
 		case ESM_FIELD_REFCOUNT:
 			return GetRefCount() - pCell->GetRefCount();
@@ -268,6 +268,7 @@ void CEsmCell::CopyCellBase(CEsmCell *pCell) {
 	int Index;
 	/* Delete the current contents, if any */
 	Destroy();
+
 	/* Copy the base record properties */
 	m_pFile = pCell->m_pFile;
 	m_Type.SetType(pCell->m_Type);
@@ -321,11 +322,11 @@ void CEsmCell::Copy(CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmCell::Create(void) {
+CEsmRecord *CEsmCell::Create() {
 	DEFINE_FUNCTION("CEsmCell::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmCell);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -343,6 +344,7 @@ CEsmRecord *CEsmCell::Create(void) {
 void CEsmCell::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
+
 	/* Create the item sub-records */
 	AllocateSubRecord(MWESM_SUBREC_DATA);
 	AllocateSubRecord(MWESM_SUBREC_AMBI);
@@ -350,6 +352,7 @@ void CEsmCell::CreateNew(CEsmFile *pFile) {
 	m_pCellData->CreateNew();
 	m_pLightData->CreateNew();
 	m_pCountData->CreateNew();
+
 	/* Default interior cell */
 	GetCellData()->Flags = MWESM_CELLFLAG_INTERIOR;
 }
@@ -376,14 +379,14 @@ CEsmSubCellRef *CEsmCell::FindFirstCellRef(CEsmRecord *pRecord) {
 
 	while (pCellRef != NULL) {
 		if (pCellRef->IsReference(pRecord->GetID())) {
-			return (pCellRef);
+			return pCellRef;
 		}
 
 		pCellRef = (CEsmSubCellRef *)FindNext(MWESM_SUBREC_CREF, ArrayIndex);
 	}
 
 	/* No match found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -407,13 +410,13 @@ CEsmSubCellRef *CEsmCell::FindActiveCellRef(CEsmSubCellRef *pCellRef) {
 
 	while (pFindCellRef != NULL) {
 		if (pFindCellRef->IsSame(pCellRef)) {
-			return (pFindCellRef);
+			return pFindCellRef;
 		}
 
 		pFindCellRef = (CEsmSubCellRef *)FindNext(MWESM_SUBREC_CREF, Index);
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -437,7 +440,7 @@ CEsmSubCellRef *CEsmCell::FindCellRef(CEsmSubCellRef *pCellRef) {
 
 	while (pFindCellRef != NULL) {
 		if (pFindCellRef->IsSame(pCellRef)) {
-			return (pFindCellRef);
+			return pFindCellRef;
 		}
 
 		pFindCellRef = (CEsmSubCellRef *)FindNext(MWESM_SUBREC_CREF, Index);
@@ -448,7 +451,7 @@ CEsmSubCellRef *CEsmCell::FindCellRef(CEsmSubCellRef *pCellRef) {
 		return ((CEsmCell *)m_pPrevRecord)->FindCellRef(pCellRef);
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -496,7 +499,7 @@ const TCHAR *CEsmCell::GetFieldString(const int FieldID) {
  * Class TCHAR* CEsmCell Method - const GetGrid (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmCell::GetGrid(void) {
+const TCHAR *CEsmCell::GetGrid() {
 	static TCHAR s_Buffer[32];
 
 	if (IsInterior()) {
@@ -504,7 +507,7 @@ const TCHAR *CEsmCell::GetGrid(void) {
 	}
 
 	snprintf(s_Buffer, 31, _T("%d, %d"), GetGridX(), GetGridY());
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -517,7 +520,7 @@ const TCHAR *CEsmCell::GetGrid(void) {
  * Class TCHAR* CEsmCell Method - const GetName (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmCell::GetName(void) {
+const TCHAR *CEsmCell::GetName() {
 	/* Just return the ID for interior cells */
 	if (IsInterior()) {
 		return GetID();
@@ -546,7 +549,7 @@ const TCHAR *CEsmCell::GetName(void) {
  * Returns the next available cell reference index.
  *
  *=========================================================================*/
-int CEsmCell::GetNextRefIndex(void) {
+int CEsmCell::GetNextRefIndex() {
 	bool Result;
 
 	do {
@@ -554,7 +557,7 @@ int CEsmCell::GetNextRefIndex(void) {
 		Result = IsValidRefIndex(g_NextCellRefIndex);
 	} while (Result);
 
-	return (g_NextCellRefIndex);
+	return g_NextCellRefIndex;
 }
 
 /*===========================================================================
@@ -567,7 +570,7 @@ int CEsmCell::GetNextRefIndex(void) {
  * Class CEsmCell Method - long GetRefCount (void) {;
  *
  *=========================================================================*/
-long CEsmCell::GetRefCount(void) {
+long CEsmCell::GetRefCount() {
 	//DEFINE_FUNCTION("CEsmCell::GetRefCount()");
 	CEsmRecord *pRecord = this;
 	CEsmCell *pCell;
@@ -583,7 +586,7 @@ long CEsmCell::GetRefCount(void) {
 		pRecord = pRecord->GetPrevRecord();
 	}
 
-	return (TotalCount);
+	return TotalCount;
 }
 
 /*===========================================================================
@@ -600,7 +603,7 @@ long CEsmCell::GetRefCount(void) {
  *
  *=========================================================================*/
 bool CEsmCell::HasCellRef(CEsmSubCellRef *pCellRef) {
-	return (FindActiveCellRef(pCellRef) != NULL);
+	return FindActiveCellRef(pCellRef) != NULL;
 }
 
 /*===========================================================================
@@ -620,22 +623,22 @@ bool CEsmCell::HasCellRef(CEsmSubCellRef *pCellRef) {
 bool CEsmCell::IsSame(CEsmRecord *pRecord) {
 	/* Check types */
 	if (!pRecord->IsType(MWESM_REC_CELL)) {
-		return (false);
+		return false;
 	}
 
 	/* Check IDs if it is an interior cell */
 	if (IsInterior()) {
-		return (StringCompare(GetID(), pRecord->GetID(), false) == 0);
+		return StringCompare(GetID(), pRecord->GetID(), false) == 0;
 	}
 
-	CEsmCell* pCell = (CEsmCell *) pRecord;
+	CEsmCell *pCell = (CEsmCell *)pRecord;
 
 	/* Check the grid location otherwise */
 	if (GetGridX() == pCell->GetGridX() && GetGridY() == pCell->GetGridY()) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -658,7 +661,7 @@ bool CEsmCell::IsValidRefIndex(const int RefIndex) {
 
 	while (pFindCellRef != NULL) {
 		if (pFindCellRef->GetIndex() == RefIndex) {
-			return (true);
+			return true;
 		}
 
 		pFindCellRef = (CEsmSubCellRef *)FindNext(MWESM_SUBREC_CREF, Index);
@@ -669,7 +672,7 @@ bool CEsmCell::IsValidRefIndex(const int RefIndex) {
 		return ((CEsmCell *)m_pPrevRecord)->IsValidRefIndex(RefIndex);
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -737,7 +740,7 @@ bool CEsmCell::ReadData(CGenFile &File) {
 		}
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 
 		//SystemLog.Printf ("\t\t%4.4s (0x%08X)", Type, File.Tell());
@@ -755,30 +758,28 @@ bool CEsmCell::ReadData(CGenFile &File) {
 			Result = pSubRecord->Read(File);
 
 			if (!Result) {
-				return (true);
+				return true;
 			}
-		}
-		/* Input a cell-ref sub-record */
-		else if (m_pLastCellRef != NULL) {
+		} else if (m_pLastCellRef != NULL) { /* Input a cell-ref sub-record */
 			//SystemLog.Printf ("Found FRMR Sub-Record %4.4s (0x%08X)", Type, File.Tell());
 			pSubRecord = AllocNewSubRecord(Type, RecordSize);
 			m_pLastCellRef->AddSubRec(pSubRecord);
 			Result = pSubRecord->Read(File);
 
 			if (!Result) {
-				return (true);
+				return true;
 			}
 		} else { /* Allocate and read a regular subrecord pointer */
 			pSubRecord = AllocateSubRecord(Type, RecordSize);
 			Result = pSubRecord->Read(File);
 
 			if (!Result) {
-				return (true);
+				return true;
 			}
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

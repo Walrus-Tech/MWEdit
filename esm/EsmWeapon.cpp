@@ -115,7 +115,7 @@ CEsmWeapon::CEsmWeapon() {
  * Description
  *
  *=========================================================================*/
-void CEsmWeapon::Destroy(void) {
+void CEsmWeapon::Destroy() {
 	//DEFINE_FUNCTION("CEsmWeapon::Destroy()");
 	m_pWeaponData = NULL;
 	CEsmItem3::Destroy();
@@ -196,11 +196,11 @@ int CEsmWeapon::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmWeapon::Create(void) {
+CEsmRecord *CEsmWeapon::Create() {
 	DEFINE_FUNCTION("CEsmWeapon::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmWeapon);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -242,43 +242,43 @@ const TCHAR *CEsmWeapon::GetFieldString(const int FieldID) {
 
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
-			return (GetWeaponType());
+			return GetWeaponType();
 
 		case ESM_FIELD_HEALTH:
 			snprintf(s_Buffer, 31, _T("%d"), GetHealth());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_SPEED:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetSpeed());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_REACH:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetReach());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_CHOPMIN:
 			snprintf(s_Buffer, 31, _T("%d"), GetChopMin());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_CHOPMAX:
 			snprintf(s_Buffer, 31, _T("%d"), GetChopMax());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_SLASHMIN:
 			snprintf(s_Buffer, 31, _T("%d"), GetSlashMin());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_SLASHMAX:
 			snprintf(s_Buffer, 31, _T("%d"), GetSlashMax());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_THRUSTMIN:
 			snprintf(s_Buffer, 31, _T("%d"), GetThrustMin());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_THRUSTMAX:
 			snprintf(s_Buffer, 31, _T("%d"), GetThrustMax());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_IGNORERESIST:
 			return BOOLTOYESNO(IsIgnoreResist());
@@ -328,49 +328,49 @@ bool CEsmWeapon::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetWeaponType(Type);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_HEALTH:
 			SetHealth(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_SPEED:
 			SetSpeed((float)atof(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_REACH:
 			SetReach((float)atof(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_CHOPMIN:
 			SetChopMin(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_CHOPMAX:
 			SetChopMax(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_SLASHMIN:
 			SetSlashMin(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_SLASHMAX:
 			SetSlashMax(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_THRUSTMIN:
 			SetThrustMin(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_THRUSTMAX:
 			SetThrustMax(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_IGNORERESIST:
 			SetIgnoreResist(StringToBoolean(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem3::SetFieldValue(FieldID, pString);
@@ -416,12 +416,12 @@ int GetESMWeaponType(const TCHAR *pString) {
 
 	/* Check for a valid input type */
 	for (Index = MWESM_WEAPONTYPE_MIN; Index <= MWESM_WEAPONTYPE_MAX; Index++) {
-		if ( _stricmp(l_WeaponTypes[Index], pString) == 0) {
-			return (Index);
+		if (_stricmp(l_WeaponTypes[Index], pString) == 0) {
+			return Index;
 		}
 	}
 
-	return (MWESM_WEAPONTYPE_SHORT);
+	return MWESM_WEAPONTYPE_SHORT;
 }
 
 /*===========================================================================
@@ -438,18 +438,18 @@ int GetESMWeaponType(const TCHAR *pString) {
  *=========================================================================*/
 bool IsESMWeaponRange(const int Type) {
 	if (Type == MWESM_WEAPONTYPE_THROWN) {
-		return (true);
+		return true;
 	}
 
 	if (Type == MWESM_WEAPONTYPE_ARROW) {
-		return (true);
+		return true;
 	}
 
 	if (Type == MWESM_WEAPONTYPE_BOLT) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================

@@ -85,7 +85,7 @@ CEsmRepair::CEsmRepair() {
  * Description
  *
  *=========================================================================*/
-void CEsmRepair::Destroy(void) {
+void CEsmRepair::Destroy() {
 	//DEFINE_FUNCTION("CEsmRepair::Destroy()");
 	m_pRepairData = NULL;
 	CEsmItem2::Destroy();
@@ -139,11 +139,11 @@ int CEsmRepair::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRepair::Create(void) {
+CEsmRecord *CEsmRepair::Create() {
 	DEFINE_FUNCTION("CEsmRepair::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRepair);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -185,11 +185,11 @@ const TCHAR *CEsmRepair::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			snprintf(s_Buffer, 31, _T("%ld"), GetUses());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_QUALITY:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetQuality());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmItem2::GetFieldString(FieldID);
@@ -231,12 +231,12 @@ bool CEsmRepair::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			SetUses(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_QUALITY:
 			SetQuality((float)atof(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem2::SetFieldValue(FieldID, pString);

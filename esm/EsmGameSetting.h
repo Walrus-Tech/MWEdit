@@ -68,13 +68,13 @@ class CEsmGameSetting : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmGameSetting();
 	//virtual ~CEsmGameSetting() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -83,14 +83,14 @@ class CEsmGameSetting : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Game Setting");
 	}
 
 	/* Get class members */
-	const TCHAR *GetTypeString(void);
-	int GetType(void);
-	const TCHAR *GetValue(void);
+	const TCHAR *GetTypeString();
+	int GetType();
+	const TCHAR *GetValue();
 	int GetType(const TCHAR *pString);
 
 	/* Used to save the various record elements */
@@ -102,7 +102,6 @@ class CEsmGameSetting : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

@@ -35,7 +35,7 @@ class CEsmRepair : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubRIDT *m_pRepairData;  /* Reference to subrecords */
+	CEsmSubRIDT *m_pRepairData; /* Reference to subrecords */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -48,41 +48,41 @@ class CEsmRepair : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmRepair();
 	//virtual ~CEsmRepair() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Repair");
 	}
 
 	/* Get class members */
-	repairdata_t *GetRepairData(void) {
-		return (m_pRepairData ? m_pRepairData->GetRepairData() : NULL);
+	repairdata_t *GetRepairData() {
+		return m_pRepairData ? m_pRepairData->GetRepairData() : NULL;
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pRepairData ? GetRepairData()->Weight : 0);
+	virtual float GetWeight() {
+		return m_pRepairData ? GetRepairData()->Weight : 0;
 	}
 
-	virtual long GetValue(void) {
-		return (m_pRepairData ? GetRepairData()->Value : 0);
+	virtual long GetValue() {
+		return m_pRepairData ? GetRepairData()->Value : 0;
 	}
 
-	float GetQuality(void) {
-		return (m_pRepairData ? GetRepairData()->Quality : 0);
+	float GetQuality() {
+		return m_pRepairData ? GetRepairData()->Quality : 0;
 	}
 
-	long GetUses(void) {
-		return (m_pRepairData ? GetRepairData()->Uses : 0);
+	long GetUses() {
+		return m_pRepairData ? GetRepairData()->Uses : 0;
 	}
 
 	/* Get a string representation of a particular field */
@@ -118,7 +118,6 @@ class CEsmRepair : public CEsmItem2 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

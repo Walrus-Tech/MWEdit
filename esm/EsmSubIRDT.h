@@ -83,26 +83,29 @@ class CEsmSubIRDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubIRDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ingredata_t));
 		m_RecordSize = sizeof(ingredata_t);
 		memset(m_pData, 0, sizeof(ingredata_t));
+
 		GetIngreData()->EffectID[0] = -1;
 		GetIngreData()->EffectID[1] = -1;
 		GetIngreData()->EffectID[2] = -1;
 		GetIngreData()->EffectID[3] = -1;
+
 		GetIngreData()->SkillID[0] = -1;
 		GetIngreData()->SkillID[1] = -1;
 		GetIngreData()->SkillID[2] = -1;
 		GetIngreData()->SkillID[3] = -1;
+
 		GetIngreData()->AttributeID[0] = -1;
 		GetIngreData()->AttributeID[1] = -1;
 		GetIngreData()->AttributeID[2] = -1;
@@ -110,32 +113,32 @@ class CEsmSubIRDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	ingredata_t *GetIngreData(void) {
-		return ((ingredata_t *)m_pData);
+	ingredata_t *GetIngreData() {
+		return (ingredata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetIngreData()->Weight);
+	float GetWeight() {
+		return GetIngreData()->Weight;
 	}
 
-	long GetValue(void) {
-		return (GetIngreData()->Value);
+	long GetValue() {
+		return GetIngreData()->Value;
 	}
 
 	bool IsValidEffect(const int Index) {
-		return (Index >= 0 && Index < MWESM_INGRE_NUMEFFECTS);
+		return Index >= 0 && Index < MWESM_INGRE_NUMEFFECTS;
 	}
 
 	long GetEffectID(const int Index) {
-		return (IsValidEffect(Index) ? GetIngreData()->EffectID[Index] : 0);
+		return IsValidEffect(Index) ? GetIngreData()->EffectID[Index] : 0;
 	}
 
 	long GetSkillID(const int Index) {
-		return (IsValidEffect(Index) ? GetIngreData()->SkillID[Index] : 0);
+		return IsValidEffect(Index) ? GetIngreData()->SkillID[Index] : 0;
 	}
 
 	long GetAttributeID(const int Index) {
-		return (IsValidEffect(Index) ? GetIngreData()->AttributeID[Index] : 0);
+		return IsValidEffect(Index) ? GetIngreData()->AttributeID[Index] : 0;
 	}
 
 	/* Checks if the sub-record uses the given ID */
@@ -167,7 +170,6 @@ class CEsmSubIRDT : public CEsmSubRecord {
 			GetIngreData()->AttributeID[Index] = Value;
 		}
 	}
-
 };
 
 /*===========================================================================
@@ -192,11 +194,11 @@ inline bool CEsmSubIRDT::IsUsed(const TCHAR *pID) {
 		Result = StringCompare(GetESMEffect(GetIngreData()->EffectID[Index]), pID, false) == 0;
 
 		if (Result) {
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================

@@ -72,7 +72,7 @@ CEsmGlobal::CEsmGlobal() {
  * Class CEsmGlobal Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmGlobal::Destroy(void) {
+void CEsmGlobal::Destroy() {
 	//DEFINE_FUNCTION("CEsmGlobal::Destroy()");
 	m_pTypeData = NULL;
 	m_pFloatData = NULL;
@@ -126,11 +126,11 @@ int CEsmGlobal::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmGlobal::Create(void) {
+CEsmRecord *CEsmGlobal::Create() {
 	DEFINE_FUNCTION("CEsmGlobal::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmGlobal);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -177,10 +177,10 @@ const TCHAR *CEsmGlobal::GetFieldString(const int FieldID) {
 			if (GetType() == MWESM_GLOBAL_FLOAT) {
 				snprintf(s_Buffer, 31, _T("%g"), GetValue());
 			} else {
-				snprintf(s_Buffer, 31, _T("%d"), (int) GetValue());
+				snprintf(s_Buffer, 31, _T("%d"), (int)GetValue());
 			}
 
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_TYPE:
 			return GetTypeString();
@@ -200,7 +200,7 @@ const TCHAR *CEsmGlobal::GetFieldString(const int FieldID) {
  * Class TCHAR* CEsmGlobal Method - const GetTypeString (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmGlobal::GetTypeString(void) {
+const TCHAR *CEsmGlobal::GetTypeString() {
 	switch (GetType()) {
 		case MWESM_GLOBAL_FLOAT:
 			return _T("float");
@@ -216,21 +216,20 @@ const TCHAR *CEsmGlobal::GetTypeString(void) {
 	}
 }
 
-
 int CEsmGlobal::GetTypeID(const TCHAR *pString) {
 	if (stricmp(pString, _T("float")) == 0) {
-		return (MWESM_GLOBAL_FLOAT);
+		return MWESM_GLOBAL_FLOAT;
 	}
 
 	if (stricmp(pString, _T("long")) == 0) {
-		return (MWESM_GLOBAL_LONG);
+		return MWESM_GLOBAL_LONG;
 	}
 
 	if (stricmp(pString, _T("short")) == 0) {
-		return (MWESM_GLOBAL_SHORT);
+		return MWESM_GLOBAL_SHORT;
 	}
 
-	return (MWESM_GLOBAL_FLOAT);
+	return MWESM_GLOBAL_FLOAT;
 }
 
 /*===========================================================================
@@ -270,13 +269,14 @@ bool CEsmGlobal::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_VALUE:
 			SetValue((float)atof(pString));
-			return (true);
+			return true;
 
-		case ESM_FIELD_TYPE:
+		case ESM_FIELD_TYPE: {
 			int Type = GetTypeID(pString);
 			SetType(Type);
-			return (true);
-	};
+			return true;
+		}
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);

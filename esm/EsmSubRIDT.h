@@ -68,14 +68,14 @@ class CEsmSubRIDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubRIDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(repairdata_t));
 		m_RecordSize = sizeof(repairdata_t);
@@ -83,24 +83,24 @@ class CEsmSubRIDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	repairdata_t *GetRepairData(void) {
-		return ((repairdata_t *)m_pData);
+	repairdata_t *GetRepairData() {
+		return (repairdata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetRepairData()->Weight);
+	float GetWeight() {
+		return GetRepairData()->Weight;
 	}
 
-	float GetQuality(void) {
-		return (GetRepairData()->Quality);
+	float GetQuality() {
+		return GetRepairData()->Quality;
 	}
 
-	long GetValue(void) {
-		return (GetRepairData()->Value);
+	long GetValue() {
+		return GetRepairData()->Value;
 	}
 
-	long GetUses(void) {
-		return (GetRepairData()->Uses);
+	long GetUses() {
+		return GetRepairData()->Uses;
 	}
 
 	/* Set class members */
@@ -119,7 +119,6 @@ class CEsmSubRIDT : public CEsmSubRecord {
 	void SetUses(const long Value) {
 		GetRepairData()->Uses = Value;
 	}
-
 };
 
 /*===========================================================================

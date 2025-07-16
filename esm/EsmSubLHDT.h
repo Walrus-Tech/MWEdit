@@ -103,102 +103,103 @@ class CEsmSubLHDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubLHDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(lightdata_t));
 		m_RecordSize = sizeof(lightdata_t);
 		memset(m_pData, 0, sizeof(lightdata_t));
+
 		GetLightData()->Red = 192;
 		GetLightData()->Green = 128;
 		GetLightData()->Blue = 64;
 	}
 
 	/* Get class members */
-	lightdata_t *GetLightData(void) {
-		return ((lightdata_t *)m_pData);
+	lightdata_t *GetLightData() {
+		return (lightdata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetLightData()->Weight);
+	float GetWeight() {
+		return GetLightData()->Weight;
 	}
 
-	long GetValue(void) {
-		return (GetLightData()->Value);
+	long GetValue() {
+		return GetLightData()->Value;
 	}
 
-	long GetTime(void) {
-		return (GetLightData()->Time);
+	long GetTime() {
+		return GetLightData()->Time;
 	}
 
-	long GetRadius(void) {
-		return (GetLightData()->Radius);
+	long GetRadius() {
+		return GetLightData()->Radius;
 	}
 
-	long GetColorRef(void) {
-		return (GetLightData()->ColorRef);
+	long GetColorRef() {
+		return GetLightData()->ColorRef;
 	}
 
-	byte GetColorRed(void) {
-		return (GetLightData()->Red);
+	byte GetColorRed() {
+		return GetLightData()->Red;
 	}
 
-	byte GetColorGreen(void) {
-		return (GetLightData()->Green);
+	byte GetColorGreen() {
+		return GetLightData()->Green;
 	}
 
-	byte GetColorBlue(void) {
-		return (GetLightData()->Blue);
+	byte GetColorBlue() {
+		return GetLightData()->Blue;
 	}
 
-	long GetFlags(void) {
-		return (GetLightData()->Flags);
+	long GetFlags() {
+		return GetLightData()->Flags;
 	}
 
-	bool IsDynamic(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_DYNAMIC) != 0);
+	bool IsDynamic() {
+		return (GetFlags() & MWESM_LIGHTFLAG_DYNAMIC) != 0;
 	}
 
-	bool IsCanCarry(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_CANCARRY) != 0);
+	bool IsCanCarry() {
+		return (GetFlags() & MWESM_LIGHTFLAG_CANCARRY) != 0;
 	}
 
-	bool IsNegative(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_NEGATIVE) != 0);
+	bool IsNegative() {
+		return (GetFlags() & MWESM_LIGHTFLAG_NEGATIVE) != 0;
 	}
 
-	bool IsFlicker(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_FLICKER) != 0);
+	bool IsFlicker() {
+		return (GetFlags() & MWESM_LIGHTFLAG_FLICKER) != 0;
 	}
 
-	bool IsFire(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_ISFIRE) != 0);
+	bool IsFire() {
+		return (GetFlags() & MWESM_LIGHTFLAG_ISFIRE) != 0;
 	}
 
-	bool IsDefaultOff(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_DEFAULTOFF) != 0);
+	bool IsDefaultOff() {
+		return (GetFlags() & MWESM_LIGHTFLAG_DEFAULTOFF) != 0;
 	}
 
-	bool IsFlickerSlow(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_FLICKERSLOW) != 0);
+	bool IsFlickerSlow() {
+		return (GetFlags() & MWESM_LIGHTFLAG_FLICKERSLOW) != 0;
 	}
 
-	bool IsPulse(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_PULSE) != 0);
+	bool IsPulse() {
+		return (GetFlags() & MWESM_LIGHTFLAG_PULSE) != 0;
 	}
 
-	bool IsPulseSlow(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_PULSESLOW) != 0);
+	bool IsPulseSlow() {
+		return (GetFlags() & MWESM_LIGHTFLAG_PULSESLOW) != 0;
 	}
 
-	bool IsFlickerAll(void) {
-		return ((GetFlags() & MWESM_LIGHTFLAG_FLICKERALL) != 0);
+	bool IsFlickerAll() {
+		return (GetFlags() & MWESM_LIGHTFLAG_FLICKERALL) != 0;
 	}
 
 	/* Set or clear flags */
@@ -288,7 +289,6 @@ class CEsmSubLHDT : public CEsmSubRecord {
 	void SetFlickerAll(const bool Flag) {
 		SetFlag(MWESM_LIGHTFLAG_FLICKERALL, Flag);
 	}
-
 };
 
 /*===========================================================================

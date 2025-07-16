@@ -77,7 +77,7 @@ CEsmGameSetting::CEsmGameSetting() {
  * Class CEsmGameSetting Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmGameSetting::Destroy(void) {
+void CEsmGameSetting::Destroy() {
 	//DEFINE_FUNCTION("CEsmGameSetting::Destroy()");
 	m_pLongData = NULL;
 	m_pStringData = NULL;
@@ -132,11 +132,11 @@ int CEsmGameSetting::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmGameSetting::Create(void) {
+CEsmRecord *CEsmGameSetting::Create() {
 	DEFINE_FUNCTION("CEsmGameSetting::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmGameSetting);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -195,7 +195,7 @@ const TCHAR *CEsmGameSetting::GetFieldString(const int FieldID) {
  * Class TCHAR* CEsmGameSetting Method - const TCHAR*  GetTypeString (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmGameSetting::GetTypeString(void) {
+const TCHAR *CEsmGameSetting::GetTypeString() {
 	switch (GetType()) {
 		case MWESM_SETTING_INTEGER:
 			return _T("Integer");
@@ -213,22 +213,22 @@ const TCHAR *CEsmGameSetting::GetTypeString(void) {
 
 int CEsmGameSetting::GetType(const TCHAR *pString) {
 	if (stricmp(pString, _T("Integer")) == 0) {
-		return (MWESM_SETTING_INTEGER);
+		return MWESM_SETTING_INTEGER;
 	}
 
 	if (stricmp(pString, _T("Float")) == 0) {
-		return (MWESM_SETTING_FLOAT);
+		return MWESM_SETTING_FLOAT;
 	}
 
 	if (stricmp(pString, _T("String")) == 0) {
-		return (MWESM_SETTING_STRING);
+		return MWESM_SETTING_STRING;
 	}
 
-	return (MWESM_SETTING_INTEGER);
+	return MWESM_SETTING_INTEGER;
 }
 
 
-int CEsmGameSetting::GetType(void) {
+int CEsmGameSetting::GetType() {
 	if (m_pLongData != NULL) {
 		return MWESM_SETTING_INTEGER;
 	}
@@ -252,21 +252,21 @@ int CEsmGameSetting::GetType(void) {
  * Return a string representation of the current setting value.
  *
  *=========================================================================*/
-const TCHAR *CEsmGameSetting::GetValue(void) {
+const TCHAR *CEsmGameSetting::GetValue() {
 	static TCHAR s_Buffer[32];
 
 	if (m_pStringData != NULL) {
-		return (m_pStringData->GetName());
+		return m_pStringData->GetName();
 	}
 
 	if (m_pLongData != NULL) {
 		snprintf(s_Buffer, 31, _T("%ld"), m_pLongData->GetValue());
-		return (s_Buffer);
+		return s_Buffer;
 	}
 
 	if (m_pFloatData != NULL) {
 		snprintf(s_Buffer, 31, _T("%g"), m_pFloatData->GetValue());
-		return (s_Buffer);
+		return s_Buffer;
 	}
 
 	return _T("");
@@ -311,12 +311,12 @@ bool CEsmGameSetting::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_VALUE:
 			SetValue(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_TYPE:
 			SetType(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);
@@ -396,9 +396,7 @@ void CEsmGameSetting::SetValue(const TCHAR *pString) {
 		m_pFloatData->SetValue((float)atof(pString));
 	} else if (m_pStringData != NULL) {
 		m_pStringData->SetName(pString);
-	}
-	/* Create the string by default */
-	else {
+	} else { /* Create the string by default */
 		AllocateSubRecord(MWESM_SUBREC_STRV);
 		m_pStringData->SetName(pString);
 	}

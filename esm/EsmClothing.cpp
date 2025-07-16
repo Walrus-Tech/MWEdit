@@ -123,7 +123,7 @@ CEsmClothing::CEsmClothing() {
  * Description
  *
  *=========================================================================*/
-void CEsmClothing::Destroy(void) {
+void CEsmClothing::Destroy() {
 	//DEFINE_FUNCTION("CEsmClothing::Destroy()");
 	m_pClothData = NULL;
 	CEsmItem3::Destroy();
@@ -174,11 +174,11 @@ int CEsmClothing::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmClothing::Create(void) {
+CEsmRecord *CEsmClothing::Create() {
 	DEFINE_FUNCTION("CEsmClothing::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmClothing);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -213,12 +213,12 @@ void CEsmClothing::CreateNew(CEsmFile *pFile) {
  * Returns the armor type as a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmClothing::GetClothType(void) {
+const TCHAR *CEsmClothing::GetClothType() {
 	if (GetClothData() == NULL) {
 		return _T("Unknown");
 	}
 
-	return (GetESMClothType(GetClothData()->Type));
+	return GetESMClothType(GetClothData()->Type);
 }
 
 /*===========================================================================
@@ -237,7 +237,7 @@ const TCHAR *CEsmClothing::GetClothType(void) {
 const TCHAR *CEsmClothing::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
-			return (GetClothType());
+			return GetClothType();
 
 		default:
 			return CEsmItem3::GetFieldString(FieldID);
@@ -284,8 +284,8 @@ bool CEsmClothing::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetClothType(Type);
 			}
 
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem3::SetFieldValue(FieldID, pString);
@@ -313,7 +313,6 @@ const TCHAR *GetESMClothType(const int ClothType) {
 	return l_ClothTypes[ClothType];
 }
 
-
 bool GetESMClothType(int &OutIndex, const TCHAR *pString) {
 	int Index;
 
@@ -321,13 +320,12 @@ bool GetESMClothType(int &OutIndex, const TCHAR *pString) {
 	for (Index = MWESM_CLOTHTYPE_MIN; Index <= MWESM_CLOTHTYPE_MAX; Index++) {
 		if (_stricmp(l_ClothTypes[Index], pString) == 0) {
 			OutIndex = Index;
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
-
 
 int GetESMClothType(const TCHAR *pString) {
 	int Index;
@@ -336,7 +334,7 @@ int GetESMClothType(const TCHAR *pString) {
 		Index = MWESM_CLOTHTYPE_MIN;
 	}
 
-	return (Index);
+	return Index;
 }
 
 /*===========================================================================

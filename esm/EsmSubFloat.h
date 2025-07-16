@@ -73,18 +73,18 @@ class CEsmSubFloat : public CEsmSubRecord {
 	virtual void Copy(CEsmSubRecord *pSubRecord) {
 		m_Type.SetType(pSubRecord->GetType());
 		m_RecordSize = pSubRecord->GetRecordSize();
-		m_Float = ((CEsmSubFloat *) pSubRecord)->GetValue();
+		m_Float = ((CEsmSubFloat *)pSubRecord)->GetValue();
 	}
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubFloat);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_Float = 0;
 		m_RecordSize = sizeof(float);
@@ -92,18 +92,17 @@ class CEsmSubFloat : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get/set the long value directly */
-	float GetValue(void) {
-		return (m_Float);
+	float GetValue() {
+		return m_Float;
 	}
 
 	void SetValue(const float Value) {
 		m_Float = Value;
 	}
-
 };
 
 /*===========================================================================

@@ -196,7 +196,7 @@ static esmreccreate_t l_RecCreate[] = {
 	{
 		NULL,
 		CEsmRecord::Create
-	}    /* Must be last record */
+	} /* Must be last record */
 };
 /*===========================================================================
  *      End of Record Create Array
@@ -227,7 +227,7 @@ CEsmFile::CEsmFile() : m_Records(0) {
  * Class CEsmFile Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmFile::Destroy(void) {
+void CEsmFile::Destroy() {
 	//DEFINE_FUNCTION("CEsmFile::Destroy()");
 	CEsmRecord *pRecord;
 	int Index;
@@ -290,7 +290,7 @@ CEsmRecord *CEsmFile::AllocateRecord(const TCHAR *pType) {
 	pRecord = AllocNewRecord(pType);
 	/* Add it to the array */
 	m_Records.Add(pRecord);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -317,7 +317,7 @@ CEsmRecord *CEsmFile::AllocNewRecord(const TCHAR *pType) {
 	pRecord = l_RecCreate[Index].CreateMethod();
 	pRecord->SetType(pType);
 	pRecord->SetFile(this);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -344,7 +344,7 @@ CEsmRecord *CEsmFile::CopyRecord(CEsmRecord *pRecord) {
 		pNewRecord->SetFile(this);
 	}
 
-	return (pNewRecord);
+	return pNewRecord;
 }
 
 /*===========================================================================
@@ -360,7 +360,7 @@ CEsmRecord *CEsmFile::CopyRecord(CEsmRecord *pRecord) {
 CEsmRecord *CEsmFile::CreateCopy(CEsmRecord *pRecord) {
 	CEsmRecord *pNewRecord = AllocNewRecord(pRecord->GetType());
 	pNewRecord->Copy(pRecord);
-	return (pNewRecord);
+	return pNewRecord;
 }
 
 /*===========================================================================
@@ -375,7 +375,7 @@ CEsmRecord *CEsmFile::CreateCopy(CEsmRecord *pRecord) {
  * Creates a new, empty, plugin file.
  *
  *=========================================================================*/
-void CEsmFile::CreateNew(void) {
+void CEsmFile::CreateNew() {
 	CEsmRecord *pRecord;
 	/* Delete the current contents of the file, if any */
 	Destroy();
@@ -407,7 +407,7 @@ CEsmRecord *CEsmFile::CreateNewRecord(const TCHAR *pType) {
 		pNewRecord->CreateNew(this);
 	}
 
-	return (pNewRecord);
+	return pNewRecord;
 }
 
 /*===========================================================================
@@ -450,11 +450,11 @@ CEsmRecord *CEsmFile::FindNext(const TCHAR *pType, int &ArrayIndex) {
 		pRecord = m_Records.GetAt(ArrayIndex);
 
 		if (pRecord->IsType(pType)) {
-			return (pRecord);
+			return pRecord;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -478,13 +478,14 @@ bool CEsmFile::Read(const TCHAR *pFilename) {
 	TCHAR Buffer[256];
 	bool Result;
 	float Percent;
+
 	/* Delete the current record information, if any */
 	Destroy();
 	/* Attempt to open file for input */
 	Result = File.Open(pFilename, "rb");
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	m_Filename = pFilename;
@@ -496,7 +497,7 @@ bool CEsmFile::Read(const TCHAR *pFilename) {
 		Result = File.Read(Type, MWESM_TYPE_SIZE);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 
 		/* Allocate the appropriate record */
@@ -520,12 +521,12 @@ bool CEsmFile::Read(const TCHAR *pFilename) {
 		Result = pRecord->Read(File);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
 	File.Close();
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -563,7 +564,7 @@ bool CEsmFile::Write(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, "wb");
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Input all the file records */
@@ -583,13 +584,13 @@ bool CEsmFile::Write(const TCHAR *pFilename) {
 		Result = m_Records.GetAt(Index)->Write(File);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
 	m_FileSize = File.Tell();
 	File.Close();
-	return (true);
+	return true;
 }
 
 /*===========================================================================

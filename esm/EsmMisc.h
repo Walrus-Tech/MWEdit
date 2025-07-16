@@ -46,7 +46,7 @@ class CEsmMisc : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubMCDT *m_pMiscData;    /* Reference to subrecords */
+	CEsmSubMCDT *m_pMiscData; /* Reference to subrecords */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -59,37 +59,37 @@ class CEsmMisc : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmMisc();
 	//virtual ~CEsmMisc() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Misc");
 	}
 
 	/* Get class members */
-	miscdata_t *GetMiscData(void) {
-		return (m_pMiscData ? m_pMiscData->GetMiscData() : NULL);
+	miscdata_t *GetMiscData() {
+		return m_pMiscData ? m_pMiscData->GetMiscData() : NULL;
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pMiscData ? m_pMiscData->GetWeight() : 0);
+	virtual float GetWeight() {
+		return m_pMiscData ? m_pMiscData->GetWeight() : 0;
 	}
 
-	virtual long GetValue(void) {
-		return (m_pMiscData ? m_pMiscData->GetValue() : 0);
+	virtual long GetValue() {
+		return m_pMiscData ? m_pMiscData->GetValue() : 0;
 	}
 
-	long GetUnknown(void) {
-		return (m_pMiscData ? m_pMiscData->GetUnknown() : 0);
+	long GetUnknown() {
+		return m_pMiscData ? m_pMiscData->GetUnknown() : 0;
 	}
 
 	/* Get a string representation of a particular field */
@@ -113,7 +113,6 @@ class CEsmMisc : public CEsmItem2 {
 			m_pMiscData->SetValue(Value);
 		}
 	}
-
 };
 
 /*===========================================================================

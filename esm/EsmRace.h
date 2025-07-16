@@ -63,13 +63,13 @@ class CEsmRace : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmRace();
 	//virtual ~CEsmRace() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -78,29 +78,29 @@ class CEsmRace : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Race");
 	}
 
 	/* Get class members */
-	racedata_t *GetRaceData(void) {
-		return (m_pRaceData ? m_pRaceData->GetRaceData() : NULL);
+	racedata_t *GetRaceData() {
+		return m_pRaceData ? m_pRaceData->GetRaceData() : NULL;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pNameData ? m_pNameData->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pNameData ? m_pNameData->GetName() : _T("");
 	}
 
-	const TCHAR *GetDescription(void) {
-		return (m_pDescData ? m_pDescData->GetName() : _T(""));
+	const TCHAR *GetDescription() {
+		return m_pDescData ? m_pDescData->GetName() : _T("");
 	}
 
-	bool IsPlayable(void) {
-		return (m_pRaceData ? ((GetRaceData()->Flags & MWESM_RACEFLAG_PLAYABLE) != 0) : false);
+	bool IsPlayable() {
+		return m_pRaceData ? ((GetRaceData()->Flags & MWESM_RACEFLAG_PLAYABLE) != 0) : false;
 	}
 
-	bool IsBeastRace(void) {
-		return (m_pRaceData ? ((GetRaceData()->Flags & MWESM_RACEFLAG_BEAST) != 0) : false);
+	bool IsBeastRace() {
+		return m_pRaceData ? ((GetRaceData()->Flags & MWESM_RACEFLAG_BEAST) != 0) : false;
 	}
 
 	/* Used to save the various record elements */
@@ -145,7 +145,6 @@ class CEsmRace : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

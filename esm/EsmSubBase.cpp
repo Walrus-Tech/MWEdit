@@ -45,7 +45,7 @@ CEsmSubRecord::CEsmSubRecord() {
  * Class CEsmSubRecord Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSubRecord::Destroy(void) {
+void CEsmSubRecord::Destroy() {
 	DEFINE_FUNCTION("CEsmSubRecord::Destroy()");
 	DestroyArrayPointer(m_pData);
 }
@@ -109,11 +109,11 @@ void CEsmSubRecord::CopyData(char *pData, const int Size) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmSubRecord::Create(void) {
+CEsmSubRecord *CEsmSubRecord::Create() {
 	DEFINE_FUNCTION("CEsmSubRecord::Create()");
 	CEsmSubRecord *pSubRecord;
 	CreatePointer(pSubRecord, CEsmSubRecord);
-	return (pSubRecord);
+	return pSubRecord;
 }
 
 /*===========================================================================
@@ -135,18 +135,18 @@ bool CEsmSubRecord::Find(esmfind_t &FindData) {
 
 	/* Ignore if data is invalid or too small */
 	if (m_pData == NULL || GetRecordSize() < FindData.Length) {
-		return (false);
+		return false;
 	}
 
 	/* Find the first occurence of the text in the raw data */
 	iResult = memisearch((char *)m_pData, FindData.pText, GetRecordSize(), FindData.Length, 0);
 
 	if (iResult >= 0) {
-		return (true);
+		return true;
 	}
 
 	/* No match */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -168,7 +168,7 @@ bool CEsmSubRecord::Read(CGenFile &File) {
 	Destroy();
 	/* Input the record data on success */
 	Result = ReadData(File);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -189,13 +189,13 @@ bool CEsmSubRecord::ReadData(CGenFile &File) {
 	bool Result;
 
 	if (m_RecordSize <= 0) {
-		return (true);
+		return true;
 	}
 
 	/* Create the data pointer */
 	CreateArrayPointer(m_pData, byte, m_RecordSize);
 	Result = File.Read((char *)m_pData, m_RecordSize);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -214,7 +214,7 @@ bool CEsmSubRecord::Write(CGenFile &File) {
 	bool Result;
 	Result = WriteHeader (File);
 	Result &= WriteData (File);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -241,7 +241,7 @@ bool CEsmSubRecord::WriteData(CGenFile &File) {
 		Result = File.Write((char *)m_pData, m_RecordSize);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -261,7 +261,7 @@ bool CEsmSubRecord::WriteHeader(CGenFile &File) {
 	bool Result;
 	Result = File.Write(m_Type.pType, MWESM_TYPE_SIZE);
 	Result &= File.WriteLong(GetRecordSize());
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================

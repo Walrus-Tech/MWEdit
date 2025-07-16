@@ -23,7 +23,6 @@
  *=========================================================================*/
 
 
-
 /*===========================================================================
  *
  * Begin Class CEsmStatic Definition
@@ -36,7 +35,7 @@ class CEsmStatic : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubNameFix *m_pModel;   /* Reference to sub-records */
+	CEsmSubNameFix *m_pModel; /* Reference to sub-records */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -49,13 +48,13 @@ class CEsmStatic : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmStatic();
 	//virtual ~CEsmStatic() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -64,13 +63,13 @@ class CEsmStatic : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Static");
 	}
 
 	/* Get class members */
-	const TCHAR *GetModel(void) {
-		return (m_pModel ? m_pModel->GetName() : _T(""));
+	const TCHAR *GetModel() {
+		return m_pModel ? m_pModel->GetName() : _T("");
 	}
 
 	/* Used to save the various record elements */
@@ -85,7 +84,6 @@ class CEsmStatic : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

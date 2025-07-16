@@ -49,7 +49,7 @@ class CEsmIngrediant : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubIRDT *m_pIngreData;       /* Reference to subrecords */
+	CEsmSubIRDT *m_pIngreData; /* Reference to subrecords */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -62,13 +62,13 @@ class CEsmIngrediant : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmIngrediant();
 	//virtual ~CEsmIngrediant() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -77,38 +77,38 @@ class CEsmIngrediant : public CEsmItem2 {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Ingrediant");
 	}
 
 	/* Get class members */
-	ingredata_t *GetIngreData(void) {
-		return (m_pIngreData ? m_pIngreData->GetIngreData() : NULL);
+	ingredata_t *GetIngreData() {
+		return m_pIngreData ? m_pIngreData->GetIngreData() : NULL;
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pIngreData ? m_pIngreData->GetWeight() : 0);
+	virtual float GetWeight() {
+		return m_pIngreData ? m_pIngreData->GetWeight() : 0;
 	}
 
-	virtual long GetValue(void) {
-		return (m_pIngreData ? m_pIngreData->GetValue() : 0);
+	virtual long GetValue() {
+		return m_pIngreData ? m_pIngreData->GetValue() : 0;
 	}
 
 	/* Access the effect/skill/attribute IDs */
 	long GetEffectID(const int Index) {
-		return (m_pIngreData ? m_pIngreData->GetEffectID(Index) : -1);
+		return m_pIngreData ? m_pIngreData->GetEffectID(Index) : -1;
 	}
 
 	long GetSkillID(const int Index) {
-		return (m_pIngreData ? m_pIngreData->GetSkillID(Index) : -1);
+		return m_pIngreData ? m_pIngreData->GetSkillID(Index) : -1;
 	}
 
 	long GetAttributeID(const int Index) {
-		return (m_pIngreData ? m_pIngreData->GetAttributeID(Index) : -1);
+		return m_pIngreData ? m_pIngreData->GetAttributeID(Index) : -1;
 	}
 
 	bool IsValidEffect(const int Index) {
-		return (m_pIngreData ? m_pIngreData->IsValidEffect(Index) : false);
+		return m_pIngreData ? m_pIngreData->IsValidEffect(Index) : false;
 	}
 
 	const TCHAR *GetEffect(const int Index) {
@@ -159,7 +159,6 @@ class CEsmIngrediant : public CEsmItem2 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

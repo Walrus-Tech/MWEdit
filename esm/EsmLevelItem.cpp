@@ -88,7 +88,7 @@ CEsmLevelItem::CEsmLevelItem() {
  * Description
  *
  *=========================================================================*/
-void CEsmLevelItem::Destroy(void) {
+void CEsmLevelItem::Destroy() {
 	//DEFINE_FUNCTION("CEsmLevelItem::Destroy()");
 	m_pID = NULL;
 	m_pData = NULL;
@@ -112,14 +112,17 @@ void CEsmLevelItem::Destroy(void) {
 void CEsmLevelItem::AddItem(const TCHAR *pID, const int Value) {
 	CEsmSubNameFix *pName;
 	CEsmSubShort *pValue;
+
 	/* Allocate the new subrecords */
 	pName = (CEsmSubNameFix *)AllocateSubRecord(MWESM_SUBREC_INAM);
 	pName->CreateNew();
 	pValue = (CEsmSubShort *)AllocateSubRecord(MWESM_SUBREC_INTV);
 	pValue->CreateNew();
+
 	/* Set the values */
 	pName->SetName(pID);
 	pValue->SetValue((short)Value);
+
 	/* Increase the size member */
 	SetListSize(GetListSize() + 1);
 }
@@ -158,7 +161,7 @@ int CEsmLevelItem::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 			return (int)IsCalcEach() - (int)pLevelItem->IsCalcEach();
 
 		case ESM_FIELD_LIST:
-			return (0);
+			return 0;
 
 		case ESM_FIELD_CHANCENONE:
 			return GetChanceNone() - pLevelItem->GetChanceNone();
@@ -180,11 +183,11 @@ int CEsmLevelItem::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLevelItem::Create(void) {
+CEsmRecord *CEsmLevelItem::Create() {
 	DEFINE_FUNCTION("CEsmLevelItem::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLevelItem);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -202,10 +205,12 @@ CEsmRecord *CEsmLevelItem::Create(void) {
 void CEsmLevelItem::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
+
 	/* Create the item sub-records */
 	AllocateSubRecord(MWESM_SUBREC_DATA);
 	AllocateSubRecord(MWESM_SUBREC_NNAM);
 	AllocateSubRecord(MWESM_SUBREC_INDX);
+
 	m_pIndex->CreateNew();
 	m_pData->CreateNew();
 	m_pNNam->CreateNew();
@@ -224,7 +229,7 @@ void CEsmLevelItem::CreateNew(CEsmFile *pFile) {
  * in the levelled list (up to 256 bytes).
  *
  *=========================================================================*/
-const TCHAR *CEsmLevelItem::GetItemListString(void) {
+const TCHAR *CEsmLevelItem::GetItemListString() {
 	static TCHAR s_Buffer[256];
 	TCHAR TempBuffer[32];
 	CEsmSubNameFix *pNameSubRec;
@@ -265,7 +270,7 @@ const TCHAR *CEsmLevelItem::GetItemListString(void) {
 		pNameSubRec = (CEsmSubNameFix *)FindNext(MWESM_SUBREC_INAM, ArrayIndex);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -286,20 +291,20 @@ const TCHAR *CEsmLevelItem::GetFieldString(const int FieldID) {
 
 	switch (FieldID) {
 		case ESM_FIELD_ID:
-			return (GetID());
+			return GetID();
 
 		case ESM_FIELD_ALLPC:
-			return (BOOLTOYESNO(IsAllPC()));
+			return BOOLTOYESNO(IsAllPC());
 
 		case ESM_FIELD_LIST:
 			return GetItemListString();
 
 		case ESM_FIELD_CHANCENONE:
 			snprintf(s_Buffer, 31, _T("%d"), GetChanceNone());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_CALCEACH:
-			return (BOOLTOYESNO(IsCalcEach()));
+			return BOOLTOYESNO(IsCalcEach());
 
 		default:
 			return CEsmRecord::GetFieldString(FieldID);
@@ -347,16 +352,16 @@ bool CEsmLevelItem::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ALLPC:
 			SetAllPC(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_CHANCENONE:
 			SetChanceNone(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_CALCEACH:
 			SetCalcEach(StringToBoolean(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);

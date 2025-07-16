@@ -67,14 +67,14 @@ class CEsmSubALDT : public CEsmSubRecord {
 	//virtual void Destroy (void) { }
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubALDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(alchemydata_t));
 		m_RecordSize = sizeof(alchemydata_t);
@@ -82,20 +82,20 @@ class CEsmSubALDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	alchemydata_t *GetAlchemyData(void) {
-		return ((alchemydata_t *)m_pData);
+	alchemydata_t *GetAlchemyData() {
+		return (alchemydata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetAlchemyData()->Weight);
+	float GetWeight() {
+		return GetAlchemyData()->Weight;
 	}
 
-	long GetValue(void) {
-		return (GetAlchemyData()->Value);
+	long GetValue() {
+		return GetAlchemyData()->Value;
 	}
 
-	bool IsAutoCalc(void) {
-		return (GetAlchemyData()->AutoCalc != 0);
+	bool IsAutoCalc() {
+		return GetAlchemyData()->AutoCalc != 0;
 	}
 
 	/* Set class members */
@@ -110,13 +110,11 @@ class CEsmSubALDT : public CEsmSubRecord {
 	void SetAutoCalc(const bool Flag) {
 		GetAlchemyData()->AutoCalc = Flag ? 1 : 0;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubALDT Definition
  *=========================================================================*/
-
 
 
 #endif

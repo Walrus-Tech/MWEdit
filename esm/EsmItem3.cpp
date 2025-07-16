@@ -45,7 +45,7 @@ CEsmItem3::CEsmItem3() {
  * Description
  *
  *=========================================================================*/
-void CEsmItem3::Destroy(void) {
+void CEsmItem3::Destroy() {
 	//DEFINE_FUNCTION("CEsmItem3::Destroy()");
 	/* Clear the references */
 	m_pEnchant = NULL;
@@ -130,11 +130,11 @@ const TCHAR *CEsmItem3::GetFieldString(const int FieldID) {
 				return _T("");
 			}
 
-			return (m_pEnchant->GetName());
+			return m_pEnchant->GetName();
 
 		case ESM_FIELD_ENCHANTPTS:
 			snprintf(s_Buffer, 31, _T("%ld"), GetEnchantPts());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:    /* Call the base class record */
 			return CEsmItem2::GetFieldString(FieldID);
@@ -179,9 +179,7 @@ void CEsmItem3::SetEnchant(const TCHAR *pEnchant) {
 		}
 
 		m_pEnchant = NULL;
-	}
-	/* Create a new enchant sub-record */
-	else if (m_pEnchant == NULL) {
+	} else if (m_pEnchant == NULL) { /* Create a new enchant sub-record */
 		AllocateSubRecord(MWESM_SUBREC_ENAM);
 		ASSERT(m_pEnchant != NULL);
 		m_pEnchant->SetName(pEnchant);
@@ -207,12 +205,12 @@ bool CEsmItem3::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANT:
 			SetEnchant(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_ENCHANTPTS:
 			SetEnchantPts(atol(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem2::SetFieldValue(FieldID, pString);

@@ -28,7 +28,6 @@
  *
  *=========================================================================*/
 #pragma pack(push, 1)
-
 #pragma pack(pop)
 /*===========================================================================
  *      End of Type Definitions
@@ -77,14 +76,14 @@ class CEsmSubByte : public CEsmSubRecord {
 	}
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubByte);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_Byte = 0;
 		m_RecordSize = sizeof(byte);
@@ -92,11 +91,11 @@ class CEsmSubByte : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get/set the long value directly */
-	byte GetValue(void) {
+	byte GetValue() {
 		return m_Byte;
 	}
 
@@ -106,11 +105,11 @@ class CEsmSubByte : public CEsmSubRecord {
 
 	/* Set a bit field flag value */
 	bool IsFlag(const byte Flag) {
-		return ((m_Byte & Flag) != 0);
+		return (m_Byte & Flag) != 0;
 	}
 
 	void SetFlag(const byte Flag, const bool Set) {
-		(Set ? SetFlag(Flag) : ClearFlag(Flag));
+		Set ? SetFlag(Flag) : ClearFlag(Flag);
 	}
 
 	void SetFlag(const byte Flag) {
@@ -120,7 +119,6 @@ class CEsmSubByte : public CEsmSubRecord {
 	void ClearFlag(const byte Flag) {
 		m_Byte = (m_Byte & (~Flag));
 	}
-
 };
 
 /*===========================================================================

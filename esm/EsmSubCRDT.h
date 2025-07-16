@@ -107,14 +107,14 @@ class CEsmSubCRDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCRDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(creaturedata_t));
 		m_RecordSize = sizeof(creaturedata_t);
@@ -122,104 +122,104 @@ class CEsmSubCRDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	creaturedata_t *GetCreatureData(void) {
-		return ((creaturedata_t *)m_pData);
+	creaturedata_t *GetCreatureData() {
+		return (creaturedata_t *)m_pData;
 	}
 
-	long GetCreaType(void) {
-		return (GetCreatureData()->Type);
+	long GetCreaType() {
+		return GetCreatureData()->Type;
 	}
 
-	long GetLevel(void) {
-		return (GetCreatureData()->Level);
+	long GetLevel() {
+		return GetCreatureData()->Level;
 	}
 
-	long GetStrength(void) {
-		return (GetCreatureData()->Strength);
+	long GetStrength() {
+		return GetCreatureData()->Strength;
 	}
 
-	long GetIntelligence(void) {
-		return (GetCreatureData()->Intelligence);
+	long GetIntelligence() {
+		return GetCreatureData()->Intelligence;
 	}
 
-	long GetWillpower(void) {
-		return (GetCreatureData()->Willpower);
+	long GetWillpower() {
+		return GetCreatureData()->Willpower;
 	}
 
-	long GetAgility(void) {
-		return (GetCreatureData()->Agility);
+	long GetAgility() {
+		return GetCreatureData()->Agility;
 	}
 
-	long GetSpeed(void) {
-		return (GetCreatureData()->Speed);
+	long GetSpeed() {
+		return GetCreatureData()->Speed;
 	}
 
-	long GetEndurance(void) {
-		return (GetCreatureData()->Endurance);
+	long GetEndurance() {
+		return GetCreatureData()->Endurance;
 	}
 
-	long GetPersonality(void) {
-		return (GetCreatureData()->Personality);
+	long GetPersonality() {
+		return GetCreatureData()->Personality;
 	}
 
-	long GetLuck(void) {
-		return (GetCreatureData()->Luck);
+	long GetLuck() {
+		return GetCreatureData()->Luck;
 	}
 
-	long GetHealth(void) {
-		return (GetCreatureData()->Health);
+	long GetHealth() {
+		return GetCreatureData()->Health;
 	}
 
-	long GetSpellPts(void) {
-		return (GetCreatureData()->SpellPts);
+	long GetSpellPts() {
+		return GetCreatureData()->SpellPts;
 	}
 
-	long GetFatigue(void) {
-		return (GetCreatureData()->Fatigue);
+	long GetFatigue() {
+		return GetCreatureData()->Fatigue;
 	}
 
-	long GetSoul(void) {
-		return (GetCreatureData()->Soul);
+	long GetSoul() {
+		return GetCreatureData()->Soul;
 	}
 
-	long GetCombat(void) {
-		return (GetCreatureData()->Combat);
+	long GetCombat() {
+		return GetCreatureData()->Combat;
 	}
 
-	long GetMagic(void) {
-		return (GetCreatureData()->Magic);
+	long GetMagic() {
+		return GetCreatureData()->Magic;
 	}
 
-	long GetStealth(void) {
-		return (GetCreatureData()->Stealth);
+	long GetStealth() {
+		return GetCreatureData()->Stealth;
 	}
 
-	long GetAttackMin1(void) {
-		return (GetCreatureData()->AttackMin1);
+	long GetAttackMin1() {
+		return GetCreatureData()->AttackMin1;
 	}
 
-	long GetAttackMin2(void) {
-		return (GetCreatureData()->AttackMin2);
+	long GetAttackMin2() {
+		return GetCreatureData()->AttackMin2;
 	}
 
-	long GetAttackMin3(void) {
-		return (GetCreatureData()->AttackMin3);
+	long GetAttackMin3() {
+		return GetCreatureData()->AttackMin3;
 	}
 
-	long GetAttackMax1(void) {
-		return (GetCreatureData()->AttackMax1);
+	long GetAttackMax1() {
+		return GetCreatureData()->AttackMax1;
 	}
 
-	long GetAttackMax2(void) {
-		return (GetCreatureData()->AttackMax2);
+	long GetAttackMax2() {
+		return GetCreatureData()->AttackMax2;
 	}
 
-	long GetAttackMax3(void) {
-		return (GetCreatureData()->AttackMax3);
+	long GetAttackMax3() {
+		return GetCreatureData()->AttackMax3;
 	}
 
-	long GetGold(void) {
-		return (GetCreatureData()->Gold);
+	long GetGold() {
+		return GetCreatureData()->Gold;
 	}
 
 	/* Set class members */
@@ -320,7 +320,6 @@ class CEsmSubCRDT : public CEsmSubRecord {
 	void SetGold(const long Value) {
 		GetCreatureData()->Gold = Value;
 	}
-
 };
 
 /*===========================================================================

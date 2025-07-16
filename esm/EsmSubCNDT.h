@@ -76,14 +76,14 @@ class CEsmSubCNDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCNDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(contdata_t));
 		m_RecordSize = sizeof(contdata_t);
@@ -91,25 +91,23 @@ class CEsmSubCNDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	contdata_t *GetContData(void) {
-		return ((contdata_t *)m_pData);
+	contdata_t *GetContData() {
+		return (contdata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetContData()->Weight);
+	float GetWeight() {
+		return GetContData()->Weight;
 	}
 
 	/* Set class members */
 	void SetWeight(const float Value) {
 		GetContData()->Weight = Value;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubCNDT Definition
  *=========================================================================*/
-
 
 
 #endif

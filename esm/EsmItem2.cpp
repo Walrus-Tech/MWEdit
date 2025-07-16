@@ -45,7 +45,7 @@ CEsmItem2::CEsmItem2() {
  * Description
  *
  *=========================================================================*/
-void CEsmItem2::Destroy(void) {
+void CEsmItem2::Destroy() {
 	//DEFINE_FUNCTION("CEsmItem2::Destroy()");
 	/* Clear the references */
 	m_pIcon = NULL;
@@ -134,15 +134,15 @@ const TCHAR *CEsmItem2::GetFieldString(const int FieldID) {
 				return _T("");
 			}
 
-			return (m_pIcon->GetName());
+			return m_pIcon->GetName();
 
 		case ESM_FIELD_WEIGHT:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetWeight());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_VALUE:
 			snprintf(s_Buffer, 31, _T("%lu"), (unsigned long)GetValue());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:    /* Call the base class record */
 			return CEsmItem1::GetFieldString(FieldID);
@@ -184,16 +184,16 @@ bool CEsmItem2::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ICON:
 			SetIcon(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_WEIGHT:
 			SetWeight((float)atof(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_VALUE:
 			SetValue(atol(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem1::SetFieldValue(FieldID, pString);
@@ -219,9 +219,7 @@ void CEsmItem2::SetIcon(const TCHAR *pIcon) {
 		}
 
 		m_pIcon = NULL;
-	}
-	/* Create a new enchant sub-record */
-	else if (m_pIcon == NULL) {
+	} else if (m_pIcon == NULL) { /* Create a new enchant sub-record */
 		AllocateSubRecord(MWESM_SUBREC_ITEX);
 		ASSERT(m_pIcon != NULL);
 		m_pIcon->SetName(pIcon);

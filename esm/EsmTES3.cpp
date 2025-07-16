@@ -73,7 +73,7 @@ CEsmTES3::CEsmTES3() {
  * Description
  *
  *=========================================================================*/
-void CEsmTES3::Destroy(void) {
+void CEsmTES3::Destroy() {
 	//DEFINE_FUNCTION("CEsmTES3::Destroy()");
 	/* Clear the references */
 	m_pHeader = NULL;
@@ -114,11 +114,11 @@ void CEsmTES3::AddMaster(const TCHAR *pFilename, const long FileSize) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmTES3::Create(void) {
+CEsmRecord *CEsmTES3::Create() {
 	DEFINE_FUNCTION("CEsmTES3::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmTES3);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================

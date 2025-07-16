@@ -86,62 +86,63 @@ class CEsmSubInfoDATA : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubInfoDATA);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(infodata_t));
 		m_RecordSize = sizeof(infodata_t);
 		memset(m_pData, 0, sizeof(infodata_t));
+
 		GetInfoData()->Rank = -1;
 		GetInfoData()->PCRank = -1;
-		GetInfoData()->Gender = (char) MWESM_INFOGENDER_NONE;
+		GetInfoData()->Gender = (char)MWESM_INFOGENDER_NONE;
 	}
 
 	/* Get class members */
-	infodata_t *GetInfoData(void) {
-		return ((infodata_t *)m_pData);
+	infodata_t *GetInfoData() {
+		return (infodata_t *)m_pData;
 	}
 
-	long GetUnknown1(void) {
-		return (GetInfoData()->Unknown1);
+	long GetUnknown1() {
+		return GetInfoData()->Unknown1;
 	}
 
-	char GetUnknown2(void) {
-		return (GetInfoData()->Unknown2);
+	char GetUnknown2() {
+		return GetInfoData()->Unknown2;
 	}
 
-	long GetDisposition(void) {
-		return (GetInfoData()->Disposition);
+	long GetDisposition() {
+		return GetInfoData()->Disposition;
 	}
 
-	char GetRank(void) {
-		return (GetInfoData()->Rank);
+	char GetRank() {
+		return GetInfoData()->Rank;
 	}
 
-	char GetPCRank(void) {
-		return (GetInfoData()->PCRank);
+	char GetPCRank() {
+		return GetInfoData()->PCRank;
 	}
 
-	char GetGender(void) {
-		return (GetInfoData()->Gender);
+	char GetGender() {
+		return GetInfoData()->Gender;
 	}
 
-	bool IsFemale(void) {
-		return (GetGender() == MWESM_INFOGENDER_FEMALE);
+	bool IsFemale() {
+		return GetGender() == MWESM_INFOGENDER_FEMALE;
 	}
 
-	bool IsMale(void) {
-		return (GetGender() == MWESM_INFOGENDER_MALE);
+	bool IsMale() {
+		return GetGender() == MWESM_INFOGENDER_MALE;
 	}
 
-	bool IsNoGender(void) {
-		return (GetGender() == MWESM_INFOGENDER_NONE);
+	bool IsNoGender() {
+		return GetGender() == MWESM_INFOGENDER_NONE;
 	}
 
 	/* Set class members */
@@ -180,7 +181,6 @@ class CEsmSubInfoDATA : public CEsmSubRecord {
 	void SetNoGender(void) {
 		SetGender(MWESM_INFOGENDER_NONE);
 	}
-
 };
 
 /*===========================================================================

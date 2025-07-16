@@ -49,7 +49,7 @@ class CEsmSpell : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubNameFix *m_pName;    /* Reference to sub-records */
+	CEsmSubNameFix *m_pName; /* Reference to sub-records */
 	CEsmSubSPDT *m_pSpellData;
 
 
@@ -63,13 +63,13 @@ class CEsmSpell : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmSpell();
 	//virtual ~CEsmSpell() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -78,45 +78,45 @@ class CEsmSpell : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Spell");
 	}
 
 	/* Get class members */
-	spelldata_t *GetSpellData(void) {
-		return (m_pSpellData ? m_pSpellData->GetSpellData() : NULL);
+	spelldata_t *GetSpellData() {
+		return m_pSpellData ? m_pSpellData->GetSpellData() : NULL;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
-	const TCHAR *GetSpellType(void) {
+	const TCHAR *GetSpellType() {
 		return GetESMSpellType(GetSpellTypeID());
 	}
 
-	int GetSpellTypeID(void) {
-		return (m_pSpellData ? GetSpellData()->Type : 0);
+	int GetSpellTypeID() {
+		return m_pSpellData ? GetSpellData()->Type : 0;
 	}
 
-	long GetFlags(void) {
-		return (m_pSpellData ? GetSpellData()->Flags : 0);
+	long GetFlags() {
+		return m_pSpellData ? GetSpellData()->Flags : 0;
 	}
 
-	long GetSpellCost(void) {
-		return (m_pSpellData ? GetSpellData()->SpellCost : 0);
+	long GetSpellCost() {
+		return m_pSpellData ? GetSpellData()->SpellCost : 0;
 	}
 
-	bool IsAutoCalc(void) {
-		return ((GetFlags() & MWESM_SPELLFLAG_AUTOCALC) != 0);
+	bool IsAutoCalc() {
+		return (GetFlags() & MWESM_SPELLFLAG_AUTOCALC) != 0;
 	}
 
-	bool IsPCStart(void) {
-		return ((GetFlags() & MWESM_SPELLFLAG_PCSTART) != 0);
+	bool IsPCStart() {
+		return (GetFlags() & MWESM_SPELLFLAG_PCSTART) != 0;
 	}
 
-	bool IsSucceeds(void) {
-		return ((GetFlags() & MWESM_SPELLFLAG_SUCCEEDS) != 0);
+	bool IsSucceeds() {
+		return (GetFlags() & MWESM_SPELLFLAG_SUCCEEDS) != 0;
 	}
 
 	/* Used to save the various record elements */
@@ -180,7 +180,6 @@ class CEsmSpell : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

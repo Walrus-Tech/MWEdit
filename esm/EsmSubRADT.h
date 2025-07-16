@@ -99,18 +99,19 @@ class CEsmSubRADT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubRADT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(racedata_t));
 		m_RecordSize = sizeof(racedata_t);
 		memset(m_pData, 0, sizeof(racedata_t));
+
 		GetRaceData()->SkillBonuses[0].SkillID = 0;
 		GetRaceData()->SkillBonuses[1].SkillID = 1;
 		GetRaceData()->SkillBonuses[2].SkillID = 2;
@@ -118,22 +119,31 @@ class CEsmSubRADT : public CEsmSubRecord {
 		GetRaceData()->SkillBonuses[4].SkillID = 4;
 		GetRaceData()->SkillBonuses[5].SkillID = 5;
 		GetRaceData()->SkillBonuses[6].SkillID = 6;
+
 		GetRaceData()->Strength[0] = 30;
 		GetRaceData()->Strength[1] = 30;
+
 		GetRaceData()->Intelligence[0] = 30;
 		GetRaceData()->Intelligence[1] = 30;
+
 		GetRaceData()->Willpower[0] = 30;
 		GetRaceData()->Willpower[1] = 30;
+
 		GetRaceData()->Agility[0] = 30;
 		GetRaceData()->Agility[1] = 30;
+
 		GetRaceData()->Speed[0] = 30;
 		GetRaceData()->Speed[1] = 30;
+
 		GetRaceData()->Endurance[0] = 30;
 		GetRaceData()->Endurance[1] = 30;
+
 		GetRaceData()->Personality[0] = 30;
 		GetRaceData()->Personality[1] = 30;
+
 		GetRaceData()->Luck[0] = 30;
 		GetRaceData()->Luck[1] = 30;
+
 		GetRaceData()->Height[0] = 1.0f;
 		GetRaceData()->Height[1] = 1.0f;
 		GetRaceData()->Weight[0] = 1.0f;
@@ -141,117 +151,117 @@ class CEsmSubRADT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	racedata_t *GetRaceData(void) {
-		return ((racedata_t *)m_pData);
+	racedata_t *GetRaceData() {
+		return (racedata_t *)m_pData;
 	}
 
-	long GetFlags(void) {
-		return (GetRaceData()->Flags);
+	long GetFlags() {
+		return GetRaceData()->Flags;
 	}
 
-	bool IsPlayable(void) {
-		return ((GetFlags() & MWESM_RACEFLAG_PLAYABLE) != 0);
+	bool IsPlayable() {
+		return (GetFlags() & MWESM_RACEFLAG_PLAYABLE) != 0;
 	}
 
-	bool IsBeast(void) {
-		return ((GetFlags() & MWESM_RACEFLAG_BEAST) != 0);
+	bool IsBeast() {
+		return (GetFlags() & MWESM_RACEFLAG_BEAST) != 0;
 	}
 
-	long GetStrengthM(void) {
-		return (GetRaceData()->Strength[0]);
+	long GetStrengthM() {
+		return GetRaceData()->Strength[0];
 	}
 
-	long GetIntelligenceM(void) {
-		return (GetRaceData()->Intelligence[0]);
+	long GetIntelligenceM() {
+		return GetRaceData()->Intelligence[0];
 	}
 
-	long GetWillpowerM(void) {
-		return (GetRaceData()->Willpower[0]);
+	long GetWillpowerM() {
+		return GetRaceData()->Willpower[0];
 	}
 
-	long GetAgilityM(void) {
-		return (GetRaceData()->Agility[0]);
+	long GetAgilityM() {
+		return GetRaceData()->Agility[0];
 	}
 
-	long GetSpeedM(void) {
-		return (GetRaceData()->Speed[0]);
+	long GetSpeedM() {
+		return GetRaceData()->Speed[0];
 	}
 
-	long GetEnduranceM(void) {
-		return (GetRaceData()->Endurance[0]);
+	long GetEnduranceM() {
+		return GetRaceData()->Endurance[0];
 	}
 
-	long GetPersonalityM(void) {
-		return (GetRaceData()->Personality[0]);
+	long GetPersonalityM() {
+		return GetRaceData()->Personality[0];
 	}
 
-	long GetLuckM(void) {
-		return (GetRaceData()->Luck[0]);
+	long GetLuckM() {
+		return GetRaceData()->Luck[0];
 	}
 
-	long GetStrengthF(void) {
-		return (GetRaceData()->Strength[1]);
+	long GetStrengthF() {
+		return GetRaceData()->Strength[1];
 	}
 
-	long GetIntelligenceF(void) {
-		return (GetRaceData()->Intelligence[1]);
+	long GetIntelligenceF() {
+		return GetRaceData()->Intelligence[1];
 	}
 
-	long GetWillpowerF(void) {
-		return (GetRaceData()->Willpower[1]);
+	long GetWillpowerF() {
+		return GetRaceData()->Willpower[1];
 	}
 
-	long GetAgilityF(void) {
-		return (GetRaceData()->Agility[1]);
+	long GetAgilityF() {
+		return GetRaceData()->Agility[1];
 	}
 
-	long GetSpeedF(void) {
-		return (GetRaceData()->Speed[1]);
+	long GetSpeedF() {
+		return GetRaceData()->Speed[1];
 	}
 
-	long GetEnduranceF(void) {
-		return (GetRaceData()->Endurance[1]);
+	long GetEnduranceF() {
+		return GetRaceData()->Endurance[1];
 	}
 
-	long GetPersonalityF(void) {
-		return (GetRaceData()->Personality[1]);
+	long GetPersonalityF() {
+		return GetRaceData()->Personality[1];
 	}
 
-	long GetLuckF(void) {
-		return (GetRaceData()->Luck[1]);
+	long GetLuckF() {
+		return GetRaceData()->Luck[1];
 	}
 
-	float GetHeightM(void) {
-		return (GetRaceData()->Height[0]);
+	float GetHeightM() {
+		return GetRaceData()->Height[0];
 	}
 
-	float GetWeightM(void) {
-		return (GetRaceData()->Weight[0]);
+	float GetWeightM() {
+		return GetRaceData()->Weight[0];
 	}
 
-	float GetHeightF(void) {
-		return (GetRaceData()->Height[1]);
+	float GetHeightF() {
+		return GetRaceData()->Height[1];
 	}
 
-	float GetWeightF(void) {
-		return (GetRaceData()->Weight[1]);
+	float GetWeightF() {
+		return GetRaceData()->Weight[1];
 	}
 
 	/* Get skill bonuses */
 	bool IsValidBonus(const int Index) {
-		return (Index >= 0 && Index < MWESM_RACEDATA_NUMBONUSES);
+		return Index >= 0 && Index < MWESM_RACEDATA_NUMBONUSES;
 	}
 
 	raceskilldata_t *GetBonusPtr(const int Index) {
-		return (IsValidBonus(Index) ? &GetRaceData()->SkillBonuses[Index] : NULL);
+		return IsValidBonus(Index) ? &GetRaceData()->SkillBonuses[Index] : NULL;
 	}
 
 	long GetBonus(const int Index) {
-		return (IsValidBonus(Index) ? GetRaceData()->SkillBonuses[Index].Bonus : -1);
+		return IsValidBonus(Index) ? GetRaceData()->SkillBonuses[Index].Bonus : -1;
 	}
 
 	long GetBonusSkill(const int Index) {
-		return (IsValidBonus(Index) ? GetRaceData()->SkillBonuses[Index].SkillID : -1);
+		return IsValidBonus(Index) ? GetRaceData()->SkillBonuses[Index].SkillID : -1;
 	}
 
 	/* Set or clear flags */
@@ -371,7 +381,6 @@ class CEsmSubRADT : public CEsmSubRecord {
 			GetRaceData()->SkillBonuses[Index].Bonus = Value;
 		}
 	}
-
 };
 
 /*===========================================================================

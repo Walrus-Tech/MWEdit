@@ -80,13 +80,13 @@ class CEsmDialogue : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmDialogue();
 	//virtual ~CEsmDialogue() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -95,15 +95,15 @@ class CEsmDialogue : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void);
+	virtual const TCHAR *GetItemType();
 
 	/* Get class members */
-	const TCHAR *GetDialogType(void) {
-		return (GetESMDialogType(GetDialogTypeID()));
+	const TCHAR *GetDialogType() {
+		return GetESMDialogType(GetDialogTypeID());
 	}
 
-	int GetDialogTypeID(void) {
-		return (m_pData ? (int)*(m_pData->GetData()) : 0);
+	int GetDialogTypeID() {
+		return m_pData ? (int)*(m_pData->GetData()) : 0;
 	}
 
 	/* Used to save the various record elements */
@@ -115,7 +115,6 @@ class CEsmDialogue : public CEsmRecord {
 			*(m_pData->GetData()) = (byte)Type;
 		}
 	}
-
 };
 
 /*===========================================================================

@@ -104,14 +104,14 @@ class CEsmSubAIDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAIDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(aidata_t));
 		m_RecordSize = sizeof(aidata_t);
@@ -119,32 +119,32 @@ class CEsmSubAIDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	aidata_t *GetAIData(void) {
-		return ((aidata_t *)m_pData);
+	aidata_t *GetAIData() {
+		return (aidata_t *)m_pData;
 	}
 
-	byte GetHello(void) {
-		return (GetAIData()->Hello);
+	byte GetHello() {
+		return GetAIData()->Hello;
 	}
 
-	byte GetFlee(void) {
-		return (GetAIData()->Flee);
+	byte GetFlee() {
+		return GetAIData()->Flee;
 	}
 
-	byte GetFight(void) {
-		return (GetAIData()->Fight);
+	byte GetFight() {
+		return GetAIData()->Fight;
 	}
 
-	byte GetAlarm(void) {
-		return (GetAIData()->Alarm);
+	byte GetAlarm() {
+		return GetAIData()->Alarm;
 	}
 
-	long GetFlags(void) {
-		return (GetAIData()->Flags);
+	long GetFlags() {
+		return GetAIData()->Flags;
 	}
 
 	bool IsFlag(const long Flag) {
-		return ((GetFlags() & Flag) != 0);
+		return (GetFlags() & Flag) != 0;
 	}
 
 	/* Set or clear flags */
@@ -176,7 +176,6 @@ class CEsmSubAIDT : public CEsmSubRecord {
 	void SetFlags(const long Value) {
 		GetAIData()->Flags = Value;
 	}
-
 };
 
 /*===========================================================================

@@ -87,14 +87,14 @@ class CEsmSubENDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubENDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(enchantdata_t));
 		m_RecordSize = sizeof(enchantdata_t);
@@ -103,24 +103,24 @@ class CEsmSubENDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	enchantdata_t *GetEnchantData(void) {
+	enchantdata_t *GetEnchantData() {
 		return (enchantdata_t *)m_pData;
 	}
 
-	long GetEnchantType(void) {
-		return (GetEnchantData()->Type);
+	long GetEnchantType() {
+		return GetEnchantData()->Type;
 	}
 
-	long GetEnchantCost(void) {
-		return (GetEnchantData()->EnchantCost);
+	long GetEnchantCost() {
+		return GetEnchantData()->EnchantCost;
 	}
 
-	long GetCharge(void) {
-		return (GetEnchantData()->Charge);
+	long GetCharge() {
+		return GetEnchantData()->Charge;
 	}
 
-	bool IsAutoCalc(void) {
-		return (GetEnchantData()->AutoCalc != 0);
+	bool IsAutoCalc() {
+		return GetEnchantData()->AutoCalc != 0;
 	}
 
 	/* Set class members */
@@ -141,13 +141,11 @@ class CEsmSubENDT : public CEsmSubRecord {
 	void SetAutoCalc(const bool Flag) {
 		GetEnchantData()->AutoCalc = Flag ? 1 : 0;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubENDT Definition
  *=========================================================================*/
-
 
 
 #endif

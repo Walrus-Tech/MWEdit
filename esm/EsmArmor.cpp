@@ -124,7 +124,7 @@ CEsmArmor::CEsmArmor() {
  * Description
  *
  *=========================================================================*/
-void CEsmArmor::Destroy(void) {
+void CEsmArmor::Destroy() {
 	//DEFINE_FUNCTION("CEsmArmor::Destroy()");
 	m_pArmorData = NULL;
 	CEsmItem3::Destroy();
@@ -183,11 +183,11 @@ int CEsmArmor::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmArmor::Create(void) {
+CEsmRecord *CEsmArmor::Create() {
 	DEFINE_FUNCTION("CEsmArmor::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmArmor);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -222,12 +222,12 @@ void CEsmArmor::CreateNew(CEsmFile *pFile) {
  * Returns the armor type as a string.  Always returns a valid string.
  *
  *=========================================================================*/
-const TCHAR *CEsmArmor::GetArmorType(void) {
+const TCHAR *CEsmArmor::GetArmorType() {
 	if (GetArmorData() == NULL) {
 		return _T("Unknown");
 	}
 
-	return (GetESMArmorType(GetArmorData()->Type));
+	return GetESMArmorType(GetArmorData()->Type);
 }
 
 /*===========================================================================
@@ -250,20 +250,20 @@ const TCHAR *CEsmArmor::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_TYPE:
 			ASSERT(GetArmorData() != NULL);
-			return (GetArmorType());
+			return GetArmorType();
 
 		case ESM_FIELD_CLASS:
-			return ("?");
+			return "?";
 
 		case ESM_FIELD_HEALTH:
 			ASSERT(GetArmorData() != NULL);
 			snprintf(s_Buffer, 31, _T("%ld"), GetArmorData()->Health);
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_RATING:
 			ASSERT(GetArmorData() != NULL);
 			snprintf(s_Buffer, 31, _T("%ld"), GetArmorData()->Rating);
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmItem3::GetFieldString(FieldID);
@@ -310,16 +310,16 @@ bool CEsmArmor::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetArmorType(Type);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_HEALTH:
 			SetArmorHealth(atol(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_RATING:
 			SetArmorRating(atol(pString));
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */
@@ -348,7 +348,6 @@ const TCHAR *GetESMArmorType(const int ArmorType) {
 	return l_ArmorTypes[ArmorType];
 }
 
-
 bool GetESMArmorType(int &OutIndex, const TCHAR *pString) {
 	int Index;
 
@@ -356,22 +355,21 @@ bool GetESMArmorType(int &OutIndex, const TCHAR *pString) {
 	for (Index = MWESM_ARMORTYPE_MIN; Index <= MWESM_ARMORTYPE_MAX; Index++) {
 		if (_stricmp(l_ArmorTypes[Index], pString) == 0) {
 			OutIndex = Index;
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
-
 
 int GetESMArmorType(const TCHAR *pString) {
 	int Index;
 
 	if (!GetESMArmorType(Index, pString)) {
-		return (MWESM_ARMORTYPE_MAX);
+		return MWESM_ARMORTYPE_MAX;
 	}
 
-	return (Index);
+	return Index;
 }
 
 /*===========================================================================

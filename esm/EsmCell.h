@@ -78,7 +78,7 @@ class CEsmCell : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmCell();
 	//virtual ~CEsmCell() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add a cell reference to the cell */
 	void AddCellRef(CEsmSubCellRef *pCellRef) {
@@ -97,7 +97,7 @@ class CEsmCell : public CEsmRecord {
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -111,61 +111,61 @@ class CEsmCell : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Cell");
 	}
 
 	/* Get class members */
-	celldata_t *GetCellData(void) {
-		return (m_pCellData ? m_pCellData->GetCellData() : NULL);
+	celldata_t *GetCellData() {
+		return m_pCellData ? m_pCellData->GetCellData() : NULL;
 	}
 
-	ambidata_t *GetAMBIData(void) {
-		return (m_pLightData ? m_pLightData->GetAMBIData() : NULL);
+	ambidata_t *GetAMBIData() {
+		return m_pLightData ? m_pLightData->GetAMBIData() : NULL;
 	}
 
-	float GetWaterHeight(void) {
-		return (m_pWaterData ? m_pWaterData->GetValue() : 0);
+	float GetWaterHeight() {
+		return m_pWaterData ? m_pWaterData->GetValue() : 0;
 	}
 
-	const TCHAR *GetRegion(void) {
-		return (m_pRegionData ? m_pRegionData->GetName() : _T(""));
+	const TCHAR *GetRegion() {
+		return m_pRegionData ? m_pRegionData->GetName() : _T("");
 	}
 
-	const TCHAR *GetName(void);
-	const TCHAR *GetGrid(void);
-	long GetRefCount(void);
-	long GetGridX(void) {
-		return (m_pCellData == NULL ? 0 : m_pCellData->GetGridX());
+	const TCHAR *GetName();
+	const TCHAR *GetGrid();
+	long GetRefCount();
+	long GetGridX() {
+		return m_pCellData == NULL ? 0 : m_pCellData->GetGridX();
 	}
 
-	long GetGridY(void) {
-		return (m_pCellData == NULL ? 0 : m_pCellData->GetGridY());
+	long GetGridY() {
+		return m_pCellData == NULL ? 0 : m_pCellData->GetGridY();
 	}
 
-	long GetFlags(void) {
-		return (m_pCellData == NULL ? 0 : m_pCellData->GetFlags());
+	long GetFlags() {
+		return m_pCellData == NULL ? 0 : m_pCellData->GetFlags();
 	}
 
-	long GetCount(void) {
-		return (m_RefCount);
+	long GetCount() {
+		return m_RefCount;
 	}
 
-	bool IsInterior(void) {
-		return (m_pCellData == NULL ? false : m_pCellData->IsInterior());
+	bool IsInterior() {
+		return m_pCellData == NULL ? false : m_pCellData->IsInterior();
 	}
 
 	virtual bool IsSame(CEsmRecord *pRecord);
 
 	/* Cell reference index methods */
-	int GetNextRefIndex(void);
+	int GetNextRefIndex();
 	bool IsValidRefIndex(const int Index);
 
 	/* Returns true if the record currently contains the given reference */
 	bool HasCellRef(CEsmSubCellRef *pCellRef);
 
 	/* Changes the total cell reference count */
-	void DecCount(void) {
+	void DecCount() {
 		m_RefCount--;
 
 		if (m_pCountData != NULL) {
@@ -173,7 +173,7 @@ class CEsmCell : public CEsmRecord {
 		}
 	}
 
-	void IncCount(void) {
+	void IncCount() {
 		m_RefCount++;
 
 		if (m_pCountData != NULL) {
@@ -192,13 +192,13 @@ class CEsmCell : public CEsmRecord {
 		}
 	}
 
-	void SetExterior(void) {
+	void SetExterior() {
 		if (m_pCellData != NULL) {
 			m_pCellData->SetInterior(false);
 		}
 	}
 
-	void SetInterior(void) {
+	void SetInterior() {
 		if (m_pCellData != NULL) {
 			m_pCellData->SetInterior(true);
 		}
@@ -219,7 +219,6 @@ class CEsmCell : public CEsmRecord {
 	void SetHasWater(const bool Flag);
 	void SetSleepIllegal(const bool Flag);
 	void SetLikeExterior(const bool Flag);
-
 };
 
 /*===========================================================================

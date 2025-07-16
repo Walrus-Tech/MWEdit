@@ -64,11 +64,11 @@ class CEsmSubCellRef : public CEsmSubRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubRecArray m_SubRecArray;      /* Array of sub-records related to the reference */
+	CEsmSubRecArray m_SubRecArray; /* Array of sub-records related to the reference */
 
 	bool m_IsActive;
 	esmrecinfo_t *m_pRecInfo;
-	CEsmCell *m_pCell;        /* Parent cell */
+	CEsmCell *m_pCell;             /* Parent cell */
 	long m_UserData;
 
 
@@ -76,7 +76,7 @@ class CEsmSubCellRef : public CEsmSubRecord {
   protected:
 
 	/* Clears all sub-records in the array */
-	void ClearSubRecArray(void);
+	void ClearSubRecArray();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -88,7 +88,7 @@ class CEsmSubCellRef : public CEsmSubRecord {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add a new sub-record to the cell-reference array */
 	void AddSubRec(CEsmSubRecord *pSubRec) {
@@ -99,7 +99,7 @@ class CEsmSubCellRef : public CEsmSubRecord {
 	virtual void Copy(CEsmSubRecord *pSubRecord);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void);
+	static CEsmSubRecord *Create();
 
 	/* Create a new sub-record */
 	virtual void CreateNew(CEsmCell *pCell);
@@ -111,37 +111,37 @@ class CEsmSubCellRef : public CEsmSubRecord {
 	CEsmSubRecord *FindSubRecord(const TCHAR *pType);
 
 	/* Get class members */
-	int GetNumSubRecs(void) {
-		return (m_SubRecArray.GetSize());
+	int GetNumSubRecs() {
+		return m_SubRecArray.GetSize();
 	}
 
 	CEsmSubRecord *GetSubRec(const int Index) {
-		return (m_SubRecArray.GetAt(Index));
+		return m_SubRecArray.GetAt(Index);
 	}
 
-	CEsmCell *GetCell(void) {
-		return (m_pCell);
+	CEsmCell *GetCell() {
+		return m_pCell;
 	}
 
-	esmrecinfo_t *GetRecInfo(void) {
-		return (m_pRecInfo);
+	esmrecinfo_t *GetRecInfo() {
+		return m_pRecInfo;
 	}
 
-	bool IsActive(void) {
-		return (m_IsActive);
+	bool IsActive() {
+		return m_IsActive;
 	}
 
-	bool IsDeleted(void) {
-		return (FindSubRecord(MWESM_SUBREC_DELE) != NULL);
+	bool IsDeleted() {
+		return FindSubRecord(MWESM_SUBREC_DELE) != NULL;
 	}
 
-	long GetUserData(void) {
-		return (m_UserData);
+	long GetUserData() {
+		return m_UserData;
 	}
 
 	const TCHAR *GetFieldString(const int FieldID);
-	int GetIndex(void);
-	pos6data_t *GetLocation(void);
+	int GetIndex();
+	pos6data_t *GetLocation();
 
 	/* Is the cell reference for the given object? */
 	bool IsReference(const TCHAR *pID);
@@ -177,7 +177,6 @@ class CEsmSubCellRef : public CEsmSubRecord {
 
 	/* Output the entire sub-record to the given location in the file */
 	virtual bool Write(CGenFile &File);
-
 };
 
 /*===========================================================================

@@ -85,7 +85,7 @@ CEsmLockPick::CEsmLockPick() {
  * Description
  *
  *=========================================================================*/
-void CEsmLockPick::Destroy(void) {
+void CEsmLockPick::Destroy() {
 	//DEFINE_FUNCTION("CEsmLockPick::Destroy()");
 	m_pLockData = NULL;
 	CEsmItem2::Destroy();
@@ -139,11 +139,11 @@ int CEsmLockPick::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLockPick::Create(void) {
+CEsmRecord *CEsmLockPick::Create() {
 	DEFINE_FUNCTION("CEsmLockPick::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLockPick);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -186,11 +186,11 @@ const TCHAR *CEsmLockPick::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			snprintf(s_Buffer, 31, _T("%ld"), GetUses());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_QUALITY:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetQuality());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmItem2::GetFieldString(FieldID);
@@ -232,11 +232,11 @@ bool CEsmLockPick::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			SetUses(atol(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_QUALITY:
 			SetQuality((float)atof(pString));
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

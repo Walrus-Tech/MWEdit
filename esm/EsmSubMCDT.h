@@ -77,14 +77,14 @@ class CEsmSubMCDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubMCDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(miscdata_t));
 		m_RecordSize = sizeof(miscdata_t);
@@ -92,20 +92,20 @@ class CEsmSubMCDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	miscdata_t *GetMiscData(void) {
-		return ((miscdata_t *)m_pData);
+	miscdata_t *GetMiscData() {
+		return (miscdata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetMiscData()->Weight);
+	float GetWeight() {
+		return GetMiscData()->Weight;
 	}
 
-	long GetValue(void) {
-		return (GetMiscData()->Value);
+	long GetValue() {
+		return GetMiscData()->Value;
 	}
 
-	long GetUnknown(void) {
-		return (GetMiscData()->Unknown);
+	long GetUnknown() {
+		return GetMiscData()->Unknown;
 	}
 
 	/* Set class members */
@@ -120,7 +120,6 @@ class CEsmSubMCDT : public CEsmSubRecord {
 	void SetUnknown(const long Value) {
 		GetMiscData()->Unknown = Value;
 	}
-
 };
 
 /*===========================================================================

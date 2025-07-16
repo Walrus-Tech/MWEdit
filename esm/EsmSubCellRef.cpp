@@ -54,7 +54,7 @@ CEsmSubCellRef::CEsmSubCellRef() : m_SubRecArray(0) {
  * Class CEsmSubCellRef Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSubCellRef::Destroy(void) {
+void CEsmSubCellRef::Destroy() {
 	//DEFINE_FUNCTION("CEsmSubCellRef::Destroy()");
 	ClearSubRecArray();
 	m_IsActive = false;
@@ -75,7 +75,7 @@ void CEsmSubCellRef::Destroy(void) {
  * Deletes all record in the cellref array.
  *
  *=========================================================================*/
-void CEsmSubCellRef::ClearSubRecArray(void) {
+void CEsmSubCellRef::ClearSubRecArray() {
 	DEFINE_FUNCTION("CEsmSubCellRef::ClearSubRecArray()");
 	CEsmSubRecord *pSubRec;
 	int Index;
@@ -136,10 +136,10 @@ void CEsmSubCellRef::Copy(CEsmSubRecord *pSubRecord) {
  * Class CEsmSubCellRef Method - CEsmSubRecord* Create (void);
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmSubCellRef::Create(void) {
+CEsmSubRecord *CEsmSubCellRef::Create() {
 	CEsmSubRecord *pSubRecord;
 	CreatePointerL(pSubRecord, CEsmSubCellRef);
-	return (pSubRecord);
+	return pSubRecord;
 }
 
 /*===========================================================================
@@ -192,11 +192,11 @@ CEsmSubRecord *CEsmSubCellRef::FindSubRecord(const TCHAR *pType) {
 		pSubRec = m_SubRecArray.GetAt(Index);
 
 		if (pSubRec->IsType(pType)) {
-			return (pSubRec);
+			return pSubRec;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -224,12 +224,12 @@ bool CEsmSubCellRef::Find(esmfind_t &FindData) {
 		Result = pSubRec->Find(FindData);
 
 		if (Result) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* No match */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -251,7 +251,7 @@ const TCHAR *CEsmSubCellRef::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESMSUBLIST_FIELD_MOD:
 			snprintf(s_Buffer, 31, _T("%s%s"), IsActive() ? "*" : "", IsDeleted() ? "D" : "");
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESMSUBLIST_FIELD_INDEX: {
 			CEsmSubFRMR *pIndex = (CEsmSubFRMR *)FindSubRecord(MWESM_SUBREC_FRMR);
@@ -262,7 +262,7 @@ const TCHAR *CEsmSubCellRef::GetFieldString(const int FieldID) {
 				snprintf(s_Buffer, 32, _T("0x%06lX-%02X"), pIndex->GetIndex(), pIndex->GetFlag());
 			}
 
-			return (s_Buffer);
+			return s_Buffer;
 		}
 
 		default:
@@ -282,14 +282,14 @@ const TCHAR *CEsmSubCellRef::GetFieldString(const int FieldID) {
  * Returns the FRMR reference index.
  *
  *=========================================================================*/
-int CEsmSubCellRef::GetIndex(void) {
+int CEsmSubCellRef::GetIndex() {
 	CEsmSubFRMR *pIndex = (CEsmSubFRMR *)FindSubRecord(MWESM_SUBREC_FRMR);
 
 	if (pIndex != 0) {
 		return pIndex->GetIndex();
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -304,14 +304,14 @@ int CEsmSubCellRef::GetIndex(void) {
  * Gets the reference location data.
  *
  *=========================================================================*/
-pos6data_t *CEsmSubCellRef::GetLocation(void) {
+pos6data_t *CEsmSubCellRef::GetLocation() {
 	CEsmSubPos6 *pPos = (CEsmSubPos6 *)FindSubRecord(MWESM_SUBREC_DATA);
 
 	if (pPos != NULL) {
-		return (pPos->GetPosData());
+		return pPos->GetPosData();
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -330,11 +330,11 @@ bool CEsmSubCellRef::IsReference(const TCHAR *pID) {
 	CEsmSubName *pName = (CEsmSubName *)FindSubRecord(MWESM_SUBREC_NAME);
 
 	if (pName == NULL) {
-		return (false);
+		return false;
 	}
 
 	//SystemLog.Printf(_T("\t\t\t'%s'(%4.4s) ?= '%s'"), pName->GetName(), pName->GetType(), pID);
-	return (StringCompare(pName->GetName(), pID, false) == 0);
+	return StringCompare(pName->GetName(), pID, false) == 0;
 }
 
 /*===========================================================================
@@ -355,17 +355,18 @@ bool CEsmSubCellRef::IsSame(CEsmSubCellRef *pCellRef) {
 	CEsmSubNameFix *pName2;
 	CEsmSubFRMR *pIndex1;
 	CEsmSubFRMR *pIndex2;
+
 	/* Check the object names */
 	pName1 = (CEsmSubNameFix *)FindSubRecord(MWESM_SUBREC_NAME);
 	pName2 = (CEsmSubNameFix *)pCellRef->FindSubRecord(MWESM_SUBREC_NAME);
 
 	if (pName1 == NULL || pName2 == NULL) {
-		return (false);
+		return false;
 	}
 
 	//SystemLog.Printf ("Compare '%s' and '%s'", pName1->GetName(), pName2->GetName());
 	if (_stricmp(pName1->GetName(), pName2->GetName()) != 0) {
-		return (false);
+		return false;
 	}
 
 	/* Check the object indices */
@@ -373,16 +374,16 @@ bool CEsmSubCellRef::IsSame(CEsmSubCellRef *pCellRef) {
 	pIndex2 = (CEsmSubFRMR *)pCellRef->FindSubRecord(MWESM_SUBREC_FRMR);
 
 	if (pIndex1 == NULL || pIndex2 == NULL) {
-		return (false);
+		return false;
 	}
 
 	//SystemLog.Printf ("\t\tCompare '%ld' and '%ld'", pIndex1->GetValue(), pIndex2->GetValue());
 
 	if (pIndex1->GetIndex() == pIndex2->GetIndex()) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -408,11 +409,11 @@ bool CEsmSubCellRef::IsUsed(const TCHAR *pID) {
 		Result = pSubRecord->IsUsed(pID);
 
 		if (Result) {
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -483,9 +484,8 @@ void CEsmSubCellRef::SetIndex(const long Index, const byte Flag) {
 	pFRMRRec->SetFlag(Flag);
 }
 
-
 void CEsmSubCellRef::SetFRMRFlag(const byte Flag) {
-	CEsmSubFRMR* pFRMRRec;
+	CEsmSubFRMR *pFRMRRec;
 	/* Find the name sub-record, create if required */
 	pFRMRRec = (CEsmSubFRMR *)FindSubRecord(MWESM_SUBREC_FRMR);
 
@@ -502,9 +502,8 @@ void CEsmSubCellRef::SetFRMRFlag(const byte Flag) {
 	pFRMRRec->SetFlag(Flag);
 }
 
-
 void CEsmSubCellRef::SetFRMRIndex(const long Index) {
-	CEsmSubFRMR* pFRMRRec;
+	CEsmSubFRMR *pFRMRRec;
 	/* Find the name sub-record, create if required */
 	pFRMRRec = (CEsmSubFRMR *)FindSubRecord(MWESM_SUBREC_FRMR);
 
@@ -573,11 +572,11 @@ bool CEsmSubCellRef::Write(CGenFile &File) {
 		Result = pSubRec->Write(File);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

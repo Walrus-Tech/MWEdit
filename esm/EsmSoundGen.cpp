@@ -97,7 +97,7 @@ CEsmSoundGen::CEsmSoundGen() {
  * Class CEsmSoundGen Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSoundGen::Destroy(void) {
+void CEsmSoundGen::Destroy() {
 	//DEFINE_FUNCTION("CEsmSoundGen::Destroy()");
 	m_pSoundName = NULL;
 	m_pTypeData = NULL;
@@ -155,11 +155,11 @@ int CEsmSoundGen::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSoundGen::Create(void) {
+CEsmRecord *CEsmSoundGen::Create() {
 	DEFINE_FUNCTION("CEsmSoundGen::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSoundGen);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -256,17 +256,17 @@ bool CEsmSoundGen::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetSoundType(Type);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_SOUND:
 			SetSound(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_CREATURE:
 			SetCreature(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);
@@ -290,9 +290,7 @@ void CEsmSoundGen::SetCreature(const TCHAR *pString) {
 		}
 
 		m_pCreatureName = NULL;
-	}
-	/* Set the creature record, create if required */
-	else if (m_pCreatureName == NULL) {
+	} else if (m_pCreatureName == NULL) { /* Set the creature record, create if required */
 		AllocateSubRecord(MWESM_SUBREC_CNAM);
 		m_pCreatureName->SetName(pString);
 	} else {
@@ -318,17 +316,16 @@ const TCHAR *GetESMSoundGenType(const int Type) {
 	return l_SoundGenTypes[Type];
 }
 
-
 int GetESMSoundGenType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_SNDGEN_MIN; Index <= MWESM_SNDGEN_MAX; Index++) {
 		if (stricmp(pString, l_SoundGenTypes[Index]) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================

@@ -82,14 +82,14 @@ class CEsmSubWEAT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubWEAT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(weatherdata_t));
 		m_RecordSize = sizeof(weatherdata_t);
@@ -97,40 +97,40 @@ class CEsmSubWEAT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	weatherdata_t *GetWeatherData(void) {
-		return ((weatherdata_t *)m_pData);
+	weatherdata_t *GetWeatherData() {
+		return (weatherdata_t *)m_pData;
 	}
 
-	byte GetClear(void) {
-		return (GetWeatherData()->Clear);
+	byte GetClear() {
+		return GetWeatherData()->Clear;
 	}
 
-	byte GetCloudy(void) {
-		return (GetWeatherData()->Cloudy);
+	byte GetCloudy() {
+		return GetWeatherData()->Cloudy;
 	}
 
-	byte GetFoggy(void) {
-		return (GetWeatherData()->Foggy);
+	byte GetFoggy() {
+		return GetWeatherData()->Foggy;
 	}
 
-	byte GetOvercast(void) {
-		return (GetWeatherData()->Overcast);
+	byte GetOvercast() {
+		return GetWeatherData()->Overcast;
 	}
 
-	byte GetRain(void) {
-		return (GetWeatherData()->Rain);
+	byte GetRain() {
+		return GetWeatherData()->Rain;
 	}
 
-	byte GetThunder(void) {
-		return (GetWeatherData()->Thunder);
+	byte GetThunder() {
+		return GetWeatherData()->Thunder;
 	}
 
-	byte GetAsh(void) {
-		return (GetWeatherData()->Ash);
+	byte GetAsh() {
+		return GetWeatherData()->Ash;
 	}
 
-	byte GetBlight(void) {
-		return (GetWeatherData()->Blight);
+	byte GetBlight() {
+		return GetWeatherData()->Blight;
 	}
 
 	/* Set class members */
@@ -165,7 +165,6 @@ class CEsmSubWEAT : public CEsmSubRecord {
 	void SetBlight(const byte Value) {
 		GetWeatherData()->Blight = Value;
 	}
-
 };
 
 /*===========================================================================

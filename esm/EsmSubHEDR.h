@@ -102,14 +102,14 @@ class CEsmSubHEDR : public CEsmSubRecord {
 	}
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubHEDR);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(headerdata_t);
 		memset(&m_Data, 0, sizeof(headerdata_t));
@@ -118,28 +118,28 @@ class CEsmSubHEDR : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	headerdata_t *GetHeaderData(void) {
-		return (&m_Data);
+	headerdata_t *GetHeaderData() {
+		return &m_Data;
 	}
 
-	float GetVersion(void) {
-		return (GetHeaderData()->Version);
+	float GetVersion() {
+		return GetHeaderData()->Version;
 	}
 
-	long GetUnknown(void) {
-		return (GetHeaderData()->Unknown1);
+	long GetUnknown() {
+		return GetHeaderData()->Unknown1;
 	}
 
-	const char *GetAuthor(void) {
-		return (GetHeaderData()->Author);
+	const char *GetAuthor() {
+		return GetHeaderData()->Author;
 	}
 
-	const char *GetDescription(void) {
-		return (GetHeaderData()->Description);
+	const char *GetDescription() {
+		return GetHeaderData()->Description;
 	}
 
-	long GetNumRecords(void) {
-		return (GetHeaderData()->NumRecords);
+	long GetNumRecords() {
+		return GetHeaderData()->NumRecords;
 	}
 
 	/* Set class members */
@@ -162,7 +162,6 @@ class CEsmSubHEDR : public CEsmSubRecord {
 	void SetDescription(const TCHAR *pValue) {
 		TSTRNCPY(GetHeaderData()->Description, pValue, MWESM_HEDR_DESCSIZE);
 	}
-
 };
 
 /*===========================================================================

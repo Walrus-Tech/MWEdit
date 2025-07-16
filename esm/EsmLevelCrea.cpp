@@ -87,7 +87,7 @@ CEsmLevelCrea::CEsmLevelCrea() {
  * Description
  *
  *=========================================================================*/
-void CEsmLevelCrea::Destroy(void) {
+void CEsmLevelCrea::Destroy() {
 	//DEFINE_FUNCTION("CEsmLevelCrea::Destroy()");
 	m_pData = NULL;
 	m_pNNam = NULL;
@@ -123,7 +123,7 @@ int CEsmLevelCrea::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 			return (int)IsAllPC() - (int)pLevelCrea->IsAllPC();
 
 		case ESM_FIELD_LIST:
-			return (0);
+			return 0;
 
 		case ESM_FIELD_CHANCENONE:
 			return GetChanceNone() - pLevelCrea->GetChanceNone();
@@ -145,11 +145,11 @@ int CEsmLevelCrea::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLevelCrea::Create(void) {
+CEsmRecord *CEsmLevelCrea::Create() {
 	DEFINE_FUNCTION("CEsmLevelCrea::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLevelCrea);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -189,7 +189,7 @@ void CEsmLevelCrea::CreateNew(CEsmFile *pFile) {
  * in the levelled list (up to 256 bytes).
  *
  *=========================================================================*/
-const TCHAR *CEsmLevelCrea::GetCreaListString(void) {
+const TCHAR *CEsmLevelCrea::GetCreaListString() {
 	static TCHAR s_Buffer[256];
 	TCHAR TempBuffer[32];
 	CEsmSubNameFix *pNameSubRec;
@@ -230,7 +230,7 @@ const TCHAR *CEsmLevelCrea::GetCreaListString(void) {
 		pNameSubRec = (CEsmSubNameFix *)FindNext(MWESM_SUBREC_CNAM, ArrayIndex);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -251,14 +251,14 @@ const TCHAR *CEsmLevelCrea::GetFieldString(const int FieldID) {
 
 	switch (FieldID) {
 		case ESM_FIELD_ALLPC:
-			return (BOOLTOYESNO(IsAllPC()));
+			return BOOLTOYESNO(IsAllPC());
 
 		case ESM_FIELD_LIST:
 			return GetCreaListString();
 
 		case ESM_FIELD_CHANCENONE:
 			snprintf(s_Buffer, 31, _T("%d"), GetChanceNone());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmRecord::GetFieldString(FieldID);
@@ -304,11 +304,11 @@ bool CEsmLevelCrea::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ALLPC:
 			SetAllPC(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_CHANCENONE:
 			SetChanceNone(atoi(pString));
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

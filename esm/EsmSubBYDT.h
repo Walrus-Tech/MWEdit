@@ -109,14 +109,14 @@ class CEsmSubBYDT : public CEsmSubRecord {
 	//virtual void Destroy (void) { }
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubBYDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(bodypartdata_t));
 		m_RecordSize = sizeof(bodypartdata_t);
@@ -124,36 +124,36 @@ class CEsmSubBYDT : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	bodypartdata_t *GetBodyData(void) {
-		return ((bodypartdata_t *)m_pData);
+	bodypartdata_t *GetBodyData() {
+		return (bodypartdata_t *)m_pData;
 	}
 
-	byte GetPart(void) {
-		return (GetBodyData()->Part);
+	byte GetPart() {
+		return GetBodyData()->Part;
 	}
 
-	byte GetPartType(void) {
-		return (GetBodyData()->PartType);
+	byte GetPartType() {
+		return GetBodyData()->PartType;
 	}
 
-	byte GetVampire(void) {
-		return (GetBodyData()->Vampire);
+	byte GetVampire() {
+		return GetBodyData()->Vampire;
 	}
 
-	byte GetFlags(void) {
-		return (GetBodyData()->Flags);
+	byte GetFlags() {
+		return GetBodyData()->Flags;
 	}
 
-	bool IsVampire(void) {
-		return (GetBodyData()->Vampire != 0);
+	bool IsVampire() {
+		return GetBodyData()->Vampire != 0;
 	}
 
-	bool IsFemale(void) {
-		return ((GetFlags() & MWESM_BODYFLAG_FEMALE) != 0);
+	bool IsFemale() {
+		return (GetFlags() & MWESM_BODYFLAG_FEMALE) != 0;
 	}
 
-	bool IsPlayable(void) {
-		return ((GetFlags() & MWESM_BODYFLAG_PLAYABLE) != 0);
+	bool IsPlayable() {
+		return (GetFlags() & MWESM_BODYFLAG_PLAYABLE) != 0;
 	}
 
 	/* Set or clear flags */
@@ -189,13 +189,11 @@ class CEsmSubBYDT : public CEsmSubRecord {
 	void SetPlayable(const bool Flag) {
 		SetFlag(MWESM_BODYFLAG_PLAYABLE, Flag);
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubBYDT Definition
  *=========================================================================*/
-
 
 
 #endif

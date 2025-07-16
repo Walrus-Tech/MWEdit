@@ -67,7 +67,7 @@ CEsmStartScript::CEsmStartScript() {
  * Class CEsmStartScript Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmStartScript::Destroy(void) {
+void CEsmStartScript::Destroy() {
 	//DEFINE_FUNCTION("CEsmStartScript::Destroy()");
 	m_pName = NULL;
 	CEsmRecord::Destroy();
@@ -118,11 +118,11 @@ int CEsmStartScript::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmStartScript::Create(void) {
+CEsmRecord *CEsmStartScript::Create() {
 	DEFINE_FUNCTION("CEsmStartScript::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmStartScript);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -207,8 +207,8 @@ bool CEsmStartScript::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);

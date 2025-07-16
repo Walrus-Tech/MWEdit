@@ -77,7 +77,7 @@ class CEsmNpc : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmNpc();
 	//virtual ~CEsmArmor() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add item/spells to the NPC */
 	bool AddItem(const TCHAR *pItemID);
@@ -92,7 +92,7 @@ class CEsmNpc : public CEsmItem1 {
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Create a new record */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -111,158 +111,158 @@ class CEsmNpc : public CEsmItem1 {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("NPC");
 	}
 
 	/* Get NPC data */
-	npcshortdata_t *GetShortData(void) {
-		return (m_pNpcShortData ? m_pNpcShortData->GetNPCData() : NULL);
+	npcshortdata_t *GetShortData() {
+		return m_pNpcShortData ? m_pNpcShortData->GetNPCData() : NULL;
 	}
 
-	npclongdata_t *GetLongData(void) {
-		return (m_pNpcLongData ? m_pNpcLongData->GetNPCData() : NULL);
+	npclongdata_t *GetLongData() {
+		return m_pNpcLongData ? m_pNpcLongData->GetNPCData() : NULL;
 	}
 
-	aidata_t *GetAIData(void) {
-		return (m_pAIData ? m_pAIData->GetAIData() : NULL);
+	aidata_t *GetAIData() {
+		return m_pAIData ? m_pAIData->GetAIData() : NULL;
 	}
 
 	const char *GetTravelCell(const int Index);
 
 	/* Get string class members */
-	const TCHAR *GetAnimation(void) {
-		return (m_pAnimation ? m_pAnimation->GetName() : _T(""));
+	const TCHAR *GetAnimation() {
+		return m_pAnimation ? m_pAnimation->GetName() : _T("");
 	}
 
-	const TCHAR *GetHairModel(void) {
-		return (m_pHairModel ? m_pHairModel->GetName() : _T(""));
+	const TCHAR *GetHairModel() {
+		return m_pHairModel ? m_pHairModel->GetName() : _T("");
 	}
 
-	const TCHAR *GetHeadModel(void) {
-		return (m_pHeadModel ? m_pHeadModel->GetName() : _T(""));
+	const TCHAR *GetHeadModel() {
+		return m_pHeadModel ? m_pHeadModel->GetName() : _T("");
 	}
 
-	const TCHAR *GetClass(void) {
-		return (m_pClass ? m_pClass->GetName() : _T(""));
+	const TCHAR *GetClass() {
+		return m_pClass ? m_pClass->GetName() : _T("");
 	}
 
-	const TCHAR *GetRace(void) {
-		return (m_pRace ? m_pRace->GetName() : _T(""));
+	const TCHAR *GetRace() {
+		return m_pRace ? m_pRace->GetName() : _T("");
 	}
 
-	const TCHAR *GetFaction(void) {
-		return (m_pFaction ? m_pFaction->GetName() : _T(""));
+	const TCHAR *GetFaction() {
+		return m_pFaction ? m_pFaction->GetName() : _T("");
 	}
 
 	/* Get class members */
-	long GetDisposition(void);
-	long GetFactionID(void);
-	long GetGold(void);
-	long GetLevel(void);
-	long GetRank(void);
-	long GetReputation(void);
-	long GetHealth(void);
-	long GetMagic(void);
-	long GetFatigue(void);
+	long GetDisposition();
+	long GetFactionID();
+	long GetGold();
+	long GetLevel();
+	long GetRank();
+	long GetReputation();
+	long GetHealth();
+	long GetMagic();
+	long GetFatigue();
 	long GetSkill(const TCHAR *pString);
 	long GetAttribute(const TCHAR *pString);
 	long GetSkill(const int SkillIndex);
 	long GetAttribute(const int AttrIndex);
-	long GetFlag(void) {
-		return (m_pFlag ? m_pFlag->GetValue() : 0);
+	long GetFlag() {
+		return m_pFlag ? m_pFlag->GetValue() : 0;
 	}
 
-	long GetAIFlags(void) {
-		return (m_pAIData ? m_pAIData->GetFlags() : 0);
+	long GetAIFlags() {
+		return m_pAIData ? m_pAIData->GetFlags() : 0;
 	}
 
-	bool IsAutoCalc(void) {
-		return ((GetFlag() & MWESM_NPCFLAG_AUTOCALC) != 0);
+	bool IsAutoCalc() {
+		return (GetFlag() & MWESM_NPCFLAG_AUTOCALC) != 0;
 	}
 
-	bool IsRespawn(void) {
-		return ((GetFlag() & MWESM_NPCFLAG_RESPAWN) != 0);
+	bool IsRespawn() {
+		return (GetFlag() & MWESM_NPCFLAG_RESPAWN) != 0;
 	}
 
-	bool IsFemale(void) {
-		return ((GetFlag() & MWESM_NPCFLAG_FEMALE) != 0);
+	bool IsFemale() {
+		return (GetFlag() & MWESM_NPCFLAG_FEMALE) != 0;
 	}
 
-	bool IsEssential(void) {
-		return ((GetFlag() & MWESM_NPCFLAG_ESSENTIAL) != 0);
+	bool IsEssential() {
+		return (GetFlag() & MWESM_NPCFLAG_ESSENTIAL) != 0;
 	}
 
-	bool IsAiBuyWeapon(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_WEAPON) : false);
+	bool IsAiBuyWeapon() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_WEAPON) : false;
 	}
 
-	bool IsAiBuyArmor(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_ARMOR) : false);
+	bool IsAiBuyArmor() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_ARMOR) : false;
 	}
 
-	bool IsAiBuyClothing(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_CLOTHING) : false);
+	bool IsAiBuyClothing() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_CLOTHING) : false;
 	}
 
-	bool IsAiBuyBook(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_BOOK) : false);
+	bool IsAiBuyBook() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_BOOK) : false;
 	}
 
-	bool IsAiBuyIngrediant(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_INGREDIANT) : false);
+	bool IsAiBuyIngrediant() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_INGREDIANT) : false;
 	}
 
-	bool IsAiBuyPick(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_PICK) : false);
+	bool IsAiBuyPick() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_PICK) : false;
 	}
 
-	bool IsAiBuyProbe(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_PROBE) : false);
+	bool IsAiBuyProbe() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_PROBE) : false;
 	}
 
-	bool IsAiBuyLight(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_LIGHT) : false);
+	bool IsAiBuyLight() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_LIGHT) : false;
 	}
 
-	bool IsAiBuyApparatus(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_APPARATUS) : false);
+	bool IsAiBuyApparatus() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_APPARATUS) : false;
 	}
 
-	bool IsAiBuyRepair(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_REPAIR) : false);
+	bool IsAiBuyRepair() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_REPAIR) : false;
 	}
 
-	bool IsAiBuyMisc(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_MISC) : false);
+	bool IsAiBuyMisc() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_MISC) : false;
 	}
 
-	bool IsAiBuySpell(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_SPELL) : false);
+	bool IsAiBuySpell() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_SPELL) : false;
 	}
 
-	bool IsAiBuyMagicItem(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_MAGICITEM) : false);
+	bool IsAiBuyMagicItem() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_MAGICITEM) : false;
 	}
 
-	bool IsAiBuyPotion(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_POTION) : false);
+	bool IsAiBuyPotion() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_POTION) : false;
 	}
 
-	bool IsAiTraining(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_TRAINING) : false);
+	bool IsAiTraining() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_TRAINING) : false;
 	}
 
-	bool IsAiSpellMaking(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_SPELLMAKING) : false);
+	bool IsAiSpellMaking() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_SPELLMAKING) : false;
 	}
 
-	bool IsAiEnchanting(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_ENCHANTING) : false);
+	bool IsAiEnchanting() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_ENCHANTING) : false;
 	}
 
-	bool IsAiRepairItem(void) {
-		return (m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_REPAIRITEM) : false);
+	bool IsAiRepairItem() {
+		return m_pAIData ? m_pAIData->IsFlag(MWESM_AIFLAG_REPAIRITEM) : false;
 	}
 
 	/* Used to save the various record elements */
@@ -340,7 +340,6 @@ class CEsmNpc : public CEsmItem1 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

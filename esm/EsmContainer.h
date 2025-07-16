@@ -32,7 +32,7 @@
  *=========================================================================*/
 
 /* Flag bit fields */
-#define MWESM_CONTFLAG_DEFAULT 8  /* Not sure what '8' is */
+#define MWESM_CONTFLAG_DEFAULT 8 /* Not sure what '8' is */
 #define MWESM_CONTFLAG_ORGANIC 1
 #define MWESM_CONTFLAG_RESPAWN 2
 
@@ -68,13 +68,13 @@ class CEsmContainer : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmContainer();
 	//virtual ~CEsmContainer() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -83,25 +83,25 @@ class CEsmContainer : public CEsmItem1 {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Container");
 	}
 
 	/* Get class members */
-	contdata_t *GetContData(void) {
-		return (m_pContData == NULL ? NULL : m_pContData->GetContData());
+	contdata_t *GetContData() {
+		return m_pContData == NULL ? NULL : m_pContData->GetContData();
 	}
 
-	float GetWeight(void) {
-		return (m_pContData == NULL ? 0 : m_pContData->GetWeight());
+	float GetWeight() {
+		return m_pContData == NULL ? 0 : m_pContData->GetWeight();
 	}
 
-	bool IsOrganic(void) {
-		return (m_pFlag == NULL ? false : m_pFlag->IsFlag(MWESM_CONTFLAG_ORGANIC));
+	bool IsOrganic() {
+		return m_pFlag == NULL ? false : m_pFlag->IsFlag(MWESM_CONTFLAG_ORGANIC);
 	}
 
-	bool IsRespawn(void) {
-		return (m_pFlag == NULL ? false : m_pFlag->IsFlag(MWESM_CONTFLAG_RESPAWN));
+	bool IsRespawn() {
+		return m_pFlag == NULL ? false : m_pFlag->IsFlag(MWESM_CONTFLAG_RESPAWN);
 	}
 
 	/* Used to save the various record elements */
@@ -128,7 +128,6 @@ class CEsmContainer : public CEsmItem1 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

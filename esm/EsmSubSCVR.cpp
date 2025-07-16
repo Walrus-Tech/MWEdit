@@ -31,7 +31,7 @@ DEFINE_FILE("EsmSubSCVR.cpp");
  * Class CEsmSubSCVR Method - void Copy (pSubRecord);
  *
  *=========================================================================*/
-void CEsmSubSCVR::Copy(CEsmSubRecord* pSubRecord) {
+void CEsmSubSCVR::Copy(CEsmSubRecord *pSubRecord) {
 	Destroy();
 	m_Type.SetType(pSubRecord->GetType());
 	m_RecordSize = pSubRecord->GetRecordSize();
@@ -58,18 +58,18 @@ bool CEsmSubSCVR::Find(esmfind_t &FindData) {
 
 	/* Ignore if data is invalid or too small */
 	if (m_pData == NULL || GetRecordSize() < FindData.Length) {
-		return (false);
+		return false;
 	}
 
 	/* Find the first occurence of the text in the name */
 	iResult = memisearch((char *)GetName(), FindData.pText, GetNameLength(), FindData.Length, 0);
 
 	if (iResult >= 0) {
-		return (true);
+		return true;
 	}
 
 	/* No match */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -83,7 +83,7 @@ bool CEsmSubSCVR::Find(esmfind_t &FindData) {
  *
  *=========================================================================*/
 bool CEsmSubSCVR::IsUsed(const TCHAR *pID) {
-	return (StringCompare(GetName(), pID, false) == 0);
+	return StringCompare(GetName(), pID, false) == 0;
 }
 
 /*===========================================================================
@@ -102,7 +102,7 @@ bool CEsmSubSCVR::ReadData(CGenFile &File) {
 	Result = File.Read((char *)&m_FuncData, m_RecordSize);
 	m_StringLength = m_RecordSize - MWESM_SCVR_BASESIZE;
 	m_FuncData.Name[m_StringLength] = NULL_CHAR;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -145,7 +145,7 @@ bool CEsmSubSCVR::WriteData(CGenFile &File) {
 	bool Result;
 	m_RecordSize = MWESM_SCVR_BASESIZE + m_StringLength;
 	Result = File.Write((char *)&m_FuncData, m_RecordSize);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================

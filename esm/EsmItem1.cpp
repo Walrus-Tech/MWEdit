@@ -47,7 +47,7 @@ CEsmItem1::CEsmItem1() {
  * Description
  *
  *=========================================================================*/
-void CEsmItem1::Destroy(void) {
+void CEsmItem1::Destroy() {
 	//DEFINE_FUNCTION("CEsmItem1::Destroy()");
 	/* Clear the references */
 	m_pModel = NULL;
@@ -91,7 +91,7 @@ int CEsmItem1::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 		case ESM_FIELD_MODEL:
 			return StringCompare(GetModel(), pRecord1->GetModel(), FALSE);
 
-		default:    /* Call the base class method */
+		default: /* Call the base class method */
 			return CEsmRecord::CompareFields(FieldID, pRecord);
 	}
 }
@@ -137,21 +137,21 @@ const TCHAR *CEsmItem1::GetFieldString(const int FieldID) {
 				return _T("");
 			}
 
-			return (m_pName->GetName());
+			return m_pName->GetName();
 
 		case ESM_FIELD_SCRIPT:
 			if (m_pScript == NULL) {
 				return _T("");
 			}
 
-			return (m_pScript->GetName());
+			return m_pScript->GetName();
 
 		case ESM_FIELD_MODEL:
 			if (m_pModel == NULL) {
 				return _T("");
 			}
 
-			return (m_pModel->GetName());
+			return m_pModel->GetName();
 
 		default:    /* Call the base class record */
 			return CEsmRecord::GetFieldString(FieldID);
@@ -228,16 +228,16 @@ bool CEsmItem1::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_SCRIPT:
 			SetScript(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_MODEL:
 			SetModel(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);

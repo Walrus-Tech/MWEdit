@@ -35,7 +35,7 @@ DEFINE_FILE("MWCommon.cpp");
  * were not found.
  *
  *=========================================================================*/
-const TCHAR *GetMWInstallPath(void) {
+const TCHAR *GetMWInstallPath() {
 	static TCHAR Buffer[_MAX_PATH + 8];
 	DWORD BufferSize = _MAX_PATH + 7;
 	DWORD Type;
@@ -55,7 +55,7 @@ const TCHAR *GetMWInstallPath(void) {
 	}
 
 	TerminatePath(Buffer);
-	return (Buffer);
+	return Buffer;
 }
 
 /*===========================================================================
@@ -72,7 +72,7 @@ const TCHAR *GetMWInstallPath(void) {
  * expected keys were not found.
  *
  *=========================================================================*/
-const TCHAR *GetMWDataFilePath(void) {
+const TCHAR *GetMWDataFilePath() {
 	static TCHAR Buffer[_MAX_PATH + 24];
 	TSTRCPY(Buffer, GetMWInstallPath());
 
@@ -81,7 +81,7 @@ const TCHAR *GetMWDataFilePath(void) {
 	}
 
 	TSTRCAT(Buffer, _T("Data Files\\"));
-	return (Buffer);
+	return Buffer;
 }
 
 /*===========================================================================
@@ -98,7 +98,7 @@ const TCHAR *GetMWDataFilePath(void) {
  * expected keys were not found.
  *
  *=========================================================================*/
-const TCHAR *GetMWTexturesPath(void) {
+const TCHAR *GetMWTexturesPath() {
 	static TCHAR Buffer[_MAX_PATH + 32];
 	TSTRCPY(Buffer, GetMWInstallPath());
 
@@ -107,7 +107,7 @@ const TCHAR *GetMWTexturesPath(void) {
 	}
 
 	TSTRCAT(Buffer, _T("Data Files\\Textures\\"));
-	return (Buffer);
+	return Buffer;
 }
 
 /*===========================================================================

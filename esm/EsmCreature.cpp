@@ -125,7 +125,7 @@ CEsmCreature::CEsmCreature() {
  * Description
  *
  *=========================================================================*/
-void CEsmCreature::Destroy(void) {
+void CEsmCreature::Destroy() {
 	//DEFINE_FUNCTION("CEsmCreature::Destroy()");
 	m_pCreatureData = NULL;
 	m_pFlag = NULL;
@@ -199,11 +199,11 @@ int CEsmCreature::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmCreature::Create(void) {
+CEsmRecord *CEsmCreature::Create() {
 	DEFINE_FUNCTION("CEsmCreature::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmCreature);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -253,7 +253,7 @@ const TCHAR *CEsmCreature::GetFieldString(const int FieldID) {
 
 		case ESM_FIELD_LEVEL:
 			snprintf(s_Buffer, 31, _T("%ld"), GetLevel());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_ESSENTIAL:
 			return BOOLTOYESNO(IsEssential());
@@ -271,7 +271,7 @@ const TCHAR *CEsmCreature::GetFieldString(const int FieldID) {
 			return BOOLTOYESNO(IsBiped());
 
 		case ESM_FIELD_SOUND:
-			return ((m_pSound == NULL) ? _T("") : m_pSound->GetName());
+			return (m_pSound == NULL) ? _T("") : m_pSound->GetName();
 
 		default:
 			return CEsmItem1::GetFieldString(FieldID);
@@ -288,7 +288,7 @@ const TCHAR *CEsmCreature::GetFieldString(const int FieldID) {
  * Class TCHAR* CEsmCreature Method - const GetMoveType (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmCreature::GetMoveType(void) {
+const TCHAR *CEsmCreature::GetMoveType() {
 	if (IsWalks()) {
 		return _T("Walks");
 	}
@@ -354,37 +354,37 @@ bool CEsmCreature::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetCreaType(Type);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_LEVEL:
 			SetLevel(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_ESSENTIAL:
 			SetEssential(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_RESPAWN:
 			SetRespawn(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_MOVEMENT:
 			SetMoveType(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_WEAPSHIELD:
 			SetWeapShield(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_BIPEDAL:
 			SetBipedal(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_SOUND:
 			SetSound(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem1::SetFieldValue(FieldID, pString);
@@ -467,17 +467,16 @@ const TCHAR *GetESMCreatureType(const int CreaType) {
 	return l_CreatureTypes[CreaType];
 }
 
-
 int GetESMCreatureType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_CREATYPE_MIN; Index <= MWESM_CREATYPE_MAX; Index++) {
 		if (stricmp(pString, l_CreatureTypes[Index]) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================

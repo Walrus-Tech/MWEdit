@@ -67,7 +67,7 @@ class CEsmEnchant : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubENDT *m_pEnchantData;     /* Reference to sub-records */
+	CEsmSubENDT *m_pEnchantData; /* Reference to sub-records */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -80,13 +80,13 @@ class CEsmEnchant : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmEnchant();
 	//virtual ~CEsmEnchant() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -95,33 +95,33 @@ class CEsmEnchant : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Enchant");
 	}
 
 	/* Get class members */
-	const TCHAR *GetEnchantType(void) {
-		return (GetESMEnchantType(GetEnchantTypeID()));
+	const TCHAR *GetEnchantType() {
+		return GetESMEnchantType(GetEnchantTypeID());
 	}
 
-	int GetEnchantTypeID(void) {
-		return (m_pEnchantData ? m_pEnchantData->GetEnchantType() : 0);
+	int GetEnchantTypeID() {
+		return m_pEnchantData ? m_pEnchantData->GetEnchantType() : 0;
 	}
 
-	enchantdata_t *GetEnchantData(void) {
-		return (m_pEnchantData ? m_pEnchantData->GetEnchantData() : NULL);
+	enchantdata_t *GetEnchantData() {
+		return m_pEnchantData ? m_pEnchantData->GetEnchantData() : NULL;
 	}
 
-	long GetEnchantCost(void) {
-		return (m_pEnchantData ? m_pEnchantData->GetEnchantCost() : 0);
+	long GetEnchantCost() {
+		return m_pEnchantData ? m_pEnchantData->GetEnchantCost() : 0;
 	}
 
-	long GetCharge(void) {
-		return (m_pEnchantData ? m_pEnchantData->GetCharge() : 0);
+	long GetCharge() {
+		return m_pEnchantData ? m_pEnchantData->GetCharge() : 0;
 	}
 
-	bool IsAutoCalc(void) {
-		return (m_pEnchantData ? m_pEnchantData->IsAutoCalc() : false);
+	bool IsAutoCalc() {
+		return m_pEnchantData ? m_pEnchantData->IsAutoCalc() : false;
 	}
 
 	/* Used to save the various record elements */
@@ -154,7 +154,6 @@ class CEsmEnchant : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

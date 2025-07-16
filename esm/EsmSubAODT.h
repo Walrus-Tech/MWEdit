@@ -96,14 +96,14 @@ class CEsmSubAODT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAODT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(armordata_t));
 		m_RecordSize = sizeof(armordata_t);
@@ -111,32 +111,32 @@ class CEsmSubAODT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	armordata_t *GetArmorData(void) {
-		return ((armordata_t *)m_pData);
+	armordata_t *GetArmorData() {
+		return (armordata_t *)m_pData;
 	}
 
-	long GetArmorType(void) {
-		return (GetArmorData()->Type);
+	long GetArmorType() {
+		return GetArmorData()->Type;
 	}
 
-	float GetWeight(void) {
-		return (GetArmorData()->Weight);
+	float GetWeight() {
+		return GetArmorData()->Weight;
 	}
 
-	long GetHealth(void) {
-		return (GetArmorData()->Health);
+	long GetHealth() {
+		return GetArmorData()->Health;
 	}
 
-	long GetValue(void) {
-		return (GetArmorData()->Value);
+	long GetValue() {
+		return GetArmorData()->Value;
 	}
 
-	long GetEnchantPts(void) {
-		return (GetArmorData()->EnchantPts);
+	long GetEnchantPts() {
+		return GetArmorData()->EnchantPts;
 	}
 
-	long GetRating(void) {
-		return (GetArmorData()->Rating);
+	long GetRating() {
+		return GetArmorData()->Rating;
 	}
 
 	/* Set class members */
@@ -165,13 +165,11 @@ class CEsmSubAODT : public CEsmSubRecord {
 	void SetRating(const long Value) {
 		GetArmorData()->Rating = Value;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubAODT Definition
  *=========================================================================*/
-
 
 
 #endif

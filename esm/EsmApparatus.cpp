@@ -101,7 +101,7 @@ CEsmApparatus::CEsmApparatus() {
  * Description
  *
  *=========================================================================*/
-void CEsmApparatus::Destroy(void) {
+void CEsmApparatus::Destroy() {
 	//DEFINE_FUNCTION("CEsmApparatus::Destroy()");
 	m_pAppaData = NULL;
 	CEsmItem2::Destroy();
@@ -156,11 +156,11 @@ int CEsmApparatus::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmApparatus::Create(void) {
+CEsmRecord *CEsmApparatus::Create() {
 	DEFINE_FUNCTION("CEsmApparatus::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmApparatus);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -204,11 +204,11 @@ const TCHAR *CEsmApparatus::GetFieldString(const int FieldID) {
 		case ESM_FIELD_QUALITY:
 			ASSERT(GetAppaData() != NULL);
 			snprintf(s_Buffer, 31, _T("%.2f"), GetAppaData()->Quality);
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_TYPE:
 			ASSERT(m_pAppaData != NULL);
-			return (GetAppaType());
+			return GetAppaType();
 
 		default:
 			return CEsmItem2::GetFieldString(FieldID);
@@ -250,7 +250,7 @@ bool CEsmApparatus::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_QUALITY:
 			SetQuality((float)atof(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_TYPE:
 			int Type = GetESMAppaType(pString);
@@ -259,7 +259,7 @@ bool CEsmApparatus::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetAppaType(Type);
 			}
 
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */
@@ -286,18 +286,17 @@ const TCHAR *GetESMAppaType(const int AppaType) {
 	return l_ApparatusTypes[AppaType];
 }
 
-
 int GetESMAppaType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_APPATYPE_MIN; Index <= MWESM_APPATYPE_MAX; Index++) {
 		if (stricmp(l_ApparatusTypes[Index], pString) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
 	/* Return the apparatus type string from the name array */
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================

@@ -54,7 +54,7 @@ class CEsmItem2 : public CEsmItem1 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubNameFix *m_pIcon;        /* Reference to record fields */
+	CEsmSubNameFix *m_pIcon; /* Reference to record fields */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -67,7 +67,7 @@ class CEsmItem2 : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmItem2();
 	//virtual ~CEsmItem2() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
@@ -76,24 +76,24 @@ class CEsmItem2 : public CEsmItem1 {
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Used to determine the type of derived classes */
-	virtual int GetClassType(void) {
-		return (CEsmItem1::GetClassType() | MWESM_CLASSTYPE_ITEM2);
+	virtual int GetClassType() {
+		return CEsmItem1::GetClassType() | MWESM_CLASSTYPE_ITEM2;
 	}
 
 	/* Get a string representation of a particular field */
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Get class members */
-	const TCHAR *GetIcon(void) const {
-		return (m_pIcon ? m_pIcon->GetName() : _T(""));
+	const TCHAR *GetIcon() const {
+		return m_pIcon ? m_pIcon->GetName() : _T("");
 	}
 
-	virtual float GetWeight(void) {
-		return (0);
+	virtual float GetWeight() {
+		return 0;
 	}
 
-	virtual long GetValue(void) {
-		return (0);
+	virtual long GetValue() {
+		return 0;
 	}
 
 	/* Used to save the various record elements */
@@ -107,7 +107,6 @@ class CEsmItem2 : public CEsmItem1 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

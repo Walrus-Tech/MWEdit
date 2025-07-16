@@ -46,7 +46,7 @@ class CEsmBook : public CEsmItem3 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubBKDT *m_pBookData;    /* Reference to subrecords */
+	CEsmSubBKDT *m_pBookData; /* Reference to subrecords */
 	CEsmSubName *m_pText;
 
 
@@ -60,13 +60,13 @@ class CEsmBook : public CEsmItem3 {
 	/* Class Constructors/Destructors */
 	CEsmBook();
 	//virtual ~CEsmBook() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -75,37 +75,37 @@ class CEsmBook : public CEsmItem3 {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Book");
 	}
 
 	/* Get class members */
-	bookdata_t *GetBookData(void) {
-		return (m_pBookData == NULL ? NULL : m_pBookData->GetBookData() );
+	bookdata_t *GetBookData() {
+		return m_pBookData == NULL ? NULL : m_pBookData->GetBookData();
 	}
 
-	const TCHAR *GetBookText(void) {
-		return (m_pText ? m_pText->GetName() : _T(""));
+	const TCHAR *GetBookText() {
+		return m_pText ? m_pText->GetName() : _T("");
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pBookData == NULL ? 0 : m_pBookData->GetWeight());
+	virtual float GetWeight() {
+		return m_pBookData == NULL ? 0 : m_pBookData->GetWeight();
 	}
 
-	virtual long GetValue(void) {
-		return (m_pBookData == NULL ? 0 : m_pBookData->GetValue());
+	virtual long GetValue() {
+		return m_pBookData == NULL ? 0 : m_pBookData->GetValue();
 	}
 
-	virtual long GetEnchantPts(void) {
-		return (m_pBookData == NULL ? 0 : m_pBookData->GetEnchantPts());
+	virtual long GetEnchantPts() {
+		return m_pBookData == NULL ? 0 : m_pBookData->GetEnchantPts();
 	}
 
-	int GetSkillID(void) {
-		return (m_pBookData == NULL ? -1 : m_pBookData->GetSkillID());
+	int GetSkillID() {
+		return m_pBookData == NULL ? -1 : m_pBookData->GetSkillID();
 	}
 
-	bool IsScroll(void) {
-		return (m_pBookData == NULL ? false : m_pBookData->IsScroll());
+	bool IsScroll() {
+		return m_pBookData == NULL ? false : m_pBookData->IsScroll();
 	}
 
 	/* Used to save the various record elements */
@@ -150,7 +150,6 @@ class CEsmBook : public CEsmItem3 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

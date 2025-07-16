@@ -86,7 +86,7 @@ CEsmRegion::CEsmRegion() {
  * Class CEsmRegion Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmRegion::Destroy(void) {
+void CEsmRegion::Destroy() {
 	//DEFINE_FUNCTION("CEsmRegion::Destroy()");
 	m_pNameData = NULL;
 	m_pWeatherData = NULL;
@@ -142,11 +142,11 @@ int CEsmRegion::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRegion::Create(void) {
+CEsmRecord *CEsmRegion::Create() {
 	DEFINE_FUNCTION("CEsmRegion::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRegion);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================

@@ -28,7 +28,6 @@
  *
  *=========================================================================*/
 #pragma pack(push, 1)
-
 #pragma pack(pop)
 /*===========================================================================
  *      End of Type Definitions
@@ -80,14 +79,14 @@ class CEsmSubLong64 : public CEsmSubRecord {
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubLong64);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(long) * 2;
 		m_Long1 = 0;
@@ -96,16 +95,16 @@ class CEsmSubLong64 : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get/set the long value directly */
-	long GetValue1(void) {
-		return (m_Long1);
+	long GetValue1() {
+		return m_Long1;
 	}
 
-	long GetValue2(void) {
-		return (m_Long2);
+	long GetValue2() {
+		return m_Long2;
 	}
 
 	void SetValue1(const long Value) {
@@ -115,7 +114,6 @@ class CEsmSubLong64 : public CEsmSubRecord {
 	void SetValue2(const long Value) {
 		m_Long2 = Value;
 	}
-
 };
 
 /*===========================================================================

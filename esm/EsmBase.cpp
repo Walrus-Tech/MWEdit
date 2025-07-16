@@ -1041,7 +1041,7 @@ static valuenames_t l_Attributes[] = {
 	{
 		0,
 		NULL
-	}     /* Must be last element, must have 0 value */
+	} /* Must be last element, must have 0 value */
 };
 /*===========================================================================
  *      End of Attribute Array
@@ -2724,31 +2724,29 @@ const TCHAR *GetESMSkill(const int SkillID) {
 	return l_Skills[SkillID].Name;
 }
 
-
 bool GetESMSkill(int &OutSkill, const TCHAR *pString) {
 	int Index;
 
 	for (Index = 0; Index < MWESM_MAX_SKILLS; Index++) {
-		if ( _stricmp(l_Skills[Index].Name, pString) == 0) {
+		if (_stricmp(l_Skills[Index].Name, pString) == 0) {
 			OutSkill = Index;
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
-
 
 int GetESMSkill(const TCHAR *pString) {
 	int Index;
 
 	for (Index = 0; Index < MWESM_MAX_SKILLS; Index++) {
-		if ( _stricmp(l_Skills[Index].Name, pString) == 0) {
-			return (Index);
+		if (_stricmp(l_Skills[Index].Name, pString) == 0) {
+			return Index;
 		}
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -2763,7 +2761,7 @@ int GetESMSkill(const TCHAR *pString) {
  *=========================================================================*/
 const TCHAR *GetESMSkillAction(const int SkillID, const int Action) {
 	if (SkillID < 0 || SkillID >= MWESM_MAX_SKILLS) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (Action == 0) {
@@ -2782,7 +2780,7 @@ const TCHAR *GetESMSkillAction(const int SkillID, const int Action) {
 		return l_Skills[SkillID].Action4;
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -2817,7 +2815,7 @@ const TCHAR *GetESMEffect(const int EffectID) {
  *=========================================================================*/
 const esmeffectdata_t *GetESMEffectData(const int EffectID) {
 	if (EffectID < 0 || EffectID >= MWESM_MAX_EFFECTS) {
-		return (NULL);
+		return NULL;
 	}
 
 	return &(l_Effects[EffectID]);
@@ -2841,46 +2839,45 @@ int FindESMEffectID(const TCHAR *pEffectID) {
 
 	for (Index = 0; Index < MWESM_MAX_EFFECTS; Index++) {
 		if (l_Effects[Index].IsID(pEffectID)) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
-
 
 bool GetESMEffectID(int &EffectID, const TCHAR *pString) {
 	int Index;
 
 	for (Index = 0; Index < MWESM_MAX_EFFECTS; Index++) {
-		if ( _stricmp(l_Effects[Index].ID, pString) == 0) {
+		if (_stricmp(l_Effects[Index].ID, pString) == 0) {
 			EffectID = Index;
-			return (true);
+			return true;
 		}
 
-		if ( _stricmp(l_Effects[Index].Name, pString) == 0) {
+		if (_stricmp(l_Effects[Index].Name, pString) == 0) {
 			EffectID = Index;
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 int GetESMEffectID(const TCHAR *pString) {
 	int Index;
 
 	for (Index = 0; Index < MWESM_MAX_EFFECTS; Index++) {
-		if ( _stricmp(l_Effects[Index].ID, pString) == 0) {
-			return (Index);
+		if (_stricmp(l_Effects[Index].ID, pString) == 0) {
+			return Index;
 		}
 
-		if ( _stricmp(l_Effects[Index].Name, pString) == 0) {
-			return (Index);
+		if (_stricmp(l_Effects[Index].Name, pString) == 0) {
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -2903,15 +2900,13 @@ const TCHAR *GetESMAttribute(const int AttributeID) {
 	return l_Attributes[AttributeID].pName;
 }
 
-
 bool GetESMAttribute(int &OutAttr, const TCHAR *pString) {
 	bool Result;
 	long Index;
 	Result = FindNameValue(Index, l_Attributes, pString);
 	OutAttr = Index;
-	return (Result);
+	return Result;
 }
-
 
 int GetESMAttribute(const TCHAR *pString) {
 	return FindNameValue(l_Attributes, pString);
@@ -2979,26 +2974,25 @@ short GetESMAnimGroupID(const TCHAR *pGroup) {
 
 	for (Index = 0; l_AnimData[Index].pName != NULL; Index++) {
 		if (l_AnimData[Index].IsName(pGroup)) {
-			return (l_AnimData[Index].ID);
+			return l_AnimData[Index].ID;
 		}
 	}
 
 	/* None found */
-	return (-1);
+	return -1;
 }
-
 
 short GetESMAnimGroupOldID(const TCHAR *pGroup) {
 	int Index;
 
 	for (Index = 0; l_AnimData[Index].pName != NULL; Index++) {
 		if (l_AnimData[Index].IsName(pGroup)) {
-			return (l_AnimData[Index].OldID);
+			return l_AnimData[Index].OldID;
 		}
 	}
 
 	/* None found */
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -3038,10 +3032,10 @@ int GetEsmFieldID(const TCHAR *pString) {
 	Result = FindNameValue(iResult, l_FieldIDs, pString);
 
 	if (!Result) {
-		return (-1);
+		return -1;
 	}
 
-	return (iResult);
+	return iResult;
 }
 
 /*===========================================================================
@@ -3077,10 +3071,10 @@ bool IsESMAttributeEffect(const int EffectID) {
 		case MWESM_EFFECT_FORTATTR:
 		case MWESM_EFFECT_RESTOREATTR:
 		case MWESM_EFFECT_DAMAGEATTR:
-			return (true);
+			return true;
 
 		default:
-			return (false);
+			return false;
 	}
 }
 
@@ -3101,10 +3095,10 @@ bool IsESMSkillEffect(const int EffectID) {
 		case MWESM_EFFECT_FORTSKILL:
 		case MWESM_EFFECT_RESTORESKILL:
 		case MWESM_EFFECT_DAMAGESKILL:
-			return (true);
+			return true;
 
 		default:
-			return (false);
+			return false;
 	}
 }
 
@@ -3139,16 +3133,16 @@ bool IsESMRecordCarryable(const TCHAR *pType) {
 		0
 	};
 	int Index;
-	long TypeLong = *(long *) pType;
+	long TypeLong = *(long *)pType;
 
 	for (Index = 0; s_ValidTypes[Index] != 0; Index++) {
 		if (TypeLong == s_ValidTypes[Index]) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* Matching object not found */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -3173,23 +3167,24 @@ bool IsESMRecordModel(const TCHAR *pType) {
 		*(long *)MWESM_REC_LEVC,
 		*(long *)MWESM_REC_LEVI,
 		*(long *)MWESM_REC_NPC_,
-		*(long *)MWESM_REC_CONT, 0
+		*(long *)MWESM_REC_CONT,
+		0
 	};
 	int Index;
-	long TypeLong = *(long *) pType;
+	long TypeLong = *(long *)pType;
 
 	/* All carryable records are included */
 	if (IsESMRecordCarryable(pType)) {
-		return (true);
+		return true;
 	}
 
 	for (Index = 0; s_ValidTypes[Index] != 0; Index++) {
 		if (TypeLong == s_ValidTypes[Index]) {
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -3216,10 +3211,10 @@ TCHAR *RemoveIDQuotes(TCHAR *pBuffer, const TCHAR *pID) {
 			pBuffer[Length - 1] = NULL_CHAR;
 		}
 
-		return (pBuffer);
+		return pBuffer;
 	}
 
-	return ((TCHAR *)pID);
+	return (TCHAR *)pID;
 }
 
 /*===========================================================================

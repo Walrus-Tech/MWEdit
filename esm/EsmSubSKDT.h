@@ -80,18 +80,19 @@ class CEsmSubSKDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSKDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(skilldata_t));
 		m_RecordSize = sizeof(skilldata_t);
 		memset(m_pData, 0, sizeof(skilldata_t));
+
 		GetSkillData()->UseValue1 = 1.0f;
 		GetSkillData()->UseValue2 = 1.0f;
 		GetSkillData()->UseValue3 = 1.0f;
@@ -99,32 +100,32 @@ class CEsmSubSKDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	skilldata_t *GetSkillData(void) {
-		return ((skilldata_t *)m_pData);
+	skilldata_t *GetSkillData() {
+		return (skilldata_t *)m_pData;
 	}
 
-	long GetAttributeID(void) {
-		return (GetSkillData()->Attribute);
+	long GetAttributeID() {
+		return GetSkillData()->Attribute;
 	}
 
-	long GetSpecialization(void) {
-		return (GetSkillData()->Specialization);
+	long GetSpecialization() {
+		return GetSkillData()->Specialization;
 	}
 
-	float GetUseValue1(void) {
-		return (GetSkillData()->UseValue1);
+	float GetUseValue1() {
+		return GetSkillData()->UseValue1;
 	}
 
-	float GetUseValue2(void) {
-		return (GetSkillData()->UseValue2);
+	float GetUseValue2() {
+		return GetSkillData()->UseValue2;
 	}
 
-	float GetUseValue3(void) {
-		return (GetSkillData()->UseValue3);
+	float GetUseValue3() {
+		return GetSkillData()->UseValue3;
 	}
 
-	float GetUseValue4(void) {
-		return (GetSkillData()->UseValue4);
+	float GetUseValue4() {
+		return GetSkillData()->UseValue4;
 	}
 
 	/* Set class members */
@@ -151,7 +152,6 @@ class CEsmSubSKDT : public CEsmSubRecord {
 	void SetUseValue4(const float Value) {
 		GetSkillData()->UseValue4 = Value;
 	}
-
 };
 
 /*===========================================================================

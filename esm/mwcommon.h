@@ -44,9 +44,9 @@
  *=========================================================================*/
 
 /* Access Morrowind related absolute paths */
-const TCHAR *GetMWInstallPath(void);
-const TCHAR *GetMWDataFilePath(void);
-const TCHAR *GetMWTexturesPath(void);
+const TCHAR *GetMWInstallPath();
+const TCHAR *GetMWDataFilePath();
+const TCHAR *GetMWTexturesPath();
 
 /*===========================================================================
  *      End of Function Prototypes

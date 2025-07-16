@@ -74,7 +74,7 @@
 #define ESM_CALLBACK_RECORD 1
 
 /* Number of records between the callback function when loading/saving */
-#define ESM_CALLBACK_RATE 25
+#define ESM_CALLBACK_RATE   25
 
 /*===========================================================================
  *      End of Definitions
@@ -135,7 +135,7 @@ class CEsmFile {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Add a record to the file */
 	void AddRecord(CEsmRecord *pRecord) {
@@ -154,7 +154,7 @@ class CEsmFile {
 	CEsmRecord *CreateCopy(CEsmRecord *pRecord);
 
 	/* Create a new, empty, plugin */
-	void CreateNew(void);
+	void CreateNew();
 
 	/* Remove a record from the array */
 	void DeleteRecord(CEsmRecord *pRecord) {
@@ -165,7 +165,7 @@ class CEsmFile {
 	CEsmRecord *FindFirst(const TCHAR *pType, int &ArrayIndex);
 	CEsmRecord *FindNext(const TCHAR *pType, int &ArrayIndex);
 	CEsmRecord *GetRecord(const int Index) {
-		return (m_Records.GetAt(Index));
+		return m_Records.GetAt(Index);
 	}
 
 	int FindRecord(CEsmRecord *pRecord) {
@@ -173,28 +173,28 @@ class CEsmFile {
 	}
 
 	/* Get class members */
-	const TCHAR *GetFilename(void) const {
-		return (m_Filename);
+	const TCHAR *GetFilename() const {
+		return m_Filename;
 	}
 
-	int GetNumRecords(void) const {
-		return (m_Records.GetSize());
+	int GetNumRecords() const {
+		return m_Records.GetSize();
 	}
 
-	bool IsMaster(void) const {
-		return (m_IsMaster);
+	bool IsMaster() const {
+		return m_IsMaster;
 	}
 
-	bool IsActive(void) const {
-		return (m_IsActive);
+	bool IsActive() const {
+		return m_IsActive;
 	}
 
-	long GetFileSize(void) const {
-		return (m_FileSize);
+	long GetFileSize() const {
+		return m_FileSize;
 	}
 
-	CEsmRecArray *GetRecords(void) {
-		return (&m_Records);
+	CEsmRecArray *GetRecords() {
+		return &m_Records;
 	}
 
 	/* Read the entire file */
@@ -217,8 +217,6 @@ class CEsmFile {
 
 	/* Write the entire file */
 	bool Write(const TCHAR *pFilename);
-
-
 };
 
 /*===========================================================================
@@ -234,8 +232,8 @@ class CEsmFile {
 
 /* Holds information on each record in the ESM/ESP files */
 struct esmrecinfo_t {
-	CEsmRecord *pRecord;    /* Reference to the 'latest' record */
-	CEsmFile *pFile;      /* Which file is the record used from? */
+	CEsmRecord *pRecord; /* Reference to the 'latest' record */
+	CEsmFile *pFile;     /* Which file is the record used from? */
 	long UserData;
 };
 

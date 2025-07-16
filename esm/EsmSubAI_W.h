@@ -80,14 +80,14 @@ class CEsmSubAI_W : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAI_W);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ai_wdata_t));
 		m_RecordSize = sizeof(ai_wdata_t);
@@ -96,32 +96,32 @@ class CEsmSubAI_W : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	ai_wdata_t *GetAIData(void) {
-		return ((ai_wdata_t *)m_pData);
+	ai_wdata_t *GetAIData() {
+		return (ai_wdata_t *)m_pData;
 	}
 
-	short GetDistance(void) {
-		return (GetAIData()->Distance);
+	short GetDistance() {
+		return GetAIData()->Distance;
 	}
 
-	short GetDuration(void) {
-		return (GetAIData()->Duration);
+	short GetDuration() {
+		return GetAIData()->Duration;
 	}
 
-	byte GetTimeOfDay(void) {
-		return (GetAIData()->TimeOfDay);
+	byte GetTimeOfDay() {
+		return GetAIData()->TimeOfDay;
 	}
 
-	byte GetUnknown(void) {
-		return (GetAIData()->Unknown);
+	byte GetUnknown() {
+		return GetAIData()->Unknown;
 	}
 
 	byte GetIdle(const int Index) {
-		return (IsValidIndex(Index) ? GetAIData()->Idle[Index] : 0);
+		return IsValidIndex(Index) ? GetAIData()->Idle[Index] : 0;
 	}
 
 	bool IsValidIndex(const int Index) {
-		return (Index >= 0 && Index < MWESM_AIW_NUMIDLES);
+		return Index >= 0 && Index < MWESM_AIW_NUMIDLES;
 	}
 
 	/* Set class members */
@@ -146,7 +146,6 @@ class CEsmSubAI_W : public CEsmSubRecord {
 			GetAIData()->Idle[Index] = Value;
 		}
 	}
-
 };
 
 /*===========================================================================

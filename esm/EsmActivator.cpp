@@ -76,7 +76,7 @@ CEsmActivator::CEsmActivator() {
  * Description
  *
  *=========================================================================*/
-void CEsmActivator::Destroy(void) {
+void CEsmActivator::Destroy() {
 	//DEFINE_FUNCTION("CEsmActivator::Destroy()");
 	CEsmItem1::Destroy();
 }
@@ -93,11 +93,11 @@ void CEsmActivator::Destroy(void) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmActivator::Create(void) {
+CEsmRecord *CEsmActivator::Create() {
 	DEFINE_FUNCTION("CEsmActivator::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmActivator);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================

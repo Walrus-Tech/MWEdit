@@ -47,19 +47,18 @@ void CEsmSubName::Copy(CEsmSubRecord *pSubRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmSubRecord *CEsmSubName::Create(void) {
+CEsmSubRecord *CEsmSubName::Create() {
 	DEFINE_FUNCTION("CEsmSubName::Create()");
 	CEsmSubRecord *pSubRecord;
 	CreatePointer(pSubRecord, CEsmSubName);
-	return (pSubRecord);
+	return pSubRecord;
 }
 
-
-CEsmSubRecord *CEsmSubNameNull::Create(void) {
+CEsmSubRecord *CEsmSubNameNull::Create() {
 	DEFINE_FUNCTION("CEsmSubNameNull::Create()");
 	CEsmSubRecord *pSubRecord;
 	CreatePointer(pSubRecord, CEsmSubNameNull);
-	return (pSubRecord);
+	return pSubRecord;
 }
 
 /*===========================================================================
@@ -82,7 +81,7 @@ bool CEsmSubName::ReadData(CGenFile &File) {
 		m_Name.UpdateLength();
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================

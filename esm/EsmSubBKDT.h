@@ -69,14 +69,14 @@ class CEsmSubBKDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubBKDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(bookdata_t));
 		m_RecordSize = sizeof(bookdata_t);
@@ -85,28 +85,28 @@ class CEsmSubBKDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	bookdata_t *GetBookData(void) {
-		return ((bookdata_t *)m_pData);
+	bookdata_t *GetBookData() {
+		return (bookdata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetBookData()->Weight);
+	float GetWeight() {
+		return GetBookData()->Weight;
 	}
 
-	long GetValue(void) {
-		return (GetBookData()->Value);
+	long GetValue() {
+		return GetBookData()->Value;
 	}
 
-	long GetEnchantPts(void) {
-		return (GetBookData()->EnchantPts);
+	long GetEnchantPts() {
+		return GetBookData()->EnchantPts;
 	}
 
-	long GetSkillID(void) {
-		return (GetBookData()->SkillID);
+	long GetSkillID() {
+		return GetBookData()->SkillID;
 	}
 
-	bool IsScroll(void) {
-		return (GetBookData()->Scroll != 0);
+	bool IsScroll() {
+		return GetBookData()->Scroll != 0;
 	}
 
 	/* Set class members */
@@ -129,7 +129,6 @@ class CEsmSubBKDT : public CEsmSubRecord {
 	void SetScroll(const bool Flag) {
 		GetBookData()->Scroll = Flag ? 1 : 0;
 	}
-
 };
 
 /*===========================================================================

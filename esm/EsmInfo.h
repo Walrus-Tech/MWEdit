@@ -100,7 +100,7 @@ class CEsmInfo : public CEsmRecord {
 	CEsmSubNameFix *m_pSound;
 	CEsmSubName *m_pResult;
 
-	CEsmDialogue *m_pDialParent;  /* Parent topic */
+	CEsmDialogue *m_pDialParent; /* Parent topic */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -113,13 +113,13 @@ class CEsmInfo : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmInfo();
 	//virtual ~CEsmInfo() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -128,65 +128,65 @@ class CEsmInfo : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Info");
 	}
 
 	/* Get class members */
-	infodata_t *GetInfoData(void) {
-		return (m_pData ? m_pData->GetInfoData() : NULL);
+	infodata_t *GetInfoData() {
+		return m_pData ? m_pData->GetInfoData() : NULL;
 	}
 
-	const TCHAR *GetResponse(void) {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetResponse() {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
-	const TCHAR *GetResult(void) {
-		return (m_pResult ? m_pResult->GetName() : _T(""));
+	const TCHAR *GetResult() {
+		return m_pResult ? m_pResult->GetName() : _T("");
 	}
 
-	const TCHAR *GetActor(void) {
-		return (m_pActor ? m_pActor->GetName() : _T(""));
+	const TCHAR *GetActor() {
+		return m_pActor ? m_pActor->GetName() : _T("");
 	}
 
-	const TCHAR *GetRace(void) {
-		return (m_pRace ? m_pRace->GetName() : _T(""));
+	const TCHAR *GetRace() {
+		return m_pRace ? m_pRace->GetName() : _T("");
 	}
 
-	const TCHAR *GetClass(void) {
-		return (m_pClass ? m_pClass->GetName() : _T(""));
+	const TCHAR *GetClass() {
+		return m_pClass ? m_pClass->GetName() : _T("");
 	}
 
-	const TCHAR *GetFaction(void) {
-		return (m_pFaction ? m_pFaction->GetName() : _T(""));
+	const TCHAR *GetFaction() {
+		return m_pFaction ? m_pFaction->GetName() : _T("");
 	}
 
-	const TCHAR *GetCell(void) {
-		return (m_pCell ? m_pCell->GetName() : _T(""));
+	const TCHAR *GetCell() {
+		return m_pCell ? m_pCell->GetName() : _T("");
 	}
 
-	const TCHAR *GetPCFaction(void) {
-		return (m_pPCFaction ? m_pPCFaction->GetName() : _T(""));
+	const TCHAR *GetPCFaction() {
+		return m_pPCFaction ? m_pPCFaction->GetName() : _T("");
 	}
 
-	const TCHAR *GetSound(void) {
-		return (m_pSound ? m_pSound->GetName() : _T(""));
+	const TCHAR *GetSound() {
+		return m_pSound ? m_pSound->GetName() : _T("");
 	}
 
-	const TCHAR *GetPrevName(void) {
-		return (m_pPrevName ? m_pPrevName->GetName() : _T(""));
+	const TCHAR *GetPrevName() {
+		return m_pPrevName ? m_pPrevName->GetName() : _T("");
 	}
 
-	const TCHAR *GetNextName(void) {
-		return (m_pNextName ? m_pNextName->GetName() : _T(""));
+	const TCHAR *GetNextName() {
+		return m_pNextName ? m_pNextName->GetName() : _T("");
 	}
 
-	int GetDisposition(void) {
-		return (m_pData ? (int)GetInfoData()->Disposition : 0);
+	int GetDisposition() {
+		return m_pData ? (int)GetInfoData()->Disposition : 0;
 	}
 
-	CEsmDialogue *GetDialParent(void) {
-		return (m_pDialParent);
+	CEsmDialogue *GetDialParent() {
+		return m_pDialParent;
 	}
 
 	const TCHAR *GetFuncText(const int Index);
@@ -234,7 +234,6 @@ class CEsmInfo : public CEsmRecord {
 	void SetSound(const TCHAR *pString);
 	void SetPCFaction(const TCHAR *pString);
 	void SetCell(const TCHAR *pString);
-
 };
 
 /*===========================================================================

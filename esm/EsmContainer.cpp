@@ -98,7 +98,7 @@ CEsmContainer::CEsmContainer() {
  * Description
  *
  *=========================================================================*/
-void CEsmContainer::Destroy(void) {
+void CEsmContainer::Destroy() {
 	//DEFINE_FUNCTION("CEsmContainer::Destroy()");
 	m_pContData = NULL;
 	m_pFlag = NULL;
@@ -139,7 +139,7 @@ int CEsmContainer::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 			return (int)IsRespawn() - (int)pCont->IsRespawn();
 
 		case ESM_FIELD_ITEMLIST:
-			return (0);
+			return 0;
 
 		default:
 			return CEsmItem1::CompareFields(FieldID, pRecord);
@@ -158,11 +158,11 @@ int CEsmContainer::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmContainer::Create(void) {
+CEsmRecord *CEsmContainer::Create() {
 	DEFINE_FUNCTION("CEsmContainer::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmContainer);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -207,16 +207,16 @@ const TCHAR *CEsmContainer::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_WEIGHT:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetWeight());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_ORGANIC:
-			return (BOOLTOYESNO(IsOrganic()));
+			return BOOLTOYESNO(IsOrganic());
 
 		case ESM_FIELD_RESPAWN:
-			return (BOOLTOYESNO(IsRespawn()));
+			return BOOLTOYESNO(IsRespawn());
 
 		case ESM_FIELD_ITEMLIST:
-			return ("");
+			return "";
 
 		default:
 			return CEsmItem1::GetFieldString(FieldID);
@@ -260,16 +260,16 @@ bool CEsmContainer::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_WEIGHT:
 			SetWeight((float)atof(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_ORGANIC:
 			SetOrganic(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_RESPAWN:
 			SetRespawn(StringToBoolean(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem1::SetFieldValue(FieldID, pString);

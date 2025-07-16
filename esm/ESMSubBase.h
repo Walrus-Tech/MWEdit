@@ -49,12 +49,12 @@ union esmrectype_t {
 		lType = 0;
 	}
 
-	operator dword(void) const {
+	operator dword() const {
 		return lType;
 	}
 
 	bool IsType(const esmrectype_t NewType) const {
-		return (NewType.lType == lType);
+		return NewType.lType == lType;
 	}
 
 	bool IsType(const TCHAR *pNewType) const {
@@ -62,7 +62,7 @@ union esmrectype_t {
 	}
 
 	bool IsType(const long lNewType) const {
-		return (lNewType == lType);
+		return lNewType == lType;
 	}
 
 	void SetType(const esmrectype_t NewType) {
@@ -85,7 +85,7 @@ inline bool operator ==(const esmrectype_t &Type1, const esmrectype_t &Type2) {
 /* Find text structure */
 struct esmfind_t {
 	const TCHAR *pText; /* The text we want to find */
-	int Length; /* Size of text */
+	int Length;         /* Size of text */
 };
 
 /*===========================================================================
@@ -105,15 +105,15 @@ class CEsmSubRecord {
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	esmrectype_t m_Type; /* Type of sub-record */
-	long m_RecordSize; /* Size of the record when output */
-	byte *m_pData; /* The record data for an unknown type */
+	long m_RecordSize;   /* Size of the record when output */
+	byte *m_pData;       /* The record data for an unknown type */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
 
 	/* Helper input methods */
-	virtual bool ReadData(CGenFile &File); /* Override in base classes */
+	virtual bool ReadData(CGenFile &File);  /* Override in base classes */
 
 	/* Helper output methods */
 	virtual bool WriteData(CGenFile &File); /* Override in base classes */
@@ -129,7 +129,7 @@ class CEsmSubRecord {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Copies the values from the given subrecord */
 	virtual void Copy(CEsmSubRecord *pSubRecord);
@@ -138,10 +138,10 @@ class CEsmSubRecord {
 	virtual void CopyData(char *pData, const int Size);
 
 	/* Return a new sub-record object */
-	static CEsmSubRecord *Create(void);
+	static CEsmSubRecord *Create();
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		Destroy();
 	}
 
@@ -156,26 +156,26 @@ class CEsmSubRecord {
 	virtual bool Find(esmfind_t &FindData);
 
 	/* Get class members */
-	const TCHAR *GetType(void) const {
-		return (m_Type.pType);
+	const TCHAR *GetType() const {
+		return m_Type.pType;
 	}
 
-	virtual long GetRecordSize(void) const {
-		return (m_RecordSize);
+	virtual long GetRecordSize() const {
+		return m_RecordSize;
 	}
 
-	byte *GetData(void) {
-		return (m_pData);
+	byte *GetData() {
+		return m_pData;
 	}
 
 	/* Type comparison */
 	bool IsType(const TCHAR *pType) const {
-		return (m_Type.IsType(pType));
+		return m_Type.IsType(pType);
 	}
 
 	/* Checks if the sub-record uses the given ID */
 	virtual bool IsUsed(const TCHAR *pID) {
-		return (false);
+		return false;
 	}
 
 	/* Read a record from the current position in the file */
@@ -192,8 +192,6 @@ class CEsmSubRecord {
 
 	/* Output the entire sub-record to the given location in the file */
 	virtual bool Write(CGenFile &File);
-
-
 };
 
 /*===========================================================================
@@ -208,7 +206,7 @@ class CEsmSubRecord {
  *=========================================================================*/
 
 /* Pointer to a class method to create a sub-record object */
-typedef CEsmSubRecord *(*ESMSUBREC_CREATEFUNC) (void);
+typedef CEsmSubRecord *(*ESMSUBREC_CREATEFUNC) ();
 
 /* Structure to hold information on sub-records */
 typedef struct esmsubreccreate {
@@ -217,7 +215,7 @@ typedef struct esmsubreccreate {
 
 	/* Simple compare function */
 	bool IsType(const TCHAR *pType) const {
-		return (TSTRNICMP(Type, pType, MWESM_TYPE_SIZE) == 0);
+		return TSTRNICMP(Type, pType, MWESM_TYPE_SIZE) == 0;
 	}
 } esmsubreccreate_t;
 

@@ -112,7 +112,7 @@ CEsmBodyPart::CEsmBodyPart() {
  * Description
  *
  *=========================================================================*/
-void CEsmBodyPart::Destroy(void) {
+void CEsmBodyPart::Destroy() {
 	//DEFINE_FUNCTION("CEsmBodyPart::Destroy()");
 	m_pName = NULL;
 	m_pBodyData = NULL;
@@ -180,11 +180,11 @@ int CEsmBodyPart::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmBodyPart::Create(void) {
+CEsmRecord *CEsmBodyPart::Create() {
 	DEFINE_FUNCTION("CEsmBodyPart::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmBodyPart);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -225,23 +225,23 @@ void CEsmBodyPart::CreateNew(CEsmFile *pFile) {
 const TCHAR *CEsmBodyPart::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_MODEL:
-			return (GetModel());
+			return GetModel();
 
 		case ESM_FIELD_NAME:
 		case ESM_FIELD_RACE:
-			return (GetRace());
+			return GetRace();
 
 		case ESM_FIELD_FEMALE:
-			return (BOOLTOYESNO(IsFemale()));
+			return BOOLTOYESNO(IsFemale());
 
 		case ESM_FIELD_TYPE:
-			return (GetBodyPartType());
+			return GetBodyPartType();
 
 		case ESM_FIELD_PART:
-			return (GetBodyPart());
+			return GetBodyPart();
 
 		case ESM_FIELD_PLAYABLE:
-			return (BOOLTOYESNO(IsPlayable()));
+			return BOOLTOYESNO(IsPlayable());
 
 		default:
 			return CEsmRecord::GetFieldString(FieldID);
@@ -287,16 +287,16 @@ bool CEsmBodyPart::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_MODEL:
 			SetModel(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_NAME:
 		case ESM_FIELD_RACE:
 			SetRace(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_FEMALE:
 			SetFemale(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_TYPE: {
 			int Type = GetESMBodyPartType(pString);
@@ -305,7 +305,7 @@ bool CEsmBodyPart::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetBodyPartType(Type);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_PART: {
@@ -315,13 +315,13 @@ bool CEsmBodyPart::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetBodyPart(Type);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_PLAYABLE:
 			SetPlayable(StringToBoolean(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);
@@ -347,17 +347,16 @@ const TCHAR *GetESMBodyPart(const int Part) {
 	return l_BodyParts[Part];
 }
 
-
 int GetESMBodyPart(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_PART_MIN; Index <= MWESM_PART_MAX; Index++) {
 		if (stricmp(l_BodyParts[Index], pString) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -380,17 +379,16 @@ const TCHAR *GetESMBodyPartType(const int PartType) {
 	return l_BodyPartTypes[PartType];
 }
 
-
 int GetESMBodyPartType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_PARTTYPE_MIN; Index <= MWESM_PARTTYPE_MAX; Index++) {
 		if (stricmp(l_BodyPartTypes[Index], pString) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================

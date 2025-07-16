@@ -89,18 +89,19 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubMEDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(magiceffectdata_t));
 		m_RecordSize = sizeof(magiceffectdata_t);
 		memset(m_pData, 0, sizeof(magiceffectdata_t));
+
 		GetEffectData()->Red = 128;
 		GetEffectData()->Blue = 128;
 		GetEffectData()->Green = 128;
@@ -111,56 +112,56 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	magiceffectdata_t *GetEffectData(void) {
-		return ((magiceffectdata_t *)m_pData);
+	magiceffectdata_t *GetEffectData() {
+		return (magiceffectdata_t *)m_pData;
 	}
 
-	long GetSpellSchool(void) {
-		return (GetEffectData()->SpellSchool);
+	long GetSpellSchool() {
+		return GetEffectData()->SpellSchool;
 	}
 
-	float GetBaseCost(void) {
-		return (GetEffectData()->BaseCost);
+	float GetBaseCost() {
+		return GetEffectData()->BaseCost;
 	}
 
-	long GetFlags(void) {
-		return (GetEffectData()->Flags);
+	long GetFlags() {
+		return GetEffectData()->Flags;
 	}
 
-	long GetRed(void) {
-		return (GetEffectData()->Red);
+	long GetRed() {
+		return GetEffectData()->Red;
 	}
 
-	long GetGreen(void) {
-		return (GetEffectData()->Green);
+	long GetGreen() {
+		return GetEffectData()->Green;
 	}
 
-	long GetBlue(void) {
-		return (GetEffectData()->Blue);
+	long GetBlue() {
+		return GetEffectData()->Blue;
 	}
 
-	float GetSpeedX(void) {
-		return (GetEffectData()->SpeedX);
+	float GetSpeedX() {
+		return GetEffectData()->SpeedX;
 	}
 
-	float GetSizeX(void) {
-		return (GetEffectData()->SizeX);
+	float GetSizeX() {
+		return (etEffectData()->SizeX;
 	}
 
-	float GetSizeCap(void) {
-		return (GetEffectData()->SizeCap);
+	float GetSizeCap() {
+		return GetEffectData()->SizeCap;
 	}
 
-	bool IsSpellMaking(void) {
-		return ((GetFlags() & MWESM_EFFECTFLAG_SPELLMAKING) != 0);
+	bool IsSpellMaking() {
+		return (GetFlags() & MWESM_EFFECTFLAG_SPELLMAKING) != 0;
 	}
 
-	bool IsEnchanting(void) {
-		return ((GetFlags() & MWESM_EFFECTFLAG_ENCHANTING) != 0);
+	bool IsEnchanting() {
+		return (GetFlags() & MWESM_EFFECTFLAG_ENCHANTING) != 0;
 	}
 
-	bool IsNegative(void) {
-		return ((GetFlags() & MWESM_EFFECTFLAG_NEGATIVE) != 0);
+	bool IsNegative() {
+		return (GetFlags() & MWESM_EFFECTFLAG_NEGATIVE) != 0;
 	}
 
 	/* Set or clear flags */
@@ -222,7 +223,6 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	void SetNegative(const bool Flag) {
 		SetFlag(MWESM_EFFECTFLAG_NEGATIVE, Flag);
 	}
-
 };
 
 /*===========================================================================

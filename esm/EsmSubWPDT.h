@@ -29,22 +29,22 @@
  *=========================================================================*/
 
 /* Armor types */
-#define MWESM_WEAPONTYPE_MIN          0
-#define MWESM_WEAPONTYPE_SHORT        0
-#define MWESM_WEAPONTYPE_LONG         1
-#define MWESM_WEAPONTYPE_LONG2HAND    2
-#define MWESM_WEAPONTYPE_BLUNT        3
-#define MWESM_WEAPONTYPE_BLUNT2CLOSE  4
-#define MWESM_WEAPONTYPE_BLUNT2WIDE   5
-#define MWESM_WEAPONTYPE_SPEAR        6
-#define MWESM_WEAPONTYPE_AXE          7
-#define MWESM_WEAPONTYPE_AXE2HAND     8
-#define MWESM_WEAPONTYPE_BOW          9
-#define MWESM_WEAPONTYPE_CROSSBOW    10
-#define MWESM_WEAPONTYPE_THROWN      11
-#define MWESM_WEAPONTYPE_ARROW       12
-#define MWESM_WEAPONTYPE_BOLT        13
-#define MWESM_WEAPONTYPE_MAX         13
+#define MWESM_WEAPONTYPE_MIN           0
+#define MWESM_WEAPONTYPE_SHORT         0
+#define MWESM_WEAPONTYPE_LONG          1
+#define MWESM_WEAPONTYPE_LONG2HAND     2
+#define MWESM_WEAPONTYPE_BLUNT         3
+#define MWESM_WEAPONTYPE_BLUNT2CLOSE   4
+#define MWESM_WEAPONTYPE_BLUNT2WIDE    5
+#define MWESM_WEAPONTYPE_SPEAR         6
+#define MWESM_WEAPONTYPE_AXE           7
+#define MWESM_WEAPONTYPE_AXE2HAND      8
+#define MWESM_WEAPONTYPE_BOW           9
+#define MWESM_WEAPONTYPE_CROSSBOW     10
+#define MWESM_WEAPONTYPE_THROWN       11
+#define MWESM_WEAPONTYPE_ARROW        12
+#define MWESM_WEAPONTYPE_BOLT         13
+#define MWESM_WEAPONTYPE_MAX          13
 
 /* Weapon flags */
 #define MWESM_WEAPONFLAG_IGNORERESIST 1
@@ -110,14 +110,14 @@ class CEsmSubWPDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubWPDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(weapondata_t));
 		m_RecordSize = sizeof(weapondata_t);
@@ -125,68 +125,68 @@ class CEsmSubWPDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	weapondata_t *GetWeaponData(void) {
-		return ((weapondata_t *)m_pData);
+	weapondata_t *GetWeaponData() {
+		return (weapondata_t *)m_pData;
 	}
 
-	float GetWeight(void) {
-		return (GetWeaponData()->Weight);
+	float GetWeight() {
+		return GetWeaponData()->Weight;
 	}
 
-	long GetValue(void) {
-		return (GetWeaponData()->Value);
+	long GetValue() {
+		return GetWeaponData()->Value;
 	}
 
-	short GetWeaponType(void) {
-		return (GetWeaponData()->Type);
+	short GetWeaponType() {
+		return GetWeaponData()->Type;
 	}
 
-	short GetEnchantPts(void) {
-		return (GetWeaponData()->EnchantPts);
+	short GetEnchantPts() {
+		return GetWeaponData()->EnchantPts;
 	}
 
-	short GetHealth(void) {
-		return (GetWeaponData()->Health);
+	short GetHealth() {
+		return GetWeaponData()->Health;
 	}
 
-	float GetSpeed(void) {
-		return (GetWeaponData()->Speed);
+	float GetSpeed() {
+		return GetWeaponData()->Speed;
 	}
 
-	float GetReach(void) {
-		return (GetWeaponData()->Reach);
+	float GetReach() {
+		return GetWeaponData()->Reach;
 	}
 
-	long GetFlags(void) {
-		return (GetWeaponData()->Flags);
+	long GetFlags() {
+		return GetWeaponData()->Flags;
 	}
 
-	byte GetChopMin(void) {
-		return (GetWeaponData()->ChopMin);
+	byte GetChopMin() {
+		return GetWeaponData()->ChopMin;
 	}
 
-	byte GetChopMax(void) {
-		return (GetWeaponData()->ChopMax);
+	byte GetChopMax() {
+		return GetWeaponData()->ChopMax;
 	}
 
-	byte GetSlashMin(void) {
-		return (GetWeaponData()->SlashMin);
+	byte GetSlashMin() {
+		return GetWeaponData()->SlashMin;
 	}
 
-	byte GetSlashMax(void) {
-		return (GetWeaponData()->SlashMax);
+	byte GetSlashMax() {
+		return GetWeaponData()->SlashMax;
 	}
 
-	byte GetThrustMin(void) {
-		return (GetWeaponData()->ThrustMin);
+	byte GetThrustMin() {
+		return GetWeaponData()->ThrustMin;
 	}
 
-	byte GetThrustMax(void) {
-		return (GetWeaponData()->ThrustMax);
+	byte GetThrustMax() {
+		return GetWeaponData()->ThrustMax;
 	}
 
-	bool IsIgnoreResist(void) {
-		return ((GetFlags() & MWESM_WEAPONFLAG_IGNORERESIST) != 0);
+	bool IsIgnoreResist() {
+		return (GetFlags() & MWESM_WEAPONFLAG_IGNORERESIST) != 0;
 	}
 
 	/* Set or clear flags */
@@ -256,13 +256,11 @@ class CEsmSubWPDT : public CEsmSubRecord {
 	void SetIgnoreResist(const bool Value) {
 		SetFlag(MWESM_WEAPONFLAG_IGNORERESIST, Value);
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubWPDT Definition
  *=========================================================================*/
-
 
 
 #endif

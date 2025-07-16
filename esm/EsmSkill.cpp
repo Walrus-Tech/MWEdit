@@ -73,7 +73,7 @@ CEsmSkill::CEsmSkill() {
  * Class CEsmSkill Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmSkill::Destroy(void) {
+void CEsmSkill::Destroy() {
 	//DEFINE_FUNCTION("CEsmSkill::Destroy()");
 	m_pIndexData = NULL;
 	m_pSkillData = NULL;
@@ -131,11 +131,11 @@ int CEsmSkill::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSkill::Create(void) {
+CEsmRecord *CEsmSkill::Create() {
 	DEFINE_FUNCTION("CEsmSkill::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSkill);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -207,17 +207,17 @@ const TCHAR *CEsmSkill::GetFieldString(const int FieldID) {
 bool CEsmSkill::IsSame(CEsmRecord *pRecord) {
 	/* Check types */
 	if (!pRecord->IsType(MWESM_REC_SKIL)) {
-		return (false);
+		return false;
 	}
 
 	CEsmSkill *pSkill = (CEsmSkill *)pRecord;
 
 	/* Check the skill indices */
 	if (GetSkillID() == pSkill->GetSkillID()) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -259,8 +259,8 @@ bool CEsmSkill::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_DESC:
 			SetDescription(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);

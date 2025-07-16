@@ -83,7 +83,7 @@ CEsmScript::CEsmScript() {
  * Description
  *
  *=========================================================================*/
-void CEsmScript::Destroy(void) {
+void CEsmScript::Destroy() {
 	//DEFINE_FUNCTION("CEsmScript::Destroy()");
 	m_pScriptHeader = NULL;
 	m_pScriptVars = NULL;
@@ -104,7 +104,7 @@ void CEsmScript::Destroy(void) {
  * Clears any compiled information in the script.
  *
  *=========================================================================*/
-void CEsmScript::ClearCompileData(void) {
+void CEsmScript::ClearCompileData() {
 	/* Reset the header data */
 	if (m_pScriptHeader != NULL) {
 		m_pScriptHeader->GetScriptHeadData()->LocalVarSize = 0;
@@ -167,11 +167,11 @@ int CEsmScript::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmScript::Create(void) {
+CEsmRecord *CEsmScript::Create() {
 	DEFINE_FUNCTION("CEsmScript::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmScript);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -220,7 +220,7 @@ bool CEsmScript::ExportScript(const TCHAR *pPath) {
 	snprintf(Filename, _MAX_PATH + 40, _T("%s%s.txt"), pPath, GetID());
 	/* Output the script text */
 	Result = WriteFile((const byte*)GetScriptText(), GetScriptSize(), Filename, false);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -245,14 +245,14 @@ short CEsmScript::FindLocalVar(const TCHAR *pLocalVar, char &VarType) {
 
 	/* Get the variable data sub-record */
 	if (m_pScriptVars == NULL || m_pScriptHeader == NULL) {
-		return (-1);
+		return -1;
 	}
 
 	pParse = (char *)m_pScriptVars->GetData();
 	pHeader = m_pScriptHeader->GetScriptHeadData();
 
 	if (pParse == NULL || pHeader == NULL) {
-		return (-1);
+		return -1;
 	}
 
 	DataIndex = 0;
@@ -274,8 +274,8 @@ short CEsmScript::FindLocalVar(const TCHAR *pLocalVar, char &VarType) {
 	while (DataIndex < m_pScriptVars->GetRecordSize()) {
 		Length = strlen(pParse);
 
-		if ( _stricmp(pLocalVar, pParse) == 0) {
-			return (TypeIndex + 1);
+		if (_stricmp(pLocalVar, pParse) == 0) {
+			return TypeIndex + 1;
 		}
 
 		pParse += Length + 1;
@@ -310,7 +310,7 @@ short CEsmScript::FindLocalVar(const TCHAR *pLocalVar, char &VarType) {
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -331,7 +331,7 @@ const TCHAR *CEsmScript::GetFieldString(const int FieldID) {
 
 	switch (FieldID) {
 		case ESM_FIELD_ID:
-			return (GetID());
+			return GetID();
 
 		case ESM_FIELD_VALUE:
 			snprintf(s_Buffer, 31, _T("%d"), GetScriptSize());
@@ -362,7 +362,7 @@ bool CEsmScript::IsUsed(const TCHAR *pID) {
 
 	/* Ignore if there is nothing to look at */
 	if (m_pScriptData == NULL) {
-		return (false);
+		return false;
 	}
 
 	pData = (const char *)m_pScriptData->GetData();
@@ -386,19 +386,19 @@ bool CEsmScript::IsUsed(const TCHAR *pID) {
 
 		/* Plain string, exact length */
 		if (pCheckData[0] == IDSize) {
-			return (true);
+			return true;
 		}
 		/* Special short variables */
 		else if (pCheckData[0] == 4 && IDSize < 4) {
 			if (memcmp(pData + FindIndex + IDSize, _T("\0\0\0\0\0"), 4 - IDSize) == 0) {
-				return (true);
+				return true;
 			}
 		}
 
 		FindIndex++;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================

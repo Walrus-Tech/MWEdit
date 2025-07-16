@@ -52,7 +52,7 @@ class CEsmItem1 : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubNameFix *m_pModel;   /* Reference to record fields */
+	CEsmSubNameFix *m_pModel; /* Reference to record fields */
 	CEsmSubNameFix *m_pName;
 	CEsmSubNameFix *m_pScript;
 
@@ -67,7 +67,7 @@ class CEsmItem1 : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmItem1();
 	//virtual ~CEsmArmor() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
@@ -76,24 +76,24 @@ class CEsmItem1 : public CEsmRecord {
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Used to determine the type of derived classes */
-	virtual int GetClassType(void) {
-		return (CEsmRecord::GetClassType() | MWESM_CLASSTYPE_ITEM1);
+	virtual int GetClassType() {
+		return CEsmRecord::GetClassType() | MWESM_CLASSTYPE_ITEM1;
 	}
 
 	/* Get a string representation of a particular field */
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Get class members */
-	const TCHAR *GetName(void) const {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetName() const {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
-	const TCHAR *GetModel(void) const {
-		return (m_pModel ? m_pModel->GetName() : _T(""));
+	const TCHAR *GetModel() const {
+		return m_pModel ? m_pModel->GetName() : _T("");
 	}
 
-	const TCHAR *GetScript(void) const {
-		return (m_pScript ? m_pScript->GetName() : _T(""));
+	const TCHAR *GetScript() const {
+		return m_pScript ? m_pScript->GetName() : _T("");
 	}
 
 	/* Used to save the various record elements */
@@ -116,7 +116,6 @@ class CEsmItem1 : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

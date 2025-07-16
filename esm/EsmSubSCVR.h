@@ -30,7 +30,6 @@
 
 /* Base size without the optional string */
 #define MWESM_SCVR_BASESIZE           5
-
 #define MWESM_SCVR_IDSIZE             63
 
 /* Index values */
@@ -139,14 +138,14 @@ class CEsmSubSCVR : public CEsmSubRecord {
 	virtual void Copy(CEsmSubRecord *pSubRecord);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSCVR);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(infofuncdata_t));
 		m_RecordSize = sizeof(infofuncdata_t);
@@ -158,40 +157,40 @@ class CEsmSubSCVR : public CEsmSubRecord {
 	virtual bool Find(esmfind_t &FindData);
 
 	/* Get class methods */
-	infofuncdata_t *GetInfoFuncData(void) {
-		return (&m_FuncData);
+	infofuncdata_t *GetInfoFuncData() {
+		return &m_FuncData;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_FuncData.Name);
+	const TCHAR *GetName() {
+		return m_FuncData.Name;
 	}
 
-	int GetNameLength(void) {
-		return (m_StringLength);
+	int GetNameLength() {
+		return m_StringLength;
 	}
 
-	virtual long GetRecordSize(void) const {
-		return (MWESM_SCVR_BASESIZE + m_StringLength);
+	virtual long GetRecordSize() const {
+		return MWESM_SCVR_BASESIZE + m_StringLength;
 	}
 
-	byte GetFuncIndex(void) {
-		return (GetInfoFuncData()->Index);
+	byte GetFuncIndex() {
+		return GetInfoFuncData()->Index;
 	}
 
-	byte GetFuncType(void) {
-		return (GetInfoFuncData()->Type);
+	byte GetFuncType() {
+		return GetInfoFuncData()->Type;
 	}
 
-	short GetFunction(void) {
-		return (GetInfoFuncData()->Function);
+	short GetFunction() {
+		return GetInfoFuncData()->Function;
 	}
 
-	byte GetCompareOp(void) {
-		return (GetInfoFuncData()->CompareOp);
+	byte GetCompareOp() {
+		return GetInfoFuncData()->CompareOp;
 	}
 
-	const char *GetFuncName(void) {
-		return (GetInfoFuncData()->Name);
+	const char *GetFuncName() {
+		return GetInfoFuncData()->Name;
 	}
 
 	/* Checks if the sub-record uses the given ID */
@@ -218,7 +217,6 @@ class CEsmSubSCVR : public CEsmSubRecord {
 	void SetCompareOp(const byte Value) {
 		GetInfoFuncData()->CompareOp = Value;
 	}
-
 };
 
 /*===========================================================================

@@ -100,7 +100,7 @@ CEsmLight::CEsmLight() {
  * Description
  *
  *=========================================================================*/
-void CEsmLight::Destroy(void) {
+void CEsmLight::Destroy() {
 	//DEFINE_FUNCTION("CEsmLight::Destroy()");
 	m_pLightData = NULL;
 	m_pSound = NULL;
@@ -158,11 +158,11 @@ int CEsmLight::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLight::Create(void) {
+CEsmRecord *CEsmLight::Create() {
 	DEFINE_FUNCTION("CEsmLight::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLight);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -205,11 +205,11 @@ const TCHAR *CEsmLight::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_TIME:
 			snprintf(s_Buffer, 31, _T("%ld"), GetTime());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_RADIUS:
 			snprintf(s_Buffer, 31, _T("%ld"), GetRadius());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_SOUND:
 			return GetSound();
@@ -256,15 +256,15 @@ bool CEsmLight::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_TIME:
 			SetTime(atol(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_RADIUS:
 			SetRadius(atol(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_SOUND:
 			SetSound(pString);
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */
@@ -301,7 +301,6 @@ void CEsmLight::SetIcon(const TCHAR *pString) {
 	}
 }
 
-
 void CEsmLight::SetName(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pName == NULL) {
@@ -321,7 +320,6 @@ void CEsmLight::SetName(const TCHAR *pString) {
 		m_pName->SetName(pString);
 	}
 }
-
 
 void CEsmLight::SetSound(const TCHAR *pString) {
 	if (pString == NULL) {

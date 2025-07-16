@@ -85,7 +85,7 @@ CEsmMisc::CEsmMisc() {
  * Description
  *
  *=========================================================================*/
-void CEsmMisc::Destroy(void) {
+void CEsmMisc::Destroy() {
 	//DEFINE_FUNCTION("CEsmMisc::Destroy()");
 	m_pMiscData = NULL;
 	CEsmItem2::Destroy();
@@ -117,7 +117,7 @@ int CEsmMisc::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 
 	switch (FieldID) {
 		case ESM_FIELD_UNKNOWN:
-			return (GetUnknown() - pMisc->GetUnknown());
+			return GetUnknown() - pMisc->GetUnknown();
 
 		default:
 			return CEsmItem2::CompareFields(FieldID, pRecord);
@@ -136,11 +136,11 @@ int CEsmMisc::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmMisc::Create(void) {
+CEsmRecord *CEsmMisc::Create() {
 	DEFINE_FUNCTION("CEsmMisc::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmMisc);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -182,7 +182,7 @@ const TCHAR *CEsmMisc::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_UNKNOWN:
 			snprintf(s_Buffer, 31, _T("%ld"), GetUnknown());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmItem2::GetFieldString(FieldID);
@@ -224,7 +224,7 @@ bool CEsmMisc::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_UNKNOWN:
 			GetMiscData()->Unknown = atol(pString);
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

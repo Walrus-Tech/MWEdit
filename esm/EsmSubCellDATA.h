@@ -81,14 +81,14 @@ class CEsmSubCellDATA : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCellDATA);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(celldata_t));
 		m_RecordSize = sizeof(celldata_t);
@@ -96,36 +96,36 @@ class CEsmSubCellDATA : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	celldata_t *GetCellData(void) {
-		return ((celldata_t *)m_pData);
+	celldata_t *GetCellData() {
+		return (celldata_t *)m_pData;
 	}
 
-	long GetGridX(void) {
-		return (GetCellData()->GridX);
+	long GetGridX() {
+		return GetCellData()->GridX;
 	}
 
-	long GetGridY(void) {
-		return (GetCellData()->GridY);
+	long GetGridY() {
+		return GetCellData()->GridY;
 	}
 
-	long GetFlags(void) {
-		return (GetCellData()->Flags);
+	long GetFlags() {
+		return GetCellData()->Flags;
 	}
 
-	bool IsInterior(void) {
-		return ((GetFlags() & MWESM_CELLFLAG_INTERIOR) != 0);
+	bool IsInterior() {
+		return (GetFlags() & MWESM_CELLFLAG_INTERIOR) != 0;
 	}
 
-	bool HasWater(void) {
-		return ((GetFlags() & MWESM_CELLFLAG_HASWATER) != 0);
+	bool HasWater() {
+		return (GetFlags() & MWESM_CELLFLAG_HASWATER) != 0;
 	}
 
-	bool IsSleepIllegal(void) {
-		return ((GetFlags() & MWESM_CELLFLAG_SLEEPILLEGAL) != 0);
+	bool IsSleepIllegal() {
+		return (GetFlags() & MWESM_CELLFLAG_SLEEPILLEGAL) != 0;
 	}
 
-	bool IsLikeExterior(void) {
-		return ((GetFlags() & MWESM_CELLFLAG_LIKEEXTERIOR) != 0);
+	bool IsLikeExterior() {
+		return (GetFlags() & MWESM_CELLFLAG_LIKEEXTERIOR) != 0;
 	}
 
 	/* Set or clear flags */
@@ -161,7 +161,6 @@ class CEsmSubCellDATA : public CEsmSubRecord {
 	void SetLikeExterior(const bool Flag) {
 		SetFlag(MWESM_CELLFLAG_LIKEEXTERIOR, Flag);
 	}
-
 };
 
 /*===========================================================================

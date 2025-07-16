@@ -50,7 +50,7 @@ class CEsmAlchemy : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubALDT *m_pAlchemyData;     /* Reference to subrecords */
+	CEsmSubALDT *m_pAlchemyData; /* Reference to subrecords */
 
 	/*---------- Begin Protected Class Methods --------------------*/
   protected:
@@ -61,31 +61,31 @@ class CEsmAlchemy : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmAlchemy();
 	//virtual ~CEsmAlchemy() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 	/* Get a string representation of a particular field */
 	virtual const TCHAR *GetFieldString(const int FieldID);
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Alchemy");
 	}
 	/* Get class members */
-	alchemydata_t *GetAlchemyData(void) {
-		return (m_pAlchemyData == NULL ? NULL : m_pAlchemyData->GetAlchemyData());
+	alchemydata_t *GetAlchemyData() {
+		return m_pAlchemyData == NULL ? NULL : m_pAlchemyData->GetAlchemyData();
 	}
-	virtual float GetWeight(void) {
-		return (m_pAlchemyData == NULL ? 0 : m_pAlchemyData->GetWeight());
+	virtual float GetWeight() {
+		return m_pAlchemyData == NULL ? 0 : m_pAlchemyData->GetWeight();
 	}
-	virtual long GetValue(void) {
-		return (m_pAlchemyData == NULL ? 0 : m_pAlchemyData->GetValue());
+	virtual long GetValue() {
+		return m_pAlchemyData == NULL ? 0 : m_pAlchemyData->GetValue();
 	}
-	bool IsAutoCalc(void) {
-		return (m_pAlchemyData ? m_pAlchemyData->IsAutoCalc() : false);
+	bool IsAutoCalc() {
+		return m_pAlchemyData ? m_pAlchemyData->IsAutoCalc() : false;
 	}
 	/* Used to save the various record elements */
 	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);

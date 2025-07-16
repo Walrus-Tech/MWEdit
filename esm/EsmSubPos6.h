@@ -70,14 +70,14 @@ class CEsmSubPos6 : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubPos6);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(pos6data_t));
 		m_RecordSize = sizeof(pos6data_t);
@@ -86,36 +86,36 @@ class CEsmSubPos6 : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get class members */
 	pos6data_t *GetPosData(void) {
-		return ((pos6data_t *)m_pData);
+		return (pos6data_t *)m_pData;
 	}
 
-	float GetPosX(void) {
-		return (GetPosData()->PosX);
+	float GetPosX() {
+		return GetPosData()->PosX;
 	}
 
-	float GetPosY(void) {
-		return (GetPosData()->PosY);
+	float GetPosY() {
+		return GetPosData()->PosY;
 	}
 
-	float GetPosZ(void) {
-		return (GetPosData()->PosZ);
+	float GetPosZ() {
+		return GetPosData()->PosZ;
 	}
 
-	float GetRotX(void) {
-		return (GetPosData()->RotX);
+	float GetRotX() {
+		return GetPosData()->RotX;
 	}
 
-	float GetRotY(void) {
-		return (GetPosData()->RotY);
+	float GetRotY() {
+		return GetPosData()->RotY;
 	}
 
-	float GetRotZ(void) {
-		return (GetPosData()->RotZ);
+	float GetRotZ() {
+		return GetPosData()->RotZ;
 	}
 
 	/* Set class members */
@@ -154,7 +154,6 @@ class CEsmSubPos6 : public CEsmSubRecord {
 		SetRotY(Y);
 		SetRotZ(Z);
 	}
-
 };
 
 /*===========================================================================

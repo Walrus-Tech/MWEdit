@@ -89,14 +89,14 @@ class CEsmSubFRMR : public CEsmSubRecord {
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubFRMR);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(frmrdata_t);
 		m_Data.Index = 0;
@@ -105,20 +105,20 @@ class CEsmSubFRMR : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get/set the long value directly */
-	long GetValue(void) {
+	long GetValue() {
 		return (*(long *)&m_Data);
 	}
 
-	long GetIndex(void) {
-		return (m_Data.Index);
+	long GetIndex() {
+		return m_Data.Index;
 	}
 
-	byte GetFlag(void) {
-		return (m_Data.Flag);
+	byte GetFlag() {
+		return m_Data.Flag;
 	}
 
 	void SetValue(const long Value) {
@@ -132,7 +132,6 @@ class CEsmSubFRMR : public CEsmSubRecord {
 	void SetFlag(const byte Flag) {
 		m_Data.Flag = Flag;
 	}
-
 };
 
 /*===========================================================================

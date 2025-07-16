@@ -86,7 +86,7 @@ CEsmDoor::CEsmDoor() {
  * Description
  *
  *=========================================================================*/
-void CEsmDoor::Destroy(void) {
+void CEsmDoor::Destroy() {
 	//DEFINE_FUNCTION("CEsmDoor::Destroy()");
 	m_pCloseSound = NULL;
 	m_pOpenSound = NULL;
@@ -105,11 +105,11 @@ void CEsmDoor::Destroy(void) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmDoor::Create(void) {
+CEsmRecord *CEsmDoor::Create() {
 	DEFINE_FUNCTION("CEsmDoor::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmDoor);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================

@@ -74,7 +74,7 @@ CEsmSound::CEsmSound() {
  * Description
  *
  *=========================================================================*/
-void CEsmSound::Destroy(void) {
+void CEsmSound::Destroy() {
 	//DEFINE_FUNCTION("CEsmSound::Destroy()");
 	m_pData = NULL;
 	m_pName = NULL;
@@ -134,11 +134,11 @@ int CEsmSound::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSound::Create(void) {
+CEsmRecord *CEsmSound::Create() {
 	DEFINE_FUNCTION("CEsmSound::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSound);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -181,15 +181,15 @@ const TCHAR *CEsmSound::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_VOLUME:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetVolume());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_MINRANGE:
 			snprintf(s_Buffer, 31, _T("%d"), (int)GetMinRange());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_MAXRANGE:
 			snprintf(s_Buffer, 31, _T("%d"), (int)GetMaxRange());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_NAME:
 			return GetName();
@@ -236,20 +236,20 @@ bool CEsmSound::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_VOLUME:
 			SetVolume((float)atof(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_MINRANGE:
 			SetMinRange(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_MAXRANGE:
 			SetMaxRange(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);
@@ -279,7 +279,6 @@ void CEsmSound::SetVolume(const float Volume) {
 	}
 }
 
-
 void CEsmSound::SetMinRange(const int Range) {
 	if (m_pData == NULL) {
 		return;
@@ -293,7 +292,6 @@ void CEsmSound::SetMinRange(const int Range) {
 		GetSoundData()->MinRange = (byte)Range;
 	}
 }
-
 
 void CEsmSound::SetMaxRange(const int Range) {
 	if (m_pData == NULL) {

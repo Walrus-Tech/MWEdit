@@ -28,7 +28,6 @@
  *
  *=========================================================================*/
 #pragma pack(push, 1)
-
 #pragma pack(pop)
 /*===========================================================================
  *      End of Type Definitions
@@ -77,14 +76,14 @@ class CEsmSubLong : public CEsmSubRecord {
 
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubLong);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = sizeof(long);
 		m_Long = 0;
@@ -92,12 +91,12 @@ class CEsmSubLong : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get/set the long value directly */
-	long GetValue(void) {
-		return (m_Long);
+	long GetValue() {
+		return m_Long;
 	}
 
 	void SetValue(const long Value) {
@@ -106,11 +105,11 @@ class CEsmSubLong : public CEsmSubRecord {
 
 	/* Set/check a bit field flag value */
 	bool IsFlag(const long Flag) {
-		return ((m_Long & Flag) != 0);
+		return (m_Long & Flag) != 0;
 	}
 
 	void SetFlag(const long Flag, const bool Set) {
-		(Set ? SetFlag(Flag) : ClearFlag(Flag));
+		Set ? SetFlag(Flag) : ClearFlag(Flag);
 	}
 
 	void SetFlag(const long Flag) {
@@ -120,7 +119,6 @@ class CEsmSubLong : public CEsmSubRecord {
 	void ClearFlag(const long Flag) {
 		m_Long = (m_Long & (~Flag));
 	}
-
 };
 
 /*===========================================================================

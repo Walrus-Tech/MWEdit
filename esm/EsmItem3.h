@@ -58,7 +58,7 @@ class CEsmItem3 : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubNameFix *m_pEnchant;     /* Reference to record fields */
+	CEsmSubNameFix *m_pEnchant; /* Reference to record fields */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -71,7 +71,7 @@ class CEsmItem3 : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmItem3();
 	//virtual ~CEsmItem3() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
@@ -80,20 +80,20 @@ class CEsmItem3 : public CEsmItem2 {
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Used to determine the type of derived classes */
-	virtual int GetClassType(void) {
-		return (CEsmItem2::GetClassType() | MWESM_CLASSTYPE_ITEM3);
+	virtual int GetClassType() {
+		return CEsmItem2::GetClassType() | MWESM_CLASSTYPE_ITEM3;
 	}
 
 	/* Get a string representation of a particular field */
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Get class members */
-	const TCHAR *GetEnchant(void) const {
-		return (m_pEnchant ? m_pEnchant->GetName() : _T(""));
+	const TCHAR *GetEnchant() const {
+		return m_pEnchant ? m_pEnchant->GetName() : _T("");
 	}
 
-	virtual long GetEnchantPts(void) {
-		return (0);
+	virtual long GetEnchantPts() {
+		return 0;
 	}
 
 	/* Used to save the various record elements */
@@ -105,7 +105,6 @@ class CEsmItem3 : public CEsmItem2 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

@@ -66,13 +66,13 @@ class CEsmRegion : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmRegion();
 	//virtual ~CEsmRegion() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -81,25 +81,25 @@ class CEsmRegion : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Region");
 	}
 
 	/* Get class members */
-	weatherdata_t *GetWeatherData(void) {
-		return (m_pWeatherData ? m_pWeatherData->GetWeatherData() : NULL);
+	weatherdata_t *GetWeatherData() {
+		return m_pWeatherData ? m_pWeatherData->GetWeatherData() : NULL;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pNameData ? m_pNameData->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pNameData ? m_pNameData->GetName() : _T("");
 	}
 
-	const TCHAR *GetCreature(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetName() : _T(""));
+	const TCHAR *GetCreature() {
+		return m_pCreatureData ? m_pCreatureData->GetName() : _T("");
 	}
 
-	long GetColor(void) {
-		return (m_pColorData ? m_pColorData->GetValue() : 0);
+	long GetColor() {
+		return m_pColorData ? m_pColorData->GetValue() : 0;
 	}
 
 	/* Used to save the various record elements */
@@ -118,7 +118,6 @@ class CEsmRegion : public CEsmRecord {
 			m_pColorData->SetValue(Color);
 		}
 	}
-
 };
 
 /*===========================================================================

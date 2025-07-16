@@ -68,14 +68,14 @@ class CEsmSubAMBI : public CEsmSubRecord {
 	//virtual void Destroy (void) { }
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAMBI);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ambidata_t));
 		m_RecordSize = sizeof(ambidata_t);
@@ -83,16 +83,14 @@ class CEsmSubAMBI : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	ambidata_t *GetAMBIData(void) {
-		return ((ambidata_t *)m_pData);
+	ambidata_t *GetAMBIData() {
+		return (ambidata_t *)m_pData;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubAMBI Definition
  *=========================================================================*/
-
 
 
 #endif

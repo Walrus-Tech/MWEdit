@@ -490,7 +490,7 @@ CEsmInfo::CEsmInfo() {
  * Class CEsmInfo Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmInfo::Destroy(void) {
+void CEsmInfo::Destroy() {
 	//DEFINE_FUNCTION("CEsmInfo::Destroy()");
 	m_pPrevName = NULL;
 	m_pNextName = NULL;
@@ -573,16 +573,16 @@ int CEsmInfo::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 
 		case ESM_FIELD_TOPIC:
 			if (m_pDialParent == NULL || pInfo->GetDialParent() == NULL) {
-				return (0);
+				return 0;
 			}
 
 			return StringCompare(m_pDialParent->GetID(), pInfo->GetDialParent()->GetID(), false);
 
 		case ESM_FIELD_PREV:
-			return (StringCompare(GetPrevName(), pInfo->GetPrevName(), false));
+			return StringCompare(GetPrevName(), pInfo->GetPrevName(), false);
 
 		case ESM_FIELD_NEXT:
-			return (StringCompare(GetNextName(), pInfo->GetNextName(), false));
+			return StringCompare(GetNextName(), pInfo->GetNextName(), false);
 
 		default:
 			return CEsmRecord::CompareFields(FieldID, pRecord);
@@ -601,11 +601,11 @@ int CEsmInfo::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmInfo::Create(void) {
+CEsmRecord *CEsmInfo::Create() {
 	DEFINE_FUNCTION("CEsmInfo::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmInfo);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -681,15 +681,15 @@ const TCHAR *CEsmInfo::GetFieldString(const int FieldID) {
 
 		case ESM_FIELD_DISPOSITION:
 			snprintf(s_Buffer, 31, _T("%d"), GetDisposition());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_NEXT:
 			strnncpy(s_Buffer, GetNextName(), 31);
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_PREV:
 			strnncpy(s_Buffer, GetPrevName(), 31);
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_TOPIC:
 			if (m_pDialParent == NULL) {
@@ -698,7 +698,7 @@ const TCHAR *CEsmInfo::GetFieldString(const int FieldID) {
 				strnncpy(s_Buffer, m_pDialParent->GetID(), MWESM_ID_MAXSIZE);
 			}
 
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmRecord::GetFieldString(FieldID);
@@ -772,7 +772,7 @@ const TCHAR *CEsmInfo::GetFuncText(const int Index) {
 		         GetESMInfoCompareOp(pFuncData->CompareOp),
 		         FuncValue);
 	} else if (pFuncRec->GetInfoFuncData()->Type == MWESM_SCVRFUNC_NONE) {
-		return (_T(""));
+		return _T("");
 	} else {
 		snprintf(s_Buffer,
 		         127,
@@ -782,7 +782,7 @@ const TCHAR *CEsmInfo::GetFuncText(const int Index) {
 		          FuncValue);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -815,7 +815,7 @@ bool CEsmInfo::IsUsed(const TCHAR *pID) {
 		if (iswctype(pParse[-1], _PUNCT | _SPACE)
 		    && (iswctype(pParse[IDLength], _PUNCT | _SPACE)
 		    || pParse[IDLength] == NULL_CHAR)) {
-			return (true);
+			return true;
 		}
 
 		pParse = stristr(pParse + IDLength, pID);
@@ -909,7 +909,6 @@ void CEsmInfo::SetActor(const TCHAR *pString) {
 	}
 }
 
-
 void CEsmInfo::SetClass(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pClass != NULL) {
@@ -925,7 +924,6 @@ void CEsmInfo::SetClass(const TCHAR *pString) {
 		m_pClass->SetName(pString);
 	}
 }
-
 
 void CEsmInfo::SetRace(const TCHAR *pString) {
 	if (pString == NULL) {
@@ -943,7 +941,6 @@ void CEsmInfo::SetRace(const TCHAR *pString) {
 	}
 }
 
-
 void CEsmInfo::SetFaction(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pFaction != NULL) {
@@ -960,7 +957,6 @@ void CEsmInfo::SetFaction(const TCHAR *pString) {
 	}
 }
 
-
 void CEsmInfo::SetPCFaction(const TCHAR *pString) {
 	if (pString == NULL) {
 		if (m_pPCFaction != NULL) {
@@ -976,7 +972,6 @@ void CEsmInfo::SetPCFaction(const TCHAR *pString) {
 		m_pPCFaction->SetName(pString);
 	}
 }
-
 
 void CEsmInfo::SetCell(const TCHAR *pString) {
 	if (pString == NULL) {
@@ -1051,7 +1046,7 @@ const TCHAR *GetESMInfoFunction(const short FuncType) {
 
 	for (Index = 0 ; l_InfoFuncData[Index].pName != NULL; Index++) {
 		if (FuncType == l_InfoFuncData[Index].Type) {
-			return (l_InfoFuncData[Index].pName);
+			return l_InfoFuncData[Index].pName;
 		}
 	}
 

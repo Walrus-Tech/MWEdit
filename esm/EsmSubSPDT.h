@@ -93,14 +93,14 @@ class CEsmSubSPDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSPDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(spelldata_t));
 		m_RecordSize = sizeof(spelldata_t);
@@ -108,32 +108,32 @@ class CEsmSubSPDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	spelldata_t *GetSpellData(void) {
-		return ((spelldata_t *)m_pData);
+	spelldata_t *GetSpellData() {
+		return (spelldata_t *)m_pData;
 	}
 
-	long GetSpellType(void) {
-		return (GetSpellData()->Type);
+	long GetSpellType() {
+		return GetSpellData()->Type;
 	}
 
-	long GetSpellCost(void) {
-		return (GetSpellData()->SpellCost);
+	long GetSpellCost() {
+		return GetSpellData()->SpellCost;
 	}
 
-	long GetFlags(void) {
-		return (GetSpellData()->Flags);
+	long GetFlags() {
+		return GetSpellData()->Flags;
 	}
 
-	bool IsAutoCalc(void) {
-		return ((GetFlags() & MWESM_SPELLFLAG_AUTOCALC) != 0);
+	bool IsAutoCalc() {
+		return (GetFlags() & MWESM_SPELLFLAG_AUTOCALC) != 0;
 	}
 
-	bool IsPCStart(void) {
-		return ((GetFlags() & MWESM_SPELLFLAG_PCSTART) != 0);
+	bool IsPCStart() {
+		return (GetFlags() & MWESM_SPELLFLAG_PCSTART) != 0;
 	}
 
-	bool IsSucceeds(void) {
-		return ((GetFlags() & MWESM_SPELLFLAG_SUCCEEDS) != 0);
+	bool IsSucceeds() {
+		return (GetFlags() & MWESM_SPELLFLAG_SUCCEEDS) != 0;
 	}
 
 	/* Set or clear flags */
@@ -167,7 +167,6 @@ class CEsmSubSPDT : public CEsmSubRecord {
 	void SetSucceeds(const bool Flag) {
 		SetFlag(MWESM_SPELLFLAG_SUCCEEDS, Flag);
 	}
-
 };
 
 /*===========================================================================

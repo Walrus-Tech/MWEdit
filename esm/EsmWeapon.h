@@ -62,13 +62,13 @@ class CEsmWeapon : public CEsmItem3 {
 	/* Class Constructors/Destructors */
 	CEsmWeapon();
 	//virtual ~CEsmWeapon() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -77,76 +77,76 @@ class CEsmWeapon : public CEsmItem3 {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Weapon");
 	}
 
 	/* Get class members */
-	weapondata_t *GetWeaponData(void) {
-		return (m_pWeaponData == NULL ? NULL : m_pWeaponData->GetWeaponData());
+	weapondata_t *GetWeaponData() {
+		return m_pWeaponData == NULL ? NULL : m_pWeaponData->GetWeaponData();
 	}
 
-	const TCHAR *GetWeaponType(void) {
+	const TCHAR *GetWeaponType() {
 		return GetESMWeaponType(GetWeaponTypeID());
 	}
 
-	int GetWeaponTypeID(void) {
-		return (m_pWeaponData ? GetWeaponData()->Type : 0);
+	int GetWeaponTypeID() {
+		return m_pWeaponData ? GetWeaponData()->Type : 0;
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pWeaponData ? GetWeaponData()->Weight : 0);
+	virtual float GetWeight() {
+		return m_pWeaponData ? GetWeaponData()->Weight : 0;
 	}
 
-	virtual long GetValue(void) {
-		return (m_pWeaponData ? GetWeaponData()->Value : 0);
+	virtual long GetValue() {
+		return m_pWeaponData ? GetWeaponData()->Value : 0;
 	}
 
-	virtual long GetEnchantPts(void) {
-		return (m_pWeaponData ? GetWeaponData()->EnchantPts : 0);
+	virtual long GetEnchantPts() {
+		return m_pWeaponData ? GetWeaponData()->EnchantPts : 0;
 	}
 
-	long GetFlags(void) {
-		return (m_pWeaponData ? GetWeaponData()->Flags : 0);
+	long GetFlags() {
+		return m_pWeaponData ? GetWeaponData()->Flags : 0;
 	}
 
-	int GetHealth(void) {
-		return (m_pWeaponData ? GetWeaponData()->Health : 0);
+	int GetHealth() {
+		return m_pWeaponData ? GetWeaponData()->Health : 0;
 	}
 
-	float GetSpeed(void) {
-		return (m_pWeaponData ? GetWeaponData()->Speed : 0);
+	float GetSpeed() {
+		return m_pWeaponData ? GetWeaponData()->Speed : 0;
 	}
 
-	float GetReach(void) {
-		return (m_pWeaponData ? GetWeaponData()->Reach : 0);
+	float GetReach() {
+		return m_pWeaponData ? GetWeaponData()->Reach : 0;
 	}
 
-	int GetChopMin(void) {
-		return (m_pWeaponData ? GetWeaponData()->ChopMin : 0);
+	int GetChopMin() {
+		return m_pWeaponData ? GetWeaponData()->ChopMin : 0;
 	}
 
-	int GetChopMax(void) {
-		return (m_pWeaponData ? GetWeaponData()->ChopMax : 0);
+	int GetChopMax() {
+		return m_pWeaponData ? GetWeaponData()->ChopMax : 0;
 	}
 
-	int GetSlashMin(void) {
-		return (m_pWeaponData ? GetWeaponData()->SlashMin : 0);
+	int GetSlashMin() {
+		return m_pWeaponData ? GetWeaponData()->SlashMin : 0;
 	}
 
-	int GetSlashMax(void) {
-		return (m_pWeaponData ? GetWeaponData()->SlashMax : 0);
+	int GetSlashMax() {
+		return m_pWeaponData ? GetWeaponData()->SlashMax : 0;
 	}
 
-	int GetThrustMin(void) {
-		return (m_pWeaponData ? GetWeaponData()->ThrustMin : 0);
+	int GetThrustMin() {
+		return m_pWeaponData ? GetWeaponData()->ThrustMin : 0;
 	}
 
-	int GetThrustMax(void) {
-		return (m_pWeaponData ? GetWeaponData()->ThrustMax : 0);
+	int GetThrustMax() {
+		return m_pWeaponData ? GetWeaponData()->ThrustMax : 0;
 	}
 
-	bool IsIgnoreResist(void) {
+	bool IsIgnoreResist() {
 		return (GetFlags() & MWESM_WEAPONFLAG_IGNORERESIST) != 0;
 	}
 
@@ -246,7 +246,6 @@ class CEsmWeapon : public CEsmItem3 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

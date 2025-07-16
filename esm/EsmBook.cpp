@@ -94,7 +94,7 @@ CEsmBook::CEsmBook() {
  * Description
  *
  *=========================================================================*/
-void CEsmBook::Destroy(void) {
+void CEsmBook::Destroy() {
 	//DEFINE_FUNCTION("CEsmBook::Destroy()");
 	m_pBookData = NULL;
 	m_pText = NULL;
@@ -127,11 +127,13 @@ int CEsmBook::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 
 	switch (FieldID) {
 		case ESM_FIELD_SCROLL:
-			return (int) IsScroll() - (int) pBook->IsScroll();
+			return (int)IsScroll() - (int)pBook->IsScroll();
 
 		case ESM_FIELD_SKILL:
 		case ESM_FIELD_TEACHES:
-			return StringCompare(GetESMSkill(GetSkillID()), GetESMSkill(pBook->GetSkillID()), false);;
+			return StringCompare(GetESMSkill(GetSkillID()),
+			                     GetESMSkill(pBook->GetSkillID()),
+			                     false);;
 
 		default:
 			return CEsmItem3::CompareFields(FieldID, pRecord);
@@ -150,11 +152,11 @@ int CEsmBook::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmBook::Create(void) {
+CEsmRecord *CEsmBook::Create() {
 	DEFINE_FUNCTION("CEsmBook::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmBook);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -199,17 +201,17 @@ const TCHAR *CEsmBook::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANTPTS:
 			snprintf(s_Buffer, 31, _T("%ld"), GetEnchantPts());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_SKILL:
 		case ESM_FIELD_TEACHES:
 			return GetESMSkill(GetSkillID());
 
 		case ESM_FIELD_SCROLL:
-			return (BOOLTOYESNO(IsScroll()));
+			return BOOLTOYESNO(IsScroll());
 
 		case ESM_FIELD_TEXT:
-			return (GetBookText());
+			return GetBookText();
 
 		default:
 			return CEsmItem3::GetFieldString(FieldID);
@@ -253,7 +255,7 @@ bool CEsmBook::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ENCHANTPTS:
 			SetEnchantPts(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_SKILL:
 		case ESM_FIELD_TEACHES: {
@@ -263,16 +265,16 @@ bool CEsmBook::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				SetSkillID(Skill);
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_SCROLL:
 			SetScroll(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_TEXT:
 			SetBookText(pString);
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

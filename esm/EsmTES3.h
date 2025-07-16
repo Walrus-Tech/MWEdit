@@ -36,7 +36,7 @@ class CEsmTES3 : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubHEDR *m_pHeader;  /* Reference to record fields */
+	CEsmSubHEDR *m_pHeader; /* Reference to record fields */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -49,25 +49,24 @@ class CEsmTES3 : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmTES3();
 	//virtual ~CEsmArmor() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Adds a master sub-record */
 	void AddMaster(const TCHAR *pFilename, const long FileSize);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Get class members */
-	headerdata_t *GetHeaderData(void) {
-		return (m_pHeader ? m_pHeader->GetHeaderData() : NULL);
+	headerdata_t *GetHeaderData() {
+		return m_pHeader ? m_pHeader->GetHeaderData() : NULL;
 	}
 
 	/* Used to save the various record elements */
 	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
-
 };
 
 /*===========================================================================

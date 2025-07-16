@@ -77,14 +77,14 @@ class CEsmSubDATA : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubDATA);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(sounddata_t));
 		m_RecordSize = sizeof(sounddata_t);
@@ -92,20 +92,20 @@ class CEsmSubDATA : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	sounddata_t *GetSoundData(void) {
-		return ((sounddata_t *)m_pData);
+	sounddata_t *GetSoundData() {
+		return (sounddata_t *)m_pData;
 	}
 
-	byte GetVolume(void) {
-		return (GetSoundData()->Volume);
+	byte GetVolume() {
+		return GetSoundData()->Volume;
 	}
 
-	byte GetMinRange(void) {
-		return (GetSoundData()->MinRange);
+	byte GetMinRange() {
+		return GetSoundData()->MinRange;
 	}
 
-	byte GetMaxRange(void) {
-		return (GetSoundData()->MaxRange);
+	byte GetMaxRange() {
+		return GetSoundData()->MaxRange;
 	}
 
 	/* Set class members */
@@ -120,7 +120,6 @@ class CEsmSubDATA : public CEsmSubRecord {
 	void SetMaxRange(const byte Value) {
 		GetSoundData()->MaxRange = Value;
 	}
-
 };
 
 /*===========================================================================

@@ -28,7 +28,7 @@
  *
  *=========================================================================*/
 
-#define MWESM_ALCH_MAXENCHANTS 8
+#define MWESM_ALCH_MAXENCHANTS    8
 
 /* Range types */
 #define MWESM_ENCHANTRANGE_MIN    0
@@ -92,14 +92,14 @@ class CEsmSubENAM : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubENAM);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(enchanteffect_t));
 		m_RecordSize = sizeof(enchanteffect_t);
@@ -110,45 +110,45 @@ class CEsmSubENAM : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	enchanteffect_t *GetEnchantData(void) {
+	enchanteffect_t *GetEnchantData() {
 		return (enchanteffect_t *)m_pData;
 	}
 
-	short GetEffectID(void) {
-		return (GetEnchantData()->EffectID);
+	short GetEffectID() {
+		return GetEnchantData()->EffectID;
 	}
 
-	byte GetSkillID(void) {
-		return (GetEnchantData()->SkillID);
+	byte GetSkillID() {
+		return GetEnchantData()->SkillID;
 	}
 
-	byte GetAttributeID(void) {
-		return (GetEnchantData()->AttributeID);
+	byte GetAttributeID() {
+		return GetEnchantData()->AttributeID;
 	}
 
-	long GetRangeType(void) {
-		return (GetEnchantData()->RangeType);
+	long GetRangeType() {
+		return GetEnchantData()->RangeType;
 	}
 
-	long GetArea(void) {
-		return (GetEnchantData()->Area);
+	long GetArea() {
+		return GetEnchantData()->Area;
 	}
 
-	long GetDuration(void) {
-		return (GetEnchantData()->Duration);
+	long GetDuration() {
+		return GetEnchantData()->Duration;
 	}
 
-	long GetMagMin(void) {
-		return (GetEnchantData()->MagMin);
+	long GetMagMin() {
+		return GetEnchantData()->MagMin;
 	}
 
-	long GetMagMax(void) {
-		return (GetEnchantData()->MagMax);
+	long GetMagMax() {
+		return GetEnchantData()->MagMax;
 	}
 
 	/* Checks if the sub-record uses the given ID */
 	virtual bool IsUsed(const TCHAR *pID) {
-		return (StringCompare(GetESMEffect(GetEnchantData()->EffectID), pID, false) == 0);
+		return StringCompare(GetESMEffect(GetEnchantData()->EffectID), pID, false) == 0;
 	}
 
 	/* Set class members */
@@ -185,13 +185,11 @@ class CEsmSubENAM : public CEsmSubRecord {
 	void SetMagMax(const long Value) {
 		GetEnchantData()->MagMax = Value;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubENAM Definition
  *=========================================================================*/
-
 
 
 #endif

@@ -91,13 +91,13 @@ class CEsmCreature : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmCreature();
 	//virtual ~CEsmCreature() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -106,156 +106,156 @@ class CEsmCreature : public CEsmItem1 {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Creature");
 	}
 
 	/* Get class members */
-	aidata_t *GetAIData(void) {
-		return (m_pAIData ? m_pAIData->GetAIData() : NULL);
+	aidata_t *GetAIData() {
+		return m_pAIData ? m_pAIData->GetAIData() : NULL;
 	}
 
-	creaturedata_t *GetCreatureData(void) {
-		return (m_pCreatureData == NULL ? NULL : m_pCreatureData->GetCreatureData());
+	creaturedata_t *GetCreatureData() {
+		return m_pCreatureData == NULL ? NULL : m_pCreatureData->GetCreatureData();
 	}
 
-	long GetCreaTypeID(void) {
-		return (m_pCreatureData == NULL ? -1 : m_pCreatureData->GetCreaType());
+	long GetCreaTypeID() {
+		return m_pCreatureData == NULL ? -1 : m_pCreatureData->GetCreaType();
 	}
 
-	const TCHAR *GetCreaType(void) {
+	const TCHAR *GetCreaType() {
 		return GetESMCreatureType(GetCreaTypeID());
 	}
 
-	const TCHAR *GetMoveType(void);
-	const TCHAR *GetSound(void) {
-		return (m_pSound ? m_pSound->GetName() : _T(""));
+	const TCHAR *GetMoveType();
+	const TCHAR *GetSound() {
+		return m_pSound ? m_pSound->GetName() : _T("");
 	}
 
-	long GetFlag(void) {
-		return (m_pFlag == NULL ? 0 : m_pFlag->GetValue());
+	long GetFlag() {
+		return m_pFlag == NULL ? 0 : m_pFlag->GetValue();
 	}
 
 	/* Get creature data */
-	long GetLevel(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetLevel() : 0);
+	long GetLevel() {
+		return m_pCreatureData ? m_pCreatureData->GetLevel() : 0;
 	}
 
-	long GetStrength(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetStrength() : 0);
+	long GetStrength() {
+		return m_pCreatureData ? m_pCreatureData->GetStrength() : 0;
 	}
 
-	long GetIntelligence(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetIntelligence() : 0);
+	long GetIntelligence() {
+		return m_pCreatureData ? m_pCreatureData->GetIntelligence() : 0;
 	}
 
-	long GetWillPower(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetWillpower() : 0);
+	long GetWillPower() {
+		return m_pCreatureData ? m_pCreatureData->GetWillpower() : 0;
 	}
 
-	long GetAgility(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAgility() : 0);
+	long GetAgility() {
+		return m_pCreatureData ? m_pCreatureData->GetAgility() : 0;
 	}
 
-	long GetSpeed(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetSpeed() : 0);
+	long GetSpeed() {
+		return m_pCreatureData ? m_pCreatureData->GetSpeed() : 0;
 	}
 
-	long GetEndurance(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetEndurance() : 0);
+	long GetEndurance() {
+		return m_pCreatureData ? m_pCreatureData->GetEndurance() : 0;
 	}
 
-	long GetPersonality(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetPersonality() : 0);
+	long GetPersonality() {
+		return m_pCreatureData ? m_pCreatureData->GetPersonality() : 0;
 	}
 
-	long GetLuck(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetLuck() : 0);
+	long GetLuck() {
+		return m_pCreatureData ? m_pCreatureData->GetLuck() : 0;
 	}
 
-	long GetHealth(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetHealth() : 0);
+	long GetHealth() {
+		return m_pCreatureData ? m_pCreatureData->GetHealth() : 0;
 	}
 
-	long GetSpellPts(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetSpellPts() : 0);
+	long GetSpellPts() {
+		return m_pCreatureData ? m_pCreatureData->GetSpellPts() : 0;
 	}
 
-	long GetFatigue(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetFatigue() : 0);
+	long GetFatigue() {
+		return m_pCreatureData ? m_pCreatureData->GetFatigue() : 0;
 	}
 
-	long GetSoul(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetSoul() : 0);
+	long GetSoul() {
+		return m_pCreatureData ? m_pCreatureData->GetSoul() : 0;
 	}
 
-	long GetCombat(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetCombat() : 0);
+	long GetCombat() {
+		return m_pCreatureData ? m_pCreatureData->GetCombat() : 0;
 	}
 
-	long GetMagic(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetMagic() : 0);
+	long GetMagic() {
+		return m_pCreatureData ? m_pCreatureData->GetMagic() : 0;
 	}
 
-	long GetStealth(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetStealth() : 0);
+	long GetStealth() {
+		return m_pCreatureData ? m_pCreatureData->GetStealth() : 0;
 	}
 
-	long GetAttackMin1(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAttackMin1() : 0);
+	long GetAttackMin1() {
+		return m_pCreatureData ? m_pCreatureData->GetAttackMin1() : 0;
 	}
 
-	long GetAttackMin2(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAttackMin2() : 0);
+	long GetAttackMin2() {
+		return m_pCreatureData ? m_pCreatureData->GetAttackMin2() : 0;
 	}
 
-	long GetAttackMin3(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAttackMin3() : 0);
+	long GetAttackMin3() {
+		return m_pCreatureData ? m_pCreatureData->GetAttackMin3() : 0;
 	}
 
-	long GetAttackMax1(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAttackMax1() : 0);
+	long GetAttackMax1() {
+		return m_pCreatureData ? m_pCreatureData->GetAttackMax1() : 0;
 	}
 
-	long GetAttackMax2(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAttackMax2() : 0);
+	long GetAttackMax2() {
+		return m_pCreatureData ? m_pCreatureData->GetAttackMax2() : 0;
 	}
 
-	long GetAttackMax3(void) {
-		return (m_pCreatureData ? m_pCreatureData->GetAttackMax3() : 0);
+	long GetAttackMax3() {
+		return m_pCreatureData ? m_pCreatureData->GetAttackMax3() : 0;
 	}
 
 	/* Get creature flags */
-	bool IsEssential(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_ESSENTIAL) != 0);
+	bool IsEssential() {
+		return (GetFlag() & MWESM_CREAFLAG_ESSENTIAL) != 0;
 	}
 
-	bool IsRespawn(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_RESPAWN) != 0);
+	bool IsRespawn() {
+		return (GetFlag() & MWESM_CREAFLAG_RESPAWN) != 0;
 	}
 
-	bool IsBiped(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_BIPED) != 0);
+	bool IsBiped() {
+		return (GetFlag() & MWESM_CREAFLAG_BIPED) != 0;
 	}
 
-	bool IsWeapShield(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_WEAPSHIELD) != 0);
+	bool IsWeapShield() {
+		return (GetFlag() & MWESM_CREAFLAG_WEAPSHIELD) != 0;
 	}
 
-	bool IsSwims(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_SWIMS) != 0);
+	bool IsSwims() {
+		return (GetFlag() & MWESM_CREAFLAG_SWIMS) != 0;
 	}
 
-	bool IsFlies(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_FLIES) != 0);
+	bool IsFlies() {
+		return (GetFlag() & MWESM_CREAFLAG_FLIES) != 0;
 	}
 
-	bool IsWalks(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_WALKS) != 0);
+	bool IsWalks() {
+		return (GetFlag() & MWESM_CREAFLAG_WALKS) != 0;
 	}
 
-	bool IsNone(void) {
-		return ((GetFlag() & MWESM_CREAFLAG_NONE) != 0);
+	bool IsNone() {
+		return (GetFlag() & MWESM_CREAFLAG_NONE) != 0;
 	}
 
 	/* Used to save the various record elements */
@@ -333,7 +333,6 @@ class CEsmCreature : public CEsmItem1 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

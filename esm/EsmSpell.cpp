@@ -97,7 +97,7 @@ CEsmSpell::CEsmSpell() {
  * Description
  *
  *=========================================================================*/
-void CEsmSpell::Destroy(void) {
+void CEsmSpell::Destroy() {
 	//DEFINE_FUNCTION("CEsmSpell::Destroy()");
 	m_pSpellData = NULL;
 	m_pName = NULL;
@@ -160,11 +160,11 @@ int CEsmSpell::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmSpell::Create(void) {
+CEsmRecord *CEsmSpell::Create() {
 	DEFINE_FUNCTION("CEsmSpell::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmSpell);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -216,7 +216,7 @@ const TCHAR *CEsmSpell::GetFieldString(const int FieldID) {
 
 		case ESM_FIELD_COST:
 			snprintf(s_Buffer, 31, _T("%ld"), GetSpellCost());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_TYPE:
 			return GetSpellType();
@@ -263,29 +263,30 @@ bool CEsmSpell::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_AUTOCALC:
 			SetAutoCalc(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_PCSTART:
 			SetPCStart(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_COST:
 			SetSpellCost(atoi(pString));
-			return (true);
+			return true;
 
-		case ESM_FIELD_TYPE:
+		case ESM_FIELD_TYPE: {
 			int Type = GetESMSpellType(pString);
 
 			if (Type >= 0) {
 				SetSpellType(Type);
 			}
 
-			return (true);
-	};
+			return true;
+		}
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);
@@ -311,17 +312,16 @@ const TCHAR *GetESMSpellType(const int Type) {
 	return l_SpellTypes[Type];
 }
 
-
 int GetESMSpellType(const TCHAR *pString) {
 	int Index;
 
 	for (Index = MWESM_SPELLTYPE_MIN; Index <= MWESM_SPELLTYPE_MAX; Index++) {
 		if (stricmp(pString, l_SpellTypes[Index]) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================

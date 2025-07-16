@@ -78,7 +78,7 @@ CEsmRecord::CEsmRecord() : m_SubRecords(0) {
  * Class CEsmRecord Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmRecord::Destroy(void) {
+void CEsmRecord::Destroy() {
 	//DEFINE_FUNCTION("CEsmRecord::Destroy()");
 	CEsmSubRecord *pSubRecord;
 	int Index;
@@ -136,7 +136,7 @@ CEsmSubRecord *CEsmRecord::AllocNewSubRecord(const TCHAR *pType, const long Reco
 	pSubRecord = SubRecCreate[Index].CreateMethod();
 	pSubRecord->SetType(pType);
 	pSubRecord->SetRecordSize(RecordSize);
-	return (pSubRecord);
+	return pSubRecord;
 }
 
 /*===========================================================================
@@ -162,7 +162,7 @@ CEsmSubRecord *CEsmRecord::AllocateSubRecord(const TCHAR *pType, const long Reco
 	m_SubRecords.Add(pSubRecord);
 	/* Call the add event */
 	OnAddSubRecord(pSubRecord);
-	return (pSubRecord);
+	return pSubRecord;
 }
 
 /*===========================================================================
@@ -202,7 +202,7 @@ int CEsmRecord::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 		case ESM_FIELD_BLOCKED:
 			return (int)IsBlocked() - (int)pRecord->IsBlocked();
 
-		case ESM_FIELD_CHANGED:         /* Note this is reversed on purpose */
+		case ESM_FIELD_CHANGED: /* Note this is reversed on purpose */
 			return ((int)pRecord->GetFile()->IsActive() + pRecord->IsDeleted() * 10)
 			        - ((int)GetFile()->IsActive() + IsDeleted() * 10);
 
@@ -230,8 +230,10 @@ void CEsmRecord::Copy(CEsmRecord *pRecord) {
 	CEsmSubRecord *pSubRecord;
 	CEsmSubRecord *pSourceSubRec;
 	int Index;
+
 	/* Delete the current contents, if any */
 	Destroy();
+
 	/* Copy the base record properties */
 	m_pFile = pRecord->m_pFile;
 	m_Type.SetType(pRecord->m_Type);
@@ -261,11 +263,11 @@ void CEsmRecord::Copy(CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmRecord::Create(void) {
+CEsmRecord *CEsmRecord::Create() {
 	DEFINE_FUNCTION("CEsmRecord::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmRecord);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -281,7 +283,7 @@ CEsmRecord *CEsmRecord::Create(void) {
 CEsmSubRecord *CEsmRecord::CreateCopy(CEsmSubRecord *pSubRecord) {
 	CEsmSubRecord *pNewSubRecord = AllocNewSubRecord(pSubRecord->GetType());
 	pNewSubRecord->Copy(pSubRecord);
-	return (pNewSubRecord);
+	return pNewSubRecord;
 }
 
 /*===========================================================================
@@ -329,7 +331,7 @@ void CEsmRecord::CreateNew(CEsmFile *pFile) {
  * Deletes or undeletes the record.
  *
  *=========================================================================*/
-void CEsmRecord::DeleteToggle(void) {
+void CEsmRecord::DeleteToggle() {
 	DEFINE_FUNCTION("CEsmRecord::DeleteToggle()");
 
 	if (IsDeleted()) {
@@ -372,7 +374,7 @@ int CEsmRecord::DeleteSubRecords(const TCHAR *pType) {
 		}
 	}
 
-	return (Count);
+	return Count;
 }
 
 /*===========================================================================
@@ -395,11 +397,11 @@ CEsmSubRecord *CEsmRecord::FindNext(const TCHAR *pType, int &ArrayIndex) {
 		pSubRecord = m_SubRecords.GetAt(ArrayIndex);
 
 		if (pSubRecord->IsType(pType)) {
-			return (pSubRecord);
+			return pSubRecord;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -427,12 +429,12 @@ bool CEsmRecord::Find(esmfind_t &FindData) {
 		Result = pSubRec->Find(FindData);
 
 		if (Result) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* No match */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -453,24 +455,24 @@ const TCHAR *CEsmRecord::GetFieldString(const int FieldID) {
 
 	switch (FieldID) {
 		case ESM_FIELD_ID:
-			return (GetID());
+			return GetID();
 
 		case ESM_FIELD_ITEMTYPE:
-			return (GetItemType());
+			return GetItemType();
 
 		case ESM_FIELD_COUNT:
 			snprintf(s_Buffer, 31, _T("%ld"), m_RefCount);
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_USERDATA:
 			snprintf(s_Buffer, 31, _T("%ld"), m_UserData);
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_PERSIST:
-			return (BOOLTOYESNO(IsPersist()));
+			return BOOLTOYESNO(IsPersist());
 
 		case ESM_FIELD_BLOCKED:
-			return (BOOLTOYESNO(IsBlocked()));
+			return BOOLTOYESNO(IsBlocked());
 
 		case ESM_FIELD_CHANGED:
 			if (m_pFile == NULL) {
@@ -506,7 +508,7 @@ const TCHAR *CEsmRecord::GetFieldString(const int FieldID) {
 bool CEsmRecord::IsSame(CEsmRecord *pRecord) {
 	/* Check types first */
 	if (!IsType(pRecord->GetType())) {
-		return (false);
+		return false;
 	}
 
 	/* Objects are the same type, not check their IDs */
@@ -514,14 +516,14 @@ bool CEsmRecord::IsSame(CEsmRecord *pRecord) {
 	const TCHAR *pName2 = pRecord->GetID();
 
 	if (pName1 == NULL || pName2 == NULL) {
-		return (false);
+		return false;
 	}
 
 	if (*pName1 == NULL_CHAR || *pName2 == NULL_CHAR) {
-		return (false);
+		return false;
 	}
 
-	return (TSTRNICMP(pName1, pName2, MWESM_ID_MAXSIZE2) == 0);
+	return TSTRNICMP(pName1, pName2, MWESM_ID_MAXSIZE2) == 0;
 }
 
 /*===========================================================================
@@ -543,7 +545,7 @@ bool CEsmRecord::IsUsed(const TCHAR *pID) {
 
 	/* Ignore if this record might be the same */
 	if (IsID(pID)) {
-		return (false);
+		return false;
 	}
 
 	/* Look through all sub-records */
@@ -552,12 +554,12 @@ bool CEsmRecord::IsUsed(const TCHAR *pID) {
 		Result = pSubRecord->IsUsed(pID);
 
 		if (Result) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* No match found */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -602,7 +604,7 @@ bool CEsmRecord::Read(CGenFile &File) {
 		Result = ReadData(File);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -638,7 +640,7 @@ bool CEsmRecord::ReadData(CGenFile &File) {
 		}
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 
 		/* Allocate the subrecord pointer */
@@ -647,11 +649,11 @@ bool CEsmRecord::ReadData(CGenFile &File) {
 		Result = pSubRecord->Read(File);
 
 		if (!Result) {
-			return (true);
+			return true;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -673,7 +675,7 @@ bool CEsmRecord::ReadHeader(CGenFile &File) {
 	Result = File.ReadLong(m_RecordSize);
 	Result &= File.ReadLong(m_Header1);
 	Result &= File.ReadLong(m_Flags);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -691,12 +693,12 @@ bool CEsmRecord::RemoveSubRecord(CEsmSubRecord *pSubRecord) {
 
 	/* Ensure valid input */
 	if (pSubRecord == NULL) {
-		return (false);
+		return false;
 	}
 
 	m_SubRecords.DeleteElement(pSubRecord);
 	DestroyPointer(pSubRecord);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -741,37 +743,37 @@ bool CEsmRecord::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_ID:
 			if (*pString == NULL_CHAR) {
-				return (false);
+				return false;
 			}
 
 			SetID(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_COUNT:
 			m_RefCount = atoi(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_USERDATA:
 			m_UserData = atol(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_PERSIST:
 			SetPersist(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_BLOCKED:
 			SetBlocked(StringToBoolean(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_DELETE:
 			SetDelete(StringToBoolean(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	ErrorHandler.AddError(ERR_BADINPUT, _T("Unknown field ID %d specified!"), FieldID);
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -794,7 +796,7 @@ bool CEsmRecord::Write(CGenFile &File) {
 	Result = WriteHeader(File);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Save the start of the sub-record data */
@@ -803,7 +805,7 @@ bool CEsmRecord::Write(CGenFile &File) {
 	Result = WriteData(File);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Update the record size */
@@ -812,7 +814,7 @@ bool CEsmRecord::Write(CGenFile &File) {
 	m_RecordSize = EndOffset - StartOffset;
 	Result = File.WriteLong(m_RecordSize);
 	File.Seek(EndOffset, SEEK_SET);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -834,7 +836,7 @@ bool CEsmRecord::WriteHeader(CGenFile &File) {
 	Result &= File.WriteLong(m_RecordSize); /* This will be updated after the sub-records have been written */
 	Result &= File.WriteLong(m_Header1);
 	Result &= File.WriteLong(m_Flags);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -859,11 +861,11 @@ bool CEsmRecord::WriteData(CGenFile &File) {
 		Result = m_SubRecords.GetAt(Index)->Write(File);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

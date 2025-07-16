@@ -29,7 +29,7 @@
  *=========================================================================*/
 
 /* Class data flags */
-#define MWESM_CLASSFLAG_PLAYABLE  1
+#define MWESM_CLASSFLAG_PLAYABLE      1
 
 /* Class Auto-calc Flags */
 #define MWESM_CLASSAUTO_WEAPONS       0x00001
@@ -113,18 +113,19 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCLDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(classdata_t));
 		m_RecordSize = sizeof(classdata_t);
 		memset(m_pData, 0, sizeof(classdata_t));
+
 		GetClassData()->MinorID1 = 0;
 		GetClassData()->MinorID2 = 1;
 		GetClassData()->MinorID3 = 2;
@@ -140,55 +141,55 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	classdata_t *GetClassData(void) {
-		return ((classdata_t *)m_pData);
+	classdata_t *GetClassData() {
+		return (classdata_t *)m_pData;
 	}
 
-	long GetAttribute1(void) {
-		return (GetClassData()->AttributeID1);
+	long GetAttribute1() {
+		return GetClassData()->AttributeID1;
 	}
 
-	long GetAttribute2(void) {
-		return (GetClassData()->AttributeID2);
+	long GetAttribute2() {
+		return GetClassData()->AttributeID2;
 	}
 
-	long GetSpecialization(void) {
-		return (GetClassData()->Specialization);
+	long GetSpecialization() {
+		return GetClassData()->Specialization;
 	}
 
-	long GetFlags(void) {
-		return (GetClassData()->Flags);
+	long GetFlags() {
+		return GetClassData()->Flags;
 	}
 
-	long GetAutoCalcFlags(void) {
-		return (GetClassData()->AutoCalcFlags);
+	long GetAutoCalcFlags() {
+		return GetClassData()->AutoCalcFlags;
 	}
 
-	bool IsPlayable(void) {
-		return ((GetFlags() & MWESM_CLASSFLAG_PLAYABLE) != 0);
+	bool IsPlayable() {
+		return (GetFlags() & MWESM_CLASSFLAG_PLAYABLE) != 0;
 	}
 
 	bool IsAutoCalcFlag(const long Flag) {
-		return ((GetAutoCalcFlags() & Flag) != 0);
+		return (GetAutoCalcFlags() & Flag) != 0;
 	}
 
 	/* Get major skills */
 	long GetMajorSkill(const int Index) {
 		switch (Index) {
 			case 0:
-				return (GetClassData()->MajorID1);
+				return GetClassData()->MajorID1;
 
 			case 1:
-				return (GetClassData()->MajorID2);
+				return GetClassData()->MajorID2;
 
 			case 2:
-				return (GetClassData()->MajorID3);
+				return GetClassData()->MajorID3;
 
 			case 3:
-				return (GetClassData()->MajorID4);
+				return GetClassData()->MajorID4;
 
 			default:
-				return (0);
+				return 0;
 		}
 	}
 
@@ -196,19 +197,19 @@ class CEsmSubCLDT : public CEsmSubRecord {
 	long GetMinorSkill(const int Index) {
 		switch (Index) {
 			case 0:
-				return (GetClassData()->MinorID1);
+				return GetClassData()->MinorID1;
 
 			case 1:
-				return (GetClassData()->MinorID2);
+				return GetClassData()->MinorID2;
 
 			case 2:
-				return (GetClassData()->MinorID3);
+				return GetClassData()->MinorID3;
 
 			case 3:
-				return (GetClassData()->MinorID4);
+				return GetClassData()->MinorID4;
 
 			default:
-				return (0);
+				return 0;
 		}
 	}
 

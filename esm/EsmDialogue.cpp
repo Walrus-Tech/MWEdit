@@ -86,7 +86,7 @@ CEsmDialogue::CEsmDialogue() {
  * Description
  *
  *=========================================================================*/
-void CEsmDialogue::Destroy(void) {
+void CEsmDialogue::Destroy() {
 	//DEFINE_FUNCTION("CEsmDialogue::Destroy()");
 	m_pData = NULL;
 	CEsmRecord::Destroy();
@@ -136,11 +136,11 @@ int CEsmDialogue::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmDialogue::Create(void) {
+CEsmRecord *CEsmDialogue::Create() {
 	DEFINE_FUNCTION("CEsmDialogue::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmDialogue);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -196,7 +196,7 @@ const TCHAR *CEsmDialogue::GetFieldString(const int FieldID) {
  * Class TCHAR* CEsmDialogue Method - const GetItemType (void);
  *
  *=========================================================================*/
-const TCHAR *CEsmDialogue::GetItemType(void) {
+const TCHAR *CEsmDialogue::GetItemType() {
 	switch (GetDialogTypeID()) {
 		case MWESM_DIALTYPE_TOPIC:
 			return _T("Dialogue");

@@ -85,7 +85,7 @@ CEsmProbe::CEsmProbe() {
  * Description
  *
  *=========================================================================*/
-void CEsmProbe::Destroy(void) {
+void CEsmProbe::Destroy() {
 	//DEFINE_FUNCTION("CEsmProbe::Destroy()");
 	m_pProbeData = NULL;
 	CEsmItem2::Destroy();
@@ -139,11 +139,11 @@ int CEsmProbe::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmProbe::Create(void) {
+CEsmRecord *CEsmProbe::Create() {
 	DEFINE_FUNCTION("CEsmProbe::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmProbe);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -186,11 +186,11 @@ const TCHAR *CEsmProbe::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			snprintf(s_Buffer, 31, _T("%ld"), GetUses());
-			return (s_Buffer);
+			return s_Buffer;
 
 		case ESM_FIELD_QUALITY:
 			snprintf(s_Buffer, 31, _T("%.2f"), GetQuality());
-			return (s_Buffer);
+			return s_Buffer;
 
 		default:
 			return CEsmItem2::GetFieldString(FieldID);
@@ -232,12 +232,12 @@ bool CEsmProbe::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_USES:
 			SetUses(atoi(pString));
-			return (true);
+			return true;
 
 		case ESM_FIELD_QUALITY:
 			SetQuality((float)atof(pString));
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmItem2::SetFieldValue(FieldID, pString);

@@ -29,9 +29,9 @@
  *=========================================================================*/
 
 /* Armor types */
-#define MWESM_CLOTHTYPE_MIN       0
-#define MWESM_CLOTHTYPE_PANTS     0
-#define MWESM_CLOTHTYPE_MAX       9
+#define MWESM_CLOTHTYPE_MIN   0
+#define MWESM_CLOTHTYPE_PANTS 0
+#define MWESM_CLOTHTYPE_MAX   9
 
 /*===========================================================================
  *      End of Definitions
@@ -84,14 +84,14 @@ class CEsmSubCTDT : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubCTDT);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(clothdata_t));
 		m_RecordSize = sizeof(clothdata_t);
@@ -99,24 +99,24 @@ class CEsmSubCTDT : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	clothdata_t *GetClothData(void) {
-		return ((clothdata_t *)m_pData);
+	clothdata_t *GetClothData() {
+		return (clothdata_t *)m_pData;
 	}
 
-	int GetClothType(void) {
-		return (GetClothData()->Type);
+	int GetClothType() {
+		return GetClothData()->Type;
 	}
 
-	ushort GetValue(void) {
-		return (GetClothData()->Value);
+	ushort GetValue() {
+		return GetClothData()->Value;
 	}
 
-	float GetWeight(void) {
-		return (GetClothData()->Weight);
+	float GetWeight() {
+		return GetClothData()->Weight;
 	}
 
-	short GetEnchantPts(void) {
-		return (GetClothData()->EnchantPts);
+	short GetEnchantPts() {
+		return GetClothData()->EnchantPts;
 	}
 
 	/* Set class members */
@@ -137,13 +137,11 @@ class CEsmSubCTDT : public CEsmSubRecord {
 	void SetEnchantPts(const short Value) {
 		GetClothData()->EnchantPts = Value;
 	}
-
 };
 
 /*===========================================================================
  *      End of Class CEsmSubCTDT Definition
  *=========================================================================*/
-
 
 
 #endif

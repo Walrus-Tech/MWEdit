@@ -44,11 +44,11 @@
  *=========================================================================*/
 
 /* Path functions */
-const TCHAR *GetMWDataPath(void);
+const TCHAR *GetMWDataPath();
 void SetMWDataPath(const TCHAR *pString);
 
 /* Attempt to update the Morrowind paths from ther registry */
-void FindMWRegistryPath(void);
+void FindMWRegistryPath();
 
 /*===========================================================================
  *      End of Function Prototypes

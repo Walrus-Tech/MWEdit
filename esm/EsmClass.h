@@ -62,13 +62,13 @@ class CEsmClass : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmClass();
 	//virtual ~CEsmClass() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -77,106 +77,106 @@ class CEsmClass : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Class");
 	}
 
 	/* Get class members */
-	classdata_t *GetClassData(void) {
-		return (m_pData ? m_pData->GetClassData() : NULL);
+	classdata_t *GetClassData() {
+		return m_pData ? m_pData->GetClassData() : NULL;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
-	const TCHAR *GetDescription(void) {
-		return (m_pDescription ? m_pDescription->GetName() : _T(""));
+	const TCHAR *GetDescription() {
+		return m_pDescription ? m_pDescription->GetName() : _T("");
 	}
 
-	long GetFlags(void) {
-		return (m_pData ? m_pData->GetFlags() : 0);
+	long GetFlags() {
+		return m_pData ? m_pData->GetFlags() : 0;
 	}
 
-	long GetAutoCalcFlags(void) {
-		return (m_pData ? m_pData->GetAutoCalcFlags() : 0);
+	long GetAutoCalcFlags() {
+		return m_pData ? m_pData->GetAutoCalcFlags() : 0;
 	}
 
-	bool IsPlayable(void) {
-		return (m_pData ? m_pData->IsPlayable() : false);
+	bool IsPlayable() {
+		return m_pData ? m_pData->IsPlayable() : false;
 	}
 
 	/* Get autocalc flags */
-	bool IsAutoWeapon(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_WEAPONS) : false);
+	bool IsAutoWeapon() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_WEAPONS) : false;
 	}
 
-	bool IsAutoArmor(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_ARMOR) : false);
+	bool IsAutoArmor() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_ARMOR) : false;
 	}
 
-	bool IsAutoClothing(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_CLOTHING) : false);
+	bool IsAutoClothing() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_CLOTHING) : false;
 	}
 
-	bool IsAutoBook(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_BOOKS) : false);
+	bool IsAutoBook() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_BOOKS) : false;
 	}
 
-	bool IsAutoIngrediant(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_INGREDIANTS) : false);
+	bool IsAutoIngrediant() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_INGREDIANTS) : false;
 	}
 
-	bool IsAutoPick(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_PICKS) : false);
+	bool IsAutoPick() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_PICKS) : false;
 	}
 
-	bool IsAutoProbe(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_PROBES) : false);
+	bool IsAutoProbe() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_PROBES) : false;
 	}
 
-	bool IsAutoLight(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_LIGHTS) : false);
+	bool IsAutoLight() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_LIGHTS) : false;
 	}
 
-	bool IsAutoApparatus(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_APPARATUS) : false);
+	bool IsAutoApparatus() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_APPARATUS) : false;
 	}
 
-	bool IsAutoRepair(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_REPAIR) : false);
+	bool IsAutoRepair() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_REPAIR) : false;
 	}
 
-	bool IsAutoMisc(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_MISC) : false);
+	bool IsAutoMisc() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_MISC) : false;
 	}
 
-	bool IsAutoSpell(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_SPELLS) : false);
+	bool IsAutoSpell() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_SPELLS) : false;
 	}
 
-	bool IsAutoMagicItem(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_MAGICITEMS) : false);
+	bool IsAutoMagicItem() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_MAGICITEMS) : false;
 	}
 
-	bool IsAutoPotion(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_POTIONS) : false);
+	bool IsAutoPotion() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_POTIONS) : false;
 	}
 
-	bool IsAutoTraining(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_TRAINING) : false);
+	bool IsAutoTraining() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_TRAINING) : false;
 	}
 
-	bool IsAutoSpellMaking(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_SPELLMAKING) : false);
+	bool IsAutoSpellMaking() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_SPELLMAKING) : false;
 	}
 
-	bool IsAutoEnchanting(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_ENCHANTING) : false);
+	bool IsAutoEnchanting() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_ENCHANTING) : false;
 	}
 
-	bool IsAutoRepairItem(void) {
-		return (m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_REPAIRITEM) : false);
+	bool IsAutoRepairItem() {
+		return m_pData ? m_pData->IsAutoCalcFlag(MWESM_CLASSAUTO_REPAIRITEM) : false;
 	}
 
 	/* Used to save the various record elements */
@@ -203,7 +203,6 @@ class CEsmClass : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

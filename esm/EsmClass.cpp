@@ -77,7 +77,7 @@ CEsmClass::CEsmClass() {
  * Class CEsmClass Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmClass::Destroy(void) {
+void CEsmClass::Destroy() {
 	//DEFINE_FUNCTION("CEsmClass::Destroy()");
 	m_pName = NULL;
 	m_pData = NULL;
@@ -132,11 +132,11 @@ int CEsmClass::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmClass::Create(void) {
+CEsmRecord *CEsmClass::Create() {
 	DEFINE_FUNCTION("CEsmClass::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmClass);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -228,15 +228,15 @@ bool CEsmClass::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_DESC:
 			SetDescription(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_PLAYABLE:
 			SetPlayable(StringToBoolean(pString));
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

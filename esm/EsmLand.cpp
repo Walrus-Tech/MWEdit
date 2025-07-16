@@ -92,7 +92,7 @@ CEsmLand::CEsmLand() {
  * Class CEsmLand Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmLand::Destroy(void) {
+void CEsmLand::Destroy() {
 	//DEFINE_FUNCTION("CEsmLand::Destroy()");
 	m_pData = NULL;
 	m_pLocation = NULL;
@@ -129,17 +129,17 @@ int CEsmLand::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 
 	switch (FieldID) {
 		case ESM_FIELD_DATA:
-			return (GetData() - pLand->GetData());
+			return GetData() - pLand->GetData();
 
 		case ESM_FIELD_CELLX:
-			return (GetCellX() - pLand->GetCellX());
+			return GetCellX() - pLand->GetCellX();
 
 		case ESM_FIELD_CELLY:
-			return (GetCellY() - pLand->GetCellY());
+			return GetCellY() - pLand->GetCellY();
 
 		case ESM_FIELD_CELL:
 		case ESM_FIELD_GRID:
-			return (GetCellX() * 100 - pLand->GetCellX() * 100 + GetCellY() - pLand->GetCellY());
+			return GetCellX() * 100 - pLand->GetCellX() * 100 + GetCellY() - pLand->GetCellY();
 
 		default:
 			return CEsmRecord::CompareFields(FieldID, pRecord);
@@ -158,11 +158,11 @@ int CEsmLand::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmLand::Create(void) {
+CEsmRecord *CEsmLand::Create() {
 	DEFINE_FUNCTION("CEsmLand::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmLand);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -180,18 +180,21 @@ CEsmRecord *CEsmLand::Create(void) {
 void CEsmLand::CreateNew(CEsmFile *pFile) {
 	/* Call the base class record first */
 	CEsmRecord::CreateNew(pFile);
+
 	/* Create the required sub-records */
 	AllocateSubRecord(MWESM_SUBREC_INTV);
 	AllocateSubRecord(MWESM_SUBREC_DATA);
 	AllocateSubRecord(MWESM_SUBREC_VNML);
 	AllocateSubRecord(MWESM_SUBREC_VHGT);
 	AllocateSubRecord(MWESM_SUBREC_WNAM);
+
 	/* Initialize the new sub-records */
 	m_pLocation->CreateNew();
 	m_pData->CreateNew();
 	m_pNormalData->CreateNew(sizeof(mwesm_vnmldata_t));
 	m_pHeightData->CreateNew(sizeof(mwesm_vhgtdata_t));
 	m_pWNAMData->CreateNew(sizeof(mwesm_wnamdata_t));
+
 	/* Set the default data for some fields */
 	SetCellX(0);
 	SetCellY(0);
@@ -256,17 +259,17 @@ const TCHAR *CEsmLand::GetFieldString(const int FieldID) {
 bool CEsmLand::IsSame(CEsmRecord *pRecord) {
 	/* Check types */
 	if (!pRecord->IsType(MWESM_REC_LAND)) {
-		return (false);
+		return false;
 	}
 
 	CEsmLand* pLand = (CEsmLand *)pRecord;
 
 	/* Check the grid location otherwise */
 	if (GetCellX() == pLand->GetCellX() && GetCellY() == pLand->GetCellY()) {
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================

@@ -80,14 +80,14 @@ class CEsmSubSCHD : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubSCHD);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(scriptheaddata_t));
 		m_RecordSize = sizeof(scriptheaddata_t);
@@ -95,32 +95,32 @@ class CEsmSubSCHD : public CEsmSubRecord {
 	}
 
 	/* Get class members */
-	scriptheaddata_t *GetScriptHeadData(void) {
-		return ((scriptheaddata_t *)m_pData);
+	scriptheaddata_t *GetScriptHeadData() {
+		return (scriptheaddata_t *)m_pData;
 	}
 
-	const TCHAR *GetName(void) {
-		return (GetScriptHeadData()->Name);
+	const TCHAR *GetName() {
+		return GetScriptHeadData()->Name;
 	}
 
-	long GetNumShorts(void) {
-		return (GetScriptHeadData()->NumShorts);
+	long GetNumShorts() {
+		return GetScriptHeadData()->NumShorts;
 	}
 
-	long GetNumLongs(void) {
-		return (GetScriptHeadData()->NumLongs);
+	long GetNumLongs() {
+		return GetScriptHeadData()->NumLongs;
 	}
 
-	long GetNumFloats(void) {
-		return (GetScriptHeadData()->NumFloats);
+	long GetNumFloats() {
+		return GetScriptHeadData()->NumFloats;
 	}
 
-	long GetScriptDataSize(void) {
-		return (GetScriptHeadData()->ScriptDataSize);
+	long GetScriptDataSize() {
+		return GetScriptHeadData()->ScriptDataSize;
 	}
 
-	long GetLocalVarSize(void) {
-		return (GetScriptHeadData()->LocalVarSize);
+	long GetLocalVarSize() {
+		return GetScriptHeadData()->LocalVarSize;
 	}
 
 	/* Set class members */
@@ -147,7 +147,6 @@ class CEsmSubSCHD : public CEsmSubRecord {
 	void SetLocalVarSize(const long Value) {
 		GetScriptHeadData()->LocalVarSize = Value;
 	}
-
 };
 
 /*===========================================================================

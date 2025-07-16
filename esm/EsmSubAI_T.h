@@ -78,14 +78,14 @@ class CEsmSubAI_T : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAI_T);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ai_tdata_t));
 		m_RecordSize = sizeof(ai_tdata_t);
@@ -94,24 +94,24 @@ class CEsmSubAI_T : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	ai_tdata_t *GetAIData(void) {
-		return ((ai_tdata_t *) m_pData);
+	ai_tdata_t *GetAIData() {
+		return (ai_tdata_t *) m_pData;
 	}
 
-	float GetXPos(void) {
-		return (GetAIData()->X);
+	float GetXPos() {
+		return GetAIData()->X;
 	}
 
-	float GetYPos(void) {
-		return (GetAIData()->Y);
+	float GetYPos() {
+		return GetAIData()->Y;
 	}
 
-	float GetZPos(void) {
-		return (GetAIData()->Z);
+	float GetZPos() {
+		return GetAIData()->Z;
 	}
 
-	long GetUnknown(void) {
-		return (GetAIData()->Unknown);
+	long GetUnknown() {
+		return GetAIData()->Unknown;
 	}
 
 	/* Set class members */
@@ -130,7 +130,6 @@ class CEsmSubAI_T : public CEsmSubRecord {
 	void SetUnknown(const long Value) {
 		GetAIData()->Unknown = Value;
 	}
-
 };
 
 /*===========================================================================

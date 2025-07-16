@@ -89,7 +89,7 @@ CEsmAlchemy::CEsmAlchemy() {
  * Description
  *
  *=========================================================================*/
-void CEsmAlchemy::Destroy(void) {
+void CEsmAlchemy::Destroy() {
 	//DEFINE_FUNCTION("CEsmAlchemy::Destroy()");
 	CEsmItem2::Destroy();
 }
@@ -121,7 +121,7 @@ int CEsmAlchemy::CompareFields(const int FieldID, CEsmRecord *pRecord) {
 	switch (FieldID) {
 		case ESM_FIELD_AUTOCALC:
 			ASSERT(GetAlchemyData() != NULL);
-			return (GetAlchemyData()->AutoCalc - pAlchemy->GetAlchemyData()->AutoCalc);
+			return GetAlchemyData()->AutoCalc - pAlchemy->GetAlchemyData()->AutoCalc;
 
 		default:
 			return CEsmItem2::CompareFields(FieldID, pRecord);
@@ -140,11 +140,11 @@ int CEsmAlchemy::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmAlchemy::Create(void) {
+CEsmRecord *CEsmAlchemy::Create() {
 	DEFINE_FUNCTION("CEsmAlchemy::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmAlchemy);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -188,7 +188,7 @@ const TCHAR *CEsmAlchemy::GetFieldString(const int FieldID) {
 	switch (FieldID) {
 		case ESM_FIELD_AUTOCALC:
 			ASSERT(GetAlchemyData() != NULL);
-			return (BOOLTOYESNO(GetAlchemyData()->AutoCalc != 0));
+			return BOOLTOYESNO(GetAlchemyData()->AutoCalc != 0);
 
 		default:
 			return CEsmItem2::GetFieldString(FieldID);
@@ -232,7 +232,7 @@ bool CEsmAlchemy::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_AUTOCALC:
 			SetAutoCalc(StringToBoolean(pString));
-			return (true);
+			return true;
 	};
 
 	/* No matching field found */

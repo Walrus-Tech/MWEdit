@@ -52,7 +52,7 @@ class CEsmBodyPart : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubNameFix *m_pName;    /* Reference to sub-records */
+	CEsmSubNameFix *m_pName; /* Reference to sub-records */
 	CEsmSubNameFix *m_pModel;
 	CEsmSubBYDT *m_pBodyData;
 
@@ -67,13 +67,13 @@ class CEsmBodyPart : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmBodyPart();
 	//virtual ~CEsmBodyPart() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -82,58 +82,58 @@ class CEsmBodyPart : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Body Part");
 	}
 
 	/* Get class members */
-	bodypartdata_t *GetBodyData(void) {
-		return (m_pBodyData == NULL ? NULL : m_pBodyData->GetBodyData() );
+	bodypartdata_t *GetBodyData() {
+		return m_pBodyData == NULL ? NULL : m_pBodyData->GetBodyData();
 	}
 
-	int GetBodyPartID(void) {
-		return (m_pBodyData == NULL ? -1 : m_pBodyData->GetPart());
+	int GetBodyPartID() {
+		return m_pBodyData == NULL ? -1 : m_pBodyData->GetPart();
 	}
 
-	int GetBodyTypeID(void) {
-		return (m_pBodyData == NULL ? -1 : m_pBodyData->GetPartType());
+	int GetBodyTypeID() {
+		return m_pBodyData == NULL ? -1 : m_pBodyData->GetPartType();
 	}
 
-	const TCHAR *GetBodyPart(void) {
+	const TCHAR *GetBodyPart() {
 		return GetESMBodyPart(GetBodyPartID());
 	}
 
-	const TCHAR *GetBodyPartType(void) {
+	const TCHAR *GetBodyPartType() {
 		return GetESMBodyPartType(GetBodyTypeID());
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
-	const TCHAR *GetModel(void) {
-		return (m_pModel ? m_pModel->GetName() : _T(""));
+	const TCHAR *GetModel() {
+		return m_pModel ? m_pModel->GetName() : _T("");
 	}
 
-	bool IsFemale(void) {
-		return (m_pBodyData == NULL ? false : m_pBodyData->IsFemale());
+	bool IsFemale() {
+		return m_pBodyData == NULL ? false : m_pBodyData->IsFemale();
 	}
 
-	bool IsVampire(void) {
-		return (m_pBodyData == NULL ? false : m_pBodyData->IsVampire());
+	bool IsVampire() {
+		return m_pBodyData == NULL ? false : m_pBodyData->IsVampire();
 	}
 
 	/* Get the playable state, but only if the part is the hair or head */
-	bool IsPlayable(void) {
+	bool IsPlayable() {
 		if (GetBodyPartID() > MWESM_PART_HAIR) {
-			return (false);
+			return false;
 		}
 
-		return (m_pBodyData->IsPlayable());
+		return m_pBodyData->IsPlayable();
 	}
 
 	/* Return the race if the part type is skin, or empty string otherwise */
-	const TCHAR *GetRace(void) {
+	const TCHAR *GetRace() {
 		if (GetBodyTypeID() != MWESM_PARTTYPE_SKIN || m_pName == NULL) {
 			return _T("");
 		}
@@ -183,7 +183,6 @@ class CEsmBodyPart : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

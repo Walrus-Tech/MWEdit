@@ -35,7 +35,7 @@ class CEsmProbe : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubPBDT *m_pProbeData;   /* Reference to subrecords */
+	CEsmSubPBDT *m_pProbeData; /* Reference to subrecords */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -48,41 +48,41 @@ class CEsmProbe : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmProbe();
 	//virtual ~CEsmProbe() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Probe");
 	}
 
 	/* Get class members */
-	probedata_t *GetProbeData(void) {
-		return (m_pProbeData ? m_pProbeData->GetProbeData() : NULL);
+	probedata_t *GetProbeData() {
+		return m_pProbeData ? m_pProbeData->GetProbeData() : NULL;
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pProbeData ? GetProbeData()->Weight : 0);
+	virtual float GetWeight() {
+		return m_pProbeData ? GetProbeData()->Weight : 0;
 	}
 
-	virtual long GetValue(void) {
-		return (m_pProbeData ? GetProbeData()->Value : 0);
+	virtual long GetValue() {
+		return m_pProbeData ? GetProbeData()->Value : 0;
 	}
 
-	float GetQuality(void) {
-		return (m_pProbeData ? GetProbeData()->Quality : 0);
+	float GetQuality() {
+		return m_pProbeData ? GetProbeData()->Quality : 0;
 	}
 
-	long GetUses(void) {
-		return (m_pProbeData ? GetProbeData()->Uses : 0);
+	long GetUses() {
+		return m_pProbeData ? GetProbeData()->Uses : 0;
 	}
 
 	/* Get a string representation of a particular field */
@@ -118,7 +118,6 @@ class CEsmProbe : public CEsmItem2 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

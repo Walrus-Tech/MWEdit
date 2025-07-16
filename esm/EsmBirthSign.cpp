@@ -81,7 +81,7 @@ CEsmBirthSign::CEsmBirthSign() {
  * Class CEsmBirthSign Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmBirthSign::Destroy(void) {
+void CEsmBirthSign::Destroy() {
 	//DEFINE_FUNCTION("CEsmBirthSign::Destroy()");
 	m_pNameData = NULL;
 	m_pDescData = NULL;
@@ -136,11 +136,11 @@ int CEsmBirthSign::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmBirthSign::Create(void) {
+CEsmRecord *CEsmBirthSign::Create() {
 	DEFINE_FUNCTION("CEsmBirthSign::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmBirthSign);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -229,16 +229,16 @@ bool CEsmBirthSign::SetFieldValue(const int FieldID, const TCHAR *pString) {
 	switch (FieldID) {
 		case ESM_FIELD_NAME:
 			SetName(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_DESC:
 			SetName(pString);
-			return (true);
+			return true;
 
 		case ESM_FIELD_ICON:
 			SetTexture(pString);
-			return (true);
-	};
+			return true;
+	}
 
 	/* No matching field found */
 	return CEsmRecord::SetFieldValue(FieldID, pString);

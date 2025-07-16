@@ -46,7 +46,7 @@ class CEsmLockPick : public CEsmItem2 {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubLKDT *m_pLockData;    /* Reference to subrecords */
+	CEsmSubLKDT *m_pLockData; /* Reference to subrecords */
 
 
 	/*---------- Begin Protected Class Methods --------------------*/
@@ -59,41 +59,41 @@ class CEsmLockPick : public CEsmItem2 {
 	/* Class Constructors/Destructors */
 	CEsmLockPick();
 	//virtual ~CEsmLockPick() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Lock Pick");
 	}
 
 	/* Get class members */
-	lockdata_t *GetLockData(void) {
-		return (m_pLockData ? m_pLockData->GetLockData() : NULL);
+	lockdata_t *GetLockData() {
+		return m_pLockData ? m_pLockData->GetLockData() : NULL;
 	}
 
-	virtual float GetWeight(void) {
-		return (m_pLockData ? m_pLockData->GetWeight() : 0);
+	virtual float GetWeight() {
+		return m_pLockData ? m_pLockData->GetWeight() : 0;
 	}
 
-	virtual long GetValue(void) {
-		return (m_pLockData ? m_pLockData->GetValue() : 0);
+	virtual long GetValue() {
+		return m_pLockData ? m_pLockData->GetValue() : 0;
 	}
 
-	float GetQuality(void) {
-		return (m_pLockData ? m_pLockData->GetQuality() : 0);
+	float GetQuality() {
+		return m_pLockData ? m_pLockData->GetQuality() : 0;
 	}
 
-	long GetUses(void) {
-		return (m_pLockData ? m_pLockData->GetUses() : 0);
+	long GetUses() {
+		return m_pLockData ? m_pLockData->GetUses() : 0;
 	}
 
 	/* Get a string representation of a particular field */
@@ -129,7 +129,6 @@ class CEsmLockPick : public CEsmItem2 {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

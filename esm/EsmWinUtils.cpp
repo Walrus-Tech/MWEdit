@@ -35,7 +35,7 @@ CString l_MWDataPath = _T(""); /* Absolute path to the Morrowind data files */
  * Attempts to find the Morrowind Data Files path from the registry
  *
  *=========================================================================*/
-void FindMWRegistryPath(void) {
+void FindMWRegistryPath() {
 	//l_MWDataPath = AfxGetApp()->GetProfileString(MWESM_REG_PATH, _T(""), NULL);
 	BYTE Buffer[_MAX_PATH + 8];
 	DWORD BufferSize = _MAX_PATH + 7;
@@ -72,9 +72,9 @@ void FindMWRegistryPath(void) {
  * Return the Morrowind Data File path.
  *
  *=========================================================================*/
-const TCHAR *GetMWDataPath(void) {
+const TCHAR *GetMWDataPath() {
 	//return _T("e:\\Morrowind\\Data Files\\");
-	return (l_MWDataPath);
+	return l_MWDataPath;
 }
 
 void SetMWDataPath(const TCHAR *pString) {

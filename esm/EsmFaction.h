@@ -64,13 +64,13 @@ class CEsmFaction : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmFaction();
 	//virtual ~CEsmFaction() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -79,21 +79,21 @@ class CEsmFaction : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Faction");
 	}
 
 	/* Get class members */
-	factiondata_t *GetFactionData(void) {
-		return (m_pFactionData ? m_pFactionData->GetFactionData() : NULL);
+	factiondata_t *GetFactionData() {
+		return m_pFactionData ? m_pFactionData->GetFactionData() : NULL;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
-	bool IsHidden(void) {
-		return (m_pFactionData ? m_pFactionData->IsHidden() : false);
+	bool IsHidden() {
+		return m_pFactionData ? m_pFactionData->IsHidden() : false;
 	}
 
 	const TCHAR *GetRankName(const int Rank);
@@ -118,7 +118,6 @@ class CEsmFaction : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

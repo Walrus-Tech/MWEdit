@@ -66,13 +66,13 @@ class CEsmGlobal : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmGlobal();
 	//virtual ~CEsmGlobal() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -81,20 +81,20 @@ class CEsmGlobal : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Global");
 	}
 
 	/* Get class members */
-	int GetType(void) {
+	int GetType() {
 		return (int)(m_pTypeData ? m_pTypeData->GetValue() : MWESM_GLOBAL_FLOAT);
 	}
 
-	float GetValue(void) {
-		return (m_pFloatData ? m_pFloatData->GetValue() : 0);
+	float GetValue() {
+		return m_pFloatData ? m_pFloatData->GetValue() : 0;
 	}
 
-	const TCHAR *GetTypeString(void);
+	const TCHAR *GetTypeString();
 	int GetTypeID(const TCHAR *pString);
 
 	/* Used to save the various record elements */
@@ -115,7 +115,6 @@ class CEsmGlobal : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

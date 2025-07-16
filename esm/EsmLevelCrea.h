@@ -51,7 +51,7 @@ class CEsmLevelCrea : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubLong *m_pData;    /* Reference to sub-records */
+	CEsmSubLong *m_pData; /* Reference to sub-records */
 	CEsmSubByte *m_pNNam;
 	CEsmSubLong *m_pIndex;
 
@@ -66,47 +66,47 @@ class CEsmLevelCrea : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmLevelCrea();
 	//virtual ~CEsmLevelCrea() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a string of the creature list */
-	const TCHAR *GetCreaListString(void);
+	const TCHAR *GetCreaListString();
 
 	/* Get a string representation of a particular field */
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Level Creature");
 	}
 
 	/* Get class members */
-	long GetDataFlag(void) {
-		return (m_pData ? m_pData->GetValue() : 0);
+	long GetDataFlag() {
+		return m_pData ? m_pData->GetValue() : 0;
 	}
 
-	int GetNNamFlag(void) {
+	int GetNNamFlag() {
 		return (int)(m_pNNam ? m_pNNam->GetValue() : 0);
 	}
 
-	bool IsAllPC(void) {
-		return ((GetDataFlag() & MWESM_LEVCREAFLAG_ALLPC) != 0);
+	bool IsAllPC() {
+		return (GetDataFlag() & MWESM_LEVCREAFLAG_ALLPC) != 0;
 	}
 
-	int GetChanceNone(void) {
+	int GetChanceNone() {
 		return (int)(GetNNamFlag());
 	}
 
-	int GetListSize(void) {
-		return (m_pIndex ? m_pIndex->GetValue() : 0);
+	int GetListSize() {
+		return m_pIndex ? m_pIndex->GetValue() : 0;
 	}
 
 	/* Used to save the various record elements */
@@ -133,7 +133,6 @@ class CEsmLevelCrea : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

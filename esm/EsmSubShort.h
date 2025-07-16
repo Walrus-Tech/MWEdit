@@ -77,14 +77,14 @@ class CEsmSubShort : public CEsmSubRecord {
 	}
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubShort);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(short));
 		m_RecordSize = sizeof(short);
@@ -93,12 +93,12 @@ class CEsmSubShort : public CEsmSubRecord {
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (false);
+		return false;
 	}
 
 	/* Get/set the long value directly */
-	short GetValue(void) {
-		return (m_Short);
+	short GetValue() {
+		return m_Short;
 	}
 
 	void SetValue(const short Value) {
@@ -107,21 +107,20 @@ class CEsmSubShort : public CEsmSubRecord {
 
 	/* Set a bit field flag value */
 	bool IsFlag(const short Flag) {
-		return ((m_Short & Flag) != 0);
+		return (m_Short & Flag) != 0;
 	}
 
 	void SetFlag(const short Flag, const bool Set) {
-		(Set ? SetFlag(Flag) : ClearFlag(Flag));
+		Set ? SetFlag(Flag) : ClearFlag(Flag);
 	}
 
 	void SetFlag(const short Flag) {
-		m_Short = (m_Short | Flag);
+		m_Short = m_Short | Flag;
 	}
 
 	void ClearFlag(const short Flag) {
 		m_Short = (m_Short & (~Flag));
 	}
-
 };
 
 /*===========================================================================

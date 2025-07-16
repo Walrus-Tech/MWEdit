@@ -70,26 +70,26 @@ class CEsmDoor : public CEsmItem1 {
 	/* Class Constructors/Destructors */
 	CEsmDoor();
 	//virtual ~CEsmDoor() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Door");
 	}
 
 	/* Get class members */
-	const TCHAR *GetCloseSound(void) {
-		return (m_pCloseSound ? m_pCloseSound->GetName() : _T(""));
+	const TCHAR *GetCloseSound() {
+		return m_pCloseSound ? m_pCloseSound->GetName() : _T("");
 	}
 
-	const TCHAR *GetOpenSound(void) {
-		return (m_pOpenSound ? m_pOpenSound->GetName() : _T(""));
+	const TCHAR *GetOpenSound() {
+		return m_pOpenSound ? m_pOpenSound->GetName() : _T("");
 	}
 
 	/* Used to save the various record elements */
@@ -107,7 +107,6 @@ class CEsmDoor : public CEsmItem1 {
 			m_pCloseSound->SetName(pSound);
 		}
 	}
-
 };
 
 /*===========================================================================

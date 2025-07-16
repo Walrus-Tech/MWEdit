@@ -48,7 +48,7 @@ class CEsmSound : public CEsmRecord {
 
 	/*---------- Begin Protected Class Members --------------------*/
   protected:
-	CEsmSubDATA *m_pData;    /* Reference to sub-records */
+	CEsmSubDATA *m_pData; /* Reference to sub-records */
 	CEsmSubName *m_pName;
 
 
@@ -62,13 +62,13 @@ class CEsmSound : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmSound();
 	//virtual ~CEsmSound() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -77,29 +77,29 @@ class CEsmSound : public CEsmRecord {
 	virtual const TCHAR *GetFieldString(const int FieldID);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Sound");
 	}
 
 	/* Get class members */
-	sounddata_t *GetSoundData(void) {
-		return (m_pData ? m_pData->GetSoundData() : NULL);
+	sounddata_t *GetSoundData() {
+		return m_pData ? m_pData->GetSoundData() : NULL;
 	}
 
-	float GetVolume(void) {
-		return (m_pData ? ((float)GetSoundData()->Volume) / 255.0f : 0.0f);
+	float GetVolume() {
+		return m_pData ? ((float)GetSoundData()->Volume) / 255.0f : 0.0f;
 	}
 
-	int GetMinRange(void) {
-		return (m_pData ? GetSoundData()->MinRange : 0);
+	int GetMinRange() {
+		return m_pData ? GetSoundData()->MinRange : 0;
 	}
 
-	int GetMaxRange(void) {
-		return (m_pData ? GetSoundData()->MaxRange : 0);
+	int GetMaxRange() {
+		return m_pData ? GetSoundData()->MaxRange : 0;
 	}
 
-	const TCHAR *GetName(void) {
-		return (m_pName ? m_pName->GetName() : _T(""));
+	const TCHAR *GetName() {
+		return m_pName ? m_pName->GetName() : _T("");
 	}
 
 	/* Used to save the various record elements */
@@ -117,7 +117,6 @@ class CEsmSound : public CEsmRecord {
 
 	/* Set a certain field of the record */
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
-
 };
 
 /*===========================================================================

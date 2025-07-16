@@ -77,13 +77,13 @@ class CEsmMagicEffect : public CEsmRecord {
 	/* Class Constructors/Destructors */
 	CEsmMagicEffect();
 	//virtual ~CEsmMagicEffect() { Destroy(); }
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Compare two fields of the record */
 	virtual int CompareFields(const int FieldID, CEsmRecord *pRecord);
 
 	/* Return a new record object */
-	static CEsmRecord *Create(void);
+	static CEsmRecord *Create();
 
 	/* Create a new, empty, record */
 	virtual void CreateNew(CEsmFile *pFile);
@@ -96,126 +96,126 @@ class CEsmMagicEffect : public CEsmRecord {
 	float GetEnchantCost(enchanteffect_t &EffectData);
 
 	/* Return a text representation of the item type */
-	virtual const TCHAR *GetItemType(void) {
+	virtual const TCHAR *GetItemType() {
 		return _T("Magic Effect");
 	}
 
 	/* Get class members */
 	bool IsEffect(const int EffectID) {
-		return (m_pIndexData ? m_pIndexData->GetValue() == EffectID : false);
+		return m_pIndexData ? m_pIndexData->GetValue() == EffectID : false;
 	}
 
-	const TCHAR *GetEffect(void) {
+	const TCHAR *GetEffect() {
 		return GetESMEffect(GetEffectID());
 	}
 
-	const TCHAR *GetName(void) {
+	const TCHAR *GetName() {
 		return GetEffect();
 	}
 
-	const TCHAR *GetSchool(void) {
+	const TCHAR *GetSchool() {
 		return GetESMSpellSchool(GetSchoolID());
 	}
 
-	const TCHAR *GetIcon(void) {
-		return (m_pIcon ? m_pIcon->GetName() : _T(""));
+	const TCHAR *GetIcon() {
+		return m_pIcon ? m_pIcon->GetName() : _T("");
 	}
 
-	const TCHAR *GetParticle(void) {
-		return (m_pParticle ? m_pParticle->GetName() : _T(""));
+	const TCHAR *GetParticle() {
+		return m_pParticle ? m_pParticle->GetName() : _T("");
 	}
 
-	const TCHAR *GetDescription(void) {
-		return (m_pDescription ? m_pDescription->GetName() : _T(""));
+	const TCHAR *GetDescription() {
+		return m_pDescription ? m_pDescription->GetName() : _T("");
 	}
 
-	const TCHAR *GetCastSound(void) {
-		return (m_pCastSound ? m_pCastSound->GetName() : _T(""));
+	const TCHAR *GetCastSound() {
+		return m_pCastSound ? m_pCastSound->GetName() : _T("");
 	}
 
-	const TCHAR *GetBoltSound(void) {
-		return (m_pBoltSound ? m_pBoltSound->GetName() : _T(""));
+	const TCHAR *GetBoltSound() {
+		return m_pBoltSound ? m_pBoltSound->GetName() : _T("");
 	}
 
-	const TCHAR *GetAreaSound(void) {
-		return (m_pAreaSound ? m_pAreaSound->GetName() : _T(""));
+	const TCHAR *GetAreaSound() {
+		return m_pAreaSound ? m_pAreaSound->GetName() : _T("");
 	}
 
-	const TCHAR *GetHitSound(void) {
-		return (m_pHitSound ? m_pHitSound->GetName() : _T(""));
+	const TCHAR *GetHitSound() {
+		return m_pHitSound ? m_pHitSound->GetName() : _T("");
 	}
 
-	const TCHAR *GetCastVisual(void) {
-		return (m_pCastVisual ? m_pCastVisual->GetName() : _T(""));
+	const TCHAR *GetCastVisual() {
+		return m_pCastVisual ? m_pCastVisual->GetName() : _T("");
 	}
 
-	const TCHAR *GetBoltVisual(void) {
-		return (m_pBoltVisual ? m_pBoltVisual->GetName() : _T(""));
+	const TCHAR *GetBoltVisual() {
+		return m_pBoltVisual ? m_pBoltVisual->GetName() : _T("");
 	}
 
-	const TCHAR *GetAreaVisual(void) {
-		return (m_pAreaVisual ? m_pAreaVisual->GetName() : _T(""));
+	const TCHAR *GetAreaVisual() {
+		return m_pAreaVisual ? m_pAreaVisual->GetName() : _T("");
 	}
 
-	const TCHAR *GetHitVisual(void) {
-		return (m_pHitVisual ? m_pHitVisual->GetName() : _T(""));
+	const TCHAR *GetHitVisual() {
+		return m_pHitVisual ? m_pHitVisual->GetName() : _T("");
 	}
 
-	int GetEffectID(void) {
-		return (m_pIndexData ? m_pIndexData->GetValue() : -1);
+	int GetEffectID() {
+		return m_pIndexData ? m_pIndexData->GetValue() : -1;
 	}
 
-	float GetBaseCost(void) {
-		return (m_pEffectData ? m_pEffectData->GetBaseCost() : 0);
+	float GetBaseCost() {
+		return m_pEffectData ? m_pEffectData->GetBaseCost() : 0;
 	}
 
-	int GetSchoolID(void) {
-		return (m_pEffectData ? m_pEffectData->GetSpellSchool() : -1);
+	int GetSchoolID() {
+		return m_pEffectData ? m_pEffectData->GetSpellSchool() : -1;
 	}
 
-	int GetRed(void) {
-		return (m_pEffectData ? m_pEffectData->GetRed() : 0);
+	int GetRed() {
+		return m_pEffectData ? m_pEffectData->GetRed() : 0;
 	}
 
-	int GetGreen(void) {
-		return (m_pEffectData ? m_pEffectData->GetGreen() : 0);
+	int GetGreen() {
+		return m_pEffectData ? m_pEffectData->GetGreen() : 0;
 	}
 
-	int GetBlue(void) {
-		return (m_pEffectData ? m_pEffectData->GetBlue() : 0);
+	int GetBlue() {
+		return m_pEffectData ? m_pEffectData->GetBlue() : 0;
 	}
 
-	float GetSpeed(void) {
-		return (m_pEffectData ? m_pEffectData->GetSpeedX() : 0.0f);
+	float GetSpeed() {
+		return m_pEffectData ? m_pEffectData->GetSpeedX() : 0.0f;
 	}
 
-	float GetSize(void) {
-		return (m_pEffectData ? m_pEffectData->GetSizeX() : 0.0f);
+	float GetSize() {
+		return m_pEffectData ? m_pEffectData->GetSizeX() : 0.0f;
 	}
 
-	float GetMaxSize(void) {
-		return (m_pEffectData ? m_pEffectData->GetSizeCap() : 0.0f);
+	float GetMaxSize() {
+		return m_pEffectData ? m_pEffectData->GetSizeCap() : 0.0f;
 	}
 
-	long GetFlags(void) {
-		return (m_pEffectData ? m_pEffectData->GetFlags() : 0);
+	long GetFlags() {
+		return m_pEffectData ? m_pEffectData->GetFlags() : 0;
 	}
 
-	bool IsSpellMaking(void) {
-		return (m_pEffectData ? m_pEffectData->IsSpellMaking() : false);
+	bool IsSpellMaking() {
+		return m_pEffectData ? m_pEffectData->IsSpellMaking() : false;
 	}
 
-	bool IsEnchanting(void) {
-		return (m_pEffectData ? m_pEffectData->IsEnchanting() : false);
+	bool IsEnchanting() {
+		return m_pEffectData ? m_pEffectData->IsEnchanting() : false;
 	}
 
-	bool IsNegative(void) {
-		return (m_pEffectData ? m_pEffectData->IsNegative() : false);
+	bool IsNegative() {
+		return m_pEffectData ? m_pEffectData->IsNegative() : false;
 	}
 
 	/* Get the effect data */
-	magiceffectdata_t *GetMagicEffectData(void) {
-		return (m_pEffectData ? m_pEffectData->GetEffectData() : NULL);
+	magiceffectdata_t *GetMagicEffectData() {
+		return m_pEffectData ? m_pEffectData->GetEffectData() : NULL;
 	}
 
 	/* Check for identical records */
@@ -301,7 +301,6 @@ class CEsmMagicEffect : public CEsmRecord {
 			m_pEffectData->SetSpeedX(Value);
 		}
 	}
-
 };
 
 /*===========================================================================

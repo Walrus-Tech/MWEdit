@@ -46,7 +46,7 @@ class CEsmSubName512 : public CEsmSubRecord {
 			ErrorHandler.AddError(ERR_BADINPUT,
 			                      _T("Invalid CEsmSubName512 record size of '%d'!"),
 			                      m_RecordSize);
-			return (false);
+			return false;
 		}
 
 		memset(m_NameData, 0, 513);
@@ -77,37 +77,36 @@ class CEsmSubName512 : public CEsmSubRecord {
 		SetName(((CEsmSubName512 *)pSubRecord)->GetName());
 	}
 
-
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubName512);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		m_RecordSize = 0;
 	}
 
 	/* Finds text in the sub-record */
 	virtual bool Find(esmfind_t &FindData) {
-		return (stristr(m_NameData, FindData.pText) != NULL);
+		return stristr(m_NameData, FindData.pText) != NULL;
 	}
 
 	/* Get class methods */
-	const TCHAR *GetName(void) const {
-		return (&m_NameData[0]);
+	const TCHAR *GetName() const {
+		return &m_NameData[0];
 	}
 
-	virtual long GetRecordSize(void) const {
-		return (m_RecordSize);
+	virtual long GetRecordSize() const {
+		return m_RecordSize;
 	}
 
 	/* Checks if the sub-record uses the given ID */
 	virtual bool IsUsed(const TCHAR *pID) {
-		return (TSTRNICMP(m_NameData, pID, 512) == 0);
+		return TSTRNICMP(m_NameData, pID, 512) == 0;
 	}
 
 	/* Set class methods */
@@ -116,7 +115,6 @@ class CEsmSubName512 : public CEsmSubRecord {
 		TSTRNCPY(m_NameData, pName, 512);
 		m_RecordSize = TSTRLEN(m_NameData);
 	}
-
 };
 
 /*===========================================================================

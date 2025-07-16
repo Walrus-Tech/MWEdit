@@ -80,14 +80,14 @@ class CEsmSubAI_F : public CEsmSubRecord {
 	//virtual void Destroy (void);
 
 	/* Create a name object */
-	static CEsmSubRecord *Create(void) {
+	static CEsmSubRecord *Create() {
 		CEsmSubRecord *pSubRecord;
 		CreatePointerL(pSubRecord, CEsmSubAI_F);
-		return (pSubRecord);
+		return pSubRecord;
 	}
 
 	/* Create a new sub-record */
-	virtual void CreateNew(void) {
+	virtual void CreateNew() {
 		CEsmSubRecord::CreateNew();
 		CreateArrayPointerL(m_pData, byte, sizeof(ai_fdata_t));
 		m_RecordSize = sizeof(ai_fdata_t);
@@ -95,32 +95,32 @@ class CEsmSubAI_F : public CEsmSubRecord {
 	}
 
 	/* Get class methods */
-	ai_fdata_t *GetAIData(void) {
-		return ((ai_fdata_t *)m_pData);
+	ai_fdata_t *GetAIData() {
+		return (ai_fdata_t *)m_pData;
 	}
 
-	float GetXPos(void) {
-		return (GetAIData()->X);
+	float GetXPos() {
+		return GetAIData()->X;
 	}
 
-	float GetYPos(void) {
-		return (GetAIData()->Y);
+	float GetYPos() {
+		return GetAIData()->Y;
 	}
 
-	float GetZPos(void) {
-		return (GetAIData()->Z);
+	float GetZPos() {
+		return GetAIData()->Z;
 	}
 
-	short GetDuration(void) {
-		return (GetAIData()->Duration);
+	short GetDuration() {
+		return GetAIData()->Duration;
 	}
 
-	short GetUnknown(void) {
-		return (GetAIData()->Unknown);
+	short GetUnknown() {
+		return GetAIData()->Unknown;
 	}
 
-	const TCHAR *GetID(void) {
-		return (GetAIData()->ID);
+	const TCHAR *GetID() {
+		return GetAIData()->ID;
 	}
 
 	/* Set class members */
@@ -147,7 +147,6 @@ class CEsmSubAI_F : public CEsmSubRecord {
 	void SetID(const TCHAR *pString) {
 		TSTRNCPY(GetAIData()->ID, pString, 32);
 	}
-
 };
 
 /*===========================================================================

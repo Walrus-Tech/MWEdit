@@ -85,7 +85,7 @@ CEsmIngrediant::CEsmIngrediant() {
  * Description
  *
  *=========================================================================*/
-void CEsmIngrediant::Destroy(void) {
+void CEsmIngrediant::Destroy() {
 	//DEFINE_FUNCTION("CEsmIngrediant::Destroy()");
 	m_pIngreData = NULL;
 	CEsmItem2::Destroy();
@@ -145,11 +145,11 @@ int CEsmIngrediant::CompareFields(const int FieldID, CEsmRecord *pRecord) {
  * Static class method to create a new record object.
  *
  *=========================================================================*/
-CEsmRecord *CEsmIngrediant::Create(void) {
+CEsmRecord *CEsmIngrediant::Create() {
 	DEFINE_FUNCTION("CEsmIngrediant::Create()");
 	CEsmRecord *pRecord;
 	CreatePointer(pRecord, CEsmIngrediant);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -246,7 +246,7 @@ bool CEsmIngrediant::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				GetIngreData()->EffectID[0] = Effect;
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_EFFECT2: {
@@ -256,7 +256,7 @@ bool CEsmIngrediant::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				GetIngreData()->EffectID[1] = Effect;
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_EFFECT3: {
@@ -266,7 +266,7 @@ bool CEsmIngrediant::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				GetIngreData()->EffectID[2] = Effect;
 			}
 
-			return (true);
+			return true;
 		}
 
 		case ESM_FIELD_EFFECT4: {
@@ -276,9 +276,9 @@ bool CEsmIngrediant::SetFieldValue(const int FieldID, const TCHAR *pString) {
 				GetIngreData()->EffectID[3] = Effect;
 			}
 
-			return (true);
+			return true;
 		}
-	};
+	}
 
 	/* No matching field found */
 	return CEsmItem2::SetFieldValue(FieldID, pString);
