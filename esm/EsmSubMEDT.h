@@ -145,7 +145,7 @@ class CEsmSubMEDT : public CEsmSubRecord {
 	}
 
 	float GetSizeX() {
-		return (etEffectData()->SizeX;
+		return GetEffectData()->SizeX;
 	}
 
 	float GetSizeCap() {
