@@ -95,7 +95,7 @@ void CEsmStaticDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmStaticDlg::GetControlData(void) {
+void CEsmStaticDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmStaticDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
@@ -129,9 +129,9 @@ void CEsmStaticDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmStaticDlg::IsModified(void) {
+bool CEsmStaticDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -140,7 +140,7 @@ bool CEsmStaticDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -157,9 +157,11 @@ bool CEsmStaticDlg::IsModified(void) {
 void CEsmStaticDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pStatic = (CEsmStatic *)GetRecInfo()->pRecord;
+
 	/* Update the UI data */
 	SetControlData();
 }
@@ -176,7 +178,7 @@ void CEsmStaticDlg::OnInitialUpdate() {
  *=========================================================================*/
 
 int CEsmStaticDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -190,7 +192,7 @@ int CEsmStaticDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmStaticDlg::SetControlData(void) {
+void CEsmStaticDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pStatic == NULL) {
 		return;

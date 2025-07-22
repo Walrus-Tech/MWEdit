@@ -83,7 +83,7 @@ class CChildFrmScript : public CMDIChildWnd {
 	virtual ~CChildFrmScript();
 
 	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext *pContext);
-	void FakeMaximize (void);
+	void FakeMaximize();
 
 
 	/* Generated message map functions */
@@ -93,11 +93,11 @@ class CChildFrmScript : public CMDIChildWnd {
 	afx_msg LRESULT OnUpdateError(LPARAM lParam, WPARAM wParam);
 	afx_msg LRESULT OnGotoError(LPARAM lParam, WPARAM wParam);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnClose (void);
+	afx_msg void OnClose();
 	afx_msg void OnMove(int cx, int cy);
 	afx_msg void OnKillFocus(CWnd *pWnd);
 	afx_msg void OnMDIActivate(BOOL bActivate, CWnd *pActivateWnd, CWnd *pDeactivateWnd);
-	afx_msg void OnSysCommand (UINT nID, LPARAM Param);
+	afx_msg void OnSysCommand(UINT nID, LPARAM Param);
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();
@@ -109,7 +109,6 @@ class CChildFrmScript : public CMDIChildWnd {
 
 
 #endif
-
 /*===========================================================================
  *      End of File Childfrmscript.H
  *=========================================================================*/

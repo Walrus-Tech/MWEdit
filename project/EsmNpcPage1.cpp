@@ -120,6 +120,7 @@ CEsmNpcPage1::~CEsmNpcPage1() {
 
 void CEsmNpcPage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmNpcPage1)
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -172,7 +173,7 @@ void CEsmNpcPage1::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage1::GetControlData(void) {
+void CEsmNpcPage1::GetControlData() {
 	CEsmNpc *pNpc;
 	npclongdata_t *pLongData;
 	CString Buffer;
@@ -316,7 +317,7 @@ void CEsmNpcPage1::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage1::GetDocument(void) {
+CMWEditDoc *CEsmNpcPage1::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage1::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -333,12 +334,12 @@ CMWEditDoc *CEsmNpcPage1::GetDocument(void) {
  *
  *=========================================================================*/
 
-bool CEsmNpcPage1::IsAutoCalc(void) {
+bool CEsmNpcPage1::IsAutoCalc() {
 	if (!::IsWindow(m_AutoCalcCheck.m_hWnd)) {
-		return (false);
+		return false;
 	}
 
-	return (m_AutoCalcCheck.GetCheck() != 0);
+	return m_AutoCalcCheck.GetCheck() != 0;
 }
 
 /*===========================================================================
@@ -472,7 +473,7 @@ BOOL CEsmNpcPage1::OnInitDialog() {
 	FillEsmFactionCombo(m_FactionList, true);
 	FillEsmBloodTypeCombo(m_BloodList);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -495,7 +496,7 @@ LRESULT CEsmNpcPage1::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Ignore if autocalc is enabled */
 
 	if (m_AutoCalcCheck.GetCheck()) {
-		return (0);
+		return 0;
 	}
 
 	if (lParam == VK_SUBTRACT || lParam == VK_ADD) {
@@ -510,10 +511,10 @@ LRESULT CEsmNpcPage1::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_SkillList.GetNextItem(ListIndex, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -532,7 +533,7 @@ LRESULT CEsmNpcPage1::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	m_SortCol = pSortData->iSubItem;
 	m_SortReverse = pSortData->Reverse;
 	m_SkillList.SortItems(l_SortCallback, (DWORD)this);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -547,7 +548,7 @@ LRESULT CEsmNpcPage1::OnRecordSort(LPARAM lParam, LPARAM wParam) {
  *=========================================================================*/
 
 int CEsmNpcPage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -561,7 +562,7 @@ int CEsmNpcPage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage1::SetControlData(void) {
+void CEsmNpcPage1::SetControlData() {
 	CEsmNpc *pNpc;
 	CString Buffer;
 	CString Race;
@@ -715,10 +716,10 @@ int CEsmNpcPage1::SortCallback(LPARAM lParam1, LPARAM lParam2) {
 	}
 
 	if (m_SortReverse) {
-		return (-Result);
+		return -Result;
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -732,8 +733,9 @@ int CEsmNpcPage1::SortCallback(LPARAM lParam1, LPARAM lParam2) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage1::UpdateAutoCalc(void) {
+void CEsmNpcPage1::UpdateAutoCalc() {
 	BOOL Result = !m_AutoCalcCheck.GetCheck();
+
 	m_StrText.EnableWindow(Result);
 	m_IntText.EnableWindow(Result);
 	m_WilText.EnableWindow(Result);

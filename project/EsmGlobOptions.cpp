@@ -32,9 +32,9 @@ DEFINE_FILE("EsmGlobOptions.cpp");
  * Function - bool GetEsmOptAllowBloodmoon (void);
  *
  *=========================================================================*/
-bool GetEsmOptAllowBloodmoon(void) {
+bool GetEsmOptAllowBloodmoon() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetAllowBloodmoon());
+	return pApp->GetOptions()->GetAllowBloodmoon();
 }
 
 /*===========================================================================
@@ -47,9 +47,9 @@ bool GetEsmOptAllowBloodmoon(void) {
  * Function - bool GetEsmOptAllowTribunal (void);
  *
  *=========================================================================*/
-bool GetEsmOptAllowTribunal(void) {
+bool GetEsmOptAllowTribunal() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetAllowTribunal());
+	return pApp->GetOptions()->GetAllowTribunal();
 }
 
 /*===========================================================================
@@ -64,9 +64,9 @@ bool GetEsmOptAllowTribunal(void) {
  * Returns the current no-script-format options flag.
  *
  *=========================================================================*/
-bool GetEsmOptNoScriptFormat(void) {
+bool GetEsmOptNoScriptFormat() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetNoScriptFormat());
+	return pApp->GetOptions()->GetNoScriptFormat();
 }
 
 /*===========================================================================
@@ -79,9 +79,9 @@ bool GetEsmOptNoScriptFormat(void) {
  * Function - bool GetEsmOptBackupSaves (void);
  *
  *=========================================================================*/
-bool GetEsmOptBackupSaves(void) {
+bool GetEsmOptBackupSaves() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetBackupSaves());
+	return pApp->GetOptions()->GetBackupSaves();
 }
 
 /*===========================================================================
@@ -94,9 +94,9 @@ bool GetEsmOptBackupSaves(void) {
  * Function - bool GetEsmOptStrictIDs (void);
  *
  *=========================================================================*/
-bool GetEsmOptStrictIDs(void) {
+bool GetEsmOptStrictIDs() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetStrictIDs());
+	return pApp->GetOptions()->GetStrictIDs();
 }
 
 /*===========================================================================
@@ -109,9 +109,9 @@ bool GetEsmOptStrictIDs(void) {
  * Function - bool GetEsmOptInitialIndentLevel (void);
  *
  *=========================================================================*/
-bool GetEsmOptInitialIndentLevel(void) {
+bool GetEsmOptInitialIndentLevel() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetInitialIndentLevel());
+	return pApp->GetOptions()->GetInitialIndentLevel();
 }
 
 /*===========================================================================
@@ -124,9 +124,9 @@ bool GetEsmOptInitialIndentLevel(void) {
  * Function - bool GetEsmOptIndentCommentsMore (void);
  *
  *=========================================================================*/
-bool GetEsmOptIndentCommentsMore(void) {
+bool GetEsmOptIndentCommentsMore() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetIndentCommentsMore());
+	return pApp->GetOptions()->GetIndentCommentsMore();
 }
 
 /*===========================================================================
@@ -139,9 +139,9 @@ bool GetEsmOptIndentCommentsMore(void) {
  * Function - bool GetEsmOptNoScriptPrompt (void);
  *
  *=========================================================================*/
-bool GetEsmOptNoScriptPrompt(void) {
+bool GetEsmOptNoScriptPrompt() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetNoScriptPrompt());
+	return pApp->GetOptions()->GetNoScriptPrompt();
 }
 
 /*===========================================================================
@@ -154,9 +154,9 @@ bool GetEsmOptNoScriptPrompt(void) {
  * Function - bool GetEsmOptUseExtraFile (void);
  *
  *=========================================================================*/
-bool GetEsmOptUseExtraFile(void) {
+bool GetEsmOptUseExtraFile() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetUseExtraFile());
+	return pApp->GetOptions()->GetUseExtraFile();
 }
 
 /*===========================================================================
@@ -169,9 +169,9 @@ bool GetEsmOptUseExtraFile(void) {
  * Function - bool GetEsmOptAllowExtFuncs (void);
  *
  *=========================================================================*/
-bool GetEsmOptAllowExtFuncs(void) {
+bool GetEsmOptAllowExtFuncs() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetAllowExtFuncs());
+	return pApp->GetOptions()->GetAllowExtFuncs();
 }
 
 /*===========================================================================
@@ -186,9 +186,9 @@ bool GetEsmOptAllowExtFuncs(void) {
  * Returns the current script compiler message level setting.
  *
  *=========================================================================*/
-int GetEsmOptScriptWarnLevel(void) {
+int GetEsmOptScriptWarnLevel() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetScriptWarnLevel());
+	return pApp->GetOptions()->GetScriptWarnLevel();
 }
 
 /*===========================================================================
@@ -203,9 +203,9 @@ int GetEsmOptScriptWarnLevel(void) {
  * Return the current type of the script format.
  *
  *=========================================================================*/
-int GetEsmOptScriptFormatType(void) {
+int GetEsmOptScriptFormatType() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetFormatType());
+	return pApp->GetOptions()->GetFormatType();
 }
 
 /*===========================================================================
@@ -220,9 +220,9 @@ int GetEsmOptScriptFormatType(void) {
  * Gets the current script options object.
  *
  *=========================================================================*/
-CEsmScriptOptions *GetEsmOptScriptOptions(void) {
+CEsmScriptOptions *GetEsmOptScriptOptions() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetScriptOptions());
+	return pApp->GetOptions()->GetScriptOptions();
 }
 
 /*===========================================================================
@@ -237,9 +237,9 @@ CEsmScriptOptions *GetEsmOptScriptOptions(void) {
  * Returns the default author string from the application options.
  *
  *=========================================================================*/
-const TCHAR *GetEsmOptDefaultAuthor(void) {
+const TCHAR *GetEsmOptDefaultAuthor() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetAuthorName());
+	return pApp->GetOptions()->GetAuthorName();
 }
 
 /*===========================================================================
@@ -252,9 +252,9 @@ const TCHAR *GetEsmOptDefaultAuthor(void) {
  * Function - const TCHAR* GetEsmOptExtraFile (void);
  *
  *=========================================================================*/
-const TCHAR *GetEsmOptExtraFile(void) {
+const TCHAR *GetEsmOptExtraFile() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetExtraFile());
+	return pApp->GetOptions()->GetExtraFile();
 }
 
 /*===========================================================================
@@ -267,9 +267,9 @@ const TCHAR *GetEsmOptExtraFile(void) {
  * Function - const TCHAR* GetEsmOptScriptIndentString (void);
  *
  *=========================================================================*/
-const TCHAR *GetEsmOptScriptIndentString(void) {
+const TCHAR *GetEsmOptScriptIndentString() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
-	return (pApp->GetOptions()->GetScriptIndentString());
+	return pApp->GetOptions()->GetScriptIndentString();
 }
 
 /*===========================================================================

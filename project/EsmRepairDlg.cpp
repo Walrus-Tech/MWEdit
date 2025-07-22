@@ -76,6 +76,7 @@ CEsmRepairDlg::CEsmRepairDlg() : CEsmRecDialog(CEsmRepairDlg::IDD) {
 
 void CEsmRepairDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmRepairDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 
@@ -106,7 +107,7 @@ void CEsmRepairDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmRepairDlg::GetControlData(void) {
+void CEsmRepairDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmRepairDlg::GetControlData()");
 	repairdata_t *pRepairData;
 	CString Buffer;
@@ -175,9 +176,9 @@ void CEsmRepairDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmRepairDlg::IsModified(void) {
+bool CEsmRepairDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -206,7 +207,7 @@ bool CEsmRepairDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -267,7 +268,7 @@ int CEsmRepairDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -281,7 +282,7 @@ int CEsmRepairDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmRepairDlg::SetControlData(void) {
+void CEsmRepairDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pRepair == NULL) {
 		return;
@@ -297,6 +298,7 @@ void CEsmRepairDlg::SetControlData(void) {
 	m_WeightText.SetWindowText(m_pRepair->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pRepair->GetFieldString(ESM_FIELD_VALUE));
 	m_UsesText.SetWindowText(m_pRepair->GetFieldString(ESM_FIELD_USES));
+
 	m_UsesText.SetModify(FALSE);
 	m_NameText.SetModify(FALSE);
 	m_QualityText.SetModify(FALSE);

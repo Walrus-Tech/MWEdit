@@ -78,7 +78,6 @@ class CEsmScrFuncArray {
   protected:
 
 	/* Input function data from the file */
-
 	bool ReadFunction(CGenFile &File, const TCHAR *pFuncName);
 
 
@@ -87,36 +86,33 @@ class CEsmScrFuncArray {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEsmScrFuncArray();
 
 	virtual ~CEsmScrFuncArray() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Find and return a function record */
-
 	CEsmScrFuncData *FindFunction(const TCHAR *pName);
 
 	/* Get class members */
-
-	int GetCount(void) {
-		return (m_Functions.GetNumElements());
+	int GetCount() {
+		return m_Functions.GetNumElements();
 	}
 
 	CEsmScrFuncData *GetFunction(const int Index) {
-		return (m_Functions.GetAt(Index));
+		return m_Functions.GetAt(Index);
 	}
 
 	bool IsValidIndex(const int Index) {
-		return (m_Functions.IsValidIndex(Index));
+		return m_Functions.IsValidIndex(Index);
 	}
 
 	/* Load a function data file */
 
-	bool LoadDefault(void) {
+	bool LoadDefault() {
 		return Load(MWESM_SFDATA_DEFAULTFILE);
 	}
 

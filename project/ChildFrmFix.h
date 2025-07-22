@@ -81,7 +81,7 @@ class CChildFrameFix : public CMDIChildWnd {
 
 	//{{AFX_MSG(CChildFrameFix)
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnClose(void);
+	afx_msg void OnClose();
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();

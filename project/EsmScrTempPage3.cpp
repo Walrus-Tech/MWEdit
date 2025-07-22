@@ -94,7 +94,7 @@ bool CEsmScrTempPage3::AddCsvColumns(CCsvFile *pCsvFile) {
 
 	if (pRow == NULL) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("CSV file has no defined header row!"));
-		return (false);
+		return false;
 	}
 
 	/* Insert the index column */
@@ -120,7 +120,7 @@ bool CEsmScrTempPage3::AddCsvColumns(CCsvFile *pCsvFile) {
 	}
 
 	m_NumColumns = Index;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -135,7 +135,7 @@ bool CEsmScrTempPage3::AddCsvColumns(CCsvFile *pCsvFile) {
  * Description
  *
  *=========================================================================*/
-void CEsmScrTempPage3::ClearCsvList(void) {
+void CEsmScrTempPage3::ClearCsvList() {
 	//DEFINE_FUNCTION("CEsmScrTempPage3::ClearCsvList()");
 	BOOL Result;
 	/* Delete rows */
@@ -205,7 +205,8 @@ bool CEsmScrTempPage3::FillCsvList(CCsvFile *pCsvFile) {
 		Buffer.Format(_T("%d"), ItemIndex + 1);
 		ListIndex = m_CsvList.InsertItem(ItemIndex, Buffer);
 
-		for (ColIndex = 0; ColIndex < pRow->GetNumElements() && ColIndex < m_NumColumns; ColIndex++) {
+		for (ColIndex = 0; ColIndex < pRow->GetNumElements()
+		                   && ColIndex < m_NumColumns; ColIndex++) {
 			pString = pRow->GetAt(ColIndex);
 			m_CsvList.SetItemText(ListIndex,
 			                      ColIndex + 1,
@@ -215,7 +216,7 @@ bool CEsmScrTempPage3::FillCsvList(CCsvFile *pCsvFile) {
 		ItemIndex++;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -231,7 +232,7 @@ bool CEsmScrTempPage3::FillCsvList(CCsvFile *pCsvFile) {
 BOOL CEsmScrTempPage3::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	m_CsvList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -246,7 +247,7 @@ BOOL CEsmScrTempPage3::OnInitDialog() {
  * Updates the page's controls from the variable data.
  *
  *=========================================================================*/
-void CEsmScrTempPage3::UpdatePage(void) {
+void CEsmScrTempPage3::UpdatePage() {
 	FillCsvList(m_pParentView->GetCsvFile());
 }
 

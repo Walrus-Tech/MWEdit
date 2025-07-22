@@ -53,18 +53,15 @@ class CChildFrame : public CMDIChildWnd {
 	/* Class constructor/destructor */
 
 	CChildFrame();
-
 	virtual ~CChildFrame();
 
-	void FakeMaximize(void);
+	void FakeMaximize();
 
 	/* Diagnostics routines */
-
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext &dc) const;
 #endif
-
 
 	/* ClassWizard generated virtual function overrides */
 

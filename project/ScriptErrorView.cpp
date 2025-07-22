@@ -140,7 +140,7 @@ void CScriptErrorView::Dump(CDumpContext &dc) const {
  *
  *=========================================================================*/
 
-void CScriptErrorView::ClearErrors(void) {
+void CScriptErrorView::ClearErrors() {
 	m_ErrorList.ResetContent();
 }
 
@@ -432,7 +432,7 @@ void CScriptErrorView::OnUpdateScrerrorFunchelp(CCmdUI *pCmdUI) {
 	if (ListIndex < 0) {
 		pCmdUI->Enable(FALSE);
 	} else {
-		CEsmScriptError* pError = (CEsmScriptError *)m_ErrorList.GetItemDataPtr(ListIndex);
+		CEsmScriptError *pError = (CEsmScriptError *)m_ErrorList.GetItemDataPtr(ListIndex);
 		pCmdUI->Enable(pError->GetFunction() != NULL);
 	}
 }

@@ -46,9 +46,11 @@ BEGIN_MESSAGE_MAP(CEsmLightDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmLightDlg)
 	ON_BN_CLICKED(IDC_COLORBUTTON, OnColorbutton)
 	ON_BN_CLICKED(IDC_CANCARRYCHECK, OnCancarrycheck)
+
 	ON_EN_CHANGE(IDC_REDTEXT, OnChangeColor)
 	ON_EN_CHANGE(IDC_GREENTEXT, OnChangeColor)
 	ON_EN_CHANGE(IDC_BLUETEXT, OnChangeColor)
+
 	ON_BN_CLICKED(IDC_SOUNDPLAY, OnSoundPlay)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -83,6 +85,7 @@ CEsmLightDlg::CEsmLightDlg() : CEsmRecDialog(CEsmLightDlg::IDD) {
 
 void CEsmLightDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmLightDlg)
 	DDX_Control(pDX, IDC_RSPIN, m_RedSpin);
 	DDX_Control(pDX, IDC_GSPIN, m_GreenSpin);
@@ -131,7 +134,7 @@ void CEsmLightDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmLightDlg::GetControlData(void) {
+void CEsmLightDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLightDlg::GetControlData()");
 	lightdata_t *pLightData;
 	CString Buffer;
@@ -265,9 +268,9 @@ void CEsmLightDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmLightDlg::IsModified(void) {
+bool CEsmLightDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -288,7 +291,7 @@ bool CEsmLightDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -545,7 +548,7 @@ int CEsmLightDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_SoundList.SelectString(-1, Buffer);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -559,7 +562,7 @@ int CEsmLightDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmLightDlg::SetControlData(void) {
+void CEsmLightDlg::SetControlData() {
 	CString Buffer;
 	lightdata_t *pLightData;
 

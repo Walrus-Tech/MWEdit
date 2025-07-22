@@ -62,7 +62,7 @@ int g_EsmLoadDlgCallback(const int Event,
                          long UserData) {
 	CEsmLoadDlg *pDialog = (CEsmLoadDlg *)UserData;
 	pDialog->SetProgress(Percent);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -114,10 +114,12 @@ void CEsmLoadDlg::DoDataExchange(CDataExchange *pDX) {
 
 BOOL CEsmLoadDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
+
 	m_FileLabel.SetWindowText(_T(""));
 	m_ProgressCtrl.SetRange(0, 200);
 	m_ProgressCtrl.SetPos(0);
-	return (TRUE);
+
+	return TRUE;
 }
 
 /*===========================================================================

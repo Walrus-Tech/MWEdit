@@ -50,17 +50,18 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
   protected:
 
 	/* Helper set/get methods */
-
-	void GetEffectData(void);
+	void GetEffectData();
 	void GetEffectData(const int EffectIndex);
-	void SetEffectData(void);
+	void SetEffectData();
 	void SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRecord);
+
 	void OnSelChangeEffectList(const int Index);
 	void OnSelChangeSkillList(const int Index);
+
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 	void UpdateSpellCost(const int Index);
-	void UpdateTotalSpellCost(void);
+	void UpdateTotalSpellCost();
 
 
 	/*---------- Begin Public Class Methods ---------------------------*/
@@ -74,12 +75,12 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 
 	/* Get class members */
 
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
 
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -91,6 +92,7 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 	CButton m_AutoCalcCheck;
 	CButton m_PersistCheck;
 	CButton m_BlockedCheck;
+
 	CEdit m_ValueText;
 	CEdit m_WeightText;
 	CEdit m_NameText;
@@ -98,6 +100,7 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 
 	CComboBox m_EffectList[MWESM_ALCHEMY_NUMENCHANTS];
 	CComboBox m_SkillList[MWESM_ALCHEMY_NUMENCHANTS];
+
 	CEdit m_CostText[MWESM_ALCHEMY_NUMENCHANTS];
 	CEdit m_DurationText[MWESM_ALCHEMY_NUMENCHANTS];
 	CEdit m_MagnitudeText[MWESM_ALCHEMY_NUMENCHANTS];
@@ -148,6 +151,7 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 	afx_msg void OnChangeDurationtext8() {
 		UpdateSpellCost(7);
 	}
+
 	afx_msg void OnSelchangeEffectlist1() {
 		OnSelChangeEffectList(0);
 	}
@@ -172,6 +176,7 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 	afx_msg void OnSelchangeEffectlist8() {
 		OnSelChangeEffectList(7);
 	}
+
 	afx_msg void OnSelchangeSkilllist1() {
 		OnSelChangeSkillList(0);
 	}
@@ -206,7 +211,6 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 
 
 #endif
-
 /*===========================================================================
  *      End of File Esmalchemydlg.H
  *=========================================================================*/

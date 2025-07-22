@@ -88,10 +88,12 @@ CEsmEffectDlg::CEsmEffectDlg() : CEsmRecDialog(CEsmEffectDlg::IDD) {
 
 void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmEffectDlg)
 	DDX_Control(pDX, IDC_ENCHANTCHECK, m_EnchantCheck);
 	DDX_Control(pDX, IDC_SPELLCHECK, m_SpellCheck);
 	DDX_Control(pDX, IDC_NEGATIVECHECK, m_NegativeCheck);
+
 	DDX_Control(pDX, IDC_CASTSOUNDLIST, m_CastSoundList);
 	DDX_Control(pDX, IDC_BOLTSOUNDLIST, m_BoltSoundList);
 	DDX_Control(pDX, IDC_AREASOUNDLIST, m_AreaSoundList);
@@ -100,11 +102,14 @@ void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_BOLTVISUALLIST, m_BoltVisualList);
 	DDX_Control(pDX, IDC_AREAVISUALLIST, m_AreaVisualList);
 	DDX_Control(pDX, IDC_HITVISUALLIST, m_HitVisualList);
+
 	DDX_Control(pDX, IDC_PARTICLEBUTTON, m_ParticleButton);
 	DDX_Control(pDX, IDC_ICONBUTTON, m_IconButton);
+
 	DDX_Control(pDX, IDC_PARTICLEBOX, m_ParticleBox);
 	DDX_Control(pDX, IDC_ICONBOX, m_IconBox);
 	DDX_Control(pDX, IDC_COLORBOX, m_ColorBox);
+
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_BASECOSTTEXT, m_BaseCostText);
 	DDX_Control(pDX, IDC_SIZETEXT, m_SizeText);
@@ -112,11 +117,14 @@ void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_GREENTEXT, m_GreenText);
 	DDX_Control(pDX, IDC_BLUETEXT, m_BlueText);
 	DDX_Control(pDX, IDC_DESCTEXT, m_DescText);
+
 	DDX_Control(pDX, IDC_RSPIN, m_RedSpin);
 	DDX_Control(pDX, IDC_GSPIN, m_GreenSpin);
 	DDX_Control(pDX, IDC_BSPIN, m_BlueSpin);
+
 	DDX_Control(pDX, IDC_MAXSIZETEXT, m_MaxSizeText);
 	DDX_Control(pDX, IDC_SPEEDTEXT, m_SpeedText);
+
 	DDX_Control(pDX, IDC_SCHOOLLIST, m_SchoolList);
 	//}}AFX_DATA_MAP
 }
@@ -132,7 +140,7 @@ void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmEffectDlg::GetControlData(void) {
+void CEsmEffectDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmEffectDlg::GetControlData()");
 	CString Buffer;
 	int Index;
@@ -225,9 +233,9 @@ void CEsmEffectDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmEffectDlg::IsModified(void) {
+bool CEsmEffectDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -264,7 +272,7 @@ bool CEsmEffectDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -596,7 +604,7 @@ int CEsmEffectDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_HitSoundList.SelectString(-1, Buffer);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -610,7 +618,7 @@ int CEsmEffectDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmEffectDlg::SetControlData(void) {
+void CEsmEffectDlg::SetControlData() {
 	CString Buffer;
 	const TCHAR *pString;
 

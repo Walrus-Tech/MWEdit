@@ -48,12 +48,10 @@ class CEsmSoundGenDlg : public CEsmRecDialog {
   protected:
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Create the sound gen ID based on the current control data */
-
-	void UpdateID(void);
+	void UpdateID();
 
 
 	/*---------- Begin Public Class Methods ---------------------------*/
@@ -61,17 +59,14 @@ class CEsmSoundGenDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmSoundGenDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

@@ -56,7 +56,7 @@ CEditUndo::CEditUndo () {
  *
  *=========================================================================*/
 
-void CEditUndo::Destroy(void) {
+void CEditUndo::Destroy() {
 	DestroyArrayPointer(m_pString);
 	m_StringLength = 0;
 	m_Action = EDITUNDO_NONE;
@@ -114,7 +114,7 @@ CEditUndoStack::CEditUndoStack() {
  *
  *=========================================================================*/
 
-void CEditUndoStack::Destroy(void) {
+void CEditUndoStack::Destroy() {
 	m_UndoStack.Destroy();
 }
 
@@ -301,7 +301,7 @@ bool CEditUndoStack::GroupUndoInsertChar(CRichEditCtrl *pCtrl, CEditUndo *pUndo)
 		m_UndoStack.DeleteElement(m_UndoStack.GetNumElements() - 1, false);
 	} while (pUndo != NULL);
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -323,17 +323,17 @@ bool CEditUndoStack::OnChar(CRichEditCtrl *pCtrl, const int CharCode) {
 	/* Ignore invalid input */
 
 	if (pCtrl == NULL || CharCode == 0) {
-		return (false);
+		return false;
 	}
 
 	/* Ignore if the Control or ALT keys are pressed */
 
 	if (GetKeyState(VK_CONTROL) & 0xf000) {
-		return (false);
+		return false;
 	}
 
 	if (GetKeyState(VK_MENU) & 0xf000) {
-		return (false);
+		return false;
 	}
 
 	switch (CharCode) {
@@ -350,7 +350,7 @@ bool CEditUndoStack::OnChar(CRichEditCtrl *pCtrl, const int CharCode) {
 			}
 
 			CreateInsertString(_T("\r\n"), StartSel, StartSel);
-			return (true);
+			return true;
 
 		default:
 			pCtrl->GetSel(StartSel, EndSel);
@@ -361,10 +361,10 @@ bool CEditUndoStack::OnChar(CRichEditCtrl *pCtrl, const int CharCode) {
 			}
 
 			CreateInsertChar((TCHAR) CharCode, StartSel, StartSel);
-			return (true);
+			return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -386,7 +386,7 @@ bool CEditUndoStack::OnCut(CRichEditCtrl *pCtrl) {
 	/* Ignore invalid input */
 
 	if (pCtrl == NULL) {
-		return (false);
+		return false;
 	}
 
 	pCtrl->GetSel(StartSel, EndSel);
@@ -394,11 +394,11 @@ bool CEditUndoStack::OnCut(CRichEditCtrl *pCtrl) {
 	if (EndSel - StartSel >= 1) {
 		Buffer = pCtrl->GetSelText();
 		CreateDeleteString(Buffer, StartSel, EndSel);
-		return (true);
+		return true;
 	}
 
 	/* Nothing to cut */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -425,13 +425,13 @@ bool CEditUndoStack::OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode) {
 	/* Ignore invalid input */
 
 	if (pCtrl == NULL || CharCode == 0) {
-		return (false);
+		return false;
 	}
 
 	/* Ignore if the ALT key is pressed */
 
 	if (GetKeyState(VK_MENU) & 0xf000) {
-		return (false);
+		return false;
 	}
 
 	switch (CharCode) {
@@ -444,7 +444,7 @@ bool CEditUndoStack::OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode) {
 			break;
 
 		default:
-			return (false);
+			return false;
 	}
 
 	pCtrl->GetSel(StartSel, EndSel);
@@ -461,7 +461,7 @@ bool CEditUndoStack::OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode) {
 	CharIndex = StartSel - LineStart + Offset;
 
 	if (CurLine < 0) {
-		return (false);
+		return false;
 	}
 
 	pCtrl->GetLine(CurLine, Buffer.GetBuffer(LineLength + 8), LineLength + 2);
@@ -470,11 +470,11 @@ bool CEditUndoStack::OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode) {
 	/* Check for at very end or start */
 
 	if (Offset < 0 && CurLine == 0 && CharIndex < 0) {
-		return (false);
+		return false;
 	}
 
 	if (Offset >= 0 && StartSel >= pCtrl->GetTextLength()) {
-		return (false);
+		return false;
 	}
 
 	if (CharIndex < 0 || CharIndex + Offset >= LineLength) {
@@ -483,7 +483,7 @@ bool CEditUndoStack::OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode) {
 		CreateDeleteChar(Buffer[CharIndex], StartSel + Offset, StartSel);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -505,7 +505,7 @@ bool CEditUndoStack::OnPaste(CRichEditCtrl *pCtrl) {
 	/* Ignore invalid input */
 
 	if (pCtrl == NULL) {
-		return (false);
+		return false;
 	}
 
 	pCtrl->GetSel(StartSel, EndSel);
@@ -519,15 +519,15 @@ bool CEditUndoStack::OnPaste(CRichEditCtrl *pCtrl) {
 	/* Get the clipboard text to insert */
 
 	if (!GetClipboardText(Buffer)) {
-		return (false);
+		return false;
 	}
 
 	if (Buffer.IsEmpty()) {
-		return (false);
+		return false;
 	}
 
 	CreateInsertString(Buffer, StartSel, StartSel);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -550,13 +550,13 @@ int CEditUndoStack::OnUndo(CRichEditCtrl *pCtrl) {
 	/* Ignore invalid input */
 
 	if (pCtrl == NULL) {
-		return (UndoType);
+		return UndoType;
 	}
 
 	pUndo = Pop();
 
 	if (pUndo == NULL) {
-		return (UndoType);
+		return UndoType;
 	}
 
 	switch (pUndo->GetAction()) {
@@ -612,7 +612,7 @@ int CEditUndoStack::OnUndo(CRichEditCtrl *pCtrl) {
 
 	pCtrl->HideSelection(FALSE, FALSE);
 	DestroyPointer(pUndo);
-	return (UndoType);
+	return UndoType;
 }
 
 /*===========================================================================
@@ -626,21 +626,21 @@ int CEditUndoStack::OnUndo(CRichEditCtrl *pCtrl) {
  *
  *=========================================================================*/
 
-CEditUndo *CEditUndoStack::Pop(void) {
+CEditUndo *CEditUndoStack::Pop() {
 	CEditUndo *pUndo;
 
 	if (m_UndoStack.GetNumElements() == 0) {
-		return (NULL);
+		return NULL;
 	}
 
 	pUndo = m_UndoStack.GetAt(m_UndoStack.GetNumElements() - 1);
 
 	if (pUndo == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	m_UndoStack.DeleteElement(m_UndoStack.GetNumElements() - 1, false);
-	return (pUndo);
+	return pUndo;
 }
 
 /*===========================================================================

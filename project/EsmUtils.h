@@ -113,11 +113,11 @@ bool SelectEsmModel(CString &ModelString, const TCHAR *pTitle, CWnd *pParent);
 bool SelectEsmTexture(CString &TextureString, const TCHAR *pTitle, CWnd *pParent);
 
 /* Path functions */
-const TCHAR *GetMWDataPath(void);
+const TCHAR *GetMWDataPath();
 void SetMWDataPath(const TCHAR *pString);
 
 /* Attempt to update the Morrowind paths from ther registry */
-void FindMWRegistryPath(void);
+void FindMWRegistryPath();
 
 /* Checks for a valid ID */
 bool IsValidESMID(const TCHAR *pID);

@@ -85,7 +85,7 @@ int l_BipedToBody[] = {
  *=========================================================================*/
 int ConvertBipedToBodyPart(const int BipedType) {
 	if (BipedType < MWESM_BIPEDPART_MIN || BipedType > MWESM_BIPEDPART_MAX) {
-		return (-1);
+		return -1;
 	}
 
 	return l_BipedToBody[BipedType];
@@ -1487,7 +1487,7 @@ void FillEsmInfoCompareOpCombo(CComboBox &ComboBox) {
  * Attempts to find the Morrowind Data Files path from the registry
  *
  *=========================================================================*/
-void FindMWRegistryPath(void) {
+void FindMWRegistryPath() {
 	//l_MWDataPath = AfxGetApp()->GetProfileString(MWESM_REG_PATH, _T(""), NULL);
 	BYTE Buffer[_MAX_PATH + 8];
 	DWORD BufferSize = _MAX_PATH + 7;
@@ -1524,9 +1524,9 @@ void FindMWRegistryPath(void) {
  * Return the Morrowind Data File path.
  *
  *=========================================================================*/
-const TCHAR *GetMWDataPath(void) {
+const TCHAR *GetMWDataPath() {
 	//return _T("e:\\Morrowind\\Data Files\\");
-	return (l_MWDataPath);
+	return l_MWDataPath;
 }
 
 void SetMWDataPath(const TCHAR *pString) {
@@ -1548,30 +1548,30 @@ void SetMWDataPath(const TCHAR *pString) {
 bool IsValidESMID(const TCHAR *pID) {
 	/* Check for a NULL or empty ID */
 	if (pID == NULL) {
-		return (false);
+		return false;
 	}
 
 	if (*pID == NULL_CHAR) {
-		return (false);
+		return false;
 	}
 
 	/* First char should not be a space, but any a-z, 0-9, _ */
 	if (!iscsym(*pID)) {
-		return (false);
+		return false;
 	}
 
 	/* Check rest of string if needed */
 	if (GetEsmOptStrictIDs()) {
 		while (*pID != NULL_CHAR) {
 			if (!iscsym(*pID) && !(*pID == ' ')) {
-				return (false);
+				return false;
 			}
 
 			pID++;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1611,7 +1611,7 @@ bool SelectEsmIcon(CString &IconString, const TCHAR *pTitle, CWnd *pParent) {
 	Result = OpenDlg.DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
 	/* Get the pathname */
@@ -1628,10 +1628,10 @@ bool SelectEsmIcon(CString &IconString, const TCHAR *pTitle, CWnd *pParent) {
 		                      _T("Icon filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
-		return (true);
+		return true;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1674,7 +1674,7 @@ bool SelectEsmModel(CString &ModelString, const TCHAR *pTitle, CWnd *pParent) {
 	SetCurrentDirectory(GetMWDataPath());
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
 	/* Get the pathname */
@@ -1693,10 +1693,10 @@ bool SelectEsmModel(CString &ModelString, const TCHAR *pTitle, CWnd *pParent) {
 		                      _T("Model filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1739,7 +1739,7 @@ bool SelectEsmSound(CString &SoundString, const TCHAR *pTitle, CWnd *pParent) {
 	SetCurrentDirectory(GetMWDataPath());
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
 	/* Get the pathname */
@@ -1756,10 +1756,10 @@ bool SelectEsmSound(CString &SoundString, const TCHAR *pTitle, CWnd *pParent) {
 		                      _T("Sound filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1799,7 +1799,7 @@ bool SelectEsmTexture(CString &TextureString, const TCHAR *pTitle, CWnd *pParent
 	Result = OpenDlg.DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
 	/* Get the pathname */
@@ -1816,10 +1816,10 @@ bool SelectEsmTexture(CString &TextureString, const TCHAR *pTitle, CWnd *pParent
 		                      _T("Texture filename exceeds the %d byte size limit!"),
 		                      MWESM_ID_MAXSIZE);
 		ErrorHandler.Notify(_T("File Error!"));
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1844,7 +1844,7 @@ bool ReadFile(CSString &Buffer, const TCHAR *pFilename) {
 	pFileHandle = OpenFile(pFilename, "rb");
 
 	if (pFileHandle == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Get filesize */
@@ -1858,10 +1858,10 @@ bool ReadFile(CSString &Buffer, const TCHAR *pFilename) {
 	/* Check for errors */
 	if (Result != FileSize) {
 		ErrorHandler.AddError(ERR_READFILE, _T("Error reading from file '%s'!"), pFilename);
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

@@ -106,65 +106,63 @@ class CEsmScriptError {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEsmScriptError();
 
 	virtual ~CEsmScriptError() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-
-	const TCHAR *GetMessage(void) const {
-		return (m_Message);
+	const TCHAR *GetMessage() const {
+		return m_Message;
 	}
 
-	const TCHAR *GetToken(void) const {
-		return (m_Token);
+	const TCHAR *GetToken() const {
+		return m_Token;
 	}
 
-	const TCHAR *GetTypeString(void) const {
-		return (IsError() ? _T("Error") : _T("Warning"));
+	const TCHAR *GetTypeString() const {
+		return IsError() ? _T("Error") : _T("Warning");
 	}
 
-	const TCHAR *GetFuncArgString(void) const;
+	const TCHAR *GetFuncArgString() const;
 
-	int GetTokenID(void) const {
-		return (m_TokenID);
+	int GetTokenID() const {
+		return m_TokenID;
 	}
 
-	int GetNumFuncArgs(void) const {
-		return (m_NumFuncArgs);
+	int GetNumFuncArgs() const {
+		return m_NumFuncArgs;
 	}
 
-	int GetFuncArgIndex(void) const {
-		return (m_FuncArgIndex);
+	int GetFuncArgIndex() const {
+		return m_FuncArgIndex;
 	}
 
-	int GetErrorCode(void) const {
-		return (m_Code);
+	int GetErrorCode() const {
+		return m_Code;
 	}
 
-	int GetLine(void) const {
-		return (m_Line);
+	int GetLine() const {
+		return m_Line;
 	}
 
-	int GetCharacter(void) const {
-		return (m_Character);
+	int GetCharacter() const {
+		return m_Character;
 	}
 
-	bool IsError(void) const {
-		return (m_Type == ESMSCR_MESSAGE_ERROR);
+	bool IsError() const {
+		return m_Type == ESMSCR_MESSAGE_ERROR;
 	}
 
-	bool IsWarning(void) const {
-		return (m_Type == ESMSCR_MESSAGE_WARNING);
+	bool IsWarning() const {
+		return m_Type == ESMSCR_MESSAGE_WARNING;
 	}
 
-	esmscrfuncinfo_t *GetFunction(void) {
-		return (m_pFunction);
+	esmscrfuncinfo_t *GetFunction() {
+		return m_pFunction;
 	}
 
 	/* Set class members */

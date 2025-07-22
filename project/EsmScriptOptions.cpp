@@ -47,7 +47,7 @@ CEsmScriptOptions::CEsmScriptOptions() {
  * Class CEsmScriptOptions Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmScriptOptions::Destroy(void) {
+void CEsmScriptOptions::Destroy() {
 	//DEFINE_FUNCTION("CEsmScriptOptions::Destroy()");
 }
 
@@ -61,7 +61,7 @@ void CEsmScriptOptions::Destroy(void) {
  * Class CEsmScriptOptions Method - void CreateDefaultWhiteFormat (void);
  *
  *=========================================================================*/
-void CEsmScriptOptions::CreateDefaultWhiteFormat(void) {
+void CEsmScriptOptions::CreateDefaultWhiteFormat() {
 	/* Create the default font */
 	m_TextFont.Detach();
 	CFONT_CREATE(m_TextFont, 8, FW_NORMAL, FALSE, "FixedSys");
@@ -97,7 +97,7 @@ void CEsmScriptOptions::CreateDefaultWhiteFormat(void) {
  * Class CEsmScriptOptions Method - void CreateDefaultBlueFormat (void);
  *
  *=========================================================================*/
-void CEsmScriptOptions::CreateDefaultBlueFormat(void) {
+void CEsmScriptOptions::CreateDefaultBlueFormat() {
 	/* Create the default font */
 	m_TextFont.Detach();
 	CFONT_CREATE(m_TextFont, 8, FW_NORMAL, FALSE, "FixedSys");
@@ -154,7 +154,7 @@ void CEsmScriptOptions::InitCharFormat(CHARFORMAT2 &Format, COLORREF Color) {
  * on any error.
  *
  *=========================================================================*/
-bool CEsmScriptOptions::ReadFromRegistry(void) {
+bool CEsmScriptOptions::ReadFromRegistry() {
 	CWinApp *pApp = AfxGetApp();
 	bool Result;
 	/* Input the background color */
@@ -167,7 +167,7 @@ bool CEsmScriptOptions::ReadFromRegistry(void) {
 	/* Input the various char format and font options */
 	Result = ReadRegCharFormat();
 	Result &= ReadRegFont();
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -182,7 +182,7 @@ bool CEsmScriptOptions::ReadFromRegistry(void) {
  * Input the char formats from the registry.
  *
  *=========================================================================*/
-bool CEsmScriptOptions::ReadRegCharFormat(void) {
+bool CEsmScriptOptions::ReadRegCharFormat() {
 	CWinApp *pApp = AfxGetApp();
 	CString RegName;
 	CHARFORMAT2 CharFormat;
@@ -203,7 +203,7 @@ bool CEsmScriptOptions::ReadRegCharFormat(void) {
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -218,7 +218,7 @@ bool CEsmScriptOptions::ReadRegCharFormat(void) {
  * Input the font options from the registry.
  *
  *=========================================================================*/
-bool CEsmScriptOptions::ReadRegFont(void) {
+bool CEsmScriptOptions::ReadRegFont() {
 	CWinApp *pApp = AfxGetApp();
 	CString FontName = _T("FixedSys");
 
@@ -235,7 +235,7 @@ bool CEsmScriptOptions::ReadRegFont(void) {
 	/* Create the font object */
 	m_TextFont.Detach();
 	CFONT_CREATE(m_TextFont, FontSize, FontBold, FontItalic, FontName);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -250,7 +250,7 @@ bool CEsmScriptOptions::ReadRegFont(void) {
  * Writes the script options to the registry. Reurns false on any error.
  *
  *=========================================================================*/
-bool CEsmScriptOptions::WriteToRegistry(void) {
+bool CEsmScriptOptions::WriteToRegistry() {
 	CWinApp *pApp = AfxGetApp();
 	bool Result;
 	int iResult;
@@ -265,7 +265,7 @@ bool CEsmScriptOptions::WriteToRegistry(void) {
 	/* Output the various char format and font options */
 	Result = WriteRegCharFormat();
 	Result &= WriteRegFont();
-	return (Result & (iResult != 0));
+	return Result & (iResult != 0);
 }
 
 /*===========================================================================
@@ -280,7 +280,7 @@ bool CEsmScriptOptions::WriteToRegistry(void) {
  * Writes the script user format to the registry. Reurns false on any error.
  *
  *=========================================================================*/
-bool CEsmScriptOptions::WriteRegCharFormat(void) {
+bool CEsmScriptOptions::WriteRegCharFormat() {
 	CWinApp *pApp = AfxGetApp();
 	CString RegName;
 	BOOL Result = TRUE;
@@ -295,7 +295,7 @@ bool CEsmScriptOptions::WriteRegCharFormat(void) {
 		                                   sizeof(m_Formats[Index]));
 	}
 
-	return (Result != 0);
+	return Result != 0;
 }
 
 /*===========================================================================
@@ -310,7 +310,7 @@ bool CEsmScriptOptions::WriteRegCharFormat(void) {
  * Writes the script font options to the registry. Reurns false on any error.
  *
  *=========================================================================*/
-bool CEsmScriptOptions::WriteRegFont(void) {
+bool CEsmScriptOptions::WriteRegFont() {
 	CWinApp *pApp = AfxGetApp();
 	LOGFONT LogFont;
 	int iResult;
@@ -318,7 +318,7 @@ bool CEsmScriptOptions::WriteRegFont(void) {
 	iResult = m_TextFont.GetLogFont(&LogFont);
 
 	if (iResult == 0) {
-		return (false);
+		return false;
 	}
 
 	/* Write the font options to the registry */
@@ -334,7 +334,7 @@ bool CEsmScriptOptions::WriteRegFont(void) {
 	iResult &= pApp->WriteProfileString(ESMSCR_REGSEC_SCRIPT,
 	                                    ESMSCR_REGENTRY_FONTNAME,
 	                                    LogFont.lfFaceName);
-	return (iResult != 0);
+	return iResult != 0;
 }
 
 /*===========================================================================
@@ -359,7 +359,7 @@ const CEsmScriptOptions &CEsmScriptOptions::operator= (CEsmScriptOptions &Option
 	m_BackgroundColor = Options.m_BackgroundColor;
 	m_NoToolTips = Options.m_NoToolTips;
 	memcpy(&m_Formats[0], &Options.m_Formats[0], sizeof(m_Formats[0]) * ESMSCRIPT_NUMFORMATS);
-	return (*this);
+	return *this;
 }
 
 /*===========================================================================

@@ -82,16 +82,13 @@ class CEsmUsesDlg : public CFormView {
 	}
 
 	/* Updates the uses label control */
-
-	void UpdateLabel(void);
+	void UpdateLabel();
 
 	/* Updates the title based on the current information */
-
-	void UpdateTitle(void);
+	void UpdateTitle();
 
 	/* Updates the uses information for the current record */
-
-	bool UpdateUses(void);
+	bool UpdateUses();
 
 	/* Dialog Data */
 

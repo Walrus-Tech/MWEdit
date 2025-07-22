@@ -47,7 +47,7 @@ CEsmScriptTemplate::CEsmScriptTemplate () : m_TemplateVars(0) {
  *
  *=========================================================================*/
 
-void CEsmScriptTemplate::Destroy(void) {
+void CEsmScriptTemplate::Destroy() {
 	//DEFINE_FUNCTION("CEsmScriptTemplate::Destroy()");
 	m_TemplateText.Empty();
 	m_Filename.Empty();
@@ -74,7 +74,7 @@ bool CEsmScriptTemplate::AddTemplateVariable(const TCHAR *pVariable, const int L
 	/* Ignore invalid input */
 
 	if (pVariable == NULL || Length <= 2) {
-		return (false);
+		return false;
 	}
 
 	strnncpy(Buffer,
@@ -104,7 +104,7 @@ bool CEsmScriptTemplate::AddTemplateVar(const TCHAR *pVariable) {
 
 	if (pTempVar != NULL) {
 		pTempVar->Uses++;
-		return (true);
+		return true;
 	}
 
 	/* Create a new template variable */
@@ -113,7 +113,7 @@ bool CEsmScriptTemplate::AddTemplateVar(const TCHAR *pVariable) {
 	pTempVar->Uses = 1;
 	pTempVar->CsvColIndex = -1;
 	m_TemplateVars.Add(pTempVar);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -129,7 +129,7 @@ bool CEsmScriptTemplate::AddTemplateVar(const TCHAR *pVariable) {
  *
  *=========================================================================*/
 
-void CEsmScriptTemplate::ClearTemplateVars(void) {
+void CEsmScriptTemplate::ClearTemplateVars() {
 	DEFINE_FUNCTION("CEsmScriptTemplate::ClearTemplateVars()");
 	esmscrtempvar_t *pTempVar;
 	int Index;
@@ -175,7 +175,7 @@ bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CC
 	if (pOutBuffer == NULL || BufferSize < m_TemplateText.GetLength()) {
 		ErrorHandler.AddError(ERR_BADINPUT,
 		                      _T("Invalid or short template script string received!"));
-		return (false);
+		return false;
 	}
 
 	/* Create the buffer copy */
@@ -230,7 +230,7 @@ bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CC
 			pCsvString = GetCsvString (CurrentVar, pRow);
 
 			if (pCsvString == NULL) {
-				return (false);
+				return false;
 			}
 
 			/* Ensure the buffer size is not exceeded */
@@ -240,7 +240,7 @@ bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CC
 				ErrorHandler.AddError(ERR_BADINPUT,
 				                      _T("Exceeded the script template buffer size of %d!"),
 				                      BufferSize);
-				return (false);
+				return false;
 			}
 
 			/* Shift the right-hand portion of the string */
@@ -263,7 +263,7 @@ bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CC
 	}
 
 	pOutBuffer[OutSize] = NULL_CHAR;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -290,12 +290,12 @@ esmscrtempvar_t *CEsmScriptTemplate::FindTemplateVar(const TCHAR *pVariable) {
 		pTempVar = m_TemplateVars.GetAt(Index);
 
 		if (pTempVar->IsName(pVariable)) {
-			return (pTempVar);
+			return pTempVar;
 		}
 	}
 
 	/* No match */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -320,7 +320,7 @@ CSString *CEsmScriptTemplate::GetCsvString(const TCHAR *pVarName, CCsvRow *pRow)
 	/* Special script name */
 
 	if (_stricmp(pVarName, ESMSCRTEMP_CSV_SCRIPTNAME) == 0) {
-		return (&m_ScriptName);
+		return &m_ScriptName;
 	}
 
 	/* Ensure a valid template variable */
@@ -330,7 +330,7 @@ CSString *CEsmScriptTemplate::GetCsvString(const TCHAR *pVarName, CCsvRow *pRow)
 		ErrorHandler.AddError(ERR_BADINPUT,
 		                      _T("Failed to find the script template variable '%s'!"),
 		                      pVarName);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Ensure a valid variable value */
@@ -340,10 +340,10 @@ CSString *CEsmScriptTemplate::GetCsvString(const TCHAR *pVarName, CCsvRow *pRow)
 		ErrorHandler.AddError(ERR_BADINPUT,
 		                      _T("Empty or missing script template variable '%s'!"),
 		                      pVarName);
-		return (NULL);
+		return NULL;
 	}
 
-	return (pCsvString);
+	return pCsvString;
 }
 
 /*===========================================================================
@@ -367,7 +367,7 @@ bool CEsmScriptTemplate::Load(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, _T("rb"));
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	FileSize = File.GetFileSize();
@@ -384,17 +384,17 @@ bool CEsmScriptTemplate::Load(const TCHAR *pFilename) {
 	Result = File.Read((TCHAR *)(const TCHAR *)m_TemplateText, FileSize);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Parse the template text */
 	Result = ParseText();
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -411,7 +411,7 @@ bool CEsmScriptTemplate::Load(const TCHAR *pFilename) {
  *
  *=========================================================================*/
 
-bool CEsmScriptTemplate::ParseText(void) {
+bool CEsmScriptTemplate::ParseText() {
 	const TCHAR *pParse;
 	const TCHAR *pLastVarStart;
 
@@ -479,7 +479,7 @@ bool CEsmScriptTemplate::ParseText(void) {
 		VarLength++;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

@@ -69,6 +69,7 @@ CEsmScrTempView::CEsmScrTempView() : CFormView(CEsmScrTempView::IDD) {
 	m_pDlgHandler = NULL;
 	m_pDocument = NULL;
 	m_hAccelerator = NULL;
+
 	/* Default options */
 	m_Options.KeepQuotes = true;
 	m_Options.OnlyCompleteRows = true;
@@ -104,7 +105,7 @@ CEsmScrTempView::~CEsmScrTempView() {
  *
  *=========================================================================*/
 
-bool CEsmScrTempView::CheckCsvFile(void) {
+bool CEsmScrTempView::CheckCsvFile() {
 	int iResult;
 	bool Result;
 
@@ -117,7 +118,7 @@ bool CEsmScrTempView::CheckCsvFile(void) {
 			ErrorHandler.AddError(ERR_BADINPUT,
 			                      _T("No %s column found in the CSV file!"),
 			                      ESMSCRTEMP_CSV_SCRIPTNAME);
-			return (false);
+			return false;
 		}
 	}
 
@@ -129,11 +130,11 @@ bool CEsmScrTempView::CheckCsvFile(void) {
 		if (Result) {
 			ErrorHandler.AddError(ERR_BADINPUT,
 			                      _T("Missing or empty cells found in the CSV file!"));
-			return (false);
+			return false;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -149,38 +150,38 @@ bool CEsmScrTempView::CheckCsvFile(void) {
  *
  *=========================================================================*/
 
-bool CEsmScrTempView::CheckTemplate(void) {
+bool CEsmScrTempView::CheckTemplate() {
 	bool Result;
 
 	/* Do we have a template file? */
 
 	if (!HasTemplateFile()) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("No template file loaded!"));
-		return (false);
+		return false;
 	}
 
 	/* Do we have a csv file? */
 
 	if (!HasCsvFile()) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("No csv file loaded!"));
-		return (false);
+		return false;
 	}
 
 	/* Check the template file parameters */
 	Result = CheckTemplateFile();
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Check the csv file parameters */
 	Result = CheckCsvFile();
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -197,7 +198,7 @@ bool CEsmScrTempView::CheckTemplate(void) {
  *
  *=========================================================================*/
 
-bool CEsmScrTempView::CheckTemplateFile(void) {
+bool CEsmScrTempView::CheckTemplateFile() {
 	esmscrtempvar_t *pTempVar;
 	int Index;
 	int iResult;
@@ -213,11 +214,11 @@ bool CEsmScrTempView::CheckTemplateFile(void) {
 			ErrorHandler.AddError(ERR_BADINPUT,
 			                      _T("No '%s' column found in the CSV file!"),
 			                      pTempVar->Name);
-			return (false);
+			return false;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -234,10 +235,11 @@ bool CEsmScrTempView::CheckTemplateFile(void) {
  *
  *=========================================================================*/
 
-bool CEsmScrTempView::CreateScripts(void) {
+bool CEsmScrTempView::CreateScripts() {
 	CCsvRow *pRow;
 	bool Result;
 	int RowIndex;
+
 	/* Update the CSV column indices for the template variables */
 	UpdateColIndices();
 	m_CreatedScripts = 0;
@@ -254,11 +256,11 @@ bool CEsmScrTempView::CreateScripts(void) {
 		Result = CreateScript(pRow);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -282,6 +284,7 @@ bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 	CString ScriptName;
 	bool Result;
 	int iResult;
+
 	/* Create/get the current script name */
 	m_CreatedScripts++;
 	ScriptName = MakeScriptName(pRow);
@@ -294,7 +297,7 @@ bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 		pRecInfo = m_pDocument->CreateNewRecord(MWESM_REC_SCPT, ScriptName);
 
 		if (pRecInfo == NULL) {
-			return (false);
+			return false;
 		}
 	}
 	/* Existing record is incorrect type */
@@ -303,12 +306,12 @@ bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 		                      _T("The previous record '%s' is not a script (%s)!"),
 		                      ScriptName,
 		                      pRecInfo->pRecord->GetItemType());
-		return (false);
+		return false;
 	} else { /* Use an existing script record */
 		pRecInfo = m_pDocument->CopyToActive(pRecInfo);
 
 		if (pRecInfo == NULL) {
-			return (false);
+			return false;
 		}
 	}
 
@@ -319,7 +322,7 @@ bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 	Result = ParseScriptText(pRow, ScriptName);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Update the script text */
@@ -355,7 +358,7 @@ bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 
 	/* Update any record view */
 	m_pDocument->UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATEITEM, (CObject *)pRecInfo);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -389,7 +392,7 @@ void CEsmScrTempView::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::GetControlData(void) {
+void CEsmScrTempView::GetControlData() {
 	m_Page1.GetControlData();
 	OnUpdateText();
 }
@@ -407,11 +410,11 @@ void CEsmScrTempView::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmScrTempView::HasCsvFile(void) {
+bool CEsmScrTempView::HasCsvFile() {
 	return !(*m_CsvFile.GetFilename() == NULL_CHAR);
 }
 
-bool CEsmScrTempView::HasTemplateFile(void) {
+bool CEsmScrTempView::HasTemplateFile() {
 	return !(*m_ScriptTemplate.GetFilename() == NULL_CHAR);
 }
 
@@ -466,14 +469,14 @@ const TCHAR *CEsmScrTempView::MakeScriptName(CCsvRow *pRow) {
 
 			if (pString != NULL && !pString->IsEmpty()) {
 				s_Buffer = (const TCHAR *)*pString;
-				return (s_Buffer);
+				return s_Buffer;
 			}
 		}
 	}
 
 	/* Autocreate the scriptname? */
 	s_Buffer.Format(_T("%s%04d"), m_Options.ScriptName, m_CreatedScripts);
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -487,7 +490,7 @@ const TCHAR *CEsmScrTempView::MakeScriptName(CCsvRow *pRow) {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::OnCheckTemplate(void) {
+void CEsmScrTempView::OnCheckTemplate() {
 	bool Result;
 	/* Update the control data */
 	GetControlData();
@@ -514,7 +517,7 @@ void CEsmScrTempView::OnCheckTemplate(void) {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::OnCreateTemplate(void) {
+void CEsmScrTempView::OnCreateTemplate() {
 	bool Result;
 	/* Update the control data */
 	GetControlData();
@@ -640,7 +643,7 @@ void CEsmScrTempView::OnInitialUpdate() {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::OnReloadCsvFile(void) {
+void CEsmScrTempView::OnReloadCsvFile() {
 	CString Buffer;
 	bool Result;
 	/* See if there is a file to reload */
@@ -677,7 +680,7 @@ void CEsmScrTempView::OnReloadCsvFile(void) {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::OnReloadScrTemp(void) {
+void CEsmScrTempView::OnReloadScrTemp() {
 	CString Buffer;
 	bool Result;
 	/* See if there is a file to reload */
@@ -753,7 +756,7 @@ void CEsmScrTempView::OnScrtempLoadcsv() {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::OnLoadTemplate(void) {
+void CEsmScrTempView::OnLoadTemplate() {
 	CFileDialog FileDlg(TRUE,
 	                    ESM_SCRTEMP_FILEEXT,
 	                    NULL,
@@ -793,7 +796,7 @@ void CEsmScrTempView::OnLoadTemplate(void) {
  *
  *=========================================================================*/
 
-void CEsmScrTempView::OnUpdateText(void) {
+void CEsmScrTempView::OnUpdateText() {
 	m_Page2.UpdateText();
 	m_ScriptTemplate.ParseText();
 	m_Page1.UpdatePage();
@@ -822,7 +825,7 @@ bool CEsmScrTempView::ParseScriptText(CCsvRow *pRow, const TCHAR *pScriptName) {
 	/* Convert the text */
 	Result = m_ScriptTemplate.ConvertText(pBuffer, ESM_SCRTEMP_MAXTEMPSIZE, pRow);
 	m_NewScriptText.ReleaseBuffer(-1);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -843,7 +846,7 @@ BOOL CEsmScrTempView::PreTranslateMessage(MSG *pMsg) {
 		Result = TranslateAccelerator(m_hWnd, m_hAccelerator, pMsg);
 
 		if (Result != 0) {
-			return (Result);
+			return Result;
 		}
 	}
 
@@ -864,7 +867,7 @@ BOOL CEsmScrTempView::PreTranslateMessage(MSG *pMsg) {
  *
  *=========================================================================*/
 
-bool CEsmScrTempView::UpdateColIndices(void) {
+bool CEsmScrTempView::UpdateColIndices() {
 	esmscrtempvar_t *pTempVar;
 	int iResult;
 	int Index;
@@ -878,7 +881,7 @@ bool CEsmScrTempView::UpdateColIndices(void) {
 		pTempVar->CsvColIndex = iResult;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

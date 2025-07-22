@@ -66,20 +66,16 @@ class CEsmNpcPage1 : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmNpcPage1();
 	~CEsmNpcPage1();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Get the current autocalc status */
-
-	bool IsAutoCalc(void);
+	bool IsAutoCalc();
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -89,21 +85,17 @@ class CEsmNpcPage1 : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Used for the skill list sorting */
-
 	int SortCallback(LPARAM lParam1, LPARAM lParam2);
 
 	/* Update record data */
-
 	int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Update the enabled/disabled controls */
-
-	void UpdateAutoCalc(void);
+	void UpdateAutoCalc();
 
 	/* Dialog Data */
 

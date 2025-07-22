@@ -47,7 +47,6 @@ class CEsmClassDlg : public CEsmRecDialog {
   protected:
 
 	/* Update modified items during edit */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
@@ -56,17 +55,14 @@ class CEsmClassDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmClassDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

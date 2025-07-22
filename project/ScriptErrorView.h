@@ -44,7 +44,6 @@ class CScriptErrorView : public CFormView {
 	DECLARE_DYNCREATE(CScriptErrorView);
 
 	/* Destructor */
-
 	virtual ~CScriptErrorView();
 
 
@@ -61,11 +60,9 @@ class CScriptErrorView : public CFormView {
 	//}}AFX_DATA
 
 	/* Clear the current error list */
-
-	void ClearErrors(void);
+	void ClearErrors();
 
 	/* Update the displayed errors */
-
 	void UpdateErrors(CEsmScriptErrArray *pErrorArray);
 
 

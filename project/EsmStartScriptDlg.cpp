@@ -99,7 +99,7 @@ void CEsmStartScriptDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmStartScriptDlg::GetControlData(void) {
+void CEsmStartScriptDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmStartScriptDlg::GetControlData()");
 	CString Buffer;
 	/* Update the record pointer and data */
@@ -119,6 +119,7 @@ void CEsmStartScriptDlg::GetControlData(void) {
 	/* Script name */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pStartScript->SetName(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pStartScript->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pStartScript->SetBlocked(m_BlockedCheck.GetCheck() != 0);
@@ -135,9 +136,9 @@ void CEsmStartScriptDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmStartScriptDlg::IsModified(void) {
+bool CEsmStartScriptDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -146,7 +147,7 @@ bool CEsmStartScriptDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -163,6 +164,7 @@ bool CEsmStartScriptDlg::IsModified(void) {
 void CEsmStartScriptDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pStartScript = (CEsmStartScript *)GetRecInfo()->pRecord;
@@ -223,7 +225,7 @@ int CEsmStartScriptDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -237,7 +239,7 @@ int CEsmStartScriptDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmStartScriptDlg::SetControlData(void) {
+void CEsmStartScriptDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pStartScript == NULL) {
 		return;
@@ -246,8 +248,10 @@ void CEsmStartScriptDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pStartScript->GetID());
 	UpdateTitle(m_pStartScript->GetID());
+
 	/* Item lists */
 	m_ScriptList.SelectString(-1, m_pStartScript->GetName());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pStartScript->IsBlocked());
 	m_PersistCheck.SetCheck(m_pStartScript->IsPersist());

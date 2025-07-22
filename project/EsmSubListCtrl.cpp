@@ -54,7 +54,7 @@ int CALLBACK l_ItemSubSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParam
 		         * ((int)pCellRef2->IsDeleted() - (int)pCellRef1->IsDeleted());
 	} else {
 		if (pCellRef1->GetRecInfo() == NULL || pCellRef2->GetRecInfo() == NULL) {
-			return (0);
+			return 0;
 		}
 
 		Result = pCellRef1->GetRecInfo()->pRecord->CompareFields(SortType,
@@ -62,10 +62,10 @@ int CALLBACK l_ItemSubSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParam
 	}
 
 	if (Flags) {
-		return (-Result);
+		return -Result;
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -135,7 +135,7 @@ int CEsmSubListCtrl::AddItem(CEsmSubCellRef *pCellRef) {
 	ListIndex = FindCellRef(pCellRef);
 
 	if (ListIndex >= 0) {
-		return (ListIndex);
+		return ListIndex;
 	}
 
 	/* Initialize the record info */
@@ -159,13 +159,13 @@ int CEsmSubListCtrl::AddItem(CEsmSubCellRef *pCellRef) {
 	ListIndex = InsertItem(GetItemCount(), "", ImageIndex);
 
 	if (ListIndex < 0) {
-		return (ListIndex);
+		return ListIndex;
 	}
 
 	/* Set the item data */
 	SetItemData(ListIndex, (DWORD)pCellRef);
 	SetItem(ListIndex, pCellRef);
-	return (ListIndex);
+	return ListIndex;
 }
 
 /*===========================================================================
@@ -192,12 +192,12 @@ int CEsmSubListCtrl::FindCellRef(CEsmSubCellRef *pCellRef) {
 		if (pCellRef1->IsSame(pCellRef)) {
 			CEsmSubFRMR* pLong = (CEsmSubFRMR *)pCellRef->FindSubRecord(MWESM_SUBREC_FRMR);
 			SystemLog.Printf ("Found Same, %d", pLong->GetValue());
-			return (Index);
+			return Index;
 		}
 	}
 
 	/* Not found */
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -213,16 +213,16 @@ int CEsmSubListCtrl::FindCellRef(CEsmSubCellRef *pCellRef) {
 
 esmrecinfo_t *CEsmSubListCtrl::GetRecInfo(const int Item) {
 	if (Item < 0 || Item >= GetItemCount()) {
-		return (NULL);
+		return NULL;
 	}
 
 	CEsmSubCellRef *pCellRef = (CEsmSubCellRef *)GetItemData(Item);
 
 	if (pCellRef == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (pCellRef->GetRecInfo());
+	return pCellRef->GetRecInfo();
 }
 
 /*===========================================================================

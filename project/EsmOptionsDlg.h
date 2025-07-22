@@ -43,10 +43,10 @@ class CEsmOptionsDlg : public CDialog {
   protected:
 
 	/* Fill the various lists with contents */
-	void FillWarnLevelList(void);
-	void FillFormatList(void);
-	void FillFontSizeList(void);
-	void FillFontNameList(void);
+	void FillWarnLevelList();
+	void FillFormatList();
+	void FillFontSizeList();
+	void FillFontNameList();
 
 
 	/*---------- Begin Public Class Methods ----------------------------*/
@@ -56,14 +56,14 @@ class CEsmOptionsDlg : public CDialog {
 	CEsmOptionsDlg(CWnd *pParent = NULL);
 
 	/* Save the control data to the options object */
-	void GetControlData(void);
-	void GetFormatData(void);
+	void GetControlData();
+	void GetFormatData();
 	void GetFontData(CFont *pFont);
 
 	/* Set the control data from the options object */
-	void SetControlData(void);
+	void SetControlData();
 	void SetFormatData(const int Index);
-	void SetFontData(void);
+	void SetFontData();
 
 	/* Set class members */
 	void SetOptions(CEsmOptions *pOptions) {
@@ -71,7 +71,7 @@ class CEsmOptionsDlg : public CDialog {
 	}
 
 	/* Update the sample font display in the textbox */
-	void UpdateSampleFontText(void);
+	void UpdateSampleFontText();
 
 	/* Dialog Data */
 	//{{AFX_DATA(CEsmOptionsDlg)

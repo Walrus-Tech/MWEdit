@@ -179,9 +179,11 @@ BEGIN_MESSAGE_MAP(CEsmDialogDlg, CEsmRecDialog)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONEDIT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnEditRecord)
 	ON_MESSAGE(ESMDLG_MSG_ONINFOEDIT, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnEditInfoRecord)
+
 	ON_BN_CLICKED(IDC_MOVEUPBUTTON, OnMoveupbutton)
 	ON_BN_CLICKED(IDC_MOVEDOWNBUTTON, OnMovedownbutton)
 	ON_WM_CONTEXTMENU()
+
 	ON_COMMAND(ID_EDIT_ADDNEW, OnEditAddnew)
 	ON_COMMAND(ID_EDIT_EDITITEM, OnEditEdititem)
 	ON_CBN_SELCHANGE(IDC_FILTERLIST, OnSelchangeFilterlist)
@@ -247,20 +249,20 @@ bool CEsmDialogDlg::CanCleanInfo(esmrecinfo_t *pRecInfo) {
 	pPrevRecInfo = GetDocument()->FindRecInfo(pPrevInfo);
 
 	if (pPrevRecInfo == NULL) {
-		return (true);
+		return true;
 	}
 
 	/* Ensure the linked list info names match exactly */
 
 	if (StringCompare(pInfo->GetNextName(), pPrevInfo->GetNextName(), false) != 0) {
-		return (false);
+		return false;
 	}
 
 	if (StringCompare(pInfo->GetPrevName(), pPrevInfo->GetPrevName(), false) != 0) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -287,6 +289,7 @@ bool CEsmDialogDlg::CheckInfoLinks(esmrecinfo_t *pStartInfoRec,
 	const TCHAR *pPrevInfo;
 	int LastIndex;
 	int RecIndex;
+
 	/* Initialize the loop variable */
 	RecIndex = m_InfoList.FindRecord(pStartInfoRec);
 	pInfo = (CEsmInfo *)pStartInfoRec->pRecord;
@@ -328,7 +331,7 @@ bool CEsmDialogDlg::CheckInfoLinks(esmrecinfo_t *pStartInfoRec,
 		pPrevInfo = pInfo->GetPrevName();
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -342,7 +345,7 @@ bool CEsmDialogDlg::CheckInfoLinks(esmrecinfo_t *pStartInfoRec,
  *
  *=========================================================================*/
 
-void CEsmDialogDlg::ClearNewInfos(void) {
+void CEsmDialogDlg::ClearNewInfos() {
 	DEFINE_FUNCTION("CEsmDialogDlg::ClearNewInfos()");
 	esminfodata_t *pInfoData;
 	int Index;
@@ -473,7 +476,7 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(const int ListIndex) {
 	/* Ensure a valid list index */
 
 	if (ListIndex < 0 || ListIndex >= m_InfoList.GetItemCount()) {
-		return (NULL);
+		return NULL;
 	}
 
 	pRecInfo = (esmrecinfo_t *)m_InfoList.GetItemData(ListIndex);
@@ -487,13 +490,13 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(const int ListIndex) {
 	else if (pRecInfo->UserData >= MWESM_DLGFORM_OLDINFO) {
 		pNewRecInfo = pRecInfo;
 	} else {
-		return (pRecInfo);
+		return pRecInfo;
 	}
 
 	/* Update the list item */
 	m_InfoList.SetItemData(ListIndex, (DWORD)pNewRecInfo);
 	//m_InfoList.SetItem(ListIndex, pNewRecInfo);
-	return (pNewRecInfo);
+	return pNewRecInfo;
 }
 
 /*===========================================================================
@@ -523,18 +526,18 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(esmrecinfo_t *pRecInfo, const bool Mu
 	/* Ensure valid input */
 
 	if (pRecInfo == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Determine if we have to create a new info record */
 
 	if (MustBeNew) {
 		if (pRecInfo->UserData == MWESM_DLGFORM_NEWINFO) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	} else {
 		if (pRecInfo->UserData >= MWESM_DLGFORM_OLDINFO) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 
 		//if (pRecInfo->pFile->IsActive()) return (pRecInfo);
@@ -574,7 +577,7 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(esmrecinfo_t *pRecInfo, const bool Mu
 
 	/* Save the new info record to the info array */
 	m_NewInfos.Add(pInfoData);
-	return (pInfoData->pNewRecInfo);
+	return pInfoData->pNewRecInfo;
 }
 
 /*===========================================================================
@@ -612,7 +615,7 @@ void CEsmDialogDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmDialogDlg::FillInfoList(void) {
+void CEsmDialogDlg::FillInfoList() {
 	esmrecinfo_t *pStartRecInfo;
 	esmrecinfo_t *pRecInfo;
 	/* Find the start of the info list */
@@ -659,12 +662,12 @@ esminfodata_t *CEsmDialogDlg::FindNewInfo(const TCHAR *pID) {
 		}
 
 		if (pInfoData->pNewRecInfo->pRecord->IsID(pID)) {
-			return (pInfoData);
+			return pInfoData;
 		}
 	}
 
 	/* Not found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -695,12 +698,12 @@ esminfodata_t *CEsmDialogDlg::FindNewInfo(esmrecinfo_t *pRecInfo) {
 		}
 
 		if (pInfoData->pNewRecInfo == pRecInfo) {
-			return (pInfoData);
+			return pInfoData;
 		}
 	}
 
 	/* Not found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -723,14 +726,14 @@ esmrecinfo_t *CEsmDialogDlg::GetRecInfo(const TCHAR *pID, const TCHAR *pDialogID
 	/* Not a valid INFO record */
 
 	if (pID == NULL || *pID == NULL_CHAR) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Find a new info record */
 	pInfoData = FindNewInfo(pID);
 
 	if (pInfoData != NULL) {
-		return (pInfoData->pNewRecInfo);
+		return pInfoData->pNewRecInfo;
 	}
 
 	/* Get the 'old' record from the document */
@@ -743,7 +746,7 @@ esmrecinfo_t *CEsmDialogDlg::GetRecInfo(const TCHAR *pID, const TCHAR *pDialogID
 		pRecInfo = GetDocument()->FindInfoRecord(pID, pDialogID);
 	}
 
-	return (pRecInfo);
+	return pRecInfo;
 }
 
 /*===========================================================================
@@ -757,12 +760,13 @@ esmrecinfo_t *CEsmDialogDlg::GetRecInfo(const TCHAR *pID, const TCHAR *pDialogID
  *
  *=========================================================================*/
 
-void CEsmDialogDlg::GetControlData(void) {
+void CEsmDialogDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmDialogDlg::GetControlData()");
 	esminfodata_t *pInfoData;
 	CString Buffer;
 	bool AddNewRecord;
 	int Index;
+
 	/* Save the current column widths of the info list */
 	m_InfoList.UpdateColData();
 	/* Update the dialogue pointer and data */
@@ -786,8 +790,8 @@ void CEsmDialogDlg::GetControlData(void) {
 
 	for (Index = 0; Index < m_NewInfos.GetSize(); Index++) {
 		pInfoData = m_NewInfos.GetAt(Index);
-		AddNewRecord = pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_OLDINFO ||
-		               pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_NEWINFO;
+		AddNewRecord = pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_OLDINFO
+		               || pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_NEWINFO;
 
 		/* Clean a record from the active file */
 
@@ -797,9 +801,7 @@ void CEsmDialogDlg::GetControlData(void) {
 			DestroyPointer(pInfoData->pNewRecInfo);
 			DestroyPointer(pInfoData);
 			continue;
-		}
-		/* Add the new info to the active file if required */
-		else if (AddNewRecord) {
+		} else if (AddNewRecord) { /* Add the new info to the active file if required */
 			GetDocument()->GetActivePlugin()->AddRecord(pInfoData->pNewRecInfo->pRecord, m_pDialog);
 			((CEsmInfo *)pInfoData->pNewRecInfo->pRecord)->SetDialParent(m_pDialog);
 		} else {
@@ -808,7 +810,8 @@ void CEsmDialogDlg::GetControlData(void) {
 
 		/* Rearrange the rec info structures */
 
-		if (pInfoData->pRecInfo == NULL || pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_NEWINFO) {
+		if (pInfoData->pRecInfo == NULL
+		    || pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_NEWINFO) {
 			GetDocument()->AddRecInfo(pInfoData->pNewRecInfo);
 			DestroyPointer(pInfoData);
 		} else if (pInfoData->pNewRecInfo->UserData == MWESM_DLGFORM_OLDINFO) {
@@ -840,9 +843,9 @@ void CEsmDialogDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmDialogDlg::IsModified(void) {
+bool CEsmDialogDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -851,7 +854,7 @@ bool CEsmDialogDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -872,7 +875,7 @@ LRESULT CEsmDialogDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
 	/* Get the recinfo record and pass it onto the OnEditInfoRecord() method */
 
 	if (lParam < 0) {
-		return (0);
+		return 0;
 	}
 
 	pRecInfo = (esmrecinfo_t *)m_InfoList.GetItemData(lParam);
@@ -896,6 +899,7 @@ LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 	esminfodata_t *pInfoData;
 	CEsmInfo *pInfo;
 	CEsmInfo *pNewInfo;
+
 	bool Result;
 	bool HasNewInfo;
 	bool AlreadyIsNew;
@@ -904,7 +908,7 @@ LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 	/* Ensure a valid input record to edit */
 
 	if (pRecInfo == NULL) {
-		return (0);
+		return 0;
 	}
 
 	pInfo = (CEsmInfo *)pRecInfo->pRecord;
@@ -936,7 +940,7 @@ LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 	/* Abort if the user cancelled the edit dialog */
 
 	if (!Result) {
-		return (0);
+		return 0;
 	}
 
 	/* Check if we need to create a new info */
@@ -944,6 +948,7 @@ LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 	if (HasNewInfo) {
 		CreatePointer(pInfoData, esminfodata_t);
 		m_NewInfos.Add(pInfoData);
+
 		/* Initialize the new info data */
 		pInfoData->pRecInfo = pRecInfo;
 		CreatePointer(pInfoData->pNewRecInfo, esmrecinfo_t);
@@ -966,13 +971,11 @@ LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 		/* Update the list data */
 		m_InfoList.SetItemData(ListIndex, (DWORD) pInfoData->pNewRecInfo);
 		m_InfoList.SetItem(ListIndex, pInfoData->pNewRecInfo);
-	}
-	/* Update an existing new info record in the list */
-	else {
+	} else { /* Update an existing new info record in the list */
 		m_InfoList.SetItem(ListIndex, pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1038,14 +1041,14 @@ LRESULT CEsmDialogDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Only accept INFO types */
 
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_INFO)) {
-		return (0);
+		return 0;
 	}
 
 	/* Copy the the dialogue item  */
 	//pRecInfo->UserData = 1;
 	//ListIndex = m_ItemList.AddItem(pRecInfo);
 	//m_ItemList.SetItemText(ListIndex, 0, _T("1"));
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1061,10 +1064,10 @@ LRESULT CEsmDialogDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 
 LRESULT CEsmDialogDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1095,7 +1098,7 @@ int CEsmDialogDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		}
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1109,7 +1112,7 @@ int CEsmDialogDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmDialogDlg::SetControlData(void) {
+void CEsmDialogDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pDialog == NULL) {
 		return;
@@ -1293,7 +1296,7 @@ void CEsmDialogDlg::OnMovedownbutton() {
 	}
 
 	if (pDestNextRecInfo != NULL) {
-		pDestNextInfo = (CEsmInfo *) pDestNextRecInfo->pRecord;
+		pDestNextInfo = (CEsmInfo *)pDestNextRecInfo->pRecord;
 	}
 
 	pSourcePrevRecInfo = CreateNewInfo(GetRecInfo(pInfo->GetPrevName()));

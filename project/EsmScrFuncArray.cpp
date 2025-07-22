@@ -47,7 +47,7 @@ CEsmScrFuncArray::CEsmScrFuncArray () : m_Functions(0) {
  *
  *=========================================================================*/
 
-void CEsmScrFuncArray::Destroy(void) {
+void CEsmScrFuncArray::Destroy() {
 	DEFINE_FUNCTION("CEsmScrFuncArray::Destroy()");
 	CEsmScrFuncData *pFunction;
 	int Index;
@@ -86,11 +86,11 @@ CEsmScrFuncData *CEsmScrFuncArray::FindFunction(const TCHAR *pName) {
 		pFunction = m_Functions.GetAt(Index);
 
 		if (pFunction->IsName(pName)) {
-			return (pFunction);
+			return pFunction;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -114,7 +114,7 @@ bool CEsmScrFuncArray::Load(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, _T("rt"));
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Clear the current contents */
@@ -155,7 +155,7 @@ bool CEsmScrFuncArray::Read(CGenFile &File) {
 		}
 
 		if (LineResult == READLINE_ERROR) {
-			return (false);
+			return false;
 		}
 
 		/* Attempt to parse the input line */
@@ -171,12 +171,12 @@ bool CEsmScrFuncArray::Read(CGenFile &File) {
 			Result = ReadFunction(File, pValue);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

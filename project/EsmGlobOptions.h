@@ -32,28 +32,28 @@
  *
  *=========================================================================*/
 
-bool GetEsmOptNoScriptFormat(void);
-bool GetEsmOptBackupSaves(void);
-bool GetEsmOptNoScriptPrompt(void);
-bool GetEsmOptAllowExtFuncs(void);
-bool GetEsmOptUseExtraFile(void);
-bool GetEsmOptStrictIDs(void);
-bool GetEsmOptInitialIndentLevel(void);
-bool GetEsmOptIndentCommentsMore(void);
-bool GetEsmOptAllowBloodmoon(void);
-bool GetEsmOptAllowTribunal(void);
+bool GetEsmOptNoScriptFormat();
+bool GetEsmOptBackupSaves();
+bool GetEsmOptNoScriptPrompt();
+bool GetEsmOptAllowExtFuncs();
+bool GetEsmOptUseExtraFile();
+bool GetEsmOptStrictIDs();
+bool GetEsmOptInitialIndentLevel();
+bool GetEsmOptIndentCommentsMore();
+bool GetEsmOptAllowBloodmoon();
+bool GetEsmOptAllowTribunal();
 
-int GetEsmOptScriptWarnLevel(void);
-int GetEsmOptScriptFormatType(void);
+int GetEsmOptScriptWarnLevel();
+int GetEsmOptScriptFormatType();
 
-const TCHAR *GetEsmOptDefaultAuthor(void);
-const TCHAR *GetEsmOptExtraFile(void);
-const TCHAR *GetEsmOptScriptIndentString(void);
+const TCHAR *GetEsmOptDefaultAuthor();
+const TCHAR *GetEsmOptExtraFile();
+const TCHAR *GetEsmOptScriptIndentString();
 
 /* Forward definition */
 
 class CEsmScriptOptions;
-CEsmScriptOptions *GetEsmOptScriptOptions(void);
+CEsmScriptOptions *GetEsmOptScriptOptions();
 
 /*===========================================================================
  *      End of Function Prototypes

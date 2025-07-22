@@ -33,15 +33,12 @@
  *=========================================================================*/
 
 /* Array of dialog pointers */
-
 typedef TPtrArray<CFrameWnd> CEsmFrameArray;
 
 /* Type for dialog static creation methods */
-
 typedef CEsmRecDialog *(*ESMRECDLG_CREATEFUNC) (void);
 
 /* Function typedef for custom dialog creation */
-
 class CEsmDlgHandler;
 typedef CFrameWnd *(CEsmDlgHandler::*DLGCREATE_FUNC) (esmrecinfo_t* pRecInfo);
 
@@ -83,7 +80,7 @@ class CEsmDlgHandler {
 	CMWEditDoc *m_pDocument; /* Current document */
 	CMainFrame *m_pMainFrame;
 
-	CFrameWnd *m_pFindDlg; /* Find dialog parent frame */
+	CFrameWnd *m_pFindDlg;   /* Find dialog parent frame */
 	CFrameWnd *m_pUsesDlg;
 	CFrameWnd *m_pScrTempDlg;
 	CFrameWnd *m_pScriptCompareDlg;
@@ -93,7 +90,6 @@ class CEsmDlgHandler {
   protected:
 
 	/* Create a new dialog based on the input type */
-
 	CFrameWnd *CreateESMDialog(esmrecinfo_t *pRecInfo, const bool IsNew);
 	CFrameWnd *CreateESMDialog(esmdlgcreateinfo_t &CreateInfo);
 
@@ -102,95 +98,82 @@ class CEsmDlgHandler {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEsmDlgHandler();
 
 	virtual ~CEsmDlgHandler() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Delete all the dialogs current in the array */
-
-	void ClearDlgArray(void);
+	void ClearDlgArray();
 
 	/* Create a copy of a record */
-
 	CEsmRecord *CreateCopy(CEsmRecord *pRecord);
 
 	/* Custom dialog creation methods */
-
 	CFrameWnd *CreateDialogueDlg(esmrecinfo_t *pRecInfo);
 
 	/* Attempt to open a new edit window */
-
 	bool EditRecord(esmrecinfo_t *pRecInfo, const bool IsNew = false);
 
 	/* Find an existing dialog */
-
 	CFrameWnd *FindDialog(esmrecinfo_t *pRecInfo);
 
 	/* Get the current active filename */
+	const TCHAR *GetDocFilename();
 
-	const TCHAR *GetDocFilename(void);
-
-	CMWEditDoc *GetDocument(void) {
-		return (m_pDocument);
+	CMWEditDoc *GetDocument() {
+		return m_pDocument;
 	}
 
-	CEsmFile *GetActiveFile(void);
+	CEsmFile *GetActiveFile();
 
-	CMainFrame *GetMainFrame(void) {
-		return (m_pMainFrame);
+	CMainFrame *GetMainFrame() {
+		return m_pMainFrame;
 	}
 
 	/* Try and find a magic effect record */
-
 	esmrecinfo_t *GetEffectRecord(const int EffectID);
 
 	/* Checks the validity of a new ID */
-
 	bool IsValidID(const TCHAR *pID);
 	bool IsExistingID(const TCHAR *pID);
 
 	/* Notifies when the find dialog is closed */
 
-	void OnCloseFindDlg(void) {
+	void OnCloseFindDlg() {
 		m_pFindDlg = NULL;
 	}
 
-	void OnCloseUsesDlg(void) {
+	void OnCloseUsesDlg() {
 		m_pUsesDlg = NULL;
 	}
 
-	void OnCloseScrTempDlg(void) {
+	void OnCloseScrTempDlg() {
 		m_pScrTempDlg = NULL;
 	}
 
-	void OnCloseScriptCompareDlg(void) {
+	void OnCloseScriptCompareDlg() {
 		m_pScriptCompareDlg = NULL;
 	}
 
 	/* Indicates that changes are about to be written to the given object */
-
 	int OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo);
 	int OnPostSaveRecord(esmreceditinfo_t *pRecEditInfo);
 
 	/* Request to create a new item of the given type */
-
 	CEsmRecord *OnAddNew(const TCHAR *pType);
 	CEsmRecord *OnAddNewDialog(const int DialType);
 
 	/* Display other dialog types */
-
-	void OpenFindDlg(void);
+	void OpenFindDlg();
 	void OpenUsesDlg(esmrecinfo_t *pRecInfo);
-	CEsmScriptCompareDlg *OpenScriptCompareDlg(void);
-	void OpenScrTempDlg(void);
+	CEsmScriptCompareDlg *OpenScriptCompareDlg();
+	void OpenScrTempDlg();
 
 	/* Removes a frame from the array */
-
 	void RemoveFrame(CFrameWnd *pFrame);
 
 	/* Set class members */

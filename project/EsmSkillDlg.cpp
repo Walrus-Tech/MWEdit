@@ -77,6 +77,7 @@ CEsmSkillDlg::CEsmSkillDlg() : CEsmRecDialog(CEsmSkillDlg::IDD) {
 
 void CEsmSkillDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmSkillDlg)
 	DDX_Control(pDX, IDC_VALUETEXT4, m_ValueText4);
 	DDX_Control(pDX, IDC_VALUETEXT3, m_ValueText3);
@@ -107,11 +108,12 @@ void CEsmSkillDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmSkillDlg::GetControlData(void) {
+void CEsmSkillDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSkillDlg::GetControlData()");
 	skilldata_t *pSkillData;
 	const TCHAR *pAction;
 	CString Buffer;
+
 	/* Update the armor pointer and data */
 	m_pSkill = (CEsmSkill *)GetRecInfo()->pRecord;
 	ASSERT(m_pSkill != NULL);
@@ -170,9 +172,9 @@ void CEsmSkillDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmSkillDlg::IsModified(void) {
+bool CEsmSkillDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -181,7 +183,7 @@ bool CEsmSkillDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -229,7 +231,7 @@ void CEsmSkillDlg::OnInitialUpdate() {
  *
  *=========================================================================*/
 
-void CEsmSkillDlg::SetControlData(void) {
+void CEsmSkillDlg::SetControlData() {
 	skilldata_t *pSkillData;
 	CString Buffer;
 	const TCHAR *pAction;

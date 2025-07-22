@@ -111,6 +111,7 @@ CEsmIntCellPage::~CEsmIntCellPage() {
 
 void CEsmIntCellPage::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmIntCellPage)
 	DDX_Control(pDX, IDC_COLORBOXF, m_ColorBoxF);
 
@@ -161,7 +162,7 @@ void CEsmIntCellPage::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmIntCellPage::GetControlData(void) {
+void CEsmIntCellPage::GetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
 	ambidata_t *pLightData;
@@ -236,7 +237,7 @@ void CEsmIntCellPage::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmIntCellPage::GetDocument(void) {
+CMWEditDoc *CEsmIntCellPage::GetDocument() {
 	DEFINE_FUNCTION("CEsmIntCellPage::GetDocument()");
 	ASSERT(m_pDlgParent != NULL);
 	return m_pDlgParent->GetDocument();
@@ -279,7 +280,7 @@ BOOL CEsmIntCellPage::OnInitDialog() {
 	m_GSpinF.SetRange32(0, 255);
 	m_BSpinF.SetRange32(0, 255);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -294,7 +295,7 @@ BOOL CEsmIntCellPage::OnInitDialog() {
  *=========================================================================*/
 
 int CEsmIntCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -308,7 +309,7 @@ int CEsmIntCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmIntCellPage::SetControlData(void) {
+void CEsmIntCellPage::SetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
 	ambidata_t *pLightData;

@@ -61,26 +61,22 @@ class CScriptErrorDlg : public CDialog {
   public:
 
 	/* Standard constructor */
-
 	CScriptErrorDlg(CWnd *pParent = NULL);
 
 	/* Clear/enable control contents */
-
-	void ClearControlData(void);
-	void ClearFunctionData(void);
+	void ClearControlData();
+	void ClearFunctionData();
 	void EnableControls(const bool Enable);
 	void EnableFuncCtrls(const bool Enable);
 
 	/* Set class members */
-
 	void SetScriptError(CEsmScriptError *pError) {
 		m_pError = pError;
 	}
 
 	/* Update the controls from the current error object */
-
-	void SetControlData(void);
-	void SetFunctionData(void);
+	void SetControlData();
+	void SetFunctionData();
 
 	/* Dialog Data */
 

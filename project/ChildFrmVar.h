@@ -57,7 +57,7 @@ class CChildFrameVar : public CMDIChildWnd {
 	virtual ~CChildFrameVar();
 
 
-	void FakeMaximize(void);
+	void FakeMaximize();
 
 	void SetSharedMenu(HMENU hMenu) {
 		m_hMenuShared = hMenu;
@@ -68,7 +68,6 @@ class CChildFrameVar : public CMDIChildWnd {
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
-
 #endif
 
 	/* ClassWizard generated virtual function overrides */
@@ -84,7 +83,7 @@ class CChildFrameVar : public CMDIChildWnd {
 
 	//{{AFX_MSG(CChildFrameVar)
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnClose (void);
+	afx_msg void OnClose();
 	afx_msg void OnSysCommand (UINT nID, LPARAM Param);
 	//}}AFX_MSG
 

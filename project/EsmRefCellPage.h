@@ -93,29 +93,24 @@ class CEsmRefCellPage : public CPropertyPage {
   protected:
 
 	/* Add/clean/delete/modify a cell reference in the cell */
-
 	bool AddNewCellRef(cellrefdata_t *pCellRefData);
 	bool CleanCellRef(cellrefdata_t *pCellRefData);
 	bool DeleteCellRef(cellrefdata_t *pCellRefData);
 	bool ModifyCellRef(cellrefdata_t *pCellRefData);
 
 	/* Add a cell reference to the modified reference array */
-
 	cellrefdata_t *AddNewCellRef(CEsmSubCellRef *pCellRef);
 	cellrefdata_t *CleanCellRef(CEsmSubCellRef *pCellRef);
 	cellrefdata_t *DeleteCellRef(CEsmSubCellRef *pCellRef);
 	cellrefdata_t *ModifyCellRef(CEsmSubCellRef *pCellRef);
 
 	/* Delete any cell references in the new cell ref array */
-
-	void ClearCellRefArray(void);
+	void ClearCellRefArray();
 
 	/* Delete or undelete a specific record */
-
 	void DeleteIndex(const int ListIndex, const bool Delete);
 
 	/* Attempt to find a new/old cell reference object */
-
 	cellrefdata_t *FindNewCellRef(CEsmSubCellRef *pCellRef);
 	cellrefdata_t *FindOldCellRef(CEsmSubCellRef *pCellRef);
 
@@ -125,16 +120,13 @@ class CEsmRefCellPage : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmRefCellPage();
 	~CEsmRefCellPage();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -144,17 +136,14 @@ class CEsmRefCellPage : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Update record data */
-
 	int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Update the cell reference list */
-
-	void UpdateCellRefList(void);
+	void UpdateCellRefList();
 
 	/* Dialog Data */
 

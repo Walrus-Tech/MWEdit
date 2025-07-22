@@ -94,7 +94,7 @@ void CEsmSettingDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmSettingDlg::GetControlData(void) {
+void CEsmSettingDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSettingDlg::GetControlData()");
 	CString Buffer;
 	/* Update the record pointer and data */
@@ -120,9 +120,9 @@ void CEsmSettingDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmSettingDlg::IsModified(void) {
+bool CEsmSettingDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -131,7 +131,7 @@ bool CEsmSettingDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -171,7 +171,7 @@ void CEsmSettingDlg::OnInitialUpdate() {
  *
  *=========================================================================*/
 
-void CEsmSettingDlg::SetControlData(void) {
+void CEsmSettingDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pSetting == NULL) {
 		return;

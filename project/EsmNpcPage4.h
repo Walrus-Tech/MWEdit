@@ -61,28 +61,22 @@ class CEsmNpcPage4 : public CPropertyPage {
   protected:
 
 	/* Creates a copy of all the given AI subrecords */
-
 	void AddAIRecords(const TCHAR *pType);
 
 	/* Delete all sub-records in the package array */
-
-	void ClearPackageArray(void);
+	void ClearPackageArray();
 
 	/* Delete all selected items in the list */
-
-	void DeleteSelectedItems(void);
+	void DeleteSelectedItems();
 
 	/* Find a subrecord array index */
-
 	CEsmSubNameFix *FindCNDTSubRec(CEsmSubRecord *pSubRecord);
 
 	/* Output the given AI package sub-record to the text control */
-
 	void OutputAIData(CEsmSubRecord *pSubRec);
 
 	/* Updates the package list */
-
-	void UpdatePackageList(void);
+	void UpdatePackageList();
 
 
 	/*---------- Begin Public Class Methods ------------------------*/
@@ -90,16 +84,13 @@ class CEsmNpcPage4 : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmNpcPage4();
 	~CEsmNpcPage4();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -109,9 +100,8 @@ class CEsmNpcPage4 : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Dialog Data */
 

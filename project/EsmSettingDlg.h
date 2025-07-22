@@ -53,17 +53,14 @@ class CEsmSettingDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmSettingDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

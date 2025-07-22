@@ -69,7 +69,7 @@ CEsmOptions::CEsmOptions() {
  * Class CEsmOptions Method - void Destroy (void);
  *
  *=========================================================================*/
-void CEsmOptions::Destroy(void) {
+void CEsmOptions::Destroy() {
 	//DEFINE_FUNCTION("CEsmOptions::Destroy()");
 }
 
@@ -85,17 +85,17 @@ void CEsmOptions::Destroy(void) {
  * Returns the script format options from the current type field.
  *
  *=========================================================================*/
-CEsmScriptOptions *CEsmOptions::GetScriptOptions(void) {
+CEsmScriptOptions *CEsmOptions::GetScriptOptions() {
 	switch (m_ScriptFormatType) {
 		case ESMSCR_FORMAT_WHITE:
-			return (&m_WhiteScriptOptions);
+			return &m_WhiteScriptOptions;
 
 		case ESMSCR_FORMAT_BLUE:
-			return (&m_BlueScriptOptions);
+			return &m_BlueScriptOptions;
 
 		case ESMSCR_FORMAT_USER:
 		default:
-			return (&m_UserScriptOptions);
+			return &m_UserScriptOptions;
 	}
 }
 
@@ -111,7 +111,7 @@ CEsmScriptOptions *CEsmOptions::GetScriptOptions(void) {
  * Read the options from the registry. Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmOptions::ReadFromRegistry(void) {
+bool CEsmOptions::ReadFromRegistry() {
 	CWinApp *pApp = AfxGetApp();
 	CString Buffer;
 	bool Result;
@@ -175,7 +175,7 @@ bool CEsmOptions::ReadFromRegistry(void) {
 	SetScriptIndentString(Buffer);
 	/* Script user format */
 	Result = m_UserScriptOptions.ReadFromRegistry();
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -190,7 +190,7 @@ bool CEsmOptions::ReadFromRegistry(void) {
  * Writes the options to the registry. Returns false on any error.
  *
  *=========================================================================*/
-bool CEsmOptions::WriteToRegistry(void) {
+bool CEsmOptions::WriteToRegistry() {
 	CWinApp *pApp = AfxGetApp();
 	bool Result;
 	int iResult;
@@ -247,7 +247,7 @@ bool CEsmOptions::WriteToRegistry(void) {
 	                                    m_ScriptIndentString);
 	/* Script user format */
 	Result = m_UserScriptOptions.WriteToRegistry();
-	return (Result & (iResult != 0));
+	return Result & (iResult != 0);
 }
 
 /*===========================================================================

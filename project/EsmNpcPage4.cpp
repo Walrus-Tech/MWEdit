@@ -146,7 +146,7 @@ void CEsmNpcPage4::AddAIRecords(const TCHAR *pType) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage4::ClearPackageArray(void) {
+void CEsmNpcPage4::ClearPackageArray() {
 	DEFINE_FUNCTION("CEsmNpcPage4::ClearPackageArray()");
 	CEsmSubRecord *pSubRec;
 	int Index;
@@ -170,7 +170,7 @@ void CEsmNpcPage4::ClearPackageArray(void) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage4::DeleteSelectedItems(void) {
+void CEsmNpcPage4::DeleteSelectedItems() {
 	CEsmSubRecord *pSubRec;
 	CEsmSubRecord *pSubNameRec;
 	int ListIndex;
@@ -205,6 +205,7 @@ void CEsmNpcPage4::DeleteSelectedItems(void) {
 
 void CEsmNpcPage4::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmNpcPage4)
 	DDX_Control(pDX, IDC_PACKAGEEDIT, m_PackageText);
 	DDX_Control(pDX, IDC_HELLOTEXT, m_HelloText);
@@ -226,7 +227,7 @@ void CEsmNpcPage4::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage4::GetControlData(void) {
+void CEsmNpcPage4::GetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubRecord *pSubRec;
 	CString Buffer;
@@ -296,7 +297,7 @@ CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 
 		if (pSubRec == pSubRecord) {
 			if (Index + 1 == m_PackageArray.GetSize()) {
-				return (NULL);
+				return NULL;
 			}
 
 			pSubRec = m_PackageArray.GetAt(Index + 1);
@@ -305,11 +306,11 @@ CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 				return (CEsmSubNameFix *)pSubRec;
 			}
 
-			return (NULL);
+			return NULL;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -323,7 +324,7 @@ CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage4::GetDocument(void) {
+CMWEditDoc *CEsmNpcPage4::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage4::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -349,7 +350,7 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	/* Ignore if no item currently selected */
 
 	if (lParam < 0) {
-		return (0);
+		return 0;
 	}
 
 	/* Display the model reference dialog */
@@ -396,7 +397,7 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 		UpdatePackageList();
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -412,6 +413,7 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 
 BOOL CEsmNpcPage4::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Spell List */
 	m_PackageList.OnInitCtrl();
 	m_PackageList.SetEnableDrag(false);
@@ -420,7 +422,8 @@ BOOL CEsmNpcPage4::OnInitDialog() {
 	m_PackageList.SetActNormal(true);
 	m_PackageList.SetWantEditMsg(true);
 	m_PackageList.InsertColumn(0, _T("Package"), LVCFMT_LEFT, 120, 0);
-	return (TRUE);
+
+	return TRUE;
 }
 
 /*===========================================================================
@@ -464,10 +467,10 @@ LRESULT CEsmNpcPage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Delete all currently selected items */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
 		DeleteSelectedItems();
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -551,7 +554,7 @@ void CEsmNpcPage4::OutputAIData(CEsmSubRecord *pSubRec) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage4::SetControlData(void) {
+void CEsmNpcPage4::SetControlData() {
 	CEsmNpc *pNpc;
 	CString Buffer;
 	aidata_t *pAiData;
@@ -598,10 +601,12 @@ void CEsmNpcPage4::OnActivatebutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnActivatebutton()");
 	CEsmSubAI_A *pNewSubRec;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_A);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_A);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiActivateDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec);
@@ -624,10 +629,12 @@ void CEsmNpcPage4::OnEscortbutton() {
 	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_E);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_E);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiEscortDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec, NULL, _T("Escort"));
@@ -661,10 +668,12 @@ void CEsmNpcPage4::OnFollowbutton() {
 	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_E);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_F);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiEscortDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec, NULL, _T("Follow"));
@@ -696,10 +705,12 @@ void CEsmNpcPage4::OnTravelbutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnTravelbutton()");
 	CEsmSubAI_T *pNewSubRec;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_T);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_T);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiTravelDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec);
@@ -720,10 +731,12 @@ void CEsmNpcPage4::OnWanderbutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnWanderbutton()");
 	CEsmSubAI_W *pNewSubRec;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_W);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_W);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiWanderDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec);
@@ -766,7 +779,7 @@ void CEsmNpcPage4::OnDeletebutton() {
  *
  *=========================================================================*/
 
-void CEsmNpcPage4::UpdatePackageList(void) {
+void CEsmNpcPage4::UpdatePackageList() {
 	CEsmSubRecord *pSubRecord;
 	int Index;
 	int ListIndex;

@@ -49,6 +49,7 @@ BOOL CErrorDialog::OnInitDialog() {
 	TCHAR ErrorBuffer[MAX_ERROR_MESSAGESIZE + 1];
 	int OutputErrors;
 	int Length;
+
 	CDialog::OnInitDialog();
 	SetWindowText(m_TitleText);
 	m_Label.SetWindowText(m_MessageText);

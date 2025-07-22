@@ -50,12 +50,10 @@ class CEsmLevelItemDlg : public CEsmRecDialog {
   protected:
 
 	/* Helper get/set methods */
-
-	void GetItemData(void);
-	void SetItemData(void);
+	void GetItemData();
+	void SetItemData();
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
@@ -64,23 +62,20 @@ class CEsmLevelItemDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmLevelItemDlg();
 
 	/* Get class members */
+	virtual bool IsModified();
 
-	virtual bool IsModified(void);
-
-	int GetSortData(void) {
-		return (m_SortData);
+	int GetSortData() {
+		return m_SortData;
 	}
 
 	int GetSortCount(esmrecinfo_t *pRecInfo);
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

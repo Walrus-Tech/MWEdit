@@ -139,6 +139,7 @@ CEsmSpellDlg::CEsmSpellDlg() : CEsmRecDialog(CEsmSpellDlg::IDD) {
 
 void CEsmSpellDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmSpellDlg)
 	DDX_Control(pDX, IDC_COSTTEXT, m_CostText);
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
@@ -244,7 +245,7 @@ void CEsmSpellDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmSpellDlg::GetControlData(void) {
+void CEsmSpellDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSpellDlg::GetControlData()");
 	spelldata_t *pSpellData;
 	CString Buffer;
@@ -402,7 +403,7 @@ void CEsmSpellDlg::GetEffectData(const int EffectIndex) {
  *
  *=========================================================================*/
 
-void CEsmSpellDlg::GetEffectData(void) {
+void CEsmSpellDlg::GetEffectData() {
 	//DEFINE_FUNCTION("CEsmSpellDlg::GetEffectData()");
 	int Index;
 	/* Delete all the enchant ub-records from the alchemy record */
@@ -424,9 +425,9 @@ void CEsmSpellDlg::GetEffectData(void) {
  *
  *=========================================================================*/
 
-bool CEsmSpellDlg::IsModified(void) {
+bool CEsmSpellDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -443,7 +444,7 @@ bool CEsmSpellDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -510,6 +511,7 @@ void CEsmSpellDlg::OnSelChangeEffectList(const int ListIndex) {
 		m_SkillList[ListIndex].ResetContent();
 		m_RangeList[ListIndex].ResetContent();
 		m_SkillList[ListIndex].EnableWindow(FALSE);
+
 		m_DurationText[ListIndex].EnableWindow(FALSE);
 		m_Magnitude1Text[ListIndex].EnableWindow(FALSE);
 		m_Magnitude2Text[ListIndex].EnableWindow(FALSE);
@@ -519,8 +521,10 @@ void CEsmSpellDlg::OnSelChangeEffectList(const int ListIndex) {
 		m_Magnitude1Text[ListIndex].SetWindowText(_T(""));
 		m_Magnitude2Text[ListIndex].SetWindowText(_T(""));
 		m_AreaText[ListIndex].SetWindowText(_T(""));
+
 		m_CostLabel[ListIndex].SetWindowText(_T(""));
 		m_TotalCostText[ListIndex].SetWindowText(_T(""));
+
 		UpdateSpellCost(ListIndex);
 		return;
 	}
@@ -617,7 +621,7 @@ void CEsmSpellDlg::OnSelChangeSkillList(const int ListIndex) {
  *=========================================================================*/
 
 int CEsmSpellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -631,7 +635,7 @@ int CEsmSpellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmSpellDlg::SetControlData(void) {
+void CEsmSpellDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pSpell == NULL) {
 		return;
@@ -814,7 +818,7 @@ void CEsmSpellDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectReco
  *
  *=========================================================================*/
 
-void CEsmSpellDlg::SetEffectData(void) {
+void CEsmSpellDlg::SetEffectData() {
 	CEsmSubENAM *pEffectRecord;
 	int RecordIndex;
 	int EffectIndex;
@@ -901,7 +905,7 @@ void CEsmSpellDlg::UpdateSpellCost(const int EffectIndex) {
  *
  *=========================================================================*/
 
-void CEsmSpellDlg::UpdateTotalSpellCost(void) {
+void CEsmSpellDlg::UpdateTotalSpellCost() {
 	CString Buffer;
 	int Index;
 	int EnchantType = MWESM_ENCHTYPE_CASTONCE;

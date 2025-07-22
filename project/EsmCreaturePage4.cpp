@@ -146,7 +146,7 @@ void CEsmCreaturePage4::AddAIRecords(const TCHAR *pType) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage4::ClearPackageArray(void) {
+void CEsmCreaturePage4::ClearPackageArray() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::ClearPackageArray()");
 	CEsmSubRecord *pSubRec;
 	int Index;
@@ -170,7 +170,7 @@ void CEsmCreaturePage4::ClearPackageArray(void) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage4::DeleteSelectedItems(void) {
+void CEsmCreaturePage4::DeleteSelectedItems() {
 	CEsmSubRecord *pSubRec;
 	CEsmSubRecord *pSubNameRec;
 	int ListIndex;
@@ -226,7 +226,7 @@ void CEsmCreaturePage4::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage4::GetControlData(void) {
+void CEsmCreaturePage4::GetControlData() {
 	CEsmCreature *pCreature;
 	CEsmSubRecord *pSubRec;
 	CString Buffer;
@@ -293,7 +293,7 @@ CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 
 		if (pSubRec == pSubRecord) {
 			if (Index + 1 == m_PackageArray.GetSize()) {
-				return (NULL);
+				return NULL;
 			}
 
 			pSubRec = m_PackageArray.GetAt(Index + 1);
@@ -302,11 +302,11 @@ CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 				return (CEsmSubNameFix *)pSubRec;
 			}
 
-			return (NULL);
+			return NULL;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -320,7 +320,7 @@ CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmCreaturePage4::GetDocument(void) {
+CMWEditDoc *CEsmCreaturePage4::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -393,7 +393,7 @@ LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 		UpdatePackageList();
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -419,7 +419,7 @@ BOOL CEsmCreaturePage4::OnInitDialog() {
 	m_PackageList.SetWantEditMsg(true);
 	m_PackageList.InsertColumn(0, _T("Package"), LVCFMT_LEFT, 120, 0);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -437,7 +437,8 @@ void CEsmCreaturePage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResul
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
 
-	if ((pNMListView->uChanged & LVIF_STATE) != 0 && (pNMListView->uNewState & LVIS_SELECTED ) != 0) {
+	if ((pNMListView->uChanged & LVIF_STATE) != 0
+	    && (pNMListView->uNewState & LVIS_SELECTED ) != 0) {
 		CEsmSubRecord *pSubRec = (CEsmSubRecord *)m_PackageList.GetItemData(pNMListView->iItem);
 		OutputAIData(pSubRec);
 	} else if ((pNMListView->uChanged & LVIF_STATE) != 0 ) {
@@ -462,10 +463,10 @@ LRESULT CEsmCreaturePage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Delete all currently selected items */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
 		DeleteSelectedItems();
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -527,11 +528,11 @@ void CEsmCreaturePage4::OutputAIData(CEsmSubRecord *pSubRec) {
 			else {
 				Buffer.Format(_T("Name = %s\r\nDuration = %d\r\nCell = %s"),
 				              pAiData->ID,
-				              (int) pAiData->Duration,
+				              (int)pAiData->Duration,
 				              ((CEsmSubNameFix *)pCellName)->GetName());
 			}
 		} else {
-			Buffer.Format(_T("Name = %s\r\nDuration = %d"), pAiData->ID, (int) pAiData->Duration);
+			Buffer.Format(_T("Name = %s\r\nDuration = %d"), pAiData->ID, (int)pAiData->Duration);
 		}
 
 		m_PackageText.SetWindowText(Buffer);
@@ -549,7 +550,7 @@ void CEsmCreaturePage4::OutputAIData(CEsmSubRecord *pSubRec) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage4::SetControlData(void) {
+void CEsmCreaturePage4::SetControlData() {
 	CEsmCreature *pCreature;
 	CString Buffer;
 	aidata_t *pAiData;
@@ -596,10 +597,12 @@ void CEsmCreaturePage4::OnActivatebutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnActivatebutton()");
 	CEsmSubAI_A *pNewSubRec;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_A);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_A);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiActivateDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec);
@@ -622,10 +625,12 @@ void CEsmCreaturePage4::OnEscortbutton() {
 	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_E);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_E);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiEscortDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec, NULL, _T("Escort"));
@@ -659,10 +664,12 @@ void CEsmCreaturePage4::OnFollowbutton() {
 	CEsmSubNameFix *pCellName;
 	CString CellName;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_E);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_F);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiEscortDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec, NULL, _T("Follow"));
@@ -694,10 +701,12 @@ void CEsmCreaturePage4::OnTravelbutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnTravelbutton()");
 	CEsmSubAI_T *pNewSubRec;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_T);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_T);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiTravelDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec);
@@ -718,10 +727,12 @@ void CEsmCreaturePage4::OnWanderbutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnWanderbutton()");
 	CEsmSubAI_W *pNewSubRec;
 	bool Result;
+
 	/* Create the new sub-record */
 	CreatePointer(pNewSubRec, CEsmSubAI_W);
 	pNewSubRec->SetType(MWESM_SUBREC_AI_W);
 	pNewSubRec->CreateNew();
+
 	/* Display the dialog to edit it */
 	CEsmAiWanderDlg Dialog;
 	Result = Dialog.DoModal(pNewSubRec);
@@ -764,7 +775,7 @@ void CEsmCreaturePage4::OnDeletebutton() {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage4::UpdatePackageList(void) {
+void CEsmCreaturePage4::UpdatePackageList() {
 	CEsmSubRecord *pSubRecord;
 	int Index;
 	int ListIndex;

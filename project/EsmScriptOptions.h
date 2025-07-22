@@ -80,27 +80,27 @@ class CEsmScriptOptions {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Create default formats */
-	void CreateDefaultWhiteFormat(void);
-	void CreateDefaultBlueFormat(void);
+	void CreateDefaultWhiteFormat();
+	void CreateDefaultBlueFormat();
 
 	/* Get class members */
-	CFont *GetTextFont(void) {
-		return (&m_TextFont);
+	CFont *GetTextFont() {
+		return &m_TextFont;
 	}
 
-	COLORREF GetBGColor(void) {
-		return (m_BackgroundColor);
+	COLORREF GetBGColor() {
+		return m_BackgroundColor;
 	}
 
 	CHARFORMAT2 *GetCharFormat(const int Index) {
 		return (Index >= 0 && Index <= ESMSCRIPT_FORMAT_MAX) ? &m_Formats[Index] : NULL;
 	}
 
-	bool GetNoToolTips(void) const {
-		return (m_NoToolTips);
+	bool GetNoToolTips() const {
+		return m_NoToolTips;
 	}
 
 	/* Initializes the given format */
@@ -122,24 +122,22 @@ class CEsmScriptOptions {
 	}
 
 	/* Read options from the application registry */
-	bool ReadFromRegistry(void);
-	bool ReadRegCharFormat(void);
-	bool ReadRegFont(void);
+	bool ReadFromRegistry();
+	bool ReadRegCharFormat();
+	bool ReadRegFont();
 
 	/* Write options to the application registry */
-	bool WriteToRegistry(void);
-	bool WriteRegCharFormat(void);
-	bool WriteRegFont(void);
+	bool WriteToRegistry();
+	bool WriteRegCharFormat();
+	bool WriteRegFont();
 
 	/* Standard copy operator */
 	const CEsmScriptOptions &operator= (CEsmScriptOptions &Options);
-
 };
 
 /*===========================================================================
  *      End of Class CEsmScriptOptions Definition
  *=========================================================================*/
-
 
 
 #endif

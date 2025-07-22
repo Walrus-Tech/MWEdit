@@ -54,7 +54,7 @@ CEsmScrFuncData::CEsmScrFuncData () {
  *
  *=========================================================================*/
 
-void CEsmScrFuncData::Destroy(void) {
+void CEsmScrFuncData::Destroy() {
 	int Index;
 
 	/* Clear strings */
@@ -99,7 +99,7 @@ const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
 
 	if (!IsValidIndex(Index)) {
 		s_Buffer[0] = NULL_CHAR;
-		return (s_Buffer);
+		return s_Buffer;
 	}
 
 	snprintf(s_Buffer, 60, _T("[%s]"), static_cast<const TCHAR *>(m_ParamDesc[Index]));
@@ -108,7 +108,7 @@ const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
 		chrcat(s_Buffer, '*');
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -125,7 +125,7 @@ const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
  *
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetFuncForm(void) const {
+const TCHAR *CEsmScrFuncData::GetFuncForm() const {
 	static CSString s_Buffer;
 	int Index;
 	s_Buffer = GetFunction();
@@ -137,7 +137,7 @@ const TCHAR *CEsmScrFuncData::GetFuncForm(void) const {
 		s_Buffer += CreateParamString(Index);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -182,7 +182,7 @@ const TCHAR *CEsmScrFuncData::GetExFuncForm(const int ParamIndex, const int Line
 		}
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -207,7 +207,7 @@ const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
 
 	if (!IsValidIndex(Index)) {
 		s_Buffer[0] = NULL_CHAR;
-		return (s_Buffer);
+		return s_Buffer;
 	}
 
 	Buffer += m_ParamDesc[Index];
@@ -318,7 +318,7 @@ const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
 	}
 
 	strnncpy(s_Buffer, Buffer, 255);
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -335,7 +335,7 @@ const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
  *
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetFlagString(void) const {
+const TCHAR *CEsmScrFuncData::GetFlagString() const {
 	static TCHAR s_Buffer[128];
 	CSString Buffer;
 
@@ -409,7 +409,7 @@ const TCHAR *CEsmScrFuncData::GetFlagString(void) const {
 		strnncpy(s_Buffer, Buffer, 127);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -425,7 +425,7 @@ const TCHAR *CEsmScrFuncData::GetFlagString(void) const {
  *
  *=========================================================================*/
 
-const TCHAR *CEsmScrFuncData::GetReturnString(void) const {
+const TCHAR *CEsmScrFuncData::GetReturnString() const {
 	static TCHAR s_Buffer[32];
 
 	if ((m_ReturnFlags & ESMSCR_FUNC_BYTE) != 0) {
@@ -442,7 +442,7 @@ const TCHAR *CEsmScrFuncData::GetReturnString(void) const {
 		strnncpy(s_Buffer, _T(""), 31);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -477,14 +477,14 @@ bool CEsmScrFuncData::ReadData(CGenFile &File) {
 		}
 
 		if (LineResult == READLINE_ERROR) {
-			return (false);
+			return false;
 		}
 
 		/* Seperate the input line into its basic two components */
 		Result = SeperateVarValue(&pVariable, &pValue, LineBuffer);
 
 		if (_stricmp(pVariable, _T("End")) == 0) {
-			return (true);
+			return true;
 		}
 
 		/* Save the input parameter on success */
@@ -494,7 +494,7 @@ bool CEsmScrFuncData::ReadData(CGenFile &File) {
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -619,7 +619,7 @@ bool CEsmScrFuncData::SetValue(const TCHAR *pVariable, TCHAR *pValue) {
 		                      pVariable);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

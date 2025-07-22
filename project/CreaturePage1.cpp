@@ -20,7 +20,6 @@ DEFINE_FILE("CreaturePage1.cpp");
 
 IMPLEMENT_DYNCREATE(CCreaturePage1, CPropertyPage)
 
-
 CCreaturePage1::CCreaturePage1() : CPropertyPage(CCreaturePage1::IDD) {
 	//{{AFX_DATA_INIT(CCreaturePage1)
 	// NOTE: the ClassWizard will add member initialization here

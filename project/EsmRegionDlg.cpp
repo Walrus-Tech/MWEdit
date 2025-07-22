@@ -142,6 +142,7 @@ CEsmRegionDlg::CEsmRegionDlg() : CEsmRecDialog(CEsmRegionDlg::IDD) {
 
 void CEsmRegionDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmRegionDlg)
 	DDX_Control(pDX, IDC_COLORBOX, m_ColorBox);
 
@@ -180,7 +181,7 @@ void CEsmRegionDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmRegionDlg::GetControlData(void) {
+void CEsmRegionDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmRegionDlg::GetControlData()");
 	CEsmSubSNAM *pSoundRec;
 	weatherdata_t *pWeatherData;
@@ -264,9 +265,9 @@ void CEsmRegionDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmRegionDlg::IsModified(void) {
+bool CEsmRegionDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -291,7 +292,7 @@ bool CEsmRegionDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -529,13 +530,13 @@ LRESULT CEsmRegionDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Can only drag sounds onto the list */
 
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_SOUN)) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_SoundList.FindRecord(pRecInfo);
@@ -549,7 +550,7 @@ LRESULT CEsmRegionDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 		m_SoundList.SetItemText(ListIndex, 1, Buffer);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -581,7 +582,7 @@ LRESULT CEsmRegionDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 		for (ListIndex = 0; ListIndex < m_SoundList.GetItemCount(); ListIndex++) {
 		}
 
-		return (1);
+		return 1;
 	} else if (lParam == VK_SUBTRACT || lParam == VK_ADD) {
 		CString Buffer;
 		int Count;
@@ -607,10 +608,10 @@ LRESULT CEsmRegionDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_SoundList.GetNextItem(ListIndex, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -642,7 +643,7 @@ int CEsmRegionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_CreatureList, (DWORD) pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -656,7 +657,7 @@ int CEsmRegionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmRegionDlg::SetControlData(void) {
+void CEsmRegionDlg::SetControlData() {
 	CEsmSubSNAM *pSoundRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -718,7 +719,7 @@ void CEsmRegionDlg::SetControlData(void) {
 	m_FoggyText.SetWindowText(Buffer);
 
 	/* Sounds */
-	pSoundRec = (CEsmSubSNAM *) m_pRegion->FindFirst(MWESM_SUBREC_SNAM, ArrayIndex);
+	pSoundRec = (CEsmSubSNAM *)m_pRegion->FindFirst(MWESM_SUBREC_SNAM, ArrayIndex);
 	Index = 1;
 
 	while (pSoundRec != NULL) {

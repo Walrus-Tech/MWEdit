@@ -49,18 +49,15 @@ class CEsmContainDlg : public CEsmRecDialog {
   protected:
 
 	/* Helper get/set methods */
-
-	void GetItemData(void);
-	void SetItemData(void);
-	void UpdateTotalWeight(void);
+	void GetItemData();
+	void SetItemData();
+	void UpdateTotalWeight();
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Update the rec info user data count values */
-
-	void UpdateUserData(void);
+	void UpdateUserData();
 
 
 	/*---------- Begin Public Class Methods ---------------------------*/
@@ -68,17 +65,14 @@ class CEsmContainDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmContainDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

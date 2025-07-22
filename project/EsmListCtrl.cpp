@@ -86,10 +86,10 @@ int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 	Result = pRecInfo1->pRecord->CompareFields(SortType, pRecInfo2->pRecord);
 
 	if (Flags) {
-		return (-Result);
+		return -Result;
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -145,7 +145,7 @@ CEsmListCtrl::~CEsmListCtrl() {
 		delete m_pDragImage;
 	}
 
-	byte* pArray = (byte *)m_ppDragRecords;
+	byte *pArray = (byte *)m_ppDragRecords;
 	DestroyArrayPointer(pArray);
 	m_ppDragRecords = NULL;
 }
@@ -168,13 +168,13 @@ int CEsmListCtrl::AddItem(esmrecinfo_t *pRecInfo) {
 	ListIndex = InsertItem(GetItemCount(), "", GetImageIndex(pRecInfo->pRecord));
 
 	if (ListIndex < 0) {
-		return (ListIndex);
+		return ListIndex;
 	}
 
 	/* Set the item data */
 	SetItemData(ListIndex, (DWORD)pRecInfo);
 	SetItem(ListIndex, pRecInfo, m_pCurrentColData);
-	return (ListIndex);
+	return ListIndex;
 }
 
 /*===========================================================================
@@ -258,7 +258,7 @@ void CEsmListCtrl::EditRecord(const int SelIndex, const bool WantEditMsg) {
  * Class CEsmListCtrl Method - void EditSelectedItem (void);
  *
  *=========================================================================*/
-void CEsmListCtrl::EditSelectedItem(void) {
+void CEsmListCtrl::EditSelectedItem() {
 #if !defined(NO_ESMLIST_EDIT)
 	POSITION ListPos;
 	int ListIndex;
@@ -309,13 +309,13 @@ int CEsmListCtrl::FindRecord(esmrecinfo_t *pRecInfo) {
  * Returns the currently selected item in the list.
  *
  *=========================================================================*/
-esmrecinfo_t *CEsmListCtrl::GetCurrentRecord(void) {
+esmrecinfo_t *CEsmListCtrl::GetCurrentRecord() {
 	int Index;
 	/* Find the first focused item */
 	Index = GetNextItem(-1, LVNI_FOCUSED);
 
 	if (Index < 0) {
-		return (NULL);
+		return NULL;
 	}
 
 	return GetRecInfo(Index);
@@ -333,11 +333,11 @@ esmrecinfo_t *CEsmListCtrl::GetCurrentRecord(void) {
  *=========================================================================*/
 esmrecinfo_t *CEsmListCtrl::GetRecInfo(const int Item) {
 	if (m_ActNormalList) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (Item < 0 || Item >= GetItemCount()) {
-		return (NULL);
+		return NULL;
 	}
 
 	return (esmrecinfo_t *)GetItemData(Item);
@@ -411,32 +411,32 @@ int CEsmListCtrl::GetImageIndex(CEsmRecord *pRecord) {
 	} else if (pRecord->IsType(MWESM_REC_DIAL)) {
 		return ESMLIST_IMAGE_DIALOG;
 	} else if (pRecord->IsType(MWESM_REC_INFO)) {
-		return (-1);
+		return -1;
 	} else if (pRecord->IsType(MWESM_REC_GMST)) {
-		return (ESMLIST_IMAGE_SETTING);
+		return ESMLIST_IMAGE_SETTING;
 	} else if (pRecord->IsType(MWESM_REC_CLAS)) {
-		return (ESMLIST_IMAGE_CLASS);
+		return ESMLIST_IMAGE_CLASS;
 	} else if (pRecord->IsType(MWESM_REC_FACT)) {
-		return (ESMLIST_IMAGE_FACTION);
+		return ESMLIST_IMAGE_FACTION;
 	} else if (pRecord->IsType(MWESM_REC_RACE)) {
-		return (ESMLIST_IMAGE_RACE);
+		return ESMLIST_IMAGE_RACE;
 	} else if (pRecord->IsType(MWESM_REC_SKIL)) {
-		return (ESMLIST_IMAGE_SKILL);
+		return ESMLIST_IMAGE_SKILL;
 	} else if (pRecord->IsType(MWESM_REC_SCPT)) {
-		return (ESMLIST_IMAGE_SCRIPT);
+		return ESMLIST_IMAGE_SCRIPT;
 	} else if (pRecord->IsType(MWESM_REC_BSGN)) {
-		return (ESMLIST_IMAGE_BIRTHSIGN);
+		return ESMLIST_IMAGE_BIRTHSIGN;
 	} else if (pRecord->IsType(MWESM_REC_SNDG)) {
-		return (ESMLIST_IMAGE_SOUNDGEN);
+		return ESMLIST_IMAGE_SOUNDGEN;
 	} else if (pRecord->IsType(MWESM_REC_REGN)) {
-		return (ESMLIST_IMAGE_REGION);
+		return ESMLIST_IMAGE_REGION;
 	} else if (pRecord->IsType(MWESM_REC_CELL)) {
-		return (ESMLIST_IMAGE_CELL);
+		return ESMLIST_IMAGE_CELL;
 	} else if (pRecord->IsType(MWESM_REC_SSCR)) {
-		return (ESMLIST_IMAGE_STARTSCRIPT);
+		return ESMLIST_IMAGE_STARTSCRIPT;
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -501,13 +501,13 @@ int CEsmListCtrl::InsertRecord(const int Index, esmrecinfo_t *pRecInfo) {
 	ListIndex = InsertItem(Index, "", GetImageIndex(pRecInfo->pRecord));
 
 	if (ListIndex < 0) {
-		return (ListIndex);
+		return ListIndex;
 	}
 
 	/* Set the item data */
 	SetItemData(ListIndex, (DWORD)pRecInfo);
 	SetItem(ListIndex, pRecInfo, m_pCurrentColData);
-	return (ListIndex);
+	return ListIndex;
 }
 
 /*===========================================================================
@@ -526,7 +526,7 @@ void CEsmListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
 	LVITEM ItemInfo;
 	POINT DragPoint;
 	BOOL Result;
-	BYTE* pArray;
+	BYTE *pArray;
 	POSITION SelPos;
 	int Offset = 10;
 	int ListIndex;
@@ -582,7 +582,7 @@ void CEsmListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
 
 	ASSERT(m_pDragImage);
 	/* Change the cursor to the drag image
-	  (still must perform DragMove() in OnMouseMove() to show it moving) */
+	   (still must perform DragMove() in OnMouseMove() to show it moving) */
 	m_pDragImage->BeginDrag(0, CPoint(Offset, Offset));
 	m_pDragImage->DragEnter(GetDesktopWindow(), pNMListView->ptAction);
 	/* Cause this control to capture all the mouse messages */
@@ -600,9 +600,9 @@ void CEsmListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
  *
  *=========================================================================*/
 void CEsmListCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
-	if (m_IgnoreCharKey > 0 && (m_IgnoreCharKey == (int)nChar ||
-	                            (m_IgnoreCharKey == VK_SUBTRACT && nChar == '-') ||
-	                            (m_IgnoreCharKey == VK_ADD && nChar == '+'))) {
+	if (m_IgnoreCharKey > 0 && (m_IgnoreCharKey == (int)nChar
+	                            || (m_IgnoreCharKey == VK_SUBTRACT && nChar == '-')
+	                            || (m_IgnoreCharKey == VK_ADD && nChar == '+'))) {
 		m_IgnoreCharKey = 0;
 		return;
 	}
@@ -782,7 +782,7 @@ void CEsmListCtrl::OnDblclk(NMHDR *pNMHDR, LRESULT *pResult) {
 int CEsmListCtrl::OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo) {
 	//GetParent()->SendNotifyMessage(ESMLIST_NOTIFY_ONDROP, 0, (LPARAM) pRecInfo);
 	GetParent()->SendMessage(ESMLIST_NOTIFY_ONDROP, (LPARAM)pDocument, (LPARAM)pRecInfo);
-	return (0);
+	return 0;
 }
 
 #endif
@@ -798,7 +798,7 @@ int CEsmListCtrl::OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo) {
  *=========================================================================*/
 UINT CEsmListCtrl::OnGetDlgCode() {
 	if (m_WantKeys) {
-		return (CListCtrl::OnGetDlgCode() | DLGC_WANTCHARS);
+		return CListCtrl::OnGetDlgCode() | DLGC_WANTCHARS;
 	}
 
 	return CListCtrl::OnGetDlgCode();
@@ -814,7 +814,7 @@ UINT CEsmListCtrl::OnGetDlgCode() {
  * Class CEsmListCtrl Event - void OnInitCtrl (void);
  *
  *=========================================================================*/
-void CEsmListCtrl::OnInitCtrl(void) {
+void CEsmListCtrl::OnInitCtrl() {
 	ListView_SetExtendedListViewStyle(m_hWnd, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 	SetImageList(&m_ImageList, LVSIL_SMALL);
 	m_hBadDropCursor = LoadCursor(NULL, IDC_NO);
@@ -1041,7 +1041,7 @@ void CEsmListCtrl::SetItem(const int ListIndex, esmrecinfo_t *pRecInfo, esmcolda
  * Class CEsmListCtrl Method - void UpdateColData (void);
  *
  *=========================================================================*/
-void CEsmListCtrl::UpdateColData(void) {
+void CEsmListCtrl::UpdateColData() {
 	//DEFINE_FUNCTION("CEsmListCtrl::UpdateColData()");
 	int Index = 0;
 	int Width;

@@ -32,7 +32,7 @@ DEFINE_FILE("EsmScriptError.cpp");
  *
  *=========================================================================*/
 
-CEsmScriptError::CEsmScriptError () {
+CEsmScriptError::CEsmScriptError() {
 	//DEFINE_FUNCTION("CEsmScriptError::CEsmScriptError()");
 	m_pFunction = NULL;
 	m_Type = ESMSCR_MESSAGE_WARNING;
@@ -55,7 +55,7 @@ CEsmScriptError::CEsmScriptError () {
  *
  *=========================================================================*/
 
-void CEsmScriptError::Destroy(void) {
+void CEsmScriptError::Destroy() {
 	//DEFINE_FUNCTION("CEsmScriptError::Destroy()");
 	m_pFunction = NULL;
 	m_Code = 0;
@@ -83,7 +83,7 @@ void CEsmScriptError::Destroy(void) {
  *
  *=========================================================================*/
 
-const TCHAR *CEsmScriptError::GetFuncArgString(void) const {
+const TCHAR *CEsmScriptError::GetFuncArgString() const {
 	static TCHAR s_Buffer[64];
 
 	if (m_pFunction == NULL) {
@@ -93,10 +93,10 @@ const TCHAR *CEsmScriptError::GetFuncArgString(void) const {
 	} else if (m_pFunction->Var[m_FuncArgIndex] == 0) {
 		strnncpy(s_Buffer, _T("Invalid"), 63);
 	} else {
-		snprintf (s_Buffer, 63, _T("0x%08I64X"), m_pFunction->Var[m_FuncArgIndex]);
+		snprintf(s_Buffer, 63, _T("0x%08I64X"), m_pFunction->Var[m_FuncArgIndex]);
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================

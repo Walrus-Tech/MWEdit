@@ -57,18 +57,14 @@ class CEsmBookDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmBookDlg();
 
-
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -80,10 +76,13 @@ class CEsmBookDlg : public CEsmRecDialog {
 	CButton m_PersistCheck;
 	CButton m_BlockedCheck;
 	CButton m_ScrollCheck;
+
 	CEdit m_EnchantText;
 	CEdit m_BookText;
+
 	CComboBox m_EnchantList;
 	CComboBox m_SkillList;
+
 	CEdit m_ValueText;
 	CEdit m_WeightText;
 	CEdit m_NameText;

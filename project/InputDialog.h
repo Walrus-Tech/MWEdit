@@ -30,11 +30,9 @@ class CInputDialog : public CDialog {
   public:
 
 	/* Construction */
-
 	CInputDialog(CWnd *pParent = NULL);
 
 	/* Main access method */
-
 	bool DoModal(CString *pResult, const TCHAR *pLabel, const TCHAR *pTitle);
 
 	//{{AFX_DATA(CInputDialog)
@@ -63,7 +61,7 @@ class CInputDialog : public CDialog {
 
 	//{{AFX_MSG(CInputDialog)
 	virtual BOOL OnInitDialog();
-	virtual void OnOK ();
+	virtual void OnOK();
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();

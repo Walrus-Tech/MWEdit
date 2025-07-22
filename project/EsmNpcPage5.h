@@ -66,17 +66,14 @@ class CEsmNpcPage5 : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmNpcPage5();
 	~CEsmNpcPage5();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 	int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -86,12 +83,10 @@ class CEsmNpcPage5 : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Enables/disables controls */
-
 	void UpdateAutoCalc(const bool AutoCalc);
 
 	/* Dialog Data */

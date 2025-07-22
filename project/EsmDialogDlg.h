@@ -43,10 +43,10 @@
 
 /* Identifies the type of new info records */
 
-#define MWESM_DLGFORM_CLEANED     2
-#define MWESM_DLGFORM_OLDINFO     3
-#define MWESM_DLGFORM_ACTIVEINFO  4
-#define MWESM_DLGFORM_NEWINFO     5
+#define MWESM_DLGFORM_CLEANED      2
+#define MWESM_DLGFORM_OLDINFO      3
+#define MWESM_DLGFORM_ACTIVEINFO   4
+#define MWESM_DLGFORM_NEWINFO      5
 
 /*===========================================================================
  *      End of Definitions
@@ -87,50 +87,42 @@ class CEsmDialogDlg : public CEsmRecDialog {
 
   protected:
 
-	CEsmDialogue *m_pDialog; /* Current dialog record we are editting */
+	CEsmDialogue *m_pDialog;      /* Current dialog record we are editting */
 	CEsmInfoDataArray m_NewInfos; /* List of new and modified info records */
-	CEsmInfo *m_pStartInfo; /* Head of the info linked list */
-	esmrecinfo_t *m_pNpcFilter; /* Current NPC that we are filtering for */
+	CEsmInfo *m_pStartInfo;       /* Head of the info linked list */
+	esmrecinfo_t *m_pNpcFilter;   /* Current NPC that we are filtering for */
 
 	/*---------- Begin Protected Class Methods ------------------------*/
 
   protected:
 
 	/* Clear the new info array */
-
-	void ClearNewInfos(void);
+	void ClearNewInfos();
 
 	/* Copy all INFOs into the record */
-
 	void CopyAllInfos(const bool Rename = false);
 
 	/* Checks if the info record can be cleaned or not */
-
 	bool CanCleanInfo(esmrecinfo_t *pRecInfo);
 
 	/* Ensure that the given list index has a new/modified info */
-
 	esmrecinfo_t *CreateNewInfo(const int ListIndex);
 	esmrecinfo_t *CreateNewInfo(esmrecinfo_t *pRecInfo, const bool MustBeNew = false);
 
 	/* Attempt to find a new INFO record in the array */
-
 	esminfodata_t *FindNewInfo(const TCHAR* pID);
 	esminfodata_t *FindNewInfo(esmrecinfo_t *pRecInfo);
 	esmrecinfo_t *GetRecInfo(const TCHAR *pID, const TCHAR *pDialogID = NULL);
 
 	/* Helper get/set methods */
-
-	void FillInfoList(void);
+	void FillInfoList();
 	void UpdateInfoList(const bool FirstUpdate = false);
 	bool CheckInfoLinks(esmrecinfo_t *pStartInfoRec, const bool FirstUpdate, CEsmNpc *pFilterNpc);
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Removes the given info from the linked info list */
-
 	void RemoveInfo(esmrecinfo_t *pRecInfo);
 
 
@@ -139,18 +131,15 @@ class CEsmDialogDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmDialogDlg();
 	virtual ~CEsmDialogDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

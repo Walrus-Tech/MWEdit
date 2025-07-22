@@ -44,8 +44,8 @@
 
 /* Reaction list definitions */
 
-#define MWESM_REACLIST_NAME   0
-#define MWESM_REACLIST_VALUE  1
+#define MWESM_REACLIST_NAME       0
+#define MWESM_REACLIST_VALUE      1
 
 /*===========================================================================
  *      End of Definitions
@@ -76,13 +76,12 @@ class CEsmFactionDlg : public CEsmRecDialog {
   protected:
 
 	/* Update the rank list data controls */
-
-	void GetRankData(void);
+	void GetRankData();
 	void SetRankData(const int Rank);
-	void GetReactionData(void);
+	void GetReactionData();
 	void SetReactionData(const int Rank);
-	/* Update item data */
 
+	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
@@ -91,17 +90,14 @@ class CEsmFactionDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmFactionDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

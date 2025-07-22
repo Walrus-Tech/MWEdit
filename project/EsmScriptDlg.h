@@ -134,9 +134,9 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	CEsmScriptDlg();
 	DECLARE_DYNCREATE(CEsmScriptDlg);
 
-	void FindScriptID(void);
+	void FindScriptID();
 
-	CString GetCurrentScriptWord(void);
+	CString GetCurrentScriptWord();
 
 
   public:
@@ -171,41 +171,41 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	virtual ~CEsmScriptDlg();
 
 	/* Attempt to automatically indent the script */
-	void AutoIndent(void);
+	void AutoIndent();
 
 	/* Change the display format to the given format */
 	void ChangeScriptFormat(CEsmScriptOptions *pNewFormat);
 
 	/* Close any open tool tips */
-	void CloseToolTips(void);
+	void CloseToolTips();
 
 	/* Return a format to display a token word with */
 	CHARFORMAT2 *GetScriptWordFormat(CString &ScriptWord, const int WordType);
 
 	/* Get class members */
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Format the current text in the rich edit */
-	void FormatText(void);
+	void FormatText();
 	void ParseLine(const int LineIndex);
 
 	/* Script text clipboard methods */
-	void CopyText(void);
-	void CutText(void);
-	void PasteText(void);
+	void CopyText();
+	void CutText();
+	void PasteText();
 
 	/* Attempt to find and open a function tool tip */
-	bool OpenFunctionToolTip(void);
+	bool OpenFunctionToolTip();
 	int ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos);
-	bool UpdateFuncToolTip(void);
+	bool UpdateFuncToolTip();
 
 	/* Update the current position status bar */
-	void UpdatePosStatus(void);
-	void UpdateSizeStatus(void);
+	void UpdatePosStatus();
+	void UpdateSizeStatus();
 
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CEsmScriptDlg)

@@ -757,13 +757,13 @@ int l_FindCsvItemType(const TCHAR *pString) {
 
 	while (l_EsmCsvRecInfos[Index].pEsmRecType != NULL) {
 		if (strnicmp(l_EsmCsvRecInfos[Index].pEsmRecType, pString, 4) == 0) {
-			return (Index);
+			return Index;
 		}
 
 		Index++;
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -785,13 +785,13 @@ int l_FindCsvRecordString(const TCHAR *pString) {
 
 	while (l_EsmCsvRecInfos[Index].pEsmRecType != NULL) {
 		if (stricmp(l_EsmCsvRecInfos[Index].pRecordName, pString) == 0) {
-			return (Index);
+			return Index;
 		}
 
 		Index++;
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -813,10 +813,10 @@ const TCHAR *GetEsmCsvRecordType(const TCHAR *pString) {
 	Index = l_FindCsvRecordString(pString);
 
 	if (Index < 0) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (l_EsmCsvRecInfos[Index].pEsmRecType);
+	return l_EsmCsvRecInfos[Index].pEsmRecType;
 }
 
 /*===========================================================================
@@ -838,10 +838,10 @@ const TCHAR *GetEsmCsvRecordString(const TCHAR *pString) {
 	Index = l_FindCsvItemType(pString);
 
 	if (Index < 0) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (l_EsmCsvRecInfos[Index].pRecordName);
+	return l_EsmCsvRecInfos[Index].pRecordName;
 }
 
 /*===========================================================================
@@ -863,10 +863,10 @@ int *GetEsmCsvColArray(const TCHAR *pType) {
 	Index = l_FindCsvItemType(pType);
 
 	if (Index < 0) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (l_EsmCsvRecInfos[Index].pColArray);
+	return l_EsmCsvRecInfos[Index].pColArray;
 }
 
 esmcsvcol_t *GetEsmCsvExColArray(const TCHAR *pType) {
@@ -874,10 +874,10 @@ esmcsvcol_t *GetEsmCsvExColArray(const TCHAR *pType) {
 	Index = l_FindCsvItemType(pType);
 
 	if (Index < 0) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (l_EsmCsvRecInfos[Index].pExColArray);
+	return l_EsmCsvRecInfos[Index].pExColArray;
 }
 
 /*===========================================================================

@@ -99,7 +99,7 @@ bool CEsmHeaderDlg::DoModal(CEsmTES3 *pHeader, const TCHAR *pFilename) {
 	/* Ensure valid input */
 
 	if (pHeader == NULL) {
-		return (false);
+		return false;
 	}
 
 	m_pHeader = pHeader;
@@ -107,10 +107,10 @@ bool CEsmHeaderDlg::DoModal(CEsmTES3 *pHeader, const TCHAR *pFilename) {
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -137,7 +137,7 @@ BOOL CEsmHeaderDlg::OnInitDialog() {
 	m_DescText.SetLimitText(MWESM_HEDR_DESCSIZE);
 	m_AuthorText.SetWindowText(m_pHeader->GetHeaderData()->Author);
 	m_DescText.SetWindowText(m_pHeader->GetHeaderData()->Description);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================

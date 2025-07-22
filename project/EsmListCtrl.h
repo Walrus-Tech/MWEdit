@@ -277,10 +277,10 @@
 #define ESMLIST_SUBITEM_NPCTRAVEL4     138
 
 /* Notify message codes */
-#define ESMLIST_NOTIFY_ONDROP     0x8152
-#define ESMLIST_NOTIFY_ONKEY      0x8153
-#define ESMLIST_NOTIFY_ONEDIT     0x8154
-#define ESMLIST_NOTIFY_ONSORT     0x8155
+#define ESMLIST_NOTIFY_ONDROP          0x8152
+#define ESMLIST_NOTIFY_ONKEY           0x8153
+#define ESMLIST_NOTIFY_ONEDIT          0x8154
+#define ESMLIST_NOTIFY_ONSORT          0x8155
 
 
 #ifndef ListView_SetCheckState
@@ -343,24 +343,33 @@ class CEsmListCtrl : public CListCtrl {
 
 	int m_LastSelItem;
 	int m_ColSubItems[200]; /* Convert a subitem to a current column */
+
 	esmcoldata_t *m_pCurrentColData;
+
 	bool m_ActNormalList;
 	bool m_WantKeys;
 	bool m_WantEditMsg;
 	bool m_WantSortMsg;
+
 	int m_LastSortField;
+
 	bool m_EnableDrag;
 	bool m_AcceptDrag;
 	bool m_IsDragging;
+
 	int m_DragIndex;
 	int m_DropIndex;
+
 	CImageList *m_pDragImage;
 	CWnd *m_pDropWnd;
 	CEsmListCtrl *m_pDropList;
 	esmrecinfo_t **m_ppDragRecords;
+
 	int m_NumDragRecords;
 	int m_LastSortSubItem; /* Used when sorting the list */
+
 	bool m_SortReverse;
+
 	int m_IgnoreCharKey;
 
 	COLORREF m_ActiveColor;
@@ -382,46 +391,37 @@ class CEsmListCtrl : public CListCtrl {
   public:
 
 	/* Construction */
-
 	CEsmListCtrl();
 	virtual ~CEsmListCtrl();
 
 	/* Add an item to the list */
-
 	int AddItem(esmrecinfo_t *pRecInfo);
 	int InsertRecord(const int Index, esmrecinfo_t *pRecInfo);
 
 	/* Used to drag and drop records between lists */
-
 #if !defined(NO_ESMLIST_EDIT)
 	void DropItemOnList(CEsmListCtrl *pDropList);
 #endif
 
 	/* Edit the first selected item */
-
-	void EditSelectedItem(void);
+	void EditSelectedItem();
 	void EditRecord(const int SelIndex, const bool WantEditMsg = false);
 
 	/* Find a specific record in the list */
-
 	int FindRecord(esmrecinfo_t *pRecInfo);
 
 	/* Returns the currently selected item */
-
-	esmrecinfo_t *GetCurrentRecord(void);
+	esmrecinfo_t *GetCurrentRecord();
 
 	/* Get class members */
-
-	int GetLastSortField(void) const {
+	int GetLastSortField() const {
 		return (m_LastSortField);
 	}
 
 	/* Convert an item type to an image index */
-
 	int GetImageIndex(CEsmRecord *pRecord);
 
 	/* Get/set an item check */
-
 	bool GetCheck(const int Item) {
 		return (ListView_GetCheckState(m_hWnd, Item) == TRUE);
 	}
@@ -431,24 +431,20 @@ class CEsmListCtrl : public CListCtrl {
 	}
 
 	/* Access the recinfo data for an item */
-
 	virtual esmrecinfo_t *GetRecInfo(const int Item);
 
 	/* Initializes the list columns */
-
 	void InitObjectList(esmcoldata_t *pColData);
 
 
 
 	/* A record has been dropped on the list */
-
 #if !defined(NO_ESMLIST_EDIT)
 	int OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo);
 
 #endif
 
 	/* Set the properties of the given armor item */
-
 	void SetItem(const int ListIndex, esmrecinfo_t *pRecInfo, esmcoldata_t *pColInfo);
 
 	void SetItem(const int ListIndex, esmrecinfo_t *pRecInfo) {
@@ -456,7 +452,6 @@ class CEsmListCtrl : public CListCtrl {
 	}
 
 	/* Set class members */
-
 #if !defined(NO_ESMLIST_EDIT)
 	void SetDlgHandler(CEsmDlgHandler *pDlgHandler) {
 		m_pEsmDlgHandler = pDlgHandler;
@@ -488,15 +483,12 @@ class CEsmListCtrl : public CListCtrl {
 	}
 
 	/* Initializes the list control */
-
-	void OnInitCtrl(void);
+	void OnInitCtrl();
 
 	/* Save the current column widths to the col data array */
-
-	void UpdateColData(void);
+	void UpdateColData();
 
 	/* Update the given item in the list */
-
 	void UpdateItem(const int Index);
 	void UpdateItem(esmrecinfo_t *pRecInfo);
 
@@ -537,7 +529,6 @@ class CEsmListCtrl : public CListCtrl {
  *=========================================================================*/
 
 /* Default item sort function for the list control */
-
 int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
 
 /*===========================================================================

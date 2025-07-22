@@ -33,11 +33,9 @@ class CEsmHeaderDlg : public CDialog {
   public:
 
 	/* Construction */
-
 	CEsmHeaderDlg(CWnd *pParent = NULL);
 
 	/* Main access method */
-
 	bool DoModal(CEsmTES3 *pHeader, const TCHAR *pFilename);
 
 	/* Dialog Data */

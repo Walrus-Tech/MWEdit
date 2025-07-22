@@ -128,7 +128,7 @@ bool CMWEditApp::AddFindHistory(const TCHAR *pString) {
 	Result = FindFindHistory(pString);
 
 	if (Result >= 0) {
-		return (false);
+		return false;
 	}
 
 	/* Shift all existing find history records and add the new one */
@@ -146,7 +146,7 @@ bool CMWEditApp::AddFindHistory(const TCHAR *pString) {
 		LastFind = TempFind;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -159,7 +159,7 @@ bool CMWEditApp::AddFindHistory(const TCHAR *pString) {
  * Class CMWEditApp Method - void ClearFileArray (void);
  *
  *=========================================================================*/
-void CMWEditApp::ClearFileArray(void) {
+void CMWEditApp::ClearFileArray() {
 	CEsmFile *pFile;
 	int Index;
 
@@ -201,12 +201,12 @@ int CMWEditApp::FindFindHistory(const TCHAR *pString) {
 
 		/* Does the find string match? */
 		if (Buffer.CompareNoCase(pString) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
 	/* No match found */
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -228,11 +228,11 @@ CEsmFile *CMWEditApp::FindMaster(const TCHAR *pPathname) {
 		pFile = m_EsmMasters.GetAt(Index);
 
 		if (_stricmp(FindFilename(pFile->GetFilename()), pFilename) == 0) {
-			return (pFile);
+			return pFile;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -438,7 +438,7 @@ CEsmFile *CMWEditApp::LoadMaster(const TCHAR *pString, CEsmLoadDlg *pLoadDlg) {
 	if (pFile != NULL) {
 		pLoadDlg->SetFilename(pString);
 		pLoadDlg->SetProgress(100.0f);
-		return (pFile);
+		return pFile;
 	}
 
 	/* Create a new file */
@@ -459,7 +459,7 @@ CEsmFile *CMWEditApp::LoadMaster(const TCHAR *pString, CEsmLoadDlg *pLoadDlg) {
 		ErrorHandler.Notify("Master Read Error!");
 	}
 
-	return (pFile);
+	return pFile;
 }
 
 /*===========================================================================
@@ -485,6 +485,7 @@ class CAboutDlg : public CDialog {
 
 	CStatic m_SiteLink;
 	//}}AFX_DATA
+
 	CFont m_Font;
 
 	/* ClassWizard generated virtual function overrides */
@@ -607,7 +608,7 @@ CDocument *CMWEditApp::OpenDocumentFile(LPCTSTR lpszFileName) {
  * Class CMWEditApp Event - void OnFileOpen (void);
  *
  *=========================================================================*/
-void CMWEditApp::OnFileOpen(void) {
+void CMWEditApp::OnFileOpen() {
 	COpenPluginDlg OpenDlg;
 	int Result;
 
@@ -706,7 +707,7 @@ bool CMWEditApp::ReadFindHistory(CString &Buffer, const int FindIndex) {
 	CString RegName;
 	RegName.Format(_T("%s%d"), ESMSCR_REGENTRY_FIND, FindIndex);
 	Buffer = AfxGetApp()->GetProfileString(ESMSCR_REGSEC_FINDHISTORY, RegName, NULL);
-	return (!Buffer.IsEmpty());
+	return !Buffer.IsEmpty();
 }
 
 /*===========================================================================
@@ -736,7 +737,7 @@ void CAboutDlg::OnSitelink() {
 BOOL CAboutDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	m_SiteLink.SetFont(&m_Font);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -756,7 +757,7 @@ HBRUSH CAboutDlg::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor) {
 		SetTextColor(pDC->m_hDC, RGB(0, 0, 255));
 	}
 
-	return (hBrush);
+	return hBrush;
 }
 
 /*===========================================================================

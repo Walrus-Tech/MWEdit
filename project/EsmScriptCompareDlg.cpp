@@ -207,7 +207,7 @@ void CEsmScriptCompareDlg::OnInitialUpdate() {
  *
  *=========================================================================*/
 
-void CEsmScriptCompareDlg::UpdateTitle(void) {
+void CEsmScriptCompareDlg::UpdateTitle() {
 	CString Buffer;
 	Buffer.Format(_T("%s -- Script Compare"), m_pDlgHandler->GetDocument()->GetTitle());
 	GetParentFrame()->SetWindowText(Buffer);

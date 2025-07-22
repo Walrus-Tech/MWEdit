@@ -196,7 +196,7 @@ void CEsmNpcPage2::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage2::GetControlData(void) {
+void CEsmNpcPage2::GetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubNPCS *pSpellName;
 	esmrecinfo_t *pRecInfo;
@@ -231,7 +231,7 @@ void CEsmNpcPage2::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage2::GetDocument(void) {
+CMWEditDoc *CEsmNpcPage2::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage2::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -250,6 +250,7 @@ CMWEditDoc *CEsmNpcPage2::GetDocument(void) {
 
 BOOL CEsmNpcPage2::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Spell List */
 	m_SpellList.OnInitCtrl();
 	m_SpellList.SetDlgHandler(m_pDlgHandler);
@@ -257,7 +258,8 @@ BOOL CEsmNpcPage2::OnInitDialog() {
 	m_SpellList.SetAcceptDrag(true);
 	m_SpellList.SetWantKeys(true);
 	m_SpellList.InitObjectList(&l_SpellColData[0]);
-	return (TRUE);
+
+	return TRUE;
 }
 
 /*===========================================================================
@@ -280,13 +282,13 @@ LRESULT CEsmNpcPage2::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Can only drag spells onto the list */
 
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_SpellList.FindRecord(pRecInfo);
@@ -297,7 +299,7 @@ LRESULT CEsmNpcPage2::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 		ListIndex = m_SpellList.AddItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -324,10 +326,10 @@ LRESULT CEsmNpcPage2::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_SpellList.GetNextItem(-1, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -347,7 +349,7 @@ int CEsmNpcPage2::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_SpellList.UpdateItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -361,7 +363,7 @@ int CEsmNpcPage2::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage2::SetControlData(void) {
+void CEsmNpcPage2::SetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubNPCS *pSpellName;
 	esmrecinfo_t *pRecInfo;

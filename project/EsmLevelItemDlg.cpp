@@ -53,10 +53,10 @@ int CALLBACK l_LevItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParam
 		Result = pRecInfo1->UserData - pRecInfo2->UserData;
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
@@ -74,10 +74,10 @@ int CALLBACK l_LevItemSortCallBack1(LPARAM lParam1, LPARAM lParam2, LPARAM lPara
 		Result = pDialog->GetSortCount(pRecInfo1) - pDialog->GetSortCount(pRecInfo2);
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, pDialog->GetSortData());
@@ -189,10 +189,12 @@ CEsmLevelItemDlg::CEsmLevelItemDlg() : CEsmRecDialog(CEsmLevelItemDlg::IDD) {
 
 void CEsmLevelItemDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmLevelItemDlg)
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
 	DDX_Control(pDX, IDC_PCLEVELCHECK, m_PCLevelCheck);
 	DDX_Control(pDX, IDC_EACHITEMCHECK, m_EachItemCheck);
+
 	DDX_Control(pDX, IDC_CHANCENONETEXT, m_ChanceNoneText);
 	DDX_Control(pDX, IDC_ITEMLIST, m_ItemList);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
@@ -210,7 +212,7 @@ void CEsmLevelItemDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmLevelItemDlg::GetControlData(void) {
+void CEsmLevelItemDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLevelItemDlg::GetControlData()");
 	CString Buffer;
 	int Chance;
@@ -238,10 +240,12 @@ void CEsmLevelItemDlg::GetControlData(void) {
 	}
 
 	m_pLevelItem->SetChanceNone(Chance);
+
 	/* Record flags */
 	m_pLevelItem->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 	m_pLevelItem->SetAllPC(m_PCLevelCheck.GetCheck() != 0);
 	m_pLevelItem->SetCalcEach(m_EachItemCheck.GetCheck() != 0);
+
 	GetItemData();
 }
 
@@ -256,13 +260,14 @@ void CEsmLevelItemDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmLevelItemDlg::GetItemData(void) {
+void CEsmLevelItemDlg::GetItemData() {
 	CEsmSubNameFix *pNameSubRec;
 	CEsmSubShort *pLevelSubRec;
 	CString Buffer;
 	int Index;
 	int Level;
 	int ItemCount = 0;
+
 	/* Delete all the CNAM and INTV sub-records from the record */
 	m_pLevelItem->DeleteSubRecords(MWESM_SUBREC_INAM);
 	m_pLevelItem->DeleteSubRecords(MWESM_SUBREC_INTV);
@@ -271,6 +276,7 @@ void CEsmLevelItemDlg::GetItemData(void) {
 		Buffer = m_ItemList.GetItemText(Index, 0);
 		Level = atoi(Buffer);
 		Buffer = m_ItemList.GetItemText(Index, 1);
+
 		/* Create the new index sub-record */
 		pNameSubRec = (CEsmSubNameFix *)m_pLevelItem->AllocateSubRecord(MWESM_SUBREC_INAM);
 		pLevelSubRec = (CEsmSubShort *)m_pLevelItem->AllocateSubRecord(MWESM_SUBREC_INTV);
@@ -306,7 +312,7 @@ int CEsmLevelItemDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 	ListIndex = m_ItemList.FindRecord(pRecInfo);
 
 	if (ListIndex < 0) {
-		return (0);
+		return 0;
 	}
 
 	/* Get the text and convert to a number value */
@@ -317,7 +323,7 @@ int CEsmLevelItemDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 		Count = 0;
 	}
 
-	return (Count);
+	return Count;
 }
 
 /*===========================================================================
@@ -365,9 +371,9 @@ void CEsmLevelItemDlg::OnEndlabeleditlist(NMHDR *pNMHDR, LRESULT *pResult) {
  *
  *=========================================================================*/
 
-bool CEsmLevelItemDlg::IsModified(void) {
+bool CEsmLevelItemDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -380,7 +386,7 @@ bool CEsmLevelItemDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -409,7 +415,7 @@ void CEsmLevelItemDlg::OnInitialUpdate() {
 
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
-	m_pLevelItem = (CEsmLevelItem *) GetRecInfo()->pRecord;
+	m_pLevelItem = (CEsmLevelItem *)GetRecInfo()->pRecord;
 
 	/* Initialize the ui controls/lists */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
@@ -460,7 +466,7 @@ LRESULT CEsmLevelItemDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Only accept certain types */
@@ -470,11 +476,11 @@ LRESULT CEsmLevelItemDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 		if (pRecInfo->pRecord->IsType(s_ValidTypes[Index])) {
 			ListIndex = m_ItemList.AddItem(pRecInfo);
 			m_ItemList.SetItemText(ListIndex, 0, _T("1")); /* Default 1 item */
-			return (0);
+			return 0;
 		}
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -513,7 +519,7 @@ LRESULT CEsmLevelItemDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_ItemList.GetNextItem(ListIndex, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	} else if (lParam == VK_DELETE || lParam == VK_BACK) {
 		ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 
@@ -522,10 +528,10 @@ LRESULT CEsmLevelItemDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -543,7 +549,7 @@ LRESULT CEsmLevelItemDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	m_SortData = pSortData->iField | (pSortData->Reverse << 16);
 	m_ItemList.SortItems(l_LevItemSortCallBack1, (DWORD)this);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -567,7 +573,7 @@ int CEsmLevelItemDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_ItemList.UpdateItem(Index);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -581,7 +587,7 @@ int CEsmLevelItemDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmLevelItemDlg::SetControlData(void) {
+void CEsmLevelItemDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pLevelItem == NULL) {
 		return;
@@ -614,7 +620,7 @@ void CEsmLevelItemDlg::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmLevelItemDlg::SetItemData(void) {
+void CEsmLevelItemDlg::SetItemData() {
 	CEsmSubNameFix *pNameSubRec;
 	CEsmSubShort *pLevelSubRec;
 	esmrecinfo_t *pRecInfo;

@@ -35,25 +35,20 @@
  *=========================================================================*/
 
 /* Maximum size of template files */
-
 #define ESM_SCRTEMP_MAXTEMPSIZE   ESM_SCRIPT_MAXTEXT
 
 /* Maximum size of template variables */
-
 #define ESM_SCRTEMP_MAXVARSIZE    31
 
 /* Template characters */
-
 #define ESM_SCRTEMP_TEMPCHAR1     '['
 #define ESM_SCRTEMP_TEMPCHAR2     ']'
 
 /* File parameters */
-
 #define ESM_SCRTEMP_FILEEXT       _T("txt")
 #define ESM_SCRTEMP_FILEFILTER    _T("Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
 
 /* Special variable names */
-
 #define ESMSCRTEMP_CSV_SCRIPTNAME _T("ScriptName")
 
 /*===========================================================================
@@ -115,7 +110,6 @@ class CEsmScriptTemplate {
   protected:
 
 	/* Parses and adds a template variable */
-
 	bool AddTemplateVariable(const TCHAR *pVariable, const int Length);
 
 
@@ -124,69 +118,58 @@ class CEsmScriptTemplate {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEsmScriptTemplate();
 
 	virtual ~CEsmScriptTemplate() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Parses and adds a template variable */
-
 	bool AddTemplateVar(const TCHAR *pVariable);
 
 	/* Delete any defined template variables */
-
-	void ClearTemplateVars(void);
+	void ClearTemplateVars();
 
 	/* Converts a script template text buffer */
-
 	bool ConvertText(TCHAR *pOutBuffer, const int BufferSize, CCsvRow *pRow);
 
 	/* Attempt to find a template variable */
-
 	esmscrtempvar_t *FindTemplateVar(const TCHAR *pVariable);
 
 	/* Find a variable value from a csv row */
-
 	CSString *GetCsvString(const TCHAR *pVarName, CCsvRow *pRow);
 
 	/* Get class members */
-
-	const TCHAR *GetTemplateText(void) const {
-		return (m_TemplateText);
+	const TCHAR *GetTemplateText() const {
+		return m_TemplateText;
 	}
 
-	const TCHAR *GetFilename(void) const {
-		return (m_Filename);
+	const TCHAR *GetFilename() const {
+		return m_Filename;
 	}
 
-	int GetTemplateSize(void) const {
-		return (m_TemplateText.GetLength());
+	int GetTemplateSize() const {
+		return m_TemplateText.GetLength();
 	}
 
-	int GetNumTempVars(void) const {
-		return (m_TemplateVars.GetNumElements());
+	int GetNumTempVars() const {
+		return m_TemplateVars.GetNumElements();
 	}
 
 	/* Access a template variable */
-
 	esmscrtempvar_t *GetTemplateVar(const int Index) {
-		return (m_TemplateVars.GetAt(Index));
+		return m_TemplateVars.GetAt(Index);
 	}
 
 	/* Attempt to load a script template file */
-
 	bool Load(const TCHAR *pFilename);
 
 	/* Parse the template text */
-
-	bool ParseText(void);
+	bool ParseText();
 
 	/* Set class members */
-
 	void SetText(const TCHAR *pString) {
 		m_TemplateText = pString;
 	}

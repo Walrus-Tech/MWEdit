@@ -62,10 +62,10 @@ int CALLBACK l_NPCItemSortCallBack (LPARAM lParam1, LPARAM lParam2, LPARAM lPara
 		Result = pRecInfo1->UserData - pRecInfo2->UserData;
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
@@ -209,7 +209,7 @@ void CEsmNpcPage3::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage3::GetControlData(void) {
+void CEsmNpcPage3::GetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubNPCO *pItemName;
 	esmrecinfo_t *pRecInfo;
@@ -247,7 +247,7 @@ void CEsmNpcPage3::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmNpcPage3::GetDocument(void) {
+CMWEditDoc *CEsmNpcPage3::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage3::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -301,6 +301,7 @@ void CEsmNpcPage3::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 
 BOOL CEsmNpcPage3::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Spell List */
 	m_ItemList.OnInitCtrl();
 	m_ItemList.SetDlgHandler(m_pDlgHandler);
@@ -310,7 +311,8 @@ BOOL CEsmNpcPage3::OnInitDialog() {
 	m_ItemList.SetWantKeys(true);
 	m_ItemList.SetWantKeys(true);
 	m_ItemList.InitObjectList(&l_ItemColData[0]);
-	return (TRUE);
+
+	return TRUE;
 }
 
 /*===========================================================================
@@ -327,20 +329,20 @@ BOOL CEsmNpcPage3::OnInitDialog() {
 LRESULT CEsmNpcPage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
-	esmrecinfo_t *pRecInfo = (esmrecinfo_t *) wParam;
+	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)wParam;
 	int ListIndex;
 	int Count;
 
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Can only drag spells onto the list */
 
 	if (!IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_ItemList.FindRecord(pRecInfo);
@@ -360,7 +362,7 @@ LRESULT CEsmNpcPage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	}
 
 	UpdateTotalWeight();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -391,7 +393,7 @@ LRESULT CEsmNpcPage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 		}
 
 		UpdateTotalWeight();
-		return (1);
+		return 1;
 	}
 	/* Update all selected items by increment/decrementing their count */
 	else if (lParam == VK_ADD || lParam == VK_SUBTRACT) {
@@ -406,10 +408,10 @@ LRESULT CEsmNpcPage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_ItemList.GetNextItem(ListIndex, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -427,7 +429,7 @@ LRESULT CEsmNpcPage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	UpdateUserData();
 	m_ItemList.SortItems(l_NPCItemSortCallBack, pSortData->iField | (pSortData->Reverse << 16));
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -443,7 +445,7 @@ LRESULT CEsmNpcPage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 
 int CEsmNpcPage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	m_ItemList.UpdateItem(pRecInfo);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -457,7 +459,7 @@ int CEsmNpcPage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage3::SetControlData(void) {
+void CEsmNpcPage3::SetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubNPCO *pItemName;
 	esmrecinfo_t *pRecInfo;
@@ -504,7 +506,7 @@ void CEsmNpcPage3::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage3::UpdateTotalWeight(void) {
+void CEsmNpcPage3::UpdateTotalWeight() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int Index;
@@ -536,7 +538,7 @@ void CEsmNpcPage3::UpdateTotalWeight(void) {
  *
  *=========================================================================*/
 
-void CEsmNpcPage3::UpdateUserData(void) {
+void CEsmNpcPage3::UpdateUserData() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
 	int Index;

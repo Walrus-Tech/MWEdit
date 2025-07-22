@@ -68,12 +68,10 @@ class CEsmScrTempPage3 : public CPropertyPage {
   protected:
 
 	/* Add columns to the list control */
-
 	bool AddCsvColumns(CCsvFile *pCsvFile);
 
 	/* Deletes all items and columns in the csv list */
-
-	void ClearCsvList(void);
+	void ClearCsvList();
 
 
 	/*---------- Begin Public Class Methods ------------------------------*/
@@ -81,16 +79,13 @@ class CEsmScrTempPage3 : public CPropertyPage {
   public:
 
 	/* Constructor and Destructor */
-
 	CEsmScrTempPage3();
 	~CEsmScrTempPage3();
 
 	/* Fills the CSV list with its contents */
-
 	bool FillCsvList(CCsvFile *pCsvFile);
 
 	/* Set class members */
-
 	void SetDlgHandler(CEsmDlgHandler *pHandler) {
 		m_pDlgHandler = pHandler;
 	}
@@ -100,8 +95,7 @@ class CEsmScrTempPage3 : public CPropertyPage {
 	}
 
 	/* Update the page controls */
-
-	void UpdatePage(void);
+	void UpdatePage();
 
 	/* Dialog Data */
 

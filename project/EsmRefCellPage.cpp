@@ -187,7 +187,7 @@ cellrefdata_t *CEsmRefCellPage::AddNewCellRef(CEsmSubCellRef *pCellRef) {
 	pCellRefData->Type = ESMCELLREF_MODTYPE_NEW;
 	pCellRefData->pOldCellRef = NULL;
 	pCellRefData->pNewCellRef = pCellRef;
-	return (pCellRefData);
+	return pCellRefData;
 }
 
 /*===========================================================================
@@ -214,7 +214,7 @@ bool CEsmRefCellPage::AddNewCellRef(cellrefdata_t *pCellRefData) {
 
 	/* Unallocate the pointers */
 	DestroyPointer(pCellRefData);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -243,12 +243,12 @@ cellrefdata_t *CEsmRefCellPage::CleanCellRef(CEsmSubCellRef *pCellRef) {
 			m_ModCellRefs.DeleteElement(pCellRefData);
 			DestroyPointer(pCellRefData->pNewCellRef);
 			DestroyPointer(pCellRefData);
-			return (pCellRefData);
+			return pCellRefData;
 		}
 
 		/* Update the reference element to clean it */
 		pCellRefData->Type = ESMCELLREF_MODTYPE_CLEAN;
-		return (pCellRefData);
+		return pCellRefData;
 	}
 
 	/* Add a new record to the modified array */
@@ -260,7 +260,7 @@ cellrefdata_t *CEsmRefCellPage::CleanCellRef(CEsmSubCellRef *pCellRef) {
 	pCellRefData->Type = ESMCELLREF_MODTYPE_CLEAN;
 	pCellRefData->pNewCellRef = pCellRef;
 	pCellRefData->pOldCellRef = pCellRef;
-	return (pCellRefData);
+	return pCellRefData;
 }
 
 /*===========================================================================
@@ -288,7 +288,7 @@ bool CEsmRefCellPage::CleanCellRef(cellrefdata_t *pCellRefData) {
 	/* Unallocate the pointers */
 	DestroyPointer(pCellRefData->pOldCellRef);
 	DestroyPointer(pCellRefData);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -302,7 +302,7 @@ bool CEsmRefCellPage::CleanCellRef(cellrefdata_t *pCellRefData) {
  *
  *=========================================================================*/
 
-void CEsmRefCellPage::ClearCellRefArray(void) {
+void CEsmRefCellPage::ClearCellRefArray() {
 	DEFINE_FUNCTION("CEsmRefCellPage::ClearCellRefArray()");
 	cellrefdata_t *pCellRefData;
 	int Index;
@@ -336,7 +336,7 @@ cellrefdata_t *CEsmRefCellPage::DeleteCellRef(CEsmSubCellRef *pCellRef) {
 
 	if (pCellRefData != NULL) {
 		pCellRefData->Type = ESMCELLREF_MODTYPE_DEL;
-		return (pCellRefData);
+		return pCellRefData;
 	}
 
 	/* Add a new record to the modified array */
@@ -348,7 +348,7 @@ cellrefdata_t *CEsmRefCellPage::DeleteCellRef(CEsmSubCellRef *pCellRef) {
 	pCellRefData->Type = ESMCELLREF_MODTYPE_DEL;
 	pCellRefData->pNewCellRef = pCellRef;
 	pCellRefData->pOldCellRef = pCellRef;
-	return (pCellRefData);
+	return pCellRefData;
 }
 
 /*===========================================================================
@@ -430,7 +430,8 @@ bool CEsmRefCellPage::DeleteCellRef(cellrefdata_t *pCellRefData) {
 	if (pCellRefData->pOldCellRef != NULL) {
 		if (pCellRefData->pOldCellRef->IsDeleted() && !pCellRefData->pNewCellRef->IsDeleted()) {
 			pCell->IncCount();
-		} else if (!pCellRefData->pOldCellRef->IsDeleted() && pCellRefData->pNewCellRef->IsDeleted()) {
+		} else if (!pCellRefData->pOldCellRef->IsDeleted()
+		           && pCellRefData->pNewCellRef->IsDeleted()) {
 			pCell->DecCount();
 		}
 	} else if (!pCellRefData->pNewCellRef->IsDeleted()) {
@@ -450,7 +451,7 @@ bool CEsmRefCellPage::DeleteCellRef(cellrefdata_t *pCellRefData) {
 
 	/* Unallocate pointer data */
 	DestroyPointer(pCellRefData);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -495,12 +496,12 @@ cellrefdata_t *CEsmRefCellPage::FindNewCellRef(CEsmSubCellRef *pCellRef) {
 		pCellRefData = m_ModCellRefs.GetAt(Index);
 
 		if (pCellRefData->pNewCellRef == pCellRef) {
-			return (pCellRefData);
+			return pCellRefData;
 		}
 	}
 
 	/* No match found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -527,12 +528,12 @@ cellrefdata_t *CEsmRefCellPage::FindOldCellRef(CEsmSubCellRef *pCellRef) {
 		pCellRefData = m_ModCellRefs.GetAt(Index);
 
 		if (pCellRefData->pOldCellRef == pCellRef) {
-			return (pCellRefData);
+			return pCellRefData;
 		}
 	}
 
 	/* No match found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -546,7 +547,7 @@ cellrefdata_t *CEsmRefCellPage::FindOldCellRef(CEsmSubCellRef *pCellRef) {
  *
  *=========================================================================*/
 
-void CEsmRefCellPage::GetControlData(void) {
+void CEsmRefCellPage::GetControlData() {
 	CEsmCell *pCell;
 	cellrefdata_t *pCellRefData;
 	bool Result;
@@ -581,7 +582,7 @@ void CEsmRefCellPage::GetControlData(void) {
 			case ESMCELLREF_MODTYPE_DEL:
 				Result = DeleteCellRef(pCellRefData);
 				break;
-		};
+		}
 	}
 
 	/* Clear the modified array (records are deleted as needed in the above methods) */
@@ -599,7 +600,7 @@ void CEsmRefCellPage::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmRefCellPage::GetDocument(void) {
+CMWEditDoc *CEsmRefCellPage::GetDocument() {
 	DEFINE_FUNCTION("CEsmRefCellPage::GetDocument()");
 	ASSERT(m_pDlgParent != NULL);
 	return m_pDlgParent->GetDocument();
@@ -626,7 +627,7 @@ cellrefdata_t *CEsmRefCellPage::ModifyCellRef(CEsmSubCellRef *pCellRef) {
 
 	if (pCellRefData != NULL) {
 		pCellRefData->Type = ESMCELLREF_MODTYPE_MOD;
-		return (pCellRefData);
+		return pCellRefData;
 	}
 
 	/* Add a new record to the modified array */
@@ -638,7 +639,7 @@ cellrefdata_t *CEsmRefCellPage::ModifyCellRef(CEsmSubCellRef *pCellRef) {
 	pCellRefData->Type = ESMCELLREF_MODTYPE_MOD;
 	pCellRefData->pNewCellRef = pCellRef;
 	pCellRefData->pOldCellRef = pCellRef;
-	return (pCellRefData);
+	return pCellRefData;
 }
 
 /*===========================================================================
@@ -672,7 +673,7 @@ bool CEsmRefCellPage::ModifyCellRef(cellrefdata_t *pCellRefData) {
 
 	/* Unallocate pointer data */
 	DestroyPointer(pCellRefData);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -935,6 +936,7 @@ void CEsmRefCellPage::OnEditClean() {
 
 BOOL CEsmRefCellPage::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
+
 	/* Intialize the list */
 	m_CellRefList.OnInitCtrl();
 	m_CellRefList.InitObjectList(l_ItemColData);
@@ -942,7 +944,8 @@ BOOL CEsmRefCellPage::OnInitDialog() {
 	m_CellRefList.SetAcceptDrag(true);
 	m_CellRefList.SetEnableDrag(true);
 	m_CellRefList.SetWantEditMsg(true);
-	return (TRUE);
+
+	return TRUE;
 }
 
 /*===========================================================================
@@ -968,13 +971,13 @@ LRESULT CEsmRefCellPage::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Only accept certain types */
 
 	if (!IsESMRecordModel(pRecInfo->pRecord->GetType())) {
-		return (0);
+		return 0;
 	}
 
 	//return (0);
@@ -988,7 +991,7 @@ LRESULT CEsmRefCellPage::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 
 	/* Update the reference list */
 	m_CellRefList.AddItem(pNewCellRef);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1015,13 +1018,13 @@ LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
 	/* Ignore if no record currently selected */
 
 	if (lParam < 0) {
-		return (0);
+		return 0;
 	}
 
 	pOldCellRef = (CEsmSubCellRef *)m_CellRefList.GetItemData(lParam);
 
 	if (pOldCellRef == NULL) {
-		return (0);
+		return 0;
 	}
 
 	/* See if the reference record is already 'new' */
@@ -1029,7 +1032,7 @@ LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
 
 	if (pCellRefData == NULL) {
 		if (pOldCellRef->IsDeleted()) {
-			return (0);
+			return 0;
 		}
 
 		IsNew = false;
@@ -1038,11 +1041,11 @@ LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
 		pNewCellRef->Copy(pOldCellRef);
 	} else {
 		if (pOldCellRef->IsDeleted()) {
-			return (0);
+			return 0;
 		}
 
 		if (pCellRefData->Type == ESMCELLREF_MODTYPE_DEL) {
-			return (0);
+			return 0;
 		}
 
 		NewAllocated = false;
@@ -1058,7 +1061,7 @@ LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
 			DestroyPointer(pNewCellRef);
 		}
 
-		return (0);
+		return 0;
 	}
 
 	/* Create a new cell ref data record if required */
@@ -1073,7 +1076,7 @@ LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
 
 	/* Update the display */
 	UpdateCellRefList();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1088,7 +1091,7 @@ LRESULT CEsmRefCellPage::OnRecordEdit(LPARAM lParam, LPARAM wParam) {
  *=========================================================================*/
 
 LRESULT CEsmRefCellPage::OnRecordKey(LPARAM lParam, LPARAM wParam) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1103,7 +1106,7 @@ LRESULT CEsmRefCellPage::OnRecordKey(LPARAM lParam, LPARAM wParam) {
  *=========================================================================*/
 
 int CEsmRefCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1152,7 +1155,7 @@ void CEsmRefCellPage::OnUpdateCellrefCreatecopy(CCmdUI *pCmdUI) {
  *
  *=========================================================================*/
 
-void CEsmRefCellPage::SetControlData(void) {
+void CEsmRefCellPage::SetControlData() {
 	m_CellRefList.SetDlgHandler(m_pDlgParent->GetParentDlg());
 	UpdateCellRefList();
 }
@@ -1168,7 +1171,7 @@ void CEsmRefCellPage::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmRefCellPage::UpdateCellRefList(void) {
+void CEsmRefCellPage::UpdateCellRefList() {
 	CEsmSubCellRef *pCellRef;
 	cellrefdata_t *pCellRefData;
 	CEsmCell *pCell = (CEsmCell *)m_pRecInfo->pRecord;

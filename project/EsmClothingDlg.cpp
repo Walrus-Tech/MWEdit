@@ -53,6 +53,7 @@ BEGIN_MESSAGE_MAP(CEsmClothingDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST5, OnSelchangeBipedlist5)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST6, OnSelchangeBipedlist6)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST7, OnSelchangeBipedlist7)
+
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST1, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST2, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST3, OnSelchangeClothList)
@@ -60,6 +61,7 @@ BEGIN_MESSAGE_MAP(CEsmClothingDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST5, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST6, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_MCLOTHLIST7, OnSelchangeClothList)
+
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST1, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST2, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST3, OnSelchangeClothList)
@@ -67,6 +69,7 @@ BEGIN_MESSAGE_MAP(CEsmClothingDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST5, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST6, OnSelchangeClothList)
 	ON_CBN_SELCHANGE(IDC_FCLOTHLIST7, OnSelchangeClothList)
+
 	ON_BN_CLICKED(IDC_ENCHANTEDIT, OnEnchantedit)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -153,13 +156,14 @@ void CEsmClothingDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmClothingDlg::GetBipedData(void) {
+void CEsmClothingDlg::GetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	CEsmSubName *pNameRecord;
 	CString Buffer;
 	int BipedIndex;
 	int BipedPart;
 	int Index;
+
 	/* Delete all the INDX/BNAM/CNAM sub-records from the armor record */
 	m_pClothing->DeleteSubRecords(MWESM_SUBREC_INDX);
 	m_pClothing->DeleteSubRecords(MWESM_SUBREC_BNAM);
@@ -183,6 +187,7 @@ void CEsmClothingDlg::GetBipedData(void) {
 		pIndexRecord = (CEsmSubByte *)m_pClothing->AllocateSubRecord(MWESM_SUBREC_INDX);
 		pIndexRecord->CreateNew();
 		pIndexRecord->SetValue((byte)BipedPart);
+
 		/* Create the male part record, if any */
 		Index = m_MClothList[BipedIndex].GetCurSel();
 		m_MClothList[BipedIndex].GetWindowText(Buffer);
@@ -216,7 +221,7 @@ void CEsmClothingDlg::GetBipedData(void) {
  *
  *=========================================================================*/
 
-void CEsmClothingDlg::GetControlData(void) {
+void CEsmClothingDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmClothingDlg::GetControlData()");
 	CString Buffer;
 	int Index;
@@ -237,6 +242,7 @@ void CEsmClothingDlg::GetControlData(void) {
 	/* Armor name */
 	m_NameText.GetWindowText(Buffer);
 	m_pClothing->SetName(TrimStringSpace(Buffer));
+
 	/* Armor type */
 	Index = m_TypeList.GetCurSel();
 
@@ -290,9 +296,9 @@ void CEsmClothingDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmClothingDlg::IsModified(void) {
+bool CEsmClothingDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -317,7 +323,7 @@ bool CEsmClothingDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -335,13 +341,16 @@ void CEsmClothingDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pClothing = (CEsmClothing *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmClothTypeCombo(m_TypeList);
 	FillEsmScriptCombo(m_ScriptList);
 	FillEsmEnchantCombo(m_EnchantList);
+
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_EnchantText.SetLimitText(16);
@@ -397,7 +406,7 @@ int CEsmClothingDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -480,7 +489,7 @@ void CEsmClothingDlg::SetBipedData(const int BipedIndex,
  *
  *=========================================================================*/
 
-void CEsmClothingDlg::SetBipedData(void) {
+void CEsmClothingDlg::SetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	int RecordIndex;
 	int BipedIndex;
@@ -490,7 +499,7 @@ void CEsmClothingDlg::SetBipedData(void) {
 
 	for (BipedIndex = 0; BipedIndex < MWESM_CLOTH_MAXBODYPARTS; BipedIndex++) {
 		SetBipedData(BipedIndex, pIndexRecord, RecordIndex);
-		pIndexRecord = (CEsmSubByte *) m_pClothing->FindNext(MWESM_SUBREC_INDX, RecordIndex);
+		pIndexRecord = (CEsmSubByte *)m_pClothing->FindNext(MWESM_SUBREC_INDX, RecordIndex);
 	}
 }
 
@@ -529,10 +538,12 @@ void CEsmClothingDlg::SetBipedObject(const int BipedIndex) {
 	/* Enable the male/female body part lists */
 	m_FClothList[BipedIndex].EnableWindow(TRUE);
 	m_MClothList[BipedIndex].EnableWindow(TRUE);
+
 	/* Fill the body lists with the appropriate body part records */
 	BodyPart = ConvertBipedToBodyPart(BipedPart);
 	FillEsmBodyPartsCombo(m_MClothList[BipedIndex], BodyPart, false, MWESM_PARTTYPE_CLOTHING);
 	FillEsmBodyPartsCombo(m_FClothList[BipedIndex], BodyPart, true, MWESM_PARTTYPE_CLOTHING);
+
 	/* Set the list items to initially nothing */
 	m_MClothList[BipedIndex].SelectString(-1, _T(""));
 	m_FClothList[BipedIndex].SelectString(-1, _T(""));
@@ -549,7 +560,7 @@ void CEsmClothingDlg::SetBipedObject(const int BipedIndex) {
  *
  *=========================================================================*/
 
-void CEsmClothingDlg::SetControlData(void) {
+void CEsmClothingDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pClothing == NULL) {
 		return;
@@ -558,26 +569,32 @@ void CEsmClothingDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pClothing->GetID());
 	UpdateTitle(m_pClothing->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pClothing->GetName());
 	m_WeightText.SetWindowText(m_pClothing->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pClothing->GetFieldString(ESM_FIELD_VALUE));
 	m_EnchantText.SetWindowText(m_pClothing->GetFieldString(ESM_FIELD_ENCHANTPTS));
+
 	m_NameText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
 	m_EnchantText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pClothing->GetModel());
 	m_IconButton.SetWindowText(m_pClothing->GetIcon());
 	m_IconPicture.SetEsmIcon(m_pClothing->GetIcon());
+
 	/* Item lists */
 	FindComboListItem(m_TypeList, m_pClothing->GetClothTypeID(), true);
 	m_EnchantList.SelectString(-1, m_pClothing->GetEnchant());
 	m_ScriptList.SelectString(-1, m_pClothing->GetScript());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pClothing->IsBlocked());
 	m_PersistCheck.SetCheck(m_pClothing->IsPersist());
+
 	/* Set all the biped part data */
 	SetBipedData();
 }

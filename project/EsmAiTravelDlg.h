@@ -52,7 +52,7 @@ class CEsmAiTravelDlg : public CDialog {
 
 	/* Main access method */
 
-	bool DoModal (CEsmSubAI_T *pSubRecord);
+	bool DoModal(CEsmSubAI_T *pSubRecord);
 
 	/* Dialog Data */
 

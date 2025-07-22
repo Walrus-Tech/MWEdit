@@ -69,24 +69,20 @@ class CEsmScriptCompareDlg : public CFormView {
   public:
 
 	/* Add text to the log */
-
 	void AddLogText(const TCHAR *pString, va_list Args);
 
 	/* Clear the text */
-
-	void ClearText(void) {
+	void ClearText() {
 		m_LogText.SetWindowText("");
 	}
 
 	/* Set class members */
-
 	void SetDlgHandler(CEsmDlgHandler *pParent) {
 		m_pDlgHandler = pParent;
 	}
 
 	/* Update the view title */
-
-	void UpdateTitle(void);
+	void UpdateTitle();
 
 	/* Dialog Data */
 

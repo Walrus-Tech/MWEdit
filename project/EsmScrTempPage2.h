@@ -56,12 +56,10 @@ class CEsmScrTempPage2 : public CPropertyPage {
   public:
 
 	/* Constructor and Destructor */
-
 	CEsmScrTempPage2();
 	~CEsmScrTempPage2();
 
 	/* Set class members */
-
 	void SetDlgHandler(CEsmDlgHandler *pHandler) {
 		m_pDlgHandler = pHandler;
 	}
@@ -71,9 +69,8 @@ class CEsmScrTempPage2 : public CPropertyPage {
 	}
 
 	/* Update the page controls */
-
-	void UpdatePage(void);
-	void UpdateText(void);
+	void UpdatePage();
+	void UpdateText();
 
 	/* Dialog Data */
 

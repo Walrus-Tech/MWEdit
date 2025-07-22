@@ -76,10 +76,10 @@ int CALLBACK l_SortFiles(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 	}
 
 	if (Flags) {
-		return (-Result);
+		return -Result;
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -126,7 +126,7 @@ COpenPluginDlg::~COpenPluginDlg() {
  * Class COpenPluginDlg Method - void ClearFileArray (void);
  *
  *=========================================================================*/
-void COpenPluginDlg::ClearFileArray(void) {
+void COpenPluginDlg::ClearFileArray() {
 	DEFINE_FUNCTION("COpenPluginDlg::ClearFileArray()");
 	esmfileinfo_t *pFile;
 	int Index;
@@ -150,7 +150,7 @@ void COpenPluginDlg::ClearFileArray(void) {
  * Class COpenPluginDlg Method - void CreateFileList (void);
  *
  *=========================================================================*/
-void COpenPluginDlg::CreateFileList(void) {
+void COpenPluginDlg::CreateFileList() {
 	DEFINE_FUNCTION("COpenPluginDlg::CreateFileList()");
 	esmfileinfo_t *pFile;
 	CFindFile FindFile;
@@ -319,7 +319,8 @@ BOOL COpenPluginDlg::OnInitDialog() {
 	m_FileList.SortItems(l_SortFiles, OPENPLUG_SUBITEM_FILENAME);
 	m_FileList.SortItems(l_SortFiles, OPENPLUG_SUBITEM_DATE);
 	m_FileList.SortItems(l_SortFiles, OPENPLUG_SUBITEM_TYPE);
-	return (TRUE);
+
+	return TRUE;
 }
 
 /*===========================================================================
@@ -343,7 +344,7 @@ void COpenPluginDlg::OnOK() {
 	/* Save the currently checked files */
 	for (Index = 0; Index < m_FileList.GetItemCount(); Index++) {
 		pFile = (esmfileinfo_t *)m_FileList.GetItemData(Index);
-		Checked = (ListView_GetCheckState(m_FileList.m_hWnd, Index) != 0);
+		Checked = ListView_GetCheckState(m_FileList.m_hWnd, Index) != 0;
 		//SystemLog.Printf("File %s: %ld", pFile->Filename, pFile->Flags);
 
 		if (Checked && (pFile->Flags & OPENPLUG_FLAG_ACTIVE) != 0) {

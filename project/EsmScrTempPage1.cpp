@@ -99,6 +99,7 @@ CEsmScrTempPage1::~CEsmScrTempPage1() {
 
 void CEsmScrTempPage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmScrTempPage1)
 	DDX_Control(pDX, IDC_SCRIPTNAME, m_ScriptName);
 	DDX_Control(pDX, IDC_AUTOSCRIPTNAME, m_AutoScriptName);
@@ -123,7 +124,7 @@ void CEsmScrTempPage1::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmScrTempPage1::FillTempVarList(void) {
+void CEsmScrTempPage1::FillTempVarList() {
 	CEsmScriptTemplate *pScrTemplate = m_pParentView->GetScriptTemplate();
 	esmscrtempvar_t *pTempVar;
 	CString Buffer;
@@ -156,7 +157,7 @@ void CEsmScrTempPage1::FillTempVarList(void) {
  *
  *=========================================================================*/
 
-void CEsmScrTempPage1::GetControlData(void) {
+void CEsmScrTempPage1::GetControlData() {
 	CString Buffer;
 
 	/* Update the options */
@@ -196,7 +197,7 @@ void CEsmScrTempPage1::OnAutoscriptname() {
 BOOL CEsmScrTempPage1::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	m_ScriptName.SetLimitText(ESMSCRTEMP_SCRIPTNAMESIZE);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -251,7 +252,7 @@ void CEsmScrTempPage1::OnUpdatetext() {
  *
  *=========================================================================*/
 
-void CEsmScrTempPage1::UpdatePage(void) {
+void CEsmScrTempPage1::UpdatePage() {
 	/* Update the template filename */
 	m_TemplateFile.SetWindowText(m_pParentView->GetScriptTemplate()->GetFilename());
 

@@ -53,6 +53,7 @@ BEGIN_MESSAGE_MAP(CEsmArmorDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST5, OnSelchangeBipedlist5)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST6, OnSelchangeBipedlist6)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST7, OnSelchangeBipedlist7)
+
 	ON_CBN_SELCHANGE(IDC_MARMORLIST1, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_MARMORLIST2, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_MARMORLIST3, OnSelchangeArmorList)
@@ -60,6 +61,7 @@ BEGIN_MESSAGE_MAP(CEsmArmorDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_MARMORLIST5, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_MARMORLIST6, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_MARMORLIST7, OnSelchangeArmorList)
+
 	ON_CBN_SELCHANGE(IDC_FARMORLIST1, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_FARMORLIST2, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_FARMORLIST3, OnSelchangeArmorList)
@@ -67,6 +69,7 @@ BEGIN_MESSAGE_MAP(CEsmArmorDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_FARMORLIST5, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_FARMORLIST6, OnSelchangeArmorList)
 	ON_CBN_SELCHANGE(IDC_FARMORLIST7, OnSelchangeArmorList)
+
 	ON_BN_CLICKED(IDC_ENCHANTEDIT2, OnEnchantedit)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -118,6 +121,7 @@ void CEsmArmorDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_MARMORLIST1, m_MArmorList[0]);
 	DDX_Control(pDX, IDC_MARMORLIST2, m_MArmorList[1]);
 	DDX_Control(pDX, IDC_MARMORLIST3, m_MArmorList[2]);
@@ -125,6 +129,7 @@ void CEsmArmorDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_MARMORLIST5, m_MArmorList[4]);
 	DDX_Control(pDX, IDC_MARMORLIST6, m_MArmorList[5]);
 	DDX_Control(pDX, IDC_MARMORLIST7, m_MArmorList[6]);
+
 	DDX_Control(pDX, IDC_FARMORLIST1, m_FArmorList[0]);
 	DDX_Control(pDX, IDC_FARMORLIST2, m_FArmorList[1]);
 	DDX_Control(pDX, IDC_FARMORLIST3, m_FArmorList[2]);
@@ -132,6 +137,7 @@ void CEsmArmorDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_FARMORLIST5, m_FArmorList[4]);
 	DDX_Control(pDX, IDC_FARMORLIST6, m_FArmorList[5]);
 	DDX_Control(pDX, IDC_FARMORLIST7, m_FArmorList[6]);
+
 	DDX_Control(pDX, IDC_BIPEDLIST1, m_BipedList[0]);
 	DDX_Control(pDX, IDC_BIPEDLIST2, m_BipedList[1]);
 	DDX_Control(pDX, IDC_BIPEDLIST3, m_BipedList[2]);
@@ -152,13 +158,14 @@ void CEsmArmorDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmArmorDlg::GetBipedData(void) {
+void CEsmArmorDlg::GetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	CEsmSubName *pNameRecord;
 	CString Buffer;
 	int BipedIndex;
 	int BipedPart;
 	int Index;
+
 	/* Delete all the INDX/BNAM/CNAM sub-records from the armor record */
 	m_pArmor->DeleteSubRecords(MWESM_SUBREC_INDX);
 	m_pArmor->DeleteSubRecords(MWESM_SUBREC_BNAM);
@@ -182,6 +189,7 @@ void CEsmArmorDlg::GetBipedData(void) {
 		pIndexRecord = (CEsmSubByte *)m_pArmor->AllocateSubRecord(MWESM_SUBREC_INDX);
 		pIndexRecord->CreateNew();
 		pIndexRecord->SetValue((byte)BipedPart);
+
 		/* Create the male part record, if any */
 		Index = m_MArmorList[BipedIndex].GetCurSel();
 		m_MArmorList[BipedIndex].GetWindowText(Buffer);
@@ -215,7 +223,7 @@ void CEsmArmorDlg::GetBipedData(void) {
  *
  *=========================================================================*/
 
-void CEsmArmorDlg::GetControlData(void) {
+void CEsmArmorDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmArmorDlg::GetControlData()");
 	armordata_t *pArmorData;
 	CString Buffer;
@@ -240,6 +248,7 @@ void CEsmArmorDlg::GetControlData(void) {
 	/* Armor name */
 	m_NameText.GetWindowText(Buffer);
 	m_pArmor->SetName(TrimStringSpace(Buffer));
+
 	/* Armor type */
 	Index = m_TypeList.GetCurSel();
 
@@ -250,33 +259,43 @@ void CEsmArmorDlg::GetControlData(void) {
 	/* Armor rating */
 	m_RatingText.GetWindowText(Buffer);
 	pArmorData->Rating = atoi(Buffer);
+
 	/* Armor health */
 	m_HealthText.GetWindowText(Buffer);
 	pArmorData->Health = atoi(Buffer);
+
 	/* Armor weight */
 	m_WeightText.GetWindowText(Buffer);
 	pArmorData->Weight = (float)atof(Buffer);
+
 	/* Armor value */
 	m_ValueText.GetWindowText(Buffer);
 	pArmorData->Value = atoi(Buffer);
+
 	/* Enchant points */
 	m_EnchantText.GetWindowText(Buffer);
 	pArmorData->EnchantPts = atoi(Buffer);
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pArmor->SetScript(TrimStringSpace(Buffer));
+
 	/* Item enchant */
 	m_EnchantList.GetWindowText(Buffer);
 	m_pArmor->SetEnchant(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pArmor->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pArmor->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pArmor->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pArmor->SetBlocked(m_BlockedCheck.GetCheck() != 0);
+
 	GetBipedData();
 }
 
@@ -291,9 +310,9 @@ void CEsmArmorDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmArmorDlg::IsModified(void) {
+bool CEsmArmorDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -326,7 +345,7 @@ bool CEsmArmorDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -378,13 +397,16 @@ void CEsmArmorDlg::OnInitialUpdate() {
 	//((CFrameWnd*)AfxGetMainWnd())->OnUpdateFrameMenu(Menu.GetSafeHmenu());
 	//((CFrameWnd*)AfxGetMainWnd())>OnUpdateFrameMenu(NULL) ;
 	//((CFrameWnd*)AfxGetMainWnd())->DrawMenuBar();
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pArmor = (CEsmArmor *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmArmorTypeCombo(m_TypeList);
 	FillEsmScriptCombo(m_ScriptList);
 	FillEsmEnchantCombo(m_EnchantList);
+
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_EnchantText.SetLimitText(16);
@@ -439,10 +461,10 @@ int CEsmArmorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -525,7 +547,7 @@ void CEsmArmorDlg::SetBipedData(const int BipedIndex,
  *
  *=========================================================================*/
 
-void CEsmArmorDlg::SetBipedData(void) {
+void CEsmArmorDlg::SetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	int RecordIndex;
 	int BipedIndex;
@@ -574,10 +596,12 @@ void CEsmArmorDlg::SetBipedObject(const int BipedIndex) {
 	/* Enable the male/female body part lists */
 	m_FArmorList[BipedIndex].EnableWindow(TRUE);
 	m_MArmorList[BipedIndex].EnableWindow(TRUE);
+
 	/* Fill the body lists with the appropriate body part records */
 	BodyPart = ConvertBipedToBodyPart(BipedPart);
 	FillEsmBodyPartsCombo(m_MArmorList[BipedIndex], BodyPart, false, MWESM_PARTTYPE_ARMOR);
 	FillEsmBodyPartsCombo(m_FArmorList[BipedIndex], BodyPart, true, MWESM_PARTTYPE_ARMOR);
+
 	/* Set the list items to initially nothing */
 	m_MArmorList[BipedIndex].SelectString(-1, _T(""));
 	m_FArmorList[BipedIndex].SelectString(-1, _T(""));
@@ -594,7 +618,7 @@ void CEsmArmorDlg::SetBipedObject(const int BipedIndex) {
  *
  *=========================================================================*/
 
-void CEsmArmorDlg::SetControlData(void) {
+void CEsmArmorDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pArmor == NULL) {
 		return;
@@ -603,6 +627,7 @@ void CEsmArmorDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pArmor->GetID());
 	UpdateTitle(m_pArmor->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pArmor->GetName());
 	m_RatingText.SetWindowText(m_pArmor->GetFieldString(ESM_FIELD_RATING));
@@ -610,23 +635,28 @@ void CEsmArmorDlg::SetControlData(void) {
 	m_WeightText.SetWindowText(m_pArmor->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pArmor->GetFieldString(ESM_FIELD_VALUE));
 	m_EnchantText.SetWindowText(m_pArmor->GetFieldString(ESM_FIELD_ENCHANTPTS));
+
 	m_NameText.SetModify(FALSE);
 	m_RatingText.SetModify(FALSE);
 	m_HealthText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
 	m_EnchantText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pArmor->GetModel());
 	m_IconButton.SetWindowText(m_pArmor->GetIcon());
 	m_IconPicture.SetEsmIcon(m_pArmor->GetIcon());
+
 	/* Item lists */
 	FindComboListItem(m_TypeList, m_pArmor->GetArmorTypeID(), true);
 	m_EnchantList.SelectString(-1, m_pArmor->GetEnchant());
 	m_ScriptList.SelectString(-1, m_pArmor->GetScript());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pArmor->IsBlocked());
 	m_PersistCheck.SetCheck(m_pArmor->IsPersist());
+
 	/* Set all the biped part data */
 	SetBipedData();
 }

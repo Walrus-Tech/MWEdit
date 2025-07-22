@@ -52,10 +52,10 @@ int CALLBACK l_CreaSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 		Result = pRecInfo1->UserData - pRecInfo2->UserData;
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
@@ -73,10 +73,10 @@ int CALLBACK l_CreaSortCallBack1(LPARAM lParam1, LPARAM lParam2, LPARAM lParamDa
 		Result = pDialog->GetSortCount(pRecInfo1) - pDialog->GetSortCount(pRecInfo2);
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, pDialog->GetSortData());
@@ -208,7 +208,7 @@ void CEsmLevelCreaDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::GetControlData(void) {
+void CEsmLevelCreaDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLevelCreaDlg::GetControlData()");
 	CString Buffer;
 	int Chance;
@@ -264,7 +264,7 @@ int CEsmLevelCreaDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 	ListIndex = m_CreatureList.FindRecord(pRecInfo);
 
 	if (ListIndex < 0) {
-		return (0);
+		return 0;
 	}
 
 	/* Get the text and convert to a number value */
@@ -275,7 +275,7 @@ int CEsmLevelCreaDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 		Count = 0;
 	}
 
-	return (Count);
+	return Count;
 }
 
 /*===========================================================================
@@ -289,13 +289,14 @@ int CEsmLevelCreaDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::GetCreatureData(void) {
+void CEsmLevelCreaDlg::GetCreatureData() {
 	CEsmSubNameFix *pNameSubRec;
 	CEsmSubShort *pLevelSubRec;
 	CString Buffer;
 	int Index;
 	int Level;
 	int CreatureCount = 0;
+
 	/* Delete all the CNAM and INTV sub-records from the record */
 	m_pLevelCrea->DeleteSubRecords(MWESM_SUBREC_CNAM);
 	m_pLevelCrea->DeleteSubRecords(MWESM_SUBREC_INTV);
@@ -365,9 +366,9 @@ void CEsmLevelCreaDlg::OnEndlabeleditlist(NMHDR *pNMHDR, LRESULT *pResult) {
  *
  *=========================================================================*/
 
-bool CEsmLevelCreaDlg::IsModified(void) {
+bool CEsmLevelCreaDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -380,7 +381,7 @@ bool CEsmLevelCreaDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -440,14 +441,14 @@ LRESULT CEsmLevelCreaDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Only accept creature/NPC records */
 
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_NPC_) &&
 	    !pRecInfo->pRecord->IsType(MWESM_REC_CREA)) {
-		return (0);
+		return 0;
 	}
 
 	/* Add a new creature to the list */
@@ -492,7 +493,7 @@ LRESULT CEsmLevelCreaDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_CreatureList.GetNextItem(ListIndex, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	} else if (lParam == VK_DELETE || lParam == VK_BACK) {
 		ListIndex = m_CreatureList.GetNextItem(-1, LVNI_SELECTED);
 
@@ -501,10 +502,10 @@ LRESULT CEsmLevelCreaDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_CreatureList.GetNextItem(-1, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -521,8 +522,8 @@ LRESULT CEsmLevelCreaDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 LRESULT CEsmLevelCreaDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	m_SortData = pSortData->iField | (pSortData->Reverse << 16);
-	m_CreatureList.SortItems(l_CreaSortCallBack1, (DWORD) this);
-	return (0);
+	m_CreatureList.SortItems(l_CreaSortCallBack1, (DWORD)this);
+	return 0;
 }
 
 /*===========================================================================
@@ -546,7 +547,7 @@ int CEsmLevelCreaDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_CreatureList.UpdateItem(Index);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -560,7 +561,7 @@ int CEsmLevelCreaDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::SetControlData(void) {
+void CEsmLevelCreaDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pLevelCrea == NULL) {
 		return;
@@ -591,7 +592,7 @@ void CEsmLevelCreaDlg::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmLevelCreaDlg::SetCreatureData(void) {
+void CEsmLevelCreaDlg::SetCreatureData() {
 	CEsmSubNameFix *pNameSubRec;
 	CEsmSubShort *pLevelSubRec;
 	esmrecinfo_t *pRecInfo;

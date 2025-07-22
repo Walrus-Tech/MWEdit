@@ -71,7 +71,7 @@ int l_FindRecNameSort(const void *pElem1, const void *pElem2, const long UserDat
 	TCHAR *pName = (TCHAR *)pElem2;
 
 	if (pRec1 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pRec1->pRecord->GetID(), pName, false);
@@ -82,7 +82,7 @@ int l_FindRecSort1(const void *pElem1, const void *pElem2, const long UserData) 
 	CEsmRecord *pRecord = (CEsmRecord *)pElem2;
 
 	if (pRec1 == NULL || pRecord == NULL) {
-		return (0);
+		return 0;
 	}
 
 	long *pType1 = (long *)pRec1->pRecord->GetType();
@@ -91,7 +91,7 @@ int l_FindRecSort1(const void *pElem1, const void *pElem2, const long UserData) 
 	if (*pType1 == *pType2) {
 		return StringCompare(pRec1->pRecord->GetID(), pRecord->GetID(), false);
 	} else {
-		return (*pType2 - *pType1);
+		return *pType2 - *pType1;
 	}
 }
 
@@ -100,7 +100,7 @@ int l_FindRecSort2(const void *pElem1, const void *pElem2, const long UserData) 
 	esmrecsortfind_t *pSortData = (esmrecsortfind_t *)pElem2;
 
 	if (pRec1 == NULL || pSortData == NULL) {
-		return (0);
+		return 0;
 	}
 
 	long *pType1 = (long *)pRec1->pRecord->GetType();
@@ -109,7 +109,7 @@ int l_FindRecSort2(const void *pElem1, const void *pElem2, const long UserData) 
 	if (*pType1 == *pType2) {
 		return StringCompare(pRec1->pRecord->GetID(), pSortData->pID, false);
 	} else {
-		return (*pType2 - *pType1);
+		return *pType2 - *pType1;
 	}
 }
 
@@ -118,7 +118,7 @@ static int l_RecSortPtr(const void *pElem1, const void *pElem2) {
 	esmrecinfo_t *pRec2 = *(esmrecinfo_t **)pElem2;
 
 	if (pRec2 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pString, pRec2->pRecord->GetID(), false);
@@ -139,7 +139,7 @@ int l_RecInfoSort(const void *pElem1, const void *pElem2, const long UserData) {
 	esmrecinfo_t *pRec2 = (esmrecinfo_t *)pElem2;
 
 	if (pRec1 == NULL || pRec2 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pRec1->pRecord->GetID(), pRec2->pRecord->GetID(), false);
@@ -150,7 +150,7 @@ int l_RecInfoSortType(const void *pElem1, const void *pElem2, const long UserDat
 	esmrecinfo_t *pRec2 = (esmrecinfo_t *)pElem2;
 
 	if (pRec1 == NULL || pRec2 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	long *pType1 = (long *)pRec1->pRecord->GetType();
@@ -159,7 +159,7 @@ int l_RecInfoSortType(const void *pElem1, const void *pElem2, const long UserDat
 	if (*pType1 == *pType2) {
 		return StringCompare(pRec1->pRecord->GetID(), pRec2->pRecord->GetID(), false);
 	} else {
-		return (*pType2 - *pType1);
+		return *pType2 - *pType1;
 	}
 }
 
@@ -178,7 +178,7 @@ int l_RecInfoSortPtr(const void *pElem1, const void *pElem2, const long UserData
 	esmrecinfo_t *pRec2 = *(esmrecinfo_t **)pElem2;
 
 	if (pRec1 == NULL || pRec2 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pRec1->pRecord->GetID(), pRec2->pRecord->GetID(), false);
@@ -311,12 +311,12 @@ bool CMWEditDoc::BackupPlugin(const TCHAR *pFilename) {
 
 	/* Ignore if not backing up things */
 	if (!GetEsmOptBackupSaves()) {
-		return (true);
+		return true;
 	}
 
 	/* Ignore if the previous filename doesn't exist */
 	if (!FileExists(pFilename)) {
-		return (true);
+		return true;
 	}
 
 	/* Find the first available number */
@@ -328,14 +328,14 @@ bool CMWEditDoc::BackupPlugin(const TCHAR *pFilename) {
 
 			if (!Result) {
 				ErrorHandler.AddError(ERR_WINDOWS, "File copy error!");
-				return (false);
+				return false;
 			}
 
-			return (true);
+			return true;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -353,22 +353,22 @@ bool CMWEditDoc::BackupPlugin(const TCHAR *pFilename) {
  *=========================================================================*/
 bool CMWEditDoc::CanCreateNew(const TCHAR *pType) {
 	if (_stricmp(pType, MWESM_REC_MGEF) == 0) {
-		return (false);
+		return false;
 	}
 
 	if (_stricmp(pType, MWESM_REC_TES3) == 0) {
-		return (false);
+		return false;
 	}
 
 	if (_stricmp(pType, MWESM_REC_GMST) == 0) {
-		return (false);
+		return false;
 	}
 
 	if (_stricmp(pType, MWESM_REC_SKIL) == 0) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -390,7 +390,7 @@ int CMWEditDoc::CleanRecord(esmrecinfo_t *pRecInfo) {
 
 	/* Ignore if the record's file is not the active file */
 	if (!pRecInfo->pFile->IsActive()) {
-		return (MWEDIT_CLEAN_OK);
+		return MWEDIT_CLEAN_OK;
 	}
 
 	pPrevRecord = pRecInfo->pRecord->GetPrevRecord();
@@ -405,7 +405,7 @@ int CMWEditDoc::CleanRecord(esmrecinfo_t *pRecInfo) {
 		m_RecInfo.DeleteElement(pRecInfo);
 		m_RecInfoSort.Delete(pRecInfo);
 		DestroyPointer(pTmpRecord);
-		return (MWEDIT_CLEAN_DELETE);
+		return MWEDIT_CLEAN_DELETE;
 	} else {
 		DestroyPointer(pRecInfo->pRecord);
 	}
@@ -414,7 +414,7 @@ int CMWEditDoc::CleanRecord(esmrecinfo_t *pRecInfo) {
 	pRecInfo->pRecord = pPrevRecord;
 	pRecInfo->pFile = pPrevRecord->GetFile();
 	SetModifiedFlag(TRUE);
-	return (MWEDIT_CLEAN_OK);
+	return MWEDIT_CLEAN_OK;
 }
 
 /*===========================================================================
@@ -431,18 +431,18 @@ bool CMWEditDoc::MakeActive(esmrecinfo_t *pRecInfo) {
 	CEsmRecord *pRecord;
 
 	if (pRecInfo == NULL) {
-		return (false);
+		return false;
 	}
 
 	if (pRecInfo->pFile->IsActive()) {
-		return (true);
+		return true;
 	}
 
 	/* Attempt to copy the record into the active file */
 	pRecord = m_ActiveFile.CopyRecord(pRecInfo->pRecord);
 
 	if (pRecord == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Update the recinfo structure */
@@ -451,7 +451,7 @@ bool CMWEditDoc::MakeActive(esmrecinfo_t *pRecInfo) {
 	pRecInfo->pRecord = pRecord;
 	pRecInfo->pFile = &m_ActiveFile;
 	SetModifiedFlag(TRUE);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -464,7 +464,7 @@ bool CMWEditDoc::MakeActive(esmrecinfo_t *pRecInfo) {
  * Class CMWEditDoc Method - void ClearFileArray (void);
  *
  *=========================================================================*/
-void CMWEditDoc::ClearFileArray(void) {
+void CMWEditDoc::ClearFileArray() {
 	CEsmFile *pFile;
 	int Index;
 
@@ -488,7 +488,7 @@ void CMWEditDoc::ClearFileArray(void) {
  * Deletes all entires in the rec info array.
  *
  *=========================================================================*/
-void CMWEditDoc::ClearRecInfoArray(void) {
+void CMWEditDoc::ClearRecInfoArray() {
 	m_RecInfo.RemoveAll();
 	m_RecInfoSort.Destroy();
 }
@@ -505,7 +505,7 @@ void CMWEditDoc::ClearRecInfoArray(void) {
  * Compare script data in the active plugin and current script file.
  *
  *=========================================================================*/
-void CMWEditDoc::CompareScripts(void) {
+void CMWEditDoc::CompareScripts() {
 	CEsmScript *pScript1;
 	CEsmScript *pScript2;
 	int RecordPos;
@@ -668,7 +668,7 @@ void CMWEditDoc::CompareScriptData(const byte *pData1,
  * Compiles all scripts in the active plugin.
  *
  *=========================================================================*/
-bool CMWEditDoc::CompileAllActiveScripts(void) {
+bool CMWEditDoc::CompileAllActiveScripts() {
 	CEsmScript *pScript;
 	CString Buffer;
 	int RecordPos;
@@ -724,7 +724,7 @@ bool CMWEditDoc::CompileAllActiveScripts(void) {
 		SetModifiedFlag(TRUE);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -759,7 +759,7 @@ bool CMWEditDoc::CompileActiveScript(CEsmScript *pScript) {
 		ErrorHandler.AddError(MWEDIT_ERR_COMPILEALL,
 		                      "%s: Failed to compile script!",
 		                      pScript->GetID());
-		return (false);
+		return false;
 	}
 
 	/* Set the script header */
@@ -800,7 +800,7 @@ bool CMWEditDoc::CompileActiveScript(CEsmScript *pScript) {
 	}
 
 	//ErrorHandler.AddError(MWEDIT_ERR_COMPILEALL, "%s: Successfully compiled script!", pScript->GetID());
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -823,14 +823,14 @@ CEsmScript *CMWEditDoc::FindScriptRecord(const TCHAR *pID) {
 
 	while (pScript != NULL) {
 		if (pScript->IsID(pID)) {
-			return (pScript);
+			return pScript;
 		}
 
 		pScript = (CEsmScript *)m_ScriptFile.FindNext("SCPT", RecordPos);
 	}
 
 	/* Nothing found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -873,7 +873,7 @@ CEsmRecord *CMWEditDoc::CopyCELLRefs(CMWEditDoc *pDocument,
 		pCell = (CEsmCell *)pCell->GetPrevRecord();
 	}
 
-	return (pDestCell);
+	return pDestCell;
 }
 
 /*===========================================================================
@@ -905,11 +905,11 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc *pSourceDoc, esmrecinfo_t *pRecInfo) {
 
 	/* Only accept certain types */
 	if (pRecInfo == NULL) {
-		return (false);
+		return false;
 	}
 
 	if (pRecInfo->pRecord->IsType(MWESM_REC_INFO)) {
-		return (false);
+		return false;
 	}
 
 	/* Attempt to find an object with the same ID */
@@ -923,7 +923,7 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc *pSourceDoc, esmrecinfo_t *pRecInfo) {
 			Buffer.Format(_T("The object '%s' already exists and is a different type!"),
 			              pRecInfo->pRecord->GetID());
 			Result = AfxMessageBox(Buffer, MB_OK | MB_ICONWARNING, 0);
-			return (false);
+			return false;
 		}
 
 		/* Prompt user if they wish to overwrite */
@@ -933,7 +933,7 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc *pSourceDoc, esmrecinfo_t *pRecInfo) {
 		Result = AfxMessageBox(Buffer, MB_YESNO | MB_ICONQUESTION, 0);
 
 		if (Result != IDYES) {
-			return (false);
+			return false;
 		}
 
 		/* Ensure that the current record exists in the active file */
@@ -954,7 +954,7 @@ bool CMWEditDoc::CopyRecord(CMWEditDoc *pSourceDoc, esmrecinfo_t *pRecInfo) {
 		CopyCELLRefs(pSourceDoc, (CEsmCell *)pRecInfo->pRecord, (CEsmCell *)pNewRecInfo->pRecord);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -992,7 +992,7 @@ esmrecinfo_t *CMWEditDoc::CopyNewRecord(esmrecinfo_t *pOrigRecInfo) {
 	m_RecInfoSort.SetAt(pNewRecInfo);
 	m_ActiveFile.AddRecord(pNewRecInfo->pRecord);
 
-	return (pNewRecInfo);
+	return pNewRecInfo;
 }
 
 /*===========================================================================
@@ -1025,7 +1025,7 @@ esmrecinfo_t *CMWEditDoc::CopyToActive(esmrecinfo_t *pRecInfo) {
 		m_ActiveFile.AddRecord(pNewRecord);
 	}
 
-	return (pRecInfo);
+	return pRecInfo;
 }
 
 /*===========================================================================
@@ -1053,7 +1053,7 @@ CEsmRecord *CMWEditDoc::CreateCopyDIAL(CMWEditDoc *pDocument, CEsmDialogue *pDia
 	pNewRecord = m_ActiveFile.AllocNewRecord(pDialRecord->GetType());
 
 	if (pNewRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	m_ActiveFile.AddRecord(pNewRecord);
@@ -1065,9 +1065,8 @@ CEsmRecord *CMWEditDoc::CreateCopyDIAL(CMWEditDoc *pDocument, CEsmDialogue *pDia
 	/* Add all the dialogue info records */
 	CreateCopyINFO(pDocument, pDialRecord, (CEsmDialogue *)pNewRecord);
 
-	return (pNewRecord);
+	return pNewRecord;
 }
-
 
 CEsmRecord *CMWEditDoc::CreateCopyINFO(CMWEditDoc *pDocument,
                                        CEsmDialogue *pDialRecord,
@@ -1120,7 +1119,7 @@ CEsmRecord *CMWEditDoc::CreateCopyINFO(CMWEditDoc *pDocument,
 		pRecInfo = pDocument->FindInfoRecord(pInfo->GetNextName(), pDialRecord->GetID());
 	}
 
-	return (pDialRecord);
+	return pDialRecord;
 }
 
 /*===========================================================================
@@ -1148,7 +1147,7 @@ CEsmRecord *CMWEditDoc::CreateCopy(CEsmRecord *pRecord) {
 	pNewRecord = m_ActiveFile.AllocNewRecord(pRecord->GetType());
 
 	if (pNewRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	m_ActiveFile.AddRecord(pNewRecord);
@@ -1162,7 +1161,7 @@ CEsmRecord *CMWEditDoc::CreateCopy(CEsmRecord *pRecord) {
 		CopyCELLRefs(this, (CEsmCell *)pRecord, (CEsmCell *)pNewRecord);
 	}
 
-	return (pNewRecord);
+	return pNewRecord;
 }
 
 /*===========================================================================
@@ -1186,7 +1185,7 @@ CEsmRecord *CMWEditDoc::CreateEditCopy(CEsmRecord *pRecord) {
 	pNewRecord = m_ActiveFile.AllocNewRecord(pRecord->GetType());
 
 	if (pNewRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	m_ActiveFile.AddRecord(pNewRecord);
@@ -1200,7 +1199,7 @@ CEsmRecord *CMWEditDoc::CreateEditCopy(CEsmRecord *pRecord) {
 		CopyCELLRefs(this, (CEsmCell *)pRecord, (CEsmCell *)pNewRecord);
 	}
 
-	return (pNewRecord);
+	return pNewRecord;
 }
 
 /*===========================================================================
@@ -1226,7 +1225,7 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t *pRecInfo, const TCHAR *pNewID
 		ErrorHandler.AddError(ERR_CUSTOM,
 		                      _T("Cannot create new %s records!"),
 		                      pRecInfo->pRecord->GetItemType());
-		return (NULL);
+		return NULL;
 	}
 
 	/* Check the new ID to ensure it is valid */
@@ -1234,7 +1233,7 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t *pRecInfo, const TCHAR *pNewID
 
 	if (!Result) {
 		ErrorHandler.AddError(ERR_CUSTOM, _T("The new ID '%s' is not valid!"), pNewID);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Is the new ID unique? */
@@ -1242,7 +1241,7 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t *pRecInfo, const TCHAR *pNewID
 
 	if (Result) {
 		ErrorHandler.AddError(ERR_CUSTOM, _T("The new ID '%s' already exists!"), pNewID);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create the new rec info object */
@@ -1254,10 +1253,11 @@ esmrecinfo_t *CMWEditDoc::CreateCopy(esmrecinfo_t *pRecInfo, const TCHAR *pNewID
 	pNewRecInfo->pRecord->SetFile(&m_ActiveFile);
 	pNewRecInfo->pRecord->SetPrevRecord(NULL);
 	pNewRecInfo->pRecord->SetID(pNewID);
+
 	m_RecInfo.Add(pNewRecInfo);
 	m_RecInfoSort.SetAt(pNewRecInfo);
 
-	return (pNewRecInfo);
+	return pNewRecInfo;
 }
 
 /*===========================================================================
@@ -1279,19 +1279,19 @@ CEsmRecord *CMWEditDoc::CreateNewRecord(const TCHAR *pType) {
 	/* Cannot create some types of records */
 	if (!CanCreateNew(pType)) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("Cannot create new %4.4s records!"), pType);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create the new record */
 	pRecord = m_ActiveFile.AllocNewRecord(pType);
 
 	if (pRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Initialize the new record */
 	pRecord->CreateNew(&m_ActiveFile);
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -1318,14 +1318,14 @@ esmrecinfo_t *CMWEditDoc::CreateNewRecord(const TCHAR *pType, const TCHAR *pID) 
 
 	if (!Result) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("The new ID '%s' is not valid!"), pID);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Attempt to create the new record */
 	pNewRecord = CreateNewRecord(pType);
 
 	if (pNewRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create/initialize the new record object */
@@ -1334,11 +1334,12 @@ esmrecinfo_t *CMWEditDoc::CreateNewRecord(const TCHAR *pType, const TCHAR *pID) 
 	pNewRecInfo->pRecord = pNewRecord;
 	pNewRecord->SetFile(&m_ActiveFile);
 	pNewRecord->SetID(pID);
+
 	m_ActiveFile.AddRecord(pNewRecord);
 	m_RecInfo.Add(pNewRecInfo);
 	m_RecInfoSort.SetAt(pNewRecInfo);
 
-	return (pNewRecInfo);
+	return pNewRecInfo;
 }
 
 /*===========================================================================
@@ -1406,7 +1407,7 @@ bool CMWEditDoc::DeleteRecord(esmrecinfo_t *pRecInfo) {
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1435,14 +1436,14 @@ bool CMWEditDoc::ExportSpellMerchants(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, "wb");
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Output the header row */
 	Result = File.Printf(_T("ID,Name,Spell,Effect,Cell,Location\n"));
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Enumerate through all NPCs currently loaded */
@@ -1452,7 +1453,7 @@ bool CMWEditDoc::ExportSpellMerchants(const TCHAR *pFilename) {
 		pNpc = (CEsmNpc *)pRecInfo->pRecord;
 		//SystemLog.Printf(_T("Merchant NPC = %s"), pNpc->GetID());
 		/* Get the ai flags from the class or npc */
-		SellSpells = ((GetNPCAiFlags(pNpc) & MWESM_AIFLAG_SPELL) != 0);
+		SellSpells = (GetNPCAiFlags(pNpc) & MWESM_AIFLAG_SPELL) != 0;
 
 		/* Only continue if the NPC actually offers spells */
 		if (SellSpells) {
@@ -1460,7 +1461,7 @@ bool CMWEditDoc::ExportSpellMerchants(const TCHAR *pFilename) {
 			Result = ExportSpellMerchant(pNpc, File);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 
@@ -1468,7 +1469,7 @@ bool CMWEditDoc::ExportSpellMerchants(const TCHAR *pFilename) {
 		pRecInfo = FindNextRecord(MWESM_REC_NPC_, ArrayIndex);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1499,7 +1500,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc, CGenFile &File) {
 	pCellRef = FindFirstCellRef(pNpc);
 
 	if (pCellRef == NULL) {
-		return (true);
+		return true;
 	}
 
 	//SystemLog.Printf(_T("\tFound Cell Ref '%s'"), pCellRef->GetCell()->GetName());
@@ -1517,7 +1518,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc, CGenFile &File) {
 			Result = ExportSpellMerchant(pNpc, pSpell, pCellRef, File);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 
@@ -1525,7 +1526,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc, CGenFile &File) {
 		pSpellName = (CEsmSubNPCS *)pNpc->FindNext(MWESM_SUBREC_NPCS, ArrayIndex);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1562,7 +1563,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc,
 			Result = ExportSpellMerchant(pNpc, pSpell, pCellRef, EffectID, File);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 
 			m_OutputEffects[EffectID]++;
@@ -1571,7 +1572,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc,
 		pEnchant = (CEsmSubENAM *)pSpell->FindNext(MWESM_SUBREC_ENAM, ArrayIndex);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1608,7 +1609,7 @@ bool CMWEditDoc::ExportSpellMerchant(CEsmNpc *pNpc,
 	}
 
 	m_NumEffectsOutput++;
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -1639,14 +1640,14 @@ CEsmSubCellRef *CMWEditDoc::FindFirstCellRef(CEsmRecord *pRecord) {
 		pCellRef = pCell->FindFirstCellRef(pRecord);
 
 		if (pCellRef != NULL) {
-			return (pCellRef);
+			return pCellRef;
 		}
 
 		pRecInfo = FindNextRecord(MWESM_REC_CELL, ArrayIndex);
 	}
 
 	/* None found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -1672,10 +1673,10 @@ esmrecinfo_t *CMWEditDoc::FindExistingRecord(const TCHAR *pID, const TCHAR *pTyp
 	pRecInfo = m_RecInfoSort.Get(pTempID);
 
 	if (pRecInfo == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
-	return (pRecInfo);
+	return pRecInfo;
 	/* Find the record with the given ID, any type */
 	//Index = m_RecInfo.FindFastFunc(l_FindRecNameSort, pTempID);
 	//if (Index < 0) return (NULL);
@@ -1692,7 +1693,7 @@ esmrecinfo_t *CMWEditDoc::FindExistingRecord(const TCHAR *pID, const TCHAR *pTyp
 	//if (pRecInfoP1 && pRecInfoP1->pRecord->IsID(pID) && pRecInfoP1->pRecord->IsType(pType)) return pRecInfoP1;
 	//if (pRecInfoP2 && pRecInfoP2->pRecord->IsID(pID) && pRecInfoP2->pRecord->IsType(pType)) return pRecInfoP2;
 	/* Return initial record with matching ID but *not* type */
-	return pRecInfo;
+//	return pRecInfo;
 }
 
 /*===========================================================================
@@ -1715,12 +1716,12 @@ esmrecinfo_t *CMWEditDoc::FindNextRecord(const TCHAR *pType, int &ArrayIndex) {
 		pRecInfo = m_RecInfo.GetAt(ArrayIndex);
 
 		if (pRecInfo->pRecord->IsType(pType)) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	}
 
 	/* None found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -1746,12 +1747,12 @@ esmrecinfo_t *CMWEditDoc::FindNextItem(int &ArrayIndex) {
 		pRecInfo = m_RecInfo.GetAt(ArrayIndex);
 
 		if (IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	}
 
 	/* None found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -1772,11 +1773,11 @@ esmrecinfo_t *CMWEditDoc::FindRecInfoByPtr(CEsmRecord *pRecord) {
 		pRecInfo = m_RecInfo.GetAt(Index);
 
 		if (pRecInfo->pRecord == pRecord) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -1801,14 +1802,14 @@ esmrecinfo_t *CMWEditDoc::FindRecInfo(CEsmRecord *pRecord) {
 
 	/* Try a quick binary search */
 	if (pRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pRecInfo = FindRecord(pRecord->GetID());
 
 	if (pRecInfo != NULL) {
 		if (pRecInfo->pRecord->IsSame(pRecord)) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	}
 
@@ -1825,7 +1826,7 @@ esmrecinfo_t *CMWEditDoc::FindRecInfo(CEsmRecord *pRecord) {
 
 	    //SystemLog.Printf ("%s == %s", pRecInfo->pRecord->GetID(), pRecord->GetID());
 	   }//*/
-	return (NULL);
+	return NULL;
 }
 
 esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR *pID) {
@@ -1879,7 +1880,7 @@ esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR *pID, const TCHAR *pType) {
 	pRecInfo = m_RecInfoSort.Get(pNewID);
 
 	if (pRecInfo != NULL && pRecInfo->pRecord->IsType(pType)) {
-		return (pRecInfo);
+		return pRecInfo;
 	}
 
 	/* Revert to 'slow' search */
@@ -1894,11 +1895,11 @@ esmrecinfo_t *CMWEditDoc::FindRecord(const TCHAR *pID, const TCHAR *pType) {
 			continue;
 		}
 
-		return (pRecInfo);
+		return pRecInfo;
 	}
 
 	/* No match */
-	return (NULL);
+	return NULL;
 }
 
 /* Looks for a given ID which is carryable */
@@ -1925,7 +1926,7 @@ esmrecinfo_t *CMWEditDoc::FindRecordCarryable(const TCHAR *pID) {
 	pRecInfo = m_RecInfoSort.Get(pNewID);
 
 	if (pRecInfo != NULL && IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-		return (pRecInfo);
+		return pRecInfo;
 	}
 
 	/* Revert to 'slow' search */
@@ -1938,12 +1939,12 @@ esmrecinfo_t *CMWEditDoc::FindRecordCarryable(const TCHAR *pID) {
 		}
 
 		if (IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	}
 
 	/* No match */
-	return (NULL);
+	return NULL;
 }
 
 esmrecinfo_t *CMWEditDoc::FindRecordSort(CEsmRecord *pRecord) {
@@ -1975,7 +1976,7 @@ esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR *pID, const TCHAR *pDialID)
 		pInfo = (CEsmInfo *)pRecInfo->pRecord;
 
 		if (pInfo->GetDialParent() && pInfo->GetDialParent()->IsID(pDialID)) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 	}
 
@@ -2010,7 +2011,7 @@ esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR *pID, const TCHAR *pDialID)
 
 	  pRecInfo = m_RecInfoSort.GetNextRecordKey(pID, Position);
 	}//*/
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -2029,23 +2030,23 @@ esmrecinfo_t *CMWEditDoc::FindInfoRecord(const TCHAR *pID, const TCHAR *pDialID)
 long CMWEditDoc::GetNPCAiFlags(CEsmNpc *pNpc) {
 	/* Ignore invalid input */
 	if (pNpc == NULL) {
-		return (0);
+		return 0;
 	}
 
 	/* Return the NPC flags if the autocalc flag is cleared */
 	if (!pNpc->IsAutoCalc()) {
-		return (pNpc->GetAIFlags());
+		return pNpc->GetAIFlags();
 	}
 
 	/* Otherwise get the class AI autocalc flags */
 	esmrecinfo_t *pRecInfo = FindRecord(pNpc->GetClass(), MWESM_REC_CLAS);
 
 	if (pRecInfo == NULL) {
-		return (0);
+		return 0;
 	}
 
 	CEsmClass *pClass = (CEsmClass *)pRecInfo->pRecord;
-	return (pClass->GetAutoCalcFlags());
+	return pClass->GetAutoCalcFlags();
 }
 
 /*===========================================================================
@@ -2068,14 +2069,14 @@ esmrecinfo_t *CMWEditDoc::GetEffectRecord(const int EffectID) {
 		pEffect = (CEsmMagicEffect *)pRecInfo->pRecord;
 
 		if (pEffect->IsEffect(EffectID)) {
-			return (pRecInfo);
+			return pRecInfo;
 		}
 
 		pRecInfo = FindNextRecord(MWESM_REC_MGEF, RecordIndex);
 	}
 
 	/* Not found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -2096,15 +2097,15 @@ CEsmGlobal *CMWEditDoc::GetGlobal(const TCHAR *pName) {
 	pRecInfo = FindRecord(pName, MWESM_REC_GLOB);
 
 	if (pRecInfo == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Ensure the record is a global */
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_GLOB)) {
-		return (NULL);
+		return NULL;
 	}
 
-	return ((CEsmGlobal *)pRecInfo->pRecord);
+	return (CEsmGlobal *)pRecInfo->pRecord;
 }
 
 /*===========================================================================
@@ -2167,7 +2168,7 @@ esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue *pDialRecord) {
 
 	/* Dialogue has no INFO child records */
 	if (pInfoRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pLastValidInfo = pInfo;
@@ -2192,7 +2193,7 @@ esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue *pDialRecord) {
 		pRecInfo = FindInfoRecord(pInfo->GetPrevName(), pDialRecord->GetID());
 
 		if (pRecInfo == NULL) {
-			return (pLastValidRecInfo);
+			return pLastValidRecInfo;
 		}
 
 		pInfo = (CEsmInfo *)pRecInfo->pRecord;
@@ -2205,7 +2206,7 @@ esmrecinfo_t *CMWEditDoc::GetInfoStart(CEsmDialogue *pDialRecord) {
 		//}
 	}
 
-	return (pLastValidRecInfo);
+	return pLastValidRecInfo;
 }
 
 /*===========================================================================
@@ -2234,7 +2235,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 	Result = ReadFile(Buffer, pFilename);
 
 	if (!Result) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Check for a too large of a script */
@@ -2242,7 +2243,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 		ErrorHandler.AddError(ERR_MAXINDEX,
 		                      _T("Script text exceeds the maximum length of %d!"),
 		                      ESM_SCRIPT_MAXTEXT);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Try compiling the script */
@@ -2253,7 +2254,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 	/* Does the script have an ID? */
 	if (!ScriptCompiler.HasScriptName()) {
 		ErrorHandler.AddError(ERR_CUSTOM, _T("File '%s' contains no script name!"), pFilename);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Find an existing script object */
@@ -2264,7 +2265,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 		ErrorHandler.AddError(ERR_CUSTOM,
 		                      _T("The existing record '%s' is not a script!"),
 		                      ScriptCompiler.GetScriptName());
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create and initialize the new/modified record */
@@ -2275,7 +2276,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 	}
 
 	if (pRecInfo == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Update the script data */
@@ -2294,7 +2295,7 @@ esmrecinfo_t *CMWEditDoc::ImportScript(const TCHAR *pFilename) {
 	pScript->GetScriptData()->CopyData(ScriptCompiler.GetScriptData(),
 	                                   ScriptCompiler.GetScriptDataSize());
 
-	return (pRecInfo);
+	return pRecInfo;
 }
 
 /*===========================================================================
@@ -2333,12 +2334,12 @@ bool CMWEditDoc::IsExistingIDDup(const TCHAR *pID) {
 
 		/* Compare IDs */
 		if (pRecInfo->pRecord->IsID(pID)) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* No match found */
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -2365,11 +2366,11 @@ bool CMWEditDoc::LoadScriptFile(const TCHAR *pFilename) {
 	Result = m_ScriptFile.Read(pFilename);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	m_ScriptFilename = pFilename;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2404,7 +2405,7 @@ BOOL CMWEditDoc::OnNewDocument() {
 		         MWESM_HEDR_AUTHORSIZE - 1);
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -2451,7 +2452,7 @@ void CMWEditDoc::Dump(CDumpContext &dc) const {
  * Class CMWEditDoc Method - bool LoadAppMasters (void);
  *
  *=========================================================================*/
-bool CMWEditDoc::LoadAppMasters(void) {
+bool CMWEditDoc::LoadAppMasters() {
 	DEFINE_FUNCTION("CMWEditDoc::LoadAppMasters()");
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	POSITION FilePos;
@@ -2464,14 +2465,14 @@ bool CMWEditDoc::LoadAppMasters(void) {
 		pFile = GetApp()->LoadMaster(pApp->m_Masters.GetAt(FilePos), &m_LoadDlg);
 
 		if (pFile == NULL) {
-			return (false);
+			return false;
 		}
 
 		m_NumFiles++;
 		AddRecInfo(pFile);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2484,7 +2485,7 @@ bool CMWEditDoc::LoadAppMasters(void) {
  * Class CMWEditDoc Method - bool LoadAppPlugins (void);
  *
  *=========================================================================*/
-bool CMWEditDoc::LoadAppPlugins(void) {
+bool CMWEditDoc::LoadAppPlugins() {
 	DEFINE_FUNCTION("CMWEditDoc::LoadAppPlugins()");
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	POSITION FilePos;
@@ -2507,14 +2508,14 @@ bool CMWEditDoc::LoadAppPlugins(void) {
 		Result = pFile->Read(pApp->m_Plugins.GetAt(FilePos));
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 
 		m_NumFiles++;
 		AddRecInfo(pFile);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2527,7 +2528,7 @@ bool CMWEditDoc::LoadAppPlugins(void) {
  * Class CMWEditDoc Method - bool LoadAppActive (void);
  *
  *=========================================================================*/
-bool CMWEditDoc::LoadAppActive(void) {
+bool CMWEditDoc::LoadAppActive() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	bool Result;
 
@@ -2535,24 +2536,25 @@ bool CMWEditDoc::LoadAppActive(void) {
 	if (pApp->m_ActivePlugin.IsEmpty()) {
 		m_ActiveFile.CreateNew();
 		m_ActiveFile.SetActive(true);
-		return (true);
+		return true;
 	}
 
 	/* Initialize the load callback */
 	m_LoadDlg.SetFilename(pApp->m_ActivePlugin);
 	m_LoadDlg.SetProgress(0.0f);
 	m_LoadDlg.SetSubLabel(_T("Loading..."));
+
 	m_ActiveFile.SetCallback(g_EsmLoadDlgCallback, (long)&m_LoadDlg);
 	m_ActiveFile.SetActive(true);
 	Result = m_ActiveFile.Read(pApp->m_ActivePlugin);
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	m_NumFiles++;
 	AddRecInfo(&m_ActiveFile);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2581,7 +2583,7 @@ bool CMWEditDoc::LoadAppActive(void) {
  * 128 bits = 39 bytes
  *
  *=========================================================================*/
-const TCHAR *CMWEditDoc::MakeNewINFOId(void) {
+const TCHAR *CMWEditDoc::MakeNewINFOId() {
 	static TCHAR s_Buffer[MWESM_ID_MAXSIZE + 4];
 	static long s_Counter = 1;
 	time_t CurrentTime = time(NULL);
@@ -2606,7 +2608,7 @@ const TCHAR *CMWEditDoc::MakeNewINFOId(void) {
 		return MakeNewINFOId();
 	}
 
-	return (s_Buffer);
+	return s_Buffer;
 }
 
 /*===========================================================================
@@ -2632,7 +2634,7 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t *pRecEditInfo) {
 	if (!Result) {
 		Buffer.Format(_T("The new ID '%s' is not valid!"), pRecEditInfo->NewID);
 		AfxMessageBox(Buffer);
-		return (MWESM_ONSAVE_ERROR);
+		return MWESM_ONSAVE_ERROR;
 	}
 
 	/* Is the new ID unique? */
@@ -2641,12 +2643,12 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t *pRecEditInfo) {
 	if (Result) {
 		Buffer.Format(_T("The new ID '%s' already exists!"), pRecEditInfo->NewID);
 		AfxMessageBox(Buffer);
-		return (MWESM_ONSAVE_ERROR);
+		return MWESM_ONSAVE_ERROR;
 	}
 
 	/* If the record is new, don't ask user to copy or rename */
 	if (pRecEditInfo->IsNew) {
-		return (MWESM_ONSAVE_OK);
+		return MWESM_ONSAVE_OK;
 	}
 
 	/* Prompt user to create new or rename (or cancel) */
@@ -2659,7 +2661,7 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t *pRecEditInfo) {
 	                    MB_YESNOCANCEL | MB_ICONQUESTION);
 
 	if (Result == IDCANCEL) {
-		return (MWESM_ONSAVE_ERROR);
+		return MWESM_ONSAVE_ERROR;
 	}
 
 	/* Create a new copy of the record if requested */
@@ -2667,7 +2669,7 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t *pRecEditInfo) {
 		pRecord = CreateEditCopy(pRecEditInfo->pRecInfo->pRecord);
 
 		if (pRecord == NULL) {
-			return (MWESM_ONSAVE_ERROR);
+			return MWESM_ONSAVE_ERROR;
 		}
 
 		CreatePointer(pRecInfo, esmrecinfo_t);
@@ -2679,15 +2681,13 @@ int CMWEditDoc::OnCheckNewID(esmreceditinfo_t *pRecEditInfo) {
 		pRecEditInfo->IsNew = true;
 		pRecEditInfo->IsCopied = true;
 		pRecEditInfo->IsRenamed = false;
-	}
-	/* Must rename an existing object */
-	else {
+	} else { /* Must rename an existing object */
 		pRecEditInfo->IsCopied = false;
 		pRecEditInfo->IsRenamed = true;
 		pRecEditInfo->HasAdded = true;
 	}
 
-	return (MWESM_ONSAVE_OK);
+	return MWESM_ONSAVE_OK;
 }
 
 /*===========================================================================
@@ -2730,7 +2730,7 @@ BOOL CMWEditDoc::OnOpenDocument(LPCTSTR lpszPathName) {
 
 	if (!Result) {
 		ErrorHandler.Notify(_T("Plugin Load Error!"));
-		return (FALSE);
+		return FALSE;
 	}
 
 	//m_RecInfo.SetCompareFunc(l_RecInfoSortPtr);
@@ -2764,7 +2764,7 @@ int CMWEditDoc::OnPostSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 	}
 
 	SetModifiedFlag(TRUE);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -2788,20 +2788,20 @@ int CMWEditDoc::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 	if (pRecEditInfo->HasNewID || pRecEditInfo->IsNew) {
 		/* Special case for exterior cells which can have any ID */
 		if (pRecEditInfo->pRecInfo->pRecord->IsType(MWESM_REC_CELL)) {
-			CEsmCell* pCell = (CEsmCell *)pRecEditInfo->pRecInfo->pRecord;
+			CEsmCell *pCell = (CEsmCell *)pRecEditInfo->pRecInfo->pRecord;
 
 			if (pCell->IsInterior()) {
 				Result = OnCheckNewID(pRecEditInfo);
 
 				if (Result != MWESM_ONSAVE_OK) {
-					return (Result);
+					return Result;
 				}
 			}
 		} else {
 			Result = OnCheckNewID(pRecEditInfo);
 
 			if (Result != MWESM_ONSAVE_OK) {
-				return (Result);
+				return Result;
 			}
 		}
 
@@ -2829,14 +2829,14 @@ int CMWEditDoc::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 
 	/* Ignore if the current file is already active */
 	if (pRecEditInfo->pRecInfo->pFile->IsActive()) {
-		return (0);
+		return 0;
 	}
 
 	/* Attempt to copy the record into the active file */
 	pRecord = m_ActiveFile.CopyRecord(pRecEditInfo->pRecInfo->pRecord);
 
 	if (pRecord == NULL) {
-		return (-1);
+		return -1;
 	}
 
 	/* Update the recinfo structure */
@@ -2856,7 +2856,7 @@ int CMWEditDoc::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 	}
 
 	SetModifiedFlag(TRUE);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -2878,7 +2878,7 @@ BOOL CMWEditDoc::OnSaveDocument(LPCTSTR lpszPathName) {
 
 	if (!Result) {
 		ErrorHandler.Notify("File Copy Error");
-		return (FALSE);
+		return FALSE;
 	}
 
 	/* Attempt to save the active file */
@@ -2888,11 +2888,11 @@ BOOL CMWEditDoc::OnSaveDocument(LPCTSTR lpszPathName) {
 
 	if (!Result) {
 		ErrorHandler.Notify("File Write Error");
-		return (FALSE);
+		return FALSE;
 	}
 
 	SetModifiedFlag(FALSE);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -2905,12 +2905,12 @@ BOOL CMWEditDoc::OnSaveDocument(LPCTSTR lpszPathName) {
  * Class CMWEditDoc Event - void OnFileSave (void);
  *
  *=========================================================================*/
-void CMWEditDoc::OnFileSave(void) {
+void CMWEditDoc::OnFileSave() {
 	BOOL Result = SetCurrentDirectory(GetMWDataPath());
 	CDocument::OnFileSave();
 }
 
-void CMWEditDoc::OnFileSaveAs(void) {
+void CMWEditDoc::OnFileSaveAs() {
 	BOOL Result = SetCurrentDirectory(GetMWDataPath());
 	CDocument::OnFileSaveAs();
 }
@@ -2938,7 +2938,7 @@ bool CMWEditDoc::RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
 		ErrorHandler.AddError(ERR_CUSTOM,
 		                      _T("Cannot rename %s records!"),
 		                      pRecInfo->pRecord->GetItemType());
-		return (NULL);
+		return NULL;
 	}
 
 	/* Check the new ID to ensure it is valid */
@@ -2946,7 +2946,7 @@ bool CMWEditDoc::RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
 
 	if (!Result) {
 		ErrorHandler.AddError(ERR_CUSTOM, _T("The new ID '%s' is not valid!"), pNewID);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Is the new ID unique? */
@@ -2954,7 +2954,7 @@ bool CMWEditDoc::RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
 
 	if (Result) {
 		ErrorHandler.AddError(ERR_CUSTOM, _T("The new ID '%s' already exists!"), pNewID);
-		return (NULL);
+		return NULL;
 	}
 
 	/* Copy the record to the active file if required */
@@ -2973,7 +2973,7 @@ bool CMWEditDoc::RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
 	/* Update the record position */
 	m_RecInfo.Add(pRecInfo);
 	m_RecInfoSort.SetAt(pRecInfo);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2988,7 +2988,7 @@ bool CMWEditDoc::RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID) {
  * Adds all currently loaded masters to the active plugin.
  *
  *=========================================================================*/
-void CMWEditDoc::UpdateMasters(void) {
+void CMWEditDoc::UpdateMasters() {
 	CEsmTES3 *pHeader;
 	int Index;
 	int ArrayIndex;

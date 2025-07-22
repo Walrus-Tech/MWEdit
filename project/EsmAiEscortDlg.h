@@ -57,8 +57,8 @@ class CEsmAiEscortDlg : public CDialog {
 
 	/* Get class members */
 
-	CString &GetCellName(void) {
-		return (m_CellName);
+	CString &GetCellName() {
+		return m_CellName;
 	}
 
 	/* Dialog Data */
@@ -71,10 +71,15 @@ class CEsmAiEscortDlg : public CDialog {
 	CEdit m_ZText;
 	CEdit m_YText;
 	CEdit m_XText;
+
 	CButton m_PointCheck;
+
 	CComboBox m_CellList;
+
 	CButton m_EscortCheck;
+
 	CEdit m_DurationText;
+
 	CComboBox m_TargetList;
 	//}}AFX_DATA
 

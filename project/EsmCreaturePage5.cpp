@@ -94,11 +94,13 @@ CEsmCreaturePage5::~CEsmCreaturePage5() {
 
 void CEsmCreaturePage5::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCreaturePage5)
 	DDX_Control(pDX, IDC_CELLLIST4, m_CellList4);
 	DDX_Control(pDX, IDC_CELLLIST3, m_CellList3);
 	DDX_Control(pDX, IDC_CELLLIST2, m_CellList2);
 	DDX_Control(pDX, IDC_CELLLIST1, m_CellList1);
+
 	DDX_Control(pDX, IDC_REPAIRSCHECK, m_RepairsItemsCheck);
 	DDX_Control(pDX, IDC_TRAINCHECK, m_TrainCheck);
 	DDX_Control(pDX, IDC_SPELLMAKECHECK, m_SpellmakeCheck);
@@ -132,7 +134,7 @@ void CEsmCreaturePage5::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage5::GetControlData(void) {
+void CEsmCreaturePage5::GetControlData() {
 	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
 	aidata_t *pAiData;
@@ -243,7 +245,7 @@ void CEsmCreaturePage5::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmCreaturePage5::GetDocument(void) {
+CMWEditDoc *CEsmCreaturePage5::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage5::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -263,7 +265,7 @@ CMWEditDoc *CEsmCreaturePage5::GetDocument(void) {
 BOOL CEsmCreaturePage5::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	m_GoldText.SetLimitText(16);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -278,7 +280,7 @@ BOOL CEsmCreaturePage5::OnInitDialog() {
  *=========================================================================*/
 
 int CEsmCreaturePage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -292,7 +294,7 @@ int CEsmCreaturePage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage5::SetControlData(void) {
+void CEsmCreaturePage5::SetControlData() {
 	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
 	aidata_t *pAiData;

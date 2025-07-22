@@ -3576,7 +3576,7 @@ void CMWEditView::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CMWEditView::ExportScripts(void) {
+void CMWEditView::ExportScripts() {
 	CFileDialog FileDlg(FALSE, _T("txt"), NULL, OFN_HIDEREADONLY, ESM_IMPORTSCPT_FILTER, this);
 	CString PathBuffer;
 	esmrecinfo_t *pRecInfo;
@@ -3636,11 +3636,11 @@ int CMWEditView::FindTabInfo(const TCHAR *pType) {
 
 	for (Index = 0; l_RecordTabData[Index].ItemType != NULL; Index++) {
 		if (TSTRNCMP(l_RecordTabData[Index].ItemType, pType, 4) == 0) {
-			return (Index);
+			return Index;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -3754,7 +3754,7 @@ void CMWEditView::FillList(const TCHAR *pItemType, esmcoldata_t *pColData) {
  *
  *=========================================================================*/
 
-void CMWEditView::InitTypeList(void) {
+void CMWEditView::InitTypeList() {
 	int Index;
 	int ListIndex;
 
@@ -3784,11 +3784,11 @@ bool CMWEditView::IsCurrentType(const TCHAR *pType) {
 	ListIndex = m_TypeList.GetCurSel();
 
 	if (ListIndex < 0 ) {
-		return (false);
+		return false;
 	}
 
 	TypeIndex = m_TypeList.GetItemData(ListIndex);
-	return (_stricmp(l_RecordTabData[TypeIndex].ItemType, pType) == 0);
+	return _stricmp(l_RecordTabData[TypeIndex].ItemType, pType) == 0;
 }
 
 /*===========================================================================
@@ -4060,6 +4060,7 @@ void CMWEditView::OnInitialUpdate() {
 	/* Initialize the object list */
 	m_EsmDlgHandler.SetDocument(GetDocument());
 	m_EsmDlgHandler.SetMainFrame((CMainFrame *)AfxGetMainWnd());
+
 	m_ObjectList.OnInitCtrl();
 	m_ObjectList.SetEnableDrag(true);
 	m_ObjectList.SetAcceptDrag(true);
@@ -4094,10 +4095,10 @@ LRESULT CMWEditView::OnRecordKey(WPARAM lParam, LPARAM wParam) {
 	/* Toggle delete */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
 		OnEditDelete();
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -4150,7 +4151,7 @@ int CMWEditView::OnSelectItem(esmrecinfo_t *pRecInfo) {
 	/* Ensure valid input */
 
 	if (pRecInfo == NULL) {
-		return (-1);
+		return -1;
 	}
 
 	/* Display the given type of record if required */
@@ -4159,7 +4160,7 @@ int CMWEditView::OnSelectItem(esmrecinfo_t *pRecInfo) {
 		TabIndex = FindTabInfo(pRecInfo->pRecord->GetType());
 
 		if (TabIndex < 0) {
-			return (-1);
+			return -1;
 		}
 
 		FindListItem(m_TypeList, TabIndex, true);
@@ -4176,7 +4177,7 @@ int CMWEditView::OnSelectItem(esmrecinfo_t *pRecInfo) {
 
 	/* Change the current focus view */
 	GetParentFrame()->ActivateFrame(SW_RESTORE);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -4355,7 +4356,7 @@ BOOL CMWEditView::PreCreateWindow(CREATESTRUCT &cs) {
  *
  *=========================================================================*/
 
-void CMWEditView::UpdateCurrentListData(void) {
+void CMWEditView::UpdateCurrentListData() {
 	m_ObjectList.UpdateColData();
 }
 
@@ -4451,11 +4452,11 @@ void CMWEditView::PreSubclassWindow() {
 int CMWEditView::OnUpdateAddItem(esmrecinfo_t *pRecInfo) {
 	/* Ignore if the currently displayed tab is not of the item's type */
 	if (!IsCurrentType(pRecInfo->pRecord->GetType())) {
-		return (0);
+		return 0;
 	}
 
 	m_ObjectList.AddItem(pRecInfo);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -4476,7 +4477,7 @@ int CMWEditView::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Ignore if the currently displayed tab is not of the item's type */
 
 	if (!IsCurrentType(pRecInfo->pRecord->GetType())) {
-		return (0);
+		return 0;
 	}
 
 	FindInfo.flags = LVFI_PARAM;
@@ -4489,7 +4490,7 @@ int CMWEditView::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		OnUpdateAddItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -4518,7 +4519,7 @@ void CMWEditView::OnClose() {
  *
  *=========================================================================*/
 
-void CMWEditView::UpdateList(void) {
+void CMWEditView::UpdateList() {
 	CString Buffer;
 	int ListIndex;
 	int TypeIndex;
@@ -4594,7 +4595,7 @@ int l_FindRecSort(const void *pElem1, const void *pElem2, const long UserData) {
 	TCHAR *pName = (TCHAR *)pElem2;
 
 	if (pRec1 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pRec1->pRecord->GetID(), pName, false);
@@ -4605,7 +4606,7 @@ int l_FindRecSort(const void *pElem1, const void *pElem2) {
 	TCHAR *pName = (TCHAR *)pElem2;
 
 	if (pRec1 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pRec1->pRecord->GetID(), pName, false);
@@ -4616,7 +4617,7 @@ int l_RecSortPtr(const void *pElem1, const void *pElem2) {
 	esmrecinfo_t *pRec2 = *(esmrecinfo_t **)pElem2;
 
 	if (pRec2 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	return StringCompare(pString, pRec2->pRecord->GetID(), false);
@@ -4736,14 +4737,14 @@ LRESULT CMWEditView::OnRecordDrop(WPARAM lParam, LPARAM wParam) {
 	/* Ensure we only accept from another document (ie. copy records) */
 
 	if (pSourceDoc == GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Copy the record */
 	GetDocument()->CopyRecord(pSourceDoc, pRecInfo);
 	/* Update the view */
 	UpdateList();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================

@@ -50,12 +50,10 @@ class CMainFrame : public CMDIFrameWnd {
   public:
 
 	/* Destructor */
-
 	virtual ~CMainFrame();
 
 	/* Attempt to find the main application view */
-
-	CView *GetActiveMainView(void);
+	CView *GetActiveMainView();
 
 
 	/* Diagnostics */

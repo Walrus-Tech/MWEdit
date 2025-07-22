@@ -124,7 +124,7 @@ CMainFrame::~CMainFrame() {
  *
  *=========================================================================*/
 
-CView *CMainFrame::GetActiveMainView(void) {
+CView *CMainFrame::GetActiveMainView() {
 	CMDIChildWnd *pActiveWnd = MDIGetActive();
 	CView *pView;
 	POSITION ViewPos;
@@ -133,19 +133,19 @@ CView *CMainFrame::GetActiveMainView(void) {
 	/* Ensure there is an active child window, view, and document */
 
 	if (pActiveWnd == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	CView *pActiveView = pActiveWnd->GetActiveView();
 
 	if (pActiveView == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pDoc = pActiveView->GetDocument();
 
 	if (pDoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Find the 'main' view in the list of current document views */
@@ -155,12 +155,12 @@ CView *CMainFrame::GetActiveMainView(void) {
 		pView = pDoc->GetNextView(ViewPos);
 
 		if (pView->IsKindOf(RUNTIME_CLASS(CMWEditView))) {
-			return (pView);
+			return pView;
 		}
 	}
 
 	/* No matching view found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -177,7 +177,7 @@ CView *CMainFrame::GetActiveMainView(void) {
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	/* Call the base class create method first */
 	if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1) {
-		return (-1);
+		return -1;
 	}
 
 	if (!m_wndToolBar.CreateEx(this,
@@ -191,19 +191,19 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	                           | CBRS_SIZE_DYNAMIC)
 	    || !m_wndToolBar.LoadToolBar(IDR_MAINFRAME)) {
 		TRACE0("Failed to create toolbar\n");
-		return (-1);
+		return -1;
 	}
 
 	if (!m_wndStatusBar.Create(this)
 	    || !m_wndStatusBar.SetIndicators(indicators, sizeof(indicators) / sizeof(UINT))) {
 		TRACE0("Failed to create status bar\n");
-		return (-1);
+		return -1;
 	}
 
 	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================

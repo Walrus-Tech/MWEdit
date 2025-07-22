@@ -62,10 +62,10 @@ int CALLBACK l_CreaItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lPara
 		Result = pRecInfo1->UserData - pRecInfo2->UserData;
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
@@ -208,7 +208,7 @@ void CEsmCreaturePage3::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage3::GetControlData(void) {
+void CEsmCreaturePage3::GetControlData() {
 	CEsmCreature *pCreature;
 	CEsmSubNPCO *pItemName;
 	esmrecinfo_t *pRecInfo;
@@ -246,7 +246,7 @@ void CEsmCreaturePage3::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmCreaturePage3::GetDocument(void) {
+CMWEditDoc *CEsmCreaturePage3::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage3::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -309,7 +309,7 @@ BOOL CEsmCreaturePage3::OnInitDialog() {
 	m_ItemList.SetWantKeys(true);
 	m_ItemList.InitObjectList(&l_ItemColData[0]);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -333,13 +333,13 @@ LRESULT CEsmCreaturePage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Can only drag spells onto the list */
 
 	if (!IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_ItemList.FindRecord(pRecInfo);
@@ -349,9 +349,7 @@ LRESULT CEsmCreaturePage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	if (ListIndex < 0) {
 		ListIndex = m_ItemList.AddItem(pRecInfo);
 		m_ItemList.SetItemText(ListIndex, 0, _T("1")); /* Default 1 item */
-	}
-	/* Update an existing item in the npc */
-	else {
+	} else { /* Update an existing item in the npc */
 		Buffer = m_ItemList.GetItemText(ListIndex, 0);
 		Count = atoi(Buffer);
 		Buffer.Format(_T("%d"), (Count < 0) ? --Count : ++Count);
@@ -359,7 +357,7 @@ LRESULT CEsmCreaturePage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	}
 
 	UpdateTotalWeight();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -390,10 +388,8 @@ LRESULT CEsmCreaturePage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 		}
 
 		UpdateTotalWeight();
-		return (1);
-	}
-	/* Update all selected items by increment/decrementing their count */
-	else if (lParam == VK_ADD || lParam == VK_SUBTRACT) {
+		return 1;
+	} else if (lParam == VK_ADD || lParam == VK_SUBTRACT) { /* Update all selected items by increment/decrementing their count */
 		AddCount = (lParam == VK_ADD) ? 1 : -1;
 		ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 
@@ -405,10 +401,10 @@ LRESULT CEsmCreaturePage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_ItemList.GetNextItem(ListIndex, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -426,7 +422,7 @@ LRESULT CEsmCreaturePage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	UpdateUserData();
 	m_ItemList.SortItems(l_CreaItemSortCallBack, pSortData->iField | (pSortData->Reverse << 16));
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -442,7 +438,7 @@ LRESULT CEsmCreaturePage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 
 int CEsmCreaturePage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	m_ItemList.UpdateItem(pRecInfo);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -456,7 +452,7 @@ int CEsmCreaturePage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage3::SetControlData(void) {
+void CEsmCreaturePage3::SetControlData() {
 	CEsmCreature *pCreature;
 	CEsmSubNPCO *pItemName;
 	esmrecinfo_t *pRecInfo;
@@ -499,7 +495,7 @@ void CEsmCreaturePage3::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage3::UpdateTotalWeight(void) {
+void CEsmCreaturePage3::UpdateTotalWeight() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int Index;
@@ -531,7 +527,7 @@ void CEsmCreaturePage3::UpdateTotalWeight(void) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage3::UpdateUserData(void) {
+void CEsmCreaturePage3::UpdateUserData() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
 	int Index;

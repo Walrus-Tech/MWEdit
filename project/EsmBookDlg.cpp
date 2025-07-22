@@ -78,6 +78,7 @@ CEsmBookDlg::CEsmBookDlg() : CEsmRecDialog(CEsmBookDlg::IDD) {
 
 void CEsmBookDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmBookDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -108,7 +109,7 @@ void CEsmBookDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmBookDlg::GetControlData(void) {
+void CEsmBookDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmBookDlg::GetControlData()");
 	CString Buffer;
 	int Index;
@@ -141,27 +142,35 @@ void CEsmBookDlg::GetControlData(void) {
 	/* Object book text */
 	m_BookText.GetWindowText(Buffer);
 	m_pBook->SetBookText(Buffer);
+
 	/* Object weight */
 	m_WeightText.GetWindowText(Buffer);
 	m_pBook->SetWeight((float)atof(Buffer));
+
 	/* Object value */
 	m_ValueText.GetWindowText(Buffer);
 	m_pBook->SetValue(atoi(Buffer));
+
 	/* Enchant points */
 	m_EnchantText.GetWindowText(Buffer);
 	m_pBook->SetEnchantPts(atoi(Buffer));
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pBook->SetScript(TrimStringSpace(Buffer));
+
 	/* Item enchant */
 	m_EnchantList.GetWindowText(Buffer);
 	m_pBook->SetEnchant(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pBook->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pBook->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pBook->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pBook->SetScroll(m_ScrollCheck.GetCheck() != 0);
@@ -179,9 +188,9 @@ void CEsmBookDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmBookDlg::IsModified(void) {
+bool CEsmBookDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -210,7 +219,7 @@ bool CEsmBookDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -227,19 +236,23 @@ bool CEsmBookDlg::IsModified(void) {
 void CEsmBookDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pBook = (CEsmBook *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmSkillsCombo(m_SkillList, true);
 	FillEsmScriptCombo(m_ScriptList);
 	FillEsmEnchantCombo(m_EnchantList);
+
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_WeightText.SetLimitText(10);
 	m_ValueText.SetLimitText(10);
 	m_EnchantText.SetLimitText(10);
 	m_BookText.SetLimitText(65536);
+
 	SetControlData();
 }
 
@@ -272,7 +285,7 @@ int CEsmBookDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -286,7 +299,7 @@ int CEsmBookDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmBookDlg::SetControlData(void) {
+void CEsmBookDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pBook == NULL) {
 		return;
@@ -295,25 +308,30 @@ void CEsmBookDlg::SetControlData(void) {
 	/* ID, update title as well */
 	m_IDText.SetWindowText(m_pBook->GetID());
 	UpdateTitle(m_pBook->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pBook->GetName());
 	m_WeightText.SetWindowText(m_pBook->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pBook->GetFieldString(ESM_FIELD_VALUE));
 	m_EnchantText.SetWindowText(m_pBook->GetFieldString(ESM_FIELD_ENCHANTPTS));
 	m_BookText.SetWindowText(m_pBook->GetBookText());
+
 	m_NameText.SetModify(FALSE);
 	m_BookText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
 	m_EnchantText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pBook->GetModel());
 	m_IconButton.SetWindowText(m_pBook->GetIcon());
 	m_IconPicture.SetEsmIcon(m_pBook->GetIcon());
+
 	/* Item lists */
 	FindComboListItem(m_SkillList, m_pBook->GetSkillID(), true);
 	m_EnchantList.SelectString(-1, m_pBook->GetEnchant());
 	m_ScriptList.SelectString(-1, m_pBook->GetScript());
+
 	/* Record flags */
 	m_ScrollCheck.SetCheck(m_pBook->IsScroll());
 	m_BlockedCheck.SetCheck(m_pBook->IsBlocked());

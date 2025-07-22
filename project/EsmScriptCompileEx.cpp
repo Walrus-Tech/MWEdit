@@ -38,7 +38,7 @@ DEFINE_FILE("EsmScriptCompileEx.cpp");
  * Alternate to ParseFuncArg() for Extended Functions - parse only, does not output anything
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncArgX(void) {
+int CEsmScriptCompile::ParseFuncArgX() {
 	int Result = ESMSC_FUNCARG_OK;
 	bool CheckMsgArgs = false;
 	m_TokenParsed = true;
@@ -52,18 +52,18 @@ int CEsmScriptCompile::ParseFuncArgX(void) {
 		                    m_NumFuncArgs);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
 	if (m_pCurrentFunc == NULL || m_FuncArgIndex >= ESMSCR_MAX_FUNCARGS) {
-		return (ESMSC_FUNCARG_ERROR);
+		return ESMSC_FUNCARG_ERROR;
 	}
 
 	/* Move counters to the next function argument */
 	m_LastFuncArg = m_NumFuncArgs;
 	m_FuncArgIndex++;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -71,19 +71,19 @@ int CEsmScriptCompile::ParseFuncArgX(void) {
  *=========================================================================*/
 
 
-int CEsmScriptCompile::PushFuncOp(void) {
+int CEsmScriptCompile::PushFuncOp() {
 	DEFINE_FUNCTION("CEsmScriptCompile::PushFuncOp()");
 	m_refObject = m_LastToken;
 	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncOp(void) {
+int CEsmScriptCompile::OutputFuncOp() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFuncOp()");
 	WriteFuncOp((const TCHAR*)m_LastToken);
 	return 0;
 }
 
-int CEsmScriptCompile::OutputStoredFuncOp(void) {
+int CEsmScriptCompile::OutputStoredFuncOp() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFuncOp()");
 
 	if (!m_refObject.IsEmpty()) {
@@ -123,13 +123,12 @@ int CEsmScriptCompile::WriteFuncOp(const TCHAR *ident) {
 	return 0;
 }
 
-
 /*===========================================================================
  *
  * Begin Output Let Blocks
  *
  *=========================================================================*/
-int CEsmScriptCompile::PushLetLocal(void) {
+int CEsmScriptCompile::PushLetLocal() {
 	DEFINE_FUNCTION("CEsmScriptCompile::PushLetLocal()");
 	esmscrstack_t *param = 0;
 	CreatePointer(param, esmscrstack_t);
@@ -141,7 +140,7 @@ int CEsmScriptCompile::PushLetLocal(void) {
 	return 0;
 }
 
-int CEsmScriptCompile::OutputLetEnd(void) {
+int CEsmScriptCompile::OutputLetEnd() {
 	short LocalIndex;
 	char LocalType;
 
@@ -149,6 +148,7 @@ int CEsmScriptCompile::OutputLetEnd(void) {
 		esmscrstack_t *param = m_LetQueue.front();
 		const TCHAR *token = param->Token;
 		LocalIndex = FindLocalVarIndex(token, LocalType);
+
 		struct {
 			short pushb;
 			short index;
@@ -162,6 +162,7 @@ int CEsmScriptCompile::OutputLetEnd(void) {
 			LocalType,
 			MWESM_OPCODE_SETLOCAL
 		};
+
 		AddScriptData(&getlocalcmd, sizeof(getlocalcmd));
 		m_LetQueue.pop();
 		DestroyPointer(param);
@@ -179,7 +180,7 @@ int CEsmScriptCompile::OutputLetEnd(void) {
  * Begin Output XIf Blocks
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputXIf(void) {
+int CEsmScriptCompile::OutputXIf() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputXIf()");
 	esmscrifblock_t *pos = 0;
 	CreatePointer(pos, esmscrifblock_t);
@@ -187,6 +188,7 @@ int CEsmScriptCompile::OutputXIf(void) {
 	m_XIfStack.push(pos);
 	char LocalType;
 	short LocalIndex = FindLocalVarIndex((const TCHAR *)m_Token, LocalType);
+
 	struct {
 		short pushb;
 		short type;
@@ -208,11 +210,12 @@ int CEsmScriptCompile::OutputXIf(void) {
 		MWESM_OPCODE_JUMPSHORTZERO,
 		0
 	};
+
 	AddScriptData(&testcmd, sizeof(testcmd));
 	return 0;
 }
 
-int CEsmScriptCompile::OutputXElse(void) {
+int CEsmScriptCompile::OutputXElse() {
 	if (m_XIfStack.size() > 0) {
 		struct {
 			short jmp;
@@ -221,6 +224,7 @@ int CEsmScriptCompile::OutputXElse(void) {
 			MWESM_OPCODE_JUMPSHORT,
 			0
 		};
+
 		esmscrifblock_t *pos = m_XIfStack.top();
 		*(short *)(&m_ScriptData[pos->IfStartPos]) = m_ScriptDataSize + 4;
 		pos->IfStartPos = m_ScriptDataSize + 2;
@@ -230,12 +234,12 @@ int CEsmScriptCompile::OutputXElse(void) {
 	return 0;
 }
 
-int CEsmScriptCompile::OutputXElseIf(void) {
+int CEsmScriptCompile::OutputXElseIf() {
 	OutputXElse();
 	return OutputXIf();
 }
 
-int CEsmScriptCompile::OutputXEndIf(void) {
+int CEsmScriptCompile::OutputXEndIf() {
 	if (m_XIfStack.size() > 0) {
 		esmscrifblock_t *pos = m_XIfStack.top();
 		m_XIfStack.pop();
@@ -265,6 +269,7 @@ int CEsmScriptCompile::OutputFuncXArgLocal(const TCHAR *name) {
 	short LocalIndex;
 	char LocalType;
 	LocalIndex = FindLocalVarIndex(name, LocalType);
+
 	struct {
 		short pushb;
 		short type;
@@ -278,12 +283,13 @@ int CEsmScriptCompile::OutputFuncXArgLocal(const TCHAR *name) {
 		LocalType,
 		MWESM_OPCODE_GETLOCAL
 	};
+
 	AddScriptData(&pushlocalcmd, sizeof(pushlocalcmd));
 	m_LastFuncArgSymbol = true;
 	return 0;
 }
 
-int CEsmScriptCompile::PushFuncXArgNum(void) {
+int CEsmScriptCompile::PushFuncXArgNum() {
 	// TODO checks
 	auto v = m_pCurrentFunc->Var[m_FuncArgIndex];
 	int FuncArgFlag = static_cast<int>(v);
@@ -333,7 +339,7 @@ int CEsmScriptCompile::OutputFuncXArgNum(int type, const TCHAR *token) {
 	return 0;
 }
 
-int CEsmScriptCompile::PushFuncXArgString(void) {
+int CEsmScriptCompile::PushFuncXArgString() {
 	auto left = m_Token.Left(m_Token.GetLength() - 1);
 	auto right = left.Right(left.GetLength() - 1);
 	return PushFuncXArg(ESMSCR_FUNC_STRING, (const TCHAR *)right);
@@ -381,7 +387,7 @@ int CEsmScriptCompile::PushFuncXArg(int type, const TCHAR *token) {
 	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncXBlock(void) {
+int CEsmScriptCompile::OutputFuncXBlock() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFuncXBlock()");
 	esmscrstack_t *param = 0;
 
@@ -433,7 +439,7 @@ int CEsmScriptCompile::OutputFuncXBlock(void) {
  * Begin Output XIf Blocks
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputXWhile(void) {
+int CEsmScriptCompile::OutputXWhile() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputXWhile()");
 	esmscrifblock_t *pos = 0;
 	CreatePointer(pos, esmscrifblock_t);
@@ -441,6 +447,7 @@ int CEsmScriptCompile::OutputXWhile(void) {
 	m_XIfStack.push(pos);
 	char LocalType;
 	short LocalIndex = FindLocalVarIndex((const TCHAR *)m_Token, LocalType);
+
 	struct {
 		short pushb;
 		short type;
@@ -462,15 +469,17 @@ int CEsmScriptCompile::OutputXWhile(void) {
 		MWESM_OPCODE_JUMPSHORTZERO,
 		0
 	};
+
 	AddScriptData(&testcmd, sizeof(testcmd));
 	return 0;
 }
 
-int CEsmScriptCompile::OutputXEndWhile(void) {
+int CEsmScriptCompile::OutputXEndWhile() {
 	if (m_XIfStack.size() > 0) {
 		esmscrifblock_t *pos = m_XIfStack.top();
 		m_XIfStack.pop();
 		// TODO checks
+
 		struct {
 			short jmp;
 			short pos;
@@ -478,6 +487,7 @@ int CEsmScriptCompile::OutputXEndWhile(void) {
 			MWESM_OPCODE_JUMPSHORT,
 			static_cast<short>(pos->IfStartPos)
 		};
+
 		AddScriptData(&endwhilecmd, sizeof(endwhilecmd));
 		*(short *)(&m_ScriptData[pos->IfStartPos + 16]) = m_ScriptDataSize;
 		DestroyPointer(pos);

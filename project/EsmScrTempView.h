@@ -118,45 +118,45 @@ class CEsmScrTempView : public CFormView {
   public:
 
 	/* Checks the current template options to see if they are valid */
-	bool CheckTemplate(void);
-	bool CheckTemplateFile(void);
-	bool CheckCsvFile(void);
+	bool CheckTemplate();
+	bool CheckTemplateFile();
+	bool CheckCsvFile();
 
 	/* Creates the required scripts */
-	bool CreateScripts(void);
+	bool CreateScripts();
 	bool CreateScript(CCsvRow *pRow);
 	bool ParseScriptText(CCsvRow *pRow, const TCHAR *pScriptName);
 
 	/* Get class members */
-	CEsmScriptTemplate *GetScriptTemplate(void) {
-		return (&m_ScriptTemplate);
+	CEsmScriptTemplate *GetScriptTemplate() {
+		return &m_ScriptTemplate;
 	}
 
-	CCsvFile *GetCsvFile(void) {
-		return (&m_CsvFile);
+	CCsvFile *GetCsvFile() {
+		return &m_CsvFile;
 	}
 
-	esmscrtempoptions_t *GetOptions(void) {
-		return (&m_Options);
+	esmscrtempoptions_t *GetOptions() {
+		return &m_Options;
 	}
 
 	/* Check if we have files */
-	bool HasCsvFile(void);
-	bool HasTemplateFile(void);
+	bool HasCsvFile();
+	bool HasTemplateFile();
 
 	/* Update the class members from the controls */
-	void GetControlData(void);
+	void GetControlData();
 
 	/* Get or create the script name */
 	const TCHAR *MakeScriptName(CCsvRow *pRow);
 
 	/* Events */
-	void OnLoadTemplate(void);
-	void OnUpdateText(void);
-	void OnReloadCsvFile(void);
-	void OnReloadScrTemp(void);
-	void OnCreateTemplate(void);
-	void OnCheckTemplate(void);
+	void OnLoadTemplate();
+	void OnUpdateText();
+	void OnReloadCsvFile();
+	void OnReloadScrTemp();
+	void OnCreateTemplate();
+	void OnCheckTemplate();
 
 	/* Set class members */
 	void SetDlgHandler(CEsmDlgHandler *pHandler) {
@@ -168,7 +168,7 @@ class CEsmScrTempView : public CFormView {
 	}
 
 	/* Updates the csv column indices for the template variables */
-	bool UpdateColIndices(void);
+	bool UpdateColIndices();
 
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CEsmScrTempView)

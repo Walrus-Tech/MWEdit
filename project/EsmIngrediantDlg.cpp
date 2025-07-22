@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CEsmIngrediantDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST2, OnSelchangeEffectlist2)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST3, OnSelchangeEffectlist3)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST4, OnSelchangeEffectlist4)
+
 	ON_CBN_SELCHANGE(IDC_SKILLLIST1, OnSelchangeSkilllist1)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST2, OnSelchangeSkilllist2)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST3, OnSelchangeSkilllist3)
@@ -124,7 +125,7 @@ void CEsmIngrediantDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmIngrediantDlg::GetControlData(void) {
+void CEsmIngrediantDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmIngrediantDlg::GetControlData()");
 	ingredata_t *pIngreData;
 	CString Buffer;
@@ -228,7 +229,7 @@ void CEsmIngrediantDlg::GetEffectData(const int ListIndex, const int EffectIndex
  *
  *=========================================================================*/
 
-void CEsmIngrediantDlg::GetEffectData(void) {
+void CEsmIngrediantDlg::GetEffectData() {
 	//DEFINE_FUNCTION("CEsmIngrediantDlg::GetEffectData()");
 	ingredata_t *pIngreData = m_pIngrediant->GetIngreData();
 	int Index;
@@ -264,9 +265,9 @@ void CEsmIngrediantDlg::GetEffectData(void) {
  *
  *=========================================================================*/
 
-bool CEsmIngrediantDlg::IsModified(void) {
+bool CEsmIngrediantDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -287,7 +288,7 @@ bool CEsmIngrediantDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -305,9 +306,11 @@ void CEsmIngrediantDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pIngrediant = (CEsmIngrediant *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmScriptCombo(m_ScriptList);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
@@ -408,7 +411,7 @@ int CEsmIngrediantDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_ScriptList.SelectString(-1, Buffer);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -422,7 +425,7 @@ int CEsmIngrediantDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmIngrediantDlg::SetControlData(void) {
+void CEsmIngrediantDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pIngrediant == NULL) {
 		return;
@@ -514,7 +517,7 @@ void CEsmIngrediantDlg::SetEffectData(const int EffectIndex) {
  *
  *=========================================================================*/
 
-void CEsmIngrediantDlg::SetEffectData(void) {
+void CEsmIngrediantDlg::SetEffectData() {
 	int EffectIndex;
 
 	for (EffectIndex = 0; EffectIndex < MWESM_INGRE_NUMENCHANTS; EffectIndex++) {

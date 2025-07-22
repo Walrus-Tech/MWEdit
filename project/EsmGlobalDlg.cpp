@@ -95,7 +95,7 @@ void CEsmGlobalDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmGlobalDlg::GetControlData(void) {
+void CEsmGlobalDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmGlobalDlg::GetControlData()");
 	CString Buffer;
 	float Value;
@@ -157,9 +157,9 @@ void CEsmGlobalDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmGlobalDlg::IsModified(void) {
+bool CEsmGlobalDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -172,7 +172,7 @@ bool CEsmGlobalDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -229,7 +229,7 @@ void CEsmGlobalDlg::OnSelchangeTypelist() {
  *
  *=========================================================================*/
 
-void CEsmGlobalDlg::SetControlData(void) {
+void CEsmGlobalDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pGlobal == NULL) {
 		return;

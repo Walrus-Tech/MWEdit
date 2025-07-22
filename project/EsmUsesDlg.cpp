@@ -297,14 +297,14 @@ LRESULT CEsmUsesDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 	ListPos = m_RecordList.GetFirstSelectedItemPosition();
 
 	if (ListPos == NULL) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_RecordList.GetNextSelectedItem(ListPos);
 	pRecInfo = m_RecordList.GetRecInfo(ListIndex);
 
 	if (m_pDlgHandler == NULL || pRecInfo == NULL) {
-		return (0);
+		return 0;
 	}
 
 	/* Check for special case of INFO record type */
@@ -328,7 +328,7 @@ LRESULT CEsmUsesDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 		m_pDlgHandler->EditRecord(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -396,7 +396,7 @@ void CEsmUsesDlg::OnInitialUpdate() {
  *
  *=========================================================================*/
 
-void CEsmUsesDlg::UpdateLabel(void) {
+void CEsmUsesDlg::UpdateLabel() {
 	CString Buffer;
 
 	if (m_pRecInfo != NULL) {
@@ -428,7 +428,7 @@ void CEsmUsesDlg::UpdateLabel(void) {
  *
  *=========================================================================*/
 
-void CEsmUsesDlg::UpdateTitle(void) {
+void CEsmUsesDlg::UpdateTitle() {
 	CString Buffer;
 
 	if (m_pRecInfo != NULL) {
@@ -456,7 +456,7 @@ void CEsmUsesDlg::UpdateTitle(void) {
  *
  *=========================================================================*/
 
-bool CEsmUsesDlg::UpdateUses(void) {
+bool CEsmUsesDlg::UpdateUses() {
 	CEsmRecInfoArray *pRecInfoArray = m_pDlgHandler->GetDocument()->GetRecInfoArray();
 	esmrecinfo_t *pRecInfo;
 	const TCHAR *pRecordID;
@@ -469,6 +469,7 @@ bool CEsmUsesDlg::UpdateUses(void) {
 	m_TotalRecords = pRecInfoArray->GetSize();
 	m_UsedRecords = 0;
 	m_ProgressBar.SetPos(0);
+
 	/* Update the frame title */
 	UpdateTitle();
 
@@ -476,7 +477,7 @@ bool CEsmUsesDlg::UpdateUses(void) {
 
 	if (m_pRecInfo == NULL) {
 		m_UsesLabel.SetWindowText(_T("No record specified!"));
-		return (false);
+		return false;
 	}
 
 	/* Get the record ID to look for */
@@ -490,7 +491,7 @@ bool CEsmUsesDlg::UpdateUses(void) {
 
 	if (pRecordID == NULL || *pRecordID == NULL_CHAR) {
 		m_UsesLabel.SetWindowText(_T("Null or empty record ID specified!"));
-		return (false);
+		return false;
 	}
 
 	SystemLog.Printf(_T("Finding uses info = '%s'"), pRecordID);
@@ -524,7 +525,7 @@ bool CEsmUsesDlg::UpdateUses(void) {
 	m_RecordList.SortItems(l_ItemSortCallBack, ESM_FIELD_ITEMTYPE);
 	m_ProgressBar.SetPos(0);
 	UpdateLabel();
-	return (true);
+	return true;
 }
 
 /*===========================================================================

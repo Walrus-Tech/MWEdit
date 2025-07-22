@@ -86,28 +86,28 @@ bool IsESMScriptFunction(const TCHAR *pString) {
 
 	/* Ensure valid word input */
 	if (FirstChar < 0 || FirstChar > 26) {
-		return (false);
+		return false;
 	}
 
 	pStartSearch = g_ScriptFuncAlpha[FirstChar];
 
 	if (pStartSearch == NULL) {
-		return (false);
+		return false;
 	}
 
 	for (Index = 0; pStartSearch[Index].Name[0] != NULL_CHAR; Index++) {
 		Result = _stricmp(pStartSearch[Index].Name, pString);
 
 		if (Result == 0) {
-			return (true);
+			return true;
 		}
 
 		if (Result > 0) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -143,7 +143,7 @@ esmscrfuncinfo_t *GetESMScriptCustomFuncInfo(const TCHAR *pString) {
 	Result = g_CustomFunctions.Lookup(pString, pFunction);
 
 	if (!Result) {
-		return (NULL);
+		return NULL;
 	}
 
 	return &(pFunction->GetData());
@@ -167,13 +167,13 @@ esmscrfuncinfo_t *GetESMScriptFuncInfo(const TCHAR *pString) {
 
 	/* Ensure valid word input */
 	if (FirstChar < 0 || FirstChar > 26) {
-		return (NULL);
+		return NULL;
 	}
 
 	pStartSearch = g_ScriptFuncAlpha[FirstChar];
 
 	if (pStartSearch == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	for (Index = 0; pStartSearch[Index].Name[0] != NULL_CHAR; Index++) {
@@ -184,11 +184,11 @@ esmscrfuncinfo_t *GetESMScriptFuncInfo(const TCHAR *pString) {
 		}
 
 		if (Result > 0) {
-			return (NULL);
+			return NULL;
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -215,15 +215,15 @@ bool IsESMScriptFunction1(const TCHAR *pString) {
 		Result = _stricmp(g_ScriptFunctions[Index].Name, pString);
 
 		if (Result == 0) {
-			return (true);
+			return true;
 		}
 
 		if (Result > 0) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -253,10 +253,10 @@ bool IsESMScriptOperator(const TCHAR Char) {
 		case '=':
 		case '!':
 		case '-':
-			return (true);
+			return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -303,13 +303,11 @@ int GetESMScriptOpToken(const TCHAR *pString) {
 			default:
 				return ESMSCR_TOKEN_UNKNOWN;
 		}
-	}
-	/* 2-byte operators */
-	else if (pString[2] == NULL_CHAR) {
+	} else if (pString[2] == NULL_CHAR) { /* 2-byte operators */
 		switch (pString[0]) {
 			case '-':
 				if (pString[1] == '>') {
-					return (ESMSCR_TOKEN_FUNCOP);
+					return ESMSCR_TOKEN_FUNCOP;
 				}
 
 				break;
@@ -319,15 +317,15 @@ int GetESMScriptOpToken(const TCHAR *pString) {
 			case '!':
 			case '>':
 				if (pString[1] == '=') {
-					return (ESMSCR_TOKEN_RELOP);
+					return ESMSCR_TOKEN_RELOP;
 				}
 
 			default:
-				return (ESMSCR_TOKEN_UNKNOWN);
+				return ESMSCR_TOKEN_UNKNOWN;
 		}
 	}
 
-	return (ESMSCR_TOKEN_UNKNOWN);
+	return ESMSCR_TOKEN_UNKNOWN;
 }
 
 /*===========================================================================
@@ -497,7 +495,7 @@ bool IsESMScriptOperator(const TCHAR *pString) {
 		case '.':
 		case ',':
 			if (pString[1] == NULL_CHAR) {
-				return (true);
+				return true;
 			}
 
 			break;
@@ -506,35 +504,35 @@ bool IsESMScriptOperator(const TCHAR *pString) {
 		case '>':
 		case '=':
 			if (pString[1] == NULL_CHAR) {
-				return (true);
+				return true;
 			}
 
 			if (TSTRCMP(pString + 1, _T("=")) == 0) {
-				return (true);
+				return true;
 			}
 
 			break;
 
 		case '!':
 			if (TSTRCMP(pString + 1, _T("=")) == 0) {
-				return (true);
+				return true;
 			}
 
 			break;
 
 		case '-':
 			if (pString[1] == NULL_CHAR) {
-				return (true);
+				return true;
 			}
 
 			if (TSTRCMP(pString + 1, _T(">")) == 0) {
-				return (true);
+				return true;
 			}
 
 			break;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -554,50 +552,50 @@ bool IsESMScriptOperator(const TCHAR *pString) {
  *=========================================================================*/
 bool IsESMScriptReserved(const TCHAR *pString) {
 	//DEFINE_FUNCTION("IsESMScriptReserved()");
-	return (GetESMScriptResToken(pString) != ESMSCR_TOKEN_UNKNOWN);
+	return GetESMScriptResToken(pString) != ESMSCR_TOKEN_UNKNOWN;
 }
 
 int GetESMScriptResToken(const TCHAR *pString) {
 	switch (toupper(pString[0])) {
 		case 'B':
 			if (_stricmp(pString + 1, _T("egin")) == 0) {
-				return (ESMSCR_TOKEN_BEGIN);
+				return ESMSCR_TOKEN_BEGIN;
 			}
 
 			break;
 
 		case 'E':
 			if (_stricmp(pString + 1, _T("nd")) == 0) {
-				return (ESMSCR_TOKEN_END);
+				return ESMSCR_TOKEN_END;
 			}
 
 			if (_stricmp(pString + 1, _T("ndwhile")) == 0) {
-				return (ESMSCR_TOKEN_ENDWHILE);
+				return ESMSCR_TOKEN_ENDWHILE;
 			}
 
 			if (_stricmp(pString + 1, _T("lse")) == 0) {
-				return (ESMSCR_TOKEN_ELSE);
+				return ESMSCR_TOKEN_ELSE;
 			}
 
 			if (_stricmp(pString + 1, _T("lseif")) == 0) {
-				return (ESMSCR_TOKEN_ELSEIF);
+				return ESMSCR_TOKEN_ELSEIF;
 			}
 
 			if (_stricmp(pString + 1, _T("ndif")) == 0) {
-				return (ESMSCR_TOKEN_ENDIF);
+				return ESMSCR_TOKEN_ENDIF;
 			}
 
 			break;
 
 		case 'I':
 			if (_stricmp(pString + 1, _T("f")) == 0) {
-				return (ESMSCR_TOKEN_IF);
+				return ESMSCR_TOKEN_IF;
 			}
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("fx")) == 0) {
-				return (ESMSCR_TOKEN_IFX);
+				return ESMSCR_TOKEN_IFX;
 			}
 
 #endif
@@ -605,21 +603,21 @@ int GetESMScriptResToken(const TCHAR *pString) {
 
 		case 'L':
 			if (_stricmp(pString + 1, _T("ong")) == 0) {
-				return (ESMSCR_TOKEN_TYPEOP);
+				return ESMSCR_TOKEN_TYPEOP;
 			}
 
 			break;
 
 		case 'F':
 			if (_stricmp(pString + 1, _T("loat")) == 0) {
-				return (ESMSCR_TOKEN_TYPEOP);
+				return ESMSCR_TOKEN_TYPEOP;
 			}
 
 			break;
 
 		case 'R':
 			if (_stricmp(pString + 1, _T("eturn")) == 0) {
-				return (ESMSCR_TOKEN_RETURN);
+				return ESMSCR_TOKEN_RETURN;
 			}
 
 //			if (_stricmp(pString+1, _T("eset")) == 0) {
@@ -629,17 +627,17 @@ int GetESMScriptResToken(const TCHAR *pString) {
 
 		case 'S':
 			if (_stricmp(pString + 1, _T("et")) == 0) {
-				return (ESMSCR_TOKEN_SET);
+				return ESMSCR_TOKEN_SET;
 			}
 
 			if (_stricmp(pString + 1, _T("hort")) == 0) {
-				return (ESMSCR_TOKEN_TYPEOP);
+				return ESMSCR_TOKEN_TYPEOP;
 			}
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("etx")) == 0) {
-				return (ESMSCR_TOKEN_SETX);
+				return ESMSCR_TOKEN_SETX;
 			}
 
 #endif
@@ -647,27 +645,27 @@ int GetESMScriptResToken(const TCHAR *pString) {
 
 		case 'T':
 			if (_stricmp(pString + 1, _T("o")) == 0) {
-				return (ESMSCR_TOKEN_TO);
+				return ESMSCR_TOKEN_TO;
 			}
 
 			break;
 
 		case 'G':
 			if (_stricmp(pString + 1, _T("et")) == 0) {
-				return (ESMSCR_TOKEN_GET);
+				return ESMSCR_TOKEN_GET;
 			}
 
 			break;
 
 		case 'W':
 			if (_stricmp(pString + 1, _T("hile")) == 0) {
-				return (ESMSCR_TOKEN_WHILE);
+				return ESMSCR_TOKEN_WHILE;
 			}
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("hilex")) == 0) {
-				return (ESMSCR_TOKEN_WHILEX);
+				return ESMSCR_TOKEN_WHILEX;
 			}
 
 #endif
@@ -677,13 +675,13 @@ int GetESMScriptResToken(const TCHAR *pString) {
 		case 'Y':
 		case 'Z':
 			if (pString[1] == NULL_CHAR) {
-				return (ESMSCR_TOKEN_XYZ);
+				return ESMSCR_TOKEN_XYZ;
 			}
 
 			break;
-	};
+	}
 
-	return (ESMSCR_TOKEN_UNKNOWN);
+	return ESMSCR_TOKEN_UNKNOWN;
 }
 
 /*===========================================================================
@@ -707,13 +705,13 @@ bool IsESMScriptReserved1(const TCHAR *pString) {
 		Result = _stricmp(l_Reserved[Index], pString);
 
 		if (Result == 0) {
-			return (true);
+			return true;
 		} else if (Result > 0) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================

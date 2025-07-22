@@ -109,7 +109,7 @@ void CEsmScrTempPage2::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmScrTempPage2::UpdatePage(void) {
+void CEsmScrTempPage2::UpdatePage() {
 	m_TemplateText.SetWindowText(m_pParentView->GetScriptTemplate()->GetTemplateText());
 }
 
@@ -127,7 +127,7 @@ void CEsmScrTempPage2::UpdatePage(void) {
  *
  *=========================================================================*/
 
-void CEsmScrTempPage2::UpdateText(void) {
+void CEsmScrTempPage2::UpdateText() {
 	CString Buffer;
 	m_TemplateText.GetWindowText(Buffer);
 	m_pParentView->GetScriptTemplate()->SetText(Buffer);

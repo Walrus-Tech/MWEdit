@@ -299,11 +299,11 @@ class CEsmScriptCompile {
 	bool CheckFuncID1(const long long ArgFlags, const TCHAR *pID, const bool Optional);
 
 	/* Checks if the current function parameter/argument is valid */
-	int CheckFuncArg(void);
+	int CheckFuncArg();
 
 	/* Delete any objects that remain in the expression stack */
-	void ClearExprStack(void);
-	void ClearIfStatementStack(void);
+	void ClearExprStack();
+	void ClearIfStatementStack();
 
 	/* Find a record in the parent document or extra file */
 	CEsmRecord *FindRecord(const char *pID);
@@ -323,11 +323,11 @@ class CEsmScriptCompile {
 	const TCHAR *GetFuncArgRefType(const long long FuncArgs);
 
 	/* Generates the script local variable data block */
-	void MakeScriptVarData(void);
-	int ComputeLocalVarDataSize(void);
+	void MakeScriptVarData();
+	int ComputeLocalVarDataSize();
 
 	/* Get the top if statement block from the stack */
-	esmscrifblock_t *PopIfBlock(void);
+	esmscrifblock_t *PopIfBlock();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -339,240 +339,240 @@ class CEsmScriptCompile {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Delete all the current compiler errors */
-	void ClearErrors(void);
+	void ClearErrors();
 
 	/* Main access method */
-	int Compile(void);
+	int Compile();
 
 	/* Find the message level corresponding to the given message ID */
 	int FindMsgLevel(const int MessageID);
 
 	/* Get class members */
-	char *GetLocalVarData(void) {
-		return (m_pLocalVarData);
+	char *GetLocalVarData() {
+		return m_pLocalVarData;
 	}
 
-	char *GetScriptData(void) {
-		return (m_ScriptData);
+	char *GetScriptData() {
+		return m_ScriptData;
 	}
 
-	const TCHAR *GetScriptName(void) {
-		return (m_ScriptName);
+	const TCHAR *GetScriptName() {
+		return m_ScriptName;
 	}
 
-	int GetScriptDataSize(void) {
-		return (m_ScriptDataSize);
+	int GetScriptDataSize() {
+		return m_ScriptDataSize;
 	}
 
-	int GetLocalVarDataSize(void) {
-		return (m_LocalVarDataSize);
+	int GetLocalVarDataSize() {
+		return m_LocalVarDataSize;
 	}
 
-	int GetNumShortLocals(void) {
-		return (m_NumShortVars);
+	int GetNumShortLocals() {
+		return m_NumShortVars;
 	}
 
-	int GetNumLongLocals(void) {
-		return (m_NumLongVars);
+	int GetNumLongLocals() {
+		return m_NumLongVars;
 	}
 
-	int GetNumFloatLocals(void) {
-		return (m_NumFloatVars);
+	int GetNumFloatLocals() {
+		return m_NumFloatVars;
 	}
 
-	int GetNumErrors(void) {
-		return (m_NumErrors);
+	int GetNumErrors() {
+		return m_NumErrors;
 	}
 
-	int GetNumWarnings(void) {
-		return (m_NumWarnings);
+	int GetNumWarnings() {
+		return m_NumWarnings;
 	}
 
-	bool HasScriptName(void) {
-		return (!m_ScriptName.IsEmpty());
+	bool HasScriptName() {
+		return !m_ScriptName.IsEmpty();
 	}
 
 	/* Access the extra file member */
-	static CEsmFile &GetExtraFile(void) {
-		return (m_ExtraFile);
+	static CEsmFile &GetExtraFile() {
+		return m_ExtraFile;
 	}
 
-	CEsmScriptErrArray *GetErrorArray(void) {
-		return (&m_ErrorArray);
+	CEsmScriptErrArray *GetErrorArray() {
+		return &m_ErrorArray;
 	}
 
-	esmscrfuncinfo_t *GetCurrentFunc(void) {
-		return (m_pCurrentFunc);
+	esmscrfuncinfo_t *GetCurrentFunc() {
+		return m_pCurrentFunc;
 	}
 
-	int GetNumFuncArgs(void) {
-		return (m_NumFuncArgs);
+	int GetNumFuncArgs() {
+		return m_NumFuncArgs;
 	}
 
-	int GetLastFuncArg(void) {
-		return (m_LastFuncArg);
+	int GetLastFuncArg() {
+		return m_LastFuncArg;
 	}
 
-	int GetFuncArgIndex(void) {
-		return (m_FuncArgIndex);
+	int GetFuncArgIndex() {
+		return m_FuncArgIndex;
 	}
 
-	CSString *GetToken(void) {
-		return (&m_Token);
+	CSString *GetToken() {
+		return &m_Token;
 	}
 
-	int GetTokenID(void) {
-		return (m_TokenID);
+	int GetTokenID() {
+		return m_TokenID;
 	}
 
-	int GetCurrentChar(void) {
-		return (m_CurrentCharPos);
+	int GetCurrentChar() {
+		return m_CurrentCharPos;
 	}
 
-	int GetCurrentLine(void) {
-		return (m_CurrentLine);
+	int GetCurrentLine() {
+		return m_CurrentLine;
 	}
 
 	/* Initialize the extra record map */
-	static void InitializeExtraRecords(void);
+	static void InitializeExtraRecords();
 
 	/* Parse table callback functions */
-	int ParseNewLocalVar(void);
-	int ParseFuncRef(void);
-	int ParseVarRef(void);
-	int ParseIfVarRef(void);
+	int ParseNewLocalVar();
+	int ParseFuncRef();
+	int ParseVarRef();
+	int ParseIfVarRef();
 	int ParseVarRef1(const bool InIf);
-	int ParseStringID(void);
-	int ParseStringIDSet(void);
-	int ParseStringIDIf(void);
-	int ParseStringIDPush(void);
-	int ParsePushStringID(void);
-	int ParseLineStringID(void) {
+	int ParseStringID();
+	int ParseStringIDSet();
+	int ParseStringIDIf();
+	int ParseStringIDPush();
+	int ParsePushStringID();
+	int ParseLineStringID() {
 		m_StatementCount++;
-		return (ParseStringID());
+		return ParseStringID();
 	}
 
-	int ParseFunctionLine(void) {
+	int ParseFunctionLine() {
 		m_StatementCount++;
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
-	int ParseSymbolID(void);
-	int ParsePushSymbolID(void);
-	int ParseLineSymbolID(void) {
+	int ParseSymbolID();
+	int ParsePushSymbolID();
+	int ParseLineSymbolID() {
 		m_StatementCount++;
-		return (ParseSymbolID());
+		return ParseSymbolID();
 	}
 
-	int ParseFuncArg(void);
-	int ParseCheckFuncArg(void);
-	int ParseChoiceFunction(void);
-	int ParseFunction(void);
-	int ParseFuncArg1(void);
-	int ParseFuncComma(void);
-	int ParseFuncEnd(void);
-	int ParseRExprStart(void);
-	int ParseIfRExprStart(void);
-	int ParsePushToken(void);
-	int ParseFuncAddOp(void);
-	int ParseSetFirstAddOp(void);
+	int ParseFuncArg();
+	int ParseCheckFuncArg();
+	int ParseChoiceFunction();
+	int ParseFunction();
+	int ParseFuncArg1();
+	int ParseFuncComma();
+	int ParseFuncEnd();
+	int ParseRExprStart();
+	int ParseIfRExprStart();
+	int ParsePushToken();
+	int ParseFuncAddOp();
+	int ParseSetFirstAddOp();
 
 	/* Character type functions */
-	bool IsParseDigit(void) {
-		return ((m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_DIGIT) != 0);
+	bool IsParseDigit() {
+		return (m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_DIGIT) != 0;
 	}
 
-	bool IsParseOperator(void) {
-		return ((m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_PUNCT) != 0);
+	bool IsParseOperator() {
+		return (m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_PUNCT) != 0;
 	}
 
-	bool IsParseSymbol(void) {
-		return ((m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SYMBOL) != 0);
+	bool IsParseSymbol() {
+		return (m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SYMBOL) != 0;
 	}
 
-	bool IsParseSymbolF(void) {
-		return ((m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SYMBOLF) != 0);
+	bool IsParseSymbolF() {
+		return (m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SYMBOLF) != 0;
 	}
 
-	bool IsParseComment(void) {
-		return (*m_pParse == ESMSCR_CHAR_COMMENT);
+	bool IsParseComment() {
+		return *m_pParse == ESMSCR_CHAR_COMMENT;
 	}
 
-	bool IsParseStringChar(void) {
-		return (*m_pParse == ESMSCR_CHAR_STRING);
+	bool IsParseStringChar() {
+		return *m_pParse == ESMSCR_CHAR_STRING;
 	}
 
-	bool IsParseWhiteSpace(void) {
-		return ((m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SPACE) != 0);
+	bool IsParseWhiteSpace() {
+		return (m_pCharTypes[(*m_pParse) & 0xFF] & ESMSCR_CHARTYPE_SPACE) != 0;
 	}
 
 	/* Get/skip the base token types */
-	int GetNextToken(void);
-	int GetNumberToken(void);
-	int GetOperatorToken(void);
-	int GetStringToken(void);
-	int GetSymbolToken(void);
-	void SkipTokenComment(void);
-	void SkipTokenWhiteSpace(void);
+	int GetNextToken();
+	int GetNumberToken();
+	int GetOperatorToken();
+	int GetStringToken();
+	int GetSymbolToken();
+	void SkipTokenComment();
+	void SkipTokenWhiteSpace();
 
 	/* Output table callback methods */
 	int OutputToken(const short Value);
-	int OutputOneExpr(void);
-	int OutputEnd(void) {
+	int OutputOneExpr();
+	int OutputEnd() {
 		m_StatementCount++;
 		return OutputToken(0x0101);
 	}
 
-	int OutputEndWhile(void);
-	int OutputIf(void);
-	int OutputElseIf(void);
-	int OutputElse(void);
-	int OutputEndIf(void);
-	int OutputWhile(void);
-	int OutputWhileFinish(void);
-	int OutputReturn(void) {
+	int OutputEndWhile();
+	int OutputIf();
+	int OutputElseIf();
+	int OutputElse();
+	int OutputEndIf();
+	int OutputWhile();
+	int OutputWhileFinish();
+	int OutputReturn() {
 		m_StatementCount++;
 		return OutputToken(0x0124);
 	}
 
-	int OutputSet(void);
-	int OutputObjRef(void) {
+	int OutputSet();
+	int OutputObjRef() {
 		return OutputToken(0x010c);
 	}
 
-	int OutputIfLocal(void);
-	int OutputIfGlobal(void);
-	int OutputIfRelOp(void);
-	int OutputIfRAddOp(void);
-	int OutputIfRNumber(void);
-	int OutputIfRLocal(void);
-	int OutputIfRGlobal(void);
-	int OutputIfEmpty(void);
-	int OutputIfFinish(void);
-	int OutputIfFunction(void);
-	int OutputSetLocal(void);
-	int OutputSetGlobal(void);
-	int OutputSetEnd(void);
-	int OutputExprStack(void);
-	int OutputIfLeftExprStack(void);
-	int OutputIfRightExprStack(void);
-	int OutputFunction(void);
-	int OutputLineFunction(void);
-	int OutputFuncArgXYZ(void);
-	int OutputFuncArgNum(void);
-	int OutputFuncArgGlobal(void);
-	int OutputFuncArgLocal(void);
-	int OutputFuncArgStrSym(void);
-	int OutputFuncArgSym(void);
-	int OutputFuncArgString(void);
-	int OutputFuncArgReset(void);
-	int OutputFuncEnd(void);
-	int OutputScriptName(void) {
+	int OutputIfLocal();
+	int OutputIfGlobal();
+	int OutputIfRelOp();
+	int OutputIfRAddOp();
+	int OutputIfRNumber();
+	int OutputIfRLocal();
+	int OutputIfRGlobal();
+	int OutputIfEmpty();
+	int OutputIfFinish();
+	int OutputIfFunction();
+	int OutputSetLocal();
+	int OutputSetGlobal();
+	int OutputSetEnd();
+	int OutputExprStack();
+	int OutputIfLeftExprStack();
+	int OutputIfRightExprStack();
+	int OutputFunction();
+	int OutputLineFunction();
+	int OutputFuncArgXYZ();
+	int OutputFuncArgNum();
+	int OutputFuncArgGlobal();
+	int OutputFuncArgLocal();
+	int OutputFuncArgStrSym();
+	int OutputFuncArgSym();
+	int OutputFuncArgString();
+	int OutputFuncArgReset();
+	int OutputFuncEnd();
+	int OutputScriptName() {
 		m_ScriptName = m_Token;
-		return (0);
+		return 0;
 	}
 
 	int OutputFuncArgAnim(const short AnimID) {
@@ -584,37 +584,37 @@ class CEsmScriptCompile {
 
 #ifdef MWEDIT_SCRIPT_MWSE
 
-	int ParseFuncArgX(void);
+	int ParseFuncArgX();
 
 	/* Fake output functions, the tokens are stored in a stack to be output in the correct order */
-	int PushFuncXArgLocal(void);
-	int PushFuncXArgNum(void);
-	int PushFuncXArgString(void);
-	int PushLetLocal(void);
-	int PushFuncOp(void);
+	int PushFuncXArgLocal();
+	int PushFuncXArgNum();
+	int PushFuncXArgString();
+	int PushLetLocal();
+	int PushFuncOp();
 
 	/* Output extended function params from the stack */
-	int OutputFuncOp(void);
-	int OutputStoredFuncOp(void);
+	int OutputFuncOp();
+	int OutputStoredFuncOp();
 	int WriteFuncOp(const TCHAR *ident);
 	int OutputFuncXArgLocal(const TCHAR *name);
 	int OutputFuncXArgNum(int type, const TCHAR *token);
 	char *OutputFuncXArgStringCat(char *buf, const void *newdata, int newdatalen);
-	int OutputFuncXArgString(const TCHAR* token);
-	int OutputFuncXBlock(void);
-	int OutputLetEnd(void);
+	int OutputFuncXArgString(const TCHAR *token);
+	int OutputFuncXBlock();
+	int OutputLetEnd();
 	int PushFuncXArg(int type, const TCHAR *token);
 
 	/* Output extended if commands */
-	int OutputXIf(void);
-	int OutputXElse(void);
-	int OutputXElseIf(void);
-	int OutputXEndIf(void);
+	int OutputXIf();
+	int OutputXElse();
+	int OutputXElseIf();
+	int OutputXEndIf();
 #endif
 
 	/* Output extended while commands */
-	int OutputXWhile(void);
-	int OutputXEndWhile(void);
+	int OutputXWhile();
+	int OutputXEndWhile();
 
 	/* Parse the given table */
 	int ParseTable(esmscrparsetable_t *pTable);
@@ -622,9 +622,9 @@ class CEsmScriptCompile {
 	int ParseTableOne(esmscrparsetable_t &TableEntry);
 
 	/* Set various message levels */
-	void SetDefaultMsgLevels(void);
-	void SetWeakMsgLevels(void);
-	void SetStrongMsgLevels(void);
+	void SetDefaultMsgLevels();
+	void SetWeakMsgLevels();
+	void SetStrongMsgLevels();
 
 	/* Set the script text to be compiled */
 	void SetScriptText(const TCHAR *pString, const int Size);
@@ -637,8 +637,7 @@ class CEsmScriptCompile {
 	void SetMsgLevel(const int Type);
 
 	/* Updates the statement count from the previous if block */
-	int UpdateLastIfBlock(void);
-
+	int UpdateLastIfBlock();
 };
 
 /*===========================================================================

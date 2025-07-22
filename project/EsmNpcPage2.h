@@ -53,7 +53,6 @@ class CEsmNpcPage2 : public CPropertyPage {
   protected:
 
 	esmrecinfo_t *m_pRecInfo;
-
 	CEsmDlgHandler *m_pDlgHandler;
 
 
@@ -62,20 +61,16 @@ class CEsmNpcPage2 : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmNpcPage2();
 	~CEsmNpcPage2();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -85,9 +80,8 @@ class CEsmNpcPage2 : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 
 	/* Dialog Data */

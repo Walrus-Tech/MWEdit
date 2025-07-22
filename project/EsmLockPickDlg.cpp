@@ -77,6 +77,7 @@ CEsmLockPickDlg::CEsmLockPickDlg() : CEsmRecDialog(CEsmLockPickDlg::IDD) {
 
 void CEsmLockPickDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmLockPickDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 
@@ -109,7 +110,7 @@ void CEsmLockPickDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmLockPickDlg::GetControlData(void) {
+void CEsmLockPickDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLockPickDlg::GetControlData()");
 	lockdata_t *pLockData;
 	CString Buffer;
@@ -178,9 +179,9 @@ void CEsmLockPickDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmLockPickDlg::IsModified(void) {
+bool CEsmLockPickDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -209,7 +210,7 @@ bool CEsmLockPickDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -271,7 +272,7 @@ int CEsmLockPickDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -285,7 +286,7 @@ int CEsmLockPickDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmLockPickDlg::SetControlData(void) {
+void CEsmLockPickDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pLockPick == NULL) {
 		return;
@@ -301,6 +302,7 @@ void CEsmLockPickDlg::SetControlData(void) {
 	m_WeightText.SetWindowText(m_pLockPick->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pLockPick->GetFieldString(ESM_FIELD_VALUE));
 	m_UsesText.SetWindowText(m_pLockPick->GetFieldString(ESM_FIELD_USES));
+
 	m_UsesText.SetModify(FALSE);
 	m_NameText.SetModify(FALSE);
 	m_QualityText.SetModify(FALSE);

@@ -41,7 +41,7 @@ class CCustRichEdit : public CRichEditCtrl {
 
 	/* Get the current line of text */
 	const TCHAR *GetCurLineText(CString &Buffer);
-	int GetCurLineCharPos(void);
+	int GetCurLineCharPos();
 
 	/* ClassWizard generated virtual function overrides */
 	//{{AFX_VIRTUAL(CCustRichEdit)

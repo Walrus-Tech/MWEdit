@@ -63,16 +63,13 @@ class CEsmIntCellPage : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmIntCellPage();
 	~CEsmIntCellPage();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -82,12 +79,10 @@ class CEsmIntCellPage : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Update record data */
-
 	int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 

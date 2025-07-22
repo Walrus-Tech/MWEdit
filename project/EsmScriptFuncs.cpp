@@ -8696,7 +8696,7 @@ bool OutputFunction(CGenFile &File, esmscrfuncinfo_t &FuncInfo) {
 
 	File.Printf(_T("\tDesc = \"\"\n"));
 	File.Printf(_T("End\n"));
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -8721,7 +8721,7 @@ bool OutputFunctionDat(const TCHAR *pFilename) {
 	Result = File.Open(pFilename, _T("wt"));
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	/* Output all functions in array */
@@ -8730,11 +8730,11 @@ bool OutputFunctionDat(const TCHAR *pFilename) {
 		Result = OutputFunction(File, g_ScriptFunctions[Index]);
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

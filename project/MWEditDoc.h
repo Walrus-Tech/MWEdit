@@ -138,38 +138,31 @@ class CMWEditDoc : public CDocument {
   protected:
 
 	/* Create from serialization only */
-
 	CMWEditDoc();
 	DECLARE_DYNCREATE(CMWEditDoc);
 
 	/* Adds the given file records to the record array */
-
 	void AddRecInfo(CEsmFile *pFile);
 
 	/* Delete all record infos in the array */
-
-	void ClearRecInfoArray(void);
-	void ClearFileArray(void);
+	void ClearRecInfoArray();
+	void ClearFileArray();
 
 	/* Script compare helper */
-
 	void CompareScriptData(const byte *pData1,
 	                       const long Size1,
 	                       const byte *pData2,
 	                       const long Size2);
 
 	/* Script compile helpers */
-
 	bool CompileActiveScript(CEsmScript *pScript);
 
 	/* Called when a plugin is loaded */
-
-	bool LoadAppMasters(void);
-	bool LoadAppPlugins(void);
-	bool LoadAppActive(void);
+	bool LoadAppMasters();
+	bool LoadAppPlugins();
+	bool LoadAppActive();
 
 	/* Called when an object's ID has been changed */
-
 	int OnCheckNewID(esmreceditinfo_t *pRecEditInfo);
 
 
@@ -178,34 +171,27 @@ class CMWEditDoc : public CDocument {
   public:
 
 	/* Destructor */
-
 	virtual ~CMWEditDoc();
 
 	/* Add a recinfo structure to the array */
-
 	void AddRecInfo(esmrecinfo_t *pRecInfo) {
 		m_RecInfoSort.SetAt(pRecInfo);
 		m_RecInfo.Add(pRecInfo);
 	}
 
 	/* Creates a backup of the given file */
-
 	bool BackupPlugin(const TCHAR *pFilename);
 
 	/* Check if the user can make new records of the given type */
-
 	bool CanCreateNew(const TCHAR *pType);
 
 	/* Compiles all scripts in the active plugin */
-
-	bool CompileAllActiveScripts(void);
+	bool CompileAllActiveScripts();
 
 	/* Attempts to copy the given record into the active file */
-
 	bool CopyRecord(CMWEditDoc *pSourceDoc, esmrecinfo_t *pRecInfo);
 
 	/* Create a new record of the given type */
-
 	CEsmRecord *CreateNewRecord(const TCHAR *pType);
 	esmrecinfo_t *CreateNewRecord(const TCHAR *pType, const TCHAR *pID);
 	CEsmRecord *CreateCopy(CEsmRecord *pRecord);
@@ -221,18 +207,15 @@ class CMWEditDoc : public CDocument {
 	CEsmRecord *CopyCELLRefs(CMWEditDoc *pDocument, CEsmCell *pSourceCell, CEsmCell *pDestCell);
 
 	/* Compare script data in the active file and the current script file */
-
-	void CompareScripts(void);
+	void CompareScripts();
 	void CompareScripts(CEsmScript *pScript1, CEsmScript *pScript2);
 
 	/* Attempt to toggle delete a record (the usual way) */
-
 	int CleanRecord(esmrecinfo_t *pRecInfo);
 	bool DeleteRecord (esmrecinfo_t *pRecInfo);
 	bool MakeActive (esmrecinfo_t *pRecInfo);
 
 	/* Export records */
-
 	bool ExportSpellMerchants(const TCHAR *pFilename);
 	bool ExportSpellMerchant(CEsmNpc *pNpc, CGenFile &File);
 	bool ExportSpellMerchant(CEsmNpc *pNpc,
@@ -246,7 +229,6 @@ class CMWEditDoc : public CDocument {
 	                         CGenFile &File);
 
 	/* Access particular records */
-
 	esmrecinfo_t *FindInfoRecord(const TCHAR *pID, const TCHAR *pDialID);
 	esmrecinfo_t *FindRecInfoByPtr(CEsmRecord *pRecord);
 	esmrecinfo_t *FindRecInfo(CEsmRecord *pRecord);
@@ -257,7 +239,7 @@ class CMWEditDoc : public CDocument {
 
 	esmrecinfo_t *FindFirstRecord(const TCHAR *pType, int &ArrayIndex) {
 		ArrayIndex = -1;
-		return (FindNextRecord(pType, ArrayIndex));
+		return FindNextRecord(pType, ArrayIndex);
 	}
 
 	esmrecinfo_t *FindNextRecord(const TCHAR *pType, int &ArrayIndex);
@@ -274,96 +256,82 @@ class CMWEditDoc : public CDocument {
 	CEsmGlobal *GetGlobal(const TCHAR *pName);
 
 	/* Find a script in the script file */
-
 	CEsmScript *FindScriptRecord(const TCHAR *pID);
 
 	/* Find record references in a cell */
-
 	CEsmSubCellRef *FindFirstCellRef(CEsmRecord *pRecord);
 
 	/* Get the main application object */
-
-	CMWEditApp *GetApp(void) {
+	CMWEditApp *GetApp() {
 		return (CMWEditApp *)AfxGetApp();
 	}
 
 	/* Access the document members */
-
-	bool GetViewChanged(void) {
-		return (m_ViewChanged);
+	bool GetViewChanged() {
+		return m_ViewChanged;
 	}
 
-	CEsmFile *GetActivePlugin(void) {
-		return (&m_ActiveFile);
+	CEsmFile *GetActivePlugin() {
+		return &m_ActiveFile;
 	}
 
-	CEsmFile &GetScriptPlugin(void) {
-		return (m_ScriptFile);
+	CEsmFile &GetScriptPlugin() {
+		return m_ScriptFile;
 	}
 
-	const TCHAR *GetScriptFilename(void) {
-		return (m_ScriptFilename);
+	const TCHAR *GetScriptFilename() {
+		return m_ScriptFilename;
 	}
 
-	CEsmRecInfoArray *GetRecInfoArray(void) {
-		return (&m_RecInfo);
+	CEsmRecInfoArray *GetRecInfoArray() {
+		return &m_RecInfo;
 	}
 
-	int GetNumEffectsOutput(void) {
-		return (m_NumEffectsOutput);
+	int GetNumEffectsOutput() {
+		return m_NumEffectsOutput;
 	}
 
-	int GetNumRecords(void) {
-		return (m_RecInfo.GetSize());
+	int GetNumRecords() {
+		return m_RecInfo.GetSize();
 	}
 
 	/* Get a magic effect record */
-
 	esmrecinfo_t *GetEffectRecord(const int EffectID);
 
 	/* Get AI flags for the given NPC */
-
 	long GetNPCAiFlags(CEsmNpc *pNpc);
 
 	/* Attempt to import a script from the filename */
-
 	esmrecinfo_t *ImportScript(const TCHAR *pFilename);
 
 	/* Checks for an existing object ID */
-
 	bool IsExistingID(const TCHAR *pID) {
-		return (FindRecord(pID) != NULL);
+		return FindRecord(pID) != NULL;
 	}
 
 	bool IsExistingIDDup(const TCHAR *pID);
 
 	/* Load a plugin file for script comparison */
-
 	bool LoadScriptFile(const TCHAR *pFilename);
 
 	/* Creates and returns a new info id */
-
-	const TCHAR *MakeNewINFOId(void);
+	const TCHAR *MakeNewINFOId();
 
 	/* Called before/after a record is changed */
-
 	int OnPostSaveRecord(esmreceditinfo_t *pRecEditInfo);
 	int OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo);
 
 	/* Attempt to rename a record */
-
 	bool RenameRecord(esmrecinfo_t *pRecInfo, const TCHAR *pNewID);
 
 	/* Set class members */
-
 	void SetViewChanged(const bool Flag) {
 		m_ViewChanged = Flag;
 		UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATE, NULL);
 	}
 
 	/* Updates the MAST records in the current active file */
-
-	void UpdateMasters(void);
+	void UpdateMasters();
 
 	/* Diagnostics */
 
@@ -391,8 +359,8 @@ class CMWEditDoc : public CDocument {
   protected:
 
 	//{{AFX_MSG(CMWEditDoc)
-	afx_msg void OnFileSave(void);
-	afx_msg void OnFileSaveAs(void);
+	afx_msg void OnFileSave();
+	afx_msg void OnFileSaveAs();
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP()

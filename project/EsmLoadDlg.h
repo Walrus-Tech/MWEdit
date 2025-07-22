@@ -38,7 +38,6 @@ class CEsmLoadDlg : public CDialog {
   public:
 
 	/* Construction */
-
 	CEsmLoadDlg(CWnd *pParent = NULL);
 
 	/* Dialog Data */
@@ -55,7 +54,6 @@ class CEsmLoadDlg : public CDialog {
 	//}}AFX_DATA
 
 	/* Update the dialog members */
-
 	void SetFilename(const TCHAR *pString) {
 		m_FileLabel.SetWindowText(pString);
 	}
@@ -101,7 +99,6 @@ class CEsmLoadDlg : public CDialog {
  *=========================================================================*/
 
 /* Global function for dialog update callback during load */
-
 int g_EsmLoadDlgCallback(const int Event, const TCHAR *pMessage, const float Percent, long Data);
 
 /*===========================================================================

@@ -229,7 +229,7 @@ void CEsmFindDlg::Dump(CDumpContext &dc) const {
  *
  *=========================================================================*/
 
-void CEsmFindDlg::FillFindList(void) {
+void CEsmFindDlg::FillFindList() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	CString Buffer;
 	bool Result;
@@ -346,14 +346,14 @@ LRESULT CEsmFindDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 	ListPos = m_RecordList.GetFirstSelectedItemPosition();
 
 	if (ListPos == NULL) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_RecordList.GetNextSelectedItem(ListPos);
 	pRecInfo = m_RecordList.GetRecInfo(ListIndex);
 
 	if (m_pDlgHandler == NULL || pRecInfo == NULL) {
-		return (0);
+		return 0;
 	}
 
 	/* Check for special case of INFO record type */
@@ -377,7 +377,7 @@ LRESULT CEsmFindDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 		m_pDlgHandler->EditRecord(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -397,10 +397,12 @@ void CEsmFindDlg::OnFindbutton() {
 	CString FindText;
 	esmfind_t FindData;
 	dword NumRecords = m_pDlgHandler->GetDocument()->GetNumRecords();
+
 	bool Result;
 	long Count;
 	int Index;
 	int iResult;
+
 	/* Ensure we have valid text to find */
 	m_CountLabel.SetWindowText(_T(""));
 	m_FindList.GetWindowText(FindText);
@@ -412,6 +414,7 @@ void CEsmFindDlg::OnFindbutton() {
 
 	/* Add the find string to the find history */
 	AddFindHistory(FindText);
+
 	/* Initialize the search */
 	FindData.Length = FindText.GetLength();
 	FindData.pText = FindText;
@@ -443,6 +446,7 @@ void CEsmFindDlg::OnFindbutton() {
 	m_RecordList.SortItems(l_ItemSortCallBack, ESM_FIELD_ID);
 	m_RecordList.SortItems(l_ItemSortCallBack, ESM_FIELD_ITEMTYPE);
 	m_ProgressBar.SetPos(0);
+
 	/* Output the status text */
 	FindText.Format(_T("Found %ld matches in %ld records"), Count, NumRecords);
 	m_CountLabel.SetWindowText(FindText);
@@ -560,7 +564,7 @@ BOOL CEsmFindDlg::PreTranslateMessage(MSG *pMsg) {
 		Result = TranslateAccelerator(m_hWnd, m_hAccelerator, pMsg);
 
 		if (Result != 0) {
-			return (Result);
+			return Result;
 		}
 	}
 

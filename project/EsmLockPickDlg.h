@@ -48,7 +48,6 @@ class CEsmLockPickDlg : public CEsmRecDialog {
   protected:
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
@@ -57,17 +56,14 @@ class CEsmLockPickDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmLockPickDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

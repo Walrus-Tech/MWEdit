@@ -61,20 +61,16 @@ class CEsmCreaturePage3 : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmCreaturePage3();
 	~CEsmCreaturePage3();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -84,17 +80,14 @@ class CEsmCreaturePage3 : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Update the current weight the NPC is carrying */
-
-	void UpdateTotalWeight(void);
+	void UpdateTotalWeight();
 
 	/* Update the recinfo userdata with the item counts */
-
-	void UpdateUserData(void);
+	void UpdateUserData();
 
 	/* Dialog Data */
 

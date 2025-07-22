@@ -82,6 +82,7 @@ CEsmFactionDlg::CEsmFactionDlg() : CEsmRecDialog(CEsmFactionDlg::IDD) {
 
 void CEsmFactionDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmFactionDlg)
 	DDX_Control(pDX, IDC_ADJUSTTEXT, m_AdjustText);
 	DDX_Control(pDX, IDC_FACTREPTEXT, m_FactRepText);
@@ -125,13 +126,14 @@ void CEsmFactionDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmFactionDlg::GetControlData(void) {
+void CEsmFactionDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmFactionDlg::GetControlData()");
 	factiondata_t *pFactionData;
 	CEsmSubLong *pSubLong;
 	CEsmSubNameFix *pSubName;
 	CString Buffer;
 	int Index;
+
 	/* Update the armor pointer and data */
 	m_pFaction = (CEsmFaction *)GetRecInfo()->pRecord;
 	ASSERT(m_pFaction != NULL);
@@ -217,7 +219,7 @@ void CEsmFactionDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmFactionDlg::GetRankData(void) {
+void CEsmFactionDlg::GetRankData() {
 	CString Buffer;
 
 	if (m_CurrentRank < 0) {
@@ -249,7 +251,7 @@ void CEsmFactionDlg::GetRankData(void) {
  *
  *=========================================================================*/
 
-void CEsmFactionDlg::GetReactionData(void) {
+void CEsmFactionDlg::GetReactionData() {
 	CString Buffer;
 
 	if (m_CurrentReaction < 0) {
@@ -273,9 +275,9 @@ void CEsmFactionDlg::GetReactionData(void) {
  *
  *=========================================================================*/
 
-bool CEsmFactionDlg::IsModified(void) {
+bool CEsmFactionDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -288,7 +290,7 @@ bool CEsmFactionDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -531,7 +533,7 @@ int CEsmFactionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_FactionList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -545,7 +547,7 @@ int CEsmFactionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmFactionDlg::SetControlData(void) {
+void CEsmFactionDlg::SetControlData() {
 	factiondata_t *pFactionData;
 	CEsmSubNameFix *pSubName;
 	CEsmSubRecord *pSubLong;

@@ -86,6 +86,7 @@ CEsmNpcPage5::~CEsmNpcPage5() {
  *=========================================================================*/
 void CEsmNpcPage5::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmNpcPage5)
 	DDX_Control(pDX, IDC_CELLLIST4, m_CellList4);
 	DDX_Control(pDX, IDC_CELLLIST3, m_CellList3);
@@ -126,7 +127,7 @@ void CEsmNpcPage5::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmNpcPage5 Method - void GetControlData (void);
  *
  *=========================================================================*/
-void CEsmNpcPage5::GetControlData(void) {
+void CEsmNpcPage5::GetControlData() {
 	CEsmNpc *pNpc;
 	aidata_t *pAiData;
 	CString Buffer;
@@ -229,7 +230,7 @@ void CEsmNpcPage5::GetControlData(void) {
  * Class CEsmNpcPage5 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-CMWEditDoc *CEsmNpcPage5::GetDocument(void) {
+CMWEditDoc *CEsmNpcPage5::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage5::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -248,7 +249,7 @@ CMWEditDoc *CEsmNpcPage5::GetDocument(void) {
 BOOL CEsmNpcPage5::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	m_GoldText.SetLimitText(16);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -262,7 +263,7 @@ BOOL CEsmNpcPage5::OnInitDialog() {
  *
  *=========================================================================*/
 int CEsmNpcPage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -275,7 +276,7 @@ int CEsmNpcPage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmNpcPage5 Method - void SetControlData (void);
  *
  *=========================================================================*/
-void CEsmNpcPage5::SetControlData(void) {
+void CEsmNpcPage5::SetControlData() {
 	CEsmNpc *pNpc;
 	aidata_t *pAiData;
 	CString Buffer;

@@ -93,12 +93,14 @@ CEsmIconFrame::~CEsmIconFrame() {
  *
  *=========================================================================*/
 
-void CEsmIconFrame::OnInitialUpdate(void) {
+void CEsmIconFrame::OnInitialUpdate() {
 	CRect ClientRect;
 	CDC *pDC;
+
 	/* Get the output area */
 	GetClientRect(&ClientRect);
 	pDC = GetDC();
+
 	/* Create the bitmap of the desired size that is compatible
 	 * with the current output DC */
 	m_Bitmap.CreateCompatibleBitmap(pDC, MWESM_ICON_DEFAULTWIDTH, MWESM_ICON_DEFAULTHEIGHT);
@@ -121,11 +123,14 @@ void CEsmIconFrame::OnPaint() {
 	CPaintDC DC(this);
 	CRect ClientRect;
 	CDC BitmapDC;
+
 	/* Get the output area */
 	GetClientRect(&ClientRect);
+
 	/* Initialize the bitmap memory DC */
 	BitmapDC.CreateCompatibleDC(&DC);
 	BitmapDC.SelectObject(&m_Bitmap);
+
 	/* Output the stretched bitmap to the frame */
 	DC.StretchBlt(0,
 	              0,
@@ -162,7 +167,6 @@ void CEsmIconFrame::SetEsmIcon(const TCHAR *pFilename, const bool RelativePath) 
 	}
 
 	/* Attempt to load the given image into a bitmap handle that is
-
 	 * compatible with the current display */
 	pDC = GetDC();
 
@@ -216,12 +220,14 @@ void CEsmIconFrame::SetIconBitmap(CBitmap *pBitmap) {
 	BITMAP BmpInfo;
 	CDC OutDC;
 	CDC InDC;
+
 	/* Initialize the contexts for copying */
 	OutDC.CreateCompatibleDC(NULL);
 	OutDC.SelectObject(&m_Bitmap);
 	InDC.CreateCompatibleDC(NULL);
 	InDC.SelectObject(pBitmap);
 	pBitmap->GetBitmap(&BmpInfo);
+
 	/* Copy the bitmap */
 	OutDC.StretchBlt(0,
 	                 0,

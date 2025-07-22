@@ -56,7 +56,6 @@ class CEsmCellDlg : public CEsmRecDialog {
   protected:
 
 	/* Update modified items during edit */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
@@ -65,18 +64,15 @@ class CEsmCellDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmCellDlg();
 
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -86,6 +82,7 @@ class CEsmCellDlg : public CEsmRecDialog {
 	};
 
 	CEdit m_GridText;
+
 	CTabCtrlSheet m_TabControl;
 	//}}AFX_DATA
 

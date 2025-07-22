@@ -63,12 +63,12 @@ class CEsmApparatusDlg : public CEsmRecDialog {
 
 	/* Get class members */
 
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
 
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 
 	/* Dialog Data */
@@ -80,10 +80,13 @@ class CEsmApparatusDlg : public CEsmRecDialog {
 
 	CButton m_PersistCheck;
 	CButton m_BlockedCheck;
+
 	CEdit m_ValueText;
 	CEdit m_QualityText;
 	CEdit m_WeightText;
+
 	CComboBox m_TypeList;
+
 	CEdit m_NameText;
 	//}}AFX_DATA
 

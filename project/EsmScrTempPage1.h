@@ -70,20 +70,16 @@ class CEsmScrTempPage1 : public CPropertyPage {
   public:
 
 	/* Constructor/destructor */
-
 	CEsmScrTempPage1();
 	~CEsmScrTempPage1();
 
 	/* Update the template variable list */
-
-	void FillTempVarList(void);
+	void FillTempVarList();
 
 	/* Save the control data */
-
-	void GetControlData(void);
+	void GetControlData();
 
 	/* Set class members */
-
 	void SetDlgHandler(CEsmDlgHandler *pHandler) {
 		m_pDlgHandler = pHandler;
 	}
@@ -93,8 +89,7 @@ class CEsmScrTempPage1 : public CPropertyPage {
 	}
 
 	/* Update the page controls */
-
-	void UpdatePage(void);
+	void UpdatePage();
 
 	/* Dialog Data */
 

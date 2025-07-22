@@ -78,6 +78,7 @@ CEsmCellRefDlg::CEsmCellRefDlg(CWnd *pParent) : CDialog(CEsmCellRefDlg::IDD, pPa
 
 void CEsmCellRefDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCellRefDlg)
 	DDX_Control(pDX, IDC_SCALETEXT, m_ScaleText);
 	DDX_Control(pDX, IDC_ZROTTEXT, m_ZRotText);
@@ -112,17 +113,17 @@ bool CEsmCellRefDlg::DoModal(CEsmSubCellRef *pCellRef, const bool IsNew, CEsmCel
 	m_HasNewCellRef = false;
 
 	if (pCell == NULL || pCellRef == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Display the model dialog */
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -136,7 +137,7 @@ bool CEsmCellRefDlg::DoModal(CEsmSubCellRef *pCellRef, const bool IsNew, CEsmCel
  *
  *=========================================================================*/
 
-void CEsmCellRefDlg::GetControlData(void) {
+void CEsmCellRefDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmCellRefDlg::GetControlData()");
 	CEsmSubPos6 *pPosition;
 	CEsmSubFloat *pScale;
@@ -226,7 +227,7 @@ void CEsmCellRefDlg::OnCancel() {
 BOOL CEsmCellRefDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	SetControlData();
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -256,11 +257,12 @@ void CEsmCellRefDlg::OnOK() {
  *
  *=========================================================================*/
 
-void CEsmCellRefDlg::SetControlData(void) {
+void CEsmCellRefDlg::SetControlData() {
 	CEsmSubPos6 *pPosition;
 	CEsmSubFloat *pScale;
 	pos6data_t *pPosData;
 	CString Buffer;
+
 	/* Set the position data */
 	pPosition = (CEsmSubPos6 *)m_pCellRef->FindSubRecord(MWESM_SUBREC_DATA);
 

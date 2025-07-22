@@ -161,7 +161,7 @@ CEsmScriptDlg::~CEsmScriptDlg() {
  * Class CEsmScriptDlg Method - void AutoIndent (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::AutoIndent(void) {
+void CEsmScriptDlg::AutoIndent() {
 	CString Buffer;
 	CString IndentString;
 	CString FirstWord;
@@ -217,21 +217,21 @@ void CEsmScriptDlg::AutoIndent(void) {
 		FirstWord = Buffer.SpanExcluding(" \t\n\r.=<>!-+;:`~@#$%^&*()[]{}\\|,?'\"");
 		IndentString = "";
 
-		if (FirstWord.CompareNoCase("if") == 0 ||
-		    FirstWord.CompareNoCase("ifx") == 0 ||
-		    FirstWord.CompareNoCase("while") == 0 ||
-		    FirstWord.CompareNoCase("whilex") == 0) {
+		if (FirstWord.CompareNoCase("if") == 0
+		    || FirstWord.CompareNoCase("ifx") == 0
+		    || FirstWord.CompareNoCase("while") == 0
+		    || FirstWord.CompareNoCase("whilex") == 0) {
 			++NextIndentLevel;
 		} else if (FirstWord.CompareNoCase("begin") == 0 && IdentInitialLevel) {
 			++NextIndentLevel;
-		} else if (FirstWord.CompareNoCase("else") == 0 ||
-		           FirstWord.CompareNoCase("elseif") == 0) {
+		} else if (FirstWord.CompareNoCase("else") == 0
+		           || FirstWord.CompareNoCase("elseif") == 0) {
 			--IndentLevel;
 		} else if (FirstWord.CompareNoCase("end") == 0 && IdentInitialLevel) {
 			--IndentLevel;
 			NextIndentLevel = IndentLevel;
-		} else if (FirstWord.CompareNoCase("endif") == 0 ||
-		           FirstWord.CompareNoCase("endwhile") == 0) {
+		} else if (FirstWord.CompareNoCase("endif") == 0
+		           || FirstWord.CompareNoCase("endwhile") == 0) {
 			--IndentLevel;
 			NextIndentLevel = IndentLevel;
 		} else if (Buffer.GetLength() > 0 && Buffer.GetAt(0) == ';') {
@@ -309,8 +309,10 @@ void CEsmScriptDlg::ChangeScriptFormat(CEsmScriptOptions *pNewFormat) {
  *=========================================================================*/
 void CEsmScriptDlg::DoDataExchange(CDataExchange *pDX) {
 	CEsmRecDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmScriptDlg)
 	DDX_Control(pDX, IDC_NOFORMATCHECK, m_NoFormatCheck);
+
 	DDX_Control(pDX, IDC_BLUEBUTTON, m_BlueButton);
 	DDX_Control(pDX, IDC_WHITEBUTTON, m_WhiteButton);
 	DDX_Control(pDX, IDC_REPLACEBUTTON, m_ReplaceButton);
@@ -321,8 +323,10 @@ void CEsmScriptDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_UNDOBUTTON, m_UndoButton);
 	DDX_Control(pDX, IDC_COPYBUTTON, m_CopyButton);
 	DDX_Control(pDX, IDC_COMPILEBUTTON, m_CompileButton);
+
 	DDX_Control(pDX, IDC_STATUSBOX2, m_StatusLabel2);
 	DDX_Control(pDX, IDC_STATUSBOX1, m_StatusLabel1);
+
 	DDX_Control(pDX, IDC_SCRIPTTEXT, m_ScriptText);
 	//}}AFX_DATA_MAP
 }
@@ -337,7 +341,7 @@ void CEsmScriptDlg::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmScriptDlg Method - void FindScriptID (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::FindScriptID(void) {
+void CEsmScriptDlg::FindScriptID() {
 	CString Buffer;
 	TCHAR *pString;
 	TCHAR *pString2;
@@ -371,7 +375,7 @@ void CEsmScriptDlg::FindScriptID(void) {
  * Class CEsmScriptDlg Method - void FormatText (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::FormatText(void) {
+void CEsmScriptDlg::FormatText() {
 	int LineCount;
 	double StartTime;
 	double EndTime;
@@ -415,7 +419,7 @@ void CEsmScriptDlg::FormatText(void) {
  * Class CEsmScriptDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::GetControlData(void) {
+void CEsmScriptDlg::GetControlData() {
 	CString Buffer;
 	CEsmSubRecord *pSubRec;
 	CEsmSubSCHD *pScriptHeader;
@@ -489,7 +493,7 @@ int GetESMScriptWord(CString &WordBuffer,
 
 	/* Check for the end of the string */
 	if (pEditBuffer[CharIndex] == NULL_CHAR) {
-		return (ESMSCRIPT_WORDTYPE_END);
+		return ESMSCRIPT_WORDTYPE_END;
 	}
 
 	StartIndex = CharIndex;
@@ -554,7 +558,7 @@ int GetESMScriptWord(CString &WordBuffer,
 	pBuffer = WordBuffer.GetBuffer(WordLength);
 	TSTRNCPY(pBuffer, pEditBuffer + StartIndex, WordLength);
 	WordBuffer.ReleaseBuffer(WordLength);
-	return (WordType);
+	return WordType;
 }
 
 /*===========================================================================
@@ -573,40 +577,40 @@ int GetESMScriptWord(CString &WordBuffer,
 CHARFORMAT2 *CEsmScriptDlg::GetScriptWordFormat(CString &ScriptWord, const int WordType) {
 	switch (WordType) {
 		case ESMSCRIPT_WORDTYPE_END:
-			return (NULL);
+			return NULL;
 
 		case ESMSCRIPT_WORDTYPE_ALPHA:
 			if (IsESMScriptReserved(ScriptWord)) {
-				return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_RESERVED));
+				return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_RESERVED);
 			} else if (IsESMScriptFunction(ScriptWord)) {
-				return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_FUNCTION));
+				return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_FUNCTION);
 			} else if (IsESMScriptCustomFunction(ScriptWord)) {
-				return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_FUNCTION));
+				return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_FUNCTION);
 			}
 
-			return (NULL);
+			return NULL;
 
 		case ESMSCRIPT_WORDTYPE_INTEGER:
-			return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_INTEGER));
+			return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_INTEGER);
 
 		case ESMSCRIPT_WORDTYPE_FLOAT:
-			return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_FLOAT));
+			return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_FLOAT);
 
 		case ESMSCRIPT_WORDTYPE_OPERATOR:
 			if (IsESMScriptOperator(ScriptWord)) {
-				return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_OPERATOR));
+				return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_OPERATOR);
 			} else {
-				return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_ERROR));
+				return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_ERROR);
 			}
 
 		case ESMSCRIPT_WORDTYPE_STRING:
-			return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_STRING));
+			return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_STRING);
 
 		case ESMSCRIPT_WORDTYPE_COMMENT:
-			return (m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_COMMENT));
+			return m_pCurrentScriptOptions->GetCharFormat(ESMSCRIPT_FORMAT_COMMENT);
 
 		default:
-			return (NULL);
+			return NULL;
 	}
 }
 
@@ -620,16 +624,16 @@ CHARFORMAT2 *CEsmScriptDlg::GetScriptWordFormat(CString &ScriptWord, const int W
  * Class CEsmScriptDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-bool CEsmScriptDlg::IsModified(void) {
+bool CEsmScriptDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	if (m_ScriptText.GetModify()) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -769,7 +773,7 @@ void CEsmScriptDlg::OnChangeScriptText() {
  * Closes any tool tips currently open.
  *
  *=========================================================================*/
-void CEsmScriptDlg::CloseToolTips(void) {
+void CEsmScriptDlg::CloseToolTips() {
 	if (m_ToolTip.IsOpen()) {
 		m_ToolTip.Hide();
 	}
@@ -860,7 +864,7 @@ LONG CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
 	/* Determine if the find dialog is closing */
 	if (pDialog->IsTerminating()) {
 		m_pFindReplaceDlg = NULL;
-		return (0);
+		return 0;
 	}
 
 	/* Initialize the find structure */
@@ -933,7 +937,7 @@ LONG CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
 	}
 
 	Buffer.ReleaseBuffer();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1151,7 +1155,7 @@ LRESULT CEsmScriptDlg::OnUpdateScriptPos(WPARAM wParam, LPARAM lParam) {
 	UpdatePosStatus();
 
 	if (m_pCurrentScriptOptions->GetNoToolTips()) {
-		return (0);
+		return 0;
 	}
 
 	if (wParam > 0) {
@@ -1173,7 +1177,7 @@ LRESULT CEsmScriptDlg::OnUpdateScriptPos(WPARAM wParam, LPARAM lParam) {
 		UpdateFuncToolTip();
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1188,7 +1192,7 @@ LRESULT CEsmScriptDlg::OnUpdateScriptPos(WPARAM wParam, LPARAM lParam) {
  *=========================================================================*/
 LRESULT CEsmScriptDlg::OnUpdateScriptScroll(WPARAM wParam, LPARAM lParam) {
 	CloseToolTips();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1234,7 +1238,7 @@ BOOL CEsmScriptDlg::PreTranslateMessage(MSG *pMsg) {
 
 	if (pMsg->message >= WM_KEYFIRST && pMsg->message <= WM_KEYLAST && m_ScriptAccel != NULL) {
 		Result = TranslateAccelerator(m_hWnd, m_ScriptAccel, pMsg);
-		return (Result);
+		return Result;
 	}
 
 	return CEsmRecDialog::PreTranslateMessage(pMsg);
@@ -1250,7 +1254,7 @@ BOOL CEsmScriptDlg::PreTranslateMessage(MSG *pMsg) {
  * Class CEsmScriptDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::SetControlData(void) {
+void CEsmScriptDlg::SetControlData() {
 	CString Buffer;
 	m_UpdatingRichEdit = true;
 
@@ -1290,7 +1294,7 @@ void CEsmScriptDlg::SetControlData(void) {
  * Text is copied in plain text format.
  *
  *=========================================================================*/
-void CEsmScriptDlg::CopyText(void) {
+void CEsmScriptDlg::CopyText() {
 	long Start;
 	long End;
 	m_ScriptText.Copy();
@@ -1307,7 +1311,7 @@ void CEsmScriptDlg::CopyText(void) {
  * Class CEsmScriptDlg Method - void CutText (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::CutText(void) {
+void CEsmScriptDlg::CutText() {
 	m_UndoStack.OnCut(&m_ScriptText);
 	m_ScriptText.Cut();
 	FormatText();
@@ -1325,7 +1329,7 @@ void CEsmScriptDlg::CutText(void) {
  * Class CEsmScriptDlg Method - void PasteText (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::PasteText(void) {
+void CEsmScriptDlg::PasteText() {
 	m_UndoStack.OnPaste(&m_ScriptText);
 	m_ScriptText.PasteSpecial(CF_TEXT);
 	FormatText();
@@ -1343,7 +1347,7 @@ void CEsmScriptDlg::PasteText(void) {
  * Class CEsmScriptDlg Method - void UpdatePosStatus (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::UpdatePosStatus(void) {
+void CEsmScriptDlg::UpdatePosStatus() {
 	CString Buffer;
 
 	long StartSel;
@@ -1368,7 +1372,7 @@ void CEsmScriptDlg::UpdatePosStatus(void) {
  * Class CEsmScriptDlg Method - void UpdateSizeStatus (void);
  *
  *=========================================================================*/
-void CEsmScriptDlg::UpdateSizeStatus(void) {
+void CEsmScriptDlg::UpdateSizeStatus() {
 	CString Buffer;
 	Buffer.Format(_T("%ld Lines, %d bytes"),
 	              m_ScriptText.GetLineCount(),
@@ -1392,7 +1396,7 @@ LRESULT CEsmScriptDlg::OnGotoError(LPARAM lParam, WPARAM wParam) {
 	m_ScriptText.SetSel(CharPos - 1, CharPos);
 	m_ScriptText.SetFocus();
 	UpdatePosStatus();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -1553,7 +1557,7 @@ void CEsmScriptDlg::OnNoformatcheck() {
 	m_ScriptText.Invalidate();
 }
 
-CString CEsmScriptDlg::GetCurrentScriptWord(void) {
+CString CEsmScriptDlg::GetCurrentScriptWord() {
 	CString Buffer;
 	TCHAR Char;
 
@@ -1575,26 +1579,26 @@ CString CEsmScriptDlg::GetCurrentScriptWord(void) {
 	}
 
 	if (CurrentPos < 0) {
-		return (Buffer);
+		return Buffer;
 	}
 
 	/* Get the current line of text */
 	CurrentLine = m_ScriptText.LineFromChar(CurrentPos);
 
 	if (CurrentLine < 0) {
-		return (Buffer);
+		return Buffer;
 	}
 
 	LineLength = m_ScriptText.LineLength(CurrentPos);
 
 	if (LineLength <= 0) {
-		return (Buffer);
+		return Buffer;
 	}
 
 	LineStart = m_ScriptText.LineIndex(CurrentLine);
 
 	if (LineStart < 0) {
-		return (Buffer);
+		return Buffer;
 	}
 
 	m_ScriptText.GetLine(CurrentLine, Buffer.GetBuffer(LineLength + 8));
@@ -1627,7 +1631,7 @@ CString CEsmScriptDlg::GetCurrentScriptWord(void) {
 		}
 	}
 
-	return (Buffer);
+	return Buffer;
 }
 
 void CEsmScriptDlg::OnScriptFuncHelp() {
@@ -1719,7 +1723,7 @@ void CEsmScriptDlg::OnSave() {
  * a tool tip text for it.
  *
  *=========================================================================*/
-bool CEsmScriptDlg::OpenFunctionToolTip(void) {
+bool CEsmScriptDlg::OpenFunctionToolTip() {
 	CEsmScrFuncData *pFunction;
 	TCHAR LineBuffer[256];
 	TCHAR *pParse;
@@ -1735,7 +1739,7 @@ bool CEsmScriptDlg::OpenFunctionToolTip(void) {
 
 	/* Ignore if tool tips have been disabled */
 	if (m_pCurrentScriptOptions->GetNoToolTips()) {
-		return (false);
+		return false;
 	}
 
 	/* Get the current line text buffer */
@@ -1743,7 +1747,7 @@ bool CEsmScriptDlg::OpenFunctionToolTip(void) {
 	LineSize = m_ScriptText.GetLine(LineIndex, LineBuffer, 255);
 
 	if (LineSize <= 0) {
-		return (false);
+		return false;
 	}
 
 	LineBuffer[LineSize] = NULL_CHAR;
@@ -1793,7 +1797,7 @@ bool CEsmScriptDlg::OpenFunctionToolTip(void) {
 		m_ToolTip.Show(pFunction->GetExFuncForm(), &Point);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -1851,17 +1855,13 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
 			}
 
 			LastComma = false;
-		}
-		/* String */
-		else if (WordBuffer.GetAt(0) == '"') {
+		} else if (WordBuffer.GetAt(0) == '"') { /* String */
 			if (!LastComma) {
 				ArgCount++;
 			}
 
 			LastComma = false;
-		}
-		/* A script operator */
-		else if (IsESMScriptOperator(WordBuffer)) {
+		} else if (IsESMScriptOperator(WordBuffer)) { /* A script operator */
 			if (WordBuffer.GetAt(0) == ',') {
 				ArgCount++;
 				LastComma = true;
@@ -1869,9 +1869,7 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
 				LastComma = false;
 				StopFunc = true;
 			}
-		}
-		/* A reserved word */
-		else if ((TokenID = GetESMScriptResToken(WordBuffer)) != ESMSCR_TOKEN_UNKNOWN) {
+		} else if ((TokenID = GetESMScriptResToken(WordBuffer)) != ESMSCR_TOKEN_UNKNOWN) { /* A reserved word */
 			if (TokenID == ESMSCR_TOKEN_XYZ) {
 				if (!LastComma) {
 					ArgCount++;
@@ -1881,9 +1879,7 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
 			}
 
 			LastComma = false;
-		}
-		/* A known script function or unknown symbol */
-		else {
+		} else { /* A known script function or unknown symbol */
 			pFuncInfo = GetESMScriptFuncInfo(WordBuffer);
 
 			if (pFuncInfo == NULL && ::GetEsmOptAllowExtFuncs()) {
@@ -1920,7 +1916,7 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
 		pFuncData = ((CMWEditApp *)AfxGetApp())->GetFunctionArray()->FindFunction(pCurFuncInfo->Name);
 
 		if (pFuncData == NULL) {
-			return (ESMSCR_PARSETTFUNC_NOFUNC);
+			return ESMSCR_PARSETTFUNC_NOFUNC;
 		}
 
 		if (ArgCount < 0) {
@@ -1933,7 +1929,7 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
 
 		/* Check if anything hsa changed */
 		if (pFuncData == m_pToolFuncData && m_TipFuncArgIndex == ArgCount) {
-			return (ESMSCR_PARSETTFUNC_NOCHANGE);
+			return ESMSCR_PARSETTFUNC_NOCHANGE;
 		}
 
 		/* Update the class members */
@@ -1943,13 +1939,13 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
 		m_TipFuncArgIndex = ArgCount;
 
 		if (pFuncData == m_pToolFuncData) {
-			return (ESMSCR_PARSETTFUNC_UPDATE);
+			return ESMSCR_PARSETTFUNC_UPDATE;
 		}
 
-		return (ESMSCR_PARSETTFUNC_NEWFUNC);
+		return ESMSCR_PARSETTFUNC_NEWFUNC;
 	}
 
-	return (ESMSCR_PARSETTFUNC_NOFUNC);
+	return ESMSCR_PARSETTFUNC_NOFUNC;
 }
 
 /*===========================================================================
@@ -1965,7 +1961,7 @@ int CEsmScriptDlg::ParseFuncToolTip(const TCHAR *pLineBuffer, const int CharPos)
  * the script text.
  *
  *=========================================================================*/
-bool CEsmScriptDlg::UpdateFuncToolTip(void) {
+bool CEsmScriptDlg::UpdateFuncToolTip() {
 	//DEFINE_FUNCTION("CEsmScriptDlg::UpdateFuncToolTip()");
 	CString LineBuffer;
 	CPoint Point;
@@ -1974,7 +1970,7 @@ bool CEsmScriptDlg::UpdateFuncToolTip(void) {
 
 	/* Ignore if we don't need to update the tooltips */
 	if (m_pCurrentScriptOptions->GetNoToolTips()) {
-		return (0);
+		return 0;
 	}
 
 	/* Get the current line information */
@@ -1984,12 +1980,12 @@ bool CEsmScriptDlg::UpdateFuncToolTip(void) {
 
 	if (Result == ESMSCR_PARSETTFUNC_NOFUNC) {
 		CloseToolTips();
-		return (false);
+		return false;
 	} else if (Result >= 0) {
 		int LineIndex = m_ScriptText.LineFromChar(-1);
 
 		if (Result == ESMSCR_PARSETTFUNC_NOCHANGE && LineIndex == m_LastTipFuncLine) {
-			return (false);
+			return false;
 		}
 
 		Point = m_ScriptText.GetCaretPos();
@@ -2010,7 +2006,7 @@ bool CEsmScriptDlg::UpdateFuncToolTip(void) {
 		m_LastTipFuncLine = LineIndex;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

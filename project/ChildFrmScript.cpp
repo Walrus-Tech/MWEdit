@@ -120,12 +120,16 @@ BOOL CChildFrmScript::OnCreateClient(LPCREATESTRUCT, CCreateContext *pContext) {
 	m_wndSplitter.SetRowInfo(1, 51, 0);
 	m_wndSplitter.RecalcLayout();
 	m_wndSplitter.SetScrollStyle(0);
+
 	m_pErrorView = (CScriptErrorView *)m_wndSplitter.GetPane(1, 0);
 	m_pScriptView = (CEsmScriptDlg *)m_wndSplitter.GetPane(0, 0);
+
 	ASSERT(m_pErrorView->IsKindOf(RUNTIME_CLASS(CScriptErrorView)));
 	ASSERT(m_pScriptView->IsKindOf(RUNTIME_CLASS(CEsmScriptDlg)));
+
 	/* Activate the default view */
 	SetActiveView((CView *)m_wndSplitter.GetPane(0, 0));
+
 	//m_wndSplitter.SetWindowPos(NULL, 0, 0, 640, 400, SWP_NOMOVE | SWP_NOZORDER);
 	m_Created = true;
 	return TRUE;
@@ -146,7 +150,7 @@ LRESULT CChildFrmScript::OnClearError(LPARAM lParam, WPARAM wParam) {
 		m_pErrorView->ClearErrors();
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -159,7 +163,7 @@ LRESULT CChildFrmScript::OnClearError(LPARAM lParam, WPARAM wParam) {
  * Class CChildFrmScript Event - void OnClose (void);
  *
  *=========================================================================*/
-void CChildFrmScript::OnClose(void) {
+void CChildFrmScript::OnClose() {
 	DestroyWindow();
 }
 
@@ -181,7 +185,7 @@ LRESULT CChildFrmScript::OnGotoError(LPARAM lParam, WPARAM wParam) {
 		pWnd->SendMessage(MSG_SCRIPTFRM_GOTOLINE, lParam, wParam);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -298,7 +302,7 @@ LRESULT CChildFrmScript::OnUpdateError(LPARAM lParam, WPARAM wParam) {
 		m_pErrorView->UpdateErrors((CEsmScriptErrArray *)lParam);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -331,7 +335,7 @@ BOOL CChildFrmScript::PreCreateWindow(CREATESTRUCT &cs) {
  * Class CChildFrmScript Method - void FakeMaximize (void);
  *
  *=========================================================================*/
-void CChildFrmScript::FakeMaximize(void) {
+void CChildFrmScript::FakeMaximize() {
 	CRect ClientRect;
 	CRect RestoreRect;
 

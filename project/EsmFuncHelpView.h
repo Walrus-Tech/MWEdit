@@ -55,21 +55,18 @@ class CEsmFuncHelpView : public CFormView {
   protected:
 
 	/* Class constructor */
-
 	CEsmFuncHelpView();
 
 	DECLARE_DYNCREATE(CEsmFuncHelpView);
 
 	/* Set the various control strings */
-
 	void SetFuncTitle(CEsmScrFuncData *pFunction);
 	void SetReturnText(CEsmScrFuncData *pFunction);
 	void SetDescText(CEsmScrFuncData *pFunction);
 	void SetDetailText(CEsmScrFuncData *pFunction);
 
 	/* Fill the function list with the current definitions */
-
-	void FillFunctionList(void);
+	void FillFunctionList();
 
 
 	/*---------- Begin Public Class Members --------------------------------*/
@@ -97,12 +94,10 @@ class CEsmFuncHelpView : public CFormView {
 	//}}AFX_DATA
 
 	/* Display function information */
-
 	void DisplayFunction(const int Index);
 
 	/* Return the application object */
-
-	CMWEditApp *GetApp(void);
+	CMWEditApp *GetApp();
 
 
 	/*---------- Begin Public Class Methods --------------------------------*/
@@ -126,7 +121,6 @@ class CEsmFuncHelpView : public CFormView {
   protected:
 
 	/* Class destructor */
-
 	virtual ~CEsmFuncHelpView();
 
 #ifdef _DEBUG
@@ -141,7 +135,7 @@ class CEsmFuncHelpView : public CFormView {
 	afx_msg LRESULT OnViewError(WPARAM wParam, LPARAM lParam);
 	afx_msg HBRUSH OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor);
 	afx_msg void OnWikilink();
-	afx_msg void OnSize( UINT, int, int );
+	afx_msg void OnSize(UINT, int, int);
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();

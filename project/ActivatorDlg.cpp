@@ -99,7 +99,7 @@ void CEsmActivatorDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmActivatorDlg::GetControlData(void) {
+void CEsmActivatorDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmActivatorDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
@@ -116,12 +116,15 @@ void CEsmActivatorDlg::GetControlData(void) {
 	/* Armor name */
 	m_NameText.GetWindowText(Buffer);
 	m_pActivator->SetName(TrimStringSpace(Buffer));
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pActivator->SetScript(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pActivator->SetModel(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pActivator->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pActivator->SetBlocked(m_BlockedCheck.GetCheck() != 0);
@@ -138,9 +141,9 @@ void CEsmActivatorDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmActivatorDlg::IsModified(void) {
+bool CEsmActivatorDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -153,7 +156,7 @@ bool CEsmActivatorDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -170,11 +173,14 @@ bool CEsmActivatorDlg::IsModified(void) {
 void CEsmActivatorDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pActivator = (CEsmActivator *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmScriptCombo(m_ScriptList);
+
 	/* Update the UI data */
 	SetControlData();
 }
@@ -202,10 +208,10 @@ int CEsmActivatorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -219,7 +225,7 @@ int CEsmActivatorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmActivatorDlg::SetControlData(void) {
+void CEsmActivatorDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pActivator == NULL) {
 		return;
@@ -228,13 +234,17 @@ void CEsmActivatorDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pActivator->GetID());
 	UpdateTitle(m_pActivator->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pActivator->GetName());
 	m_NameText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pActivator->GetModel());
+
 	/* Item lists */
 	m_ScriptList.SelectString(-1, m_pActivator->GetScript());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pActivator->IsBlocked());
 	m_PersistCheck.SetCheck(m_pActivator->IsPersist());

@@ -48,21 +48,17 @@ class CEsmClothingDlg : public CEsmRecDialog {
   protected:
 
 	/* Handles selchange events in all the biped lists */
-
 	void OnSelChangeBipedList(const int Index);
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Sets the values for a biped object */
-
 	void SetBipedObject(const int Index);
 
 	/* Helper get/set methods */
-
-	void GetBipedData(void);
-	void SetBipedData(void);
+	void GetBipedData();
+	void SetBipedData();
 	void SetBipedData(const int BipedIndex, CEsmSubByte *pIndexRecord, const int RecordIndex);
 
 
@@ -71,17 +67,14 @@ class CEsmClothingDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmClothingDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -92,11 +85,16 @@ class CEsmClothingDlg : public CEsmRecDialog {
 
 	CButton m_PersistCheck;
 	CButton m_BlockedCheck;
+
 	CEdit m_EnchantText;
+
 	CComboBox m_EnchantList;
+
 	CEdit m_ValueText;
 	CEdit m_WeightText;
+
 	CComboBox m_TypeList;
+
 	CEdit m_NameText;
 	//}}AFX_DATA
 

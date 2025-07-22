@@ -79,6 +79,7 @@ CEsmWeaponDlg::CEsmWeaponDlg() : CEsmRecDialog(CEsmWeaponDlg::IDD) {
 
 void CEsmWeaponDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmWeaponDlg)
 	DDX_Control(pDX, IDC_SCRIPTEDIT, m_ScriptButton);
 
@@ -126,7 +127,7 @@ void CEsmWeaponDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmWeaponDlg::GetControlData(void) {
+void CEsmWeaponDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmWeaponDlg::GetControlData()");
 	weapondata_t *pWeaponData;
 	CString Buffer;
@@ -245,9 +246,9 @@ void CEsmWeaponDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmWeaponDlg::IsModified(void) {
+bool CEsmWeaponDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -308,7 +309,7 @@ bool CEsmWeaponDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -384,7 +385,7 @@ int CEsmWeaponDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_EnchantList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -398,7 +399,7 @@ int CEsmWeaponDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmWeaponDlg::SetControlData(void) {
+void CEsmWeaponDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pWeapon == NULL) {
 		return;
@@ -502,7 +503,7 @@ void CEsmWeaponDlg::OnSelchangeTypelist() {
 		return;
 	}
 
-	Type = (short) m_TypeList.GetItemData(ListIndex);
+	Type = (short)m_TypeList.GetItemData(ListIndex);
 
 	switch (Type) {
 		case MWESM_WEAPONTYPE_THROWN:

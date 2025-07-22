@@ -149,30 +149,24 @@ class CMWEditView : public CFormView {
   protected:
 
 	/* Create from serialization only */
-
 	CMWEditView();
 	DECLARE_DYNCREATE(CMWEditView);
 
 	/* Export records to text files */
-
-	void ExportScripts(void);
+	void ExportScripts();
 
 	/* Find the tab informtion for a specific record type */
-
 	int FindTabInfo(const TCHAR *pType);
 
 	/* Fill the object list using the given item and display configuration */
-
 	void FillList(const TCHAR *pItemType, esmcoldata_t *pColData);
 	void FillDialogueList(esmcoldata_t *pColData, const int DialType);
 
 	/* Initialize the view components */
-
-	void InitTypeList(void);
+	void InitTypeList();
 
 	/* Stores the current list config data */
-
-	void UpdateCurrentListData(void);
+	void UpdateCurrentListData();
 
 
 	/*---------- Begin Public Class Methods --------------------------*/
@@ -180,13 +174,11 @@ class CMWEditView : public CFormView {
   public:
 
 	/* Class destructor */
-
 	virtual ~CMWEditView();
 
 	int EsmCallback(const int Event, const TCHAR *pMessage);
 
 	/* Fill dialogue lists */
-
 	void FillTopicList(esmcoldata_t *pColData) {
 		FillDialogueList(pColData, MWESM_DIALTYPE_TOPIC);
 	}
@@ -208,18 +200,15 @@ class CMWEditView : public CFormView {
 	}
 
 	/* Checks the current type of the main view */
-
 	bool IsCurrentType(const TCHAR *pType);
 
 	/* Update a particular item */
-
 	int OnUpdateItem(esmrecinfo_t *pRecInfo);
 	int OnUpdateAddItem(esmrecinfo_t *pRecInfo);
 	int OnSelectItem(esmrecinfo_t *pRecInfo);
 
 	/* Updates the current list data */
-
-	void UpdateList(void);
+	void UpdateList();
 
 	/* Diagnostics */
 

@@ -50,10 +50,9 @@ class CEsmEnchantDlg : public CEsmRecDialog {
   protected:
 
 	/* Helper set/get methods */
-
-	void GetEffectData(void);
+	void GetEffectData();
 	void GetEffectData(const int EffectIndex);
-	void SetEffectData(void);
+	void SetEffectData();
 	void SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRecord);
 
 	void OnSelChangeEffectList(const int EffectIndex);
@@ -61,10 +60,9 @@ class CEsmEnchantDlg : public CEsmRecDialog {
 	void OnSelChangeRangeList(const int EffectIndex);
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 	void UpdateSpellCost(const int Index);
-	void UpdateTotalSpellCost(void);
+	void UpdateTotalSpellCost();
 
 
 	/*---------- Begin Public Class Methods ---------------------------*/
@@ -72,17 +70,14 @@ class CEsmEnchantDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmEnchantDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 

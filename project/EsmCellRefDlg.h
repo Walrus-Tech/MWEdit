@@ -61,27 +61,23 @@ class CEsmCellRefDlg : public CDialog {
   public:
 
 	/* Construction */
-
 	CEsmCellRefDlg(CWnd *pParent = NULL);
 
 	/* Main access method */
-
 	bool DoModal(CEsmSubCellRef *pCellRef, const bool IsNew, CEsmCell *pCell);
 
 	/* Get class members */
-
-	bool HasNewCellRef(void) {
-		return (m_HasNewCellRef);
+	bool HasNewCellRef() {
+		return m_HasNewCellRef;
 	}
 
-	CEsmSubCellRef *GetCellRef(void) {
-		return (m_pCellRef);
+	CEsmSubCellRef *GetCellRef() {
+		return m_pCellRef;
 	}
 
 	/* Set/get control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Dialog Data */
 

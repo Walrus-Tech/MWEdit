@@ -64,7 +64,7 @@ bool CMwCustomFunction::Read(CGenFile &File, dword &LineCount) {
 		Result = File.ReadLine(Buffer, 500);
 
 		if (Result == READLINE_ERROR) {
-			return (false);
+			return false;
 		}
 
 		if (Result == READLINE_MSL) {
@@ -82,7 +82,7 @@ bool CMwCustomFunction::Read(CGenFile &File, dword &LineCount) {
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -144,7 +144,7 @@ bool CMwCustomFunction::ParseFuncOptions(dword &Options, const char *pValue) {
 		pParse = strtok(NULL, "|");
 	}
 
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -250,7 +250,7 @@ bool CMwCustomFunction::ParseFuncArgOptions(dword &Options, const char *pValue) 
 		pParse = strtok(NULL, "|");
 	}
 
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -302,7 +302,7 @@ bool CMwCustomFunction::ParseReturnOptions(dword &Options, const char *pValue) {
 		pParse = strtok(NULL, "|");
 	}
 
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -325,71 +325,71 @@ bool CMwCustomFunction::SetParameter(const char *pVariable, const char *pValue) 
 
 	if (stricmp(pVariable, "name") == 0) {
 		SetName(pValue);
-		return (true);
+		return true;
 	} else if (stricmp(pVariable, "opcode") == 0) {
 		dword OpCode = strtoul(pValue, NULL, 0);
-		SetOpCode((short) OpCode);
-		return (OpCode != 0);
+		SetOpCode((short)OpCode);
+		return OpCode != 0;
 	} else if (stricmp(pVariable, "options") == 0) {
 		Result = ParseFuncOptions(Options, pValue);
 		SetOptions(Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "return") == 0) {
 		Result = ParseReturnOptions(Options, pValue);
 		SetReturnOptions(Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param1") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(0, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param2") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(1, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param3") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(2, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param4") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(3, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param5") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(4, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param6") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(5, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param7") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(6, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param8") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(7, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param9") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(8, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param10") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(9, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param11") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(10, Options);
-		return (Result);
+		return Result;
 	} else if (stricmp(pVariable, "param12") == 0) {
 		Result = ParseFuncArgOptions(Options, pValue);
 		SetArgOptions(11, Options);
-		return (Result);
+		return Result;
 	}
 
 	ErrorHandler.AddError(ERR_BADINPUT, "Unknown function parameter '%s'!", pVariable);
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -421,14 +421,14 @@ bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename)
 	Result = File.Open(pFilename, "rb");
 
 	if (!Result) {
-		return (false);
+		return false;
 	}
 
 	while (!File.IsEOF()) {
 		Result = File.ReadLine(Buffer, 500);
 
 		if (Result == READLINE_ERROR) {
-			return (false);
+			return false;
 		}
 
 		if (Result == READLINE_MSL) {
@@ -444,14 +444,14 @@ bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename)
 			Functions.SetAt(pFunction->GetName(), pFunction);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		} else if (*pVar != NULL_CHAR) {
 			ErrorHandler.AddError(ERR_BADINPUT, "Unknown function parameter '%s'!", pVar);
 		}
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================

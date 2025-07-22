@@ -97,6 +97,7 @@ CEsmExtCellPage::~CEsmExtCellPage() {
 
 void CEsmExtCellPage::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmExtCellPage)
 	DDX_Control(pDX, IDC_COLORBUTTON, m_ColorButton);
 	DDX_Control(pDX, IDC_COLORBOX, m_ColorBox);
@@ -126,10 +127,11 @@ void CEsmExtCellPage::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmExtCellPage::GetControlData(void) {
+void CEsmExtCellPage::GetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
 	CEsmSubLong *pLightData;
+
 	long Flags;
 	int ArrayIndex;
 	int Red;
@@ -182,7 +184,7 @@ void CEsmExtCellPage::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmExtCellPage::GetDocument(void) {
+CMWEditDoc *CEsmExtCellPage::GetDocument() {
 	DEFINE_FUNCTION("CEsmExtCellPage::GetDocument()");
 	ASSERT(m_pDlgParent != NULL);
 	return m_pDlgParent->GetDocument();
@@ -211,7 +213,7 @@ BOOL CEsmExtCellPage::OnInitDialog() {
 	m_GSpin.SetRange32(0, 255);
 	m_BSpin.SetRange32(0, 255);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -226,7 +228,7 @@ BOOL CEsmExtCellPage::OnInitDialog() {
  *=========================================================================*/
 
 int CEsmExtCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -240,7 +242,7 @@ int CEsmExtCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmExtCellPage::SetControlData(void) {
+void CEsmExtCellPage::SetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
 	CEsmSubLong *pLightData;

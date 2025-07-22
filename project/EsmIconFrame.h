@@ -67,16 +67,13 @@ class CEsmIconFrame : public CStatic {
   public:
 
 	/* Construction/Destruction */
-
 	CEsmIconFrame();
 	virtual ~CEsmIconFrame();
 
 	/* Called after the frame window is created */
-
-	void OnInitialUpdate(void);
+	void OnInitialUpdate();
 
 	/* Set class members */
-
 	void SetIconBitmap(CBitmap *pBitmap);
 	void SetEsmIcon(const TCHAR *pFilename, const bool RelativePath = true);
 

@@ -33,7 +33,6 @@
  *=========================================================================*/
 
 /* Types of undo actions */
-
 #define EDITUNDO_NONE         0
 #define EDITUNDO_INSERTCHAR   1
 #define EDITUNDO_INSERTSTRING 2
@@ -42,7 +41,6 @@
 #define EDITUNDO_ENTIRETEXT   5
 
 /* Default undo limit */
-
 #define EDITUNDO_DEFAULT_LIMIT 100
 
 /*===========================================================================
@@ -82,45 +80,40 @@ class CEditUndo {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEditUndo();
 
 	virtual ~CEditUndo() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-
-	int GetAction(void) {
-		return (m_Action);
+	int GetAction() {
+		return m_Action;
 	}
 
-	TCHAR GetChar(void) {
-		return (m_Char);
+	TCHAR GetChar() {
+		return m_Char;
 	}
 
-	const TCHAR *GetString(void) {
-		return (m_pString);
+	const TCHAR *GetString() {
+		return m_pString;
 	}
 
-	dword GetStringLength(void) {
-		return (m_StringLength);
+	dword GetStringLength() {
+		return m_StringLength;
 	}
 
-	int GetSelStart(void) {
-		return (m_SelStart);
+	int GetSelStart() {
+		return m_SelStart;
 	}
 
-	int GetSelEnd(void) {
-		return (m_SelEnd);
+	int GetSelEnd() {
+		return m_SelEnd;
 	}
-
-
 
 	/* Set class members */
-
 	void SetAction(const int Action) {
 		m_Action = Action;
 	}
@@ -181,17 +174,15 @@ class CEditUndoStack {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEditUndoStack();
 
 	virtual ~CEditUndoStack() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Create undo actions */
-
 	void CreateInsertChar(const TCHAR Char, const int StartSel, const int EndSel);
 	void CreateInsertString(const TCHAR *pString, const int StartSel, const int EndSel);
 	void CreateDeleteChar(const TCHAR Char, const int StartSel, const int EndSel);
@@ -199,23 +190,20 @@ class CEditUndoStack {
 	void CreateEntireText(const TCHAR *pString);
 
 	/* Get class members */
-
-	dword GetSize(void) const {
+	dword GetSize() const {
 		return m_UndoStack.GetNumElements();
 	}
 
-	dword GetLimit(void) const {
-		return (m_Limit);
+	dword GetLimit() const {
+		return m_Limit;
 	}
 
 	/* Checks if the stack is empty or not */
-
-	bool IsEmpty(void) const {
-		return (m_UndoStack.GetNumElements() == 0);
+	bool IsEmpty() const {
+		return m_UndoStack.GetNumElements() == 0;
 	}
 
 	/* Helper handler functions */
-
 	bool OnChar(CRichEditCtrl *pCtrl, const int CharCode);
 	bool OnKeyDown(CRichEditCtrl *pCtrl, const int CharCode);
 	int OnUndo(CRichEditCtrl *pCtrl);
@@ -223,17 +211,14 @@ class CEditUndoStack {
 	bool OnCut(CRichEditCtrl *pCtrl);
 
 	/* Push a new undo action to the top of the stack */
-
 	void Push(CEditUndo *pUndo) {
 		m_UndoStack.Add(pUndo);
 	}
 
 	/* Remove an undo action from the top of the stack */
-
-	CEditUndo *Pop(void);
+	CEditUndo *Pop();
 
 	/* Set class members */
-
 	void SetGroupUndos(const bool Flag) {
 		m_GroupUndos = Flag;
 	}

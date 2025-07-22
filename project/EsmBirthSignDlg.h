@@ -72,13 +72,11 @@ class CEsmBirthSignDlg : public CEsmRecDialog {
 
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -88,8 +86,11 @@ class CEsmBirthSignDlg : public CEsmRecDialog {
 	};
 
 	CEdit m_DescText;
+
 	CEsmListCtrl m_SpellList;
+
 	CButton m_TextureButton;
+
 	CEdit m_NameText;
 	//}}AFX_DATA
 

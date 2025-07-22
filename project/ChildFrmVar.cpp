@@ -143,7 +143,7 @@ void CChildFrameVar::Dump(CDumpContext &dc) const {
  *
  *=========================================================================*/
 
-void CChildFrameVar::OnClose(void) {
+void CChildFrameVar::OnClose() {
 	DestroyWindow();
 }
 
@@ -182,7 +182,7 @@ void CChildFrameVar::OnSize(UINT nType, int cx, int cy) {
  *
  *=========================================================================*/
 
-void CChildFrameVar::FakeMaximize(void) {
+void CChildFrameVar::FakeMaximize() {
 	CRect ClientRect;
 	CRect RestoreRect;
 

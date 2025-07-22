@@ -113,7 +113,6 @@ BOOL CChildFrameFix::PreCreateWindow(CREATESTRUCT &cs) {
 
 
 #ifdef _DEBUG
-
 /*===========================================================================
  *
  * CChildFrameFix Diagnostics
@@ -131,7 +130,6 @@ void CChildFrameFix::Dump(CDumpContext &dc) const {
 /*===========================================================================
  *      End of CChildFrameFix Diagnostics
  *=========================================================================*/
-
 #endif
 
 
@@ -141,7 +139,7 @@ void CChildFrameFix::Dump(CDumpContext &dc) const {
  *
  *=========================================================================*/
 
-void CChildFrameFix::OnClose(void) {
+void CChildFrameFix::OnClose() {
 	DestroyWindow();
 }
 
@@ -169,7 +167,6 @@ void CChildFrameFix::OnSize(UINT nType, int cx, int cy) {
  *      End of Class Event CChildFrameFix::OnSize()
  *=========================================================================*/
 
-
 void CChildFrameFix::ActivateFrame(int nCmdShow) {
 	BOOL bVisibleThen = (GetStyle() & WS_VISIBLE) != 0;
 	CMDIFrameWnd *pFrameWnd = GetMDIFrame();
@@ -196,7 +193,7 @@ void CChildFrameFix::ActivateFrame(int nCmdShow) {
 	CFrameWnd::ActivateFrame(nCmdShow);
 	//MessageBox("test2");
 	// update the Window menu to reflect new child window
-	CMDIFrameWnd* pFrame = GetMDIFrame();
+	CMDIFrameWnd *pFrame = GetMDIFrame();
 	::SendMessage(pFrame->m_hWndMDIClient, WM_MDIREFRESHMENU, 0, 0);
 	// Note: Update the m_bPseudoInactive flag.  This is used to handle the
 	// last MDI child getting hidden.  Windows provides no way to deactivate

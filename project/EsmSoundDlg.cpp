@@ -79,6 +79,7 @@ CEsmSoundDlg::CEsmSoundDlg() : CEsmRecDialog(CEsmSoundDlg::IDD) {
 
 void CEsmSoundDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmSoundDlg)
 	DDX_Control(pDX, IDC_VOLUMETEXT, m_VolumeText);
 	DDX_Control(pDX, IDC_MINRANGETEXT, m_MinRangeText);
@@ -100,7 +101,7 @@ void CEsmSoundDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmSoundDlg::GetControlData(void) {
+void CEsmSoundDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSoundDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
@@ -140,9 +141,9 @@ void CEsmSoundDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmSoundDlg::IsModified(void) {
+bool CEsmSoundDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -163,7 +164,7 @@ bool CEsmSoundDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -250,7 +251,7 @@ void CEsmSoundDlg::OnSoundbutton() {
  *=========================================================================*/
 
 int CEsmSoundDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -264,7 +265,7 @@ int CEsmSoundDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmSoundDlg::SetControlData(void) {
+void CEsmSoundDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pSound == NULL) {
 		return;

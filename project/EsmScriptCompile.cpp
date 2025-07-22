@@ -2219,13 +2219,15 @@ void CEsmScriptCompile::Destroy() {
 bool CEsmScriptCompile::AddIfBlock(const int StatementCount, const int ScriptPos) {
 	DEFINE_FUNCTION("CEsmScriptCompile::AddIfBlock()");
 	esmscrifblock_t *pNewBlock;
+
 	/* Allocate and intialize the new if statement block */
 	CreatePointer(pNewBlock, esmscrifblock_t);
 	pNewBlock->IfStartPos = ScriptPos;
 	pNewBlock->StartStatementCount = StatementCount;
+
 	/* Update the if statement stack */
 	m_IfStatementStack.Push((void *)pNewBlock);
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2248,7 +2250,7 @@ bool CEsmScriptCompile::AddLocalVar(const TCHAR *pName, const int Type) {
 		           "Local variable name exceeds the maximum length of %d (%s)!",
 		           ESMSCR_VAR_MAXLENGTH,
 		           pName);
-		return (false);
+		return false;
 	}
 
 	if (Type == ESMSCR_VAR_SHORT) {
@@ -2256,7 +2258,7 @@ bool CEsmScriptCompile::AddLocalVar(const TCHAR *pName, const int Type) {
 			AddMessage(ESMSCR_ERROR_BADLOCAL,
 			           "Exceeded the maximum number of local short variables (%d)!",
 			           ESMSCR_MAX_LOCALVARS);
-			return (false);
+			return false;
 		}
 
 		/* Add the variable */
@@ -2268,7 +2270,7 @@ bool CEsmScriptCompile::AddLocalVar(const TCHAR *pName, const int Type) {
 			AddMessage(ESMSCR_ERROR_BADLOCAL,
 			           "Exceeded the maximum number of local long variables (%d)!",
 			           ESMSCR_MAX_LOCALVARS);
-			return (false);
+			return false;
 		}
 
 		/* Add the variable */
@@ -2280,7 +2282,7 @@ bool CEsmScriptCompile::AddLocalVar(const TCHAR *pName, const int Type) {
 			AddMessage(ESMSCR_ERROR_BADLOCAL,
 			           "Exceeded the maximum number of local float variables (%d)!",
 			           ESMSCR_MAX_LOCALVARS);
-			return (false);
+			return false;
 		}
 
 		/* Add the variable */
@@ -2289,7 +2291,7 @@ bool CEsmScriptCompile::AddLocalVar(const TCHAR *pName, const int Type) {
 		m_NumFloatVars++;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2308,10 +2310,12 @@ void CEsmScriptCompile::AddError(const TCHAR *pString, ...) {
 	TCHAR UserMsg[256];
 	TCHAR ErrorString[512];
 	va_list Args;
+
 	/* Create the input message */
 	va_start(Args, pString);
 	vsnprintf(UserMsg, 255, pString, Args);
 	va_end(Args);
+
 	/* Create the expanded error message */
 	snprintf(ErrorString,
 	         511,
@@ -2319,6 +2323,7 @@ void CEsmScriptCompile::AddError(const TCHAR *pString, ...) {
 	         m_CurrentLine + 1,
 	         m_CurrentCharPos + 1,
 	         UserMsg);
+
 	/* Save the message */
 	ErrorHandler.AddError(ERR_BADINPUT, ErrorString);
 	m_ErrorMessage = ErrorString;
@@ -2340,7 +2345,7 @@ bool CEsmScriptCompile::AddScriptData(const void *pData, const int Size) {
 	/* Check for buffer overflows */
 	if (m_ScriptDataSize + Size >= ESMSCR_DATA_SIZE) {
 		AddError("Maximum compiled script size %d exceeded!", ESMSCR_DATA_SIZE);
-		return (false);
+		return false;
 	}
 
 	memcpy(m_ScriptData + m_ScriptDataSize, pData, Size);
@@ -2352,7 +2357,7 @@ bool CEsmScriptCompile::AddScriptData(const void *pData, const int Size) {
 	}
 
 	m_ScriptDataSize += Size;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -2371,10 +2376,12 @@ void CEsmScriptCompile::AddWarning(const TCHAR *pString, ...) {
 	TCHAR UserMsg[256];
 	TCHAR ErrorString[512];
 	va_list Args;
+
 	/* Create the input message */
 	va_start(Args, pString);
 	vsnprintf(UserMsg, 255, pString, Args);
 	va_end(Args);
+
 	/* Create the expanded error message */
 	snprintf(ErrorString,
 	         511,
@@ -2382,6 +2389,7 @@ void CEsmScriptCompile::AddWarning(const TCHAR *pString, ...) {
 	         m_CurrentLine + 1,
 	         m_CurrentCharPos + 1,
 	         UserMsg);
+
 	/* Save the message */
 	ErrorHandler.AddError(ERR_BADINPUT, ErrorString);
 	m_ErrorMessage = ErrorString;
@@ -2411,17 +2419,19 @@ bool CEsmScriptCompile::AddMessage(const int MessageID, const TCHAR *pString, ..
 	bool ReturnValue = true;
 	int MsgLevel;
 	int MsgType;
+
 	/* Create the user message */
 	va_start(Args, pString);
 	vsnprintf(UserMsg, 255, pString, Args);
 	va_end(Args);
+
 	/* Find the current message level for the message */
 	MsgLevel = FindMsgLevel(MessageID);
 
 	/* Determine the action to take */
 	switch (MsgLevel) {
 		case ESMSCR_MSGLEVEL_NONE:
-			return (true);
+			return true;
 
 		case ESMSCR_MSGLEVEL_WARNING:
 			AddWarning(UserMsg);
@@ -2433,7 +2443,7 @@ bool CEsmScriptCompile::AddMessage(const int MessageID, const TCHAR *pString, ..
 			ReturnValue = false;
 			MsgType = ESMSCR_MESSAGE_ERROR;
 			break;
-	};
+	}
 
 	/* Allocate the new warning object */
 	CreatePointer(pError, CEsmScriptError);
@@ -2442,17 +2452,11 @@ bool CEsmScriptCompile::AddMessage(const int MessageID, const TCHAR *pString, ..
 
 	/* Initialize the error record */
 	pError->SetCode(MessageID);
-
 	pError->SetLine(m_CurrentLine + 1);
-
 	pError->SetType(MsgType);
-
 	pError->SetCharacter(m_CurrentCharPos + 1);
-
 	pError->SetMessage(UserMsg);
-
 	pError->SetToken(m_Token);
-
 	pError->SetTokenID(m_TokenID);
 
 	if (m_pCurrentFunc != NULL) {
@@ -2461,7 +2465,7 @@ bool CEsmScriptCompile::AddMessage(const int MessageID, const TCHAR *pString, ..
 		pError->SetFuncArgIndex(m_FuncArgIndex);
 	}
 
-	return (ReturnValue);
+	return ReturnValue;
 }
 
 /*===========================================================================
@@ -2484,10 +2488,10 @@ int CEsmScriptCompile::AssertToken(const int Token) {
 		           GetESMTokenName(Token),
 		           GetESMTokenName(m_TokenID),
 		           m_Token);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 int CEsmScriptCompile::AssertToken(const int Token1, const int Token2) {
@@ -2498,10 +2502,10 @@ int CEsmScriptCompile::AssertToken(const int Token1, const int Token2) {
 		           GetESMTokenName(Token2),
 		           GetESMTokenName(m_TokenID),
 		           m_Token);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -2525,7 +2529,7 @@ bool CEsmScriptCompile::CheckFuncID(const long long ArgFlags,
 	if (pRecord == NULL) {
 		/* Don't enforce rigid checks for cell IDs */
 		if ((ArgFlags & ESMSCR_FUNC_CELLID) != 0) {
-			return (true);
+			return true;
 		}
 
 		/* Is the argument optional or not? */
@@ -2535,77 +2539,77 @@ bool CEsmScriptCompile::CheckFuncID(const long long ArgFlags,
 			                    m_Token);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 
-		return (false);
+		return false;
 	}
 
 	/* Is the ID the correct type */
 	if ((ArgFlags & ESMSCR_FUNC_IDMASK) == 0) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_EFFECTID) != 0 && pRecord->IsType(MWESM_REC_MGEF)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_LEVELCID) != 0 && pRecord->IsType(MWESM_REC_LEVC)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_LEVELIID) != 0 && pRecord->IsType(MWESM_REC_LEVI)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_CREATUREID) != 0 && pRecord->IsType(MWESM_REC_CREA)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_NPCID) != 0 && pRecord->IsType(MWESM_REC_NPC_)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_SPELLID) != 0 && pRecord->IsType(MWESM_REC_SPEL)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_TOPICID) != 0 && pRecord->IsType(MWESM_REC_DIAL)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_REGIONID) != 0 && pRecord->IsType(MWESM_REC_REGN)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_ITEMID) != 0 && IsESMRecordCarryable(pRecord->GetType())) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_FACTIONID) != 0 && pRecord->IsType(MWESM_REC_FACT)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_RACEID) != 0 && pRecord->IsType(MWESM_REC_RACE)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_SOUNDID) != 0 && pRecord->IsType(MWESM_REC_SOUN)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_SCRIPTID) != 0 && pRecord->IsType(MWESM_REC_SCPT)) {
-		return (true);
+		return true;
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_CELLID) != 0) {
 		if ((ArgFlags & ESMSCR_FUNC_CELLSTR) != 0) {
-			return (true);
+			return true;
 		}
 
 		if (pRecord->IsType(MWESM_REC_CELL)) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2613,15 +2617,15 @@ bool CEsmScriptCompile::CheckFuncID(const long long ArgFlags,
 		CEsmDialogue *pDialog = (CEsmDialogue *)pRecord;
 
 		if (pDialog->GetDialogTypeID() == MWESM_DIALTYPE_JOURNAL) {
-			return (true);
+			return true;
 		}
 	}
 
 	if ((ArgFlags & ESMSCR_FUNC_SOULGEMID) != 0 && pRecord->IsType(MWESM_REC_MISC)) {
 		if (pID[0] == '"' && TSTRNICMP(pID + 1, "misc_soulgem_", 13) == 0) {
-			return (true);
+			return true;
 		} else if (TSTRNICMP(pID, "misc_soulgem_", 13) == 0) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2632,11 +2636,11 @@ bool CEsmScriptCompile::CheckFuncID(const long long ArgFlags,
 		                    GetFuncArgIDType(ArgFlags));
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -2654,16 +2658,16 @@ CEsmRecord *CEsmScriptCompile::FindRecord(const char *pID) {
 	pRecInfo = m_pDocument->FindRecord(pID);
 
 	if (pRecInfo != NULL) {
-		return (pRecInfo->pRecord);
+		return pRecInfo->pRecord;
 	}
 
 	if (::GetEsmOptUseExtraFile()) {
 		CEsmRecord *pRecord;
 		m_ExtraRecords.Lookup(pID, pRecord);
-		return (pRecord);
+		return pRecord;
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -2684,14 +2688,14 @@ CEsmRecord *CEsmScriptCompile::FindRecord(const char *pID, const char *pType) {
 	pRecInfo = m_pDocument->FindRecord(pID);
 
 	if (pRecInfo != NULL && pRecInfo->pRecord->IsType(pType)) {
-		return (pRecInfo->pRecord);
+		return pRecInfo->pRecord;
 	}
 
 	/* Do a slow lookup */
 	pRecInfo = m_pDocument->FindRecord(pID, pType);
 
 	if (pRecInfo != NULL) {
-		return (pRecInfo->pRecord);
+		return pRecInfo->pRecord;
 	}
 
 	/* Check the extra file last */
@@ -2699,12 +2703,12 @@ CEsmRecord *CEsmScriptCompile::FindRecord(const char *pID, const char *pType) {
 		Result = m_ExtraRecords.Lookup(pID, pRecord);
 
 		if (Result && pRecord != NULL && pRecord->IsType(pType)) {
-			return (pRecord);
+			return pRecord;
 		}
 	}
 
 	/* No match */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -2725,14 +2729,14 @@ CEsmRecord *CEsmScriptCompile::FindRecordCarryable(const char *pID) {
 	pRecInfo = m_pDocument->FindRecord(pID);
 
 	if (pRecInfo != NULL && IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-		return (pRecInfo->pRecord);
+		return pRecInfo->pRecord;
 	}
 
 	/* Do a slow lookup */
 	pRecInfo = m_pDocument->FindRecordCarryable(pID);
 
 	if (pRecInfo != NULL) {
-		return (pRecInfo->pRecord);
+		return pRecInfo->pRecord;
 	}
 
 	/* Check the extra file last */
@@ -2740,12 +2744,12 @@ CEsmRecord *CEsmScriptCompile::FindRecordCarryable(const char *pID) {
 		Result = m_ExtraRecords.Lookup(pID, pRecord);
 
 		if (Result && pRecord != NULL && IsESMRecordCarryable(pRecord->GetType())) {
-			return (pRecord);
+			return pRecord;
 		}
 	}
 
 	/* No match */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -2783,7 +2787,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_MGEF);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2792,7 +2796,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_LEVC);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2801,7 +2805,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_LEVI);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2810,7 +2814,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_CREA);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2819,7 +2823,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_NPC_);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2828,7 +2832,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_SPEL);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2837,7 +2841,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_DIAL);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2846,7 +2850,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_REGN);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2855,7 +2859,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecordCarryable(s_IDBuffer);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2864,7 +2868,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_FACT);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2873,7 +2877,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_RACE);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2882,7 +2886,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_SOUN);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2891,20 +2895,20 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_SCPT);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
 	/* Check the cell ID */
 	if ((ArgFlags & ESMSCR_FUNC_CELLID) != 0) {
 		if ((ArgFlags & ESMSCR_FUNC_CELLSTR) != 0) {
-			return (true);
+			return true;
 		}
 
 		pRecord = FindRecord(s_IDBuffer, MWESM_REC_CELL);
 
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2917,7 +2921,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 
 			//SystemLog.Printf("%s->GetDialogTypeID() = %d", pDialog->GetID(), pDialog->GetDialogTypeID());
 			if (pDialog->GetDialogTypeID() == MWESM_DIALTYPE_JOURNAL) {
-				return (true);
+				return true;
 			}
 		}
 	}
@@ -2928,7 +2932,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 
 		if (pRecord != NULL) {
 			if (TSTRNICMP(s_IDBuffer, "misc_soulgem_", 13) == 0) {
-				return (true);
+				return true;
 			}
 		}
 	}
@@ -2938,7 +2942,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 
 	if ((ArgFlags & ESMSCR_FUNC_IDMASK) == 0) {
 		if (pRecord != NULL) {
-			return (true);
+			return true;
 		}
 	}
 
@@ -2953,7 +2957,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 			                    s_IDBuffer);
 
 			if (!Result) {
-				return (false);
+				return false;
 			}
 		}
 	}
@@ -2966,11 +2970,11 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 		                    GetFuncArgIDType(ArgFlags));
 
 		if (!Result) {
-			return (false);
+			return false;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -2985,7 +2989,7 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
  * Clears the current list of compile errors.
  *
  *=========================================================================*/
-void CEsmScriptCompile::ClearErrors(void) {
+void CEsmScriptCompile::ClearErrors() {
 	DEFINE_FUNCTION("CEsmScriptCompile::ClearErrors()");
 	CEsmScriptError *pError;
 	int Index;
@@ -3008,7 +3012,7 @@ void CEsmScriptCompile::ClearErrors(void) {
  * Class CEsmScriptCompile Method - void ClearExprStack (void);
  *
  *=========================================================================*/
-void CEsmScriptCompile::ClearExprStack(void) {
+void CEsmScriptCompile::ClearExprStack() {
 	DEFINE_FUNCTION("CEsmScriptCompile::ClearExprStack()");
 	esmscrstack_t *pStack;
 
@@ -3029,7 +3033,7 @@ void CEsmScriptCompile::ClearExprStack(void) {
  * Class CEsmScriptCompile Method - void ClearIfStatementStack (void);
  *
  *=========================================================================*/
-void CEsmScriptCompile::ClearIfStatementStack(void) {
+void CEsmScriptCompile::ClearIfStatementStack() {
 	DEFINE_FUNCTION("CEsmScriptCompile::ClearIfStatementStack()");
 	esmscrifblock_t *pStack;
 
@@ -3052,7 +3056,7 @@ void CEsmScriptCompile::ClearIfStatementStack(void) {
  * variable names.
  *
  *=========================================================================*/
-int CEsmScriptCompile::ComputeLocalVarDataSize(void) {
+int CEsmScriptCompile::ComputeLocalVarDataSize() {
 	int Size = 0;
 	int Index;
 
@@ -3068,7 +3072,7 @@ int CEsmScriptCompile::ComputeLocalVarDataSize(void) {
 		Size += TSTRLEN(m_FloatVars[Index].Name) + 1;
 	}
 
-	return (Size);
+	return Size;
 }
 
 /*===========================================================================
@@ -3083,13 +3087,13 @@ int CEsmScriptCompile::ComputeLocalVarDataSize(void) {
  * Description
  *
  *=========================================================================*/
-int CEsmScriptCompile::Compile(void) {
+int CEsmScriptCompile::Compile() {
 	int Result;
 
 	/* Ignore if the document object hasn't been set */
 	if (m_pDocument == NULL) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("Compiler document object has not been set!"));
-		return (-1);
+		return -1;
 	}
 
 	/* Reset the parsing variables */
@@ -3119,7 +3123,6 @@ int CEsmScriptCompile::Compile(void) {
 	ClearIfStatementStack();
 
 	/* Start compiling with the root block table */
-
 	Result = ParseTable(l_MainBlock);
 
 	/* Post cleanup */
@@ -3129,7 +3132,7 @@ int CEsmScriptCompile::Compile(void) {
 	/* Update the local var data */
 	MakeScriptVarData();
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -3150,23 +3153,23 @@ bool CEsmScriptCompile::FindLocalVar(const TCHAR *pName) {
 
 	for (Index = 0; Index < m_NumShortVars; Index++) {
 		if (_stricmp(pName, m_ShortVars[Index].Name) == 0) {
-			return (true);
+			return true;
 		}
 	}
 
 	for (Index = 0; Index < m_NumLongVars; Index++) {
 		if (_stricmp(pName, m_LongVars[Index].Name) == 0) {
-			return (true);
+			return true;
 		}
 	}
 
 	for (Index = 0; Index < m_NumFloatVars; Index++) {
 		if (_stricmp(pName, m_FloatVars[Index].Name) == 0) {
-			return (true);
+			return true;
 		}
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -3195,7 +3198,7 @@ int CEsmScriptCompile::FindLocalVarIndex(const TCHAR *pName, char &Type) {
 				           pName);
 			}
 
-			return (Index + 1);
+			return Index + 1;
 		}
 	}
 
@@ -3209,7 +3212,7 @@ int CEsmScriptCompile::FindLocalVarIndex(const TCHAR *pName, char &Type) {
 				           pName);
 			}
 
-			return (Index + 1);
+			return Index + 1;
 		}
 	}
 
@@ -3223,11 +3226,11 @@ int CEsmScriptCompile::FindLocalVarIndex(const TCHAR *pName, char &Type) {
 				           pName);
 			}
 
-			return (Index + 1);
+			return Index + 1;
 		}
 	}
 
-	return (-1);
+	return -1;
 }
 
 /*===========================================================================
@@ -3245,12 +3248,12 @@ int CEsmScriptCompile::FindMsgLevel(const int MessageID) {
 
 	for (Index = 0; Index < m_NumMsgLevels; Index++) {
 		if (m_MsgLevels[Index].MessageID == MessageID) {
-			return (m_MsgLevels[Index].Level);
+			return m_MsgLevels[Index].Level;
 		}
 	}
 
 	/* Return the default level if not found */
-	return (ESMSCR_MSGLEVEL_WARNING);
+	return ESMSCR_MSGLEVEL_WARNING;
 }
 
 /*===========================================================================
@@ -3417,7 +3420,7 @@ CEsmGlobal *CEsmScriptCompile::GetGlobal(const TCHAR *pName) {
 	pGlobal = m_pDocument->GetGlobal(pName);
 
 	if (pGlobal != NULL) {
-		return (pGlobal);
+		return pGlobal;
 	}
 
 	if (::GetEsmOptUseExtraFile()) {
@@ -3425,7 +3428,7 @@ CEsmGlobal *CEsmScriptCompile::GetGlobal(const TCHAR *pName) {
 		bool Result = m_ExtraRecords.Lookup(pName, pRecord);
 
 		if (!Result) {
-			return (NULL);
+			return NULL;
 		}
 
 		if (pRecord->IsType(MWESM_REC_GLOB)) {
@@ -3433,7 +3436,7 @@ CEsmGlobal *CEsmScriptCompile::GetGlobal(const TCHAR *pName) {
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -3463,21 +3466,21 @@ int CEsmScriptCompile::GetGlobalType(const TCHAR *pName) {
 	pGlobal = GetGlobal(pName);
 
 	if (pGlobal == NULL) {
-		return (ESMSCR_VAR_UNKNOWN);
+		return ESMSCR_VAR_UNKNOWN;
 	}
 
 	switch (pGlobal->GetType()) {
 		case MWESM_GLOBAL_SHORT:
-			return (ESMSCR_VAR_SHORT);
+			return ESMSCR_VAR_SHORT;
 
 		case MWESM_GLOBAL_LONG:
-			return (ESMSCR_VAR_LONG);
+			return ESMSCR_VAR_LONG;
 
 		case MWESM_GLOBAL_FLOAT:
-			return (ESMSCR_VAR_FLOAT);
+			return ESMSCR_VAR_FLOAT;
 	}
 
-	return (ESMSCR_VAR_UNKNOWN);
+	return ESMSCR_VAR_UNKNOWN;
 }
 
 /*===========================================================================
@@ -3492,7 +3495,7 @@ int CEsmScriptCompile::GetGlobalType(const TCHAR *pName) {
  * Parses out the next token from the current parsing position.
  *
  *=========================================================================*/
-int CEsmScriptCompile::GetNextToken(void) {
+int CEsmScriptCompile::GetNextToken() {
 	//DEFINE_FUNCTION("CEsmScriptCompile::GetNextToken()");
 	m_LastToken = m_Token;
 
@@ -3532,10 +3535,10 @@ int CEsmScriptCompile::GetNextToken(void) {
 		return GetOperatorToken();
 	} else {
 		AddMessage(ESMSCR_ERROR_BADTOKEN, "Unknown token type character '%c' found!", *m_pParse);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -3555,7 +3558,7 @@ int CEsmScriptCompile::GetNextToken(void) {
  * range check the number at all.
  *
  *=========================================================================*/
-int CEsmScriptCompile::GetNumberToken(void) {
+int CEsmScriptCompile::GetNumberToken() {
 	TCHAR *pStart = m_pParse;
 	int StartPos = m_CurrentCharPos;
 	bool Result;
@@ -3587,11 +3590,11 @@ int CEsmScriptCompile::GetNumberToken(void) {
 		                    m_Token);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -3609,11 +3612,12 @@ int CEsmScriptCompile::GetNumberToken(void) {
  * Only parses valid ESM script operators.
  *
  *=========================================================================*/
-int CEsmScriptCompile::GetOperatorToken(void) {
+int CEsmScriptCompile::GetOperatorToken() {
 	TCHAR *pStart = m_pParse;
 	int StartPos = m_CurrentCharPos;
 	TCHAR TempOp[4] = "\0\0\0";
 	bool Result;
+
 	/* Check for a 2-byte operator first */
 	TempOp[0] = m_pParse[0];
 	TempOp[1] = m_pParse[1];
@@ -3636,7 +3640,7 @@ int CEsmScriptCompile::GetOperatorToken(void) {
 		/* Line can only have one object reference */
 		if (m_LineHasRef) {
 			AddMessage(ESMSCR_ERROR_MULTREF, _T("Multiple object references found on line!"));
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 
 		m_LineHasRef = true;
@@ -3665,7 +3669,7 @@ int CEsmScriptCompile::GetOperatorToken(void) {
 				                    _T("Comparison operator missing space characters on one/both sides!"));
 
 				if (!Result) {
-					return (ESMSCR_RESULT_ERROR);
+					return ESMSCR_RESULT_ERROR;
 				}
 			}
 		} else if (m_Token.GetLength() == 2) {
@@ -3674,13 +3678,13 @@ int CEsmScriptCompile::GetOperatorToken(void) {
 				                    _T("Comparison operator missing space characters on one/both sides!"));
 
 				if (!Result) {
-					return (ESMSCR_RESULT_ERROR);
+					return ESMSCR_RESULT_ERROR;
 				}
 			}
 		}
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -3696,7 +3700,7 @@ int CEsmScriptCompile::GetOperatorToken(void) {
  * ESMSCR_RESULT_OK on success.
  *
  *=========================================================================*/
-int CEsmScriptCompile::GetStringToken(void) {
+int CEsmScriptCompile::GetStringToken() {
 	TCHAR *pStart = m_pParse;
 	int StartPos = m_CurrentCharPos;
 
@@ -3710,18 +3714,21 @@ int CEsmScriptCompile::GetStringToken(void) {
 		AddMessage(ESMSCR_ERROR_BADTOKEN,
 		           "Bad String, no terminating \" found on line for string starting at position %d!",
 		           StartPos);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Skip the " character */
 	m_pParse++;
 	m_CurrentCharPos++;
+
 	/* Copy the string token */
 	m_Token.Copy(pStart, m_pParse - pStart);
 	m_TokenID = ESMSCR_TOKEN_STRING;
+
 	/* check for a string'ed symbol */
 	//if (IsSymbolID(m_Token)) m_TokenID = EMSCR_TOKEN_SYMBOL;
-	return (ESMSCR_RESULT_OK);
+
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -3740,7 +3747,7 @@ int CEsmScriptCompile::GetStringToken(void) {
  * list is checked and the token type updated as required.
  *
  *=========================================================================*/
-int CEsmScriptCompile::GetSymbolToken(void) {
+int CEsmScriptCompile::GetSymbolToken() {
 	TCHAR *pStart = m_pParse;
 	CEsmGlobal* pGlobal;
 	esmscrfuncinfo_t *pFunc;
@@ -3755,12 +3762,13 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 	/* Copy the token name */
 	m_Token.Copy(pStart, m_pParse - pStart);
 	m_TokenID = ESMSCR_TOKEN_SYMBOL;
+
 	/* Check if the token is a reserved word */
 	Result = GetESMScriptResToken(m_Token);
 
 	if (Result != ESMSCR_TOKEN_UNKNOWN) {
 		m_TokenID = Result;
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Check if the token is a local variable */
@@ -3768,7 +3776,7 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 
 	if (fResult) {
 		m_TokenID = ESMSCR_TOKEN_LOCALVAR;
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Check for a global variable */
@@ -3777,7 +3785,7 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 	if (pGlobal != NULL) {
 		m_Token = pGlobal->GetID(); /* Use the correct case for the ID */
 		m_TokenID = ESMSCR_TOKEN_GLOBALVAR;
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Check for a function */
@@ -3788,7 +3796,7 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 			AddMessage(ESMSCR_ERROR_BADTOKEN,
 			           _T("Cannot call the function '%s' from within another function!"),
 			           m_Token);
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 
 		m_pCurrentFunc = pFunc;
@@ -3807,7 +3815,7 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 			                     m_Token);
 
 			if (!fResult) {
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 		}
 
@@ -3817,11 +3825,11 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 			                     m_Token);
 
 			if (!fResult) {
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 		}
 
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Check for a custom function */
@@ -3843,11 +3851,11 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 			                     m_Token);
 
 			if (!fResult) {
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 		}
 
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Check for an object ID - for speed/convience, this is done later on in the
@@ -3862,7 +3870,7 @@ int CEsmScriptCompile::GetSymbolToken(void) {
 		}
 		return (ESMSCR_RESULT_OK);
 	} */
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -3884,7 +3892,7 @@ bool CEsmScriptCompile::InsertScriptDataRef(const TCHAR *pData, int Size) {
 	/* Check for buffer overflows */
 	if (m_ScriptDataSize + Size >= ESMSCR_DATA_SIZE) {
 		AddError("Maximum compiled script size %d exceeded!", ESMSCR_DATA_SIZE);
-		return (false);
+		return false;
 	}
 
 	/* Shift existing line output data */
@@ -3917,7 +3925,7 @@ bool CEsmScriptCompile::InsertScriptDataRef(const TCHAR *pData, int Size) {
 	}
 
 	m_ScriptDataSize += Size + 3;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -3954,10 +3962,10 @@ bool CEsmScriptCompile::IsSymbolID(CSString &Token) {
 
 	if (pRecord != NULL) {
 		Token = pRecord->GetID(); /* Preserve ID case */
-		return (true);
+		return true;
 	}
 
-	return (false);
+	return false;
 }
 
 /*===========================================================================
@@ -3973,10 +3981,11 @@ bool CEsmScriptCompile::IsSymbolID(CSString &Token) {
  * script information.
  *
  *=========================================================================*/
-void CEsmScriptCompile::MakeScriptVarData(void) {
+void CEsmScriptCompile::MakeScriptVarData() {
 	DEFINE_FUNCTION("CEsmScriptCompile::MakeScriptVarData()");
 	int Index;
 	char *pData;
+
 	/* Delete the current local variable data */
 	DestroyArrayPointer(m_pLocalVarData);
 	/* Compute the size of the current local variables */
@@ -4023,7 +4032,7 @@ void CEsmScriptCompile::MakeScriptVarData(void) {
  *=========================================================================*/
 int CEsmScriptCompile::OutputToken(const short Value) {
 	AddScriptData(&Value, sizeof(short));
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -4062,7 +4071,7 @@ short CEsmScriptCompile::GetAnimGroupID(const TCHAR *pString) {
  * Protected class method.
  *
  *=========================================================================*/
-int CEsmScriptCompile::CheckFuncArg(void) {
+int CEsmScriptCompile::CheckFuncArg() {
 	bool Result;
 	int iResult;
 	__int64 FuncFlags;
@@ -4074,7 +4083,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 		Result = AddMessage(ESMSCR_ERROR_TOOMANYARGS,
 		                    _T("Exceeded the maximum of %d function arguments!"),
 		                    ESMSCR_MAX_FUNCARGS);
-		return (ESMSC_FUNCARG_ERROR);
+		return ESMSC_FUNCARG_ERROR;
 	}
 
 	/* Get the flags from the current function argument */
@@ -4089,10 +4098,10 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 		                    m_NumFuncArgs);
 
 		if (!Result) {
-			return (ESMSC_FUNCARG_ERROR);
+			return ESMSC_FUNCARG_ERROR;
 		}
 
-		return (ESMSC_FUNCARG_OK);
+		return ESMSC_FUNCARG_OK;
 	}
 
 	/* Special case required for some functions */
@@ -4107,11 +4116,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 		case ESMSCR_TOKEN_RESET:
 			if ((FuncFlags & ESMSCR_FUNC_RESET) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_WARNING_BADFUNCARG,
@@ -4119,7 +4128,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			}
 
@@ -4131,11 +4140,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 
 				if (iResult < 0 || iResult >= MWESM_EFFECT_MAX) {
 					if (NoMessage) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 
 					if (IsOptional) {
-						return (ESMSC_FUNCARG_ENDTABLE);
+						return ESMSC_FUNCARG_ENDTABLE;
 					}
 
 					Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4143,7 +4152,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 					                    m_Token);
 
 					if (!Result) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 				} else {
 					OutputEffect(iResult);
@@ -4153,11 +4162,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 			} else if ((FuncFlags & ESMSCR_FUNC_RESET) != 0) {
 			} else if ((FuncFlags & ESMSCR_FUNC_NUMBER) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4165,7 +4174,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			}
 			/* Special case for messagebox function */
@@ -4175,7 +4184,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    _T("MessageBox function does not accept a number variable!"));
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			}
 
@@ -4186,7 +4195,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				Result = CheckFuncID1(FuncFlags, m_Token, false);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				OutputFuncArgStrSym();
@@ -4197,11 +4206,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 
 				if (AnimID < 0) {
 					if (NoMessage) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 
 					if (IsOptional) {
-						return (ESMSC_FUNCARG_ENDTABLE);
+						return ESMSC_FUNCARG_ENDTABLE;
 					}
 
 					Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4209,18 +4218,18 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 					                    TempBuffer);
 
 					if (!Result) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 				}
 
 				OutputFuncArgAnim(AnimID);
 			} else if ((FuncFlags & ESMSCR_FUNC_STRING) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4228,7 +4237,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			} else {
 				OutputFuncArgString();
@@ -4239,11 +4248,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 		case ESMSCR_TOKEN_XYZ:
 			if ((FuncFlags & ESMSCR_FUNC_XYZ) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4251,7 +4260,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			}
 
@@ -4263,11 +4272,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 
 				if (iResult < 0) {
 					if (NoMessage) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 
 					if (IsOptional) {
-						return (ESMSC_FUNCARG_ENDTABLE);
+						return ESMSC_FUNCARG_ENDTABLE;
 					}
 
 					Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4275,7 +4284,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 					                    m_Token);
 
 					if (!Result) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 				} else {
 					OutputEffect(iResult);
@@ -4287,11 +4296,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 
 				if (AnimID < 0) {
 					if (NoMessage) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 
 					if (IsOptional) {
-						return (ESMSC_FUNCARG_ENDTABLE);
+						return ESMSC_FUNCARG_ENDTABLE;
 					}
 
 					Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4299,7 +4308,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 					                    m_Token);
 
 					if (!Result) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 				}
 
@@ -4313,16 +4322,16 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 					                    m_Token);
 
 					if (!Result) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 				}
 			} else if ((FuncFlags & ESMSCR_FUNC_ID) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4330,13 +4339,13 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			} else {
 				Result = CheckFuncID1(FuncFlags, m_Token, false);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				OutputFuncArgSym();
@@ -4347,18 +4356,18 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 		case ESMSCR_TOKEN_GLOBALVAR:
 			if ((m_pCurrentFunc->Flags & ESMSCR_FUNC_ALLOWGLOBAL) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_WARNING_BADFUNCVAR,
 				                    _T("Function does not accept global variables!"));
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			}
 
@@ -4373,31 +4382,31 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 					                    m_Token);
 
 					if (!Result) {
-						return (ESMSC_FUNCARG_ERROR);
+						return ESMSC_FUNCARG_ERROR;
 					}
 				}
 			} else if ((m_pCurrentFunc->Flags & ESMSCR_FUNC_VAR) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_WARNING_BADFUNCVAR,
 				                    _T("Function does not accept variable input!"));
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			} else if ((FuncFlags & ESMSCR_FUNC_NUMBER) == 0) {
 				if (NoMessage) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 
 				if (IsOptional) {
-					return (ESMSC_FUNCARG_ENDTABLE);
+					return ESMSC_FUNCARG_ENDTABLE;
 				}
 
 				Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4405,7 +4414,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSC_FUNCARG_ERROR);
+					return ESMSC_FUNCARG_ERROR;
 				}
 			}
 
@@ -4413,11 +4422,11 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 
 		default:
 			if (NoMessage) {
-				return (ESMSC_FUNCARG_ERROR);
+				return ESMSC_FUNCARG_ERROR;
 			}
 
 			if (IsOptional) {
-				return (ESMSC_FUNCARG_ENDTABLE);
+				return ESMSC_FUNCARG_ENDTABLE;
 			}
 
 			Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -4427,13 +4436,13 @@ int CEsmScriptCompile::CheckFuncArg(void) {
 			                    GetESMTokenName(m_TokenID));
 
 			if (!Result) {
-				return (ESMSC_FUNCARG_ERROR);
+				return ESMSC_FUNCARG_ERROR;
 			}
 
 			break;
 	} /* End of switch */
 
-	return (ESMSC_FUNCARG_OK);
+	return ESMSC_FUNCARG_OK;
 }
 
 /*===========================================================================
@@ -4448,7 +4457,7 @@ int CEsmScriptCompile::CheckFuncArg(void) {
  * Improved alternate to ParseFuncArg()
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncArg1(void) {
+int CEsmScriptCompile::ParseFuncArg1() {
 	int Result;
 	bool CheckMsgArgs = false;
 	m_TokenParsed = true;
@@ -4462,7 +4471,7 @@ int CEsmScriptCompile::ParseFuncArg1(void) {
 		                    m_NumFuncArgs);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
@@ -4470,7 +4479,7 @@ int CEsmScriptCompile::ParseFuncArg1(void) {
 	Result = CheckFuncArg();
 
 	if (m_pCurrentFunc == NULL || m_FuncArgIndex >= ESMSCR_MAX_FUNCARGS) {
-		return (ESMSC_FUNCARG_ERROR);
+		return ESMSC_FUNCARG_ERROR;
 	}
 
 	/* Special case for messagebox function */
@@ -4497,7 +4506,7 @@ int CEsmScriptCompile::ParseFuncArg1(void) {
 				                    m_NumFuncArgs,
 				                    m_Token,
 				                    GetESMTokenName(m_TokenID));
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 		} else if (m_pCurrentFunc->OpCode == ESMSCR_FUNCOPCODE_MESSAGEBOX) {
 			CheckMsgArgs = true;
@@ -4518,7 +4527,7 @@ int CEsmScriptCompile::ParseFuncArg1(void) {
 				                    MWESM_SCRIPT_MAXMSGARGS);
 
 				if (!Result) {
-					return (ESMSCR_RESULT_ERROR);
+					return ESMSCR_RESULT_ERROR;
 				}
 			}
 
@@ -4529,24 +4538,24 @@ int CEsmScriptCompile::ParseFuncArg1(void) {
 				                    MWESM_SCRIPT_MAXMSGBUTTONS);
 
 				if (!Result) {
-					return (ESMSCR_RESULT_ERROR);
+					return ESMSCR_RESULT_ERROR;
 				}
 			}
 		}
 
 		m_LastFuncArg = m_NumFuncArgs;
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	} else if (Result == ESMSC_FUNCARG_ERROR) {
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	} else if (Result == ESMSC_FUNCARG_ENDTABLE) {
 		//return (ESMSCR_RESULT_ERROR);
-		return (ESMSCR_RESULT_TABLEEND);
+		return ESMSCR_RESULT_TABLEEND;
 	}
 
 	/* Move counters to the next function argument */
 	m_LastFuncArg = m_NumFuncArgs;
 	m_FuncArgIndex++;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -4559,12 +4568,12 @@ int CEsmScriptCompile::ParseFuncArg1(void) {
  * Class CEsmScriptCompile Method - int ParseFunction (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFunction(void) {
+int CEsmScriptCompile::ParseFunction() {
 	if (m_pCurrentFunc->OpCode == 0x10C9) {
 		return ParseChoiceFunction();
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -4577,7 +4586,7 @@ int CEsmScriptCompile::ParseFunction(void) {
  * Class CEsmScriptCompile Method - int ParseChoiceFunction (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseChoiceFunction(void) {
+int CEsmScriptCompile::ParseChoiceFunction() {
 	int Result;
 	int SizeOffset;
 	int OutputSize = 0;
@@ -4592,7 +4601,7 @@ int CEsmScriptCompile::ParseChoiceFunction(void) {
 			Result = GetNextToken();
 
 			if (Result != ESMSCR_RESULT_OK) {
-				return (Result);
+				return Result;
 			}
 		}
 
@@ -4613,7 +4622,7 @@ int CEsmScriptCompile::ParseChoiceFunction(void) {
 					                    m_Token);
 
 					if (Result < 0) {
-						return (Result);
+						return Result;
 					}
 				}
 
@@ -4636,7 +4645,7 @@ int CEsmScriptCompile::ParseChoiceFunction(void) {
 				                    m_Token);
 
 				if (Result < 0) {
-					return (Result);
+					return Result;
 				}
 
 				m_TokenParsed = true;
@@ -4647,12 +4656,12 @@ int CEsmScriptCompile::ParseChoiceFunction(void) {
 	if (OutputSize > 65535) {
 		AddMessage(ESMSCR_ERROR_TOOMANYARGS,
 		           "Arguments in Choice function exceed maximum length of 65535 bytes!");
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Update the output bytes */
 	memcpy(m_ScriptData + SizeOffset, &OutputSize, 2);
-	return (ESMSCR_RESULT_TABLEEND);
+	return ESMSCR_RESULT_TABLEEND;
 }
 
 /*===========================================================================
@@ -4665,17 +4674,17 @@ int CEsmScriptCompile::ParseChoiceFunction(void) {
  * Class CEsmScriptCompile Method - int ParseCheckFuncArg (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseCheckFuncArg(void) {
+int CEsmScriptCompile::ParseCheckFuncArg() {
 	bool Result;
 	int ParseResult;
 	__int64 FuncFlags;
 
 	if (m_pCurrentFunc == NULL) {
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	if (m_NumFuncArgs > ESMSCR_MAX_FUNCARGS || m_FuncArgIndex > ESMSCR_MAX_FUNCARGS) {
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	FuncFlags = m_pCurrentFunc->Var[m_FuncArgIndex];
@@ -4687,20 +4696,20 @@ int CEsmScriptCompile::ParseCheckFuncArg(void) {
 			                    m_FuncArgIndex + 1);
 
 			if (!Result) {
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 		}
 
 		ParseResult = ParseFuncEnd();
 
 		if (ParseResult < 0) {
-			return (ParseResult);
+			return ParseResult;
 		}
 
-		return (ESMSCR_RESULT_TABLEEND);
+		return ESMSCR_RESULT_TABLEEND;
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -4713,7 +4722,7 @@ int CEsmScriptCompile::ParseCheckFuncArg(void) {
  * Class CEsmScriptCompile Method - int ParseFuncArg (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncArg(void) {
+int CEsmScriptCompile::ParseFuncArg() {
 	bool KeepParsing;
 	bool Result;
 	bool OptError = false;
@@ -4723,7 +4732,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 	m_TokenParsed = true;
 
 	if (m_pCurrentFunc == NULL) {
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Missing commas between parameters */
@@ -4735,7 +4744,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 		                    m_NumFuncArgs);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
@@ -4743,7 +4752,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 		Result = AddMessage(ESMSCR_ERROR_MISC,
 		                    _T("Exceeded the maximum of %d function arguments!"),
 		                    ESMSCR_MAX_FUNCARGS);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* While loop is used to skip any optional arguments */
@@ -4766,7 +4775,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 				                    m_NumFuncArgs);
 
 				if (!Result) {
-					return (ESMSCR_RESULT_ERROR);
+					return ESMSCR_RESULT_ERROR;
 				}
 			}
 
@@ -4795,7 +4804,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						Result = CheckFuncID1(FuncFlags, m_Token, true);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 
 						OutputFuncArgStrSym();
@@ -4822,7 +4831,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						Result = CheckFuncID1(FuncFlags, m_Token, true);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 
 						OutputFuncArgSym();
@@ -4838,7 +4847,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 							                    _T("Function does not accept variable input!"));
 
 							if (!Result) {
-								return (ESMSCR_RESULT_ERROR);
+								return ESMSCR_RESULT_ERROR;
 							}
 						}
 
@@ -4859,7 +4868,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    GetESMTokenName(m_TokenID));
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					}
 
@@ -4885,7 +4894,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    m_NumFuncArgs);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					}
 
@@ -4901,7 +4910,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 							                    m_Token);
 
 							if (!Result) {
-								return (ESMSCR_RESULT_ERROR);
+								return ESMSCR_RESULT_ERROR;
 							}
 						} else {
 							OutputEffect(iResult);
@@ -4914,7 +4923,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    m_NumFuncArgs);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					}
 
@@ -4925,7 +4934,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						Result = CheckFuncID1(FuncFlags, m_Token, false);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 
 						OutputFuncArgStrSym();
@@ -4935,7 +4944,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    m_NumFuncArgs);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					} else {
 						OutputFuncArgString();
@@ -4950,7 +4959,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    m_NumFuncArgs);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					}
 
@@ -4966,7 +4975,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 							                    m_Token);
 
 							if (!Result) {
-								return (ESMSCR_RESULT_ERROR);
+								return ESMSCR_RESULT_ERROR;
 							}
 						} else {
 							OutputEffect(iResult);
@@ -4980,7 +4989,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 							Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
 							                    _T("The '%s' is not a valid animation group!"),
 							                    m_Token);
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 
 						OutputFuncArgAnim(AnimID);
@@ -4990,13 +4999,13 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    m_NumFuncArgs);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					} else {
 						Result = CheckFuncID1(FuncFlags, m_Token, false);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 
 						OutputFuncArgSym();
@@ -5010,7 +5019,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    _T("Function does not accept global variables!"));
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					}
 
@@ -5021,7 +5030,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    _T("Function does not accept variable input!"));
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					} else if ((FuncFlags & ESMSCR_FUNC_NUMBER) == 0) {
 						Result = AddMessage(ESMSCR_ERROR_BADFUNCARG,
@@ -5029,7 +5038,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 						                    m_NumFuncArgs);
 
 						if (!Result) {
-							return (ESMSCR_RESULT_ERROR);
+							return ESMSCR_RESULT_ERROR;
 						}
 					}
 
@@ -5043,7 +5052,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 					                    GetESMTokenName(m_TokenID));
 
 					if (!Result) {
-						return (ESMSCR_RESULT_ERROR);
+						return ESMSCR_RESULT_ERROR;
 					}
 
 					break;
@@ -5054,7 +5063,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
 	} /* End of while */
 
 	m_LastFuncArg = m_NumFuncArgs;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5067,7 +5076,7 @@ int CEsmScriptCompile::ParseFuncArg(void) {
  * Class CEsmScriptCompile Method - int ParseFuncComma (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncComma(void) {
+int CEsmScriptCompile::ParseFuncComma() {
 	bool Result;
 
 	/* Check for an optional function argument */
@@ -5079,7 +5088,7 @@ int CEsmScriptCompile::ParseFuncComma(void) {
 			                    m_FuncArgIndex + 1);
 
 			if (!Result) {
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 		}
 
@@ -5092,7 +5101,7 @@ int CEsmScriptCompile::ParseFuncComma(void) {
 	}
 
 	m_NumFuncArgs++;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5105,12 +5114,12 @@ int CEsmScriptCompile::ParseFuncComma(void) {
  * Class CEsmScriptCompile Method - int ParseFuncEnd (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncEnd(void) {
+int CEsmScriptCompile::ParseFuncEnd() {
 	int Index;
 	bool Result;
 
 	if (m_pCurrentFunc == NULL) {
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	if (m_NumFuncArgs == 0) {
@@ -5125,7 +5134,7 @@ int CEsmScriptCompile::ParseFuncEnd(void) {
 
 		if (!Result) {
 			m_pCurrentFunc = NULL;
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
@@ -5137,7 +5146,7 @@ int CEsmScriptCompile::ParseFuncEnd(void) {
 
 		if (!Result) {
 			m_pCurrentFunc = NULL;
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
@@ -5154,7 +5163,7 @@ int CEsmScriptCompile::ParseFuncEnd(void) {
 
 			if (!Result) {
 				m_pCurrentFunc = NULL;
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 
 			m_LastFuncArgSymbol = false;
@@ -5198,7 +5207,7 @@ int CEsmScriptCompile::ParseFuncEnd(void) {
 
 	OutputFuncEnd();
 	m_pCurrentFunc = NULL;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5214,7 +5223,7 @@ int CEsmScriptCompile::ParseFuncEnd(void) {
  * Current token should be the type operator.
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseNewLocalVar(void) {
+int CEsmScriptCompile::ParseNewLocalVar() {
 	int NewType;
 	int Result;
 
@@ -5227,14 +5236,14 @@ int CEsmScriptCompile::ParseNewLocalVar(void) {
 		NewType = ESMSCR_VAR_FLOAT;
 	} else {
 		AddMessage(ESMSCR_ERROR_BADTOKEN, _T("Unknown type operator '%s'!"), m_Token);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Get the new symbol */
 	Result = GetNextToken();
 
 	if (Result != ESMSCR_RESULT_OK) {
-		return (Result);
+		return Result;
 	}
 
 	/* Assert the correct type */
@@ -5257,7 +5266,7 @@ int CEsmScriptCompile::ParseNewLocalVar(void) {
 			                    m_Token);
 
 			if (!Result) {
-				return (ESMSCR_RESULT_ERROR);
+				return ESMSCR_RESULT_ERROR;
 			}
 
 			break;
@@ -5266,14 +5275,14 @@ int CEsmScriptCompile::ParseNewLocalVar(void) {
 			AddMessage(ESMSCR_ERROR_BADLOCAL,
 			           _T("Local variable '%s' has already been defined!"),
 			           m_Token);
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 
 		default:
 			AddMessage(ESMSCR_ERROR_BADLOCAL,
 			           _T("Invalid local variable name '%s'!"),
 			           m_Token);
-			return (ESMSCR_RESULT_ERROR);
-	};
+			return ESMSCR_RESULT_ERROR;
+	}
 
 	/* Check for special warning conditions */
 	if (m_Token[0] == '_') {
@@ -5282,7 +5291,7 @@ int CEsmScriptCompile::ParseNewLocalVar(void) {
 		                    m_Token);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
@@ -5290,25 +5299,25 @@ int CEsmScriptCompile::ParseNewLocalVar(void) {
 	Result = AddLocalVar(m_Token, NewType);
 
 	if (!Result) {
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Ensure we end the line correctly */
 	Result = GetNextToken();
 
 	if (Result != ESMSCR_RESULT_OK) {
-		return (Result);
+		return Result;
 	}
 
 	Result = AssertToken(ESMSCR_TOKEN_EOL);
 
 	if (Result != ESMSCR_RESULT_OK) {
-		return (Result);
+		return Result;
 	}
 
 	m_TokenParsed = true;
 	m_StatementCount++;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5321,7 +5330,7 @@ int CEsmScriptCompile::ParseNewLocalVar(void) {
  * Class CEsmScriptCompile Method - int ParsePushToken (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParsePushToken(void) {
+int CEsmScriptCompile::ParsePushToken() {
 	DEFINE_FUNCTION("CEsmScriptCompile::ParsePushToken()");
 	esmscrstack_t *pNewStack = (esmscrstack_t *)m_ExprStack.Peek();
 	int TopTokenID = ESMSCR_TOKEN_UNKNOWN;
@@ -5496,7 +5505,7 @@ int CEsmScriptCompile::ParsePushToken(void) {
 	//AddScriptData(" ", 1);
 	//AddScriptData(m_Token, m_Token.GetLength());
 	m_TokenParsed = true;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5509,11 +5518,11 @@ int CEsmScriptCompile::ParsePushToken(void) {
  * Class CEsmScriptCompile Method - int ParseIfRExprStart (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseIfRExprStart(void) {
+int CEsmScriptCompile::ParseIfRExprStart() {
 	m_LastSetSymbol = true;
 	m_LastSetPos = m_ScriptDataSize - 1;
 	ParseRExprStart();
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5526,10 +5535,10 @@ int CEsmScriptCompile::ParseIfRExprStart(void) {
  * Class CEsmScriptCompile Method - int ParseRExprStart (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseRExprStart(void) {
+int CEsmScriptCompile::ParseRExprStart() {
 	ClearExprStack();
 	m_NumOutputExpr = 0;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5542,8 +5551,8 @@ int CEsmScriptCompile::ParseRExprStart(void) {
  * Class CEsmScriptCompile Method - int ParseStringID (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseStringID(void) {
-	CSString TempToken(((const TCHAR*)m_Token) + 1, m_Token.GetLength() - 2);
+int CEsmScriptCompile::ParseStringID() {
+	CSString TempToken(((const TCHAR *)m_Token) + 1, m_Token.GetLength() - 2);
 	bool Result;
 	/* Ensure the string is a valid ID */
 	Result = IsSymbolID(TempToken);
@@ -5553,15 +5562,14 @@ int CEsmScriptCompile::ParseStringID(void) {
 		Result = AddMessage(ESMSCR_ERROR_BADID, _T("Unknown object ID %s found!"), m_Token);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
-
-int CEsmScriptCompile::ParseStringIDSet(void) {
+int CEsmScriptCompile::ParseStringIDSet() {
 	CSString TempToken(((const TCHAR *)m_Token) + 1, m_Token.GetLength() - 2);
 	CEsmGlobal *pGlobal;
 	/* Check for a global variable first */
@@ -5571,14 +5579,13 @@ int CEsmScriptCompile::ParseStringIDSet(void) {
 		m_Token = TempToken;
 		m_TokenID = ESMSCR_TOKEN_GLOBALVAR;
 		OutputSetGlobal();
-		return (ESMSCR_RESULT_TABLEEND);
+		return ESMSCR_RESULT_TABLEEND;
 	}
 
 	return ParseStringID();
 }
 
-
-int CEsmScriptCompile::ParseStringIDIf(void) {
+int CEsmScriptCompile::ParseStringIDIf() {
 	CSString TempToken(((const TCHAR *)m_Token) + 1, m_Token.GetLength() - 2);
 	CEsmGlobal *pGlobal;
 	/* Check for a global variable first */
@@ -5588,13 +5595,13 @@ int CEsmScriptCompile::ParseStringIDIf(void) {
 		m_Token = TempToken;
 		m_TokenID = ESMSCR_TOKEN_GLOBALVAR;
 		OutputIfGlobal();
-		return (ESMSCR_RESULT_TABLEEND);
+		return ESMSCR_RESULT_TABLEEND;
 	}
 
 	return ParseStringID();
 }
 
-int CEsmScriptCompile::ParseStringIDPush(void) {
+int CEsmScriptCompile::ParseStringIDPush() {
 	CSString TempToken(((const TCHAR *)m_Token) + 1, m_Token.GetLength() - 2);
 	CEsmGlobal *pGlobal;
 	/* Check for a global variable first */
@@ -5604,7 +5611,7 @@ int CEsmScriptCompile::ParseStringIDPush(void) {
 		m_Token = TempToken;
 		m_TokenID = ESMSCR_TOKEN_GLOBALVAR;
 		ParsePushToken();
-		return (ESMSCR_RESULT_TABLEEND);
+		return ESMSCR_RESULT_TABLEEND;
 	}
 
 	return ParseStringID();
@@ -5620,16 +5627,16 @@ int CEsmScriptCompile::ParseStringIDPush(void) {
  * Class CEsmScriptCompile Method - int ParsePushStringID (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParsePushStringID(void) {
+int CEsmScriptCompile::ParsePushStringID() {
 	int Result;
 	Result = ParseStringID();
 
 	if (Result < ESMSCR_RESULT_OK) {
-		return (Result);
+		return Result;
 	}
 
 	AddScriptData(" ", 1);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -5642,7 +5649,7 @@ int CEsmScriptCompile::ParsePushStringID(void) {
  * Class CEsmScriptCompile Method - int ParseSymbolID (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseSymbolID(void) {
+int CEsmScriptCompile::ParseSymbolID() {
 	bool Result;
 	/* Ensure the token is a valid ID */
 	Result = IsSymbolID(m_Token);
@@ -5651,12 +5658,12 @@ int CEsmScriptCompile::ParseSymbolID(void) {
 		Result = AddMessage(ESMSCR_ERROR_BADID, _T("Unknown object ID '%s' found!"), m_Token);
 
 		if (!Result) {
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
 	m_TokenParsed = true;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5669,16 +5676,16 @@ int CEsmScriptCompile::ParseSymbolID(void) {
  * Class CEsmScriptCompile Method - int ParsePushSymbolID (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParsePushSymbolID(void) {
+int CEsmScriptCompile::ParsePushSymbolID() {
 	int Result;
 	Result = ParseSymbolID();
 
 	if (Result < ESMSCR_RESULT_OK) {
-		return (Result);
+		return Result;
 	}
 
 	AddScriptData(" ", 1);
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -5708,7 +5715,7 @@ int CEsmScriptCompile::ParseTable(esmscrparsetable_t *pTable) {
 			Result = ParseTableMany(pTable[Index]);
 
 			if (Result != ESMSCR_RESULT_OK) {
-				return (Result);
+				return Result;
 			}
 		}
 		/* Parse exactly 1 of the given simple token */
@@ -5716,15 +5723,15 @@ int CEsmScriptCompile::ParseTable(esmscrparsetable_t *pTable) {
 			Result = ParseTableOne(pTable[Index]);
 
 			if (Result == ESMSCR_RESULT_TABLEEND) {
-				return (ESMSCR_RESULT_OK);
+				return ESMSCR_RESULT_OK;
 			}
 
 			if (Result == ESMSCR_RESULT_BLOCKEND) {
-				return (ESMSCR_RESULT_OK);
+				return ESMSCR_RESULT_OK;
 			}
 
 			if (Result != ESMSCR_RESULT_OK) {
-				return (Result);
+				return Result;
 			}
 		}
 	}
@@ -5740,20 +5747,22 @@ int CEsmScriptCompile::ParseTable(esmscrparsetable_t *pTable) {
 			Result = (this->*(pTable[Index].ParseFunc))();
 
 			if (Result != ESMSCR_RESULT_OK) {
-				return (Result);
+				return Result;
 			}
 		}
 
 		if ((pTable[Index].Flags & ESTF_OPT) != 0) {
-			return (ESMSCR_RESULT_BLOCKEND);
+			return ESMSCR_RESULT_BLOCKEND;
 		}
 
-		AddMessage(ESMSCR_ERROR_BADTOKEN, "Unknown token '%s'(%s) found!", m_Token,
+		AddMessage(ESMSCR_ERROR_BADTOKEN,
+		           "Unknown token '%s'(%s) found!",
+		           m_Token,
 		           GetESMTokenName(m_TokenID));
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -5814,10 +5823,10 @@ int CEsmScriptCompile::ParseTableMany(esmscrparsetable_t &TableEntry) {
 	}
 
 	if (Result == ESMSCR_RESULT_BLOCKEND) {
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -5841,7 +5850,7 @@ int CEsmScriptCompile::ParseTableOne(esmscrparsetable_t &TableEntry) {
 		Result = GetNextToken();
 
 		if (Result != ESMSCR_RESULT_OK) {
-			return (Result);
+			return Result;
 		}
 	}
 
@@ -5907,7 +5916,7 @@ int CEsmScriptCompile::ParseTableOne(esmscrparsetable_t &TableEntry) {
 		(this->*TableEntry.OutputFunc)();
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -5920,7 +5929,7 @@ int CEsmScriptCompile::ParseTableOne(esmscrparsetable_t &TableEntry) {
  * Class CEsmScriptCompile Method - int ParseFuncRef (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncRef(void) {
+int CEsmScriptCompile::ParseFuncRef() {
 	m_TokenParsed = true;
 	return ParseTable(l_LeftFuncBlock);
 }
@@ -5955,7 +5964,7 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 	Result = GetNextToken();
 
 	if (Result != ESMSCR_RESULT_OK) {
-		return (Result);
+		return Result;
 	}
 
 	/* Ensure a valid token type */
@@ -5970,7 +5979,7 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 			AddMessage(ESMSCR_ERROR_BADTOKEN,
 			           _T("Expecting an object variable name but found '%s'!"),
 			           GetESMTokenName(m_TokenID));
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Get the object reference for the variable */
@@ -5978,7 +5987,7 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 
 	if (pRecord == NULL) {
 		AddMessage(ESMSCR_ERROR_BADID, _T("Unknown object id '%s' found!"), m_VarToken);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	if (InIf) {
@@ -5996,7 +6005,7 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 
 		if (pSubScript == NULL) {
 			AddMessage(ESMSCR_ERROR_BADID, _T("Object '%s' has no script assigned!"), m_VarToken);
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 
 		pRecord = FindRecord(pSubScript->GetName());
@@ -6005,7 +6014,7 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 			AddMessage(ESMSCR_ERROR_BADID,
 			           _T("Invalid script name '%s' found!"),
 			           pSubScript->GetName());
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 
 		AddScriptData("r", 1);
@@ -6034,7 +6043,7 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 		           _T("Object '%s' has no local variable '%s'!"),
 		           m_VarToken,
 		           m_Token);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Output the local var reference */
@@ -6066,14 +6075,14 @@ int CEsmScriptCompile::ParseVarRef1(const bool InIf) {
 	}
 
 	m_TokenParsed = true;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
-int CEsmScriptCompile::ParseVarRef(void) {
+int CEsmScriptCompile::ParseVarRef() {
 	return ParseVarRef1(false);
 }
 
-int CEsmScriptCompile::ParseIfVarRef(void) {
+int CEsmScriptCompile::ParseIfVarRef() {
 	return ParseVarRef1(true);
 }
 
@@ -6091,11 +6100,14 @@ int CEsmScriptCompile::ParseIfVarRef(void) {
  *=========================================================================*/
 void CEsmScriptCompile::SetScriptText(const TCHAR *pString, const int Size) {
 	DEFINE_FUNCTION("CEsmScriptCompile::SetScriptText()");
+
 	/* Delete the current text, if any */
 	DestroyArrayPointer(m_pScriptText);
+
 	/* Create and copy the script text */
 	CreateArrayPointer(m_pScriptText, TCHAR, Size + 64);
 	memcpy(m_pScriptText, pString, Size * sizeof(TCHAR));
+
 	/* Ensure it is NULL terminated */
 	m_pScriptText[Size] = NULL_CHAR;
 	m_pParse = m_pScriptText;
@@ -6118,7 +6130,7 @@ void CEsmScriptCompile::SetScriptText(const TCHAR *pString, const int Size) {
  * stopping at the first CR.
  *
  *=========================================================================*/
-void CEsmScriptCompile::SkipTokenComment(void) {
+void CEsmScriptCompile::SkipTokenComment() {
 	do {
 		m_CurrentCharPos++;
 		m_pParse++;
@@ -6142,7 +6154,7 @@ void CEsmScriptCompile::SkipTokenComment(void) {
  * Assumes that the current parse character is on a whitespace character.
  *
  *=========================================================================*/
-void CEsmScriptCompile::SkipTokenWhiteSpace(void) {
+void CEsmScriptCompile::SkipTokenWhiteSpace() {
 	do {
 		m_CurrentCharPos++;
 		m_pParse++;
@@ -6159,7 +6171,7 @@ void CEsmScriptCompile::SkipTokenWhiteSpace(void) {
  * Begin Default Message Level Initialization Methods
  *
  *=========================================================================*/
-void CEsmScriptCompile::SetDefaultMsgLevels(void) {
+void CEsmScriptCompile::SetDefaultMsgLevels() {
 	m_MsgLevels[0].MessageID = ESMSCR_ERROR_BADID;
 	m_MsgLevels[0].Level = ESMSCR_MSGLEVEL_ERROR;
 	m_MsgLevels[1].MessageID = ESMSCR_WARNING_NOCOMMA;
@@ -6201,8 +6213,7 @@ void CEsmScriptCompile::SetDefaultMsgLevels(void) {
 	m_NumMsgLevels = 18;
 }
 
-
-void CEsmScriptCompile::SetWeakMsgLevels(void) {
+void CEsmScriptCompile::SetWeakMsgLevels() {
 	m_MsgLevels[0].MessageID = ESMSCR_ERROR_BADID;
 	m_MsgLevels[0].Level = ESMSCR_MSGLEVEL_WARNING;
 	m_MsgLevels[1].MessageID = ESMSCR_WARNING_NOCOMMA;
@@ -6242,8 +6253,7 @@ void CEsmScriptCompile::SetWeakMsgLevels(void) {
 	m_NumMsgLevels = 18;
 }
 
-
-void CEsmScriptCompile::SetStrongMsgLevels(void) {
+void CEsmScriptCompile::SetStrongMsgLevels() {
 	m_MsgLevels[0].MessageID = ESMSCR_ERROR_BADID;
 	m_MsgLevels[0].Level = ESMSCR_MSGLEVEL_ERROR;
 	m_MsgLevels[1].MessageID = ESMSCR_WARNING_NOCOMMA;
@@ -6293,16 +6303,16 @@ void CEsmScriptCompile::SetStrongMsgLevels(void) {
  * Class CEsmScriptCompile Method - int OutputOneExpr (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputOneExpr(void) {
+int CEsmScriptCompile::OutputOneExpr() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputOneExpr()");
 	esmscrstack_t *pStack1;
 	esmscrstack_t *pStack2;
 	bool DoExtra = false;
-	return (0);
+	return 0;
 	pStack1 = (esmscrstack_t *)m_ExprStack.Pop();
 
 	if (pStack1 == NULL) {
-		return (0);
+		return 0;
 	}
 
 	if (pStack1->TokenID != ESMSCR_TOKEN_ADDOP && pStack1->TokenID != ESMSCR_TOKEN_MULOP) {
@@ -6318,7 +6328,7 @@ int CEsmScriptCompile::OutputOneExpr(void) {
 		pStack1 = (esmscrstack_t *)m_ExprStack.Pop();
 
 		if (pStack1 == NULL) {
-			return (0);
+			return 0;
 		}
 	}
 
@@ -6346,7 +6356,7 @@ int CEsmScriptCompile::OutputOneExpr(void) {
 	DestroyPointer(pStack2);
 	DestroyPointer(pStack1);
 	m_NumOutputExpr++;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6359,7 +6369,7 @@ int CEsmScriptCompile::OutputOneExpr(void) {
  * Class CEsmScriptCompile Method - int OutputIf (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIf(void) {
+int CEsmScriptCompile::OutputIf() {
 	//DEFINE_FUNCTION("CEsmScriptCompile::OutputIf()");
 	int LinePos = m_ScriptDataSize;
 	/* Output the initial if token */
@@ -6376,7 +6386,7 @@ int CEsmScriptCompile::OutputIf(void) {
 	m_LastSetNegative = false;
 	m_LastFuncArgSymbol = false;
 	m_LastSetSymbol = false;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6389,7 +6399,7 @@ int CEsmScriptCompile::OutputIf(void) {
  * Class CEsmScriptCompile Method - int OutputIfGlobal (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfGlobal(void) {
+int CEsmScriptCompile::OutputIfGlobal() {
 	byte GlobalSize;
 	AddScriptData(" G", 2);
 	GlobalSize = m_Token.GetLength();
@@ -6405,7 +6415,7 @@ int CEsmScriptCompile::OutputIfGlobal(void) {
 		AddScriptData(m_Token, GlobalSize);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6418,13 +6428,13 @@ int CEsmScriptCompile::OutputIfGlobal(void) {
  * Class CEsmScriptCompile Method - int OutputIfLocal (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfLocal(void) {
+int CEsmScriptCompile::OutputIfLocal() {
 	int LocalIndex;
 	char LocalType;
 	LocalIndex = FindLocalVarIndex(m_Token, LocalType);
 	OutputToken(0x20 + (LocalType << 8));
 	OutputToken(LocalIndex);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6437,7 +6447,7 @@ int CEsmScriptCompile::OutputIfLocal(void) {
  * Class CEsmScriptCompile Method - int OutputIfRelOp (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfRelOp(void) {
+int CEsmScriptCompile::OutputIfRelOp() {
 	char Buffer[16];
 	int Length;
 	bool Result;
@@ -6448,12 +6458,12 @@ int CEsmScriptCompile::OutputIfRelOp(void) {
 		Result = AddScriptData(Buffer, Length);
 
 		if (!Result) {
-			return (-1);
+			return -1;
 		}
 	}
 
 	m_IsEmptyIf = false;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6466,29 +6476,29 @@ int CEsmScriptCompile::OutputIfRelOp(void) {
  * Begin Output Right If Blocks
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfRAddOp(void) {
+int CEsmScriptCompile::OutputIfRAddOp() {
 	bool Result;
 	Result = AddScriptData(m_Token, m_Token.GetLength());
 
 	if (!Result) {
-		return (-1);
+		return -1;
 	}
 
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputIfRNumber(void) {
+int CEsmScriptCompile::OutputIfRNumber() {
 	bool Result;
 	Result = AddScriptData(m_Token, m_Token.GetLength());
 
 	if (!Result) {
-		return (-1);
+		return -1;
 	}
 
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputIfRLocal(void) {
+int CEsmScriptCompile::OutputIfRLocal() {
 	int LocalIndex;
 	char LocalType;
 //	Result = AddScriptData(m_Token, m_Token.GetLength());
@@ -6500,10 +6510,10 @@ int CEsmScriptCompile::OutputIfRLocal(void) {
 	OutputToken(LocalIndex);
 	LocalType = 0;
 	AddScriptData("\0", 1);
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputIfRGlobal(void) {
+int CEsmScriptCompile::OutputIfRGlobal() {
 	char GlobalSize = m_Token.GetLength();
 //	Result = AddScriptData(m_Token, m_Token.GetLength());
 //	if (!Result) {
@@ -6523,18 +6533,18 @@ int CEsmScriptCompile::OutputIfRGlobal(void) {
 	}
 
 	AddScriptData("\0", 1);
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputIfEmpty(void) {
+int CEsmScriptCompile::OutputIfEmpty() {
 	bool Result;
 	Result = AddScriptData("\0", 1);
 
 	if (!Result) {
-		return (-1);
+		return -1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6547,11 +6557,11 @@ int CEsmScriptCompile::OutputIfEmpty(void) {
  * Class CEsmScriptCompile Method - int OutputIfFinish (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfFinish(void) {
+int CEsmScriptCompile::OutputIfFinish() {
 	int Size;
 
 	if (m_LastIfPos < 0) {
-		return (-1);
+		return -1;
 	}
 
 	Size = m_ScriptDataSize - m_LastIfPos - 1;
@@ -6560,7 +6570,7 @@ int CEsmScriptCompile::OutputIfFinish(void) {
 	if (Size > MWESM_SCRIPT_MAXIFEXPRESSIONS) {
 		AddError(_T("Compiled IF expression length exceeds %d bytes!"),
 		         MWESM_SCRIPT_MAXIFEXPRESSIONS);
-		return (-1);
+		return -1;
 	} else if (m_IsEmptyIf) {
 		AddScriptData("\0", 1);
 		Size++;
@@ -6573,7 +6583,7 @@ int CEsmScriptCompile::OutputIfFinish(void) {
 	/* Reset variables */
 	m_LastIfPos = -1;
 	m_OutputFuncIDRef = false;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6586,7 +6596,7 @@ int CEsmScriptCompile::OutputIfFinish(void) {
  * Begin Output Set Blocks
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputSet(void) {
+int CEsmScriptCompile::OutputSet() {
 	int LinePos;
 	int Result;
 	LinePos = m_ScriptDataSize;
@@ -6598,11 +6608,10 @@ int CEsmScriptCompile::OutputSet(void) {
 	Result = OutputToken(0x0105);
 	m_LastLineDataPos = LinePos;
 	m_StatementCount++;
-	return (Result);
+	return Result;
 }
 
-
-int CEsmScriptCompile::OutputSetLocal(void) {
+int CEsmScriptCompile::OutputSetLocal() {
 	int LocalIndex;
 	char LocalType;
 	LocalIndex = FindLocalVarIndex(m_Token, LocalType);
@@ -6612,10 +6621,10 @@ int CEsmScriptCompile::OutputSetLocal(void) {
 	AddScriptData(&LocalType, 1);
 	m_LastSetPos = m_ScriptDataSize - 1;
 	//m_LastSetSymbol = true;
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputSetGlobal(void) {
+int CEsmScriptCompile::OutputSetGlobal() {
 	char GlobalSize = m_Token.GetLength();
 	AddScriptData("G", 1);
 
@@ -6634,21 +6643,21 @@ int CEsmScriptCompile::OutputSetGlobal(void) {
 	AddScriptData("\0", 1);
 	m_LastSetPos = m_ScriptDataSize - 1;
 	//m_LastSetSymbol = true;
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputSetEnd(void) {
+int CEsmScriptCompile::OutputSetEnd() {
 	int Size;
 
 	if (m_LastSetPos < 0) {
-		return (-1);
+		return -1;
 	}
 
 	Size = m_ScriptDataSize - m_LastSetPos - 1;
 
 	if (Size > 255) {
 		AddError(_T("Compiled SET expression length exceeds 255 bytes!"));
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	if (m_LastSetSymbol && !m_LastFuncArgSymbol) {
@@ -6659,7 +6668,7 @@ int CEsmScriptCompile::OutputSetEnd(void) {
 
 	m_ScriptData[m_LastSetPos] = (byte)Size;
 	m_OutputFuncIDRef = false;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6672,14 +6681,14 @@ int CEsmScriptCompile::OutputSetEnd(void) {
  * Class CEsmScriptCompile Method - int ParseFuncAddOp (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseFuncAddOp(void) {
+int CEsmScriptCompile::ParseFuncAddOp() {
 	m_LastTokenNegative = false;
 
 	if (m_Token == "-") {
 		m_LastTokenNegative = true;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6692,14 +6701,14 @@ int CEsmScriptCompile::ParseFuncAddOp(void) {
  * Class CEsmScriptCompile Method - int ParseSetFirstAddOp (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::ParseSetFirstAddOp(void) {
+int CEsmScriptCompile::ParseSetFirstAddOp() {
 	m_LastSetNegative = false;
 
 	if (m_Token == "-") {
 		m_LastSetNegative = true;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6712,7 +6721,7 @@ int CEsmScriptCompile::ParseSetFirstAddOp(void) {
  * Class CEsmScriptCompile Method - int OutputElseIf (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputElseIf(void) {
+int CEsmScriptCompile::OutputElseIf() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputElseIf()");
 	int Result;
 	int LinePos = m_ScriptDataSize;
@@ -6720,20 +6729,23 @@ int CEsmScriptCompile::OutputElseIf(void) {
 	Result = UpdateLastIfBlock();
 
 	if (Result == ESMSCR_RESULT_ERROR) {
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Output the initial if token */
 	OutputToken(0x0108);
 	m_StatementCount++;
+
 	/* Output the intial exmpty statement count and expression length */
 	OutputToken(0x0000);
+
 	/* Initialize the required if related variables */
 	m_LastIfPos = m_ScriptDataSize - 1;
 	m_IsEmptyIf = true;
 	m_OutputFuncIDRef = true;
 	m_LastLineDataPos = LinePos;
-	return (0);
+
+	return 0;
 }
 
 /*===========================================================================
@@ -6746,7 +6758,7 @@ int CEsmScriptCompile::OutputElseIf(void) {
  * Class CEsmScriptCompile Method - int OutputElse (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputElse(void) {
+int CEsmScriptCompile::OutputElse() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputElse()");
 	int Result;
 	int LinePos = m_ScriptDataSize;
@@ -6754,19 +6766,23 @@ int CEsmScriptCompile::OutputElse(void) {
 	Result = UpdateLastIfBlock();
 
 	if (Result == ESMSCR_RESULT_ERROR) {
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Output the initial if token */
 	OutputToken(0x0107);
 	m_StatementCount++;
+
 	/* Add an if block to the if statement stack */
 	AddIfBlock(m_StatementCount, m_ScriptDataSize);
+
 	/* Output the intial empty statement count */
 	AddScriptData(_T("\00"), 1);
+
 	/* Initialize the required if related variables */
 	m_LastLineDataPos = LinePos;
-	return (0);
+
+	return 0;
 }
 
 /*===========================================================================
@@ -6779,13 +6795,13 @@ int CEsmScriptCompile::OutputElse(void) {
  * Class CEsmScriptCompile Method - int OutputEndIf (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputEndIf(void) {
+int CEsmScriptCompile::OutputEndIf() {
 	int Result;
 	/* Update the previous IF/ELSEIF/ELSE block statement count */
 	Result = UpdateLastIfBlock();
 
 	if (Result == ESMSCR_RESULT_ERROR) {
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	m_StatementCount++;
@@ -6802,7 +6818,7 @@ int CEsmScriptCompile::OutputEndIf(void) {
  * Class CEsmScriptCompile Method - int OutputIfLeftExprStack (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfLeftExprStack(void) {
+int CEsmScriptCompile::OutputIfLeftExprStack() {
 	return OutputExprStack();
 }
 
@@ -6816,7 +6832,7 @@ int CEsmScriptCompile::OutputIfLeftExprStack(void) {
  * Class CEsmScriptCompile Method - int OutputIfRightExprStack (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfRightExprStack(void) {
+int CEsmScriptCompile::OutputIfRightExprStack() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputIfExprStack()");
 	int Result;
 	int Size;
@@ -6827,7 +6843,7 @@ int CEsmScriptCompile::OutputIfRightExprStack(void) {
 
 		if (Size > 255) {
 			AddError(_T("Compiled IF expression length exceeds 255 bytes!"));
-			return (ESMSCR_RESULT_ERROR);
+			return ESMSCR_RESULT_ERROR;
 		}
 	}
 
@@ -6835,7 +6851,7 @@ int CEsmScriptCompile::OutputIfRightExprStack(void) {
 		AddScriptData("\0", 1);
 	}
 
-	return (Result);
+	return Result;
 }
 
 /*===========================================================================
@@ -6848,7 +6864,7 @@ int CEsmScriptCompile::OutputIfRightExprStack(void) {
  * Class CEsmScriptCompile Method - int OutputExprStack (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputExprStack(void) {
+int CEsmScriptCompile::OutputExprStack() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputExprStack()");
 	esmscrstack_t *pNewStack;
 	bool Done = false;
@@ -6870,7 +6886,7 @@ int CEsmScriptCompile::OutputExprStack(void) {
 		}
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6883,22 +6899,20 @@ int CEsmScriptCompile::OutputExprStack(void) {
  * Class CEsmScriptCompile Method - int OutputFunction (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputIfFunction(void) {
+int CEsmScriptCompile::OutputIfFunction() {
 	//DEFINE_FUNCTION("CEsmScriptCompile::OutputIfFunction()");
 	AddScriptData(" ", 1);
 	AddScriptData("X", 1);
 	return OutputFunction();
 }
 
-
-int CEsmScriptCompile::OutputLineFunction(void) {
+int CEsmScriptCompile::OutputLineFunction() {
 	//DEFINE_FUNCTION("CEsmScriptCompile::OutputLineFunction()");
 	m_StatementCount++;
 	return OutputFunction();
 }
 
-
-int CEsmScriptCompile::OutputFunction(void) {
+int CEsmScriptCompile::OutputFunction() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFunction()");
 	ASSERT(m_pCurrentFunc != NULL);
 #ifdef MWEDIT_SCRIPT_MWSE
@@ -6911,7 +6925,7 @@ int CEsmScriptCompile::OutputFunction(void) {
 	m_NumMsgButtons = 0;
 	m_FuncOptCount = 0;
 	m_LastFuncArgSymbol = false;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -6924,22 +6938,22 @@ int CEsmScriptCompile::OutputFunction(void) {
  * Begin Output Function Arguments
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputFuncArgReset(void) {
+int CEsmScriptCompile::OutputFuncArgReset() {
 	/*if (m_pCurrentFunc == NULL
 	      || (m_pCurrentFunc->Var[m_NumFuncArgs-1] & ESMSCR_FUNC_RESET1) == 0) {
 		AddScriptData("\5", 1);
 	} else*/
 	AddScriptData("\5", 1);
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgXYZ(void) {
+int CEsmScriptCompile::OutputFuncArgXYZ() {
 	char Byte = toupper(m_Token[0]);
 	AddScriptData(&Byte, 1);
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgNum(void) {
+int CEsmScriptCompile::OutputFuncArgNum() {
 	float fValue = (float)atof(m_Token);
 	long lValue = (long)atol(m_Token);
 	short sValue = (short)atoi(m_Token);
@@ -6982,15 +6996,15 @@ int CEsmScriptCompile::OutputFuncArgNum(void) {
 //		m_NumMsgArgs++;
 //	}
 	m_LastFuncArgSymbol = false;
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgGlobal(void) {
+int CEsmScriptCompile::OutputFuncArgGlobal() {
 	char GlobalSize = m_Token.GetLength();
 
 	if (m_FuncArgIndex >= 0 && m_FuncArgIndex < MWESM_SCRIPT_MAXARGS) {
 		if ((m_pCurrentFunc->Var[m_FuncArgIndex] & ESMSCR_FUNC_RESET) != 0) {
-			return (0);
+			return 0;
 		}
 	}
 
@@ -7020,16 +7034,16 @@ int CEsmScriptCompile::OutputFuncArgGlobal(void) {
 //	if (m_pCurrentFunc->OpCode == 0x1000) {
 //		m_NumMsgArgs++;
 //	}
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgLocal(void) {
+int CEsmScriptCompile::OutputFuncArgLocal() {
 	short FuncIndex;
 	char FuncType;
 
 	if (m_FuncArgIndex >= 0 && m_FuncArgIndex < MWESM_SCRIPT_MAXARGS) {
 		if ((m_pCurrentFunc->Var[m_FuncArgIndex] & ESMSCR_FUNC_RESET) != 0) {
-			return (0);
+			return 0;
 		}
 	}
 
@@ -7050,10 +7064,10 @@ int CEsmScriptCompile::OutputFuncArgLocal(void) {
 //	if (m_pCurrentFunc->OpCode == 0x1000) {
 //		m_NumMsgArgs++;
 //	}
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgStrSym(void) {
+int CEsmScriptCompile::OutputFuncArgStrSym() {
 	char StringLen = m_Token.GetLength() - 2;
 
 	if (m_OutputFuncIDRef) {
@@ -7063,10 +7077,10 @@ int CEsmScriptCompile::OutputFuncArgStrSym(void) {
 	AddScriptData(&StringLen, 1);
 	AddScriptData(((const TCHAR *)m_Token) + 1, (int)StringLen);
 	m_LastFuncArgSymbol = false;
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgSym(void) {
+int CEsmScriptCompile::OutputFuncArgSym() {
 	char StringLen = m_Token.GetLength();
 
 	if (m_OutputFuncIDRef) {
@@ -7076,10 +7090,10 @@ int CEsmScriptCompile::OutputFuncArgSym(void) {
 	AddScriptData(&StringLen, 1);
 	AddScriptData(m_Token, (int)StringLen);
 	m_LastFuncArgSymbol = false;
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncArgString(void) {
+int CEsmScriptCompile::OutputFuncArgString() {
 	short StringLen = m_Token.GetLength() - 2;
 
 	/* Special case function */
@@ -7112,10 +7126,10 @@ int CEsmScriptCompile::OutputFuncArgString(void) {
 		AddScriptData(((const TCHAR *)m_Token) + 1, bStringLen);
 	}
 
-	return (0);
+	return 0;
 }
 
-int CEsmScriptCompile::OutputFuncEnd(void) {
+int CEsmScriptCompile::OutputFuncEnd() {
 	/* Output extra unknown short at end */
 	if ((m_pCurrentFunc->Flags & ESMSCR_FUNC_EXTRASHORT) != 0) {
 		short Value = -1;
@@ -7138,7 +7152,7 @@ int CEsmScriptCompile::OutputFuncEnd(void) {
 		//AddScriptData("\0", 1); /* Only at end in some cases? */
 	}
 
-	return (0);
+	return 0;
 }
 
 int CEsmScriptCompile::OutputEffect(const int EffectID) {
@@ -7159,20 +7173,24 @@ int CEsmScriptCompile::OutputEffect(const int EffectID) {
  * Class CEsmScriptCompile Method - int OutputWhile (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputWhile(void) {
+int CEsmScriptCompile::OutputWhile() {
 	int LinePos = m_ScriptDataSize;
+
 	/* Output the initial if token */
 	OutputToken(0x010A);
 	m_StatementCount++;
+
 	/* Output the intial exmpty statement count and expression length */
 	OutputToken(0x0000);
+
 	/* Initialize the required if related variables */
 	m_LastIfPos = m_ScriptDataSize - 1;
 	m_IsEmptyIf = true;
 	m_OutputFuncIDRef = true;
 	m_LastLineDataPos = LinePos;
 	m_LastSetNegative = false;
-	return (ESMSCR_RESULT_OK);
+
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -7185,11 +7203,11 @@ int CEsmScriptCompile::OutputWhile(void) {
  * Class CEsmScriptCompile Method - int OutputWhileFinish (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputWhileFinish(void) {
+int CEsmScriptCompile::OutputWhileFinish() {
 	int Size;
 
 	if (m_LastIfPos < 0) {
-		return (-1);
+		return -1;
 	}
 
 	Size = m_ScriptDataSize - m_LastIfPos - 1;
@@ -7197,7 +7215,7 @@ int CEsmScriptCompile::OutputWhileFinish(void) {
 	/* Ensure a valid WHILE expression size */
 	if (Size > 255) {
 		AddError(_T("Compiled WHILE expression length exceeds 255 bytes!"));
-		return (-1);
+		return -1;
 	} else if (m_IsEmptyIf) {
 		AddScriptData("\0", 1);
 		Size++;
@@ -7210,7 +7228,7 @@ int CEsmScriptCompile::OutputWhileFinish(void) {
 	/* Reset variables */
 	m_LastIfPos = -1;
 	m_OutputFuncIDRef = false;
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -7223,13 +7241,13 @@ int CEsmScriptCompile::OutputWhileFinish(void) {
  * Class CEsmScriptCompile Method - int OutputEndWhile (void);
  *
  *=========================================================================*/
-int CEsmScriptCompile::OutputEndWhile(void) {
+int CEsmScriptCompile::OutputEndWhile() {
 	int Result;
 	/* Update the previous WHILE block statement count */
 	Result = UpdateLastIfBlock();
 
 	if (Result == ESMSCR_RESULT_ERROR) {
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	m_StatementCount++;
@@ -7250,20 +7268,20 @@ int CEsmScriptCompile::OutputEndWhile(void) {
  * local static (which is returned) and then freed.
  *
  *=========================================================================*/
-esmscrifblock_t *CEsmScriptCompile::PopIfBlock(void) {
+esmscrifblock_t *CEsmScriptCompile::PopIfBlock() {
 	static esmscrifblock_t s_IfBlock;
 	esmscrifblock_t *pIfBlock;
 	/* Pop the top object and ensure it is valid */
 	pIfBlock = (esmscrifblock_t *)m_IfStatementStack.Pop();
 
 	if (pIfBlock == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Copy if block and delete the allocated object */
 	s_IfBlock = *pIfBlock;
 	DestroyPointer(pIfBlock);
-	return (&s_IfBlock);
+	return &s_IfBlock;
 }
 
 /*===========================================================================
@@ -7308,14 +7326,14 @@ void CEsmScriptCompile::SetMsgLevel(const int Type) {
  * ESMSCR_MESSAGE_ERROR on any error.
  *
  *=========================================================================*/
-int CEsmScriptCompile::UpdateLastIfBlock(void) {
+int CEsmScriptCompile::UpdateLastIfBlock() {
 	esmscrifblock_t *pIfBlock;
 	int NumStatements;
 	/* Attempt to get the last if block information and ensure it is valid */
 	pIfBlock = PopIfBlock();
 
 	if (pIfBlock == NULL) {
-		return (ESMSCR_RESULT_OK);
+		return ESMSCR_RESULT_OK;
 	}
 
 	/* Update the statement count and ensure it is valid */
@@ -7324,12 +7342,12 @@ int CEsmScriptCompile::UpdateLastIfBlock(void) {
 	if (NumStatements > MWESM_SCRIPT_MAXIFSTATEMENTS) {
 		AddError(_T("Exceeded the maximum of %d statements within an IF block!"),
 		         MWESM_SCRIPT_MAXIFSTATEMENTS);
-		return (ESMSCR_RESULT_ERROR);
+		return ESMSCR_RESULT_ERROR;
 	}
 
 	/* Update the if statement count */
 	m_ScriptData[pIfBlock->IfStartPos] = (byte)NumStatements;
-	return (ESMSCR_RESULT_OK);
+	return ESMSCR_RESULT_OK;
 }
 
 /*===========================================================================
@@ -7345,7 +7363,7 @@ int CEsmScriptCompile::UpdateLastIfBlock(void) {
  * current extra file contents.
  *
  *=========================================================================*/
-void CEsmScriptCompile::InitializeExtraRecords(void) {
+void CEsmScriptCompile::InitializeExtraRecords() {
 	CEsmRecord *pRecord;
 	const TCHAR *pID;
 	int Index;

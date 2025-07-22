@@ -48,21 +48,17 @@ class CEsmArmorDlg : public CEsmRecDialog {
   protected:
 
 	/* Handles selchange events in all the biped lists */
-
 	void OnSelChangeBipedList(const int Index);
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Sets the values for a biped object */
-
 	void SetBipedObject(const int Index);
 
 	/* Helper get/set methods */
-
-	void GetBipedData(void);
-	void SetBipedData(void);
+	void GetBipedData();
+	void SetBipedData();
 	void SetBipedData(const int BipedIndex, CEsmSubByte *pIndexRecord, const int RecordIndex);
 
 
@@ -76,13 +72,11 @@ class CEsmArmorDlg : public CEsmRecDialog {
 
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -93,13 +87,18 @@ class CEsmArmorDlg : public CEsmRecDialog {
 
 	CButton m_PersistCheck;
 	CButton m_BlockedCheck;
+
 	CEdit m_EnchantText;
+
 	CComboBox m_EnchantList;
+
 	CEdit m_ValueText;
 	CEdit m_HealthText;
 	CEdit m_RatingText;
 	CEdit m_WeightText;
+
 	CComboBox m_TypeList;
+
 	CEdit m_NameText;
 	//}}AFX_DATA
 
@@ -125,7 +124,6 @@ class CEsmArmorDlg : public CEsmRecDialog {
 
 	//{{AFX_MSG(CEsmArmorDlg)
 	afx_msg void OnEnchantedit();
-
 	//}}AFX_MSG
 
 	void OnSelchangeBipedlist1() {

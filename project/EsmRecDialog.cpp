@@ -126,7 +126,7 @@ CEsmRecDialog::~CEsmRecDialog() {
  *
  *=========================================================================*/
 
-void CEsmRecDialog::CheckIDText(void) {
+void CEsmRecDialog::CheckIDText() {
 	/* Ignore if the dialog doesn't have any ID text control */
 	if (!m_HasIDText) {
 		return;
@@ -170,10 +170,10 @@ void CEsmRecDialog::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmRecDialog::GetDocument(void) {
+CMWEditDoc *CEsmRecDialog::GetDocument() {
 	ASSERT(m_pParent != NULL);
 	ASSERT(m_pParent->GetDocument() != NULL);
-	return (m_pParent->GetDocument());
+	return m_pParent->GetDocument();
 }
 
 /*===========================================================================
@@ -189,7 +189,7 @@ CMWEditDoc *CEsmRecDialog::GetDocument(void) {
 
 bool CEsmRecDialog::IsRecord(esmrecinfo_t *pRecInfo) {
 	if (pRecInfo == NULL || GetRecInfo() == NULL) {
-		return (false);
+		return false;
 	}
 
 	return GetRecInfo()->pRecord->IsSame(pRecInfo->pRecord);
@@ -417,9 +417,9 @@ void CEsmRecDialog::OnModelbutton() {
  *
  *=========================================================================*/
 
-int CEsmRecDialog::OnPostSaveRecord(void) {
+int CEsmRecDialog::OnPostSaveRecord() {
 	ASSERT(m_pParent != NULL);
-	return (m_pParent->OnPostSaveRecord(&m_RecEditInfo));
+	return m_pParent->OnPostSaveRecord(&m_RecEditInfo);
 }
 
 /*===========================================================================
@@ -433,7 +433,7 @@ int CEsmRecDialog::OnPostSaveRecord(void) {
  *
  *=========================================================================*/
 
-int CEsmRecDialog::OnPreSaveRecord(void) {
+int CEsmRecDialog::OnPreSaveRecord() {
 	//DEFINE_FUNCTION("CEsmRecDialog::OnPreSaveRecord()");
 	/* Ensure a valid object state */
 	ASSERT(m_pParent != NULL);
@@ -559,7 +559,7 @@ BOOL CEsmRecDialog::PreTranslateMessage(MSG *pMsg) {
 		Result = TranslateAccelerator(m_hWnd, m_hAccelator, pMsg);
 
 		if (Result != 0) {
-			return (Result);
+			return Result;
 		}
 	}
 

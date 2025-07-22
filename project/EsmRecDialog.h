@@ -94,21 +94,19 @@ class CEsmRecDialog : public CFormView {
   protected:
 
 	/* Checks the ID text of the dialog to see if it has changed */
-
-	virtual void CheckIDText(void);
+	virtual void CheckIDText();
 
 	/* virtual update methods */
-
-	virtual int OnUpdateRecord(void) {
-		return (0);
+	virtual int OnUpdateRecord() {
+		return 0;
 	}
 
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo) {
-		return (0);
+		return 0;
 	}
 
 	virtual int OnUpdateAddItem(esmrecinfo_t *pRecInfo) {
-		return (OnUpdateItem(pRecInfo));
+		return OnUpdateItem(pRecInfo);
 	}
 
 
@@ -117,45 +115,39 @@ class CEsmRecDialog : public CFormView {
   public:
 
 	/* Construction */
-
 	CEsmRecDialog(const int IDD = 0);
-	virtual ~CEsmRecDialog(void);
+	virtual ~CEsmRecDialog();
 
 	/* Get class members */
-
-	esmrecinfo_t *GetRecInfo(void) {
-		return (m_RecEditInfo.pRecInfo);
+	esmrecinfo_t *GetRecInfo() {
+		return m_RecEditInfo.pRecInfo;
 	}
 
-	virtual bool IsModified(void) {
-		return (m_Modified);
+	virtual bool IsModified() {
+		return m_Modified;
 	}
 
 	bool IsRecord(esmrecinfo_t *pRecInfo);
 
-	CEsmDlgHandler *GetParentDlg(void) {
-		return (m_pParent);
+	CEsmDlgHandler *GetParentDlg() {
+		return m_pParent;
 	}
 
 	/* Retrieve the parent document object */
-
-	CMWEditDoc *GetDocument(void);
-	CMWEditApp *GetApp(void) {
-		return ((CMWEditApp *)AfxGetApp());
+	CMWEditDoc *GetDocument();
+	CMWEditApp *GetApp() {
+		return (CMWEditApp *)AfxGetApp();
 	}
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void){ ; }
-	virtual void SetControlData(void){ ; }
+	virtual void GetControlData(){ ; }
+	virtual void SetControlData(){ ; }
 
 	/* Record events */
-
-	virtual int OnPostSaveRecord(void);
-	virtual int OnPreSaveRecord(void);
+	virtual int OnPostSaveRecord();
+	virtual int OnPreSaveRecord();
 
 	/* Set class members */
-
 	void SetModified(const bool Flag = true) {
 		m_Modified = Flag;
 	}
@@ -178,7 +170,6 @@ class CEsmRecDialog : public CFormView {
 	}
 
 	/* Update the window's title */
-
 	void UpdateTitle(const TCHAR *pItemID);
 
 	/* Dialog Data */

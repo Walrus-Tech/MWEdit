@@ -75,27 +75,23 @@ class CEsmInfoDlg : public CDialog {
   public:
 
 	/* Construction */
-
 	CEsmInfoDlg(CWnd *pParent = NULL);
 
 	/* Main access method */
-
 	bool DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDocument);
 
 	/* Get class members */
-
-	bool HasNewInfo(void) {
-		return (m_IsNew);
+	bool HasNewInfo() {
+		return m_IsNew;
 	}
 
-	CEsmInfo *GetInfo(void) {
-		return (m_pInfo);
+	CEsmInfo *GetInfo() {
+		return m_pInfo;
 	}
 
 	/* Set/get control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 	void GetFuncData(const int Index, int &FuncIndex);
 	void SetFuncData(const int Index, CEsmSubSCVR *pFuncData, CEsmSubRecord *pValue);
 

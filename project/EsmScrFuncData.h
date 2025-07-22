@@ -79,55 +79,52 @@ class CEsmScrFuncData {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CEsmScrFuncData();
 
 	virtual ~CEsmScrFuncData() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Generates a parameter string for the given parameter */
-
 	const TCHAR *CreateParamString(const int Index) const;
 	const TCHAR *GetParamDetail(const int Index) const;
-	const TCHAR *GetFlagString(void) const;
+	const TCHAR *GetFlagString() const;
 
 	/* Get class members */
-
-	long GetFlags(void) const {
-		return (m_Flags);
+	long GetFlags() const {
+		return m_Flags;
 	}
 
-	long GetOpCode(void) const {
-		return (m_OpCode);
+	long GetOpCode() const {
+		return m_OpCode;
 	}
 
-	const TCHAR *GetDescription(void) const {
-		return (m_Description);
+	const TCHAR *GetDescription() const {
+		return m_Description;
 	}
 
-	int GetNumParams(void) const {
-		return (m_NumParams);
+	int GetNumParams() const {
+		return m_NumParams;
 	}
 
-	long GetReturnFlags(void) const {
-		return (m_ReturnFlags);
+	long GetReturnFlags() const {
+		return m_ReturnFlags;
 	}
 
-	const TCHAR *GetReturnDesc(void) const {
-		return (m_ReturnDesc);
+	const TCHAR *GetReturnDesc() const {
+		return m_ReturnDesc;
 	}
 
-	const TCHAR *GetFunction(void) const {
-		return (m_Function);
+	const TCHAR *GetFunction() const {
+		return m_Function;
 	}
 
-	const TCHAR *GetFuncForm(void) const;
+	const TCHAR *GetFuncForm() const;
 	const TCHAR *GetExFuncForm(const int ParamIndex = -1, const int LineLength = -1) const;
 
-	const TCHAR *GetWikiLink(void) const {
+	const TCHAR *GetWikiLink() const {
 		if (m_WikiLink[0] == NULL_CHAR) {
 			return m_Function;
 		}
@@ -136,35 +133,30 @@ class CEsmScrFuncData {
 	}
 
 	/* Get parameter members */
-
 	const TCHAR *GetParamDesc(const int Index) const {
-		return (IsValidIndex(Index) ? static_cast<const TCHAR *>(m_ParamDesc[Index]) : _T(""));
+		return IsValidIndex(Index) ? static_cast<const TCHAR *>(m_ParamDesc[Index]) : _T("");
 	}
 
 	long GetParamFlags(const int Index) const {
-		return (IsValidIndex(Index) ? m_ParamFlags[Index] : 0);
+		return IsValidIndex(Index) ? m_ParamFlags[Index] : 0;
 	}
 
-	const TCHAR *GetReturnString(void) const;
+	const TCHAR *GetReturnString() const;
 
 	/* Checks for a mathcing function name, case insensitive */
-
 	bool IsName(const TCHAR *pName) const {
-		return (_stricmp(m_Function, pName) == 0);
+		return _stricmp(m_Function, pName) == 0;
 	}
 
 	/* Check parameter index */
-
 	bool IsValidIndex(const int Index) const {
-		return (Index >= 0 && Index < m_NumParams);
+		return Index >= 0 && Index < m_NumParams;
 	}
 
 	/* Input a function data section from the given file */
-
 	bool ReadData(CGenFile &File);
 
 	/* Set class members */
-
 	void SetDescription(const TCHAR *pString) {
 		m_Description = pString;
 	}
@@ -196,7 +188,6 @@ class CEsmScrFuncData {
 	}
 
 	/* Set parameter members */
-
 	void SetParamFlags(const int Index, const long Flags) {
 		if (IsValidIndex(Index)) {
 			m_ParamFlags[Index] = Flags;
@@ -212,7 +203,6 @@ class CEsmScrFuncData {
 	void SetParamValue(const int Index, TCHAR *pValue);
 
 	/* Set a class member based on the input stirngs */
-
 	bool SetValue(const TCHAR *pVariable, TCHAR *pValue);
 };
 

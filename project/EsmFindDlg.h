@@ -65,12 +65,10 @@ class CEsmFindDlg : public CFormView {
 	DECLARE_DYNCREATE(CEsmFindDlg);
 
 	/* Save a find history to the registry */
-
 	void AddFindHistory(const TCHAR *pString);
 
 	/* Fills the find list with previous entries */
-
-	void FillFindList(void);
+	void FillFindList();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -78,7 +76,6 @@ class CEsmFindDlg : public CFormView {
   public:
 
 	/* Set parent dialog handler */
-
 	void SetDlgHandler(CEsmDlgHandler *pParent) {
 		m_pDlgHandler = pParent;
 	}

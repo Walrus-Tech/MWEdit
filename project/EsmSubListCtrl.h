@@ -61,24 +61,19 @@ class CEsmSubListCtrl : public CEsmListCtrl {
   public:
 
 	/* Construction */
-
 	CEsmSubListCtrl();
 	virtual ~CEsmSubListCtrl();
 
 	/* Add an item to the list */
-
 	int AddItem(CEsmSubCellRef *pCellRef);
 
 	/* Find an existing cellref in the list */
-
 	int FindCellRef(CEsmSubCellRef *pCellRef);
 
 	/* Access the recinfo data for an item */
-
 	virtual esmrecinfo_t *GetRecInfo(const int Item);
 
 	/* Set the properties of the given armor item */
-
 	void SetItem(const int ListIndex, CEsmSubCellRef *pCellRef);
 
 	/* ClassWizard generated virtual function overrides */

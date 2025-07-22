@@ -116,16 +116,16 @@ bool CEsmAiEscortDlg::DoModal(CEsmSubAI_E *pSubRecord,
 	}
 
 	if (pSubRecord == NULL) {
-		return (false);
+		return false;
 	}
 
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -145,9 +145,12 @@ BOOL CEsmAiEscortDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	Buffer.Format(_T("AI Package: %s"), m_Title);
 	SetWindowText(Buffer);
+
 	pAiData = m_pSubRecord->GetAIData();
+
 	FillEsmNpcCombo(m_TargetList);
 	FillEsmCellCombo(m_CellList);
+
 	m_CellList.LimitText(MWESM_ID_MAXSIZE);
 	m_TargetList.LimitText(MWESM_ID_MAXSIZE);
 	m_DurationText.LimitText(16);
@@ -158,7 +161,7 @@ BOOL CEsmAiEscortDlg::OnInitDialog() {
 	/* Set the text values */
 
 	if (pAiData != NULL) {
-		Buffer.Format(_T("%d"), (int) pAiData->Duration);
+		Buffer.Format(_T("%d"), (int)pAiData->Duration);
 		m_DurationText.SetWindowText(Buffer);
 		m_TargetList.SetWindowText(pAiData->ID);
 		m_EscortCheck.SetCheck(!m_CellName.IsEmpty());
@@ -179,7 +182,7 @@ BOOL CEsmAiEscortDlg::OnInitDialog() {
 
 	/* Enable/disable controls as required */
 	OnEscortcheck();
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================

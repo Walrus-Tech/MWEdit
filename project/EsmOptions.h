@@ -55,20 +55,19 @@ class CEsmOptions {
 	CEsmScriptOptions m_BlueScriptOptions; /* Standard/user script settings */
 	CEsmScriptOptions m_WhiteScriptOptions;
 	CEsmScriptOptions m_UserScriptOptions;
+
 	int m_ScriptFormatType;
 
-	bool m_StrictIDs;      /* Only only certain IDs */
+	bool m_StrictIDs;                      /* Only only certain IDs */
+	bool m_BackupSaves;                    /* Backup plugins when saving */
+	bool m_AllowExtFuncs;                  /* Allow extended MWSE functions */
+	bool m_NoScriptFormat;                 /* Display script format or not? */
+	bool m_NoScriptPrompt;                 /* No script compile prompt */
 
-	bool m_BackupSaves;    /* Backup plugins when saving */
-
-	bool m_AllowExtFuncs;  /* Allow extended MWSE functions */
-
-	bool m_NoScriptFormat; /* Display script format or not? */
-	bool m_NoScriptPrompt; /* No script compile prompt */
-
-	int m_ScriptWarnLevel; /* The warning level of the compiler */
+	int m_ScriptWarnLevel;                 /* The warning level of the compiler */
 
 	TCHAR m_ScriptIndentString[ESMSCR_OPTION_NAMESIZE + 1];
+
 	bool m_InitialIndentLevel;
 	bool m_IndentCommentsMore;
 
@@ -78,10 +77,10 @@ class CEsmOptions {
 	/* Optional custom game path */
 	TCHAR m_DataPath[_MAX_PATH + 4];
 
-	bool m_UseExtraFile; /* Use extra file for script compilations */
+	bool m_UseExtraFile;                   /* Use extra file for script compilations */
 	TCHAR m_ExtraFile[_MAX_PATH + 4];
 
-	bool m_AllowBloodmoon; /* Enable game specific features */
+	bool m_AllowBloodmoon;                 /* Enable game specific features */
 	bool m_AllowTribunal;
 
 
@@ -98,96 +97,96 @@ class CEsmOptions {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Get class members */
-	CEsmScriptOptions *GetScriptOptions(void);
-	CEsmScriptOptions *GetUserFormat(void) {
-		return (&m_UserScriptOptions);
+	CEsmScriptOptions *GetScriptOptions();
+	CEsmScriptOptions *GetUserFormat() {
+		return &m_UserScriptOptions;
 	}
 
-	const TCHAR *GetAuthorName(void) {
-		return (m_AuthorName);
+	const TCHAR *GetAuthorName() {
+		return m_AuthorName;
 	}
 
-	const TCHAR *GetDataPath(void) {
-		return (m_DataPath);
+	const TCHAR *GetDataPath() {
+		return m_DataPath;
 	}
 
-	const TCHAR *GetExtraFile(void) {
-		return (m_ExtraFile);
+	const TCHAR *GetExtraFile() {
+		return m_ExtraFile;
 	}
 
-	const TCHAR *GetScriptIndentString(void) {
-		return (m_ScriptIndentString);
+	const TCHAR *GetScriptIndentString() {
+		return m_ScriptIndentString;
 	}
 
-	bool GetInitialIndentLevel(void) {
-		return (m_InitialIndentLevel);
+	bool GetInitialIndentLevel() {
+		return m_InitialIndentLevel;
 	}
 
-	bool GetIndentCommentsMore(void) {
-		return (m_IndentCommentsMore);
+	bool GetIndentCommentsMore() {
+		return m_IndentCommentsMore;
 	}
 
-	bool GetStrictIDs(void) {
-		return (m_StrictIDs);
+	bool GetStrictIDs() {
+		return m_StrictIDs;
 	}
 
-	bool GetNoScriptFormat(void) {
-		return (m_NoScriptFormat);
+	bool GetNoScriptFormat() {
+		return m_NoScriptFormat;
 	}
 
-	bool GetNoToolTips(void) {
-		return (m_UserScriptOptions.GetNoToolTips());
+	bool GetNoToolTips() {
+		return m_UserScriptOptions.GetNoToolTips();
 	}
 
-	bool GetUseExtraFile(void) {
-		return (m_UseExtraFile);
+	bool GetUseExtraFile() {
+		return m_UseExtraFile;
 	}
 
-	bool GetNoScriptPrompt(void) {
-		return (m_NoScriptPrompt);
+	bool GetNoScriptPrompt() {
+		return m_NoScriptPrompt;
 	}
 
-	bool GetBackupSaves(void) {
-		return (m_BackupSaves);
+	bool GetBackupSaves() {
+		return m_BackupSaves;
 	}
 
-	bool GetAllowExtFuncs(void) {
-		return (m_AllowExtFuncs);
+	bool GetAllowExtFuncs() {
+		return m_AllowExtFuncs;
 	}
 
-	bool GetAllowBloodmoon(void) {
-		return (m_AllowBloodmoon);
+	bool GetAllowBloodmoon() {
+		return m_AllowBloodmoon;
 	}
 
-	bool GetAllowTribunal(void) {
-		return (m_AllowTribunal);
+	bool GetAllowTribunal() {
+		return m_AllowTribunal;
 	}
 
-	int GetScriptWarnLevel(void) {
-		return (m_ScriptWarnLevel);
+	int GetScriptWarnLevel() {
+		return m_ScriptWarnLevel;
 	}
 
-	int GetFormatType(void) {
-		return (m_ScriptFormatType);
+	int GetFormatType() {
+		return m_ScriptFormatType;
 	}
 
-	bool HasDataPath(void) const {
-		return (m_DataPath[0] != NULL_CHAR);
+	bool HasDataPath() const {
+		return m_DataPath[0] != NULL_CHAR;
 	}
 
 	/* Set class members */
-	void SetBlueScript(void) {
+	void SetBlueScript() {
 		m_ScriptFormatType = ESMSCR_FORMAT_BLUE;
 	}
 
-	void SetUserScript(void) {
+	void SetUserScript() {
 		m_ScriptFormatType = ESMSCR_FORMAT_USER;
 	}
 
-	void SetWhiteScript(void) {
+	void SetWhiteScript() {
 		m_ScriptFormatType = ESMSCR_FORMAT_WHITE;
 	}
 
@@ -256,17 +255,15 @@ class CEsmOptions {
 	}
 
 	/* Read options from the registry */
-	bool ReadFromRegistry(void);
+	bool ReadFromRegistry();
 
 	/* Write options to the registry */
-	bool WriteToRegistry(void);
-
+	bool WriteToRegistry();
 };
 
 /*===========================================================================
  *      End of Class CEsmOptions Definition
  *=========================================================================*/
-
 
 
 #endif

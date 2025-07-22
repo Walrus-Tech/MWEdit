@@ -83,6 +83,7 @@ CEsmOptionsDlg::CEsmOptionsDlg(CWnd *pParent) : CDialog(CEsmOptionsDlg::IDD, pPa
  *=========================================================================*/
 void CEsmOptionsDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmOptionsDlg)
 	DDX_Control(pDX, IDC_ALLOWTRIBUNAL, m_AllowTribunal);
 	DDX_Control(pDX, IDC_ALLOWBLOODMOON, m_AllowBloodmoon);
@@ -137,7 +138,7 @@ void CEsmOptionsDlg::DoDataExchange(CDataExchange *pDX) {
  * Fills the format list with the format names.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::FillFormatList(void) {
+void CEsmOptionsDlg::FillFormatList() {
 	/* Clear the current list */
 	m_FormatList.ResetContent();
 	m_CurrentFormat = -1;
@@ -167,7 +168,7 @@ void CEsmOptionsDlg::FillFormatList(void) {
  * Fills the font size list.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::FillFontSizeList(void) {
+void CEsmOptionsDlg::FillFontSizeList() {
 	/* Clear the current list */
 	m_FontSizeList.ResetContent();
 
@@ -199,7 +200,7 @@ void CEsmOptionsDlg::FillFontSizeList(void) {
  * Fills the font name list.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::FillFontNameList(void) {
+void CEsmOptionsDlg::FillFontNameList() {
 	/* Clear the current list */
 	m_FontFaceList.ResetContent();
 
@@ -225,7 +226,7 @@ void CEsmOptionsDlg::FillFontNameList(void) {
  * Fill the warning level list with the level types.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::FillWarnLevelList(void) {
+void CEsmOptionsDlg::FillWarnLevelList() {
 	int ListIndex;
 	/* Clear the current list */
 	m_WarnLevelList.ResetContent();
@@ -261,7 +262,7 @@ void CEsmOptionsDlg::FillWarnLevelList(void) {
  * Save the control data to the original options object.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::GetControlData(void) {
+void CEsmOptionsDlg::GetControlData() {
 	CString Buffer;
 	int ListIndex;
 	int Count;
@@ -375,7 +376,7 @@ void CEsmOptionsDlg::GetControlData(void) {
  * Gets the format data from the controls if required.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::GetFormatData(void) {
+void CEsmOptionsDlg::GetFormatData() {
 	CHARFORMAT2 *pFormat;
 	int FormatIndex;
 
@@ -626,13 +627,16 @@ void CEsmOptionsDlg::OnWhiteformatButton() {
  *=========================================================================*/
 BOOL CEsmOptionsDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
+
 	/* Fill/create the required lists */
 	FillWarnLevelList();
 	FillFormatList();
 	FillFontNameList();
 	FillFontSizeList();
+
 	/* Limit the size of the input author name textbox */
 	m_AuthorText.SetLimitText(ESMSCR_OPTION_NAMESIZE);
+
 	/* Set the sample text value */
 	m_SampleText.SetWindowText(_T("Sample Text..."));
 
@@ -642,7 +646,7 @@ BOOL CEsmOptionsDlg::OnInitDialog() {
 	}
 
 	SetControlData();
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -688,7 +692,7 @@ void CEsmOptionsDlg::OnSelchangeFormatList() {
  * Set the control values from the options object.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::SetControlData(void) {
+void CEsmOptionsDlg::SetControlData() {
 	CString Buffer;
 
 	/* Ensure a valid options object */
@@ -699,6 +703,7 @@ void CEsmOptionsDlg::SetControlData(void) {
 	/* General options */
 	m_AuthorText.SetWindowText(m_pOrigOptions->GetAuthorName());
 	m_GamePath.SetWindowText(m_pOrigOptions->GetDataPath());
+
 	m_BackupSaves.SetCheck(m_pOrigOptions->GetBackupSaves());
 	m_AllowExtFuncs.SetCheck(m_pOrigOptions->GetAllowExtFuncs());
 	m_StrictIDs.SetCheck(m_pOrigOptions->GetStrictIDs());
@@ -731,6 +736,7 @@ void CEsmOptionsDlg::SetControlData(void) {
 	/* Display the first format information */
 	m_FormatList.SetCurSel(0);
 	SetFormatData(0);
+
 	/* Set the font controls */
 	SetFontData();
 }
@@ -747,7 +753,7 @@ void CEsmOptionsDlg::SetControlData(void) {
  * Sets the font control data from the current options object.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::SetFontData(void) {
+void CEsmOptionsDlg::SetFontData() {
 	LOGFONT LogFont;
 	int ListIndex;
 	/* Get the font information */
@@ -792,6 +798,7 @@ void CEsmOptionsDlg::SetFormatData(const int Index) {
 	}
 
 	pFormat = m_ScriptOptions.GetCharFormat(FormatIndex);
+
 	/* Update the format color box */
 	m_FormatColor.SetColor(pFormat->crTextColor);
 	m_FormatColor.RedrawWindow();
@@ -810,7 +817,7 @@ void CEsmOptionsDlg::SetFormatData(const int Index) {
  * Updates the font of the sample textbox and redraws it.
  *
  *=========================================================================*/
-void CEsmOptionsDlg::UpdateSampleFontText(void) {
+void CEsmOptionsDlg::UpdateSampleFontText() {
 	GetFontData(&m_SampleFont);
 	m_SampleText.SetFont(&m_SampleFont, TRUE);
 }

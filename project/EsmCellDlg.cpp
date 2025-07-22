@@ -76,6 +76,7 @@ CEsmCellDlg::CEsmCellDlg() : CEsmRecDialog(CEsmCellDlg::IDD) {
 
 void CEsmCellDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCellDlg)
 	DDX_Control(pDX, IDC_GRIDTEXT, m_GridText);
 	DDX_Control(pDX, IDC_TABCTRL, m_TabControl);
@@ -94,9 +95,10 @@ void CEsmCellDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmCellDlg::GetControlData(void) {
+void CEsmCellDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmCellDlg::GetControlData()");
 	CString Buffer;
+
 	/* Update the armor pointer and data */
 	m_pCell = (CEsmCell *)GetRecInfo()->pRecord;
 	ASSERT(m_pCell != NULL);
@@ -130,9 +132,9 @@ void CEsmCellDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmCellDlg::IsModified(void) {
+bool CEsmCellDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -141,7 +143,7 @@ bool CEsmCellDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -158,9 +160,11 @@ bool CEsmCellDlg::IsModified(void) {
 void CEsmCellDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the cell record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pCell = (CEsmCell *)GetRecInfo()->pRecord;
+
 	/* Create the tab control pages according to the cell type */
 	m_RefCellPage.Create(IDD_REFCELL_PAGE, &m_TabControl);
 	m_TabControl.AddTab("Objects", &m_RefCellPage);
@@ -180,8 +184,10 @@ void CEsmCellDlg::OnInitialUpdate() {
 	}
 
 	m_TabControl.SetPage(0);
+
 	/* Initialize the text controls */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE * 2);
+
 	/* Update the UI data */
 	SetControlData();
 }
@@ -205,7 +211,7 @@ int CEsmCellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		}
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -219,7 +225,7 @@ int CEsmCellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmCellDlg::SetControlData(void) {
+void CEsmCellDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pCell == NULL) {
 		return;
@@ -229,6 +235,7 @@ void CEsmCellDlg::SetControlData(void) {
 	m_IDText.SetWindowText(m_pCell->GetID());
 	UpdateTitle(m_pCell->GetName());
 	m_IDText.SetModify(FALSE);
+
 	/* Read only textbox for the grid coordinates */
 	m_GridText.SetWindowText(m_pCell->GetGrid());
 	m_RefCellPage.SetControlData();

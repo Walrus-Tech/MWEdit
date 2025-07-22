@@ -84,7 +84,6 @@ static esmcoldata_t l_SpellColData[] = {
 		0,
 		0
 	} /* Must be last record */
-
 };
 
 /*===========================================================================
@@ -136,6 +135,7 @@ CEsmBirthSignDlg::CEsmBirthSignDlg() : CEsmRecDialog(CEsmBirthSignDlg::IDD) {
 
 void CEsmBirthSignDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmBirthSignDlg)
 	DDX_Control(pDX, IDC_DESCTEXT, m_DescText);
 	DDX_Control(pDX, IDC_SPELLLIST, m_SpellList);
@@ -156,7 +156,7 @@ void CEsmBirthSignDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmBirthSignDlg::GetControlData(void) {
+void CEsmBirthSignDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmBirthSignDlg::GetControlData()");
 	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
@@ -176,12 +176,15 @@ void CEsmBirthSignDlg::GetControlData(void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pBirthSign->SetName(TrimStringSpace(Buffer));
+
 	/* Item description */
 	m_DescText.GetWindowText(Buffer);
 	m_pBirthSign->SetDescription(TrimStringSpace(Buffer));
+
 	/* Texture button */
 	m_TextureButton.GetWindowText(Buffer);
 	m_pBirthSign->SetTexture(Buffer);
+
 	/* Spells and abilities */
 	m_pBirthSign->DeleteSubRecords(MWESM_SUBREC_NPCS);
 
@@ -209,9 +212,9 @@ void CEsmBirthSignDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmBirthSignDlg::IsModified(void) {
+bool CEsmBirthSignDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -228,7 +231,7 @@ bool CEsmBirthSignDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -245,9 +248,11 @@ bool CEsmBirthSignDlg::IsModified(void) {
 void CEsmBirthSignDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pBirthSign = (CEsmBirthSign *)GetRecInfo()->pRecord;
+
 	/* Spell List */
 	m_SpellList.OnInitCtrl();
 	m_SpellList.SetDlgHandler(m_pParent);
@@ -255,10 +260,12 @@ void CEsmBirthSignDlg::OnInitialUpdate() {
 	m_SpellList.SetAcceptDrag(true);
 	m_SpellList.SetWantKeys(true);
 	m_SpellList.InitObjectList(&l_SpellColData[0]);
+
 	/* Initialize the text controls */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
 	m_DescText.SetLimitText(256);
+
 	/* Update the UI data */
 	SetControlData();
 }
@@ -283,13 +290,13 @@ LRESULT CEsmBirthSignDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Can only drag spells onto the list */
 
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_SpellList.FindRecord(pRecInfo);
@@ -300,7 +307,7 @@ LRESULT CEsmBirthSignDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 		ListIndex = m_SpellList.AddItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -327,10 +334,10 @@ LRESULT CEsmBirthSignDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_SpellList.GetNextItem(-1, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -371,7 +378,7 @@ int CEsmBirthSignDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_SpellList.UpdateItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -385,7 +392,7 @@ int CEsmBirthSignDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmBirthSignDlg::SetControlData(void) {
+void CEsmBirthSignDlg::SetControlData() {
 	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -401,14 +408,18 @@ void CEsmBirthSignDlg::SetControlData(void) {
 	m_IDText.SetWindowText(m_pBirthSign->GetID());
 	UpdateTitle(m_pBirthSign->GetID());
 	m_IDText.SetModify(FALSE);
+
 	/* Item name */
 	m_NameText.SetWindowText(m_pBirthSign->GetName());
 	m_NameText.SetModify(FALSE);
+
 	/* Item description */
 	m_DescText.SetWindowText(m_pBirthSign->GetDescription());
 	m_DescText.SetModify(FALSE);
+
 	/* Texture button */
 	m_TextureButton.SetWindowText(m_pBirthSign->GetTexture());
+
 	/* Spells and abilities */
 	pSpellRec = (CEsmSubName32 *)m_pBirthSign->FindFirst(MWESM_SUBREC_NPCS, Index);
 

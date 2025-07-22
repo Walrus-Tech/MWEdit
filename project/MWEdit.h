@@ -91,7 +91,7 @@ class CMWEditApp : public CWinApp {
 	bool AddFindHistory(const TCHAR *pString);
 
 	/* Delete all current master files */
-	void ClearFileArray(void);
+	void ClearFileArray();
 
 	/* Sees if the find string already exists in the find history */
 	int FindFindHistory(const TCHAR *pString);
@@ -100,16 +100,16 @@ class CMWEditApp : public CWinApp {
 	CEsmFile *FindMaster(const TCHAR *pFilename);
 
 	/* Get class members */
-	CEsmFileArray *GetMasters(void) {
-		return (&m_EsmMasters);
+	CEsmFileArray *GetMasters() {
+		return &m_EsmMasters;
 	}
 
-	CEsmScrFuncArray *GetFunctionArray(void) {
-		return (&m_FunctionArray);
+	CEsmScrFuncArray *GetFunctionArray() {
+		return &m_FunctionArray;
 	}
 
-	CEsmOptions *GetOptions(void) {
-		return (&m_Options);
+	CEsmOptions *GetOptions() {
+		return &m_Options;
 	}
 
 	/* Loads the given master ESM file */

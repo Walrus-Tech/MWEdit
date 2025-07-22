@@ -46,12 +46,14 @@ DEFINE_FILE("EsmInfoDlg.cpp");
 BEGIN_MESSAGE_MAP(CEsmInfoDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmInfoDlg)
 	ON_CBN_SELCHANGE(IDC_IDLIST, OnSelchangeIdlist)
+
 	ON_CBN_SELCHANGE(IDC_TYPELIST1, OnSelchangeTypelist1)
 	ON_CBN_SELCHANGE(IDC_TYPELIST2, OnSelchangeTypelist2)
 	ON_CBN_SELCHANGE(IDC_TYPELIST3, OnSelchangeTypelist3)
 	ON_CBN_SELCHANGE(IDC_TYPELIST4, OnSelchangeTypelist4)
 	ON_CBN_SELCHANGE(IDC_TYPELIST5, OnSelchangeTypelist5)
 	ON_CBN_SELCHANGE(IDC_TYPELIST6, OnSelchangeTypelist6)
+
 	ON_BN_CLICKED(IDC_SOUNDBUTTON, OnSoundbutton)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -89,20 +91,27 @@ CEsmInfoDlg::CEsmInfoDlg(CWnd* pParent) : CDialog(CEsmInfoDlg::IDD, pParent) {
 
 void CEsmInfoDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmInfoDlg)
 	DDX_Control(pDX, IDC_SOUNDBUTTON, m_SoundButton);
 	DDX_Control(pDX, IDC_SOUNDLABEL, m_SoundLabel);
+
 	DDX_Control(pDX, IDC_RESULTTEXT, m_ResultText);
+
 	DDX_Control(pDX, IDC_PCRANKLIST, m_PCRankList);
 	DDX_Control(pDX, IDC_PCFACTIONLIST, m_PCFactionList);
+
 	DDX_Control(pDX, IDC_CELLLIST, m_CellList);
 	DDX_Control(pDX, IDC_RANKLIST, m_RankList);
 	DDX_Control(pDX, IDC_FACTIONLIST, m_FactionList);
 	DDX_Control(pDX, IDC_CLASSLIST, m_ClassList);
 	DDX_Control(pDX, IDC_RACELIST, m_RaceList);
 	DDX_Control(pDX, IDC_IDLIST, m_IDList);
+
 	DDX_Control(pDX, IDC_DISPOSITIONTEXT, m_DispText);
+
 	DDX_Control(pDX, IDC_GENDERLIST, m_GenderList);
+
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
@@ -158,17 +167,17 @@ bool CEsmInfoDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDocume
 	m_pDocument = pDocument;
 
 	if (pInfo == NULL || pDocument == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Display the modal window */
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -182,7 +191,7 @@ bool CEsmInfoDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDocume
  *
  *=========================================================================*/
 
-void CEsmInfoDlg::GetControlData(void) {
+void CEsmInfoDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmInfoDlg::GetControlData()");
 	CString Buffer;
 	CEsmInfo *pNewInfo;
@@ -297,6 +306,7 @@ void CEsmInfoDlg::GetFuncData(const int Index, int &FuncIndex) {
 	pFuncData = (CEsmSubSCVR *)m_pInfo->AllocateSubRecord(MWESM_SUBREC_SCVR);
 	pFuncData->CreateNew();
 	pData = pFuncData->GetInfoFuncData();
+
 	/* Basic function data */
 	ListIndex = m_CompareList[Index].GetCurSel();
 	pData->CompareOp = (byte)((ListIndex < 0) ? MWESM_SCVROP_EQUALS
@@ -311,8 +321,8 @@ void CEsmInfoDlg::GetFuncData(const int Index, int &FuncIndex) {
 	switch (NewType) {
 		case MWESM_SCVRFUNC_FUNCTION:
 			ListIndex = m_FuncVarList[Index].GetCurSel();
-			pData->Function = (short)((ListIndex < 0) ? MWESM_SCVRFUNCCODE_VARIABLE :
-			                          m_FuncVarList[Index].GetItemData(ListIndex));
+			pData->Function = (short)((ListIndex < 0) ? MWESM_SCVRFUNCCODE_VARIABLE
+			                          : m_FuncVarList[Index].GetItemData(ListIndex));
 			break;
 
 		case MWESM_SCVRFUNC_GLOBAL:
@@ -443,7 +453,7 @@ BOOL CEsmInfoDlg::OnInitDialog() {
 	}
 
 	SetControlData();
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -582,7 +592,7 @@ void CEsmInfoDlg::OnSoundbutton() {
  *
  *=========================================================================*/
 
-void CEsmInfoDlg::SetControlData(void) {
+void CEsmInfoDlg::SetControlData() {
 	CString Buffer;
 	CEsmSubSCVR *pFuncData;
 	infodata_t *pInfoData = m_pInfo->GetInfoData();
@@ -622,13 +632,13 @@ void CEsmInfoDlg::SetControlData(void) {
 		m_GenderList.EnableWindow(FALSE);
 	}
 
-	pFuncData = (CEsmSubSCVR *) m_pInfo->FindFirst(MWESM_SUBREC_SCVR, ArrayIndex);
+	pFuncData = (CEsmSubSCVR *)m_pInfo->FindFirst(MWESM_SUBREC_SCVR, ArrayIndex);
 
 	/* Function data */
 
 	for (Index = 0; Index < MWESM_INFO_MAXFUNCS; Index++) {
 		SetFuncData(Index, pFuncData, m_pInfo->GetSubRecord(ArrayIndex + 1));
-		pFuncData = (CEsmSubSCVR *) m_pInfo->FindNext(MWESM_SUBREC_SCVR, ArrayIndex);
+		pFuncData = (CEsmSubSCVR *)m_pInfo->FindNext(MWESM_SUBREC_SCVR, ArrayIndex);
 	}
 
 	/* Sound button if required */

@@ -60,31 +60,26 @@ class CMwCustomFunction {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CMwCustomFunction();
 	//virtual ~CMwCustomFunction() { Destroy(); }
 	//virtual void Destroy (void);
 
 	/* Get class members */
-
-	esmscrfuncinfo_t &GetData(void) {
-		return (m_Data);
+	esmscrfuncinfo_t &GetData() {
+		return m_Data;
 	}
 
-	const char *GetName(void) {
-		return (m_Data.Name);
+	const char *GetName() {
+		return m_Data.Name;
 	}
 
 	/* Read in function parameters from a file */
-
 	bool Read(CGenFile &File, dword &LineCount);
 
 	/* Sets a parameter based on the string inputs */
-
 	bool SetParameter(const char *pVariable, const char *pValue);
 
 	/* Set class members */
-
 	void SetName(const char *pValue) {
 		strnncpy(m_Data.Name, pValue, MWESM_SCRIPT_FUNCNAMESIZE);
 	}
@@ -120,7 +115,6 @@ class CMwCustomFunction {
  *=========================================================================*/
 
 /* Map of custom functions */
-
 typedef TGenMap<CSString, CMwCustomFunction *, const char *> CMwCustomFunctions;
 
 /*===========================================================================
@@ -135,7 +129,6 @@ typedef TGenMap<CSString, CMwCustomFunction *, const char *> CMwCustomFunctions;
  *=========================================================================*/
 
 /* Input functions from a file */
-
 bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename);
 
 /*===========================================================================
@@ -150,7 +143,6 @@ bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename)
  *=========================================================================*/
 
 /* Global custom function map */
-
 extern CMwCustomFunctions g_CustomFunctions;
 
 /*===========================================================================

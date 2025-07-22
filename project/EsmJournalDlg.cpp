@@ -116,17 +116,17 @@ bool CEsmJournalDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDoc
 	m_pDocument = pDocument;
 
 	if (pInfo == NULL || pDocument == NULL) {
-		return (false);
+		return false;
 	}
 
 	/* Display the modal window */
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -140,7 +140,7 @@ bool CEsmJournalDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDoc
  *
  *=========================================================================*/
 
-void CEsmJournalDlg::GetControlData(void) {
+void CEsmJournalDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmJournalDlg::GetControlData()");
 	CString Buffer;
 	CEsmInfo *pNewInfo;
@@ -216,7 +216,7 @@ BOOL CEsmJournalDlg::OnInitDialog() {
 	m_NameText.SetLimitText(512);
 	m_IndexText.SetLimitText(8);
 	SetControlData();
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -246,7 +246,7 @@ void CEsmJournalDlg::OnOK() {
  *
  *=========================================================================*/
 
-void CEsmJournalDlg::SetControlData(void) {
+void CEsmJournalDlg::SetControlData() {
 	CString Buffer;
 	int ArrayIndex;
 

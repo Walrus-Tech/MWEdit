@@ -51,17 +51,14 @@ class CEsmBodyPartDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmBodyPartDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -73,9 +70,11 @@ class CEsmBodyPartDlg : public CEsmRecDialog {
 	CButton m_VampireCheck;
 	CButton m_FemaleCheck;
 	CButton m_PlayableCheck;
+
 	CComboBox m_RaceList;
 	CComboBox m_PartTypeList;
 	CComboBox m_PartList;
+
 	CButton m_BlockedCheck;
 	//}}AFX_DATA
 

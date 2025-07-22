@@ -94,7 +94,7 @@ void CEsmNpcDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmNpcDlg::GetControlData(void) {
+void CEsmNpcDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmNpcDlg::GetControlData()");
 	CString Buffer;
 	/* Update the object pointer and data */
@@ -128,16 +128,16 @@ void CEsmNpcDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmNpcDlg::IsModified(void) {
+bool CEsmNpcDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	if (m_IDText.GetModify()) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -222,7 +222,7 @@ int CEsmNpcDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_Page3.OnUpdateItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -236,7 +236,7 @@ int CEsmNpcDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmNpcDlg::SetControlData(void) {
+void CEsmNpcDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pNpc == NULL) {
 		return;

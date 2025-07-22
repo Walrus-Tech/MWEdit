@@ -46,12 +46,10 @@ class CMwSplitterWnd : public CSplitterWnd {
   public:
 
 	/* Construction/Destructor */
-
 	CMwSplitterWnd();
 	virtual ~CMwSplitterWnd();
 
 	/* Overloaded to change layout order */
-
 	virtual void RecalcLayout();
 
 	/* ClassWizard generated virtual function overrides */
@@ -74,15 +72,8 @@ class CMwSplitterWnd : public CSplitterWnd {
  *=========================================================================*/
 
 
-
-
-
 //{{AFX_INSERT_LOCATION}}
-
 //}}AFX_INSERT_LOCATION
-
-
-
 
 
 #endif

@@ -83,6 +83,7 @@ CEsmBodyPartDlg::CEsmBodyPartDlg() : CEsmRecDialog(CEsmBodyPartDlg::IDD) {
 
 void CEsmBodyPartDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmBodyPartDlg)
 	DDX_Control(pDX, IDC_VAMPIRECHECK, m_VampireCheck);
 	DDX_Control(pDX, IDC_FEMALECHECK, m_FemaleCheck);
@@ -107,7 +108,7 @@ void CEsmBodyPartDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmBodyPartDlg::GetControlData(void) {
+void CEsmBodyPartDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmBodyPartDlg::GetControlData()");
 	bodypartdata_t *pBodyData;
 	CString Buffer;
@@ -135,11 +136,13 @@ void CEsmBodyPartDlg::GetControlData(void) {
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pBodyPart->SetModel(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pBodyPart->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 	pBodyData->Vampire = m_VampireCheck.GetCheck();
 	m_pBodyPart->SetPlayable(m_PlayableCheck.GetCheck() != 0);
 	m_pBodyPart->SetFemale(m_FemaleCheck.GetCheck() != 0);
+
 	/* Body part list */
 	ListIndex = m_PartList.GetCurSel();
 
@@ -170,9 +173,9 @@ void CEsmBodyPartDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmBodyPartDlg::IsModified(void) {
+bool CEsmBodyPartDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -181,7 +184,7 @@ bool CEsmBodyPartDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -198,17 +201,22 @@ bool CEsmBodyPartDlg::IsModified(void) {
 void CEsmBodyPartDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pBodyPart = (CEsmBodyPart *)GetRecInfo()->pRecord;
+
 	/* Set text limits */
 	m_IDText.SetLimitText(MWESM_ID_MAXSIZE);
+
 	/* Disable controls */
 	m_PlayableCheck.EnableWindow(FALSE);
+
 	/* Fill the various lists */
 	FillEsmBodyPartCombo(m_PartList);
 	FillEsmBodyPartTypeCombo(m_PartTypeList);
 	FillEsmRaceCombo(m_RaceList);
+
 	SetControlData();
 }
 
@@ -264,7 +272,7 @@ void CEsmBodyPartDlg::OnSelchangeList() {
  *
  *=========================================================================*/
 
-void CEsmBodyPartDlg::SetControlData(void) {
+void CEsmBodyPartDlg::SetControlData() {
 	bodypartdata_t *pBodyData;
 
 	/* Ignore if the current item is not valid */
@@ -282,15 +290,19 @@ void CEsmBodyPartDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pBodyPart->GetID());
 	UpdateTitle(m_pBodyPart->GetID());
+
 	/* Update Lists */
 	FindComboListItem(m_PartList, pBodyData->Part, true);
 	FindComboListItem(m_PartTypeList, pBodyData->PartType, true);
 	m_RaceList.SelectString(-1, m_pBodyPart->GetRace());
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pBodyPart->GetModel());
+
 	/* Enable/disable skin data controls */
 	m_RaceList.EnableWindow(pBodyData->PartType == MWESM_PARTTYPE_SKIN);
 	m_VampireCheck.EnableWindow(pBodyData->PartType == MWESM_PARTTYPE_SKIN);
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pBodyPart->IsBlocked());
 	m_VampireCheck.SetCheck(m_pBodyPart->IsVampire());

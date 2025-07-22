@@ -103,7 +103,7 @@ void CEsmApparatusDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmApparatusDlg::GetControlData(void) {
+void CEsmApparatusDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmApparatusDlg::GetControlData()");
 	appadata_t *pAppaData;
 	CString Buffer;
@@ -128,6 +128,7 @@ void CEsmApparatusDlg::GetControlData(void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pApparatus->SetName(TrimStringSpace(Buffer));
+
 	/* Item type */
 	Index = m_TypeList.GetCurSel();
 
@@ -138,21 +139,27 @@ void CEsmApparatusDlg::GetControlData(void) {
 	/* Item quality */
 	m_QualityText.GetWindowText(Buffer);
 	pAppaData->Quality = (float)atof(Buffer);
+
 	/* Item weight */
 	m_WeightText.GetWindowText(Buffer);
 	pAppaData->Weight = (float)atof(Buffer);
+
 	/* Item value */
 	m_ValueText.GetWindowText(Buffer);
 	pAppaData->Value = atoi(Buffer);
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pApparatus->SetScript(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pApparatus->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pApparatus->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pApparatus->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pApparatus->SetBlocked(m_BlockedCheck.GetCheck() != 0);
@@ -169,9 +176,9 @@ void CEsmApparatusDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmApparatusDlg::IsModified(void) {
+bool CEsmApparatusDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -196,7 +203,7 @@ bool CEsmApparatusDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -213,15 +220,19 @@ bool CEsmApparatusDlg::IsModified(void) {
 void CEsmApparatusDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pApparatus = (CEsmApparatus *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmApparatusTypeCombo(m_TypeList);
 	FillEsmScriptCombo(m_ScriptList);
+
 	m_WeightText.SetLimitText(8);
 	m_ValueText.SetLimitText(8);
 	m_QualityText.SetLimitText(8);
+
 	/* Update the UI data */
 	SetControlData();
 }
@@ -252,7 +263,7 @@ int CEsmApparatusDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -266,7 +277,7 @@ int CEsmApparatusDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmApparatusDlg::SetControlData(void) {
+void CEsmApparatusDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pApparatus == NULL) {
 		return;
@@ -275,6 +286,7 @@ void CEsmApparatusDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pApparatus->GetID());
 	UpdateTitle(m_pApparatus->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pApparatus->GetName());
 	m_QualityText.SetWindowText(m_pApparatus->GetFieldString(ESM_FIELD_QUALITY));
@@ -284,13 +296,16 @@ void CEsmApparatusDlg::SetControlData(void) {
 	m_QualityText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pApparatus->GetModel());
 	m_IconButton.SetWindowText(m_pApparatus->GetIcon());
 	m_IconPicture.SetEsmIcon(m_pApparatus->GetIcon());
+
 	/* Item lists */
 	FindComboListItem(m_TypeList, m_pApparatus->GetAppaTypeID(), true);
 	m_ScriptList.SelectString(-1, m_pApparatus->GetScript());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pApparatus->IsBlocked());
 	m_PersistCheck.SetCheck(m_pApparatus->IsPersist());

@@ -141,6 +141,7 @@ void CEsmFuncHelpView::DisplayFunction(const int Index) {
  *=========================================================================*/
 void CEsmFuncHelpView::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmFuncHelpView)
 	DDX_Control(pDX, IDC_DETAILLABEL, m_DetailLabel);
 	DDX_Control(pDX, IDC_HBAR, m_Bar);
@@ -187,7 +188,7 @@ void CEsmFuncHelpView::Dump(CDumpContext &dc) const {
  * Fills the function combo list with the current function names.
  *
  *=========================================================================*/
-void CEsmFuncHelpView::FillFunctionList(void) {
+void CEsmFuncHelpView::FillFunctionList() {
 	CEsmScrFuncData *pFunction;
 	int Index;
 	int Result;
@@ -220,7 +221,7 @@ void CEsmFuncHelpView::FillFunctionList(void) {
  * Class CEsmFuncHelpView Method - CMWEditApp* GetApp (void);
  *
  *=========================================================================*/
-CMWEditApp *CEsmFuncHelpView::GetApp(void) {
+CMWEditApp *CEsmFuncHelpView::GetApp() {
 	return (CMWEditApp *)AfxGetApp();
 }
 
@@ -301,19 +302,19 @@ LRESULT CEsmFuncHelpView::OnViewError(WPARAM wParam, LPARAM lParam) {
 
 	/* Ensure valid input */
 	if (pName == NULL) {
-		return (0);
+		return 0;
 	}
 
 	/* Attempt to find the function in the list */
 	ListIndex = m_FunctionList.FindStringExact(0, pName);
 
 	if (ListIndex < 0) {
-		return (0);
+		return 0;
 	}
 
 	m_FunctionList.SetCurSel(ListIndex);
 	DisplayFunction(ListIndex);
-	return (0);
+	return 0;
 }
 
 /*===========================================================================

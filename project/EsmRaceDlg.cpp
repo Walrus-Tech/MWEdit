@@ -164,6 +164,7 @@ CEsmRaceDlg::CEsmRaceDlg() : CEsmRecDialog(CEsmRaceDlg::IDD) {
 
 void CEsmRaceDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmRaceDlg)
 	DDX_Control(pDX, IDC_FEMALETOTAL, m_FemaleTotal);
 	DDX_Control(pDX, IDC_MALETOTAL, m_MaleTotal);
@@ -236,13 +237,14 @@ void CEsmRaceDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmRaceDlg::GetControlData(void) {
+void CEsmRaceDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmRaceDlg::GetControlData()");
 	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	racedata_t *pRaceData;
 	CString Buffer;
 	int Index;
+
 	/* Update the armor pointer and data */
 	m_pRace = (CEsmRace *)GetRecInfo()->pRecord;
 	ASSERT(m_pRace != NULL);
@@ -275,6 +277,7 @@ void CEsmRaceDlg::GetControlData(void) {
 	GETLISTDATA(m_SkillList5, pRaceData->SkillBonuses[4].SkillID);
 	GETLISTDATA(m_SkillList6, pRaceData->SkillBonuses[5].SkillID);
 	GETLISTDATA(m_SkillList7, pRaceData->SkillBonuses[6].SkillID);
+
 	m_BonusText1.GetWindowText(Buffer);
 	pRaceData->SkillBonuses[0].Bonus = atoi(Buffer);
 	m_BonusText2.GetWindowText(Buffer);
@@ -372,9 +375,9 @@ void CEsmRaceDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmRaceDlg::IsModified(void) {
+bool CEsmRaceDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -391,7 +394,7 @@ bool CEsmRaceDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -501,13 +504,13 @@ LRESULT CEsmRaceDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Can only drag spells onto the list */
 
 	if (!pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_SpellList.FindRecord(pRecInfo);
@@ -518,7 +521,7 @@ LRESULT CEsmRaceDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 		ListIndex = m_SpellList.AddItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -545,10 +548,10 @@ LRESULT CEsmRaceDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_SpellList.GetNextItem(-1, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -568,7 +571,7 @@ int CEsmRaceDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_SpellList.UpdateItem(pRecInfo);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -582,7 +585,7 @@ int CEsmRaceDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmRaceDlg::SetControlData(void) {
+void CEsmRaceDlg::SetControlData() {
 	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -741,7 +744,7 @@ void CEsmRaceDlg::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmRaceDlg::UpdateAttribTotals(void) {
+void CEsmRaceDlg::UpdateAttribTotals() {
 	CString Buffer;
 	int MaleTotal = 0;
 	int FemaleTotal = 0;

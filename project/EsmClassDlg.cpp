@@ -86,6 +86,7 @@ CEsmClassDlg::CEsmClassDlg() : CEsmRecDialog(CEsmClassDlg::IDD) {
 
 void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmClassDlg)
 	DDX_Control(pDX, IDC_MINORLIST5, m_MinorList5);
 	DDX_Control(pDX, IDC_MINORLIST4, m_MinorList4);
@@ -97,6 +98,7 @@ void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_MAJORLIST3, m_MajorList3);
 	DDX_Control(pDX, IDC_MAJORLIST2, m_MajorList2);
 	DDX_Control(pDX, IDC_MAJORLIST1, m_MajorList1);
+
 	DDX_Control(pDX, IDC_PLAYABLECHECK, m_PlayableCheck);
 	DDX_Control(pDX, IDC_REPAIRSCHECK, m_RepairItemsCheck);
 	DDX_Control(pDX, IDC_TRAINCHECK, m_TrainCheck);
@@ -116,11 +118,16 @@ void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_BOOKCHECK, m_BookCheck);
 	DDX_Control(pDX, IDC_ARMORCHECK, m_ArmorCheck);
 	DDX_Control(pDX, IDC_APPARATUSCHECK, m_ApparatusCheck);
+
 	DDX_Control(pDX, IDC_DESCTEXT, m_DescText);
+
 	DDX_Control(pDX, IDC_MAJORLIST6, m_SpecialList);
+
 	DDX_Control(pDX, IDC_ATTRIBUTELIST2, m_AttributeList2);
 	DDX_Control(pDX, IDC_ATTRIBUTELIST1, m_AttributeList1);
+
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
+
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
 }
@@ -136,10 +143,11 @@ void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmClassDlg::GetControlData(void) {
+void CEsmClassDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmClassDlg::GetControlData()");
 	classdata_t *pClassData;
 	CString Buffer;
+
 	/* Update the armor pointer and data */
 	m_pClass = (CEsmClass *)GetRecInfo()->pRecord;
 	ASSERT(m_pClass != NULL);
@@ -275,9 +283,9 @@ void CEsmClassDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmClassDlg::IsModified(void) {
+bool CEsmClassDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -294,7 +302,7 @@ bool CEsmClassDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -319,6 +327,7 @@ void CEsmClassDlg::OnInitialUpdate() {
 	/* Initialize the lists */
 	FillEsmAttributesCombo(m_AttributeList1);
 	FillEsmAttributesCombo(m_AttributeList2);
+
 	FillEsmSkillsCombo(m_MajorList1);
 	FillEsmSkillsCombo(m_MajorList2);
 	FillEsmSkillsCombo(m_MajorList3);
@@ -329,6 +338,7 @@ void CEsmClassDlg::OnInitialUpdate() {
 	FillEsmSkillsCombo(m_MinorList3);
 	FillEsmSkillsCombo(m_MinorList4);
 	FillEsmSkillsCombo(m_MinorList5);
+
 	FillEsmClassSpecCombo(m_SpecialList);
 
 	/* Initialize the text controls */
@@ -356,7 +366,7 @@ int CEsmClassDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -370,7 +380,7 @@ int CEsmClassDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmClassDlg::SetControlData(void) {
+void CEsmClassDlg::SetControlData() {
 	classdata_t *pClassData;
 
 	/* Ignore if the current item is not valid */

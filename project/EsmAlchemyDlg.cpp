@@ -36,6 +36,7 @@ DEFINE_FILE("EsmAlchemyDlg.cpp");
 BEGIN_MESSAGE_MAP(CEsmAlchemyDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmAlchemyDlg)
 	ON_BN_CLICKED(IDC_AUTOCALCCHECK, OnAutocalccheck)
+
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST1, OnSelchangeEffectlist1)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST2, OnSelchangeEffectlist2)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST3, OnSelchangeEffectlist3)
@@ -44,6 +45,7 @@ BEGIN_MESSAGE_MAP(CEsmAlchemyDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST6, OnSelchangeEffectlist6)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST7, OnSelchangeEffectlist7)
 	ON_CBN_SELCHANGE(IDC_EFFECTLIST8, OnSelchangeEffectlist8)
+
 	ON_CBN_SELCHANGE(IDC_SKILLLIST1, OnSelchangeSkilllist1)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST2, OnSelchangeSkilllist2)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST3, OnSelchangeSkilllist3)
@@ -52,6 +54,7 @@ BEGIN_MESSAGE_MAP(CEsmAlchemyDlg, CEsmRecDialog)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST6, OnSelchangeSkilllist6)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST7, OnSelchangeSkilllist7)
 	ON_CBN_SELCHANGE(IDC_SKILLLIST8, OnSelchangeSkilllist8)
+
 	ON_EN_CHANGE(IDC_DURATIONTEXT1, OnChangeDurationtext1)
 	ON_EN_CHANGE(IDC_DURATIONTEXT2, OnChangeDurationtext2)
 	ON_EN_CHANGE(IDC_DURATIONTEXT3, OnChangeDurationtext3)
@@ -60,6 +63,7 @@ BEGIN_MESSAGE_MAP(CEsmAlchemyDlg, CEsmRecDialog)
 	ON_EN_CHANGE(IDC_DURATIONTEXT6, OnChangeDurationtext6)
 	ON_EN_CHANGE(IDC_DURATIONTEXT7, OnChangeDurationtext7)
 	ON_EN_CHANGE(IDC_DURATIONTEXT8, OnChangeDurationtext8)
+
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT1, OnChangeDurationtext1)
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT2, OnChangeDurationtext2)
 	ON_EN_CHANGE(IDC_MAGNITUDETEXT3, OnChangeDurationtext3)
@@ -119,6 +123,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_NAMETEXT, m_NameText);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_EFFECTLIST1, m_EffectList[0]);
 	DDX_Control(pDX, IDC_EFFECTLIST2, m_EffectList[1]);
 	DDX_Control(pDX, IDC_EFFECTLIST3, m_EffectList[2]);
@@ -127,6 +132,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_EFFECTLIST6, m_EffectList[5]);
 	DDX_Control(pDX, IDC_EFFECTLIST7, m_EffectList[6]);
 	DDX_Control(pDX, IDC_EFFECTLIST8, m_EffectList[7]);
+
 	DDX_Control(pDX, IDC_SKILLLIST1, m_SkillList[0]);
 	DDX_Control(pDX, IDC_SKILLLIST2, m_SkillList[1]);
 	DDX_Control(pDX, IDC_SKILLLIST3, m_SkillList[2]);
@@ -135,6 +141,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_SKILLLIST6, m_SkillList[5]);
 	DDX_Control(pDX, IDC_SKILLLIST7, m_SkillList[6]);
 	DDX_Control(pDX, IDC_SKILLLIST8, m_SkillList[7]);
+
 	DDX_Control(pDX, IDC_COSTLABEL1, m_CostText[0]);
 	DDX_Control(pDX, IDC_COSTLABEL2, m_CostText[1]);
 	DDX_Control(pDX, IDC_COSTLABEL3, m_CostText[2]);
@@ -143,6 +150,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_COSTLABEL6, m_CostText[5]);
 	DDX_Control(pDX, IDC_COSTLABEL7, m_CostText[6]);
 	DDX_Control(pDX, IDC_COSTLABEL8, m_CostText[7]);
+
 	DDX_Control(pDX, IDC_DURATIONTEXT1, m_DurationText[0]);
 	DDX_Control(pDX, IDC_DURATIONTEXT2, m_DurationText[1]);
 	DDX_Control(pDX, IDC_DURATIONTEXT3, m_DurationText[2]);
@@ -151,6 +159,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_DURATIONTEXT6, m_DurationText[5]);
 	DDX_Control(pDX, IDC_DURATIONTEXT7, m_DurationText[6]);
 	DDX_Control(pDX, IDC_DURATIONTEXT8, m_DurationText[7]);
+
 	DDX_Control(pDX, IDC_MAGNITUDETEXT1, m_MagnitudeText[0]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT2, m_MagnitudeText[1]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT3, m_MagnitudeText[2]);
@@ -159,6 +168,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_MAGNITUDETEXT6, m_MagnitudeText[5]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT7, m_MagnitudeText[6]);
 	DDX_Control(pDX, IDC_MAGNITUDETEXT8, m_MagnitudeText[7]);
+
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL1, m_TotalCostText[0]);
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL2, m_TotalCostText[1]);
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL3, m_TotalCostText[2]);
@@ -180,7 +190,7 @@ void CEsmAlchemyDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmAlchemyDlg::GetControlData(void) {
+void CEsmAlchemyDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmAlchemyDlg::GetControlData()");
 	alchemydata_t *pAlchemyData;
 	CString Buffer;
@@ -204,25 +214,32 @@ void CEsmAlchemyDlg::GetControlData(void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pAlchemy->SetName(TrimStringSpace(Buffer));
+
 	/* Item weight */
 	m_WeightText.GetWindowText(Buffer);
 	pAlchemyData->Weight = (float)atof(Buffer);
+
 	/* Item value */
 	m_ValueText.GetWindowText(Buffer);
 	pAlchemyData->Value = atoi(Buffer);
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pAlchemy->SetScript(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pAlchemy->SetModel(TrimStringSpace(Buffer));
+
 	/* Icon filename */
 	m_IconButton.GetWindowText(Buffer);
 	m_pAlchemy->SetIcon(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pAlchemy->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pAlchemy->SetBlocked(m_BlockedCheck.GetCheck() != 0);
-	pAlchemyData->AutoCalc = (m_AutoCalcCheck.GetCheck() != 0);
+
+	pAlchemyData->AutoCalc = m_AutoCalcCheck.GetCheck() != 0;
 	GetEffectData();
 }
 
@@ -255,8 +272,10 @@ void CEsmAlchemyDlg::GetEffectData(const int EffectIndex) {
 	pEnchantData = pEnchantSubRec->GetEnchantData();
 	pEnchantData->Area = 0;
 	pEnchantData->RangeType = 0;
+
 	/* Set the enchant effect */
 	pEnchantData->EffectID = (short)m_EffectList[EffectIndex].GetItemData(ListIndex);
+
 	/* Set the enchant duration */
 	m_DurationText[EffectIndex].GetWindowText(Buffer);
 	pEnchantData->Duration = (short)(atoi(Buffer));
@@ -276,7 +295,6 @@ void CEsmAlchemyDlg::GetEffectData(const int EffectIndex) {
 	pEnchantData->MagMax = pEnchantData->MagMin;
 
 	/* Get the skill/attribute ids */
-
 	if (IsESMSkillEffect(pEnchantData->EffectID)) {
 		ListIndex = m_SkillList[EffectIndex].GetCurSel();
 
@@ -303,7 +321,7 @@ void CEsmAlchemyDlg::GetEffectData(const int EffectIndex) {
  *
  *=========================================================================*/
 
-void CEsmAlchemyDlg::GetEffectData(void) {
+void CEsmAlchemyDlg::GetEffectData() {
 	//DEFINE_FUNCTION("CEsmAlchemyDlg::GetEffectData()");
 	int Index;
 	/* Delete all the enchant ub-records from the alchemy record */
@@ -325,9 +343,9 @@ void CEsmAlchemyDlg::GetEffectData(void) {
  *
  *=========================================================================*/
 
-bool CEsmAlchemyDlg::IsModified(void) {
+bool CEsmAlchemyDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -348,7 +366,7 @@ bool CEsmAlchemyDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -366,9 +384,11 @@ void CEsmAlchemyDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
+
 	/* Initialize the armor record */
 	ASSERT(GetRecInfo() != NULL);
 	m_pAlchemy = (CEsmAlchemy *)GetRecInfo()->pRecord;
+
 	/* Initialize the ui controls/lists */
 	FillEsmScriptCombo(m_ScriptList);
 	m_NameText.SetLimitText(MWESM_ID_MAXSIZE);
@@ -501,10 +521,10 @@ int CEsmAlchemyDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -518,7 +538,7 @@ int CEsmAlchemyDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmAlchemyDlg::SetControlData(void) {
+void CEsmAlchemyDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pAlchemy == NULL) {
 		return;
@@ -527,6 +547,7 @@ void CEsmAlchemyDlg::SetControlData(void) {
 	/* Armor ID, update title as well */
 	m_IDText.SetWindowText(m_pAlchemy->GetID());
 	UpdateTitle(m_pAlchemy->GetID());
+
 	/* Item strings and values */
 	m_NameText.SetWindowText(m_pAlchemy->GetName());
 	m_WeightText.SetWindowText(m_pAlchemy->GetFieldString(ESM_FIELD_WEIGHT));
@@ -535,16 +556,20 @@ void CEsmAlchemyDlg::SetControlData(void) {
 	m_NameText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
+
 	/* Model/icon buttons */
 	m_ModelButton.SetWindowText(m_pAlchemy->GetModel());
 	m_IconButton.SetWindowText(m_pAlchemy->GetIcon());
 	m_IconPicture.SetEsmIcon(m_pAlchemy->GetIcon());
+
 	/* Item lists */
 	m_ScriptList.SelectString(-1, m_pAlchemy->GetScript());
+
 	/* Record flags */
 	m_BlockedCheck.SetCheck(m_pAlchemy->IsBlocked());
 	m_PersistCheck.SetCheck(m_pAlchemy->IsPersist());
 	m_AutoCalcCheck.SetCheck(m_pAlchemy->IsAutoCalc());
+
 	/* Set the effect data */
 	SetEffectData();
 }
@@ -651,7 +676,7 @@ void CEsmAlchemyDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRe
  *
  *=========================================================================*/
 
-void CEsmAlchemyDlg::SetEffectData(void) {
+void CEsmAlchemyDlg::SetEffectData() {
 	CEsmSubENAM *pEffectRecord;
 	int RecordIndex;
 	int EffectIndex;
@@ -736,7 +761,7 @@ void CEsmAlchemyDlg::UpdateSpellCost(const int EffectIndex) {
  *
  *=========================================================================*/
 
-void CEsmAlchemyDlg::UpdateTotalSpellCost(void) {
+void CEsmAlchemyDlg::UpdateTotalSpellCost() {
 	CString Buffer;
 	int Index;
 	float SumValue = 0;
@@ -753,7 +778,7 @@ void CEsmAlchemyDlg::UpdateTotalSpellCost(void) {
 	}
 
 	/* Set the value text */
-	Buffer.Format(_T("%d"), (int) SumValue);
+	Buffer.Format(_T("%d"), (int)SumValue);
 	m_ValueText.SetWindowText(Buffer);
 }
 

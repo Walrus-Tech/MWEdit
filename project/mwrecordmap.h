@@ -32,11 +32,9 @@
  *=========================================================================*/
 
 /* Default size of the hash map tables */
-
 #define MW_RECORDMAP_DEFAULTSIZE 1009
 
 /* Used to iterate through records */
-
 typedef void *MWMAPPOS;
 
 /*===========================================================================
@@ -58,7 +56,6 @@ template<class TKey, class TRecord, class TKeyArg>
 class CMwBaseRecordMap {
 
 	/* Private structure used as a linked list for each unique hash value */
-
 	struct CMwMapAssoc {
 		CMwMapAssoc *pNext;
 		dword HashValue;
@@ -79,19 +76,16 @@ class CMwBaseRecordMap {
   protected:
 
 	/* Compare two keys */
-
 	virtual bool CompareKeys(TKeyArg Key1, TKeyArg Key2);
 	virtual bool CompareKeys(TRecord *Record1, TRecord *Record2);
 	virtual bool CompareKeys(TRecord *Record, TKeyArg Key) = 0;
 
 	/* Helper find method */
-
 	virtual CMwMapAssoc *GetAssocNode(TKeyArg Key, dword &Hash);
 	virtual CMwMapAssoc *GetAssocNode(TRecord *Record, dword &Hash);
 
 	/* Create a new node */
-
-	virtual CMwMapAssoc *NewAssocNode(void);
+	virtual CMwMapAssoc *NewAssocNode();
 
 
 	/*---------- Begin Public Class Methods -----------------------*/
@@ -99,57 +93,47 @@ class CMwBaseRecordMap {
   public:
 
 	/* Class Constructors/Destructors */
-
 	CMwBaseRecordMap();
 
 	virtual ~CMwBaseRecordMap() {
 		Destroy();
 	}
 
-	virtual void Destroy(void);
+	virtual void Destroy();
 
 	/* Delete a specified key */
-
 	void Delete(TKeyArg Key, TRecord *pRecord, const bool Delete = true);
 
 	/* Iterate through records in the map */
-
 	TRecord *GetFirstRecord(MWMAPPOS &Position);
 	TRecord *GetNextRecord(MWMAPPOS &Position);
 	TRecord *GetFirstRecordKey(TKeyArg Key, MWMAPPOS &Position);
 	TRecord *GetNextRecordKey(TKeyArg Key, MWMAPPOS &Position);
 
 	/* Get class members */
-
-	virtual dword GetRecordCount (void) {
-		return (m_RecordCount);
+	virtual dword GetRecordCount() {
+		return m_RecordCount;
 	}
 
 	/* Hash a key value */
-
 	virtual dword HashKey(TKeyArg Key);
 	virtual dword HashKey(TRecord *pRecord);
 
 	/* Initialize the hash table to a specific size */
-
 	virtual void InitHashTable(const dword Size);
 
 	/* Checks if the given record is valid or not */
-
 	virtual bool IsValidRecord(TRecord *pRecord) {
 		return (pRecord != NULL);
 	}
 
 	/* Find an existing value by its key */
-
 	virtual bool Lookup(TKeyArg Key, TRecord *&pRecord);
 
 	/* Delete all hash table entries */
-
-	virtual void RemoveAll(void);
+	virtual void RemoveAll();
 
 	/* Set a value */
-
 	virtual void SetAt(TKeyArg Key, TRecord *pRecord);
 };
 
@@ -183,7 +167,7 @@ CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwBaseRecordMap() {
  *=========================================================================*/
 
 template<class TKey, class TRecord, class TKeyArg>
-inline void CMwBaseRecordMap<TKey, TRecord, TKeyArg>::Destroy(void) {
+inline void CMwBaseRecordMap<TKey, TRecord, TKeyArg>::Destroy() {
 	RemoveAll();
 }
 
@@ -200,13 +184,13 @@ inline void CMwBaseRecordMap<TKey, TRecord, TKeyArg>::Destroy(void) {
 
 template<class TKey, class TRecord, class TKeyArg>
 inline bool CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CompareKeys(TKeyArg Key1, TKeyArg Key2) {
-	return (Key1 == Key2);
+	return Key1 == Key2;
 }
 
 template<class TKey, class TRecord, class TKeyArg>
 inline bool CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CompareKeys(TRecord *Record1,
                                                                   TRecord *Record2) {
-	return (Record1 == Record2);
+	return Record1 == Record2;
 }
 
 /*===========================================================================
@@ -272,7 +256,7 @@ typename CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwMapAssoc
 	Hash = HashKey(Key) % m_HashTableSize;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	for (pAssoc = m_ppHashTable[Hash]; pAssoc != NULL; pAssoc = pAssoc->pNext) {
@@ -281,7 +265,7 @@ typename CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwMapAssoc
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 template<class TKey, class TRecord, class TKeyArg>
@@ -292,7 +276,7 @@ typename CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwMapAssoc
 	Hash = HashKey(pRecord) % m_HashTableSize;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	for (pAssoc = m_ppHashTable[Hash]; pAssoc != NULL; pAssoc = pAssoc->pNext) {
@@ -301,7 +285,7 @@ typename CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwMapAssoc
 		}
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -322,7 +306,7 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetFirstRecord(MWMAPPOS &Posi
 	Position = (MWMAPPOS)NULL;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	for (Index = 0; Index < m_HashTableSize; ++Index) {
@@ -330,12 +314,12 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetFirstRecord(MWMAPPOS &Posi
 
 		if (pAssoc != NULL) {
 			Position = (MWMAPPOS)pAssoc;
-			return (pAssoc->Value);
+			return pAssoc->Value;
 		}
 	}
 
 	/* Nothing to return */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -356,16 +340,16 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetNextRecord(MWMAPPOS &Posit
 	pAssoc = (CMwMapAssoc *)Position;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (pAssoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (pAssoc->pNext != NULL) {
 		Position = (MWMAPPOS)pAssoc->pNext;
-		return (pAssoc->pNext->Value);
+		return pAssoc->pNext->Value;
 	}
 
 	for (Index = pAssoc->HashValue + 1; Index < m_HashTableSize; ++Index) {
@@ -373,13 +357,13 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetNextRecord(MWMAPPOS &Posit
 
 		if (pAssoc != NULL) {
 			Position = (MWMAPPOS)pAssoc;
-			return (pAssoc->Value);
+			return pAssoc->Value;
 		}
 	}
 
 	/* Nothing to return */
 	Position = (MWMAPPOS)NULL;
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -401,7 +385,7 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetFirstRecordKey(TKeyArg Key
 	Position = NULL;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	Hash = HashKey(Key) % m_HashTableSize;
@@ -410,14 +394,14 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetFirstRecordKey(TKeyArg Key
 	while (pAssoc) {
 		if (CompareKeys(pAssoc->Value, Key)) {
 			Position = (MWMAPPOS)pAssoc;
-			return (pAssoc->Value);
+			return pAssoc->Value;
 		}
 
 		pAssoc = pAssoc->pNext;
 	}
 
 	Position = NULL;
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -438,11 +422,11 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetNextRecordKey(TKeyArg Key,
 	pAssoc = (CMwMapAssoc *)Position;
 
 	if (m_ppHashTable == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	if (pAssoc == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	pAssoc = pAssoc->pNext;
@@ -450,7 +434,7 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetNextRecordKey(TKeyArg Key,
 	while (pAssoc) {
 		if (CompareKeys(pAssoc->Value, Key)) {
 			Position = (MWMAPPOS)pAssoc;
-			return (pAssoc->Value);
+			return pAssoc->Value;
 		}
 
 		pAssoc = pAssoc->pNext;
@@ -458,7 +442,7 @@ TRecord *CMwBaseRecordMap<TKey, TRecord, TKeyArg>::GetNextRecordKey(TKeyArg Key,
 
 	/* Nothing to return */
 	Position = NULL;
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -527,11 +511,11 @@ bool CMwBaseRecordMap<TKey, TRecord, TKeyArg>::Lookup(TKeyArg Key, TRecord *&pRe
 
 	if (pAssoc == NULL) {
 		pRecord = NULL;
-		return (false);
+		return false;
 	}
 
 	pRecord = pAssoc->Value;
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -547,10 +531,10 @@ bool CMwBaseRecordMap<TKey, TRecord, TKeyArg>::Lookup(TKeyArg Key, TRecord *&pRe
 
 template<class TKey, class TRecord, class TKeyArg>
 typename CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwMapAssoc
-*CMwBaseRecordMap<TKey, TRecord, TKeyArg>::NewAssocNode(void) {
+*CMwBaseRecordMap<TKey, TRecord, TKeyArg>::NewAssocNode() {
 	CMwBaseRecordMap::CMwMapAssoc *pAssoc;
 	pAssoc = new CMwMapAssoc;
-	return (pAssoc);
+	return pAssoc;
 }
 
 /*===========================================================================
@@ -565,7 +549,7 @@ typename CMwBaseRecordMap<TKey, TRecord, TKeyArg>::CMwMapAssoc
  *=========================================================================*/
 
 template<class TKey, class TRecord, class TKeyArg>
-void CMwBaseRecordMap<TKey, TRecord, TKeyArg>::RemoveAll(void) {
+void CMwBaseRecordMap<TKey, TRecord, TKeyArg>::RemoveAll() {
 	CMwMapAssoc *pAssoc;
 	CMwMapAssoc *pAssoc1;
 	dword Index;
@@ -646,7 +630,6 @@ class CMwTypeRecordMap : public CMwBaseRecordMap<esmrectype_t, esmrecinfo_t, esm
   protected:
 
 	/* Compare two keys */
-
 	virtual bool CompareKeys(esmrecinfo_t *Record1, esmrecinfo_t *Record2);
 	virtual bool CompareKeys(esmrecinfo_t *Record, esmrectype_t Key);
 
@@ -654,20 +637,16 @@ class CMwTypeRecordMap : public CMwBaseRecordMap<esmrectype_t, esmrecinfo_t, esm
   public:
 
 	/* Delete record from the map */
-
 	void Delete(esmrecinfo_t *pRecord, const bool Delete = true);
 
 	/* Compute a hash from a record key */
-
 	dword HashKey(esmrecinfo_t *pRecord);
 	dword HashKey(esmrectype_t Key);
 
 	/* Check if a record is valid and can be added to map */
-
 	bool IsValidRecord(esmrecinfo_t *pRecord);
 
 	/* Set a value */
-
 	void SetAt(esmrecinfo_t *pRecord);
 };
 
@@ -678,7 +657,6 @@ class CMwIdRecordMap : public CMwBaseRecordMap<CSString, esmrecinfo_t, const TCH
   protected:
 
 	/* Compare two string keys */
-
 	virtual bool CompareKeys(const TCHAR *Key1, const TCHAR *Key2);
 	virtual bool CompareKeys(esmrecinfo_t *Record1, esmrecinfo_t *Record2);
 	virtual bool CompareKeys(esmrecinfo_t *Record, const TCHAR *Key);
@@ -687,24 +665,19 @@ class CMwIdRecordMap : public CMwBaseRecordMap<CSString, esmrecinfo_t, const TCH
   public:
 
 	/* Delete record from the map */
-
 	void Delete(esmrecinfo_t *pRecord, const bool Delete = true);
 
 	/* Lookup a record on its ID */
-
 	esmrecinfo_t *Get(const TCHAR *Key2);
 
 	/* Compute a hash from a string key */
-
 	dword HashKey(const TCHAR *Key);
 	dword HashKey(esmrecinfo_t *pRecord);
 
 	/* Check if a record is valid and can be added to map */
-
 	bool IsValidRecord(esmrecinfo_t *pRecord);
 
 	/* Set a value */
-
 	void SetAt(esmrecinfo_t *pRecord);
 };
 
@@ -720,23 +693,23 @@ class CMwIdRecordMap : public CMwBaseRecordMap<CSString, esmrecinfo_t, const TCH
  *=========================================================================*/
 
 inline bool CMwTypeRecordMap::CompareKeys(esmrecinfo_t *Record1, esmrecinfo_t *Record2) {
-	return (*(dword *)Record1->pRecord->GetType() == *(dword *)Record2->pRecord->GetType());
+	return *(dword *)Record1->pRecord->GetType() == *(dword *)Record2->pRecord->GetType();
 }
 
 inline bool CMwTypeRecordMap::CompareKeys(esmrecinfo_t *Record, esmrectype_t Key) {
-	return (*(long *)Record->pRecord->GetType() == Key.lType);
+	return *(long *)Record->pRecord->GetType() == Key.lType;
 }
 
 inline bool CMwIdRecordMap::CompareKeys(const TCHAR *Key1, const TCHAR *Key2) {
-	return (stricmp(Key1, Key2) == 0);
+	return stricmp(Key1, Key2) == 0;
 }
 
 inline bool CMwIdRecordMap::CompareKeys(esmrecinfo_t *Record1, esmrecinfo_t *Record2) {
-	return (stricmp(Record1->pRecord->GetID(), Record2->pRecord->GetID()) == 0);
+	return stricmp(Record1->pRecord->GetID(), Record2->pRecord->GetID()) == 0;
 }
 
 inline bool CMwIdRecordMap::CompareKeys(esmrecinfo_t *Record, const TCHAR *Key) {
-	return (_stricmp(Record->pRecord->GetID(), Key) == 0);
+	return _stricmp(Record->pRecord->GetID(), Key) == 0;
 }
 
 /*===========================================================================
@@ -781,10 +754,10 @@ inline esmrecinfo_t *CMwIdRecordMap::Get(const TCHAR *Key2) {
 	esmrecinfo_t *pRecInfo;
 
 	if (Lookup(Key2, pRecInfo)) {
-		return (pRecInfo);
+		return pRecInfo;
 	}
 
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -820,7 +793,7 @@ inline dword CMwTypeRecordMap::HashKey(esmrecinfo_t *pRecord) {
 }
 
 inline dword CMwTypeRecordMap::HashKey(esmrectype_t Key) {
-	return ((dword) (Key.lType)) >> 4;
+	return ((dword)(Key.lType)) >> 4;
 }
 
 /*===========================================================================
@@ -835,14 +808,14 @@ inline dword CMwTypeRecordMap::HashKey(esmrectype_t Key) {
  *=========================================================================*/
 
 inline bool CMwTypeRecordMap::IsValidRecord(esmrecinfo_t *pRecord) {
-	return (pRecord != NULL && pRecord->pRecord != NULL);
+	return pRecord != NULL && pRecord->pRecord != NULL;
 }
 
 inline bool CMwIdRecordMap::IsValidRecord(esmrecinfo_t *pRecord) {
-	return (pRecord != NULL
-	        && pRecord->pRecord != NULL
-	        && pRecord->pRecord->GetID() != NULL
-	        && pRecord->pRecord->GetID()[0] != NULL_CHAR);
+	return pRecord != NULL
+	       && pRecord->pRecord != NULL
+	       && pRecord->pRecord->GetID() != NULL
+	       && pRecord->pRecord->GetID()[0] != NULL_CHAR;
 }
 
 /*===========================================================================

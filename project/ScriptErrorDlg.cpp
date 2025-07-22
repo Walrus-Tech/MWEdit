@@ -79,7 +79,7 @@ CScriptErrorDlg::CScriptErrorDlg(CWnd *pParent) : CDialog(CScriptErrorDlg::IDD, 
  *
  *=========================================================================*/
 
-void CScriptErrorDlg::ClearControlData(void) {
+void CScriptErrorDlg::ClearControlData() {
 	m_MsgText.SetWindowText(_T(""));
 	m_CodeText.SetWindowText(_T(""));
 	m_LocationText.SetWindowText(_T(""));
@@ -101,7 +101,7 @@ void CScriptErrorDlg::ClearControlData(void) {
  *
  *=========================================================================*/
 
-void CScriptErrorDlg::ClearFunctionData(void) {
+void CScriptErrorDlg::ClearFunctionData() {
 	m_FuncDescText.SetWindowText(_T(""));
 	m_FuncFormText.SetWindowText(_T(""));
 	m_FuncArgText.SetWindowText(_T(""));
@@ -122,9 +122,11 @@ void CScriptErrorDlg::ClearFunctionData(void) {
 
 void CScriptErrorDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CScriptErrorDlg)
 	DDX_Control(pDX, IDC_FUNC_GOTO, m_GotoButton);
 	DDX_Control(pDX, IDC_FUNC_BUTTON, m_FuncButton);
+
 	DDX_Control(pDX, IDC_FUNCDESC_TEXT, m_FuncDescText);
 	DDX_Control(pDX, IDC_FUNCFORM_TEXT, m_FuncFormText);
 	DDX_Control(pDX, IDC_FUNCARG_TEXT, m_FuncArgText);
@@ -224,7 +226,7 @@ void CScriptErrorDlg::OnFuncGoto() {
 BOOL CScriptErrorDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	SetControlData();
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -240,7 +242,7 @@ BOOL CScriptErrorDlg::OnInitDialog() {
  *
  *=========================================================================*/
 
-void CScriptErrorDlg::SetControlData(void) {
+void CScriptErrorDlg::SetControlData() {
 	CString Buffer;
 
 	/* Clear/disable the controls if error object is invalid */
@@ -290,7 +292,7 @@ void CScriptErrorDlg::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CScriptErrorDlg::SetFunctionData(void) {
+void CScriptErrorDlg::SetFunctionData() {
 	//DEFINE_FUNCTION("CScriptErrorDlg::SetFunctionData()");
 	CString Buffer;
 	esmscrfuncinfo_t *pFunction = m_pError->GetFunction();

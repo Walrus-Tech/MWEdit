@@ -57,10 +57,10 @@ int CALLBACK l_ContSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 		Result = pRecInfo1->UserData - pRecInfo2->UserData;
 
 		if (Flags) {
-			return (-Result);
+			return -Result;
 		}
 
-		return (Result);
+		return Result;
 	}
 
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
@@ -173,6 +173,7 @@ CEsmContainDlg::CEsmContainDlg() : CEsmRecDialog(CEsmContainDlg::IDD) {
 
 void CEsmContainDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmContainDlg)
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
@@ -199,7 +200,7 @@ void CEsmContainDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmContainDlg::GetControlData(void) {
+void CEsmContainDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmContainDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
@@ -216,20 +217,25 @@ void CEsmContainDlg::GetControlData(void) {
 	/* Item name */
 	m_NameText.GetWindowText(Buffer);
 	m_pContainer->SetName(TrimStringSpace(Buffer));
+
 	/* Item weight */
 	m_WeightText.GetWindowText(Buffer);
 	m_pContainer->SetWeight((float)atof(Buffer));
+
 	/* Item script */
 	m_ScriptList.GetWindowText(Buffer);
 	m_pContainer->SetScript(TrimStringSpace(Buffer));
+
 	/* Model filename */
 	m_ModelButton.GetWindowText(Buffer);
 	m_pContainer->SetModel(TrimStringSpace(Buffer));
+
 	/* Record flags */
 	m_pContainer->SetPersist(m_PersistCheck.GetCheck() != 0);
 	m_pContainer->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 	m_pContainer->SetOrganic(m_OrganicCheck.GetCheck() != 0);
 	m_pContainer->SetRespawn(m_RespawnCheck.GetCheck() != 0);
+
 	GetItemData();
 }
 
@@ -244,7 +250,7 @@ void CEsmContainDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmContainDlg::GetItemData(void) {
+void CEsmContainDlg::GetItemData() {
 	CEsmSubNPCO *pItemSubRec;
 	CString Buffer;
 	int Index;
@@ -256,6 +262,7 @@ void CEsmContainDlg::GetItemData(void) {
 		Buffer = m_ItemList.GetItemText(Index, 0);
 		Count = atoi(Buffer);
 		Buffer = m_ItemList.GetItemText(Index, 1);
+
 		/* Create the new index sub-record */
 		pItemSubRec = (CEsmSubNPCO *)m_pContainer->AllocateSubRecord(MWESM_SUBREC_NPCO);
 		pItemSubRec->CreateNew();
@@ -313,9 +320,9 @@ void CEsmContainDlg::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
  *
  *=========================================================================*/
 
-bool CEsmContainDlg::IsModified(void) {
+bool CEsmContainDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -332,7 +339,7 @@ bool CEsmContainDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -354,6 +361,7 @@ void CEsmContainDlg::OnInitialUpdate() {
 	m_ItemList.OnInitCtrl();
 	m_ItemList.SetDlgHandler(m_pParent);
 	m_ItemList.InitObjectList(l_ItemColData);
+
 	m_ItemList.SetWantKeys(true);
 	m_ItemList.SetWantSortMsg(true);
 	m_ItemList.SetAcceptDrag(true);
@@ -411,13 +419,13 @@ LRESULT CEsmContainDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	/* Ensure we only drag from the current document */
 
 	if (pSourceDoc != GetDocument()) {
-		return (0);
+		return 0;
 	}
 
 	/* Only accept certain types */
 
 	if (!IsESMRecordCarryable(pRecInfo->pRecord->GetType())) {
-		return (0);
+		return 0;
 	}
 
 	ListIndex = m_ItemList.FindRecord(pRecInfo);
@@ -439,7 +447,7 @@ LRESULT CEsmContainDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	}
 
 	UpdateTotalWeight();
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -474,7 +482,7 @@ LRESULT CEsmContainDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 		}
 
 		UpdateTotalWeight();
-		return (1);
+		return 1;
 	} else if (lParam == VK_DELETE || lParam == VK_BACK) {
 		ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 
@@ -483,10 +491,10 @@ LRESULT CEsmContainDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 			ListIndex = m_ItemList.GetNextItem(-1, LVNI_SELECTED);
 		}
 
-		return (1);
+		return 1;
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -504,7 +512,7 @@ LRESULT CEsmContainDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	UpdateUserData();
 	m_ItemList.SortItems(l_ContSortCallBack, pSortData->iField | (pSortData->Reverse << 16));
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -540,10 +548,10 @@ int CEsmContainDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		}
 
 		FillEsmScriptCombo(m_ScriptList);
-		FindComboListItem(m_ScriptList, (DWORD) pRecInfo, true);
+		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -557,7 +565,7 @@ int CEsmContainDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmContainDlg::SetControlData(void) {
+void CEsmContainDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pContainer == NULL) {
 		return;
@@ -600,7 +608,7 @@ void CEsmContainDlg::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmContainDlg::SetItemData(void) {
+void CEsmContainDlg::SetItemData() {
 	CEsmSubNPCO *pItemSubRec;
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -635,7 +643,7 @@ void CEsmContainDlg::SetItemData(void) {
  *
  *=========================================================================*/
 
-void CEsmContainDlg::UpdateTotalWeight(void) {
+void CEsmContainDlg::UpdateTotalWeight() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
 	int Index;
@@ -643,7 +651,8 @@ void CEsmContainDlg::UpdateTotalWeight(void) {
 
 	for (Index = 0; Index < m_ItemList.GetItemCount(); Index++) {
 		pRecInfo = (esmrecinfo_t *)m_ItemList.GetItemData(Index);
-		Total += (float)atof(pRecInfo->pRecord->GetFieldString(ESM_FIELD_WEIGHT)) * abs(pRecInfo->UserData);
+		Total += (float)atof(pRecInfo->pRecord->GetFieldString(ESM_FIELD_WEIGHT))
+		         * abs(pRecInfo->UserData);
 	}
 
 	Buffer.Format(_T("%.2f"), Total);
@@ -664,7 +673,7 @@ void CEsmContainDlg::UpdateTotalWeight(void) {
  *
  *=========================================================================*/
 
-void CEsmContainDlg::UpdateUserData(void) {
+void CEsmContainDlg::UpdateUserData() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
 	int Index;

@@ -50,7 +50,6 @@ class CCreaturePage2 : public CPropertyPage {
 	//}}AFX_VIRTUAL
 
 
-
 // Implementation
 
   protected:
@@ -62,7 +61,6 @@ class CCreaturePage2 : public CPropertyPage {
 
 	DECLARE_MESSAGE_MAP()
 };
-
 
 
 //{{AFX_INSERT_LOCATION}}

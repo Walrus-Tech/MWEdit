@@ -1,6 +1,5 @@
 // CreaturePage2.cpp : implementation file
 
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "CreaturePage2.h"

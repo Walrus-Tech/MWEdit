@@ -76,6 +76,7 @@ CEsmMiscDlg::CEsmMiscDlg() : CEsmRecDialog(CEsmMiscDlg::IDD) {
 
 void CEsmMiscDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmMiscDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 
@@ -106,7 +107,7 @@ void CEsmMiscDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmMiscDlg::GetControlData(void) {
+void CEsmMiscDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmMiscDlg::GetControlData()");
 	miscdata_t *pMiscData;
 	CString Buffer;
@@ -167,9 +168,9 @@ void CEsmMiscDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmMiscDlg::IsModified(void) {
+bool CEsmMiscDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -190,7 +191,7 @@ bool CEsmMiscDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -245,7 +246,7 @@ int CEsmMiscDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -259,7 +260,7 @@ int CEsmMiscDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmMiscDlg::SetControlData(void) {
+void CEsmMiscDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pMisc == NULL) {
 		return;
@@ -273,6 +274,7 @@ void CEsmMiscDlg::SetControlData(void) {
 	m_NameText.SetWindowText(m_pMisc->GetName());
 	m_WeightText.SetWindowText(m_pMisc->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pMisc->GetFieldString(ESM_FIELD_VALUE));
+
 	m_NameText.SetModify(FALSE);
 	m_WeightText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);

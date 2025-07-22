@@ -99,7 +99,7 @@ CCustRichEdit::~CCustRichEdit() {
 
 BOOL CCustRichEdit::Create(DWORD dwStyle, const RECT &rect, CWnd *pParentWnd, UINT nID) {
 	CWnd *l_pWnd = this ;
-	return l_pWnd->Create( _T("RichEdit"), NULL, dwStyle, rect, pParentWnd, nID );
+	return l_pWnd->Create(_T("RichEdit"), NULL, dwStyle, rect, pParentWnd, nID);
 }
 
 /*===========================================================================
@@ -115,13 +115,13 @@ BOOL CCustRichEdit::Create(DWORD dwStyle, const RECT &rect, CWnd *pParentWnd, UI
  *
  *=========================================================================*/
 
-int CCustRichEdit::GetCurLineCharPos(void) {
+int CCustRichEdit::GetCurLineCharPos() {
 	long StartChar;
 	long EndChar;
 	int CharPos;
 	GetSel(StartChar, EndChar);
 	CharPos = StartChar - LineIndex(-1);
-	return (CharPos);
+	return CharPos;
 }
 
 /*===========================================================================
@@ -154,7 +154,7 @@ const TCHAR *CCustRichEdit::GetCurLineText(CString &Buffer) {
 		Buffer.Empty();
 	}
 
-	return (const TCHAR *)(Buffer);
+	return (const TCHAR *)Buffer;
 }
 
 /*===========================================================================

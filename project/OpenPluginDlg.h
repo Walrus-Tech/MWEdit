@@ -90,12 +90,10 @@ class COpenPluginDlg : public CDialog {
   protected:
 
 	/* Delete all files currently in the file array */
-
-	void ClearFileArray(void);
+	void ClearFileArray();
 
 	/* Fills the file list with plugins */
-
-	void CreateFileList(void);
+	void CreateFileList();
 
 
 	/*---------- Begin Public Class Methods --------------------------*/
@@ -103,26 +101,24 @@ class COpenPluginDlg : public CDialog {
   public:
 
 	/* Construction */
-
 	COpenPluginDlg(CWnd *pParent = NULL);
 	~COpenPluginDlg();
 
 	/* Get class members */
-
-	CString &GetActivePlugin(void) {
-		return (m_ActivePlugin);
+	CString &GetActivePlugin() {
+		return m_ActivePlugin;
 	}
 
-	CStringList &GetMasters(void) {
-		return (m_Masters);
+	CStringList &GetMasters() {
+		return m_Masters;
 	}
 
-	CStringList &GetPlugins(void) {
-		return (m_Plugins);
+	CStringList &GetPlugins() {
+		return m_Plugins;
 	}
 
-	bool HasActive(void) {
-		return (m_HasActive);
+	bool HasActive() {
+		return m_HasActive;
 	}
 
 	/* Dialog Data */

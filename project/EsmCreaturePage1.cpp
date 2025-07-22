@@ -98,6 +98,7 @@ CEsmCreaturePage1::~CEsmCreaturePage1() {
 
 void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCreaturePage1)
 	DDX_Control(pDX, IDC_SCRIPTLIST, m_ScriptList);
 	DDX_Control(pDX, IDC_THRUSTMAXTEXT, m_AttMax3Text);
@@ -106,6 +107,7 @@ void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_SLASHMINTEXT, m_AttMin2Text);
 	DDX_Control(pDX, IDC_CHOPMAXTEXT, m_AttMax1Text);
 	DDX_Control(pDX, IDC_CHOPMINTEXT, m_AttMin1Text);
+
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
 	DDX_Control(pDX, IDC_WEAPSHIELDCHECK, m_WeapShieldCheck);
@@ -116,9 +118,12 @@ void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_SWIMSCHECK, m_SwimsCheck);
 	DDX_Control(pDX, IDC_WALKSCHECK, m_WalksCheck);
 	DDX_Control(pDX, IDC_FLIESCHECK, m_FliesCheck);
+
 	DDX_Control(pDX, IDC_ANIMATIONBUTTON, m_AnimButton);
+
 	DDX_Control(pDX, IDC_BLOODLIST, m_BloodList);
 	DDX_Control(pDX, IDC_SOUNDGENLIST, m_SoundList);
+
 	DDX_Control(pDX, IDC_SOULTEXT, m_SoulText);
 	DDX_Control(pDX, IDC_FAQTIGUETEXT, m_FatigueText);
 	DDX_Control(pDX, IDC_MAGICTEXT, m_MagicText);
@@ -151,7 +156,7 @@ void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage1::GetControlData(void) {
+void CEsmCreaturePage1::GetControlData() {
 	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
 	CString Buffer;
@@ -201,45 +206,59 @@ void CEsmCreaturePage1::GetControlData(void) {
 	m_StrText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Strength = (long)Value;
+
 	m_IntText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Intelligence = (long)Value;
+
 	m_WilText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Willpower = (long)Value;
+
 	m_SpdText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Speed = (long)Value;
+
 	m_AgiText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Agility = (long)Value;
+
 	m_EndText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Endurance = (long)Value;
+
 	m_PerText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Personality = (long)Value;
+
 	m_LucText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Luck = (long)Value;
+
 	m_HealthText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Health = (long)Value;
+
 	m_MagicText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->SpellPts = (long)Value;
+
 	m_FatigueText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Fatigue = (long)Value;
+
 	m_SoulText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Soul = (long)Value;
+
 	m_CombatText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Combat = (long)Value;
+
 	m_MagicSkillText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Magic = (long)Value;
+
 	m_StealthText.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->Stealth = (long)Value;
@@ -248,18 +267,23 @@ void CEsmCreaturePage1::GetControlData(void) {
 	m_AttMin1Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->AttackMin1 = (long)Value;
+
 	m_AttMax1Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->AttackMax1 = (long)Value;
+
 	m_AttMin2Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->AttackMin2 = (long)Value;
+
 	m_AttMax2Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->AttackMax2 = (long)Value;
+
 	m_AttMin3Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->AttackMin3 = (long)Value;
+
 	m_AttMax3Text.GetWindowText(Buffer);
 	Value = atoi(Buffer);
 	pCreaData->AttackMax3 = (long)Value;
@@ -316,7 +340,7 @@ void CEsmCreaturePage1::GetControlData(void) {
  *
  *=========================================================================*/
 
-CMWEditDoc *CEsmCreaturePage1::GetDocument(void) {
+CMWEditDoc *CEsmCreaturePage1::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage1::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
@@ -382,7 +406,7 @@ BOOL CEsmCreaturePage1::OnInitDialog() {
 	FillEsmSoundGenCreaCombo(m_SoundList);
 	FillEsmCreatureListCombo(m_TypeList);
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================
@@ -419,7 +443,7 @@ void CEsmCreaturePage1::OnScriptEdit() {
  *=========================================================================*/
 
 int CEsmCreaturePage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -433,7 +457,7 @@ int CEsmCreaturePage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmCreaturePage1::SetControlData(void) {
+void CEsmCreaturePage1::SetControlData() {
 	CEsmCreature *pCreature;
 	CString Buffer;
 	creaturedata_t *pCreaData;

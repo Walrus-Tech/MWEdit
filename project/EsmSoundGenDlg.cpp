@@ -100,7 +100,7 @@ void CEsmSoundGenDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmSoundGenDlg::GetControlData(void) {
+void CEsmSoundGenDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSoundGenDlg::GetControlData()");
 	CString Buffer;
 	int Index;
@@ -142,9 +142,9 @@ void CEsmSoundGenDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmSoundGenDlg::IsModified(void) {
+bool CEsmSoundGenDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -153,7 +153,7 @@ bool CEsmSoundGenDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -266,7 +266,7 @@ int CEsmSoundGenDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_SoundList, (DWORD)pOldRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -280,7 +280,7 @@ int CEsmSoundGenDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmSoundGenDlg::SetControlData(void) {
+void CEsmSoundGenDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pSoundGen == NULL) {
 		return;
@@ -311,7 +311,7 @@ void CEsmSoundGenDlg::SetControlData(void) {
  *
  *=========================================================================*/
 
-void CEsmSoundGenDlg::UpdateID(void) {
+void CEsmSoundGenDlg::UpdateID() {
 	//DEFINE_FUNCTION("CEsmSoundGenDlg::UpdateID()");
 	CString CreatureName;
 	CString NewID;

@@ -59,7 +59,7 @@ END_MESSAGE_MAP()
  *
  *=========================================================================*/
 
-CInputDialog::CInputDialog(CWnd* pParent) : CDialog(CInputDialog::IDD, pParent) {
+CInputDialog::CInputDialog(CWnd *pParent) : CDialog(CInputDialog::IDD, pParent) {
 	//{{AFX_DATA_INIT(CInputDialog)
 	//}}AFX_DATA_INIT
 }
@@ -102,10 +102,10 @@ bool CInputDialog::DoModal(CString *pResult, const TCHAR *pLabel, const TCHAR *p
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -125,7 +125,7 @@ BOOL CInputDialog::OnInitDialog() {
 	m_MainLabel.SetWindowText(m_pLabel == NULL ? _T("Input text:") : m_pLabel);
 	m_InputText.SetWindowText(m_pOutputString == NULL ? _T("") : (const TCHAR *)*m_pOutputString);
 	m_InputText.SetFocus();
-	return (FALSE);
+	return FALSE;
 }
 
 /*===========================================================================

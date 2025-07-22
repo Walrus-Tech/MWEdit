@@ -470,7 +470,7 @@ CEsmDlgHandler::CEsmDlgHandler() : m_Frames(0) {
  *
  *=========================================================================*/
 
-void CEsmDlgHandler::Destroy(void) {
+void CEsmDlgHandler::Destroy() {
 	//DEFINE_FUNCTION("CEsmDlgHandler::Destroy()");
 	ClearDlgArray();
 }
@@ -489,7 +489,7 @@ void CEsmDlgHandler::Destroy(void) {
  *
  *=========================================================================*/
 
-void CEsmDlgHandler::ClearDlgArray(void) {
+void CEsmDlgHandler::ClearDlgArray() {
 	DEFINE_FUNCTION("CEsmDlgHandler::ClearDlgArray()");
 	CFrameWnd *pFrame;
 
@@ -540,7 +540,7 @@ CEsmRecord *CEsmDlgHandler::CreateCopy(CEsmRecord *pRecord) {
 	CEsmRecord *pNewRecord;
 	ASSERT(m_pDocument != NULL);
 	pNewRecord = m_pDocument->CreateCopy(pRecord);
-	return (pNewRecord);
+	return pNewRecord;
 }
 
 /*===========================================================================
@@ -584,7 +584,7 @@ CFrameWnd *CEsmDlgHandler::CreateDialogueDlg(esmrecinfo_t *pRecInfo) {
 		pFrame->LoadFrame(CEsmDialogDlg::IDD, WS_OVERLAPPEDWINDOW, NULL, &Context);
 	}
 
-	return (pFrame);
+	return pFrame;
 }
 
 /*===========================================================================
@@ -621,7 +621,7 @@ CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmdlgcreateinfo_t &CreateInfo) {
 	                  WS_OVERLAPPEDWINDOW,
 	                  NULL,
 	                  &Context);
-	return (pFrame);
+	return pFrame;
 }
 
 /*===========================================================================
@@ -672,12 +672,12 @@ CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmrecinfo_t *pRecInfo, const bool Is
 			}
 
 			m_Frames.Add(pFrame);
-			return (pFrame);
+			return pFrame;
 		}
 	}
 
 	/* No matching dialog found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -713,13 +713,13 @@ bool CEsmDlgHandler::EditRecord(esmrecinfo_t *pRecInfo, const bool IsNew) {
 			ErrorHandler.AddError(ERR_BADINPUT,
 			                      _T("No edit dialog defined for '%4.4s' records!"),
 			                      pRecInfo->pRecord->GetType());
-			return (false);
+			return false;
 		}
 	} else {
 		pFrame->ActivateFrame(SW_RESTORE);
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -754,7 +754,7 @@ CFrameWnd *CEsmDlgHandler::FindDialog(esmrecinfo_t *pRecInfo) {
 	}
 
 	/* Nothing found */
-	return (NULL);
+	return NULL;
 }
 
 /*===========================================================================
@@ -768,14 +768,14 @@ CFrameWnd *CEsmDlgHandler::FindDialog(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-const TCHAR *CEsmDlgHandler::GetDocFilename(void) {
+const TCHAR *CEsmDlgHandler::GetDocFilename() {
 	ASSERT(m_pDocument != NULL);
-	return (m_pDocument->GetTitle());
+	return m_pDocument->GetTitle();
 }
 
-CEsmFile *CEsmDlgHandler::GetActiveFile(void) {
+CEsmFile *CEsmDlgHandler::GetActiveFile() {
 	ASSERT(m_pDocument != NULL);
-	return (m_pDocument->GetActivePlugin());
+	return m_pDocument->GetActivePlugin();
 }
 
 /*===========================================================================
@@ -813,7 +813,7 @@ bool CEsmDlgHandler::IsExistingID(const TCHAR *pID) {
 	esmrecinfo_t *pRecInfo;
 	ASSERT(m_pDocument != NULL);
 	pRecInfo = m_pDocument->FindRecord(pID);
-	return (pRecInfo != NULL);
+	return pRecInfo != NULL;
 }
 
 /*===========================================================================
@@ -836,14 +836,14 @@ CEsmRecord *CEsmDlgHandler::OnAddNew(const TCHAR *pType) {
 	/* Ensure a valid object state */
 
 	if (m_pDocument == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create the new record */
 	pRecord = m_pDocument->CreateNewRecord(pType);
 
 	if (pRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create the new recinfo object */
@@ -862,7 +862,7 @@ CEsmRecord *CEsmDlgHandler::OnAddNew(const TCHAR *pType) {
 		DestroyPointer(pRecord);
 	}
 
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -885,14 +885,14 @@ CEsmRecord *CEsmDlgHandler::OnAddNewDialog(const int DialType) {
 	/* Ensure a valid object state */
 
 	if (m_pDocument == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Create the new record */
 	pRecord = m_pDocument->CreateNewRecord(MWESM_REC_DIAL);
 
 	if (pRecord == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	((CEsmDialogue *)pRecord)->SetDialogType(DialType);
@@ -913,7 +913,7 @@ CEsmRecord *CEsmDlgHandler::OnAddNewDialog(const int DialType) {
 		DestroyPointer(pRecord);
 	}
 
-	return (pRecord);
+	return pRecord;
 }
 
 /*===========================================================================
@@ -967,7 +967,7 @@ int CEsmDlgHandler::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
  *
  *=========================================================================*/
 
-void CEsmDlgHandler::OpenFindDlg(void) {
+void CEsmDlgHandler::OpenFindDlg() {
 	CEsmFindDlg *pFindView;
 	CWnd *pWnd;
 
@@ -1010,7 +1010,7 @@ void CEsmDlgHandler::OpenFindDlg(void) {
  *
  *=========================================================================*/
 
-void CEsmDlgHandler::OpenScrTempDlg(void) {
+void CEsmDlgHandler::OpenScrTempDlg() {
 	CEsmScrTempView *pScrTempView;
 	CWnd *pWnd;
 
@@ -1107,7 +1107,7 @@ void CEsmDlgHandler::OpenUsesDlg(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg(void) {
+CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg() {
 	CEsmScriptCompareDlg *pCompareView = NULL;
 	CWnd *pWnd;
 
@@ -1123,14 +1123,14 @@ CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg(void) {
 			pCompareView->SetDlgHandler(this);
 		}
 
-		return (pCompareView);
+		return pCompareView;
 	}
 
 	/* Attempt to create the frame/formview */
 	m_pScriptCompareDlg = CreateESMDialog(l_EsmScriptCompareCreateInfo);
 
 	if (m_pScriptCompareDlg == NULL) {
-		return (NULL);
+		return NULL;
 	}
 
 	/* Attempt to initialize the new view */
@@ -1143,7 +1143,7 @@ CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg(void) {
 
 	m_pScriptCompareDlg->InitialUpdateFrame(m_pDocument, TRUE);
 	m_pScriptCompareDlg->ActivateFrame(SW_SHOWNORMAL);
-	return (pCompareView);
+	return pCompareView;
 }
 
 /*===========================================================================

@@ -76,6 +76,7 @@ CEsmProbeDlg::CEsmProbeDlg() : CEsmRecDialog(CEsmProbeDlg::IDD) {
 
 void CEsmProbeDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmProbeDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 
@@ -108,7 +109,7 @@ void CEsmProbeDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmProbeDlg::GetControlData(void) {
+void CEsmProbeDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmProbeDlg::GetControlData()");
 	probedata_t *pProbeData;
 	CString Buffer;
@@ -177,9 +178,9 @@ void CEsmProbeDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmProbeDlg::IsModified(void) {
+bool CEsmProbeDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -208,7 +209,7 @@ bool CEsmProbeDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -269,7 +270,7 @@ int CEsmProbeDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		FindComboListItem(m_ScriptList, (DWORD)pRecInfo, true);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -283,7 +284,7 @@ int CEsmProbeDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmProbeDlg::SetControlData(void) {
+void CEsmProbeDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pProbe == NULL) {
 		return;
@@ -299,6 +300,7 @@ void CEsmProbeDlg::SetControlData(void) {
 	m_WeightText.SetWindowText(m_pProbe->GetFieldString(ESM_FIELD_WEIGHT));
 	m_ValueText.SetWindowText(m_pProbe->GetFieldString(ESM_FIELD_VALUE));
 	m_UsesText.SetWindowText(m_pProbe->GetFieldString(ESM_FIELD_USES));
+
 	m_UsesText.SetModify(FALSE);
 	m_NameText.SetModify(FALSE);
 	m_QualityText.SetModify(FALSE);

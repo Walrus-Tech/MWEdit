@@ -26,13 +26,13 @@
 
 /* Script format types */
 
-#define ESMSCR_FORMAT_BLUE  1
-#define ESMSCR_FORMAT_WHITE 2
-#define ESMSCR_FORMAT_USER  3
+#define ESMSCR_FORMAT_BLUE        1
+#define ESMSCR_FORMAT_WHITE       2
+#define ESMSCR_FORMAT_USER        3
 
 /* Max author name string size (same as in TES3 header) */
 
-#define ESMSCR_OPTION_NAMESIZE 32
+#define ESMSCR_OPTION_NAMESIZE    32
 
 
 /*===========================================================================

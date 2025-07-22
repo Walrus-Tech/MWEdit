@@ -79,6 +79,7 @@ CEsmDoorDlg::CEsmDoorDlg() : CEsmRecDialog(CEsmDoorDlg::IDD) {
 
 void CEsmDoorDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmDoorDlg)
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
@@ -102,7 +103,7 @@ void CEsmDoorDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmDoorDlg::GetControlData(void) {
+void CEsmDoorDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmDoorDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
@@ -155,9 +156,9 @@ void CEsmDoorDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmDoorDlg::IsModified(void) {
+bool CEsmDoorDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
 	/* Check edit controls for changes */
@@ -170,7 +171,7 @@ bool CEsmDoorDlg::IsModified(void) {
 		m_Modified = true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -267,7 +268,7 @@ int CEsmDoorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 		m_CloseList.SelectString(-1, Buffer1);
 	}
 
-	return (0);
+	return 0;
 }
 
 /*===========================================================================
@@ -281,7 +282,7 @@ int CEsmDoorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  *
  *=========================================================================*/
 
-void CEsmDoorDlg::SetControlData(void) {
+void CEsmDoorDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pDoor == NULL) {
 		return;

@@ -76,6 +76,7 @@ CEsmCreatureDlg::CEsmCreatureDlg() : CEsmRecDialog(CEsmCreatureDlg::IDD) {
 
 void CEsmCreatureDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCreatureDlg)
 	DDX_Control(pDX, IDC_MAINTAB, m_MainTab);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
@@ -93,7 +94,7 @@ void CEsmCreatureDlg::DoDataExchange(CDataExchange *pDX) {
  *
  *=========================================================================*/
 
-void CEsmCreatureDlg::GetControlData(void) {
+void CEsmCreatureDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmCreatureDlg::GetControlData()");
 	CString Buffer;
 	/* Update the armor pointer and data */
@@ -125,12 +126,12 @@ void CEsmCreatureDlg::GetControlData(void) {
  *
  *=========================================================================*/
 
-bool CEsmCreatureDlg::IsModified(void) {
+bool CEsmCreatureDlg::IsModified() {
 	if (m_Modified) {
-		return (true);
+		return true;
 	}
 
-	return (m_Modified);
+	return m_Modified;
 }
 
 /*===========================================================================
@@ -191,7 +192,7 @@ void CEsmCreatureDlg::OnInitialUpdate() {
  *
  *=========================================================================*/
 
-void CEsmCreatureDlg::SetControlData(void) {
+void CEsmCreatureDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pCreature == NULL) {
 		return;

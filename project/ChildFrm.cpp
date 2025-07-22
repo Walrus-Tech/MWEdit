@@ -12,7 +12,6 @@
 /* Include Files */
 
 #include "stdafx.h"
-
 #include "MWEdit.h"
 #include "ChildFrm.h"
 
@@ -27,11 +26,9 @@
 /* Debug defines */
 
 #ifdef _DEBUG
-
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
-
 #endif
 
 
@@ -50,15 +47,11 @@ DEFINE_FILE("ChildFrm.cpp");
  *=========================================================================*/
 
 BEGIN_MESSAGE_MAP(CChildFrame, CMDIChildWnd)
-
 	//{{AFX_MSG_MAP(CChildFrame)
-
 	ON_WM_SIZE()
 	ON_WM_MDIACTIVATE()
 	ON_WM_SYSCOMMAND()
-
 	//}}AFX_MSG_MAP
-
 END_MESSAGE_MAP()
 
 /*===========================================================================
@@ -122,7 +115,6 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT &cs) {
 
 
 #ifdef _DEBUG
-
 /*===========================================================================
  *
  * CChildFrame Diagnostics
@@ -133,8 +125,6 @@ void CChildFrame::AssertValid() const {
 	CMDIChildWnd::AssertValid();
 }
 
-
-
 void CChildFrame::Dump(CDumpContext &dc) const {
 	CMDIChildWnd::Dump(dc);
 }
@@ -142,7 +132,6 @@ void CChildFrame::Dump(CDumpContext &dc) const {
 /*===========================================================================
  *      End of CChildFrame Diagnostics
  *=========================================================================*/
-
 #endif
 
 
@@ -183,7 +172,7 @@ void CChildFrame::OnMDIActivate(BOOL bActivate, CWnd *pActivateWnd, CWnd *pDeact
  *
  *=========================================================================*/
 
-void CChildFrame::FakeMaximize(void) {
+void CChildFrame::FakeMaximize() {
 	CRect ClientRect;
 	CRect RestoreRect;
 

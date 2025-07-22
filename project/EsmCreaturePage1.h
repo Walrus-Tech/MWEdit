@@ -55,13 +55,10 @@ class CEsmCreaturePage1 : public CPropertyPage {
   protected:
 
 	esmrecinfo_t *m_pRecInfo;
-
 	CEsmDlgHandler *m_pDlgHandler;
 
 	int m_SkillValues[MWESM_MAX_SKILLS];
-
 	int m_SortCol;
-
 	int m_SortReverse;
 
 
@@ -70,20 +67,16 @@ class CEsmCreaturePage1 : public CPropertyPage {
   public:
 
 	/* Construction */
-
 	CEsmCreaturePage1();
 	~CEsmCreaturePage1();
 
 	/* Get class members */
-
-	CMWEditDoc *GetDocument(void);
+	CMWEditDoc *GetDocument();
 
 	/* Get the current autocalc status */
-
-	bool IsAutoCalc(void);
+	bool IsAutoCalc();
 
 	/* Set class members */
-
 	void SetRecInfo(esmrecinfo_t *pRecInfo) {
 		m_pRecInfo = pRecInfo;
 	}
@@ -93,21 +86,17 @@ class CEsmCreaturePage1 : public CPropertyPage {
 	}
 
 	/* Get/set control data */
-
-	void GetControlData(void);
-	void SetControlData(void);
+	void GetControlData();
+	void SetControlData();
 
 	/* Used for the skill list sorting */
-
 	int SortCallback(LPARAM lParam1, LPARAM lParam2);
 
 	/* Update record data */
-
 	int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 	/* Update the enabled/disabled controls */
-
-	void UpdateAutoCalc(void);
+	void UpdateAutoCalc();
 
 	/* Dialog Data */
 
@@ -178,7 +167,7 @@ class CEsmCreaturePage1 : public CPropertyPage {
 	//{{AFX_MSG(CEsmCreaturePage1)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnAnimationbutton();
-	afx_msg void OnScriptEdit ();
+	afx_msg void OnScriptEdit();
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP();

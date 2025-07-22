@@ -75,11 +75,13 @@ CEsmAiWanderDlg::CEsmAiWanderDlg(CWnd *pParent) : CDialog(CEsmAiWanderDlg::IDD, 
 
 void CEsmAiWanderDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmAiWanderDlg)
 	DDX_Control(pDX, IDC_TIMETEXT, m_TimeText);
 	DDX_Control(pDX, IDC_DISTANCETEXT, m_DistanceText);
 	DDX_Control(pDX, IDC_DURATIONTEXT, m_DurationText);
 	//}}AFX_DATA_MAP
+
 	DDX_Control(pDX, IDC_IDLETEXT2, m_IdleText[0]);
 	DDX_Control(pDX, IDC_IDLETEXT3, m_IdleText[1]);
 	DDX_Control(pDX, IDC_IDLETEXT4, m_IdleText[2]);
@@ -106,16 +108,16 @@ bool CEsmAiWanderDlg::DoModal(CEsmSubAI_W *pSubRecord) {
 	m_pSubRecord = pSubRecord;
 
 	if (pSubRecord == NULL) {
-		return (false);
+		return false;
 	}
 
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -134,7 +136,9 @@ BOOL CEsmAiWanderDlg::OnInitDialog() {
 	CString Buffer;
 	int Index;
 	CDialog::OnInitDialog();
+
 	pAiData = m_pSubRecord->GetAIData();
+
 	m_DistanceText.LimitText(16);
 	m_DurationText.LimitText(16);
 	m_TimeText.LimitText(16);
@@ -156,7 +160,7 @@ BOOL CEsmAiWanderDlg::OnInitDialog() {
 		}
 	}
 
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================

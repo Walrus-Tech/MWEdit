@@ -100,16 +100,16 @@ bool CEsmAiActivateDlg::DoModal(CEsmSubAI_A *pSubRecord) {
 	m_pSubRecord = pSubRecord;
 
 	if (pSubRecord == NULL) {
-		return (false);
+		return false;
 	}
 
 	Result = CDialog::DoModal();
 
 	if (Result != IDOK) {
-		return (false);
+		return false;
 	}
 
-	return (true);
+	return true;
 }
 
 /*===========================================================================
@@ -128,7 +128,7 @@ BOOL CEsmAiActivateDlg::OnInitDialog() {
 	FillEsmNpcCombo(m_TargetList);
 	m_TargetList.SetWindowText(m_pSubRecord->GetName());
 	m_TargetList.LimitText(MWESM_ID_MAXSIZE);
-	return (TRUE);
+	return TRUE;
 }
 
 /*===========================================================================

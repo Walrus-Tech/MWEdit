@@ -63,14 +63,11 @@ class CEsmActivatorDlg : public CEsmRecDialog {
 	CEsmActivatorDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
@@ -91,7 +88,6 @@ class CEsmActivatorDlg : public CEsmRecDialog {
   protected:
 
 	virtual void OnInitialUpdate();
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
@@ -107,19 +103,14 @@ class CEsmActivatorDlg : public CEsmRecDialog {
 };
 
 /*===========================================================================
-
  *      End of Class CEsmActivatorDlg Definition
-
  *=========================================================================*/
 
 //{{AFX_INSERT_LOCATION}}
-
 //}}AFX_INSERT_LOCATION
 
 #endif
 
 /*===========================================================================
-
  *      End of File Activatordlg.H
-
  *=========================================================================*/

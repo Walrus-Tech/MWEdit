@@ -49,17 +49,15 @@ class CEsmIngrediantDlg : public CEsmRecDialog {
   protected:
 
 	/* Helper set/get methods */
-
-	void GetEffectData(void);
+	void GetEffectData();
 	void GetEffectData(const int ListIndex, const int EffectIndex);
-	void SetEffectData(void);
+	void SetEffectData();
 	void SetEffectData(const int EffectIndex);
 
 	void OnSelChangeEffectList(const int Index);
 	void OnSelChangeSkillList(const int Index);
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
@@ -68,17 +66,14 @@ class CEsmIngrediantDlg : public CEsmRecDialog {
   public:
 
 	/* Construction */
-
 	CEsmIngrediantDlg();
 
 	/* Get class members */
-
-	virtual bool IsModified(void);
+	virtual bool IsModified();
 
 	/* Set or update the record data */
-
-	virtual void GetControlData(void);
-	virtual void SetControlData(void);
+	virtual void GetControlData();
+	virtual void SetControlData();
 
 	/* Dialog Data */
 
