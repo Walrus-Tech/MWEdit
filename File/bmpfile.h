@@ -12,23 +12,9 @@
 #define __BMPFILE_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "common/images/rgbpal.h"
 #include "common/file/genfile.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Standard BMP file type */
 #define BMPFILE_TYPE_WORD ((ushort)0x4D42)
@@ -39,16 +25,7 @@
 #define BMPCOMPRESS_RLE4  ((uint)2)
 #define BMPCOMPRESS_BIT   ((uint)3)
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 #pragma pack(push, 1)
 
 /* Standard bitmap file header */
@@ -75,11 +52,7 @@ typedef struct {
 	uint ColorImportant;
 } bmpinfoheader_t;
 
-
 #pragma pack(pop)
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -91,10 +64,7 @@ typedef struct {
  *
  *=========================================================================*/
 class CBmpFile : virtual public CGenFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
-
 	bmpfileheader_t m_FileHeader; /* Image header data */
 	bmpinfoheader_t m_InfoHeader;
 
@@ -105,16 +75,12 @@ class CBmpFile : virtual public CGenFile {
 	int m_PaletteSize;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Helper output functions */
 	bool WriteQuadPalette();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CBmpFile();
 	virtual void Destroy();
@@ -134,16 +100,6 @@ class CBmpFile : virtual public CGenFile {
 	bool Save(const char *pFilename);
 };
 
-/*===========================================================================
- *      End of Class CBmpFile Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Class CBmpFile Inline Methods
- *
- *=========================================================================*/
 
 /* Compute various file offsets and sizes */
 inline uint CBmpFile::ComputeSize() const {
@@ -159,27 +115,10 @@ inline uint CBmpFile::ComputeOffsetBits() const {
 	        + (uint)(m_PaletteSize * 4) );
 }
 
-/*===========================================================================
- *      End of Class CBmpFile Inline Methods
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Definitions
- *
- *=========================================================================*/
 
 /* Initialize the header structures with default values */
 void InitBMPFileHeader(bmpfileheader_t &FileHeader);
 void InitBMPInfoHeader(bmpinfoheader_t &InfoHeader);
 
-/*===========================================================================
- *      End of Function Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Bmpfile.H
- *=========================================================================*/

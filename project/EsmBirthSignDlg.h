@@ -7,35 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMBIRTHSIGNDLG_H
 #define __ESMBIRTHSIGNDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,31 +21,19 @@
  * Begin Class CEsmBirthSignDlg Definition
  *
  *=========================================================================*/
-
 class CEsmBirthSignDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmBirthSignDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmBirthSign *m_pBirthSign;
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
-	/*---------- Begin Public Class Methods ---------------------------*/
 
   public:
-
 	/* Construction */
-
 	CEsmBirthSignDlg();
 
 
@@ -97,16 +63,12 @@ class CEsmBirthSignDlg : public CEsmRecDialog {
 	/* ClassWizard generated virtual function overrides */
 
 	//{{AFX_VIRTUAL(CEsmBirthSignDlg)
-
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
-
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmBirthSignDlg)
@@ -118,17 +80,9 @@ class CEsmBirthSignDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmBirthSignDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmbirthsigndlg.H
- *=========================================================================*/

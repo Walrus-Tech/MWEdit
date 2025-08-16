@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMENCHANTDLG_H
 #define __ESMENCHANTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,23 +20,14 @@
  * Begin Class CEsmEnchantDlg Definition
  *
  *=========================================================================*/
-
 class CEsmEnchantDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmEnchantDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmEnchant *m_pEnchant;
 	esmrecinfo_t *m_pEffectInfo[MWESM_ENCHANT_NUMENCHANTS];
 	bool m_IsConstantEffect;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper set/get methods */
 	void GetEffectData();
@@ -65,10 +45,7 @@ class CEsmEnchantDlg : public CEsmRecDialog {
 	void UpdateTotalSpellCost();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmEnchantDlg();
 
@@ -110,14 +87,12 @@ class CEsmEnchantDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmEnchantDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmEnchantDlg)
@@ -256,13 +231,5 @@ class CEsmEnchantDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmEnchantDlg Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmenchantdlg.H
- *=========================================================================*/

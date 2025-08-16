@@ -7,53 +7,20 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRFUNCARRAY_H
 #define __ESMSCRFUNCARRAY_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmScrFuncData.h"
 #include "contain/PtrArray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Default data file */
-
 #define MWESM_SFDATA_DEFAULTFILE _T("Functions.dat")
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Array of function definition objects */
-
 typedef TPtrArray<CEsmScrFuncData> CEsmSFDataArray;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -63,28 +30,17 @@ typedef TPtrArray<CEsmScrFuncData> CEsmSFDataArray;
  * Holds an array of string function definitions
  *
  *=========================================================================*/
-
 class CEsmScrFuncArray {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
-
 	CEsmSFDataArray m_Functions; /* Function definition array */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
   protected:
-
 	/* Input function data from the file */
 	bool ReadFunction(CGenFile &File, const TCHAR *pFuncName);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScrFuncArray();
 
@@ -120,13 +76,5 @@ class CEsmScrFuncArray {
 	bool Read(CGenFile &File);
 };
 
-/*===========================================================================
- *      End of Class CEsmScrFuncArray Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmscrfuncarray.H
- *=========================================================================*/

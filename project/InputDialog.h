@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __INPUTDIALOG_H
 #define __INPUTDIALOG_H
 
@@ -17,18 +16,14 @@
  * Begin Class CInputDialog Definition
  *
  *=========================================================================*/
-
 class CInputDialog : public CDialog {
-
   protected:
-
 	const TCHAR *m_pLabel;       /* The label text string */
 	const TCHAR *m_pTitle;       /* The window title string */
 	CString *m_pOutputString;    /* Where to store the input result */
 
 
   public:
-
 	/* Construction */
 	CInputDialog(CWnd *pParent = NULL);
 
@@ -50,13 +45,11 @@ class CInputDialog : public CDialog {
 	//{{AFX_VIRTUAL(CInputDialog)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CInputDialog)
@@ -67,22 +60,8 @@ class CInputDialog : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CInputDialog Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototype
- *
- *=========================================================================*/
 
 bool InputDialog(CString *pResult, const TCHAR *pLabel, const TCHAR *pTitle);
-
-/*===========================================================================
- *      End of Function Prototype
- *=========================================================================*/
 
 
 //{{AFX_INSERT_LOCATION}}
@@ -90,7 +69,3 @@ bool InputDialog(CString *pResult, const TCHAR *pLabel, const TCHAR *pTitle);
 
 
 #endif
-
-/*===========================================================================
- *      End of File Inputdialog.H
- *=========================================================================*/

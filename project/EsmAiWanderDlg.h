@@ -7,21 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMAIWANDERDLG_H
 #define __ESMAIWANDERDLG_H
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmSubAI_W.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -29,29 +19,17 @@
  * Begin Class CEsmAiWanderDlg
  *
  *=========================================================================*/
-
 class CEsmAiWanderDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members -------------------------*/
-
   protected:
-
 	CEsmSubAI_W *m_pSubRecord;
 
 
-	/*---------- Begin Public Class Method -----------------------------*/
-
   public:
-
-
 	/* Construction */
-
 	CEsmAiWanderDlg(CWnd *pParent = NULL);
 
-
 	/* Main access method */
-
-	bool DoModal (CEsmSubAI_W *pSubRecord);
+	bool DoModal(CEsmSubAI_W *pSubRecord);
 
 	/* Dialog Data */
 
@@ -71,17 +49,12 @@ class CEsmAiWanderDlg : public CDialog {
 	/* ClassWizard generated virtual function overrides */
 
 	//{{AFX_VIRTUAL(CEsmAiWanderDlg)
-
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
-
 	//}}AFX_VIRTUAL
 
 
   protected:
-
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmAiWanderDlg)
@@ -92,17 +65,9 @@ class CEsmAiWanderDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmAiWanderDlg
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmaiwanderdlg.H
- *=========================================================================*/

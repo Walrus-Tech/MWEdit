@@ -12,51 +12,19 @@
 #define __DL_LOG_H
 
 
-/*===========================================================================
- *
- * Begin Include Files
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include <stdarg.h>
-/*===========================================================================
- *      End of Include Files
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin File Identification
- *
- *=========================================================================*/
 #define DL_LOG_NAME    _T("DL_Log.cpp")
 #define DL_LOG_VERSION _T("0.01d")
 #define DL_LOG_AUTHOR  _T("Dave Humphrey (uesp@m0use.net)")
 #define DL_LOG_DATE    _T("2 April 2001")
-/*===========================================================================
- *      End of File Identification
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Defines
- *
- *=========================================================================*/
 
 /* Number of tab levels allowed in a log file */
 #define LOGFILE_MAX_TABS 20
 
-/*===========================================================================
- *      End of Defines
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type and Structure Definitions
- *
- *=========================================================================*/
 
 /* Logfile hook callback function type */
 typedef void (*PLOGFILE_HOOKPROC) (const TCHAR *pString, va_list Args);
@@ -68,10 +36,6 @@ typedef enum {
 	LOG_APPEND = 1
 } logmode_t;
 
-/*===========================================================================
- *      End of Type and Structure Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -82,17 +46,13 @@ typedef enum {
  *
  *=========================================================================*/
 class CLogFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	FILE *pLogFileHandle;        /* The pointer to the log file steam */
 	int TabLevel;                /* Number of tabs to pad output with */
 	PLOGFILE_HOOKPROC pHookProc; /* The optional hook function */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Outputs the current time to the log file */
 	bool OutputCurrentTime();
 
@@ -100,9 +60,7 @@ class CLogFile {
 	bool OutputTabs();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructor and Destructor */
 	CLogFile();
 	CLogFile(const TCHAR *pFilename, const logmode_t AppendFile = LOG_OPEN);
@@ -163,10 +121,6 @@ class CLogFile {
 	void SetTabLevel(const int NewTabLevel = 0);
 };
 
-/*===========================================================================
- *      End of Class CLogFile Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -178,26 +132,10 @@ class CLogFile {
 #if defined(_DEBUG)
 	void Test_LogFile();
 #endif
-/*===========================================================================
- *      End of Test Function Prototypes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin External Variable Definitions
- *
- *=========================================================================*/
 
 /* The primary log file */
 extern CLogFile SystemLog;
 
-/*===========================================================================
- *      End of External Variable Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Dl_log.H
- *=========================================================================*/

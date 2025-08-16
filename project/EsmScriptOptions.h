@@ -11,23 +11,6 @@
 #define __ESMSCRIPTOPTIONS_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *        End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
-*
-* Begin Definitions
-*
-*=========================================================================*/
-
 /* Format type indices */
 #define ESMSCRIPT_FORMAT_DEFAULT    0
 #define ESMSCRIPT_FORMAT_SYMBOL     1
@@ -42,10 +25,6 @@
 #define ESMSCRIPT_FORMAT_MAX        9
 #define ESMSCRIPT_NUMFORMATS        10
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -55,8 +34,6 @@
  *
  *=========================================================================*/
 class CEsmScriptOptions {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CFont m_TextFont;            /* Base font for the rich edit control */
 	COLORREF m_BackgroundColor;  /* Background color of control */
@@ -66,13 +43,7 @@ class CEsmScriptOptions {
 	CHARFORMAT2 m_Formats[ESMSCRIPT_NUMFORMATS];
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScriptOptions();
 
@@ -135,12 +106,5 @@ class CEsmScriptOptions {
 	const CEsmScriptOptions &operator= (CEsmScriptOptions &Options);
 };
 
-/*===========================================================================
- *      End of Class CEsmScriptOptions Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *     End of File EsmScriptOptions.H
- *=========================================================================*/

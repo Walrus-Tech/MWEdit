@@ -11,16 +11,8 @@
 #define __ESMREPAIR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem2.h"
 #include "EsmSubRIDT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -33,18 +25,11 @@
 class CEsmRepair : public CEsmItem2 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubRIDT *m_pRepairData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmRepair();
 	//virtual ~CEsmRepair() { Destroy(); }
@@ -120,12 +105,5 @@ class CEsmRepair : public CEsmItem2 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmArmor Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmProbe.H
- *=========================================================================*/

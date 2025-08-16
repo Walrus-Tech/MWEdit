@@ -7,38 +7,16 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRTEMPPAGE1_H
 #define __ESMSCRTEMPPAGE1_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "dl_err.h"
 #include "EsmDlgArray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* String sizes */
-
 #define ESMSCRTEMP_SCRIPTNAMESIZE 24
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,29 +24,17 @@
  * Begin Class CEsmScrTempPage1 Definition
  *
  *=========================================================================*/
-
 class CEsmScrTempView;
 
 class CEsmScrTempPage1 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmScrTempPage1);
 
-	/*---------- Begin Public Class Members ----------------------------*/
-
   protected:
-
 	CEsmDlgHandler *m_pDlgHandler; /* Parent dialog handler */
 	CEsmScrTempView *m_pParentView;
 
 
-	/*---------- Begin Public Class Methods ----------------------------*/
-
-  protected:
-
-	/*---------- Begin Public Class Methods ----------------------------*/
-
   public:
-
 	/* Constructor/destructor */
 	CEsmScrTempPage1();
 	~CEsmScrTempPage1();
@@ -115,13 +81,11 @@ class CEsmScrTempPage1 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmScrTempPage1)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmScrTempPage1)
@@ -139,17 +103,9 @@ class CEsmScrTempPage1 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmScrTempPage1 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmscrtemppage1.H
- *=========================================================================*/

@@ -7,29 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCSVIMPORTDLG_H
 #define __ESMCSVIMPORTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmCsvDefs.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* List definitions */
 
@@ -40,40 +23,24 @@
 #define ESMCSVIMP_CSV_EXT     _T("csv")
 #define ESMCSVIMP_CSV_FILTER  _T("CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmCsvImportDlg Definition
  *
  *=========================================================================*/
-
 class CMWEditDoc;
 
 class CEsmCsvImportDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members ------------------*/
-
   protected:
-
 	CCsvFile m_CsvFile;      /* Csv file object */
 	CMWEditDoc *m_pDocument; /* Reference to parent document */
 	int m_CreatedRecords;
 	int m_IDColIndex;        /* Special column indices */
 	int m_TypeColIndex;
 
-	/*---------- Begin Protected Class Methods ------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods ---------------------*/
 
   public:
-
 	/* Protected constructor used by dynamic creation */
 	CEsmCsvImportDlg(CWnd *pParent);
 	virtual ~CEsmCsvImportDlg();
@@ -119,13 +86,11 @@ class CEsmCsvImportDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmCsvImportDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmCsvImportDlg)
@@ -137,17 +102,9 @@ class CEsmCsvImportDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmCsvImportDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcsvimportdlg.H
- *=========================================================================*/

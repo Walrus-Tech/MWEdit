@@ -7,35 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMNPCPAGE2_H
 #define __ESMNPCPAGE2_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,23 +22,15 @@ class CEsmDlgHandler;
  * Begin Class CEsmNpcPage2 Definition
  *
  *=========================================================================*/
-
 class CEsmNpcPage2 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmNpcPage2);
 
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmDlgHandler *m_pDlgHandler;
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmNpcPage2();
 	~CEsmNpcPage2();
@@ -99,13 +70,11 @@ class CEsmNpcPage2 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmNpcPage2)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmNpcPage2)
@@ -117,17 +86,9 @@ class CEsmNpcPage2 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmNpcPage2 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmnpcpage2.H
- *=========================================================================*/

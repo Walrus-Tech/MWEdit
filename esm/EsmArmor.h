@@ -11,31 +11,13 @@
 #define __ESMARMOR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem3.h"
 #include "EsmSubAODT.h"
 #include "EsmSubByte.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of body part definitions allowed in an armor record */
 #define MWESM_ARMOR_MAXBODYPARTS 7
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -47,20 +29,11 @@
  *=========================================================================*/
 class CEsmArmor : public CEsmItem3 {
 	DECLARE_SUBRECCREATE();
-
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubAODT *m_pArmorData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmArmor();
 	//virtual ~CEsmArmor() { Destroy(); }
@@ -149,28 +122,11 @@ class CEsmArmor : public CEsmItem3 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmArmor Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Convert an armor type to a string */
 const TCHAR *GetESMArmorType(const int ArmorType);
 int GetESMArmorType(const TCHAR *pString);
 bool GetESMArmorType(int &OutIndex, const TCHAR *pString);
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

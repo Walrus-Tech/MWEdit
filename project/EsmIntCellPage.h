@@ -7,37 +7,16 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMINTCELLPAGE_H
 #define __ESMINTCELLPAGE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "ColorStatic1.h"
 #include "EsmFile.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmRecDialog;
 class CMWEditDoc;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -45,23 +24,15 @@ class CMWEditDoc;
  * Begin Class CEsmIntCellPage Definition
  *
  *=========================================================================*/
-
 class CEsmIntCellPage : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmIntCellPage);
 
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmRecDialog *m_pDlgParent;
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmIntCellPage();
 	~CEsmIntCellPage();
@@ -138,13 +109,11 @@ class CEsmIntCellPage : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmIntCellPage)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmIntCellPage)
@@ -162,17 +131,9 @@ class CEsmIntCellPage : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmIntCellPage Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmintcellpage.H
- *=========================================================================*/

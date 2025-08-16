@@ -7,35 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCREATUREPAGE3_H
 #define __ESMCREATUREPAGE3_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,23 +22,15 @@ class CEsmDlgHandler;
  * Begin Class CEsmCreaturePage3 Definition
  *
  *=========================================================================*/
-
 class CEsmCreaturePage3 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmCreaturePage3);
 
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmDlgHandler *m_pDlgHandler;
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmCreaturePage3();
 	~CEsmCreaturePage3();
@@ -105,12 +76,10 @@ class CEsmCreaturePage3 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmCreaturePage3)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmCreaturePage3)
@@ -126,17 +95,9 @@ class CEsmCreaturePage3 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmCreaturePage3 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcreaturepage3.H
- *=========================================================================*/

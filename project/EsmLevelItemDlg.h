@@ -7,24 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMLEVELITEMDLG_H
 #define __ESMLEVELITEMDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,22 +21,13 @@
  * Begin Class CEsmLevelItemDlg Definition
  *
  *=========================================================================*/
-
 class CEsmLevelItemDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmLevelItemDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmLevelItem *m_pLevelItem;
 	int m_SortData;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper get/set methods */
 	void GetItemData();
@@ -57,10 +37,7 @@ class CEsmLevelItemDlg : public CEsmRecDialog {
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmLevelItemDlg();
 
@@ -98,7 +75,6 @@ class CEsmLevelItemDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmLevelItemDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
@@ -106,7 +82,6 @@ class CEsmLevelItemDlg : public CEsmRecDialog {
 
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmLevelItemDlg)
@@ -120,17 +95,9 @@ class CEsmLevelItemDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmLevelItemDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmlevelitemdlg.H
- *=========================================================================*/

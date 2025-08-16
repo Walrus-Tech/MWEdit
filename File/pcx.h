@@ -11,23 +11,9 @@
 #define __PCX_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "common/images/rgbpal.h"
 #include "common/file/genfile.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* PCX specific error codes */
 #define PCXERR_BIGIMAGE  2001
@@ -36,16 +22,7 @@
 /* Compression constant */
 #define PCX_RLE_VALUE    192
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*=========================================================================
- *
- * Begin Type Definitions
- *
- *=======================================================================*/
 #pragma pack(push, 1)
 
 /* Defines the header data structure for a PCX file */
@@ -73,9 +50,6 @@ typedef struct {
 } pcxheader_t;
 
 #pragma pack(pop)
-/*=========================================================================
- *      End of Type Definitions
- *=======================================================================*/
 
 
 /*===========================================================================
@@ -87,8 +61,6 @@ typedef struct {
  *
  *=========================================================================*/
 class CPcxFile : public CGenFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	pcxheader_t m_Header; /* Header information */
 
@@ -99,9 +71,7 @@ class CPcxFile : public CGenFile {
 	int m_PaletteSize;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Sets header values to default values */
 	void CreateStandardHeader();
 
@@ -114,9 +84,7 @@ class CPcxFile : public CGenFile {
 	bool WritePalette();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CPcxFile();
 	virtual ~CPcxFile() {
@@ -137,12 +105,5 @@ class CPcxFile : public CGenFile {
 	bool Save(const char *pFilename);
 };
 
-/*===========================================================================
- *      End of Class CPcxFile Definition
- *=========================================================================*/
-
 
 #endif
-/*=========================================================================
- *      End of File PCX.H
- *=======================================================================*/

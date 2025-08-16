@@ -7,35 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCREATUREPAGE4_H
 #define __ESMCREATUREPAGE4_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,22 +22,14 @@ class CEsmDlgHandler;
  * Begin Class CEsmCreaturePage4 Definition
  *
  *=========================================================================*/
-
 class CEsmCreaturePage4 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmCreaturePage4);
 
-	/*---------- Begin Protected Class Members  --------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmDlgHandler *m_pDlgHandler;
 	CEsmSubRecArray m_PackageArray; /* Holds all the packages being editted */
 
-	/*---------- Begin Protected Class Methods ---------------------*/
-
-  protected:
 
 	/* Creates a copy of all the given AI subrecords */
 	void AddAIRecords(const TCHAR *pType);
@@ -79,10 +50,7 @@ class CEsmCreaturePage4 : public CPropertyPage {
 	void UpdatePackageList();
 
 
-	/*---------- Begin Public Class Methods ------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmCreaturePage4();
 	~CEsmCreaturePage4();
@@ -124,12 +92,10 @@ class CEsmCreaturePage4 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmCreaturePage4)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmCreaturePage4)
@@ -149,17 +115,9 @@ class CEsmCreaturePage4 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmCreaturePage4 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcreaturepage4.H
- *=========================================================================*/

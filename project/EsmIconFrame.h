@@ -7,38 +7,17 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMICONFRAME_H
 #define __ESMICONFRAME_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "dl_err.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Default icon width/height */
 
 #define MWESM_ICON_DEFAULTWIDTH  32
 #define MWESM_ICON_DEFAULTHEIGHT 32
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,26 +25,13 @@
  * Begin Class CEsmIcon Frame Definition
  *
  *=========================================================================*/
-
 class CEsmIconFrame : public CStatic {
-
-	/*---------- Begin Protected Class Members ---------------------*/
-
   protected:
-
 	CBitmap m_Bitmap; /* The bitmap image to draw */
 	bool m_IsInitialized;
 
 
-	/*---------- Begin Protected Class Methods ---------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods ------------------------*/
-
   public:
-
 	/* Construction/Destruction */
 	CEsmIconFrame();
 	virtual ~CEsmIconFrame();
@@ -85,7 +51,6 @@ class CEsmIconFrame : public CStatic {
 	/* Generated message map functions */
 
   protected:
-
 	//{{AFX_MSG(CEsmIconFrame)
 	afx_msg void OnPaint();
 	//}}AFX_MSG
@@ -93,17 +58,9 @@ class CEsmIconFrame : public CStatic {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmIcon Frame Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmiconframe.H
- *=========================================================================*/

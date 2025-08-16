@@ -11,16 +11,8 @@
 #define __ESMSUBNAME512_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
 #include "string/SString.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,14 +23,9 @@
  *
  *=========================================================================*/
 class CEsmSubName512 : public CEsmSubRecord {
-
-	/*---------- Begin Proected Class Members ---------------------*/
   protected:
 	char m_NameData[513];
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper input methods */
 	virtual bool ReadData(CGenFile &File) {
@@ -58,9 +45,7 @@ class CEsmSubName512 : public CEsmSubRecord {
 	}
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSubName512() {
 		memset(m_NameData, 0, 513);
@@ -117,12 +102,5 @@ class CEsmSubName512 : public CEsmSubRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmSubName512 Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmSubNameFix.H
- *=========================================================================*/

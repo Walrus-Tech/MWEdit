@@ -12,12 +12,6 @@
 #define __GENFIND_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
-
 #if defined(__MSDOS__)
 	#include "dos.h"
 	#include "dir.h"
@@ -32,16 +26,7 @@
 #endif
 
 #include "dl_file.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*=========================================================================
- *
- * Begin Defines
- *
- *=======================================================================*/
 
 /* Used to indicate an invalid find handle */
 #define NULL_FIND_HANDLE (-1l)
@@ -57,7 +42,6 @@
 	#define FA_HIDDEN   FILE_ATTRIBUTE_HIDDEN
 	#define FA_SYSTEM   FILE_ATTRIBUTE_SYSTEM
 	#define FA_NORMAL   FILE_ATTRIBUTE_NORMAL
-
 #elif defined(_WIN32)
 	/* Define the base file block type */
 	typedef struct _finddata_t fileblock_t;
@@ -69,17 +53,10 @@
 	#define FA_HIDDEN   _A_HIDDEN
 	#define FA_SYSTEM   _A_SYSTEM
 	#define FA_NORMAL   _A_NORMAL
-
-
-
 #elif defined(__MSDOS__)
 	/* Define the base file block type */
 	typedef struct ffblk fileblock_t;
 #endif
-
-/*=========================================================================
- *      End of Defines
- *=======================================================================*/
 
 
 /*=========================================================================
@@ -91,14 +68,10 @@
  *
  *=======================================================================*/
 class CFileBlock {
-
-	/* Begin protected class members */
   protected:
 	fileblock_t BlockData;
 
-	/* Begin public class methods */
   public:
-
 	/* Class Constructor */
 	CFileBlock() {
 		Destroy();
@@ -117,7 +90,7 @@ class CFileBlock {
 	}
 
 	/* Define the get methods depending on the platform */
-#if defined (_WIN32) && defined(__BORLANDC__)
+#if defined(_WIN32) && defined(__BORLANDC__)
 	time_t ConvertFileTime(const FILETIME &FileTime) const;
 
 	char *GetName() {
@@ -193,10 +166,6 @@ class CFileBlock {
 #endif
 };
 
-/*=========================================================================
- *      End of Class CFileBlock Definition
- *=======================================================================*/
-
 
 /*=========================================================================
  *
@@ -206,16 +175,12 @@ class CFileBlock {
  *
  *=======================================================================*/
 class CFindFile {
-
-	/* Begin protected class members */
   protected:
 	long FindHandle;      /* Handle for the current find */
 	CFileBlock FileBlock; /* Block for holding file info */
 
 
-	/* Begin public class methods */
   public:
-
 	/* Class Constructor */
 	CFindFile();
 
@@ -282,12 +247,5 @@ class CFindFile {
 	}
 };
 
-/*=========================================================================
- *      End of Class CFindFile Definition
- *=======================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Genfind.H
- *=========================================================================*/

@@ -11,28 +11,12 @@
 #define __CONFIGFILE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "GenFile.h"
 #include "SString.h"
 #include "PtrArray.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 #define CONFIG_LINE_LENGTH 256
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,20 +27,12 @@
  *
  *=========================================================================*/
 class CConfigEntry {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CSString m_Variable;
 	CSString m_Value;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CConfigEntry() { ; }
 
@@ -92,9 +68,6 @@ class CConfigEntry {
 };
 
 typedef TPtrArray<CConfigEntry> CCfgEntryArray;
-/*===========================================================================
- *      End of Class CConfigEntry Definition
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -105,20 +78,12 @@ typedef TPtrArray<CConfigEntry> CCfgEntryArray;
  *
  *=========================================================================*/
 class CConfigGroup {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CSString m_Name;          /* Group name */
 	CCfgEntryArray m_Entries; /* Array of config entries */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CConfigGroup() : m_Entries(2) {;}
 
@@ -158,9 +123,6 @@ class CConfigGroup {
 };
 
 typedef TPtrArray<CConfigGroup> CCfgGroupArray;
-/*===========================================================================
- *      End of Class CConfigGroup Definition
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -171,24 +133,18 @@ typedef TPtrArray<CConfigGroup> CCfgGroupArray;
  *
  *=========================================================================*/
 class CConfigFile : public CGenFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CCfgGroupArray m_Groups; /* Array of config groups */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Helper method to make a variable array string */
 	const TCHAR *CreateArrayString(const TCHAR *pVariable, const int ID);
 	const TCHAR *CreateArrayString(const TCHAR *pVariable, const int ID1, const int ID2);
 	const TCHAR *CreateArrayString(const TCHAR *pVariable, const int ID1, const TCHAR *pID2);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CConfigFile();
 	virtual ~CConfigFile() {
@@ -289,12 +245,4 @@ class CConfigFile : public CGenFile {
 	bool SetBool(const TCHAR *pGroup, const TCHAR *pVariable, const bool Value);
 };
 
-/*===========================================================================
- *      End of Class CConfigFile Definition
- *=========================================================================*/
-
-
 #endif
-/*===========================================================================
- *      End of File Configfile.H
- *=========================================================================*/

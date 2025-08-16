@@ -7,35 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCELLREFDLG_H
 #define __ESMCELLREFDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmSubCellRef.h"
 #include "EsmCell.h"
 #include "contain/ptrarray.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,23 +21,15 @@
  * Begin Class CEsmCellRefDlg Definition
  *
  *=========================================================================*/
-
 class CEsmCellRefDlg : public CDialog {
-
-	/*---------- Protected Class Members ----------------------------*/
-
   protected:
-
 	CEsmSubCellRef *m_pCellRef; /* The cell reference we are editting */
 	CEsmCell *m_pCell;
 	bool m_HasNewCellRef;
 	bool m_IsAlreadyNew;
 
 
-	/*---------- Public Class Methods -------------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmCellRefDlg(CWnd *pParent = NULL);
 
@@ -100,7 +70,6 @@ class CEsmCellRefDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmCellRefDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
@@ -108,7 +77,6 @@ class CEsmCellRefDlg : public CDialog {
 // Implementation
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmCellRefDlg)
@@ -120,17 +88,9 @@ class CEsmCellRefDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmCellRefDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcellrefdlg.H
- *=========================================================================*/

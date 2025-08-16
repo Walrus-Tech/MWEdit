@@ -11,18 +11,10 @@
 #define __ESMSTARTSCRIPT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubLong.h"
 #include "EsmSubName32.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -35,18 +27,11 @@
 class CEsmStartScript : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pName;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmStartScript();
 	//virtual ~CEsmStartScript() { Destroy(); }
@@ -88,12 +73,5 @@ class CEsmStartScript : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmStartScript Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmstartscript.H
- *=========================================================================*/

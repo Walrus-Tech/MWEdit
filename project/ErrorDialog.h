@@ -7,29 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ERRORDIALOG_H
 #define __ERRORDIALOG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
 class CErrorDialog : public CDialog {
-
-
   public:
-
 	CErrorDialog(CWnd *pParent = NULL);
-
 
 	CString m_MessageText;
 	CString m_TitleText;
@@ -49,13 +33,11 @@ class CErrorDialog : public CDialog {
 	//{{AFX_VIRTUAL(CErrorDialog)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CErrorDialog)
@@ -71,7 +53,3 @@ class CErrorDialog : public CDialog {
 
 
 #endif
-
-/*===========================================================================
- *      End of File Errordialog.H
- *=========================================================================*/

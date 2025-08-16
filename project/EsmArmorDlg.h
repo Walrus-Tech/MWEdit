@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMARMORDLG_H
 #define __ESMARMORDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,21 +20,12 @@
  * Begin Class CEsmArmorDlg Definition
  *
  *=========================================================================*/
-
 class CEsmArmorDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmArmorDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmArmor *m_pArmor;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Handles selchange events in all the biped lists */
 	void OnSelChangeBipedList(const int Index);
@@ -62,12 +42,8 @@ class CEsmArmorDlg : public CEsmRecDialog {
 	void SetBipedData(const int BipedIndex, CEsmSubByte *pIndexRecord, const int RecordIndex);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
-
 	CEsmArmorDlg();
 
 
@@ -110,18 +86,13 @@ class CEsmArmorDlg : public CEsmRecDialog {
 	/* ClassWizard generated virtual function overrides */
 
 	//{{AFX_VIRTUAL(CEsmArmorDlg)
-
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
-
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
-
 	//{{AFX_MSG(CEsmArmorDlg)
 	afx_msg void OnEnchantedit();
 	//}}AFX_MSG
@@ -161,17 +132,9 @@ class CEsmArmorDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmArmorDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmarmordlg.H
- *=========================================================================*/

@@ -7,30 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMFACTIONDLG_H
 #define __ESMFACTIONDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Rank list definitions */
 
@@ -47,33 +30,20 @@
 #define MWESM_REACLIST_NAME       0
 #define MWESM_REACLIST_VALUE      1
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmFactionDlg Definition
  *
  *=========================================================================*/
-
 class CEsmFactionDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmFactionDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmFaction *m_pFaction;
 	int m_CurrentRank;
 	int m_CurrentReaction;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update the rank list data controls */
 	void GetRankData();
@@ -85,10 +55,7 @@ class CEsmFactionDlg : public CEsmRecDialog {
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmFactionDlg();
 
@@ -140,14 +107,12 @@ class CEsmFactionDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmFactionDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmFactionDlg)
@@ -160,17 +125,9 @@ class CEsmFactionDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmFactionDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmfactiondlg.H
- *=========================================================================*/

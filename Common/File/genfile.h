@@ -11,30 +11,13 @@
 #ifndef __GENFILE_H
 #define __GENFILE_H
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
+
 #include <stdarg.h>
 #include "dl_file.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type and Structure Definitions
- *
- *=========================================================================*/
 
 /* Used to indicate a position in a file stream */
 typedef long filepos_t;
-
-/*===========================================================================
- *      End of Type and Structure Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,17 +29,13 @@ typedef long filepos_t;
  *
  *=========================================================================*/
 class CGenFile {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	FILE *m_pFileHandle; /* The file stream handle */
 	bool m_Attached;     /* Indicates the stream should not be closed */
 	long m_LineCount;    /* Used to track lines in file */
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors */
 	CGenFile();
 	CGenFile(FILE *pSourceHandle);
@@ -163,16 +142,6 @@ class CGenFile {
 	operator FILE *();
 };
 
-/*===========================================================================
- *      End of Class CGenFile Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Class CGenFile Inline Methods
- *
- *=========================================================================*/
 
 /* Class constructors */
 inline CGenFile::CGenFile() {
@@ -542,16 +511,7 @@ inline CGenFile::operator FILE *(void) {
 	return m_pFileHandle;
 }
 
-/*===========================================================================
- *      End of Class CGenFile Inline Methods
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Test Routine Prototypes
- *
- *=========================================================================*/
 #if defined(_DEBUG)
 	#define TEST_GENFILE_SEEKFILESIZE 10000
 	#define TEST_GENFILE_RWNUMSIZE  1000
@@ -563,12 +523,6 @@ inline CGenFile::operator FILE *(void) {
 	void Test_GenFilePrint();
 	void Test_GenFile();
 #endif
-/*===========================================================================
- *      End of Test Routine Prototypes
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File Genfile.H
- *=========================================================================*/

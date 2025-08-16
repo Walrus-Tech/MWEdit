@@ -11,22 +11,9 @@
 #define __ESMSUBFRMR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 #pragma pack(push, 1)
 
 typedef struct {
@@ -35,9 +22,6 @@ typedef struct {
 } frmrdata_t;
 
 #pragma pack(pop)
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -48,13 +32,9 @@ typedef struct {
  *
  *=========================================================================*/
 class CEsmSubFRMR : public CEsmSubRecord {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	frmrdata_t m_Data;
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	virtual bool ReadData(CGenFile &File) {
 		return File.Read((char *)&m_Data, sizeof(frmrdata_t));
@@ -65,9 +45,7 @@ class CEsmSubFRMR : public CEsmSubRecord {
 	}
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	//CEsmSubFRMR();
 	//virtual ~CEsmSubFRMR() { Destroy(); }
@@ -134,12 +112,5 @@ class CEsmSubFRMR : public CEsmSubRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmSubAADT Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmsubINDX.H
- *=========================================================================*/

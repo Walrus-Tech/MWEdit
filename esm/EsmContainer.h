@@ -11,34 +11,16 @@
 #define __ESMCONTAINER_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem1.h"
 #include "EsmSubCNDT.h"
 #include "EsmSubLong.h"
 #include "EsmSubNPCO.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Flag bit fields */
 #define MWESM_CONTFLAG_DEFAULT 8 /* Not sure what '8' is */
 #define MWESM_CONTFLAG_ORGANIC 1
 #define MWESM_CONTFLAG_RESPAWN 2
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -51,20 +33,12 @@
 class CEsmContainer : public CEsmItem1 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubCNDT *m_pContData;
 	CEsmSubLong *m_pFlag;
 
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmContainer();
 	//virtual ~CEsmContainer() { Destroy(); }
@@ -130,12 +104,5 @@ class CEsmContainer : public CEsmItem1 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmContainer Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmActivator.H
- *=========================================================================*/

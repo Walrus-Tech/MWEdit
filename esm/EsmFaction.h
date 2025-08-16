@@ -11,29 +11,11 @@
 #define __ESMFACTION_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubLong.h"
 #include "EsmSubName32.h"
 #include "EsmSubFADT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,7 +28,6 @@
 class CEsmFaction : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pName;
 	CEsmSubFADT *m_pFactionData;
@@ -54,13 +35,7 @@ class CEsmFaction : public CEsmRecord {
 	int m_NumRankNames;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmFaction();
 	//virtual ~CEsmFaction() { Destroy(); }
@@ -120,12 +95,5 @@ class CEsmFaction : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmFaction Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

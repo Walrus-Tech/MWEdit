@@ -7,36 +7,15 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRIPTCOMPAREDLG_H
 #define __ESMSCRIPTCOMPAREDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "MWEditDoc.h"
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -44,19 +23,10 @@ class CEsmDlgHandler;
  * Begin CEsmScriptCompareDlg Definition
  *
  *=========================================================================*/
-
 class CEsmScriptCompareDlg : public CFormView {
-
-	/*---------- Begin Protected Class Members --------------------*/
-
   protected:
-
 	CEsmDlgHandler *m_pDlgHandler; /* Reference to parent handler */
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
 
 	CEsmScriptCompareDlg();
 	virtual ~CEsmScriptCompareDlg();
@@ -64,10 +34,7 @@ class CEsmScriptCompareDlg : public CFormView {
 	DECLARE_DYNCREATE(CEsmScriptCompareDlg);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Add text to the log */
 	void AddLogText(const TCHAR *pString, va_list Args);
 
@@ -99,17 +66,14 @@ class CEsmScriptCompareDlg : public CFormView {
 	//{{AFX_VIRTUAL(CEsmScriptCompareDlg)
 
   public:
-
 	virtual void OnInitialUpdate();
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Class diagnostics */
 
 #ifdef _DEBUG
@@ -127,17 +91,9 @@ class CEsmScriptCompareDlg : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of CEsmScriptCompareDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File EsmScriptCompareDlg.H
- *=========================================================================*/

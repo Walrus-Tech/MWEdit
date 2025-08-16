@@ -7,23 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMDOORDLG_H
 #define __ESMDOORDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,30 +21,18 @@
  * Begin Class CEsmDoorDlg Definition
  *
  *=========================================================================*/
-
 class CEsmDoorDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmDoorDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmDoor *m_pDoor;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmDoorDlg();
 
@@ -87,14 +65,12 @@ class CEsmDoorDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmDoorDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmDoorDlg)
@@ -107,17 +83,9 @@ class CEsmDoorDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmDoorDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmdoordlg.H
- *=========================================================================*/

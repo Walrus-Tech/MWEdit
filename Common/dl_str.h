@@ -11,26 +11,12 @@
 #define __DL_STR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include "dl_mem.h"
 #include "dl_err.h"
 #include "dl_log.h"
 #include <string.h>
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Defines
- *
- *=========================================================================*/
 
 /* Convert a bool value to a string */
 #define BooleanToString(Flag) ((Flag) ? _T("True") : _T("False"))
@@ -43,16 +29,6 @@
 	#define stricmp(String1, String2) _stricmp((String1), (String2))
 #endif
 
-/*===========================================================================
- *      End of Defines
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Returns the number of substrings in the given string */
 size_t CountSubstrings(const TCHAR *pSourceString, const TCHAR *pSearchString);
@@ -118,25 +94,10 @@ TCHAR *UnquoteString(TCHAR *pString);
 int vsnprintf(TCHAR *pBuffer, const size_t MaxLength, const TCHAR *pFormat, va_list Args);
 
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Inline String Functions
- *
- *=========================================================================*/
-
 /* A strlen() function which can handle NULL strings */
 inline size_t SafeStrLen(const TCHAR *pString) {
 	return (pString == NULL) ? 0 : TSTRLEN(pString);
 }
-
-/*===========================================================================
- *      End of Inline String Functions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -155,9 +116,6 @@ inline size_t SafeStrLen(const TCHAR *pString) {
 	/* Compare a portion of a string with case insensitivity */
 	int strnicmp(const TCHAR *pString1, const TCHAR *pString2, const size_t MaxStringLength);
 #endif
-/*===========================================================================
- *      End of Standard Replacement Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -187,12 +145,6 @@ inline size_t SafeStrLen(const TCHAR *pString) {
 	void Test_strnicmp();
 	void Test_DLStr();
 #endif
-/*===========================================================================
- *      End of Testing Routine Prototypes
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File Dl_str.H
- *=========================================================================*/

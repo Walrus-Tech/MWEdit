@@ -7,30 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __EDITUNDO_H
 #define __EDITUNDO_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "dl_err.h"
 #include "contain/temarray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Types of undo actions */
 #define EDITUNDO_NONE         0
@@ -43,10 +26,6 @@
 /* Default undo limit */
 #define EDITUNDO_DEFAULT_LIMIT 100
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -55,13 +34,8 @@
  * Defines a single undo action for an edit control.
  *
  *=========================================================================*/
-
 class CEditUndo {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
-
 	int m_Action;
 	TCHAR m_Char;
 	TCHAR *m_pString;
@@ -70,15 +44,7 @@ class CEditUndo {
 	int m_SelEnd;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CEditUndo();
 
@@ -134,12 +100,7 @@ class CEditUndo {
 };
 
 /* Array of undo actions */
-
 typedef TTemplateArray<CEditUndo> CEditUndoList;
-
-/*===========================================================================
- *      End of Class CEditUndo Definition
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -149,30 +110,19 @@ typedef TTemplateArray<CEditUndo> CEditUndoList;
  * Description
  *
  *=========================================================================*/
-
 class CEditUndoStack {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
-
 	CEditUndoList m_UndoStack;
 
 	bool m_GroupUndos;
 	int m_Limit;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
   protected:
-
 	bool GroupUndoInsertChar(CRichEditCtrl *pCtrl, CEditUndo *pUndo);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CEditUndoStack();
 
@@ -228,13 +178,5 @@ class CEditUndoStack {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEditUndoStack Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Editundo.H
- *=========================================================================*/

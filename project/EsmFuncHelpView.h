@@ -7,16 +7,9 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMFUNCHELPVIEW_H
 #define __ESMFUNCHELPVIEW_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #ifndef __AFXEXT_H__
 	#include <afxext.h>
@@ -24,35 +17,22 @@
 
 #include "EsmScrFuncArray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmFuncHelpView Definition
  *
  *=========================================================================*/
-
 class CMWEditApp;
 
 class CEsmFuncHelpView : public CFormView {
-
-	/*---------- Begin Protected Class Members -----------------------------*/
-
   protected:
-
 	CFont m_Font;
 	CFont m_NameFont;
 	CFont m_LinkFont;
 	CEsmScrFuncArray *m_pFuncArray; /* Points to the array of functions in the app */
 	int m_CurrentFunc;
 
-
-	/*---------- Begin Protected Class Methods -----------------------------*/
-
-  protected:
 
 	/* Class constructor */
 	CEsmFuncHelpView();
@@ -69,10 +49,7 @@ class CEsmFuncHelpView : public CFormView {
 	void FillFunctionList();
 
 
-	/*---------- Begin Public Class Members --------------------------------*/
-
   public:
-
 	//{{AFX_DATA(CEsmFuncHelpView)
 	enum {
 		IDD = IDD_FUNCTION_HELP
@@ -100,26 +77,20 @@ class CEsmFuncHelpView : public CFormView {
 	CMWEditApp *GetApp();
 
 
-	/*---------- Begin Public Class Methods --------------------------------*/
-
   public:
-
 	/* ClassWizard generated virtual function overrides */
 
 	//{{AFX_VIRTUAL(CEsmFuncHelpView)
 
   public:
-
 	virtual void OnInitialUpdate();
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Class destructor */
 	virtual ~CEsmFuncHelpView();
 
@@ -141,17 +112,9 @@ class CEsmFuncHelpView : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmFuncHelpView Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmfunchelpview.H
- *=========================================================================*/

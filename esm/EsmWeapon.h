@@ -11,29 +11,13 @@
 #define __ESMWEAPON_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem3.h"
 #include "EsmSubWPDT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMWeaponType(const int Type);
 int GetESMWeaponType(const TCHAR *pString);
 bool IsESMWeaponRange(const int Type);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,19 +30,11 @@ bool IsESMWeaponRange(const int Type);
 class CEsmWeapon : public CEsmItem3 {
 	DECLARE_SUBRECCREATE();
 
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubWPDT *m_pWeaponData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmWeapon();
 	//virtual ~CEsmWeapon() { Destroy(); }
@@ -248,12 +224,5 @@ class CEsmWeapon : public CEsmItem3 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmWeapon Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

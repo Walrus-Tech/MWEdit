@@ -11,27 +11,11 @@
 #define __ESMLIGHT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem2.h"
 #include "EsmSubLHDT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMLightFlicker(const int Flags);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -44,19 +28,12 @@ const TCHAR *GetESMLightFlicker(const int Flags);
 class CEsmLight : public CEsmItem2 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubLHDT *m_pLightData;   /* Reference to subrecords */
 	CEsmSubNameFix *m_pSound;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmLight();
 	//virtual ~CEsmLight() { Destroy(); }
@@ -274,12 +251,5 @@ class CEsmLight : public CEsmItem2 {
 
 };
 
-/*===========================================================================
- *      End of Class CEsmArmor Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

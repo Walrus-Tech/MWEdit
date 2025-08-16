@@ -7,37 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMNPCPAGE1_H
 #define __ESMNPCPAGE1_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/* Skill data */
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -45,26 +22,19 @@ class CEsmDlgHandler;
  * Begin Class CEsmNpcPage1 Definition
  *
  *=========================================================================*/
-
 class CEsmNpcPage1 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmNpcPage1);
 
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmDlgHandler *m_pDlgHandler;
+
 	int m_SkillValues[MWESM_MAX_SKILLS];
 	int m_SortCol;
 	int m_SortReverse;
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmNpcPage1();
 	~CEsmNpcPage1();
@@ -147,13 +117,11 @@ class CEsmNpcPage1 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmNpcPage1)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmNpcPage1)
@@ -171,17 +139,9 @@ class CEsmNpcPage1 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmNpcPage1 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmnpcpage1.H
- *=========================================================================*/

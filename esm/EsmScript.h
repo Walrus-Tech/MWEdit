@@ -11,31 +11,13 @@
 #define __ESMSCRIPT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubSCHD.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Max script text size */
 #define ESM_SCRIPT_MAXTEXT 32768
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -48,7 +30,6 @@
 class CEsmScript : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubSCHD *m_pScriptHeader;
 	CEsmSubRecord *m_pScriptVars;
@@ -56,13 +37,7 @@ class CEsmScript : public CEsmRecord {
 	CEsmSubName *m_pScriptText;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScript();
 	//virtual ~CEsmScript() { Destroy(); }
@@ -139,12 +114,5 @@ class CEsmScript : public CEsmRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmScript Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmScript.H
- *=========================================================================*/

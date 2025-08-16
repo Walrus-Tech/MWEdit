@@ -14,16 +14,7 @@
 #define __OBJARRAY_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "PtrArray.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -35,21 +26,15 @@
  *=========================================================================*/
 template <class CObjType> class TObjArray {
 
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	TPtrArray<CObjType> m_Array; /* Array of object pointers */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
-	/* Helper function to delete all elements */
 	void DeleteElements_Priv();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	TObjArray(const int MaxSize = 0, const int GrowSize = -1);
 	virtual ~TObjArray() {
@@ -201,11 +186,6 @@ template <class CObjType> class TObjArray {
 };
 
 /*===========================================================================
- *      End of Class TObjArray Definition
- *=========================================================================*/
-
-
-/*===========================================================================
  *
  * Class TObjArray Constructor - TObjArray (MaxSize);
  *
@@ -219,11 +199,6 @@ template <class CObjType> TObjArray<CObjType>::TObjArray(const int MaxSize, cons
 }
 
 /*===========================================================================
- *      End of Class TObjArray Constructor
- *=========================================================================*/
-
-
-/*===========================================================================
  *
  * Template TObjArray Method - void Destroy (void);
  *
@@ -233,11 +208,6 @@ void TObjArray<CObjType>::Destroy() {
 	//DEFINE_FUNCTION("TObjArray::Destroy()");
 	DeleteElements_Priv();
 }
-
-/*===========================================================================
- *      End of Class Method TObjArray::Destroy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -255,11 +225,6 @@ CObjType *TObjArray<CObjType>::AddNew() {
 	m_Array.Add(pNewObject);
 	return pNewObject;
 }
-
-/*===========================================================================
- *      End of Class Method TObjArray::Add()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -280,11 +245,6 @@ void TObjArray<CObjType>::DeleteElement(CObjType *pObject) {
 
 	DeleteElement(Index);
 }
-
-/*===========================================================================
- *      End of Class Method TObjArray::DeleteElement()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -311,11 +271,6 @@ void TObjArray<CObjType>::DeleteElement(const int Index) {
 }
 
 /*===========================================================================
- *      End of Class Method TObjArray::DeleteElement()
- *=========================================================================*/
-
-
-/*===========================================================================
  *
  * Template TObjArray Method - void DeleteElements_Priv (void);
  *
@@ -337,11 +292,6 @@ void TObjArray<CObjType>::DeleteElements_Priv() {
 	/* Clear the array itself */
 	m_Array.Destroy();
 }
-
-/*===========================================================================
- *      End of Class Method TObjArray::DeleteElements_Priv()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -366,12 +316,5 @@ void TObjArray<CObjType>::SetMaxElements(const int MaxSize) {
 	m_Array.Resize(MaxSize);
 }
 
-/*===========================================================================
- *      End of Class Method TObjArray::SetMaxElements()
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Objarray.H
- *=========================================================================*/

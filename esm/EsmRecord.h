@@ -11,26 +11,12 @@
 #define __ESMRECORD_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
 #include "EsmSubName.h"
 #include "EsmSubLong.h"
 #include "EsmSubNameFix.h"
 #include "contain/dl_map.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Offset of the recordsize from the end of the record header */
 #define MWESM_RECSIZE_OFFSET 12
@@ -47,21 +33,6 @@
 	static const esmsubreccreate_t s_SubRecCreate[]; \
 	virtual const esmsubreccreate_t* GetSubRecCreate () const { return s_SubRecCreate; }
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -75,7 +46,6 @@ class CEsmFile;
 class CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmFile *m_pFile;            /* File parent */
 	CEsmRecord *m_pPrevRecord;    /* Previous record in another file */
@@ -94,9 +64,6 @@ class CEsmRecord {
 	CEsmSubName *m_pID;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
 	/* Helper input methods */
 	virtual bool ReadData(CGenFile &File);
 	virtual bool ReadHeader(CGenFile &File);
@@ -106,9 +73,7 @@ class CEsmRecord {
 	virtual bool WriteData(CGenFile &File);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmRecord();
 	virtual ~CEsmRecord() {
@@ -288,16 +253,6 @@ class CEsmRecord {
 	bool Write(CGenFile &File);
 };
 
-/*===========================================================================
- *      End of Class CEsmRecord Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Pointer to a class method to create a record object */
 typedef CEsmRecord *(*ESMREC_CREATEFUNC) ();
@@ -319,12 +274,5 @@ int _cdecl EsmRecordSort(const void *pElem1, const void *pElem2, const long lUse
 /* Simple map of records by ID */
 typedef TGenRefMap<CSString, CEsmRecord *, const char *> CEsmRecordRefMap;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmrecord.H
- *=========================================================================*/

@@ -7,33 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSUBLISTCTRL_H
 #define __ESMSUBLISTCTRL_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -41,25 +19,10 @@
  * Begin Class CEsmSubListCtrl Definition
  *
  *=========================================================================*/
-
 class CEsmSubListCtrl : public CEsmListCtrl {
-
 	DECLARE_DYNCREATE(CEsmSubListCtrl);
 
-	/*---------- Begin Protected Class Members --------------------*/
-
-  protected:
-
-
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Construction */
 	CEsmSubListCtrl();
 	virtual ~CEsmSubListCtrl();
@@ -84,7 +47,6 @@ class CEsmSubListCtrl : public CEsmListCtrl {
 	/* Generated message map functions */
 
   protected:
-
 	//{{AFX_MSG(CEsmSubListCtrl)
 	afx_msg void OnColumnclick(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult);
@@ -94,28 +56,9 @@ class CEsmSubListCtrl : public CEsmListCtrl {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmSubListCtrl Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmlistctrl.H
- *=========================================================================*/

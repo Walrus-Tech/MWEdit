@@ -11,26 +11,12 @@
 #define __WINUTIL_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #if defined(UNDER_CE)
 	#include "dl_wince.h"
 #else
 	#include "dl_err.h"
 #endif
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Options for the MakeTimeString() function, bit field values */
 #define TIMESTRING_SHORTTIME 1
@@ -45,16 +31,7 @@
 #define CFONT_CREATE(Font, Size, Bold, Italic, FontName) Font.CreateFont(Size, 0, 0, 0, Bold, Italic, 0, 0, \
         DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, FontName);
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions when using Borland C
- *
- *=========================================================================*/
 #if defined(__BORLANDC__)
 	#define CComboBox TComboBox
 	#define CListBox  TListBox
@@ -73,16 +50,7 @@
 	#define afx_msg
 	#define DECLARE_MESSAGE_MAP()
 #endif
-/*===========================================================================
- *      End of Definitions when using Borland C
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Adds a string data value pair to a combo or list box */
 bool AddComboString(CComboBox &ComboBox, const TCHAR *pString, const int Data);
@@ -176,11 +144,5 @@ bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuRe
 /* Set the internal window text directly */
 void WINAPI SetInternalWindowText(HWND hwnd, LPCTSTR lpText);
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 #endif
-/*===========================================================================
- *      End of File Winutil.H
- *=========================================================================*/

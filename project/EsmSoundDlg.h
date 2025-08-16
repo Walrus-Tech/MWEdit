@@ -7,24 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSOUNDDLG_H
 #define __ESMSOUNDDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,28 +21,17 @@
  * Begin Class CEsmSoundDlg Definition
  *
  *=========================================================================*/
-
 class CEsmSoundDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmSoundDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmSound *m_pSound;
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmSoundDlg();
 
@@ -83,14 +61,12 @@ class CEsmSoundDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmSoundDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmSoundDlg)
@@ -101,17 +77,9 @@ class CEsmSoundDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmSoundDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmsounddlg.H
- *=========================================================================*/

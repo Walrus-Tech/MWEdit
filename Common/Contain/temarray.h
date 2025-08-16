@@ -11,47 +11,17 @@
 #define __TEMARRAY_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include "dl_mem.h"
 #include "dl_err.h"
 #include <limits.h>
 #include <memory.h>
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Macro for iterating through an array */
 #if !defined(ITERATE_ARRAY)
 	#define ITERATE_ARRAY(Array, Index, pRecord) for (Index = 0; Index < Array.GetNumElements(), pRecord = Array.GetAt(Index); Index++)
 #endif
-
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -65,8 +35,6 @@
  *=========================================================================*/
 template <class TArrayPtr>
 class TTemplateArray {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	TArrayPtr **m_ppArray;     /* Contains the array of pointers to objects */
 	int m_MaxElements;         /* Maximum size of array */
@@ -77,16 +45,12 @@ class TTemplateArray {
 	long m_CmpFuncData;        /* User supplied data for the compare function */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Changes the max-size of the array */
 	void ResizeArray(const bool GrowArray);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	TTemplateArray(const int MaxSize = 0, const int GrowSize = -1);
 	virtual ~TTemplateArray();
@@ -162,10 +126,6 @@ class TTemplateArray {
 	void Sort(const long lUserData);
 };
 
-/*===========================================================================
- *      End of Class TTemplateArray Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -194,10 +154,6 @@ template <class TArrayPtr> TTemplateArray<TArrayPtr>::TTemplateArray(const int M
 	m_pCmpFunc = NULL;
 }
 
-/*===========================================================================
- *      End of Class TTemplateArray Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -211,10 +167,6 @@ template <class TArrayPtr> TTemplateArray<TArrayPtr>::~TTemplateArray() {
 	/* Unallocate the array */
 	DestroyArrayPointer(m_ppArray);
 }
-
-/*===========================================================================
- *      End of Class TTemplateArray Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -240,10 +192,6 @@ void TTemplateArray<TArrayPtr>::Destroy() {
 
 	m_NumElements = 0;
 }
-
-/*===========================================================================
- *      End of Class Method TTemplateArray::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -279,10 +227,6 @@ bool TTemplateArray<TArrayPtr>::AddElement(TArrayPtr *pNewElement) {
 	m_NumElements++;
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method TTemplateArray::AddElement()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -347,10 +291,6 @@ bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method TTemplateArray::AddSort()
- *=========================================================================*/
-
 
 #if defined(_DEBUG)
 /*===========================================================================
@@ -382,9 +322,6 @@ bool TTemplateArray<TArrayPtr>::AssertValid() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method TTemplateArray::AssertValid()
- *=========================================================================*/
 #endif
 
 
@@ -418,10 +355,6 @@ void TTemplateArray<TArrayPtr>::DeleteElement(const int Index, const bool Delete
 	return;
 }
 
-/*===========================================================================
- *      End of Class Method TTemplateArray::DeleteElement()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -447,10 +380,6 @@ bool TTemplateArray<TArrayPtr>::GetElement(TArrayPtr **ppElement, const int Inde
 	*ppElement = NULL;
 	return false;
 }
-
-/*===========================================================================
- *      End of Class Method TTemplateArray::GetElement()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -513,10 +442,6 @@ void TTemplateArray<TArrayPtr>::ResizeArray(const bool GrowArray) {
 	DestroyArrayPointer(ppOldArray);
 }
 
-/*===========================================================================
- *      End of Class Method TTemplateArray::ResizeArray()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -538,10 +463,6 @@ void TTemplateArray<TArrayPtr>::Sort(const long lUserData) {
 	/* Run the extended qsort() routine on the array */
 	qsort((void *)m_ppArray, m_NumElements, sizeof(TArrayPtr *), m_pCmpFunc, m_CmpFuncData);
 }
-
-/*===========================================================================
- *      End of Class Method TTemplateArray<TArrayPtr>::Sort()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -566,26 +487,11 @@ inline TArrayPtr *TTemplateArray<TArrayPtr>::operator[](const int Index) const {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method TTemplateArray::operator[]()
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Module Test Function Prototypes
- *
- *=========================================================================*/
 #if defined(_DEBUG)
 	void Test_StressTemplateArray(const int NumTests = 100);
 	void Test_TemplateArray();
 #endif
-/*===========================================================================
- *      End of Module Test Function Prototypes
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File TemArray.H
- *=========================================================================*/

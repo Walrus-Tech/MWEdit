@@ -12,30 +12,11 @@
 #define __LISTFILE_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_err.h"
 #include "dl_file.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Defines
- *
- *=========================================================================*/
 
 /* Default maximum line length */
 #define LISTFILE_LINE_LENGTH 256
-
-/*===========================================================================
- *      End of Defines
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -48,8 +29,6 @@
  *
  *=========================================================================*/
 class CListFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	char *pCurrentLine;       /* Holds the text of the current line */
 	size_t MaxLineLength;     /* Maximum characters allowed per line */
@@ -58,13 +37,7 @@ class CListFile {
 	boolean IgnoreBlankLines; /* An option of ignoring empty lines in file */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CListFile(const size_t LineLength = LISTFILE_LINE_LENGTH);
 	virtual ~CListFile();
@@ -93,17 +66,6 @@ class CListFile {
 	/* Set class members */
 	void SetIgnoreBlankLines(const boolean Value);
 };
-
-/*===========================================================================
- *      End of Class CListFile Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin CListFile Inline Methods
- *
- *=========================================================================*/
 
 /* Return the current line string buffer */
 inline char *CListFile::GetCurrentLine() const {
@@ -135,25 +97,9 @@ inline void CListFile::SetIgnoreBlankLines(const boolean Value) {
 	IgnoreBlankLines = Value;
 }
 
-/*===========================================================================
- *      End of CListFile Inline Methods
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Test Function Prototypes
- *
- *=========================================================================*/
 #if defined(_DEBUG)
 	void Test_ListFile();
 #endif
-/*===========================================================================
- *      End of Test Function Prototypes
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File ListFile.H
- *=========================================================================*/

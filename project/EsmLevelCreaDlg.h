@@ -7,24 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMLEVELCREADLG_H
 #define __ESMLEVELCREADLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,22 +21,13 @@
  * Begin Class CEsmLevelCreaDlg Definition
  *
  *=========================================================================*/
-
 class CEsmLevelCreaDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmLevelCreaDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmLevelCrea *m_pLevelCrea;
 	int m_SortData;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper get/set methods */
 	void GetCreatureData();
@@ -60,10 +40,7 @@ class CEsmLevelCreaDlg : public CEsmRecDialog {
 	void UpdateUserData();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmLevelCreaDlg();
 
@@ -100,14 +77,12 @@ class CEsmLevelCreaDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmLevelCreaDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmLevelCreaDlg)
@@ -121,17 +96,9 @@ class CEsmLevelCreaDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmLevelCreaDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmlevelcreadlg.H
- *=========================================================================*/

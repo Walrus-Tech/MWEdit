@@ -11,16 +11,8 @@
 #define __ESMOPTIONSDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmOptions.h"
 #include "ColorStatic1.h"
-/*===========================================================================
- *        End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -29,8 +21,6 @@
 *
 *=========================================================================*/
 class CEsmOptionsDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members -------------------------*/
   protected:
 	CEsmOptions *m_pOrigOptions;       /* Reference to the original options object */
 	CEsmScriptOptions m_ScriptOptions; /* Temporary script options */
@@ -39,9 +29,6 @@ class CEsmOptionsDlg : public CDialog {
 	CFont m_SampleFont;                /* Sample font object for output */
 
 
-	/*---------- Begin Protected Class Methods -------------------------*/
-  protected:
-
 	/* Fill the various lists with contents */
 	void FillWarnLevelList();
 	void FillFormatList();
@@ -49,9 +36,7 @@ class CEsmOptionsDlg : public CDialog {
 	void FillFontNameList();
 
 
-	/*---------- Begin Public Class Methods ----------------------------*/
   public:
-
 	/* Construction */
 	CEsmOptionsDlg(CWnd *pParent = NULL);
 
@@ -128,7 +113,6 @@ class CEsmOptionsDlg : public CDialog {
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 	//{{AFX_MSG(CEsmOptionsDlg)
 	virtual BOOL OnInitDialog();
@@ -150,16 +134,9 @@ class CEsmOptionsDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmOptionsDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-/*===========================================================================
- *      End of File Esmoptionsdlg.H
- *=========================================================================*/

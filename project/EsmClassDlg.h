@@ -7,22 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCLASSDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -30,30 +19,18 @@
  * Begin Class CEsmClassDlg Definition
  *
  *=========================================================================*/
-
 class CEsmClassDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmClassDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmClass *m_pClass;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update modified items during edit */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmClassDlg();
 
@@ -116,13 +93,11 @@ class CEsmClassDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmClassDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmClassDlg)
@@ -173,17 +148,9 @@ class CEsmClassDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmClassDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmclassdlg.H
- *=========================================================================*/

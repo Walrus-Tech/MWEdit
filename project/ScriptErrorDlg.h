@@ -7,38 +7,16 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __SCRIPTERRORDLG_H
 #define __SCRIPTERRORDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmScriptError.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Return codes */
-
 #define SCRERRDLG_RESULT_GOTO     101
 #define SCRERRDLG_RESULT_MOREHELP 102
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,20 +24,12 @@
  * Begin Class CScriptErrorDlg
  *
  *=========================================================================*/
-
 class CScriptErrorDlg : public CDialog {
-
-	/*---------- Begin Protected Class Memebers -----------------------*/
-
   protected:
-
 	CEsmScriptError *m_pError; /* Reference to the script error object */
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Standard constructor */
 	CScriptErrorDlg(CWnd *pParent = NULL);
 
@@ -104,13 +74,11 @@ class CScriptErrorDlg : public CDialog {
 	//{{AFX_VIRTUAL(CScriptErrorDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CScriptErrorDlg)
@@ -122,17 +90,9 @@ class CScriptErrorDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CScriptErrorDlg
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Scripterrordlg.H
- *=========================================================================*/

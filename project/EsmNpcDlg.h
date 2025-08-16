@@ -7,16 +7,9 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMNPCDLG_H
 #define __ESMNPCDLG_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmRecDialog.h"
 #include "Resource.h"
@@ -27,25 +20,16 @@
 #include "EsmNpcPage4.h"
 #include "EsmNpcPage5.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmNpcDlg Definition
  *
  *=========================================================================*/
-
 class CEsmNpcDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmNpcDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmNpcPage1 m_Page1;
 	CEsmNpcPage2 m_Page2;
 	CEsmNpcPage3 m_Page3;
@@ -54,18 +38,11 @@ class CEsmNpcDlg : public CEsmRecDialog {
 	CEsmNpc *m_pNpc;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmNpcDlg();
 
@@ -91,14 +68,12 @@ class CEsmNpcDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmNpcDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmNpcDlg)
@@ -108,17 +83,9 @@ class CEsmNpcDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmNpcDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmnpcdlg.H
- *=========================================================================*/

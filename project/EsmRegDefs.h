@@ -7,26 +7,17 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMREGDEFS_H
 #define __ESMREGDEFS_H
 
 
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
 /* Registry sections */
-
 #define ESMSCR_REGSEC_GENERAL                _T("General")
 #define ESMSCR_REGSEC_SCRIPT                 _T("Script")
 #define ESMSCR_REGSEC_USERFORMAT             _T("UserFormat")
 #define ESMSCR_REGSEC_FINDHISTORY            _T("FindHistory")
 
 /* Registry entries */
-
 #define ESMSCR_REGENTRY_WARNLEVEL            _T("ScriptWarnLevel")
 #define ESMSCR_REGENTRY_NOSCRFORMAT          _T("NoScriptFormat")
 #define ESMSCR_REGENTRY_SCRFORMAT            _T("ScriptFormatType")
@@ -54,16 +45,7 @@
 #define ESMSCR_REGENTRY_ALLOWTRIBUNAL        _T("AllowTribunal")
 
 /* Number of find history records to save */
-
 #define ESMSCR_FINDHISTORY_NUMRECORDS        10
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmregdefs.H
- *=========================================================================*/

@@ -7,22 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMAIESCORTDLG_H
 #define __ESMAIESCORTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmSubAI_E.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -30,11 +19,7 @@
  * Begin Class CEsmAiEscortDlg
  *
  *=========================================================================*/
-
 class CEsmAiEscortDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members -------------------------*/
-
   protected:
 
 	CEsmSubAI_E *m_pSubRecord;
@@ -42,21 +27,15 @@ class CEsmAiEscortDlg : public CDialog {
 	CString m_Title;
 
 
-	/*---------- Begin Public Class Method -----------------------------*/
-
   public:
-
 	/* Construction */
-
 	CEsmAiEscortDlg(CWnd *pParent = NULL);
 
 
 	/* Main access method */
-
 	bool DoModal(CEsmSubAI_E *pSubRecord, const TCHAR *pCellName, const TCHAR *pTitle);
 
 	/* Get class members */
-
 	CString &GetCellName() {
 		return m_CellName;
 	}
@@ -89,15 +68,12 @@ class CEsmAiEscortDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmAiEscortDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
 
   protected:
-
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmAiEscortDlg)
@@ -110,17 +86,9 @@ class CEsmAiEscortDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmAiEscortDlg
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmaiescortdlg.H
- *=========================================================================*/

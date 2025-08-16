@@ -7,22 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMLOADDLG_H
 #define __ESMLOADDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -30,13 +19,8 @@
  * Begin Class CEsmLoadDlg Definition
  *
  *=========================================================================*/
-
 class CEsmLoadDlg : public CDialog {
-
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmLoadDlg(CWnd *pParent = NULL);
 
@@ -71,13 +55,11 @@ class CEsmLoadDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmLoadDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmLoadDlg)
@@ -87,23 +69,9 @@ class CEsmLoadDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmLoadDlg Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Global function for dialog update callback during load */
 int g_EsmLoadDlgCallback(const int Event, const TCHAR *pMessage, const float Percent, long Data);
-
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 //{{AFX_INSERT_LOCATION}}
@@ -111,7 +79,3 @@ int g_EsmLoadDlgCallback(const int Event, const TCHAR *pMessage, const float Per
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmloaddlg.H
- *=========================================================================*/

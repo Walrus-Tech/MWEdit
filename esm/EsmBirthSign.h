@@ -11,29 +11,10 @@
 #define __ESMBIRTHSIGN_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubNameFix.h"
 #include "EsmSubName32.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,20 +27,13 @@
 class CEsmBirthSign : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pNameData;
 	CEsmSubNameFix *m_pTextureData;
 	CEsmSubName *m_pDescData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmBirthSign();
 	//virtual ~CEsmBirthSign() { Destroy(); }
@@ -121,12 +95,5 @@ class CEsmBirthSign : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmBirthSign Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

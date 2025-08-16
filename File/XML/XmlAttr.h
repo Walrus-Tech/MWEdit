@@ -11,24 +11,10 @@
 #define __XMLATTR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "PtrArray.h"
 #include "sstring.h"
 #include "GenFile.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Read method result values */
 #define XMLFILE_READ_OK         0
@@ -40,10 +26,6 @@
 /* Used only when inputting attributes */
 #define XMLATTR_MAX_NAMESIZE  255
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -53,24 +35,17 @@
  *
  *=========================================================================*/
 class CXmlAttribute {
-
-	/*---------- Begin Private Class Members ----------------------*/
   protected:
 	CSString m_Name;
 	CSString m_Value;
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper input methods */
 	bool ReadName(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
 	bool ReadValue(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CXmlAttribute();
 	virtual ~CXmlAttribute() {
@@ -118,12 +93,6 @@ class CXmlAttribute {
 
 /* Array of attribute pointers */
 typedef TPtrArray<CXmlAttribute> CAttributeArray;
-/*===========================================================================
- *      End of Class CXmlAttribute Definition
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File Xmlattr.H
- *=========================================================================*/

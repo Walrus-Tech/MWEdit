@@ -7,22 +7,14 @@
 #endif // _MSC_VER > 1000
 
 
-// CreaturePage2.h : header file
-
-
 /////////////////////////////////////////////////////////////////////////////
 // CCreaturePage2 dialog
-
-
 class CCreaturePage2 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CCreaturePage2)
 
 
 // Construction
-
   public:
-
 	CCreaturePage2();
 	~CCreaturePage2();
 
@@ -44,16 +36,12 @@ class CCreaturePage2 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CCreaturePage2)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX); // DDX/DDV support
-
 	//}}AFX_VIRTUAL
 
 
 // Implementation
-
   protected:
-
 	// Generated message map functions
 	//{{AFX_MSG(CCreaturePage2)
 	// NOTE: the ClassWizard will add member functions here

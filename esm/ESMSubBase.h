@@ -11,34 +11,10 @@
 #define __ESMSUBBASE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "file/GenFile.h"
 #include "EsmDefs.h"
 #include "contain/PtrArray.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* The record and sub-record type */
 union esmrectype_t {
@@ -88,10 +64,6 @@ struct esmfind_t {
 	int Length;         /* Size of text */
 };
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -101,16 +73,11 @@ struct esmfind_t {
  *
  *=========================================================================*/
 class CEsmSubRecord {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	esmrectype_t m_Type; /* Type of sub-record */
 	long m_RecordSize;   /* Size of the record when output */
 	byte *m_pData;       /* The record data for an unknown type */
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper input methods */
 	virtual bool ReadData(CGenFile &File);  /* Override in base classes */
@@ -120,9 +87,7 @@ class CEsmSubRecord {
 	virtual bool WriteHeader(CGenFile &File);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSubRecord();
 	virtual ~CEsmSubRecord() {
@@ -194,16 +159,6 @@ class CEsmSubRecord {
 	virtual bool Write(CGenFile &File);
 };
 
-/*===========================================================================
- *      End of Class CEsmSubRecord Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Pointer to a class method to create a sub-record object */
 typedef CEsmSubRecord *(*ESMSUBREC_CREATEFUNC) ();
@@ -222,12 +177,5 @@ typedef struct esmsubreccreate {
 /* Array of sub-record pointers */
 typedef TPtrArray<CEsmSubRecord> CEsmSubRecArray;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmsubbase.H
- *=========================================================================*/

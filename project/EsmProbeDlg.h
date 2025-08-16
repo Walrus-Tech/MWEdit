@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMPROBEDLG_H
 #define __ESMPROBEDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,30 +20,18 @@
  * Begin Class CEsmProbeDlg Definition
  *
  *=========================================================================*/
-
 class CEsmProbeDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmProbeDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmProbe *m_pProbe;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmProbeDlg();
 
@@ -87,14 +64,12 @@ class CEsmProbeDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmProbeDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmProbeDlg)
@@ -103,17 +78,9 @@ class CEsmProbeDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmProbeDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmprobedlg.H
- *=========================================================================*/

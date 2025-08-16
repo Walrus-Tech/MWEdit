@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMBOOKDLG_H
 #define __ESMBOOKDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,31 +20,18 @@
  * Begin Class CEsmBookDlg Definition
  *
  *=========================================================================*/
-
 class CEsmBookDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmBookDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmBook *m_pBook;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmBookDlg();
 
@@ -93,7 +69,6 @@ class CEsmBookDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmBookDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
@@ -101,7 +76,6 @@ class CEsmBookDlg : public CEsmRecDialog {
 
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmBookDlg)
@@ -111,17 +85,9 @@ class CEsmBookDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmBookDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmbookdlg.H
- *=========================================================================*/

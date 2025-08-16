@@ -12,38 +12,14 @@
 #define __SSTRING_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include "dl_mem.h"
 #include "dl_str.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of extra bytes to allocate when creating strings */
 #define SSTRING_ALLOC_EXTRA 32
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CSStringData {
   public:
@@ -54,10 +30,6 @@ class CSStringData {
 	}
 };
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -67,15 +39,11 @@ class CSStringData {
  *
  *=========================================================================*/
 class CSString {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	TCHAR *m_pString; /* The string data */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Allocate string buffers of a given size */
 	void AllocString(const int StringSize);
 	void AllocCopy(const int StringSize);
@@ -99,9 +67,7 @@ class CSString {
 	void Init();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors */
 	CSString();
 	CSString(const TCHAR *pString);
@@ -190,17 +156,6 @@ class CSString {
 	/* Return a const pointer to the string buffer */
 	operator const TCHAR *() const;
 };
-
-/*===========================================================================
- *      End of Class CSString Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Begin Inline CSString Methods
- *
- *=========================================================================*/
 
 
 inline CSString &TerminatePathString (CSString &PathBuffer) {
@@ -424,7 +379,6 @@ inline void CSString::Truncate(const int Index) {
 	GetData()->Length = Index;
 }
 
-
 inline void CSString::UpdateLength() {
 	int Index = GetLength() - 1;
 
@@ -512,12 +466,5 @@ inline bool operator>(const CSString &String1, const TCHAR *String2) {
 	return String1.Compare(String2) > 0;
 }
 
-/*===========================================================================
- *      End of Begin Inline CSString Methods
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Sstring.H
- *=========================================================================*/

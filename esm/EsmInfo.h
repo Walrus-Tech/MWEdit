@@ -11,11 +11,6 @@
 #define __ESMINFO_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubNameFix.h"
 #include "EsmSubByte.h"
@@ -24,44 +19,17 @@
 #include "EsmSubLong.h"
 #include "EsmSubInfoDATA.h"
 #include "EsmSubSCVR.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of function/variables per info */
 #define MWESM_INFO_MAXFUNCS 6
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMInfoGender(const int Type);
 const TCHAR *GetESMInfoFunction(const short FuncType);
 const TCHAR *GetESMInfoFuncType(const byte FuncType);
 const TCHAR *GetESMInfoCompareOp(const byte Type);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Used to hold type information on the various function bytes */
 typedef struct {
@@ -70,9 +38,6 @@ typedef struct {
 } esmfuncinfo_t;
 
 class CEsmDialogue;
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -85,7 +50,6 @@ class CEsmDialogue;
 class CEsmInfo : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pPrevName;
 	CEsmSubNameFix *m_pNextName;
@@ -103,13 +67,7 @@ class CEsmInfo : public CEsmRecord {
 	CEsmDialogue *m_pDialParent; /* Parent topic */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmInfo();
 	//virtual ~CEsmInfo() { Destroy(); }
@@ -236,12 +194,5 @@ class CEsmInfo : public CEsmRecord {
 	void SetCell(const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmInfo Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmDialogue.H
- *=========================================================================*/

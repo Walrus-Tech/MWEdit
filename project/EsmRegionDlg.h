@@ -7,36 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMREGIONDLG_H
 #define __ESMREGIONDLG_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
 #include "ColorStatic1.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -44,30 +22,18 @@
  * Begin Class CEsmRegionDlg Definition
  *
  *=========================================================================*/
-
 class CEsmRegionDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmRegionDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmRegion *m_pRegion;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmRegionDlg();
 
@@ -115,14 +81,12 @@ class CEsmRegionDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmRegionDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmRegionDlg)
@@ -136,17 +100,9 @@ class CEsmRegionDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmRegionDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmregiondlg.H
- *=========================================================================*/

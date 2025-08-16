@@ -11,16 +11,8 @@
 #define __ESMPROBE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem2.h"
 #include "EsmSubPBDT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -33,18 +25,11 @@
 class CEsmProbe : public CEsmItem2 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubPBDT *m_pProbeData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmProbe();
 	//virtual ~CEsmProbe() { Destroy(); }
@@ -120,12 +105,5 @@ class CEsmProbe : public CEsmItem2 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmArmor Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmProbe.H
- *=========================================================================*/

@@ -11,15 +11,7 @@
 #define __ESMACTIVATOR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem1.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,16 +23,7 @@
  *=========================================================================*/
 class CEsmActivator : public CEsmItem1 {
 	DECLARE_SUBRECCREATE();
-
-	/*---------- Begin Protected Class Members --------------------*/
-  protected:
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmActivator();
 	//virtual ~CEsmActivator() { Destroy(); }
@@ -55,12 +38,5 @@ class CEsmActivator : public CEsmItem1 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmActivator Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmActivator.H
- *=========================================================================*/

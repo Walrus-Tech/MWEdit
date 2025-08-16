@@ -11,29 +11,10 @@
 #define __ESMSOUND_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubNameFix.h"
 #include "EsmSubDATA.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,19 +27,12 @@
 class CEsmSound : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubDATA *m_pData; /* Reference to sub-records */
 	CEsmSubName *m_pName;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSound();
 	//virtual ~CEsmSound() { Destroy(); }
@@ -119,12 +93,5 @@ class CEsmSound : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmSound Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

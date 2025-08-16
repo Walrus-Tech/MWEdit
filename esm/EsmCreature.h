@@ -11,26 +11,12 @@
 #define __ESMCREATURE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem1.h"
 #include "EsmSubCRDT.h"
 #include "EsmSubNPCO.h"
 #include "EsmSubAIDT.h"
 #include "EsmSubLong.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Creature flags */
 #define MWESM_CREAFLAG_BIPED      0x0001
@@ -46,21 +32,9 @@
 #define MWESM_CREAFLAG_GOLDBLOOD  0x0800
 #define MWESM_CREAFLAG_BLOODMASK  0x0F00
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMCreatureType(const int CreaType);
 int GetESMCreatureType(const TCHAR *pString);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,7 +47,6 @@ int GetESMCreatureType(const TCHAR *pString);
 class CEsmCreature : public CEsmItem1 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubCRDT *m_pCreatureData;
 	CEsmSubLong *m_pFlag;
@@ -81,13 +54,7 @@ class CEsmCreature : public CEsmItem1 {
 	CEsmSubNameFix *m_pSound;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmCreature();
 	//virtual ~CEsmCreature() { Destroy(); }
@@ -335,12 +302,5 @@ class CEsmCreature : public CEsmItem1 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmCreature Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmActivator.H
- *=========================================================================*/

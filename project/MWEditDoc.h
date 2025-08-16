@@ -7,48 +7,28 @@
  * Definition of the CMWEditDoc document class.
  *
  *=========================================================================*/
-
 #ifndef __MWEditDoc_H
 #define __MWEditDoc_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "esmfile.h"
 #include "EsmLoadDlg.h"
 #include "mwrecordmap.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* View update definitions */
-
 #define MWEDITDOC_HINT_UPDATE     1
 #define MWEDITDOC_HINT_UPDATEITEM 101
 #define MWEDITDOC_HINT_NEWITEM    102
 #define MWEDITDOC_HINT_SELECTITEM 103
 
 /* Return codes for the OnPreSaveRecord() and OnPostSaveRecord() events */
-
 #define MWESM_ONSAVE_OK            0
 #define MWESM_ONSAVE_ERROR        -1
 #define MWESM_ONSAVE_KEEPEDITTING -2
 #define MWESM_ONSAVE_ABORTEDIT    -3
 
 /* Clean record returns */
-
 #define MWEDIT_CLEAN_OK            0
 #define MWEDIT_CLEAN_ERROR        -1
 #define MWEDIT_CLEAN_DELETE        1
@@ -56,22 +36,10 @@
 #define ESM_IMPORTSCPT_FILTER _T("Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
 
 /* Custom error message for compiling all scripts */
-
 #define MWEDIT_ERR_COMPILEALL     10931
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Holds information on a record being editted */
-
 typedef struct {
 	esmrecinfo_t *pRecInfo;   /* The record being editted */
 	CString OldID;            /* The ID of the object before being editted */
@@ -84,7 +52,6 @@ typedef struct {
 } esmreceditinfo_t;
 
 /* Used to find a record of a specific type */
-
 typedef struct {
 	const TCHAR *pID;
 	const TCHAR *pType;
@@ -93,23 +60,14 @@ typedef struct {
 
 class CMWEditApp;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditDoc Definition
  *
  *=========================================================================*/
-
 class CMWEditDoc : public CDocument {
-
-	/*---------- Begin Protected Class Members --------------------------*/
-
   protected:
-
 	CEsmFileArray m_EsmFiles;   /* Plugin files */
 	CEsmFile m_ActiveFile;      /* The currently active file */
 	CEsmLoadDlg m_LoadDlg;
@@ -132,10 +90,6 @@ class CMWEditDoc : public CDocument {
 	int m_OutputEffects[MWESM_MAX_EFFECTS];
 	int m_NumEffectsOutput;
 
-
-	/*---------- Begin Protected Class Methods --------------------------*/
-
-  protected:
 
 	/* Create from serialization only */
 	CMWEditDoc();
@@ -166,10 +120,7 @@ class CMWEditDoc : public CDocument {
 	int OnCheckNewID(esmreceditinfo_t *pRecEditInfo);
 
 
-	/*---------- Begin Public Class Methods -----------------------------*/
-
   public:
-
 	/* Destructor */
 	virtual ~CMWEditDoc();
 
@@ -345,7 +296,6 @@ class CMWEditDoc : public CDocument {
 	//{{AFX_VIRTUAL(CMWEditDoc)
 
   public:
-
 	virtual BOOL OnNewDocument();
 	virtual void Serialize(CArchive &ar);
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
@@ -357,7 +307,6 @@ class CMWEditDoc : public CDocument {
 	/* Generated message map functions */
 
   protected:
-
 	//{{AFX_MSG(CMWEditDoc)
 	afx_msg void OnFileSave();
 	afx_msg void OnFileSaveAs();
@@ -366,17 +315,9 @@ class CMWEditDoc : public CDocument {
 	DECLARE_MESSAGE_MAP()
 };
 
-/*===========================================================================
- *      End of Class CMWEditDoc Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
 
 #endif
-
-/*===========================================================================
- *      End of File MWEditDoc.H
- *=========================================================================*/

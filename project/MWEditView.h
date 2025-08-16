@@ -7,33 +7,15 @@
  * Interface of the CMWEditView class.
  *
  *=========================================================================*/
-
 #ifndef __MWEditView_H
 #define __MWEditView_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 #include "EsmDlgArray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Object tab data */
-
 #define OBJECT_TAB_ACTIVATOR    1
 #define OBJECT_TAB_ALCHEMY      2
 #define OBJECT_TAB_APPARATUS    3
@@ -78,31 +60,18 @@
 #define OBJECT_TAB_STARTSCRIPT  42
 
 /* Used when resizing */
-
 #define OBJECTTAB_WIDTH_OFFSET  10
 #define TYPELIST_WIDTH          80
 #define OBJECTTAB_HEIGHT_OFFSET 10
 #define OBJECTTAB_MIN_WIDTH     100
 #define OBJECTTAB_MIN_HEIGHT    100
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Fill list function type */
-
 class CMWEditView;
 typedef void (CMWEditView::*FILLVIEW_VIEWFUNC) (esmcoldata_t *pColData);
 
 /* Holds information for the tab control manipulation and display */
-
 typedef struct {
 	int TabType;            /* The tab id */
 	const TCHAR *Title;     /* Tab title text */
@@ -112,23 +81,14 @@ typedef struct {
 	FILLVIEW_VIEWFUNC FillFunc;
 } esmtabinfo_t;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CMWEditView Definition
  *
  *=========================================================================*/
-
 class CMWEditView : public CFormView {
-
-	/*---------- Begin Protected Class Members ----------------------*/
-
   protected:
-
 	int m_CurrentType;
 	const TCHAR *m_pCurrentType;
 	CEsmDlgHandler m_EsmDlgHandler;
@@ -143,10 +103,6 @@ class CMWEditView : public CFormView {
 	CEsmListCtrl m_ObjectList;
 	//}}AFX_DATA
 
-
-	/*---------- Begin Protected Class Methods ----------------------*/
-
-  protected:
 
 	/* Create from serialization only */
 	CMWEditView();
@@ -169,10 +125,7 @@ class CMWEditView : public CFormView {
 	void UpdateCurrentListData();
 
 
-	/*---------- Begin Public Class Methods --------------------------*/
-
   public:
-
 	/* Class destructor */
 	virtual ~CMWEditView();
 
@@ -224,11 +177,9 @@ class CMWEditView : public CFormView {
 	//{{AFX_VIRTUAL(CMWEditView)
 
   public:
-
 	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	virtual void OnInitialUpdate();
 	virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject *pHint);
@@ -239,7 +190,6 @@ class CMWEditView : public CFormView {
 	/* Generated message map functions */
 
   protected:
-
 	//{{AFX_MSG(CMWEditView)
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnColumnclickObjectlist(NMHDR *pNMHDR, LRESULT *pResult);
@@ -287,16 +237,6 @@ class CMWEditView : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CMWEditView Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Inline Class Methods
- *
- *=========================================================================*/
 
 #ifndef _DEBUG
 
@@ -306,17 +246,9 @@ inline CMWEditDoc *CMWEditView::GetDocument() {
 
 #endif
 
-/*===========================================================================
- *      End of Inline Class Methods
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File View.H
- *=========================================================================*/

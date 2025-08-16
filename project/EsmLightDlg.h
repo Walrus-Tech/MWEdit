@@ -7,24 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMLIGHTDLG_H
 #define __ESMLIGHTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "ColorStatic1.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,30 +21,18 @@
  * Begin Class CEsmLightDlg Definition
  *
  *=========================================================================*/
-
 class CEsmLightDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmLightDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmLight *m_pLight;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmLightDlg();
 
@@ -106,14 +83,12 @@ class CEsmLightDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmLightDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmLightDlg)
@@ -126,17 +101,9 @@ class CEsmLightDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmLightDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmlightdlg.H
- *=========================================================================*/

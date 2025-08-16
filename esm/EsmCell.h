@@ -11,11 +11,6 @@
 #define __ESMCELL_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubNameFix.h"
@@ -28,19 +23,6 @@
 #include "EsmSubAMBI.h"
 #include "EsmSubCellRef.h"
 #include "EsmSubFRMR.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-/*===========================================================================
-*      End of Definitions
-*=========================================================================*/
 
 
 /*===========================================================================
@@ -53,7 +35,6 @@
 class CEsmCell : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubCellDATA *m_pCellData;
 	CEsmSubNameFix *m_pRegionData;
@@ -65,16 +46,11 @@ class CEsmCell : public CEsmRecord {
 	int m_RefCount;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
 	/* Input sub-records */
 	virtual bool ReadData(CGenFile &File);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmCell();
 	//virtual ~CEsmCell() { Destroy(); }
@@ -221,12 +197,5 @@ class CEsmCell : public CEsmRecord {
 	void SetLikeExterior(const bool Flag);
 };
 
-/*===========================================================================
- *      End of Class CEsmCell Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

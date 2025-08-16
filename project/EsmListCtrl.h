@@ -1,4 +1,3 @@
-
 /*===========================================================================
  *
  * File:    Esmlistctrl.H
@@ -12,26 +11,13 @@
 #define __ESMLISTCTRL_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmFile.h"
 
 #if !defined(NO_ESMLIST_EDIT)
 	#include "EsmDlgArray.h"
 #endif
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 /* Used for image indices */
 #define ESMLIST_IMAGE_ACTIVATOR        0
 #define ESMLIST_IMAGE_ALCHEMY          1
@@ -288,16 +274,7 @@
 	ListView_SetItemState(hwndLV, i, INDEXTOSTATEIMAGEMASK((fCheck)+1), LVIS_STATEIMAGEMASK)
 #endif
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 /* Used for the esm list for each type of output column */
 struct esmcoldata_t {
 	const TCHAR *pName;
@@ -319,9 +296,6 @@ typedef struct {
 	long UserData1;
 	long UserData2;
 } esmlistsortdata_t;
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -330,17 +304,9 @@ typedef struct {
  *
  *=========================================================================*/
 class CEsmListCtrl : public CListCtrl {
-
 	DECLARE_DYNCREATE(CEsmListCtrl);
 
-  public:
-
-	static CImageList m_ImageList; /* Image list for all the lists */
-
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
-
 	int m_LastSelItem;
 	int m_ColSubItems[200]; /* Convert a subitem to a current column */
 
@@ -383,12 +349,9 @@ class CEsmListCtrl : public CListCtrl {
 	HCURSOR m_hGoodDropCursor;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
+	static CImageList m_ImageList; /* Image list for all the lists */
+
 
 	/* Construction */
 	CEsmListCtrl();
@@ -436,12 +399,9 @@ class CEsmListCtrl : public CListCtrl {
 	/* Initializes the list columns */
 	void InitObjectList(esmcoldata_t *pColData);
 
-
-
 	/* A record has been dropped on the list */
 #if !defined(NO_ESMLIST_EDIT)
 	int OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo);
-
 #endif
 
 	/* Set the properties of the given armor item */
@@ -499,7 +459,6 @@ class CEsmListCtrl : public CListCtrl {
 
 	/* Generated message map functions */
   protected:
-
 	//{{AFX_MSG(CEsmListCtrl)
 	afx_msg UINT OnGetDlgCode();
 	afx_msg void OnColumnclick(NMHDR *pNMHDR, LRESULT *pResult);
@@ -517,23 +476,9 @@ class CEsmListCtrl : public CListCtrl {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmListCtrl Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Default item sort function for the list control */
 int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort);
-
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 //{{AFX_INSERT_LOCATION}}
@@ -541,7 +486,3 @@ int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmlistctrl.H
- *=========================================================================*/

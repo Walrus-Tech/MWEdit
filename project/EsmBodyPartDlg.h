@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMBODYPARTDLG_H
 #define __ESMBODYPARTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,25 +20,13 @@
  * Begin Class CEsmBodyPartDlg Definition
  *
  *=========================================================================*/
-
 class CEsmBodyPartDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmBodyPartDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmBodyPart *m_pBodyPart;
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmBodyPartDlg();
 
@@ -83,14 +60,12 @@ class CEsmBodyPartDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmBodyPartDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmBodyPartDlg)
@@ -102,13 +77,5 @@ class CEsmBodyPartDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmBodyPartDlg Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmbodypartdlg.H
- *=========================================================================*/

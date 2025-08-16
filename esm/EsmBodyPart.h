@@ -11,33 +11,15 @@
 #define __ESMBODYPART_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubBYDT.h"
 #include "EsmSubName.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 const TCHAR *GetESMBodyPart(const int Part);
 const TCHAR *GetESMBodyPartType(const int PartType);
 int GetESMBodyPart(const TCHAR *pString);
 int GetESMBodyPartType(const TCHAR *pString);
-
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -50,20 +32,13 @@ int GetESMBodyPartType(const TCHAR *pString);
 class CEsmBodyPart : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pName; /* Reference to sub-records */
 	CEsmSubNameFix *m_pModel;
 	CEsmSubBYDT *m_pBodyData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmBodyPart();
 	//virtual ~CEsmBodyPart() { Destroy(); }
@@ -185,12 +160,5 @@ class CEsmBodyPart : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmBodyPart Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

@@ -11,16 +11,8 @@
 #define __ESMSUBNAME_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
 #include "string/SString.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,14 +23,9 @@
  *
  *=========================================================================*/
 class CEsmSubName : public CEsmSubRecord {
-
-	/*---------- Begin Proected Class Members ---------------------*/
   protected:
 	CSString m_Name;
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper input methods */
 	virtual bool ReadData(CGenFile &File);
@@ -51,9 +38,7 @@ class CEsmSubName : public CEsmSubRecord {
 	}
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	//CEsmSubName();
 	//virtual ~CEsmSubName() { Destroy(); }
@@ -99,7 +84,6 @@ class CEsmSubName : public CEsmSubRecord {
 /* Force null termination */
 class CEsmSubNameNull : public CEsmSubName {
   public:
-
 	/* Create a name object */
 	static CEsmSubRecord *Create();
 
@@ -109,12 +93,5 @@ class CEsmSubNameNull : public CEsmSubName {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmSubName Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmsubname.H
- *=========================================================================*/

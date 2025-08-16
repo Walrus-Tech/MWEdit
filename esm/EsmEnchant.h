@@ -11,48 +11,22 @@
 #define __ESMENCHANT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubENDT.h"
 #include "EsmSubENAM.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of effects allowed per enchantment */
 #define MWESM_ENCHANT_NUMENCHANTS 8
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMEnchantType(const int Type);
 int GetESMEnchantType(const TCHAR *pString);
 bool GetESMEnchantType(int &OutType, const TCHAR *pString);
 const TCHAR *GetESMEnchantRangeType(const int Type);
 int GetESMEnchantRangeType(const TCHAR *pString);
 bool GetESMEnchantRangeType(int &OutType, const TCHAR *pString);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -65,18 +39,11 @@ bool GetESMEnchantRangeType(int &OutType, const TCHAR *pString);
 class CEsmEnchant : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubENDT *m_pEnchantData; /* Reference to sub-records */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmEnchant();
 	//virtual ~CEsmEnchant() { Destroy(); }
@@ -156,12 +123,5 @@ class CEsmEnchant : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmEnchant Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

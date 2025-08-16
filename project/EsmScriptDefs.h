@@ -7,57 +7,35 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRIPTDEFS_H
 #define __ESMSCRIPTDEFS_H
 
 
 #define MWEDIT_SCRIPT_MWSE
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "dl_err.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of script word types */
-
 #define MWESM_SCRIPT_NUMRESERVED      16
 #define MWESM_SCRIPT_NUMFUNCTIONS     444
 
 /* Arbitrary number of arguments allowed */
-
 #define MWESM_SCRIPT_MAXARGS          13
 
 /* Arbitrary function name size */
-
 #define MWESM_SCRIPT_FUNCNAMESIZE     31
 
 /* Number of buttons/arguments allowed in the MessageBox function */
-
 #define MWESM_SCRIPT_MAXMSGBUTTONS    9
 #define MWESM_SCRIPT_MAXMSGARGS       9
 
 /* Maximum size of if expressions/statement counts */
-
 #define MWESM_SCRIPT_MAXIFSTATEMENTS  255
 #define MWESM_SCRIPT_MAXIFEXPRESSIONS 255
 
 /* Script token definitions */
-
 #define ESMSCR_BEGINBLOCK            -2
 #define ESMSCR_ENDTABLE              -1
 #define ESMSCR_TOKEN_UNKNOWN          0
@@ -106,7 +84,6 @@
 #endif
 
 /* Function flags */
-
 #define ESMSCR_FUNC_SHORTVAR         0x00000001
 #define ESMSCR_FUNC_ALLOWGLOBAL      0x00000002
 #define ESMSCR_FUNC_EXTRASHORT       0x00000004
@@ -123,7 +100,6 @@
 #endif
 
 /* Function argument flags */
-
 #define ESMSCR_FUNC_BYTE             0x00000001
 #define ESMSCR_FUNC_SHORT            0x00000002
 #define ESMSCR_FUNC_LONG             0x00000004
@@ -164,22 +140,11 @@
 #define ESMSCR_FUNC_NOOUTPUT         0x100000000
 
 /* Custom event message IDs */
-
 #define MSG_SCRIPTFRM_CLEARERROR     (WM_USER + 1071)
 #define MSG_SCRIPTFRM_UPDATEERROR    (WM_USER + 1072)
 #define MSG_SCRIPTFRM_GOTOLINE       (WM_USER + 1073)
 #define MSG_SCRIPTFRM_VIEWERROR      (WM_USER + 1074)
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin MWSE OpCodes
- *
- *=========================================================================*/
 
 #ifdef MWEDIT_SCRIPT_MWSE
 	#define MWESM_OPCODE_COPYFROMSTACK        0x3807
@@ -204,19 +169,8 @@
 	#define MWESM_OPCODE_SUB                  0x3821
 #endif
 
-/*===========================================================================
- *      End of MWSE OpCodes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Holds information about a script function */
-
 typedef struct {
 	TCHAR Name[MWESM_SCRIPT_FUNCNAMESIZE + 1]; /* Function name (not case sensitive) */
 	short OpCode;                              /* Output function code */
@@ -225,16 +179,6 @@ typedef struct {
 	__int64 Var[MWESM_SCRIPT_MAXARGS];         /* Variable types/flags */
 } esmscrfuncinfo_t;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Definitions
- *
- *=========================================================================*/
 
 bool IsESMScriptReserved(const TCHAR *pString);
 bool IsESMScriptReserved1(const TCHAR *pString);
@@ -255,27 +199,9 @@ const TCHAR *GetESMTokenName(const int Token);
 
 bool OutputFunctionDat(const TCHAR *pFilename);
 
-/*===========================================================================
- *      End of Function Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin External Definitions
- *
- *=========================================================================*/
 
 extern esmscrfuncinfo_t g_ScriptFunctions[];
 extern esmscrfuncinfo_t *g_ScriptFuncAlpha[];
 
-/*===========================================================================
- *      End of External Definitions
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmscriptdefs.H
- *=========================================================================*/

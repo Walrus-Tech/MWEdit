@@ -11,29 +11,11 @@
 #define __TABCTRLSHEET_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_err.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of sheets allowed in the extended tab control */
 #define TCS_ARRAYSIZE 32
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,17 +28,11 @@
  *
  *=========================================================================*/
 class CTabCtrlSheet : public CTabCtrl {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CPropertyPage *m_pPages[TCS_ARRAYSIZE]; /* Array of pages to display */
 	int m_NumPages;                         /* Number of sheets currently defined */
-
 	int m_CurrentPage;                      /* The currently displayed sheet */
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Displays the given page, resizing/repositioning as required */
 	void DisplayPage(const int PageIndex);
@@ -65,9 +41,7 @@ class CTabCtrlSheet : public CTabCtrl {
 	bool SetCurrentPage(const int PageIndex);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class construction/destruction */
 	CTabCtrlSheet();
 	virtual ~CTabCtrlSheet();
@@ -110,16 +84,9 @@ class CTabCtrlSheet : public CTabCtrl {
 	DECLARE_MESSAGE_MAP()
 };
 
-/*===========================================================================
- *      End of Class CTabCtrlSheet Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-/*===========================================================================
- *      End of File Tabctrlsheet.H
- *=========================================================================*/

@@ -9,11 +9,6 @@
 #define __ESMNPC_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem1.h"
 #include "EsmSubName.h"
 #include "EsmSubNPDT.h"
@@ -27,20 +22,9 @@
 #include "EsmSubAI_F.h"
 #include "EsmSubAI_T.h"
 #include "EsmSubAI_W.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 class CEsmInfo;
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -53,7 +37,6 @@ class CEsmInfo;
 class CEsmNpc : public CEsmItem1 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNPDTS *m_pNpcShortData;
 	CEsmSubNPDTL *m_pNpcLongData;
@@ -67,13 +50,7 @@ class CEsmNpc : public CEsmItem1 {
 	CEsmSubAIDT *m_pAIData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmNpc();
 	//virtual ~CEsmArmor() { Destroy(); }
@@ -342,27 +319,10 @@ class CEsmNpc : public CEsmItem1 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmNpc Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Local Variable Definitions
- *
- *=========================================================================*/
 
 /* Function to convert blood type values */
 const TCHAR *GetEsmNpcBloodType(const int Index);
 int GetEsmNpcBloodType(const TCHAR *pString);
 
-/*===========================================================================
- *      End of Local Variable Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmNpc.H
- *=========================================================================*/

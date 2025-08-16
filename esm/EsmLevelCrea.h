@@ -11,32 +11,14 @@
 #define __ESMLEVELCREA_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubLong.h"
 #include "EsmSubShort.h"
 #include "EsmSubByte.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 #define MWESM_LEVCREAFLAG_ALLPC 1
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -49,20 +31,13 @@
 class CEsmLevelCrea : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubLong *m_pData; /* Reference to sub-records */
 	CEsmSubByte *m_pNNam;
 	CEsmSubLong *m_pIndex;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmLevelCrea();
 	//virtual ~CEsmLevelCrea() { Destroy(); }
@@ -135,12 +110,5 @@ class CEsmLevelCrea : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmLevelCrea Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

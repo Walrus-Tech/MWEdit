@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ACTIVATORDLG_H
 #define __ACTIVATORDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,35 +20,19 @@
  * Begin Class CEsmActivatorDlg Definition
  *
  *=========================================================================*/
-
 class CEsmActivatorDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmActivatorDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmActivator *m_pActivator;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
-
 	/* Update item data */
-
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
-
 	/* Construction */
-
 	CEsmActivatorDlg();
 
 	/* Get class members */
@@ -86,13 +59,11 @@ class CEsmActivatorDlg : public CEsmRecDialog {
 
 	//{{AFX_VIRTUAL(CEsmActivatorDlg)
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmActivatorDlg)
@@ -102,15 +73,8 @@ class CEsmActivatorDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmActivatorDlg Definition
- *=========================================================================*/
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 #endif
-
-/*===========================================================================
- *      End of File Activatordlg.H
- *=========================================================================*/

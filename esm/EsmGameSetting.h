@@ -11,34 +11,16 @@
 #define __ESMGAMESETTING_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubFloat.h"
 #include "EsmSubLong.h"
 #include "EsmSubName.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Global types */
 #define MWESM_SETTING_INTEGER 1
 #define MWESM_SETTING_FLOAT   2
 #define MWESM_SETTING_STRING  3
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -51,20 +33,13 @@
 class CEsmGameSetting : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubLong *m_pLongData;
 	CEsmSubFloat *m_pFloatData;
 	CEsmSubName *m_pStringData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmGameSetting();
 	//virtual ~CEsmGameSetting() { Destroy(); }
@@ -104,12 +79,5 @@ class CEsmGameSetting : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmGameSetting Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmGameSetting.H
- *=========================================================================*/

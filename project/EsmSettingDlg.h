@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSETTINGDLG_H
 #define __ESMSETTINGDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,27 +20,14 @@
  * Begin Class CEsmSettingDlg Definition
  *
  *=========================================================================*/
-
 class CEsmSettingDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmSettingDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmGameSetting *m_pSetting;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmSettingDlg();
 
@@ -79,14 +55,12 @@ class CEsmSettingDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmSettingDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmSettingDlg)
@@ -95,17 +69,9 @@ class CEsmSettingDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmSettingDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmsettingdlg.H
- *=========================================================================*/

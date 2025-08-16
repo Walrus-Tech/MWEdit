@@ -11,31 +11,13 @@
 #define __ESMCLOTHING_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem3.h"
 #include "EsmSubCTDT.h"
 #include "EsmSubByte.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of body part definitions allowed in a clothing record */
 #define MWESM_CLOTH_MAXBODYPARTS 7
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -48,19 +30,11 @@
 class CEsmClothing : public CEsmItem3 {
 	DECLARE_SUBRECCREATE();
 
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubCTDT *m_pClothData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmClothing();
 	//virtual ~CEsmClothing() { Destroy(); }
@@ -137,28 +111,11 @@ class CEsmClothing : public CEsmItem3 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmClothing Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Convert an armor type to a string */
 const TCHAR *GetESMClothType(const int ArmorType);
 int GetESMClothType(const TCHAR *pString);
 bool GetESMClothType(int &OutIndex, const TCHAR *pString);
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

@@ -11,11 +11,6 @@
 #define __ESMSCRTEMPVIEW_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_err.h"
 #include "windows/TabCtrlSheet.h"
 #include "EsmScrTempPage1.h"
@@ -23,32 +18,12 @@
 #include "EsmScrTempPage3.h"
 #include "ScriptTemplate.h"
 #include "file/CsvFile.h"
-/*===========================================================================
- *        End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
-*
-* Begin Definitions
-*
-*=========================================================================*/
 
 /* Csv file definitions */
 #define ESMSCRTEMP_CSV_EXT      _T("csv")
 #define ESMSCRTEMP_CSV_FILTER   _T("CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*||")
 
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Template options */
 typedef struct esmscrtempoptions {
@@ -62,10 +37,6 @@ typedef struct esmscrtempoptions {
 	}
 } esmscrtempoptions_t;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -76,8 +47,6 @@ class CEsmScrTempView;
 class CMWEditDoc;
 
 class CEsmScrTempView : public CFormView {
-
-	/*---------- Begin Protected Class Members -------------------------*/
   protected:
 	CEsmDlgHandler *m_pDlgHandler;         /* Parent dialog handler */
 	CMWEditDoc *m_pDocument;               /* Parent document */
@@ -96,9 +65,6 @@ class CEsmScrTempView : public CFormView {
 	HACCEL m_hAccelerator;
 
 
-	/*---------- Begin Protected Class Methods -------------------------*/
-  protected:
-
 	/* Class Constructor */
 	CEsmScrTempView();
 	DECLARE_DYNCREATE(CEsmScrTempView);
@@ -114,9 +80,7 @@ class CEsmScrTempView : public CFormView {
 	//}}AFX_DATA
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
   public:
-
 	/* Checks the current template options to see if they are valid */
 	bool CheckTemplate();
 	bool CheckTemplateFile();
@@ -200,16 +164,9 @@ class CEsmScrTempView : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmScrTempView Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-/*===========================================================================
- *      End of File Esmscrtempview.H
- *=========================================================================*/

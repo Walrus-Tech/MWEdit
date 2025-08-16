@@ -7,31 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMDIALOGDLG_H
 #define __ESMDIALOGDLG_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Used for resizing the window and controls */
 
@@ -48,19 +31,8 @@
 #define MWESM_DLGFORM_ACTIVEINFO   4
 #define MWESM_DLGFORM_NEWINFO      5
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Holds information on modified info records */
-
 typedef struct {
 	esmrecinfo_t *pNewRecInfo;
 	esmrecinfo_t *pRecInfo;
@@ -68,33 +40,21 @@ typedef struct {
 
 typedef TPtrArray<esminfodata_t> CEsmInfoDataArray;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmDialogDlg Definition
  *
  *=========================================================================*/
-
 class CEsmDialogDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmDialogDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmDialogue *m_pDialog;      /* Current dialog record we are editting */
 	CEsmInfoDataArray m_NewInfos; /* List of new and modified info records */
 	CEsmInfo *m_pStartInfo;       /* Head of the info linked list */
 	esmrecinfo_t *m_pNpcFilter;   /* Current NPC that we are filtering for */
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Clear the new info array */
 	void ClearNewInfos();
@@ -126,10 +86,7 @@ class CEsmDialogDlg : public CEsmRecDialog {
 	void RemoveInfo(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmDialogDlg();
 	virtual ~CEsmDialogDlg();
@@ -161,13 +118,11 @@ class CEsmDialogDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmDialogDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmDialogDlg)
@@ -190,17 +145,9 @@ class CEsmDialogDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmDialogDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmdialogdlg.H
- *=========================================================================*/

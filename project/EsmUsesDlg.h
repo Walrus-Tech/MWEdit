@@ -7,36 +7,15 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMUSESDLG_H
 #define __ESMUSESDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "MWEditDoc.h"
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -44,13 +23,8 @@ class CEsmDlgHandler;
  * Begin CEsmUsesDlg Definition
  *
  *=========================================================================*/
-
 class CEsmUsesDlg : public CFormView {
-
-	/*---------- Begin Protected Class Members --------------------*/
-
   protected:
-
 	CEsmDlgHandler *m_pDlgHandler; /* Reference to parent handler */
 	esmrecinfo_t *m_pRecInfo;      /* The record being searched for */
 
@@ -58,19 +32,13 @@ class CEsmUsesDlg : public CFormView {
 	int m_UsedRecords;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
-
 	CEsmUsesDlg();
 	virtual ~CEsmUsesDlg();
 
 	DECLARE_DYNCREATE(CEsmUsesDlg);
 
-	/*---------- Begin Public Class Methods -----------------------*/
 
   public:
-
 	/* Set class members */
 
 	void SetDlgHandler(CEsmDlgHandler *pParent) {
@@ -109,17 +77,14 @@ class CEsmUsesDlg : public CFormView {
 	//{{AFX_VIRTUAL(CEsmUsesDlg)
 
   public:
-
 	virtual void OnInitialUpdate();
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Class diagnostics */
 
 #ifdef _DEBUG
@@ -143,17 +108,9 @@ class CEsmUsesDlg : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of CEsmUsesDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmusesdlg.H
- *=========================================================================*/

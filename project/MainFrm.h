@@ -7,20 +7,8 @@
  * Defines the interface of the CMainFrame class.
  *
  *=========================================================================*/
-
 #ifndef __MainFrm_H
 #define __MainFrm_H
-
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -28,26 +16,17 @@
  * Class CMainFrame Definition
  *
  *=========================================================================*/
-
 class CMainFrame : public CMDIFrameWnd {
-
 	DECLARE_DYNAMIC(CMainFrame)
 
-  public:
-
-	CMainFrame();
-
-	/*---------- Begin Protected Class Members ----------------------*/
-
   protected:
-
 	CStatusBar m_wndStatusBar;
 	CToolBar m_wndToolBar;
 	HINSTANCE m_hItemHelp;
 
-	/*---------- Begin Public Class Methods ------------------------*/
 
   public:
+	CMainFrame();
 
 	/* Destructor */
 	virtual ~CMainFrame();
@@ -73,7 +52,6 @@ class CMainFrame : public CMDIFrameWnd {
 	/* Generated message map functions */
 
   protected:
-
 	//{{AFX_MSG(CMainFrame)
 
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -93,17 +71,9 @@ class CMainFrame : public CMDIFrameWnd {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CMainFrame Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File MainFrm.H
- *=========================================================================*/

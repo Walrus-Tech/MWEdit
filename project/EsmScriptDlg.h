@@ -11,11 +11,6 @@
 #define __RtfEditView_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmGlobOptions.h"
 #include "contain/PtrArray.h"
 #include "esmscriptdefs.h"
@@ -26,16 +21,7 @@
 #include "EsmScrFuncArray.h"
 #include "editundo.h"
 #include "richole.h"
-/*===========================================================================
- *        End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
-*
-* Begin Definitions
-*
-*=========================================================================*/
 
 /* Word Types */
 #define ESMSCRIPT_WORDTYPE_END     -1
@@ -61,29 +47,11 @@
 
 
 /*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *        End of Type Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
 *
 * Begin Class CEsmScriptDlg Definition
 *
 *=========================================================================*/
 class CEsmScriptDlg : public CEsmRecDialog {
-
-	/*---------- Begin Protected Class Members ----------------------*/
   protected:
 	CEsmScript *m_pScript;
 	CEsmScriptCompile m_Compiler;
@@ -127,9 +95,7 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	long m_LastDragEndSel;
 
 
-	/*---------- Begin Protected Class Methods ----------------------*/
   protected:
-
 	/* Create from serialization only */
 	CEsmScriptDlg();
 	DECLARE_DYNCREATE(CEsmScriptDlg);
@@ -163,9 +129,6 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	CCustRichEdit m_ScriptText;
 	//}}AFX_DATA
 
-
-	/*---------- Begin Public Class Methods --------------------------*/
-  public:
 
 	/* Class destructor */
 	virtual ~CEsmScriptDlg();
@@ -263,7 +226,6 @@ class CEsmScriptDlg : public CEsmRecDialog {
 
 	// Interface Map
   public:
-
 	BEGIN_INTERFACE_PART(RichEditOleCallback, IRichEditOleCallback)
 	INIT_INTERFACE_PART(CRichEditView, RichEditOleCallback)
 	STDMETHOD(GetNewStorage) (LPSTORAGE*);
@@ -283,16 +245,9 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	DECLARE_INTERFACE_MAP()
 };
 
-/*===========================================================================
- *      End of Class CEsmScriptDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-/*===========================================================================
- *      End of File View.H
- *=========================================================================*/

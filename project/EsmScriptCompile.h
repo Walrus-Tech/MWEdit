@@ -11,11 +11,6 @@
 #define __ESMSCRIPTCOMPILE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmScriptDefs.h"
 #include "EsmScriptError.h"
 #include "string/SString.h"
@@ -28,16 +23,7 @@
 	#include <queue>
 	#include <stack>
 #endif
-/*===========================================================================
- *        End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
-*
-* Begin Definitions
-*
-*=========================================================================*/
 
 /* Token flags */
 #define ESTF_ONE                        1
@@ -104,16 +90,6 @@
 /* Max token string length for stack */
 #define ESMSCR_STACK_MAXTOKENSIZE      63
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Class forward definition */
 class CEsmScriptCompile;
@@ -161,11 +137,6 @@ struct esmscrifblock_t {
 
 
 /*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
  *
  * Begin Class CEsmScriptCompile Definition
  *
@@ -173,8 +144,6 @@ struct esmscrifblock_t {
  *
  *=========================================================================*/
 class CEsmScriptCompile {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CMWEditDoc *m_pDocument;        /* Parent document */
 
@@ -272,9 +241,6 @@ class CEsmScriptCompile {
 	CGenStack m_IfStatementStack; /* Tracks statement count for if statements */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
 	/* Add a local variable to the defined array */
 	bool AddLocalVar(const TCHAR *pName, const int Type);
 
@@ -330,9 +296,7 @@ class CEsmScriptCompile {
 	esmscrifblock_t *PopIfBlock();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScriptCompile();
 	virtual ~CEsmScriptCompile() {
@@ -640,12 +604,5 @@ class CEsmScriptCompile {
 	int UpdateLastIfBlock();
 };
 
-/*===========================================================================
- *      End of Class CEsmScriptCompile Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *     End of File Esmscriptcompile.H
- *=========================================================================*/

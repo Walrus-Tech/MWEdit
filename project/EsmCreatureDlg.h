@@ -7,16 +7,9 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCREATUREDLG_H
 #define __ESMCREATUREDLG_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmRecDialog.h"
 #include "Resource.h"
@@ -27,25 +20,16 @@
 #include "EsmCreaturePage4.h"
 #include "EsmCreaturePage5.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmCreatureDlg Definition
  *
  *=========================================================================*/
-
 class CEsmCreatureDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmCreatureDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmCreaturePage1 m_Page1;
 	CEsmCreaturePage2 m_Page2;
 	CEsmCreaturePage3 m_Page3;
@@ -55,15 +39,7 @@ class CEsmCreatureDlg : public CEsmRecDialog {
 	CEsmCreature *m_pCreature;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmCreatureDlg();
 
@@ -89,14 +65,12 @@ class CEsmCreatureDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmCreatureDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmCreatureDlg)
@@ -106,17 +80,9 @@ class CEsmCreatureDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmCreatureDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcreaturedlg.H
- *=========================================================================*/

@@ -7,54 +7,25 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMREFCELLPAGE_H
 #define __ESMREFCELLPAGE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "ColorStatic1.h"
 #include "EsmSubListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Types of modified records */
-
 #define ESMCELLREF_MODTYPE_NEW    1
 #define ESMCELLREF_MODTYPE_DEL    2
 #define ESMCELLREF_MODTYPE_CLEAN  3
 #define ESMCELLREF_MODTYPE_MOD    4
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmRecDialog;
 class CMWEditDoc;
 
 /* Holds information on modified references */
-
 typedef struct {
 	CEsmSubCellRef *pOldCellRef;
 	CEsmSubCellRef *pNewCellRef;
@@ -64,33 +35,20 @@ typedef struct {
 
 typedef TPtrArray<cellrefdata_t> CEsmCellRefArray;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmRefCellPage Definition
  *
  *=========================================================================*/
-
 class CEsmRefCellPage : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmRefCellPage);
 
-	/*---------- Begin Protected Class Members ----------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmRecDialog *m_pDlgParent;
 	CEsmCellRefArray m_ModCellRefs;
 
-
-	/*---------- Begin Protected Class Methods ----------------------*/
-
-  protected:
 
 	/* Add/clean/delete/modify a cell reference in the cell */
 	bool AddNewCellRef(cellrefdata_t *pCellRefData);
@@ -115,10 +73,7 @@ class CEsmRefCellPage : public CPropertyPage {
 	cellrefdata_t *FindOldCellRef(CEsmSubCellRef *pCellRef);
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmRefCellPage();
 	~CEsmRefCellPage();
@@ -160,13 +115,11 @@ class CEsmRefCellPage : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmRefCellPage)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmRefCellPage)
@@ -192,17 +145,9 @@ class CEsmRefCellPage : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmRefCellPage Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmrefcellpage.H
- *=========================================================================*/

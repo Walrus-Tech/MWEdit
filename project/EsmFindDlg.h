@@ -7,36 +7,15 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMFINDDLG_H
 #define __ESMFINDDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
-
 #include "MWEditDoc.h"
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -44,20 +23,11 @@ class CEsmDlgHandler;
  * Begin Class CEsmFindDlg Definition
  *
  *=========================================================================*/
-
 class CEsmFindDlg : public CFormView {
-
-	/*---------- Begin Protected Class Members --------------------*/
-
   protected:
-
 	CEsmDlgHandler *m_pDlgHandler;
 	HACCEL m_hAccelerator;
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
 
 	CEsmFindDlg();
 	virtual ~CEsmFindDlg();
@@ -71,10 +41,7 @@ class CEsmFindDlg : public CFormView {
 	void FillFindList();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Set parent dialog handler */
 	void SetDlgHandler(CEsmDlgHandler *pParent) {
 		m_pDlgHandler = pParent;
@@ -99,19 +66,16 @@ class CEsmFindDlg : public CFormView {
 	//{{AFX_VIRTUAL(CEsmFindDlg)
 
   public:
-
 	virtual void OnInitialUpdate();
 	virtual BOOL PreTranslateMessage(MSG *pMsg);
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
 
   protected:
-
 	/* Class diagnostics */
 
 #ifdef _DEBUG
@@ -139,17 +103,9 @@ class CEsmFindDlg : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmFindDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmfinddlg.H
- *=========================================================================*/

@@ -13,48 +13,18 @@
 #define __PTRARRAY_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include "dl_mem.h"
 #include "dl_err.h"
 #include <limits.h>
 #include <memory.h>
 #include "math.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Macro for iterating through an array */
 #if !defined(ITERATE_ARRAY)
 	#define ITERATE_ARRAY(Array, Index, pRecord) for (Index = 0; Index < Array.GetNumElements(), pRecord = Array.GetAt(Index); Index++)
 #endif
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -66,8 +36,6 @@
  *
  *=========================================================================*/
 template <class TArrayPtr> class TPtrArray {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	TArrayPtr **m_ppArray;     /* Contains the array of pointers to objects */
 	int m_MaxElements;         /* Maximum size of array */
@@ -78,21 +46,18 @@ template <class TArrayPtr> class TPtrArray {
 	long m_CmpFuncData;        /* User supplied data for the compare function */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Changes the max-size of the array */
 	void ResizeArray(const bool GrowArray);
 	void ResizeArray(const int NewSize);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	TPtrArray(const int MaxSize = 0, const int GrowSize = -1);
 	virtual ~TPtrArray();
 	virtual void Destroy();
+
 	void RemoveAll() {
 		Destroy();
 	}
@@ -113,6 +78,7 @@ template <class TArrayPtr> class TPtrArray {
 	/* Attempts to delete an element from the array */
 	void DeleteElement(const int Index);
 	void DeleteElement(TArrayPtr *pElement);
+
 	void RemoveAt(const int Index) {
 		DeleteElement(Index);
 	}
@@ -195,10 +161,6 @@ template <class TArrayPtr> class TPtrArray {
 	void Sort(const long lUserData);
 };
 
-/*===========================================================================
- *      End of Class TPtrArray Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -227,10 +189,6 @@ template <class TArrayPtr> TPtrArray<TArrayPtr>::TPtrArray(const int MaxSize,
 	m_pCmpFunc = NULL;
 }
 
-/*===========================================================================
- *      End of Class TPtrArray Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -243,10 +201,6 @@ template <class TArrayPtr> TPtrArray<TArrayPtr>::~TPtrArray() {
 	/* Unallocate the array */
 	DestroyArrayPointer(m_ppArray);
 }
-
-/*===========================================================================
- *      End of Class TPtrArray Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -261,10 +215,6 @@ void TPtrArray<TArrayPtr>::Destroy() {
 	//DEFINE_FUNCTION("TPtrArray::Destroy()");
 	m_NumElements = 0;
 }
-
-/*===========================================================================
- *      End of Class Method TPtrArray::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -325,13 +275,11 @@ int TPtrArray<TArrayPtr>::Add(TArrayPtr *pNewElement) {
 	return m_NumElements - 1;
 }
 
-
 template <class TArrayPtr>
 int TPtrArray<TArrayPtr>::AddHead(TArrayPtr *pNewElement) {
 	//DEFINE_FUNCTION("TPtrArray::AddHead()");
 	return InsertBefore(0, pNewElement);
 }
-
 
 template <class TArrayPtr>
 int TPtrArray<TArrayPtr>::Insert(TArrayPtr *pNewElement, const int Index) {
@@ -363,10 +311,6 @@ int TPtrArray<TArrayPtr>::Insert(TArrayPtr *pNewElement, const int Index) {
 
 	return Index;
 }
-
-/*===========================================================================
- *      End of Class Method TPtrArray::AddElement()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -450,10 +394,6 @@ void TPtrArray<TArrayPtr>::AddSortFast(TArrayPtr *pNewElement) {
 	return;
 }
 
-/*===========================================================================
- *      End of Class Method TPtrArray::AddSort()
- *=========================================================================*/
-
 
 #if defined(_DEBUG)
 /*===========================================================================
@@ -485,9 +425,6 @@ bool TPtrArray<TArrayPtr>::AssertValid() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method TPtrArray::AssertValid()
- *=========================================================================*/
 #endif
 
 
@@ -516,7 +453,6 @@ void TPtrArray<TArrayPtr>::DeleteElement(const int Index) {
 	return;
 }
 
-
 template <class TArrayPtr>
 void TPtrArray<TArrayPtr>::DeleteElement(TArrayPtr *pElement) {
 	//DEFINE_FUNCTION("TPtrArray::DeleteElement()");
@@ -526,10 +462,6 @@ void TPtrArray<TArrayPtr>::DeleteElement(TArrayPtr *pElement) {
 		DeleteElement(Index);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method TPtrArray::DeleteElement()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -589,7 +521,6 @@ int TPtrArray<TArrayPtr>::FindFast(TArrayPtr *pElement) {
 
 	return -1;
 }
-
 
 template <class TArrayPtr>
 int TPtrArray<TArrayPtr>::FindFastFunc(PQSORT_CMPFUNC pCompareFunc, void *pElement2) {
@@ -691,10 +622,6 @@ int TPtrArray<TArrayPtr>::FindBSearch(PQSORT_CMPFUNC_ORIG pCompareFunc, void *pE
 	return pResult - m_ppArray;
 }
 
-/*===========================================================================
- *      End of Class Method TPtrArray::FindElement()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -735,10 +662,6 @@ TArrayPtr *TPtrArray<TArrayPtr>::GetAt(const int Index) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method TPtrArray::GetElement()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -773,7 +696,6 @@ bool TPtrArray<TArrayPtr>::InsertAfter(const int Index, TArrayPtr *pElement) {
 	return true;
 }
 
-
 template <class TArrayPtr>
 bool TPtrArray<TArrayPtr>::InsertBefore(const int Index, TArrayPtr *pElement) {
 	int LoopIndex;
@@ -798,10 +720,6 @@ bool TPtrArray<TArrayPtr>::InsertBefore(const int Index, TArrayPtr *pElement) {
 	m_ppArray[Index] = pElement;
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method TPtrArray::InsertBefore()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -864,7 +782,6 @@ void TPtrArray<TArrayPtr>::ResizeArray(const bool GrowArray) {
 	DestroyArrayPointer(ppOldArray);
 }
 
-
 template <class TArrayPtr>
 void TPtrArray<TArrayPtr>::ResizeArray(const int NewSize) {
 	DEFINE_FUNCTION("TPtrArray::ResizeArray()");
@@ -894,10 +811,6 @@ void TPtrArray<TArrayPtr>::ResizeArray(const int NewSize) {
 	DestroyArrayPointer(ppOldArray);
 }
 
-/*===========================================================================
- *      End of Class Method TPtrArray::ResizeArray()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -919,10 +832,6 @@ void TPtrArray<TArrayPtr>::Sort(const long lUserData) {
 	/* Run the extended qsort() routine on the array */
 	qsort((void *)m_ppArray, m_NumElements, sizeof(TArrayPtr *), m_pCmpFunc, m_CmpFuncData);
 }
-
-/*===========================================================================
- *      End of Class Method TPtrArray<TArrayPtr>::Sort()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -947,26 +856,11 @@ inline TArrayPtr *TPtrArray<TArrayPtr>::operator[](const int Index) const {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method TPtrArray::operator[]()
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Module Test Function Prototypes
- *
- *=========================================================================*/
 #if defined(_DEBUG)
 	void Test_StressPtrArray(const int NumTests = 100);
-	void Test_PtrArray ();
+	void Test_PtrArray();
 #endif
-/*===========================================================================
- *      End of Module Test Function Prototypes
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File PTRArray.H
- *=========================================================================*/

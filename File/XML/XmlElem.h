@@ -11,23 +11,9 @@
 #define __XMLELEM_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "XmlAttr.h"
 #include "PtrArray.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Initial array sizes */
 #define XMLFILE_DEFAULT_ELEMENTS     16
@@ -39,16 +25,6 @@
 /* Element callback event codes */
 #define XMLELEM_CBCODE_ELEMSTART      1
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Array of XML element pointers */
 class CXmlElement;
@@ -69,10 +45,6 @@ typedef struct {
 /* Load/write callback function */
 typedef int (*XMLFILE_CALLBACK) (xmlcallbackinfo_t *pCallbackInfo);
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -82,8 +54,6 @@ typedef int (*XMLFILE_CALLBACK) (xmlcallbackinfo_t *pCallbackInfo);
  *
  *=========================================================================*/
 class CXmlElement {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CXmlElement *m_pParent;       /* Parent element */
 
@@ -106,9 +76,6 @@ class CXmlElement {
 	static xmlcallbackinfo_t m_CallBackInfo;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
 	/* Helper input routines */
 	bool ReadAttribute(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
 	bool ReadChild(TCHAR *pBuffer, int &BufferPos, const int FileSize, long &LineCount);
@@ -121,9 +88,7 @@ class CXmlElement {
 	bool WriteChildren(CGenFile &File);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CXmlElement();
 	virtual ~CXmlElement() {
@@ -255,12 +220,5 @@ class CXmlElement {
 	bool Write (CGenFile &File);
 };
 
-/*===========================================================================
- *      End of Class CXmlElement Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Xmlelem.H
- *=========================================================================*/

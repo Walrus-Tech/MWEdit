@@ -12,16 +12,8 @@
 #define __POINTER_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include "dl_mem.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -33,20 +25,12 @@
  *
  *=========================================================================*/
 template <class TPtr> class CSPointer {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	TPtr *m_pPointer;   /* The pointer to the template class object */
 	boolean AutoDelete; /* Determines whether pointer is deleted when destructed */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructor */
 	CSPointer(TPtr *pNewPtr) : m_pPointer(pNewPtr) {
 		AutoDelete = TRUE;
@@ -114,28 +98,12 @@ template <class TPtr> class CSPointer {
 	}
 };
 
-/*===========================================================================
- *      End of Class CSPointer Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Common Smart Pointer Type Definitions
- *
- *=========================================================================*/
 typedef CSPointer<char> spchar_t;
 typedef CSPointer<byte> spbyte_t;
 typedef CSPointer<int> spint_t;
 typedef CSPointer<uint> spuint_t;
 typedef CSPointer<long> splong_t;
 typedef CSPointer<ulong> spulong_t;
-/*===========================================================================
- *      End of Common Smart Pointer Type Definitions
- *=========================================================================*/
 
 
 #endif
-/*===========================================================================
- *      End of File Pointer.H
- *=========================================================================*/

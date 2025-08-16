@@ -7,35 +7,13 @@
  * Defines the child frame class for the script window.
  *
  *=========================================================================*/
-
 #ifndef __CHILDFRMSCRIPT_H
 #define __CHILDFRMSCRIPT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "Resource.h"
 #include "EsmScriptDefs.h"
 #include "splitterwnd.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,19 +21,13 @@
  * Begin Class CChildFrmScript Definition
  *
  *=========================================================================*/
-
 class CScriptErrorView;
 class CEsmScriptDlg;
 
 class CChildFrmScript : public CMDIChildWnd {
-
 	DECLARE_DYNCREATE(CChildFrmScript);
 
-
-	/*---------- Begin Protected Class Members --------------------*/
-
   protected:
-
 	CMwSplitterWnd m_wndSplitter;
 	CScriptErrorView *m_pErrorView;
 	CEsmScriptDlg *m_pScriptView;
@@ -64,22 +36,13 @@ class CChildFrmScript : public CMDIChildWnd {
 	bool m_Created;
 
 
-	/*---------- Begin Protected Class Methods -------------------*/
-
-  protected:
-
-
 	/* Protected constructor used by dynamic creation */
-
 	CChildFrmScript();
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
 
 
-	/*---------- Begin Public Class Methods ----------------------*/
-
   public:
-
 	virtual ~CChildFrmScript();
 
 	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext *pContext);
@@ -103,12 +66,5 @@ class CChildFrmScript : public CMDIChildWnd {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CChildFrmScript Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Childfrmscript.H
- *=========================================================================*/

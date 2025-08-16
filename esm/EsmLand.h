@@ -11,24 +11,10 @@
 #define __ESMLAND_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubLong.h"
 #include "EsmSubLong64.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Default grid array size */
 #define MWESM_LAND_VERTEXSIZE  65
@@ -38,16 +24,7 @@
 /*  Default record data */
 #define MWESM_LAND_DEFAULTDATA 9
 
-/*===========================================================================
-*      End of Definitions
-*=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 #pragma pack(push, 1)
 
 struct mwesm_vnmlpoint_t {
@@ -83,9 +60,6 @@ struct mwesm_vtexdata_t {
 };
 
 #pragma pack(pop)
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -98,7 +72,6 @@ struct mwesm_vtexdata_t {
 class CEsmLand : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubLong64 *m_pLocation;
 	CEsmSubLong *m_pData;
@@ -109,13 +82,7 @@ class CEsmLand : public CEsmRecord {
 	CEsmSubRecord *m_pTextureData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmLand();
 	//virtual ~CEsmLand() { Destroy(); }
@@ -198,12 +165,5 @@ class CEsmLand : public CEsmRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmLand Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmLand.H
- *=========================================================================*/

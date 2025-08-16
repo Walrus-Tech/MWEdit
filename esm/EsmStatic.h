@@ -11,16 +11,8 @@
 #define __ESMSTATIC_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -33,18 +25,11 @@
 class CEsmStatic : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pModel; /* Reference to sub-records */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmStatic();
 	//virtual ~CEsmStatic() { Destroy(); }
@@ -86,12 +71,5 @@ class CEsmStatic : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmStatic Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmSpell.H
- *=========================================================================*/

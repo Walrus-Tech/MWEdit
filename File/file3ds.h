@@ -11,23 +11,9 @@
 #define __FILE3DS_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "common/file/genfile.h"
 #include "images/rgbpal.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Flags for the 3DS chunk types */
 #define CHUNK3DS_FLAG_SIMPLECONTAINER 1
@@ -73,16 +59,6 @@
 #define CHUNK3DS_MAT_ENTRY            ((ushort)0xAFFF)
 #define CHUNK3DS_ID_LAST              ((ushort)0xFFFF)
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Holds information on the chunk types */
 typedef struct {
@@ -97,10 +73,6 @@ typedef struct {
 	long Offset;
 } chunk3dsstack_t;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -110,8 +82,6 @@ typedef struct {
  *
  *=========================================================================*/
 class C3dsFile : public CGenFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	long m_MainChunkOffset; /* Keeps track of the chunk starting offsets */
 	long m_EditChunkOffset;
@@ -135,9 +105,7 @@ class C3dsFile : public CGenFile {
 	int m_ChunkStackSize;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Helper function to dump chunks recursively */
 	bool DumpChunk(FILE *pFileHandle);
 	bool DumpMeshMatrix(FILE *pFileHandle);
@@ -151,9 +119,7 @@ class C3dsFile : public CGenFile {
 	bool PopChunkStack(const ushort ID, const short Value);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	//C3dsFile();
 	//virtual ~C3dsFile() { Destroy(); }
@@ -223,16 +189,6 @@ class C3dsFile : public CGenFile {
 	bool WriteTexVert(const float X, const float Y);
 };
 
-/*===========================================================================
- *      End of Class C3dsFile Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin C3dsFile Inline Methods
- *
- *=========================================================================*/
 
 /* End outputting chunk sections */
 inline bool C3dsFile::EndTexVertChunk(const short Count) {
@@ -276,12 +232,5 @@ inline bool C3dsFile::StartChunk(const ushort ID) {
 	return PushChunkStack(ID);
 }
 
-/*===========================================================================
- *      End of C3dsFile Inline Methods
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File File3ds.H
- *=========================================================================*/

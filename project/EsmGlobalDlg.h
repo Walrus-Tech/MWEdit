@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMGLOBALDLG_H
 #define __ESMGLOBALDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,27 +20,14 @@
  * Begin Class CEsmGlobalDlg Definition
  *
  *=========================================================================*/
-
 class CEsmGlobalDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmGlobalDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmGlobal *m_pGlobal;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmGlobalDlg();
 
@@ -79,14 +55,12 @@ class CEsmGlobalDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmGlobalDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmGlobalDlg)
@@ -96,17 +70,9 @@ class CEsmGlobalDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmGlobalDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmglobaldlg.H
- *=========================================================================*/

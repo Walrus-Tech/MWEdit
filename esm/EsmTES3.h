@@ -10,18 +10,10 @@
 #define __ESMTES3_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubHEDR.h"
 #include "EsmSubName.h"
 #include "EsmSubLong64.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -34,18 +26,11 @@
 class CEsmTES3 : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubHEDR *m_pHeader; /* Reference to record fields */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmTES3();
 	//virtual ~CEsmArmor() { Destroy(); }
@@ -69,12 +54,5 @@ class CEsmTES3 : public CEsmRecord {
 	virtual void OnAddSubRecord(CEsmSubRecord *pSubRecord);
 };
 
-/*===========================================================================
- *      End of Class CEsmTES3 Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

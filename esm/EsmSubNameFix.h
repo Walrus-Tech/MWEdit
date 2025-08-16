@@ -11,17 +11,10 @@
 #define __ESMSUBNAMEFIX_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
 #include "EsmSubName.h"
 #include "string/SString.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
+
 
 typedef CEsmSubName CEsmSubNameFix;
 
@@ -35,14 +28,9 @@ typedef CEsmSubName CEsmSubNameFix;
  *
  *=========================================================================*/
 class CEsmSubNameFix : public CEsmSubRecord {
-
-	/*---------- Begin Proected Class Members ---------------------*/
   protected:
 	CSString m_Name;
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper input methods */
 	virtual bool ReadData(CGenFile &File) {
@@ -61,9 +49,7 @@ class CEsmSubNameFix : public CEsmSubRecord {
 	}
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	//CEsmSubNameFix() { m_MaxSize = MWESM_ID_MAXSIZE; }
 	//virtual ~CEsmSubNameFix() { Destroy(); }
@@ -112,12 +98,7 @@ class CEsmSubNameFix : public CEsmSubRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmSubNameFix Definition
- *=========================================================================*/
+
 #endif
 
 #endif
-/*===========================================================================
- *      End of File EsmSubNameFix.H
- *=========================================================================*/

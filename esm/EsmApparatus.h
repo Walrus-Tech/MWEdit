@@ -11,31 +11,13 @@
 #define __ESMAPPARATUS_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem2.h"
 #include "EsmSubAADT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Convert an apparatus type to a string */
 const TCHAR *GetESMAppaType(const int AppaType);
 int GetESMAppaType(const TCHAR *pString);
-
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -47,19 +29,11 @@ int GetESMAppaType(const TCHAR *pString);
  *=========================================================================*/
 class CEsmApparatus : public CEsmItem2 {
 	DECLARE_SUBRECCREATE();
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubAADT *m_pAppaData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmApparatus();
 	//virtual ~CEsmApparatus() { Destroy(); }
@@ -135,12 +109,5 @@ class CEsmApparatus : public CEsmItem2 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmArmor Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

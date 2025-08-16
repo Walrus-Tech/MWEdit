@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMALCHEMYDLG_H
 #define __ESMALCHEMYDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,23 +20,13 @@
  * Begin Class CEsmAlchemyDlg Definition
  *
  *=========================================================================*/
-
 class CEsmAlchemyDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmAlchemyDlg);
 
-
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmAlchemy *m_pAlchemy;
 	esmrecinfo_t *m_pEffectInfo[MWESM_ALCHEMY_NUMENCHANTS];
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper set/get methods */
 	void GetEffectData();
@@ -64,21 +43,15 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 	void UpdateTotalSpellCost();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
-
 	CEsmAlchemyDlg();
 
 
 	/* Get class members */
-
 	virtual bool IsModified();
 
 	/* Set or update the record data */
-
 	virtual void GetControlData();
 	virtual void SetControlData();
 
@@ -110,19 +83,14 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 	/* ClassWizard generated virtual function overrides */
 
 	//{{AFX_VIRTUAL(CEsmAlchemyDlg)
-
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
-
 	//}}AFX_VIRTUAL
 
 
   protected:
-
 	/* Generated message map functions */
-
 	//{{AFX_MSG(CEsmAlchemyDlg)
 	afx_msg void OnAutocalccheck();
 	//}}AFX_MSG
@@ -205,12 +173,5 @@ class CEsmAlchemyDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmAlchemyDlg Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmalchemydlg.H
- *=========================================================================*/

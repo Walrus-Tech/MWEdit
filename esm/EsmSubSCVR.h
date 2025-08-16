@@ -11,22 +11,8 @@
 #define __ESMSUBSCVR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Base size without the optional string */
 #define MWESM_SCVR_BASESIZE           5
@@ -74,16 +60,7 @@
 #define MWESM_SCVROP_LESSER           ((byte)'4')
 #define MWESM_SCVROP_LESSEREQUALS     ((byte)'5')
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 #pragma pack(push, 1)
 
 typedef struct {
@@ -95,9 +72,6 @@ typedef struct {
 } infofuncdata_t;
 
 #pragma pack(pop)
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -108,24 +82,17 @@ typedef struct {
  *
  *=========================================================================*/
 class CEsmSubSCVR : public CEsmSubRecord {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	infofuncdata_t m_FuncData;
 	int m_StringLength;
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper input methods */
 	virtual bool ReadData(CGenFile &File);
 	virtual bool WriteData(CGenFile &File);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSubSCVR() {
 		m_StringLength = 0;
@@ -219,12 +186,5 @@ class CEsmSubSCVR : public CEsmSubRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmSubAADT Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmsubINDX.H
- *=========================================================================*/

@@ -11,30 +11,12 @@
 #define __ESMINGREDIANT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem2.h"
 #include "EsmSubENAM.h"
 #include "EsmSubIRDT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 #define MWESM_INGRE_NUMENCHANTS 4
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -47,18 +29,11 @@
 class CEsmIngrediant : public CEsmItem2 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubIRDT *m_pIngreData; /* Reference to subrecords */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmIngrediant();
 	//virtual ~CEsmIngrediant() { Destroy(); }
@@ -161,12 +136,5 @@ class CEsmIngrediant : public CEsmItem2 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmIngrediant Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmIngrediant.H
- *=========================================================================*/

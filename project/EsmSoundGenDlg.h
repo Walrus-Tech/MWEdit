@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSOUNDGENDLG_H
 #define __ESMSOUNDGENDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,22 +20,14 @@
  * Begin Class CEsmSoundGenDlg Definition
  *
  *=========================================================================*/
-
 class CEsmSoundGenDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmSoundGenDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmSoundGen *m_pSoundGen;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
   protected:
-
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
@@ -54,10 +35,7 @@ class CEsmSoundGenDlg : public CEsmRecDialog {
 	void UpdateID();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmSoundGenDlg();
 
@@ -85,14 +63,12 @@ class CEsmSoundGenDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmSoundGenDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmSoundGenDlg)
@@ -103,17 +79,9 @@ class CEsmSoundGenDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmSoundGenDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmsoundgendlg.H
- *=========================================================================*/

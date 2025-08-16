@@ -11,46 +11,20 @@
 #define __ESMSUBCELLREF_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmSubBase.h"
 #include "EsmSubPos6.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 #define MWESM_CELLREF_INDEXMASK 0x00FFFFFF
 #define MWESM_CELLREF_MODFLAG   0x01000000
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 //#pragma pack(push, 1)
 
 struct esmrecinfo_t;
 class CEsmCell;
 
 //#pragma pack(pop)
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -61,8 +35,6 @@ class CEsmCell;
  *
  *=========================================================================*/
 class CEsmSubCellRef : public CEsmSubRecord {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubRecArray m_SubRecArray; /* Array of sub-records related to the reference */
 
@@ -72,16 +44,11 @@ class CEsmSubCellRef : public CEsmSubRecord {
 	long m_UserData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
 	/* Clears all sub-records in the array */
 	void ClearSubRecArray();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSubCellRef();
 	virtual ~CEsmSubCellRef() {
@@ -179,12 +146,5 @@ class CEsmSubCellRef : public CEsmSubRecord {
 	virtual bool Write(CGenFile &File);
 };
 
-/*===========================================================================
- *      End of Class CEsmSubCellRef Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmsubaodt.H
- *=========================================================================*/

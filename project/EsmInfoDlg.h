@@ -7,49 +7,15 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMINFODLG_H
 #define __ESMINFODLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmInfo.h"
 #include "contain/ptrarray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/* Class forward definition */
 
 class CMWEditDoc;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -57,23 +23,15 @@ class CMWEditDoc;
  * Begin Class CEsmInfoDlg Definition
  *
  *=========================================================================*/
-
 class CEsmInfoDlg : public CDialog {
-
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	CEsmInfo *m_pInfo; /* The info object we are editting */
 	bool m_IsNew;
 	bool m_AlreadyIsNew;
 	CMWEditDoc *m_pDocument;
 
 
-	/*---------- Begin Public Class Methods ------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmInfoDlg(CWnd *pParent = NULL);
 
@@ -137,13 +95,11 @@ class CEsmInfoDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmInfoDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmInfoDlg)
@@ -183,17 +139,9 @@ class CEsmInfoDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmInfoDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esminfodlg.H
- *=========================================================================*/

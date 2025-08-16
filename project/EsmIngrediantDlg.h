@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMINGREDIANTDLG_H
 #define __ESMINGREDIANTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,22 +20,13 @@
  * Begin Class CEsmIngrediantDlg Definition
  *
  *=========================================================================*/
-
 class CEsmIngrediantDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmIngrediantDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmIngrediant *m_pIngrediant;
 	esmrecinfo_t *m_pEffectInfo[MWESM_INGRE_NUMENCHANTS];
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper set/get methods */
 	void GetEffectData();
@@ -61,10 +41,7 @@ class CEsmIngrediantDlg : public CEsmRecDialog {
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmIngrediantDlg();
 
@@ -98,14 +75,12 @@ class CEsmIngrediantDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmIngrediantDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmIngrediantDlg)
@@ -146,17 +121,9 @@ class CEsmIngrediantDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmIngrediantDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmingrediantdlg.H
- *=========================================================================*/

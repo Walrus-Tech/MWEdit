@@ -7,41 +7,19 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRFUNCDATA_H
 #define __ESMSCRFUNCDATA_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "dl_err.h"
 #include "string/sstring.h"
 #include "EsmScriptDefs.h"
 #include "file/GenFile.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Max string lengths */
-
 #define ESM_SFDATA_NAMESIZE   31
 #define ESM_SFDATA_LINELENGTH 255
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -51,13 +29,8 @@
  * Holds a single function definition for the Morrowind script compiler.
  *
  *=========================================================================*/
-
 class CEsmScrFuncData {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
-
 	TCHAR m_Function[ESM_SFDATA_NAMESIZE + 1];     /* Function name */
 	TCHAR m_WikiLink[ESM_SFDATA_NAMESIZE + 1];     /* Optional link to alternate wiki page */
 	TCHAR m_ReturnDesc[ESM_SFDATA_LINELENGTH + 1]; /* Return description */
@@ -70,14 +43,7 @@ class CEsmScrFuncData {
 	long m_Flags;                                  /* Function options */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
-
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScrFuncData();
 
@@ -206,13 +172,5 @@ class CEsmScrFuncData {
 	bool SetValue(const TCHAR *pVariable, TCHAR *pValue);
 };
 
-/*===========================================================================
- *      End of Class CEsmScrFuncData Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmscrfuncdata.H
- *=========================================================================*/

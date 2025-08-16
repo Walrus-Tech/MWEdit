@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSKILLDLG_H
 #define __ESMSKILLDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,27 +20,14 @@
  * Begin Class CEsmSkillDlg Definition
  *
  *=========================================================================*/
-
 class CEsmSkillDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmSkillDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmSkill *m_pSkill;
 
 
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmSkillDlg();
 
@@ -92,14 +68,12 @@ class CEsmSkillDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmSkillDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmSkillDlg)
@@ -108,17 +82,9 @@ class CEsmSkillDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmSkillDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmskilldlg.H
- *=========================================================================*/

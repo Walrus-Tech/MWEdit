@@ -12,25 +12,11 @@
 #define __CONAPP_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_base.h"
 #include "dl_err.h"
 #include "dl_str.h"
 #include "dl_file.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Defines
- *
- *=========================================================================*/
 
 /* Defines a standard main routine */
 #define STANDARD_CONSOLEAPP_MAIN(AppName) int main(int ArgCount, char *pArgs[]) { \
@@ -40,16 +26,6 @@
 #define ERRCONAPP_NOHELP          2001
 #define ERRCONAPP_BADLINESPERPAGE 2002
 
-/*===========================================================================
- *      End of Defines
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Structure and Type Definitions
- *
- *=========================================================================*/
 
 /* Used to determine the type of release */
 typedef enum {
@@ -67,10 +43,6 @@ typedef enum {
 	CMDPARSE_SUCCESS = 1
 } cmdparse_t;
 
-/*===========================================================================
- *      End of Structure and Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -81,8 +53,6 @@ typedef enum {
  *
  *=========================================================================*/
 class CConsoleApp {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	FILE *pOutputStream;  /* Destination of output */
 	int NumArguments;     /* The program arguments data */
@@ -113,9 +83,7 @@ class CConsoleApp {
 	char **ppHelpText;    /* Help text for the application */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Registers any custom class errors */
 	static bool AddClassErrors();
 
@@ -134,9 +102,7 @@ class CConsoleApp {
 	virtual int StartApp();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CConsoleApp();
 	virtual ~CConsoleApp() {
@@ -189,16 +155,6 @@ class CConsoleApp {
 	virtual int StartConsoleApp(const int ArgC, char *Argv[]);
 };
 
-/*===========================================================================
- *      End of Class CConsoleApp Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Class CConsoleApp Inline Methods
- *
- *=========================================================================*/
 
 /* Get class members */
 inline char *CConsoleApp::GetAppName() {
@@ -269,16 +225,6 @@ inline void CConsoleApp::SetDoOpenLog(const bool Flag) {
 	DoOpenLog = Flag;
 }
 
-/*===========================================================================
- *      End of Class CConsoleApp Inline Methods
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Return the current console application object */
 CConsoleApp *GetConsoleApp();
@@ -286,12 +232,5 @@ CConsoleApp *GetConsoleApp();
 /* Converts a release type to a printable output character */
 char ReleaseTypeToChar(const release_t ReleaseType);
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File ConApp.H
- *=========================================================================*/

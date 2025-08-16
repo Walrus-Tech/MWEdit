@@ -15,30 +15,12 @@
 #define __ESMITEM1_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Class type flag (bit field) */
 #define MWESM_CLASSTYPE_ITEM1 2
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -49,21 +31,13 @@
  *
  *=========================================================================*/
 class CEsmItem1 : public CEsmRecord {
-
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pModel; /* Reference to record fields */
 	CEsmSubNameFix *m_pName;
 	CEsmSubNameFix *m_pScript;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmItem1();
 	//virtual ~CEsmArmor() { Destroy(); }
@@ -118,12 +92,5 @@ class CEsmItem1 : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmItem1 Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

@@ -7,22 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMAIACTIVATEDLG_H
 #define __ESMAIACTIVATEDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmSubAI_A.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -30,27 +19,17 @@
  * Begin Class CEsmAiActivateDlg
  *
  *=========================================================================*/
-
 class CEsmAiActivateDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members -------------------------*/
-
   protected:
-
 	CEsmSubAI_A *m_pSubRecord;
 
 
-	/*---------- Begin Public Class Method -----------------------------*/
-
   public:
-
 	/* Construction */
-
 	CEsmAiActivateDlg(CWnd *pParent = NULL);
 
 
 	/* Main access method */
-
 	bool DoModal(CEsmSubAI_A *pSubRecord);
 
 	/* Dialog Data */
@@ -68,14 +47,12 @@ class CEsmAiActivateDlg : public CDialog {
 
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmAiActivateDlg)
@@ -86,17 +63,9 @@ class CEsmAiActivateDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmAiActivateDlg
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmaiactivatedlg.H
- *=========================================================================*/

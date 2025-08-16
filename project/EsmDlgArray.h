@@ -7,30 +7,13 @@
  * Handles a general array of ESM record dialogs.
  *
  *=========================================================================*/
-
 #ifndef __ESMDLGARRAY_H
 #define __ESMDLGARRAY_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "MainFrm.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Array of dialog pointers */
 typedef TPtrArray<CFrameWnd> CEsmFrameArray;
@@ -43,7 +26,6 @@ class CEsmDlgHandler;
 typedef CFrameWnd *(CEsmDlgHandler::*DLGCREATE_FUNC) (esmrecinfo_t* pRecInfo);
 
 /* Used to create the various dialogs */
-
 struct esmdlgcreateinfo_t {
 	const TCHAR *Type;
 	const TCHAR *pTitle;
@@ -53,13 +35,7 @@ struct esmdlgcreateinfo_t {
 	DLGCREATE_FUNC CreateFunc;
 };
 
-/* Class forward definitions */
-
 class CEsmScriptCompareDlg;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -69,13 +45,8 @@ class CEsmScriptCompareDlg;
  * Description
  *
  *=========================================================================*/
-
 class CEsmDlgHandler {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   protected:
-
 	CEsmFrameArray m_Frames; /* Array of ESM frame windows */
 	CMWEditDoc *m_pDocument; /* Current document */
 	CMainFrame *m_pMainFrame;
@@ -85,18 +56,13 @@ class CEsmDlgHandler {
 	CFrameWnd *m_pScrTempDlg;
 	CFrameWnd *m_pScriptCompareDlg;
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
 
 	/* Create a new dialog based on the input type */
 	CFrameWnd *CreateESMDialog(esmrecinfo_t *pRecInfo, const bool IsNew);
 	CFrameWnd *CreateESMDialog(esmdlgcreateinfo_t &CreateInfo);
 
-	/*---------- Begin Public Class Methods -----------------------*/
 
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmDlgHandler();
 
@@ -187,13 +153,5 @@ class CEsmDlgHandler {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmDlgHandler Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmdlgarray.H
- *=========================================================================*/

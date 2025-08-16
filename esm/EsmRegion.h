@@ -11,31 +11,12 @@
 #define __ESMREGION_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubWEAT.h"
 #include "EsmSubNameFix.h"
 #include "EsmSubLong.h"
 #include "EsmSubSNAM.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -48,7 +29,6 @@
 class CEsmRegion : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pNameData;
 	CEsmSubWEAT *m_pWeatherData;
@@ -56,13 +36,7 @@ class CEsmRegion : public CEsmRecord {
 	CEsmSubLong *m_pColorData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmRegion();
 	//virtual ~CEsmRegion() { Destroy(); }
@@ -120,12 +94,5 @@ class CEsmRegion : public CEsmRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmRegion Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

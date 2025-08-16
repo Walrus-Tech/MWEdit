@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSPELLDLG_H
 #define __ESMSPELLDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,23 +20,14 @@
  * Begin Class CEsmSpellDlg Definition
  *
  *=========================================================================*/
-
 class CEsmSpellDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmSpellDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmSpell *m_pSpell;
 	esmrecinfo_t *m_pEffectInfo[MWESM_ENCHANT_NUMENCHANTS];
 	bool m_DisableCost;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper set/get methods */
 	void GetEffectData();
@@ -66,10 +46,7 @@ class CEsmSpellDlg : public CEsmRecDialog {
 	void UpdateTotalSpellCost();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmSpellDlg();
 
@@ -114,14 +91,12 @@ class CEsmSpellDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmSpellDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmSpellDlg)
@@ -260,13 +235,5 @@ class CEsmSpellDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmSpellDlg Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Esmspelldlg.H
- *=========================================================================*/

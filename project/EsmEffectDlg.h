@@ -7,24 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMEFFECTDLG_H
 #define __ESMEFFECTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "ColorStatic1.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,30 +21,18 @@
  * Begin Class CEsmEffectDlg Definition
  *
  *=========================================================================*/
-
 class CEsmEffectDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmEffectDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmMagicEffect *m_pEffect;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmEffectDlg();
 
@@ -117,14 +94,12 @@ class CEsmEffectDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmEffectDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmEffectDlg)
@@ -143,17 +118,9 @@ class CEsmEffectDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmEffectDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmeffectdlg.H
- *=========================================================================*/

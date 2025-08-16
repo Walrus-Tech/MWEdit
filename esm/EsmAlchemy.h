@@ -11,31 +11,13 @@
 #define __ESMALCHEMY_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmItem2.h"
 #include "EsmSubENAM.h"
 #include "EsmSubALDT.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of enchantments allowed per alchemy object */
 #define MWESM_ALCHEMY_NUMENCHANTS 8
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -48,16 +30,10 @@
 class CEsmAlchemy : public CEsmItem2 {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubALDT *m_pAlchemyData; /* Reference to subrecords */
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmAlchemy();
 	//virtual ~CEsmAlchemy() { Destroy(); }
@@ -110,24 +86,9 @@ class CEsmAlchemy : public CEsmItem2 {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmAlchemy Definition
- *=========================================================================*/
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Convert an armor type to a string */
 const TCHAR *GetESMArmorType(const int ArmorType);
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 #endif
-/*===========================================================================
- *      End of File Esmarmor.H
- *=========================================================================*/

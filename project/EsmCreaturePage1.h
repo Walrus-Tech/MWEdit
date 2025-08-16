@@ -7,53 +7,20 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCREATUREPAGE1_H
 #define __ESMCREATUREPAGE1_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
 
-/* Skill data */
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Class CEsmCreaturePage1 Definition
- *
- *=========================================================================*/
 
 class CEsmCreaturePage1 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmCreaturePage1);
 
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmDlgHandler *m_pDlgHandler;
 
@@ -62,10 +29,7 @@ class CEsmCreaturePage1 : public CPropertyPage {
 	int m_SortReverse;
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmCreaturePage1();
 	~CEsmCreaturePage1();
@@ -156,12 +120,10 @@ class CEsmCreaturePage1 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmCreaturePage1)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmCreaturePage1)
@@ -173,17 +135,9 @@ class CEsmCreaturePage1 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmCreaturePage1 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcreaturepage1.H
- *=========================================================================*/

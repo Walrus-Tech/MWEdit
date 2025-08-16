@@ -11,11 +11,6 @@
 #define __ESMMAGICEFFECT_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubLong.h"
@@ -23,21 +18,6 @@
 #include "EsmSubByte.h"
 #include "EsmSubMEDT.h"
 #include "EsmSubENAM.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -50,7 +30,6 @@
 class CEsmMagicEffect : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubLong *m_pIndexData;
 	CEsmSubMEDT *m_pEffectData;
@@ -67,13 +46,7 @@ class CEsmMagicEffect : public CEsmRecord {
 	CEsmSubNameFix *m_pBoltVisual;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmMagicEffect();
 	//virtual ~CEsmMagicEffect() { Destroy(); }
@@ -303,12 +276,5 @@ class CEsmMagicEffect : public CEsmRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmMagicEffect Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

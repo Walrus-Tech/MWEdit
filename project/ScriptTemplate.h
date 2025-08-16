@@ -7,32 +7,15 @@
  * Defines the CEsmScriptTemplate class.
  *
  *=========================================================================*/
-
 #ifndef __SCRIPTTEMPLATE_H
 #define __SCRIPTTEMPLATE_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "dl_err.h"
 #include "EsmScript.h"
 #include "contain/PtrArray.h"
 #include "file/csvfile.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Maximum size of template files */
 #define ESM_SCRTEMP_MAXTEMPSIZE   ESM_SCRIPT_MAXTEXT
@@ -51,19 +34,8 @@
 /* Special variable names */
 #define ESMSCRTEMP_CSV_SCRIPTNAME _T("ScriptName")
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Holds information on a single template variable */
-
 typedef struct esmscrtempvar {
 	TCHAR Name[ESM_SCRTEMP_MAXVARSIZE + 1];
 	int Uses;
@@ -80,10 +52,6 @@ typedef struct esmscrtempvar {
 
 typedef TPtrArray<esmscrtempvar_t> CEsmScrTempVarArray;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -92,11 +60,7 @@ typedef TPtrArray<esmscrtempvar_t> CEsmScrTempVarArray;
  * Handles the loading and parsing of script template files.
  *
  *=========================================================================*/
-
 class CEsmScriptTemplate {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
 	CSString m_TemplateText; /* The template text buffer */
 	CSString m_Filename;
@@ -105,18 +69,12 @@ class CEsmScriptTemplate {
 	CSString m_ScriptName; /* Used for conversion */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
   protected:
-
 	/* Parses and adds a template variable */
 	bool AddTemplateVariable(const TCHAR *pVariable, const int Length);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScriptTemplate();
 
@@ -179,13 +137,5 @@ class CEsmScriptTemplate {
 	}
 };
 
-/*===========================================================================
- *      End of Class CEsmScriptTemplate Definition
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Scripttemplate.H
- *=========================================================================*/

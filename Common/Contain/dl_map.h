@@ -11,24 +11,10 @@
 #define __DLMAP_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_err.h"
 #include "dl_str.h"
 #include <ctype.h>
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Default size of the hash map tables */
 #define DLMAP_DEFAULTSIZE 1009
@@ -36,17 +22,6 @@
 /* Used to iterate through records */
 typedef void *MAPPOSITION;
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-
-/*===========================================================================
- *
- * Begin Predefined CompareKeys Functions
- *
- *=========================================================================*/
 inline bool CompareKeys(dword Key1, dword Key2) {
 	return Key1 == Key2;
 }
@@ -55,16 +30,6 @@ inline bool CompareKeys(const char *Key1, const char *Key2) {
 	return StringCompare(Key1, Key2, false) == 0;
 }
 
-/*===========================================================================
- *        End of Predefined CompareKeys Functions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Predefined HashKey Functions
- *
- *=========================================================================*/
 inline dword HashKey(dword Key) {
 	return Key >> 4;
 }
@@ -80,10 +45,6 @@ inline dword HashKey(const char *Key) {
 
 	return nHash;
 }
-
-/*===========================================================================
- *        End of Predefined HashKey Functions
- *=========================================================================*/
 
 /*===========================================================================
  *
@@ -104,16 +65,12 @@ class TGenMap {
 		TValue Value;
 	};
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CGenMapAssoc **m_ppHashTable; /* Array of hash records */
 	dword m_RecordCount;
 	dword m_HashTableSize;
 	bool m_DeleteValues;
 
-
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
 
 	/* Helper find method */
 	virtual CGenMapAssoc *GetAssocNode (TKeyArg Key, dword &Hash);
@@ -122,9 +79,7 @@ class TGenMap {
 	virtual CGenMapAssoc *NewAssocNode ();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	TGenMap();
 	virtual ~TGenMap() {
@@ -162,10 +117,6 @@ class TGenMap {
 	virtual void SetAt(TKeyArg Key, TValue &Record);
 };
 
-/*===========================================================================
- *      End of Class TGenMap Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -184,10 +135,6 @@ class TGenRefMap : public TGenMap<TKey, TValue, TKeyArg> {
 	}
 };
 
-/*===========================================================================
- *      End of Class TGenMap Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -201,10 +148,6 @@ template<class TKey, class TValue, class TKeyArg> TGenMap<TKey, TValue, TKeyArg>
 	m_DeleteValues = true;
 }
 
-/*===========================================================================
- *      End of Class TGenMap Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -215,10 +158,6 @@ template<class TKey, class TValue, class TKeyArg>
 inline void TGenMap<TKey, TValue, TKeyArg>::Destroy() {
 	RemoveAll();
 }
-
-/*===========================================================================
- *      End of Class Method TGenMap::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -258,10 +197,6 @@ void TGenMap<TKey, TValue, TKeyArg>::Delete(TKeyArg Key) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method TGenMap::Delete()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -287,10 +222,6 @@ typename TGenMap<TKey, TValue, TKeyArg>::CGenMapAssoc
 
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method TGenMap::GetAssocNode()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -320,10 +251,6 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecord(MAPPOSITION &Position) {
 	/* Nothing to return */
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method TGenMap::GetFirstRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -366,10 +293,6 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetNextRecord(MAPPOSITION &Position) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method TGenMap::GetNextRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -403,10 +326,6 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetFirstRecordKey(TKeyArg Key, MAPPOSITIO
 	Position = NULL;
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method TGenMap::GetFirstRecordKey()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -444,10 +363,6 @@ TValue TGenMap<TKey, TValue, TKeyArg>::GetNextRecordKey(TKeyArg Key, MAPPOSITION
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method TGenMap::GetNextRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -466,10 +381,6 @@ void TGenMap<TKey, TValue, TKeyArg>::InitHashTable(const dword Size) {
 	m_RecordCount = 0;
 	memset(m_ppHashTable, 0, sizeof(CGenMapAssoc *) * m_HashTableSize);
 }
-
-/*===========================================================================
- *      End of Class Method TGenMap::InitHashTable()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -492,10 +403,6 @@ bool TGenMap<TKey, TValue, TKeyArg>::Lookup(TKeyArg Key, TValue &Record) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method TGenMap::Lookup()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -510,10 +417,6 @@ typename TGenMap<TKey, TValue, TKeyArg>::CGenMapAssoc
 	CreatePointer(pAssoc, CGenMapAssoc);
 	return pAssoc;
 }
-
-/*===========================================================================
- *      End of Class Method TGenMap::NewAssocNode()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -550,10 +453,6 @@ void TGenMap<TKey, TValue, TKeyArg>::RemoveAll() {
 	m_RecordCount = 0;
 }
 
-/*===========================================================================
- *      End of Class Method TGenMap::RemoveAll()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -583,12 +482,5 @@ void TGenMap<TKey, TValue, TKeyArg>::SetAt(TKeyArg Key, TValue &Record) {
 	pAssoc->Value = Record;
 }
 
-/*===========================================================================
- *      End of Class Method TGenMap::SetAt()
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File dl_map.H
- *=========================================================================*/

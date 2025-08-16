@@ -7,31 +7,17 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMHEADERDLG_H
 #define __ESMHEADERDLG_H
 
 
-/*===========================================================================
- *
- * Begin Class CEsmHeaderDlg Definition
- *
- *=========================================================================*/
-
 class CEsmHeaderDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members ----------------------*/
-
   protected:
-
 	CEsmTES3 *m_pHeader;
 	const TCHAR *m_pFilename;
 
 
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmHeaderDlg(CWnd *pParent = NULL);
 
@@ -54,13 +40,11 @@ class CEsmHeaderDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmHeaderDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmHeaderDlg)
@@ -71,17 +55,9 @@ class CEsmHeaderDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmHeaderDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmheaderdlg.H
- *=========================================================================*/

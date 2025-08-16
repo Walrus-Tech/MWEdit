@@ -7,39 +7,17 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRTEMPPAGE3_H
 #define __ESMSCRTEMPPAGE3_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "dl_err.h"
 #include "EsmDlgArray.h"
 #include "file/CsvFile.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Default list column width */
-
 #define ESMSCRTEMP_CSVLIST_COLWIDTH   80
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -47,25 +25,16 @@
  * Begin Class CEsmScrTempPage3 Definition
  *
  *=========================================================================*/
-
 class CEsmScrTempView;
 
 class CEsmScrTempPage3 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmScrTempPage3);
 
-	/*---------- Begin Protected Class Members ---------------------------*/
-
   protected:
-
 	CEsmDlgHandler *m_pDlgHandler; /* Parent dialog handler */
 	CEsmScrTempView *m_pParentView;
 	int m_NumColumns;
 
-
-	/*---------- Begin Protected Class Methods ---------------------------*/
-
-  protected:
 
 	/* Add columns to the list control */
 	bool AddCsvColumns(CCsvFile *pCsvFile);
@@ -74,10 +43,7 @@ class CEsmScrTempPage3 : public CPropertyPage {
 	void ClearCsvList();
 
 
-	/*---------- Begin Public Class Methods ------------------------------*/
-
   public:
-
 	/* Constructor and Destructor */
 	CEsmScrTempPage3();
 	~CEsmScrTempPage3();
@@ -112,13 +78,11 @@ class CEsmScrTempPage3 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmScrTempPage3)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmScrTempPage3)
@@ -128,17 +92,9 @@ class CEsmScrTempPage3 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmScrTempPage3 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File EsmScrTempPage3.H
- *=========================================================================*/

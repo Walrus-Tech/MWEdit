@@ -7,22 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMAITRAVELDLG_H
 #define __ESMAITRAVELDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmSubAI_T.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -30,28 +19,17 @@
  * Begin Class CEsmAiTravelDlg
  *
  *=========================================================================*/
-
 class CEsmAiTravelDlg : public CDialog {
-
-	/*---------- Begin Protected Class Members -------------------------*/
-
   protected:
-
 	CEsmSubAI_T *m_pSubRecord;
 
 
-	/*---------- Begin Public Class Method -----------------------------*/
-
   public:
-
-
 	/* Construction */
-
 	CEsmAiTravelDlg(CWnd *pParent = NULL);
 
 
 	/* Main access method */
-
 	bool DoModal(CEsmSubAI_T *pSubRecord);
 
 	/* Dialog Data */
@@ -70,16 +48,12 @@ class CEsmAiTravelDlg : public CDialog {
 	/* ClassWizard generated virtual function overrides */
 
 	//{{AFX_VIRTUAL(CEsmAiTravelDlg)
-
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
 
   protected:
-
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmAiTravelDlg)
@@ -90,17 +64,9 @@ class CEsmAiTravelDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmAiTravelDlg
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmaitraveldlg.H
- *=========================================================================*/

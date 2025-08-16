@@ -7,24 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMCONTAINDLG_H
 #define __ESMCONTAINDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,21 +21,12 @@
  * Begin Class CEsmContainDlg Definition
  *
  *=========================================================================*/
-
 class CEsmContainDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmContainDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmContainer *m_pContainer;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Helper get/set methods */
 	void GetItemData();
@@ -60,10 +40,7 @@ class CEsmContainDlg : public CEsmRecDialog {
 	void UpdateUserData();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmContainDlg();
 
@@ -99,14 +76,12 @@ class CEsmContainDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmContainDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmContainDlg)
@@ -121,17 +96,9 @@ class CEsmContainDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmContainDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmcontaindlg.H
- *=========================================================================*/

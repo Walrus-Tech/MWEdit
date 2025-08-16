@@ -7,20 +7,8 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __SPLITTERWND_H
 #define __SPLITTERWND_H
-
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -28,23 +16,8 @@
  * Begin Class CMwSplitterWnd Definition
  *
  *=========================================================================*/
-
 class CMwSplitterWnd : public CSplitterWnd {
-
-	/*---------- Begin Protected Class Members ----------------------*/
-
-  protected:
-
-
-	/*---------- Begin Protected Class Methods ----------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods -------------------------*/
-
   public:
-
 	/* Construction/Destructor */
 	CMwSplitterWnd();
 	virtual ~CMwSplitterWnd();
@@ -58,7 +31,6 @@ class CMwSplitterWnd : public CSplitterWnd {
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CMwSplitterWnd)
@@ -67,19 +39,9 @@ class CMwSplitterWnd : public CSplitterWnd {
 	DECLARE_MESSAGE_MAP()
 };
 
-/*===========================================================================
- *      End of Class CMwSplitterWnd Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
-
- *      End of File SplitterWnd.H
-
- *=========================================================================*/

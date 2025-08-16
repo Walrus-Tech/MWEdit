@@ -11,11 +11,6 @@
 #define __MWEDIT_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #ifndef __AFXWIN_H__
 	#error include 'stdafx.h' before including this file for PCH
 #endif
@@ -27,16 +22,7 @@
 #include "EsmOptions.h"
 #include "EsmRegDefs.h"
 #include "mwcustomfunc.h"
-/*===========================================================================
- *        End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
-*
-* Begin Definitions
-*
-*=========================================================================*/
 
 /* Default web sites */
 #define MWEDIT_WEBPAGE_UESPTES3MOD    _T("http://www.uesp.net/wiki/Tes3Mod:Modding")
@@ -49,10 +35,6 @@
 
 #define MWEDIT_DEFAULT_CUSTOMFUNCS    _T("customfunctions.dat")
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -60,9 +42,6 @@
  *
  *=========================================================================*/
 class CMWEditApp : public CWinApp {
-
-	/*---------- Begin Protected Class Members -----------------------*/
-  protected:
   public:
 	CBitmap m_IconBitmap[64];
 
@@ -79,9 +58,6 @@ class CMWEditApp : public CWinApp {
 	CEsmOptions m_Options;            /* User options */
 	long m_NonameCount;
 
-
-	/*--------- Begin Public Class Methods ---------------------------*/
-  public:
 
 	/* Class Constructor */
 	CMWEditApp();
@@ -140,16 +116,9 @@ class CMWEditApp : public CWinApp {
 	DECLARE_MESSAGE_MAP()
 };
 
-/*===========================================================================
- *      End of Class CMWEditApp Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 //}}AFX_INSERT_LOCATION
 
 #endif
-/*===========================================================================
- *      End of File Root.H
- *=========================================================================*/

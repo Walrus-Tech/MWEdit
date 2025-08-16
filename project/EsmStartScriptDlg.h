@@ -7,23 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSTARTSCRIPTDLG_H
 #define __ESMSTARTSCRIPTDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,30 +20,18 @@
  * Begin Class CEsmStartScriptDlg Definition
  *
  *=========================================================================*/
-
 class CEsmStartScriptDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmStartScriptDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmStartScript *m_pStartScript;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Standard constructor */
 	CEsmStartScriptDlg(CWnd *pParent = NULL);
 
@@ -81,14 +58,12 @@ class CEsmStartScriptDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmStartScriptDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	virtual void OnInitialUpdate();
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmStartScriptDlg)
@@ -98,17 +73,9 @@ class CEsmStartScriptDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmStartScriptDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION}}
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmstartscriptdlg.H
- *=========================================================================*/

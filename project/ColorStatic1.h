@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __COLORSTATIC1_H
 #define __COLORSTATIC1_H
 
@@ -17,18 +16,14 @@
  * Begin Class CColorStatic Definition
  *
  *=========================================================================*/
-
 class CColorStatic : public CStatic {
-
   public:
-
 	COLORREF m_Color;
 	int m_Red;
 	int m_Green;
 	int m_Blue;
 
 	/* Construction */
-
 	CColorStatic();
 	virtual ~CColorStatic();
 
@@ -55,7 +50,6 @@ class CColorStatic : public CStatic {
 	/* Generated message map functions */
 
   protected:
-
 	//{{AFX_MSG(CColorStatic)
 	afx_msg void OnPaint();
 	//}}AFX_MSG
@@ -63,17 +57,9 @@ class CColorStatic : public CStatic {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CColorStatic Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Colorstatic1.H
- *=========================================================================*/

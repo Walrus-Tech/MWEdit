@@ -7,20 +7,8 @@
  * Definition of the CChildFrameFix class.
  *
  *=========================================================================*/
-
 #ifndef __ChildFrmFixed_H
 #define __ChildFrmFixed_H
-
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -28,28 +16,11 @@
  * Class CChildFrameFix Definition
  *
  *=========================================================================*/
-
 class CChildFrameFix : public CMDIChildWnd {
-
 	DECLARE_DYNCREATE(CChildFrameFix)
 
-
-	/*---------- Begin Private Class Members ----------------------*/
-
-  private:
-
-
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class constructor/destructor */
-
 	CChildFrameFix();
 	virtual ~CChildFrameFix();
 
@@ -76,9 +47,7 @@ class CChildFrameFix : public CMDIChildWnd {
 
 
 	/*---------- Generated message map functions ------------------*/
-
   protected:
-
 	//{{AFX_MSG(CChildFrameFix)
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnClose();
@@ -87,16 +56,8 @@ class CChildFrameFix : public CMDIChildWnd {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CMWEditView Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 #endif
-
-/*===========================================================================
- *      End of File ChildFrm.H
- *=========================================================================*/

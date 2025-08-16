@@ -7,35 +7,17 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMSCRIPTERROR_H
 #define __ESMSCRIPTERROR_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "dl_err.h"
 #include "EsmScriptDefs.h"
 #include "string/sstring.h"
 #include "contain/ptrarray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Error/warning types */
-
 #define ESMSCR_ERROR_TOOMANYARGS     -1008
 #define ESMSCR_ERROR_BADFUNCARG      -1007
 #define ESMSCR_ERROR_MISC            -1006
@@ -57,13 +39,8 @@
 #define ESMSCR_WARNING_DIALOGFUNC     1011
 
 /* Message types */
-
 #define ESMSCR_MESSAGE_WARNING 0
 #define ESMSCR_MESSAGE_ERROR   1
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -74,14 +51,9 @@
  * encountered during compiling.
  *
  *=========================================================================*/
-
 class CEsmScriptError {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
-
-	CSString m_Message; /* Error message */
+	CSString m_Message;            /* Error message */
 
 	int m_Code;                    /* Error code */
 	int m_Type;                    /* Is this a warning or error */
@@ -96,15 +68,7 @@ class CEsmScriptError {
 	int m_FuncArgIndex;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmScriptError();
 
@@ -217,16 +181,7 @@ class CEsmScriptError {
 };
 
 /* Array of script error pointers */
-
 typedef TPtrArray<CEsmScriptError> CEsmScriptErrArray;
-
-/*===========================================================================
- *      End of Class CEsmScriptError Definition
- *=========================================================================*/
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmscripterror.H
- *=========================================================================*/

@@ -7,35 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMRACEDLG_H
 #define __ESMRACEDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmRecDialog.h"
 #include "Resource.h"
 #include "EsmListCtrl.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,21 +21,12 @@
  * Begin Class CEsmRaceDlg Definition
  *
  *=========================================================================*/
-
 class CEsmRaceDlg : public CEsmRecDialog {
-
 	DECLARE_DYNCREATE(CEsmRaceDlg);
 
-	/*---------- Begin Protected Class Members ------------------------*/
-
   protected:
-
 	CEsmRace *m_pRace;
 
-
-	/*---------- Begin Protected Class Methods ------------------------*/
-
-  protected:
 
 	/* Update item data */
 	virtual int OnUpdateItem(esmrecinfo_t *pRecInfo);
@@ -66,10 +35,7 @@ class CEsmRaceDlg : public CEsmRecDialog {
 	void UpdateAttribTotals();
 
 
-	/*---------- Begin Public Class Methods ---------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmRaceDlg();
 
@@ -141,13 +107,11 @@ class CEsmRaceDlg : public CEsmRecDialog {
 	//{{AFX_VIRTUAL(CEsmRaceDlg)
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmRaceDlg)
@@ -166,17 +130,9 @@ class CEsmRaceDlg : public CEsmRecDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmRaceDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmracedlg.H
- *=========================================================================*/

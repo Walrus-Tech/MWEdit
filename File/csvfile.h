@@ -11,25 +11,11 @@
 #define __CSVFILE_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "file/genfile.h"
 #include "contain/temarray.h"
 #include "contain/ptrarray.h"
 #include "string/sstring.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* CSV file characters */
 #define CSVFILE_COLCHAR   ','
@@ -37,26 +23,12 @@
 #define CSVFILE_ROWCHAR2  '\n'
 #define CSVFILE_QUOTECHAR '"'
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Array of string objects */
 typedef TTemplateArray<CSString> CCsvRow;
 
 /* Array of CSV row points */
 typedef TPtrArray<CCsvRow> CCsvRowArray;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -67,8 +39,6 @@ typedef TPtrArray<CCsvRow> CCsvRowArray;
  *
  *=========================================================================*/
 class CCsvFile {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CCsvRowArray m_Rows; /* CSV file rows */
 	CSString m_Filename; /* The last known filename */
@@ -76,13 +46,7 @@ class CCsvFile {
 	bool m_KeepQuotes;   /* Keep or parse quote files */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CCsvFile();
 	virtual ~CCsvFile() {
@@ -143,12 +107,5 @@ class CCsvFile {
 	}
 };
 
-/*===========================================================================
- *      End of Class CCsvFile Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File CsvFile.H
- *=========================================================================*/

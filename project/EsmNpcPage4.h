@@ -7,35 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMNPCPAGE4_H
 #define __ESMNPCPAGE4_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmListCtrl.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 class CEsmDlgHandler;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -43,22 +22,14 @@ class CEsmDlgHandler;
  * Begin Class CEsmNpcPage4 Definition
  *
  *=========================================================================*/
-
 class CEsmNpcPage4 : public CPropertyPage {
-
 	DECLARE_DYNCREATE(CEsmNpcPage4);
 
-	/*---------- Begin Protected Class Members  --------------------*/
-
   protected:
-
 	esmrecinfo_t *m_pRecInfo;
 	CEsmDlgHandler *m_pDlgHandler;
 	CEsmSubRecArray m_PackageArray; /* Holds all the packages being editted */
 
-	/*---------- Begin Protected Class Methods ---------------------*/
-
-  protected:
 
 	/* Creates a copy of all the given AI subrecords */
 	void AddAIRecords(const TCHAR *pType);
@@ -79,10 +50,7 @@ class CEsmNpcPage4 : public CPropertyPage {
 	void UpdatePackageList();
 
 
-	/*---------- Begin Public Class Methods ------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmNpcPage4();
 	~CEsmNpcPage4();
@@ -124,13 +92,11 @@ class CEsmNpcPage4 : public CPropertyPage {
 	//{{AFX_VIRTUAL(CEsmNpcPage4)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmNpcPage4)
@@ -153,17 +119,9 @@ class CEsmNpcPage4 : public CPropertyPage {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmNpcPage4 Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmnpcpage4.H
- *=========================================================================*/

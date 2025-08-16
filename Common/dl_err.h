@@ -12,22 +12,8 @@
 #define __DL_ERR_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_mem.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Defines
- *
- *=========================================================================*/
 
 /* Maximum size of a message string for the error message strings */
 #define MAX_ERROR_MESSAGESIZE   1024
@@ -38,10 +24,6 @@
 /* Maximum number of errors to output to a notify list */
 #define MAX_ERROR_NOTIFYLIST    10
 #define ERROR_NOTIFYLIST_BUFFER 1024
-
-/*===========================================================================
- *      End of  Defines
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -62,16 +44,7 @@
 #define ERR_TCGRAPH       ((errcode_t) 10) /* Only in TC-DOS */
 #define ERR_WINDOWS       ((errcode_t) 11) /* Only under windows */
 #define ERR_CUSTOM        ((errcode_t) 12)
-/*===========================================================================
- *      End of Custom Error Code Defines
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Type and Structure Definitions
- *
- *=========================================================================*/
 
 /* Define type for error codes */
 typedef long errcode_t;
@@ -92,10 +65,6 @@ typedef int (*PERR_NOTIFY_FUNCTION) (const TCHAR *pTitle, const TCHAR *pMsg);
 /* Error hook callback function type */
 typedef void (*PERROR_HOOKPROC) (void *pData, const TCHAR *pString, va_list Args);
 
-/*===========================================================================
- *      End of Type and Structure Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -109,9 +78,6 @@ typedef void (*PERROR_HOOKPROC) (void *pData, const TCHAR *pString, va_list Args
  *=========================================================================*/
 typedef const TCHAR *(ERR_CUSTOM_FUNCTION) (const errcode_t Code);
 typedef const TCHAR *(*PERR_CUSTOM_FUNCTION) (const errcode_t Code);
-/*===========================================================================
- *      End of Custom Error Function Definition
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -123,8 +89,6 @@ typedef const TCHAR *(*PERR_CUSTOM_FUNCTION) (const errcode_t Code);
  *
  *=========================================================================*/
 class CErrorRecord {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	errcode_t Code;   /* The custom code for this error */
 	TCHAR *pMessage;  /* the custom message string for the error */
@@ -138,13 +102,7 @@ class CErrorRecord {
 	CErrorRecord *pNext;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CErrorRecord();
 	virtual ~CErrorRecord() {
@@ -199,10 +157,6 @@ class CErrorRecord {
 	}
 };
 
-/*===========================================================================
- *      End of Class CErrorRecord Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -214,21 +168,13 @@ class CErrorRecord {
  *
  *=========================================================================*/
 class CErrorDatabase {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CErrorRecord *pHead;        /* Start of the singly linked list */
 	boolean AddedDefaultErrors; /* Have the default custom errors been loaded? */
 	int NumErrors;              /* Number of custom errors in list */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CErrorDatabase();
 	virtual ~CErrorDatabase() {
@@ -260,10 +206,6 @@ class CErrorDatabase {
 	void InitDefaultErrors();
 };
 
-/*===========================================================================
- *      End of Class CErrorDatabase Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -274,8 +216,6 @@ class CErrorDatabase {
  *
  *=========================================================================*/
 class CErrorIncident {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	errcode_t Code;        /* The custom error code */
 	errcode_t SubCode;
@@ -283,13 +223,7 @@ class CErrorIncident {
 	CErrorIncident *pNext; /* Pointer to the next record in linked list */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CErrorIncident();
 	virtual ~CErrorIncident() {
@@ -335,10 +269,6 @@ class CErrorIncident {
 	void SetMsg(const TCHAR *pString, va_list Args);
 };
 
-/*===========================================================================
- *      End of Class CErrorIncident Definition
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -348,8 +278,6 @@ class CErrorIncident {
  *
  *=========================================================================*/
 class CErrorHandler {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CErrorIncident *pIncidentHead;    /* The current errors recorded */
 	int NumErrors;
@@ -363,16 +291,12 @@ class CErrorHandler {
 	int m_LastErrorCount;             /* Used to keep track of errors since last reset */
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Outputs the most recent error to the SystemLog */
 	void OutputLastErrorToLog();
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CErrorHandler(CErrorDatabase &ErrDB);
 	virtual ~CErrorHandler() {
@@ -443,28 +367,10 @@ class CErrorHandler {
 	}
 };
 
-/*===========================================================================
- *      End of Class CErrorHandler Definition
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Global Variable Definitions
- *
- *=========================================================================*/
 extern CErrorHandler ErrorHandler;
 extern CErrorDatabase ErrorDatabase;
-/*===========================================================================
- *      End of Global Variable Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Returns the system error message associated with the error code */
 const TCHAR *SystemErrorFunction(const errcode_t Code);
@@ -473,10 +379,6 @@ const TCHAR *TCGraphErrorFunction(const errcode_t Code);
 #if defined(_WIN32) || defined(__BCPLUSPLUS__)
 	const TCHAR *WindowsErrorFunction(const errcode_t Code);
 #endif
-
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -505,12 +407,5 @@ void Test_HandlerNotify();
 void Test_DLErr();
 const TCHAR *Test_CustomErrFunc(const errcode_t Code);
 
-/*===========================================================================
- *      End of Test Routine Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File DL_Err.H
- *=========================================================================*/

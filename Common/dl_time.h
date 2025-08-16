@@ -12,47 +12,21 @@
 #define __DL_TIME_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_err.h"
 #include <time.h>
 
 #if defined(_WIN32)
 	#include "windows.h"
 #endif
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Types of counters used */
 #define HICLOCK_PERFORMANCE 1
 #define HICLOCK_CLOCK       0
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Type for recording high-resolution counters */
 typedef struct hiclock_t {
-
-	/*-------------- Structure Data Members ----------------------*/
 	union {
 		clock_t ClockCount;       /* For the standard clock() counter */
 
@@ -63,8 +37,6 @@ typedef struct hiclock_t {
 
 	int CountType;                /* Stores what type of counter is used */
 
-
-	/*-------------- Structure Overloaded Operators -------------*/
 
 	/* Overloaded copy operator */
 	hiclock_t &operator =(const hiclock_t &Value);
@@ -89,16 +61,6 @@ typedef struct hiclock_t {
 	friend hiclock_t operator -(const hiclock_t &Value1);
 } hiclock_t;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Inline Functions
- *
- *=========================================================================*/
 
 /* High-resolution counter copy operator */
 inline hiclock_t &hiclock_t::operator =(const hiclock_t &Value) {
@@ -304,16 +266,6 @@ inline hiclock_t::operator double() const {
 	}
 }
 
-/*===========================================================================
- *      End of Inline Functions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 
 /* Retrieves the systems high-resolution counter */
 void GetHiClock(hiclock_t &Counter);
@@ -322,12 +274,5 @@ double GetHiClockTime();
 /* Get the frequency of the system's high-resolution counter */
 double GetHiClockFreq();
 
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Dl_time.H
- *=========================================================================*/

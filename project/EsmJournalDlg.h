@@ -7,49 +7,15 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMJOURNALDLG_H
 #define __ESMJOURNALDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
 #include "EsmInfo.h"
 #include "contain/ptrarray.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/* Class forward definition */
 
 class CMWEditDoc;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -57,23 +23,15 @@ class CMWEditDoc;
  * Begin Class CEsmJournalDlg Definition
  *
  *=========================================================================*/
-
 class CEsmJournalDlg : public CDialog {
-
-	/*---------- Begin Protected Class Methods ----------------------*/
-
   protected:
-
 	CEsmInfo *m_pInfo; /* The info object we are editting */
 	bool m_IsNew;
 	bool m_AlreadyIsNew;
 	CMWEditDoc *m_pDocument;
 
 
-	/*---------- Begin Public Class Methods ------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmJournalDlg(CWnd *pParent = NULL);
 
@@ -118,12 +76,10 @@ class CEsmJournalDlg : public CDialog {
 	//{{AFX_VIRTUAL(CEsmJournalDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmJournalDlg)
@@ -138,17 +94,9 @@ class CEsmJournalDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmJournalDlg Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmjournaldlg.H
- *=========================================================================*/

@@ -11,29 +11,11 @@
 #define __FILEBUFFER_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "dl_err.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Default input buffer size in bytes */
 #define FILEBUF_DEFAULT_BUFFER_SIZE 1024
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -44,8 +26,6 @@
  *
  *=========================================================================*/
 class CFileBuffer {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	FILE *m_pFile;   /* File handle */
 	bool m_Attached; /* Does handle belong to us? */
@@ -57,9 +37,7 @@ class CFileBuffer {
 	int m_FileIndex;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Ensure the given amount of data is available */
 	bool GetData_Priv(const int Size);
 	bool GetData(const int Size) {
@@ -67,9 +45,7 @@ class CFileBuffer {
 	}
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CFileBuffer();
 	virtual ~CFileBuffer();
@@ -117,14 +93,5 @@ class CFileBuffer {
 	void SetBufferSize(const int Size);
 };
 
-/*===========================================================================
- *      End of Class CFileBuffer Definition
- *=========================================================================*/
-
-
-
 
 #endif
-/*===========================================================================
- *      End of File Filebuffer.H
- *=========================================================================*/

@@ -11,33 +11,15 @@
 #define __ESMGLOBAL_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubFloat.h"
 #include "EsmSubByte.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Global types */
 #define MWESM_GLOBAL_SHORT    ('s')
 #define MWESM_GLOBAL_LONG     ('l')
 #define MWESM_GLOBAL_FLOAT    ('f')
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -50,19 +32,12 @@
 class CEsmGlobal : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubByte *m_pTypeData;
 	CEsmSubFloat *m_pFloatData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmGlobal();
 	//virtual ~CEsmGlobal() { Destroy(); }
@@ -117,12 +92,5 @@ class CEsmGlobal : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmGlobal Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

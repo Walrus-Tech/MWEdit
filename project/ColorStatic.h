@@ -6,32 +6,18 @@
 	#pragma once
 #endif // _MSC_VER > 1000
 
-// ColorStatic.h : header file
-
 
 /////////////////////////////////////////////////////////////////////////////
 // CColorStatic window
-
-
 class CColorStatic : public CStatic {
 
 // Construction
-
   public:
-
 	CColorStatic();
 
 
-// Attributes
-
-  public:
-
-
 // Operations
-
   public:
-
-
 // Overrides
 
 	// ClassWizard generated virtual function overrides
@@ -41,14 +27,11 @@ class CColorStatic : public CStatic {
 
 
 // Implementation
-
   public:
-
 	virtual ~CColorStatic();
 
 
 	// Generated message map functions
-
   protected:
 
 	//{{AFX_MSG(CColorStatic)

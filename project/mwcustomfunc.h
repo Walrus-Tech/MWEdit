@@ -7,25 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __MWCUSTOMFUNC_H
 #define __MWCUSTOMFUNC_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "file/genfile.h"
 #include "string/sstring.h"
 #include "contain/dl_map.h"
 #include "Esmscriptdefs.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -35,30 +24,19 @@
  * Description
  *
  *=========================================================================*/
-
 class CMwCustomFunction {
-
-	/*---------- Begin Private Class Members ----------------------*/
-
   private:
-
 	esmscrfuncinfo_t m_Data; /* Function data */
 	dword m_LineCount;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-
   protected:
-
 	bool ParseFuncOptions(dword &Options, const char *pValue);
 	bool ParseFuncArgOptions(dword &Options, const char *pValue);
 	bool ParseReturnOptions(dword &Options, const char *pValue);
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
-
   public:
-
 	/* Class Constructors/Destructors */
 	CMwCustomFunction();
 	//virtual ~CMwCustomFunction() { Destroy(); }
@@ -103,55 +81,17 @@ class CMwCustomFunction {
 	}
 };
 
-/*===========================================================================
- *      End of Class CMwCustomFunction Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* Map of custom functions */
 typedef TGenMap<CSString, CMwCustomFunction *, const char *> CMwCustomFunctions;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Functions
- *
- *=========================================================================*/
 
 /* Input functions from a file */
 bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename);
 
-/*===========================================================================
- *      End of Functions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin External Definitions
- *
- *=========================================================================*/
 
 /* Global custom function map */
 extern CMwCustomFunctions g_CustomFunctions;
 
-/*===========================================================================
- *      End of External Definitions
- *=========================================================================*/
-
 
 #endif
-
-/*===========================================================================
- *      End of File Mwcustomfunc.H
- *=========================================================================*/

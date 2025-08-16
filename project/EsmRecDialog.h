@@ -7,16 +7,9 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __ESMRECDIALOG_H
 #define __ESMRECDIALOG_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #include "EsmFile.h"
 #include "EsmUtils.h"
@@ -24,41 +17,14 @@
 #include "MWEditDoc.h"
 #include "EsmIconFrame.h"
 
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Custom messaages */
-
 #define ESMDLG_MSG_ONINFOEDIT 0x8301
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
-
-/* Forward class definition */
 
 class CEsmDlgHandler;
 class CMWEditDoc;
 class CMWEditApp;
-
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -66,15 +32,10 @@ class CMWEditApp;
  * Begin Class CEsmRecDialog Definition
  *
  *=========================================================================*/
-
 class CEsmRecDialog : public CFormView {
-
 	DECLARE_DYNCREATE(CEsmRecDialog);
 
-	/*---------- Begin Protected Class Members -----------------------*/
-
   protected:
-
 	esmreceditinfo_t m_RecEditInfo; /* Information about the record being editted */
 	CEsmDlgHandler *m_pParent;
 	int m_DialogID;
@@ -88,10 +49,6 @@ class CEsmRecDialog : public CFormView {
 	CComboBox m_ScriptList;
 	CEsmIconFrame m_IconPicture;
 
-
-	/*---------- Begin Protected Class Methods -----------------------*/
-
-  protected:
 
 	/* Checks the ID text of the dialog to see if it has changed */
 	virtual void CheckIDText();
@@ -110,10 +67,7 @@ class CEsmRecDialog : public CFormView {
 	}
 
 
-	/*---------- Begin Public Class Methods --------------------------*/
-
   public:
-
 	/* Construction */
 	CEsmRecDialog(const int IDD = 0);
 	virtual ~CEsmRecDialog();
@@ -182,11 +136,9 @@ class CEsmRecDialog : public CFormView {
 	//{{AFX_VIRTUAL(CEsmRecDialog)
 
   public:
-
 	virtual BOOL PreTranslateMessage(MSG *pMsg);
 
   protected:
-
 	virtual void OnInitialUpdate();
 	virtual void DoDataExchange(CDataExchange *pDX);
 	virtual void OnUpdate(CView *pSender, LPARAM lHint, CObject *pHint);
@@ -194,7 +146,6 @@ class CEsmRecDialog : public CFormView {
 	//}}AFX_VIRTUAL
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(CEsmRecDialog)
@@ -212,17 +163,9 @@ class CEsmRecDialog : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CEsmRecDialog Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Esmrecdialog.H
- *=========================================================================*/

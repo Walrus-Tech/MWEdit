@@ -11,25 +11,11 @@
 #define __ESMSOUNDGEN_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubNameFix.h"
 #include "EsmSubLong.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* SoundGen types */
 #define MWESM_SNDGEN_MIN          0
@@ -43,21 +29,9 @@
 #define MWESM_SNDGEN_LAND         7
 #define MWESM_SNDGEN_MAX          7
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMSoundGenType(const int Type);
 int GetESMSoundGenType(const TCHAR *pString);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -70,20 +44,13 @@ int GetESMSoundGenType(const TCHAR *pString);
 class CEsmSoundGen : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubLong *m_pTypeData;
 	CEsmSubNameFix *m_pSoundName;
 	CEsmSubNameFix *m_pCreatureName;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSoundGen();
 	//virtual ~CEsmSoundGen() { Destroy(); }
@@ -144,12 +111,5 @@ class CEsmSoundGen : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmSoundGen Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmBodyPart.H
- *=========================================================================*/

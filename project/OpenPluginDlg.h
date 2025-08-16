@@ -7,36 +7,16 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __OPENPLUGINDLG_H
 #define __OPENPLUGINDLG_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
-
 /* Subitem/column indices */
-
 #define OPENPLUG_SUBITEM_FILENAME 0
 #define OPENPLUG_SUBITEM_TYPE     1
 #define OPENPLUG_SUBITEM_DATE     2
 
 /* Item data values */
-
 #define OPENPLUG_FLAG_SAVEGAME    1
 #define OPENPLUG_FLAG_MASTER      2
 #define OPENPLUG_FLAG_ACTIVE      4
@@ -47,7 +27,6 @@
 #endif
 
 /* Holds information on the files to be loaded */
-
 struct esmfileinfo_t {
 	TCHAR Filename[_MAX_PATH + 4];
 	long Flags;
@@ -56,23 +35,14 @@ struct esmfileinfo_t {
 
 typedef TPtrArray<esmfileinfo_t> CEsmFileInfoArray;
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class COpenPluginDlg
  *
  *=========================================================================*/
-
 class COpenPluginDlg : public CDialog {
-
-	/*---------- Begin Public Class Members -------------------------*/
-
   protected:
-
 	CStringList m_Plugins;
 	CStringList m_Masters;
 	CString m_ActivePlugin;
@@ -85,10 +55,6 @@ class COpenPluginDlg : public CDialog {
 	int m_LastSortSubItem;
 
 
-	/*---------- Begin Protected Class Methods ----------------------*/
-
-  protected:
-
 	/* Delete all files currently in the file array */
 	void ClearFileArray();
 
@@ -96,10 +62,7 @@ class COpenPluginDlg : public CDialog {
 	void CreateFileList();
 
 
-	/*---------- Begin Public Class Methods --------------------------*/
-
   public:
-
 	/* Construction */
 	COpenPluginDlg(CWnd *pParent = NULL);
 	~COpenPluginDlg();
@@ -136,14 +99,12 @@ class COpenPluginDlg : public CDialog {
 	//{{AFX_VIRTUAL(COpenPluginDlg)
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
 
   protected:
-
 	/* Generated message map functions */
 
 	//{{AFX_MSG(COpenPluginDlg)
@@ -157,17 +118,9 @@ class COpenPluginDlg : public CDialog {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class COpenPluginDlg
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Openplugindlg.H
- *=========================================================================*/

@@ -11,30 +11,13 @@
 #define __ESMSPELL_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmRecord.h"
 #include "EsmSubName.h"
 #include "EsmSubSPDT.h"
 #include "EsmSubENAM.h"
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 const TCHAR *GetESMSpellType(const int Type);
 int GetESMSpellType(const TCHAR *pString);
-/*===========================================================================
- *      End of Function Prototypes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -47,19 +30,12 @@ int GetESMSpellType(const TCHAR *pString);
 class CEsmSpell : public CEsmRecord {
 	DECLARE_SUBRECCREATE();
 
-	/*---------- Begin Protected Class Members --------------------*/
   protected:
 	CEsmSubNameFix *m_pName; /* Reference to sub-records */
 	CEsmSubSPDT *m_pSpellData;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmSpell();
 	//virtual ~CEsmSpell() { Destroy(); }
@@ -182,12 +158,5 @@ class CEsmSpell : public CEsmRecord {
 	virtual bool SetFieldValue(const int FieldID, const TCHAR *pString);
 };
 
-/*===========================================================================
- *      End of Class CEsmSpell Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File EsmSpell.H
- *=========================================================================*/

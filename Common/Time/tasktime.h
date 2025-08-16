@@ -12,22 +12,8 @@
 #define __TASKTIME_H
 
 
-/*===========================================================================
- *
- * Begin Required Include Files
- *
- *=========================================================================*/
 #include "dl_err.h"
-/*===========================================================================
- *      End of Required Include Files
- *=========================================================================*/
 
-
-/*===========================================================================
- *
- * Begin Definitions
- *
- *=========================================================================*/
 
 /* Number of different tasks we can handle */
 #define MAX_TIMER_TASKS 20
@@ -38,16 +24,6 @@
 /* The timer interrupt under DOS */
 #define DOS_TIMER_INT 0x1C
 
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Type Definitions
- *
- *=========================================================================*/
 
 /* DOS timer interrupt function type */
 SYS_MSDOS(typedef void interrupt (*PDOS_TIMER_INT)(...));
@@ -68,10 +44,6 @@ typedef struct {
 	long UserData;     /* User data to pass to function */
 } task_t;
 
-/*===========================================================================
- *      End of Type Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -82,8 +54,6 @@ typedef struct {
  *
  *=========================================================================*/
 class CTaskTimer {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	task_t m_Tasks[MAX_TIMER_TASKS]; /* Array of task information */
 	int m_NumTasks;
@@ -95,22 +65,12 @@ class CTaskTimer {
 	SYS_WIN32(uint m_TimerID;)       /* The timer ID in Win32 */
 
 
-	/* To store the previous timer in DOS */
-  public:
-	SYS_MSDOS(PDOS_TIMER_INT m_PrevTimerFunc;)
-
-
-
-	/*---------- Begin Protected Class Methods --------------------*/
   protected:
-
 	/* Find a task array index with the given handle */
 	int GetTaskIndex(const HTIMERTASK hTask) const;
 
 
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CTaskTimer();
 	virtual ~CTaskTimer() {
@@ -150,18 +110,11 @@ class CTaskTimer {
 	virtual void SetTaskRate(const HTIMERTASK hTask, const ulong Rate);
 	virtual void SetTaskFunc(const HTIMERTASK hTask, const PTASK_FUNC pFunc);
 	virtual void SetUserData(const HTIMERTASK hTask, const long UserData);
+
+	/* To store the previous timer in DOS */
+	SYS_MSDOS(PDOS_TIMER_INT m_PrevTimerFunc;)
 };
 
-/*===========================================================================
- *      End of Class CTaskTimer Definition
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Inline CTaskTimer Methods
- *
- *=========================================================================*/
 
 /* Get class members */
 inline int CTaskTimer::GetNumTasks() const {
@@ -185,26 +138,9 @@ inline void CTaskTimer::SetActive(const boolean Flag) {
 	m_Active = Flag;
 }
 
-/*===========================================================================
- *      End of Inline CTaskTimer Methods
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin External Variable Definitions
- *
- *=========================================================================*/
 
 /* The one and only task handler */
 extern CTaskTimer TaskTimer;
 
-/*===========================================================================
- *      End of External Variable Definitions
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of File Tasktime.H
- *=========================================================================*/

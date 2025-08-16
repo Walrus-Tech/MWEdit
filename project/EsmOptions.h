@@ -12,33 +12,15 @@
 #define __ESMOPTIONS_H
 
 
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 #include "EsmDefs.h"
 #include "EsmOptionsDef.h"
 #include "EsmScriptOptions.h"
 #include "EsmRegDefs.h"
 #include "dl_str.h"
-/*===========================================================================
- *        End of Required Includes
- *=========================================================================*/
 
-
-/*===========================================================================
-*
-* Begin Definitions
-*
-*=========================================================================*/
 
 #define MWEDIT_DEFAULT_EXTRAFILE    _T("mweditextrafile.esp")
 #define MWEDIT_DEFAULT_SCRIPTINDENT _T("\t")
-
-/*===========================================================================
- *      End of Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -49,8 +31,6 @@
  *
  *=========================================================================*/
 class CEsmOptions {
-
-	/*---------- Begin Private Class Members ----------------------*/
   private:
 	CEsmScriptOptions m_BlueScriptOptions; /* Standard/user script settings */
 	CEsmScriptOptions m_WhiteScriptOptions;
@@ -84,13 +64,7 @@ class CEsmOptions {
 	bool m_AllowTribunal;
 
 
-	/*---------- Begin Protected Class Methods --------------------*/
-  protected:
-
-
-	/*---------- Begin Public Class Methods -----------------------*/
   public:
-
 	/* Class Constructors/Destructors */
 	CEsmOptions();
 	virtual ~CEsmOptions() {
@@ -261,12 +235,5 @@ class CEsmOptions {
 	bool WriteToRegistry();
 };
 
-/*===========================================================================
- *      End of Class CEsmOptions Definition
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *     End of File Esmoptions.H
- *=========================================================================*/

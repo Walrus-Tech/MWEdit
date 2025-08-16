@@ -7,25 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
 #ifndef __SCRIPTERRORVIEW_H
 #define __SCRIPTERRORVIEW_H
 
-
-/*===========================================================================
- *
- * Begin Required Includes
- *
- *=========================================================================*/
 
 #ifndef __AFXEXT_H__
 	#include <afxext.h>
 #endif
 #include "EsmScriptError.h"
-
-/*===========================================================================
- *      End of Required Includes
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -33,13 +22,8 @@
  * Begin Class CScriptErrorView Definition
  *
  *=========================================================================*/
-
 class CScriptErrorView : public CFormView {
-
-	/*---------- Begin Protected Class Methods -----------------------*/
-
   protected:
-
 	CScriptErrorView();
 	DECLARE_DYNCREATE(CScriptErrorView);
 
@@ -47,10 +31,7 @@ class CScriptErrorView : public CFormView {
 	virtual ~CScriptErrorView();
 
 
-	/*---------- Begin Public Class Methods --------------------------*/
-
   public:
-
 	//{{AFX_DATA(CScriptErrorView)
 	enum {
 		IDD = IDD_SCRIPTERRORVIEW
@@ -71,17 +52,14 @@ class CScriptErrorView : public CFormView {
 	//{{AFX_VIRTUAL(CScriptErrorView)
 
   public:
-
 	virtual void OnInitialUpdate();
 
   protected:
-
 	virtual void DoDataExchange(CDataExchange *pDX);
 
 	//}}AFX_VIRTUAL
 
   protected:
-
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext &dc) const;
@@ -106,17 +84,9 @@ class CScriptErrorView : public CFormView {
 	DECLARE_MESSAGE_MAP();
 };
 
-/*===========================================================================
- *      End of Class CScriptErrorView Definition
- *=========================================================================*/
-
 
 //{{AFX_INSERT_LOCATION}}
 //}}AFX_INSERT_LOCATION
 
 
 #endif
-
-/*===========================================================================
- *      End of File Scripterrorview.H
- *=========================================================================*/
