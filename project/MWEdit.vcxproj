@@ -988,7 +988,7 @@
     <ClInclude Include="..\Common\dl_time.h" />
     <ClInclude Include="..\Common\File\genfile.h" />
     <ClInclude Include="..\Common\File\genfind.h" />
-    <ClInclude Include="..\Common\String\sstring.h" />
+    <ClInclude Include="..\Common\String\SString.h" />
     <ClInclude Include="..\Common\Utility\namelist.h" />
     <ClInclude Include="..\esm\EsmActivator.h" />
     <ClInclude Include="..\esm\EsmAlchemy.h" />
@@ -1045,7 +1045,7 @@
     <ClInclude Include="..\esm\EsmSubALDT.h" />
     <ClInclude Include="..\esm\EsmSubAMBI.h" />
     <ClInclude Include="..\esm\EsmSubAODT.h" />
-    <ClInclude Include="..\esm\ESMSubBase.h" />
+    <ClInclude Include="..\esm\EsmSubBase.h" />
     <ClInclude Include="..\esm\EsmSubBKDT.h" />
     <ClInclude Include="..\esm\EsmSubBYDT.h" />
     <ClInclude Include="..\esm\EsmSubByte.h" />
@@ -1095,7 +1095,7 @@
     <ClInclude Include="..\mwcommon.h" />
     <ClInclude Include="..\Windows\dl_ToolTip.h" />
     <ClInclude Include="..\Windows\TabCtrlSheet.h" />
-    <ClInclude Include="..\Windows\winutil.h" />
+    <ClInclude Include="..\Windows\WinUtil.h" />
     <ClInclude Include="ActivatorDlg.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ChildFrmFix.h" />

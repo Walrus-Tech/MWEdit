@@ -1012,7 +1012,7 @@
     <ClInclude Include="..\Common\Contain\ptrarray.h">
       <Filter>Header Files\Common.</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\String\sstring.h">
+    <ClInclude Include="..\Common\String\SString.h">
       <Filter>Header Files\Common.</Filter>
     </ClInclude>
     <ClInclude Include="..\Windows\TabCtrlSheet.h">
@@ -1021,7 +1021,7 @@
     <ClInclude Include="..\Common\Contain\temarray.h">
       <Filter>Header Files\Common.</Filter>
     </ClInclude>
-    <ClInclude Include="..\Windows\winutil.h">
+    <ClInclude Include="..\Windows\WinUtil.h">
       <Filter>Header Files\Common.</Filter>
     </ClInclude>
     <ClInclude Include="EsmCsvDefs.h">
@@ -1216,7 +1216,7 @@
     <ClInclude Include="..\esm\EsmSubAODT.h">
       <Filter>Header Files\ESM.\SubRecords.</Filter>
     </ClInclude>
-    <ClInclude Include="..\esm\ESMSubBase.h">
+    <ClInclude Include="..\esm\EsmSubBase.h">
       <Filter>Header Files\ESM.\SubRecords.</Filter>
     </ClInclude>
     <ClInclude Include="..\esm\EsmSubBKDT.h">
