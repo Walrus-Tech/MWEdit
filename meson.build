@@ -1,6 +1,6 @@
 project('MWEdit',
         'cpp',
-        version : '0.1',
+        version : '0.6.3',
         default_options : ['warning_level=3',
                            'cpp_std=c++20'])
 
@@ -223,12 +223,12 @@ executable('MWEdit',
            win_subsystem : 'windows',
            install : true,
            install_dir : 'MWEdit')
-install_data(['project/customfunctions.dat',
-              'IL/DevIL.dll',
-              'project/Functions.dat',
+install_data(['IL/DevIL.dll',
               'IL/ilu.dll',
               'IL/ilu-l.dll',
               'IL/ILUT.dll',
+              'project/customfunctions.dat',
+              'project/Functions.dat',
               'project/mweditextrafile.esp',
-              'MwEditScriptTest.esp'],
+              'project/MwEditScriptTest.esp'],
               install_dir : 'MWEdit')
