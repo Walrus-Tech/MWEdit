@@ -6,7 +6,6 @@ project('MWEdit',
 
 common_src = ['Common/Contain/GenStack.cpp',
               'Common/Contain/listfile.cpp',
-              'Common/Contain/ObjArray.cpp',
               'Common/Contain/PtrArray.cpp',
               'Common/Contain/temarray.cpp',
               'Common/File/CfgFile.cpp',
