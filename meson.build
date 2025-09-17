@@ -38,8 +38,7 @@ file_src = ['File/XML/XMLFile.cpp',
             'File/file3ds.cpp',
             'File/pcx.cpp']
 
-windows_src = ['Windows/ColorStatic.cpp',
-               'Windows/TabCtrlSheet.cpp',
+windows_src = ['Windows/TabCtrlSheet.cpp',
                'Windows/WinUtil.cpp',
                'Windows/dl_ToolTip.cpp']
 
@@ -102,7 +101,6 @@ project_src = ['project/ActivatorDlg.cpp',
                'project/ChildFrmFix.cpp',
                'project/ChildFrmScript.cpp',
                'project/ChildFrmVar.cpp',
-               'project/ColorStatic.cpp',
                'project/ColorStatic1.cpp',
                'project/CreaturePage1.cpp',
                'project/CreaturePage2.cpp',
