@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmNpcPage2.h"
@@ -17,12 +14,6 @@
 #include "MWEditDoc.h"
 #include "EsmDlgArray.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -33,17 +24,12 @@
 IMPLEMENT_DYNCREATE(CEsmNpcPage2, CPropertyPage);
 DEFINE_FILE("EsmNpcPage2.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Spell List Column Data
  *
  *=========================================================================*/
-
 static esmcoldata_t l_SpellColData[] = {
 	{
 		_T("ID"),
@@ -117,17 +103,12 @@ static esmcoldata_t l_SpellColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Spell List Column Data
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmNpcPage2 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmNpcPage2, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmNpcPage2)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
@@ -135,17 +116,12 @@ BEGIN_MESSAGE_MAP(CEsmNpcPage2, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmNpcPage2 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Constructor
  *
  *=========================================================================*/
-
 CEsmNpcPage2::CEsmNpcPage2() : CPropertyPage(CEsmNpcPage2::IDD) {
 	//{{AFX_DATA_INIT(CEsmNpcPage2)
 	//}}AFX_DATA_INIT
@@ -153,23 +129,14 @@ CEsmNpcPage2::CEsmNpcPage2() : CPropertyPage(CEsmNpcPage2::IDD) {
 	m_pDlgHandler = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmNpcPage2 Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Destructor
  *
  *=========================================================================*/
-
 CEsmNpcPage2::~CEsmNpcPage2() {
 }
-
-/*===========================================================================
- *      End of Class CEsmNpcPage2 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -177,17 +144,13 @@ CEsmNpcPage2::~CEsmNpcPage2() {
  * Class CEsmNpcPage2 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmNpcPage2::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmNpcPage2)
 	DDX_Control(pDX, IDC_ITEMLIST, m_SpellList);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcPage2::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -195,7 +158,6 @@ void CEsmNpcPage2::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmNpcPage2 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage2::GetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubNPCS *pSpellName;
@@ -220,26 +182,17 @@ void CEsmNpcPage2::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage2::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmNpcPage2::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage2::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcPage2::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -247,7 +200,6 @@ CMWEditDoc *CEsmNpcPage2::GetDocument() {
  * Class CEsmNpcPage2 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmNpcPage2::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 
@@ -262,17 +214,12 @@ BOOL CEsmNpcPage2::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage2::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmNpcPage2::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
@@ -302,17 +249,12 @@ LRESULT CEsmNpcPage2::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage2::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmNpcPage2::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	int ListIndex;
 
@@ -332,17 +274,12 @@ LRESULT CEsmNpcPage2::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage2::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmNpcPage2::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
@@ -352,17 +289,12 @@ int CEsmNpcPage2::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage2::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage2 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage2::SetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubNPCS *pSpellName;
@@ -387,7 +319,3 @@ void CEsmNpcPage2::SetControlData() {
 		pSpellName = (CEsmSubNPCS *)pNpc->FindNext(MWESM_SUBREC_NPCS, ArrayIndex);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcPage2::SetControlData()
- *=========================================================================*/

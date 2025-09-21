@@ -7,20 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmScrTempPage1.h"
 #include "EsmScrTempView.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmScrTempPage1, CPropertyPage)
 DEFINE_FILE("EsmScrTempPage1.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmScrTempPage1 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmScrTempPage1, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmScrTempPage1)
 	ON_BN_CLICKED(IDC_LOADSCRTEMP, OnLoadscrtemp)
@@ -55,26 +41,17 @@ BEGIN_MESSAGE_MAP(CEsmScrTempPage1, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of Class CEsmScrTempPage1 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempPage1 Constructor
  *
  *=========================================================================*/
-
 CEsmScrTempPage1::CEsmScrTempPage1() : CPropertyPage(CEsmScrTempPage1::IDD) {
 	//{{AFX_DATA_INIT(CEsmScrTempPage1)
 	//}}AFX_DATA_INIT
 	m_pParentView = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmScrTempPage1 Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -82,13 +59,8 @@ CEsmScrTempPage1::CEsmScrTempPage1() : CPropertyPage(CEsmScrTempPage1::IDD) {
  * Class CEsmScrTempPage1 Destructor
  *
  *=========================================================================*/
-
 CEsmScrTempPage1::~CEsmScrTempPage1() {
 }
-
-/*===========================================================================
- *      End of Class CEsmScrTempPage1 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -96,7 +68,6 @@ CEsmScrTempPage1::~CEsmScrTempPage1() {
  * Class CEsmScrTempPage1 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmScrTempPage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -111,10 +82,6 @@ void CEsmScrTempPage1::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage1::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -123,7 +90,6 @@ void CEsmScrTempPage1::DoDataExchange(CDataExchange *pDX) {
  * Fills the list of template variables.
  *
  *=========================================================================*/
-
 void CEsmScrTempPage1::FillTempVarList() {
 	CEsmScriptTemplate *pScrTemplate = m_pParentView->GetScriptTemplate();
 	esmscrtempvar_t *pTempVar;
@@ -144,10 +110,6 @@ void CEsmScrTempPage1::FillTempVarList() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage1::FillTempVarList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -156,7 +118,6 @@ void CEsmScrTempPage1::FillTempVarList() {
  * Save the current control data.
  *
  *=========================================================================*/
-
 void CEsmScrTempPage1::GetControlData() {
 	CString Buffer;
 
@@ -168,24 +129,15 @@ void CEsmScrTempPage1::GetControlData() {
 	m_pParentView->GetOptions()->SetScriptName(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage1::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempPage1 Event - void OnAutoscriptname ();
  *
  *=========================================================================*/
-
 void CEsmScrTempPage1::OnAutoscriptname() {
 	m_ScriptName.EnableWindow(m_AutoScriptName.GetCheck() != 0);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmScrTempPage1::OnAutoscriptname()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -193,16 +145,11 @@ void CEsmScrTempPage1::OnAutoscriptname() {
  * Class CEsmScrTempPage1 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmScrTempPage1::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	m_ScriptName.SetLimitText(ESMSCRTEMP_SCRIPTNAMESIZE);
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmScrTempPage1::OnInitDialog()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -210,7 +157,6 @@ BOOL CEsmScrTempPage1::OnInitDialog() {
  * Class CEsmScrTempPage1 Event - void OnLoadcsv ();
  *
  *=========================================================================*/
-
 void CEsmScrTempPage1::OnCheckTemplate() {
 	m_pParentView->OnCheckTemplate();
 }
@@ -239,10 +185,6 @@ void CEsmScrTempPage1::OnUpdatetext() {
 	m_pParentView->OnUpdateText();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempPage1::OnUpdatetext()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -251,7 +193,6 @@ void CEsmScrTempPage1::OnUpdatetext() {
  * Updates the page's controls from the variable data.
  *
  *=========================================================================*/
-
 void CEsmScrTempPage1::UpdatePage() {
 	/* Update the template filename */
 	m_TemplateFile.SetWindowText(m_pParentView->GetScriptTemplate()->GetFilename());
@@ -269,7 +210,3 @@ void CEsmScrTempPage1::UpdatePage() {
 	/* Fill the template variable list */
 	FillTempVarList();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage1::UpdatePage()
- *=========================================================================*/

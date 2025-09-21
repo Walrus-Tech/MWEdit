@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "Resource.h"
@@ -17,12 +14,6 @@
 #include "EsmDlgArray.h"
 #include "ChildFrmFix.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -33,17 +24,12 @@
 IMPLEMENT_DYNCREATE(CEsmArmorDlg, CEsmRecDialog);
 DEFINE_FILE("EsmArmorDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmArmorDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmArmorDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmArmorDlg)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST1, OnSelchangeBipedlist1)
@@ -74,26 +60,17 @@ BEGIN_MESSAGE_MAP(CEsmArmorDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmArmorDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Constructor
  *
  *=========================================================================*/
-
 CEsmArmorDlg::CEsmArmorDlg() : CEsmRecDialog(CEsmArmorDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmArmorDlg)
 	//}}AFX_DATA_INIT
 	m_pArmor = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmArmorDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -101,9 +78,9 @@ CEsmArmorDlg::CEsmArmorDlg() : CEsmRecDialog(CEsmArmorDlg::IDD) {
  * Class CEsmArmorDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmArmorDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -147,17 +124,12 @@ void CEsmArmorDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_BIPEDLIST7, m_BipedList[6]);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - void GetBipedData (void);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::GetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	CEsmSubName *pNameRecord;
@@ -212,17 +184,12 @@ void CEsmArmorDlg::GetBipedData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::GetBipedData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmArmorDlg::GetControlData()");
 	armordata_t *pArmorData;
@@ -299,17 +266,12 @@ void CEsmArmorDlg::GetControlData() {
 	GetBipedData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmArmorDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -348,17 +310,12 @@ bool CEsmArmorDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Event - void OnEnchantedit ();
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::OnEnchantedit() {
 	esmrecinfo_t *pRecInfo;
 	int Index;
@@ -372,17 +329,12 @@ void CEsmArmorDlg::OnEnchantedit() {
 	m_pParent->EditRecord(pRecInfo, false);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmArmorDlg::OnEnchantedit()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
@@ -422,25 +374,16 @@ void CEsmArmorDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmArmorDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Event - void OnSelChangeBipedList (BipedIndex);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::OnSelChangeBipedList(const int BipedIndex) {
 	SetBipedObject(BipedIndex);
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmArmorDlg::OnSelChangeBipedList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -448,7 +391,6 @@ void CEsmArmorDlg::OnSelChangeBipedList(const int BipedIndex) {
  * Class CEsmArmorDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmArmorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -467,17 +409,12 @@ int CEsmArmorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmArmorDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - void SetBipedData (BipedIndex);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::SetBipedData(const int BipedIndex,
                                 CEsmSubByte *pIndexRecord,
                                 const int RecordIndex) {
@@ -536,17 +473,12 @@ void CEsmArmorDlg::SetBipedData(const int BipedIndex,
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::SetBipedData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - void SetBipedData (void);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::SetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	int RecordIndex;
@@ -561,17 +493,12 @@ void CEsmArmorDlg::SetBipedData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::SetBipedData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - void SetBipedObject (BipedIndex);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::SetBipedObject(const int BipedIndex) {
 	int BipedPart = -1;
 	int BodyPart;
@@ -607,17 +534,12 @@ void CEsmArmorDlg::SetBipedObject(const int BipedIndex) {
 	m_FArmorList[BipedIndex].SelectString(-1, _T(""));
 }
 
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::SetBipedObject()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmArmorDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmArmorDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pArmor == NULL) {
@@ -660,7 +582,3 @@ void CEsmArmorDlg::SetControlData() {
 	/* Set all the biped part data */
 	SetBipedData();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmArmorDlg::SetControlData()
- *=========================================================================*/

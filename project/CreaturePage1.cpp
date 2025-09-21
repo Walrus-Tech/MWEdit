@@ -17,7 +17,6 @@ DEFINE_FILE("CreaturePage1.cpp");
 /////////////////////////////////////////////////////////////////////////////
 // CCreaturePage1 property page
 
-
 IMPLEMENT_DYNCREATE(CCreaturePage1, CPropertyPage)
 
 CCreaturePage1::CCreaturePage1() : CPropertyPage(CCreaturePage1::IDD) {

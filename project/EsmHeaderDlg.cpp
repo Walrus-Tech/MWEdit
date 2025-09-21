@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmHeaderDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -29,25 +20,16 @@
 
 DEFINE_FILE("EsmHeaderDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmHeaderDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmHeaderDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmHeaderDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of Class CEsmHeaderDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -55,7 +37,6 @@ END_MESSAGE_MAP()
  * Class CEsmHeaderDlg Constructor
  *
  *=========================================================================*/
-
 CEsmHeaderDlg::CEsmHeaderDlg(CWnd* pParent) : CDialog(CEsmHeaderDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmHeaderDlg)
 	//}}AFX_DATA_INIT
@@ -63,28 +44,20 @@ CEsmHeaderDlg::CEsmHeaderDlg(CWnd* pParent) : CDialog(CEsmHeaderDlg::IDD, pParen
 	m_pFilename = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmHeaderDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmHeaderDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmHeaderDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmHeaderDlg)
 	DDX_Control(pDX, IDC_DESCTEXT, m_DescText);
 	DDX_Control(pDX, IDC_AUTHORTEXT, m_AuthorText);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmHeaderDlg::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -92,7 +65,6 @@ void CEsmHeaderDlg::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmHeaderDlg Method - bool DoModal (pHeader, pFilename);
  *
  *=========================================================================*/
-
 bool CEsmHeaderDlg::DoModal(CEsmTES3 *pHeader, const TCHAR *pFilename) {
 	int Result;
 
@@ -113,17 +85,12 @@ bool CEsmHeaderDlg::DoModal(CEsmTES3 *pHeader, const TCHAR *pFilename) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmHeaderDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmHeaderDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmHeaderDlg::OnInitDialog() {
 	CString Buffer;
 	CDialog::OnInitDialog();
@@ -140,17 +107,12 @@ BOOL CEsmHeaderDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmHeaderDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmHeaderDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmHeaderDlg::OnOK() {
 	CString Buffer;
 	m_AuthorText.GetWindowText(Buffer);
@@ -159,7 +121,3 @@ void CEsmHeaderDlg::OnOK() {
 	TSTRNCPY(m_pHeader->GetHeaderData()->Description, Buffer, MWESM_HEDR_DESCSIZE);
 	CDialog::OnOK();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmHeaderDlg::OnOK()
- *=========================================================================*/

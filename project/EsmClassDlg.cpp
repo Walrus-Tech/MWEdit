@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmClassDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,17 +21,12 @@
 DEFINE_FILE("EsmClassDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmClassDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmClassDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmClassDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmClassDlg)
 	ON_CBN_SELCHANGE(IDC_MAJORLIST1, OnSelchangeMajorlist1)
@@ -56,26 +42,17 @@ BEGIN_MESSAGE_MAP(CEsmClassDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmClassDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Constructor
  *
  *=========================================================================*/
-
 CEsmClassDlg::CEsmClassDlg() : CEsmRecDialog(CEsmClassDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmClassDlg)
 	//}}AFX_DATA_INIT
 	m_pClass = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmClassDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -83,7 +60,6 @@ CEsmClassDlg::CEsmClassDlg() : CEsmRecDialog(CEsmClassDlg::IDD) {
  * Class CEsmClassDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -132,17 +108,12 @@ void CEsmClassDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClassDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmClassDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmClassDlg::GetControlData()");
 	classdata_t *pClassData;
@@ -272,17 +243,12 @@ void CEsmClassDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClassDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmClassDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -305,17 +271,12 @@ bool CEsmClassDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClassDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmClassDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -350,17 +311,12 @@ void CEsmClassDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmClassDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmClassDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -369,17 +325,12 @@ int CEsmClassDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmClassDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmClassDlg::SetControlData() {
 	classdata_t *pClassData;
 
@@ -449,17 +400,12 @@ void CEsmClassDlg::SetControlData() {
 	m_RepairItemsCheck.SetCheck((pClassData->AutoCalcFlags & MWESM_CLASSAUTO_REPAIRITEM) != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClassDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClassDlg Event - void OnSelChangeSkillList (pComboBox);
  *
  *=========================================================================*/
-
 void CEsmClassDlg::OnSelChangeSkillList(CComboBox *pComboBox) {
 	CComboBox *Boxes[] = {
 		&m_MajorList1,
@@ -529,7 +475,3 @@ void CEsmClassDlg::OnSelChangeSkillList(CComboBox *pComboBox) {
 		}
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CEsmClassDlg::OnSelChangeSkillList()
- *=========================================================================*/

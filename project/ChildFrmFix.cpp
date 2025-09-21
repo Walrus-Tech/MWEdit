@@ -9,22 +9,13 @@
  *=========================================================================*/
 
 
-/* Include Files */
-
 #include "stdafx.h"
 
 #include "MWEdit.h"
 #include "ChildFrmFix.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 /* Debug defines */
-
 #ifdef _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
@@ -35,17 +26,12 @@
 IMPLEMENT_DYNCREATE(CChildFrameFix, CMDIChildWnd);
 DEFINE_FILE("ChildFrmFix.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CChildFrameFix Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CChildFrameFix, CMDIChildWnd)
 	//{{AFX_MSG_MAP(CChildFrameFix)
 	ON_WM_SIZE()
@@ -53,23 +39,14 @@ BEGIN_MESSAGE_MAP(CChildFrameFix, CMDIChildWnd)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CChildFrameFix Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CChildFrameFix Constructor
  *
  *=========================================================================*/
-
 CChildFrameFix::CChildFrameFix() {
 }
-
-/*===========================================================================
- *      End of Class CChildFrameFix Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -77,18 +54,8 @@ CChildFrameFix::CChildFrameFix() {
  * Class CChildFrameFix Destructor
  *
  *=========================================================================*/
-
 CChildFrameFix::~CChildFrameFix() {
 }
-
-/*===========================================================================
- *      End of Class CChildFrameFix Destructor
- *=========================================================================*/
-
-
-/*===========================================================================
- *      End of Class Event CChildFrameFix::OnCreateClient()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -96,7 +63,6 @@ CChildFrameFix::~CChildFrameFix() {
  * Class CChildFrameFix Method - BOOL PreCreateWindow (cs);
  *
  *=========================================================================*/
-
 BOOL CChildFrameFix::PreCreateWindow(CREATESTRUCT &cs) {
 	cs.style &= ~WS_THICKFRAME;
 	cs.style &= ~WS_MAXIMIZEBOX;
@@ -107,10 +73,6 @@ BOOL CChildFrameFix::PreCreateWindow(CREATESTRUCT &cs) {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Method CChildFrameFix::PreCreateWindow()
- *=========================================================================*/
-
 
 #ifdef _DEBUG
 /*===========================================================================
@@ -118,7 +80,6 @@ BOOL CChildFrameFix::PreCreateWindow(CREATESTRUCT &cs) {
  * CChildFrameFix Diagnostics
  *
  *=========================================================================*/
-
 void CChildFrameFix::AssertValid() const {
 	CMDIChildWnd::AssertValid();
 }
@@ -126,10 +87,6 @@ void CChildFrameFix::AssertValid() const {
 void CChildFrameFix::Dump(CDumpContext &dc) const {
 	CMDIChildWnd::Dump(dc);
 }
-
-/*===========================================================================
- *      End of CChildFrameFix Diagnostics
- *=========================================================================*/
 #endif
 
 
@@ -138,14 +95,9 @@ void CChildFrameFix::Dump(CDumpContext &dc) const {
  * Class CChildFrameFix Event - void OnClose (void);
  *
  *=========================================================================*/
-
 void CChildFrameFix::OnClose() {
 	DestroyWindow();
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrameFix::OnClose()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -153,7 +105,6 @@ void CChildFrameFix::OnClose() {
  * Class CChildFrameFix Event - void OnSize (nType, cx, cy);
  *
  *=========================================================================*/
-
 void CChildFrameFix::OnSize(UINT nType, int cx, int cy) {
 	/* Cannot maximize this type of frame */
 	if (nType == SIZE_MAXIMIZED) {
@@ -162,10 +113,6 @@ void CChildFrameFix::OnSize(UINT nType, int cx, int cy) {
 		CMDIChildWnd::OnSize(nType, cx, cy);
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrameFix::OnSize()
- *=========================================================================*/
 
 void CChildFrameFix::ActivateFrame(int nCmdShow) {
 	BOOL bVisibleThen = (GetStyle() & WS_VISIBLE) != 0;

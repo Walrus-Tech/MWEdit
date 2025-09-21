@@ -7,26 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "mwcustomfunc.h"
 
-/*===========================================================================
- *
- * Begin Global Definitions
- *
- *=========================================================================*/
 
 DEFINE_FILE("MwCustomFunc.cpp");
 
 /* Global custom function map */
-
 CMwCustomFunctions g_CustomFunctions;
-
-/*===========================================================================
- *      End of Global Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -34,15 +21,10 @@ CMwCustomFunctions g_CustomFunctions;
  * Class CMwCustomFunction Constructor
  *
  *=========================================================================*/
-
 CMwCustomFunction::CMwCustomFunction () {
 	//DEFINE_FUNCTION("CMwCustomFunction::CMwCustomFunction()");
 	memset(&m_Data, 0, sizeof(m_Data));
 }
-
-/*===========================================================================
- *      End of Class CMwCustomFunction Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -53,7 +35,6 @@ CMwCustomFunction::CMwCustomFunction () {
  * file. Returns false on any error.
  *
  *=========================================================================*/
-
 bool CMwCustomFunction::Read(CGenFile &File, dword &LineCount) {
 	TCHAR Buffer[512];
 	TCHAR *pVar;
@@ -85,10 +66,6 @@ bool CMwCustomFunction::Read(CGenFile &File, dword &LineCount) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CMwCustomFunction::Read()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -98,7 +75,6 @@ bool CMwCustomFunction::Read(CGenFile &File, dword &LineCount) {
  * on any error.
  *
  *=========================================================================*/
-
 bool CMwCustomFunction::ParseFuncOptions(dword &Options, const char *pValue) {
 	bool ReturnValue = true;
 	TCHAR Buffer[512];
@@ -147,10 +123,6 @@ bool CMwCustomFunction::ParseFuncOptions(dword &Options, const char *pValue) {
 	return ReturnValue;
 }
 
-/*===========================================================================
- *      End of Class Method CMwCustomFunction::ParseFuncOptions()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -160,7 +132,6 @@ bool CMwCustomFunction::ParseFuncOptions(dword &Options, const char *pValue) {
  * false on any error.
  *
  *=========================================================================*/
-
 bool CMwCustomFunction::ParseFuncArgOptions(dword &Options, const char *pValue) {
 	bool ReturnValue = true;
 	TCHAR Buffer[512];
@@ -253,10 +224,6 @@ bool CMwCustomFunction::ParseFuncArgOptions(dword &Options, const char *pValue) 
 	return ReturnValue;
 }
 
-/*===========================================================================
- *      End of Class Method CMwCustomFunction::ParseFuncArgOptions()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -266,7 +233,6 @@ bool CMwCustomFunction::ParseFuncArgOptions(dword &Options, const char *pValue) 
  * false on any error.
  *
  *=========================================================================*/
-
 bool CMwCustomFunction::ParseReturnOptions(dword &Options, const char *pValue) {
 	bool ReturnValue = true;
 	TCHAR Buffer[512];
@@ -305,10 +271,6 @@ bool CMwCustomFunction::ParseReturnOptions(dword &Options, const char *pValue) {
 	return ReturnValue;
 }
 
-/*===========================================================================
- *      End of Class Method CMwCustomFunction::ParseReturnOptions()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -318,7 +280,6 @@ bool CMwCustomFunction::ParseReturnOptions(dword &Options, const char *pValue) {
  * false on any error.
  *
  *=========================================================================*/
-
 bool CMwCustomFunction::SetParameter(const char *pVariable, const char *pValue) {
 	dword Options;
 	bool Result;
@@ -392,10 +353,6 @@ bool CMwCustomFunction::SetParameter(const char *pVariable, const char *pValue) 
 	return false;
 }
 
-/*===========================================================================
- *      End of Class Method CMwCustomFunction::SetParameter()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -404,7 +361,6 @@ bool CMwCustomFunction::SetParameter(const char *pVariable, const char *pValue) 
  * Input custom functions from the given file. Returns false on any error.
  *
  *=========================================================================*/
-
 bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename) {
 	DEFINE_FUNCTION("ReadMwCustomFunctions()");
 	CMwCustomFunction *pFunction;
@@ -453,7 +409,3 @@ bool ReadMwCustomFunctions(CMwCustomFunctions &Functions, const char *pFilename)
 
 	return true;
 }
-
-/*===========================================================================
- *      End of Function ReadMwCustomFunctions()
- *=========================================================================*/

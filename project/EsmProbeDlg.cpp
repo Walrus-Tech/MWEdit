@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmProbeDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,25 +21,16 @@
 IMPLEMENT_DYNCREATE(CEsmProbeDlg, CEsmRecDialog);
 DEFINE_FILE("EsmProbeDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmProbeDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmProbeDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmProbeDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmProbeDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmProbeDlg Constructor
  *
  *=========================================================================*/
-
 CEsmProbeDlg::CEsmProbeDlg() : CEsmRecDialog(CEsmProbeDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmProbeDlg)
 	//}}AFX_DATA_INIT
 	m_pProbe = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmProbeDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,7 +50,6 @@ CEsmProbeDlg::CEsmProbeDlg() : CEsmRecDialog(CEsmProbeDlg::IDD) {
  * Class CEsmProbeDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmProbeDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -98,17 +74,12 @@ void CEsmProbeDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmProbeDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmProbeDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmProbeDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmProbeDlg::GetControlData()");
 	probedata_t *pProbeData;
@@ -167,17 +138,12 @@ void CEsmProbeDlg::GetControlData() {
 	m_pProbe->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmProbeDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmProbeDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmProbeDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -212,17 +178,12 @@ bool CEsmProbeDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmProbeDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmProbeDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmProbeDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -244,17 +205,12 @@ void CEsmProbeDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmProbeDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmProbeDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmProbeDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -273,17 +229,12 @@ int CEsmProbeDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmProbeDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmProbeDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmProbeDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pProbe == NULL) {
@@ -319,7 +270,3 @@ void CEsmProbeDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pProbe->IsBlocked());
 	m_PersistCheck.SetCheck(m_pProbe->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmProbeDlg::SetControlData()
- *=========================================================================*/

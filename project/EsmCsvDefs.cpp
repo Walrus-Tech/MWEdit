@@ -7,23 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "esmcsvdefs.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 DEFINE_FILE("EsmCsvDefs.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,7 +18,6 @@ DEFINE_FILE("EsmCsvDefs.cpp");
  * Begin Csv Record Arrays
  *
  *=========================================================================*/
-
 int l_EsmCsvColActivator[] = {
 	ESM_FIELD_ID,
 	ESM_FIELD_ITEMTYPE,
@@ -738,10 +724,6 @@ static esmcsvrecinfo_t l_EsmCsvRecInfos[] = {
 	}
 };
 
-/*===========================================================================
- *      End of Csv Record Arrays
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -751,7 +733,6 @@ static esmcsvrecinfo_t l_EsmCsvRecInfos[] = {
  * item type string. Returns -1 on any error.
  *
  *=========================================================================*/
-
 int l_FindCsvItemType(const TCHAR *pString) {
 	int Index = 0;
 
@@ -766,10 +747,6 @@ int l_FindCsvItemType(const TCHAR *pString) {
 	return -1;
 }
 
-/*===========================================================================
- *      End of Function l_FindCsvItemType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -779,7 +756,6 @@ int l_FindCsvItemType(const TCHAR *pString) {
  * record string. Returns -1 on any error.
  *
  *=========================================================================*/
-
 int l_FindCsvRecordString(const TCHAR *pString) {
 	int Index = 0;
 
@@ -794,10 +770,6 @@ int l_FindCsvRecordString(const TCHAR *pString) {
 	return -1;
 }
 
-/*===========================================================================
- *      End of Function l_FindCsvRecordString()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -807,7 +779,6 @@ int l_FindCsvRecordString(const TCHAR *pString) {
  * record type string. Returns NULL on any error.
  *
  *=========================================================================*/
-
 const TCHAR *GetEsmCsvRecordType(const TCHAR *pString) {
 	int Index;
 	Index = l_FindCsvRecordString(pString);
@@ -819,10 +790,6 @@ const TCHAR *GetEsmCsvRecordType(const TCHAR *pString) {
 	return l_EsmCsvRecInfos[Index].pEsmRecType;
 }
 
-/*===========================================================================
- *      End of Function TCHAR* GetEsmCsvRecordType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -832,7 +799,6 @@ const TCHAR *GetEsmCsvRecordType(const TCHAR *pString) {
  * to a CSV file. Returns NULL on any error.
  *
  *=========================================================================*/
-
 const TCHAR *GetEsmCsvRecordString(const TCHAR *pString) {
 	int Index;
 	Index = l_FindCsvItemType(pString);
@@ -844,10 +810,6 @@ const TCHAR *GetEsmCsvRecordString(const TCHAR *pString) {
 	return l_EsmCsvRecInfos[Index].pRecordName;
 }
 
-/*===========================================================================
- *      End of Function TCHAR* GetEsmCsvRecordType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -857,7 +819,6 @@ const TCHAR *GetEsmCsvRecordString(const TCHAR *pString) {
  * Returns NULL on any error.
  *
  *=========================================================================*/
-
 int *GetEsmCsvColArray(const TCHAR *pType) {
 	int Index;
 	Index = l_FindCsvItemType(pType);
@@ -879,7 +840,3 @@ esmcsvcol_t *GetEsmCsvExColArray(const TCHAR *pType) {
 
 	return l_EsmCsvRecInfos[Index].pExColArray;
 }
-
-/*===========================================================================
- *      End of Function TCHAR* GetEsmCsvColArray()
- *=========================================================================*/

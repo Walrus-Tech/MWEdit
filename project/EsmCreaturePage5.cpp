@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmCreaturePage5.h"
@@ -17,12 +14,6 @@
 #include "MWEditDoc.h"
 #include "EsmDlgArray.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -33,25 +24,16 @@
 IMPLEMENT_DYNCREATE(CEsmCreaturePage5, CPropertyPage);
 DEFINE_FILE("EsmNpcPage5.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmCreaturePage5 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmCreaturePage5, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmCreaturePage5)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmCreaturePage5 Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -59,7 +41,6 @@ END_MESSAGE_MAP()
  * Class CEsmCreaturePage5 Constructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage5::CEsmCreaturePage5() : CPropertyPage(CEsmCreaturePage5::IDD) {
 	//{{AFX_DATA_INIT(CEsmCreaturePage5)
 	//}}AFX_DATA_INIT
@@ -67,23 +48,14 @@ CEsmCreaturePage5::CEsmCreaturePage5() : CPropertyPage(CEsmCreaturePage5::IDD) {
 	m_pDlgHandler = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmCreaturePage5 Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage5 Destructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage5::~CEsmCreaturePage5() {
 }
-
-/*===========================================================================
- *      End of Class CEsmCreaturePage5 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -91,7 +63,6 @@ CEsmCreaturePage5::~CEsmCreaturePage5() {
  * Class CEsmCreaturePage5 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage5::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -123,17 +94,12 @@ void CEsmCreaturePage5::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage5::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage5 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage5::GetControlData() {
 	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
@@ -234,26 +200,17 @@ void CEsmCreaturePage5::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage5::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage5 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmCreaturePage5::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage5::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage5::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -261,16 +218,11 @@ CMWEditDoc *CEsmCreaturePage5::GetDocument() {
  * Class CEsmCreaturePage5 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmCreaturePage5::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	m_GoldText.SetLimitText(16);
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage5::OnInitDialog()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -278,14 +230,9 @@ BOOL CEsmCreaturePage5::OnInitDialog() {
  * Class CEsmCreaturePage5 Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmCreaturePage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage5::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -293,7 +240,6 @@ int CEsmCreaturePage5::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmCreaturePage5 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage5::SetControlData() {
 	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
@@ -380,9 +326,3 @@ void CEsmCreaturePage5::SetControlData() {
 		Count++;
 	}
 }
-
-/*===========================================================================
-
- *      End of Class Method CEsmCreaturePage5::SetControlData()
-
- *=========================================================================*/

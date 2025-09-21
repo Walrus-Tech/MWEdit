@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "EsmDlgArray.h"
 #include "ActivatorDlg.h"
@@ -62,17 +59,7 @@
 //#include "mmsystem.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 DEFINE_FILE("EsmDlgArray.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -80,7 +67,6 @@ DEFINE_FILE("EsmDlgArray.cpp");
  * Begin Dialog Creation Array
  *
  *=========================================================================*/
-
 static esmdlgcreateinfo_t l_EsmDlgCreateInfo[] = {
 	{
 		MWESM_REC_ACTI,
@@ -438,17 +424,12 @@ static esmdlgcreateinfo_t l_EsmScrTempCreateInfo = {
 	NULL
 };
 
-/*===========================================================================
- *      End of Dialog Creation Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Constructor
  *
  *=========================================================================*/
-
 CEsmDlgHandler::CEsmDlgHandler() : m_Frames(0) {
 	//DEFINE_FUNCTION("CEsmDlgHandler::CEsmDlgHandler()");
 	m_pDocument = NULL;
@@ -459,25 +440,16 @@ CEsmDlgHandler::CEsmDlgHandler() : m_Frames(0) {
 	m_pScriptCompareDlg = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmDlgHandler Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Method - void Destroy (void);
  *
  *=========================================================================*/
-
 void CEsmDlgHandler::Destroy() {
 	//DEFINE_FUNCTION("CEsmDlgHandler::Destroy()");
 	ClearDlgArray();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -488,7 +460,6 @@ void CEsmDlgHandler::Destroy() {
  * dialogs currently open.
  *
  *=========================================================================*/
-
 void CEsmDlgHandler::ClearDlgArray() {
 	DEFINE_FUNCTION("CEsmDlgHandler::ClearDlgArray()");
 	CFrameWnd *pFrame;
@@ -525,27 +496,18 @@ void CEsmDlgHandler::ClearDlgArray() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::ClearDlgArray()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Method - CEsmRecord* CreateCopy (pRecord);
  *
  *=========================================================================*/
-
 CEsmRecord *CEsmDlgHandler::CreateCopy(CEsmRecord *pRecord) {
 	CEsmRecord *pNewRecord;
 	ASSERT(m_pDocument != NULL);
 	pNewRecord = m_pDocument->CreateCopy(pRecord);
 	return pNewRecord;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::CreateCopy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -555,7 +517,6 @@ CEsmRecord *CEsmDlgHandler::CreateCopy(CEsmRecord *pRecord) {
  * Creates and returns the window for editting a dialogue topic.
  *
  *=========================================================================*/
-
 CFrameWnd *CEsmDlgHandler::CreateDialogueDlg(esmrecinfo_t *pRecInfo) {
 	CEsmDialogue *pDialogue;
 	CCreateContext Context;
@@ -587,10 +548,6 @@ CFrameWnd *CEsmDlgHandler::CreateDialogueDlg(esmrecinfo_t *pRecInfo) {
 	return pFrame;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::CreateDialogueDlg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -600,7 +557,6 @@ CFrameWnd *CEsmDlgHandler::CreateDialogueDlg(esmrecinfo_t *pRecInfo) {
  * array to make and return a new dialog.
  *
  *=========================================================================*/
-
 CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmdlgcreateinfo_t &CreateInfo) {
 	CCreateContext Context;
 	CFrameWnd *pFrame;
@@ -624,10 +580,6 @@ CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmdlgcreateinfo_t &CreateInfo) {
 	return pFrame;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::CreateESMDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -638,7 +590,6 @@ CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmdlgcreateinfo_t &CreateInfo) {
  * the new CEsmRecView.  Does not display the frame.
  *
  *=========================================================================*/
-
 CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmrecinfo_t *pRecInfo, const bool IsNew) {
 	CFrameWnd *pFrame;
 	CEsmRecDialog *pView;
@@ -680,10 +631,6 @@ CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmrecinfo_t *pRecInfo, const bool Is
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::CreateESMDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -695,7 +642,6 @@ CFrameWnd *CEsmDlgHandler::CreateESMDialog(esmrecinfo_t *pRecInfo, const bool Is
  * displayed to edit the item.
  *
  *=========================================================================*/
-
 bool CEsmDlgHandler::EditRecord(esmrecinfo_t *pRecInfo, const bool IsNew) {
 	CFrameWnd *pFrame;
 	/* See if item is already being editted */
@@ -722,10 +668,6 @@ bool CEsmDlgHandler::EditRecord(esmrecinfo_t *pRecInfo, const bool IsNew) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::EditRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -734,7 +676,6 @@ bool CEsmDlgHandler::EditRecord(esmrecinfo_t *pRecInfo, const bool IsNew) {
  * Find an existing record frame. Returns NULL if no open dialog is found.
  *
  *=========================================================================*/
-
 CFrameWnd *CEsmDlgHandler::FindDialog(esmrecinfo_t *pRecInfo) {
 	CEsmRecDialog *pView;
 	CFrameWnd *pFrame;
@@ -757,17 +698,12 @@ CFrameWnd *CEsmDlgHandler::FindDialog(esmrecinfo_t *pRecInfo) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::FindDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class TCHAR* CEsmDlgHandler Method - const GetDocFilename (void);
  *
  *=========================================================================*/
-
 const TCHAR *CEsmDlgHandler::GetDocFilename() {
 	ASSERT(m_pDocument != NULL);
 	return m_pDocument->GetTitle();
@@ -778,25 +714,16 @@ CEsmFile *CEsmDlgHandler::GetActiveFile() {
 	return m_pDocument->GetActivePlugin();
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmDlgHandler::GetDocFilename()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Method - esmrecinfo_t* GetEffectRecord (EffectID);
  *
  *=========================================================================*/
-
 esmrecinfo_t *CEsmDlgHandler::GetEffectRecord(const int EffectID) {
 	ASSERT(m_pDocument != NULL);
 	return m_pDocument->GetEffectRecord(EffectID);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::GetEffectRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -804,7 +731,6 @@ esmrecinfo_t *CEsmDlgHandler::GetEffectRecord(const int EffectID) {
  * Class CEsmDlgHandler Method - bool IsValidID (pID);
  *
  *=========================================================================*/
-
 bool CEsmDlgHandler::IsValidID(const TCHAR *pID) {
 	return IsValidESMID(pID);
 }
@@ -816,17 +742,12 @@ bool CEsmDlgHandler::IsExistingID(const TCHAR *pID) {
 	return pRecInfo != NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::IsValidID()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Event - CEsmRecord* OnAddNew (pType);
  *
  *=========================================================================*/
-
 CEsmRecord *CEsmDlgHandler::OnAddNew(const TCHAR *pType) {
 	DEFINE_FUNCTION("CEsmDlgHandler::OnAddNew()");
 	CEsmRecord *pRecord;
@@ -865,17 +786,12 @@ CEsmRecord *CEsmDlgHandler::OnAddNew(const TCHAR *pType) {
 	return pRecord;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDlgHandler::OnAddNew()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Event - CEsmRecord* OnAddNewDialog (DialType);
  *
  *=========================================================================*/
-
 CEsmRecord *CEsmDlgHandler::OnAddNewDialog(const int DialType) {
 	DEFINE_FUNCTION("CEsmDlgHandler::OnAddNewDialog()");
 	CEsmRecord *pRecord;
@@ -916,10 +832,6 @@ CEsmRecord *CEsmDlgHandler::OnAddNewDialog(const int DialType) {
 	return pRecord;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDlgHandler::OnAddNewDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -928,15 +840,10 @@ CEsmRecord *CEsmDlgHandler::OnAddNewDialog(const int DialType) {
  * Called after an item has been changed.
  *
  *=========================================================================*/
-
 int CEsmDlgHandler::OnPostSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 	ASSERT(m_pDocument != NULL);
 	return m_pDocument->OnPostSaveRecord(pRecEditInfo);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmDlgHandler::OnPostSaveRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -948,15 +855,10 @@ int CEsmDlgHandler::OnPostSaveRecord(esmreceditinfo_t *pRecEditInfo) {
  * active plugin if required.
  *
  *=========================================================================*/
-
 int CEsmDlgHandler::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
 	ASSERT(m_pDocument != NULL);
 	return m_pDocument->OnPreSaveRecord(pRecEditInfo);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmDlgHandler::OnPreSaveRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -966,7 +868,6 @@ int CEsmDlgHandler::OnPreSaveRecord(esmreceditinfo_t *pRecEditInfo) {
  * Creates if nessecary, and displays the find window.
  *
  *=========================================================================*/
-
 void CEsmDlgHandler::OpenFindDlg() {
 	CEsmFindDlg *pFindView;
 	CWnd *pWnd;
@@ -997,10 +898,6 @@ void CEsmDlgHandler::OpenFindDlg() {
 	m_pFindDlg->ActivateFrame(SW_SHOWNORMAL);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::OpenFindDlg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1009,7 +906,6 @@ void CEsmDlgHandler::OpenFindDlg() {
  * Opens the script template form view.
  *
  *=========================================================================*/
-
 void CEsmDlgHandler::OpenScrTempDlg() {
 	CEsmScrTempView *pScrTempView;
 	CWnd *pWnd;
@@ -1041,10 +937,6 @@ void CEsmDlgHandler::OpenScrTempDlg() {
 	m_pScrTempDlg->ActivateFrame(SW_SHOWNORMAL);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::OpenScrTempDlg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1053,7 +945,6 @@ void CEsmDlgHandler::OpenScrTempDlg() {
  * Creates if nessecary, and displays the uses window for the given record.
  *
  *=========================================================================*/
-
 void CEsmDlgHandler::OpenUsesDlg(esmrecinfo_t *pRecInfo) {
 	CEsmUsesDlg *pUsesView;
 	CWnd* pWnd;
@@ -1096,17 +987,12 @@ void CEsmDlgHandler::OpenUsesDlg(esmrecinfo_t *pRecInfo) {
 	pUsesView->UpdateUses();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::OpenUsesDlg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDlgHandler Method - CEsmScriptCompareDlg* OpenScriptCompareDlg (void);
  *
  *=========================================================================*/
-
 CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg() {
 	CEsmScriptCompareDlg *pCompareView = NULL;
 	CWnd *pWnd;
@@ -1146,10 +1032,6 @@ CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg() {
 	return pCompareView;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::OpenScriptCompareDlg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1158,11 +1040,6 @@ CEsmScriptCompareDlg *CEsmDlgHandler::OpenScriptCompareDlg() {
  * Removes the frame from the class array.
  *
  *=========================================================================*/
-
 void CEsmDlgHandler::RemoveFrame(CFrameWnd *pFrame) {
 	m_Frames.DeleteElement(pFrame);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmDlgHandler::RemoveFrame()
- *=========================================================================*/

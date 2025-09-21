@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmCreaturePage4.h"
@@ -18,12 +15,6 @@
 #include "EsmAiTravelDlg.h"
 #include "EsmAiWanderDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -34,17 +25,12 @@
 IMPLEMENT_DYNCREATE(CEsmCreaturePage4, CPropertyPage);
 DEFINE_FILE("EsmCreaturePage4.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmCreaturePage4 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmCreaturePage4, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmCreaturePage4)
 	ON_BN_CLICKED(IDC_ACTIVATEBUTTON, OnActivatebutton)
@@ -60,25 +46,16 @@ BEGIN_MESSAGE_MAP(CEsmCreaturePage4, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmCreaturePage4 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Constructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage4::CEsmCreaturePage4() : CPropertyPage(CEsmCreaturePage4::IDD), m_PackageArray(0) {
 	//{{AFX_DATA_INIT(CEsmCreaturePage4)
 	//}}AFX_DATA_INIT
 }
-
-/*===========================================================================
- *      End of Class CEsmCreaturePage4 Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -86,14 +63,9 @@ CEsmCreaturePage4::CEsmCreaturePage4() : CPropertyPage(CEsmCreaturePage4::IDD), 
  * Class CEsmCreaturePage4 Destructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage4::~CEsmCreaturePage4() {
 	ClearPackageArray();
 }
-
-/*===========================================================================
- *      End of Class CEsmCreaturePage4 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -104,7 +76,6 @@ CEsmCreaturePage4::~CEsmCreaturePage4() {
  * of the given type in the current NPC record.
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::AddAIRecords(const TCHAR *pType) {
 	CEsmCreature *pCreature;
 	CEsmSubRecord *pSubRecord;
@@ -135,17 +106,12 @@ void CEsmCreaturePage4::AddAIRecords(const TCHAR *pType) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::AddAIRecords()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - void ClearPackageArray (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::ClearPackageArray() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::ClearPackageArray()");
 	CEsmSubRecord *pSubRec;
@@ -159,17 +125,12 @@ void CEsmCreaturePage4::ClearPackageArray() {
 	m_PackageArray.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::ClearPackageArray()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - void DeleteSelectedItems (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::DeleteSelectedItems() {
 	CEsmSubRecord *pSubRec;
 	CEsmSubRecord *pSubNameRec;
@@ -192,19 +153,15 @@ void CEsmCreaturePage4::DeleteSelectedItems() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::DeleteSelectedItems()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCreaturePage4)
 	DDX_Control(pDX, IDC_PACKAGEEDIT, m_PackageText);
 	DDX_Control(pDX, IDC_HELLOTEXT, m_HelloText);
@@ -215,17 +172,12 @@ void CEsmCreaturePage4::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::GetControlData() {
 	CEsmCreature *pCreature;
 	CEsmSubRecord *pSubRec;
@@ -270,10 +222,6 @@ void CEsmCreaturePage4::GetControlData() {
 	m_PackageArray.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -283,7 +231,6 @@ void CEsmCreaturePage4::GetControlData() {
  * or NULL if none is found.
  *
  *=========================================================================*/
-
 CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 	CEsmSubRecord *pSubRec;
 	int Index;
@@ -309,26 +256,17 @@ CEsmSubNameFix *CEsmCreaturePage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::FindCNDTSubRec()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmCreaturePage4::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -336,7 +274,6 @@ CMWEditDoc *CEsmCreaturePage4::GetDocument() {
  * Class CEsmCreaturePage4 Event - LRESULT OnDblclkObjectlist (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnEditRecord()");
 	CEsmSubRecord *pSubRecord;
@@ -396,17 +333,12 @@ LRESULT CEsmCreaturePage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage4::OnDblclkObjectlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmCreaturePage4::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 
@@ -422,17 +354,12 @@ BOOL CEsmCreaturePage4::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage4::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Event - void OnItemchangingPackagelist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResult) {
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
@@ -448,17 +375,12 @@ void CEsmCreaturePage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResul
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage4::OnItemchangingPackagelist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmCreaturePage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Delete all currently selected items */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
@@ -469,10 +391,6 @@ LRESULT CEsmCreaturePage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage4::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -481,7 +399,6 @@ LRESULT CEsmCreaturePage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
  * Attempts to output the given AI package sub-record to the text control.
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::OutputAIData(CEsmSubRecord *pSubRec) {
 	CString Buffer;
 
@@ -539,17 +456,12 @@ void CEsmCreaturePage4::OutputAIData(CEsmSubRecord *pSubRec) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::OutputAIData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::SetControlData() {
 	CEsmCreature *pCreature;
 	CString Buffer;
@@ -582,17 +494,12 @@ void CEsmCreaturePage4::SetControlData() {
 	UpdatePackageList();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Package Event Buttons
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::OnActivatebutton() {
 	DEFINE_FUNCTION("CEsmCreaturePage4::OnActivatebutton()");
 	CEsmSubAI_A *pNewSubRec;
@@ -764,17 +671,12 @@ void CEsmCreaturePage4::OnDeletebutton() {
 	DeleteSelectedItems();
 }
 
-/*===========================================================================
- *      End of Package Event Buttons
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage4 Method - void UpdatePackageList (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage4::UpdatePackageList() {
 	CEsmSubRecord *pSubRecord;
 	int Index;
@@ -806,7 +708,3 @@ void CEsmCreaturePage4::UpdatePackageList() {
 		}
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage4::UpdatePackageList()
- *=========================================================================*/

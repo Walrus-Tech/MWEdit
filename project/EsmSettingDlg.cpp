@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmSettingDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,25 +21,16 @@
 IMPLEMENT_DYNCREATE(CEsmSettingDlg, CEsmRecDialog);
 DEFINE_FILE("EsmSettingDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmSettingDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmSettingDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmSettingDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmSettingDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmSettingDlg Constructor
  *
  *=========================================================================*/
-
 CEsmSettingDlg::CEsmSettingDlg() : CEsmRecDialog(CEsmSettingDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmSettingDlg)
 	//}}AFX_DATA_INIT
 	m_pSetting = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmSettingDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,9 +50,9 @@ CEsmSettingDlg::CEsmSettingDlg() : CEsmRecDialog(CEsmSettingDlg::IDD) {
  * Class CEsmSettingDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmSettingDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmSettingDlg)
 	DDX_Control(pDX, IDC_VALUETEXT, m_ValueText);
 	DDX_Control(pDX, IDC_TYPELABEL, m_TypeLabel);
@@ -83,17 +60,12 @@ void CEsmSettingDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSettingDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSettingDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmSettingDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSettingDlg::GetControlData()");
 	CString Buffer;
@@ -109,17 +81,12 @@ void CEsmSettingDlg::GetControlData() {
 	m_pSetting->SetValue(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSettingDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSettingDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmSettingDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -134,17 +101,12 @@ bool CEsmSettingDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSettingDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSettingDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmSettingDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -160,17 +122,12 @@ void CEsmSettingDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSettingDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSettingDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmSettingDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pSetting == NULL) {
@@ -187,7 +144,3 @@ void CEsmSettingDlg::SetControlData() {
 	m_IDText.SetModify(FALSE);
 	m_ValueText.SetModify(FALSE);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmSettingDlg::SetControlData()
- *=========================================================================*/

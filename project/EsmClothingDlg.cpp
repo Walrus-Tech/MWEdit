@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "Resource.h"
@@ -17,12 +14,6 @@
 #include "EsmDlgArray.h"
 #include "ChildFrmFix.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -33,17 +24,12 @@
 IMPLEMENT_DYNCREATE(CEsmClothingDlg, CEsmRecDialog);
 DEFINE_FILE("EsmClothingDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmClothingDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmClothingDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmClothingDlg)
 	ON_CBN_SELCHANGE(IDC_BIPEDLIST1, OnSelchangeBipedlist1)
@@ -74,26 +60,17 @@ BEGIN_MESSAGE_MAP(CEsmClothingDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmClothingDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Constructor
  *
  *=========================================================================*/
-
 CEsmClothingDlg::CEsmClothingDlg() : CEsmRecDialog(CEsmClothingDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmClothingDlg)
 	//}}AFX_DATA_INIT
 	m_pClothing = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmClothingDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -101,7 +78,6 @@ CEsmClothingDlg::CEsmClothingDlg() : CEsmRecDialog(CEsmClothingDlg::IDD) {
  * Class CEsmClothingDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -145,17 +121,12 @@ void CEsmClothingDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_BIPEDLIST7, m_BipedList[6]);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - void GetBipedData (void);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::GetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	CEsmSubName *pNameRecord;
@@ -210,17 +181,12 @@ void CEsmClothingDlg::GetBipedData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::GetBipedData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmClothingDlg::GetControlData()");
 	CString Buffer;
@@ -285,17 +251,12 @@ void CEsmClothingDlg::GetControlData() {
 	GetBipedData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmClothingDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -326,17 +287,12 @@ bool CEsmClothingDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
@@ -364,25 +320,16 @@ void CEsmClothingDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmClothingDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Event - void OnSelChangeBipedList (BipedIndex);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::OnSelChangeBipedList(const int BipedIndex) {
 	SetBipedObject(BipedIndex);
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmClothingDlg::OnSelChangeBipedList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -390,7 +337,6 @@ void CEsmClothingDlg::OnSelChangeBipedList(const int BipedIndex) {
  * Class CEsmClothingDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmClothingDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -409,17 +355,12 @@ int CEsmClothingDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmClothingDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - void SetBipedData (BipedIndex);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::SetBipedData(const int BipedIndex,
                                    CEsmSubByte *pIndexRecord,
                                    const int RecordIndex) {
@@ -478,17 +419,12 @@ void CEsmClothingDlg::SetBipedData(const int BipedIndex,
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::SetBipedData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - void SetBipedData (void);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::SetBipedData() {
 	CEsmSubByte *pIndexRecord;
 	int RecordIndex;
@@ -503,17 +439,12 @@ void CEsmClothingDlg::SetBipedData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::SetBipedData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - void SetBipedObject (BipedIndex);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::SetBipedObject(const int BipedIndex) {
 	int BipedPart = -1;
 	int BodyPart;
@@ -549,17 +480,12 @@ void CEsmClothingDlg::SetBipedObject(const int BipedIndex) {
 	m_FClothList[BipedIndex].SelectString(-1, _T(""));
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::SetBipedObject()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pClothing == NULL) {
@@ -599,17 +525,12 @@ void CEsmClothingDlg::SetControlData() {
 	SetBipedData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmClothingDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmClothingDlg Event - void OnEnchantedit ();
  *
  *=========================================================================*/
-
 void CEsmClothingDlg::OnEnchantedit() {
 	esmrecinfo_t *pRecInfo;
 	int Index;
@@ -622,7 +543,3 @@ void CEsmClothingDlg::OnEnchantedit() {
 	pRecInfo = (esmrecinfo_t *)m_EnchantList.GetItemData(Index);
 	m_pParent->EditRecord(pRecInfo, false);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmClothingDlg::OnEnchantedit()
- *=========================================================================*/

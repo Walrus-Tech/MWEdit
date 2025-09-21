@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmAiTravelDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,25 +21,16 @@
 
 DEFINE_FILE("EsmAiTravelDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmAiTravelDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmAiTravelDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmAiTravelDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmAiTravelDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmAiTravelDlg Constructor
  *
  *=========================================================================*/
-
 CEsmAiTravelDlg::CEsmAiTravelDlg(CWnd *pParent) : CDialog(CEsmAiTravelDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmAiTravelDlg)
 	//}}AFX_DATA_INIT
 	m_pSubRecord = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmAiTravelDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,7 +50,6 @@ CEsmAiTravelDlg::CEsmAiTravelDlg(CWnd *pParent) : CDialog(CEsmAiTravelDlg::IDD, 
  * Class CEsmAiTravelDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmAiTravelDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmAiTravelDlg)
@@ -83,17 +59,12 @@ void CEsmAiTravelDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiTravelDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiTravelDlg Method - bool DoModal (pSubRecord);
  *
  *=========================================================================*/
-
 bool CEsmAiTravelDlg::DoModal(CEsmSubAI_T *pSubRecord) {
 	int Result;
 	m_pSubRecord = pSubRecord;
@@ -111,17 +82,12 @@ bool CEsmAiTravelDlg::DoModal(CEsmSubAI_T *pSubRecord) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiTravelDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiTravelDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmAiTravelDlg::OnInitDialog() {
 	ai_tdata_t *pAiData;
 	CString Buffer;
@@ -146,17 +112,12 @@ BOOL CEsmAiTravelDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmAiTravelDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiTravelDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmAiTravelDlg::OnOK() {
 	ai_tdata_t *pAiData;
 	CString Buffer;
@@ -175,7 +136,3 @@ void CEsmAiTravelDlg::OnOK() {
 
 	CDialog::OnOK();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmAiTravelDlg::OnOK()
- *=========================================================================*/

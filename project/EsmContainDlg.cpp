@@ -12,19 +12,10 @@
  *    the list is to be sorted.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmContainDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -35,17 +26,12 @@
 DEFINE_FILE("EsmContainDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmContainDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Function - int CALLBACK l_ContSortCallBack (lParam1, lParam2, lParamSort);
  *
  *=========================================================================*/
-
 int CALLBACK l_ContSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t*)lParam1;
 	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t*)lParam2;
@@ -66,17 +52,12 @@ int CALLBACK l_ContSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
 }
 
-/*===========================================================================
- *      End of Function CALLBACK l_ContSortCallBack()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Item List Display Data Array
  *
  *=========================================================================*/
-
 static esmcoldata_t l_ItemColData[] = {
 	{
 		_T("Count"),
@@ -122,17 +103,12 @@ static esmcoldata_t l_ItemColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Item List Display Data Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmContainDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmContainDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmContainDlg)
 	ON_BN_CLICKED(IDC_ORGANICCHECK, OnOrganiccheck)
@@ -143,26 +119,17 @@ BEGIN_MESSAGE_MAP(CEsmContainDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmContainDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Constructor
  *
  *=========================================================================*/
-
 CEsmContainDlg::CEsmContainDlg() : CEsmRecDialog(CEsmContainDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmContainDlg)
 	//}}AFX_DATA_INIT
 	m_pContainer = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmContainDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -170,7 +137,6 @@ CEsmContainDlg::CEsmContainDlg() : CEsmRecDialog(CEsmContainDlg::IDD) {
  * Class CEsmContainDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -189,17 +155,12 @@ void CEsmContainDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmContainDlg::GetControlData()");
 	CString Buffer;
@@ -239,17 +200,12 @@ void CEsmContainDlg::GetControlData() {
 	GetItemData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Method - void GetItemData (void);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::GetItemData() {
 	CEsmSubNPCO *pItemSubRec;
 	CString Buffer;
@@ -271,17 +227,12 @@ void CEsmContainDlg::GetItemData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::GetItemData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Event - void OnEndlabeleditItemlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	esmrecinfo_t *pRecInfo;
@@ -309,17 +260,12 @@ void CEsmContainDlg::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	*pResult = 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnEndlabeleditItemlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmContainDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -342,17 +288,12 @@ bool CEsmContainDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmContainDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -382,25 +323,16 @@ void CEsmContainDlg::OnInitialUpdate() {
 	m_ItemList.SortItems(l_ContSortCallBack, ESM_FIELD_COUNT);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Event - void OnOrganiccheck ();
  *
  *=========================================================================*/
-
 void CEsmContainDlg::OnOrganiccheck() {
 	m_RespawnCheck.EnableWindow(m_OrganicCheck.GetCheck());
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnOrganiccheck()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -408,7 +340,6 @@ void CEsmContainDlg::OnOrganiccheck() {
  * Class CEsmContainDlg Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmContainDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
@@ -450,17 +381,12 @@ LRESULT CEsmContainDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Event - LRESULT  OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmContainDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
@@ -497,17 +423,12 @@ LRESULT CEsmContainDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Event - LRESULT OnRecordSort (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmContainDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	UpdateUserData();
@@ -515,17 +436,12 @@ LRESULT CEsmContainDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnRecordSort()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmContainDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	int Index;
 	/* Update an item inside the container */
@@ -554,17 +470,12 @@ int CEsmContainDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmContainDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pContainer == NULL) {
@@ -597,17 +508,12 @@ void CEsmContainDlg::SetControlData() {
 	SetItemData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Method - void SetItemData (void);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::SetItemData() {
 	CEsmSubNPCO *pItemSubRec;
 	esmrecinfo_t *pRecInfo;
@@ -632,17 +538,12 @@ void CEsmContainDlg::SetItemData() {
 	UpdateTotalWeight();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::SetItemData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmContainDlg Method - void UpdateTotalWeight (void);
  *
  *=========================================================================*/
-
 void CEsmContainDlg::UpdateTotalWeight() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -659,10 +560,6 @@ void CEsmContainDlg::UpdateTotalWeight() {
 	m_WeightLabel.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::UpdateTotalWeight()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -672,7 +569,6 @@ void CEsmContainDlg::UpdateTotalWeight() {
  * count for sorting.
  *
  *=========================================================================*/
-
 void CEsmContainDlg::UpdateUserData() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
@@ -688,7 +584,3 @@ void CEsmContainDlg::UpdateUserData() {
 		pRecInfo->UserData = Count;
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmContainDlg::UpdateUserData()
- *=========================================================================*/

@@ -9,18 +9,10 @@
  *=========================================================================*/
 
 
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "ActivatorDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -32,25 +24,16 @@
 DEFINE_FILE("ActivatorDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmActivatorDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmActivatorDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmActivatorDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmActivatorDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmActivatorDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -58,16 +41,11 @@ END_MESSAGE_MAP()
  * Class CEsmActivatorDlg Constructor
  *
  *=========================================================================*/
-
 CEsmActivatorDlg::CEsmActivatorDlg() : CEsmRecDialog(CEsmActivatorDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmActivatorDlg)
 	//}}AFX_DATA_INIT
 	m_pActivator = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmActivatorDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -75,7 +53,6 @@ CEsmActivatorDlg::CEsmActivatorDlg() : CEsmRecDialog(CEsmActivatorDlg::IDD) {
  * Class CEsmActivatorDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmActivatorDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmActivatorDlg)
@@ -88,17 +65,12 @@ void CEsmActivatorDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmActivatorDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmActivatorDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmActivatorDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmActivatorDlg::GetControlData()");
 	CString Buffer;
@@ -130,17 +102,12 @@ void CEsmActivatorDlg::GetControlData() {
 	m_pActivator->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmActivatorDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmActivatorDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmActivatorDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -159,17 +126,12 @@ bool CEsmActivatorDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmActivatorDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmActivatorDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmActivatorDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -185,17 +147,12 @@ void CEsmActivatorDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmActivatorDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmActivatorDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmActivatorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -214,17 +171,12 @@ int CEsmActivatorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmActivatorDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmActivatorDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmActivatorDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pActivator == NULL) {
@@ -249,7 +201,3 @@ void CEsmActivatorDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pActivator->IsBlocked());
 	m_PersistCheck.SetCheck(m_pActivator->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmActivatorDlg::SetControlData()
- *=========================================================================*/

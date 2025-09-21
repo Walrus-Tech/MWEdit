@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmAiWanderDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -29,25 +20,16 @@
 
 DEFINE_FILE("EsmAiWanderDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmAiWanderDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmAiWanderDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmAiWanderDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmAiWanderDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -55,16 +37,11 @@ END_MESSAGE_MAP()
  * Class CEsmAiWanderDlg Constructor
  *
  *=========================================================================*/
-
 CEsmAiWanderDlg::CEsmAiWanderDlg(CWnd *pParent) : CDialog(CEsmAiWanderDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmAiWanderDlg)
 	//}}AFX_DATA_INIT
 	m_pSubRecord = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmAiWanderDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -72,7 +49,6 @@ CEsmAiWanderDlg::CEsmAiWanderDlg(CWnd *pParent) : CDialog(CEsmAiWanderDlg::IDD, 
  * Class CEsmAiWanderDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmAiWanderDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 
@@ -92,17 +68,12 @@ void CEsmAiWanderDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_IDLETEXT9, m_IdleText[7]);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiWanderDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiWanderDlg Method - bool DoModal (pSubRecord);
  *
  *=========================================================================*/
-
 bool CEsmAiWanderDlg::DoModal(CEsmSubAI_W *pSubRecord) {
 	int Result;
 	m_pSubRecord = pSubRecord;
@@ -120,17 +91,12 @@ bool CEsmAiWanderDlg::DoModal(CEsmSubAI_W *pSubRecord) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiWanderDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiWanderDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmAiWanderDlg::OnInitDialog() {
 	ai_wdata_t *pAiData;
 	CString Buffer;
@@ -163,17 +129,12 @@ BOOL CEsmAiWanderDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmAiWanderDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiWanderDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmAiWanderDlg::OnOK() {
 	ai_wdata_t *pAiData;
 	CString Buffer;
@@ -199,7 +160,3 @@ void CEsmAiWanderDlg::OnOK() {
 
 	CDialog::OnOK();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmAiWanderDlg::OnOK()
- *=========================================================================*/

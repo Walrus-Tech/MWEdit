@@ -8,16 +8,10 @@
  *
  *=========================================================================*/
 
-/* Include Files */
 #include "dl_base.h"
 #include "dl_err.h"
 
 
-/*===========================================================================
- *
- * Begin Local Variables
- *
- *=========================================================================*/
 DEFINE_FILE("DL_Base.cpp");
 
 /* The current path seperator character (usually '\\' or '/') */
@@ -32,10 +26,6 @@ PQSORT_CMPFUNC l_QSortCmpFunc = NULL;
 #if defined(_DEBUG)
 	TCHAR ThisFunction[] = _T("?");
 #endif
-
-/*===========================================================================
- *      End of Local Variables
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -93,10 +83,6 @@ void CustomAssert(const TCHAR *pString,
 #endif
 }
 
-/*===========================================================================
- *      End of Function CustomAssert()
- *=========================================================================*/
-
 
 #if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
 /*===========================================================================
@@ -111,10 +97,6 @@ void CustomAssert(const TCHAR *pString,
 void throw(const TCHAR *pString) {
 	ErrorHandler.Exit(pString);
 }
-
-/*===========================================================================
- *      End of Function throw()
- *=========================================================================*/
 #endif
 
 #if !defined(_WIN32_WCE)
@@ -143,8 +125,4 @@ void qsort(void *pBase,
 	/* Call the standard qsort() algorithm with our inline compare function */
 	qsort(pBase, NumElements, ElementWidth, l_QSortCompare);
 }
-
-/*===========================================================================
- *      End of Function qsort()
- *=========================================================================*/
 #endif

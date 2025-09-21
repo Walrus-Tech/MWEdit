@@ -7,20 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmWeaponDlg.h"
 #include "EsmDlgArray.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmWeaponDlg, CEsmRecDialog);
 DEFINE_FILE("EsmWeaponDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmWeaponDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmWeaponDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmWeaponDlg)
 	ON_BN_CLICKED(IDC_ENCHANTEDIT, OnEnchantedit)
@@ -49,26 +35,17 @@ BEGIN_MESSAGE_MAP(CEsmWeaponDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmWeaponDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Constructor
  *
  *=========================================================================*/
-
 CEsmWeaponDlg::CEsmWeaponDlg() : CEsmRecDialog(CEsmWeaponDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmWeaponDlg)
 	//}}AFX_DATA_INIT
 	m_pWeapon = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmWeaponDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -76,7 +53,6 @@ CEsmWeaponDlg::CEsmWeaponDlg() : CEsmRecDialog(CEsmWeaponDlg::IDD) {
  * Class CEsmWeaponDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmWeaponDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -116,17 +92,12 @@ void CEsmWeaponDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmWeaponDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmWeaponDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmWeaponDlg::GetControlData()");
 	weapondata_t *pWeaponData;
@@ -235,17 +206,12 @@ void CEsmWeaponDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmWeaponDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmWeaponDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -312,17 +278,12 @@ bool CEsmWeaponDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmWeaponDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmWeaponDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -348,17 +309,12 @@ void CEsmWeaponDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmWeaponDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmWeaponDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -388,17 +344,12 @@ int CEsmWeaponDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmWeaponDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmWeaponDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pWeapon == NULL) {
@@ -459,17 +410,12 @@ void CEsmWeaponDlg::SetControlData() {
 	OnSelchangeTypelist();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmWeaponDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Event - void OnEnchantedit ();
  *
  *=========================================================================*/
-
 void CEsmWeaponDlg::OnEnchantedit() {
 	esmrecinfo_t *pRecInfo;
 	int Index;
@@ -483,17 +429,12 @@ void CEsmWeaponDlg::OnEnchantedit() {
 	m_pParent->EditRecord(pRecInfo, false);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmWeaponDlg::OnEnchantedit()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmWeaponDlg Event - void OnSelchangeTypelist ();
  *
  *=========================================================================*/
-
 void CEsmWeaponDlg::OnSelchangeTypelist() {
 	int ListIndex;
 	int Type;
@@ -519,7 +460,3 @@ void CEsmWeaponDlg::OnSelchangeTypelist() {
 			break;
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CEsmWeaponDlg::OnSelchangeTypelist()
- *=========================================================================*/

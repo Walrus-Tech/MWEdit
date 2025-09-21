@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmNpcPage1.h"
@@ -17,12 +14,6 @@
 #include "MWEditDoc.h"
 #include "EsmDlgArray.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -33,17 +24,12 @@
 IMPLEMENT_DYNCREATE(CEsmNpcPage1, CPropertyPage);
 DEFINE_FILE("EsmNpcPage1.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmNpcPage1 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmNpcPage1, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmNpcPage1)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONKEY, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordKey)
@@ -57,25 +43,16 @@ BEGIN_MESSAGE_MAP(CEsmNpcPage1, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmNpcPage1 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Function - int l_SortCallback (lParam1, lParam2, lUserData);
  *
  *=========================================================================*/
-
 int __stdcall l_SortCallback(LPARAM lParam1, LPARAM lParam2, LPARAM lUserData) {
 	CEsmNpcPage1 *pPage = (CEsmNpcPage1 *)lUserData;
 	return pPage->SortCallback(lParam1, lParam2);
 }
-
-/*===========================================================================
- *      End of Function l_SortCallback()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -83,7 +60,6 @@ int __stdcall l_SortCallback(LPARAM lParam1, LPARAM lParam2, LPARAM lUserData) {
  * Class CEsmNpcPage1 Constructor
  *
  *=========================================================================*/
-
 CEsmNpcPage1::CEsmNpcPage1() : CPropertyPage(CEsmNpcPage1::IDD) {
 	//{{AFX_DATA_INIT(CEsmNpcPage1)
 	//}}AFX_DATA_INIT
@@ -93,23 +69,14 @@ CEsmNpcPage1::CEsmNpcPage1() : CPropertyPage(CEsmNpcPage1::IDD) {
 	m_SortCol = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmNpcPage1 Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Destructor
  *
  *=========================================================================*/
-
 CEsmNpcPage1::~CEsmNpcPage1() {
 }
-
-/*===========================================================================
- *      End of Class CEsmNpcPage1 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -117,7 +84,6 @@ CEsmNpcPage1::~CEsmNpcPage1() {
  * Class CEsmNpcPage1 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -162,17 +128,12 @@ void CEsmNpcPage1::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::GetControlData() {
 	CEsmNpc *pNpc;
 	npclongdata_t *pLongData;
@@ -306,26 +267,17 @@ void CEsmNpcPage1::GetControlData() {
 	pNpc->SetFlag(Flag);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmNpcPage1::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage1::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -333,7 +285,6 @@ CMWEditDoc *CEsmNpcPage1::GetDocument() {
  * Class CEsmNpcPage1 Method - bool IsAutoCalc (void);
  *
  *=========================================================================*/
-
 bool CEsmNpcPage1::IsAutoCalc() {
 	if (!::IsWindow(m_AutoCalcCheck.m_hWnd)) {
 		return false;
@@ -342,17 +293,12 @@ bool CEsmNpcPage1::IsAutoCalc() {
 	return m_AutoCalcCheck.GetCheck() != 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::IsAutoCalc()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - void OnAnimationbutton ();
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::OnAnimationbutton() {
 	CString Buffer;
 	bool Result;
@@ -364,24 +310,15 @@ void CEsmNpcPage1::OnAnimationbutton() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnAnimationbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - void OnAutocalccheck ();
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::OnAutocalccheck() {
 	UpdateAutoCalc();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnAutocalccheck()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -389,7 +326,6 @@ void CEsmNpcPage1::OnAutocalccheck() {
  * Class CEsmNpcPage1 Event - void OnEndlabeleditItemlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
@@ -422,17 +358,12 @@ void CEsmNpcPage1::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	*pResult = 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnEndlabeleditItemlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmNpcPage1::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 
@@ -476,17 +407,12 @@ BOOL CEsmNpcPage1::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmNpcPage1::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
@@ -517,17 +443,12 @@ LRESULT CEsmNpcPage1::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - LRESULT OnRecordSort (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmNpcPage1::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	m_SortCol = pSortData->iSubItem;
@@ -536,24 +457,15 @@ LRESULT CEsmNpcPage1::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnRecordSort()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmNpcPage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -561,7 +473,6 @@ int CEsmNpcPage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmNpcPage1 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::SetControlData() {
 	CEsmNpc *pNpc;
 	CString Buffer;
@@ -695,17 +606,12 @@ void CEsmNpcPage1::SetControlData() {
 	m_EssentialCheck.SetCheck(pNpc->IsEssential());
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Method - int SortCallback (lParam1, lParam2);
  *
  *=========================================================================*/
-
 int CEsmNpcPage1::SortCallback(LPARAM lParam1, LPARAM lParam2) {
 	int Result = 0;
 
@@ -722,17 +628,12 @@ int CEsmNpcPage1::SortCallback(LPARAM lParam1, LPARAM lParam2) {
 	return Result;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::SortCallback()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Method - void UpdateAutoCalc (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::UpdateAutoCalc() {
 	BOOL Result = !m_AutoCalcCheck.GetCheck();
 
@@ -750,17 +651,12 @@ void CEsmNpcPage1::UpdateAutoCalc() {
 	m_RepText.EnableWindow(Result);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage1::UpdateAutoCalc()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage1 Event - void OnScriptEdit ();
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::OnScriptEdit() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -772,17 +668,12 @@ void CEsmNpcPage1::OnScriptEdit() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage1::OnScriptEdit()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Body Part Rebuild Events
  *
  *=========================================================================*/
-
 void CEsmNpcPage1::OnFemalecheck() {
 	CString RaceName;
 	m_RaceList.GetWindowText(RaceName);
@@ -803,7 +694,3 @@ void CEsmNpcPage1::OnFemalecheck() {
 void CEsmNpcPage1::OnSelchangeRacelist() {
 	OnFemalecheck();
 }
-
-/*===========================================================================
- *      End of Body Part Rebuild Events
- *=========================================================================*/

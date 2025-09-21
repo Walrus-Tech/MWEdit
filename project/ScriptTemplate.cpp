@@ -7,23 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "scripttemplate.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 DEFINE_FILE("ScriptTemplate.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,14 +18,9 @@ DEFINE_FILE("ScriptTemplate.cpp");
  * Class CEsmScriptTemplate Constructor
  *
  *=========================================================================*/
-
 CEsmScriptTemplate::CEsmScriptTemplate () : m_TemplateVars(0) {
 	//DEFINE_FUNCTION("CEsmScriptTemplate::CEsmScriptTemplate()");
 }
-
-/*===========================================================================
- *      End of Class CEsmScriptTemplate Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,17 +28,12 @@ CEsmScriptTemplate::CEsmScriptTemplate () : m_TemplateVars(0) {
  * Class CEsmScriptTemplate Method - void Destroy (void);
  *
  *=========================================================================*/
-
 void CEsmScriptTemplate::Destroy() {
 	//DEFINE_FUNCTION("CEsmScriptTemplate::Destroy()");
 	m_TemplateText.Empty();
 	m_Filename.Empty();
 	ClearTemplateVars();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -67,7 +44,6 @@ void CEsmScriptTemplate::Destroy() {
  * character. Returns false on any error. Protected class method.
  *
  *=========================================================================*/
-
 bool CEsmScriptTemplate::AddTemplateVariable(const TCHAR *pVariable, const int Length) {
 	TCHAR Buffer[ESM_SCRTEMP_MAXVARSIZE + 1];
 
@@ -83,10 +59,6 @@ bool CEsmScriptTemplate::AddTemplateVariable(const TCHAR *pVariable, const int L
 	return AddTemplateVar(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::AddTemplateVariable()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -95,7 +67,6 @@ bool CEsmScriptTemplate::AddTemplateVariable(const TCHAR *pVariable, const int L
  * Adds the given template variable. Returns false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScriptTemplate::AddTemplateVar(const TCHAR *pVariable) {
 	DEFINE_FUNCTION("CEsmScriptTemplate::AddTemplateVar()");
 	esmscrtempvar_t *pTempVar;
@@ -116,10 +87,6 @@ bool CEsmScriptTemplate::AddTemplateVar(const TCHAR *pVariable) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::AddTemplateVar()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -128,7 +95,6 @@ bool CEsmScriptTemplate::AddTemplateVar(const TCHAR *pVariable) {
  * Deletes any defined template variables in the array.
  *
  *=========================================================================*/
-
 void CEsmScriptTemplate::ClearTemplateVars() {
 	DEFINE_FUNCTION("CEsmScriptTemplate::ClearTemplateVars()");
 	esmscrtempvar_t *pTempVar;
@@ -142,10 +108,6 @@ void CEsmScriptTemplate::ClearTemplateVars() {
 	m_TemplateVars.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::ClearTemplateVars()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -156,7 +118,6 @@ void CEsmScriptTemplate::ClearTemplateVars() {
  * on any error.
  *
  *=========================================================================*/
-
 bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CCsvRow *pRow) {
 	TCHAR *pParse;
 	TCHAR *pLastVarStart;
@@ -266,10 +227,6 @@ bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CC
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::ConvertText()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -279,7 +236,6 @@ bool CEsmScriptTemplate::ConvertText(TCHAR *pOutBuffer, const int BufferSize, CC
  * on any error.
  *
  *=========================================================================*/
-
 esmscrtempvar_t *CEsmScriptTemplate::FindTemplateVar(const TCHAR *pVariable) {
 	esmscrtempvar_t *pTempVar;
 	int Index;
@@ -298,10 +254,6 @@ esmscrtempvar_t *CEsmScriptTemplate::FindTemplateVar(const TCHAR *pVariable) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::FindTemplateVar()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -311,7 +263,6 @@ esmscrtempvar_t *CEsmScriptTemplate::FindTemplateVar(const TCHAR *pVariable) {
  * NULL on any error.
  *
  *=========================================================================*/
-
 CSString *CEsmScriptTemplate::GetCsvString(const TCHAR *pVarName, CCsvRow *pRow) {
 	//DEFINE_FUNCTION("CEsmScriptTemplate::GetCsvString()");
 	esmscrtempvar_t *pTempVar;
@@ -346,10 +297,6 @@ CSString *CEsmScriptTemplate::GetCsvString(const TCHAR *pVarName, CCsvRow *pRow)
 	return pCsvString;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::GetCsvString()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -358,7 +305,6 @@ CSString *CEsmScriptTemplate::GetCsvString(const TCHAR *pVarName, CCsvRow *pRow)
  * Attenpt to load the given template file. Returns false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScriptTemplate::Load(const TCHAR *pFilename) {
 	CGenFile File;
 	bool Result;
@@ -397,10 +343,6 @@ bool CEsmScriptTemplate::Load(const TCHAR *pFilename) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::Load()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -410,7 +352,6 @@ bool CEsmScriptTemplate::Load(const TCHAR *pFilename) {
  * false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScriptTemplate::ParseText() {
 	const TCHAR *pParse;
 	const TCHAR *pLastVarStart;
@@ -481,7 +422,3 @@ bool CEsmScriptTemplate::ParseText() {
 
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptTemplate::ParseText()
- *=========================================================================*/

@@ -15,21 +15,12 @@
  *    record is editted.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "EsmRecDialog.h"
 #include "EsmDlgArray.h"
 #include "MWEdit.h"
 #include "MWEditDoc.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -40,17 +31,12 @@
 IMPLEMENT_DYNCREATE(CEsmRecDialog, CFormView);
 DEFINE_FILE("EsmRecDialog.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmRecDialog Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmRecDialog, CFormView)
 	//{{AFX_MSG_MAP(CEsmRecDialog)
 	ON_WM_DESTROY()
@@ -66,17 +52,12 @@ BEGIN_MESSAGE_MAP(CEsmRecDialog, CFormView)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmRecDialog Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Constructor
  *
  *=========================================================================*/
-
 CEsmRecDialog::CEsmRecDialog(const int IDD) : CFormView(IDD) {
 	//{{AFX_DATA_INIT(CEsmRecDialog)
 	//}}AFX_DATA_INIT
@@ -96,25 +77,16 @@ CEsmRecDialog::CEsmRecDialog(const int IDD) : CFormView(IDD) {
 	m_RecEditInfo.pRecInfo = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmRecDialog Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Destructor
  *
  *=========================================================================*/
-
 CEsmRecDialog::~CEsmRecDialog() {
 	m_RecEditInfo.NewID.Empty();
 	m_RecEditInfo.OldID.Empty();
 }
-
-/*===========================================================================
- *      End of Class CEsmRecDialog Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -125,7 +97,6 @@ CEsmRecDialog::~CEsmRecDialog() {
  * modified.
  *
  *=========================================================================*/
-
 void CEsmRecDialog::CheckIDText() {
 	/* Ignore if the dialog doesn't have any ID text control */
 	if (!m_HasIDText) {
@@ -142,26 +113,18 @@ void CEsmRecDialog::CheckIDText() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::CheckIDText()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmRecDialog::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmRecDialog)
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -169,16 +132,11 @@ void CEsmRecDialog::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmRecDialog Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmRecDialog::GetDocument() {
 	ASSERT(m_pParent != NULL);
 	ASSERT(m_pParent->GetDocument() != NULL);
 	return m_pParent->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -186,7 +144,6 @@ CMWEditDoc *CEsmRecDialog::GetDocument() {
  * Class CEsmRecDialog Method - bool IsRecord (pRecInfo);
  *
  *=========================================================================*/
-
 bool CEsmRecDialog::IsRecord(esmrecinfo_t *pRecInfo) {
 	if (pRecInfo == NULL || GetRecInfo() == NULL) {
 		return false;
@@ -195,17 +152,12 @@ bool CEsmRecDialog::IsRecord(esmrecinfo_t *pRecInfo) {
 	return GetRecInfo()->pRecord->IsSame(pRecInfo->pRecord);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::IsRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnDestroy ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnDestroy() {
 	CFormView::OnDestroy();
 
@@ -214,17 +166,12 @@ void CEsmRecDialog::OnDestroy() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnDestroy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnCancel ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnCancel() {
 	DEFINE_FUNCTION("CEsmRecDialog::OnCancel()");
 
@@ -238,17 +185,12 @@ void CEsmRecDialog::OnCancel() {
 	GetParentFrame()->DestroyWindow();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnCancel()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnEditCopy ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnEditCopy() {
 	CWnd *pFocusWnd = GetFocus();
 	CEdit *pEditWnd;
@@ -269,17 +211,12 @@ void CEsmRecDialog::OnEditCopy() {
 	pEditWnd->Copy();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnEditCopy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnEditCut ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnEditCut() {
 	CWnd *pFocusWnd = GetFocus();
 	CEdit *pEditWnd;
@@ -300,17 +237,12 @@ void CEsmRecDialog::OnEditCut() {
 	pEditWnd->Cut();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnEditCut()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnEditPaste ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnEditPaste() {
 	CWnd *pFocusWnd = GetFocus();
 	CEdit *pEditWnd;
@@ -331,17 +263,12 @@ void CEsmRecDialog::OnEditPaste() {
 	pEditWnd->Paste();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnEditPaste()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnIconbutton ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnIconbutton() {
 	CString Filename;
 	bool Result;
@@ -354,17 +281,12 @@ void CEsmRecDialog::OnIconbutton() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnIconbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnInitialUpdate() {
 	CFormView::OnInitialUpdate();
 	ResizeParentToFit(FALSE);
@@ -384,17 +306,12 @@ void CEsmRecDialog::OnInitialUpdate() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnModelbutton ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnModelbutton() {
 	CString Filename;
 	bool Result;
@@ -406,25 +323,16 @@ void CEsmRecDialog::OnModelbutton() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnModelbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - int OnPostSaveRecord (void);
  *
  *=========================================================================*/
-
 int CEsmRecDialog::OnPostSaveRecord() {
 	ASSERT(m_pParent != NULL);
 	return m_pParent->OnPostSaveRecord(&m_RecEditInfo);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnPostSaveRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -432,7 +340,6 @@ int CEsmRecDialog::OnPostSaveRecord() {
  * Class CEsmRecDialog Method - int OnPreSaveRecord (void);
  *
  *=========================================================================*/
-
 int CEsmRecDialog::OnPreSaveRecord() {
 	//DEFINE_FUNCTION("CEsmRecDialog::OnPreSaveRecord()");
 	/* Ensure a valid object state */
@@ -448,17 +355,12 @@ int CEsmRecDialog::OnPreSaveRecord() {
 	return m_pParent->OnPreSaveRecord(&m_RecEditInfo);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::OnPreSaveRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnSave ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnSave() {
 	int Result;
 	/* Call the pre-save event */
@@ -487,17 +389,12 @@ void CEsmRecDialog::OnSave() {
 	GetParentFrame()->DestroyWindow();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnSave()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnScriptEdit ();
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnScriptEdit() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -510,17 +407,12 @@ void CEsmRecDialog::OnScriptEdit() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnScriptEdit()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Event - void OnUpdate (pSender, lHint, pHint);
  *
  *=========================================================================*/
-
 void CEsmRecDialog::OnUpdate(CView *pSender, LPARAM lHint, CObject *pHint) {
 	switch (lHint) {
 		case MWEDITDOC_HINT_UPDATE:
@@ -541,17 +433,12 @@ void CEsmRecDialog::OnUpdate(CView *pSender, LPARAM lHint, CObject *pHint) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRecDialog::OnUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Method - BOOL PreTranslateMessage (pMsg);
  *
  *=========================================================================*/
-
 BOOL CEsmRecDialog::PreTranslateMessage(MSG *pMsg) {
 	int Result;
 
@@ -566,17 +453,12 @@ BOOL CEsmRecDialog::PreTranslateMessage(MSG *pMsg) {
 	return CFormView::PreTranslateMessage(pMsg);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::PreTranslateMessage()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRecDialog Method - void UpdateTitle (pItemID);
  *
  *=========================================================================*/
-
 void CEsmRecDialog::UpdateTitle(const TCHAR *pItemID) {
 	CString Buffer;
 	Buffer.Format(_T("%s -- %s -- %s"),
@@ -585,7 +467,3 @@ void CEsmRecDialog::UpdateTitle(const TCHAR *pItemID) {
 	              (pItemID && *pItemID != NULL_CHAR) ? pItemID : _T("New Object"));
 	SetInternalWindowText(GetParentFrame()->m_hWnd, Buffer);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmRecDialog::UpdateTitle()
- *=========================================================================*/

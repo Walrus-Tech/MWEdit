@@ -7,20 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmSubListCtrl.h"
 #include "Resource.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmSubListCtrl, CEsmListCtrl);
 DEFINE_FILE("EsmSubListCtrl.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Default List Sort Functions
  *
  *=========================================================================*/
-
 int CALLBACK l_ItemSubSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 	CEsmSubCellRef *pCellRef1 = (CEsmSubCellRef *)lParam1;
 	CEsmSubCellRef *pCellRef2 = (CEsmSubCellRef *)lParam2;
@@ -68,17 +54,12 @@ int CALLBACK l_ItemSubSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParam
 	return Result;
 }
 
-/*===========================================================================
- *      End of Default List Sort Functions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmSubListCtrl Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmSubListCtrl, CEsmListCtrl)
 	//{{AFX_MSG_MAP(CEsmSubListCtrl)
 	ON_NOTIFY_REFLECT(LVN_COLUMNCLICK, OnColumnclick)
@@ -87,23 +68,14 @@ BEGIN_MESSAGE_MAP(CEsmSubListCtrl, CEsmListCtrl)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmSubListCtrl Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSubListCtrl Constructor
  *
  *=========================================================================*/
-
 CEsmSubListCtrl::CEsmSubListCtrl() {
 }
-
-/*===========================================================================
- *      End of Class CEsmSubListCtrl Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -111,13 +83,8 @@ CEsmSubListCtrl::CEsmSubListCtrl() {
  * Class CEsmSubListCtrl Destructor
  *
  *=========================================================================*/
-
 CEsmSubListCtrl::~CEsmSubListCtrl() {
 }
-
-/*===========================================================================
- *      End of Class CEsmSubListCtrl Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -125,7 +92,6 @@ CEsmSubListCtrl::~CEsmSubListCtrl() {
  * Class CEsmSubListCtrl Method - int AddItem (pCellRef);
  *
  *=========================================================================*/
-
 int CEsmSubListCtrl::AddItem(CEsmSubCellRef *pCellRef) {
 	esmrecinfo_t *pRecInfo;
 	CEsmSubNameFix *pName;
@@ -168,10 +134,6 @@ int CEsmSubListCtrl::AddItem(CEsmSubCellRef *pCellRef) {
 	return ListIndex;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSubListCtrl::AddItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -181,7 +143,6 @@ int CEsmSubListCtrl::AddItem(CEsmSubCellRef *pCellRef) {
  * reference is not found.
  *
  *=========================================================================*/
-
 int CEsmSubListCtrl::FindCellRef(CEsmSubCellRef *pCellRef) {
 	CEsmSubCellRef *pCellRef1;
 	int Index;
@@ -200,17 +161,12 @@ int CEsmSubListCtrl::FindCellRef(CEsmSubCellRef *pCellRef) {
 	return -1;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSubListCtrl::FindCellRef()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSubListCtrl Method - esmrecinfo_t* GetRecInfo (Item);
  *
  *=========================================================================*/
-
 esmrecinfo_t *CEsmSubListCtrl::GetRecInfo(const int Item) {
 	if (Item < 0 || Item >= GetItemCount()) {
 		return NULL;
@@ -225,17 +181,12 @@ esmrecinfo_t *CEsmSubListCtrl::GetRecInfo(const int Item) {
 	return pCellRef->GetRecInfo();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSubListCtrl::GetRecInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSubListCtrl Event - void OnBeginDrag (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmSubListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
 	DEFINE_FUNCTION("CEsmSubListCtrl::OnBeginDrag()");
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
@@ -327,17 +278,12 @@ void CEsmSubListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
 	SetCapture();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSubListCtrl::OnBeginDrag()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSubListCtrl Event - void OnColumnclick (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmSubListCtrl::OnColumnclick(NMHDR *pNMHDR, LRESULT *pResult) {
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	int Data;
@@ -371,17 +317,12 @@ void CEsmSubListCtrl::OnColumnclick(NMHDR *pNMHDR, LRESULT *pResult) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSubListCtrl::OnColumnclick()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSubListCtrl Event - void OnCustomdraw (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmSubListCtrl::OnCustomdraw(NMHDR *pNMHDR, LRESULT *pResult) {
 	NMLVCUSTOMDRAW *pLVCD = reinterpret_cast<NMLVCUSTOMDRAW *>(pNMHDR);
 	/* Take the default processing unless we set this to something else below. */
@@ -411,17 +352,12 @@ void CEsmSubListCtrl::OnCustomdraw(NMHDR *pNMHDR, LRESULT *pResult) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSubListCtrl::OnCustomdraw()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSubListCtrl Method - void SetItem (ListIndex, pCellRef);
  *
  *=========================================================================*/
-
 void CEsmSubListCtrl::SetItem(const int ListIndex, CEsmSubCellRef *pCellRef) {
 	CEsmRecord *pRecord;
 	int ColIndex;
@@ -454,7 +390,3 @@ void CEsmSubListCtrl::SetItem(const int ListIndex, CEsmSubCellRef *pCellRef) {
 		}
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmSubListCtrl::SetItem()
- *=========================================================================*/

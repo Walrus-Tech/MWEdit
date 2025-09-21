@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmFactionDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,17 +21,12 @@
 DEFINE_FILE("EsmFactionDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmFactionDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmFactionDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmFactionDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmFactionDlg)
 	ON_NOTIFY(LVN_ITEMCHANGING, IDC_RANKLIST, OnItemchangingRanklist)
@@ -50,17 +36,12 @@ BEGIN_MESSAGE_MAP(CEsmFactionDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmFactionDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Constructor
  *
  *=========================================================================*/
-
 CEsmFactionDlg::CEsmFactionDlg() : CEsmRecDialog(CEsmFactionDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmFactionDlg)
 	//}}AFX_DATA_INIT
@@ -69,17 +50,12 @@ CEsmFactionDlg::CEsmFactionDlg() : CEsmRecDialog(CEsmFactionDlg::IDD) {
 	m_CurrentReaction = -1;
 }
 
-/*===========================================================================
- *      End of Class CEsmFactionDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -115,17 +91,12 @@ void CEsmFactionDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmFactionDlg::GetControlData()");
 	factiondata_t *pFactionData;
@@ -208,17 +179,12 @@ void CEsmFactionDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void GetRankData (void);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::GetRankData() {
 	CString Buffer;
 
@@ -240,17 +206,12 @@ void CEsmFactionDlg::GetRankData() {
 	m_RankList.SetItemText(m_CurrentRank, MWESM_RANKLIST_FACTREP, Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::GetRankData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void GetReactionData (void);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::GetReactionData() {
 	CString Buffer;
 
@@ -264,17 +225,12 @@ void CEsmFactionDlg::GetReactionData() {
 	m_ReactionList.SetItemText(m_CurrentReaction, MWESM_REACLIST_VALUE, TrimStringSpace(Buffer));
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::GetReactionData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmFactionDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -293,17 +249,12 @@ bool CEsmFactionDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Event - void OnDelreaction ();
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::OnDelreaction() {
 	POSITION SelPos;
 	int ListIndex;
@@ -326,17 +277,12 @@ void CEsmFactionDlg::OnDelreaction() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFactionDlg::OnDelreaction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -422,17 +368,12 @@ void CEsmFactionDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFactionDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Event - void OnItemchangingRanklist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::OnItemchangingRanklist(NMHDR *pNMHDR, LRESULT *pResult) {
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
@@ -455,17 +396,12 @@ void CEsmFactionDlg::OnItemchangingRanklist(NMHDR *pNMHDR, LRESULT *pResult) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFactionDlg::OnItemchangingRanklist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Event - void OnItemchangingReactionlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::OnItemchangingReactionlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
@@ -488,17 +424,12 @@ void CEsmFactionDlg::OnItemchangingReactionlist(NMHDR *pNMHDR, LRESULT *pResult)
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFactionDlg::OnItemchangingReactionlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Event - void OnNewreaction ();
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::OnNewreaction() {
 	m_AdjustText.EnableWindow(TRUE);
 	m_FactionList.EnableWindow(TRUE);
@@ -507,17 +438,12 @@ void CEsmFactionDlg::OnNewreaction() {
 	m_ReactionList.SetItemState(0, LVIS_SELECTED, LVIS_SELECTED );
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFactionDlg::OnNewreaction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmFactionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the faction list */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_FACT)) {
@@ -536,17 +462,12 @@ int CEsmFactionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFactionDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::SetControlData() {
 	factiondata_t *pFactionData;
 	CEsmSubNameFix *pSubName;
@@ -641,17 +562,12 @@ void CEsmFactionDlg::SetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void SetRankData (Rank);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::SetRankData(const int Rank) {
 	CString Buffer;
 	Buffer = m_RankList.GetItemText(Rank, MWESM_RANKLIST_NAME);
@@ -669,17 +585,12 @@ void CEsmFactionDlg::SetRankData(const int Rank) {
 	m_CurrentRank = Rank;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::SetRankData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFactionDlg Method - void SetReactionData (Rank);
  *
  *=========================================================================*/
-
 void CEsmFactionDlg::SetReactionData(const int Reaction) {
 	CString Buffer;
 	Buffer = m_ReactionList.GetItemText(Reaction, MWESM_REACLIST_NAME);
@@ -688,7 +599,3 @@ void CEsmFactionDlg::SetReactionData(const int Reaction) {
 	m_AdjustText.SetWindowText(Buffer);
 	m_CurrentReaction = Reaction;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmFactionDlg::SetReactionData()
- *=========================================================================*/

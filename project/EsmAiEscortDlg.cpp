@@ -7,21 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmAiEscortDlg.h"
 #include "EsmUtils.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -31,17 +21,12 @@
 
 DEFINE_FILE("EsmAiEscortDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmAiEscortDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmAiEscortDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmAiEscortDlg)
 	ON_BN_CLICKED(IDC_ESCORTCHECK, OnEscortcheck)
@@ -49,26 +34,17 @@ BEGIN_MESSAGE_MAP(CEsmAiEscortDlg, CDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmAiEscortDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiEscortDlg Constructor
  *
  *=========================================================================*/
-
 CEsmAiEscortDlg::CEsmAiEscortDlg(CWnd* pParent) : CDialog(CEsmAiEscortDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmAiEscortDlg)
 	//}}AFX_DATA_INIT
 	m_pSubRecord = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmAiEscortDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -76,9 +52,9 @@ CEsmAiEscortDlg::CEsmAiEscortDlg(CWnd* pParent) : CDialog(CEsmAiEscortDlg::IDD, 
  * Class CEsmAiEscortDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmAiEscortDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmAiEscortDlg)
 	DDX_Control(pDX, IDC_ZTEXT, m_ZText);
 	DDX_Control(pDX, IDC_YTEXT, m_YText);
@@ -91,17 +67,12 @@ void CEsmAiEscortDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiEscortDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiEscortDlg Method - bool DoModal (pSubRecord, pCellName, pTitle);
  *
  *=========================================================================*/
-
 bool CEsmAiEscortDlg::DoModal(CEsmSubAI_E *pSubRecord,
                               const TCHAR *pCellName,
                               const TCHAR *pTitle) {
@@ -128,17 +99,12 @@ bool CEsmAiEscortDlg::DoModal(CEsmSubAI_E *pSubRecord,
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiEscortDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiEscortDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmAiEscortDlg::OnInitDialog() {
 	ai_edata_t *pAiData;
 	CString Buffer;
@@ -185,17 +151,12 @@ BOOL CEsmAiEscortDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmAiEscortDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiEscortDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmAiEscortDlg::OnOK() {
 	ai_edata_t *pAiData;
 	CString Buffer;
@@ -235,17 +196,12 @@ void CEsmAiEscortDlg::OnOK() {
 	CDialog::OnOK();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmAiEscortDlg::OnOK()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CheckBox Events
  *
  *=========================================================================*/
-
 void CEsmAiEscortDlg::OnEscortcheck() {
 	m_CellList.EnableWindow(m_EscortCheck.GetCheck() != 0);
 	m_PointCheck.EnableWindow(m_EscortCheck.GetCheck() != 0);
@@ -259,7 +215,3 @@ void CEsmAiEscortDlg::OnPointcheck() {
 	m_YText.EnableWindow(m_EscortCheck.GetCheck() != 0 && m_PointCheck.GetCheck() != 0);
 	m_ZText.EnableWindow(m_EscortCheck.GetCheck() != 0 && m_PointCheck.GetCheck() != 0);
 }
-
-/*===========================================================================
- *      End of CheckBox Events
- *=========================================================================*/

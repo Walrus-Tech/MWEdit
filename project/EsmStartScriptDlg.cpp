@@ -10,19 +10,10 @@
  *  - Used the base class script list member.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmStartScriptDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -33,26 +24,17 @@
 IMPLEMENT_DYNCREATE(CEsmStartScriptDlg, CEsmRecDialog);
 DEFINE_FILE("EsmStartScriptDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmStartScriptDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmStartScriptDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmStartScriptDlg)
 	ON_CBN_SELCHANGE(IDC_SCRIPTLIST, OnSelchangeScriptlist)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmStartScriptDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -60,16 +42,11 @@ END_MESSAGE_MAP()
  * Class CEsmStartScriptDlg Constructor
  *
  *=========================================================================*/
-
 CEsmStartScriptDlg::CEsmStartScriptDlg (CWnd* pParent) : CEsmRecDialog(CEsmStartScriptDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmStartScriptDlg)
 	//}}AFX_DATA_INIT
 	m_pStartScript = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmStartScriptDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -77,9 +54,9 @@ CEsmStartScriptDlg::CEsmStartScriptDlg (CWnd* pParent) : CEsmRecDialog(CEsmStart
  * Class CEsmStartScriptDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmStartScriptDlg::DoDataExchange(CDataExchange *pDX) {
 	CEsmRecDialog::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmStartScriptDlg)
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -88,17 +65,12 @@ void CEsmStartScriptDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmStartScriptDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStartScriptDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmStartScriptDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmStartScriptDlg::GetControlData()");
 	CString Buffer;
@@ -125,17 +97,12 @@ void CEsmStartScriptDlg::GetControlData() {
 	m_pStartScript->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmStartScriptDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStartScriptDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmStartScriptDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -150,17 +117,12 @@ bool CEsmStartScriptDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmStartScriptDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStartScriptDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmStartScriptDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -181,24 +143,15 @@ void CEsmStartScriptDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmStartScriptDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStartScriptDlg Event - void OnSelchangeScriptlist ();
  *
  *=========================================================================*/
-
 void CEsmStartScriptDlg::OnSelchangeScriptlist() {
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmStartScriptDlg::OnSelchangeScriptlist()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -206,7 +159,6 @@ void CEsmStartScriptDlg::OnSelchangeScriptlist() {
  * Class CEsmStartScriptDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmStartScriptDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -228,17 +180,12 @@ int CEsmStartScriptDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmStartScriptDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStartScriptDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmStartScriptDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pStartScript == NULL) {
@@ -256,7 +203,3 @@ void CEsmStartScriptDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pStartScript->IsBlocked());
 	m_PersistCheck.SetCheck(m_pStartScript->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmStartScriptDlg::SetControlData()
- *=========================================================================*/

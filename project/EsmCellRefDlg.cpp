@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmCellRefDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -29,25 +20,16 @@
 
 DEFINE_FILE("EsmCellRefDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmCellRefDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmCellRefDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmCellRefDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmCellRefDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -55,7 +37,6 @@ END_MESSAGE_MAP()
  * Class CEsmCellRefDlg Constructor
  *
  *=========================================================================*/
-
 CEsmCellRefDlg::CEsmCellRefDlg(CWnd *pParent) : CDialog(CEsmCellRefDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmCellRefDlg)
 	//}}AFX_DATA_INIT
@@ -65,17 +46,12 @@ CEsmCellRefDlg::CEsmCellRefDlg(CWnd *pParent) : CDialog(CEsmCellRefDlg::IDD, pPa
 	m_IsAlreadyNew = false;
 }
 
-/*===========================================================================
- *      End of Class CEsmCellRefDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCellRefDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmCellRefDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 
@@ -90,10 +66,6 @@ void CEsmCellRefDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCellRefDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -102,7 +74,6 @@ void CEsmCellRefDlg::DoDataExchange(CDataExchange *pDX) {
  * Description
  *
  *=========================================================================*/
-
 bool CEsmCellRefDlg::DoModal(CEsmSubCellRef *pCellRef, const bool IsNew, CEsmCell *pCell) {
 	//DEFINE_FUNCTION("CEsmCellRefDlg::DoModal()");
 	int Result;
@@ -126,17 +97,12 @@ bool CEsmCellRefDlg::DoModal(CEsmSubCellRef *pCellRef, const bool IsNew, CEsmCel
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCellRefDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCellRefDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCellRefDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmCellRefDlg::GetControlData()");
 	CEsmSubPos6 *pPosition;
@@ -198,24 +164,15 @@ void CEsmCellRefDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCellRefDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCellRefDlg Event - void OnCancel ();
  *
  *=========================================================================*/
-
 void CEsmCellRefDlg::OnCancel() {
 	CDialog::OnCancel();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCellRefDlg::OnCancel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -223,16 +180,11 @@ void CEsmCellRefDlg::OnCancel() {
  * Class CEsmCellRefDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmCellRefDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	SetControlData();
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCellRefDlg::OnInitDialog()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -240,15 +192,10 @@ BOOL CEsmCellRefDlg::OnInitDialog() {
  * Class CEsmCellRefDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmCellRefDlg::OnOK() {
 	GetControlData();
 	CDialog::OnOK();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCellRefDlg::OnOK()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -256,7 +203,6 @@ void CEsmCellRefDlg::OnOK() {
  * Class CEsmCellRefDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCellRefDlg::SetControlData() {
 	CEsmSubPos6 *pPosition;
 	CEsmSubFloat *pScale;
@@ -299,7 +245,3 @@ void CEsmCellRefDlg::SetControlData() {
 		m_ScaleText.SetWindowText(_T("1.0"));
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCellRefDlg::SetControlData()
- *=========================================================================*/

@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmSpellDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,17 +21,12 @@
 IMPLEMENT_DYNCREATE(CEsmSpellDlg, CEsmRecDialog);
 DEFINE_FILE("EsmSpellDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmSpellDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmSpellDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmSpellDlg)
 	ON_BN_CLICKED(IDC_AUTOCALCCHECK, OnAutocalccheck)
@@ -102,17 +88,12 @@ BEGIN_MESSAGE_MAP(CEsmSpellDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmSpellDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Constructor
  *
  *=========================================================================*/
-
 CEsmSpellDlg::CEsmSpellDlg() : CEsmRecDialog(CEsmSpellDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmSpellDlg)
 	//}}AFX_DATA_INIT
@@ -126,17 +107,12 @@ CEsmSpellDlg::CEsmSpellDlg() : CEsmRecDialog(CEsmSpellDlg::IDD) {
 	m_DisableCost = false;
 }
 
-/*===========================================================================
- *      End of Class CEsmSpellDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -234,17 +210,12 @@ void CEsmSpellDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL8, m_TotalCostText[7]);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSpellDlg::GetControlData()");
 	spelldata_t *pSpellData;
@@ -306,17 +277,12 @@ void CEsmSpellDlg::GetControlData() {
 	GetEffectData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void GetEffectData (EffectIndex);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::GetEffectData(const int EffectIndex) {
 	CEsmSubENAM *pEnchantSubRec;
 	enchanteffect_t *pSpellData;
@@ -392,17 +358,12 @@ void CEsmSpellDlg::GetEffectData(const int EffectIndex) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::GetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void GetEffectData (void);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::GetEffectData() {
 	//DEFINE_FUNCTION("CEsmSpellDlg::GetEffectData()");
 	int Index;
@@ -414,17 +375,12 @@ void CEsmSpellDlg::GetEffectData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::GetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmSpellDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -447,17 +403,12 @@ bool CEsmSpellDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
@@ -480,17 +431,12 @@ void CEsmSpellDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSpellDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Event - void OnSelChangeEffectList (ListIndex);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::OnSelChangeEffectList(const int ListIndex) {
 	const esmeffectdata_t *pEffectData = NULL;
 	int EffectIndex;
@@ -593,25 +539,16 @@ void CEsmSpellDlg::OnSelChangeEffectList(const int ListIndex) {
 	m_Modified = true;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSpellDlg::OnSelChangeEffectList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Event - void OnSelChangeSkillList (ListIndex);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::OnSelChangeSkillList(const int ListIndex) {
 	UpdateSpellCost(ListIndex);
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmSpellDlg::OnSelChangeSkillList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -619,14 +556,9 @@ void CEsmSpellDlg::OnSelChangeSkillList(const int ListIndex) {
  * Class CEsmSpellDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmSpellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmSpellDlg::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -634,7 +566,6 @@ int CEsmSpellDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmSpellDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pSpell == NULL) {
@@ -668,17 +599,12 @@ void CEsmSpellDlg::SetControlData() {
 	SetEffectData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void SetEffectData (EffectIndex, pEffectRecord);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRecord) {
 	DEFINE_FUNCTION("CEsmSpellDlg::SetEffectData()");
 	const esmeffectdata_t *pEffectData = NULL;
@@ -807,17 +733,12 @@ void CEsmSpellDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectReco
 	UpdateSpellCost(EffectIndex);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::SetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void SetEffectData (void);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::SetEffectData() {
 	CEsmSubENAM *pEffectRecord;
 	int RecordIndex;
@@ -830,17 +751,12 @@ void CEsmSpellDlg::SetEffectData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::SetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void UpdateSpellCost (EffectIndex);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::UpdateSpellCost(const int EffectIndex) {
 	CString Buffer;
 	enchanteffect_t EffectData;
@@ -894,17 +810,12 @@ void CEsmSpellDlg::UpdateSpellCost(const int EffectIndex) {
 	UpdateTotalSpellCost();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::UpdateSpellCost()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Method - void UpdateTotalSpellCost (void);
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::UpdateTotalSpellCost() {
 	CString Buffer;
 	int Index;
@@ -935,25 +846,16 @@ void CEsmSpellDlg::UpdateTotalSpellCost() {
 	m_CostText.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSpellDlg::UpdateTotalSpellCost()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSpellDlg Event - void OnAutocalccheck ();
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::OnAutocalccheck() {
 	m_CostText.EnableWindow(!m_AutoCalcCheck.GetCheck() && !m_DisableCost);
 	UpdateTotalSpellCost();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmSpellDlg::OnAutocalccheck()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -961,7 +863,6 @@ void CEsmSpellDlg::OnAutocalccheck() {
  * Class CEsmSpellDlg Event - void OnSelchangeTypelist ();
  *
  *=========================================================================*/
-
 void CEsmSpellDlg::OnSelchangeTypelist() {
 	CString Buffer;
 	int ListIndex;
@@ -989,7 +890,3 @@ void CEsmSpellDlg::OnSelchangeTypelist() {
 	m_Modified = true;
 	UpdateTotalSpellCost();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmSpellDlg::OnSelchangeTypelist()
- *=========================================================================*/

@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmRaceDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,17 +21,12 @@
 DEFINE_FILE("EsmRaceDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmRaceDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Spell Column Data
  *
  *=========================================================================*/
-
 static esmcoldata_t l_SpellColData[] = {
 	{
 		_T("ID"),
@@ -86,17 +72,12 @@ static esmcoldata_t l_SpellColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Spell Column Data
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmRaceDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmRaceDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmRaceDlg)
 	ON_EN_CHANGE(IDC_STRTEXT1, OnChangeAttribText)
@@ -134,26 +115,17 @@ BEGIN_MESSAGE_MAP(CEsmRaceDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmRaceDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Constructor
  *
  *=========================================================================*/
-
 CEsmRaceDlg::CEsmRaceDlg() : CEsmRecDialog(CEsmRaceDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmRaceDlg)
 	//}}AFX_DATA_INIT
 	m_pRace = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmRaceDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -161,7 +133,6 @@ CEsmRaceDlg::CEsmRaceDlg() : CEsmRecDialog(CEsmRaceDlg::IDD) {
  * Class CEsmRaceDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -226,17 +197,12 @@ void CEsmRaceDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRaceDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmRaceDlg::GetControlData()");
 	CEsmSubName32 *pSpellRec;
@@ -364,17 +330,12 @@ void CEsmRaceDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRaceDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmRaceDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -397,24 +358,15 @@ bool CEsmRaceDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRaceDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Event - void OnChangeAttribText ();
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::OnChangeAttribText() {
 	UpdateAttribTotals();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmRaceDlg::OnChangeAttribText()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -422,7 +374,6 @@ void CEsmRaceDlg::OnChangeAttribText() {
  * Class CEsmRaceDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -484,17 +435,12 @@ void CEsmRaceDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRaceDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmRaceDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
@@ -524,17 +470,12 @@ LRESULT CEsmRaceDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRaceDlg::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmRaceDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	int ListIndex;
 
@@ -554,17 +495,12 @@ LRESULT CEsmRaceDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRaceDlg::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmRaceDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
@@ -574,17 +510,12 @@ int CEsmRaceDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRaceDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::SetControlData() {
 	CEsmSubName32 *pSpellRec;
 	esmrecinfo_t *pRecInfo;
@@ -733,17 +664,12 @@ void CEsmRaceDlg::SetControlData() {
 	UpdateAttribTotals();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRaceDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRaceDlg Method - void UpdateAttribTotals (void);
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::UpdateAttribTotals() {
 	CString Buffer;
 	int MaleTotal = 0;
@@ -788,17 +714,12 @@ void CEsmRaceDlg::UpdateAttribTotals() {
 	m_FemaleTotal.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRaceDlg::UpdateAttribTotals()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Skill List Sel Change Events
  *
  *=========================================================================*/
-
 void CEsmRaceDlg::OnSelchangeSkilllist1() {
 	int Index;
 	Index = m_SkillList1.GetCurSel();
@@ -882,7 +803,3 @@ void CEsmRaceDlg::OnSelchangeSkilllist7() {
 		m_BonusText7.EnableWindow(TRUE);
 	}
 }
-
-/*===========================================================================
- *      End of Skill List Sel Change Events
- *=========================================================================*/

@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmGlobalDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,26 +21,17 @@
 IMPLEMENT_DYNCREATE(CEsmGlobalDlg, CEsmRecDialog);
 DEFINE_FILE("EsmApparatusDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmGlobalDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmGlobalDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmGlobalDlg)
 	ON_CBN_SELCHANGE(IDC_TYPELIST, OnSelchangeTypelist)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmGlobalDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -57,16 +39,11 @@ END_MESSAGE_MAP()
  * Class CEsmGlobalDlg Constructor
  *
  *=========================================================================*/
-
 CEsmGlobalDlg::CEsmGlobalDlg() : CEsmRecDialog(CEsmGlobalDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmGlobalDlg)
 	//}}AFX_DATA_INIT
 	m_pGlobal = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmGlobalDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -74,9 +51,9 @@ CEsmGlobalDlg::CEsmGlobalDlg() : CEsmRecDialog(CEsmGlobalDlg::IDD) {
  * Class CEsmGlobalDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmGlobalDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmGlobalDlg)
 	DDX_Control(pDX, IDC_VALUETEXT, m_ValueText);
 	DDX_Control(pDX, IDC_TYPELIST, m_TypeList);
@@ -84,17 +61,12 @@ void CEsmGlobalDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmGlobalDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmGlobalDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmGlobalDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmGlobalDlg::GetControlData()");
 	CString Buffer;
@@ -146,17 +118,12 @@ void CEsmGlobalDlg::GetControlData() {
 	m_pGlobal->SetValue(Value);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmGlobalDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmGlobalDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmGlobalDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -175,17 +142,12 @@ bool CEsmGlobalDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmGlobalDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmGlobalDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmGlobalDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -203,24 +165,15 @@ void CEsmGlobalDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmGlobalDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmGlobalDlg Event - void OnSelchangeTypelist ();
  *
  *=========================================================================*/
-
 void CEsmGlobalDlg::OnSelchangeTypelist() {
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmGlobalDlg::OnSelchangeTypelist()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -228,7 +181,6 @@ void CEsmGlobalDlg::OnSelchangeTypelist() {
  * Class CEsmGlobalDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmGlobalDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pGlobal == NULL) {
@@ -247,7 +199,3 @@ void CEsmGlobalDlg::SetControlData() {
 	/* Item lists */
 	FindComboListItem(m_TypeList, m_pGlobal->GetType(), true);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmGlobalDlg::SetControlData()
- *=========================================================================*/

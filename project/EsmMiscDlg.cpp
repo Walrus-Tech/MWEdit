@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmMiscDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,25 +21,16 @@
 IMPLEMENT_DYNCREATE(CEsmMiscDlg, CEsmRecDialog);
 DEFINE_FILE("EsmMiscDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmMiscDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmMiscDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmMiscDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmMiscDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmMiscDlg Constructor
  *
  *=========================================================================*/
-
 CEsmMiscDlg::CEsmMiscDlg() : CEsmRecDialog(CEsmMiscDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmMiscDlg)
 	//}}AFX_DATA_INIT
 	m_pMisc = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmMiscDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,7 +50,6 @@ CEsmMiscDlg::CEsmMiscDlg() : CEsmRecDialog(CEsmMiscDlg::IDD) {
  * Class CEsmMiscDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmMiscDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -96,17 +72,12 @@ void CEsmMiscDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmMiscDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmMiscDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmMiscDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmMiscDlg::GetControlData()");
 	miscdata_t *pMiscData;
@@ -157,17 +128,12 @@ void CEsmMiscDlg::GetControlData() {
 	m_pMisc->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmMiscDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmMiscDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmMiscDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -194,17 +160,12 @@ bool CEsmMiscDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmMiscDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmMiscDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmMiscDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -217,17 +178,12 @@ void CEsmMiscDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmMiscDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmMiscDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmMiscDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -249,17 +205,12 @@ int CEsmMiscDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmMiscDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmMiscDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmMiscDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pMisc == NULL) {
@@ -291,7 +242,3 @@ void CEsmMiscDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pMisc->IsBlocked());
 	m_PersistCheck.SetCheck(m_pMisc->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmMiscDlg::SetControlData()
- *=========================================================================*/

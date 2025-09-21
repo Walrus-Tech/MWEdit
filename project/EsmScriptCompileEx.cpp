@@ -8,8 +8,6 @@
  * non-standard script extenions.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include <stdafx.h>
 #include "esmscriptcompile.h"
 #include "ctype.h"
@@ -18,15 +16,7 @@
 #include "EsmGlobOptions.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("EsmScriptCompileEx.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 #ifdef MWEDIT_SCRIPT_MWSE
@@ -65,10 +55,6 @@ int CEsmScriptCompile::ParseFuncArgX() {
 	m_FuncArgIndex++;
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncArgX()
- *=========================================================================*/
 
 
 int CEsmScriptCompile::PushFuncOp() {
@@ -171,9 +157,6 @@ int CEsmScriptCompile::OutputLetEnd() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Output Let Blocks
- *=========================================================================*/
 
 /*===========================================================================
  *
@@ -250,17 +233,12 @@ int CEsmScriptCompile::OutputXEndIf() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Output XIf Blocks
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Output SE Function Arguments
  *
  *=========================================================================*/
-
 int CEsmScriptCompile::PushFuncXArgLocal() {
 	return PushFuncXArg(ESMSCR_FUNC_LOCALVAR, (const TCHAR *)m_Token);
 }
@@ -429,10 +407,6 @@ int CEsmScriptCompile::OutputFuncXBlock() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Output SE Function Arguments
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -495,9 +469,5 @@ int CEsmScriptCompile::OutputXEndWhile() {
 
 	return 0;
 }
-
-/*===========================================================================
- *      End of Output XWhile Blocks
- *=========================================================================*/
 
 #endif /* MWEDIT_SCRIPT_MWSE */

@@ -76,7 +76,7 @@ class CTabCtrlSheet : public CTabCtrl {
   public:
 	afx_msg void OnSelchange(NMHDR *pNMHDR, LRESULT *pResult);
   protected:
-	afx_msg UINT OnGetDlgCode ();
+	afx_msg UINT OnGetDlgCode();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	//}}AFX_MSG

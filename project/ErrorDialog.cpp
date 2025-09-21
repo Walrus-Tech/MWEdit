@@ -15,7 +15,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CErrorDialog dialog
 
-
 CErrorDialog::CErrorDialog(CWnd *pParent) : CDialog(CErrorDialog::IDD, pParent) {
 	//{{AFX_DATA_INIT(CErrorDialog)
 	//}}AFX_DATA_INIT
@@ -42,7 +41,6 @@ END_MESSAGE_MAP()
  * Class CErrorDialog Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CErrorDialog::OnInitDialog() {
 	CErrorIncident *pError;
 	CErrorRecord *pErrorRecord;
@@ -86,7 +84,3 @@ BOOL CErrorDialog::OnInitDialog() {
 	m_Text.SetSel(0, 0, FALSE);
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Event CErrorDialog::OnInitDialog()
- *=========================================================================*/

@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmRepairDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,25 +21,16 @@
 IMPLEMENT_DYNCREATE(CEsmRepairDlg, CEsmRecDialog);
 DEFINE_FILE("EsmRepairDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmRepairDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmRepairDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmRepairDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmRepairDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmRepairDlg Constructor
  *
  *=========================================================================*/
-
 CEsmRepairDlg::CEsmRepairDlg() : CEsmRecDialog(CEsmRepairDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmRepairDlg)
 	//}}AFX_DATA_INIT
 	m_pRepair = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmRepairDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,7 +50,6 @@ CEsmRepairDlg::CEsmRepairDlg() : CEsmRecDialog(CEsmRepairDlg::IDD) {
  * Class CEsmRepairDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmRepairDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -96,17 +72,12 @@ void CEsmRepairDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRepairDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRepairDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmRepairDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmRepairDlg::GetControlData()");
 	repairdata_t *pRepairData;
@@ -165,17 +136,12 @@ void CEsmRepairDlg::GetControlData() {
 	m_pRepair->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRepairDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRepairDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmRepairDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -210,17 +176,12 @@ bool CEsmRepairDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRepairDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRepairDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmRepairDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -242,17 +203,12 @@ void CEsmRepairDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRepairDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRepairDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmRepairDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -271,17 +227,12 @@ int CEsmRepairDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRepairDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRepairDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmRepairDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pRepair == NULL) {
@@ -317,7 +268,3 @@ void CEsmRepairDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pRepair->IsBlocked());
 	m_PersistCheck.SetCheck(m_pRepair->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmRepairDlg::SetControlData()
- *=========================================================================*/

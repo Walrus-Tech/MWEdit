@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmNpcDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,26 +21,17 @@
 DEFINE_FILE("EsmNpcDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmNpcDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmNpcDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmNpcDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmNpcDlg)
 	ON_NOTIFY(TCN_SELCHANGING, IDC_MAINTAB, OnSelchangingMaintab)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmNpcDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -57,16 +39,11 @@ END_MESSAGE_MAP()
  * Class CEsmNpcDlg Constructor
  *
  *=========================================================================*/
-
 CEsmNpcDlg::CEsmNpcDlg() : CEsmRecDialog(CEsmNpcDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmNpcDlg)
 	//}}AFX_DATA_INIT
 	m_pNpc = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmNpcDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -74,18 +51,14 @@ CEsmNpcDlg::CEsmNpcDlg() : CEsmRecDialog(CEsmNpcDlg::IDD) {
  * Class CEsmNpcDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmNpcDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmNpcDlg)
 	DDX_Control(pDX, IDC_MAINTAB, m_MainTab);
 	DDX_Control(pDX, IDC_IDTEXT, m_IDText);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcDlg::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -93,7 +66,6 @@ void CEsmNpcDlg::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmNpcDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmNpcDlg::GetControlData()");
 	CString Buffer;
@@ -117,17 +89,12 @@ void CEsmNpcDlg::GetControlData() {
 	m_Page5.GetControlData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmNpcDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -140,17 +107,12 @@ bool CEsmNpcDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmNpcDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -187,25 +149,16 @@ void CEsmNpcDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcDlg Event - void OnSelchangingMaintab (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmNpcDlg::OnSelchangingMaintab(NMHDR *pNMHDR, LRESULT *pResult) {
 	*pResult = 0;
 	m_Page5.UpdateAutoCalc(m_Page1.IsAutoCalc());
 }
-
-/*===========================================================================
- *      End of Class Event CEsmNpcDlg::OnSelchangingMaintab()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -213,7 +166,6 @@ void CEsmNpcDlg::OnSelchangingMaintab(NMHDR *pNMHDR, LRESULT *pResult) {
  * Class CEsmNpcDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmNpcDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the spell list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SPEL)) {
@@ -225,17 +177,12 @@ int CEsmNpcDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pNpc == NULL) {
@@ -251,7 +198,3 @@ void CEsmNpcDlg::SetControlData() {
 	m_Page4.SetControlData();
 	m_Page5.SetControlData();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcDlg::SetControlData()
- *=========================================================================*/

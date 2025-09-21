@@ -7,24 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "esmscrfuncdata.h"
 #include "string/sstring.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 DEFINE_FILE("EsmScrFuncData.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -32,7 +19,6 @@ DEFINE_FILE("EsmScrFuncData.cpp");
  * Class CEsmScrFuncData Constructor
  *
  *=========================================================================*/
-
 CEsmScrFuncData::CEsmScrFuncData () {
 	m_Function[0] = NULL_CHAR;
 	m_ReturnDesc[0] = NULL_CHAR;
@@ -43,17 +29,12 @@ CEsmScrFuncData::CEsmScrFuncData () {
 	m_NumParams = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmScrFuncData Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrFuncData Destructor
  *
  *=========================================================================*/
-
 void CEsmScrFuncData::Destroy() {
 	int Index;
 
@@ -78,10 +59,6 @@ void CEsmScrFuncData::Destroy() {
 	m_NumParams = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmScrFuncData Destructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -91,7 +68,6 @@ void CEsmScrFuncData::Destroy() {
  * string on any error. Uses a local static string buffer.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
 	static TCHAR s_Buffer[64];
 
@@ -111,10 +87,6 @@ const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrFuncData::CreateParamString()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -124,7 +96,6 @@ const TCHAR *CEsmScrFuncData::CreateParamString(const int Index) const {
  * Uses a local static string buffer.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrFuncData::GetFuncForm() const {
 	static CSString s_Buffer;
 	int Index;
@@ -140,10 +111,6 @@ const TCHAR *CEsmScrFuncData::GetFuncForm() const {
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrFuncData::GetFuncForm()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -154,7 +121,6 @@ const TCHAR *CEsmScrFuncData::GetFuncForm() const {
  * a carriage return will be inserted after that many characters.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrFuncData::GetExFuncForm(const int ParamIndex, const int LineLength) const {
 	static CSString s_Buffer;
 	int Index;
@@ -185,10 +151,6 @@ const TCHAR *CEsmScrFuncData::GetExFuncForm(const int ParamIndex, const int Line
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrFuncData::GetExFuncForm()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -198,7 +160,6 @@ const TCHAR *CEsmScrFuncData::GetExFuncForm(const int ParamIndex, const int Line
  * empty  string on any error. Uses a local static string buffer.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
 	static TCHAR s_Buffer[256];
 	CSString Buffer;
@@ -321,10 +282,6 @@ const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrFuncData::GetParamDetail()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -334,7 +291,6 @@ const TCHAR *CEsmScrFuncData::GetParamDetail(const int Index) const {
  * static string buffer.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrFuncData::GetFlagString() const {
 	static TCHAR s_Buffer[128];
 	CSString Buffer;
@@ -412,10 +368,6 @@ const TCHAR *CEsmScrFuncData::GetFlagString() const {
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrFuncData::GetFlagString()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -424,7 +376,6 @@ const TCHAR *CEsmScrFuncData::GetFlagString() const {
  * Returns a description of the return string.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrFuncData::GetReturnString() const {
 	static TCHAR s_Buffer[32];
 
@@ -445,10 +396,6 @@ const TCHAR *CEsmScrFuncData::GetReturnString() const {
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrFuncData::GetReturnString()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -458,7 +405,6 @@ const TCHAR *CEsmScrFuncData::GetReturnString() const {
  * given file. Returns false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScrFuncData::ReadData(CGenFile &File) {
 	TCHAR LineBuffer[ESM_SFDATA_LINELENGTH + 1];
 	TCHAR *pVariable;
@@ -497,10 +443,6 @@ bool CEsmScrFuncData::ReadData(CGenFile &File) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncData::ReadData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -512,7 +454,6 @@ bool CEsmScrFuncData::ReadData(CGenFile &File) {
  *      Flags, "Description"
  *
  *=========================================================================*/
-
 void CEsmScrFuncData::SetParamValue(const int ParamIndex, TCHAR *pValue) {
 	TCHAR *pParse;
 
@@ -544,10 +485,6 @@ void CEsmScrFuncData::SetParamValue(const int ParamIndex, TCHAR *pValue) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncData::SetParamValue()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -559,7 +496,6 @@ void CEsmScrFuncData::SetParamValue(const int ParamIndex, TCHAR *pValue) {
  *      Flags, "Description"
  *
  *=========================================================================*/
-
 void CEsmScrFuncData::SetReturnValue(TCHAR *pValue) {
 	TCHAR *pParse;
 	/* Try and find the comma seperating character */
@@ -578,10 +514,6 @@ void CEsmScrFuncData::SetReturnValue(TCHAR *pValue) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncData::SetReturnValue()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -590,7 +522,6 @@ void CEsmScrFuncData::SetReturnValue(TCHAR *pValue) {
  * Sets a class member based on the input data. Returns false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScrFuncData::SetValue(const TCHAR *pVariable, TCHAR *pValue) {
 	int ParamIndex;
 
@@ -621,7 +552,3 @@ bool CEsmScrFuncData::SetValue(const TCHAR *pVariable, TCHAR *pValue) {
 
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrFuncData::SetValue()
- *=========================================================================*/

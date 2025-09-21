@@ -15,11 +15,6 @@
 #include "mwcommon.h"
 
 
-/*===========================================================================
- *
- * Begin Function Prototypes
- *
- *=========================================================================*/
 /* Type conversion functions */
 int ConvertBipedToBodyPart(const int BipedType);
 

@@ -7,19 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmEnchantDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -30,17 +21,12 @@
 IMPLEMENT_DYNCREATE(CEsmEnchantDlg, CEsmRecDialog);
 DEFINE_FILE("EsmEnchantDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmEnchantDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmEnchantDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmEnchantDlg)
 	ON_BN_CLICKED(IDC_AUTOCALCCHECK, OnAutocalccheck)
@@ -103,17 +89,12 @@ BEGIN_MESSAGE_MAP(CEsmEnchantDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmEnchantDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Constructor
  *
  *=========================================================================*/
-
 CEsmEnchantDlg::CEsmEnchantDlg() : CEsmRecDialog(CEsmEnchantDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmEnchantDlg)
 	//}}AFX_DATA_INIT
@@ -126,17 +107,12 @@ CEsmEnchantDlg::CEsmEnchantDlg() : CEsmRecDialog(CEsmEnchantDlg::IDD) {
 	}
 }
 
-/*===========================================================================
- *      End of Class CEsmEnchantDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -230,17 +206,12 @@ void CEsmEnchantDlg::DoDataExchange(CDataExchange *pDX) {
 	DDX_Control(pDX, IDC_TOTALCOSTLABEL8, m_TotalCostText[7]);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmEnchantDlg::GetControlData()");
 	enchantdata_t *pEnchantData;
@@ -283,17 +254,12 @@ void CEsmEnchantDlg::GetControlData() {
 	GetEffectData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void GetEffectData (EffectIndex);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::GetEffectData(const int EffectIndex) {
 	CEsmSubENAM *pEnchantSubRec;
 	enchanteffect_t *pEnchantData;
@@ -369,17 +335,12 @@ void CEsmEnchantDlg::GetEffectData(const int EffectIndex) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::GetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void GetEffectData (void);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::GetEffectData() {
 	//DEFINE_FUNCTION("CEsmEnchantDlg::GetEffectData()");
 	int Index;
@@ -391,17 +352,12 @@ void CEsmEnchantDlg::GetEffectData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::GetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmEnchantDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -424,17 +380,12 @@ bool CEsmEnchantDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::OnInitialUpdate() {
 	int Index;
 	CEsmRecDialog::OnInitialUpdate();
@@ -458,17 +409,12 @@ void CEsmEnchantDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEnchantDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Event - void OnSelChangeEffectList (ListIndex);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::OnSelChangeEffectList(const int ListIndex) {
 	const esmeffectdata_t *pEffectData = NULL;
 	int EffectIndex;
@@ -576,25 +522,16 @@ void CEsmEnchantDlg::OnSelChangeEffectList(const int ListIndex) {
 	m_Modified = true;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEnchantDlg::OnSelChangeEffectList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Event - void OnSelChangeSkillList (ListIndex);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::OnSelChangeSkillList(const int ListIndex) {
 	UpdateSpellCost(ListIndex);
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmEnchantDlg::OnSelChangeSkillList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -602,14 +539,9 @@ void CEsmEnchantDlg::OnSelChangeSkillList(const int ListIndex) {
  * Class CEsmEnchantDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmEnchantDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmEnchantDlg::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -617,7 +549,6 @@ int CEsmEnchantDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmEnchantDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pEnchant == NULL) {
@@ -647,17 +578,12 @@ void CEsmEnchantDlg::SetControlData() {
 	SetEffectData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void SetEffectData (EffectIndex, pEffectRecord);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRecord) {
 	DEFINE_FUNCTION("CEsmEnchantDlg::SetEffectData()");
 	const esmeffectdata_t *pEffectData = NULL;
@@ -778,17 +704,12 @@ void CEsmEnchantDlg::SetEffectData(const int EffectIndex, CEsmSubENAM *pEffectRe
 	UpdateSpellCost(EffectIndex);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::SetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void SetEffectData (void);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::SetEffectData() {
 	CEsmSubENAM *pEffectRecord;
 	int RecordIndex;
@@ -801,17 +722,12 @@ void CEsmEnchantDlg::SetEffectData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::SetEffectData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void UpdateSpellCost (EffectIndex);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::UpdateSpellCost(const int EffectIndex) {
 	CString Buffer;
 	enchanteffect_t EffectData;
@@ -865,17 +781,12 @@ void CEsmEnchantDlg::UpdateSpellCost(const int EffectIndex) {
 	UpdateTotalSpellCost();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::UpdateSpellCost()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Method - void UpdateTotalSpellCost (void);
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::UpdateTotalSpellCost() {
 	CString Buffer;
 	int Index;
@@ -920,26 +831,17 @@ void CEsmEnchantDlg::UpdateTotalSpellCost() {
 	m_ChargeText.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEnchantDlg::UpdateTotalSpellCost()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEnchantDlg Event - void OnAutocalccheck ();
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::OnAutocalccheck() {
 	m_CostText.EnableWindow(!m_AutoCalcCheck.GetCheck() && !m_IsConstantEffect);
 	m_ChargeText.EnableWindow(!m_AutoCalcCheck.GetCheck() && !m_IsConstantEffect);
 	UpdateTotalSpellCost();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmEnchantDlg::OnAutocalccheck()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -947,7 +849,6 @@ void CEsmEnchantDlg::OnAutocalccheck() {
  * Class CEsmEnchantDlg Event - void OnSelchangeTypelist ();
  *
  *=========================================================================*/
-
 void CEsmEnchantDlg::OnSelchangeTypelist() {
 	int ListIndex;
 	ListIndex = m_TypeList.GetCurSel();
@@ -969,7 +870,3 @@ void CEsmEnchantDlg::OnSelchangeTypelist() {
 	m_Modified = true;
 	UpdateTotalSpellCost();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmEnchantDlg::OnSelchangeTypelist()
- *=========================================================================*/

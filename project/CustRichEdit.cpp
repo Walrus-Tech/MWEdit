@@ -7,21 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "CustRichEdit.h"
 #include "dl_err.h"
 #include "afxrich.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -32,17 +22,12 @@
 
 DEFINE_FILE("CustRichEdit.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CCustRichEdit Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CCustRichEdit, CRichEditCtrl)
 	//{{AFX_MSG_MAP(CCustRichEdit)
 	ON_WM_GETDLGCODE()
@@ -56,23 +41,14 @@ BEGIN_MESSAGE_MAP(CCustRichEdit, CRichEditCtrl)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CCustRichEdit Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CCustRichEdit Constructor
  *
  *=========================================================================*/
-
 CCustRichEdit::CCustRichEdit() {
 }
-
-/*===========================================================================
- *      End of Class CCustRichEdit Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -80,13 +56,8 @@ CCustRichEdit::CCustRichEdit() {
  * Class CCustRichEdit Destructor
  *
  *=========================================================================*/
-
 CCustRichEdit::~CCustRichEdit() {
 }
-
-/*===========================================================================
- *      End of Class CCustRichEdit Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -96,15 +67,10 @@ CCustRichEdit::~CCustRichEdit() {
  * Description
  *
  *=========================================================================*/
-
 BOOL CCustRichEdit::Create(DWORD dwStyle, const RECT &rect, CWnd *pParentWnd, UINT nID) {
 	CWnd *l_pWnd = this ;
 	return l_pWnd->Create(_T("RichEdit"), NULL, dwStyle, rect, pParentWnd, nID);
 }
-
-/*===========================================================================
- *      End of Class Method CCustRichEdit::Create()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -114,7 +80,6 @@ BOOL CCustRichEdit::Create(DWORD dwStyle, const RECT &rect, CWnd *pParentWnd, UI
  * Returns the 0-based character position in the current line.
  *
  *=========================================================================*/
-
 int CCustRichEdit::GetCurLineCharPos() {
 	long StartChar;
 	long EndChar;
@@ -124,10 +89,6 @@ int CCustRichEdit::GetCurLineCharPos() {
 	return CharPos;
 }
 
-/*===========================================================================
- *      End of Class Method CCustRichEdit::GetCurLineCharPos()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -136,7 +97,6 @@ int CCustRichEdit::GetCurLineCharPos() {
  * Returns the current line of text.
  *
  *=========================================================================*/
-
 const TCHAR *CCustRichEdit::GetCurLineText(CString &Buffer) {
 	int LineSize;
 	int LineIndex;
@@ -157,24 +117,15 @@ const TCHAR *CCustRichEdit::GetCurLineText(CString &Buffer) {
 	return (const TCHAR *)Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method CCustRichEdit::GetCurLineText()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CCustRichEdit Event - UINT OnGetDlgCode ();
  *
  *=========================================================================*/
-
 UINT CCustRichEdit::OnGetDlgCode() {
 	return CRichEditCtrl::OnGetDlgCode() | DLGC_WANTTAB;
 }
-
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnGetDlgCode()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -182,7 +133,6 @@ UINT CCustRichEdit::OnGetDlgCode() {
  * Class CCustRichEdit Event - void OnChar (nChar, nRepCnt, nFlags);
  *
  *=========================================================================*/
-
 void CCustRichEdit::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	if (nChar == '\t') {
 		//this->ReplaceSel("\t", TRUE);
@@ -192,17 +142,12 @@ void CCustRichEdit::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	GetParent()->SendMessage(CRE_UPDATEPOS, nChar, 0);
 }
 
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnChar()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CCustRichEdit Event - void OnKeyDown (nChar, nRepCnt, nFlags);
  *
  *=========================================================================*/
-
 void CCustRichEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	if (nChar == '\t') {
 		//this->ReplaceSel("test", TRUE);
@@ -213,25 +158,16 @@ void CCustRichEdit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	GetParent()->SendMessage(CRE_UPDATEPOS, 0, nChar);
 }
 
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnKeyDown()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CCustRichEdit Event - void OnLButtonDown (nFlags, point);
  *
  *=========================================================================*/
-
 void CCustRichEdit::OnLButtonDown(UINT nFlags, CPoint point) {
 	CRichEditCtrl::OnLButtonDown(nFlags, point);
 	GetParent()->SendMessage(CRE_UPDATEPOS, -1, 0);
 }
-
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnLButtonDown()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -239,15 +175,10 @@ void CCustRichEdit::OnLButtonDown(UINT nFlags, CPoint point) {
  * Class CCustRichEdit Event - void OnRButtonDown (nFlags, point);
  *
  *=========================================================================*/
-
 void CCustRichEdit::OnRButtonDown(UINT nFlags, CPoint point) {
 	CRichEditCtrl::OnRButtonDown(nFlags, point);
 	GetParent()->SendMessage(CRE_UPDATEPOS, -1, 0);
 }
-
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnRButtonDown()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -255,7 +186,6 @@ void CCustRichEdit::OnRButtonDown(UINT nFlags, CPoint point) {
  * Class CCustRichEdit Event - int OnCreate (LPCREATESTRUCT lpCreateStruct);
  *
  *=========================================================================*/
-
 int CCustRichEdit::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	if (CRichEditCtrl::OnCreate(lpCreateStruct) == -1) {
 		return -1;
@@ -264,25 +194,16 @@ int CCustRichEdit::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnCreate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CCustRichEdit Event - BOOL OnMouseWheel (nFlags, zDetla, pt);
  *
  *=========================================================================*/
-
 BOOL CCustRichEdit::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
 	GetParent()->SendMessage(CRE_UPDATESCROLL, -1, 0);
 	return CRichEditCtrl::OnMouseWheel(nFlags, zDelta, pt);
 }
-
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnMouseWheel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -290,12 +211,7 @@ BOOL CCustRichEdit::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
  * Class CCustRichEdit Event - void OnVScroll (nSBCode, nPos, pScrollBar);
  *
  *=========================================================================*/
-
 void CCustRichEdit::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar *pScrollBar) {
 	GetParent()->SendMessage(CRE_UPDATESCROLL, -1, 0);
 	CRichEditCtrl::OnVScroll(nSBCode, nPos, pScrollBar);
 }
-
-/*===========================================================================
- *      End of Class Event CCustRichEdit::OnVScroll()
- *=========================================================================*/

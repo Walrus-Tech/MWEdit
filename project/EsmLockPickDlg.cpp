@@ -7,20 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "resource.h"
 #include "EsmLockPickDlg.h"
 
-
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 
 #ifdef _DEBUG
 	#define new DEBUG_NEW
@@ -31,25 +22,16 @@
 IMPLEMENT_DYNCREATE(CEsmLockPickDlg, CEsmRecDialog);
 DEFINE_FILE("EsmLockPickDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmLockPickDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmLockPickDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmLockPickDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmLockPickDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -57,16 +39,11 @@ END_MESSAGE_MAP()
  * Class CEsmLockPickDlg Constructor
  *
  *=========================================================================*/
-
 CEsmLockPickDlg::CEsmLockPickDlg() : CEsmRecDialog(CEsmLockPickDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmLockPickDlg)
 	//}}AFX_DATA_INIT
 	m_pLockPick = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmLockPickDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -74,7 +51,6 @@ CEsmLockPickDlg::CEsmLockPickDlg() : CEsmRecDialog(CEsmLockPickDlg::IDD) {
  * Class CEsmLockPickDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmLockPickDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -99,17 +75,12 @@ void CEsmLockPickDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLockPickDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLockPickDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmLockPickDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLockPickDlg::GetControlData()");
 	lockdata_t *pLockData;
@@ -168,17 +139,12 @@ void CEsmLockPickDlg::GetControlData() {
 	m_pLockPick->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLockPickDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLockPickDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmLockPickDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -213,17 +179,12 @@ bool CEsmLockPickDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLockPickDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLockPickDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmLockPickDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -243,17 +204,12 @@ void CEsmLockPickDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLockPickDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLockPickDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmLockPickDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -275,17 +231,12 @@ int CEsmLockPickDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLockPickDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLockPickDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmLockPickDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pLockPick == NULL) {
@@ -321,7 +272,3 @@ void CEsmLockPickDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pLockPick->IsBlocked());
 	m_PersistCheck.SetCheck(m_pLockPick->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmLockPickDlg::SetControlData()
- *=========================================================================*/
