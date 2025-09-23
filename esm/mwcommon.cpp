@@ -7,7 +7,6 @@
  * Contains common functions for Morrowind related projects.
  *
  *=========================================================================*/
-
 #include "stdafx.h"
 #include "mwcommon.h"
 #include "windows/WinUtil.h"

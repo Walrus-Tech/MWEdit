@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #include "stdafx.h"
 #include "childfrmscript.h"
 #include "ScriptErrorView.h"
@@ -15,7 +14,7 @@
 
 
 /* Debug defines */
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;

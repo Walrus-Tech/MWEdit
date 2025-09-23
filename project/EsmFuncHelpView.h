@@ -94,7 +94,7 @@ class CEsmFuncHelpView : public CFormView {
 	/* Class destructor */
 	virtual ~CEsmFuncHelpView();
 
-#ifdef _DEBUG
+#if _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext &dc) const;
 #endif

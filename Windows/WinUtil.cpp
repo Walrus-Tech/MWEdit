@@ -20,7 +20,6 @@
  *  - Re-added the CopyTextToClipboard() and GetClipboardText() functions.
  *
  *=========================================================================*/
-
 #include "stdafx.h"
 #include "winutil.h"
 #include "dl_file.h"
@@ -514,7 +513,6 @@ bool GetCurSelComboItemData(long &Data, CComboBox &ComboBox) {
 }
 
 
-#if !defined(UNDER_CE) && !defined(__BORLANDC__)
 /*========================================================================
  *
  * Function - CDocument* GetActiveDocument (void);
@@ -874,8 +872,6 @@ bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuRe
 	pPopup->TrackPopupMenu(TPM_RIGHTBUTTON | TPM_LEFTALIGN, Point.x, Point.y, pParent);
 	return true;
 }
-
-#endif /* End of if !defined(UNDER_CE) and !defined(__BORLANDC__) */
 
 
 /*===========================================================================

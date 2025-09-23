@@ -7,7 +7,6 @@
  * Implements common functions for Dave's Library of common code.
  *
  *=========================================================================*/
-
 #include "dl_base.h"
 #include "dl_err.h"
 
@@ -23,7 +22,7 @@ PQSORT_CMPFUNC l_QSortCmpFunc = NULL;
 
 /* Global variable used to eliminate errors from not using the
    DEFINE_FUNCTION() macro (for DEBUG builds only) */
-#if defined(_DEBUG)
+#if _DEBUG
 	TCHAR ThisFunction[] = _T("?");
 #endif
 
@@ -43,15 +42,6 @@ void CustomAssert(const TCHAR *pString,
                   const TCHAR *pFunction,
                   const long Line) {
 	//DEFINE_FUNCTION("CustomAssert()");
-	/* TODO: Hack to ensure we reset to text mode under MSDOS in
-	 * case we are in a graphics mode. */
-#if defined(__MSDOS__)
-	ASM {
-		mov ax, 03h
-		int 10h
-	};
-#endif
-
 	/* Output message to log file */
 	if (SystemLog.IsOpen()) {
 		SystemLog.Printf(_T("ASSERTION FAILED: '%s'"), pString);
@@ -61,7 +51,7 @@ void CustomAssert(const TCHAR *pString,
 	}
 
 	/* Display a message box under Borland */
-#if defined(__BCPLUSPLUS__) || defined(_WIN32)
+#if _WIN32
 	ErrorHandler.Printf(_T("Application Assert!"),
 	                    _T("ASSERTION FAILED: '%s'\r\n\tFile: '%s'\r\n\tFunc: '%s'\r\n\tLine: %ld\r\nAborting Program!"),
 	                    pString,
@@ -76,30 +66,10 @@ void CustomAssert(const TCHAR *pString,
 	fflush(stderr);
 #endif
 	/* Abort program */
-#if defined(_WIN32_WCE)
-	exit(0);
-#else
 	abort();
-#endif
 }
 
 
-#if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
-/*===========================================================================
- *
- * Function - void throw (pString);
- *
- * A custom throw function only used when the system has no exception
- * handling capability.  Calls the ErrorHandler.Exit() function to abort
- * the program.
- *
- *=========================================================================*/
-void throw(const TCHAR *pString) {
-	ErrorHandler.Exit(pString);
-}
-#endif
-
-#if !defined(_WIN32_WCE)
 /*===========================================================================
  *
  * Function - void qsort (pBase, NumElements, ElementWidth, pCmpFunc, lUserData);
@@ -125,4 +95,3 @@ void qsort(void *pBase,
 	/* Call the standard qsort() algorithm with our inline compare function */
 	qsort(pBase, NumElements, ElementWidth, l_QSortCompare);
 }
-#endif

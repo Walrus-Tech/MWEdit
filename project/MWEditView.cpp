@@ -19,7 +19,7 @@
 #include "EsmScriptCompareDlg.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -4201,7 +4201,7 @@ void CMWEditView::UpdateCurrentListData() {
  * Begin Class Diagnostics
  *
  *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 
 void CMWEditView::AssertValid() const {
 	CFormView::AssertValid();

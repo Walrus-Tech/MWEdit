@@ -35,7 +35,6 @@
  *  - Replaced the 'boolean' type with 'bool'.
  *
  *=========================================================================*/
-
 #include "conapp.h"
 #include <conio.h>
 #include <ctype.h>
@@ -157,7 +156,7 @@ void CConsoleApp::AbortProgram() {
  *=========================================================================*/
 bool CConsoleApp::OpenLog() {
 	//DEFINE_FUNCTION("CConsoleApp::OpenLog()");
-#if defined(_DEBUG)
+#if _DEBUG
 	char LogFilename[_MAX_FNAME + 5] = "temp.log";
 	/* Create a file with the new extension and attempt to open log */
 	ChangeExtension(LogFilename, pProgramName, ".log", _MAX_FNAME + 4);

@@ -19,7 +19,7 @@
 #include "MWEditView.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -184,7 +184,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT &cs) {
 }
 
 
-#ifdef _DEBUG
+#if _DEBUG
 
 /*===========================================================================
  *

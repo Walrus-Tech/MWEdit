@@ -7,7 +7,6 @@
  * Contains the implementation for the simple string class CSString.
  *
  *=========================================================================*/
-
 #include <ctype.h>
 #include <limits.h>
 #include "sstring.h"
@@ -44,7 +43,7 @@ CSString::CSString() {
  * NULL input string case.
  *
  *=========================================================================*/
-CSString::CSString (const TCHAR *pSrcString) {
+CSString::CSString(const TCHAR *pSrcString) {
 	//DEFINE_FUNCTION("CSString::CSString(TCHAR*)");
 	Init();
 

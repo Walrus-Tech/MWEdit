@@ -24,7 +24,7 @@
 
 
 /* Debug definitions */
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -2218,7 +2218,7 @@ void CMWEditDoc::Serialize(CArchive &ar) {
 }
 
 
-#ifdef _DEBUG
+#if _DEBUG
 /*===========================================================================
  *
  * Class CMWEditDoc Diagnostics

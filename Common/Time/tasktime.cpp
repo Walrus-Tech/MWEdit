@@ -7,15 +7,11 @@
  * Implements the CTaskTimer class.
  *
  *=========================================================================*/
-
 #include "time\tasktime.h"
 
-#if defined(_WIN32)
+#if _WIN32
 	#include <windows.h>
 	#include "mmsystem.h"
-#elif defined(__MSDOS__)
-	#include <time.h>
-	#include <dos.h>
 #endif
 
 
@@ -28,15 +24,7 @@ CTaskTimer TaskTimer;
  * Begin Local System-Specific Timer Functions
  *
  *=========================================================================*/
-#if defined(__MSDOS__)
-/* The new timer interrupt for MSDOS */
-void interrupt far l_DosTimerProc(...) {
-	TaskTimer.DoTasks((ulong)(1000.0 / (float)CLK_TCK));
-	/* Chain to the old timer interrupt */
-	TaskTimer.m_PrevTimerFunc();
-}
-
-#elif defined(_WIN32)
+#if _WIN32
 /* The callback function for the timeSetEvent() Windows function */
 VOID CALLBACK l_Win32TimerProc(UINT, UINT, DWORD, DWORD, DWORD) {
 	static DWORD LastTime = timeGetTime();

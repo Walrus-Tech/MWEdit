@@ -158,7 +158,7 @@ esmscrparsetable_t l_FuncArgBlock[] = {
 	}
 };
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 esmscrparsetable_t l_FuncXArgBlock[] = {
 	{
 		ESMSCR_TOKEN_COMMA,
@@ -572,7 +572,7 @@ esmscrparsetable_t l_LeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::ParseVarRef
 	},
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT, NULL,
@@ -603,7 +603,7 @@ esmscrparsetable_t l_IfLeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::ParseIfVarRef
 	},
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT,
@@ -643,7 +643,7 @@ esmscrparsetable_t l_LeftVarIDBlock[] = {
 };
 
 esmscrparsetable_t l_RightIDBlock[] = {
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT,
@@ -1525,7 +1525,7 @@ esmscrparsetable_t l_ReturnBlock[] = {
 	}
 };
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 esmscrparsetable_t l_ObjRefFuncBlock[] = {
 	{
@@ -1594,7 +1594,7 @@ esmscrparsetable_t l_SymFuncBlock[] = {
 #endif
 
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 esmscrparsetable_t l_StatementBlock[] = {
 	{
@@ -3516,7 +3516,7 @@ int CEsmScriptCompile::GetOperatorToken() {
 		m_LineHasRef = true;
 		m_LineRefToken = m_LastToken;
 		//m_LineRefID    = m_TokenID;
-#if !defined(MWEDIT_SCRIPT_MWSE)
+#ifndef MWEDIT_SCRIPT_MWSE
 
 		if (m_TokenID == ESMSCR_TOKEN_FUNCOP) {
 			InsertScriptDataRef((const TCHAR *)m_LastToken, m_LastToken.GetLength());
@@ -6588,7 +6588,7 @@ int CEsmScriptCompile::OutputLineFunction() {
 int CEsmScriptCompile::OutputFunction() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFunction()");
 	ASSERT(m_pCurrentFunc != NULL);
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	OutputStoredFuncOp();
 #endif
 	AddScriptData(&(m_pCurrentFunc->OpCode), 2);

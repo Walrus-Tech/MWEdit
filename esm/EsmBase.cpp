@@ -12,7 +12,6 @@
  *    attribute functions accordingly.
  *
  *=========================================================================*/
-
 #include "esmdefs.h"
 #include "dl_str.h"
 #include "utility/namelist.h"

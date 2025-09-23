@@ -97,7 +97,7 @@ inline void CListFile::SetIgnoreBlankLines(const boolean Value) {
 	IgnoreBlankLines = Value;
 }
 
-#if defined(_DEBUG)
+#if _DEBUG
 	void Test_ListFile();
 #endif
 

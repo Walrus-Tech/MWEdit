@@ -7,7 +7,6 @@
  * Implements a simple CSV (Comma Seperated File) class, CCsvFile.
  *
  *=========================================================================*/
-
 #include "csvFile.h"
 
 

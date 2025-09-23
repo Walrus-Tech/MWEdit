@@ -26,7 +26,7 @@ IMPLEMENT_DYNCREATE(CEsmScriptDlg, CEsmRecDialog);
 DEFINE_FILE("EsmScriptDlg.cpp");
 
 /* Debug definitions */
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;

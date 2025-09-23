@@ -512,7 +512,7 @@ inline CGenFile::operator FILE *(void) {
 }
 
 
-#if defined(_DEBUG)
+#if _DEBUG
 	#define TEST_GENFILE_SEEKFILESIZE 10000
 	#define TEST_GENFILE_RWNUMSIZE  1000
 

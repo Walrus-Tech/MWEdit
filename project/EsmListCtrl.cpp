@@ -14,7 +14,7 @@
  *=========================================================================*/
 #include "stdafx.h"
 
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	#include "MWEdit.h"
 #endif
 
@@ -22,7 +22,7 @@
 //#include "Resource.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -86,7 +86,7 @@ int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
  *=========================================================================*/
 CEsmListCtrl::CEsmListCtrl() {
 	m_pCurrentColData = NULL;
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	m_pEsmDlgHandler = NULL;
 #endif
 	m_LastSortSubItem = -1;
@@ -159,7 +159,7 @@ int CEsmListCtrl::AddItem(esmrecinfo_t *pRecInfo) {
  * Used to copy records between the current list and the source list.
  *
  *=========================================================================*/
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 
 void CEsmListCtrl::DropItemOnList(CEsmListCtrl *pDropList) {
 	int Index;
@@ -197,7 +197,7 @@ void CEsmListCtrl::DropItemOnList(CEsmListCtrl *pDropList) {
  *
  *=========================================================================*/
 void CEsmListCtrl::EditRecord(const int SelIndex, const bool WantEditMsg) {
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	esmrecinfo_t *pRecInfo;
 
 	/* Call the user's event handler if required */
@@ -222,7 +222,7 @@ void CEsmListCtrl::EditRecord(const int SelIndex, const bool WantEditMsg) {
  *
  *=========================================================================*/
 void CEsmListCtrl::EditSelectedItem() {
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	POSITION ListPos;
 	int ListIndex;
 
@@ -653,7 +653,7 @@ void CEsmListCtrl::OnCustomdraw(NMHDR *pNMHDR, LRESULT *pResult) {
  *
  *=========================================================================*/
 void CEsmListCtrl::OnDblclk(NMHDR *pNMHDR, LRESULT *pResult) {
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	esmrecinfo_t *pRecInfo;
 	LPNMLISTVIEW pListView = (LPNMLISTVIEW)pNMHDR;
 
@@ -692,7 +692,7 @@ void CEsmListCtrl::OnDblclk(NMHDR *pNMHDR, LRESULT *pResult) {
  * Class CEsmListCtrl Event - int OnDropRecord (pDocument, pRecInfo);
  *
  *=========================================================================*/
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 
 int CEsmListCtrl::OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo) {
 	//GetParent()->SendNotifyMessage(ESMLIST_NOTIFY_ONDROP, 0, (LPARAM) pRecInfo);
@@ -823,7 +823,7 @@ void CEsmListCtrl::OnLButtonUp(UINT nFlags, CPoint Point) {
 	/* If window is CListCtrl, we perform the drop */
 	if (pDropWnd->IsKindOf(RUNTIME_CLASS(CEsmListCtrl))) {
 		m_pDropList = (CEsmListCtrl *)pDropWnd;
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 		DropItemOnList(m_pDropList);
 #endif
 	}

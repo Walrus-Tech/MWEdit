@@ -16,7 +16,7 @@
 
 
 /* Macros for inserting profiles, only valid in debug builds */
-#if defined(_DEBUG)
+#if _DEBUG
 
 /* Define a profile variable */
 #define DEFINE_PROFILE(ProfName) \
@@ -89,7 +89,7 @@ typedef struct {
 
 /* Class used only by the profiler for automatically calling
  * things at end of functions */
-#if defined(_DEBUG)
+#if _DEBUG
 
 /* Used as a hack for internal static function profiles */
 extern profile_t *g_pLastStaticProfile;

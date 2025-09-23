@@ -20,7 +20,6 @@
  *  - Added the Metricize() buffered function.
  *
  *=========================================================================*/
-
 #include "dl_math.h"
 #include "dl_str.h"
 #include <time.h>
@@ -601,13 +600,8 @@ void SeedRandom(const ulong NewSeed) {
  * Debug build only functions for testing functions in this module.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
-/* Turn off several warnings associated with the test code */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn -rch
-	#pragma warn -ccc
-#endif
 
 /*===========================================================================
  *
@@ -762,16 +756,8 @@ void Test_Metricize() {
  *=========================================================================*/
 void Test_Random(const size_t NumTests) {
 	DEFINE_FUNCTION("Test_Random()");
-#if defined(__BCPLUSPLUS__)
-	const size_t ArraySize = 4000u;
-	const size_t ShiftSize = 17;
-#elif defined(__TURBOC__)
-	const size_t ArraySize = 32767u;
-	const size_t ShiftSize = 17;
-#else
 	const size_t ArraySize = 65535u;
 	const size_t ShiftSize = 16;
-#endif
 	size_t *NumberCount;
 	size_t *NumberCount1;
 	size_t LoopCounter;
@@ -1095,11 +1081,5 @@ void Test_DL_Math() {
 	//Test_RandomRate();
 }
 
-
-/* Restore compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn .rch
-	#pragma warn .ccc
-#endif
 
 #endif

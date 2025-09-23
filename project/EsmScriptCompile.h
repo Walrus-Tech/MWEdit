@@ -19,7 +19,7 @@
 #include "mwcustomfunc.h"
 #include "esmfile.h"
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	#include <queue>
 	#include <stack>
 #endif
@@ -196,7 +196,7 @@ class CEsmScriptCompile {
 	emscrmsglevel_t m_MsgLevels[ESMSCR_MAX_MESSAGES];
 	int m_NumMsgLevels;
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 	CSString m_refObject;
 
@@ -546,7 +546,7 @@ class CEsmScriptCompile {
 	int OutputEffect(const int EffectID);
 
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 	int ParseFuncArgX();
 

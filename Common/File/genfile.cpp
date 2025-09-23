@@ -8,7 +8,6 @@
  * operations.
  *
  *=========================================================================*/
-
 #include "file\genfile.h"
 
 
@@ -20,7 +19,7 @@ DEFINE_FILE("GenFile.cpp");
  * Begin Module Test Routines
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 #include "dl_math.h"
 
 

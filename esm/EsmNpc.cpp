@@ -7,11 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
 #include "EsmNpc.h"
 #include "EsmInfo.h"
 #include "EsmSubPos6.h"
-#include "utility/namelist.h"
+#include "Common/Utility/namelist.h"
 
 
 DEFINE_FILE("EsmNpc.cpp");

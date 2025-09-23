@@ -13,12 +13,11 @@
  * The code is primarily from "Writing Solid Code" by Steve Maguire.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 #ifndef __DL_BLOCK_H
 #define __DL_BLOCK_H
 
 
-/* Required Includes */
 #include "dl_base.h"
 
 

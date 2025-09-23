@@ -76,7 +76,7 @@ class CEsmScriptCompareDlg : public CFormView {
   protected:
 	/* Class diagnostics */
 
-#ifdef _DEBUG
+#if _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext &dc) const;
 #endif

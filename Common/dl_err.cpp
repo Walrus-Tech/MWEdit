@@ -35,20 +35,17 @@
  *    database if it is available.
  *
  *=========================================================================*/
-
 #include "dl_err.h"
 #include "dl_str.h"
+#include <errno.h>
 
-#if !defined(_WIN32_WCE)
-	#include <errno.h>
-	/* Include TC graphic error messages */
-	#if defined(_TCGRAPHERRORS)
-		#include <graphics.h>
-	#endif
+/* Include TC graphic error messages */
+#if _TCGRAPHERRORS
+	#include <graphics.h>
 #endif
 
 /* Include Windows error messages/functions */
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 	#include "windows.h"
 #endif
 
@@ -275,11 +272,11 @@ void CErrorDatabase::InitDefaultErrors() {
 	/* Add the system error messages */
 	AddCustomError(ERR_SYSTEM, SystemErrorFunction);
 	/* Add the graphic error messages under DOS if required */
-#if defined(_TCGRAPHERRORS)
+#if _TCGRAPHERRORS
 	AddCustomError(ERR_TCGRAPH, TCGraphErrorFunction);
 #endif
 	/* Add the windows error messages under Windows if required */
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 	AddCustomError(ERR_WINDOWS, WindowsErrorFunction);
 #endif
 	AddedDefaultErrors = TRUE;
@@ -384,7 +381,7 @@ void CErrorHandler::AddError(const errcode_t Code, const TCHAR *pString, ...) {
 	//DEFINE_FUNCTION("CErrorHandler::AddError(errcode_t, TCHAR*, ...)");
 	va_list Args;
 	va_start(Args, pString);
-#if defined(_WIN32)
+#if _WIN32
 	AddErrorV(Code, GetLastError(), pString, Args);
 #else
 	AddErrorV(Code, ERR_NONE, pString, Args);
@@ -981,7 +978,7 @@ void CErrorHandler::Printf(const TCHAR *pTitle, const TCHAR *pString, va_list Ar
 	}
 
 	/*---------- Begin Win32 Specific Code ----------------------------*/
-#if (defined(_WIN32) || defined(__BCPLUSPLUS__)) && !defined(_CONSOLE)
+#if _WIN32 && !_CONSOLE
 	/* Output the variable argument list to the temporary string */
 	vsnprintf(MsgBuffer, MAX_ERROR_MESSAGESIZE, pString, Args);
 	/* Display a standard error message box */
@@ -1009,9 +1006,6 @@ void CErrorHandler::Printf(const TCHAR *pTitle, const TCHAR *pString, va_list Ar
 const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	DEFINE_FUNCTION("SystemErrorFunction()");
 	TCHAR *pErrMessage;
-#if defined(_WIN32_WCE)
-	return _T("No system errors in WinCE!");
-#else
 
 	/* Check to ensure that it is a valid system error code */
 	if (Code < 0 || ((int)Code) >= _sys_nerr) {
@@ -1019,7 +1013,7 @@ const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	}
 
 	/* Retrieve the error message from the system, ensuring its valid */
-#if defined(_UNICODE)
+#if _UNICODE
 	static TCHAR l_BufferMsg[256];
 	/* Convert ASCII message to unicode */
 	mbstowcs(l_BufferMsg, sys_errlist[(int)Code], 255);
@@ -1030,11 +1024,10 @@ const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	ASSERT(pErrMessage != NULL);
 	//SystemLog.Printf ("SystemErrorFunction(%s)", pErrMessage);
 	return pErrMessage;
-#endif
 }
 
 
-#if defined(_TCGRAPHERRORS)
+#if _TCGRAPHERRORS
 /*===========================================================================
  *
  * Function - TCHAR* TCGraphErrorFunction (Code);
@@ -1059,7 +1052,7 @@ const TCHAR *TCGraphErrorFunction(const errcode_t Code) {
 #endif
 
 
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 /*===========================================================================
 *
  * Function - TCHAR* WindowsErrorFunction (Code);
@@ -1073,9 +1066,6 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
 	static TCHAR ErrMessage[512] = _T("");
 	DWORD Result;
 	/* Format message string */
-#if defined(__BCPLUSPLUS__)
-	Result = sprintf(ErrMessage, _T("Windows 16-bit error code = %ld (0x%04X)"), Code, Code);
-#else
 	Result = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 	                       NULL,
 	                       (DWORD)Code,
@@ -1083,7 +1073,6 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
 	                       &ErrMessage[0],
 	                       511,
 	                       NULL);
-#endif
 
 	/* Ensure the message is valid */
 	if (Result == 0) {
@@ -1102,14 +1091,9 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
  * Debug builds only test routines for this module.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
 
-/* Turn off several warnings associated with the test code */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn -rch
-	#pragma warn -ccc
-#endif
 
+#if _DEBUG
 /*===========================================================================
  *
  * Function - TCHAR* Test_CustomErrorFunc (const errcode_t Code);
@@ -1516,12 +1500,4 @@ void Test_DLErr() {
 	SystemLog.Printf (stdout, _T("================ End of Test_DLErr() ==================="));
 	//Test_Allocation();
 }
-
-
-/* Restore compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn .rch
-	#pragma warn .ccc
-#endif
-
 #endif

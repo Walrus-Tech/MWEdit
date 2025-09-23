@@ -19,7 +19,7 @@
 DEFINE_FILE("EsmScriptCompileEx.cpp");
 
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 /*===========================================================================
  *

@@ -42,7 +42,7 @@ typedef struct esmscrtempvar {
 	int CsvColIndex;
 
 	bool IsName(const TCHAR *pString) {
-		return (StringCompare(Name, pString, false) == 0);
+		return StringCompare(Name, pString, false) == 0;
 	}
 
 	void SetName(const TCHAR *pString) {

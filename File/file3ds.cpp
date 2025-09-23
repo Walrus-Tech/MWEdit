@@ -7,7 +7,6 @@
  * Implements the C3dsFile class.
  *
  *=========================================================================*/
-
 #include "file3ds.h"
 #include <math.h>
 
