@@ -7,23 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "esmscrfuncarray.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 DEFINE_FILE("EsmScrFuncArray.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,14 +18,9 @@ DEFINE_FILE("EsmScrFuncArray.cpp");
  * Class CEsmScrFuncArray Constructor
  *
  *=========================================================================*/
-
 CEsmScrFuncArray::CEsmScrFuncArray () : m_Functions(0) {
 	//DEFINE_FUNCTION("CEsmScrFuncArray::CEsmScrFuncArray()");
 }
-
-/*===========================================================================
- *      End of Class CEsmScrFuncArray Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -46,7 +28,6 @@ CEsmScrFuncArray::CEsmScrFuncArray () : m_Functions(0) {
  * Class CEsmScrFuncArray Method - void Destroy (void);
  *
  *=========================================================================*/
-
 void CEsmScrFuncArray::Destroy() {
 	DEFINE_FUNCTION("CEsmScrFuncArray::Destroy()");
 	CEsmScrFuncData *pFunction;
@@ -62,10 +43,6 @@ void CEsmScrFuncArray::Destroy() {
 	m_Functions.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncArray::Destroy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -75,7 +52,6 @@ void CEsmScrFuncArray::Destroy() {
  * is not found. Does not use a fast search method.
  *
  *=========================================================================*/
-
 CEsmScrFuncData *CEsmScrFuncArray::FindFunction(const TCHAR *pName) {
 	CEsmScrFuncData *pFunction;
 	int Index;
@@ -93,10 +69,6 @@ CEsmScrFuncData *CEsmScrFuncArray::FindFunction(const TCHAR *pName) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncArray::FindFunction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -106,7 +78,6 @@ CEsmScrFuncData *CEsmScrFuncArray::FindFunction(const TCHAR *pName) {
  * false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScrFuncArray::Load(const TCHAR *pFilename) {
 	CGenFile File;
 	bool Result;
@@ -123,10 +94,6 @@ bool CEsmScrFuncArray::Load(const TCHAR *pFilename) {
 	return Read(File);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncArray::Load()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -136,7 +103,6 @@ bool CEsmScrFuncArray::Load(const TCHAR *pFilename) {
  * error.
  *
  *=========================================================================*/
-
 bool CEsmScrFuncArray::Read(CGenFile &File) {
 	TCHAR LineBuffer[ESM_SFDATA_LINELENGTH];
 	TCHAR *pVariable;
@@ -179,10 +145,6 @@ bool CEsmScrFuncArray::Read(CGenFile &File) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrFuncArray::Read()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -193,7 +155,6 @@ bool CEsmScrFuncArray::Read(CGenFile &File) {
  * on any error.
  *
  *=========================================================================*/
-
 bool CEsmScrFuncArray::ReadFunction(CGenFile &File, const TCHAR *pFuncName) {
 	DEFINE_FUNCTION("CEsmScrFuncArray::ReadFunction()");
 	CEsmScrFuncData *pFunction;
@@ -206,7 +167,3 @@ bool CEsmScrFuncArray::ReadFunction(CGenFile &File, const TCHAR *pFuncName) {
 	/* Input the function record */
 	return pFunction->ReadData(File);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrFuncArray::ReadFunction()
- *=========================================================================*/

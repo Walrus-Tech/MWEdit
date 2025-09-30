@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "EsmIconFrame.h"
 #include "il/il.h"
@@ -18,13 +15,7 @@
 #include "EsmDefs.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -32,26 +23,17 @@
 
 DEFINE_FILE("EsmIconFrame.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmIconFrame Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmIconFrame, CStatic)
 	//{{AFX_MSG_MAP(CEsmIconFrame)
 	ON_WM_PAINT()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmIconFrame Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -59,14 +41,9 @@ END_MESSAGE_MAP()
  * Class CEsmIconFrame Constructor
  *
  *=========================================================================*/
-
 CEsmIconFrame::CEsmIconFrame() {
 	m_IsInitialized = false;
 }
-
-/*===========================================================================
- *      End of Class CEsmIconFrame Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -74,7 +51,6 @@ CEsmIconFrame::CEsmIconFrame() {
  * Class CEsmIconFrame Destructor
  *
  *=========================================================================*/
-
 CEsmIconFrame::~CEsmIconFrame() {
 	/* Destroy the frame's bitmap if required */
 	if (m_IsInitialized) {
@@ -82,17 +58,12 @@ CEsmIconFrame::~CEsmIconFrame() {
 	}
 }
 
-/*===========================================================================
- *      End of Class CEsmIconFrame Destructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIconFrame Event - void OnInitialUpdate (void);
  *
  *=========================================================================*/
-
 void CEsmIconFrame::OnInitialUpdate() {
 	CRect ClientRect;
 	CDC *pDC;
@@ -108,17 +79,12 @@ void CEsmIconFrame::OnInitialUpdate() {
 	m_IsInitialized = true;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmIconFrame::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIconFrame Event - void OnPaint ();
  *
  *=========================================================================*/
-
 void CEsmIconFrame::OnPaint() {
 	CPaintDC DC(this);
 	CRect ClientRect;
@@ -144,17 +110,12 @@ void CEsmIconFrame::OnPaint() {
 	              SRCCOPY);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmIconFrame::OnPaint()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIconFrame Method - void SetEsmIcon (pFilename, RelativePath);
  *
  *=========================================================================*/
-
 void CEsmIconFrame::SetEsmIcon(const TCHAR *pFilename, const bool RelativePath) {
 	HBITMAP hBMP;
 	CBitmap TempBitmap;
@@ -204,17 +165,12 @@ void CEsmIconFrame::SetEsmIcon(const TCHAR *pFilename, const bool RelativePath) 
 	RedrawWindow();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmIconFrame::SetEsmIcon()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIconFrame Method - void SetIconBitmap (pBitmap);
  *
  *=========================================================================*/
-
 void CEsmIconFrame::SetIconBitmap(CBitmap *pBitmap) {
 	DEFINE_FUNCTION("CEsmIconFrame::SetIconBitmap()");
 	BITMAP BmpInfo;
@@ -240,9 +196,3 @@ void CEsmIconFrame::SetIconBitmap(CBitmap *pBitmap) {
 	                 BmpInfo.bmHeight,
 	                 SRCCOPY);
 }
-
-/*===========================================================================
-
- *      End of Class Method CEsmIconFrame::SetIconBitmap()
-
- *=========================================================================*/

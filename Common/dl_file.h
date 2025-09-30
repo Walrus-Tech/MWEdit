@@ -20,13 +20,7 @@
 
 
 /* Size of input/output buffer for the CopyFile() function */
-#if defined(__BCPLUSPLUS__)
-	#define COPYFILE_BUFFERSIZE 1024u
-#elif defined(__TURBOC__)
-	#define COPYFILE_BUFFERSIZE 60000u
-#else
-	#define COPYFILE_BUFFERSIZE 60000u
-#endif
+#define COPYFILE_BUFFERSIZE 60000u
 
 /* Number of bytes read at a time for the ReadFileCB() function */
 #define READFILECB_NUMBYTES     32000
@@ -183,14 +177,10 @@ bool WildcardCompare(const TCHAR *pFilename, const TCHAR *pFilter);
  * builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
 	/* Maximum file size to use for Test_RWFile() */
-	#if defined(__TURBOC__)
-		#define TEST_RWFILE_MAXFILESIZE 65000u
-	#else
-		#define TEST_RWFILE_MAXFILESIZE 100000
-	#endif
+	#define TEST_RWFILE_MAXFILESIZE 100000
 
 	/* Helper function to create a random file of a given size */
 	void Test_CreateRandomFile(const TCHAR *pFilename,

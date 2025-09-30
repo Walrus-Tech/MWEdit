@@ -7,10 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmAiActivateDlg.h"
@@ -18,13 +14,7 @@
 #include "EsmUtils.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -33,25 +23,16 @@
 
 DEFINE_FILE("EsmAiActivateDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmAiActivateDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmAiActivateDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmAiActivateDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmAiActivateDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -59,16 +40,11 @@ END_MESSAGE_MAP()
  * Class CEsmAiActivateDlg Constructor
  *
  *=========================================================================*/
-
 CEsmAiActivateDlg::CEsmAiActivateDlg(CWnd *pParent) : CDialog(CEsmAiActivateDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmAiActivateDlg)
 	//}}AFX_DATA_INIT
 	m_pSubRecord = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmAiActivateDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -76,7 +52,6 @@ CEsmAiActivateDlg::CEsmAiActivateDlg(CWnd *pParent) : CDialog(CEsmAiActivateDlg:
  * Class CEsmAiActivateDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmAiActivateDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmAiActivateDlg)
@@ -84,17 +59,12 @@ void CEsmAiActivateDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiActivateDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiActivateDlg Method - bool DoModal (pSubRecord);
  *
  *=========================================================================*/
-
 bool CEsmAiActivateDlg::DoModal(CEsmSubAI_A *pSubRecord) {
 	int Result;
 	m_pSubRecord = pSubRecord;
@@ -112,17 +82,12 @@ bool CEsmAiActivateDlg::DoModal(CEsmSubAI_A *pSubRecord) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmAiActivateDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiActivateDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmAiActivateDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	FillEsmNpcCombo(m_TargetList);
@@ -131,24 +96,15 @@ BOOL CEsmAiActivateDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmAiActivateDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmAiActivateDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmAiActivateDlg::OnOK() {
 	CString Buffer;
 	m_TargetList.GetWindowText(Buffer);
 	m_pSubRecord->SetName(Buffer);
 	CDialog::OnOK();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmAiActivateDlg::OnOK()
- *=========================================================================*/

@@ -7,21 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmBodyPartDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,17 +21,12 @@
 IMPLEMENT_DYNCREATE(CEsmBodyPartDlg, CEsmRecDialog);
 DEFINE_FILE("EsmBodyPartDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmBodyPartDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmBodyPartDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmBodyPartDlg)
 	ON_CBN_SELCHANGE(IDC_PARTTYPELIST, OnSelchangeParttypelist)
@@ -53,26 +39,17 @@ BEGIN_MESSAGE_MAP(CEsmBodyPartDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmBodyPartDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBodyPartDlg Constructor
  *
  *=========================================================================*/
-
 CEsmBodyPartDlg::CEsmBodyPartDlg() : CEsmRecDialog(CEsmBodyPartDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmBodyPartDlg)
 	//}}AFX_DATA_INIT
 	m_pBodyPart = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmBodyPartDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -80,7 +57,6 @@ CEsmBodyPartDlg::CEsmBodyPartDlg() : CEsmRecDialog(CEsmBodyPartDlg::IDD) {
  * Class CEsmBodyPartDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmBodyPartDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -97,17 +73,12 @@ void CEsmBodyPartDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBodyPartDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBodyPartDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmBodyPartDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmBodyPartDlg::GetControlData()");
 	bodypartdata_t *pBodyData;
@@ -162,17 +133,12 @@ void CEsmBodyPartDlg::GetControlData() {
 	m_pBodyPart->SetRace(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBodyPartDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBodyPartDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmBodyPartDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -187,17 +153,12 @@ bool CEsmBodyPartDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBodyPartDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBodyPartDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmBodyPartDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -220,17 +181,12 @@ void CEsmBodyPartDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmBodyPartDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBodyPartDlg Event - void OnSelchangeParttypelist ();
  *
  *=========================================================================*/
-
 void CEsmBodyPartDlg::OnSelchangeParttypelist() {
 	int ListIndex;
 	int PartType;
@@ -246,24 +202,15 @@ void CEsmBodyPartDlg::OnSelchangeParttypelist() {
 	m_Modified = true;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmBodyPartDlg::OnSelchangeParttypelist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBodyPartDlg Event - void OnSelchangeList ();
  *
  *=========================================================================*/
-
 void CEsmBodyPartDlg::OnSelchangeList() {
 	m_Modified = true;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmBodyPartDlg::OnSelchangeList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -271,7 +218,6 @@ void CEsmBodyPartDlg::OnSelchangeList() {
  * Class CEsmBodyPartDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmBodyPartDlg::SetControlData() {
 	bodypartdata_t *pBodyData;
 
@@ -309,7 +255,3 @@ void CEsmBodyPartDlg::SetControlData() {
 	m_PlayableCheck.SetCheck(m_pBodyPart->IsPlayable());
 	m_FemaleCheck.SetCheck(m_pBodyPart->IsFemale());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmBodyPartDlg::SetControlData()
- *=========================================================================*/

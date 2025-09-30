@@ -15,7 +15,7 @@
 #include "dl_err.h"
 #include <time.h>
 
-#if defined(_WIN32)
+#if _WIN32
 	#include "windows.h"
 #endif
 
@@ -30,7 +30,7 @@ typedef struct hiclock_t {
 	union {
 		clock_t ClockCount;       /* For the standard clock() counter */
 
-#if defined(_WIN32)
+#if _WIN32
 		LARGE_INTEGER TimerCount; /* Windows performance counter */
 #endif
 	};
@@ -65,7 +65,7 @@ typedef struct hiclock_t {
 /* High-resolution counter copy operator */
 inline hiclock_t &hiclock_t::operator =(const hiclock_t &Value) {
 	CountType = Value.CountType;
-#if defined(WIN32)
+#if WIN32
 	TimerCount = Value.TimerCount;
 #else
 	ClockCount = Value.ClockCount;
@@ -75,7 +75,7 @@ inline hiclock_t &hiclock_t::operator =(const hiclock_t &Value) {
 
 /* High-resolution counter copy operator from a long value */
 inline hiclock_t &hiclock_t::operator =(const ulong &lValue) {
-#if defined(WIN32)
+#if WIN32
 	TimerCount.QuadPart = (LONGLONG)lValue;
 #else
 	ClockCount = (clock_t)lValue;
@@ -92,7 +92,7 @@ inline int HiClockCompare(const hiclock_t &Value1, const hiclock_t &Value2) {
 
 	switch (Value1.CountType) {
 		case HICLOCK_PERFORMANCE: {
-#if defined(_WIN32)
+#if _WIN32
 			LONGLONG Diff = Value1.TimerCount.QuadPart - Value2.TimerCount.QuadPart;
 
 			if (Diff == (LONGLONG)0) {
@@ -135,7 +135,7 @@ inline hiclock_t &hiclock_t::operator +=(const hiclock_t &Value) {
 	/* Ensure same clock types */
 	if (Value.CountType == CountType) {
 		if (Value.CountType == HICLOCK_PERFORMANCE) {
-#if defined(_WIN32)
+#if _WIN32
 			TimerCount.QuadPart += Value.TimerCount.QuadPart;
 #endif
 		} else {
@@ -151,7 +151,7 @@ inline hiclock_t &hiclock_t::operator -=(const hiclock_t &Value) {
 	/* Ensure same clock types */
 	if (Value.CountType == CountType) {
 		if (Value.CountType == HICLOCK_PERFORMANCE) {
-#if defined(_WIN32)
+#if _WIN32
 			TimerCount.QuadPart -= Value.TimerCount.QuadPart;
 #endif
 		} else {
@@ -175,7 +175,7 @@ inline hiclock_t operator +(const hiclock_t &Value1, const hiclock_t &Value2) {
 
 	switch (Value1.CountType) {
 		case HICLOCK_PERFORMANCE:
-#if defined(_WIN32)
+#if _WIN32
 			TempTime.TimerCount.QuadPart = Value1.TimerCount.QuadPart + Value2.TimerCount.QuadPart;
 			return TempTime;
 #else
@@ -204,7 +204,7 @@ inline hiclock_t operator -(const hiclock_t &Value1, const hiclock_t &Value2) {
 
 	switch (Value1.CountType) {
 		case HICLOCK_PERFORMANCE:
-#if defined(_WIN32)
+#if _WIN32
 			TempTime.TimerCount.QuadPart = Value1.TimerCount.QuadPart - Value2.TimerCount.QuadPart;
 			return TempTime;
 #else
@@ -232,7 +232,7 @@ inline hiclock_t operator -(const hiclock_t &Value) {
 
 	switch (Value.CountType) {
 		case HICLOCK_PERFORMANCE:
-#if defined(_WIN32)
+#if _WIN32
 			TempTime.TimerCount.QuadPart = -Value.TimerCount.QuadPart;
 			return TempTime;
 #else
@@ -252,7 +252,7 @@ inline hiclock_t operator -(const hiclock_t &Value) {
 inline hiclock_t::operator double() const {
 	switch (CountType) {
 		case HICLOCK_PERFORMANCE:
-#if defined(_WIN32)
+#if _WIN32
 			return (double)TimerCount.QuadPart;
 #else
 			return (double)0.0;

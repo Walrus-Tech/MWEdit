@@ -7,21 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmCreatureDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,25 +21,16 @@
 DEFINE_FILE("EsmCreatureDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmCreatureDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmCreatureDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmCreatureDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmCreatureDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmCreatureDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmCreatureDlg Constructor
  *
  *=========================================================================*/
-
 CEsmCreatureDlg::CEsmCreatureDlg() : CEsmRecDialog(CEsmCreatureDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmCreatureDlg)
 	//}}AFX_DATA_INIT
 	m_pCreature = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmCreatureDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,7 +50,6 @@ CEsmCreatureDlg::CEsmCreatureDlg() : CEsmRecDialog(CEsmCreatureDlg::IDD) {
  * Class CEsmCreatureDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmCreatureDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -83,17 +59,12 @@ void CEsmCreatureDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreatureDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreatureDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreatureDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmCreatureDlg::GetControlData()");
 	CString Buffer;
@@ -115,17 +86,12 @@ void CEsmCreatureDlg::GetControlData() {
 	m_Page5.GetControlData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreatureDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreatureDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmCreatureDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -134,17 +100,12 @@ bool CEsmCreatureDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreatureDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreatureDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmCreatureDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -181,17 +142,12 @@ void CEsmCreatureDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreatureDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreatureDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreatureDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pCreature == NULL) {
@@ -207,7 +163,3 @@ void CEsmCreatureDlg::SetControlData() {
 	m_Page4.SetControlData();
 	m_Page5.SetControlData();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreatureDlg::SetControlData()
- *=========================================================================*/

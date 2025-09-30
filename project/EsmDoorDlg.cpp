@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmDoorDlg.h"
 #include "mmsystem.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmDoorDlg, CEsmRecDialog);
 DEFINE_FILE("EsmDoorDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmDoorDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmDoorDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmDoorDlg)
 	ON_BN_CLICKED(IDC_OPENPLAY, OnOpenPlay)
@@ -49,26 +35,17 @@ BEGIN_MESSAGE_MAP(CEsmDoorDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmDoorDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Constructor
  *
  *=========================================================================*/
-
 CEsmDoorDlg::CEsmDoorDlg() : CEsmRecDialog(CEsmDoorDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmDoorDlg)
 	//}}AFX_DATA_INIT
 	m_pDoor = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmDoorDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -76,7 +53,6 @@ CEsmDoorDlg::CEsmDoorDlg() : CEsmRecDialog(CEsmDoorDlg::IDD) {
  * Class CEsmDoorDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -92,17 +68,12 @@ void CEsmDoorDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDoorDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmDoorDlg::GetControlData()");
 	CString Buffer;
@@ -145,17 +116,12 @@ void CEsmDoorDlg::GetControlData() {
 	m_pDoor->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDoorDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmDoorDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -174,23 +140,14 @@ bool CEsmDoorDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDoorDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Event - void OnClosebutton ();
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::OnClosebutton() {
 }
-
-/*===========================================================================
- *      End of Class Event CEsmDoorDlg::OnClosebutton()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -198,13 +155,8 @@ void CEsmDoorDlg::OnClosebutton() {
  * Class CEsmDoorDlg Event - void OnOpenbutton ();
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::OnOpenbutton() {
 }
-
-/*===========================================================================
- *      End of Class Event CEsmDoorDlg::OnOpenbutton()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -212,7 +164,6 @@ void CEsmDoorDlg::OnOpenbutton() {
  * Class CEsmDoorDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -229,17 +180,12 @@ void CEsmDoorDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDoorDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmDoorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -271,17 +217,12 @@ int CEsmDoorDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDoorDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pDoor == NULL) {
@@ -309,17 +250,12 @@ void CEsmDoorDlg::SetControlData() {
 	m_PersistCheck.SetCheck(m_pDoor->IsPersist());
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDoorDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Event - void OnClosePlay ();
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::OnClosePlay() {
 	CString SoundFile;
 	CEsmSound *pSound;
@@ -337,17 +273,12 @@ void CEsmDoorDlg::OnClosePlay() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDoorDlg::OnClosePlay()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDoorDlg Event - void OnOpenPlay ();
  *
  *=========================================================================*/
-
 void CEsmDoorDlg::OnOpenPlay() {
 	CString SoundFile;
 	CEsmSound *pSound;
@@ -364,7 +295,3 @@ void CEsmDoorDlg::OnOpenPlay() {
 		PlaySound(SoundFile, NULL, SND_FILENAME | SND_ASYNC | SND_NODEFAULT);
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CEsmDoorDlg::OnOpenPlay()
- *=========================================================================*/

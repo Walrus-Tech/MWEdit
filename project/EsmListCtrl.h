@@ -13,7 +13,7 @@
 
 #include "EsmFile.h"
 
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	#include "EsmDlgArray.h"
 #endif
 
@@ -341,7 +341,7 @@ class CEsmListCtrl : public CListCtrl {
 	COLORREF m_ActiveColor;
 	COLORREF m_DeleteColor;
 
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	CEsmDlgHandler *m_pEsmDlgHandler;
 #endif
 
@@ -362,7 +362,7 @@ class CEsmListCtrl : public CListCtrl {
 	int InsertRecord(const int Index, esmrecinfo_t *pRecInfo);
 
 	/* Used to drag and drop records between lists */
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	void DropItemOnList(CEsmListCtrl *pDropList);
 #endif
 
@@ -400,7 +400,7 @@ class CEsmListCtrl : public CListCtrl {
 	void InitObjectList(esmcoldata_t *pColData);
 
 	/* A record has been dropped on the list */
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	int OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo);
 #endif
 
@@ -412,7 +412,7 @@ class CEsmListCtrl : public CListCtrl {
 	}
 
 	/* Set class members */
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	void SetDlgHandler(CEsmDlgHandler *pDlgHandler) {
 		m_pEsmDlgHandler = pDlgHandler;
 	}

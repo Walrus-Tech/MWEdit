@@ -7,24 +7,12 @@
  * Implementation of the CChildFrameVar class
  *
  *=========================================================================*/
-
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "ChildFrmVar.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-/* Debug defines */
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -33,17 +21,12 @@
 IMPLEMENT_DYNCREATE(CChildFrameVar, CMDIChildWnd)
 DEFINE_FILE("ChildFrmVar.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CChildFrameVar Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CChildFrameVar, CMDIChildWnd)
 	//{{AFX_MSG_MAP(CChildFrameVar)
 	ON_WM_SIZE()
@@ -52,24 +35,15 @@ BEGIN_MESSAGE_MAP(CChildFrameVar, CMDIChildWnd)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CChildFrameVar Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CChildFrameVar Constructor
  *
  *=========================================================================*/
-
 CChildFrameVar::CChildFrameVar() {
 	m_IsFakeMaximized = false;
 }
-
-/*===========================================================================
- *      End of Class CChildFrameVar Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -77,18 +51,8 @@ CChildFrameVar::CChildFrameVar() {
  * Class CChildFrameVar Destructor
  *
  *=========================================================================*/
-
 CChildFrameVar::~CChildFrameVar() {
 }
-
-/*===========================================================================
- *      End of Class CChildFrameVar Destructor
- *=========================================================================*/
-
-
-/*===========================================================================
- *      End of Class Event CChildFrameVar::OnCreateClient()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -96,7 +60,6 @@ CChildFrameVar::~CChildFrameVar() {
  * Class CChildFrameVar Method - BOOL PreCreateWindow (cs);
  *
  *=========================================================================*/
-
 BOOL CChildFrameVar::PreCreateWindow(CREATESTRUCT &cs) {
 	//cs.style &= ~WS_THICKFRAME;
 	//cs.style &= ~WS_MAXIMIZEBOX;
@@ -109,19 +72,13 @@ BOOL CChildFrameVar::PreCreateWindow(CREATESTRUCT &cs) {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Method CChildFrameVar::PreCreateWindow()
- *=========================================================================*/
 
-
-#ifdef _DEBUG
-
+#if _DEBUG
 /*===========================================================================
  *
  * CChildFrameVar Diagnostics
  *
  *=========================================================================*/
-
 void CChildFrameVar::AssertValid() const {
 	CMDIChildWnd::AssertValid();
 }
@@ -129,11 +86,6 @@ void CChildFrameVar::AssertValid() const {
 void CChildFrameVar::Dump(CDumpContext &dc) const {
 	CMDIChildWnd::Dump(dc);
 }
-
-/*===========================================================================
- *      End of CChildFrameVar Diagnostics
- *=========================================================================*/
-
 #endif
 
 
@@ -142,14 +94,9 @@ void CChildFrameVar::Dump(CDumpContext &dc) const {
  * Class CChildFrameVar Event - void OnClose (void);
  *
  *=========================================================================*/
-
 void CChildFrameVar::OnClose() {
 	DestroyWindow();
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrameVar::OnClose()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -157,7 +104,6 @@ void CChildFrameVar::OnClose() {
  * Class CChildFrameVar Event - void OnSize (nType, cx, cy);
  *
  *=========================================================================*/
-
 void CChildFrameVar::OnSize(UINT nType, int cx, int cy) {
 	/* Cannot maximize this type of frame */
 	/*if (nType == SIZE_MAXIMIZED) {
@@ -171,17 +117,12 @@ void CChildFrameVar::OnSize(UINT nType, int cx, int cy) {
 	m_IsFakeMaximized = false;
 }
 
-/*===========================================================================
- *      End of Class Event CChildFrameVar::OnSize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CChildFrameVar Method - void FakeMaximize (void);
  *
  *=========================================================================*/
-
 void CChildFrameVar::FakeMaximize() {
 	CRect ClientRect;
 	CRect RestoreRect;
@@ -208,17 +149,12 @@ void CChildFrameVar::FakeMaximize() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CChildFrameVar::FakeMaximize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CChildFrameVar Event - void OnSysCommand (nID, Param);
  *
  *=========================================================================*/
-
 void CChildFrameVar::OnSysCommand(UINT nID, LPARAM Param) {
 	if ((nID & 0xFFF0) == SC_MAXIMIZE) {
 		FakeMaximize();
@@ -229,7 +165,3 @@ void CChildFrameVar::OnSysCommand(UINT nID, LPARAM Param) {
 
 	CMDIChildWnd::OnSysCommand(nID, Param);
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrameVar::OnSysCommand()
- *=========================================================================*/

@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmLightDlg.h"
 #include "mmsystem.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmLightDlg, CEsmRecDialog);
 DEFINE_FILE("EsmLightDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmLightDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmLightDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmLightDlg)
 	ON_BN_CLICKED(IDC_COLORBUTTON, OnColorbutton)
@@ -55,26 +41,17 @@ BEGIN_MESSAGE_MAP(CEsmLightDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmLightDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Constructor
  *
  *=========================================================================*/
-
 CEsmLightDlg::CEsmLightDlg() : CEsmRecDialog(CEsmLightDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmLightDlg)
 	//}}AFX_DATA_INIT
 	m_pLight = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmLightDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -82,7 +59,6 @@ CEsmLightDlg::CEsmLightDlg() : CEsmRecDialog(CEsmLightDlg::IDD) {
  * Class CEsmLightDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmLightDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -123,17 +99,12 @@ void CEsmLightDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLightDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmLightDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLightDlg::GetControlData()");
 	lightdata_t *pLightData;
@@ -257,17 +228,12 @@ void CEsmLightDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLightDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmLightDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -294,17 +260,12 @@ bool CEsmLightDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLightDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Event - void OnCancarrycheck ();
  *
  *=========================================================================*/
-
 void CEsmLightDlg::OnCancarrycheck() {
 	m_ValueText.EnableWindow(m_CanCarryCheck.GetCheck());
 	m_WeightText.EnableWindow(m_CanCarryCheck.GetCheck());
@@ -315,17 +276,12 @@ void CEsmLightDlg::OnCancarrycheck() {
 	m_OffCheck.EnableWindow(m_CanCarryCheck.GetCheck());
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLightDlg::OnCancarrycheck()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Event - void OnChangeColor ();
  *
  *=========================================================================*/
-
 void CEsmLightDlg::OnChangeColor() {
 	CString Buffer;
 	int Red;
@@ -373,17 +329,12 @@ void CEsmLightDlg::OnChangeColor() {
 	m_ColorBox.RedrawWindow();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLightDlg::OnChangeColor()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Event - void OnColorbutton ();
  *
  *=========================================================================*/
-
 void CEsmLightDlg::OnColorbutton() {
 	int Result;
 	CString Buffer;
@@ -443,17 +394,12 @@ void CEsmLightDlg::OnColorbutton() {
 	m_ColorBox.SetColor(Red, Green, Blue);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLightDlg::OnColorbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmLightDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -485,17 +431,12 @@ void CEsmLightDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLightDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Event - void OnSoundPlay ();
  *
  *=========================================================================*/
-
 void CEsmLightDlg::OnSoundPlay() {
 	CString SoundFile;
 	CEsmSound *pSound;
@@ -513,17 +454,12 @@ void CEsmLightDlg::OnSoundPlay() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLightDlg::OnSoundPlay()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmLightDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -551,17 +487,12 @@ int CEsmLightDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLightDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLightDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmLightDlg::SetControlData() {
 	CString Buffer;
 	lightdata_t *pLightData;
@@ -650,7 +581,3 @@ void CEsmLightDlg::SetControlData() {
 	m_DynamicCheck.SetCheck(m_pLight->IsDynamic());
 	m_NegativeCheck.SetCheck(m_pLight->IsNegative());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmLightDlg::SetControlData()
- *=========================================================================*/

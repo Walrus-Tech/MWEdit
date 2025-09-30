@@ -25,10 +25,6 @@
 /* Shortcut to trimming whitespace from a string */
 #define trim(String) ltrim(rtrim(String))
 
-#if defined(_WIN32_WCE)
-	#define stricmp(String1, String2) _stricmp((String1), (String2))
-#endif
-
 
 /* Returns the number of substrings in the given string */
 size_t CountSubstrings(const TCHAR *pSourceString, const TCHAR *pSearchString);
@@ -108,7 +104,7 @@ inline size_t SafeStrLen(const TCHAR *pString) {
  * otherwise available.
  *
  *=========================================================================*/
-#if !defined(__TURBOC__) && !defined(_WIN32)
+#ifndef _WIN32
 	/* Standard uppercase/lowercase conversion functions */
 	TCHAR *strlwr(TCHAR *pString);
 	TCHAR *strupr(TCHAR *pString);
@@ -125,7 +121,7 @@ inline size_t SafeStrLen(const TCHAR *pString) {
  * Prototypes for test functions of module.  Only available in DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 	void Test_vsnprintf();
 	void Test_CountSubstrings();
 	void Test_ltrim();

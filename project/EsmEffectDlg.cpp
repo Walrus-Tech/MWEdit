@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmEffectDlg.h"
 #include "mmsystem.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmEffectDlg, CEsmRecDialog);
 DEFINE_FILE("EsmEffectDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmEffectDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmEffectDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmEffectDlg)
 	ON_BN_CLICKED(IDC_CASTPLAY, OnCastPlay)
@@ -57,17 +43,12 @@ BEGIN_MESSAGE_MAP(CEsmEffectDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmEffectDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Constructor
  *
  *=========================================================================*/
-
 CEsmEffectDlg::CEsmEffectDlg() : CEsmRecDialog(CEsmEffectDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmEffectDlg)
 	//}}AFX_DATA_INIT
@@ -75,17 +56,12 @@ CEsmEffectDlg::CEsmEffectDlg() : CEsmRecDialog(CEsmEffectDlg::IDD) {
 	m_HasIDText = false;
 }
 
-/*===========================================================================
- *      End of Class CEsmEffectDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -129,17 +105,12 @@ void CEsmEffectDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEffectDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmEffectDlg::GetControlData()");
 	CString Buffer;
@@ -222,17 +193,12 @@ void CEsmEffectDlg::GetControlData() {
 	m_pEffect->SetNegative(m_NegativeCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEffectDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmEffectDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -275,17 +241,12 @@ bool CEsmEffectDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmEffectDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - void OnCastPlay ();
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::OnCastPlay() {
 	CString SoundFile;
 	CEsmSound *pSound;
@@ -354,17 +315,12 @@ void CEsmEffectDlg::OnAreaPlay() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnCastPlay()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - void OnChangeColor ();
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::OnChangeColor() {
 	CString Buffer;
 	int Red;
@@ -412,17 +368,12 @@ void CEsmEffectDlg::OnChangeColor() {
 	m_ColorBox.RedrawWindow();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnChangeColor()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - void OnColorbutton ();
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::OnColorbutton() {
 	int Result;
 	CString Buffer;
@@ -482,17 +433,12 @@ void CEsmEffectDlg::OnColorbutton() {
 	m_ColorBox.SetColor(Red, Green, Blue);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnColorbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - void OnIconbutton ();
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::OnIconbutton() {
 	CString Filename;
 	bool Result;
@@ -504,17 +450,12 @@ void CEsmEffectDlg::OnIconbutton() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnIconbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -551,17 +492,12 @@ void CEsmEffectDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - void OnParticlebutton ();
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::OnParticlebutton() {
 	CString Filename;
 	bool Result;
@@ -573,17 +509,12 @@ void CEsmEffectDlg::OnParticlebutton() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnParticlebutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmEffectDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -607,17 +538,12 @@ int CEsmEffectDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmEffectDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmEffectDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmEffectDlg::SetControlData() {
 	CString Buffer;
 	const TCHAR *pString;
@@ -752,7 +678,3 @@ void CEsmEffectDlg::SetControlData() {
 	m_SpellCheck.SetCheck(m_pEffect->IsEnchanting());
 	m_NegativeCheck.SetCheck(m_pEffect->IsNegative());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmEffectDlg::SetControlData()
- *=========================================================================*/

@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmScrTempView.h"
 #include "EsmScriptCompile.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmScrTempView, CFormView);
 DEFINE_FILE("EsmScrTempView.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmScrTempView Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmScrTempView, CFormView)
 	//{{AFX_MSG_MAP(CEsmScrTempView)
 	ON_WM_DESTROY()
@@ -52,17 +38,12 @@ BEGIN_MESSAGE_MAP(CEsmScrTempView, CFormView)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of Class CEsmScrTempView Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Constructor
  *
  *=========================================================================*/
-
 CEsmScrTempView::CEsmScrTempView() : CFormView(CEsmScrTempView::IDD) {
 	//{{AFX_DATA_INIT(CEsmScrTempView)
 	//}}AFX_DATA_INIT
@@ -77,23 +58,14 @@ CEsmScrTempView::CEsmScrTempView() : CFormView(CEsmScrTempView::IDD) {
 	m_Options.SetScriptName(_T("scripttemp_"));
 }
 
-/*===========================================================================
- *      End of Class CEsmScrTempView Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Destructor
  *
  *=========================================================================*/
-
 CEsmScrTempView::~CEsmScrTempView() {
 }
-
-/*===========================================================================
- *      End of Class CEsmScrTempView Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -104,7 +76,6 @@ CEsmScrTempView::~CEsmScrTempView() {
  * are invalid.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::CheckCsvFile() {
 	int iResult;
 	bool Result;
@@ -137,10 +108,6 @@ bool CEsmScrTempView::CheckCsvFile() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::CheckCsvFile()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -149,7 +116,6 @@ bool CEsmScrTempView::CheckCsvFile() {
  * Returns false if any script template parameters are not valid.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::CheckTemplate() {
 	bool Result;
 
@@ -184,10 +150,6 @@ bool CEsmScrTempView::CheckTemplate() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::CheckTemplate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -197,7 +159,6 @@ bool CEsmScrTempView::CheckTemplate() {
  * are invalid.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::CheckTemplateFile() {
 	esmscrtempvar_t *pTempVar;
 	int Index;
@@ -221,10 +182,6 @@ bool CEsmScrTempView::CheckTemplateFile() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::CheckTemplateFile()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -234,7 +191,6 @@ bool CEsmScrTempView::CheckTemplateFile() {
  * that all template parameters have been checked and are valid.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::CreateScripts() {
 	CCsvRow *pRow;
 	bool Result;
@@ -263,10 +219,6 @@ bool CEsmScrTempView::CreateScripts() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::CreateScripts()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -276,7 +228,6 @@ bool CEsmScrTempView::CreateScripts() {
  * valid. Returns false on any errors.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 	CEsmScript *pScript;
 	esmrecinfo_t *pRecInfo;
@@ -361,27 +312,19 @@ bool CEsmScrTempView::CreateScript(CCsvRow *pRow) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::CreateScript()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmScrTempView)
 	DDX_Control(pDX, IDC_TAB1, m_TabControl);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -391,15 +334,10 @@ void CEsmScrTempView::DoDataExchange(CDataExchange *pDX) {
  * Get the current control data.
  *
  *=========================================================================*/
-
 void CEsmScrTempView::GetControlData() {
 	m_Page1.GetControlData();
 	OnUpdateText();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::GetControlData()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -409,7 +347,6 @@ void CEsmScrTempView::GetControlData() {
  * Checks if there is a current valid csv/template file.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::HasCsvFile() {
 	return !(*m_CsvFile.GetFilename() == NULL_CHAR);
 }
@@ -418,18 +355,13 @@ bool CEsmScrTempView::HasTemplateFile() {
 	return !(*m_ScriptTemplate.GetFilename() == NULL_CHAR);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::HasCsvFile()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CEsmScrTempView Diagnostics
  *
  *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 
 void CEsmScrTempView::AssertValid() const {
 	CFormView::AssertValid();
@@ -441,10 +373,6 @@ void CEsmScrTempView::Dump(CDumpContext &dc) const {
 
 #endif
 
-/*===========================================================================
- *      End of Class CEsmScrTempView Diagnostics
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -453,7 +381,6 @@ void CEsmScrTempView::Dump(CDumpContext &dc) const {
  * Gets or creates the script name for the given csv row.
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScrTempView::MakeScriptName(CCsvRow *pRow) {
 	static CString s_Buffer;
 	esmscrtempvar_t *pTempVar;
@@ -479,17 +406,12 @@ const TCHAR *CEsmScrTempView::MakeScriptName(CCsvRow *pRow) {
 	return s_Buffer;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScrTempView::MakeScriptName()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnCheckTemplate (void);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnCheckTemplate() {
 	bool Result;
 	/* Update the control data */
@@ -506,17 +428,12 @@ void CEsmScrTempView::OnCheckTemplate() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnCheckTemplate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnCreateTemplate (void);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnCreateTemplate() {
 	bool Result;
 	/* Update the control data */
@@ -543,17 +460,12 @@ void CEsmScrTempView::OnCreateTemplate() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnCreateTemplate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnDestroy ();
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnDestroy() {
 	CFormView::OnDestroy();
 
@@ -562,17 +474,12 @@ void CEsmScrTempView::OnDestroy() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnDestroy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnEditCopy ();
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnEditCopy() {
 	ClipCopyFromWnd(GetFocus());
 }
@@ -585,17 +492,12 @@ void CEsmScrTempView::OnEditPaste() {
 	ClipPasteToWnd(GetFocus());
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnEditPaste()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnInitialUpdate() {
 	CString Buffer;
 	CFormView::OnInitialUpdate();
@@ -632,17 +534,12 @@ void CEsmScrTempView::OnInitialUpdate() {
 	m_Page3.UpdatePage();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnReloadCsvFile (void);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnReloadCsvFile() {
 	CString Buffer;
 	bool Result;
@@ -669,17 +566,12 @@ void CEsmScrTempView::OnReloadCsvFile() {
 	m_Page1.UpdatePage();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnReloadCsvFile()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnReloadScrTemp (void);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnReloadScrTemp() {
 	CString Buffer;
 	bool Result;
@@ -702,17 +594,12 @@ void CEsmScrTempView::OnReloadScrTemp() {
 	m_Page2.UpdatePage();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnReloadScrTemp()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnScrtempLoadcsv ();
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnScrtempLoadcsv() {
 	CFileDialog FileDlg(TRUE,
 	                    ESMSCRTEMP_CSV_EXT,
@@ -745,17 +632,12 @@ void CEsmScrTempView::OnScrtempLoadcsv() {
 	m_Page1.UpdatePage();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnScrtempLoadcsv()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnLoadTemplate (void);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnLoadTemplate() {
 	CFileDialog FileDlg(TRUE,
 	                    ESM_SCRTEMP_FILEEXT,
@@ -785,26 +667,17 @@ void CEsmScrTempView::OnLoadTemplate() {
 	m_Page2.UpdatePage();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnLoadTemplate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Event - void OnUpdateText (void);
  *
  *=========================================================================*/
-
 void CEsmScrTempView::OnUpdateText() {
 	m_Page2.UpdateText();
 	m_ScriptTemplate.ParseText();
 	m_Page1.UpdatePage();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmScrTempView::OnUpdateText()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -815,7 +688,6 @@ void CEsmScrTempView::OnUpdateText() {
  * false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::ParseScriptText(CCsvRow *pRow, const TCHAR *pScriptName) {
 	TCHAR *pBuffer;
 	bool Result;
@@ -828,17 +700,12 @@ bool CEsmScrTempView::ParseScriptText(CCsvRow *pRow, const TCHAR *pScriptName) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::ParseScriptText()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScrTempView Method - BOOL PreTranslateMessage (pMsg);
  *
  *=========================================================================*/
-
 BOOL CEsmScrTempView::PreTranslateMessage(MSG *pMsg) {
 	int Result;
 
@@ -853,10 +720,6 @@ BOOL CEsmScrTempView::PreTranslateMessage(MSG *pMsg) {
 	return CFormView::PreTranslateMessage(pMsg);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::PreTranslateMessage()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -866,7 +729,6 @@ BOOL CEsmScrTempView::PreTranslateMessage(MSG *pMsg) {
  * false on any error.
  *
  *=========================================================================*/
-
 bool CEsmScrTempView::UpdateColIndices() {
 	esmscrtempvar_t *pTempVar;
 	int iResult;
@@ -883,7 +745,3 @@ bool CEsmScrTempView::UpdateColIndices() {
 
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrTempView::UpdateColIndices()
- *=========================================================================*/

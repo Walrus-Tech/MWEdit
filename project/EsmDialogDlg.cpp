@@ -11,9 +11,6 @@
  *    list to check for any 'one-way' links.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmDialogDlg.h"
@@ -21,13 +18,7 @@
 #include "EsmJournalDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -36,17 +27,12 @@
 DEFINE_FILE("EsmDialogDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmDialogDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Item List Display Data Array
  *
  *=========================================================================*/
-
 static esmcoldata_t l_InfoColData[] = {
 	{
 		_T("Info"),
@@ -162,17 +148,12 @@ static esmcoldata_t l_InfoColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Item List Display Data Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmDialogDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmDialogDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmDialogDlg)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
@@ -194,17 +175,12 @@ BEGIN_MESSAGE_MAP(CEsmDialogDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmDialogDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Constructor
  *
  *=========================================================================*/
-
 CEsmDialogDlg::CEsmDialogDlg() : CEsmRecDialog(CEsmDialogDlg::IDD), m_NewInfos(0) {
 	//{{AFX_DATA_INIT(CEsmDialogDlg)
 	//}}AFX_DATA_INIT
@@ -213,24 +189,15 @@ CEsmDialogDlg::CEsmDialogDlg() : CEsmRecDialog(CEsmDialogDlg::IDD), m_NewInfos(0
 	m_pNpcFilter = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmDialogDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Destructor
  *
  *=========================================================================*/
-
 CEsmDialogDlg::~CEsmDialogDlg () {
 	ClearNewInfos();
 }
-
-/*===========================================================================
- *      End of Class CEsmDialogDlg Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -240,7 +207,6 @@ CEsmDialogDlg::~CEsmDialogDlg () {
  * Returns true if the given info record can be safely cleaned.
  *
  *=========================================================================*/
-
 bool CEsmDialogDlg::CanCleanInfo(esmrecinfo_t *pRecInfo) {
 	CEsmInfo* pPrevInfo = (CEsmInfo *)pRecInfo->pRecord->GetPrevRecord();
 	CEsmInfo* pInfo = (CEsmInfo *)pRecInfo->pRecord;
@@ -265,10 +231,6 @@ bool CEsmDialogDlg::CanCleanInfo(esmrecinfo_t *pRecInfo) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::CanCleanInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -278,7 +240,6 @@ bool CEsmDialogDlg::CanCleanInfo(esmrecinfo_t *pRecInfo) {
  * ensures that all the INFOs have been added to the list.
  *
  *=========================================================================*/
-
 bool CEsmDialogDlg::CheckInfoLinks(esmrecinfo_t *pStartInfoRec,
                                    const bool FirstUpdate,
                                    CEsmNpc* pFilterNpc) {
@@ -334,17 +295,12 @@ bool CEsmDialogDlg::CheckInfoLinks(esmrecinfo_t *pStartInfoRec,
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::CheckInfoLinks()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Method - void ClearNewInfos (void);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::ClearNewInfos() {
 	DEFINE_FUNCTION("CEsmDialogDlg::ClearNewInfos()");
 	esminfodata_t *pInfoData;
@@ -365,10 +321,6 @@ void CEsmDialogDlg::ClearNewInfos() {
 	m_NewInfos.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::ClearNewInfos()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -380,7 +332,6 @@ void CEsmDialogDlg::ClearNewInfos() {
  * of all the info records.
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::CopyAllInfos(const bool Rename) {
 	esmrecinfo_t *pRecInfo;
 	CEsmInfo *pInfo;
@@ -453,10 +404,6 @@ void CEsmDialogDlg::CopyAllInfos(const bool Rename) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::CopyAllInfos()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -468,7 +415,6 @@ void CEsmDialogDlg::CopyAllInfos(const bool Rename) {
  * info array.
  *
  *=========================================================================*/
-
 esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(const int ListIndex) {
 	esmrecinfo_t *pRecInfo;
 	esmrecinfo_t *pNewRecInfo;
@@ -499,10 +445,6 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(const int ListIndex) {
 	return pNewRecInfo;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::CreateNewInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -517,7 +459,6 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(const int ListIndex) {
  * the new info record is only created if the current info is not active.
  *
  *=========================================================================*/
-
 esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(esmrecinfo_t *pRecInfo, const bool MustBeNew) {
 	DEFINE_FUNCTION("CEsmDialogDlg::CreateNewInfo()");
 	esminfodata_t *pInfoData;
@@ -580,19 +521,15 @@ esmrecinfo_t *CEsmDialogDlg::CreateNewInfo(esmrecinfo_t *pRecInfo, const bool Mu
 	return pInfoData->pNewRecInfo;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::CreateNewInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmDialogDlg)
 	DDX_Control(pDX, IDCANCEL, m_CancelButton);
 	DDX_Control(pDX, IDC_SAVE, m_SaveButton);
@@ -602,10 +539,6 @@ void CEsmDialogDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -614,7 +547,6 @@ void CEsmDialogDlg::DoDataExchange(CDataExchange *pDX) {
  * Fills the info list with the INFO records for the current filter settings.
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::FillInfoList() {
 	esmrecinfo_t *pStartRecInfo;
 	esmrecinfo_t *pRecInfo;
@@ -631,10 +563,6 @@ void CEsmDialogDlg::FillInfoList() {
 	UpdateInfoList(true);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::FillInfoList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -643,7 +571,6 @@ void CEsmDialogDlg::FillInfoList() {
  * Attempt to find the given INFO ID string in the new info array.
  *
  *=========================================================================*/
-
 esminfodata_t *CEsmDialogDlg::FindNewInfo(const TCHAR *pID) {
 	esminfodata_t *pInfoData;
 	int Index;
@@ -670,10 +597,6 @@ esminfodata_t *CEsmDialogDlg::FindNewInfo(const TCHAR *pID) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::FindNewInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -683,7 +606,6 @@ esminfodata_t *CEsmDialogDlg::FindNewInfo(const TCHAR *pID) {
  * match the INFO ID string).
  *
  *=========================================================================*/
-
 esminfodata_t *CEsmDialogDlg::FindNewInfo(esmrecinfo_t *pRecInfo) {
 	esminfodata_t *pInfoData;
 	int Index;
@@ -706,10 +628,6 @@ esminfodata_t *CEsmDialogDlg::FindNewInfo(esmrecinfo_t *pRecInfo) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::FindNewInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -718,7 +636,6 @@ esminfodata_t *CEsmDialogDlg::FindNewInfo(esmrecinfo_t *pRecInfo) {
  * Find the INFO record (new or old) with the given ID.
  *
  *=========================================================================*/
-
 esmrecinfo_t *CEsmDialogDlg::GetRecInfo(const TCHAR *pID, const TCHAR *pDialogID) {
 	esminfodata_t *pInfoData;
 	esmrecinfo_t *pRecInfo;
@@ -749,17 +666,12 @@ esmrecinfo_t *CEsmDialogDlg::GetRecInfo(const TCHAR *pID, const TCHAR *pDialogID
 	return pRecInfo;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::GetRecInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmDialogDlg::GetControlData()");
 	esminfodata_t *pInfoData;
@@ -832,17 +744,12 @@ void CEsmDialogDlg::GetControlData() {
 	m_NewInfos.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmDialogDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -857,17 +764,12 @@ bool CEsmDialogDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - LRESULT OnEditRecord (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmDialogDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
 	DEFINE_FUNCTION("CEsmDialogDlg::OnEditRecord()");
 	esmrecinfo_t *pRecInfo;
@@ -882,17 +784,12 @@ LRESULT CEsmDialogDlg::OnEditRecord (LPARAM lParam, LPARAM wParam) {
 	return OnEditInfoRecord((LPARAM) pRecInfo, lParam);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - LRESULT OnEditInfoRecord (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 	DEFINE_FUNCTION("CEsmDialogDlg::OnEditInfoRecord()");
 	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)lParam;
@@ -978,17 +875,12 @@ LRESULT CEsmDialogDlg::OnEditInfoRecord (LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditInfoRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -1023,17 +915,12 @@ void CEsmDialogDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmDialogDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo = (esmrecinfo_t *)wParam;
@@ -1051,17 +938,12 @@ LRESULT CEsmDialogDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmDialogDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
 		return 1;
@@ -1070,17 +952,12 @@ LRESULT CEsmDialogDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmDialogDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 	int Index;
@@ -1101,17 +978,12 @@ int CEsmDialogDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pDialog == NULL) {
@@ -1125,17 +997,12 @@ void CEsmDialogDlg::SetControlData() {
 	FillInfoList();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnMoveupbutton ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnMoveupbutton() {
 	esmrecinfo_t *pRecInfo;
 	esmrecinfo_t *pSourcePrevRecInfo = NULL;
@@ -1235,17 +1102,12 @@ void CEsmDialogDlg::OnMoveupbutton() {
 	m_InfoList.SetItemState(ListIndex, LVIS_SELECTED, LVIS_SELECTED);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnMoveupbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnMovedownbutton ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnMovedownbutton() {
 	esmrecinfo_t *pRecInfo;
 	esmrecinfo_t *pSourcePrevRecInfo = NULL;
@@ -1347,17 +1209,12 @@ void CEsmDialogDlg::OnMovedownbutton() {
 	m_InfoList.SetItemState(ListIndex, LVIS_SELECTED, LVIS_SELECTED);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnMovedownbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnContextMenu (pWnd, Point);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnContextMenu(CWnd *pWnd, CPoint point) {
 	CMenu Menu;
 	CMenu *pPopup;
@@ -1386,17 +1243,12 @@ void CEsmDialogDlg::OnContextMenu(CWnd *pWnd, CPoint point) {
 	pPopup->TrackPopupMenu(TPM_LEFTALIGN | TPM_LEFTBUTTON, point.x, point.y, this);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnContextMenu()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnEditAddnew ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnEditAddnew() {
 	DEFINE_FUNCTION("CEsmDialogDlg::OnEditAddnew()");
 	CEsmInfo *pNewInfo;
@@ -1523,17 +1375,12 @@ void CEsmDialogDlg::OnEditAddnew() {
 	UpdateInfoList();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditAddnew()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnEditClean ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnEditClean() {
 	DEFINE_FUNCTION("CEsmDialogDlg::OnEditClean()");
 	POSITION SelPos;
@@ -1658,9 +1505,7 @@ void CEsmDialogDlg::OnEditClean() {
 		} else if (IsStart) {
 			m_pStartInfo = NULL;
 		}
-	}
-	/* Get the 'previous' record for the one being cleaned */
-	else {
+	} else { /* Get the 'previous' record for the one being cleaned */
 		pNewRecInfo->pFile = pPrevRecord->GetFile();
 		pNewRecInfo->pRecord = pPrevRecord;
 	}
@@ -1682,17 +1527,12 @@ void CEsmDialogDlg::OnEditClean() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditClean()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnEditCreatecopy ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnEditCreatecopy() {
 	DEFINE_FUNCTION("CEsmDialogDlg::OnEditCreatecopy()");
 	POSITION SelPos;
@@ -1777,17 +1617,12 @@ void CEsmDialogDlg::OnEditCreatecopy() {
 	UpdateInfoList();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditCreatecopy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnEditDelete ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnEditDelete() {
 	POSITION SelPos;
 	esmrecinfo_t *pRecInfo;
@@ -1810,24 +1645,15 @@ void CEsmDialogDlg::OnEditDelete() {
 	m_InfoList.UpdateItem(ListIndex);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditDelete()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnEditEdititem ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnEditEdititem() {
 	m_InfoList.EditSelectedItem();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnEditEdititem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1835,7 +1661,6 @@ void CEsmDialogDlg::OnEditEdititem() {
  * Class CEsmDialogDlg Event - void OnSelchangeFilterlist ();
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnSelchangeFilterlist() {
 	int ListIndex;
 	ListIndex = m_FilterList.GetCurSel();
@@ -1849,17 +1674,12 @@ void CEsmDialogDlg::OnSelchangeFilterlist() {
 	UpdateInfoList();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnSelchangeFilterlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Event - void OnSize (nType, cx, int cy);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::OnSize(UINT nType, int cx, int cy) {
 	CRect ButtonRect;
 	int Width;
@@ -1910,10 +1730,6 @@ void CEsmDialogDlg::OnSize(UINT nType, int cx, int cy) {
 	                            SWP_NOZORDER | SWP_NOSIZE);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmDialogDlg::OnSize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1923,7 +1739,6 @@ void CEsmDialogDlg::OnSize(UINT nType, int cx, int cy) {
  * the previous/next info records to point to each other.
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::RemoveInfo(esmrecinfo_t *pRecInfo) {
 	CEsmInfo* pInfo = (CEsmInfo *)pRecInfo->pRecord;
 	esmrecinfo_t *pNextRecInfo;
@@ -1968,17 +1783,12 @@ void CEsmDialogDlg::RemoveInfo(esmrecinfo_t *pRecInfo) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::RemoveInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmDialogDlg Method - void UpdateInfoList (FirstUpdate);
  *
  *=========================================================================*/
-
 void CEsmDialogDlg::UpdateInfoList(const bool FirstUpdate) {
 	esmrecinfo_t *pRecInfo;
 	esmrecinfo_t *pLastRecInfo = NULL;
@@ -2059,7 +1869,3 @@ void CEsmDialogDlg::UpdateInfoList(const bool FirstUpdate) {
 		   } //*/
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmDialogDlg::UpdateInfoList()
- *=========================================================================*/

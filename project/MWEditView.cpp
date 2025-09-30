@@ -7,9 +7,6 @@
  * Implementation of the CMWEditView class.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "MWEditDoc.h"
@@ -22,15 +19,7 @@
 #include "EsmScriptCompareDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-/* Debug definitions */
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -38,10 +27,6 @@
 
 IMPLEMENT_DYNCREATE(CMWEditView, CFormView);
 DEFINE_FILE("MWEditView.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -51,7 +36,6 @@ DEFINE_FILE("MWEditView.cpp");
  * Used for formatting the object list for each type of item.
  *
  *=========================================================================*/
-
 static esmcoldata_t l_ActivatorColData[] = {
 	{
 		_T("ID"),
@@ -3090,17 +3074,12 @@ static esmcoldata_t l_WeaponColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Object Column Data Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Tab Info Array
  *
  *=========================================================================*/
-
 esmtabinfo_t l_RecordTabData[] = {
 	{
 		OBJECT_TAB_ACTIVATOR,
@@ -3445,17 +3424,12 @@ esmtabinfo_t l_RecordTabData[] = {
 	} /* Must be last entry */
 };
 
-/*===========================================================================
- *      End of Tab Info Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class CMWEditView Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CMWEditView, CFormView)
 	//{{AFX_MSG_MAP(CMWEditView)
 	ON_WM_SIZE()
@@ -3513,26 +3487,17 @@ BEGIN_MESSAGE_MAP(CMWEditView, CFormView)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of Class CMWEditView Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Constructor
  *
  *=========================================================================*/
-
 CMWEditView::CMWEditView() : CFormView(CMWEditView::IDD) {
 	//{{AFX_DATA_INIT(CMWEditView)
 	//}}AFX_DATA_INIT
 	m_pCurrentType = NULL;
 }
-
-/*===========================================================================
- *      End of Class CMWEditView Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3540,13 +3505,8 @@ CMWEditView::CMWEditView() : CFormView(CMWEditView::IDD) {
  * Class CMWEditView Destructor
  *
  *=========================================================================*/
-
 CMWEditView::~CMWEditView() {
 }
-
-/*===========================================================================
- *      End of Class CMWEditView Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3554,18 +3514,14 @@ CMWEditView::~CMWEditView() {
  * Class CMWEditView Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CMWEditView::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CMWEditView)
 	DDX_Control(pDX, IDC_TYPELIST, m_TypeList);
 	DDX_Control(pDX, IDC_OBJECTLIST, m_ObjectList);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CMWEditView::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3575,7 +3531,6 @@ void CMWEditView::DoDataExchange(CDataExchange *pDX) {
  * Exports the currently selected scripts in the object list to text files.
  *
  *=========================================================================*/
-
 void CMWEditView::ExportScripts() {
 	CFileDialog FileDlg(FALSE, _T("txt"), NULL, OFN_HIDEREADONLY, ESM_IMPORTSCPT_FILTER, this);
 	CString PathBuffer;
@@ -3617,10 +3572,6 @@ void CMWEditView::ExportScripts() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::ExportScripts()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3630,7 +3581,6 @@ void CMWEditView::ExportScripts() {
  * type. Returns -1 if it is not found.
  *
  *=========================================================================*/
-
 int CMWEditView::FindTabInfo(const TCHAR *pType) {
 	int Index;
 
@@ -3643,10 +3593,6 @@ int CMWEditView::FindTabInfo(const TCHAR *pType) {
 	return -1;
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::FindTabInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3655,7 +3601,6 @@ int CMWEditView::FindTabInfo(const TCHAR *pType) {
  * Fills the object list with dialogue objects of the given type.
  *
  *=========================================================================*/
-
 void CMWEditView::FillDialogueList(esmcoldata_t *pColData, const int DialType) {
 	esmrecinfo_t *pRecInfo;
 	CEsmDialogue *pDialogue;
@@ -3700,17 +3645,12 @@ void CMWEditView::FillDialogueList(esmcoldata_t *pColData, const int DialType) {
 	m_ObjectList.SetRedraw(TRUE);
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::FillDialogueList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Method - void FillList (pItemType, pColData);
  *
  *=========================================================================*/
-
 void CMWEditView::FillList(const TCHAR *pItemType, esmcoldata_t *pColData) {
 	esmrecinfo_t *pRecInfo;
 	int ArrayIndex;
@@ -3741,10 +3681,6 @@ void CMWEditView::FillList(const TCHAR *pItemType, esmcoldata_t *pColData) {
 	m_ObjectList.SetRedraw(TRUE);
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::FillList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3753,7 +3689,6 @@ void CMWEditView::FillList(const TCHAR *pItemType, esmcoldata_t *pColData) {
  * Protected class method that initializes the object type list.
  *
  *=========================================================================*/
-
 void CMWEditView::InitTypeList() {
 	int Index;
 	int ListIndex;
@@ -3767,17 +3702,12 @@ void CMWEditView::InitTypeList() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::InitTypeList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Method - bool IsCurrentType (pType);
  *
  *=========================================================================*/
-
 bool CMWEditView::IsCurrentType(const TCHAR *pType) {
 	int ListIndex;
 	int TypeIndex;
@@ -3791,25 +3721,16 @@ bool CMWEditView::IsCurrentType(const TCHAR *pType) {
 	return _stricmp(l_RecordTabData[TypeIndex].ItemType, pType) == 0;
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::IsCurrentType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnColumnclickObjectlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CMWEditView::OnColumnclickObjectlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnColumnclickObjectlist()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3817,7 +3738,6 @@ void CMWEditView::OnColumnclickObjectlist(NMHDR *pNMHDR, LRESULT *pResult) {
  * Class CMWEditView Event - void OnContextMenu (pWnd, Point);
  *
  *=========================================================================*/
-
 void CMWEditView::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	CMenu Menu;
 	CMenu *pPopup;
@@ -3858,25 +3778,16 @@ void CMWEditView::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnContextMenu()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnDestroy ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnDestroy() {
 	m_EsmDlgHandler.ClearDlgArray();
 	CFormView::OnDestroy();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnDestroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3884,7 +3795,6 @@ void CMWEditView::OnDestroy() {
  * Class CMWEditView Event - void OnEditAddnew ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditAddnew() {
 	CEsmRecord *pRecord;
 
@@ -3927,17 +3837,12 @@ void CMWEditView::OnEditAddnew() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditAddnew()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditClean ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditClean() {
 	POSITION SelPos;
 	CFrameWnd *pFrame;
@@ -3983,24 +3888,15 @@ void CMWEditView::OnEditClean() {
 	UpdateList();
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditClean()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEdititem ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEdititem() {
 	m_ObjectList.EditSelectedItem();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEdititem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4008,7 +3904,6 @@ void CMWEditView::OnEdititem() {
  * Class CMWEditView Event - void OnEditDelete ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditDelete() {
 	POSITION SelPos;
 	esmrecinfo_t *pRecInfo;
@@ -4043,17 +3938,12 @@ void CMWEditView::OnEditDelete() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditDelete()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnInitialUpdate() {
 	CFormView::OnInitialUpdate();
 
@@ -4080,17 +3970,12 @@ void CMWEditView::OnInitialUpdate() {
 	ShowWindow(SW_SHOWNORMAL);
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - LRESULT  OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CMWEditView::OnRecordKey(WPARAM lParam, LPARAM wParam) {
 	/* Toggle delete */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
@@ -4101,17 +3986,12 @@ LRESULT CMWEditView::OnRecordKey(WPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnSelchangeTypelist ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnSelchangeTypelist() {
 	CString Buffer;
 	int ListIndex;
@@ -4133,17 +4013,12 @@ void CMWEditView::OnSelchangeTypelist() {
 	UpdateList();
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnSelchangeTypelist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - int OnSelectItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CMWEditView::OnSelectItem(esmrecinfo_t *pRecInfo) {
 	int TabIndex;
 	int ListIndex;
@@ -4180,17 +4055,12 @@ int CMWEditView::OnSelectItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnSelectItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnSize (nType, cx, cy);
  *
  *=========================================================================*/
-
 void CMWEditView::OnSize(UINT nType, int cx, int cy) {
 	CRect ListRect;
 	int Width;
@@ -4224,17 +4094,12 @@ void CMWEditView::OnSize(UINT nType, int cx, int cy) {
 	m_TypeList.SetWindowPos(NULL, 0, 0, TYPELIST_WIDTH, Height, SWP_NOZORDER | SWP_NOMOVE);
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnSize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnUpdateEditDelete (pCmdUI);
  *
  *=========================================================================*/
-
 void CMWEditView::OnUpdateEditDelete(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_ObjectList.GetSelectedCount() > 0);
 }
@@ -4266,24 +4131,15 @@ void CMWEditView::OnUpdateFileExportCsv(CCmdUI *pCmdUI) {
 void CMWEditView::OnUpdateFileExportSpellmerchants(CCmdUI *pCmdUI) {
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdateEditDelete()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnUpdateEditAddnew (pCmdUI);
  *
  *=========================================================================*/
-
 void CMWEditView::OnUpdateEditAddnew(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(GetDocument()->CanCreateNew(m_pCurrentType));
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdateEditAddnew()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4291,14 +4147,9 @@ void CMWEditView::OnUpdateEditAddnew(CCmdUI *pCmdUI) {
  * Class CMWEditView Event - void OnUpdateEditEdititem (pCmdUI);
  *
  *=========================================================================*/
-
 void CMWEditView::OnUpdateEditEdititem(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_ObjectList.GetSelectedCount() > 0);
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdateEditEdititem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4306,14 +4157,9 @@ void CMWEditView::OnUpdateEditEdititem(CCmdUI *pCmdUI) {
  * Class CMWEditView Event - void OnUpdateViewViewactive (pCmdUI);
  *
  *=========================================================================*/
-
 void CMWEditView::OnUpdateViewViewactive(CCmdUI *pCmdUI) {
 	pCmdUI->SetCheck(GetDocument()->GetViewChanged());
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdateViewViewactive()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4321,16 +4167,11 @@ void CMWEditView::OnUpdateViewViewactive(CCmdUI *pCmdUI) {
  * Class CMWEditView Event - void OnViewViewactive ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnViewViewactive() {
 	bool Flag = GetDocument()->GetViewChanged();
 	GetDocument()->SetViewChanged(!Flag);
 	UpdateList();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnViewViewactive()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4338,14 +4179,9 @@ void CMWEditView::OnViewViewactive() {
  * Class CMWEditView Method - BOOL PreCreateWindow (cs);
  *
  *=========================================================================*/
-
 BOOL CMWEditView::PreCreateWindow(CREATESTRUCT &cs) {
 	return CFormView::PreCreateWindow(cs);
 }
-
-/*===========================================================================
- *      End of Class Method CMWEditView::PreCreateWindow()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4355,14 +4191,9 @@ BOOL CMWEditView::PreCreateWindow(CREATESTRUCT &cs) {
  * Saves the current list column configuration, if any.
  *
  *=========================================================================*/
-
 void CMWEditView::UpdateCurrentListData() {
 	m_ObjectList.UpdateColData();
 }
-
-/*===========================================================================
- *      End of Class Method CMWEditView::UpdateCurrentListData()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4370,8 +4201,7 @@ void CMWEditView::UpdateCurrentListData() {
  * Begin Class Diagnostics
  *
  *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 
 void CMWEditView::AssertValid() const {
 	CFormView::AssertValid();
@@ -4388,17 +4218,12 @@ CMWEditDoc *CMWEditView::GetDocument() {
 
 #endif
 
-/*===========================================================================
- *      End of Class Diagnostics
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnUpdate (pSender, lHint, pHint);
  *
  *=========================================================================*/
-
 void CMWEditView::OnUpdate(CView *pSender, LPARAM lHint, CObject *pHint) {
 	switch (lHint) {
 		case MWEDITDOC_HINT_UPDATE:
@@ -4423,24 +4248,15 @@ void CMWEditView::OnUpdate(CView *pSender, LPARAM lHint, CObject *pHint) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Method - void PreSubclassWindow ();
  *
  *=========================================================================*/
-
 void CMWEditView::PreSubclassWindow() {
 	CFormView::PreSubclassWindow();
 }
-
-/*===========================================================================
- *      End of Class Method CMWEditView::PreSubclassWindow()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4448,7 +4264,6 @@ void CMWEditView::PreSubclassWindow() {
  * Class CMWEditView Event - int OnUpdateAddItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CMWEditView::OnUpdateAddItem(esmrecinfo_t *pRecInfo) {
 	/* Ignore if the currently displayed tab is not of the item's type */
 	if (!IsCurrentType(pRecInfo->pRecord->GetType())) {
@@ -4459,17 +4274,12 @@ int CMWEditView::OnUpdateAddItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdateAddItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CMWEditView::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	LVFINDINFO FindInfo;
 	int Index;
@@ -4493,24 +4303,15 @@ int CMWEditView::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnClose ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnClose() {
 	CFormView::OnClose();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnClose()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4518,7 +4319,6 @@ void CMWEditView::OnClose() {
  * Class CMWEditView Method - void UpdateList (void);
  *
  *=========================================================================*/
-
 void CMWEditView::UpdateList() {
 	CString Buffer;
 	int ListIndex;
@@ -4561,17 +4361,12 @@ void CMWEditView::UpdateList() {
 	::SetWindowText(GetParentFrame()->m_hWnd, Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CMWEditView::UpdateList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditOutputrecinfo ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditOutputrecinfo() {
 	CEsmRecInfoArray *pArray = GetDocument()->GetRecInfoArray();
 	int Index;
@@ -4584,10 +4379,6 @@ void CMWEditView::OnEditOutputrecinfo() {
 		                 (*pArray)[Index]->pRecord->GetFieldString(ESM_FIELD_NAME));
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditOutputrecinfo()
- *=========================================================================*/
 
 
 int l_FindRecSort(const void *pElem1, const void *pElem2, const long UserData) {
@@ -4628,7 +4419,6 @@ int l_RecSortPtr(const void *pElem1, const void *pElem2) {
  * Class CMWEditView Event - void OnEditTestfind ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditTestfind() {
 	CEsmRecInfoArray *pArray = GetDocument()->GetRecInfoArray();
 	int Index;
@@ -4685,17 +4475,12 @@ void CMWEditView::OnEditTestfind() {
 	                 AvgSlow / (double)Count);
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditTestfind()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditPlugininfo ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditPlugininfo() {
 	CEsmHeaderDlg Dialog;
 	int Index;
@@ -4703,24 +4488,15 @@ void CMWEditView::OnEditPlugininfo() {
 	               GetDocument()->GetTitle());
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditPlugininfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditFindtext ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditFindtext() {
 	m_EsmDlgHandler.OpenFindDlg();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditFindtext()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4728,7 +4504,6 @@ void CMWEditView::OnEditFindtext() {
  * Class CMWEditView Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CMWEditView::OnRecordDrop(WPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
@@ -4747,17 +4522,12 @@ LRESULT CMWEditView::OnRecordDrop(WPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditCreatecopy ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditCreatecopy() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
@@ -4793,17 +4563,12 @@ void CMWEditView::OnEditCreatecopy() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditCreatecopy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditInfo ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditInfo() {
 	esmrecinfo_t *pRecInfo;
 	/* Find the uses info on the current record */
@@ -4816,17 +4581,12 @@ void CMWEditView::OnEditInfo() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditRename ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditRename() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
@@ -4861,24 +4621,15 @@ void CMWEditView::OnEditRename() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditRename()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditScripttemplate ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditScripttemplate() {
 	m_EsmDlgHandler.OpenScrTempDlg();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditScripttemplate()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4886,7 +4637,6 @@ void CMWEditView::OnEditScripttemplate() {
  * Class CMWEditView Event - void OnImportScript ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnImportScript() {
 	CFileDialog FileDlg(TRUE,
 	                    _T("txt"),
@@ -4923,17 +4673,12 @@ void CMWEditView::OnImportScript() {
 	UpdateList();
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnImportScript()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnExportRecords ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnExportRecords() {
 	/* Special case records */
 	if (TSTRNICMP(m_pCurrentType, MWESM_REC_SCPT, 4) == 0) {
@@ -4943,17 +4688,12 @@ void CMWEditView::OnExportRecords() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnExportRecords()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnTestGettype ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnTestGettype() {
 	CInputDialog InputDlg;
 	CString Buffer;
@@ -4980,17 +4720,12 @@ void CMWEditView::OnTestGettype() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnTestGettype()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnFileImportCsvrecords ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnFileImportCsvrecords() {
 	CEsmCsvImportDlg CsvImportDlg(this);
 	int Result;
@@ -5007,17 +4742,12 @@ void CMWEditView::OnFileImportCsvrecords() {
 	GetDocument()->UpdateAllViews(NULL, MWEDITDOC_HINT_UPDATE, 0);
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnFileImportCsvrecords()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnFileExportCsv ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnFileExportCsv() {
 	CFileDialog FileDlg(FALSE,
 	                    ESMCSVIMP_CSV_EXT,
@@ -5103,17 +4833,12 @@ void CMWEditView::OnFileExportCsv() {
 	MessageBox(Buffer, _T("Csv Export Success!"), MB_OK | MB_ICONINFORMATION);
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnFileExportCsv()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnFileExportSpellmerchants ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnFileExportSpellmerchants() {
 	CFileDialog FileDlg(FALSE,
 	                    ESMCSVIMP_CSV_EXT,
@@ -5143,17 +4868,12 @@ void CMWEditView::OnFileExportSpellmerchants() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnFileExportSpellmerchants()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Function - void l_CompareScriptHook (pString, Args);
  *
  *=========================================================================*/
-
 CEsmScriptCompareDlg *l_CompareScriptView = NULL;
 
 void l_CompareScriptHook(const TCHAR *pString, va_list Args) {
@@ -5162,17 +4882,12 @@ void l_CompareScriptHook(const TCHAR *pString, va_list Args) {
 	}
 }
 
-/*===========================================================================
- *      End of Function l_CompareScriptHook()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnTestComparescripts ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnTestComparescripts() {
 	CFileDialog FileDlg(TRUE,
 	                    NULL,
@@ -5207,24 +4922,15 @@ void CMWEditView::OnTestComparescripts() {
 	l_CompareScriptView = NULL;
 }
 
-/*===========================================================================
- *      End of Class Event CMWEditView::OnTestComparescripts()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMWEditView Event - void OnEditCompileactivescripts ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditCompileactivescripts() {
 	GetDocument()->CompileAllActiveScripts();
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditCompileactivescripts()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5232,7 +4938,6 @@ void CMWEditView::OnEditCompileactivescripts() {
  * Class CMWEditView Event - void OnEditMakeactive ();
  *
  *=========================================================================*/
-
 void CMWEditView::OnEditMakeactive() {
 	POSITION SelPos;
 	CFrameWnd *pFrame;
@@ -5263,7 +4968,3 @@ void CMWEditView::OnEditMakeactive() {
 		m_ObjectList.UpdateItem(ListIndex);
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CMWEditView::OnEditMakeactive()
- *=========================================================================*/

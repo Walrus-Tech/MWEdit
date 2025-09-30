@@ -7,8 +7,6 @@
  * Implements the CEsmOptionsDlg class for the options dialog.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmOptionsDlg.h"
@@ -17,21 +15,13 @@
 #include "esmscriptcompile.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
 #endif
 
 DEFINE_FILE("EsmOptionsDlg.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -54,9 +44,6 @@ BEGIN_MESSAGE_MAP(CEsmOptionsDlg, CDialog)
 	ON_BN_CLICKED(IDC_BROWSEEXTRAFILE, OnBrowseextrafile)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-/*===========================================================================
- *      End of CEsmOptionsDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -70,10 +57,6 @@ CEsmOptionsDlg::CEsmOptionsDlg(CWnd *pParent) : CDialog(CEsmOptionsDlg::IDD, pPa
 	m_pOrigOptions = NULL;
 	m_CurrentFormat = -1;
 }
-
-/*===========================================================================
- *      End of Class CEsmOptionsDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -126,10 +109,6 @@ void CEsmOptionsDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -155,10 +134,6 @@ void CEsmOptionsDlg::FillFormatList() {
 	AddListString(m_FormatList, _T("Operator"), ESMSCRIPT_FORMAT_OPERATOR);
 	AddListString(m_FormatList, _T("Error"), ESMSCRIPT_FORMAT_ERROR);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::FillFormatList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -188,10 +163,6 @@ void CEsmOptionsDlg::FillFontSizeList() {
 	AddComboString(m_FontSizeList, _T("20"), 20);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::FillFontSizeList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -213,10 +184,6 @@ void CEsmOptionsDlg::FillFontNameList() {
 	m_FontFaceList.AddString(_T("Arial"));
 	m_FontFaceList.AddString(_T("Terminal"));
 }
-
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::FillFontNameList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -249,10 +216,6 @@ void CEsmOptionsDlg::FillWarnLevelList() {
 		m_WarnLevelList.SetItemData(ListIndex, ESMSCR_COMPILEMSG_WEAK);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::FillWarnLevelList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -364,10 +327,6 @@ void CEsmOptionsDlg::GetControlData() {
 	GetFontData(m_pOrigOptions->GetUserFormat()->GetTextFont());
 }
 
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -389,10 +348,6 @@ void CEsmOptionsDlg::GetFormatData() {
 	pFormat = m_ScriptOptions.GetCharFormat(FormatIndex);
 	pFormat->crTextColor = m_FormatColor.m_Color;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::GetFormatData()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -438,10 +393,6 @@ void CEsmOptionsDlg::GetFontData(CFont *pFont) {
 	CFONT_CREATE((*pFont), Size, Bold, Italic, Face);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::GetFontData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -461,10 +412,6 @@ void CEsmOptionsDlg::OnBgcolor() {
 	m_BGColor.SetColor(ColorDlg.GetColor());
 	m_BGColor.RedrawWindow();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnBgcolor()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -491,10 +438,6 @@ void CEsmOptionsDlg::OnBrowseextrafile() {
 	m_ExtraFile.SetWindowText(BrowseDlg.GetPathName());
 }
 
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnBrowseextrafile()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -515,10 +458,6 @@ void CEsmOptionsDlg::OnBrowsegamepath() {
 	m_GamePath.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnBrowsegamepath()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -528,10 +467,6 @@ void CEsmOptionsDlg::OnBrowsegamepath() {
 void CEsmOptionsDlg::OnCancel() {
 	CDialog::OnCancel();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnCancel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -552,10 +487,6 @@ void CEsmOptionsDlg::OnFormatcolor() {
 	m_FormatColor.SetColor(ColorDlg.GetColor());
 	m_FormatColor.RedrawWindow();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnFormatcolor()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -584,10 +515,6 @@ void CEsmOptionsDlg::OnBlueformatButton() {
 	m_pOrigOptions->SetBlueScript();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnBlueformatButton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -614,10 +541,6 @@ void CEsmOptionsDlg::OnWhiteformatButton() {
 	SetFormatData(m_CurrentFormat);
 	m_pOrigOptions->SetWhiteScript();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnWhiteformatButton()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -649,10 +572,6 @@ BOOL CEsmOptionsDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -665,10 +584,6 @@ void CEsmOptionsDlg::OnOK() {
 	CDialog::OnOK();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnOK()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -679,10 +594,6 @@ void CEsmOptionsDlg::OnSelchangeFormatList() {
 	GetFormatData();
 	SetFormatData(m_FormatList.GetCurSel());
 }
-
-/*===========================================================================
- *      End of Class Event CEsmOptionsDlg::OnSelchangeFormatList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -741,10 +652,6 @@ void CEsmOptionsDlg::SetControlData() {
 	SetFontData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -769,10 +676,6 @@ void CEsmOptionsDlg::SetFontData() {
 	/* Update the font display in the sample textbox */
 	UpdateSampleFontText();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::SetFontData()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -805,10 +708,6 @@ void CEsmOptionsDlg::SetFormatData(const int Index) {
 	m_CurrentFormat = Index;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::SetFormatData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -821,10 +720,6 @@ void CEsmOptionsDlg::UpdateSampleFontText() {
 	GetFontData(&m_SampleFont);
 	m_SampleText.SetFont(&m_SampleFont, TRUE);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmOptionsDlg::UpdateSampleFontText()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -847,7 +742,3 @@ void CEsmOptionsDlg::OnFontboldCheck() {
 void CEsmOptionsDlg::OnFontitalicCheck() {
 	UpdateSampleFontText();
 }
-
-/*===========================================================================
- *      End of Font Update Methods
- *=========================================================================*/

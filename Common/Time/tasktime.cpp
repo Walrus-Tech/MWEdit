@@ -7,42 +7,16 @@
  * Implements the CTaskTimer class.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "time\tasktime.h"
 
-#if defined(_WIN32)
+#if _WIN32
 	#include <windows.h>
 	#include "mmsystem.h"
-#elif defined(__MSDOS__)
-	#include <time.h>
-	#include <dos.h>
 #endif
 
 
-/*===========================================================================
- *
- * Begin Local Variable Definitions
- *
- *=========================================================================*/
-//DEFINE_FILE();
-/*===========================================================================
- *      End of Local Variable Definitions
- *=========================================================================*/
-
-
-/*===========================================================================
- *
- * Begin Global Variable Definitions
- *
- *=========================================================================*/
-
 /* The one and only task timer */
 CTaskTimer TaskTimer;
-
-/*===========================================================================
- *      End of Global Variable Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -50,15 +24,7 @@ CTaskTimer TaskTimer;
  * Begin Local System-Specific Timer Functions
  *
  *=========================================================================*/
-#if defined(__MSDOS__)
-/* The new timer interrupt for MSDOS */
-void interrupt far l_DosTimerProc(...) {
-	TaskTimer.DoTasks((ulong)(1000.0 / (float)CLK_TCK));
-	/* Chain to the old timer interrupt */
-	TaskTimer.m_PrevTimerFunc();
-}
-
-#elif defined(_WIN32)
+#if _WIN32
 /* The callback function for the timeSetEvent() Windows function */
 VOID CALLBACK l_Win32TimerProc(UINT, UINT, DWORD, DWORD, DWORD) {
 	static DWORD LastTime = timeGetTime();
@@ -67,9 +33,6 @@ VOID CALLBACK l_Win32TimerProc(UINT, UINT, DWORD, DWORD, DWORD) {
 	LastTime = CurrentTime;
 }
 #endif
-/*===========================================================================
- *      End of Local System-Specific Timer Functions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -86,10 +49,6 @@ CTaskTimer::CTaskTimer() {
 	SYS_MSDOS(m_PrevTimerFunc = NULL);
 	SYS_WIN32(m_TimerID = 0);
 }
-
-/*===========================================================================
- *      End of Class CTaskTimer Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -115,10 +74,6 @@ void CTaskTimer::Destroy() {
 	SYS_WIN32(m_TimerID = 0);
 	SYS_MSDOS(m_PrevTimerFunc = NULL);
 }
-
-/*===========================================================================
- *      End of Class Method CTaskTimer::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -153,10 +108,6 @@ boolean CTaskTimer::AddTask(HTIMERTASK &hTask,
 	m_NumTasks++;
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Method CTaskTimer::AddTask()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -201,10 +152,6 @@ boolean CTaskTimer::DoTasks(const ulong ElaspedTime) {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Method CTaskTimer::DoTasks()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -226,10 +173,6 @@ int CTaskTimer::GetTaskIndex(const HTIMERTASK hTask) const {
 	/* No match found */
 	return -1;
 }
-
-/*===========================================================================
- *      End of Class Method CTaskTimer::GetTaskIndex()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -256,10 +199,6 @@ boolean CTaskTimer::IsValidTask(const HTIMERTASK hTask) const {
 	int TaskIndex = GetTaskIndex(hTask);
 	return (TaskIndex >= 0 && TaskIndex < m_NumTasks) ? TRUE : FALSE;
 }
-
-/*===========================================================================
- *      End of Class CTaskTimer Get Task Information Methods
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -309,10 +248,6 @@ boolean CTaskTimer::Initialize() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Method CTaskTimer::Initialize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -346,10 +281,6 @@ boolean CTaskTimer::RemoveTask(const HTIMERTASK hTask) {
 	m_Active = PrevActive;
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Method CTaskTimer::RemoveTask()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -388,7 +319,3 @@ void CTaskTimer::SetUserData(const HTIMERTASK hTask, const long UserData) {
 		m_Tasks[TaskIndex].UserData = UserData;
 	}
 }
-
-/*===========================================================================
- *      End of Set Task Information
- *=========================================================================*/

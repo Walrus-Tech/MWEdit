@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmCreaturePage1.h"
@@ -18,13 +15,7 @@
 #include "EsmDlgArray.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -33,17 +24,12 @@
 IMPLEMENT_DYNCREATE(CEsmCreaturePage1, CPropertyPage);
 DEFINE_FILE("EsmCreaturePage1.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmCreaturePage1 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmCreaturePage1, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmCreaturePage1)
 	ON_BN_CLICKED(IDC_ANIMATIONBUTTON, OnAnimationbutton)
@@ -51,17 +37,12 @@ BEGIN_MESSAGE_MAP(CEsmCreaturePage1, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmCreaturePage1 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Constructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage1::CEsmCreaturePage1() : CPropertyPage(CEsmCreaturePage1::IDD) {
 	//{{AFX_DATA_INIT(CEsmCreaturePage1)
 	//}}AFX_DATA_INIT
@@ -71,23 +52,14 @@ CEsmCreaturePage1::CEsmCreaturePage1() : CPropertyPage(CEsmCreaturePage1::IDD) {
 	m_SortCol = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmCreaturePage1 Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Destructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage1::~CEsmCreaturePage1() {
 }
-
-/*===========================================================================
- *      End of Class CEsmCreaturePage1 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -95,7 +67,6 @@ CEsmCreaturePage1::~CEsmCreaturePage1() {
  * Class CEsmCreaturePage1 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -145,17 +116,12 @@ void CEsmCreaturePage1::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage1::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage1::GetControlData() {
 	CEsmCreature *pCreature;
 	creaturedata_t *pCreaData;
@@ -329,26 +295,17 @@ void CEsmCreaturePage1::GetControlData() {
 	pCreature->SetFlag(Flag);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage1::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmCreaturePage1::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage1::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage1::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -356,7 +313,6 @@ CMWEditDoc *CEsmCreaturePage1::GetDocument() {
  * Class CEsmCreaturePage1 Event - void OnAnimationbutton ();
  *
  *=========================================================================*/
-
 void CEsmCreaturePage1::OnAnimationbutton() {
 	CString Buffer;
 	bool Result;
@@ -368,17 +324,12 @@ void CEsmCreaturePage1::OnAnimationbutton() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage1::OnAnimationbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmCreaturePage1::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 
@@ -409,17 +360,12 @@ BOOL CEsmCreaturePage1::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage1::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Event - void OnScriptEdit ();
  *
  *=========================================================================*/
-
 void CEsmCreaturePage1::OnScriptEdit() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -431,24 +377,15 @@ void CEsmCreaturePage1::OnScriptEdit() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage1::OnScriptEdit()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage1 Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmCreaturePage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage1::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -456,7 +393,6 @@ int CEsmCreaturePage1::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmCreaturePage1 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage1::SetControlData() {
 	CEsmCreature *pCreature;
 	CString Buffer;
@@ -545,7 +481,3 @@ void CEsmCreaturePage1::SetControlData() {
 	m_NoneCheck.SetCheck(pCreature->IsNone());
 	m_WeapShieldCheck.SetCheck(pCreature->IsWeapShield());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage1::SetControlData()
- *=========================================================================*/

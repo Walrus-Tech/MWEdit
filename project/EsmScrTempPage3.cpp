@@ -7,20 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmScrTempPage3.h"
 #include "EsmScrTempView.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -28,9 +21,6 @@
 
 IMPLEMENT_DYNCREATE(CEsmScrTempPage3, CPropertyPage);
 DEFINE_FILE("EsmScrTempPage2.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -42,9 +32,6 @@ BEGIN_MESSAGE_MAP(CEsmScrTempPage3, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmScrTempPage3)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-/*===========================================================================
- *      End of Class CEsmScrTempPage3 Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -59,10 +46,6 @@ CEsmScrTempPage3::CEsmScrTempPage3() : CPropertyPage(CEsmScrTempPage3::IDD) {
 	m_NumColumns = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmScrTempPage3 Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -71,10 +54,6 @@ CEsmScrTempPage3::CEsmScrTempPage3() : CPropertyPage(CEsmScrTempPage3::IDD) {
  *=========================================================================*/
 CEsmScrTempPage3::~CEsmScrTempPage3() {
 }
-
-/*===========================================================================
- *      End of Class CEsmScrTempPage3 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -123,10 +102,6 @@ bool CEsmScrTempPage3::AddCsvColumns(CCsvFile *pCsvFile) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage3::AddCsvColumns()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -149,10 +124,6 @@ void CEsmScrTempPage3::ClearCsvList() {
 	m_NumColumns = 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage3::ClearCsvList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -161,14 +132,11 @@ void CEsmScrTempPage3::ClearCsvList() {
  *=========================================================================*/
 void CEsmScrTempPage3::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmScrTempPage3)
 	DDX_Control(pDX, IDC_CSVLIST, m_CsvList);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage3::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -219,10 +187,6 @@ bool CEsmScrTempPage3::FillCsvList(CCsvFile *pCsvFile) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage3::FillCsvList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -235,10 +199,6 @@ BOOL CEsmScrTempPage3::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmScrTempPage3::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -250,7 +210,3 @@ BOOL CEsmScrTempPage3::OnInitDialog() {
 void CEsmScrTempPage3::UpdatePage() {
 	FillCsvList(m_pParentView->GetCsvFile());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScrTempPage1::CEsmScrTempPage3()
- *=========================================================================*/

@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmNpcPage4.h"
@@ -19,13 +16,7 @@
 #include "EsmAiWanderDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -34,17 +25,12 @@
 IMPLEMENT_DYNCREATE(CEsmNpcPage4, CPropertyPage);
 DEFINE_FILE("EsmNpcPage4.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmNpcPage4 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmNpcPage4, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmNpcPage4)
 	ON_BN_CLICKED(IDC_ACTIVATEBUTTON, OnActivatebutton)
@@ -60,25 +46,16 @@ BEGIN_MESSAGE_MAP(CEsmNpcPage4, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmNpcPage4 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Constructor
  *
  *=========================================================================*/
-
 CEsmNpcPage4::CEsmNpcPage4() : CPropertyPage(CEsmNpcPage4::IDD), m_PackageArray(0) {
 	//{{AFX_DATA_INIT(CEsmNpcPage4)
 	//}}AFX_DATA_INIT
 }
-
-/*===========================================================================
- *      End of Class CEsmNpcPage4 Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -86,14 +63,9 @@ CEsmNpcPage4::CEsmNpcPage4() : CPropertyPage(CEsmNpcPage4::IDD), m_PackageArray(
  * Class CEsmNpcPage4 Destructor
  *
  *=========================================================================*/
-
 CEsmNpcPage4::~CEsmNpcPage4() {
 	ClearPackageArray();
 }
-
-/*===========================================================================
- *      End of Class CEsmNpcPage4 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -104,7 +76,6 @@ CEsmNpcPage4::~CEsmNpcPage4() {
  * of the given type in the current NPC record.
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::AddAIRecords(const TCHAR *pType) {
 	CEsmNpc *pNpc;
 	CEsmSubRecord *pSubRecord;
@@ -135,17 +106,12 @@ void CEsmNpcPage4::AddAIRecords(const TCHAR *pType) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::AddAIRecords()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - void ClearPackageArray (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::ClearPackageArray() {
 	DEFINE_FUNCTION("CEsmNpcPage4::ClearPackageArray()");
 	CEsmSubRecord *pSubRec;
@@ -159,17 +125,12 @@ void CEsmNpcPage4::ClearPackageArray() {
 	m_PackageArray.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::ClearPackageArray()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - void DeleteSelectedItems (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::DeleteSelectedItems() {
 	CEsmSubRecord *pSubRec;
 	CEsmSubRecord *pSubNameRec;
@@ -192,17 +153,12 @@ void CEsmNpcPage4::DeleteSelectedItems() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::DeleteSelectedItems()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -216,17 +172,12 @@ void CEsmNpcPage4::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::GetControlData() {
 	CEsmNpc *pNpc;
 	CEsmSubRecord *pSubRec;
@@ -274,10 +225,6 @@ void CEsmNpcPage4::GetControlData() {
 	m_PackageArray.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -287,7 +234,6 @@ void CEsmNpcPage4::GetControlData() {
  * or NULL if none is found.
  *
  *=========================================================================*/
-
 CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 	CEsmSubRecord *pSubRec;
 	int Index;
@@ -313,26 +259,17 @@ CEsmSubNameFix *CEsmNpcPage4::FindCNDTSubRec(CEsmSubRecord *pSubRecord) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::FindCNDTSubRec()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmNpcPage4::GetDocument() {
 	DEFINE_FUNCTION("CEsmNpcPage4::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -340,7 +277,6 @@ CMWEditDoc *CEsmNpcPage4::GetDocument() {
  * Class CEsmNpcPage4 Event - LRESULT OnDblclkObjectlist (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnEditRecord()");
 	CEsmSubRecord *pSubRecord;
@@ -400,17 +336,12 @@ LRESULT CEsmNpcPage4::OnEditRecord(LPARAM lParam, WPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage4::OnDblclkObjectlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmNpcPage4::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 
@@ -426,17 +357,12 @@ BOOL CEsmNpcPage4::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage4::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Event - void OnItemchangingPackagelist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResult) {
 	NM_LISTVIEW *pNMListView = (NM_LISTVIEW *)pNMHDR;
 	*pResult = 0;
@@ -452,17 +378,12 @@ void CEsmNpcPage4::OnItemchangingPackagelist(NMHDR *pNMHDR, LRESULT *pResult) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage4::OnItemchangingPackagelist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmNpcPage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	/* Delete all currently selected items */
 	if (lParam == VK_DELETE || lParam == VK_BACK) {
@@ -473,10 +394,6 @@ LRESULT CEsmNpcPage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmNpcPage4::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -485,7 +402,6 @@ LRESULT CEsmNpcPage4::OnRecordKey(LPARAM lParam, LPARAM wParam) {
  * Attempts to output the given AI package sub-record to the text control.
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::OutputAIData(CEsmSubRecord *pSubRec) {
 	CString Buffer;
 
@@ -543,17 +459,12 @@ void CEsmNpcPage4::OutputAIData(CEsmSubRecord *pSubRec) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::OutputAIData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::SetControlData() {
 	CEsmNpc *pNpc;
 	CString Buffer;
@@ -586,17 +497,12 @@ void CEsmNpcPage4::SetControlData() {
 	UpdatePackageList();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Package Event Buttons
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::OnActivatebutton() {
 	DEFINE_FUNCTION("CEsmNpcPage4::OnActivatebutton()");
 	CEsmSubAI_A *pNewSubRec;
@@ -768,17 +674,12 @@ void CEsmNpcPage4::OnDeletebutton() {
 	DeleteSelectedItems();
 }
 
-/*===========================================================================
- *      End of Package Event Buttons
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmNpcPage4 Method - void UpdatePackageList (void);
  *
  *=========================================================================*/
-
 void CEsmNpcPage4::UpdatePackageList() {
 	CEsmSubRecord *pSubRecord;
 	int Index;
@@ -810,7 +711,3 @@ void CEsmNpcPage4::UpdatePackageList() {
 		}
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmNpcPage4::UpdatePackageList()
- *=========================================================================*/

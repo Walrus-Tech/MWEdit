@@ -78,11 +78,10 @@ class CLogFile {
 
 	/* Same as the Printf() method except it only works in debug builds.
 	 * For release builds the function is nothing (to save a call). */
-#if defined(_DEBUG)
+#if _DEBUG
 	void DebugPrintf(const TCHAR *pString, ...);
 #else
 	void DebugPrintf(const TCHAR *, ...) { }
-
 #endif
 
 	/* Increase or decrease the current tab level of log file */
@@ -129,7 +128,7 @@ class CLogFile {
  * Prototypes for functions to test module.  Available only in DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 	void Test_LogFile();
 #endif
 

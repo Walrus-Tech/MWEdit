@@ -1,11 +1,10 @@
 // ErrorDialog.cpp : implementation file
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "ErrorDialog.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -14,7 +13,6 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CErrorDialog dialog
-
 
 CErrorDialog::CErrorDialog(CWnd *pParent) : CDialog(CErrorDialog::IDD, pParent) {
 	//{{AFX_DATA_INIT(CErrorDialog)
@@ -42,7 +40,6 @@ END_MESSAGE_MAP()
  * Class CErrorDialog Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CErrorDialog::OnInitDialog() {
 	CErrorIncident *pError;
 	CErrorRecord *pErrorRecord;
@@ -86,7 +83,3 @@ BOOL CErrorDialog::OnInitDialog() {
 	m_Text.SetSel(0, 0, FALSE);
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Event CErrorDialog::OnInitDialog()
- *=========================================================================*/

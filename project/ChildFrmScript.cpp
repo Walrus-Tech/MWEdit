@@ -7,22 +7,14 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 #include "childfrmscript.h"
 #include "ScriptErrorView.h"
 #include "EsmScriptDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- * misc_dwrv_Ark_key00
- *=========================================================================*/
-
 /* Debug defines */
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,9 +22,6 @@
 
 IMPLEMENT_DYNCREATE(CChildFrmScript, CMDIChildWnd);
 DEFINE_FILE("Childfrmscript.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -53,9 +42,6 @@ BEGIN_MESSAGE_MAP(CChildFrmScript, CMDIChildWnd)
 	ON_WM_SYSCOMMAND()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-/*===========================================================================
- *      End of CChildFrmScript Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -70,10 +56,6 @@ CChildFrmScript::CChildFrmScript() {
 	m_IsFakeMaximized = false;
 }
 
-/*===========================================================================
- *      End of Class CChildFrmScript Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -83,10 +65,6 @@ CChildFrmScript::CChildFrmScript() {
 CChildFrmScript::~CChildFrmScript() {
 	m_Created = false;
 }
-
-/*===========================================================================
- *      End of Class CChildFrmScript Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -135,10 +113,6 @@ BOOL CChildFrmScript::OnCreateClient(LPCREATESTRUCT, CCreateContext *pContext) {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnCreateClient()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -153,10 +127,6 @@ LRESULT CChildFrmScript::OnClearError(LPARAM lParam, WPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnClearError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -166,10 +136,6 @@ LRESULT CChildFrmScript::OnClearError(LPARAM lParam, WPARAM wParam) {
 void CChildFrmScript::OnClose() {
 	DestroyWindow();
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnClose()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -188,10 +154,6 @@ LRESULT CChildFrmScript::OnGotoError(LPARAM lParam, WPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnGotoError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -205,10 +167,6 @@ void CChildFrmScript::OnKillFocus(CWnd *pWnd) {
 
 	CMDIChildWnd::OnKillFocus(pWnd);
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnKillFocus()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -224,10 +182,6 @@ void CChildFrmScript::OnMDIActivate(BOOL bActivate, CWnd *pActivateWnd, CWnd *pD
 	CMDIChildWnd::OnMDIActivate(bActivate, pActivateWnd, pDeactivateWnd);
 }
 
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnMDIActivate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -241,11 +195,6 @@ void CChildFrmScript::OnMove(int cx, int cy) {
 
 	CMDIChildWnd::OnMove(cx, cy);
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnMove()
- *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -287,10 +236,6 @@ void CChildFrmScript::OnSize(UINT nType, int cx, int cy) {
 	m_wndSplitter.RecalcLayout();
 }
 
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnSize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -304,10 +249,6 @@ LRESULT CChildFrmScript::OnUpdateError(LPARAM lParam, WPARAM wParam) {
 
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnUpdateError()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -324,10 +265,6 @@ BOOL CChildFrmScript::PreCreateWindow(CREATESTRUCT &cs) {
 
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Method CChildFrmScript::PreCreateWindow()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -361,10 +298,6 @@ void CChildFrmScript::FakeMaximize() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CChildFrmScript::FakeMaximize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -381,7 +314,3 @@ void CChildFrmScript::OnSysCommand(UINT nID, LPARAM Param) {
 
 	CMDIChildWnd::OnSysCommand(nID, Param);
 }
-
-/*===========================================================================
- *      End of Class Event CChildFrmScript::OnSysCommand()
- *=========================================================================*/

@@ -24,8 +24,6 @@
 *     bytes of a global name properly.
 *
 *=========================================================================*/
-
-/* Include Files */
 #include <stdafx.h>
 #include "esmscriptcompile.h"
 #include "ctype.h"
@@ -35,20 +33,11 @@
 #include "EsmGlobOptions.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("EsmScriptCompile.cpp");
 
 /* Static class members */
 CEsmFile CEsmScriptCompile::m_ExtraFile;
 CEsmRecordRefMap CEsmScriptCompile::m_ExtraRecords;
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,7 +45,6 @@ CEsmRecordRefMap CEsmScriptCompile::m_ExtraRecords;
  * Begin Parsing Tables
  *
  *=========================================================================*/
-
 /* Forward definitions to help the table order */
 extern esmscrparsetable_t l_StatementBlock[];
 extern esmscrparsetable_t l_RightExprBlock1[];
@@ -170,7 +158,7 @@ esmscrparsetable_t l_FuncArgBlock[] = {
 	}
 };
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 esmscrparsetable_t l_FuncXArgBlock[] = {
 	{
 		ESMSCR_TOKEN_COMMA,
@@ -584,7 +572,7 @@ esmscrparsetable_t l_LeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::ParseVarRef
 	},
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT, NULL,
@@ -615,7 +603,7 @@ esmscrparsetable_t l_IfLeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::ParseIfVarRef
 	},
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT,
@@ -655,7 +643,7 @@ esmscrparsetable_t l_LeftVarIDBlock[] = {
 };
 
 esmscrparsetable_t l_RightIDBlock[] = {
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT,
@@ -1537,7 +1525,7 @@ esmscrparsetable_t l_ReturnBlock[] = {
 	}
 };
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 esmscrparsetable_t l_ObjRefFuncBlock[] = {
 	{
@@ -1606,7 +1594,7 @@ esmscrparsetable_t l_SymFuncBlock[] = {
 #endif
 
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 esmscrparsetable_t l_StatementBlock[] = {
 	{
@@ -1840,9 +1828,6 @@ esmscrparsetable_t l_MainBlock[] = {
 		NULL
 	}
 };
-/*===========================================================================
- *      End of Parsing Tables
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2114,9 +2099,6 @@ int l_EsmScrCharTypes[257] = {
 	0,
 	0,
 };
-/*===========================================================================
- *      End of Custom Script Character Type Array
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2159,10 +2141,6 @@ CEsmScriptCompile::CEsmScriptCompile() : m_Token(100), m_ErrorArray(0) {
 	m_FuncOptCount = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmScriptCompile Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2203,10 +2181,6 @@ void CEsmScriptCompile::Destroy() {
 	ClearIfStatementStack();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::Destroy();
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2229,10 +2203,6 @@ bool CEsmScriptCompile::AddIfBlock(const int StatementCount, const int ScriptPos
 	m_IfStatementStack.Push((void *)pNewBlock);
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AddIfBlock()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2294,10 +2264,6 @@ bool CEsmScriptCompile::AddLocalVar(const TCHAR *pName, const int Type) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AddLocalVar()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2331,10 +2297,6 @@ void CEsmScriptCompile::AddError(const TCHAR *pString, ...) {
 	m_NumErrors++;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AddError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2359,10 +2321,6 @@ bool CEsmScriptCompile::AddScriptData(const void *pData, const int Size) {
 	m_ScriptDataSize += Size;
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AddScriptData()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2396,10 +2354,6 @@ void CEsmScriptCompile::AddWarning(const TCHAR *pString, ...) {
 	m_HasErrorMsg = true;
 	m_NumWarnings++;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AddWarning()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2468,10 +2422,6 @@ bool CEsmScriptCompile::AddMessage(const int MessageID, const TCHAR *pString, ..
 	return ReturnValue;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AddMessage()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2507,10 +2457,6 @@ int CEsmScriptCompile::AssertToken(const int Token1, const int Token2) {
 
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::AssertToken()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2643,10 +2589,6 @@ bool CEsmScriptCompile::CheckFuncID(const long long ArgFlags,
 	return false;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::CheckFuncID()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2669,10 +2611,6 @@ CEsmRecord *CEsmScriptCompile::FindRecord(const char *pID) {
 
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::FindRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2711,10 +2649,6 @@ CEsmRecord *CEsmScriptCompile::FindRecord(const char *pID, const char *pType) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::FindRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -2751,10 +2685,6 @@ CEsmRecord *CEsmScriptCompile::FindRecordCarryable(const char *pID) {
 	/* No match */
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::FindRecordCarryable()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -2977,10 +2907,6 @@ bool CEsmScriptCompile::CheckFuncID1(const long long ArgFlags,
 	return false;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::CheckFuncID1()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3002,10 +2928,6 @@ void CEsmScriptCompile::ClearErrors() {
 	m_ErrorArray.RemoveAll();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ClearErrors()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3023,10 +2945,6 @@ void CEsmScriptCompile::ClearExprStack() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ClearExprStack()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3042,10 +2960,6 @@ void CEsmScriptCompile::ClearIfStatementStack() {
 		DestroyPointer(pStack);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ClearIfStatementStack()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3074,10 +2988,6 @@ int CEsmScriptCompile::ComputeLocalVarDataSize() {
 
 	return Size;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ComputeLocalVarDataSize()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3135,10 +3045,6 @@ int CEsmScriptCompile::Compile() {
 	return Result;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::Compile()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3171,10 +3077,6 @@ bool CEsmScriptCompile::FindLocalVar(const TCHAR *pName) {
 
 	return false;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::FindLocalVar()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3233,10 +3135,6 @@ int CEsmScriptCompile::FindLocalVarIndex(const TCHAR *pName, char &Type) {
 	return -1;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::FindLocalVarIndex()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3255,10 +3153,6 @@ int CEsmScriptCompile::FindMsgLevel(const int MessageID) {
 	/* Return the default level if not found */
 	return ESMSCR_MSGLEVEL_WARNING;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::FindMsgLevel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3342,10 +3236,6 @@ const TCHAR *CEsmScriptCompile::GetFuncArgIDType(const long long ArgFlags) {
 	return _T("Unknown");
 }
 
-/*===========================================================================
- *      End of Class Method CHAR* CEsmScriptCompile::GetFuncArgIDType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3404,10 +3294,6 @@ const TCHAR *CEsmScriptCompile::GetFuncArgRefType(const long long ArgFlags) {
 	return _T(" r");
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScriptCompile::GetFuncArgRefType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3438,10 +3324,6 @@ CEsmGlobal *CEsmScriptCompile::GetGlobal(const TCHAR *pName) {
 
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetGlobal()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3482,10 +3364,6 @@ int CEsmScriptCompile::GetGlobalType(const TCHAR *pName) {
 
 	return ESMSCR_VAR_UNKNOWN;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetGlobalType()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3541,10 +3419,6 @@ int CEsmScriptCompile::GetNextToken() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetNextToken()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3597,10 +3471,6 @@ int CEsmScriptCompile::GetNumberToken() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetNumberToken()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3646,7 +3516,7 @@ int CEsmScriptCompile::GetOperatorToken() {
 		m_LineHasRef = true;
 		m_LineRefToken = m_LastToken;
 		//m_LineRefID    = m_TokenID;
-#if !defined(MWEDIT_SCRIPT_MWSE)
+#ifndef MWEDIT_SCRIPT_MWSE
 
 		if (m_TokenID == ESMSCR_TOKEN_FUNCOP) {
 			InsertScriptDataRef((const TCHAR *)m_LastToken, m_LastToken.GetLength());
@@ -3687,10 +3557,6 @@ int CEsmScriptCompile::GetOperatorToken() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetOperatorToken()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3730,10 +3596,6 @@ int CEsmScriptCompile::GetStringToken() {
 
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetStringToken()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -3873,10 +3735,6 @@ int CEsmScriptCompile::GetSymbolToken() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetSymbolToken()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3928,10 +3786,6 @@ bool CEsmScriptCompile::InsertScriptDataRef(const TCHAR *pData, int Size) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::InsertScriptDataRef()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -3967,10 +3821,6 @@ bool CEsmScriptCompile::IsSymbolID(CSString &Token) {
 
 	return false;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::IsSymbolID()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4018,10 +3868,6 @@ void CEsmScriptCompile::MakeScriptVarData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::MakeScriptVarData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -4034,10 +3880,6 @@ int CEsmScriptCompile::OutputToken(const short Value) {
 	AddScriptData(&Value, sizeof(short));
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputToken()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4052,10 +3894,6 @@ short CEsmScriptCompile::GetAnimGroupID(const TCHAR *pString) {
 
 	return GetESMAnimGroupOldID(pString);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::GetAnimGroupID()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4445,10 +4283,6 @@ int CEsmScriptCompile::CheckFuncArg() {
 	return ESMSC_FUNCARG_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::CheckFuncArg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -4558,10 +4392,6 @@ int CEsmScriptCompile::ParseFuncArg1() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncArg1()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -4575,10 +4405,6 @@ int CEsmScriptCompile::ParseFunction() {
 
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFunction()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -4664,10 +4490,6 @@ int CEsmScriptCompile::ParseChoiceFunction() {
 	return ESMSCR_RESULT_TABLEEND;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseChoiceFunction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -4711,10 +4533,6 @@ int CEsmScriptCompile::ParseCheckFuncArg() {
 
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseCheckFuncArg()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5066,10 +4884,6 @@ int CEsmScriptCompile::ParseFuncArg() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncArg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5103,10 +4917,6 @@ int CEsmScriptCompile::ParseFuncComma() {
 	m_NumFuncArgs++;
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncComma()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5209,10 +5019,6 @@ int CEsmScriptCompile::ParseFuncEnd() {
 	m_pCurrentFunc = NULL;
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncEnd()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5319,10 +5125,6 @@ int CEsmScriptCompile::ParseNewLocalVar() {
 	m_StatementCount++;
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseNewLocalVar()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5508,10 +5310,6 @@ int CEsmScriptCompile::ParsePushToken() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParsePushToken()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5525,10 +5323,6 @@ int CEsmScriptCompile::ParseIfRExprStart() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseIfRExprStart()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5540,10 +5334,6 @@ int CEsmScriptCompile::ParseRExprStart() {
 	m_NumOutputExpr = 0;
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseRExprStart()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5617,10 +5407,6 @@ int CEsmScriptCompile::ParseStringIDPush() {
 	return ParseStringID();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseStringID()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5638,10 +5424,6 @@ int CEsmScriptCompile::ParsePushStringID() {
 	AddScriptData(" ", 1);
 	return Result;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParsePushStringID()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5666,10 +5448,6 @@ int CEsmScriptCompile::ParseSymbolID() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method ParseSymbolID::ParseSymbolID()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5687,11 +5465,6 @@ int CEsmScriptCompile::ParsePushSymbolID() {
 	AddScriptData(" ", 1);
 	return Result;
 }
-
-/*===========================================================================
- *      End of Class Method ParseSymbolID::ParsePushSymbolID()
- *=========================================================================*/
-
 
 
 /*===========================================================================
@@ -5765,10 +5538,6 @@ int CEsmScriptCompile::ParseTable(esmscrparsetable_t *pTable) {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseTable()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5828,10 +5597,6 @@ int CEsmScriptCompile::ParseTableMany(esmscrparsetable_t &TableEntry) {
 
 	return Result;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseTableMany()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -5919,10 +5684,6 @@ int CEsmScriptCompile::ParseTableOne(esmscrparsetable_t &TableEntry) {
 	return Result;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseTableOne()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -5933,10 +5694,6 @@ int CEsmScriptCompile::ParseFuncRef() {
 	m_TokenParsed = true;
 	return ParseTable(l_LeftFuncBlock);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncRef()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6086,10 +5843,6 @@ int CEsmScriptCompile::ParseIfVarRef() {
 	return ParseVarRef1(true);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseVarRef1()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6117,10 +5870,6 @@ void CEsmScriptCompile::SetScriptText(const TCHAR *pString, const int Size) {
 	m_LineHasRef = false;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::SetScriptText()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6136,10 +5885,6 @@ void CEsmScriptCompile::SkipTokenComment() {
 		m_pParse++;
 	} while (*m_pParse != ESMSCR_CHAR_EOL && *m_pParse != NULL_CHAR);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::SkipTokenComment()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6160,10 +5905,6 @@ void CEsmScriptCompile::SkipTokenWhiteSpace() {
 		m_pParse++;
 	} while (IsParseWhiteSpace());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::SkipTokenWhiteSpace()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6293,10 +6034,6 @@ void CEsmScriptCompile::SetStrongMsgLevels() {
 	m_NumMsgLevels = 18;
 }
 
-/*===========================================================================
- *      End of Default Message Level Initialization Methods
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6359,10 +6096,6 @@ int CEsmScriptCompile::OutputOneExpr() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputOneExpr()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6389,10 +6122,6 @@ int CEsmScriptCompile::OutputIf() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIf()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6418,10 +6147,6 @@ int CEsmScriptCompile::OutputIfGlobal() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIfGlobal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6436,10 +6161,6 @@ int CEsmScriptCompile::OutputIfLocal() {
 	OutputToken(LocalIndex);
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIfLocal()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6465,10 +6186,6 @@ int CEsmScriptCompile::OutputIfRelOp() {
 	m_IsEmptyIf = false;
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIfRelOp()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6547,10 +6264,6 @@ int CEsmScriptCompile::OutputIfEmpty() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Output Right If Blocks
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6585,10 +6298,6 @@ int CEsmScriptCompile::OutputIfFinish() {
 	m_OutputFuncIDRef = false;
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIfFinish()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6671,10 +6380,6 @@ int CEsmScriptCompile::OutputSetEnd() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Output Set Blocks
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6691,10 +6396,6 @@ int CEsmScriptCompile::ParseFuncAddOp() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseFuncAddOp()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6710,10 +6411,6 @@ int CEsmScriptCompile::ParseSetFirstAddOp() {
 
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::ParseSetFirstAddOp()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6748,10 +6445,6 @@ int CEsmScriptCompile::OutputElseIf() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputElseIf()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6785,10 +6478,6 @@ int CEsmScriptCompile::OutputElse() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputElse()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6808,10 +6497,6 @@ int CEsmScriptCompile::OutputEndIf() {
 	return OutputToken(0x0109);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputEndIf()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6821,10 +6506,6 @@ int CEsmScriptCompile::OutputEndIf() {
 int CEsmScriptCompile::OutputIfLeftExprStack() {
 	return OutputExprStack();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIfLeftExprStack()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6853,10 +6534,6 @@ int CEsmScriptCompile::OutputIfRightExprStack() {
 
 	return Result;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputIfRightExprStack()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -6889,10 +6566,6 @@ int CEsmScriptCompile::OutputExprStack() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputExprStack()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -6915,7 +6588,7 @@ int CEsmScriptCompile::OutputLineFunction() {
 int CEsmScriptCompile::OutputFunction() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFunction()");
 	ASSERT(m_pCurrentFunc != NULL);
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	OutputStoredFuncOp();
 #endif
 	AddScriptData(&(m_pCurrentFunc->OpCode), 2);
@@ -6927,10 +6600,6 @@ int CEsmScriptCompile::OutputFunction() {
 	m_LastFuncArgSymbol = false;
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputFunction()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -7163,10 +6832,6 @@ int CEsmScriptCompile::OutputEffect(const int EffectID) {
 	return AddScriptData(&EffectID, 2);
 }
 
-/*===========================================================================
- *      End of Output Function Arguments
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -7192,10 +6857,6 @@ int CEsmScriptCompile::OutputWhile() {
 
 	return ESMSCR_RESULT_OK;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputWhile()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -7231,10 +6892,6 @@ int CEsmScriptCompile::OutputWhileFinish() {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputWhileFinish()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -7253,10 +6910,6 @@ int CEsmScriptCompile::OutputEndWhile() {
 	m_StatementCount++;
 	return OutputToken(0x010B);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::OutputEndWhile()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -7284,10 +6937,6 @@ esmscrifblock_t *CEsmScriptCompile::PopIfBlock() {
 	return &s_IfBlock;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::PopIfBlock()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -7312,10 +6961,6 @@ void CEsmScriptCompile::SetMsgLevel(const int Type) {
 			break;
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::SetMsgLevel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -7350,10 +6995,6 @@ int CEsmScriptCompile::UpdateLastIfBlock() {
 	return ESMSCR_RESULT_OK;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::UpdateLastIfBlock()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -7385,7 +7026,3 @@ void CEsmScriptCompile::InitializeExtraRecords() {
 		m_ExtraRecords.SetAt(pID, pRecord);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptCompile::InitializeExtraRecords()
- *=========================================================================*/

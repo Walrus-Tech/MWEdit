@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmFindDlg.h"
 #include "EsmDlgArray.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 DEFINE_FILE("EsmFindDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmFindDlg, CFormView)
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Record List Display Data Array
  *
  *=========================================================================*/
-
 static esmcoldata_t l_ItemColData[] = {
 	{
 		_T("ID"),
@@ -86,17 +72,12 @@ static esmcoldata_t l_ItemColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Record List Display Data Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmFindDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmFindDlg, CFormView)
 	//{{AFX_MSG_MAP(CEsmFindDlg)
 	ON_BN_CLICKED(IDC_FINDBUTTON, OnFindbutton)
@@ -114,17 +95,12 @@ BEGIN_MESSAGE_MAP(CEsmFindDlg, CFormView)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmFindDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Constructor
  *
  *=========================================================================*/
-
 CEsmFindDlg::CEsmFindDlg() : CFormView(CEsmFindDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmFindDlg)
 	//}}AFX_DATA_INIT
@@ -132,23 +108,14 @@ CEsmFindDlg::CEsmFindDlg() : CFormView(CEsmFindDlg::IDD) {
 	m_hAccelerator = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmFindDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Destructor
  *
  *=========================================================================*/
-
 CEsmFindDlg::~CEsmFindDlg() {
 }
-
-/*===========================================================================
- *      End of Class CEsmFindDlg Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -158,7 +125,6 @@ CEsmFindDlg::~CEsmFindDlg() {
  * Adds a find history record to the registry and the find list.
  *
  *=========================================================================*/
-
 void CEsmFindDlg::AddFindHistory(const TCHAR *pString) {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	bool Result;
@@ -172,19 +138,15 @@ void CEsmFindDlg::AddFindHistory(const TCHAR *pString) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFindDlg::AddFindHistory()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmFindDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmFindDlg)
 	DDX_Control(pDX, IDC_PROGRESS1, m_ProgressBar);
 	DDX_Control(pDX, IDC_FINDLIST, m_FindList);
@@ -193,18 +155,13 @@ void CEsmFindDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFindDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Class Diagnostics
  *
  *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 
 void CEsmFindDlg::AssertValid() const {
 	CFormView::AssertValid();
@@ -216,10 +173,6 @@ void CEsmFindDlg::Dump(CDumpContext &dc) const {
 
 #endif
 
-/*===========================================================================
- *      End of Class Diagnostics
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -228,7 +181,6 @@ void CEsmFindDlg::Dump(CDumpContext &dc) const {
  * Fills the find list with the history records from the registry.
  *
  *=========================================================================*/
-
 void CEsmFindDlg::FillFindList() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	CString Buffer;
@@ -256,24 +208,15 @@ void CEsmFindDlg::FillFindList() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFindDlg::FillFindList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Event - void OnCancel ();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnCancel() {
 	GetParentFrame()->DestroyWindow();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnCancel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -281,16 +224,11 @@ void CEsmFindDlg::OnCancel() {
  * Class CEsmFindDlg Event - void OnContextMenu (pWnd, Point);
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnContextMenu(CWnd *pWnd, CPoint Point) {
 	if (pWnd->GetDlgCtrlID() == IDC_RECORDLIST) {
 		OpenContextMenu(this, pWnd, Point, IDR_FIND_MENU);
 	}
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnContextMenu()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -298,15 +236,10 @@ void CEsmFindDlg::OnContextMenu(CWnd *pWnd, CPoint Point) {
  * Class CEsmFindDlg Event - void OnDestroy();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnDestroy() {
 	CFormView::OnDestroy();
 	m_pDlgHandler->OnCloseFindDlg();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnDestroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -314,7 +247,6 @@ void CEsmFindDlg::OnDestroy() {
  * Class CEsmFindDlg Event - void OnEditCopy ();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnEditCopy() {
 	ClipCopyFromWnd(GetFocus());
 }
@@ -327,17 +259,12 @@ void CEsmFindDlg::OnEditPaste() {
 	ClipPasteToWnd(GetFocus());
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnEditPaste()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Event - LRESULT OnEditRecord (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmFindDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 	POSITION ListPos;
 	int ListIndex;
@@ -380,17 +307,12 @@ LRESULT CEsmFindDlg::OnEditRecord(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnEditRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Event - void OnFindbutton ();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnFindbutton() {
 	CEsmRecInfoArray *pRecInfoArray = m_pDlgHandler->GetDocument()->GetRecInfoArray();
 	esmrecinfo_t *pRecInfo;
@@ -452,17 +374,12 @@ void CEsmFindDlg::OnFindbutton() {
 	m_CountLabel.SetWindowText(FindText);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnFindbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnInitialUpdate() {
 	CString Buffer;
 	CFormView::OnInitialUpdate();
@@ -486,17 +403,12 @@ void CEsmFindDlg::OnInitialUpdate() {
 	GetParentFrame()->SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Event - void OnEditInfo ();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnEditInfo() {
 	esmrecinfo_t *pRecInfo;
 	/* Get the currently selected record */
@@ -510,26 +422,17 @@ void CEsmFindDlg::OnEditInfo() {
 	m_pDlgHandler->OpenUsesDlg(pRecInfo);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnEditInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Event - void OnEditSelectrecord ();
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnEditSelectrecord() {
 	m_pDlgHandler->GetDocument()->UpdateAllViews(NULL,
 	                                             MWEDITDOC_HINT_SELECTITEM,
 	                                             (CObject *)m_RecordList.GetCurrentRecord());
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnEditSelectrecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -537,7 +440,6 @@ void CEsmFindDlg::OnEditSelectrecord() {
  * Class CEsmFindDlg Event - void OnUpdateEditInfo (pCmdUI);
  *
  *=========================================================================*/
-
 void CEsmFindDlg::OnUpdateEditInfo(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_RecordList.GetSelectedCount() > 0);
 }
@@ -546,17 +448,12 @@ void CEsmFindDlg::OnUpdateEditSelectrecord(CCmdUI *pCmdUI) {
 	pCmdUI->Enable(m_RecordList.GetSelectedCount() > 0);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFindDlg::OnUpdateEditInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmFindDlg Method - BOOL PreTranslateMessage (pMsg);
  *
  *=========================================================================*/
-
 BOOL CEsmFindDlg::PreTranslateMessage(MSG *pMsg) {
 	int Result;
 
@@ -570,7 +467,3 @@ BOOL CEsmFindDlg::PreTranslateMessage(MSG *pMsg) {
 
 	return CFormView::PreTranslateMessage(pMsg);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmFindDlg::PreTranslateMessage()
- *=========================================================================*/

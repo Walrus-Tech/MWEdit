@@ -7,19 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 #include "SplitterWnd.h"
 #include <afxpriv.h>
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -35,10 +28,6 @@ static int s_cyBorder2;
 static int CX_BORDER = 1;
 static int CY_BORDER = 1;
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -49,9 +38,6 @@ BEGIN_MESSAGE_MAP(CMwSplitterWnd, CSplitterWnd)
 	//{{AFX_MSG_MAP(CMwSplitterWnd)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-/*===========================================================================
- *      End of CMwSplitterWnd Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -104,10 +90,6 @@ AFX_STATIC void AFXAPI _AfxDeferClientPos(AFX_SIZEPARENTPARAMS *lpLayout,
 		AfxRepositionWindow(lpLayout, pWnd->m_hWnd, rect);
 	}
 }
-
-/*===========================================================================
- *      End of Function _AfxDeferClientPos()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -225,10 +207,6 @@ void l_ObLayoutRowCol(CSplitterWnd::CRowColInfo *pInfoArray,
 	ASSERT(nSize == 0); // all space should be allocated
 }
 
-/*===========================================================================
- *      End of Function l_ObLayoutRowCol()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -243,10 +221,6 @@ CMwSplitterWnd::CMwSplitterWnd() {
 	s_cyBorder2 = /*s_bWin4 ? 2*CY_BORDER :*/ CY_BORDER;
 }
 
-/*===========================================================================
- *      End of Class CMwSplitterWnd Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -255,10 +229,6 @@ CMwSplitterWnd::CMwSplitterWnd() {
  *=========================================================================*/
 CMwSplitterWnd::~CMwSplitterWnd() {
 }
-
-/*===========================================================================
- *      End of Class CMwSplitterWnd Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -382,7 +352,3 @@ void CMwSplitterWnd::RecalcLayout() {
 	// invalidate all the splitter bars (with NULL pDC)
 	DrawAllSplitBars(NULL, rectInside.right, rectInside.bottom);
 }
-
-/*===========================================================================
- *      End of Class Method CMwSplitterWnd::RecalcLayout()
- *=========================================================================*/

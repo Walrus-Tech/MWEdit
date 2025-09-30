@@ -1,10 +1,9 @@
 // CreaturePage1.cpp : implementation file
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "CreaturePage1.h"
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -16,7 +15,6 @@ DEFINE_FILE("CreaturePage1.cpp");
 
 /////////////////////////////////////////////////////////////////////////////
 // CCreaturePage1 property page
-
 
 IMPLEMENT_DYNCREATE(CCreaturePage1, CPropertyPage)
 

@@ -15,12 +15,6 @@
 #include "dl_log.h"
 #include "dl_block.h"
 
-#if defined(__TURBOC__)
-	#if !defined(_WIN32_WCE)
-		//#include <alloc.h>
-	#endif
-#endif
-
 
 #define DL_MEM_NAME    _T("DL_Mem.cpp")
 #define DL_MEM_VERSION _T("0.01d")
@@ -39,7 +33,7 @@
  * and output more explicit error messages.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
 /* Macro for creating a general pointer */
 #define CreatePointer(pObject, Type) { \
@@ -192,7 +186,7 @@
  * and output error to log file if a NULL pointer was deleted.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
 /* Macro for destroying a pointer */
 #define DestroyPointer(pObject) { \
@@ -215,7 +209,7 @@
 		} }
 
 /* Release a handle type object (mostly for Win32 COM) */
-#if !defined(RELEASE)
+#ifndef RELEASE
 #define RELEASE(pObject) { \
 		if ((pObject) != NULL) { \
 			(pObject)->Release(); \
@@ -242,7 +236,7 @@
 			(pObject) = NULL; } }
 
 /* Release a handle type object (mostly for Win32 COM) */
-#if !defined(RELEASE)
+#ifndef RELEASE
 #define RELEASE(pObject) { \
 		if ((pObject) != NULL) { \
 			(pObject)->Release(); \
@@ -260,18 +254,10 @@
  * appropiate definition depending on the current system.
  *
  *=========================================================================*/
-#if defined(__BCPLUSPLUS__)
-	#define HEAP_OK       (_HEAPOK)
-	#define HEAP_CORRUPT  (-5)
-	#define HEAP_EMPTY    (_HEAPEMPTY)
-#elif defined(_WIN32)
+#if _WIN32
 	#define HEAP_OK       (1)
 	#define HEAP_CORRUPT  (0)
 	#define HEAP_EMPTY    (-9)
-#elif defined(__MSDOS__) &&  defined(__BCPLUSPLUS__)
-	#define HEAP_OK       (_HEAPOK)
-	#define HEAP_CORRUPT  (_HEAPCORRUPT)
-	#define HEAP_EMPTY    (_HEAPEMPTY)
 #else
 	#define HEAP_OK       (1)
 	#define HEAP_CORRUPT  (0)
@@ -328,12 +314,8 @@ bool ReplaceString(TCHAR **pNewString, const size_t Length);
  * Functions compile to nothing in release builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
-	#if defined(_MSDOS)
-		#define DebugHeapCheckMemory() true
-		/* Output all objects on the heap to the SystemLog */
-		void _DosMemDumpHeap();
-	#elif defined(_WIN32)
+#if _DEBUG
+	#if _WIN32
 		#define DebugHeapCheckMemory() (_CrtDumpMemoryLeaks() == TRUE)
 	#endif
 #endif
@@ -346,12 +328,8 @@ bool ReplaceString(TCHAR **pNewString, const size_t Length);
  * Test function prototypes for this module, available only in DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
-	#if defined(__TURBOC__) || defined(__BCPLUSPLUS__)
-		#define TEST_MAXSTRING_SIZE 64000u
-	#else
-		#define TEST_MAXSTRING_SIZE 100000u
-	#endif
+#if _DEBUG
+	#define TEST_MAXSTRING_SIZE 100000u
 	void Test_DL_Mem();
 	void Test_CreateString1();
 	void Test_CreateString2();

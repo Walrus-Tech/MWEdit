@@ -7,21 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmRegionDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,17 +21,12 @@
 DEFINE_FILE("EsmRegionDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmRegionDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Spell Column Data
  *
  *=========================================================================*/
-
 static esmcoldata_t l_SoundColData[] = {
 	{
 		_T("Chance"),
@@ -86,17 +72,12 @@ static esmcoldata_t l_SoundColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Spell Column Data
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmRegionDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmRegionDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmRegionDlg)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
@@ -112,26 +93,17 @@ BEGIN_MESSAGE_MAP(CEsmRegionDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmRegionDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Constructor
  *
  *=========================================================================*/
-
 CEsmRegionDlg::CEsmRegionDlg() : CEsmRecDialog(CEsmRegionDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmRegionDlg)
 	//}}AFX_DATA_INIT
 	m_pRegion = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmRegionDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -139,7 +111,6 @@ CEsmRegionDlg::CEsmRegionDlg() : CEsmRecDialog(CEsmRegionDlg::IDD) {
  * Class CEsmRegionDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -170,17 +141,12 @@ void CEsmRegionDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRegionDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmRegionDlg::GetControlData()");
 	CEsmSubSNAM *pSoundRec;
@@ -254,17 +220,12 @@ void CEsmRegionDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRegionDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmRegionDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -295,17 +256,12 @@ bool CEsmRegionDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmRegionDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - void OnChangeColor ();
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::OnChangeColor() {
 	CString Buffer;
 	int Red;
@@ -353,17 +309,12 @@ void CEsmRegionDlg::OnChangeColor() {
 	m_ColorBox.RedrawWindow();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnChangeColor()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - void OnColorbutton ();
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::OnColorbutton() {
 	int Result;
 	CString Buffer;
@@ -424,17 +375,12 @@ void CEsmRegionDlg::OnColorbutton() {
 	m_ColorBox.SetColor(Red, Green, Blue);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnColorbutton()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - void OnEndlabeleditItemlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
@@ -458,17 +404,12 @@ void CEsmRegionDlg::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	*pResult = 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnEndlabeleditItemlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -510,17 +451,12 @@ void CEsmRegionDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmRegionDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
@@ -553,17 +489,12 @@ LRESULT CEsmRegionDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmRegionDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	int ListIndex;
 
@@ -614,17 +545,12 @@ LRESULT CEsmRegionDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmRegionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SOUN)) {
@@ -646,17 +572,12 @@ int CEsmRegionDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmRegionDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmRegionDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmRegionDlg::SetControlData() {
 	CEsmSubSNAM *pSoundRec;
 	esmrecinfo_t *pRecInfo;
@@ -737,7 +658,3 @@ void CEsmRegionDlg::SetControlData() {
 		pSoundRec = (CEsmSubSNAM *)m_pRegion->FindNext(MWESM_SUBREC_SNAM, ArrayIndex);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmRegionDlg::SetControlData()
- *=========================================================================*/

@@ -112,7 +112,7 @@ inline uint CBmpFile::ComputeSize() const {
 inline uint CBmpFile::ComputeOffsetBits() const {
 	return ((uint)sizeof(bmpfileheader_t)
 	        + (uint)sizeof(bmpinfoheader_t)
-	        + (uint)(m_PaletteSize * 4) );
+	        + (uint)(m_PaletteSize * 4));
 }
 
 

@@ -12,9 +12,6 @@
  *  - Added the events for opening the various web page links.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "MainFrm.h"
@@ -22,22 +19,13 @@
 #include "MWEditView.h"
 
 
-/*===========================================================================
- *
- * Local Definitions
- *
- *=========================================================================*/
-
-/* Debug defines */
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
 #endif
 
 /* Status bar setup */
-
 static UINT indicators[] = {
 	ID_SEPARATOR,
 	ID_INDICATOR_CAPS,
@@ -48,17 +36,12 @@ static UINT indicators[] = {
 IMPLEMENT_DYNAMIC(CMainFrame, CMDIFrameWnd);
 DEFINE_FILE("MainFrm.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	//{{AFX_MSG_MAP(CMainFrame)
 	ON_WM_CREATE()
@@ -81,24 +64,15 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	ON_COMMAND(ID_DEFAULT_HELP, CMDIFrameWnd::OnHelpFinder)
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of Class CMainFrame Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Constructor
  *
  *=========================================================================*/
-
 CMainFrame::CMainFrame() {
 	m_hItemHelp = NULL;
 }
-
-/*===========================================================================
- *      End of Class CMainFrame Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -106,13 +80,8 @@ CMainFrame::CMainFrame() {
  * Class CMainFrame Destructor
  *
  *=========================================================================*/
-
 CMainFrame::~CMainFrame() {
 }
-
-/*===========================================================================
- *      End of Class CMainFrame Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -123,7 +92,6 @@ CMainFrame::~CMainFrame() {
  * NULL is returned if it is not found.
  *
  *=========================================================================*/
-
 CView *CMainFrame::GetActiveMainView() {
 	CMDIChildWnd *pActiveWnd = MDIGetActive();
 	CView *pView;
@@ -163,17 +131,12 @@ CView *CMainFrame::GetActiveMainView() {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CMainFrame::GetActiveMainView()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Event - int OnCreate (lpCreateStruct);
  *
  *=========================================================================*/
-
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	/* Call the base class create method first */
 	if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1) {
@@ -206,17 +169,12 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CMainFrame::OnCreate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Method - BOOL PreCreateWindow (cs);
  *
  *=========================================================================*/
-
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT &cs) {
 	if (!CMDIFrameWnd::PreCreateWindow(cs)) {
 		return FALSE;
@@ -225,12 +183,8 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT &cs) {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Method CMainFrame::PreCreateWindow()
- *=========================================================================*/
 
-
-#ifdef _DEBUG
+#if _DEBUG
 
 /*===========================================================================
  *
@@ -246,10 +200,6 @@ void CMainFrame::Dump(CDumpContext &dc) const {
 	CMDIFrameWnd::Dump(dc);
 }
 
-/*===========================================================================
- *      End of Class CMainFrame Diagnostics
- *=========================================================================*/
-
 #endif
 
 
@@ -258,7 +208,6 @@ void CMainFrame::Dump(CDumpContext &dc) const {
  * Class CMainFrame Event - void OnEditFindtext ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnEditFindtext() {
 	CView *pView = GetActiveMainView();
 
@@ -267,17 +216,12 @@ void CMainFrame::OnEditFindtext() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMainFrame::OnEditFindtext()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Event - void OnEditPluginInfo ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnEditPluginInfo() {
 	CView *pView = GetActiveMainView();
 
@@ -286,25 +230,16 @@ void CMainFrame::OnEditPluginInfo() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMainFrame::OnEditPluginInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Event - void OnHelpAbout ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpAbout() {
 	CDialog dlg(IDD_ABOUTBOX);
 	dlg.DoModal();
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpAbout()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -312,14 +247,9 @@ void CMainFrame::OnHelpAbout() {
  * Class CMainFrame Event - void OnHelpEmail ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpEmail() {
 	OpenWebPage(MWEDIT_EMAIL_DEVELOPER);
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpEmail()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -327,15 +257,10 @@ void CMainFrame::OnHelpEmail() {
  * Class CMainFrame Event - void OnHelpFunctions ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpFunctions() {
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
 	pApp->OpenFuncHelpView();
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpFunctions()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -343,7 +268,6 @@ void CMainFrame::OnHelpFunctions() {
  * Class CMainFrame Event - void OnHelpItemindex ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpItemindex() {
 	HWND hWnd = NULL;
 	/* Activate a currently open window, if any */
@@ -357,24 +281,15 @@ void CMainFrame::OnHelpItemindex() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpItemindex()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Event - void OnHelpLinksSourceforge ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpLinksSourceforge() {
 	OpenWebPage(MWEDIT_WEBPAGE_PROJECT);
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpLinksSourceforge()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -382,14 +297,9 @@ void CMainFrame::OnHelpLinksSourceforge() {
  * Class CMainFrame Event - void OnHelpSubmitbug ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpSubmitbug() {
 	OpenWebPage(MWEDIT_WEBPAGE_BUG);
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpSubmitbug()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -397,14 +307,9 @@ void CMainFrame::OnHelpSubmitbug() {
  * Class CMainFrame Event - void OnHelpSubmitfeature ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpSubmitfeature() {
 	OpenWebPage(MWEDIT_WEBPAGE_FEATURE);
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpSubmitfeature()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -412,7 +317,6 @@ void CMainFrame::OnHelpSubmitfeature() {
  * Class CMainFrame Event - void OnViewOptions ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnViewOptions() {
 	CEsmOptionsDlg OptionsDlg;
 	CMWEditApp *pApp = (CMWEditApp *)AfxGetApp();
@@ -422,21 +326,12 @@ void CMainFrame::OnViewOptions() {
 	Result = OptionsDlg.DoModal();
 }
 
-/*===========================================================================
- *      End of Class Event CMainFrame::OnViewOptions()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CMainFrame Event - void OnHelpLinksUesptes3mod ();
  *
  *=========================================================================*/
-
 void CMainFrame::OnHelpLinksUesptes3mod() {
 	OpenWebPage(MWEDIT_WEBPAGE_UESPTES3MOD);
 }
-
-/*===========================================================================
- *      End of Class Event CMainFrame::OnHelpLinksUesptes3mod()
- *=========================================================================*/

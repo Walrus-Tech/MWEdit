@@ -7,21 +7,11 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "esmscriptdefs.h"
 #include "mwcustomfunc.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("EsmScriptDefs.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -39,19 +29,19 @@ const TCHAR *l_Reserved[] = {
 	_T("float"),
 	_T("get"),
 	_T("if"),
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	_T("ifx")
 #endif
 	_T("long"),
 	_T("return"),
 	_T("set"),
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	_T("setx"),
 #endif
 	_T("short"),
 	_T("to"),
 	_T("while"),
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	_T("whilex"),
 #endif
 	_T("X"),
@@ -60,9 +50,6 @@ const TCHAR *l_Reserved[] = {
 	// _T("reset"),
 	NULL /* Must be last entry */
 };
-/*===========================================================================
- *      End of Reserved String Array
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -110,10 +97,6 @@ bool IsESMScriptFunction(const TCHAR *pString) {
 	return false;
 }
 
-/*===========================================================================
- *      End of Function IsESMScriptFunction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -126,10 +109,6 @@ bool IsESMScriptCustomFunction(const TCHAR *pString) {
 	CMwCustomFunction *pFunction;
 	return g_CustomFunctions.Lookup(pString, pFunction);
 }
-
-/*===========================================================================
- *      End of Function IsESMScriptCustomFunction()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -148,10 +127,6 @@ esmscrfuncinfo_t *GetESMScriptCustomFuncInfo(const TCHAR *pString) {
 
 	return &(pFunction->GetData());
 }
-
-/*===========================================================================
- *      End of Function GetESMScriptCustomFuncInfo()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -191,10 +166,6 @@ esmscrfuncinfo_t *GetESMScriptFuncInfo(const TCHAR *pString) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Function GetESMScriptFuncInfo()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -226,10 +197,6 @@ bool IsESMScriptFunction1(const TCHAR *pString) {
 	return false;
 }
 
-/*===========================================================================
- *      End of Function IsESMScriptFunction1()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -258,10 +225,6 @@ bool IsESMScriptOperator(const TCHAR Char) {
 
 	return false;
 }
-
-/*===========================================================================
- *      End of Function IsESMScriptOperator()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -327,10 +290,6 @@ int GetESMScriptOpToken(const TCHAR *pString) {
 
 	return ESMSCR_TOKEN_UNKNOWN;
 }
-
-/*===========================================================================
- *      End of Function GetESMScriptOpToken()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -455,7 +414,7 @@ const TCHAR *GetESMTokenName(const int Token) {
 
 		case ESMSCR_TOKEN_RESET:
 			return _T("reset");
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 		case ESMSCR_TOKEN_WHILEX:
 			return _T("whilex");
@@ -471,10 +430,6 @@ const TCHAR *GetESMTokenName(const int Token) {
 			return _T("Unknown");
 	}
 }
-
-/*===========================================================================
- *      End of Function TCHAR* GetESMTokenName()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -535,10 +490,6 @@ bool IsESMScriptOperator(const TCHAR *pString) {
 	return false;
 }
 
-/*===========================================================================
- *      End of Function IsESMScriptOperator()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -592,7 +543,7 @@ int GetESMScriptResToken(const TCHAR *pString) {
 				return ESMSCR_TOKEN_IF;
 			}
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("fx")) == 0) {
 				return ESMSCR_TOKEN_IFX;
@@ -634,7 +585,7 @@ int GetESMScriptResToken(const TCHAR *pString) {
 				return ESMSCR_TOKEN_TYPEOP;
 			}
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("etx")) == 0) {
 				return ESMSCR_TOKEN_SETX;
@@ -662,7 +613,7 @@ int GetESMScriptResToken(const TCHAR *pString) {
 				return ESMSCR_TOKEN_WHILE;
 			}
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("hilex")) == 0) {
 				return ESMSCR_TOKEN_WHILEX;
@@ -683,10 +634,6 @@ int GetESMScriptResToken(const TCHAR *pString) {
 
 	return ESMSCR_TOKEN_UNKNOWN;
 }
-
-/*===========================================================================
- *      End of Function IsESMScriptReserved()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -713,7 +660,3 @@ bool IsESMScriptReserved1(const TCHAR *pString) {
 
 	return false;
 }
-
-/*===========================================================================
- *      End of Function IsESMScriptReserved1()
- *=========================================================================*/

@@ -10,21 +10,11 @@
  *  - Modified FindGroup() method to check for a 0-length group name.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 #include "cfgfile.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("CfgFile.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -41,10 +31,6 @@ bool CConfigEntry::Write(CGenFile &File) {
 	Result = File.Printf("%s = %s\n", m_Variable, m_Value);
 	return Result;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigEntry::Write()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -66,10 +52,6 @@ void CConfigGroup::Destroy() {
 	m_Entries.RemoveAll();
 	m_Name.Empty();
 }
-
-/*===========================================================================
- *      End of Class Method CConfigGroup::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -97,10 +79,6 @@ CConfigEntry *CConfigGroup::AddEntry(const TCHAR *pVar, const TCHAR *pValue) {
 	m_Entries.Add(pEntry);
 	return pEntry;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigGroup::AddEntry()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -131,10 +109,6 @@ CConfigEntry *CConfigGroup::FindEntry(const TCHAR *pVariable) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CConfigGroup::FindEntry()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -159,10 +133,6 @@ CConfigEntry *CConfigGroup::GetEntry(const TCHAR *pVariable) {
 	return pEntry;
 }
 
-/*===========================================================================
- *      End of Class Method CConfigGroup::GetEntry()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -181,10 +151,6 @@ const TCHAR *CConfigGroup::GetValue(const TCHAR *pVariable) {
 	return pEntry->GetValue();
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CConfigGroup::GetValue()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -200,10 +166,6 @@ bool CConfigGroup::SetValue(const TCHAR *pVariable, const TCHAR *pValue) {
 	pEntry->SetValue(pValue);
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigGroup::SetValue()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -237,10 +199,6 @@ bool CConfigGroup::Write(CGenFile &File) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CConfigGroup::Write()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -250,10 +208,6 @@ bool CConfigGroup::Write(CGenFile &File) {
 CConfigFile::CConfigFile() : m_Groups(2) {
 	//DEFINE_FUNCTION("CConfigFile::CConfigFile()");
 }
-
-/*===========================================================================
- *      End of Class CConfigFile Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -277,10 +231,6 @@ void CConfigFile::Destroy() {
 	/* Call the base class method */
 	CGenFile::Destroy();
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -308,10 +258,6 @@ CConfigGroup *CConfigFile::AddGroup(const TCHAR *pName) {
 	m_Groups.Add(pGroup);
 	return pGroup;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::AddGroup()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -348,10 +294,6 @@ const TCHAR *CConfigFile::CreateArrayString(const TCHAR *pVariable,
 	snprintf(Buffer, CONFIG_LINE_LENGTH, "%s[%d].%s", pVariable, ID1, pID2);
 	return Buffer;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::CreateArrayString()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -393,10 +335,6 @@ CConfigGroup *CConfigFile::FindGroup(const TCHAR *pName) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CConfigFile::FindGroup()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -420,10 +358,6 @@ CConfigGroup *CConfigFile::GetGroup(const TCHAR *pName) {
 	ASSERT(pGroup != NULL);
 	return pGroup;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::GetGroup()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -492,10 +426,6 @@ float CConfigFile::GetArrayReal(const TCHAR *pGroup,
 	return GetReal(pGroup, CreateArrayString(pVariable, ID1, pID2), Default);
 }
 
-/*===========================================================================
- *      End of Class Method CConfigFile::GetArray...()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -517,10 +447,6 @@ bool CConfigFile::GetBool(const TCHAR *pGroup, const TCHAR *pVariable, const boo
 	/* Convert the string to a bool value */
 	return StringToBoolean(pValue);
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::GetBool()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -544,10 +470,6 @@ int CConfigFile::GetInt(const TCHAR *pGroup, const TCHAR *pVariable, const int D
 	return atoi(pValue);
 }
 
-/*===========================================================================
- *      End of Class Method CConfigFile::GetInt()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -569,10 +491,6 @@ float CConfigFile::GetReal(const TCHAR *pGroup, const TCHAR *pVariable, const fl
 	/* Convert the string to a float value */
 	return (float)atof(pValue);
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::GetReal()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -605,10 +523,6 @@ const TCHAR *CConfigFile::GetValue(const TCHAR *pVariable) {
 	return NULL;
 }
 
-/*===========================================================================
- *      End of Class Method TCHAR* CConfigFile::GetValue()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -634,10 +548,6 @@ const TCHAR *CConfigFile::GetValue(const TCHAR *pGroupName, const TCHAR *pVariab
 	/* Search the groups */
 	return pGroup->GetValue(pVariable);
 }
-
-/*===========================================================================
- *      End of Class Method TCHAR* CConfigFile::GetValue()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -691,10 +601,6 @@ bool CConfigFile::LoadINI(const TCHAR *pFilename) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CConfigFile::LoadINI()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -728,10 +634,6 @@ bool CConfigFile::SaveINI(const TCHAR *pFilename) {
 	Close();
 	return true;
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::SaveINI()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -804,10 +706,6 @@ bool CConfigFile::SetArrayReal(const TCHAR *pGroup,
 	return SetReal(pGroup, CreateArrayString(pVariable, ID1, pID2), Value);
 }
 
-/*===========================================================================
- *      End of Class Method CConfigFile::SetArray...()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -820,10 +718,6 @@ bool CConfigFile::SetArrayReal(const TCHAR *pGroup,
 bool CConfigFile::SetBool(const TCHAR *pGroup, const TCHAR *pVariable, const bool Value) {
 	return SetValue(pGroup, pVariable, BooleanToString(Value));
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::SetBool()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -840,10 +734,6 @@ bool CConfigFile::SetInt(const TCHAR *pGroup, const TCHAR *pVariable, const int 
 	return SetValue(pGroup, pVariable, Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CConfigFile::SetInt()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -858,10 +748,6 @@ bool CConfigFile::SetReal(const TCHAR *pGroup, const TCHAR *pVariable, const flo
 	sprintf(Buffer, "%g", Value);
 	return SetValue(pGroup, pVariable, Buffer);
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::SetReal()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -879,7 +765,3 @@ bool CConfigFile::SetValue(const TCHAR *pGroupName, const TCHAR *pVariable, cons
 	/* Set the entry value */
 	return pGroup->SetValue(pVariable, pValue);
 }
-
-/*===========================================================================
- *      End of Class Method CConfigFile::SetValue()
- *=========================================================================*/

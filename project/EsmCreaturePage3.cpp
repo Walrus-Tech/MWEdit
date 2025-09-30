@@ -14,9 +14,6 @@
  *    +/- key.
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmCreaturePage3.h"
@@ -25,13 +22,7 @@
 #include "EsmDlgArray.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -40,17 +31,12 @@
 IMPLEMENT_DYNCREATE(CEsmCreaturePage3, CPropertyPage);
 DEFINE_FILE("EsmCreaturePage3.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Function - int CALLBACK l_CreaItemSortCallBack (lParam1, lParam2, lParamSort);
  *
  *=========================================================================*/
-
 int CALLBACK l_CreaItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t *)lParam1;
 	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t *)lParam2;
@@ -71,17 +57,12 @@ int CALLBACK l_CreaItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lPara
 	return l_ItemSortCallBack(lParam1, lParam2, lParamSort);
 }
 
-/*===========================================================================
- *      End of Function CALLBACK l_CreaItemSortCallBack()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Item List Display Data Array
  *
  *=========================================================================*/
-
 static esmcoldata_t l_ItemColData[] = {
 	{
 		_T("Count"),
@@ -126,17 +107,12 @@ static esmcoldata_t l_ItemColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Item List Display Data Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmCreaturePage3 Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmCreaturePage3, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmCreaturePage3)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
@@ -146,17 +122,12 @@ BEGIN_MESSAGE_MAP(CEsmCreaturePage3, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmCreaturePage3 Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Constructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage3::CEsmCreaturePage3() : CPropertyPage(CEsmCreaturePage3::IDD) {
 	//{{AFX_DATA_INIT(CEsmCreaturePage3)
 	//}}AFX_DATA_INIT
@@ -164,23 +135,14 @@ CEsmCreaturePage3::CEsmCreaturePage3() : CPropertyPage(CEsmCreaturePage3::IDD) {
 	m_pDlgHandler = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmCreaturePage3 Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Destructor
  *
  *=========================================================================*/
-
 CEsmCreaturePage3::~CEsmCreaturePage3() {
 }
-
-/*===========================================================================
- *      End of Class CEsmCreaturePage3 Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -188,18 +150,14 @@ CEsmCreaturePage3::~CEsmCreaturePage3() {
  * Class CEsmCreaturePage3 Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage3::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmCreaturePage3)
 	DDX_Control(pDX, IDC_ENCUMLABEL, m_WeightLabel);
 	DDX_Control(pDX, IDC_ITEMLIST, m_ItemList);
 	//}}AFX_DATA_MAP
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage3::DoDataExchange()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -207,7 +165,6 @@ void CEsmCreaturePage3::DoDataExchange(CDataExchange *pDX) {
  * Class CEsmCreaturePage3 Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage3::GetControlData() {
 	CEsmCreature *pCreature;
 	CEsmSubNPCO *pItemName;
@@ -235,26 +192,17 @@ void CEsmCreaturePage3::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage3::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmCreaturePage3::GetDocument() {
 	DEFINE_FUNCTION("CEsmCreaturePage3::GetDocument()");
 	ASSERT(m_pDlgHandler != NULL);
 	return m_pDlgHandler->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage3::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -262,7 +210,6 @@ CMWEditDoc *CEsmCreaturePage3::GetDocument() {
  * Class CEsmCreaturePage3 Event - void OnEndlabeleditItemlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage3::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
@@ -287,17 +234,12 @@ void CEsmCreaturePage3::OnEndlabeleditItemlist(NMHDR *pNMHDR, LRESULT *pResult) 
 	*pResult = 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage3::OnEndlabeleditItemlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmCreaturePage3::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 
@@ -312,17 +254,12 @@ BOOL CEsmCreaturePage3::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage3::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmCreaturePage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	CMWEditDoc *pSourceDoc = (CMWEditDoc *)lParam;
@@ -360,17 +297,12 @@ LRESULT CEsmCreaturePage3::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage3::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmCreaturePage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
@@ -407,17 +339,12 @@ LRESULT CEsmCreaturePage3::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage3::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Event - LRESULT OnRecordSort (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmCreaturePage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	UpdateUserData();
@@ -425,25 +352,16 @@ LRESULT CEsmCreaturePage3::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage3::OnRecordSort()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmCreaturePage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	m_ItemList.UpdateItem(pRecInfo);
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmCreaturePage3::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -451,7 +369,6 @@ int CEsmCreaturePage3::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmCreaturePage3 Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage3::SetControlData() {
 	CEsmCreature *pCreature;
 	CEsmSubNPCO *pItemName;
@@ -484,17 +401,12 @@ void CEsmCreaturePage3::SetControlData() {
 	UpdateTotalWeight();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage3::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmCreaturePage3 Method - void UpdateTotalWeight (void);
  *
  *=========================================================================*/
-
 void CEsmCreaturePage3::UpdateTotalWeight() {
 	esmrecinfo_t *pRecInfo;
 	CString Buffer;
@@ -513,10 +425,6 @@ void CEsmCreaturePage3::UpdateTotalWeight() {
 	m_WeightLabel.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage3::UpdateTotalWeight()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -526,7 +434,6 @@ void CEsmCreaturePage3::UpdateTotalWeight() {
  * count for sorting.
  *
  *=========================================================================*/
-
 void CEsmCreaturePage3::UpdateUserData() {
 	CString Buffer;
 	esmrecinfo_t *pRecInfo;
@@ -542,7 +449,3 @@ void CEsmCreaturePage3::UpdateUserData() {
 		pRecInfo->UserData = Count;
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmCreaturePage3::UpdateUserData()
- *=========================================================================*/

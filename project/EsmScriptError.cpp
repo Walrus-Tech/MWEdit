@@ -7,23 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "esmscripterror.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
 DEFINE_FILE("EsmScriptError.cpp");
-
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -31,7 +18,6 @@ DEFINE_FILE("EsmScriptError.cpp");
  * Class CEsmScriptError Constructor
  *
  *=========================================================================*/
-
 CEsmScriptError::CEsmScriptError() {
 	//DEFINE_FUNCTION("CEsmScriptError::CEsmScriptError()");
 	m_pFunction = NULL;
@@ -44,17 +30,12 @@ CEsmScriptError::CEsmScriptError() {
 	m_TokenID = 0;
 }
 
-/*===========================================================================
- *      End of Class CEsmScriptError Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmScriptError Method - void Destroy (void);
  *
  *=========================================================================*/
-
 void CEsmScriptError::Destroy() {
 	//DEFINE_FUNCTION("CEsmScriptError::Destroy()");
 	m_pFunction = NULL;
@@ -68,10 +49,6 @@ void CEsmScriptError::Destroy() {
 	m_Message.Empty();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptError::Destroy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -82,7 +59,6 @@ void CEsmScriptError::Destroy() {
  * buffer;
  *
  *=========================================================================*/
-
 const TCHAR *CEsmScriptError::GetFuncArgString() const {
 	static TCHAR s_Buffer[64];
 
@@ -98,7 +74,3 @@ const TCHAR *CEsmScriptError::GetFuncArgString() const {
 
 	return s_Buffer;
 }
-
-/*===========================================================================
- *      End of Class Method TCHAR* CEsmScriptError::GetFuncArgString()
- *=========================================================================*/

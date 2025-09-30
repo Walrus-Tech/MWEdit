@@ -18,7 +18,7 @@
 #include "dl_log.h"
 #include <string.h>
 
-#if defined(_WIN32)
+#if _WIN32
 	#include "tchar.h"
 #endif
 
@@ -56,7 +56,7 @@ TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateTCHAR);
  * Prototypes for test functions of module.  Only available in DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 	void Test_chradd();
 	void Test_chrcat();
 	void Test_chrdel();

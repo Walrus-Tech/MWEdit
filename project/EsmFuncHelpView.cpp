@@ -7,20 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmFuncHelpView.h"
 #include "windows/winutil.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -28,9 +21,6 @@
 
 DEFINE_FILE("EsmFuncHelpView.cpp");
 IMPLEMENT_DYNCREATE(CEsmFuncHelpView, CFormView);
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -47,9 +37,6 @@ BEGIN_MESSAGE_MAP(CEsmFuncHelpView, CFormView)
 	ON_BN_CLICKED(IDC_WIKILINK, OnWikilink)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-/*===========================================================================
- *      End of CEsmFuncHelpView Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -82,10 +69,6 @@ CEsmFuncHelpView::CEsmFuncHelpView() : CFormView(CEsmFuncHelpView::IDD) {
 	      CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, _T("Arial")); //*/
 }
 
-/*===========================================================================
- *      End of Class CEsmFuncHelpView Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -94,10 +77,6 @@ CEsmFuncHelpView::CEsmFuncHelpView() : CFormView(CEsmFuncHelpView::IDD) {
  *=========================================================================*/
 CEsmFuncHelpView::~CEsmFuncHelpView() {
 }
-
-/*===========================================================================
- *      End of Class CEsmFuncHelpView Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -129,10 +108,6 @@ void CEsmFuncHelpView::DisplayFunction(const int Index) {
 	m_CurrentFunc = Index;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::DisplayFunction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -155,17 +130,13 @@ void CEsmFuncHelpView::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmFuncHelpView Diagnostics
  *
  *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 
 void CEsmFuncHelpView::AssertValid() const {
 	CFormView::AssertValid();
@@ -176,9 +147,6 @@ void CEsmFuncHelpView::Dump(CDumpContext &dc) const {
 }
 
 #endif
-/*===========================================================================
- *      End of CEsmFuncHelpView Diagnostics
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -211,10 +179,6 @@ void CEsmFuncHelpView::FillFunctionList() {
 	m_CurrentFunc = -1;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::FillFunctionList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -224,10 +188,6 @@ void CEsmFuncHelpView::FillFunctionList() {
 CMWEditApp *CEsmFuncHelpView::GetApp() {
 	return (CMWEditApp *)AfxGetApp();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::GetApp()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -244,10 +204,6 @@ HBRUSH CEsmFuncHelpView::OnCtlColor(CDC *pDC, CWnd *pWnd, UINT nCtlColor) {
 
 	return hbr;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFuncHelpView::OnCtlColor()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -272,10 +228,6 @@ void CEsmFuncHelpView::OnInitialUpdate() {
 	m_FunctionList.SetCurSel(0);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFuncHelpView::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -285,10 +237,6 @@ void CEsmFuncHelpView::OnInitialUpdate() {
 void CEsmFuncHelpView::OnSelchangeFuncList() {
 	DisplayFunction(m_FunctionList.GetCurSel());
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFuncHelpView::OnSelchangeFuncList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -316,10 +264,6 @@ LRESULT CEsmFuncHelpView::OnViewError(WPARAM wParam, LPARAM lParam) {
 	DisplayFunction(ListIndex);
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmFuncHelpView::OnViewError()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -358,10 +302,6 @@ void CEsmFuncHelpView::OnSize(UINT nType, int CX, int CY) {
 	m_DetailLabel.SetWindowPos(NULL, 10, 140 + 10 + NewHeight, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFuncHelpView::OnSize()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -390,10 +330,6 @@ void CEsmFuncHelpView::OnWikilink() {
 	OpenWebPage(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmFuncHelpView::OnWikilink()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -405,10 +341,6 @@ void CEsmFuncHelpView::OnWikilink() {
 void CEsmFuncHelpView::SetDescText(CEsmScrFuncData *pFunction) {
 	m_DescText.SetWindowText(pFunction->GetDescription());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::SetDescText()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -433,10 +365,6 @@ void CEsmFuncHelpView::SetDetailText(CEsmScrFuncData *pFunction) {
 	m_DetailText.SetWindowText(Buffer);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::SetDetailText()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -450,10 +378,6 @@ void CEsmFuncHelpView::SetFuncTitle(CEsmScrFuncData *pFunction) {
 	m_FuncTitle.SetWindowText(pFunction->GetFuncForm());
 }
 
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::SetFuncTitle()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -466,7 +390,3 @@ void CEsmFuncHelpView::SetReturnText(CEsmScrFuncData *pFunction) {
 	CString Buffer;
 	m_ReturnText.SetWindowText(pFunction->GetReturnDesc());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmFuncHelpView::SetReturnText()
- *=========================================================================*/

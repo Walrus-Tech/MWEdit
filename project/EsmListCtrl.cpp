@@ -12,25 +12,17 @@
  *    the bug of the selection changing in a list when using the +/- keys.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "stdafx.h"
 
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	#include "MWEdit.h"
 #endif
 
 #include "EsmListCtrl.h"
-
 //#include "Resource.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -42,9 +34,6 @@ CImageList CEsmListCtrl::m_ImageList;
 
 IMPLEMENT_DYNCREATE(CEsmListCtrl, CListCtrl);
 DEFINE_FILE("EsmListCtrl.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -67,9 +56,6 @@ BEGIN_MESSAGE_MAP(CEsmListCtrl, CListCtrl)
 	ON_WM_KEYUP()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-/*===========================================================================
- *      End of CEsmListCtrl Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -92,10 +78,6 @@ int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
 	return Result;
 }
 
-/*===========================================================================
- *      End of Default List Sort Functions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -104,7 +86,7 @@ int CALLBACK l_ItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSor
  *=========================================================================*/
 CEsmListCtrl::CEsmListCtrl() {
 	m_pCurrentColData = NULL;
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	m_pEsmDlgHandler = NULL;
 #endif
 	m_LastSortSubItem = -1;
@@ -130,10 +112,6 @@ CEsmListCtrl::CEsmListCtrl() {
 	m_hBadDropCursor = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmListCtrl Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -149,10 +127,6 @@ CEsmListCtrl::~CEsmListCtrl() {
 	DestroyArrayPointer(pArray);
 	m_ppDragRecords = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmListCtrl Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -177,10 +151,6 @@ int CEsmListCtrl::AddItem(esmrecinfo_t *pRecInfo) {
 	return ListIndex;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::AddItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -189,7 +159,7 @@ int CEsmListCtrl::AddItem(esmrecinfo_t *pRecInfo) {
  * Used to copy records between the current list and the source list.
  *
  *=========================================================================*/
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 
 void CEsmListCtrl::DropItemOnList(CEsmListCtrl *pDropList) {
 	int Index;
@@ -216,9 +186,6 @@ void CEsmListCtrl::DropItemOnList(CEsmListCtrl *pDropList) {
 }
 
 #endif
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::DropItemOnList()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -230,7 +197,7 @@ void CEsmListCtrl::DropItemOnList(CEsmListCtrl *pDropList) {
  *
  *=========================================================================*/
 void CEsmListCtrl::EditRecord(const int SelIndex, const bool WantEditMsg) {
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	esmrecinfo_t *pRecInfo;
 
 	/* Call the user's event handler if required */
@@ -248,10 +215,6 @@ void CEsmListCtrl::EditRecord(const int SelIndex, const bool WantEditMsg) {
 #endif
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::EditRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -259,7 +222,7 @@ void CEsmListCtrl::EditRecord(const int SelIndex, const bool WantEditMsg) {
  *
  *=========================================================================*/
 void CEsmListCtrl::EditSelectedItem() {
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	POSITION ListPos;
 	int ListIndex;
 
@@ -280,10 +243,6 @@ void CEsmListCtrl::EditSelectedItem() {
 #endif
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::EditSelectedItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -296,10 +255,6 @@ int CEsmListCtrl::FindRecord(esmrecinfo_t *pRecInfo) {
 	FindInfo.lParam = (DWORD)pRecInfo;
 	return FindItem(&FindInfo);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::FindRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -321,10 +276,6 @@ esmrecinfo_t *CEsmListCtrl::GetCurrentRecord() {
 	return GetRecInfo(Index);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::GetCurrentRecord()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -342,10 +293,6 @@ esmrecinfo_t *CEsmListCtrl::GetRecInfo(const int Item) {
 
 	return (esmrecinfo_t *)GetItemData(Item);
 }
-
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::GetRecInfo()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -439,10 +386,6 @@ int CEsmListCtrl::GetImageIndex(CEsmRecord *pRecord) {
 	return -1;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::GetImageIndex()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -483,10 +426,6 @@ void CEsmListCtrl::InitObjectList(esmcoldata_t *pColData) {
 	m_LastSortField = -1;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::InitObjectList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -509,10 +448,6 @@ int CEsmListCtrl::InsertRecord(const int Index, esmrecinfo_t *pRecInfo) {
 	SetItem(ListIndex, pRecInfo, m_pCurrentColData);
 	return ListIndex;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::InsertRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -589,10 +524,6 @@ void CEsmListCtrl::OnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult) {
 	SetCapture();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnBeginDrag()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -609,10 +540,6 @@ void CEsmListCtrl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 
 	CListCtrl::OnChar(nChar, nRepCnt, nFlags);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnChar()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -680,10 +607,6 @@ void CEsmListCtrl::OnColumnclick(NMHDR *pNMHDR, LRESULT *pResult) {
 	m_pCurrentColData->LastReverseSort = m_SortReverse;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnColumnclick()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -723,10 +646,6 @@ void CEsmListCtrl::OnCustomdraw(NMHDR *pNMHDR, LRESULT *pResult) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnCustomdraw()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -734,7 +653,7 @@ void CEsmListCtrl::OnCustomdraw(NMHDR *pNMHDR, LRESULT *pResult) {
  *
  *=========================================================================*/
 void CEsmListCtrl::OnDblclk(NMHDR *pNMHDR, LRESULT *pResult) {
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 	esmrecinfo_t *pRecInfo;
 	LPNMLISTVIEW pListView = (LPNMLISTVIEW)pNMHDR;
 
@@ -767,17 +686,13 @@ void CEsmListCtrl::OnDblclk(NMHDR *pNMHDR, LRESULT *pResult) {
 #endif
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnDblclk()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmListCtrl Event - int OnDropRecord (pDocument, pRecInfo);
  *
  *=========================================================================*/
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 
 int CEsmListCtrl::OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo) {
 	//GetParent()->SendNotifyMessage(ESMLIST_NOTIFY_ONDROP, 0, (LPARAM) pRecInfo);
@@ -786,9 +701,6 @@ int CEsmListCtrl::OnDropRecord(CMWEditDoc *pDocument, esmrecinfo_t *pRecInfo) {
 }
 
 #endif
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnDropRecord()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -804,10 +716,6 @@ UINT CEsmListCtrl::OnGetDlgCode() {
 	return CListCtrl::OnGetDlgCode();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnGetDlgCode()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -819,10 +727,6 @@ void CEsmListCtrl::OnInitCtrl() {
 	SetImageList(&m_ImageList, LVSIL_SMALL);
 	m_hBadDropCursor = LoadCursor(NULL, IDC_NO);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnInitCtrl()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -856,10 +760,6 @@ void CEsmListCtrl::OnItemchanged(NMHDR *pNMHDR, LRESULT *pResult) {
 	m_LastSelItem = SelIndex;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnItemchanged()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -880,10 +780,6 @@ void CEsmListCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	CListCtrl::OnKeyDown(nChar, nRepCnt, nFlags);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnKeyDown()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -893,10 +789,6 @@ void CEsmListCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 void CEsmListCtrl::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	CListCtrl::OnKeyUp(nChar, nRepCnt, nFlags);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnKeyUp()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -931,7 +823,7 @@ void CEsmListCtrl::OnLButtonUp(UINT nFlags, CPoint Point) {
 	/* If window is CListCtrl, we perform the drop */
 	if (pDropWnd->IsKindOf(RUNTIME_CLASS(CEsmListCtrl))) {
 		m_pDropList = (CEsmListCtrl *)pDropWnd;
-#if !defined(NO_ESMLIST_EDIT)
+#ifndef NO_ESMLIST_EDIT
 		DropItemOnList(m_pDropList);
 #endif
 	}
@@ -942,10 +834,6 @@ void CEsmListCtrl::OnLButtonUp(UINT nFlags, CPoint Point) {
 	m_ppDragRecords = NULL;
 	m_NumDragRecords = 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnLButtonUp()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -997,10 +885,6 @@ void CEsmListCtrl::OnMouseMove(UINT nFlags, CPoint Point) {
 	m_pDragImage->DragShowNolock(true);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmListCtrl::OnMouseMove()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1031,10 +915,6 @@ void CEsmListCtrl::SetItem(const int ListIndex, esmrecinfo_t *pRecInfo, esmcolda
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::SetItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1061,10 +941,6 @@ void CEsmListCtrl::UpdateColData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::UpdateColData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1089,7 +965,3 @@ void CEsmListCtrl::UpdateItem(esmrecinfo_t *pRecInfo) {
 		UpdateItem(Index);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmListCtrl::UpdateItem()
- *=========================================================================*/

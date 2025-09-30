@@ -7,20 +7,10 @@
  * Contains common time related routines.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "dl_time.h"
 
 
-/*===========================================================================
- *
- * Begin Local Variable Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("dl_time.h");
-/*===========================================================================
- *      End of Local Variable Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -34,7 +24,7 @@ DEFINE_FILE("dl_time.h");
  *=========================================================================*/
 void GetHiClock(hiclock_t &Counter) {
 	/* Attempt to use the performance counter */
-#if defined(_WIN32)
+#if _WIN32
 	boolean Result;
 	/* Attempt to get the performance timer count */
 	Result = QueryPerformanceCounter(&Counter.TimerCount);
@@ -51,10 +41,6 @@ void GetHiClock(hiclock_t &Counter) {
 	Counter.CountType = HICLOCK_CLOCK;
 }
 
-/*===========================================================================
- *      End of Function GetHiClock()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -69,10 +55,6 @@ double GetHiClockTime() {
 	return ((double)CurrentClock) / GetHiClockFreq();
 }
 
-/*===========================================================================
- *      End of Function GetHiClockTime()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -83,7 +65,7 @@ double GetHiClockTime() {
  *=========================================================================*/
 double GetHiClockFreq() {
 	/* Attempt to use the performance counter */
-#if defined(_WIN32)
+#if _WIN32
 	LARGE_INTEGER Freq;
 	int Result;
 	Result = QueryPerformanceFrequency(&Freq);
@@ -95,10 +77,6 @@ double GetHiClockFreq() {
 	return (double)Freq.QuadPart;
 	/* Use the clock() frequency */
 #else
-	return (double) CLOCKS_PER_SEC;
+	return (double)CLOCKS_PER_SEC;
 #endif
 }
-
-/*===========================================================================
- *      End of Function GetHiClockFreq()
- *=========================================================================*/

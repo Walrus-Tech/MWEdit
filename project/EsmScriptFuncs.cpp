@@ -7,14 +7,10 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "esmscriptdefs.h"
 #include "file/GenFile.h"
 
 /* Shorter definitions for convienence */
-
 #define VN     0
 #define VB     ESMSCR_FUNC_BYTE
 #define VS     ESMSCR_FUNC_SHORT
@@ -62,7 +58,6 @@
 #define VNOT   ESMSCR_FUNC_NOOUTPUT
 
 // SE variables allowed, Strings, and References
-
 #define VSEV  (VSE|VAG|VSV|VVAR)
 #define VSES  (VL|VSTR)
 #define VSER  VL
@@ -8678,7 +8673,6 @@ esmscrfuncinfo_t *g_ScriptFuncAlpha[26] = {
  * Function - bool OutputFunction (File, FuncInfo);
  *
  *=========================================================================*/
-
 bool OutputFunction(CGenFile &File, esmscrfuncinfo_t &FuncInfo) {
 	int Index;
 	File.Printf(_T("Function = %s\n"), FuncInfo.Name);
@@ -8699,10 +8693,6 @@ bool OutputFunction(CGenFile &File, esmscrfuncinfo_t &FuncInfo) {
 	return true;
 }
 
-/*===========================================================================
- *      End of Function OutputFunction()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -8712,7 +8702,6 @@ bool OutputFunction(CGenFile &File, esmscrfuncinfo_t &FuncInfo) {
  * the function array to the given file. Returns false on any error.
  *
  *=========================================================================*/
-
 bool OutputFunctionDat(const TCHAR *pFilename) {
 	CGenFile File;
 	bool Result;
@@ -8736,7 +8725,3 @@ bool OutputFunctionDat(const TCHAR *pFilename) {
 
 	return true;
 }
-
-/*===========================================================================
- *      End of Function OutputFunctionDat()
- *=========================================================================*/

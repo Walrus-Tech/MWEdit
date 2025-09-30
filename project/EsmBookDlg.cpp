@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmBookDlg.h"
 #include "EsmDlgArray.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,26 +22,17 @@
 IMPLEMENT_DYNCREATE(CEsmBookDlg, CEsmRecDialog);
 DEFINE_FILE("EsmBookDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmBookDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmBookDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmBookDlg)
 	ON_BN_CLICKED(IDC_ENCHANTEDIT, OnEnchantedit)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmBookDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -58,16 +40,11 @@ END_MESSAGE_MAP()
  * Class CEsmBookDlg Constructor
  *
  *=========================================================================*/
-
 CEsmBookDlg::CEsmBookDlg() : CEsmRecDialog(CEsmBookDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmBookDlg)
 	//}}AFX_DATA_INIT
 	m_pBook = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmBookDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -75,7 +52,6 @@ CEsmBookDlg::CEsmBookDlg() : CEsmRecDialog(CEsmBookDlg::IDD) {
  * Class CEsmBookDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmBookDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -98,17 +74,12 @@ void CEsmBookDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBookDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBookDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmBookDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmBookDlg::GetControlData()");
 	CString Buffer;
@@ -177,17 +148,12 @@ void CEsmBookDlg::GetControlData() {
 	m_pBook->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBookDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBookDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmBookDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -222,17 +188,12 @@ bool CEsmBookDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBookDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBookDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmBookDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -256,17 +217,12 @@ void CEsmBookDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmBookDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBookDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmBookDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 
@@ -288,17 +244,12 @@ int CEsmBookDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmBookDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBookDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmBookDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pBook == NULL) {
@@ -338,17 +289,12 @@ void CEsmBookDlg::SetControlData() {
 	m_PersistCheck.SetCheck(m_pBook->IsPersist());
 }
 
-/*===========================================================================
- *      End of Class Method CEsmBookDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmBookDlg Event - void OnEnchantedit ();
  *
  *=========================================================================*/
-
 void CEsmBookDlg::OnEnchantedit() {
 	esmrecinfo_t *pRecInfo;
 	int Index;
@@ -361,7 +307,3 @@ void CEsmBookDlg::OnEnchantedit() {
 	pRecInfo = (esmrecinfo_t *)m_EnchantList.GetItemData(Index);
 	m_pParent->EditRecord(pRecInfo, false);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmBookDlg::OnEnchantedit()
- *=========================================================================*/

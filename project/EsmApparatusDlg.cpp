@@ -7,21 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmApparatusDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,25 +21,16 @@
 IMPLEMENT_DYNCREATE(CEsmApparatusDlg, CEsmRecDialog);
 DEFINE_FILE("EsmApparatusDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmApparatusDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmApparatusDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmApparatusDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmApparatusDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmApparatusDlg Constructor
  *
  *=========================================================================*/
-
 CEsmApparatusDlg::CEsmApparatusDlg() : CEsmRecDialog(CEsmApparatusDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmApparatusDlg)
 	//}}AFX_DATA_INIT
 	m_pApparatus = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmApparatusDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,9 +50,9 @@ CEsmApparatusDlg::CEsmApparatusDlg() : CEsmRecDialog(CEsmApparatusDlg::IDD) {
  * Class CEsmApparatusDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmApparatusDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmApparatusDlg)
 	DDX_Control(pDX, IDC_ICONPICTURE, m_IconPicture);
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
@@ -92,17 +69,12 @@ void CEsmApparatusDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmApparatusDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmApparatusDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmApparatusDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmApparatusDlg::GetControlData()");
 	appadata_t *pAppaData;
@@ -165,17 +137,12 @@ void CEsmApparatusDlg::GetControlData() {
 	m_pApparatus->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmApparatusDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmApparatusDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmApparatusDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -206,17 +173,12 @@ bool CEsmApparatusDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmApparatusDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmApparatusDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmApparatusDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -237,17 +199,12 @@ void CEsmApparatusDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmApparatusDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmApparatusDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmApparatusDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	/* Refill the script list if required */
 	if (pRecInfo->pRecord->IsType(MWESM_REC_SCRI)) {
@@ -266,17 +223,12 @@ int CEsmApparatusDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmApparatusDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmApparatusDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmApparatusDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pApparatus == NULL) {
@@ -310,7 +262,3 @@ void CEsmApparatusDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pApparatus->IsBlocked());
 	m_PersistCheck.SetCheck(m_pApparatus->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmApparatusDlg::SetControlData()
- *=========================================================================*/

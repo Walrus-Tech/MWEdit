@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmExtCellPage.h"
 #include "EsmRecDialog.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmExtCellPage, CPropertyPage);
 DEFINE_FILE("EsmExtCellPage.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmExtCellPage Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmExtCellPage, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmExtCellPage)
 	ON_BN_CLICKED(IDC_COLORBUTTON, OnColorbutton)
@@ -52,17 +38,12 @@ BEGIN_MESSAGE_MAP(CEsmExtCellPage, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmExtCellPage Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmExtCellPage Constructor
  *
  *=========================================================================*/
-
 CEsmExtCellPage::CEsmExtCellPage() : CPropertyPage(CEsmExtCellPage::IDD) {
 	//{{AFX_DATA_INIT(CEsmExtCellPage)
 	//}}AFX_DATA_INIT
@@ -70,23 +51,14 @@ CEsmExtCellPage::CEsmExtCellPage() : CPropertyPage(CEsmExtCellPage::IDD) {
 	m_pDlgParent = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmExtCellPage Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmExtCellPage Destructor
  *
  *=========================================================================*/
-
 CEsmExtCellPage::~CEsmExtCellPage() {
 }
-
-/*===========================================================================
- *      End of Class CEsmExtCellPage Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -94,7 +66,6 @@ CEsmExtCellPage::~CEsmExtCellPage() {
  * Class CEsmExtCellPage Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmExtCellPage::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -116,17 +87,12 @@ void CEsmExtCellPage::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmExtCellPage::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmExtCellPage Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmExtCellPage::GetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
@@ -173,26 +139,17 @@ void CEsmExtCellPage::GetControlData() {
 	pCell->GetCellData()->Flags = Flags;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmExtCellPage::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmExtCellPage Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmExtCellPage::GetDocument() {
 	DEFINE_FUNCTION("CEsmExtCellPage::GetDocument()");
 	ASSERT(m_pDlgParent != NULL);
 	return m_pDlgParent->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmExtCellPage::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -200,7 +157,6 @@ CMWEditDoc *CEsmExtCellPage::GetDocument() {
  * Class CEsmExtCellPage Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmExtCellPage::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	FillEsmRegionCombo(m_RegionList);
@@ -216,24 +172,15 @@ BOOL CEsmExtCellPage::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmExtCellPage::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmExtCellPage Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmExtCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmExtCellPage::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -241,7 +188,6 @@ int CEsmExtCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmExtCellPage Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmExtCellPage::SetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
@@ -273,17 +219,12 @@ void CEsmExtCellPage::SetControlData() {
 	m_SleepCheck.SetCheck((pCell->GetFlags() & MWESM_CELLFLAG_SLEEPILLEGAL) != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmExtCellPage::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Color Buttons
  *
  *=========================================================================*/
-
 void CEsmExtCellPage::OnColorbutton() {
 	int Result;
 	CString Buffer;
@@ -343,17 +284,12 @@ void CEsmExtCellPage::OnColorbutton() {
 	m_ColorBox.SetColor(Red, Green, Blue);
 }
 
-/*===========================================================================
- *      End of Color Buttons
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Color Change Events
  *
  *=========================================================================*/
-
 void CEsmExtCellPage::OnChangeColor() {
 	CString Buffer;
 	int Red;
@@ -401,17 +337,12 @@ void CEsmExtCellPage::OnChangeColor() {
 	m_ColorBox.RedrawWindow();
 }
 
-/*===========================================================================
- *      End of Color Change Events
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmExtCellPage Event - void OnMapcheck ();
  *
  *=========================================================================*/
-
 void CEsmExtCellPage::OnMapcheck() {
 	BOOL Result = m_MapCheck.GetCheck();
 	m_RedText.EnableWindow(Result);
@@ -419,7 +350,3 @@ void CEsmExtCellPage::OnMapcheck() {
 	m_GreenText.EnableWindow(Result);
 	m_ColorButton.EnableWindow(Result);
 }
-
-/*===========================================================================
- *      End of Class Event CEsmExtCellPage::OnMapcheck()
- *=========================================================================*/

@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "esmlevelitemdlg.h"
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmLevelItemDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 DEFINE_FILE("EsmLevelItemDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmLevelItemDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Function - int CALLBACK l_LevItemSortCallBack (lParam1, lParam2, lParamSort);
  *
  *=========================================================================*/
-
 int CALLBACK l_LevItemSortCallBack(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 	esmrecinfo_t *pRecInfo1 = (esmrecinfo_t *)lParam1;
 	esmrecinfo_t *pRecInfo2 = (esmrecinfo_t *)lParam2;
@@ -83,17 +69,12 @@ int CALLBACK l_LevItemSortCallBack1(LPARAM lParam1, LPARAM lParam2, LPARAM lPara
 	return l_ItemSortCallBack(lParam1, lParam2, pDialog->GetSortData());
 }
 
-/*===========================================================================
- *      End of Function CALLBACK l_LevItemSortCallBack()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Item List Display Data Array
  *
  *=========================================================================*/
-
 static esmcoldata_t l_ItemColData[] = {
 	{
 		_T("Level"),
@@ -139,17 +120,12 @@ static esmcoldata_t l_ItemColData[] = {
 	} /* Must be last record */
 };
 
-/*===========================================================================
- *      End of Item List Display Data Array
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmLevelItemDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmLevelItemDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmLevelItemDlg)
 	ON_MESSAGE(ESMLIST_NOTIFY_ONDROP, (LRESULT(AFX_MSG_CALL CWnd::*)(WPARAM, LPARAM))OnRecordDrop)
@@ -159,26 +135,17 @@ BEGIN_MESSAGE_MAP(CEsmLevelItemDlg, CEsmRecDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmLevelItemDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Constructor
  *
  *=========================================================================*/
-
 CEsmLevelItemDlg::CEsmLevelItemDlg() : CEsmRecDialog(CEsmLevelItemDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmLevelItemDlg)
 	//}}AFX_DATA_INIT
 	m_pLevelItem = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmLevelItemDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -186,7 +153,6 @@ CEsmLevelItemDlg::CEsmLevelItemDlg() : CEsmRecDialog(CEsmLevelItemDlg::IDD) {
  * Class CEsmLevelItemDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -201,17 +167,12 @@ void CEsmLevelItemDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmLevelItemDlg::GetControlData()");
 	CString Buffer;
@@ -249,17 +210,12 @@ void CEsmLevelItemDlg::GetControlData() {
 	GetItemData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Method - void GetItemData (void);
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::GetItemData() {
 	CEsmSubNameFix *pNameSubRec;
 	CEsmSubShort *pLevelSubRec;
@@ -290,10 +246,6 @@ void CEsmLevelItemDlg::GetItemData() {
 	m_pLevelItem->SetListSize(ItemCount);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::GetItemData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -303,7 +255,6 @@ void CEsmLevelItemDlg::GetItemData() {
  * 0 on any error.
  *
  *=========================================================================*/
-
 int CEsmLevelItemDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 	int ListIndex;
@@ -326,17 +277,12 @@ int CEsmLevelItemDlg::GetSortCount(esmrecinfo_t *pRecInfo) {
 	return Count;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::GetSortCount()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Event - void OnEndlabeleditlist (pNMHDR, pResult);
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::OnEndlabeleditlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	LV_DISPINFO *pDispInfo = (LV_DISPINFO *)pNMHDR;
 	CString Buffer;
@@ -360,17 +306,12 @@ void CEsmLevelItemDlg::OnEndlabeleditlist(NMHDR *pNMHDR, LRESULT *pResult) {
 	*pResult = 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLevelItemDlg::OnEndlabeleditlist()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmLevelItemDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -389,17 +330,12 @@ bool CEsmLevelItemDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -426,17 +362,12 @@ void CEsmLevelItemDlg::OnInitialUpdate() {
 	m_ItemList.SortItems(l_LevItemSortCallBack, ESM_FIELD_CUSTOM);
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLevelItemDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Event - LRESULT OnRecordDrop (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmLevelItemDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	static const TCHAR *s_ValidTypes[] = {
 		MWESM_REC_ALCH,
@@ -483,17 +414,12 @@ LRESULT CEsmLevelItemDlg::OnRecordDrop(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLevelItemDlg::OnRecordDrop()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Event - LRESULT OnRecordKey (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmLevelItemDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	CString Buffer;
 	int ListIndex;
@@ -534,17 +460,12 @@ LRESULT CEsmLevelItemDlg::OnRecordKey(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLevelItemDlg::OnRecordKey()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Event - LRESULT OnRecordSort (lParam, wParam);
  *
  *=========================================================================*/
-
 LRESULT CEsmLevelItemDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	esmlistsortdata_t *pSortData = (esmlistsortdata_t *)lParam;
 	m_SortData = pSortData->iField | (pSortData->Reverse << 16);
@@ -552,17 +473,12 @@ LRESULT CEsmLevelItemDlg::OnRecordSort(LPARAM lParam, LPARAM wParam) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLevelItemDlg::OnRecordSort()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmLevelItemDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	CString Buffer;
 	int Index;
@@ -576,17 +492,12 @@ int CEsmLevelItemDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmLevelItemDlg::OnUpdateItem()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pLevelItem == NULL) {
@@ -609,17 +520,12 @@ void CEsmLevelItemDlg::SetControlData() {
 	SetItemData();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmLevelItemDlg Method - void SetItemData (void);
  *
  *=========================================================================*/
-
 void CEsmLevelItemDlg::SetItemData() {
 	CEsmSubNameFix *pNameSubRec;
 	CEsmSubShort *pLevelSubRec;
@@ -643,7 +549,3 @@ void CEsmLevelItemDlg::SetItemData() {
 		pNameSubRec = (CEsmSubNameFix *)m_pLevelItem->FindNext(MWESM_SUBREC_INAM, ArrayIndex);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmLevelItemDlg::SetItemData()
- *=========================================================================*/

@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmJournalDlg.h"
@@ -18,13 +15,7 @@
 #include "windows/WinUtil.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -32,17 +23,12 @@
 
 DEFINE_FILE("EsmJournalDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmJournalDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmJournalDlg, CDialog)
 	//{{AFX_MSG_MAP(CEsmJournalDlg)
 	ON_BN_CLICKED(IDC_NAMECHECK, OnNamecheck)
@@ -51,17 +37,12 @@ BEGIN_MESSAGE_MAP(CEsmJournalDlg, CDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmJournalDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmJournalDlg Constructor
  *
  *=========================================================================*/
-
 CEsmJournalDlg::CEsmJournalDlg(CWnd* pParent) : CDialog(CEsmJournalDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CEsmJournalDlg)
 	//}}AFX_DATA_INIT
@@ -71,17 +52,12 @@ CEsmJournalDlg::CEsmJournalDlg(CWnd* pParent) : CDialog(CEsmJournalDlg::IDD, pPa
 	m_AlreadyIsNew = false;
 }
 
-/*===========================================================================
- *      End of Class CEsmJournalDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmJournalDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmJournalDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CEsmJournalDlg)
@@ -94,10 +70,6 @@ void CEsmJournalDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmJournalDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -106,7 +78,6 @@ void CEsmJournalDlg::DoDataExchange(CDataExchange *pDX) {
  * Description
  *
  *=========================================================================*/
-
 bool CEsmJournalDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDocument) {
 	int Result;
 	/* Initialize the class members */
@@ -129,17 +100,12 @@ bool CEsmJournalDlg::DoModal(CEsmInfo *pInfo, const bool IsNew, CMWEditDoc *pDoc
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmJournalDlg::DoModal()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmJournalDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmJournalDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmJournalDlg::GetControlData()");
 	CString Buffer;
@@ -184,24 +150,15 @@ void CEsmJournalDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmJournalDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmJournalDlg Event - void OnCancel ();
  *
  *=========================================================================*/
-
 void CEsmJournalDlg::OnCancel() {
 	CDialog::OnCancel();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmJournalDlg::OnCancel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -209,7 +166,6 @@ void CEsmJournalDlg::OnCancel() {
  * Class CEsmJournalDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmJournalDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	/* Initilaize the text controls */
@@ -219,25 +175,16 @@ BOOL CEsmJournalDlg::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmJournalDlg::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmJournalDlg Event - void OnOK ();
  *
  *=========================================================================*/
-
 void CEsmJournalDlg::OnOK() {
 	GetControlData();
 	CDialog::OnOK();
 }
-
-/*===========================================================================
- *      End of Class Event CEsmJournalDlg::OnOK()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -245,7 +192,6 @@ void CEsmJournalDlg::OnOK() {
  * Class CEsmJournalDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmJournalDlg::SetControlData() {
 	CString Buffer;
 	int ArrayIndex;
@@ -268,17 +214,12 @@ void CEsmJournalDlg::SetControlData() {
 	m_RestartCheck.SetCheck(m_pInfo->FindFirst(MWESM_SUBREC_QSTR, ArrayIndex) != NULL);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmJournalDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Checkbox Events
  *
  *=========================================================================*/
-
 void CEsmJournalDlg::OnNamecheck() {
 	m_FinishCheck.SetCheck(0);
 	m_RestartCheck.SetCheck(0);
@@ -293,7 +234,3 @@ void CEsmJournalDlg::OnRestartcheck() {
 	m_FinishCheck.SetCheck(0);
 	m_NameCheck.SetCheck(0);
 }
-
-/*===========================================================================
- *      End of Checkbox Events
- *=========================================================================*/

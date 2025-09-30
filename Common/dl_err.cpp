@@ -35,48 +35,26 @@
  *    database if it is available.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "dl_err.h"
 #include "dl_str.h"
+#include <errno.h>
 
-#if !defined(_WIN32_WCE)
-	#include <errno.h>
-	/* Include TC graphic error messages */
-	#if defined(_TCGRAPHERRORS)
-		#include <graphics.h>
-	#endif
+/* Include TC graphic error messages */
+#if _TCGRAPHERRORS
+	#include <graphics.h>
 #endif
 
 /* Include Windows error messages/functions */
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 	#include "windows.h"
 #endif
 
 
-
-
-/*===========================================================================
- *
- * Begin Local Variables
- *
- *=========================================================================*/
 DEFINE_FILE("DL_Err.h");
-/*===========================================================================
- *      End of Local Variables
- *=========================================================================*/
 
 
-/*===========================================================================
- *
- * Begin Global Variables
- *
- *=========================================================================*/
 CErrorDatabase ErrorDatabase;
 CErrorHandler ErrorHandler(ErrorDatabase);
-/*===========================================================================
- *      End of Global Variables
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -91,10 +69,6 @@ CErrorRecord::CErrorRecord() {
 	Level = ERRLEVEL_UNKNOWN;
 	pNext = NULL;
 }
-
-/*===========================================================================
- *      End of Class CErrorRecord Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -113,10 +87,6 @@ void CErrorRecord::Destroy() {
 	/* Assumed the linked list structure is maintained by the parent */
 	pNext = NULL;
 }
-
-/*===========================================================================
- *      End of Class Method CErrorRecord::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -141,10 +111,6 @@ const TCHAR *CErrorRecord::GetMsg(const errcode_t SubCode) const {
 	return CustomErrFunction(SubCode);
 }
 
-/*===========================================================================
- *      End of Class Method CErrorRecord::GetMsg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -157,10 +123,6 @@ CErrorDatabase::CErrorDatabase() {
 	NumErrors = 0;
 	InitDefaultErrors();
 }
-
-/*===========================================================================
- *      End of Class CErrorDatabase Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -175,10 +137,6 @@ void CErrorDatabase::Destroy() {
 	/* Delete the singly linked list */
 	ClearErrors();
 }
-
-/*===========================================================================
- *      End of Class Method CErrorDatabase::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -207,10 +165,6 @@ void CErrorDatabase::Add(const errcode_t Code, const TCHAR *pMessage, const errl
 	NumErrors++;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorDatabase::Add()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -236,10 +190,6 @@ void CErrorDatabase::AddCustomError(const errcode_t Code, PERR_CUSTOM_FUNCTION E
 	NumErrors++;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorDatabase::AddCustomError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -262,10 +212,6 @@ void CErrorDatabase::ClearErrors() {
 	AddedDefaultErrors = FALSE;
 	NumErrors = 0;
 }
-
-/*===========================================================================
- *      End of Class Method CErrorDatabase::ClearErrors()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -293,10 +239,6 @@ CErrorRecord *CErrorDatabase::Find(const errcode_t Code) {
 	                      Code);
 	return NULL;
 }
-
-/*===========================================================================
- *      End of Class Method CErrorDatabase::Find()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -330,19 +272,15 @@ void CErrorDatabase::InitDefaultErrors() {
 	/* Add the system error messages */
 	AddCustomError(ERR_SYSTEM, SystemErrorFunction);
 	/* Add the graphic error messages under DOS if required */
-#if defined(_TCGRAPHERRORS)
+#if _TCGRAPHERRORS
 	AddCustomError(ERR_TCGRAPH, TCGraphErrorFunction);
 #endif
 	/* Add the windows error messages under Windows if required */
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 	AddCustomError(ERR_WINDOWS, WindowsErrorFunction);
 #endif
 	AddedDefaultErrors = TRUE;
 }
-
-/*===========================================================================
- *      End of Class Method CErrorDatabase::InitDefaultErrors()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -356,10 +294,6 @@ CErrorIncident::CErrorIncident() {
 	Code = ERR_NONE;
 	SubCode = ERR_NONE;
 }
-
-/*===========================================================================
- *      End of Class CErrorIncident Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -377,10 +311,6 @@ void CErrorIncident::Destroy() {
 	/* Assumes that the linked list structure is maintained by the parent */
 	pNext = NULL;
 }
-
-/*===========================================================================
- *      End of Class Method CErrorIncident::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -405,10 +335,6 @@ void CErrorIncident::SetMsg(const TCHAR *pString, va_list Args) {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CErrorIncident::SetMsg()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -422,10 +348,6 @@ CErrorHandler::CErrorHandler(CErrorDatabase &ErrDB) : refErrorDatabase(ErrDB) {
 	pHookFunc = NULL;
 	m_LastErrorCount = 0;
 }
-
-/*===========================================================================
- *      End of Class CErrorHandler Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -443,10 +365,6 @@ void CErrorHandler::Destroy() {
 	pHookFunc = NULL;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::Destroy()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -463,17 +381,13 @@ void CErrorHandler::AddError(const errcode_t Code, const TCHAR *pString, ...) {
 	//DEFINE_FUNCTION("CErrorHandler::AddError(errcode_t, TCHAR*, ...)");
 	va_list Args;
 	va_start(Args, pString);
-#if defined(_WIN32)
+#if _WIN32
 	AddErrorV(Code, GetLastError(), pString, Args);
 #else
 	AddErrorV(Code, ERR_NONE, pString, Args);
 #endif
 	va_end(Args);
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::AddError()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -497,10 +411,6 @@ void CErrorHandler::AddError(const errcode_t Code,
 	AddErrorV(Code, SubCode, pString, Args);
 	va_end(Args);
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::AddError()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -552,10 +462,6 @@ void CErrorHandler::AddErrorV(const errcode_t Code,
 	OutputLastErrorToLog();
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::AddErrorV()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -579,10 +485,6 @@ void CErrorHandler::ClearErrors() {
 	m_LastErrorCount = 0;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::ClearErrors()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -600,10 +502,6 @@ void CErrorHandler::Exit(const TCHAR *pTitle) {
 	exit(EXIT_FAILURE);
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::Exit()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -620,10 +518,6 @@ void CErrorHandler::_Exit(const TCHAR *pTitle) {
 	/* End program immediately without calling any cleanup code */
 	_exit(EXIT_FAILURE);
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::_Exit()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -654,10 +548,6 @@ CErrorIncident *CErrorHandler::GetError(const int Index) {
 	return pListPtr;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::GetError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -685,10 +575,6 @@ const TCHAR *CErrorHandler::GetLastErrorMsg() {
 	/* Return the message from the error database */
 	return GetLastErrorDBMsg();
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::GetLastErrorMsg()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -722,10 +608,6 @@ const TCHAR *CErrorHandler::GetLastErrorDBMsg() {
 	                 pIncidentHead->GetSubCode());
 	return _T("No message available for the error!");
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::GetLastDBErrorMsg()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -761,10 +643,6 @@ void CErrorHandler::Notify(const TCHAR *pTitle) {
 		       pIncidentHead->GetMsg());
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::Notify()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -803,10 +681,6 @@ void CErrorHandler::Notify(const TCHAR *pMsg, const TCHAR *pTitle) {
 		       pIncidentHead->GetMsg());
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::Notify()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -864,10 +738,6 @@ void CErrorHandler::NotifyList(const TCHAR *pMsg, const TCHAR *pTitle) {
 	Printf(pTitle, ErrorBuffer, NULL);
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::NotifyList()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -922,10 +792,6 @@ void CErrorHandler::NotifyListCode(const int ErrCode, const TCHAR *pMsg, const T
 		Printf(pTitle, ErrorBuffer, NULL);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::NotifyListCode()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -982,10 +848,6 @@ void CErrorHandler::NotifyListType(const int ErrType, const TCHAR *pMsg, const T
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::NotifyListType()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1014,10 +876,6 @@ void CErrorHandler::OutputLastErrorToLog() {
 	SystemLog.Printf(_T("\t\t User Message: %s"), pIncidentHead->GetMsg());
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::OutputLastErrorToLog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1045,10 +903,6 @@ CErrorIncident *CErrorHandler::PopError() {
 	return pLastError;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::PopError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1071,10 +925,6 @@ CErrorIncident *CErrorHandler::PeekError() {
 	return pIncidentHead;
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::PeekError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1096,10 +946,6 @@ void CErrorHandler::Printf(const TCHAR *pTitle, const TCHAR *pString, ...) {
 	Printf(pTitle, pString, Args);
 	va_end(Args);
 }
-
-/*===========================================================================
- *      End of Class Method CErrorHandler::Printf()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1132,7 +978,7 @@ void CErrorHandler::Printf(const TCHAR *pTitle, const TCHAR *pString, va_list Ar
 	}
 
 	/*---------- Begin Win32 Specific Code ----------------------------*/
-#if (defined(_WIN32) || defined(__BCPLUSPLUS__)) && !defined(_CONSOLE)
+#if _WIN32 && !_CONSOLE
 	/* Output the variable argument list to the temporary string */
 	vsnprintf(MsgBuffer, MAX_ERROR_MESSAGESIZE, pString, Args);
 	/* Display a standard error message box */
@@ -1148,10 +994,6 @@ void CErrorHandler::Printf(const TCHAR *pTitle, const TCHAR *pString, va_list Ar
 #endif
 }
 
-/*===========================================================================
- *      End of Class Method CErrorHandler::Printf()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1164,9 +1006,6 @@ void CErrorHandler::Printf(const TCHAR *pTitle, const TCHAR *pString, va_list Ar
 const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	DEFINE_FUNCTION("SystemErrorFunction()");
 	TCHAR *pErrMessage;
-#if defined(_WIN32_WCE)
-	return _T("No system errors in WinCE!");
-#else
 
 	/* Check to ensure that it is a valid system error code */
 	if (Code < 0 || ((int)Code) >= _sys_nerr) {
@@ -1174,7 +1013,7 @@ const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	}
 
 	/* Retrieve the error message from the system, ensuring its valid */
-#if defined(_UNICODE)
+#if _UNICODE
 	static TCHAR l_BufferMsg[256];
 	/* Convert ASCII message to unicode */
 	mbstowcs(l_BufferMsg, sys_errlist[(int)Code], 255);
@@ -1185,15 +1024,10 @@ const TCHAR *SystemErrorFunction(const errcode_t Code) {
 	ASSERT(pErrMessage != NULL);
 	//SystemLog.Printf ("SystemErrorFunction(%s)", pErrMessage);
 	return pErrMessage;
-#endif
 }
 
-/*===========================================================================
- *      End of Function SystemErrorFunction()
- *=========================================================================*/
 
-
-#if defined(_TCGRAPHERRORS)
+#if _TCGRAPHERRORS
 /*===========================================================================
  *
  * Function - TCHAR* TCGraphErrorFunction (Code);
@@ -1215,14 +1049,10 @@ const TCHAR *TCGraphErrorFunction(const errcode_t Code) {
 
 	return pErrMessage;
 }
-
-/*===========================================================================
- *      End of Function TCGraphErrorFunction()
- *=========================================================================*/
 #endif
 
 
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 /*===========================================================================
 *
  * Function - TCHAR* WindowsErrorFunction (Code);
@@ -1236,9 +1066,6 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
 	static TCHAR ErrMessage[512] = _T("");
 	DWORD Result;
 	/* Format message string */
-#if defined(__BCPLUSPLUS__)
-	Result = sprintf(ErrMessage, _T("Windows 16-bit error code = %ld (0x%04X)"), Code, Code);
-#else
 	Result = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 	                       NULL,
 	                       (DWORD)Code,
@@ -1246,7 +1073,6 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
 	                       &ErrMessage[0],
 	                       511,
 	                       NULL);
-#endif
 
 	/* Ensure the message is valid */
 	if (Result == 0) {
@@ -1255,10 +1081,6 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
 
 	return ErrMessage;
 }
-
-/*===========================================================================
- *      End of Function WindowsErrorFunction()
- *=========================================================================*/
 #endif
 
 
@@ -1269,14 +1091,9 @@ const TCHAR *WindowsErrorFunction(const errcode_t Code) {
  * Debug builds only test routines for this module.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
 
-/* Turn off several warnings associated with the test code */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn -rch
-	#pragma warn -ccc
-#endif
 
+#if _DEBUG
 /*===========================================================================
  *
  * Function - TCHAR* Test_CustomErrorFunc (const errcode_t Code);
@@ -1305,10 +1122,6 @@ const TCHAR *Test_CustomErrorFunc(const errcode_t Code) {
 			return _T("Unknown Test Error Code");
 	}
 }
-
-/*===========================================================================
- *      End of Function Test_CustomErrorFunc()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1351,10 +1164,6 @@ void Test_AddError() {
 	SystemLog.Printf(_T("TEST_ERR2a = '%s'"), pFindRecord->GetMsg());
 }
 
-/*===========================================================================
- *      End of Function Test_AddError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1381,10 +1190,6 @@ void Test_AddCustomError() {
 	SystemLog.Printf(_T("CustomError(TEST_ERR1) = '%s'"), pFindRecord->GetMsg(TEST_ERR1));
 	SystemLog.Printf(_T("CustomError(TEST_ERR4) = '%s'"), pFindRecord->GetMsg(TEST_ERR4));
 }
-
-/*===========================================================================
- *      End of Function Test_AddCustomError()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1442,10 +1247,6 @@ void Test_DefaultErrors() {
 	ASSERT(ErrorDatabase.GetNumErrors() == ErrorCounter);
 }
 
-/*===========================================================================
- *      End of Function Test_DefaultErrors()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1491,10 +1292,6 @@ void Test_GetLastErrorMsg() {
 	ErrorHandler.AddError(123, (TCHAR*)NULL);
 	SystemLog.Printf(_T("\t***Bad Code, No Msg = %s"), ErrorHandler.GetLastErrorMsg());
 }
-
-/*===========================================================================
- *      End of Function Test_GetLastErrorMsg()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1546,10 +1343,6 @@ void Test_HandlerAddError() {
 	ErrorHandler.AddError(ERR_MEM, ERR_MEM, NULL);
 }
 
-/*===========================================================================
- *      End of Function Test_HandlerAddError()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1575,10 +1368,6 @@ void Test_HandlerNotify() {
 		DestroyPointer(pErrorIncident);
 	}
 }
-
-/*===========================================================================
- *      End of Function Test_HandlerNotify()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1615,10 +1404,6 @@ void Test_SystemErrors() {
 	SystemLog.Printf(_T("System Error( 105) = '%s'"), pSystemError->GetMsg(105));
 	SystemLog.Printf(_T("System Error(1111) = '%s'"), pSystemError->GetMsg(1111));
 }
-
-/*===========================================================================
- *      End of Function Test_SystemErrors()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -1675,10 +1460,6 @@ void Test_Allocation() {
 	SystemLog.Printf(stdout, _T("================ End of Test_Allocation() ============"));
 }
 
-/*===========================================================================
- *      End of Function Test_Allocation()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -1719,18 +1500,4 @@ void Test_DLErr() {
 	SystemLog.Printf (stdout, _T("================ End of Test_DLErr() ==================="));
 	//Test_Allocation();
 }
-
-/*===========================================================================
- *      End of Function Test_DLErr()
- *=========================================================================*/
-
-/* Restore compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn .rch
-	#pragma warn .ccc
 #endif
-
-#endif
-/*===========================================================================
- *      End of Module Test Routines
- *=========================================================================*/

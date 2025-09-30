@@ -7,21 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmSkillDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,25 +21,16 @@
 DEFINE_FILE("EsmSkillDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmSkillDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmSkillDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmSkillDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmSkillDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmSkillDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,7 +38,6 @@ END_MESSAGE_MAP()
  * Class CEsmSkillDlg Constructor
  *
  *=========================================================================*/
-
 CEsmSkillDlg::CEsmSkillDlg() : CEsmRecDialog(CEsmSkillDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmSkillDlg)
 	//}}AFX_DATA_INIT
@@ -64,17 +45,12 @@ CEsmSkillDlg::CEsmSkillDlg() : CEsmRecDialog(CEsmSkillDlg::IDD) {
 	m_HasIDText = false;
 }
 
-/*===========================================================================
- *      End of Class CEsmSkillDlg Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSkillDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmSkillDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
 
@@ -97,17 +73,12 @@ void CEsmSkillDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSkillDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSkillDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmSkillDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmSkillDlg::GetControlData()");
 	skilldata_t *pSkillData;
@@ -161,17 +132,12 @@ void CEsmSkillDlg::GetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSkillDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSkillDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmSkillDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -186,17 +152,12 @@ bool CEsmSkillDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmSkillDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSkillDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmSkillDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -220,17 +181,12 @@ void CEsmSkillDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmSkillDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmSkillDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmSkillDlg::SetControlData() {
 	skilldata_t *pSkillData;
 	CString Buffer;
@@ -305,7 +261,3 @@ void CEsmSkillDlg::SetControlData() {
 		m_ActionText4.SetWindowText(pAction);
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CEsmSkillDlg::SetControlData()
- *=========================================================================*/

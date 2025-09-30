@@ -376,7 +376,7 @@ extern CErrorDatabase ErrorDatabase;
 const TCHAR *SystemErrorFunction(const errcode_t Code);
 const TCHAR *TCGraphErrorFunction(const errcode_t Code);
 
-#if defined(_WIN32) || defined(__BCPLUSPLUS__)
+#if _WIN32
 	const TCHAR *WindowsErrorFunction(const errcode_t Code);
 #endif
 

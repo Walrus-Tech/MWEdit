@@ -7,9 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "ScriptErrorDlg.h"
@@ -17,13 +14,7 @@
 #include "EsmScrFuncData.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 
 DEFINE_FILE("ScriptErrorDlg.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CScriptErrorDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CScriptErrorDlg, CDialog)
 	//{{AFX_MSG_MAP(CScriptErrorDlg)
 	ON_BN_CLICKED(IDC_FUNC_BUTTON, OnFuncButton)
@@ -49,26 +35,17 @@ BEGIN_MESSAGE_MAP(CScriptErrorDlg, CDialog)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CScriptErrorDlg Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CScriptErrorDlg Constructor
  *
  *=========================================================================*/
-
 CScriptErrorDlg::CScriptErrorDlg(CWnd *pParent) : CDialog(CScriptErrorDlg::IDD, pParent) {
 	//{{AFX_DATA_INIT(CScriptErrorDlg)
 	//}}AFX_DATA_INIT
 	m_pError = NULL;
 }
-
-/*===========================================================================
- *      End of Class CScriptErrorDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -78,7 +55,6 @@ CScriptErrorDlg::CScriptErrorDlg(CWnd *pParent) : CDialog(CScriptErrorDlg::IDD, 
  * Clears the contents of the controls.
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::ClearControlData() {
 	m_MsgText.SetWindowText(_T(""));
 	m_CodeText.SetWindowText(_T(""));
@@ -88,10 +64,6 @@ void CScriptErrorDlg::ClearControlData() {
 	ClearFunctionData();
 }
 
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::ClearControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -100,7 +72,6 @@ void CScriptErrorDlg::ClearControlData() {
  * Clears the contents of the function controls.
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::ClearFunctionData() {
 	m_FuncDescText.SetWindowText(_T(""));
 	m_FuncFormText.SetWindowText(_T(""));
@@ -109,17 +80,12 @@ void CScriptErrorDlg::ClearFunctionData() {
 	m_FuncButton.SetWindowText(_T(""));
 }
 
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::ClearFunctionData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CScriptErrorDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::DoDataExchange(CDataExchange *pDX) {
 	CDialog::DoDataExchange(pDX);
 
@@ -139,10 +105,6 @@ void CScriptErrorDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -151,7 +113,6 @@ void CScriptErrorDlg::DoDataExchange(CDataExchange *pDX) {
  * Enables/disables the form controls.
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::EnableControls(const bool Enable) {
 	m_MsgText.EnableWindow(Enable);
 	m_CodeText.EnableWindow(Enable);
@@ -161,10 +122,6 @@ void CScriptErrorDlg::EnableControls(const bool Enable) {
 	EnableFuncCtrls(Enable);
 }
 
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::EnableControls()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -173,7 +130,6 @@ void CScriptErrorDlg::EnableControls(const bool Enable) {
  * Enable/disable the function controls.
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::EnableFuncCtrls(const bool Enable) {
 	m_FuncDescText.EnableWindow(Enable);
 	m_FuncFormText.EnableWindow(Enable);
@@ -182,24 +138,15 @@ void CScriptErrorDlg::EnableFuncCtrls(const bool Enable) {
 	m_FuncButton.EnableWindow(Enable);
 }
 
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::EnableFuncCtrls()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CScriptErrorDlg Event - void OnFuncButton ();
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::OnFuncButton() {
 	EndDialog(SCRERRDLG_RESULT_MOREHELP);
 }
-
-/*===========================================================================
- *      End of Class Event CScriptErrorDlg::OnFuncButton()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -207,14 +154,9 @@ void CScriptErrorDlg::OnFuncButton() {
  * Class CScriptErrorDlg Event - void OnFuncGoto ();
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::OnFuncGoto() {
 	EndDialog(SCRERRDLG_RESULT_GOTO);
 }
-
-/*===========================================================================
- *      End of Class Event CScriptErrorDlg::OnFuncGoto()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -222,16 +164,11 @@ void CScriptErrorDlg::OnFuncGoto() {
  * Class CScriptErrorDlg Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CScriptErrorDlg::OnInitDialog() {
 	CDialog::OnInitDialog();
 	SetControlData();
 	return TRUE;
 }
-
-/*===========================================================================
- *      End of Class Event CScriptErrorDlg::OnInitDialog()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -241,7 +178,6 @@ BOOL CScriptErrorDlg::OnInitDialog() {
  * Sets the control data from the current error object.
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::SetControlData() {
 	CString Buffer;
 
@@ -281,17 +217,12 @@ void CScriptErrorDlg::SetControlData() {
 	}
 }
 
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CScriptErrorDlg Method - void SetFunctionData (void);
  *
  *=========================================================================*/
-
 void CScriptErrorDlg::SetFunctionData() {
 	//DEFINE_FUNCTION("CScriptErrorDlg::SetFunctionData()");
 	CString Buffer;
@@ -334,7 +265,3 @@ void CScriptErrorDlg::SetFunctionData() {
 		m_FuncDescText.SetWindowText(_T("Not Available"));
 	}
 }
-
-/*===========================================================================
- *      End of Class Method CScriptErrorDlg::SetFunctionData()
- *=========================================================================*/

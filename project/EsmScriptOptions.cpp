@@ -7,23 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "Stdafx.h"
 #include "esmscriptoptions.h"
 #include "EsmOptions.h"
 #include "windows/WinUtil.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("EsmScriptOptions.cpp");
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -37,10 +27,6 @@ CEsmScriptOptions::CEsmScriptOptions() {
 	m_NoToolTips = false;
 }
 
-/*===========================================================================
- *      End of Class CEsmScriptOptions Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -50,10 +36,6 @@ CEsmScriptOptions::CEsmScriptOptions() {
 void CEsmScriptOptions::Destroy() {
 	//DEFINE_FUNCTION("CEsmScriptOptions::Destroy()");
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::Destroy()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -87,10 +69,6 @@ void CEsmScriptOptions::CreateDefaultWhiteFormat() {
 	m_Formats[ESMSCRIPT_FORMAT_COMMENT].crBackColor = RGB(255, 128, 128);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::CreateDefaultWhiteFormat()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -121,10 +99,6 @@ void CEsmScriptOptions::CreateDefaultBlueFormat() {
 	m_Formats[ESMSCRIPT_FORMAT_ERROR].crBackColor = RGB(255, 0, 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::CreateDefaultBlueFormat()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -140,10 +114,6 @@ void CEsmScriptOptions::InitCharFormat(CHARFORMAT2 &Format, COLORREF Color) {
 	Format.crTextColor = Color;
 	Format.dwEffects = 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::InitCharFormat()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -169,10 +139,6 @@ bool CEsmScriptOptions::ReadFromRegistry() {
 	Result &= ReadRegFont();
 	return Result;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::ReadFromRegistry()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -206,10 +172,6 @@ bool CEsmScriptOptions::ReadRegCharFormat() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::ReadRegCharFormat()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -238,10 +200,6 @@ bool CEsmScriptOptions::ReadRegFont() {
 	return true;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::ReadRegFont()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -268,10 +226,6 @@ bool CEsmScriptOptions::WriteToRegistry() {
 	return Result & (iResult != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::WriteToRegistry()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -297,10 +251,6 @@ bool CEsmScriptOptions::WriteRegCharFormat() {
 
 	return Result != 0;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::WriteRegCharFormat()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -337,10 +287,6 @@ bool CEsmScriptOptions::WriteRegFont() {
 	return iResult != 0;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions::WriteRegFont()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -361,7 +307,3 @@ const CEsmScriptOptions &CEsmScriptOptions::operator= (CEsmScriptOptions &Option
 	memcpy(&m_Formats[0], &Options.m_Formats[0], sizeof(m_Formats[0]) * ESMSCRIPT_NUMFORMATS);
 	return *this;
 }
-
-/*===========================================================================
- *      End of Class Method CEsmScriptOptions& CEsmScriptOptions::operator=()
- *=========================================================================*/

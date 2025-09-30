@@ -7,21 +7,12 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmStaticDlg.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -30,25 +21,16 @@
 DEFINE_FILE("EsmStaticDlg.cpp");
 IMPLEMENT_DYNCREATE(CEsmStaticDlg, CEsmRecDialog);
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmStaticDlg Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmStaticDlg, CEsmRecDialog)
 	//{{AFX_MSG_MAP(CEsmStaticDlg)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
-
-/*===========================================================================
- *      End of CEsmStaticDlg Message Map
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -56,16 +38,11 @@ END_MESSAGE_MAP()
  * Class CEsmStaticDlg Constructor
  *
  *=========================================================================*/
-
 CEsmStaticDlg::CEsmStaticDlg() : CEsmRecDialog(CEsmStaticDlg::IDD) {
 	//{{AFX_DATA_INIT(CEsmStaticDlg)
 	//}}AFX_DATA_INIT
 	m_pStatic = NULL;
 }
-
-/*===========================================================================
- *      End of Class CEsmStaticDlg Constructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -73,9 +50,9 @@ CEsmStaticDlg::CEsmStaticDlg() : CEsmRecDialog(CEsmStaticDlg::IDD) {
  * Class CEsmStaticDlg Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmStaticDlg::DoDataExchange(CDataExchange *pDX) {
 	CFormView::DoDataExchange(pDX);
+
 	//{{AFX_DATA_MAP(CEsmStaticDlg)
 	DDX_Control(pDX, IDC_PERSISTCHECK, m_PersistCheck);
 	DDX_Control(pDX, IDC_BLOCKEDCHECK, m_BlockedCheck);
@@ -84,17 +61,12 @@ void CEsmStaticDlg::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmStaticDlg::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStaticDlg Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmStaticDlg::GetControlData() {
 	DEFINE_FUNCTION("CEsmStaticDlg::GetControlData()");
 	CString Buffer;
@@ -118,17 +90,12 @@ void CEsmStaticDlg::GetControlData() {
 	m_pStatic->SetBlocked(m_BlockedCheck.GetCheck() != 0);
 }
 
-/*===========================================================================
- *      End of Class Method CEsmStaticDlg::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStaticDlg Method - bool IsModified (void);
  *
  *=========================================================================*/
-
 bool CEsmStaticDlg::IsModified() {
 	if (m_Modified) {
 		return true;
@@ -143,17 +110,12 @@ bool CEsmStaticDlg::IsModified() {
 	return m_Modified;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmStaticDlg::IsModified()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStaticDlg Event - void OnInitialUpdate ();
  *
  *=========================================================================*/
-
 void CEsmStaticDlg::OnInitialUpdate() {
 	CEsmRecDialog::OnInitialUpdate();
 	UpdateTitle(NULL);
@@ -166,24 +128,15 @@ void CEsmStaticDlg::OnInitialUpdate() {
 	SetControlData();
 }
 
-/*===========================================================================
- *      End of Class Event CEsmStaticDlg::OnInitialUpdate()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmStaticDlg Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmStaticDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmStaticDlg::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -191,7 +144,6 @@ int CEsmStaticDlg::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmStaticDlg Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmStaticDlg::SetControlData() {
 	/* Ignore if the current item is not valid */
 	if (m_pStatic == NULL) {
@@ -209,7 +161,3 @@ void CEsmStaticDlg::SetControlData() {
 	m_BlockedCheck.SetCheck(m_pStatic->IsBlocked());
 	m_PersistCheck.SetCheck(m_pStatic->IsPersist());
 }
-
-/*===========================================================================
- *      End of Class Method CEsmStaticDlg::SetControlData()
- *=========================================================================*/

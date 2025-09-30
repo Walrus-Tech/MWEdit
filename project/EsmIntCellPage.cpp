@@ -7,22 +7,13 @@
  * Description
  *
  *=========================================================================*/
-
-/* Include Files */
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "EsmIntCellPage.h"
 #include "EsmRecDialog.h"
 
 
-/*===========================================================================
- *
- * Begin Local Definitions
- *
- *=========================================================================*/
-
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -31,17 +22,12 @@
 IMPLEMENT_DYNCREATE(CEsmIntCellPage, CPropertyPage);
 DEFINE_FILE("EsmIntCellPage.cpp");
 
-/*===========================================================================
- *      End of Local Definitions
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin CEsmIntCellPage Message Map
  *
  *=========================================================================*/
-
 BEGIN_MESSAGE_MAP(CEsmIntCellPage, CPropertyPage)
 	//{{AFX_MSG_MAP(CEsmIntCellPage)
 	ON_BN_CLICKED(IDC_COLORBUTTONA, OnColorbuttona)
@@ -66,17 +52,12 @@ BEGIN_MESSAGE_MAP(CEsmIntCellPage, CPropertyPage)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
-/*===========================================================================
- *      End of CEsmIntCellPage Message Map
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIntCellPage Constructor
  *
  *=========================================================================*/
-
 CEsmIntCellPage::CEsmIntCellPage() : CPropertyPage(CEsmIntCellPage::IDD) {
 	//{{AFX_DATA_INIT(CEsmIntCellPage)
 	//}}AFX_DATA_INIT
@@ -84,23 +65,14 @@ CEsmIntCellPage::CEsmIntCellPage() : CPropertyPage(CEsmIntCellPage::IDD) {
 	m_pDlgParent = NULL;
 }
 
-/*===========================================================================
- *      End of Class CEsmIntCellPage Constructor
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIntCellPage Destructor
  *
  *=========================================================================*/
-
 CEsmIntCellPage::~CEsmIntCellPage() {
 }
-
-/*===========================================================================
- *      End of Class CEsmIntCellPage Destructor
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -108,7 +80,6 @@ CEsmIntCellPage::~CEsmIntCellPage() {
  * Class CEsmIntCellPage Method - void DoDataExchange (pDX);
  *
  *=========================================================================*/
-
 void CEsmIntCellPage::DoDataExchange(CDataExchange *pDX) {
 	CPropertyPage::DoDataExchange(pDX);
 
@@ -151,17 +122,12 @@ void CEsmIntCellPage::DoDataExchange(CDataExchange *pDX) {
 	//}}AFX_DATA_MAP
 }
 
-/*===========================================================================
- *      End of Class Method CEsmIntCellPage::DoDataExchange()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIntCellPage Method - void GetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmIntCellPage::GetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
@@ -226,26 +192,17 @@ void CEsmIntCellPage::GetControlData() {
 	pCell->GetCellData()->Flags = Flags;
 }
 
-/*===========================================================================
- *      End of Class Method CEsmIntCellPage::GetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIntCellPage Method - CMWEditDoc* GetDocument (void);
  *
  *=========================================================================*/
-
 CMWEditDoc *CEsmIntCellPage::GetDocument() {
 	DEFINE_FUNCTION("CEsmIntCellPage::GetDocument()");
 	ASSERT(m_pDlgParent != NULL);
 	return m_pDlgParent->GetDocument();
 }
-
-/*===========================================================================
- *      End of Class Method CEsmIntCellPage::GetDocument()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -253,7 +210,6 @@ CMWEditDoc *CEsmIntCellPage::GetDocument() {
  * Class CEsmIntCellPage Event - BOOL OnInitDialog ();
  *
  *=========================================================================*/
-
 BOOL CEsmIntCellPage::OnInitDialog() {
 	CPropertyPage::OnInitDialog();
 	FillEsmRegionCombo(m_RegionList);
@@ -283,24 +239,15 @@ BOOL CEsmIntCellPage::OnInitDialog() {
 	return TRUE;
 }
 
-/*===========================================================================
- *      End of Class Event CEsmIntCellPage::OnInitDialog()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Class CEsmIntCellPage Event - int OnUpdateItem (pRecInfo);
  *
  *=========================================================================*/
-
 int CEsmIntCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
 	return 0;
 }
-
-/*===========================================================================
- *      End of Class Event CEsmIntCellPage::OnUpdateItem()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -308,7 +255,6 @@ int CEsmIntCellPage::OnUpdateItem(esmrecinfo_t *pRecInfo) {
  * Class CEsmIntCellPage Method - void SetControlData (void);
  *
  *=========================================================================*/
-
 void CEsmIntCellPage::SetControlData() {
 	CEsmCell *pCell;
 	CString Buffer;
@@ -372,17 +318,12 @@ void CEsmIntCellPage::SetControlData() {
 	OnWatercheck();
 }
 
-/*===========================================================================
- *      End of Class Method CEsmIntCellPage::SetControlData()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Color Buttons
  *
  *=========================================================================*/
-
 void CEsmIntCellPage::OnColorbuttona() {
 	int Result;
 	CString Buffer;
@@ -560,17 +501,12 @@ void CEsmIntCellPage::OnColorbuttonf() {
 	m_ColorBoxF.SetColor(Red, Green, Blue);
 }
 
-/*===========================================================================
- *      End of Color Buttons
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Color Change Events
  *
  *=========================================================================*/
-
 void CEsmIntCellPage::OnChangeColorA() {
 	CString Buffer;
 	int Red;
@@ -712,17 +648,12 @@ void CEsmIntCellPage::OnChangeColorF() {
 	m_ColorBoxF.RedrawWindow();
 }
 
-/*===========================================================================
- *      End of Color Change Events
- *=========================================================================*/
-
 
 /*===========================================================================
  *
  * Begin Checkbox Events
  *
  *=========================================================================*/
-
 void CEsmIntCellPage::OnWatercheck() {
 	m_WaterText.EnableWindow(m_WaterCheck.GetCheck());
 }
@@ -730,7 +661,3 @@ void CEsmIntCellPage::OnWatercheck() {
 void CEsmIntCellPage::OnExteriorcheck() {
 	m_RegionList.EnableWindow(m_ExteriorCheck.GetCheck());
 }
-
-/*===========================================================================
- *      End of Checkbox Events
- *=========================================================================*/

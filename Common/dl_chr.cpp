@@ -14,21 +14,11 @@
  *    under Windows. Successfully tested.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "dl_chr.h"
 #include <ctype.h>
 
 
-/*===========================================================================
- *
- * Begin Local Variable Definitions
- *
- *=========================================================================*/
 DEFINE_FILE("DL_Chr.h");
-/*===========================================================================
- *      End of Local Variable Definitions
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -45,20 +35,19 @@ void chradd(TCHAR *pString, const size_t CharIndex, const TCHAR NewChar) {
 	DEFINE_FUNCTION("chradd()");
 	TCHAR *pInsertPosition;
 	size_t StringLength;
+
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
 	StringLength = TSTRLEN(pString);
 	ASSERT(CharIndex <= StringLength);
+
 	/* Shift the characters after insert position right by one */
 	pInsertPosition = pString + CharIndex;
 	memmove (pInsertPosition + 1, pInsertPosition, (StringLength - CharIndex + 1) * sizeof(TCHAR));
+
 	/* Add the new character to the string */
 	*pInsertPosition = NewChar;
 }
-
-/*===========================================================================
- *      End of Function chradd()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -81,10 +70,6 @@ void chrcat(TCHAR *pString, const TCHAR NewChar) {
 	pInsertPosition[1] = NULL_CHAR;
 	pInsertPosition[0] = NewChar;
 }
-
-/*===========================================================================
- *      End of Function chrcat()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -112,10 +97,6 @@ int chrcount(const TCHAR *pString, const TCHAR Char) {
 	return Count;
 }
 
-/*===========================================================================
- *      End of Function chrcount()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -130,18 +111,16 @@ void chrdel(TCHAR *pString, const size_t CharIndex) {
 	DEFINE_FUNCTION("chrdel()");
 	TCHAR *pDeletePosition;
 	size_t StringLength;
+
 	/* Ensure valid input */
 	ASSERT(pString != NULL);
 	StringLength = TSTRLEN(pString);
 	ASSERT(CharIndex <= StringLength);
+
 	/* Shift the characters left of the deletion position by one */
 	pDeletePosition = pString + CharIndex;
 	memmove (pDeletePosition, pDeletePosition + 1, (StringLength - CharIndex) * sizeof(TCHAR));
 }
-
-/*===========================================================================
- *      End of Function chrdel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -164,10 +143,6 @@ void chrdellast(TCHAR *pString) {
 		pString[StringLength - 1] = NULL_CHAR;
 	}
 }
-
-/*===========================================================================
- *      End of Function chrdellast()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -201,10 +176,6 @@ boolean chrrpunc(size_t &CharIndex, const TCHAR *pString) {
 	/* character not found in string */
 	return FALSE;
 }
-
-/*===========================================================================
- *      End of Function chrrpunc()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -259,10 +230,6 @@ TCHAR *chrtok(TCHAR *pString, const TCHAR TokenChar) {
 	return pResult;
 }
 
-/*===========================================================================
- *      End of Function chrtok()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -286,10 +253,6 @@ TCHAR *chrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
 
 	return pString;
 }
-
-/*===========================================================================
- *      End of Function chrtrunc()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -315,10 +278,6 @@ TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
 	return pString;
 }
 
-/*===========================================================================
- *      End of Function chrrtrunc()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -328,7 +287,7 @@ TCHAR *chrrtrunc(TCHAR *pString, const TCHAR TruncateChar) {
  * DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
 
 /*===========================================================================
@@ -345,20 +304,19 @@ void Test_chradd() {
 	DEFINE_FUNCTION("Test_chradd()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chradd() ===================="));
+
 	/* Add a character in the middle of the string */
 	chradd(TestString, 4, '4');
 	ASSERT(TSTRCMP(TestString, _T("1234456789")) == 0);
+
 	/* Add a character at the start of the string */
 	chradd(TestString, 0, '0');
 	ASSERT(TSTRCMP(TestString, _T("01234456789")) == 0);
+
 	/* Add a character at the end of the string */
 	chradd(TestString, 11, '0');
 	ASSERT(TSTRCMP(TestString, _T("012344567890")) == 0);
 }
-
-/*===========================================================================
- *      End of Function Test_chradd()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -374,18 +332,16 @@ void Test_chrcat() {
 	DEFINE_FUNCTION("Test_chrcat()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrcat() ===================="));
+
 	/* Test adding character to regular string */
 	chrcat(TestString, '0');
 	ASSERT(TSTRCMP(TestString, _T("1234567890")) == 0);
+
 	/* Test adding character to empty string */
 	TestString[0] = NULL_CHAR;
 	chrcat(TestString, '0');
 	ASSERT(TSTRCMP(TestString, _T("0")) == 0);
 }
-
-/*===========================================================================
- *      End of Function Test_chrcat()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -402,24 +358,24 @@ void Test_chrdel() {
 	DEFINE_FUNCTION("Test_chrdel()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrdel() ===================="));
+
 	/* Delete characters from middle of string */
 	chrdel(TestString, 4);
 	ASSERT(TSTRCMP(TestString, _T("12346789")) == 0);
+
 	/* Delete characters from end of string */
 	chrdel(TestString, 7);
 	ASSERT(TSTRCMP(TestString, _T("1234678")) == 0);
+
 	/* Delete characters from start of string */
 	chrdel(TestString, 0);
 	ASSERT(TSTRCMP(TestString, _T("234678")) == 0);
+
 	/* Delete character from empty string */
 	TestString[0] = NULL_CHAR;
 	chrdel(TestString, 0);
 	ASSERT(TSTRCMP(TestString, _T("")) == 0);
 }
-
-/*===========================================================================
- *      End of Function Test_chrdel()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -435,18 +391,16 @@ void Test_chrdellast() {
 	DEFINE_FUNCTION("Test_chrdellast()");
 	TCHAR TestString[101] = _T("123456789");
 	SystemLog.Printf(stdout, _T("============= Testing chrdellast() ===================="));
+
 	/* Delete characters from regular of string */
 	chrdellast(TestString);
 	ASSERT(TSTRCMP(TestString, _T("12345678")) == 0);
+
 	/* Delete character from empty string */
 	TestString[0] = NULL_CHAR;
 	chrdellast(TestString);
 	ASSERT(TSTRCMP(TestString, _T("")) == 0);
 }
-
-/*===========================================================================
- *      End of Function Test_chrdellast()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -465,6 +419,7 @@ void Test_chrtok() {
 	TCHAR *pChrPtr;
 	TCHAR *pStrPtr;
 	SystemLog.Printf(stdout, _T("============= Testing chrtok() ===================="));
+
 	/* Compare chrtok() results with strtok() for a normal string */
 	pChrPtr = chrtok(TestString1, 'x');
 	pStrPtr = TSTRTOK(TestString2, _T("x"));
@@ -477,6 +432,7 @@ void Test_chrtok() {
 	}
 
 	ASSERT(pChrPtr == NULL && pStrPtr == NULL);
+
 	/* Test the enhanced feature of chrtok() */
 	TSTRCPY (TestString1, _T("111x222xx333xx"));
 	pChrPtr = chrtok(TestString1, 'x');
@@ -494,10 +450,6 @@ void Test_chrtok() {
 	pChrPtr = chrtok(NULL, 'x');
 	ASSERT(pChrPtr == NULL);
 }
-
-/*===========================================================================
- *      End of Function Test_chrtok()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -552,10 +504,6 @@ void Test_chrrpunc() {
 	ASSERT(Result == FALSE);
 }
 
-/*===========================================================================
- *      End of Function Test_chrrpunc()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -598,10 +546,6 @@ void Test_chrtrunc() {
 	chrtrunc(TestString, '5');
 	ASSERT(TSTRCMP(TestString, _T("")) == 0);
 }
-
-/*===========================================================================
- *      End of Function Test_chrtrunc()
- *=========================================================================*/
 
 
 /*===========================================================================
@@ -646,10 +590,6 @@ void Test_chrrtrunc() {
 	ASSERT(TSTRCMP(TestString, _T("")) == 0);
 }
 
-/*===========================================================================
- *      End of Function Test_chrrtrunc()
- *=========================================================================*/
-
 
 /*===========================================================================
  *
@@ -676,12 +616,5 @@ void Test_DLChr() {
 	Test_chrrtrunc();
 }
 
-/*===========================================================================
- *      End of Function Test_DLChr()
- *=========================================================================*/
-
 
 #endif
-/*===========================================================================
- *      End of Module Test Routines
- *=========================================================================*/
