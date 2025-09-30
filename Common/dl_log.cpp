@@ -17,12 +17,9 @@
  *    under Windows. Successfully tested.
  *
  *=========================================================================*/
-
 #include "dl_log.h"
 #include "dl_mem.h"
-#if !defined(_WIN32_WCE)
-	#include <time.h>
-#endif
+#include <time.h>
 
 
 /* The main log file for debugging output */
@@ -95,7 +92,7 @@ bool CLogFile::Close() {
 }
 
 
-#if defined(_DEBUG)
+#if _DEBUG
 /*===========================================================================
  *
  * Class CLogFile Method - void DebugPrintf (const TCHAR* pString, ...);
@@ -309,13 +306,13 @@ void CLogFile::OutputMemoryStatus() {
 	}
 
 	/* Output heap information */
-#if defined(_DEBUG)
+#if _DEBUG
 	DebugPrintf(_T("DebugHeapCheckMemory() returns %s"),
 	            DebugHeapCheckMemory() ? _T("TRUE") : _T("FALSE"));
 #endif
 	Printf(_T("Heap Status: %s"), GetHeapStatusString());
 	/* Output custom heap information */
-#if defined(_DEBUG)
+#if _DEBUG
 	OutputBlockInfo();
 #endif
 }
@@ -535,11 +532,6 @@ void CLogFile::SetTabLevel(const int NewTabLevel) {
  *=========================================================================*/
 #if defined(_DEBUG)
 
-/* Turn off compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn -rch
-	#pragma warn -ccc
-#endif
 
 /*===========================================================================
  *
@@ -634,11 +626,5 @@ void Test_LogFile() {
 	ASSERT(DebugHeapCheckMemory());
 }
 
-
-/* Restore compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn .rch
-	#pragma warn .ccc
-#endif
 
 #endif

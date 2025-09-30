@@ -7,14 +7,12 @@
  * Implementation of the CChildFrameVar class
  *
  *=========================================================================*/
-
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "ChildFrmVar.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -75,7 +73,7 @@ BOOL CChildFrameVar::PreCreateWindow(CREATESTRUCT &cs) {
 }
 
 
-#ifdef _DEBUG
+#if _DEBUG
 /*===========================================================================
  *
  * CChildFrameVar Diagnostics

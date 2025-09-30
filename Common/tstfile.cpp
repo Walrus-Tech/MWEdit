@@ -7,10 +7,9 @@
  * Tests the DL_FILE.CPP module.
  *
  *=========================================================================*/
-
 #include "dl_file.h"
 
-#if !defined(UNDER_CE)
+#if !UNDER_CE
 	#include <direct.h>
 	#include <sys\stat.h>
 	#include <io.h>
@@ -31,7 +30,7 @@ DEFINE_FILE("tstfile.cpp");
  * Functions to test this module, available only in DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
 
 /*===========================================================================
@@ -934,9 +933,7 @@ void Test_read_int() {
 
 	/* Test error condition */
 	ASSERT(read_int(pFileHandle, TestValue) == FALSE);
-#if !defined(__BCPLUSPLUS__)
 	ASSERT(write_int(pFileHandle, 0) == FALSE);
-#endif
 	fclose(pFileHandle);
 }
 
@@ -986,9 +983,7 @@ void Test_read_long() {
 
 	/* Test error condition */
 	ASSERT(read_long(pFileHandle, TestValue) == FALSE);
-#if !defined(__BCPLUSPLUS__)
 	ASSERT(write_long(pFileHandle, 0) == FALSE);
-#endif
 	fclose(pFileHandle);
 }
 
@@ -1038,9 +1033,7 @@ void Test_read_short() {
 
 	/* Test error condition */
 	ASSERT(read_short(pFileHandle, TestValue) == FALSE);
-#if !defined(__BCPLUSPLUS__)
 	ASSERT(write_short(pFileHandle, 0) == FALSE);
-#endif
 	fclose(pFileHandle);
 }
 
@@ -1090,9 +1083,7 @@ void Test_read_motlong() {
 
 	/* Test error condition */
 	ASSERT(read_long(pFileHandle, TestValue) == FALSE);
-#if !defined(__BCPLUSPLUS__)
 	ASSERT(write_motlong(pFileHandle, 0) == FALSE);
-#endif
 	fclose(pFileHandle);
 }
 

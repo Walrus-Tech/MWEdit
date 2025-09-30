@@ -26,7 +26,7 @@
  *  4512 = Assignment operator could not be generated
  *
  *=========================================================================*/
-#if defined(_WIN32)
+#if _WIN32
 	#pragma warning(disable : 4514)
 	#pragma warning(disable : 4512)
 #endif
@@ -58,13 +58,9 @@
  * By including "crtdgb.h"
  *
  *=========================================================================*/
-#if defined(_DEBUG) && defined(_WIN32) && !defined(__BCPLUSPLUS__) && !defined(_WIN32_WCE)
+#if _DEBUG && _WIN32
 	//#define _CRTDBG_MAP_ALLOC
 	#include "crtdbg.h"
-#endif
-
-#if defined(_WIN32_WCE)
-	//#include "dbgapi.h"
 #endif
 
 
@@ -75,12 +71,7 @@
  * Macros to help create system specific commands.
  *
  *=========================================================================*/
-#if defined(__MSDOS__)
-	#define SYS_MSDOS(Cmd) Cmd
-	#define SYS_WIN32(Cmd)
-	#define SYS_UNIX(Cmd)
-	#define SYS_NONE(Cmd)
-#elif defined(_WIN32)
+#if _WIN32
 	#define SYS_MSDOS(Cmd)
 	#define SYS_WIN32(Cmd) Cmd
 	#define SYS_UNIX(Cmd)
@@ -100,18 +91,14 @@
  * Various compilers have different definitions for the time stamp.
  *
  *=========================================================================*/
-#if defined(__TURBOC__)
-	#define __DL_TIMESTAMP__ __TIME__
-#elif defined(_WIN32)
+#if _WIN32
 	#define __DL_TIMESTAMP__ __TIMESTAMP__
 #endif
 
 
-#if defined(_WIN32)
+#if _WIN32
 	#define ASM __asm
 	#define interrupt
-#elif defined(__TURBOC__)
-	#define ASM asm
 #endif
 
 
@@ -123,14 +110,14 @@
  * unsigned char to match that used in MSVC++.
  *
  *=========================================================================*/
-#if defined(_WIN32)
+#if _WIN32
 	//typedef bool boolean;
 	//#define TRUE  true
 	//#define FALSE false
 	#define __BOOLEAN_DEF
 	typedef unsigned char boolean;
 
-	#if !defined(TRUE)
+	#ifndef TRUE
 		#define TRUE  1
 		#define FALSE 0
 	#endif
@@ -139,7 +126,7 @@
 	#define __BOOLEAN_DEF
 	typedef unsigned char boolean;
 
-	#if !defined(TRUE)
+	#ifndef TRUE
 		#define TRUE ((boolean)1)
 		#define FALSE ((boolean)0)
 	#endif
@@ -168,11 +155,11 @@ typedef unsigned long dword;
 //#define DWORD_MAX ULONG_MAX
 
 /* Define the TCHAR type if required */
-#if defined(_WIN32) && !defined(__BORLANDC__)
+#if _WIN32
 	#include <tchar.h>
 #else
-	#if !defined(_TCHAR_DEFINED)
-		#if defined(_UNICODE)
+	#ifndef _TCHAR_DEFINED
+		#if _UNICODE
 			typedef wchar_t TCHAR;
 		#else
 			typedef char TCHAR;
@@ -181,8 +168,8 @@ typedef unsigned long dword;
 	#endif
 
 	/* Define the custom _T() macro for wide/single byte strings */
-	#if !defined(_T)
-		#if defined(_UNICODE)
+	#ifndef _T
+		#if _UNICODE
 			#define _T(text) L##text
 		#else
 			#define _T(text) text
@@ -191,8 +178,8 @@ typedef unsigned long dword;
 #endif
 
 /* Basic string-tchar definitions as required */
-#if defined(_UNICODE)
-	#if defined(_WIN32)
+#if _UNICODE
+	#if _WIN32
 		#define TSTRLEN(string) _tcslen(string)
 		#define TSTRCMP(string1, string2) _tcscmp(string1, string2)
 		#define  _stricmp(string1, string2) _tcsicmp(string1, string2)
@@ -278,7 +265,7 @@ typedef int (_cdecl *PQSORT_CMPFUNC_ORIG)(const void *pElem1, const void *pElem2
  * an empty string in release builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 	#define DEFINE_FUNCTION(FuncString) static TCHAR ThisFunction[] = _T(FuncString);
 	extern TCHAR ThisFunction[10];
 #else
@@ -345,7 +332,7 @@ extern TCHAR ThisFile[];
  * Commonly used math constants accurate to 21 decimal places.
  *
  *=========================================================================*/
-#if !defined(M_PI)
+#ifndef M_PI
 	#define M_E         2.71828182845904523536
 	#define M_LOG2E     1.44269504088896340736
 	#define M_LOG10E    0.434294481903251827651
@@ -380,8 +367,8 @@ extern TCHAR ThisFile[];
  * Define the standard ASSERT type macros if not previously defined.
  *
  *=========================================================================*/
-#if !defined(ASSERT)
-	#if defined(DEBUG) || defined(__DEBUG) || defined(_DEBUG)
+#ifndef ASSERT
+	#if DEBUG || __DEBUG || _DEBUG
 		#define ASSERT(exp)  { if (!(exp)) { CustomAssert(_T(#exp), ThisFile, ThisFunction, __LINE__); } }
 		#undef TRACE
 		#define TRACE(msg)   { SystemLog.Printf(_T("%s - %s"), ThisFunction, msg); }
@@ -394,7 +381,7 @@ extern TCHAR ThisFile[];
 	#endif
 #endif
 
-#if defined(DEBUG) || defined(__DEBUG) || defined(_DEBUG)
+#if DEBUG || __DEBUG || _DEBUG
 	#define IASSERT(exp) { if (!(exp)) { CustomAssert(_T(#exp), _T(""), _T(""), __LINE__); } }
 	#define ABORT(msg)   { CustomAssert(msg, _T(""), __FILE__, __LINE__); }
 	#define IFTRACE(exp, msg) { if (exp) SystemLog.Printf(_T("%s - %s"), ThisFunction, msg); }
@@ -411,10 +398,6 @@ void CustomAssert(const TCHAR *pString,
                   const TCHAR *pFunction,
                   const long Line);
 
-/* Create the exception 'throw' function for DOS systems */
-#if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
-	void throw(const char *pString);
-#endif
 
 /* Standard qsort() replacement */
 void qsort(void *pBase,

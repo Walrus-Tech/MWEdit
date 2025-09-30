@@ -75,7 +75,7 @@
 #define ESMSCR_TOKEN_SYMBOLID        34
 #define ESMSCR_TOKEN_RESET           35
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	#define ESMSCR_TOKEN_FUNCTIONX   36
 	#define ESMSCR_TOKEN_SETX        37
 	#define ESMSCR_TOKEN_IFX         38
@@ -94,7 +94,7 @@
 #define ESMSCR_FUNC_BAD              0x00002000
 #define ESMSCR_FUNC_VAR              0x00004000
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	#define ESMSCR_FUNC_MWSE         0x00008000
 	#define ESMSCR_FUNC_MWE          0x00010000
 #endif
@@ -146,7 +146,7 @@
 #define MSG_SCRIPTFRM_VIEWERROR      (WM_USER + 1074)
 
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	#define MWESM_OPCODE_COPYFROMSTACK        0x3807
 	#define MWESM_OPCODE_JUMP                 0x3809
 	#define MWESM_OPCODE_JUMPSHORT            0x380a

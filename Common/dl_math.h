@@ -19,11 +19,6 @@
 #include <ctype.h>
 #include "math.h"
 
-#if defined(__TURBOC__) && !defined(__WIN32_CE)
-	#include <values.h>
-	#include <float.h>
-#endif
-
 
 /* Exponential of power of 10s macro */
 #define exp10(Value) (exp(Value * M_LN10))
@@ -32,11 +27,6 @@
 #define pow2l(Value) ((long)(1l << (Value)))
 #define log2(Value)  (log(Value) / M_LN2)
 
-/* Float min/max definitions for TurboC */
-#if defined(__TURBOC__) && !defined(FLT_MAX)
-	#define FLT_MAX MAXFLOAT
-	#define FLT_MIN MINFLOAT
-#endif
 
 /* Fixes the given value to >= Min and <= Max */
 #define FIX_RANGE(Value, Min, Max) if ((Value) > (Max)) (Value) = (Max); else if ((Value) < (Min)) (Value) = (Min);
@@ -144,7 +134,7 @@ void RandomizeTimer();
 void SeedRandom(const ulong NewSeed = 1);
 
 
-#if defined(_DEBUG)
+#if _DEBUG
 	void Test_Random(const size_t NumTests = 1000);
 	void Test_Random1(const size_t NumTests = 1000);
 	void Test_Random2(const size_t NumTests = 1000);

@@ -7,15 +7,13 @@
  * Implementation of the CChildFrame class
  *
  *=========================================================================*/
-
-
 #include "stdafx.h"
 #include "MWEdit.h"
 #include "ChildFrm.h"
 
 
 /* Debug defines */
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -75,7 +73,7 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT &cs) {
 }
 
 
-#ifdef _DEBUG
+#if _DEBUG
 /*===========================================================================
  *
  * CChildFrame Diagnostics

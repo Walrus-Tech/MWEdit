@@ -7,7 +7,6 @@
  * Contains common time related routines.
  *
  *=========================================================================*/
-
 #include "dl_time.h"
 
 
@@ -25,7 +24,7 @@ DEFINE_FILE("dl_time.h");
  *=========================================================================*/
 void GetHiClock(hiclock_t &Counter) {
 	/* Attempt to use the performance counter */
-#if defined(_WIN32)
+#if _WIN32
 	boolean Result;
 	/* Attempt to get the performance timer count */
 	Result = QueryPerformanceCounter(&Counter.TimerCount);
@@ -66,7 +65,7 @@ double GetHiClockTime() {
  *=========================================================================*/
 double GetHiClockFreq() {
 	/* Attempt to use the performance counter */
-#if defined(_WIN32)
+#if _WIN32
 	LARGE_INTEGER Freq;
 	int Result;
 	Result = QueryPerformanceFrequency(&Freq);

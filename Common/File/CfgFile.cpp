@@ -10,7 +10,6 @@
  *  - Modified FindGroup() method to check for a 0-length group name.
  *
  *=========================================================================*/
-
 #include "stdafx.h"
 #include "cfgfile.h"
 

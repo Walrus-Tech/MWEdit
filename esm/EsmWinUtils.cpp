@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #include "stdafx.h"
 #include "esmwinutils.h"
 #include "WinUtil.h"

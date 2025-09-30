@@ -27,7 +27,6 @@
  *  - Added the MakeSpaceLabel() function.
  *
  *=========================================================================*/
-
 #include "dl_file.h"
 #include <direct.h>
 #include <errno.h>
@@ -40,7 +39,7 @@
 	#include <dir.h>
 #endif
 
-#if defined(_WIN32)
+#if _WIN32
 	#include <windows.h>
 #endif
 
@@ -68,24 +67,8 @@ bool ChangeDirectory(const TCHAR *pPath) {
 	/* Make sure the given path is valid */
 	ASSERT(pPath != NULL);
 	/* Call the correct function according to the current system */
-#if defined(__BCPLUSPLUS__)
-	Result = chdir(pPath);
-
-	/* Change active drives if required */
-	if (Result == 0 && pPath[1] == (TCHAR)':') {
-		Result = _chdrive(tolower(pPath[0]) - 'a' + 1);
-	}
-
-#elif defined(_WIN32)
+#if _WIN32
 	Result = _tchdir(pPath);
-#elif defined(__MSDOS__)
-	Result = chdir(pPath);
-
-	/* Change active drives if required */
-	if (Result == 0 && pPath[1] == (TCHAR)':') {
-		Result = _chdrive(tolower(pPath[0]) - 'a' + 1);
-	}
-
 #else
 	ASSERT(FALSE);
 #endif
@@ -327,7 +310,7 @@ TCHAR *CreatePath(TCHAR *pNewPath, const TCHAR *pString, const size_t MaxStringL
  *=========================================================================*/
 bool DelOneFile(const TCHAR *pFilename) {
 	DEFINE_FUNCTION("DelOneFile()");
-#if defined(_WIN32)
+#if _WIN32
 	BOOL Result;
 	Result = DeleteFile(pFilename);
 
@@ -518,7 +501,7 @@ TCHAR *GetDirString(TCHAR *pString, const int MaxLength) {
 	DEFINE_FUNCTION("GetDirString()");
 	/* Ensure valid input */
 	ASSERT(pString != NULL && MaxLength > 0);
-#if defined(_WIN32)
+#if _WIN32
 	_tgetcwd(pString, MaxLength - 1);
 #else
 	getcwd(pString, MaxLength - 1);
@@ -736,7 +719,7 @@ bool IsDirectory(const TCHAR *pPath) {
 	/* Ensure valid input */
 	ASSERT(pPath != NULL);
 	/* Save the initial directory */
-#if defined(_WIN32)
+#if _WIN32
 	pResult = _tgetcwd(InitialPath, _MAX_PATH);
 #else
 	pResult = getcwd(InitialPath, _MAX_PATH);

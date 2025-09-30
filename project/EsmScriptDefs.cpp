@@ -29,19 +29,19 @@ const TCHAR *l_Reserved[] = {
 	_T("float"),
 	_T("get"),
 	_T("if"),
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	_T("ifx")
 #endif
 	_T("long"),
 	_T("return"),
 	_T("set"),
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	_T("setx"),
 #endif
 	_T("short"),
 	_T("to"),
 	_T("while"),
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 	_T("whilex"),
 #endif
 	_T("X"),
@@ -414,7 +414,7 @@ const TCHAR *GetESMTokenName(const int Token) {
 
 		case ESMSCR_TOKEN_RESET:
 			return _T("reset");
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 		case ESMSCR_TOKEN_WHILEX:
 			return _T("whilex");
@@ -543,7 +543,7 @@ int GetESMScriptResToken(const TCHAR *pString) {
 				return ESMSCR_TOKEN_IF;
 			}
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("fx")) == 0) {
 				return ESMSCR_TOKEN_IFX;
@@ -585,7 +585,7 @@ int GetESMScriptResToken(const TCHAR *pString) {
 				return ESMSCR_TOKEN_TYPEOP;
 			}
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("etx")) == 0) {
 				return ESMSCR_TOKEN_SETX;
@@ -613,7 +613,7 @@ int GetESMScriptResToken(const TCHAR *pString) {
 				return ESMSCR_TOKEN_WHILE;
 			}
 
-#ifdef MWEDIT_SCRIPT_MWSE
+#if MWEDIT_SCRIPT_MWSE
 
 			if (_stricmp(pString + 1, _T("hilex")) == 0) {
 				return ESMSCR_TOKEN_WHILEX;

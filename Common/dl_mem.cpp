@@ -12,25 +12,17 @@
  *  - CreateString(TCHAR*) now accepts NULL input (returns NULL).
  *
  *=========================================================================*/
-
 #include "dl_mem.h"
 #include <string.h>
 
-#if !defined(_WIN32_WCE)
-	#include <time.h>
-	#if defined(_MSC_VER)
-		//#include <alloc.h>
-	#endif
-#endif
-
-#if defined(__BCPLUSPLUS__)
-	#include "alloc.h"
-	#include "malloc.h"
+#include <time.h>
+#if defined(_MSC_VER)
+	//#include <alloc.h>
 #endif
 
 #include <ctype.h>
 
-#if defined(_WIN32)
+#if _WIN32
 	#include <windows.h>
 #endif
 
@@ -56,7 +48,7 @@ void *AllocateMemory(const size_t Size) {
 	/* Attempt to allocate memory */
 	CreateArrayPointer(pNewObject, TCHAR, Size);
 	/* Initialize memory in debug mode */
-#if defined(_DEBUG)
+#if _DEBUG
 	memset(pNewObject, GARBAGE_CHAR, Size * sizeof(TCHAR));
 #endif
 	return pNewObject;
@@ -171,16 +163,8 @@ bool CreateString(TCHAR **ppNewString, const size_t StringSize) {
  *=======================================================================*/
 bool GetFreeMemory(long &Memory) {
 	DEFINE_FUNCTION("GetFreeMemory()");
-	/*---------- Borland 16 bit ---------------------------------------------*/
-#if defined (__BCPLUSPLUS__)
-	Memory = 0;
-	return TRUE;
-	/*---------- DOS real mode implementation -------------------------------*/
-#elif defined (__MSDOS__)
-	Memory = farcoreleft();
-	return TRUE;
 	/*---------- Windows implementation -------------------------------------*/
-#elif defined(_WIN32)
+#if _WIN32
 	MEMORYSTATUS Status;
 	GlobalMemoryStatus(&Status);
 	Memory = (long)Status.dwAvailVirtual;
@@ -203,33 +187,8 @@ bool GetFreeMemory(long &Memory) {
  *=======================================================================*/
 bool GetTotalMemory(long &Memory) {
 	DEFINE_FUNCTION("GetTotalMemory()");
-	/*---------- Borland 16 bit ---------------------------------------------*/
-#if defined (__BCPLUSPLUS__)
-	Memory = 0;
-	return TRUE;
-	/*---------- DOS real mode implementation -------------------------------*/
-#elif defined(__TURBOC__)
-	struct heapinfo HeapInfo;
-	long MemorySize = 0l;
-
-	/* Make sure the heap is not corrupt */
-	if (heapcheck() != _HEAPOK) {
-		return FALSE;
-	}
-
-	GetFreeMemory(MemorySize);
-	/* Walk through the heap counting used and free blocks */
-	HeapInfo.ptr = NULL;
-
-	while (heapwalk(&HeapInfo) == _HEAPOK) {
-		if (HeapInfo.in_use) {
-			MemorySize += HeapInfo.size;
-		}
-	}
-
-	return TRUE;
 	/*---------- Windows implementation -------------------------------------*/
-#elif defined(_WIN32)
+#if _WIN32
 	MEMORYSTATUS Status;
 	GlobalMemoryStatus(&Status);
 	Memory = (long)Status.dwAvailVirtual;
@@ -287,15 +246,9 @@ bool GetUsedMemory(long &Memory) {
  *=======================================================================*/
 int GetHeapStatus() {
 	DEFINE_FUNCTION("GetHeapStatus()");
-	/*---------- Borland 16 bit ---------------------------------------------*/
-#if defined (__BCPLUSPLUS__)
-	return HEAP_NOTDEFINED;
-	/*---------- DOS real mode implementation -------------------------------*/
-#elif defined(__MSDOS__)
-	return heapcheck();
 	/*---------- Windows implementation -------------------------------------*/
-#elif defined(_WIN32)
-#if defined(_DEBUG)
+#if _WIN32
+#if _DEBUG
 
 	if (_CrtCheckMemory()) {
 		return HEAP_OK;
@@ -501,70 +454,14 @@ bool ReplaceString(TCHAR **ppNewString, const size_t Length) {
 }
 
 
-#if defined(__TURBOC__) && !defined(__BCPLUSPLUS__)
-/*===========================================================================
- *
- * Function - void _DosMemDumpHeap (void);
- *
- * Dumps the heap blocks to the SystemLog under TurboC.
- *
- *=========================================================================*/
-void _DosMemDumpHeap() {
-	struct heapinfo HeapInfo;
-	long MemorySize = 0l;
-	long UnusedSize = 0l;
-	long Index = 1l;
-	SystemLog.Printf(_T("Outputting DOS heap block information..."));
-
-	/* Make sure the heap is not corrupt */
-	if (heapcheck() != _HEAPOK) {
-		SystemLog.Printf(_T("\t\tHeap is corrupt, cannot output block information!"));
-		return;
-	}
-
-	/* Walk through the heap counting used and free blocks */
-	HeapInfo.ptr = NULL;
-
-	while (heapwalk(&HeapInfo) == _HEAPOK) {
-		if (HeapInfo.in_use) {
-			MemorySize += HeapInfo.size;
-		} else {
-			UnusedSize += HeapInfo.size;
-		}
-
-		SystemLog.Printf(_T("\t\t%3ld) %p: %8ld bytes,  Used=%1d "),
-		                 Index,
-		                 HeapInfo.ptr,
-		                 HeapInfo.size,
-		                 HeapInfo.in_use);
-		Index++;
-	}
-
-	SystemLog.Printf(_T("\tOutput %ld bytes of used and %ld bytes of unused heap blocks."),
-	                 MemorySize,
-	                 UnusedSize);
-	/* Chain to our custom block handler in debug builds */
-#if defined(_DEBUG)
-	OutputBlockInfo();
-#endif
-	return;
-}
-#endif
-
-
 /*===========================================================================
  *
  * Begin File Test Routines (Debug Builds Only)
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 #define CREATESTRING1_BUFFERSIZE 11000
 
-/* Turn off compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn -rch
-	#pragma warn -ccc
-#endif
 
 /*===========================================================================
  *
@@ -873,11 +770,5 @@ void Test_DL_Mem() {
 	SystemLog.Printf(_T("\tGetHeapStatus() returned %ld"), GetHeapStatus());
 	SystemLog.Printf(_T("\tGetHeapStatusString() returned '%s'"), GetHeapStatusString());
 }
-
-/* Restore compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn .rch
-	#pragma warn .ccc
-#endif
 
 #endif

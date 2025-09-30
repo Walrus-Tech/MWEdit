@@ -12,7 +12,6 @@
  *  - Added the GetFieldString() method.
  *
  *=========================================================================*/
-
 #include "EsmSubCellRef.h"
 #include "EsmSubNameFix.h"
 #include "EsmSubLong.h"

@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #include "esmrecord.h"
 #include "esmfile.h"
 #include "EsmSubName.h"

@@ -13,7 +13,7 @@
 #include "windows/winutil.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -136,7 +136,7 @@ void CEsmFuncHelpView::DoDataExchange(CDataExchange *pDX) {
  * Begin CEsmFuncHelpView Diagnostics
  *
  *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 
 void CEsmFuncHelpView::AssertValid() const {
 	CFormView::AssertValid();

@@ -18,7 +18,7 @@
  *    pointers.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
 #include "dl_block.h"
 #include "dl_log.h"

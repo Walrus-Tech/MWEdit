@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #include "EsmCreature.h"
 #include "EsmSubNPCS.h"
 

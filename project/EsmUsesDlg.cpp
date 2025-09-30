@@ -12,7 +12,7 @@
 #include "EsmUsesDlg.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -137,7 +137,7 @@ void CEsmUsesDlg::DoDataExchange(CDataExchange *pDX) {
  * Begin Class Diagnostics
  *
  *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 
 void CEsmUsesDlg::AssertValid() const {
 	CFormView::AssertValid();

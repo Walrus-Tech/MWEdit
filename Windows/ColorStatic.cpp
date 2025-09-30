@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #include "stdafx.h"
 #include "dl_err.h"
 #include "ColorStatic.h"

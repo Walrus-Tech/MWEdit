@@ -23,7 +23,6 @@
  *  - StringToBoolean() modified to convert Yes/No values.
  *
  *=========================================================================*/
-
 #include "dl_str.h"
 #include "dl_chr.h"
 #include <ctype.h>
@@ -646,7 +645,7 @@ size_t strlinelen(const TCHAR *pString) {
  * the current system.  ASSERTs if given invalid input.
  *
  *=======================================================================*/
-#if !defined(__TURBOC__) && !defined(_WIN32)
+#ifndef _WIN32
 
 TCHAR *strlwr(TCHAR *pString) {
 	DEFINE_FUNCTION("strlwr()");
@@ -716,7 +715,7 @@ size_t strmaxlinelen(const TCHAR *pString) {
  * similar function is not available.
  *
  *=======================================================================*/
-#if !defined(__TURBOC__) && !defined(_WIN32)
+#ifndef _WIN32
 
 int strnicmp(const TCHAR *pString1, const TCHAR *pString2, const size_t MaxStringLength) {
 	DEFINE_FUNCTION("strnicmp()");
@@ -820,7 +819,7 @@ TCHAR *UnquoteString(TCHAR *pString) {
  * the current system.  ASSERTs if given invalid input.
  *
  *=======================================================================*/
-#if !defined(__TURBOC__) && !defined(_WIN32)
+#ifndef _WIN32
 
 TCHAR *strupr(TCHAR *pString) {
 	DEFINE_FUNCTION("strupr()");
@@ -915,13 +914,8 @@ TCHAR *strupr(TCHAR *pString) {
  * DEBUG builds.
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 
-/* Turn off compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn -rch
-	#pragma warn -ccc
-#endif
 
 /*===========================================================================
  *
@@ -1483,7 +1477,7 @@ void Test_strmaxlinelen() {
 void Test_strnicmp() {
 	DEFINE_FUNCTION("Test_strnicmp()");
 	SystemLog.Printf(stdout, _T("============= Testing strnicmp() ===================="));
-#if !defined(__TURBOC__) && !defined(_WIN32)
+#ifndef _WIN32
 	/* Test several equal strings */
 	ASSERT(strnicmp(_T("123"), _T("123"), 5) == 0);
 	ASSERT(strnicmp(_T("123"), _T("123"), 2) == 0);
@@ -1577,7 +1571,7 @@ void Test_strproper() {
 void Test_strupr() {
 	DEFINE_FUNCTION("Test_strupr()");
 	SystemLog.Printf(stdout, _T("============= Testing strlwr()/strupr() ===================="));
-#if !defined(__TURBOC__) && !defined(_WIN32)
+#ifndef _WIN32
 	TCHAR TestString[101];
 
 	/* Test strlwr() with typical strings */
@@ -1688,10 +1682,5 @@ void Test_DLStr() {
 	Test_strnicmp();
 }
 
-/* Restore compiler warning options */
-#if defined(__BCPLUSPLUS__)
-	#pragma warn .rch
-	#pragma warn .ccc
-#endif
 
 #endif

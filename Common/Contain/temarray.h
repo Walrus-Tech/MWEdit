@@ -19,7 +19,7 @@
 
 
 /* Macro for iterating through an array */
-#if !defined(ITERATE_ARRAY)
+#ifndef ITERATE_ARRAY
 	#define ITERATE_ARRAY(Array, Index, pRecord) for (Index = 0; Index < Array.GetNumElements(), pRecord = Array.GetAt(Index); Index++)
 #endif
 
@@ -57,7 +57,7 @@ class TTemplateArray {
 	virtual void Destroy();
 
 	/* Tests the contents to ensure they are valid */
-#if defined(_DEBUG)
+#if _DEBUG
 	bool AssertValid();
 #endif
 
@@ -292,7 +292,7 @@ bool TTemplateArray<TArrayPtr>::AddSort(TArrayPtr *pNewElement) {
 }
 
 
-#if defined(_DEBUG)
+#if _DEBUG
 /*===========================================================================
  *
  * Class TTemplateArray Method - bool AssertValid (void);
@@ -488,7 +488,7 @@ inline TArrayPtr *TTemplateArray<TArrayPtr>::operator[](const int Index) const {
 }
 
 
-#if defined(_DEBUG)
+#if _DEBUG
 	void Test_StressTemplateArray(const int NumTests = 100);
 	void Test_TemplateArray();
 #endif

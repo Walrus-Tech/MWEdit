@@ -11,11 +11,7 @@
 #define __WINUTIL_H
 
 
-#if defined(UNDER_CE)
-	#include "dl_wince.h"
-#else
-	#include "dl_err.h"
-#endif
+#include "dl_err.h"
 
 
 /* Options for the MakeTimeString() function, bit field values */
@@ -30,26 +26,6 @@
 /* Shortcuts to font creation */
 #define CFONT_CREATE(Font, Size, Bold, Italic, FontName) Font.CreateFont(Size, 0, 0, 0, Bold, Italic, 0, 0, \
         DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, FontName);
-
-
-#if defined(__BORLANDC__)
-	#define CComboBox TComboBox
-	#define CListBox  TListBox
-	#define CDC       TDC
-	#define CPen      TPen
-	#define CFont     TFont
-	#define CBrush    TBrush
-	#define CPaintDC  TPaintDC
-	#define CWnd      TWindow
-	//#define RECT        TRect
-	#define CRect     TRect
-	#define CPoint    TPoint
-	#define CSize     TSize
-
-
-	#define afx_msg
-	#define DECLARE_MESSAGE_MAP()
-#endif
 
 
 /* Adds a string data value pair to a combo or list box */
@@ -104,7 +80,6 @@ int FindComboListItem(CComboBox &ComboBox, const DWORD ItemData, const bool Sele
 int FindListItem(CListBox &ListBox, const DWORD ItemData, const bool Select = false);
 
 /* Get the currently active view/document */
-#if !defined(UNDER_CE) && !defined(__BORLANDC__)
 
 /* Clipboard functions */
 bool ClipCopyFromWnd(CWnd *pWnd);
@@ -139,7 +114,6 @@ bool GetStringWord(CString &OutputString, const TCHAR *pBuffer, int &StartPos);
 /* Open a context menu */
 bool OpenContextMenu(CWnd *pParent, CWnd *pWnd, CPoint Point, const DWORD MenuResource);
 
-#endif
 
 /* Set the internal window text directly */
 void WINAPI SetInternalWindowText(HWND hwnd, LPCTSTR lpText);

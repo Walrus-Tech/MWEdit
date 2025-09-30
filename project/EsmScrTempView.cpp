@@ -13,7 +13,7 @@
 #include "EsmScriptCompile.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -361,7 +361,7 @@ bool CEsmScrTempView::HasTemplateFile() {
  * Begin Class CEsmScrTempView Diagnostics
  *
  *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 
 void CEsmScrTempView::AssertValid() const {
 	CFormView::AssertValid();

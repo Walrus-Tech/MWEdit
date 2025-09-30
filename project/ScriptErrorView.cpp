@@ -13,7 +13,7 @@
 #include "ScriptErrorDlg.h"
 
 
-#ifdef _DEBUG
+#if _DEBUG
 	#define new DEBUG_NEW
 	#undef THIS_FILE
 	static char THIS_FILE[] = __FILE__;
@@ -85,7 +85,7 @@ void CScriptErrorView::DoDataExchange(CDataExchange *pDX) {
  * Begin CScriptErrorView Diagnostics
  *
  *=========================================================================*/
-#ifdef _DEBUG
+#if _DEBUG
 
 void CScriptErrorView::AssertValid() const {
 	CFormView::AssertValid();

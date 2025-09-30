@@ -10,7 +10,6 @@
  *  - Added the FindCellRef() method.
  *
  *=========================================================================*/
-
 #include "EsmCell.h"
 #include "EsmFile.h"
 

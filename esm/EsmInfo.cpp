@@ -7,7 +7,6 @@
  * Description
  *
  *=========================================================================*/
-
 #include "EsmInfo.h"
 #include "EsmSubFloat.h"
 #include "EsmDialogue.h"

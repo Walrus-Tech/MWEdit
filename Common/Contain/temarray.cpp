@@ -8,8 +8,6 @@
  * of typed pointers.
  *
  *=========================================================================*/
-
-/* Include Files */
 #include "contain\temarray.h"
 
 
@@ -21,7 +19,7 @@ DEFINE_FILE("TemArray.cpp");
  * Begin Module Test Routines
  *
  *=========================================================================*/
-#if defined(_DEBUG)
+#if _DEBUG
 #include <float.h>
 #include <time.h>
 #include <string.h>

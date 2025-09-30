@@ -12,16 +12,7 @@
 #define __GENFIND_H
 
 
-#if defined(__MSDOS__)
-	#include "dos.h"
-	#include "dir.h"
-	#include "time.h"
-	#include "io.h"
-#elif defined (__BORLANDC__)
-	#include "sys/types.h"
-	//#include "sysutils.hpp"
-	#include "io.h"
-#elif defined(_WIN32)
+#if _WIN32
 	#include "io.h"
 #endif
 
@@ -32,17 +23,7 @@
 #define NULL_FIND_HANDLE (-1l)
 
 /* Platform specific defines */
-#if defined(_WIN32) && defined(__BORLANDC__)
-	typedef WIN32_FIND_DATA fileblock_t;
-
-	/* Redefine attribute values */
-	#define FA_ARCH     FILE_ATTRIBUTE_ARCHIVE
-	#define FA_DIREC    FILE_ATTRIBUTE_DIRECTORY
-	#define FA_RDONLY   FILE_ATTRIBUTE_READONLY
-	#define FA_HIDDEN   FILE_ATTRIBUTE_HIDDEN
-	#define FA_SYSTEM   FILE_ATTRIBUTE_SYSTEM
-	#define FA_NORMAL   FILE_ATTRIBUTE_NORMAL
-#elif defined(_WIN32)
+#if _WIN32
 	/* Define the base file block type */
 	typedef struct _finddata_t fileblock_t;
 
@@ -53,9 +34,6 @@
 	#define FA_HIDDEN   _A_HIDDEN
 	#define FA_SYSTEM   _A_SYSTEM
 	#define FA_NORMAL   _A_NORMAL
-#elif defined(__MSDOS__)
-	/* Define the base file block type */
-	typedef struct ffblk fileblock_t;
 #endif
 
 
@@ -90,34 +68,7 @@ class CFileBlock {
 	}
 
 	/* Define the get methods depending on the platform */
-#if defined(_WIN32) && defined(__BORLANDC__)
-	time_t ConvertFileTime(const FILETIME &FileTime) const;
-
-	char *GetName() {
-		return &BlockData.cFileName[0];
-	}
-
-	int GetAttribute() const {
-		return BlockData.dwFileAttributes;
-	}
-
-	time_t GetCreationTime() const {
-		return ConvertFileTime(BlockData.ftCreationTime);
-	}
-
-	time_t GetAccessTime() const {
-		return ConvertFileTime(BlockData.ftLastAccessTime);
-	}
-
-	time_t GetWriteTime() const {
-		return ConvertFileTime(BlockData.ftLastWriteTime);
-	}
-
-	ulong GetSize() const {
-		return BlockData.nFileSizeLow;
-	}
-
-#elif defined(_WIN32)
+#if _WIN32
 	char *GetName() {
 		return &BlockData.name[0];
 	}
@@ -140,28 +91,6 @@ class CFileBlock {
 
 	ulong GetSize() const {
 		return BlockData.size;
-	}
-
-#elif defined(__MSDOS__)
-	char *GetName() const {
-		return (char *)&BlockData.ff_name[0];
-	}
-
-	int GetAttribute() const {
-		return BlockData.ff_attrib;
-	}
-
-	time_t GetCreationTime() const {
-		return -1l;
-	}
-
-	time_t GetAccessTime() const {
-		return -1l;
-	}
-
-	time_t GetWriteTime() const;
-	ulong GetSize() const {
-		return BlockData.ff_fsize;
 	}
 #endif
 };

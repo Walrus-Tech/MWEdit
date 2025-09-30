@@ -32,7 +32,7 @@ class CChildFrame : public CMDIChildWnd {
 	void FakeMaximize();
 
 	/* Diagnostics routines */
-#ifdef _DEBUG
+#if _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext &dc) const;
 #endif
