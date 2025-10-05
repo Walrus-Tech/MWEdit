@@ -11,8 +11,8 @@
 #define __EDITUNDO_H
 
 
-#include "dl_err.h"
-#include "contain/temarray.h"
+#include "Common/dl_err.h"
+#include "Common/Contain/temarray.h"
 
 
 /* Types of undo actions */

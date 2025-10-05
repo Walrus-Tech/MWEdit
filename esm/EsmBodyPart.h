@@ -11,9 +11,9 @@
 #define __ESMBODYPART_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubBYDT.h"
-#include "EsmSubName.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubBYDT.h"
+#include "esm/EsmSubName.h"
 
 
 const TCHAR *GetESMBodyPart(const int Part);

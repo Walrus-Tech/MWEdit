@@ -12,10 +12,10 @@
  *  - Added the GetFieldString() method.
  *
  *=========================================================================*/
-#include "EsmSubCellRef.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubLong.h"
-#include "EsmCell.h"
+#include "esm/EsmSubCellRef.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmCell.h"
 
 
 DEFINE_FILE("EsmSubCellRef.cpp");

@@ -7,9 +7,9 @@
  * Implementation of the CChildFrame class
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "ChildFrm.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/ChildFrm.h"
 
 
 /* Debug defines */

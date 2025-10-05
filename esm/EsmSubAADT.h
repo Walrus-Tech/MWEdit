@@ -11,7 +11,7 @@
 #define __ESMSUBAADT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 #define MWESM_APPATYPE_MIN        0

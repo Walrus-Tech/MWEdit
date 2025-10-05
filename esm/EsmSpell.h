@@ -11,10 +11,10 @@
 #define __ESMSPELL_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubSPDT.h"
-#include "EsmSubENAM.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubSPDT.h"
+#include "esm/EsmSubENAM.h"
 
 const TCHAR *GetESMSpellType(const int Type);
 int GetESMSpellType(const TCHAR *pString);

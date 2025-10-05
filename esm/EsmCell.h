@@ -11,18 +11,18 @@
 #define __ESMCELL_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubLong.h"
-#include "EsmSubPos6.h"
-#include "EsmSubCellDATA.h"
-#include "EsmSubFloat.h"
-#include "EsmSubByte.h"
-#include "EsmSubFloat.h"
-#include "EsmSubAMBI.h"
-#include "EsmSubCellRef.h"
-#include "EsmSubFRMR.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubPos6.h"
+#include "esm/EsmSubCellDATA.h"
+#include "esm/EsmSubFloat.h"
+#include "esm/EsmSubByte.h"
+#include "esm/EsmSubFloat.h"
+#include "esm/EsmSubAMBI.h"
+#include "esm/EsmSubCellRef.h"
+#include "esm/EsmSubFRMR.h"
 
 
 /*===========================================================================

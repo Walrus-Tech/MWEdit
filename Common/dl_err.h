@@ -12,7 +12,7 @@
 #define __DL_ERR_H
 
 
-#include "dl_mem.h"
+#include "Common/dl_mem.h"
 
 
 /* Maximum size of a message string for the error message strings */

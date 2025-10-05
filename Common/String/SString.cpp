@@ -9,7 +9,7 @@
  *=========================================================================*/
 #include <ctype.h>
 #include <limits.h>
-#include "sstring.h"
+#include "Common/SString.h"
 
 
 DEFINE_FILE("SString.cpp");

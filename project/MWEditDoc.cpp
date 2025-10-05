@@ -10,17 +10,17 @@
  *  - Updated CleanRecord() method to dirty the document's modified flag.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "MWEditDoc.h"
-#include "ESMUtils.h"
-#include "windows/WinUtil.h"
-#include "EsmGlobal.h"
-#include "EsmScriptCompile.h"
-#include "EsmGlobOptions.h"
-#include "dl_time.h"
-#include "EsmScriptCompile.h"
-#include "ErrorDialog.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmUtils.h"
+#include "Windows/WinUtil.h"
+#include "esm/EsmGlobal.h"
+#include "project/EsmScriptCompile.h"
+#include "project/EsmGlobOptions.h"
+#include "Common/dl_time.h"
+#include "project/EsmScriptCompile.h"
+#include "project/ErrorDialog.h"
 
 
 /* Debug definitions */

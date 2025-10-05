@@ -7,11 +7,11 @@
  * Tests the DL_FILE.CPP module.
  *
  *=========================================================================*/
-#include "dl_file.h"
+#include "Common/dl_file.h"
 
 #if !UNDER_CE
 	#include <direct.h>
-	#include <sys\stat.h>
+	#include <sys/stat.h>
 	#include <io.h>
 	#include <dos.h>
 #endif

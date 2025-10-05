@@ -11,8 +11,8 @@
 #define __SSARRAY_H
 
 
-#include "SString.h"
-#include "PtrArray.h"
+#include "Common/String/SString.h"
+#include "Common/Contain/PtrArray.h"
 
 
 /* Local private string array definition */

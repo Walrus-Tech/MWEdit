@@ -11,11 +11,11 @@
 #define __ESMRECDIALOG_H
 
 
-#include "EsmFile.h"
-#include "EsmUtils.h"
-#include "windows/WinUtil.h"
-#include "MWEditDoc.h"
-#include "EsmIconFrame.h"
+#include "esm/EsmFile.h"
+#include "project/EsmUtils.h"
+#include "Windows/WinUtil.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmIconFrame.h"
 
 
 /* Custom messaages */

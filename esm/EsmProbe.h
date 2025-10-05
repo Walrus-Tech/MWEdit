@@ -11,8 +11,8 @@
 #define __ESMPROBE_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubPBDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubPBDT.h"
 
 
 /*===========================================================================

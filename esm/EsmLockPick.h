@@ -11,8 +11,8 @@
 #define __ESMLOCKPICK_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubLKDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubLKDT.h"
 
 
 /*===========================================================================

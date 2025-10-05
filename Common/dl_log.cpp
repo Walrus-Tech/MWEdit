@@ -17,8 +17,8 @@
  *    under Windows. Successfully tested.
  *
  *=========================================================================*/
-#include "dl_log.h"
-#include "dl_mem.h"
+#include "Common/dl_log.h"
+#include "Common/dl_mem.h"
 #include <time.h>
 
 

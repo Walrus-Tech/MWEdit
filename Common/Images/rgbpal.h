@@ -11,7 +11,7 @@
 #define __RGBPAL_H
 
 
-#include "common/dl_err.h"
+#include "Common/dl_err.h"
 
 
 /* Copy palette options */

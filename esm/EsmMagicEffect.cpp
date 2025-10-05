@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmMagicEffect.h"
+#include "esm/EsmMagicEffect.h"
 
 
 DEFINE_FILE("EsmMagicEffect.cpp");

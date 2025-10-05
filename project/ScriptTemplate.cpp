@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "scripttemplate.h"
+#include "project/ScriptTemplate.h"
 
 
 DEFINE_FILE("ScriptTemplate.cpp");

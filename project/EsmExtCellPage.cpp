@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmExtCellPage.h"
-#include "EsmRecDialog.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmExtCellPage.h"
+#include "project/EsmRecDialog.h"
 
 
 #if _DEBUG

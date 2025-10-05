@@ -11,7 +11,7 @@
 #define __DL_TOOLTIP_H
 
 
-#include "WinUtil.h"
+#include "Windows/WinUtil.h"
 
 
 /* Timer events */

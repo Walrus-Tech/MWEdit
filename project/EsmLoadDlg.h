@@ -11,7 +11,7 @@
 #define __ESMLOADDLG_H
 
 
-#include "resource.h"
+#include "project/Resource.h"
 
 
 /*===========================================================================

@@ -12,7 +12,7 @@
  *  - CreateString(TCHAR*) now accepts NULL input (returns NULL).
  *
  *=========================================================================*/
-#include "dl_mem.h"
+#include "Common/dl_mem.h"
 #include <string.h>
 
 #include <time.h>

@@ -11,6 +11,9 @@
 #define __ESMSUBCNDT_H
 
 
+#include "esm/EsmSubBase.h"
+
+
 #pragma pack(push, 1)
 
 typedef struct {

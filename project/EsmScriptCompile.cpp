@@ -24,13 +24,17 @@
 *     bytes of a global name properly.
 *
 *=========================================================================*/
-#include <stdafx.h>
-#include "esmscriptcompile.h"
-#include "ctype.h"
-#include "EsmGlobal.h"
-#include "MwEditDoc.h"
-//#include "EsmOptions.h"
-#include "EsmGlobOptions.h"
+//#include <stdafx.h>
+#include "project/EsmScriptCompile.h"
+
+#include <ctype.h>
+
+#include "project/StdAfx.h"
+
+#include "esm/EsmGlobal.h"
+#include "project/MWEditDoc.h"
+//#include "project/EsmOptions.h"
+#include "project/EsmGlobOptions.h"
 
 
 DEFINE_FILE("EsmScriptCompile.cpp");

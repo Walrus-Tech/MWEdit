@@ -1,7 +1,7 @@
 // ColorStatic.cpp : implementation file
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "ColorStatic.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/ColorStatic.h"
 
 
 #if _DEBUG

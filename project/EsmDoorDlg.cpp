@@ -7,10 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmDoorDlg.h"
+#include "project/EsmDoorDlg.h"
+
 #include "mmsystem.h"
+
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
 
 
 #if _DEBUG

@@ -11,7 +11,7 @@
 #define __ESMSUBINFODATA_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Gender types */

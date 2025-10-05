@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmEnchant.h"
+#include "esm/EsmEnchant.h"
 
 
 DEFINE_FILE("EsmEnchant.cpp");

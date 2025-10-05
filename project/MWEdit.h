@@ -15,13 +15,13 @@
 	#error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "resource.h"
-#include "EsmFile.h"
-#include "EsmLoadDlg.h"
-#include "EsmFuncHelpView.h"
-#include "EsmOptions.h"
-#include "EsmRegDefs.h"
-#include "mwcustomfunc.h"
+#include "project/Resource.h"
+#include "esm/EsmFile.h"
+#include "project/EsmLoadDlg.h"
+#include "project/EsmFuncHelpView.h"
+#include "project/EsmOptions.h"
+#include "project/EsmRegDefs.h"
+#include "project/mwcustomfunc.h"
 
 
 /* Default web sites */

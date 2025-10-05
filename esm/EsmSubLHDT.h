@@ -11,7 +11,7 @@
 #define __ESMSUBLHDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Light flags */

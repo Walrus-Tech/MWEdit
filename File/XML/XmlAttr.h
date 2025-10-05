@@ -11,9 +11,9 @@
 #define __XMLATTR_H
 
 
-#include "PtrArray.h"
-#include "sstring.h"
-#include "GenFile.h"
+#include "Common/Contain/PtrArray.h"
+#include "Common/String/SString.h"
+#include "Common/File/GenFile.h"
 
 
 /* Read method result values */

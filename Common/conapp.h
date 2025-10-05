@@ -12,10 +12,10 @@
 #define __CONAPP_H
 
 
-#include "dl_base.h"
-#include "dl_err.h"
-#include "dl_str.h"
-#include "dl_file.h"
+#include "Common/dl_base.h"
+#include "Common/dl_err.h"
+#include "Common/dl_str.h"
+#include "Common/dl_file.h"
 
 
 /* Defines a standard main routine */

@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "EsmIconFrame.h"
-#include "il/il.h"
-#include "il/ilut.h"
-#include "EsmUtils.h"
-#include "EsmDefs.h"
+#include "project/StAafx.h"
+#include "project/EsmIconFrame.h"
+#include "IL/il.h"
+#include "IL/ilut.h"
+#include "project/EsmUtils.h"
+#include "esm/EsmDefs.h"
 
 
 #if _DEBUG

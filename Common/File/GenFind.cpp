@@ -11,7 +11,7 @@
 	#include "io.h"
 #endif
 
-#include "file\genfind.h"
+#include "Common/File/GenFind.h"
 
 
 DEFINE_FILE("GenFind.cpp");

@@ -11,7 +11,7 @@
 #define __ESMAIESCORTDLG_H
 
 
-#include "EsmSubAI_E.h"
+#include "esm/EsmSubAI_E.h"
 
 
 /*===========================================================================

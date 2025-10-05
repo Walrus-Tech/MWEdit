@@ -11,13 +11,15 @@
  *    the previous filename as the initial filename.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "esmutils.h"
-#include "EsmArmor.h"
-#include "MWEditDoc.h"
-#include "windows/WinUtil.h"
+#include "project/EsmUtils.h"
+
 #include <direct.h>
-#include "esmgloboptions.h"
+
+#include "project/StdAfx.h"
+#include "esm/EsmArmor.h"
+#include "project/MWEditDoc.h"
+#include "Windows/WinUtil.h"
+#include "project/EsmGlobOtions.h"
 
 
 DEFINE_FILE("EsmUtils.cpp");

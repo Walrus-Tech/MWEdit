@@ -11,9 +11,9 @@
 #define __CHILDFRMSCRIPT_H
 
 
-#include "Resource.h"
-#include "EsmScriptDefs.h"
-#include "splitterwnd.h"
+#include "project/Resource.h"
+#include "project/EsmScriptDefs.h"
+#include "project/splitterwnd.h"
 
 
 /*===========================================================================

@@ -11,9 +11,9 @@
 #define __ESMGLOBAL_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubFloat.h"
-#include "EsmSubByte.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubFloat.h"
+#include "esm/EsmSubByte.h"
 
 
 /* Global types */

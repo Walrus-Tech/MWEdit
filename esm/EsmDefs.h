@@ -11,7 +11,7 @@
 #define __ESMDEFS_H
 
 
-#include "dl_err.h"
+#include "Common/dl_err.h"
 
 
 /* Number of enchantments for alchemy and enchant items */

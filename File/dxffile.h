@@ -11,7 +11,7 @@
 #define __DXFFILE_H
 
 
-#include "common/file/genfile.h"
+#include "Common/File/GenFile.h"
 
 
 /*===========================================================================

@@ -7,8 +7,8 @@
  * Implements the CTabCtrlSheet class.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "TabCtrlSheet.h"
+#include "project/StdAfx.h"
+#include "Windows/TabCtrlSheet.h"
 
 
 DEFINE_FILE("TabStrlSheet.cpp");

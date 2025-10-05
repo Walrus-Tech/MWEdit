@@ -11,7 +11,7 @@
 #define __ESMSUBAODT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Armor types */

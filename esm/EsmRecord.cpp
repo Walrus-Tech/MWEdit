@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "esmrecord.h"
-#include "esmfile.h"
-#include "EsmSubName.h"
-#include "EsmSubNameFix.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmFile.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubNameFix.h"
 
 
 DEFINE_FILE("EsmRecord.cpp");

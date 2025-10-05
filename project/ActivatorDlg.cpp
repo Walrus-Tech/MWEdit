@@ -7,9 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "ActivatorDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/ActivatorDlg.h"
 
 
 #if _DEBUG

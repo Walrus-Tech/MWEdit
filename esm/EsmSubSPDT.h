@@ -11,7 +11,7 @@
 #define __ESMSUBSPDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Spell types */

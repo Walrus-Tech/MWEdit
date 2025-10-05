@@ -12,10 +12,10 @@
  *    attribute functions accordingly.
  *
  *=========================================================================*/
-#include "esmdefs.h"
-#include "dl_str.h"
-#include "utility/namelist.h"
-#include "esmgloboptions.h"
+#include "esm/EsmDefs.h"
+#include "Common/dl_str.h"
+#include "Common/Utility/namelist.h"
+#include "project/EsmGlobOptions.h"
 
 
 DEFINE_FILE("EsmBase.cpp")

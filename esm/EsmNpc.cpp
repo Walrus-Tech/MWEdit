@@ -7,9 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmNpc.h"
-#include "EsmInfo.h"
-#include "EsmSubPos6.h"
+#include "esm/EsmNpc.h"
+#include "esm/EsmInfo.h"
+#include "esm/EsmSubPos6.h"
 #include "Common/Utility/namelist.h"
 
 

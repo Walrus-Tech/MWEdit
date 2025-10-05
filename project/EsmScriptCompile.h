@@ -11,13 +11,13 @@
 #define __ESMSCRIPTCOMPILE_H
 
 
-#include "EsmScriptDefs.h"
-#include "EsmScriptError.h"
-#include "string/SString.h"
-#include "contain/PtrArray.h"
-#include "contain/GenStack.h"
-#include "mwcustomfunc.h"
-#include "esmfile.h"
+#include "project/EsmScriptDefs.h"
+#include "project/EsmScriptError.h"
+#include "Common/String/SString.h"
+#include "Common/Contain/PtrArray.h"
+#include "Common/Contain/GenStack.h"
+#include "project/mwcustomfunc.h"
+#include "esm/EsmFile.h"
 
 #if MWEDIT_SCRIPT_MWSE
 	#include <queue>

@@ -11,10 +11,10 @@
 #define __ESMSCRFUNCDATA_H
 
 
-#include "dl_err.h"
-#include "string/sstring.h"
-#include "EsmScriptDefs.h"
-#include "file/GenFile.h"
+#include "Common/dl_err.h"
+#include "Common/String/SString.h"
+#include "project/EsmScriptDefs.h"
+#include "Common/File/GenFile.h"
 
 
 /* Max string lengths */

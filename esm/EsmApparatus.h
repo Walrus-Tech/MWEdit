@@ -11,8 +11,8 @@
 #define __ESMAPPARATUS_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubAADT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubAADT.h"
 
 
 /* Convert an apparatus type to a string */

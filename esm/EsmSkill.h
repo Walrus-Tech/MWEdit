@@ -11,10 +11,10 @@
 #define __ESMSKILL_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubLong.h"
-#include "EsmSubSKDT.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubSKDT.h"
 
 
 /*===========================================================================

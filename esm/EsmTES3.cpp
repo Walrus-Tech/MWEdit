@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esmTES3.h"
+#include "esm/EsmTES3.h"
 
 
 DEFINE_FILE("EsmTES3.cpp");

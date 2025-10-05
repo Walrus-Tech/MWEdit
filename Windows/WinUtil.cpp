@@ -20,9 +20,9 @@
  *  - Re-added the CopyTextToClipboard() and GetClipboardText() functions.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "winutil.h"
-#include "dl_file.h"
+#include "project/StdAfx.h"
+#include "Windows/WinUtil.h"
+#include "Common/dl_file.h"
 #include "process.h"
 
 

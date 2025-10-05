@@ -18,7 +18,7 @@
 #define __ESMITEM2_H
 
 
-#include "EsmItem1.h"
+#include "esm/EsmItem1.h"
 
 
 /* Class type flag (bit field) */

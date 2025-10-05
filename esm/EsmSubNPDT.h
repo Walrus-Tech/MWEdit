@@ -11,7 +11,7 @@
 #define __ESMSUBNPDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* NPC flags */

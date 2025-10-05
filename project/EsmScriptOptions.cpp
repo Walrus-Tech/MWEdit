@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "Stdafx.h"
-#include "esmscriptoptions.h"
-#include "EsmOptions.h"
-#include "windows/WinUtil.h"
+#include "project/StdAfx.h"
+#include "project/EsmScriptOptions.h"
+#include "project/EsmOptions.h"
+#include "Windows/WinUtil.h"
 
 
 DEFINE_FILE("EsmScriptOptions.cpp");

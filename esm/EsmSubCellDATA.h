@@ -11,7 +11,7 @@
 #define __ESMSUBCELLDATA_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 #define MWESM_CELLFLAG_INTERIOR       0x01

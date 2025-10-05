@@ -11,9 +11,9 @@
 #define __ESMLAND_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubLong.h"
-#include "EsmSubLong64.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubLong64.h"
 
 
 /* Default grid array size */

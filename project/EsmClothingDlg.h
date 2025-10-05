@@ -11,8 +11,8 @@
 #define __ESMCLOTHINGDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
 
 
 /*===========================================================================

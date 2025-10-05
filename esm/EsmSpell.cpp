@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmSpell.h"
+#include "esm/EsmSpell.h"
 
 
 DEFINE_FILE("EsmSpell.cpp");

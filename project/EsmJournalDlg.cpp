@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmJournalDlg.h"
-#include "MWEditDoc.h"
-#include "EsmUtils.h"
-#include "windows/WinUtil.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmJournalDlg.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmUtils.h"
+#include "Windows/WinUtil.h"
 
 
 #if _DEBUG

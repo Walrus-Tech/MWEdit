@@ -27,7 +27,7 @@
  *  - Added the MakeSpaceLabel() function.
  *
  *=========================================================================*/
-#include "dl_file.h"
+#include "Common/dl_file.h"
 #include <direct.h>
 #include <errno.h>
 //#include <limits.h>

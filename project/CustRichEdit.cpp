@@ -7,10 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "CustRichEdit.h"
-#include "dl_err.h"
+#include "project/CustRichEdit.h"
+
 #include "afxrich.h"
+
+#include "Common/dl_err.h"
+#include "project/StdAfx.h"
 
 
 #if _DEBUG

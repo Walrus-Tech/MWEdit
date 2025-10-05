@@ -11,11 +11,11 @@
 #define __ESMRECORD_H
 
 
-#include "EsmSubBase.h"
-#include "EsmSubName.h"
-#include "EsmSubLong.h"
-#include "EsmSubNameFix.h"
-#include "contain/dl_map.h"
+#include "esm/EsmSubBase.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubNameFix.h"
+#include "Common/Contain/dl_map.h"
 
 
 /* Offset of the recordsize from the end of the record header */

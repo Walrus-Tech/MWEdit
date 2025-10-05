@@ -11,9 +11,9 @@
 #define __ESMLIGHTDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
-#include "ColorStatic1.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
+#include "project/ColorStatic1.h"
 
 
 /*===========================================================================

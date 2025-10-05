@@ -11,9 +11,9 @@
 #define __ESMDIALOGDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
-#include "EsmListCtrl.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
+#include "project/EsmListCtrl.h"
 
 
 /* Used for resizing the window and controls */

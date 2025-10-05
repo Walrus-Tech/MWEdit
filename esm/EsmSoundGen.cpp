@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmSoundGen.h"
+#include "esm/EsmSoundGen.h"
 
 
 DEFINE_FILE("EsmSoundGen.cpp");

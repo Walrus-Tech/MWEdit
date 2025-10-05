@@ -8,12 +8,14 @@
  * non-standard script extenions.
  *
  *=========================================================================*/
-#include <stdafx.h>
-#include "esmscriptcompile.h"
-#include "ctype.h"
-#include "EsmGlobal.h"
-#include "MwEditDoc.h"
-#include "EsmGlobOptions.h"
+//#include <stdafx.h>
+#include <ctype.h>
+
+#include "project/StdAfx.h"
+#include "project/EsmScriptCompile.h"
+#include "esm/EsmGlobal.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmGlobOptions.h"
 
 
 DEFINE_FILE("EsmScriptCompileEx.cpp");

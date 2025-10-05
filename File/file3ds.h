@@ -11,8 +11,8 @@
 #define __FILE3DS_H
 
 
-#include "common/file/genfile.h"
-#include "images/rgbpal.h"
+#include "Common/File/GenFile.h"
+#include "Common/Images/rgbpal.h"
 
 
 /* Flags for the 3DS chunk types */

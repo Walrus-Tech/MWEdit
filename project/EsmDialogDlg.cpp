@@ -11,11 +11,11 @@
  *    list to check for any 'one-way' links.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmDialogDlg.h"
-#include "EsmInfoDlg.h"
-#include "EsmJournalDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmDialogDlg.h"
+#include "project/EsmInfoDlg.h"
+#include "project/EsmJournalDlg.h"
 
 
 #if _DEBUG

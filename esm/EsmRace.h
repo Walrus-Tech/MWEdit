@@ -11,11 +11,11 @@
 #define __ESMRACE_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubName.h"
-#include "EsmSubName32.h"
-#include "EsmSubRADT.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubName32.h"
+#include "esm/EsmSubRADT.h"
 
 
 /*===========================================================================

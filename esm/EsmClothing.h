@@ -11,9 +11,9 @@
 #define __ESMCLOTHING_H
 
 
-#include "EsmItem3.h"
-#include "EsmSubCTDT.h"
-#include "EsmSubByte.h"
+#include "esm/EsmItem3.h"
+#include "esm/EsmSubCTDT.h"
+#include "esm/EsmSubByte.h"
 
 
 /* Number of body part definitions allowed in a clothing record */
