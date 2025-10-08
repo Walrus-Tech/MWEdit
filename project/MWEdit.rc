@@ -4,7 +4,7 @@
 
 // Generated Help ID header file
 #define APSTUDIO_HIDDEN_SYMBOLS
-#include "project/resource.hm"
+#include "resource.hm"
 #undef APSTUDIO_HIDDEN_SYMBOLS
 
 #define APSTUDIO_READONLY_SYMBOLS
