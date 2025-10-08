@@ -10,7 +10,7 @@ common_src = ['Common/Contain/GenStack.cpp',
               'Common/Contain/temarray.cpp',
               'Common/File/CfgFile.cpp',
               'Common/File/FileBuffer.cpp',
-              'Common/File/GenFile.cpp'
+              'Common/File/GenFile.cpp',
               'Common/File/GenFind.cpp',
               'Common/Images/rgbpal.cpp',
               'Common/String/SSArray.cpp',
