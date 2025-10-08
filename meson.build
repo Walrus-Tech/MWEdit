@@ -206,7 +206,7 @@ project_src = ['project/ActivatorDlg.cpp',
                'project/splitterwnd.cpp']
 
 windows = import('windows')
-rc_data = windows.compile_resources('project/MWedit.rc')
+rc_data = windows.compile_resources('project/MWEdit.rc')
 
 executable('MWEdit',
            sources : [common_src,
