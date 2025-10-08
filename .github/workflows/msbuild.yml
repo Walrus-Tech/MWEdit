@@ -11,7 +11,7 @@ on:
   pull_request:
     branches: [ "master", "meson" ]
 
-env:
+#env:
   # Path to the solution file relative to the root of the project.
 #  SOLUTION_FILE_PATH: project/MWEdit.sln
 
@@ -20,8 +20,8 @@ env:
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
 #  BUILD_CONFIGURATION: Release
 
-permissions:
-  contents: read
+#permissions:
+#  contents: read
 
 jobs:
   build:
