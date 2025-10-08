@@ -7,7 +7,7 @@ name: MSBuild
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "meson" ]
   pull_request:
     branches: [ "master", "meson" ]
 
