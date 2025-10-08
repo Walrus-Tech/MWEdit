@@ -13,9 +13,6 @@
 #include "Common/Contain/listfile.h"
 
 
-DEFINE_FILE();
-
-
 /*===========================================================================
  *
  * Class CListFile Constructor
