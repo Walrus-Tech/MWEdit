@@ -1,7 +1,7 @@
 project('MWEdit',
         'cpp',
         version: '0.6.3',
-        default_options: ['warning_level=3',
+        default_options: ['warning_level=0',
                           'cpp_std=c++20'])
 
 common_src = ['Common/Contain/GenStack.cpp',
