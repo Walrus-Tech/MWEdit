@@ -10,9 +10,6 @@
 #include "Common/Utility/profile.h"
 
 
-DEFINE_FILE();
-
-
 /* Only open log file in debug builds */
 #if _DEBUG
 	/* Define and automatically open the profile log file */
