@@ -65,7 +65,7 @@ typedef struct hiclock_t {
 /* High-resolution counter copy operator */
 inline hiclock_t &hiclock_t::operator =(const hiclock_t &Value) {
 	CountType = Value.CountType;
-#if WIN32
+#if _WIN32
 	TimerCount = Value.TimerCount;
 #else
 	ClockCount = Value.ClockCount;
@@ -75,7 +75,7 @@ inline hiclock_t &hiclock_t::operator =(const hiclock_t &Value) {
 
 /* High-resolution counter copy operator from a long value */
 inline hiclock_t &hiclock_t::operator =(const ulong &lValue) {
-#if WIN32
+#if _WIN32
 	TimerCount.QuadPart = (LONGLONG)lValue;
 #else
 	ClockCount = (clock_t)lValue;
