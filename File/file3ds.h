@@ -64,7 +64,7 @@
 typedef struct {
 	ushort ID;
 	int Flags;
-	char *pName;
+	const char *pName;
 } chunk3ds_t;
 
 /* Chunk stack record type */
