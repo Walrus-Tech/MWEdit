@@ -278,7 +278,7 @@ int C3dsFile::GetChunkFlag(const ushort ChunkID) {
  * returned, never NULL.
  *
  *=========================================================================*/
-char *C3dsFile::GetChunkName(const ushort ChunkID) {
+const char *C3dsFile::GetChunkName(const ushort ChunkID) {
 	chunk3ds_t *pChunk = FindChunk(ChunkID);
 
 	if (pChunk == NULL) {

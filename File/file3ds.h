@@ -152,7 +152,7 @@ class C3dsFile : public CGenFile {
 	bool EndTexVertChunk(const short Count);
 
 	/* Attempts to find a chunk info structure */
-	static char *GetChunkName(const ushort ChunkID);
+	static const char *GetChunkName(const ushort ChunkID);
 	static int GetChunkFlag(const ushort ChunkID);
 	static chunk3ds_t *FindChunk(const ushort ChunkID);
 
