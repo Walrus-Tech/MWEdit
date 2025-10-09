@@ -44,7 +44,7 @@ class CDxfFile : public CGenFile {
 	                  const int Flags,
 	                  const int LayerNumber);
 	bool WriteVertex(const float X, const float Y, const float Z, const int Flags);
-	bool WriteVertex const float X, const float Y, const float Z);
+	bool WriteVertex(const float X, const float Y, const float Z);
 	bool Write3DVertex(const float X, const float Y, const float Z);
 	bool Write3DVertexL(const float X, const float Y, const float Z, const int LayerNumber);
 
