@@ -1,8 +1,8 @@
 project('MWEdit',
         'cpp',
-        version : '0.6.3',
-        default_options : ['warning_level=3',
-                           'cpp_std=c++20'])
+        version: '0.6.3',
+        default_options: ['warning_level=3',
+                          'cpp_std=c++20'])
 
 common_src = ['Common/Contain/GenStack.cpp',
               'Common/Contain/listfile.cpp',
@@ -205,20 +205,23 @@ project_src = ['project/ActivatorDlg.cpp',
                'project/mwcustomfunc.cpp',
                'project/splitterwnd.cpp']
 
+add_project_arguments('-D_AFXDLL',
+                      language: 'cpp')
+
 windows = import('windows')
 rc_data = windows.compile_resources('project/MWEdit.rc')
 
 executable('MWEdit',
-           sources : [common_src,
-                      file_src,
-                      windows_src,
-                      esm_src,
-                      project_src,
-                      rc_data,
-                      'project/MWEdit.cpp'],
-           win_subsystem : 'windows',
-           install : true,
-           install_dir : 'MWEdit')
+           sources: [common_src,
+                     file_src,
+                     windows_src,
+                     esm_src,
+                     project_src,
+                     rc_data,
+                     'project/MWEdit.cpp'],
+           win_subsystem: 'windows',
+           install: true,
+           install_dir: 'MWEdit')
 
 install_data(['IL/DevIL.dll',
               'IL/ilu.dll',
@@ -228,4 +231,4 @@ install_data(['IL/DevIL.dll',
               'project/Functions.dat',
               'project/mweditextrafile.esp',
               'project/MwEditScriptTest.esp'],
-              install_dir : 'MWEdit')
+              install_dir: 'MWEdit')
