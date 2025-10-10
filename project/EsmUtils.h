@@ -10,6 +10,7 @@
 #ifndef __ESMUTILS_H
 #define __ESMUTILS_H
 
+#include <afxwin.h>
 
 #include "Common/String/SString.h"
 #include "esm/mwcommon.h"
