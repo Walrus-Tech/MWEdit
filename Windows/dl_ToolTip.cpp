@@ -202,7 +202,7 @@ void CDlToolTip::OnPaint() {
  * Class CDlToolTip Event - void OnTimer (nIDEvent);
  *
  *=========================================================================*/
-void CDlToolTip::OnTimer(UINT nIDEvent) {
+void CDlToolTip::OnTimer(UINT_PTR nIDEvent) {
 	HRGN hRegion;
 	CSize WindowSize;
 	CDC *pDC;
