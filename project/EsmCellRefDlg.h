@@ -11,7 +11,7 @@
 #define __ESMCELLREFDLG_H
 
 
-#include "project/EsmSubCellRefDlg.h"
+#include "esm/EsmSubCellRef.h"
 #include "esm/EsmCell.h"
 #include "Common/Contain/PtrArray.h"
 
