@@ -198,7 +198,7 @@ class CEsmScriptDlg : public CEsmRecDialog {
 	afx_msg void OnScriptPaste();
 	afx_msg void OnScriptFuncHelp();
 	afx_msg void OnScriptReplacetext();
-	afx_msg LONG OnFindReplace(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnFindReplace(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnScriptUndo();
 	afx_msg void OnUpdateScriptUndo(CCmdUI *pCmdUI);
 	afx_msg void OnPastebutton();

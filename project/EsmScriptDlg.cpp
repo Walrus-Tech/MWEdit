@@ -776,7 +776,7 @@ void CEsmScriptDlg::OnContextMenu(CWnd *pWnd, CPoint Point) {
     CHARRANGE chrgText;  // range in which text is found
 
  *=========================================================================*/
-LONG CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
+LRESULT CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
 	CFindReplaceDialog *pDialog = CFindReplaceDialog::GetNotifier(lParam);
 	FINDTEXTEX FindTextData;
 	CString Buffer;
