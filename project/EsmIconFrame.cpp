@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StAafx.h"
+#include "project/StdAfx.h"
 #include "project/EsmIconFrame.h"
 #include "IL/il.h"
 #include "IL/ilut.h"
