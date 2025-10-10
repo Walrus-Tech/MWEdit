@@ -15,6 +15,8 @@
  *    record is editted.
  *
  *=========================================================================*/
+#include <afxext.h>
+
 #include "project/StdAfx.h"
 #include "project/EsmRecDialog.h"
 #include "project/EsmDlgArray.h"

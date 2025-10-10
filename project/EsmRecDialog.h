@@ -10,6 +10,7 @@
 #ifndef __ESMRECDIALOG_H
 #define __ESMRECDIALOG_H
 
+#include <afxext.h>
 
 #include "esm/EsmFile.h"
 #include "project/EsmUtils.h"
