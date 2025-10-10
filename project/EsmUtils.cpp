@@ -19,7 +19,7 @@
 #include "esm/EsmArmor.h"
 #include "project/MWEditDoc.h"
 #include "Windows/WinUtil.h"
-#include "project/EsmGlobOtions.h"
+#include "project/EsmGlobOptions.h"
 
 
 DEFINE_FILE("EsmUtils.cpp");
