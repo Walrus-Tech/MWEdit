@@ -10,6 +10,7 @@
 #ifndef __WINUTIL_H
 #define __WINUTIL_H
 
+#include <afxcmn.h>
 
 #include "Common/dl_err.h"
 
