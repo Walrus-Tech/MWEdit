@@ -19,10 +19,10 @@
 #include "project/mwcustomfunc.h"
 #include "esm/EsmFile.h"
 
-#if MWEDIT_SCRIPT_MWSE
-	#include <queue>
-	#include <stack>
-#endif
+//#if MWEDIT_SCRIPT_MWSE
+#include <queue>
+#include <stack>
+//#endif
 
 
 /* Token flags */
@@ -196,7 +196,7 @@ class CEsmScriptCompile {
 	emscrmsglevel_t m_MsgLevels[ESMSCR_MAX_MESSAGES];
 	int m_NumMsgLevels;
 
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 
 	CSString m_refObject;
 
@@ -209,7 +209,7 @@ class CEsmScriptCompile {
 	/* Extended function if stack */
 	std::stack<esmscrifblock_t *> m_XIfStack;
 
-#endif
+//#endif
 
 	/* Expression stack */
 	CGenStack m_ExprStack;
@@ -546,7 +546,7 @@ class CEsmScriptCompile {
 	int OutputEffect(const int EffectID);
 
 
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 
 	int ParseFuncArgX();
 
@@ -574,7 +574,7 @@ class CEsmScriptCompile {
 	int OutputXElse();
 	int OutputXElseIf();
 	int OutputXEndIf();
-#endif
+//#endif
 
 	/* Output extended while commands */
 	int OutputXWhile();

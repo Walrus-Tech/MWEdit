@@ -11,7 +11,7 @@
 #define __ESMSCRIPTDEFS_H
 
 
-#define MWEDIT_SCRIPT_MWSE
+//#define MWEDIT_SCRIPT_MWSE
 
 
 #include "Common/dl_err.h"
@@ -75,13 +75,13 @@
 #define ESMSCR_TOKEN_SYMBOLID        34
 #define ESMSCR_TOKEN_RESET           35
 
-#if MWEDIT_SCRIPT_MWSE
-	#define ESMSCR_TOKEN_FUNCTIONX   36
-	#define ESMSCR_TOKEN_SETX        37
-	#define ESMSCR_TOKEN_IFX         38
-	#define ESMSCR_TOKEN_WHILEX      39
-	#define ESMSCR_FUNC_LOCALVAR     0x00010000
-#endif
+//#if MWEDIT_SCRIPT_MWSE
+#define ESMSCR_TOKEN_FUNCTIONX   36
+#define ESMSCR_TOKEN_SETX        37
+#define ESMSCR_TOKEN_IFX         38
+#define ESMSCR_TOKEN_WHILEX      39
+#define ESMSCR_FUNC_LOCALVAR     0x00010000
+//#endif
 
 /* Function flags */
 #define ESMSCR_FUNC_SHORTVAR         0x00000001
@@ -94,10 +94,10 @@
 #define ESMSCR_FUNC_BAD              0x00002000
 #define ESMSCR_FUNC_VAR              0x00004000
 
-#if MWEDIT_SCRIPT_MWSE
-	#define ESMSCR_FUNC_MWSE         0x00008000
-	#define ESMSCR_FUNC_MWE          0x00010000
-#endif
+//#if MWEDIT_SCRIPT_MWSE
+#define ESMSCR_FUNC_MWSE         0x00008000
+#define ESMSCR_FUNC_MWE          0x00010000
+//#endif
 
 /* Function argument flags */
 #define ESMSCR_FUNC_BYTE             0x00000001
@@ -146,28 +146,28 @@
 #define MSG_SCRIPTFRM_VIEWERROR      (WM_USER + 1074)
 
 
-#if MWEDIT_SCRIPT_MWSE
-	#define MWESM_OPCODE_COPYFROMSTACK        0x3807
-	#define MWESM_OPCODE_JUMP                 0x3809
-	#define MWESM_OPCODE_JUMPSHORT            0x380a
-	#define MWESM_OPCODE_JUMPSHORTZERO        0x380c
-	#define MWESM_OPCODE_JUMPSHORTNOTZERO     0x380e
-	#define MWESM_OPCODE_JUMPSHORTNOTNEGATIVE 0x3817
-	#define MWESM_OPCODE_JUMPSHORTNEGATIVE    0x3819
-	#define MWESM_OPCODE_SUB                  0x3821
-	#define MWESM_OPCODE_MUL                  0x3822
-	#define MWESM_OPCODE_FSUB                 0x382b
-	#define MWESM_OPCODE_FMUL                 0x382c
-	#define MWESM_OPCODE_POP                  0x380f
-	#define MWESM_OPCODE_PUSH                 0x3811
-	#define MWESM_OPCODE_PUSHB                0x3812
-	#define MWESM_OPCODE_PUSHS                0x3813
-	#define MWESM_OPCODE_GETLOCAL             0x3c00
-	#define MWESM_OPCODE_SETLOCAL             0x3c02
-	#define MWESM_OPCODE_SETREF               0x3c18
+//#if MWEDIT_SCRIPT_MWSE
+#define MWESM_OPCODE_COPYFROMSTACK        0x3807
+#define MWESM_OPCODE_JUMP                 0x3809
+#define MWESM_OPCODE_JUMPSHORT            0x380a
+#define MWESM_OPCODE_JUMPSHORTZERO        0x380c
+#define MWESM_OPCODE_JUMPSHORTNOTZERO     0x380e
+#define MWESM_OPCODE_JUMPSHORTNOTNEGATIVE 0x3817
+#define MWESM_OPCODE_JUMPSHORTNEGATIVE    0x3819
+#define MWESM_OPCODE_SUB                  0x3821
+#define MWESM_OPCODE_MUL                  0x3822
+#define MWESM_OPCODE_FSUB                 0x382b
+#define MWESM_OPCODE_FMUL                 0x382c
+#define MWESM_OPCODE_POP                  0x380f
+#define MWESM_OPCODE_PUSH                 0x3811
+#define MWESM_OPCODE_PUSHB                0x3812
+#define MWESM_OPCODE_PUSHS                0x3813
+#define MWESM_OPCODE_GETLOCAL             0x3c00
+#define MWESM_OPCODE_SETLOCAL             0x3c02
+#define MWESM_OPCODE_SETREF               0x3c18
 
-	#define MWESM_OPCODE_SUB                  0x3821
-#endif
+#define MWESM_OPCODE_SUB                  0x3821
+//#endif
 
 
 /* Holds information about a script function */

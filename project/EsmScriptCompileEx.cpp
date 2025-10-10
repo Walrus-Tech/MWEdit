@@ -21,7 +21,7 @@
 DEFINE_FILE("EsmScriptCompileEx.cpp");
 
 
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 
 /*===========================================================================
  *
@@ -472,4 +472,4 @@ int CEsmScriptCompile::OutputXEndWhile() {
 	return 0;
 }
 
-#endif /* MWEDIT_SCRIPT_MWSE */
+//#endif /* MWEDIT_SCRIPT_MWSE */
