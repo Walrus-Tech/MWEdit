@@ -20,11 +20,11 @@
 
 
 /* Path functions */
-const TCHAR *GetMWDataPath();
-void SetMWDataPath(const TCHAR *pString);
+//const TCHAR *GetMWDataPath();
+//void SetMWDataPath(const TCHAR *pString);
 
 /* Attempt to update the Morrowind paths from ther registry */
-void FindMWRegistryPath();
+//void FindMWRegistryPath();
 
 
 #endif
