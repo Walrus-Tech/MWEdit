@@ -40,7 +40,7 @@ jobs:
 
     - name: Prepare Build
 #      run: meson setup --buildtype release --vsenv build
-      run: meson setup --buildtype release --backend vs
+      run: meson setup --buildtype release --backend vs build
 
     - name: Run Build
       run: meson compile -v -C build
