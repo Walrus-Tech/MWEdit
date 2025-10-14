@@ -205,6 +205,16 @@ project_src = ['project/ActivatorDlg.cpp',
                'project/mwcustomfunc.cpp',
                'project/splitterwnd.cpp']
 
+cc = meson.get_compiler('cpp')
+
+devil_dep = declare_dependency(dependencies : [cc.find_library('DevIL'),
+                                               cc.find_library('ilu'),
+                                               cc.find_library('ilu-l'),
+                                               cc.find_library('ILUT')],
+                               dirs : ['IL'),
+                               include_directories : include_directories('IL'),
+)
+
 add_project_arguments('-D_AFXDLL',
                       language: 'cpp')
 
@@ -219,6 +229,7 @@ executable('MWEdit',
                      project_src,
                      rc_data,
                      'project/MWEdit.cpp'],
+           dependencies: devil_dep,
            win_subsystem: 'windows',
            install: true,
            install_dir: 'MWEdit')
