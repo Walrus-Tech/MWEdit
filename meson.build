@@ -13,15 +13,14 @@ il_lib_dir = join_paths(project_base, 'IL')
 
 cc = meson.get_compiler('cpp')
 
-il_dep = declare_dependency(dependencies : [cc.find_library('DevIL',
+il_dep = [cc.find_library('DevIL',
                                                             dirs : il_lib_dir),
                                             cc.find_library('ilu',
                                                             dirs : il_lib_dir),
                                             cc.find_library('ilu-l',
                                                             dirs : il_lib_dir),
                                             cc.find_library('ILUT',
-                                                            dirs : il_lib_dir)],
-                            include_directories : 'IL')
+                                                            dirs : il_lib_dir)]
 
 common_src = ['Common/Contain/GenStack.cpp',
               'Common/Contain/listfile.cpp',
