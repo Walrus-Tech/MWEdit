@@ -239,6 +239,7 @@ executable('MWEdit',
                      rc_data,
                      'project/MWEdit.cpp'],
            dependencies: il_dep,
+           link_with: il_dep,
            win_subsystem: 'windows',
            install: true,
            install_dir: 'MWEdit')
