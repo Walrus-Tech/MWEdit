@@ -8,20 +8,20 @@ project('MWEdit',
 project_base = meson.current_source_dir()
 
 # Construct the full path to the "include" subdirectory
-il_include_dir = join_paths(project_base, 'IL')
+#il_include_dir = join_paths(project_base, 'IL')
 il_lib_dir = join_paths(project_base, 'IL')
 
 cc = meson.get_compiler('cpp')
 
 il_dep = declare_dependency(dependencies : [cc.find_library('DevIL',
                                                                dirs : il_lib_dir),
-                                               cc.find_library('ilu',
+                                            cc.find_library('ilu',
                                                                dirs : il_lib_dir),
-                                               cc.find_library('ilu-l',
+                                            cc.find_library('ilu-l',
                                                                dirs : il_lib_dir),
-                                               cc.find_library('ILUT',
+                                            cc.find_library('ILUT',
                                                                dirs : il_lib_dir)],
-                               include_directories : il_include_dir)
+                               include_directories : 'IL')
 
 common_src = ['Common/Contain/GenStack.cpp',
               'Common/Contain/listfile.cpp',
