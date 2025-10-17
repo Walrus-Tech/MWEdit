@@ -23,8 +23,8 @@
  *  - StringToBoolean() modified to convert Yes/No values.
  *
  *=========================================================================*/
-#include "dl_str.h"
-#include "dl_chr.h"
+#include "Common/dl_str.h"
+#include "Common/dl_chr.h"
 #include <ctype.h>
 
 

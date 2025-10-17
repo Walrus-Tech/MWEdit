@@ -7,10 +7,10 @@
  * Implements the CEsmOptions class.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "esmoptions.h"
-#include "dl_file.h"
-#include "esmutils.h"
+#include "project/StdAfx.h"
+#include "project/EsmOptions.h"
+#include "Common/dl_file.h"
+#include "project/EsmUtils.h"
 
 
 DEFINE_FILE("EsmOptions.cpp");

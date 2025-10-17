@@ -10,6 +10,7 @@
 #ifndef __CUSTRICHEDIT_H
 #define __CUSTRICHEDIT_H
 
+#include <afxcmn.h>
 
 /* Custom events */
 #define CRE_UPDATEPOS       0x8001

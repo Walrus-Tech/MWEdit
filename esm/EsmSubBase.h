@@ -11,9 +11,9 @@
 #define __ESMSUBBASE_H
 
 
-#include "file/GenFile.h"
-#include "EsmDefs.h"
-#include "contain/PtrArray.h"
+#include "Common/File/GenFile.h"
+#include "esm/EsmDefs.h"
+#include "Common/Contain/PtrArray.h"
 
 
 /* The record and sub-record type */

@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "Resource.h"
-#include "EsmArmorDlg.h"
-#include "EsmDlgArray.h"
-#include "ChildFrmFix.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/Resource.h"
+#include "project/EsmArmorDlg.h"
+#include "project/EsmDlgArray.h"
+#include "project/ChildFrmFix.h"
 
 
 #if _DEBUG

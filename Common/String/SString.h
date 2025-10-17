@@ -12,9 +12,9 @@
 #define __SSTRING_H
 
 
-#include "dl_base.h"
-#include "dl_mem.h"
-#include "dl_str.h"
+#include "Common/dl_base.h"
+#include "Common/dl_mem.h"
+#include "Common/dl_str.h"
 
 
 /* Number of extra bytes to allocate when creating strings */

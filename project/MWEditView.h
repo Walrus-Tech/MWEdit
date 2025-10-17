@@ -11,8 +11,8 @@
 #define __MWEditView_H
 
 
-#include "EsmListCtrl.h"
-#include "EsmDlgArray.h"
+#include "project/EsmListCtrl.h"
+#include "project/EsmDlgArray.h"
 
 
 /* Object tab data */

@@ -11,8 +11,8 @@
 #define __ESMSCRTEMPPAGE1_H
 
 
-#include "dl_err.h"
-#include "EsmDlgArray.h"
+#include "Common/dl_err.h"
+#include "project/EsmDlgArray.h"
 
 
 /* String sizes */

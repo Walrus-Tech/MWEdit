@@ -11,7 +11,7 @@
 #define __SCRIPTERRORDLG_H
 
 
-#include "EsmScriptError.h"
+#include "project/EsmScriptError.h"
 
 
 /* Return codes */

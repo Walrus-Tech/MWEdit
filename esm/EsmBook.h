@@ -11,8 +11,8 @@
 #define __ESMBOOK_H
 
 
-#include "EsmItem3.h"
-#include "EsmSubBKDT.h"
+#include "esm/EsmItem3.h"
+#include "esm/EsmSubBKDT.h"
 
 
 /*===========================================================================

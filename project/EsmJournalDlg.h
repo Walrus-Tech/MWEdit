@@ -11,8 +11,8 @@
 #define __ESMJOURNALDLG_H
 
 
-#include "EsmInfo.h"
-#include "contain/ptrarray.h"
+#include "esm/EsmInfo.h"
+#include "Common/Contain/PtrArray.h"
 
 
 class CMWEditDoc;

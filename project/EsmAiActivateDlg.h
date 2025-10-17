@@ -11,7 +11,7 @@
 #define __ESMAIACTIVATEDLG_H
 
 
-#include "EsmSubAI_A.h"
+#include "esm/EsmSubAI_A.h"
 
 
 /*===========================================================================

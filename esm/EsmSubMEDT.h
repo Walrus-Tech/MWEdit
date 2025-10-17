@@ -11,7 +11,7 @@
 #define __ESMSUBMEDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Magic effect flags */

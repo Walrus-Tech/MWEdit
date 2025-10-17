@@ -10,8 +10,9 @@
 #ifndef __WINUTIL_H
 #define __WINUTIL_H
 
+#include <afxcmn.h>
 
-#include "dl_err.h"
+#include "Common/dl_err.h"
 
 
 /* Options for the MakeTimeString() function, bit field values */

@@ -11,8 +11,8 @@
 #define __ESMSCRFUNCARRAY_H
 
 
-#include "EsmScrFuncData.h"
-#include "contain/PtrArray.h"
+#include "project/EsmScrFuncData.h"
+#include "Common/Contain/PtrArray.h"
 
 
 /* Default data file */

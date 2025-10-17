@@ -11,8 +11,8 @@
 #define __ESMSUBNAME512_H
 
 
-#include "EsmSubBase.h"
-#include "string/SString.h"
+#include "esm/EsmSubBase.h"
+#include "Common/String/SString.h"
 
 
 /*===========================================================================

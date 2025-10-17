@@ -11,14 +11,14 @@
 #define __ESMNPCDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
-#include "windows/TabCtrlSheet.h"
-#include "EsmNpcPage1.h"
-#include "EsmNpcPage2.h"
-#include "EsmNpcPage3.h"
-#include "EsmNpcPage4.h"
-#include "EsmNpcPage5.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
+#include "Windows/TabCtrlSheet.h"
+#include "project/EsmNpcPage1.h"
+#include "project/EsmNpcPage2.h"
+#include "project/EsmNpcPage3.h"
+#include "project/EsmNpcPage4.h"
+#include "project/EsmNpcPage5.h"
 
 
 /*===========================================================================

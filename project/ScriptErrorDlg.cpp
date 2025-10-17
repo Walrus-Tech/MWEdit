@@ -7,11 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "ScriptErrorDlg.h"
-#include "EsmScriptDefs.h"
-#include "EsmScrFuncData.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/ScriptErrorDlg.h"
+#include "project/EsmScriptDefs.h"
+#include "project/EsmScrFuncData.h"
 
 
 #if _DEBUG

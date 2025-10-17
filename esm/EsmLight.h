@@ -11,8 +11,8 @@
 #define __ESMLIGHT_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubLHDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubLHDT.h"
 
 
 const TCHAR *GetESMLightFlicker(const int Flags);

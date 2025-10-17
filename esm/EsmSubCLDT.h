@@ -11,7 +11,7 @@
 #define __ESMSUBCLDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Class data flags */

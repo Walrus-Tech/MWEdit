@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmNpcPage1.h"
-#include "dl_Err.h"
-#include "MWEditDoc.h"
-#include "EsmDlgArray.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmNpcPage1.h"
+#include "Common/dl_Err.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmDlgArray.h"
 
 
 #if _DEBUG

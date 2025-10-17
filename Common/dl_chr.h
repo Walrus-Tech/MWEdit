@@ -12,10 +12,10 @@
 #define __DL_CHR_H
 
 
-#include "dl_base.h"
-#include "dl_mem.h"
-#include "dl_err.h"
-#include "dl_log.h"
+#include "Common/dl_base.h"
+#include "Common/dl_mem.h"
+#include "Common/dl_err.h"
+#include "Common/dl_log.h"
 #include <string.h>
 
 #if _WIN32

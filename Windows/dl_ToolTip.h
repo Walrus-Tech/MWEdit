@@ -11,7 +11,7 @@
 #define __DL_TOOLTIP_H
 
 
-#include "WinUtil.h"
+#include "Windows/WinUtil.h"
 
 
 /* Timer events */
@@ -54,7 +54,7 @@ class CDlToolTip : CWnd {
 	//{{AFX_MSG(CDlToolTip)
 	afx_msg void OnPaint();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnDestroy();
 	//}}AFX_MSG
 

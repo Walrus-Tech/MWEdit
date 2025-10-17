@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmAiEscortDlg.h"
-#include "EsmUtils.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmAiEscortDlg.h"
+#include "project/EsmUtils.h"
 
 
 #if _DEBUG

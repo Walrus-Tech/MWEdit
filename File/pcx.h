@@ -11,8 +11,8 @@
 #define __PCX_H
 
 
-#include "common/images/rgbpal.h"
-#include "common/file/genfile.h"
+#include "Common/Images/rgbpal.h"
+#include "Common/File/GenFile.h"
 
 
 /* PCX specific error codes */

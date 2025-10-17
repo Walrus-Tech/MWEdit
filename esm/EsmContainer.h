@@ -11,10 +11,10 @@
 #define __ESMCONTAINER_H
 
 
-#include "EsmItem1.h"
-#include "EsmSubCNDT.h"
-#include "EsmSubLong.h"
-#include "EsmSubNPCO.h"
+#include "esm/EsmItem1.h"
+#include "esm/EsmSubCNDT.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubNPCO.h"
 
 
 /* Flag bit fields */

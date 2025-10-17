@@ -7,18 +7,18 @@
  * Implementation of the CEsmScriptDlg class.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "resource.h"
-#include "EsmScriptDlg.h"
-#include "MwEditDoc.h"
-#include "dl_err.h"
-#include "dl_str.h"
-#include "dl_time.h"
-#include "string/SString.h"
-#include "windows/WinUtil.h"
-#include "ChildFrmScript.h"
-#include "EsmScriptOptions.h"
-#include "MWEdit.h"
+#include "project/StdAfx.h"
+#include "project/Resource.h"
+#include "project/EsmScriptDlg.h"
+#include "project/MWEditDoc.h"
+#include "Common/dl_err.h"
+#include "Common/dl_str.h"
+#include "Common/dl_time.h"
+#include "Common/String/SString.h"
+#include "Windows/WinUtil.h"
+#include "project/ChildFrmScript.h"
+#include "project/EsmScriptOptions.h"
+#include "project/MWEdit.h"
 //#include "afxole.h"
 
 
@@ -776,7 +776,7 @@ void CEsmScriptDlg::OnContextMenu(CWnd *pWnd, CPoint Point) {
     CHARRANGE chrgText;  // range in which text is found
 
  *=========================================================================*/
-LONG CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
+LRESULT CEsmScriptDlg::OnFindReplace(WPARAM wParam, LPARAM lParam) {
 	CFindReplaceDialog *pDialog = CFindReplaceDialog::GetNotifier(lParam);
 	FINDTEXTEX FindTextData;
 	CString Buffer;

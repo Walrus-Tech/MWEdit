@@ -9,19 +9,19 @@
 #define __ESMNPC_H
 
 
-#include "EsmItem1.h"
-#include "EsmSubName.h"
-#include "EsmSubNPDT.h"
-#include "EsmSubNPCO.h"
-#include "EsmSubNPCS.h"
-#include "EsmSubLong.h"
-#include "EsmSubAIDT.h"
-#include "EsmSubFloat.h"
-#include "EsmSubAI_A.h"
-#include "EsmSubAI_E.h"
-#include "EsmSubAI_F.h"
-#include "EsmSubAI_T.h"
-#include "EsmSubAI_W.h"
+#include "esm/EsmItem1.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubNPDT.h"
+#include "esm/EsmSubNPCO.h"
+#include "esm/EsmSubNPCS.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubAIDT.h"
+#include "esm/EsmSubFloat.h"
+#include "esm/EsmSubAI_A.h"
+#include "esm/EsmSubAI_E.h"
+#include "esm/EsmSubAI_F.h"
+#include "esm/EsmSubAI_T.h"
+#include "esm/EsmSubAI_W.h"
 
 
 class CEsmInfo;

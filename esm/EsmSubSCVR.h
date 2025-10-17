@@ -11,7 +11,7 @@
 #define __ESMSUBSCVR_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Base size without the optional string */

@@ -7,10 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "common/utility/profile.h"
-
-
-DEFINE_FILE();
+#include "Common/Utility/profile.h"
 
 
 /* Only open log file in debug builds */

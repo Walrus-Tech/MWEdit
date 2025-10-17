@@ -14,12 +14,12 @@
  *    +/- key.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmCreaturePage3.h"
-#include "dl_Err.h"
-#include "MWEditDoc.h"
-#include "EsmDlgArray.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmCreaturePage3.h"
+#include "Common/dl_Err.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmDlgArray.h"
 
 
 #if _DEBUG

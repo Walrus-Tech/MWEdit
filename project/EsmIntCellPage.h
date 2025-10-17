@@ -11,8 +11,8 @@
 #define __ESMINTCELLPAGE_H
 
 
-#include "ColorStatic1.h"
-#include "EsmFile.h"
+#include "project/ColorStatic1.h"
+#include "esm/EsmFile.h"
 
 
 class CEsmRecDialog;

@@ -11,8 +11,8 @@
 #define __ESMOPTIONSDLG_H
 
 
-#include "EsmOptions.h"
-#include "ColorStatic1.h"
+#include "project/EsmOptions.h"
+#include "project/ColorStatic1.h"
 
 
 /*===========================================================================

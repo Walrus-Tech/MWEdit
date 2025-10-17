@@ -7,8 +7,8 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "dl_tooltip.h"
+#include "project/StdAfx.h"
+#include "Windows/dl_tooltip.h"
 
 
 #ifdef _DEBUG
@@ -202,7 +202,7 @@ void CDlToolTip::OnPaint() {
  * Class CDlToolTip Event - void OnTimer (nIDEvent);
  *
  *=========================================================================*/
-void CDlToolTip::OnTimer(UINT nIDEvent) {
+void CDlToolTip::OnTimer(UINT_PTR nIDEvent) {
 	HRGN hRegion;
 	CSize WindowSize;
 	CDC *pDC;

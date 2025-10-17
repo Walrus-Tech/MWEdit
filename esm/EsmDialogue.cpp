@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmDialogue.h"
+#include "esm/EsmDialogue.h"
 
 
 DEFINE_FILE("EsmDialogue.cpp");

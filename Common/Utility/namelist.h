@@ -11,7 +11,7 @@
 #define __NAMELIST_H
 
 
-#include "dl_err.h"
+#include "Common/dl_err.h"
 
 
 /* Associate a short string with a long integer value */

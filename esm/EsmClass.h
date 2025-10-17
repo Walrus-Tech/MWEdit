@@ -11,9 +11,9 @@
 #define __ESMCLASS_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubCLDT.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubCLDT.h"
 
 
 /*===========================================================================

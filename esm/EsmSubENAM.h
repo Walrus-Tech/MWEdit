@@ -11,7 +11,7 @@
 #define __ESMSUBENAM_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 #define MWESM_ALCH_MAXENCHANTS    8

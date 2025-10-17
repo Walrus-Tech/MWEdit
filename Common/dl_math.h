@@ -14,8 +14,8 @@
 #define __DL_MATH_H
 
 
-#include "dl_base.h"
-#include "dl_err.h"
+#include "Common/dl_base.h"
+#include "Common/dl_err.h"
 #include <ctype.h>
 #include "math.h"
 

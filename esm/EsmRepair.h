@@ -11,8 +11,8 @@
 #define __ESMREPAIR_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubRIDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubRIDT.h"
 
 
 /*===========================================================================

@@ -11,9 +11,9 @@
 #define __ESMINGREDIANT_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubENAM.h"
-#include "EsmSubIRDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubENAM.h"
+#include "esm/EsmSubIRDT.h"
 
 
 #define MWESM_INGRE_NUMENCHANTS 4

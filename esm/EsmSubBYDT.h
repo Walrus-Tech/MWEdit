@@ -11,7 +11,7 @@
 #define __ESMSUBBYDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Part types */

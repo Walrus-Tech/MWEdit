@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmSubListCtrl.h"
-#include "Resource.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmSubListCtrl.h"
+#include "project/Resource.h"
 
 
 #if _DEBUG

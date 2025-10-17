@@ -11,10 +11,10 @@
 #define __ESMSOUND_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubDATA.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubDATA.h"
 
 
 /*===========================================================================

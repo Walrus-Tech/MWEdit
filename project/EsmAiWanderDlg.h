@@ -11,7 +11,7 @@
 #define __ESMAIWANDERDLG_H
 
 
-#include "EsmSubAI_W.h"
+#include "esm/EsmSubAI_W.h"
 
 
 /*===========================================================================

@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmSound.h"
+#include "esm/EsmSound.h"
 
 
 DEFINE_FILE("EsmSound.cpp");

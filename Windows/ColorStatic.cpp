@@ -7,9 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "dl_err.h"
-#include "ColorStatic.h"
+#include "project/StdAfx.h"
+#include "Common/dl_err.h"
+#include "Windows/ColorStatic.h"
 
 
 #ifdef _DEBUG

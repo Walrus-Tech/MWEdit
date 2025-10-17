@@ -11,11 +11,11 @@
 #define __ESMFACTION_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubLong.h"
-#include "EsmSubName32.h"
-#include "EsmSubFADT.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubName32.h"
+#include "esm/EsmSubFADT.h"
 
 
 /*===========================================================================

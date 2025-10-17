@@ -11,9 +11,9 @@
 #define __ESMDIALOGUE_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubByte.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubByte.h"
 
 
 /* Dialogue types */

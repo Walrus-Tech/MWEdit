@@ -12,9 +12,9 @@
  *    the list is to be sorted.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmContainDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmContainDlg.h"
 
 
 #if _DEBUG

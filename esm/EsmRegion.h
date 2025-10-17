@@ -11,12 +11,12 @@
 #define __ESMREGION_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubWEAT.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubLong.h"
-#include "EsmSubSNAM.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubWEAT.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubSNAM.h"
 
 
 /*===========================================================================

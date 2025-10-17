@@ -11,10 +11,10 @@
 #define __SCRIPTTEMPLATE_H
 
 
-#include "dl_err.h"
-#include "EsmScript.h"
-#include "contain/PtrArray.h"
-#include "file/csvfile.h"
+#include "Common/dl_err.h"
+#include "esm/EsmScript.h"
+#include "Common/Contain/PtrArray.h"
+#include "File/CsvFile.h"
 
 
 /* Maximum size of template files */

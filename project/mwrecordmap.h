@@ -11,7 +11,7 @@
 #define __MWRECORDMAP_H
 
 
-#include "esmrecord.h"
+#include "esm/EsmRecord.h"
 
 
 /* Default size of the hash map tables */

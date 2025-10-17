@@ -114,7 +114,7 @@ ILAPI ILboolean ILAPIENTRY ilutRenderer(ILenum Renderer);
 	#define ILUT_USE_WIN32
 #elif _WIN32
 	//#ifdef __GNUC__ //__CYGWIN32__ (Cygwin seems to not define this with DevIL builds)
-	#include "config.h"
+	#include "IL/config.h"
 
 /*// Temporary fix for the SDL main() linker bug.
 #ifdef  ILUT_USE_SDL
@@ -137,7 +137,7 @@ ILAPI ILboolean ILAPIENTRY ilutRenderer(ILenum Renderer);
 * We are surely using a *nix so the configure script
 * may have written the configured config.h header
 */
-	#include "config.h"
+	#include "IL/config.h"
 #endif
 
 // ImageLib Utility Toolkit's OpenGL Functions

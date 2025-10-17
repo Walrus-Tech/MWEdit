@@ -11,14 +11,14 @@
 #define __ESMCREATUREDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
-#include "windows/TabCtrlSheet.h"
-#include "EsmCreaturePage1.h"
-#include "EsmCreaturePage2.h"
-#include "EsmCreaturePage3.h"
-#include "EsmCreaturePage4.h"
-#include "EsmCreaturePage5.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
+#include "Windows/TabCtrlSheet.h"
+#include "project/EsmCreaturePage1.h"
+#include "project/EsmCreaturePage2.h"
+#include "project/EsmCreaturePage3.h"
+#include "project/EsmCreaturePage4.h"
+#include "project/EsmCreaturePage5.h"
 
 
 /*===========================================================================

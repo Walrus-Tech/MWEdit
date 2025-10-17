@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmLight.h"
+#include "esm/EsmLight.h"
 
 
 DEFINE_FILE("EsmLight.cpp");

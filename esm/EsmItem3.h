@@ -22,7 +22,7 @@
 #define __ESMITEM3H
 
 
-#include "EsmItem2.h"
+#include "esm/EsmItem2.h"
 
 
 /* Class type flag (bit field) */

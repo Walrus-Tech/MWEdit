@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmWeapon.h"
+#include "esm/EsmWeapon.h"
 
 
 DEFINE_FILE("EsmWeapon.cpp");

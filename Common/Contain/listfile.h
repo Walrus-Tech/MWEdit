@@ -12,8 +12,8 @@
 #define __LISTFILE_H
 
 
-#include "dl_err.h"
-#include "dl_file.h"
+#include "Common/dl_err.h"
+#include "Common/dl_file.h"
 
 /* Default maximum line length */
 #define LISTFILE_LINE_LENGTH 256

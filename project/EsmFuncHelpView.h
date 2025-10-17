@@ -15,7 +15,7 @@
 	#include <afxext.h>
 #endif
 
-#include "EsmScrFuncArray.h"
+#include "project/EsmScrFuncArray.h"
 
 
 /*===========================================================================

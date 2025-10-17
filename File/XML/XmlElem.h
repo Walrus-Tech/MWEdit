@@ -11,8 +11,8 @@
 #define __XMLELEM_H
 
 
-#include "XmlAttr.h"
-#include "PtrArray.h"
+#include "File/XML/XmlAttr.h"
+#include "Common/Contain/PtrArray.h"
 
 
 /* Initial array sizes */

@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "childfrmscript.h"
-#include "ScriptErrorView.h"
-#include "EsmScriptDlg.h"
+#include "project/StdAfx.h"
+#include "project/ChildFrmScript.h"
+#include "project/ScriptErrorView.h"
+#include "project/EsmScriptDlg.h"
 
 
 /* Debug defines */

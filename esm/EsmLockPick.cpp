@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmLockPick.h"
+#include "esm/EsmLockPick.h"
 
 
 DEFINE_FILE("EsmLockPick.cpp");

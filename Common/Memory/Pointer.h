@@ -12,8 +12,8 @@
 #define __POINTER_H
 
 
-#include "dl_base.h"
-#include "dl_mem.h"
+#include "Common/dl_base.h"
+#include "Common/dl_mem.h"
 
 
 /*===========================================================================

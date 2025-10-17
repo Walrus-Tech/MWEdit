@@ -10,10 +10,10 @@
 #define __ESMTES3_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubHEDR.h"
-#include "EsmSubName.h"
-#include "EsmSubLong64.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubHEDR.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubLong64.h"
 
 
 /*===========================================================================

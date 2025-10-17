@@ -7,16 +7,16 @@
  * Implementation of the CMWEditView class.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "MWEditDoc.h"
-#include "MWEditView.h"
-#include "EsmFile.h"
-#include "dl_time.h"
-#include "EsmHeaderDlg.h"
-#include "InputDialog.h"
-#include "EsmCsvImportDlg.h"
-#include "EsmScriptCompareDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/MWEditDoc.h"
+#include "project/MWEditView.h"
+#include "esm/EsmFile.h"
+#include "Common/dl_time.h"
+#include "project/EsmHeaderDlg.h"
+#include "project/InputDialog.h"
+#include "project/EsmCsvImportDlg.h"
+#include "project/EsmScriptCompareDlg.h"
 
 
 #if _DEBUG

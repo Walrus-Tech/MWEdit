@@ -11,13 +11,13 @@
 #define __ESMSCRTEMPVIEW_H
 
 
-#include "dl_err.h"
-#include "windows/TabCtrlSheet.h"
-#include "EsmScrTempPage1.h"
-#include "EsmScrTempPage2.h"
-#include "EsmScrTempPage3.h"
-#include "ScriptTemplate.h"
-#include "file/CsvFile.h"
+#include "Common/dl_err.h"
+#include "Windows/TabCtrlSheet.h"
+#include "project/EsmScrTempPage1.h"
+#include "project/EsmScrTempPage2.h"
+#include "project/EsmScrTempPage3.h"
+#include "project/ScriptTemplate.h"
+#include "File/CsvFile.h"
 
 
 /* Csv file definitions */

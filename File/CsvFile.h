@@ -11,10 +11,10 @@
 #define __CSVFILE_H
 
 
-#include "file/genfile.h"
-#include "contain/temarray.h"
-#include "contain/ptrarray.h"
-#include "string/sstring.h"
+#include "Common/File/GenFile.h"
+#include "Common/Contain/temarray.h"
+#include "Common/Contain/PtrArray.h"
+#include "Common/String/SString.h"
 
 
 /* CSV file characters */
