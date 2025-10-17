@@ -63,3 +63,6 @@ jobs:
       with:
         name: MWEdit
         path: build/MWEdit.exe
+
+        name: _Meson_Testlog
+        path: build/meson-logs/meson-log.txt
