@@ -141,7 +141,7 @@ void CEsmIconFrame::SetEsmIcon(const TCHAR *pFilename, const bool RelativePath) 
 		//_makepath(FileBuffer, NULL, "c:\\temp\\test\\", pFilename, NULL);
 		hBMP = ilutWinLoadImage(FileBuffer, pDC->GetSafeHdc());
 	} else {
-		hBMP = ilutWinLoadImage((char *const)pFilename, pDC->GetSafeHdc());
+		hBMP = ilutWinLoadImage(/*(char *const)*/pFilename, pDC->GetSafeHdc());
 	}
 
 	ReleaseDC(pDC);
