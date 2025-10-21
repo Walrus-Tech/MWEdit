@@ -209,6 +209,7 @@ set(il_libs "IL/DevIL"
 add_executable(MWEdit ${common_src} ${file_src} ${windows_src} ${esm_src} ${project_src} "project/MWEdit.cpp")
 target_compile_features(MWEdit PUBLIC cxx_std_20)
 target_compile_definitions(MWEdit PUBLIC _AFXDLL)
+target_include_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}")
 target_link_libraries(MWEdit PUBLIC ${il_libs})
 
 if (WIN32)
