@@ -206,13 +206,25 @@ set(il_libs "DevIL"
             "ilu-l"
             "ILUT")
 
-add_executable(MWEdit ${common_src} ${file_src} ${windows_src} ${esm_src} ${project_src} "project/MWEdit.cpp")
-target_compile_features(MWEdit PUBLIC cxx_std_20)
-target_compile_definitions(MWEdit PUBLIC _AFXDLL)
-target_include_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}")
-target_link_directories( MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/IL")
-target_link_libraries(MWEdit PUBLIC ${il_libs})
+find_package(MFC)
 
-if (WIN32)
-	target_sources(MWEdit PUBLIC "project/MWEdit.rc")
+if (MFC_FOUND)
+	# Use shared MFC libraries
+	set(CMAKE_MFC_FLAG 2)
+
+	add_executable(MWEdit WIN32 ${common_src} ${file_src} ${windows_src} ${esm_src} ${project_src} "project/MWEdit.cpp")
+
+	# Set C++ standard to C++20
+	target_compile_features(MWEdit PUBLIC cxx_std_20)
+	# Add required macros
+	target_compile_definitions(MWEdit PUBLIC _AFXDLL)
+	target_include_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}")
+	target_link_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/IL")
+	target_link_libraries(MWEdit PUBLIC ${il_libs})
+
+	if (WIN32)
+		target_sources(MWEdit PUBLIC "project/MWEdit.rc")
+	endif ()
+else ()
+	message(FATAL_ERROR "MFC Not Found")
 endif ()
