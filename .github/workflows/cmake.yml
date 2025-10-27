@@ -65,7 +65,16 @@ jobs:
       run: cmake --build build --config Release
 
     - name: Archive Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: MWEdit
-        path: build/MWEdit.exe
+        path: |
+              build/Release/MWEdit.exe
+              IL/DevIL.dll
+              IL/ilu.dll
+              IL/ilu-l.dll
+              IL/ILUT.dll
+              project/customfunctions.dat
+              project/Functions.dat
+              project/mweditextrafile.esp
+              project/MwEditScriptTest.esp
