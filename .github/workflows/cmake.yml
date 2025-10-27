@@ -34,8 +34,8 @@ jobs:
       run: |
            aria2c https://gigenet.dl.sourceforge.net/project/openil/DevIL%20Windows%20SDK/1.8.0/DevIL-Windows-SDK-1.8.0.zip
            unzip DevIL-Windows-SDK-1.8.0.zip
-           mv --verbose "DevIL Windows SDK"/include/IL/* IL/
-           mv --verbose "DevIL Windows SDK"/lib/x64/Release/* IL/
+           mv --verbose "DevIL Windows SDK/include/IL/*" IL/
+           mv --verbose "DevIL Windows SDK/lib/x64/Release/*" IL/
 
     - name: Prepare Build
       run: mkdir build; cmake -G "Visual Studio 17 2022" -B build
