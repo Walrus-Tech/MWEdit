@@ -253,13 +253,15 @@ if (WIN32)
 	install(FILES "IL/DevIL.dll"
 	              "IL/ilu.dll"
 	              "IL/ilu-l.dll"
-	              "IL/ILUT.dll")
+	              "IL/ILUT.dll"
+	        TYPE DATA)
 endif ()
 
 install(FILES "project/customfunctions.dat"
               "project/Functions.dat"
               "project/mweditextrafile.esp"
-              "project/MwEditScriptTest.esp")
+              "project/MwEditScriptTest.esp"
+        TYPE DATA)
 
 set(CPACK_PACKAGE_VENDOR "Walrus Technologies")
 set(CPACK_PACKAGE_DESCRIPTION "An alternative Morrowind plugin editor")
