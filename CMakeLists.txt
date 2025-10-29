@@ -275,4 +275,4 @@ if (WIN32)
 	set(CPACK_WIX_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/project/res/MWEdit.ico")
 endif ()
 
-include(cpack)
+include(CPack)
