@@ -68,13 +68,4 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
         name: MWEdit
-        path: |
-              build/Release/MWEdit.exe
-              IL/DevIL.dll
-              IL/ilu.dll
-              IL/ilu-l.dll
-              IL/ILUT.dll
-              project/customfunctions.dat
-              project/Functions.dat
-              project/mweditextrafile.esp
-              project/MwEditScriptTest.esp
+        path: build/Release/MWEdit.msi
