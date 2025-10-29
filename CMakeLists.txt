@@ -262,7 +262,7 @@ install(FILES "project/customfunctions.dat"
               "project/MwEditScriptTest.esp")
 
 set(CPACK_PACKAGE_VENDOR "Walrus Technologies")
-set(CPACK_PACKAGE_DESCRIPTION "An alternative Morrowind plugin editor"
+set(CPACK_PACKAGE_DESCRIPTION "An alternative Morrowind plugin editor")
 set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/project/res/MWEdit.ico")
 set(CPACK_PACKAGE_EXECUTABLES "MWEdit" "MWEdit")
 set(CPACK_CREATE_DESKTOP_LINKS MWEdit)
