@@ -8,11 +8,6 @@ endif()
 project(MWEdit VERSION 0.6.3
                HOMEPAGE_URL "https://github.com/Walrus-Tech/MWEdit")
 
-if (WIN32)
-	# Set the format for installers
-	set(CPACK_GENERATOR WIX)
-endif ()
-
 set(common_src "Common/Contain/GenStack.cpp"
                "Common/Contain/listfile.cpp"
                "Common/Contain/PtrArray.cpp"
@@ -214,39 +209,65 @@ set(project_src "project/ActivatorDlg.cpp"
                 "project/mwcustomfunc.cpp"
                 "project/splitterwnd.cpp")
 
-set(il_libs "DevIL"
-            "ilu"
-            "ilu-l"
-            "ILUT")
 # Find and set up MFC on Windows
 if (WIN32)
 	find_package(MFC)
-endif ()
 
-if (MFC_FOUND)
-	# Use shared MFC libraries
-	set(CMAKE_MFC_FLAG 2)
-else ()
-	message(FATAL_ERROR "MFC Not Found")
+	if (MFC_FOUND)
+		# Use shared MFC libraries
+		set(CMAKE_MFC_FLAG 2)
+	else ()
+		message(FATAL_ERROR "MFC Not Found")
+	endif ()
 endif ()
 
 if (WIN32)
 	# If building on Windows, set the GUI application flag
-	add_executable(MWEdit WIN32 ${common_src} ${file_src} ${windows_src} ${esm_src} ${project_src} "project/MWEdit.cpp")
+	add_executable(MWEdit WIN32 ${common_src}
+	                            ${file_src}
+	                            ${windows_src}
+	                            ${esm_src}
+	                            ${project_src}
+	                            "project/MWEdit.cpp")
 	# Add required MFC macros
 	target_compile_definitions(MWEdit PUBLIC _AFXDLL)
 	# Add the Windows resource file
 	target_sources(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/project/MWEdit.rc")
 else ()
-	add_executable(MWEdit ${common_src} ${file_src} ${windows_src} ${esm_src} ${project_src} "project/MWEdit.cpp")
+	add_executable(MWEdit ${common_src}
+	                      ${file_src}
+	                      ${windows_src}
+	                      ${esm_src}
+	                      ${project_src}
+	                      "project/MWEdit.cpp")
+endif ()
+
+# Enable all compiler warnings
+if (MSVC)
+	target_compile_options(MWEdit PRIVATE /Wall)
+else ()
+	target_compile_options(MWEdit PRIVATE -Wall -Wextra -Wpedantic)
+endif ()
+
+# Find and link the image library
+find_package(DevIL)
+if (DevIL_ILUT_FOUND)
+	target_link_libraries(MWEdit PUBLIC DevIL::IL
+	                                    DevIL::ILU
+	                                    DevIL::ILUT)
+else ()
+	# Use Bundled DevIL if not found on the system
+	set(il_libs "DevIL"
+	            "ilu"
+	            "ilu-l"
+	            "ILUT")
+	target_link_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/IL")
+	target_link_libraries(MWEdit PUBLIC ${il_libs})
 endif ()
 
 # Set C++ standard to C++20
 target_compile_features(MWEdit PUBLIC cxx_std_20)
 target_include_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}")
-target_link_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/IL")
-target_link_libraries(MWEdit PUBLIC ${il_libs})
-
 install(TARGETS MWEdit)
 
 if (WIN32)
@@ -262,6 +283,11 @@ install(FILES "project/customfunctions.dat"
               "project/mweditextrafile.esp"
               "project/MwEditScriptTest.esp"
         TYPE DATA)
+
+if (WIN32)
+	# Set the format for installers
+	set(CPACK_GENERATOR WIX)
+endif ()
 
 set(CPACK_PACKAGE_VENDOR "Walrus Technologies")
 set(CPACK_PACKAGE_DESCRIPTION "An alternative Morrowind plugin editor")
