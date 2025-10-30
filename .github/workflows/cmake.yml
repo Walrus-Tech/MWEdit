@@ -40,8 +40,8 @@ jobs:
       run: |
            aria2c https://gigenet.dl.sourceforge.net/project/openil/DevIL%20Windows%20SDK/1.8.0/DevIL-Windows-SDK-1.8.0.zip
            unzip DevIL-Windows-SDK-1.8.0.zip
-           Copy-Item -Path "DevIL Windows SDK/include/IL/*" -Destination IL/ -Force
-           Copy-Item -Path "DevIL Windows SDK/lib/x64/Release/*" -Destination IL/ -Force
+           Move-Item -Path "DevIL Windows SDK/include/IL/" -Destination IL -Force
+           Move-Item -Path "DevIL Windows SDK/lib/x64/Release/*" -Destination IL/ -Force
 
 
     - name: Prepare Build
