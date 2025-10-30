@@ -258,8 +258,7 @@ if (DevIL_ILUT_FOUND)
 else ()
 	# Use Bundled DevIL if not found on the system
 	set(il_libs "DevIL"
-	            "ilu"
-	            "ilu-l"
+	            "ILU"
 	            "ILUT")
 	target_link_directories(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/IL")
 	target_link_libraries(MWEdit PUBLIC ${il_libs})
@@ -272,8 +271,7 @@ install(TARGETS MWEdit)
 
 if (WIN32)
 	install(FILES "IL/DevIL.dll"
-	              "IL/ilu.dll"
-	              "IL/ilu-l.dll"
+	              "IL/ILU.dll"
 	              "IL/ILUT.dll"
 	        TYPE DATA)
 endif ()
