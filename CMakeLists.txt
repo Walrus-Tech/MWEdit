@@ -273,14 +273,14 @@ if (WIN32)
 	install(FILES "IL/DevIL.dll"
 	              "IL/ILU.dll"
 	              "IL/ILUT.dll"
-	        TYPE DATA)
+	        DESTINATION bin)
 endif ()
 
 install(FILES "project/customfunctions.dat"
               "project/Functions.dat"
               "project/mweditextrafile.esp"
               "project/MwEditScriptTest.esp"
-        TYPE DATA)
+        DESTINATION bin)
 
 if (WIN32)
 	# Set the format for installers
@@ -290,13 +290,18 @@ endif ()
 set(CPACK_PACKAGE_VENDOR "Walrus Technologies")
 set(CPACK_PACKAGE_DESCRIPTION "An alternative Morrowind plugin editor")
 set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/project/res/MWEdit.ico")
-set(CPACK_PACKAGE_EXECUTABLES "MWEdit" "MWEdit")
-set(CPACK_CREATE_DESKTOP_LINKS MWEdit)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.txt"
+#set(CPACK_PACKAGE_EXECUTABLES "MWEdit" "MWEdit")
+#set(CPACK_CREATE_DESKTOP_LINKS MWEdit)
 
 if (WIN32)
 	set(CPACK_WIX_UPGRADE_GUID "1F54561E-59B9-4E81-AD80-797B9CACA41D")
-	set(CPACK_WIX_LICENSE_RTF "${CMAKE_SOURCE_DIR}/LICENSE")
+#	set(CPACK_WIX_LICENSE_RTF "${CMAKE_SOURCE_DIR}/LICENSE.txt")
 	set(CPACK_WIX_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/project/res/MWEdit.ico")
+	set_property(INSTALL $<TARGET_FILE_NAME:MWEdit>
+	             PROPERTY CPACK_START_MENU_SHORTCUTS "MWEdit")
+	set_property(INSTALL $<TARGET_FILE_NAME:MWEdit>
+	             PROPERTY CPACK_DESKTOP_SHORTCUTS "MWEdit")
 endif ()
 
 include(CPack)
