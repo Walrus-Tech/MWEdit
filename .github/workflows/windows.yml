@@ -38,7 +38,7 @@ jobs:
            #mv --verbose "DevIL Windows SDK/lib/x64/Release/*" IL/
 
       run: |
-           aria2c https://sourceforge.net/projects/openil/files/DevIL%20Windows%20SDK/1.8.0/DevIL-Windows-SDK-1.8.0.zip/download
+           aria2c -o "DevIL-Windows-SDK-1.8.0.zip" https://sourceforge.net/projects/openil/files/DevIL%20Windows%20SDK/1.8.0/DevIL-Windows-SDK-1.8.0.zip/download
            unzip DevIL-Windows-SDK-1.8.0.zip
            Move-Item -Path "DevIL Windows SDK/include/IL/" -Destination IL -Force
            Move-Item -Path "DevIL Windows SDK/lib/x64/Release/*" -Destination IL/ -Force
