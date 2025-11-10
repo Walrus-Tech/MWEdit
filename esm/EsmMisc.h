@@ -11,8 +11,8 @@
 #define __ESMMISC_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubMCDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubMCDT.h"
 
 
 /*===========================================================================

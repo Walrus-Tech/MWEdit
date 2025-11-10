@@ -20,9 +20,9 @@
  *  - Re-added the CopyTextToClipboard() and GetClipboardText() functions.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "winutil.h"
-#include "dl_file.h"
+#include "project/StdAfx.h"
+#include "Windows/WinUtil.h"
+#include "Common/dl_file.h"
 #include "process.h"
 
 
@@ -453,7 +453,7 @@ HWND FindWindowHandle(HINSTANCE hInstance) {
 		/* Only bother with top-level windows */
 		if (::GetParent(hWnd) == NULL) {
 			/* Check the instance handle for the app */
-			if (hInstance == (HINSTANCE)::GetWindowLong(hWnd, GWL_HINSTANCE)) {
+			if (hInstance == (HINSTANCE)::GetWindowLong(hWnd, GWLP_HINSTANCE)) {
 				return hWnd;
 			}
 		}

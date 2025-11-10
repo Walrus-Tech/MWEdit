@@ -11,7 +11,7 @@
 #define __ESMSUBAI_W_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 #define MWESM_AIW_NUMIDLES 8

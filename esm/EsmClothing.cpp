@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmClothing.h"
+#include "esm/EsmClothing.h"
 
 
 DEFINE_FILE("EsmClothing.cpp");

@@ -10,7 +10,7 @@
  *  - Added the IsUsed() method for checking record uses.
  *
  *=========================================================================*/
-#include "EsmScript.h"
+#include "esm/EsmScript.h"
 
 
 DEFINE_FILE("EsmScript.cpp");

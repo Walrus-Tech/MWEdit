@@ -7,8 +7,8 @@
  * Description
  *
  *=========================================================================*/
-#include "esmscrfuncdata.h"
-#include "string/sstring.h"
+#include "project/EsmScrFuncData.h"
+#include "Common/String/SString.h"
 
 
 DEFINE_FILE("EsmScrFuncData.cpp");

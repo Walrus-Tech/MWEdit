@@ -11,9 +11,9 @@
 #define __MWEditDoc_H
 
 
-#include "esmfile.h"
-#include "EsmLoadDlg.h"
-#include "mwrecordmap.h"
+#include "esm/EsmFile.h"
+#include "project/EsmLoadDlg.h"
+#include "project/mwrecordmap.h"
 
 
 /* View update definitions */

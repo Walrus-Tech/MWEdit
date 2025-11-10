@@ -11,7 +11,7 @@
 #define __ESMSUBAMBI_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 #pragma pack(push, 1)

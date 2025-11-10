@@ -7,12 +7,12 @@
  * Implements the CEsmOptionsDlg class for the options dialog.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmOptionsDlg.h"
-#include "windows/WinUtil.h"
-#include "esmutils.h"
-#include "esmscriptcompile.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmOptionsDlg.h"
+#include "Windows/WinUtil.h"
+#include "project/EsmUtils.h"
+#include "project/EsmScriptCompile.h"
 
 
 #if _DEBUG

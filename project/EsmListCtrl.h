@@ -11,10 +11,10 @@
 #define __ESMLISTCTRL_H
 
 
-#include "EsmFile.h"
+#include "esm/EsmFile.h"
 
 #ifndef NO_ESMLIST_EDIT
-	#include "EsmDlgArray.h"
+	#include "project/EsmDlgArray.h"
 #endif
 
 

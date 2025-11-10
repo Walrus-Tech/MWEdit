@@ -11,9 +11,9 @@
 #define __DL_MEM_H
 
 
-#include "dl_base.h"
-#include "dl_log.h"
-#include "dl_block.h"
+#include "Common/dl_base.h"
+#include "Common/dl_log.h"
+#include "Common/dl_block.h"
 
 
 #define DL_MEM_NAME    _T("DL_Mem.cpp")

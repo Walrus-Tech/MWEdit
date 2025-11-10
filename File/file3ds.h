@@ -11,8 +11,8 @@
 #define __FILE3DS_H
 
 
-#include "common/file/genfile.h"
-#include "images/rgbpal.h"
+#include "Common/File/GenFile.h"
+#include "Common/Images/rgbpal.h"
 
 
 /* Flags for the 3DS chunk types */
@@ -64,7 +64,7 @@
 typedef struct {
 	ushort ID;
 	int Flags;
-	char *pName;
+	const char *pName;
 } chunk3ds_t;
 
 /* Chunk stack record type */
@@ -152,7 +152,7 @@ class C3dsFile : public CGenFile {
 	bool EndTexVertChunk(const short Count);
 
 	/* Attempts to find a chunk info structure */
-	static char *GetChunkName(const ushort ChunkID);
+	static const char *GetChunkName(const ushort ChunkID);
 	static int GetChunkFlag(const ushort ChunkID);
 	static chunk3ds_t *FindChunk(const ushort ChunkID);
 

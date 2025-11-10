@@ -11,9 +11,9 @@
 #define __ESMALCHEMY_H
 
 
-#include "EsmItem2.h"
-#include "EsmSubENAM.h"
-#include "EsmSubALDT.h"
+#include "esm/EsmItem2.h"
+#include "esm/EsmSubENAM.h"
+#include "esm/EsmSubALDT.h"
 
 
 /* Number of enchantments allowed per alchemy object */

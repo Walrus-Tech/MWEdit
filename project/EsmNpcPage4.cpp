@@ -7,13 +7,13 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmNpcPage4.h"
-#include "EsmAiActivateDlg.h"
-#include "EsmAiEscortDlg.h"
-#include "EsmAiTravelDlg.h"
-#include "EsmAiWanderDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmNpcPage4.h"
+#include "project/EsmAiActivateDlg.h"
+#include "project/EsmAiEscortDlg.h"
+#include "project/EsmAiTravelDlg.h"
+#include "project/EsmAiWanderDlg.h"
 
 
 #if _DEBUG

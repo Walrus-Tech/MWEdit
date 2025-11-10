@@ -11,7 +11,7 @@
 #define __ESMSUBCRDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Creature types */

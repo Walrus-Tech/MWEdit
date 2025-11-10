@@ -11,7 +11,7 @@
 #define __ESMAITRAVELDLG_H
 
 
-#include "EsmSubAI_T.h"
+#include "esm/EsmSubAI_T.h"
 
 
 /*===========================================================================

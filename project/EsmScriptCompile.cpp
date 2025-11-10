@@ -24,13 +24,17 @@
 *     bytes of a global name properly.
 *
 *=========================================================================*/
-#include <stdafx.h>
-#include "esmscriptcompile.h"
-#include "ctype.h"
-#include "EsmGlobal.h"
-#include "MwEditDoc.h"
-//#include "EsmOptions.h"
-#include "EsmGlobOptions.h"
+//#include <stdafx.h>
+#include "project/EsmScriptCompile.h"
+
+#include <ctype.h>
+
+#include "project/StdAfx.h"
+
+#include "esm/EsmGlobal.h"
+#include "project/MWEditDoc.h"
+//#include "project/EsmOptions.h"
+#include "project/EsmGlobOptions.h"
 
 
 DEFINE_FILE("EsmScriptCompile.cpp");
@@ -158,7 +162,7 @@ esmscrparsetable_t l_FuncArgBlock[] = {
 	}
 };
 
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 esmscrparsetable_t l_FuncXArgBlock[] = {
 	{
 		ESMSCR_TOKEN_COMMA,
@@ -462,7 +466,7 @@ esmscrparsetable_t l_XWhileBlock[] = {
 	}
 };
 
-#endif
+//#endif
 
 esmscrparsetable_t l_FunctionBlock[] = {
 	{
@@ -572,22 +576,22 @@ esmscrparsetable_t l_LeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::ParseVarRef
 	},
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT, NULL,
 		&CEsmScriptCompile::ParseFuncRef,
 		&CEsmScriptCompile::OutputFuncOp
 	},
-#else
-	{
-		ESMSCR_TOKEN_FUNCOP,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		NULL,
-		&CEsmScriptCompile::ParseFuncRef
-		/*, &CEsmScriptCompile::OutputObjRef */
-	},
-#endif
+//#else
+//	{
+//		ESMSCR_TOKEN_FUNCOP,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		NULL,
+//		&CEsmScriptCompile::ParseFuncRef
+//		/*, &CEsmScriptCompile::OutputObjRef */
+//	},
+//#endif
 	{
 		ESMSCR_ENDTABLE,
 		ESTF_STOP,
@@ -603,7 +607,7 @@ esmscrparsetable_t l_IfLeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::ParseIfVarRef
 	},
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT,
@@ -611,14 +615,14 @@ esmscrparsetable_t l_IfLeftIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::OutputFuncOp
 	},
-#else
-	{
-		ESMSCR_TOKEN_FUNCOP,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_LeftFuncBlock,
-		NULL
-	},
-#endif
+//#else
+//	{
+//		ESMSCR_TOKEN_FUNCOP,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_LeftFuncBlock,
+//		NULL
+//	},
+//#endif
 	{
 		ESMSCR_ENDTABLE,
 		ESTF_STOP,
@@ -643,7 +647,7 @@ esmscrparsetable_t l_LeftVarIDBlock[] = {
 };
 
 esmscrparsetable_t l_RightIDBlock[] = {
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 	{
 		ESMSCR_TOKEN_FUNCOP,
 		ESTF_ONE | ESTF_STOP | ESTF_OPT,
@@ -651,14 +655,14 @@ esmscrparsetable_t l_RightIDBlock[] = {
 		NULL,
 		&CEsmScriptCompile::OutputFuncOp
 	},
-#else
-	{
-		ESMSCR_TOKEN_FUNCOP,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_LeftFuncBlock,
-		NULL
-	},
-#endif
+//#else
+//	{
+//		ESMSCR_TOKEN_FUNCOP,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_LeftFuncBlock,
+//		NULL
+//	},
+//#endif
 	{
 		ESMSCR_ENDTABLE,
 		ESTF_STOP,
@@ -1525,7 +1529,7 @@ esmscrparsetable_t l_ReturnBlock[] = {
 	}
 };
 
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 
 esmscrparsetable_t l_ObjRefFuncBlock[] = {
 	{
@@ -1562,39 +1566,39 @@ esmscrparsetable_t l_ObjRefFuncBlock[] = {
 	}
 };
 
-#else
+//#else
+//
+//esmscrparsetable_t l_SymFuncBlock[] = {
+//	{
+//		ESMSCR_TOKEN_FUNCOP,
+//		ESTF_ONE,
+//		NULL,
+//		NULL
+//	},
+//	{
+//		ESMSCR_TOKEN_FUNCTION,
+//		ESTF_ONE,
+//		l_FunctionBlock,
+//		NULL,
+//		&CEsmScriptCompile::OutputFunction
+//	},
+//	{
+//		ESMSCR_TOKEN_EOL,
+//		ESTF_ONE,
+//		NULL,
+//		NULL
+//	},
+//	{
+//		ESMSCR_ENDTABLE,
+//		0,
+//		NULL,
+//		NULL
+//	}
+//};
+//#endif
 
-esmscrparsetable_t l_SymFuncBlock[] = {
-	{
-		ESMSCR_TOKEN_FUNCOP,
-		ESTF_ONE,
-		NULL,
-		NULL
-	},
-	{
-		ESMSCR_TOKEN_FUNCTION,
-		ESTF_ONE,
-		l_FunctionBlock,
-		NULL,
-		&CEsmScriptCompile::OutputFunction
-	},
-	{
-		ESMSCR_TOKEN_EOL,
-		ESTF_ONE,
-		NULL,
-		NULL
-	},
-	{
-		ESMSCR_ENDTABLE,
-		0,
-		NULL,
-		NULL
-	}
-};
-#endif
 
-
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 
 esmscrparsetable_t l_StatementBlock[] = {
 	{
@@ -1696,76 +1700,76 @@ esmscrparsetable_t l_StatementBlock[] = {
 		NULL
 	}
 };
-#else
-
-esmscrparsetable_t l_StatementBlock[] = {
-	{
-		ESMSCR_TOKEN_TYPEOP,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		NULL,
-		&CEsmScriptCompile::ParseNewLocalVar
-	},
-	{
-		ESMSCR_TOKEN_SET,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_SetBlock,
-		NULL,
-		&CEsmScriptCompile::OutputSet
-	},
-	{
-		ESMSCR_TOKEN_IF,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_IfBlock,
-		NULL,
-		&CEsmScriptCompile::OutputIf
-	},
-	{
-		ESMSCR_TOKEN_WHILE,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_WhileBlock,
-		NULL,
-		&CEsmScriptCompile::OutputWhile
-	},
-	{
-		ESMSCR_TOKEN_RETURN,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_ReturnBlock,
-		NULL,
-		&CEsmScriptCompile::OutputReturn
-	},
-	{
-		ESMSCR_TOKEN_SYMBOL,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_SymFuncBlock,
-		&CEsmScriptCompile::ParseLineSymbolID
-	},
-	{
-		ESMSCR_TOKEN_STRING,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_SymFuncBlock,
-		&CEsmScriptCompile::ParseLineStringID
-	},
-	{
-		ESMSCR_TOKEN_FUNCTION,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		l_FuncLineBlock,
-		NULL,
-		&CEsmScriptCompile::OutputLineFunction
-	},
-	{
-		ESMSCR_TOKEN_EOL,
-		ESTF_ONE | ESTF_STOP | ESTF_OPT,
-		NULL,
-		NULL
-	},
-	{
-		ESMSCR_ENDTABLE,
-		ESTF_STOP | ESTF_OPT,
-		NULL,
-		NULL
-	}
-};
-#endif
+//#else
+//
+//esmscrparsetable_t l_StatementBlock[] = {
+//	{
+//		ESMSCR_TOKEN_TYPEOP,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		NULL,
+//		&CEsmScriptCompile::ParseNewLocalVar
+//	},
+//	{
+//		ESMSCR_TOKEN_SET,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_SetBlock,
+//		NULL,
+//		&CEsmScriptCompile::OutputSet
+//	},
+//	{
+//		ESMSCR_TOKEN_IF,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_IfBlock,
+//		NULL,
+//		&CEsmScriptCompile::OutputIf
+//	},
+//	{
+//		ESMSCR_TOKEN_WHILE,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_WhileBlock,
+//		NULL,
+//		&CEsmScriptCompile::OutputWhile
+//	},
+//	{
+//		ESMSCR_TOKEN_RETURN,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_ReturnBlock,
+//		NULL,
+//		&CEsmScriptCompile::OutputReturn
+//	},
+//	{
+//		ESMSCR_TOKEN_SYMBOL,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_SymFuncBlock,
+//		&CEsmScriptCompile::ParseLineSymbolID
+//	},
+//	{
+//		ESMSCR_TOKEN_STRING,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_SymFuncBlock,
+//		&CEsmScriptCompile::ParseLineStringID
+//	},
+//	{
+//		ESMSCR_TOKEN_FUNCTION,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		l_FuncLineBlock,
+//		NULL,
+//		&CEsmScriptCompile::OutputLineFunction
+//	},
+//	{
+//		ESMSCR_TOKEN_EOL,
+//		ESTF_ONE | ESTF_STOP | ESTF_OPT,
+//		NULL,
+//		NULL
+//	},
+//	{
+//		ESMSCR_ENDTABLE,
+//		ESTF_STOP | ESTF_OPT,
+//		NULL,
+//		NULL
+//	}
+//};
+//#endif
 
 esmscrparsetable_t l_ScriptBlock[] = {
 	{
@@ -3516,15 +3520,15 @@ int CEsmScriptCompile::GetOperatorToken() {
 		m_LineHasRef = true;
 		m_LineRefToken = m_LastToken;
 		//m_LineRefID    = m_TokenID;
-#ifndef MWEDIT_SCRIPT_MWSE
-
-		if (m_TokenID == ESMSCR_TOKEN_FUNCOP) {
-			InsertScriptDataRef((const TCHAR *)m_LastToken, m_LastToken.GetLength());
-		} else {
-			/* Varops output in the ParseVarRef() */
-		}
-
-#endif
+//#ifndef MWEDIT_SCRIPT_MWSE
+//
+//		if (m_TokenID == ESMSCR_TOKEN_FUNCOP) {
+//			InsertScriptDataRef((const TCHAR *)m_LastToken, m_LastToken.GetLength());
+//		} else {
+//			/* Varops output in the ParseVarRef() */
+//		}
+//
+//#endif
 	}
 	/* Check for whitespace surrounding brackets */
 	else if (m_TokenID == ESMSCR_TOKEN_OPENBRAC || m_TokenID == ESMSCR_TOKEN_CLOSEBRAC) {
@@ -6588,9 +6592,9 @@ int CEsmScriptCompile::OutputLineFunction() {
 int CEsmScriptCompile::OutputFunction() {
 	DEFINE_FUNCTION("CEsmScriptCompile::OutputFunction()");
 	ASSERT(m_pCurrentFunc != NULL);
-#if MWEDIT_SCRIPT_MWSE
+//#if MWEDIT_SCRIPT_MWSE
 	OutputStoredFuncOp();
-#endif
+//#endif
 	AddScriptData(&(m_pCurrentFunc->OpCode), 2);
 	m_LastMsgBoxArgs = -1;
 	m_LastMsgBoxBut = -1;

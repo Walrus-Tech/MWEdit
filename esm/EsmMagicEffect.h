@@ -11,13 +11,13 @@
 #define __ESMMAGICEFFECT_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubLong.h"
-#include "EsmSubShort.h"
-#include "EsmSubByte.h"
-#include "EsmSubMEDT.h"
-#include "EsmSubENAM.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubShort.h"
+#include "esm/EsmSubByte.h"
+#include "esm/EsmSubMEDT.h"
+#include "esm/EsmSubENAM.h"
 
 
 /*===========================================================================

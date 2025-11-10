@@ -10,9 +10,10 @@
 #ifndef __ESMUTILS_H
 #define __ESMUTILS_H
 
+#include <afxwin.h>
 
-#include "string/sstring.h"
-#include "mwcommon.h"
+#include "Common/String/SString.h"
+#include "esm/mwcommon.h"
 
 
 /* Type conversion functions */

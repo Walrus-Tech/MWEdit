@@ -11,8 +11,8 @@
 #define __ESMSTATIC_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
 
 
 /*===========================================================================

@@ -11,9 +11,9 @@
 #define __ESMARMOR_H
 
 
-#include "EsmItem3.h"
-#include "EsmSubAODT.h"
-#include "EsmSubByte.h"
+#include "esm/EsmItem3.h"
+#include "esm/EsmSubAODT.h"
+#include "esm/EsmSubByte.h"
 
 
 /* Number of body part definitions allowed in an armor record */

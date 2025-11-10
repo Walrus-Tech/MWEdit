@@ -20,8 +20,8 @@
  *=========================================================================*/
 #if _DEBUG
 
-#include "dl_block.h"
-#include "dl_log.h"
+#include "Common/dl_block.h"
+#include "Common/dl_log.h"
 #include <string.h>
 
 

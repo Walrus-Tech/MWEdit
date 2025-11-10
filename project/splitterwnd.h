@@ -10,6 +10,7 @@
 #ifndef __SPLITTERWND_H
 #define __SPLITTERWND_H
 
+#include <afxext.h>
 
 /*===========================================================================
  *

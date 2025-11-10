@@ -7,11 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmAiActivateDlg.h"
-#include "EsmAiWanderDlg.h"
-#include "EsmUtils.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmAiActivateDlg.h"
+#include "project/EsmAiWanderDlg.h"
+#include "project/EsmUtils.h"
 
 
 #if _DEBUG

@@ -7,7 +7,7 @@
  * Implements the CDxfFile class.
  *
  *=========================================================================*/
-#include "dxffile.h"
+#include "File/dxffile.h"
 
 
 DEFINE_FILE("dxffile.cpp");

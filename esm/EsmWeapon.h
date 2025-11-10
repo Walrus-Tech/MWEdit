@@ -11,8 +11,8 @@
 #define __ESMWEAPON_H
 
 
-#include "EsmItem3.h"
-#include "EsmSubWPDT.h"
+#include "esm/EsmItem3.h"
+#include "esm/EsmSubWPDT.h"
 
 
 const TCHAR *GetESMWeaponType(const int Type);

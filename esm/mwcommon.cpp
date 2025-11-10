@@ -7,10 +7,10 @@
  * Contains common functions for Morrowind related projects.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "mwcommon.h"
-#include "windows/WinUtil.h"
-#include "dl_file.h"
+#include "project/StdAfx.h"
+#include "esm/mwcommon.h"
+#include "Windows/WinUtil.h"
+#include "Common/dl_file.h"
 
 
 DEFINE_FILE("MWCommon.cpp");

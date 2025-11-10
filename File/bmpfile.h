@@ -12,8 +12,8 @@
 #define __BMPFILE_H
 
 
-#include "common/images/rgbpal.h"
-#include "common/file/genfile.h"
+#include "Common/Images/rgbpal.h"
+#include "Common/File/GenFile.h"
 
 
 /* Standard BMP file type */

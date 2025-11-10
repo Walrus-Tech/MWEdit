@@ -11,10 +11,10 @@
 #define __ESMGAMESETTING_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubFloat.h"
-#include "EsmSubLong.h"
-#include "EsmSubName.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubFloat.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubName.h"
 
 
 /* Global types */

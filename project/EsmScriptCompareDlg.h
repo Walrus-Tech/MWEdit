@@ -11,8 +11,8 @@
 #define __ESMSCRIPTCOMPAREDLG_H
 
 
-#include "MWEditDoc.h"
-#include "EsmListCtrl.h"
+#include "project/MWEditDoc.h"
+#include "project/EsmListCtrl.h"
 
 
 class CEsmDlgHandler;

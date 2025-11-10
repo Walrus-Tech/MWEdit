@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmWeaponDlg.h"
-#include "EsmDlgArray.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmWeaponDlg.h"
+#include "project/EsmDlgArray.h"
 
 
 #if _DEBUG

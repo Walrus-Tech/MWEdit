@@ -35,7 +35,7 @@
  *  - Replaced the 'boolean' type with 'bool'.
  *
  *=========================================================================*/
-#include "conapp.h"
+#include "Common/conapp.h"
 #include <conio.h>
 #include <ctype.h>
 

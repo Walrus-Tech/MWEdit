@@ -7,7 +7,7 @@
  * Implements common routines for RGB palettes.
  *
  *=========================================================================*/
-#include "rgbpal.h"
+#include "Common/Images/rgbpal.h"
 #include <memory.h>
 
 

@@ -1,0 +1,57 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Windows
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+#env:
+  # Path to the solution file relative to the root of the project.
+#  SOLUTION_FILE_PATH: project/MWEdit.sln
+
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+#  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Prepare DevIL
+      #run: |
+           #aria2c https://gigenet.dl.sourceforge.net/project/openil/DevIL%20Windows%20SDK/1.8.0/DevIL-Windows-SDK-1.8.0.zip
+           #unzip DevIL-Windows-SDK-1.8.0.zip
+           #mv --verbose "DevIL Windows SDK/include/IL/*" IL/
+           #mv --verbose "DevIL Windows SDK/lib/x64/Release/*" IL/
+
+      run: |
+           aria2c https://gigenet.dl.sourceforge.net/project/openil/DevIL%20Windows%20SDK/1.8.0/DevIL-Windows-SDK-1.8.0.zip
+           unzip DevIL-Windows-SDK-1.8.0.zip
+           Move-Item -Path "DevIL Windows SDK/include/IL/" -Destination IL -Force
+           Move-Item -Path "DevIL Windows SDK/lib/x64/Release/*" -Destination IL/ -Force
+
+
+    - name: Prepare Build
+      run: mkdir build; cmake -G "Visual Studio 17 2022" -B build
+
+    - name: Run Build
+      run: cmake --build build --config Release --target PACKAGE
+
+    - name: Archive Artifact
+      uses: actions/upload-artifact@v5
+      with:
+        name: MWEdit
+        path: build/MWEdit-0.6.3-win64.msi

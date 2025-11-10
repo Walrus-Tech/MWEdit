@@ -11,14 +11,14 @@
 #define __ESMINFO_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubByte.h"
-#include "EsmSubName.h"
-#include "EsmSubName512.h"
-#include "EsmSubLong.h"
-#include "EsmSubInfoDATA.h"
-#include "EsmSubSCVR.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubByte.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubName512.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubInfoDATA.h"
+#include "esm/EsmSubSCVR.h"
 
 
 /* Number of function/variables per info */

@@ -10,9 +10,9 @@
  *  - Used the base class script list member.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmStartScriptDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmStartScriptDlg.h"
 
 
 #if _DEBUG

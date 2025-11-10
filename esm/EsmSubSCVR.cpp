@@ -10,7 +10,7 @@
  *  - Added the Fine() virtual method.
  *
  *=========================================================================*/
-#include "EsmSubSCVR.h"
+#include "esm/EsmSubSCVR.h"
 
 
 DEFINE_FILE("EsmSubSCVR.cpp");

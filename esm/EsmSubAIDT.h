@@ -11,7 +11,7 @@
 #define __ESMSUBAIDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* AI data flag values */

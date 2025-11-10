@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmGameSetting.h"
+#include "esm/EsmGameSetting.h"
 
 
 DEFINE_FILE("EsmGameSetting.cpp");

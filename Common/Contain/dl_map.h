@@ -11,8 +11,8 @@
 #define __DLMAP_H
 
 
-#include "dl_err.h"
-#include "dl_str.h"
+#include "Common/dl_err.h"
+#include "Common/dl_str.h"
 #include <ctype.h>
 
 

@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmBodyPart.h"
+#include "esm/EsmBodyPart.h"
 
 
 DEFINE_FILE("EsmBodyPart.cpp");

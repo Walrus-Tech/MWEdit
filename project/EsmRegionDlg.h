@@ -11,10 +11,10 @@
 #define __ESMREGIONDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
-#include "EsmListCtrl.h"
-#include "ColorStatic1.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
+#include "project/EsmListCtrl.h"
+#include "project/ColorStatic1.h"
 
 
 /*===========================================================================

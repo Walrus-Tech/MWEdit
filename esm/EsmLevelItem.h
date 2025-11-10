@@ -11,11 +11,11 @@
 #define __ESMLEVELITEM_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubLong.h"
-#include "EsmSubShort.h"
-#include "EsmSubByte.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubLong.h"
+#include "esm/EsmSubShort.h"
+#include "esm/EsmSubByte.h"
 
 
 #define MWESM_LEVITEMFLAG_ALLPC    1

@@ -7,9 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmUsesDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmUsesDlg.h"
 
 
 #if _DEBUG

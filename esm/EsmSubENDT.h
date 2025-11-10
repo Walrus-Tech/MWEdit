@@ -11,7 +11,7 @@
 #define __ESMSUBENDT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Enchant types */

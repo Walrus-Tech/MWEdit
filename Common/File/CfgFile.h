@@ -11,9 +11,9 @@
 #define __CONFIGFILE_H
 
 
-#include "GenFile.h"
-#include "SString.h"
-#include "PtrArray.h"
+#include "Common/File/GenFile.h"
+#include "Common/String/SString.h"
+#include "Common/Contain/PtrArray.h"
 
 
 #define CONFIG_LINE_LENGTH 256

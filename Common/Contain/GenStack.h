@@ -11,7 +11,7 @@
 #define __GENSTACK_H
 
 
-#include "dl_str.h"
+#include "Common/dl_str.h"
 
 
 /* Default stack size */

@@ -7,8 +7,8 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmCreature.h"
-#include "EsmSubNPCS.h"
+#include "esm/EsmCreature.h"
+#include "esm/EsmSubNPCS.h"
 
 
 DEFINE_FILE("EsmCreature.cpp");

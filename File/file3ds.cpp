@@ -7,7 +7,7 @@
  * Implements the C3dsFile class.
  *
  *=========================================================================*/
-#include "file3ds.h"
+#include "File/file3ds.h"
 #include <math.h>
 
 
@@ -26,7 +26,7 @@ DEFINE_FILE("file3ds.cpp");
  * to access the array elements.
  *
  *=========================================================================*/
-#include "chunk3ds.h"
+#include "File/chunk3ds.h"
 
 
 /*===========================================================================
@@ -278,7 +278,7 @@ int C3dsFile::GetChunkFlag(const ushort ChunkID) {
  * returned, never NULL.
  *
  *=========================================================================*/
-char *C3dsFile::GetChunkName(const ushort ChunkID) {
+const char *C3dsFile::GetChunkName(const ushort ChunkID) {
 	chunk3ds_t *pChunk = FindChunk(ChunkID);
 
 	if (pChunk == NULL) {

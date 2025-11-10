@@ -1,8 +1,8 @@
 // EsmAlchemyDlg.cpp : implementation file
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmAlchemyDlg.h"
-#include "EsmDlgArray.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmAlchemyDlg.h"
+#include "project/EsmDlgArray.h"
 
 
 #if _DEBUG

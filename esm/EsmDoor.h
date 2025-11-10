@@ -11,8 +11,8 @@
 #define __ESMDOOR_H
 
 
-#include "EsmItem1.h"
-#include "EsmSubName.h"
+#include "esm/EsmItem1.h"
+#include "esm/EsmSubName.h"
 
 
 /*===========================================================================

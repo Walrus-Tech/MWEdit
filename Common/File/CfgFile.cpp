@@ -10,8 +10,8 @@
  *  - Modified FindGroup() method to check for a 0-length group name.
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "cfgfile.h"
+#include "project/StdAfx.h"
+#include "Common/File/CfgFile.h"
 
 
 DEFINE_FILE("CfgFile.cpp");

@@ -11,8 +11,8 @@
 #define __ESMDLGARRAY_H
 
 
-#include "EsmRecDialog.h"
-#include "MainFrm.h"
+#include "project/EsmRecDialog.h"
+#include "project/MainFrm.h"
 
 
 /* Array of dialog pointers */

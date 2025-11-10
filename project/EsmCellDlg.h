@@ -11,12 +11,12 @@
 #define __ESMCELLDLG_H
 
 
-#include "EsmRecDialog.h"
-#include "Resource.h"
-#include "EsmIntCellPage.h"
-#include "EsmExtCellPage.h"
-#include "EsmRefCellPage.h"
-#include "windows/TabCtrlSheet.h"
+#include "project/EsmRecDialog.h"
+#include "project/Resource.h"
+#include "project/EsmIntCellPage.h"
+#include "project/EsmExtCellPage.h"
+#include "project/EsmRefCellPage.h"
+#include "Windows/TabCtrlSheet.h"
 
 
 /*===========================================================================

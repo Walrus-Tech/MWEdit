@@ -7,9 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "SplitterWnd.h"
+#include "project/splitterwnd.h"
+
 #include <afxpriv.h>
+
+#include "project/StdAfx.h"
 
 
 #if _DEBUG

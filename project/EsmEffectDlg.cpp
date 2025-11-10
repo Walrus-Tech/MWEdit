@@ -7,10 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmEffectDlg.h"
+#include "project/EsmEffectDlg.h"
+
 #include "mmsystem.h"
+
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
 
 
 #if _DEBUG

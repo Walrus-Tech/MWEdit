@@ -7,10 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmSoundDlg.h"
+#include "project/EsmSoundDlg.h"
+
 #include "mmsystem.h"
+
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
 
 
 #if _DEBUG

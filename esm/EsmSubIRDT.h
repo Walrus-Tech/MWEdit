@@ -11,7 +11,7 @@
 #define __ESMSUBIRDTXH
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Number of effects per ingrediant */

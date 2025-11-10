@@ -20,8 +20,8 @@
  *  - Added the Metricize() buffered function.
  *
  *=========================================================================*/
-#include "dl_math.h"
-#include "dl_str.h"
+#include "Common/dl_math.h"
+#include "Common/dl_str.h"
 #include <time.h>
 #include <string.h>
 #include <limits.h>

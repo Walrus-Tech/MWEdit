@@ -12,11 +12,11 @@
 #define __ESMOPTIONS_H
 
 
-#include "EsmDefs.h"
-#include "EsmOptionsDef.h"
-#include "EsmScriptOptions.h"
-#include "EsmRegDefs.h"
-#include "dl_str.h"
+#include "esm/EsmDefs.h"
+#include "project/EsmOptionsDef.h"
+#include "project/EsmScriptOptions.h"
+#include "project/EsmRegDefs.h"
+#include "Common/dl_str.h"
 
 
 #define MWEDIT_DEFAULT_EXTRAFILE    _T("mweditextrafile.esp")

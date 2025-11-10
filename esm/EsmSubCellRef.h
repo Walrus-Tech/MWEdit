@@ -11,8 +11,8 @@
 #define __ESMSUBCELLREF_H
 
 
-#include "EsmSubBase.h"
-#include "EsmSubPos6.h"
+#include "esm/EsmSubBase.h"
+#include "esm/EsmSubPos6.h"
 
 
 #define MWESM_CELLREF_INDEXMASK 0x00FFFFFF

@@ -11,10 +11,10 @@
 #define __ESMSOUNDGEN_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubLong.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubLong.h"
 
 
 /* SoundGen types */

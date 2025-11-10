@@ -11,11 +11,11 @@
 #define __ESMCREATURE_H
 
 
-#include "EsmItem1.h"
-#include "EsmSubCRDT.h"
-#include "EsmSubNPCO.h"
-#include "EsmSubAIDT.h"
-#include "EsmSubLong.h"
+#include "esm/EsmItem1.h"
+#include "esm/EsmSubCRDT.h"
+#include "esm/EsmSubNPCO.h"
+#include "esm/EsmSubAIDT.h"
+#include "esm/EsmSubLong.h"
 
 
 /* Creature flags */

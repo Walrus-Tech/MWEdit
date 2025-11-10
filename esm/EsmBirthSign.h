@@ -11,10 +11,10 @@
 #define __ESMBIRTHSIGN_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubNameFix.h"
-#include "EsmSubName32.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubNameFix.h"
+#include "esm/EsmSubName32.h"
 
 
 /*===========================================================================

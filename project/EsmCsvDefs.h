@@ -11,8 +11,8 @@
 #define __ESMCSVDEFS_H
 
 
-#include "file/csvfile.h"
-#include "EsmDefs.h"
+#include "File/CsvFile.h"
+#include "esm/EsmDefs.h"
 
 
 /* Holds extended CSV import/export column information */

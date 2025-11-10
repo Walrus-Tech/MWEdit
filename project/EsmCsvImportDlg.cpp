@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmCsvImportDlg.h"
-#include "MWEditDoc.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/EsmCsvImportDlg.h"
+#include "project/MWEditDoc.h"
 
 
 #if _DEBUG

@@ -11,7 +11,7 @@
 #define __ESMACTIVATOR_H
 
 
-#include "EsmItem1.h"
+#include "esm/EsmItem1.h"
 
 
 /*===========================================================================

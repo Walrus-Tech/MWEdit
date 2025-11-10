@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "EsmActivator.h"
+#include "esm/EsmActivator.h"
 
 
 DEFINE_FILE("EsmActivator.cpp");

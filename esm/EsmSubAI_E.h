@@ -11,8 +11,10 @@
 #define __ESMSUBAI_E_H
 
 
-#include "EsmSubBase.h"
-#include "float.h"
+#include <float.h>
+
+#include "esm/EsmSubBase.h"
+
 
 
 #pragma pack(push, 1)

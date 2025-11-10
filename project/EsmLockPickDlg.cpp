@@ -7,10 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "resource.h"
-#include "EsmLockPickDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/Resource.h"
+#include "project/EsmLockPickDlg.h"
 
 
 #if _DEBUG

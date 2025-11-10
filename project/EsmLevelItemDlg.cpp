@@ -7,10 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esmlevelitemdlg.h"
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "EsmLevelItemDlg.h"
+#include "project/EsmLevelItemDlg.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
 
 
 #if _DEBUG

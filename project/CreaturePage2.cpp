@@ -1,7 +1,7 @@
 // CreaturePage2.cpp : implementation file
-#include "stdafx.h"
-#include "MWEdit.h"
-#include "CreaturePage2.h"
+#include "project/StdAfx.h"
+#include "project/MWEdit.h"
+#include "project/CreaturePage2.h"
 
 
 #if _DEBUG

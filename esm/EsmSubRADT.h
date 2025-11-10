@@ -11,7 +11,7 @@
 #define __ESMSUBRADT_H
 
 
-#include "EsmSubBase.h"
+#include "esm/EsmSubBase.h"
 
 
 /* Number of skill bonuses for each race */

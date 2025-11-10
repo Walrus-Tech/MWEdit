@@ -11,9 +11,9 @@
 #define __ESMSUBNAMEFIX_H
 
 
-#include "EsmSubBase.h"
-#include "EsmSubName.h"
-#include "string/SString.h"
+#include "esm/EsmSubBase.h"
+#include "esm/EsmSubName.h"
+#include "Common/String/SString.h"
 
 
 typedef CEsmSubName CEsmSubNameFix;

@@ -11,10 +11,10 @@
 #define __ESMENCHANT_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubENDT.h"
-#include "EsmSubENAM.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubENDT.h"
+#include "esm/EsmSubENAM.h"
 
 
 /* Number of effects allowed per enchantment */

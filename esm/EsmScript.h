@@ -11,9 +11,9 @@
 #define __ESMSCRIPT_H
 
 
-#include "EsmRecord.h"
-#include "EsmSubName.h"
-#include "EsmSubSCHD.h"
+#include "esm/EsmRecord.h"
+#include "esm/EsmSubName.h"
+#include "esm/EsmSubSCHD.h"
 
 
 /* Max script text size */
