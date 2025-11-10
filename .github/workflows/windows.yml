@@ -54,4 +54,4 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
         name: MWEdit
-        path: build/MWEdit-0.6.3-win64.msi
+        path: build/MWEdit-0.7.0-win64.msi

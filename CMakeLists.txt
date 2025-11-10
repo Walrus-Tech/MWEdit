@@ -5,7 +5,7 @@ if (POLICY CMP0048)
 	cmake_policy(SET CMP0048 NEW)
 endif()
 
-project(MWEdit VERSION 0.6.3
+project(MWEdit VERSION 0.7.0
                HOMEPAGE_URL "https://github.com/Walrus-Tech/MWEdit")
 
 set(common_src "Common/Contain/GenStack.cpp"

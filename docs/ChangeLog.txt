@@ -60,16 +60,16 @@
 	  by default (as in the TESCS) (4 August 2003).
 	- Reset tokens for the script compiler now accept numeric values (31 August 2003).
 	- Added the Bloodmoon functions (31 August 2003)
-			BecomeWereWolf
-			GetPCinJail
-			GetPCTraveling
-			GetWerewolfKills
-			IsWerewolf
-			PlaceAtMe
-			SetWereWolfAcrobatics
-			TurnMoonRed
-			TurnMoonWhite
-			UndoWerewolf
+	      BecomeWereWolf
+	      GetPCinJail
+	      GetPCTraveling
+	      GetWerewolfKills
+	      IsWerewolf
+	      PlaceAtMe
+	      SetWereWolfAcrobatics
+	      TurnMoonRed
+	      TurnMoonWhite
+	      UndoWerewolf
 	- Added a topic column in the find dialog for INFO records. For INFO records the parent
 	  dialogue is opened for editting instead of the INFO itself (1 September 2003).
 	- Corrected the GetItemType() method for the Dialogue record type to properly return the
@@ -130,18 +130,18 @@
 	  context menu to view help for that function (15 September 2003).
 	- For the script compiler, animation groups can now be enclosed by quotes (15 September 2003).
 	- Script functions test and output verifications:
-			- All A/C/D/E/F/H/J/K/L/O/P/R/S/U-Z functions (15 September 2003).
-			- All G functions. Fixed minor bug in GetDetected output (15 September 2003).
-			- All M functions, except MessageBox. Found 2 unknown ModRegion parameters (15 September 2003).
-			- MessageBox function (16 September 2003).
-			- Set command in various formats. Fixed a bunch of minor differences in compiled output
-			  (16 September 2003).
-			- Error/warning returned if the maximum number of variables/buttons are exceeded in
-			  a MessageBox function call (9 each). An error is also returned if you use a number
-			  for a variable value (only locals/globals allowed). Does not yet support strings for
-			  variables (16 September 2003).
-			- Strengthened the warning level of some compiler messages, i.e., some messages that
-			  were warnings by default are now errors (16 September 2003).
+		- All A/C/D/E/F/H/J/K/L/O/P/R/S/U-Z functions (15 September 2003).
+		- All G functions. Fixed minor bug in GetDetected output (15 September 2003).
+		- All M functions, except MessageBox. Found 2 unknown ModRegion parameters (15 September 2003).
+		- MessageBox function (16 September 2003).
+		- Set command in various formats. Fixed a bunch of minor differences in compiled output
+		  (16 September 2003).
+		- Error/warning returned if the maximum number of variables/buttons are exceeded in
+		  a MessageBox function call (9 each). An error is also returned if you use a number
+		  for a variable value (only locals/globals allowed). Does not yet support strings for
+		  variables (16 September 2003).
+		- Strengthened the warning level of some compiler messages, i.e., some messages that
+		  were warnings by default are now errors (16 September 2003).
 	- Moved to using SourceForge for source control, documents, and downloading.
 
 
@@ -288,8 +288,8 @@ v0.6.0-RC2 (Build 0, 27 August 2006)
 	- Changed valid script if() syntax. Now allows operators, and functions on both sides
 	  and reference calls on the left side. Ensure to enclose both sides of the comparison
 	  operator in brackets to ensure it compiles correctly in the Construction Set, eg:
-				WRONG:		if (  Var1 * Var2 + 10  >=  Var2/109  )
-				CORRECT:	if ( (Var1 * Var2 + 10) >= (Var2/109) )
+	      WRONG:   if (  Var1 * Var2 + 10  >=  Var2/109  )
+	      CORRECT: if ( (Var1 * Var2 + 10) >= (Var2/109) )
 	- Changed how extra variables are checked at the end of function calls to prevent some
 	  errors when functions are used in if() statements.
 	- Tabs will now undo in the script editor.
@@ -297,19 +297,19 @@ v0.6.0-RC2 (Build 0, 27 August 2006)
 	  indent the script according to the current settings. This action can be undone.
 	- Added various identation settings in the options dialog.
 	- Added the following console functions to the script compiler:
-			CenterOnCell
-			CenterOnExterior
-			FillMap
-			FixMe
-			ToggleAI
-			ToggleCollision
-			ToggleFogOfWar
-			ToggleGodMode
-			ToggleMenus
-			ToggleSky
-			ToggleVanityMode
-			ToggleWorld
-	  Verified script output matches 100% to that produced in the CS with the above functions.
+	      CenterOnCell
+	      CenterOnExterior
+	      FillMap
+	      FixMe
+	      ToggleAI
+	      ToggleCollision
+	      ToggleFogOfWar
+	      ToggleGodMode
+	      ToggleMenus
+	      ToggleSky
+	      ToggleVanityMode
+	      ToggleWorld
+	- Verified script output matches 100% to that produced in the CS with the above functions.
 
 
 v0.6.0-RC3 (Build 0, September 2006)
@@ -326,7 +326,7 @@ v0.6.0-RC3 (Build 0, September 2006)
 	- Fixed a script compile bug with local variable references (eg: set SomeObject.LocalVar to 1)
 	  which would output incorrect data in some cases.
 	- Local variables can now be checked in if statements, ex:
-			if ( SomeObject.LocalVar == 1 )
+	      if ( SomeObject.LocalVar == 1 )
 	- Checked output of whilex(i) using one character local variables as mentioned as a possible
 	  bug. Seems to be the same as multi-character variables and is the same output as MWEditSE.
 	- The while statement now accepts extended expression like the if statement. This also fixes
@@ -348,74 +348,74 @@ v0.6.0-RC3 (Build 0, September 2006)
 	  sometime between the original version of the CS and the latest version.
 	- Added some missing animation codes added in a previous patch or expansion. It is unsure
 	  whether any of these codes have a valid use in a script.
-				Attack1
-				Attack2
-				Attack3
-				Block Hit
-				Block Start
-				Block Stop
-				Equip Attach
-				Equip Start
-				Equip Stop
-				Loop Start
-				Loop Stop
-				Self Release
-				Self Start
-				Self Stop
-				Shoot Attach
-				Shoot Follow Attach
-				Shoot Follow Start
-				Shoot Follow Stop
-				Shoot Max Attack
-				Shoot Min Attack
-				Shoot Min Hit
-				Shoot Release
-				Shoot Start
-				Slash Hit
-				Slash Large Follow Start
-				Slash Large Follow Stop
-				Slash Max Attack
-				Slash Medium Follow Start
-				Slash Medium Follow Stop
-				Slash Min Attack
-				Slash Min Hit
-				Slash Small Follow Start
-				Slash Small Follow Stop
-				Slash Start
-				Start
-				Stop
-				SwimAttack1
-				SwimAttack2
-				SwimAttack3
-				SwimDeath2
-				SwimDeath3
-				SwimHit1
-				SwimHit2
-				SwimHit3
-				Target Release
-				Target Start
-				Target Stop
-				Thrust Hit
-				Thrust Large Follow Start
-				Thrust Large Follow Stop
-				Thrust Max Attack
-				Thrust Medium Follow Start
-				Thrust Medium Follow Stop
-				Thrust Min Attack
-				Thrust Min Hit
-				Thrust Small Follow Start
-				Thrust Small Follow Stop
-				Thrust Start
-				Touch Release
-				Touch Start
-				Touch Stop
-				Unequip Detach
-				Unequip Start
-				Unequip Stop
+	      Attack1
+	      Attack2
+	      Attack3
+	      Block Hit
+	      Block Start
+	      Block Stop
+	      Equip Attach
+	      Equip Start
+	      Equip Stop
+	      Loop Start
+	      Loop Stop
+	      Self Release
+	      Self Start
+	      Self Stop
+	      Shoot Attach
+	      Shoot Follow Attach
+	      Shoot Follow Start
+	      Shoot Follow Stop
+	      Shoot Max Attack
+	      Shoot Min Attack
+	      Shoot Min Hit
+	      Shoot Release
+	      Shoot Start
+	      Slash Hit
+	      Slash Large Follow Start
+	      Slash Large Follow Stop
+	      Slash Max Attack
+	      Slash Medium Follow Start
+	      Slash Medium Follow Stop
+	      Slash Min Attack
+	      Slash Min Hit
+	      Slash Small Follow Start
+	      Slash Small Follow Stop
+	      Slash Start
+	      Start
+	      Stop
+	      SwimAttack1
+	      SwimAttack2
+	      SwimAttack3
+	      SwimDeath2
+	      SwimDeath3
+	      SwimHit1
+	      SwimHit2
+	      SwimHit3
+	      Target Release
+	      Target Start
+	      Target Stop
+	      Thrust Hit
+	      Thrust Large Follow Start
+	      Thrust Large Follow Stop
+	      Thrust Max Attack
+	      Thrust Medium Follow Start
+	      Thrust Medium Follow Stop
+	      Thrust Min Attack
+	      Thrust Min Hit
+	      Thrust Small Follow Start
+	      Thrust Small Follow Stop
+	      Thrust Start
+	      Touch Release
+	      Touch Start
+	      Touch Stop
+	      Unequip Detach
+	      Unequip Start
+	      Unequip Stop
 	  Animation groups with a space in them must be enclosed in quotes when used, eg:
-				LoopGroup "Unequip Stop"
+	      LoopGroup "Unequip Stop"
 	  New groups that have multiple opcodes use the lowest opcode value. See
-				http://www.uesp.net/wiki/Tes3Mod:Animation_Groups
+	      http://www.uesp.net/wiki/Tes3Mod:Animation_Groups
 	  for the complete list of valid animation groups.
 	- The script find dialog defaults to a down direction.
 	- Added the GetLOS function as as short form for GetLineOfSight.
@@ -431,12 +431,12 @@ v0.6.0-RC3 (Build 0, September 2006)
 	- Included the MwEditScriptTest.esp file which was used to verify the output of the
 	  script compiler matches as close to possible the output from the CS. The scripts
 	  starting with "testbar" are known to contain issues:
-			testbad_aiwander:	AiWander calls with reset are output strangely from the CS.
-			testbad_if3:		If/set expressions with negatives are output differently by the CS
-								but the final result is the same.
-			testbad_random1:
-			testbad_random2:	Random is just messed up by the CS but the 'correct' output
-								from MWEdit seems to work just fine.
+	      testbad_aiwander: AiWander calls with reset are output strangely from the CS.
+	      testbad_if3:      If/set expressions with negatives are output differently by the CS
+	                        but the final result is the same.
+	      testbad_random1:
+	      testbad_random2:  Random is just messed up by the CS but the 'correct' output
+	                        from MWEdit seems to work just fine.
 	  All other scripts are verified to compile in MWEdit to exactly the same as from the CS.
 	- Added the "Allow Bloodmoon" and "Allow Tribunal" options. When checked they allow the
 	  expansion specific script functions to be used (you'll receive an error/warning message
@@ -474,8 +474,8 @@ v0.6.1 (28 Nov 2006)
 	- Added the 'Make Active' command to the main record list context menu. This moves all
 	  selected records to the active plugin.
 	- Improved support for the unary minus operation in scripts. For example:
-			set local to -(6 + global1)
-			set local to -player->getpos x
+	      set local to -(6 + global1)
+	      set local to -player->getpos x
 	  Note that the CS seems to not handle complex unary minus operations very well and may
 	  output invalid compiled data in those cases.
 	- Fixed crash when compiling a function call within another function.
@@ -499,3 +499,16 @@ v0.6.3 (06 Jul 2025)
 	- Update project to newer Visual Studio versions [rfuzzo, NimrodPSI]
 	- Fixed a bug in the magic effect's RGB data [NimrodPSI]
 	- Added missing magic effects from Bloodmoon and fixed Tribunal's effect [NimrodPSI]
+
+
+v0.7.0 (10 Nov 2025)
+=======================================
+	- Add a CMake build script [deathssoul]
+	- Update the GitHub CI to use CMake and CPack with WiX [deathssoul]
+	- Update code for C++20 compatibility [deathssoul]
+	- Update some includes [deathssoul]
+	- Remove old project files [deathssoul]
+	- Updates for Windows API changes [deathssoul]
+	- Remove the bundled DevIL files [deathssoul]
+	- Enable 64-bit builds [deathssoul]
+	- Update readme for new build infrastructure [deathssoul]

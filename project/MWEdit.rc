@@ -289,15 +289,15 @@ CAPTION "About MWEdit"
 FONT 8, "MS Sans Serif"
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "MWEdit Version 0.6.2a",IDC_STATIC,40,10,119,8,
+    LTEXT           "MWEdit Version 0.7.0",IDC_STATIC,40,10,119,8,
                     SS_NOPREFIX
-    LTEXT           "Copyright (C) 2003",IDC_STATIC,40,44,119,8
+    LTEXT           "Copyright (C) 2025",IDC_STATIC,40,44,119,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
-    LTEXT           "Dave Humphrey, uesp@sympatico.ca",IDC_STATIC,39,20,126,
+    LTEXT           "deathssoul",IDC_STATIC,39,20,126,
                     8
-    LTEXT           "http://mwedit.sourceforge.net/",IDC_SITELINK,40,32,119,
+    LTEXT           "https://github.com/Walrus-Tech/MWEdit",IDC_SITELINK,40,32,119,
                     8,SS_NOTIFY
-    LTEXT           "WARNING: This version of MWEdit is not complete and has not been thoroughly tested.  Please use caution and backup any plugins when editting them.  Please e-mail any bugs or suggestions to me at the above e-mail address.",
+    LTEXT           "Please report any bugs or suggestions to me at the above site",
                     IDC_STATIC,7,68,221,35
     LTEXT           "MWEdit is an unofficial editor for Morrowind's ESP/ESM plugin files.",
                     IDC_STATIC,7,56,221,10
@@ -1085,8 +1085,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,6,2,0
- PRODUCTVERSION 0,6,2,0
+ FILEVERSION 0,7,0,0
+ PRODUCTVERSION 0,7,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -1102,16 +1102,16 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "Comments", "3rd party editor for Morrowind's ESM/ESP plugin files.\0"
-            VALUE "CompanyName", "Abode Inc.\0"
+            VALUE "CompanyName", "Walrus Technologies\0"
             VALUE "FileDescription", "MWEdit MFC Application\0"
-            VALUE "FileVersion", "0, 6, 2, 0\0"
+            VALUE "FileVersion", "0, 7, 0, 0\0"
             VALUE "InternalName", "MWEdit\0"
-            VALUE "LegalCopyright", "Copyright (C) 2003\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "MWEdit.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "MWEdit Application\0"
-            VALUE "ProductVersion", "0, 6, 2, 0\0"
+            VALUE "ProductVersion", "0, 7, 0, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -1354,7 +1354,7 @@ END
 
 STRINGTABLE PRELOAD DISCARDABLE
 BEGIN
-    AFX_IDS_APP_TITLE       "MWEdit v0.6.2a"
+    AFX_IDS_APP_TITLE       "MWEdit v0.7.0"
     AFX_IDS_IDLEMESSAGE     "For Help, press F1"
     AFX_IDS_HELPMODEMESSAGE "Select an object on which to get Help"
 END
