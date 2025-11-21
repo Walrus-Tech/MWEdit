@@ -12,6 +12,19 @@
  *=========================================================================*/
 #include "Common/Contain/listfile.h"
 
+#include <cstddef>
+#include <cstdio>
+
+#include "Common/dl_base.h"
+#include "Common/dl_file.h"
+#include "Common/dl_mem.h"
+
+#if _DEBUG
+#include <cstring>
+
+#include "Common/dl_log.h"
+#endif  // _DEBUG
+
 
 /*===========================================================================
  *
@@ -22,7 +35,7 @@
  * LISTFILE_LINE_LENGTH is used.
  *
  *=========================================================================*/
-CListFile::CListFile(const size_t LineLength) {
+CListFile::CListFile(const std::size_t LineLength) {
 	//DEFINE_FUNCTION("CListFile::CListFile()");
 	/* Initialize the class members */
 	MaxLineLength = LineLength;
@@ -86,7 +99,7 @@ void CListFile::Close() {
 
 	/* Don't close the file unless it is valid */
 	if (pFileHandle != NULL) {
-		fclose(pFileHandle);
+		std::fclose(pFileHandle);
 		pFileHandle = NULL;
 		*pCurrentLine = NULL_CHAR;
 		BufferValid = FALSE;
@@ -178,11 +191,6 @@ boolean CListFile::ReadNextLine() {
 }
 
 
-/*===========================================================================
- *
- * Begin Module Test Routines
- *
- *=========================================================================*/
 #if _DEBUG
 
 /*===========================================================================
@@ -203,7 +211,7 @@ boolean CListFile::ReadNextLine() {
  *=========================================================================*/
 void Test_ListFile() {
 	DEFINE_FUNCTION("Test_ListFile()");
-	SystemLog.Printf(stdout, "================= Testing CListFile =========================");
+	SystemLog.Printf(std::stdout, "================= Testing CListFile =========================");
 
 	/* Test the CListFile construction */
 	CListFile TestFile1;
@@ -229,9 +237,9 @@ void Test_ListFile() {
 	ASSERT(TestFile3.IsValidLine() == FALSE);
 
 	/* Test the GetCurrentLine() method */
-	ASSERT(strcmp(TestFile1.GetCurrentLine(), "Test1, Line1") == 0);
-	ASSERT(strcmp(TestFile2.GetCurrentLine(), "Test2, Lin") == 0);
-	ASSERT(strcmp(TestFile3.GetCurrentLine(), "") == 0);
+	ASSERT(std::strcmp(TestFile1.GetCurrentLine(), "Test1, Line1") == 0);
+	ASSERT(std::strcmp(TestFile2.GetCurrentLine(), "Test2, Lin") == 0);
+	ASSERT(std::strcmp(TestFile3.GetCurrentLine(), "") == 0);
 
 	/* Output the rest of the TestFile1 file to the SystemLog */
 	do {
@@ -244,7 +252,7 @@ void Test_ListFile() {
 	/* Test reopening an open file */
 	ASSERT(TestFile1.Open("test1.lst") == TRUE);
 	ASSERT(TestFile1.IsValidLine() == TRUE);
-	ASSERT(strcmp(TestFile1.GetCurrentLine(), "Test1, Line1") == 0);
+	ASSERT(std::strcmp(TestFile1.GetCurrentLine(), "Test1, Line1") == 0);
 
 	/* Test the Close() and IsOpen() methods */
 	ASSERT(TestFile1.IsOpen() == TRUE);
@@ -253,4 +261,4 @@ void Test_ListFile() {
 	ASSERT(TestFile1.IsValidLine() == FALSE);
 }
 
-#endif
+#endif  // _DEBUG

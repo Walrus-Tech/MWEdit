@@ -9,6 +9,13 @@
  *=========================================================================*/
 #include "Common/Contain/GenStack.h"
 
+#include <cstddef>
+#include <cstring>
+
+#include "Common/dl_base.h"
+#include "Common/dl_err.h"
+#include "Common/dl_mem.h"
+
 
 DEFINE_FILE("GenStack.cpp");
 
@@ -56,21 +63,20 @@ bool CGenStack::AllocSize(const int Size) {
 	if (Size <= 0) {
 		ErrorHandler.AddError(ERR_BADINPUT, _T("Invalid stack size to %d!"), Size);
 		return false;
-	}
-	/* Ensure we don't truncate existing stack elements */
-	else if (m_NumElements > Size) {
+	} else if (m_NumElements > Size) { /* Ensure we don't truncate existing stack elements */
 		ErrorHandler.AddError(ERR_BADINPUT,
 		                      _T("Cannot set the stack size to %d, %d elements would be lost!"),
-		                      Size, m_NumElements - Size);
+		                      Size,
+		                      m_NumElements - Size);
 		return false;
 	}
 
 	/* Allocate the new stack data */
-	CreateArrayPointer(ppNewData, void*, Size);
+	CreateArrayPointer(ppNewData, void *, Size);
 
 	/* Copy the old stack data */
 	if (m_NumElements != 0) {
-		memcpy(ppNewData, m_ppStack, sizeof(void *)*m_NumElements);
+		std::memcpy(ppNewData, m_ppStack, sizeof(void *)*m_NumElements);
 	}
 
 	/* Delete the old stack and set to the new */

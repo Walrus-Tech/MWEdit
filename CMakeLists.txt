@@ -11,6 +11,7 @@ project(MWEdit VERSION 0.7.0
 set(common_src "Common/Contain/GenStack.cpp"
                "Common/Contain/listfile.cpp"
                "Common/Contain/PtrArray.cpp"
+               "Common/Contain/dl_map.cpp"
                "Common/Contain/temarray.cpp"
                "Common/File/CfgFile.cpp"
                "Common/File/FileBuffer.cpp"

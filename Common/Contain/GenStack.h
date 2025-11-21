@@ -11,9 +11,6 @@
 #define __GENSTACK_H
 
 
-#include "Common/dl_str.h"
-
-
 /* Default stack size */
 #define GENSTACK_DEFAULT_SIZE 32
 
@@ -27,7 +24,6 @@
  *
  *=========================================================================*/
 class CGenStack {
-
   protected:
 	void **m_ppStack;   /* Pointer to array of void pointers */
 	int m_NumElements;  /* Number of elements on the stack */
@@ -65,4 +61,4 @@ class CGenStack {
 };
 
 
-#endif
+#endif  // __GENSTACK_H

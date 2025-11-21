@@ -11,9 +11,10 @@
 #ifndef __LISTFILE_H
 #define __LISTFILE_H
 
+#include <cstddef>
+#include <cstdio>
 
-#include "Common/dl_err.h"
-#include "Common/dl_file.h"
+#include "Common/dl_base.h"
 
 /* Default maximum line length */
 #define LISTFILE_LINE_LENGTH 256
@@ -30,16 +31,16 @@
  *=========================================================================*/
 class CListFile {
   private:
-	char *pCurrentLine;       /* Holds the text of the current line */
-	size_t MaxLineLength;     /* Maximum characters allowed per line */
-	FILE *pFileHandle;        /* Handle to the list file */
-	boolean BufferValid;      /* Is the current line buffer valid */
-	boolean IgnoreBlankLines; /* An option of ignoring empty lines in file */
+	char *pCurrentLine;            /* Holds the text of the current line */
+	std::size_t MaxLineLength;     /* Maximum characters allowed per line */
+	std::FILE *pFileHandle;        /* Handle to the list file */
+	boolean BufferValid;           /* Is the current line buffer valid */
+	boolean IgnoreBlankLines;      /* An option of ignoring empty lines in file */
 
 
   public:
 	/* Class Constructors/Destructors */
-	CListFile(const size_t LineLength = LISTFILE_LINE_LENGTH);
+	CListFile(const std::size_t LineLength = LISTFILE_LINE_LENGTH);
 	virtual ~CListFile();
 	virtual void Destroy();
 
@@ -99,7 +100,7 @@ inline void CListFile::SetIgnoreBlankLines(const boolean Value) {
 
 #if _DEBUG
 	void Test_ListFile();
-#endif
+#endif  // _DEBUG
 
 
-#endif
+#endif  // __LISTFILE_H
