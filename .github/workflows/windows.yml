@@ -45,13 +45,13 @@ jobs:
 
 
     - name: Prepare Build
-      run: mkdir build; cmake -G "Visual Studio 17 2022" -B build
+      run: mkdir builddir; cmake -G "Visual Studio 17 2022" -B build
 
     - name: Run Build
-      run: cmake --build build --config Release --target PACKAGE
+      run: cmake --build builddir --config Release --target PACKAGE
 
     - name: Archive Artifact
       uses: actions/upload-artifact@v5
       with:
         name: MWEdit
-        path: build/MWEdit-0.7.0-win64.msi
+        path: builddir/MWEdit-0.7.0-win64.msi
