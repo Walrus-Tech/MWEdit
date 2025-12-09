@@ -45,7 +45,7 @@ jobs:
 
 
     - name: Prepare Build
-      run: mkdir builddir; cmake -G "Visual Studio 17 2022" -B build
+      run: mkdir builddir; cmake -G "Visual Studio 17 2022" -B builddir
 
     - name: Run Build
       run: cmake --build builddir --config Release --target PACKAGE
