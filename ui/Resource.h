@@ -27,7 +27,6 @@
 #define IDI_ARMOR                       136
 #define IDB_APPARATUS                   137
 #define IDD_FORMVIEW                    137
-#define IDD_CREATURE1_VIEW              137
 #define IDD_FUNCTION_HELP               137
 #define IDI_FUNCHELP                    137
 #define IDB_BODYPART                    138
@@ -61,7 +60,6 @@
 #define IDD_CREATURE_DLG                147
 #define IDI_CREATURE                    147
 #define IDB_LIGHT                       148
-#define IDD_CREATURE2_VIEW              148
 #define IDB_LOCKPICK                    149
 #define IDD_DOOR_DLG                    149
 #define IDI_DOOR                        149
