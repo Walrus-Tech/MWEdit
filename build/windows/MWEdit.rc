@@ -1,10 +1,10 @@
 //Microsoft Developer Studio generated resource script.
 //
-#include "Resource.h"
+#include "ui/Resource.h"
 
 // Generated Help ID header file
 #define APSTUDIO_HIDDEN_SYMBOLS
-#include "resource.hm"
+#include "data/resource.hm"
 #undef APSTUDIO_HIDDEN_SYMBOLS
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -33,26 +33,26 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\MWEdit.ico"
-IDR_MWEDITTYPE          ICON    DISCARDABLE     "res\\MWEditDoc.ico"
+IDR_MAINFRAME           ICON    DISCARDABLE     "data\\MWEdit.ico"
+IDR_MWEDITTYPE          ICON    DISCARDABLE     "data\\MWEditDoc.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
-IDB_WHITEBMP            BITMAP  DISCARDABLE     "res\\whitebmp.bmp"
-IDB_TESTBITMAP          BITMAP  DISCARDABLE     "res\\testbitm.bmp"
-IDB_REPLACEBMP          BITMAP  DISCARDABLE     "res\\replaceb.bmp"
-IDB_PASTEBMP            BITMAP  DISCARDABLE     "res\\pastebmp.bmp"
-IDB_FINDBMP             BITMAP  DISCARDABLE     "res\\findbmp.bmp"
-IDB_CUTBMP              BITMAP  DISCARDABLE     "res\\cutbmp.bmp"
-IDB_COPYBMP             BITMAP  DISCARDABLE     "res\\copybmp.bmp"
-IDB_COMPILEBMP          BITMAP  DISCARDABLE     "res\\compileb.bmp"
-IDB_BLUEBMP             BITMAP  DISCARDABLE     "res\\bluebmp.bmp"
-IDB_UNDOBMP             BITMAP  DISCARDABLE     "res\\bmp00005.bmp"
-IDB_INDENTBMP           BITMAP  DISCARDABLE     "res\\bmp00006.bmp"
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "data\\Toolbar.bmp"
+IDB_WHITEBMP            BITMAP  DISCARDABLE     "data\\whitebmp.bmp"
+IDB_TESTBITMAP          BITMAP  DISCARDABLE     "data\\testbitm.bmp"
+IDB_REPLACEBMP          BITMAP  DISCARDABLE     "data\\replaceb.bmp"
+IDB_PASTEBMP            BITMAP  DISCARDABLE     "data\\pastebmp.bmp"
+IDB_FINDBMP             BITMAP  DISCARDABLE     "data\\findbmp.bmp"
+IDB_CUTBMP              BITMAP  DISCARDABLE     "data\\cutbmp.bmp"
+IDB_COPYBMP             BITMAP  DISCARDABLE     "data\\copybmp.bmp"
+IDB_COMPILEBMP          BITMAP  DISCARDABLE     "data\\compileb.bmp"
+IDB_BLUEBMP             BITMAP  DISCARDABLE     "data\\bluebmp.bmp"
+IDB_UNDOBMP             BITMAP  DISCARDABLE     "data\\bmp00005.bmp"
+IDB_INDENTBMP           BITMAP  DISCARDABLE     "data\\bmp00006.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1339,7 +1339,7 @@ END
 // Cursor
 //
 
-IDC_NODROP              CURSOR  DISCARDABLE     "nodrop.cur"
+IDC_NODROP              CURSOR  DISCARDABLE     "data\\nodrop.cur"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1528,94 +1528,94 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_CAN
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ARMOR               ICON    DISCARDABLE     "res\\armor.ico"
-IDI_APPARATUS           ICON    DISCARDABLE     "res\\apparatu.ico"
-IDI_ACTIVATOR           ICON    DISCARDABLE     "res\\activato.ico"
-IDI_ALCHEMY             ICON    DISCARDABLE     "res\\alchemy.ico"
-IDI_GLOBAL              ICON    DISCARDABLE     "res\\global.ico"
-IDI_BODYPART            ICON    DISCARDABLE     "res\\bodypart.ico"
-IDI_BOOK                ICON    DISCARDABLE     "res\\book.ico"
-IDI_CLOTHING            ICON    DISCARDABLE     "res\\clothing.ico"
-IDI_CONTAINER           ICON    DISCARDABLE     "res\\containe.ico"
-IDI_CREATURE            ICON    DISCARDABLE     "res\\creature.ico"
-IDI_DOOR                ICON    DISCARDABLE     "res\\door.ico"
-IDI_ENCHANT             ICON    DISCARDABLE     "res\\enchant.ico"
-IDI_INGREDIANT          ICON    DISCARDABLE     "res\\ingredia.ico"
-IDI_LEVELCREA           ICON    DISCARDABLE     "res\\levelcre.ico"
-IDI_LEVELITEM           ICON    DISCARDABLE     "res\\levelite.ico"
-IDI_LIGHT               ICON    DISCARDABLE     "res\\light.ico"
-IDI_DIALOG              ICON    DISCARDABLE     "res\\dialog.ico"
-IDI_LOCKPICK            ICON    DISCARDABLE     "res\\lockpick.ico"
-IDI_EFFECT              ICON    DISCARDABLE     "res\\effect.ico"
-IDI_MISC                ICON    DISCARDABLE     "res\\misc.ico"
-IDI_PROBE               ICON    DISCARDABLE     "res\\probe.ico"
-IDI_REPAIR              ICON    DISCARDABLE     "res\\repair.ico"
-IDI_SOUND               ICON    DISCARDABLE     "res\\sound.ico"
-IDI_SPELL               ICON    DISCARDABLE     "res\\light1.ico"
-IDI_STATIC              ICON    DISCARDABLE     "res\\static.ico"
-IDI_WEAPON              ICON    DISCARDABLE     "res\\weapon.ico"
-IDI_SETTING             ICON    DISCARDABLE     "res\\setting.ico"
-IDI_CLASS               ICON    DISCARDABLE     "res\\class.ico"
-IDI_FACTION             ICON    DISCARDABLE     "res\\effect1.ico"
-IDI_RACE                ICON    DISCARDABLE     "res\\race.ico"
-IDI_SKILL               ICON    DISCARDABLE     "res\\skill.ico"
-IDI_BIRTHSIGN           ICON    DISCARDABLE     "res\\birthsig.ico"
-IDI_SOUNDGEN            ICON    DISCARDABLE     "res\\sound1.ico"
-IDI_REGION              ICON    DISCARDABLE     "res\\region.ico"
-IDI_CELL                ICON    DISCARDABLE     "res\\cell.ico"
-IDI_NPC                 ICON    DISCARDABLE     "res\\npc.ico"
-IDI_FIND_DIALOG         ICON    DISCARDABLE     "res\\find_dia.ico"
-IDI_SCRIPT              ICON    DISCARDABLE     "res\\skill1.ico"
-IDI_FUNCHELP            ICON    DISCARDABLE     "res\\funchelp.ico"
-IDI_STARTSCRIPT         ICON    DISCARDABLE     "res\\script1.ico"
-IDI_USES_DIALOG         ICON    DISCARDABLE     "res\\uses_dia.ico"
-IDI_SCRIPTTEMPLATE      ICON    DISCARDABLE     "res\\ico00001.ico"
+IDI_ARMOR               ICON    DISCARDABLE     "data\\armor.ico"
+IDI_APPARATUS           ICON    DISCARDABLE     "data\\apparatu.ico"
+IDI_ACTIVATOR           ICON    DISCARDABLE     "data\\activato.ico"
+IDI_ALCHEMY             ICON    DISCARDABLE     "data\\alchemy.ico"
+IDI_GLOBAL              ICON    DISCARDABLE     "data\\global.ico"
+IDI_BODYPART            ICON    DISCARDABLE     "data\\bodypart.ico"
+IDI_BOOK                ICON    DISCARDABLE     "data\\book.ico"
+IDI_CLOTHING            ICON    DISCARDABLE     "data\\clothing.ico"
+IDI_CONTAINER           ICON    DISCARDABLE     "data\\containe.ico"
+IDI_CREATURE            ICON    DISCARDABLE     "data\\creature.ico"
+IDI_DOOR                ICON    DISCARDABLE     "data\\door.ico"
+IDI_ENCHANT             ICON    DISCARDABLE     "data\\enchant.ico"
+IDI_INGREDIANT          ICON    DISCARDABLE     "data\\ingredia.ico"
+IDI_LEVELCREA           ICON    DISCARDABLE     "data\\levelcre.ico"
+IDI_LEVELITEM           ICON    DISCARDABLE     "data\\levelite.ico"
+IDI_LIGHT               ICON    DISCARDABLE     "data\\light.ico"
+IDI_DIALOG              ICON    DISCARDABLE     "data\\dialog.ico"
+IDI_LOCKPICK            ICON    DISCARDABLE     "data\\lockpick.ico"
+IDI_EFFECT              ICON    DISCARDABLE     "data\\effect.ico"
+IDI_MISC                ICON    DISCARDABLE     "data\\misc.ico"
+IDI_PROBE               ICON    DISCARDABLE     "data\\probe.ico"
+IDI_REPAIR              ICON    DISCARDABLE     "data\\repair.ico"
+IDI_SOUND               ICON    DISCARDABLE     "data\\sound.ico"
+IDI_SPELL               ICON    DISCARDABLE     "data\\light1.ico"
+IDI_STATIC              ICON    DISCARDABLE     "data\\static.ico"
+IDI_WEAPON              ICON    DISCARDABLE     "data\\weapon.ico"
+IDI_SETTING             ICON    DISCARDABLE     "data\\setting.ico"
+IDI_CLASS               ICON    DISCARDABLE     "data\\class.ico"
+IDI_FACTION             ICON    DISCARDABLE     "data\\effect1.ico"
+IDI_RACE                ICON    DISCARDABLE     "data\\race.ico"
+IDI_SKILL               ICON    DISCARDABLE     "data\\skill.ico"
+IDI_BIRTHSIGN           ICON    DISCARDABLE     "data\\birthsig.ico"
+IDI_SOUNDGEN            ICON    DISCARDABLE     "data\\sound1.ico"
+IDI_REGION              ICON    DISCARDABLE     "data\\region.ico"
+IDI_CELL                ICON    DISCARDABLE     "data\\cell.ico"
+IDI_NPC                 ICON    DISCARDABLE     "data\\npc.ico"
+IDI_FIND_DIALOG         ICON    DISCARDABLE     "data\\find_dia.ico"
+IDI_SCRIPT              ICON    DISCARDABLE     "data\\skill1.ico"
+IDI_FUNCHELP            ICON    DISCARDABLE     "data\\funchelp.ico"
+IDI_STARTSCRIPT         ICON    DISCARDABLE     "data\\script1.ico"
+IDI_USES_DIALOG         ICON    DISCARDABLE     "data\\uses_dia.ico"
+IDI_SCRIPTTEMPLATE      ICON    DISCARDABLE     "data\\ico00001.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Bitmap
 //
 
-IDB_ARMOR               BITMAP  DISCARDABLE     "res\\bitmap1.bmp"
-IDB_ACTIVATOR           BITMAP  DISCARDABLE     "res\\activato.bmp"
-IDB_ALCHEMY             BITMAP  DISCARDABLE     "res\\alchemy.bmp"
-IDB_APPARATUS           BITMAP  DISCARDABLE     "res\\armor1.bmp"
-IDB_BOOK                BITMAP  DISCARDABLE     "res\\bmp00002.bmp"
-IDB_CLOTHING            BITMAP  DISCARDABLE     "res\\clothing.bmp"
-IDB_CONTAINER           BITMAP  DISCARDABLE     "res\\containe.bmp"
-IDB_CREATURE            BITMAP  DISCARDABLE     "res\\bmp00003.bmp"
-IDB_ENCHANT             BITMAP  DISCARDABLE     "res\\door1.bmp"
-IDB_INGREDIANT          BITMAP  DISCARDABLE     "res\\ingredia.bmp"
-IDB_LEVELCREA           BITMAP  DISCARDABLE     "res\\bmp00004.bmp"
-IDB_LEVELITEM           BITMAP  DISCARDABLE     "res\\levelite.bmp"
-IDB_LIGHT               BITMAP  DISCARDABLE     "res\\light.bmp"
-IDB_LOCKPICK            BITMAP  DISCARDABLE     "res\\lockpick.bmp"
-IDB_MISC                BITMAP  DISCARDABLE     "res\\misc.bmp"
-IDB_NPC                 BITMAP  DISCARDABLE     "res\\npc.bmp"
-IDB_PROBE               BITMAP  DISCARDABLE     "res\\probe.bmp"
-IDB_REPAIR              BITMAP  DISCARDABLE     "res\\repair.bmp"
-IDB_SPELL               BITMAP  DISCARDABLE     "res\\spell.bmp"
-IDB_STATIC              BITMAP  DISCARDABLE     "res\\static.bmp"
-IDB_WEAPON              BITMAP  DISCARDABLE     "res\\weapon.bmp"
-IDB_GLOBAL              BITMAP  DISCARDABLE     "res\\global.bmp"
-IDB_DROPBAD             BITMAP  DISCARDABLE     "res\\dropbad.bmp"
-IDB_SOUND               BITMAP  DISCARDABLE     "res\\sound.bmp"
-IDB_MAGICEFFECT         BITMAP  DISCARDABLE     "res\\magiceff.bmp"
-IDB_DOOR                BITMAP  DISCARDABLE     "res\\door.bmp"
-IDB_DIALOG              BITMAP  DISCARDABLE     "res\\dialog.bmp"
-IDB_GAMESETTING         BITMAP  DISCARDABLE     "res\\gamesett.bmp"
-IDB_FACTION             BITMAP  DISCARDABLE     "res\\faction.bmp"
-IDB_CLASS               BITMAP  DISCARDABLE     "res\\class.bmp"
-IDB_RACE                BITMAP  DISCARDABLE     "res\\race.bmp"
-IDB_SKILL               BITMAP  DISCARDABLE     "res\\skill.bmp"
-IDB_SCRIPT              BITMAP  DISCARDABLE     "res\\script.bmp"
-IDB_BIRTHSIGN           BITMAP  DISCARDABLE     "res\\birthsig.bmp"
-IDB_SOUNDGEN            BITMAP  DISCARDABLE     "res\\soundgen.bmp"
-IDB_BODYPART            BITMAP  DISCARDABLE     "res\\bmp00001.bmp"
-IDB_REGION              BITMAP  DISCARDABLE     "res\\region.bmp"
-IDB_CELL                BITMAP  DISCARDABLE     "res\\cell.bmp"
-IDB_FIND_DIALOG         BITMAP  DISCARDABLE     "res\\find_dia.bmp"
-IDB_STARTSCRIPT         BITMAP  DISCARDABLE     "res\\script1.bmp"
+IDB_ARMOR               BITMAP  DISCARDABLE     "data\\bitmap1.bmp"
+IDB_ACTIVATOR           BITMAP  DISCARDABLE     "data\\activato.bmp"
+IDB_ALCHEMY             BITMAP  DISCARDABLE     "data\\alchemy.bmp"
+IDB_APPARATUS           BITMAP  DISCARDABLE     "data\\armor1.bmp"
+IDB_BOOK                BITMAP  DISCARDABLE     "data\\bmp00002.bmp"
+IDB_CLOTHING            BITMAP  DISCARDABLE     "data\\clothing.bmp"
+IDB_CONTAINER           BITMAP  DISCARDABLE     "data\\containe.bmp"
+IDB_CREATURE            BITMAP  DISCARDABLE     "data\\bmp00003.bmp"
+IDB_ENCHANT             BITMAP  DISCARDABLE     "data\\door1.bmp"
+IDB_INGREDIANT          BITMAP  DISCARDABLE     "data\\ingredia.bmp"
+IDB_LEVELCREA           BITMAP  DISCARDABLE     "data\\bmp00004.bmp"
+IDB_LEVELITEM           BITMAP  DISCARDABLE     "data\\levelite.bmp"
+IDB_LIGHT               BITMAP  DISCARDABLE     "data\\light.bmp"
+IDB_LOCKPICK            BITMAP  DISCARDABLE     "data\\lockpick.bmp"
+IDB_MISC                BITMAP  DISCARDABLE     "data\\misc.bmp"
+IDB_NPC                 BITMAP  DISCARDABLE     "data\\npc.bmp"
+IDB_PROBE               BITMAP  DISCARDABLE     "data\\probe.bmp"
+IDB_REPAIR              BITMAP  DISCARDABLE     "data\\repair.bmp"
+IDB_SPELL               BITMAP  DISCARDABLE     "data\\spell.bmp"
+IDB_STATIC              BITMAP  DISCARDABLE     "data\\static.bmp"
+IDB_WEAPON              BITMAP  DISCARDABLE     "data\\weapon.bmp"
+IDB_GLOBAL              BITMAP  DISCARDABLE     "data\\global.bmp"
+IDB_DROPBAD             BITMAP  DISCARDABLE     "data\\dropbad.bmp"
+IDB_SOUND               BITMAP  DISCARDABLE     "data\\sound.bmp"
+IDB_MAGICEFFECT         BITMAP  DISCARDABLE     "data\\magiceff.bmp"
+IDB_DOOR                BITMAP  DISCARDABLE     "data\\door.bmp"
+IDB_DIALOG              BITMAP  DISCARDABLE     "data\\dialog.bmp"
+IDB_GAMESETTING         BITMAP  DISCARDABLE     "data\\gamesett.bmp"
+IDB_FACTION             BITMAP  DISCARDABLE     "data\\faction.bmp"
+IDB_CLASS               BITMAP  DISCARDABLE     "data\\class.bmp"
+IDB_RACE                BITMAP  DISCARDABLE     "data\\race.bmp"
+IDB_SKILL               BITMAP  DISCARDABLE     "data\\skill.bmp"
+IDB_SCRIPT              BITMAP  DISCARDABLE     "data\\script.bmp"
+IDB_BIRTHSIGN           BITMAP  DISCARDABLE     "data\\birthsig.bmp"
+IDB_SOUNDGEN            BITMAP  DISCARDABLE     "data\\soundgen.bmp"
+IDB_BODYPART            BITMAP  DISCARDABLE     "data\\bmp00001.bmp"
+IDB_REGION              BITMAP  DISCARDABLE     "data\\region.bmp"
+IDB_CELL                BITMAP  DISCARDABLE     "data\\cell.bmp"
+IDB_FIND_DIALOG         BITMAP  DISCARDABLE     "data\\find_dia.bmp"
+IDB_STARTSCRIPT         BITMAP  DISCARDABLE     "data\\script1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -4739,7 +4739,7 @@ BEGIN
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\MWEdit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""data\\MWEdit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""afxres.rc""         // Standard components\r\n"
     "#endif\r\n"
     "\0"
@@ -4857,7 +4857,7 @@ END
 LANGUAGE 9, 1
 #pragma code_page(1252)
 #endif //_WIN32
-#include "res\MWEdit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "data\MWEdit.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"         // Standard components
 #endif
 
