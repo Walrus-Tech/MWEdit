@@ -27,7 +27,8 @@
  *  - Added the MakeSpaceLabel() function.
  *
  *=========================================================================*/
-#include "Common/dl_file.h"
+#include "common/dl_file.h"
+
 #include <direct.h>
 #include <errno.h>
 //#include <limits.h>
@@ -42,7 +43,6 @@
 #if _WIN32
 	#include <windows.h>
 #endif
-
 
 DEFINE_FILE("DL_File.h");
 

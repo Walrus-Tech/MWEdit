@@ -8,9 +8,8 @@
  * lists.
  *
  *=========================================================================*/
-#include "Common/Utility/namelist.h"
+#include "common/utility/name_list.h"
 #include <string.h>
-
 
 DEFINE_FILE("NameList.cpp");
 

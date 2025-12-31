@@ -10,9 +10,8 @@
 #ifndef __SSARRAY_H
 #define __SSARRAY_H
 
-
-#include "Common/String/SString.h"
-#include "Common/Contain/PtrArray.h"
+#include "common/string/sstring.h"
+#include "common/container/ptr_array.h"
 
 
 /* Local private string array definition */

@@ -11,9 +11,8 @@
 #ifndef __GENFILE_H
 #define __GENFILE_H
 
-
 #include <stdarg.h>
-#include "Common/dl_file.h"
+#include "common/dl_file.h"
 
 
 /* Used to indicate a position in a file stream */

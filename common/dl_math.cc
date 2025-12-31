@@ -20,13 +20,14 @@
  *  - Added the Metricize() buffered function.
  *
  *=========================================================================*/
-#include "Common/dl_math.h"
-#include "Common/dl_str.h"
-#include <time.h>
-#include <string.h>
-#include <limits.h>
-#include <float.h>
+#include "common/dl_math.h"
 
+#include <float.h>
+#include <limits.h>
+#include <string.h>
+#include <time.h>
+
+#include "common/dl_str.h"
 
 DEFINE_FILE("dl_math.cpp");
 

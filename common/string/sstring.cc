@@ -7,10 +7,10 @@
  * Contains the implementation for the simple string class CSString.
  *
  *=========================================================================*/
+#include "common/string/sstring.h"
+
 #include <ctype.h>
 #include <limits.h>
-#include "Common/String/SString.h"
-
 
 DEFINE_FILE("SString.cpp");
 

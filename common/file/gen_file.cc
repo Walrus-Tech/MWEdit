@@ -8,8 +8,11 @@
  * operations.
  *
  *=========================================================================*/
-#include "Common/File/GenFile.h"
+#include "common/file/gen_file.h"
 
+#if _DEBUG
+#include "common/dl_math.h"
+#endif
 
 DEFINE_FILE("GenFile.cpp");
 
@@ -20,7 +23,6 @@ DEFINE_FILE("GenFile.cpp");
  *
  *=========================================================================*/
 #if _DEBUG
-#include "dl_math.h"
 
 
 /*===========================================================================

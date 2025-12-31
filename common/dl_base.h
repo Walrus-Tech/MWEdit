@@ -15,7 +15,6 @@
 #ifndef __DL_BASE_H
 #define __DL_BASE_H
 
-
 /*===========================================================================
  *
  * Begin Windows Pragmas
@@ -36,6 +35,17 @@
 #include <stdio.h>
 #include <limits.h>
 
+/*===========================================================================
+ *
+ * Begin Enable Debug Memory Handler for Windows
+ *
+ * By including "crtdgb.h"
+ *
+ *=========================================================================*/
+#if _DEBUG && _WIN32
+	//#define _CRTDBG_MAP_ALLOC
+	#include "crtdbg.h"
+#endif
 
 /*===========================================================================
  *
@@ -49,19 +59,6 @@
 #define DL_BASE_AUTHOR  "Dave Humphrey"
 #define DL_BASE_EMAIL   "uesp@m0use.net"
 #define DL_BASE_DATE    "1 April 2001"
-
-
-/*===========================================================================
- *
- * Begin Enable Debug Memory Handler for Windows
- *
- * By including "crtdgb.h"
- *
- *=========================================================================*/
-#if _DEBUG && _WIN32
-	//#define _CRTDBG_MAP_ALLOC
-	#include "crtdbg.h"
-#endif
 
 
 /*===========================================================================

@@ -8,23 +8,23 @@
  * of typed pointers.
  *
  *=========================================================================*/
-#include "Common/Contain/temarray.h"
+#include "common/container/tem_array.h"
 
 #include <cstddef>
 #include <climits>
 #include <cstring>
 
-#include "Common/dl_base.h"
-#include "Common/dl_block.h"
-#include "Common/dl_err.h"
-#include "Common/dl_mem.h"
+#include "common/dl_base.h"
+#include "common/dl_block.h"
+#include "common/dl_err.h"
+#include "common/dl_mem.h"
 
 #if _DEBUG
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
 
-#include "Common/dl_log.h"
+#include "common/dl_log.h"
 #endif  // _DEBUG
 
 DEFINE_FILE("TemArray.cpp");

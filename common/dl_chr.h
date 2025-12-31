@@ -11,12 +11,12 @@
 #ifndef __DL_CHR_H
 #define __DL_CHR_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_mem.h"
-#include "Common/dl_err.h"
-#include "Common/dl_log.h"
 #include <string.h>
+
+#include "common/dl_base.h"
+#include "common/dl_err.h"
+#include "common/dl_log.h"
+#include "common/dl_mem.h"
 
 #if _WIN32
 	#include "tchar.h"

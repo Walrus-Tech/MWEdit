@@ -11,14 +11,13 @@
 #ifndef __DL_TIME_H
 #define __DL_TIME_H
 
-
-#include "Common/dl_err.h"
 #include <time.h>
+
+#include "common/dl_err.h"
 
 #if _WIN32
 	#include "windows.h"
 #endif
-
 
 /* Types of counters used */
 #define HICLOCK_PERFORMANCE 1

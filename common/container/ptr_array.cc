@@ -10,7 +10,7 @@
  *=========================================================================*/
 
 /* Include Files */
-#include "Common/Contain/PtrArray.h"
+#include "common/container/ptr_array.h"
 
 #include <cstddef>
 #include <cstdlib>
@@ -18,16 +18,16 @@
 #include <cmath>
 #include <cstring>
 
-#include "Common/dl_base.h"
-#include "Common/dl_err.h"
-#include "Common/dl_mem.h"
+#include "common/dl_base.h"
+#include "common/dl_err.h"
+#include "common/dl_mem.h"
 
 #if _DEBUG
 #include <cstdio>
 #include <ctime>
 
-#include "Common/dl_block.h"
-#include "Common/dl_log.h"
+#include "common/dl_block.h"
+#include "common/dl_log.h"
 #endif  //_DEBUG
 
 

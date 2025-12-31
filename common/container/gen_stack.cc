@@ -7,14 +7,14 @@
  * Description
  *
  *=========================================================================*/
-#include "Common/Contain/GenStack.h"
+#include "common/container/gen_stack.h"
 
 #include <cstddef>
 #include <cstring>
 
-#include "Common/dl_base.h"
-#include "Common/dl_err.h"
-#include "Common/dl_mem.h"
+#include "common/dl_base.h"
+#include "common/dl_err.h"
+#include "common/dl_mem.h"
 
 
 DEFINE_FILE("GenStack.cpp");

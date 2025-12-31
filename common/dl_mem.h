@@ -10,11 +10,9 @@
 #ifndef __DL_MEM_H
 #define __DL_MEM_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_log.h"
-#include "Common/dl_block.h"
-
+#include "common/dl_base.h"
+#include "common/dl_block.h"
+#include "common/dl_log.h"
 
 #define DL_MEM_NAME    _T("DL_Mem.cpp")
 #define DL_MEM_VERSION _T("0.01d")

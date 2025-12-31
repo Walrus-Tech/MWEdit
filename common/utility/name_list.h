@@ -10,8 +10,7 @@
 #ifndef __NAMELIST_H
 #define __NAMELIST_H
 
-
-#include "Common/dl_err.h"
+#include "common/dl_err.h"
 
 
 /* Associate a short string with a long integer value */

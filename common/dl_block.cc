@@ -20,9 +20,11 @@
  *=========================================================================*/
 #if _DEBUG
 
-#include "Common/dl_block.h"
-#include "Common/dl_log.h"
+#include "common/dl_block.h"
+
 #include <string.h>
+
+#include "common/dl_log.h"
 
 
 DEFINE_FILE("DL_Block.cpp");

@@ -10,11 +10,9 @@
 #ifndef __CONFIGFILE_H
 #define __CONFIGFILE_H
 
-
-#include "Common/File/GenFile.h"
-#include "Common/String/SString.h"
-#include "Common/Contain/PtrArray.h"
-
+#include "common/container/ptr_array.h"
+#include "common/file/gen_file.h"
+#include "common/string.sstring.h"
 
 #define CONFIG_LINE_LENGTH 256
 

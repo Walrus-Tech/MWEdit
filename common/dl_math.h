@@ -13,12 +13,11 @@
 #ifndef __DL_MATH_H
 #define __DL_MATH_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_err.h"
 #include <ctype.h>
 #include "math.h"
 
+#include "common/dl_base.h"
+#include "common/dl_err.h"
 
 /* Exponential of power of 10s macro */
 #define exp10(Value) (exp(Value * M_LN10))

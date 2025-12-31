@@ -17,9 +17,7 @@
 #ifndef __DL_BLOCK_H
 #define __DL_BLOCK_H
 
-
-#include "Common/dl_base.h"
-
+#include "common/dl_base.h"
 
 #define BLOCK_INITIAL_ARRAYSIZE  256
 #define BLOCK_RESIZEARRAY_FACTOR 2

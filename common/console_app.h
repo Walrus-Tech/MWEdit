@@ -11,12 +11,10 @@
 #ifndef __CONAPP_H
 #define __CONAPP_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_err.h"
-#include "Common/dl_str.h"
-#include "Common/dl_file.h"
-
+#include "common/dl_base.h"
+#include "common/dl_err.h"
+#include "common/dl_file.h"
+#include "common/dl_str.h"
 
 /* Defines a standard main routine */
 #define STANDARD_CONSOLEAPP_MAIN(AppName) int main(int ArgCount, char *pArgs[]) { \

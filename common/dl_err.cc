@@ -35,9 +35,11 @@
  *    database if it is available.
  *
  *=========================================================================*/
-#include "Common/dl_err.h"
-#include "Common/dl_str.h"
+#include "common/dl_err.h"
+
 #include <errno.h>
+
+#include "common/dl_str.h"
 
 /* Include TC graphic error messages */
 #if _TCGRAPHERRORS

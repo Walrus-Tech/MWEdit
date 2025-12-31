@@ -7,9 +7,8 @@
  * Implements common functions for Dave's Library of common code.
  *
  *=========================================================================*/
-#include "Common/dl_base.h"
-#include "Common/dl_err.h"
-
+#include "common/dl_base.h"
+#include "common/dl_err.h"
 
 DEFINE_FILE("DL_Base.cpp");
 

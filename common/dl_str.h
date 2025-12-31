@@ -10,13 +10,12 @@
 #ifndef __DL_STR_H
 #define __DL_STR_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_mem.h"
-#include "Common/dl_err.h"
-#include "Common/dl_log.h"
 #include <string.h>
 
+#include "common/dl_base.h"
+#include "common/dl_err.h"
+#include "common/dl_log.h"
+#include "common/dl_mem.h"
 
 /* Convert a bool value to a string */
 #define BooleanToString(Flag) ((Flag) ? _T("True") : _T("False"))

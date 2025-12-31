@@ -35,10 +35,10 @@
  *  - Replaced the 'boolean' type with 'bool'.
  *
  *=========================================================================*/
-#include "Common/conapp.h"
+#include "common/console_app.h"
+
 #include <conio.h>
 #include <ctype.h>
-
 
 DEFINE_FILE("ConApp.cpp");
 

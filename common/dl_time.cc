@@ -7,11 +7,9 @@
  * Contains common time related routines.
  *
  *=========================================================================*/
-#include "Common/dl_time.h"
-
+#include "common/dl_time.h"
 
 DEFINE_FILE("dl_time.h");
-
 
 /*===========================================================================
  *

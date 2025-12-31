@@ -12,8 +12,8 @@
 
 #include <cctype>
 
-#include "Common/dl_base.h"
-#include "Common/dl_str.h"
+#include "common/dl_base.h"
+#include "common/dl_str.h"
 
 
 /* Default size of the hash map tables */

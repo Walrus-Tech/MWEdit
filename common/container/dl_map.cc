@@ -1,10 +1,10 @@
-#include "Common/Contain/dl_map.h"
+#include "common/container/dl_map.h"
 
 #include <cstddef>
 #include <cstring>
 
-#include "Common/dl_base.h"
-#include "Common/dl_mem.h"
+#include "common/dl_base.h"
+#include "common/dl_mem.h"
 
 /*===========================================================================
  *

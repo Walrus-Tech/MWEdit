@@ -11,10 +11,9 @@
 #ifndef __DL_LOG_H
 #define __DL_LOG_H
 
-
-#include "Common/dl_base.h"
 #include <stdarg.h>
 
+#include "common/dl_base.h"
 
 #define DL_LOG_NAME    _T("DL_Log.cpp")
 #define DL_LOG_VERSION _T("0.01d")

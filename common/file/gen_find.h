@@ -11,12 +11,11 @@
 #ifndef __GENFIND_H
 #define __GENFIND_H
 
-
 #if _WIN32
 	#include "io.h"
 #endif
 
-#include "Common/dl_file.h"
+#include "common/dl_file.h"
 
 
 /* Used to indicate an invalid find handle */

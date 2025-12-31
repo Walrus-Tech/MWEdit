@@ -11,8 +11,7 @@
 #ifndef __DL_ERR_H
 #define __DL_ERR_H
 
-
-#include "Common/dl_mem.h"
+#include "common/dl_mem.h"
 
 
 /* Maximum size of a message string for the error message strings */

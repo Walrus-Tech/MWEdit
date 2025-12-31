@@ -12,23 +12,21 @@
  *  - CreateString(TCHAR*) now accepts NULL input (returns NULL).
  *
  *=========================================================================*/
-#include "Common/dl_mem.h"
-#include <string.h>
+#include "common/dl_mem.h"
 
+#include <ctype.h>
+#include <string.h>
 #include <time.h>
+
 #if defined(_MSC_VER)
 	//#include <alloc.h>
 #endif
-
-#include <ctype.h>
 
 #if _WIN32
 	#include <windows.h>
 #endif
 
-
 DEFINE_FILE("DL_Mem.h");
-
 
 /*===========================================================================
  *

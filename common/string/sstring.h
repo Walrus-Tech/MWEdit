@@ -11,10 +11,9 @@
 #ifndef __SSTRING_H
 #define __SSTRING_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_mem.h"
-#include "Common/dl_str.h"
+#include "common/dl_base.h"
+#include "common/dl_mem.h"
+#include "common/dl_str.h"
 
 
 /* Number of extra bytes to allocate when creating strings */

@@ -14,9 +14,8 @@
  *    under Windows. Successfully tested.
  *
  *=========================================================================*/
-#include "Common/dl_chr.h"
+#include "common/dl_chr.h"
 #include <ctype.h>
-
 
 DEFINE_FILE("DL_Chr.h");
 

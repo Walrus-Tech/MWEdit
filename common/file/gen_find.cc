@@ -7,15 +7,13 @@
  * Implements the CFileFind class
  *
  *=========================================================================*/
+#include "common/file/gen_find.h"
+
 #if _WIN32
 	#include "io.h"
 #endif
 
-#include "Common/File/GenFind.h"
-
-
 DEFINE_FILE("GenFind.cpp");
-
 
 /*=========================================================================
  *

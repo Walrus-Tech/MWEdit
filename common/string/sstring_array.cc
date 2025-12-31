@@ -7,8 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "Common/String/SSArray.h"
-
+#include "common/string/sstring_array.h"
 
 DEFINE_FILE("SSArray.cpp");
 

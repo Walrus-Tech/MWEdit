@@ -10,13 +10,12 @@
 #ifndef __DL_FILE_H
 #define __DL_FILE_H
 
-
-#include "Common/dl_base.h"
-#include "Common/dl_mem.h"
-#include "Common/dl_log.h"
-#include "Common/dl_err.h"
-#include "Common/dl_chr.h"
-#include "Common/dl_str.h"
+#include "common/dl_base.h"
+#include "common/dl_chr.h"
+#include "common/dl_err.h"
+#include "common/dl_log.h"
+#include "common/dl_mem.h"
+#include "common/dl_str.h"
 
 
 /* Size of input/output buffer for the CopyFile() function */

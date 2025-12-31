@@ -17,17 +17,16 @@
  *    under Windows. Successfully tested.
  *
  *=========================================================================*/
-#include "Common/dl_log.h"
-#include "Common/dl_mem.h"
+#include "common/dl_log.h"
+
 #include <time.h>
 
+#include "common/dl_mem.h"
 
 /* The main log file for debugging output */
 CLogFile SystemLog;
 
-
 DEFINE_FILE("DL_log.cpp");
-
 
 /*===========================================================================
  *

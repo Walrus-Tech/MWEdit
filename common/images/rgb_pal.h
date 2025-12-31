@@ -10,8 +10,7 @@
 #ifndef __RGBPAL_H
 #define __RGBPAL_H
 
-
-#include "Common/dl_err.h"
+#include "common/dl_err.h"
 
 
 /* Copy palette options */
