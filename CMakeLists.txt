@@ -233,21 +233,23 @@ if (WIN32)
 	# If building on Windows, set the GUI application flag
 	add_executable(MWEdit WIN32 ${common_src}
 	                            ${file_src}
-	                            ${windows_src}
 	                            ${game_morrowind_src}
+	                            ${mwedit_src}
 	                            ${ui_src}
+	                            ${windows_src}
 	                            "ui/mwedit.cc")
 	# Add required MFC macros
 	target_compile_definitions(MWEdit PUBLIC _AFXDLL)
 	# Add the Windows resource file
-	target_sources(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/build/windows/MWEdit.rc")
+	target_sources(MWEdit PUBLIC "${CMAKE_SOURCE_DIR}/build/windows/mwedit.rc")
 else ()
 	add_executable(MWEdit ${common_src}
 	                      ${file_src}
-	                      ${windows_src}
 	                      ${game_morrowind_src}
+	                      ${mwedit_src}
 	                      ${ui_src}
-	                      "project/MWEdit.cpp")
+	                      ${windows_src}
+	                      "ui/mwedit.cc")
 endif ()
 
 # Enable all compiler warnings
