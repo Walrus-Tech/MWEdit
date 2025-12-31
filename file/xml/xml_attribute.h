@@ -10,11 +10,9 @@
 #ifndef __XMLATTR_H
 #define __XMLATTR_H
 
-
-#include "Common/Contain/PtrArray.h"
-#include "Common/String/SString.h"
-#include "Common/File/GenFile.h"
-
+#include "common/container/ptr_array.h"
+#include "common/file/gen_file.h"
+#include "common/string/sstring.h"
 
 /* Read method result values */
 #define XMLFILE_READ_OK         0
@@ -25,7 +23,6 @@
 
 /* Used only when inputting attributes */
 #define XMLATTR_MAX_NAMESIZE  255
-
 
 /*===========================================================================
  *

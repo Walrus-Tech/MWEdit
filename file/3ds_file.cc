@@ -7,12 +7,9 @@
  * Implements the C3dsFile class.
  *
  *=========================================================================*/
-#include "File/file3ds.h"
+#include "file/3ds_file.h"
+
 #include <math.h>
-
-
-DEFINE_FILE("file3ds.cpp");
-
 
 /*===========================================================================
  *
@@ -26,8 +23,9 @@ DEFINE_FILE("file3ds.cpp");
  * to access the array elements.
  *
  *=========================================================================*/
-#include "File/chunk3ds.h"
+#include "file/chunk_3ds.h"
 
+DEFINE_FILE("file3ds.cpp");
 
 /*===========================================================================
  *

@@ -7,11 +7,9 @@
  * Implements the CBmpFile class for handling standard BMP image files.
  *
  *=========================================================================*/
-#include "File/bmpfile.h"
-
+#include "file/bmp_file.h"
 
 DEFINE_FILE("bmpfile.cpp");
-
 
 /*===========================================================================
  *

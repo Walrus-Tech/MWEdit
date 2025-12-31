@@ -10,9 +10,7 @@
 #ifndef __DXFFILE_H
 #define __DXFFILE_H
 
-
-#include "Common/File/GenFile.h"
-
+#include "common/file/gen_file.h"
 
 /*===========================================================================
  *

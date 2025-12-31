@@ -10,12 +10,10 @@
 #ifndef __CSVFILE_H
 #define __CSVFILE_H
 
-
-#include "Common/File/GenFile.h"
-#include "Common/Contain/temarray.h"
-#include "Common/Contain/PtrArray.h"
-#include "Common/String/SString.h"
-
+#include "common/container/tem_array.h"
+#include "common/container/ptr_array.h"
+#include "common/file/gen_file.h"
+#include "common/string/sstring.h"
 
 /* CSV file characters */
 #define CSVFILE_COLCHAR   ','

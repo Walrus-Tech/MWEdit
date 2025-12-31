@@ -7,11 +7,9 @@
  * Implements the CPcxFile class for handling simple PCX image files.
  *
  *=========================================================================*/
-#include "File/pcx.h"
-
+#include "file/pcx_file.h"
 
 DEFINE_FILE("pcx.cpp");
-
 
 /*===========================================================================
  *

@@ -10,10 +10,8 @@
 #ifndef __XMLELEM_H
 #define __XMLELEM_H
 
-
-#include "File/XML/XmlAttr.h"
-#include "Common/Contain/PtrArray.h"
-
+#include "common/container/ptr_array.h"
+#include "file/xml/xml_attribute.h"
 
 /* Initial array sizes */
 #define XMLFILE_DEFAULT_ELEMENTS     16

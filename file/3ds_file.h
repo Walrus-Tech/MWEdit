@@ -10,10 +10,8 @@
 #ifndef __FILE3DS_H
 #define __FILE3DS_H
 
-
-#include "Common/File/GenFile.h"
-#include "Common/Images/rgbpal.h"
-
+#include "common/file/gen_file.h"
+#include "common/images/rgb_pal.h"
 
 /* Flags for the 3DS chunk types */
 #define CHUNK3DS_FLAG_SIMPLECONTAINER 1

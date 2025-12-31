@@ -10,9 +10,7 @@
 #ifndef __XMLFILE_H
 #define __XMLFILE_H
 
-
-#include "File/XML/XmlElem.h"
-
+#include "file/xml/xml_element.h"
 
 /* Callback event codes */
 #define XMLFILE_CBCODE_READSTART  101
@@ -22,7 +20,6 @@
 #define XMLFILE_CBCODE_WRITESTART 121
 #define XMLFILE_CBCODE_WRITEDONE  122
 #define XMLFILE_CBCODE_WRITING    123
-
 
 /*===========================================================================
  *
