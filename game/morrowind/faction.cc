@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmFaction.h"
-
+#include "game/morrowind/faction.h"
 
 DEFINE_FILE("EsmFaction.cpp");
-
 
 /*===========================================================================
  *

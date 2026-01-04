@@ -10,17 +10,14 @@
 #ifndef __ESMLEVELITEM_H
 #define __ESMLEVELITEM_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubShort.h"
-#include "esm/EsmSubByte.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_short.h"
 
 #define MWESM_LEVITEMFLAG_ALLPC    1
 #define MWESM_LEVITEMFLAG_CALCEACH 2
-
 
 /*===========================================================================
  *

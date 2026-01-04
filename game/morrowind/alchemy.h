@@ -10,15 +10,13 @@
 #ifndef __ESMALCHEMY_H
 #define __ESMALCHEMY_H
 
+#include "game/morrowind/item_2.h"
 
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubENAM.h"
-#include "esm/EsmSubALDT.h"
-
+#include "game/morrowind/sub_aldt.h"
+#include "game/morrowind/sub_enam.h"
 
 /* Number of enchantments allowed per alchemy object */
 #define MWESM_ALCHEMY_NUMENCHANTS 8
-
 
 /*===========================================================================
  *

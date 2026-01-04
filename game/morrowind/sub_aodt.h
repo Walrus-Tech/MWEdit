@@ -10,8 +10,7 @@
 #ifndef __ESMSUBAODT_H
 #define __ESMSUBAODT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Armor types */

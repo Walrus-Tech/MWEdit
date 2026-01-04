@@ -10,26 +10,22 @@
 #ifndef __ESMINFO_H
 #define __ESMINFO_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubByte.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubName512.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubInfoDATA.h"
-#include "esm/EsmSubSCVR.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_info_data.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_512.h"
+#include "game/morrowind/sub_name_fix.h"
+#include "game/morrowind/sub_scvr.h"
 
 /* Number of function/variables per info */
 #define MWESM_INFO_MAXFUNCS 6
-
 
 const TCHAR *GetESMInfoGender(const int Type);
 const TCHAR *GetESMInfoFunction(const short FuncType);
 const TCHAR *GetESMInfoFuncType(const byte FuncType);
 const TCHAR *GetESMInfoCompareOp(const byte Type);
-
 
 /* Used to hold type information on the various function bytes */
 typedef struct {
@@ -38,7 +34,6 @@ typedef struct {
 } esmfuncinfo_t;
 
 class CEsmDialogue;
-
 
 /*===========================================================================
  *

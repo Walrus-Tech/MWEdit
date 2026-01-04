@@ -7,8 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmWeapon.h"
-
+#include "game/morrowind/weapon.h"
 
 DEFINE_FILE("EsmWeapon.cpp");
 

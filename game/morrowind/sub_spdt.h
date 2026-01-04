@@ -10,8 +10,7 @@
 #ifndef __ESMSUBSPDT_H
 #define __ESMSUBSPDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Spell types */

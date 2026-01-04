@@ -10,10 +10,8 @@
 #ifndef __ESMMISC_H
 #define __ESMMISC_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubMCDT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_mcdt.h"
 
 /*===========================================================================
  *

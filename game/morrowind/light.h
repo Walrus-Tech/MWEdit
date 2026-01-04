@@ -10,13 +10,10 @@
 #ifndef __ESMLIGHT_H
 #define __ESMLIGHT_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubLHDT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_lhdt.h"
 
 const TCHAR *GetESMLightFlicker(const int Flags);
-
 
 /*===========================================================================
  *

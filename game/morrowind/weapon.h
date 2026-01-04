@@ -10,9 +10,8 @@
 #ifndef __ESMWEAPON_H
 #define __ESMWEAPON_H
 
-
-#include "esm/EsmItem3.h"
-#include "esm/EsmSubWPDT.h"
+#include "game/morrowind/item_3.h"
+#include "game/morrowind/sub_wpdt.h"
 
 
 const TCHAR *GetESMWeaponType(const int Type);

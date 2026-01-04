@@ -10,8 +10,7 @@
 #ifndef __ESMSUBSNAM_H
 #define __ESMSUBSNAM_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 #pragma pack(push, 1)

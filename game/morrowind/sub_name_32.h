@@ -10,9 +10,8 @@
 #ifndef __ESMSUBNAME32_H
 #define __ESMSUBNAME32_H
 
-
-#include "esm/EsmSubBase.h"
-#include "Common/String/SString.h"
+#include "common/string/sstring.h"
+#include "game/morrowind/sub_base.h"
 
 
 /*===========================================================================

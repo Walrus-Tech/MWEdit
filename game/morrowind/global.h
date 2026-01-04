@@ -10,17 +10,14 @@
 #ifndef __ESMGLOBAL_H
 #define __ESMGLOBAL_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubFloat.h"
-#include "esm/EsmSubByte.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_float.h"
 
 /* Global types */
 #define MWESM_GLOBAL_SHORT    ('s')
 #define MWESM_GLOBAL_LONG     ('l')
 #define MWESM_GLOBAL_FLOAT    ('f')
-
 
 /*===========================================================================
  *

@@ -10,8 +10,7 @@
 #ifndef __ESMSUBFADT_H
 #define __ESMSUBFADT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Flags */

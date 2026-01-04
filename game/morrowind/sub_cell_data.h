@@ -10,8 +10,7 @@
 #ifndef __ESMSUBCELLDATA_H
 #define __ESMSUBCELLDATA_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 #define MWESM_CELLFLAG_INTERIOR       0x01

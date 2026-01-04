@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmMagicEffect.h"
-
+#include "game/morrowind/magic_effect.h"
 
 DEFINE_FILE("EsmMagicEffect.cpp");
-
 
 /*===========================================================================
  *

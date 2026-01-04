@@ -10,11 +10,9 @@
 #ifndef __ESMLAND_H
 #define __ESMLAND_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubLong64.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_long_64.h"
 
 /* Default grid array size */
 #define MWESM_LAND_VERTEXSIZE  65
@@ -60,7 +58,6 @@ struct mwesm_vtexdata_t {
 };
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

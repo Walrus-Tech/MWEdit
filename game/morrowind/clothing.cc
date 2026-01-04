@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmClothing.h"
-
+#include "game/morrowind/clothing.h"
 
 DEFINE_FILE("EsmClothing.cpp");
-
 
 /*===========================================================================
  *

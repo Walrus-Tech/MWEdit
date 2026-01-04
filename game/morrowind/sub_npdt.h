@@ -10,8 +10,7 @@
 #ifndef __ESMSUBNPDT_H
 #define __ESMSUBNPDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* NPC flags */

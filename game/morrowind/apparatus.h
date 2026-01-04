@@ -10,15 +10,12 @@
 #ifndef __ESMAPPARATUS_H
 #define __ESMAPPARATUS_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubAADT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_aadt.h"
 
 /* Convert an apparatus type to a string */
 const TCHAR *GetESMAppaType(const int AppaType);
 int GetESMAppaType(const TCHAR *pString);
-
 
 /*===========================================================================
  *

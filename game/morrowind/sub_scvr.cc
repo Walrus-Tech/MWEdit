@@ -10,7 +10,7 @@
  *  - Added the Fine() virtual method.
  *
  *=========================================================================*/
-#include "esm/EsmSubSCVR.h"
+#include "game/morrowind/sub_scvr.h"
 
 
 DEFINE_FILE("EsmSubSCVR.cpp");

@@ -10,8 +10,7 @@
 #ifndef __ESMSUBINFODATA_H
 #define __ESMSUBINFODATA_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Gender types */

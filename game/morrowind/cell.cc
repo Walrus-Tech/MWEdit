@@ -10,14 +10,13 @@
  *  - Added the FindCellRef() method.
  *
  *=========================================================================*/
-#include "esm/EsmCell.h"
-#include "esm/EsmFile.h"
+#include "game/morrowind/cell.h"
 
+#include "game/morrowind/file.h"
 
 DEFINE_FILE("EsmCell.cpp");
 
 int g_NextCellRefIndex = 1; /* Used for cell reference indices */
-
 
 /*===========================================================================
  *

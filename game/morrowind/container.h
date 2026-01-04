@@ -10,18 +10,15 @@
 #ifndef __ESMCONTAINER_H
 #define __ESMCONTAINER_H
 
-
-#include "esm/EsmItem1.h"
-#include "esm/EsmSubCNDT.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubNPCO.h"
-
+#include "game/morrowind/item_1.h"
+#include "game/morrowind/sub_cndt.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_npco.h"
 
 /* Flag bit fields */
 #define MWESM_CONTFLAG_DEFAULT 8 /* Not sure what '8' is */
 #define MWESM_CONTFLAG_ORGANIC 1
 #define MWESM_CONTFLAG_RESPAWN 2
-
 
 /*===========================================================================
  *

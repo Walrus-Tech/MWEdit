@@ -10,10 +10,9 @@
 #ifndef __ESMSUBNAMEFIX_H
 #define __ESMSUBNAMEFIX_H
 
-
-#include "esm/EsmSubBase.h"
-#include "esm/EsmSubName.h"
-#include "Common/String/SString.h"
+#include "common/string/sstring.h"
+#include "game/morrowind/sub_base.h"
+#include "game/morrowind/sub_name.h"
 
 
 typedef CEsmSubName CEsmSubNameFix;

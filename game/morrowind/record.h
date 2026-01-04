@@ -10,13 +10,11 @@
 #ifndef __ESMRECORD_H
 #define __ESMRECORD_H
 
-
-#include "esm/EsmSubBase.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubNameFix.h"
-#include "Common/Contain/dl_map.h"
-
+#include "common/container/dl_map.h"
+#include "game/morrowind/sub_base.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_fix.h"
 
 /* Offset of the recordsize from the end of the record header */
 #define MWESM_RECSIZE_OFFSET 12
@@ -32,7 +30,6 @@
 #define DECLARE_SUBRECCREATE() private: \
 	static const esmsubreccreate_t s_SubRecCreate[]; \
 	virtual const esmsubreccreate_t* GetSubRecCreate () const { return s_SubRecCreate; }
-
 
 /*===========================================================================
  *

@@ -10,13 +10,11 @@
 #ifndef __ESMRACE_H
 #define __ESMRACE_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubName32.h"
-#include "esm/EsmSubRADT.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name32.h"
+#include "game/morrowind/sub_namefix.h"
+#include "game/morrowind/sub_radt.h"
 
 /*===========================================================================
  *

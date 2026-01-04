@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmSoundGen.h"
-
+#include "game/morrowind/sound_gen.h"
 
 DEFINE_FILE("EsmSoundGen.cpp");
-
 
 /*===========================================================================
  *

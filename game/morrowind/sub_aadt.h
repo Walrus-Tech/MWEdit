@@ -10,9 +10,7 @@
 #ifndef __ESMSUBAADT_H
 #define __ESMSUBAADT_H
 
-
-#include "esm/EsmSubBase.h"
-
+#include "game/morrowind/sub_base.h"
 
 #define MWESM_APPATYPE_MIN        0
 #define MWESM_APPATYPE_MORTAR     0
@@ -32,7 +30,6 @@ typedef struct {
 } appadata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmEnchant.h"
-
+#include "game/morrowind/enchant.h"
 
 DEFINE_FILE("EsmEnchant.cpp");
-
 
 /*===========================================================================
  *

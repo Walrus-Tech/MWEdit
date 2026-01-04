@@ -10,11 +10,9 @@
 #ifndef __ESMCLASS_H
 #define __ESMCLASS_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubCLDT.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_cldt.h"
+#include "game/morrowind/sub_name.h"
 
 /*===========================================================================
  *

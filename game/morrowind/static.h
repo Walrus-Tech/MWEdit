@@ -10,10 +10,8 @@
 #ifndef __ESMSTATIC_H
 #define __ESMSTATIC_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_name.h"
 
 /*===========================================================================
  *

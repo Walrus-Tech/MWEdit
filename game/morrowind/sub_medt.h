@@ -10,8 +10,7 @@
 #ifndef __ESMSUBMEDT_H
 #define __ESMSUBMEDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Magic effect flags */

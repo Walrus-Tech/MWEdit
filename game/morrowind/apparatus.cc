@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmApparatus.h"
-
+#include "game/morrowind/apparatus.h"
 
 DEFINE_FILE("EsmApparatus.cpp");
-
 
 /*===========================================================================
  *

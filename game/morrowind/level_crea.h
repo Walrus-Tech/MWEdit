@@ -10,16 +10,13 @@
 #ifndef __ESMLEVELCREA_H
 #define __ESMLEVELCREA_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubShort.h"
-#include "esm/EsmSubByte.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_short.h"
 
 #define MWESM_LEVCREAFLAG_ALLPC 1
-
 
 /*===========================================================================
  *

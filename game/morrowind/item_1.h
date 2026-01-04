@@ -14,14 +14,11 @@
 #ifndef __ESMITEM1_H
 #define __ESMITEM1_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_name.h"
 
 /* Class type flag (bit field) */
 #define MWESM_CLASSTYPE_ITEM1 2
-
 
 /*===========================================================================
  *

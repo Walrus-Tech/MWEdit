@@ -10,14 +10,11 @@
 #ifndef __ESMINGREDIANT_H
 #define __ESMINGREDIANT_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubENAM.h"
-#include "esm/EsmSubIRDT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_enam.h"
+#include "game/morrowind/sub_irdt.h"
 
 #define MWESM_INGRE_NUMENCHANTS 4
-
 
 /*===========================================================================
  *

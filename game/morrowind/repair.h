@@ -10,10 +10,8 @@
 #ifndef __ESMREPAIR_H
 #define __ESMREPAIR_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubRIDT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_ridt.h"
 
 /*===========================================================================
  *

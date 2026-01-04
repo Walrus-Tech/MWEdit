@@ -10,8 +10,7 @@
 #ifndef __ESMSUBBYDT_H
 #define __ESMSUBBYDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Part types */

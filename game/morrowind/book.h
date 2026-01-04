@@ -10,10 +10,8 @@
 #ifndef __ESMBOOK_H
 #define __ESMBOOK_H
 
-
-#include "esm/EsmItem3.h"
-#include "esm/EsmSubBKDT.h"
-
+#include "game/morrowind/item_3.h"
+#include "game/morrowind/sub_bkdt.h"
 
 /*===========================================================================
  *

@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmLevelItem.h"
-
+#include "game/morrowind/level_item.h"
 
 DEFINE_FILE("EsmLevelItem.cpp");
-
 
 /*===========================================================================
  *

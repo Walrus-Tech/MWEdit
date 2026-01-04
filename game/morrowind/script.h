@@ -10,15 +10,12 @@
 #ifndef __ESMSCRIPT_H
 #define __ESMSCRIPT_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubSCHD.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_schd.h"
 
 /* Max script text size */
 #define ESM_SCRIPT_MAXTEXT 32768
-
 
 /*===========================================================================
  *

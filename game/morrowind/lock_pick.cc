@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmLockPick.h"
-
+#include "game/morrowind/lock_pick.h"
 
 DEFINE_FILE("EsmLockPick.cpp");
-
 
 /*===========================================================================
  *

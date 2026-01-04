@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmArmor.h"
+#include "game/morrowind/armor.h"
 
 
 DEFINE_FILE("EsmArmor.cpp");

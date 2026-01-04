@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmDialogue.h"
-
+#include "game/morrowind/dialogue.h"
 
 DEFINE_FILE("EsmDialogue.cpp");
-
 
 /*===========================================================================
  *

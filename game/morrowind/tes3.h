@@ -9,12 +9,10 @@
 #ifndef __ESMTES3_H
 #define __ESMTES3_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubHEDR.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong64.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_hedr.h"
+#include "game/morrowind/sub_long_64.h"
+#include "game/morrowind/sub_name.h"
 
 /*===========================================================================
  *

@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmSubBase.h"
-
+#include "game/morrowind/sub_base.h"
 
 DEFINE_FILE("EsmSubBase.cpp");
-
 
 /*===========================================================================
  *

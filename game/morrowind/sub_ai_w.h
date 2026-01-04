@@ -10,12 +10,9 @@
 #ifndef __ESMSUBAI_W_H
 #define __ESMSUBAI_W_H
 
-
-#include "esm/EsmSubBase.h"
-
+#include "game/morrowind/sub_base.h"
 
 #define MWESM_AIW_NUMIDLES 8
-
 
 #pragma pack(push, 1)
 
@@ -28,7 +25,6 @@ typedef struct {
 } ai_wdata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

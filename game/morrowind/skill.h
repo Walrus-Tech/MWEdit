@@ -10,12 +10,10 @@
 #ifndef __ESMSKILL_H
 #define __ESMSKILL_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubSKDT.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_skdt.h"
 
 /*===========================================================================
  *

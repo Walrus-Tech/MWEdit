@@ -10,15 +10,13 @@
 #ifndef __ESMSPELL_H
 #define __ESMSPELL_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubSPDT.h"
-#include "esm/EsmSubENAM.h"
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_enam.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_spdt.h"
 
 const TCHAR *GetESMSpellType(const int Type);
 int GetESMSpellType(const TCHAR *pString);
-
 
 /*===========================================================================
  *

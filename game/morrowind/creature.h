@@ -10,13 +10,11 @@
 #ifndef __ESMCREATURE_H
 #define __ESMCREATURE_H
 
-
-#include "esm/EsmItem1.h"
-#include "esm/EsmSubCRDT.h"
-#include "esm/EsmSubNPCO.h"
-#include "esm/EsmSubAIDT.h"
-#include "esm/EsmSubLong.h"
-
+#include "game/morrowind/item_1.h"
+#include "game/morrowind/sub_aidt.h"
+#include "game/morrowind/sub_crdt.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_npco.h"
 
 /* Creature flags */
 #define MWESM_CREAFLAG_BIPED      0x0001
@@ -32,10 +30,8 @@
 #define MWESM_CREAFLAG_GOLDBLOOD  0x0800
 #define MWESM_CREAFLAG_BLOODMASK  0x0F00
 
-
 const TCHAR *GetESMCreatureType(const int CreaType);
 int GetESMCreatureType(const TCHAR *pString);
-
 
 /*===========================================================================
  *

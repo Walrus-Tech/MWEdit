@@ -10,17 +10,14 @@
 #ifndef __ESMBODYPART_H
 #define __ESMBODYPART_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubBYDT.h"
-#include "esm/EsmSubName.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_bydt.h"
+#include "game/morrowind/sub_name.h"
 
 const TCHAR *GetESMBodyPart(const int Part);
 const TCHAR *GetESMBodyPartType(const int PartType);
 int GetESMBodyPart(const TCHAR *pString);
 int GetESMBodyPartType(const TCHAR *pString);
-
 
 /*===========================================================================
  *

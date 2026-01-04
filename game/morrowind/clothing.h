@@ -10,15 +10,12 @@
 #ifndef __ESMCLOTHING_H
 #define __ESMCLOTHING_H
 
-
-#include "esm/EsmItem3.h"
-#include "esm/EsmSubCTDT.h"
-#include "esm/EsmSubByte.h"
-
+#include "game/morrowind/item_3.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_ctdt.h"
 
 /* Number of body part definitions allowed in a clothing record */
 #define MWESM_CLOTH_MAXBODYPARTS 7
-
 
 /*===========================================================================
  *

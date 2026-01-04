@@ -10,16 +10,13 @@
 #ifndef __ESMENCHANT_H
 #define __ESMENCHANT_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubENDT.h"
-#include "esm/EsmSubENAM.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_endt.h"
+#include "game/morrowind/sub_enam.h"
+#include "game/morrowind/sub_name.h"
 
 /* Number of effects allowed per enchantment */
 #define MWESM_ENCHANT_NUMENCHANTS 8
-
 
 const TCHAR *GetESMEnchantType(const int Type);
 int GetESMEnchantType(const TCHAR *pString);
@@ -27,7 +24,6 @@ bool GetESMEnchantType(int &OutType, const TCHAR *pString);
 const TCHAR *GetESMEnchantRangeType(const int Type);
 int GetESMEnchantRangeType(const TCHAR *pString);
 bool GetESMEnchantRangeType(int &OutType, const TCHAR *pString);
-
 
 /*===========================================================================
  *

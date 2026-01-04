@@ -10,15 +10,13 @@
 #ifndef __ESMMAGICEFFECT_H
 #define __ESMMAGICEFFECT_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubShort.h"
-#include "esm/EsmSubByte.h"
-#include "esm/EsmSubMEDT.h"
-#include "esm/EsmSubENAM.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_enam.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_medt.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_short.h"
 
 /*===========================================================================
  *

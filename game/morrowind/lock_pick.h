@@ -10,10 +10,8 @@
 #ifndef __ESMLOCKPICK_H
 #define __ESMLOCKPICK_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubLKDT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_lkdt.h"
 
 /*===========================================================================
  *

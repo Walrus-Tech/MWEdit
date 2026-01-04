@@ -21,13 +21,10 @@
 #ifndef __ESMITEM3H
 #define __ESMITEM3H
 
-
-#include "esm/EsmItem2.h"
-
+#include "game/morrowind/item_2.h"
 
 /* Class type flag (bit field) */
 #define MWESM_CLASSTYPE_ITEM3 8
-
 
 /*===========================================================================
  *

@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmAlchemy.h"
+#include "game/morrowind/alchemy.h"
 
 
 DEFINE_FILE("EsmAlchemy.cpp");

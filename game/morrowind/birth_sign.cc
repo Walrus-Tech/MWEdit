@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmBirthSign.h"
-
+#include "game/morrowind/birth_sign.h"
 
 DEFINE_FILE("EsmBirthSign.cpp");
-
 
 /*===========================================================================
  *

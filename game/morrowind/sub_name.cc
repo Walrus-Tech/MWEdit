@@ -7,8 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmSubName.h"
-
+#include "game/morrowind/sub_name.h"
 
 DEFINE_FILE("EsmSubName.cpp");
 

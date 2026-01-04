@@ -10,8 +10,7 @@
 #ifndef __ESMSUBENDT_H
 #define __ESMSUBENDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Enchant types */

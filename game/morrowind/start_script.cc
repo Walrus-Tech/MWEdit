@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmStartScript.h"
-
+#include "game/morrowind/start_script.h"
 
 DEFINE_FILE("EsmStartScript.cpp");
-
 
 /*===========================================================================
  *

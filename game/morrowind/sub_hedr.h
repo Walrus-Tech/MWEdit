@@ -10,8 +10,7 @@
 #ifndef __ESMSUBHEDR_H
 #define __ESMSUBHEDR_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Header string sizes */

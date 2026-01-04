@@ -10,10 +10,8 @@
 #ifndef __ESMPROBE_H
 #define __ESMPROBE_H
 
-
-#include "esm/EsmItem2.h"
-#include "esm/EsmSubPBDT.h"
-
+#include "game/morrowind/item_2.h"
+#include "game/morrowind/sub_pbdt.h"
 
 /*===========================================================================
  *

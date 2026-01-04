@@ -10,12 +10,9 @@
 #ifndef __ESMSUBAI_E_H
 #define __ESMSUBAI_E_H
 
-
 #include <float.h>
 
-#include "esm/EsmSubBase.h"
-
-
+#include "game/morrowind/sub_base.h"
 
 #pragma pack(push, 1)
 
@@ -29,7 +26,6 @@ typedef struct {
 } ai_edata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

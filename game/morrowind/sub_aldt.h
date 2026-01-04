@@ -10,9 +10,7 @@
 #ifndef __ESMSUBALDT_H
 #define __ESMSUBALDT_H
 
-
-#include "esm/EsmSubBase.h"
-
+#include "game/morrowind/sub_base.h"
 
 #pragma pack(push, 1)
 
@@ -23,7 +21,6 @@ typedef struct {
 } alchemydata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

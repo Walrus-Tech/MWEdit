@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmTES3.h"
+#include "game/morrowind/tes3.h"
 
 
 DEFINE_FILE("EsmTES3.cpp");

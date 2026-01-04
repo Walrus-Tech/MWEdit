@@ -11,7 +11,7 @@
 #define __ESMACTIVATOR_H
 
 
-#include "esm/EsmItem1.h"
+#include "game/morrowind/item_1.h"
 
 
 /*===========================================================================

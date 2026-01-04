@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmIngrediant.h"
-
+#include "game/morrowind/ingredient.h"
 
 DEFINE_FILE("EsmIngrediant.cpp");
-
 
 /*===========================================================================
  *

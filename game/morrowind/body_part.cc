@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmBodyPart.h"
-
+#include "game/morrowind/body_part.h"
 
 DEFINE_FILE("EsmBodyPart.cpp");
-
 
 /*===========================================================================
  *

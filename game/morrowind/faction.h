@@ -10,13 +10,11 @@
 #ifndef __ESMFACTION_H
 #define __ESMFACTION_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubName32.h"
-#include "esm/EsmSubFADT.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_fadt.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_32.h"
 
 /*===========================================================================
  *

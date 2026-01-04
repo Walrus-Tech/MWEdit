@@ -11,7 +11,7 @@
 #define __PCX_H
 
 #include "common/file/gen_file.h"
-#include "Common/images/rgb_pal.h"
+#include "common/images/rgb_pal.h"
 
 /* PCX specific error codes */
 #define PCXERR_BIGIMAGE  2001

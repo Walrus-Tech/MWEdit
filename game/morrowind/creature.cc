@@ -7,12 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmCreature.h"
-#include "esm/EsmSubNPCS.h"
+#include "game/morrowind/creature.h"
 
+#include "game/morrowind/sub_npcs.h"
 
 DEFINE_FILE("EsmCreature.cpp");
-
 
 /*===========================================================================
  *

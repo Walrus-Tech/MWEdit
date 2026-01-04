@@ -10,10 +10,8 @@
 #ifndef __ESMDOOR_H
 #define __ESMDOOR_H
 
-
-#include "esm/EsmItem1.h"
-#include "esm/EsmSubName.h"
-
+#include "game/morrowind/item_1.h"
+#include "game/morrowind/sub_name.h"
 
 /*===========================================================================
  *

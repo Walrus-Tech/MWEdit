@@ -12,10 +12,11 @@
  *  - Added the GetFieldString() method.
  *
  *=========================================================================*/
-#include "esm/EsmSubCellRef.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmCell.h"
+#include "game/morrowind/sub_cell_ref.h"
+
+#include "game/morrowind/cell.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name_fix.h"
 
 
 DEFINE_FILE("EsmSubCellRef.cpp");

@@ -10,15 +10,12 @@
 #ifndef __ESMARMOR_H
 #define __ESMARMOR_H
 
-
-#include "esm/EsmItem3.h"
-#include "esm/EsmSubAODT.h"
-#include "esm/EsmSubByte.h"
-
+#include "game/morrowind/item_3.h"
+#include "game/morrowind/sub_aodt.h"
+#include "game/morrowind/sub_byte.h"
 
 /* Number of body part definitions allowed in an armor record */
 #define MWESM_ARMOR_MAXBODYPARTS 7
-
 
 /*===========================================================================
  *

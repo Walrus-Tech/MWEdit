@@ -7,14 +7,14 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmInfo.h"
-#include "esm/EsmSubFloat.h"
-#include "esm/EsmDialogue.h"
+#include "game/morrowind/info.h"
+
 #include <ctype.h>
 
+#include "game/morrowind/dialogue.h"
+#include "game/morrowind/sub_float.h"
 
 DEFINE_FILE("EsmInfo.cpp");
-
 
 /*===========================================================================
  *

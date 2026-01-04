@@ -10,20 +10,17 @@
 #ifndef __ESMCELL_H
 #define __ESMCELL_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubPos6.h"
-#include "esm/EsmSubCellDATA.h"
-#include "esm/EsmSubFloat.h"
-#include "esm/EsmSubByte.h"
-#include "esm/EsmSubFloat.h"
-#include "esm/EsmSubAMBI.h"
-#include "esm/EsmSubCellRef.h"
-#include "esm/EsmSubFRMR.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_ambi.h"
+#include "game/morrowind/sub_byte.h"
+#include "game/morrowind/sub_cell_data.h"
+#include "game/morrowind/sub_cell_ref.h"
+#include "game/morrowind/sub_float.h"
+#include "game/morrowind/sub_frmr.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_fix.h"
+#include "game/morrowind/sub_pos_6.h"
 
 /*===========================================================================
  *

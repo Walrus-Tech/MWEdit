@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmGameSetting.h"
-
+#include "game/morrowind/game_setting.h"
 
 DEFINE_FILE("EsmGameSetting.cpp");
-
 
 /*===========================================================================
  *

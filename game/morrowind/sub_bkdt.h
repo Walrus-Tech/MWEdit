@@ -10,8 +10,7 @@
 #ifndef __ESMSUBBKDT_H
 #define __ESMSUBBKDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 #pragma pack(push, 1)
@@ -25,7 +24,6 @@ typedef struct {
 } bookdata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

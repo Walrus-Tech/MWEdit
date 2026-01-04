@@ -10,12 +10,10 @@
 #ifndef __ESMSOUND_H
 #define __ESMSOUND_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubDATA.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_data.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_fix.h"
 
 /*===========================================================================
  *

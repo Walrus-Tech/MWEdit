@@ -10,12 +10,10 @@
 #ifndef __ESMSOUNDGEN_H
 #define __ESMSOUNDGEN_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubLong.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_fix.h"
 
 /* SoundGen types */
 #define MWESM_SNDGEN_MIN          0
@@ -29,10 +27,8 @@
 #define MWESM_SNDGEN_LAND         7
 #define MWESM_SNDGEN_MAX          7
 
-
 const TCHAR *GetESMSoundGenType(const int Type);
 int GetESMSoundGenType(const TCHAR *pString);
-
 
 /*===========================================================================
  *

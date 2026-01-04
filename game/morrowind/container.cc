@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmContainer.h"
-
+#include "game/morrowind/container.h"
 
 DEFINE_FILE("EsmContainer.cpp");
-
 
 /*===========================================================================
  *

@@ -10,8 +10,7 @@
 #ifndef __ESMSUBIRDT_H
 #define __ESMSUBIRDTXH
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Number of effects per ingrediant */

@@ -10,10 +10,9 @@
 #ifndef __ESMSUBBASE_H
 #define __ESMSUBBASE_H
 
-
-#include "Common/File/GenFile.h"
-#include "esm/EsmDefs.h"
-#include "Common/Contain/PtrArray.h"
+#include "common/container/ptr_array.h"
+#include "common/file/gen_file.h"
+#include "game/morrowind/defs.h"
 
 
 /* The record and sub-record type */

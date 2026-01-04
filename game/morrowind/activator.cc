@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmActivator.h"
+#include "game/morrowind/activator.h"
 
 
 DEFINE_FILE("EsmActivator.cpp");

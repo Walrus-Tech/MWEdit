@@ -7,11 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmLevelCrea.h"
-
+#include "game/morrowind/level_crea.h"
 
 DEFINE_FILE("EsmLevelCrea.cpp");
-
 
 /*===========================================================================
  *

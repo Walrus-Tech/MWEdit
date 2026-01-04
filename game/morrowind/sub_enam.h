@@ -10,8 +10,7 @@
 #ifndef __ESMSUBENAM_H
 #define __ESMSUBENAM_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 #define MWESM_ALCH_MAXENCHANTS    8

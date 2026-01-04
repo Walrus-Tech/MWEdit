@@ -10,14 +10,12 @@
 #ifndef __ESMREGION_H
 #define __ESMREGION_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubWEAT.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubSNAM.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_fix.h"
+#include "game/morrowind/sub_snam.h"
+#include "game/morrowind/sub_weat.h"
 
 /*===========================================================================
  *

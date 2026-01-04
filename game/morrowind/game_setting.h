@@ -10,18 +10,15 @@
 #ifndef __ESMGAMESETTING_H
 #define __ESMGAMESETTING_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubFloat.h"
-#include "esm/EsmSubLong.h"
-#include "esm/EsmSubName.h"
-
+#include "game/morrowind/record.h"
+#include "game/morrowind/sub_float.h"
+#include "game/morrowind/sub_long.h"
+#include "game/morrowind/sub_name.h"
 
 /* Global types */
 #define MWESM_SETTING_INTEGER 1
 #define MWESM_SETTING_FLOAT   2
 #define MWESM_SETTING_STRING  3
-
 
 /*===========================================================================
  *

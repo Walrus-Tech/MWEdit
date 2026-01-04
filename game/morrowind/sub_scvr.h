@@ -10,8 +10,7 @@
 #ifndef __ESMSUBSCVR_H
 #define __ESMSUBSCVR_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Base size without the optional string */

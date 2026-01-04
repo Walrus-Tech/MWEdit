@@ -10,9 +10,8 @@
 #ifndef __ESMSUBCELLREF_H
 #define __ESMSUBCELLREF_H
 
-
-#include "esm/EsmSubBase.h"
-#include "esm/EsmSubPos6.h"
+#include "game/morrowind/sub_base.h"
+#include "game/morrowind/sub_pos_6.h"
 
 
 #define MWESM_CELLREF_INDEXMASK 0x00FFFFFF

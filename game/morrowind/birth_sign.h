@@ -10,12 +10,10 @@
 #ifndef __ESMBIRTHSIGN_H
 #define __ESMBIRTHSIGN_H
 
-
-#include "esm/EsmRecord.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubNameFix.h"
-#include "esm/EsmSubName32.h"
-
+#include "game/morrowind/EsmRecord.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_32.h"
+#include "game/morrowind/sub_name_fix.h"
 
 /*===========================================================================
  *

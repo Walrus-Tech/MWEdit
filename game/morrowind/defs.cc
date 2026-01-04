@@ -12,14 +12,13 @@
  *    attribute functions accordingly.
  *
  *=========================================================================*/
-#include "esm/EsmDefs.h"
-#include "Common/dl_str.h"
-#include "Common/Utility/namelist.h"
-#include "project/EsmGlobOptions.h"
+#include "game/morrowind/defs.h"
 
+#include "common/dl_str.h"
+#include "common/utility/name_list.h"
+#include "ui/glob_options.h"
 
 DEFINE_FILE("EsmBase.cpp")
-
 
 /*===========================================================================
  *

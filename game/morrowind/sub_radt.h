@@ -10,8 +10,7 @@
 #ifndef __ESMSUBRADT_H
 #define __ESMSUBRADT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Number of skill bonuses for each race */

@@ -7,14 +7,13 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmNpc.h"
-#include "esm/EsmInfo.h"
-#include "esm/EsmSubPos6.h"
-#include "Common/Utility/namelist.h"
+#include "game/morrowind/npc.h"
 
+#include "common/utility/name_list.h"
+#include "game/morrowind/info.h"
+#include "game/morrowind/sub_pos_6.h"
 
 DEFINE_FILE("EsmNpc.cpp");
-
 
 /*===========================================================================
  *

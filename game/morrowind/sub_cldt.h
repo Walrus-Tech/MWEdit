@@ -10,8 +10,7 @@
 #ifndef __ESMSUBCLDT_H
 #define __ESMSUBCLDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Class data flags */

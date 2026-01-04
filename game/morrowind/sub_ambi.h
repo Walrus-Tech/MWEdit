@@ -10,9 +10,7 @@
 #ifndef __ESMSUBAMBI_H
 #define __ESMSUBAMBI_H
 
-
-#include "esm/EsmSubBase.h"
-
+#include "game/morrowind/sub_base.h"
 
 #pragma pack(push, 1)
 
@@ -24,7 +22,6 @@ typedef struct {
 } ambidata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

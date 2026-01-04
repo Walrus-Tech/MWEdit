@@ -10,8 +10,7 @@
 #ifndef __ESMSUBLHDT_H
 #define __ESMSUBLHDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Light flags */

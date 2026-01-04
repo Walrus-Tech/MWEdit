@@ -10,8 +10,7 @@
 #ifndef __ESMSUBCRDT_H
 #define __ESMSUBCRDT_H
 
-
-#include "esm/EsmSubBase.h"
+#include "game/morrowind/sub_base.h"
 
 
 /* Creature types */

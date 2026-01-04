@@ -10,9 +10,7 @@
 #ifndef __ESMSUBAIDT_H
 #define __ESMSUBAIDT_H
 
-
-#include "esm/EsmSubBase.h"
-
+#include "game/morrowind/sub_base.h"
 
 /* AI data flag values */
 #define MWESM_AIFLAG_WEAPON       0x00001
@@ -34,7 +32,6 @@
 #define MWESM_AIFLAG_ENCHANTING   0x10000
 #define MWESM_AIFLAG_REPAIRITEM   0x20000
 
-
 #pragma pack(push, 1)
 
 typedef struct {
@@ -50,7 +47,6 @@ typedef struct {
 } aidata_t;
 
 #pragma pack(pop)
-
 
 /*===========================================================================
  *

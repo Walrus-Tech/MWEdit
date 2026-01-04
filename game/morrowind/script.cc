@@ -10,11 +10,9 @@
  *  - Added the IsUsed() method for checking record uses.
  *
  *=========================================================================*/
-#include "esm/EsmScript.h"
-
+#include "game/morrowind/script.h"
 
 DEFINE_FILE("EsmScript.cpp");
-
 
 /*===========================================================================
  *

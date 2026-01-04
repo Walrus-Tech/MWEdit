@@ -7,14 +7,13 @@
  * Description
  *
  *=========================================================================*/
-#include "esm/EsmRecord.h"
-#include "esm/EsmFile.h"
-#include "esm/EsmSubName.h"
-#include "esm/EsmSubNameFix.h"
+#include "game/morrowind/record.h"
 
+#include "game/morrowind/file.h"
+#include "game/morrowind/sub_name.h"
+#include "game/morrowind/sub_name_fix.h"
 
 DEFINE_FILE("EsmRecord.cpp");
-
 
 /*===========================================================================
  *
