@@ -10,19 +10,18 @@
 #ifndef __ESMSCRIPTCOMPILE_H
 #define __ESMSCRIPTCOMPILE_H
 
-
-#include "project/EsmScriptDefs.h"
-#include "project/EsmScriptError.h"
-#include "Common/String/SString.h"
-#include "Common/Contain/PtrArray.h"
-#include "Common/Contain/GenStack.h"
-#include "project/mwcustomfunc.h"
-#include "esm/EsmFile.h"
-
 //#if MWEDIT_SCRIPT_MWSE
 #include <queue>
 #include <stack>
 //#endif
+
+#include "common/container/ptr_array.h"
+#include "common/container/gen_stack.h"
+#include "common/string/sstring.h"
+#include "game/morrowind/file.h"
+#include "mwedit/mw_custom_func.h"
+#include "mwedit/script_defs.h"
+#include "mwedit/script_error.h"
 
 
 /* Token flags */

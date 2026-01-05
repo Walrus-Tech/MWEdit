@@ -7,8 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmScriptDefs.h"
-#include "Common/File/GenFile.h"
+#include "common/file/gen_file.h"
+#include "mwedit/script_defs.h"
+
 
 /* Shorter definitions for convienence */
 #define VN     0

@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmScrFuncArray.h"
+#include "mwedit/scr_func_array.h"
 
 
 DEFINE_FILE("EsmScrFuncArray.cpp");

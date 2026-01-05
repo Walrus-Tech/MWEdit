@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "project/ScriptTemplate.h"
+#include "mwedit/script_template.h"
 
 
 DEFINE_FILE("ScriptTemplate.cpp");

@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "project/mwcustomfunc.h"
+#include "mwedit/mw_custom_func.h"
 
 
 DEFINE_FILE("MwCustomFunc.cpp");

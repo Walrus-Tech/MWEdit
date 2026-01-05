@@ -7,8 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmScrFuncData.h"
-#include "Common/String/SString.h"
+#include "mwedit/scr_func_data.h"
+
+#include "common/string/sstring.h"
 
 
 DEFINE_FILE("EsmScrFuncData.cpp");

@@ -25,16 +25,15 @@
 *
 *=========================================================================*/
 //#include <stdafx.h>
-#include "project/EsmScriptCompile.h"
+#include "mwedit/script_compile.h"
 
 #include <ctype.h>
 
-#include "project/StdAfx.h"
-
-#include "esm/EsmGlobal.h"
-#include "project/MWEditDoc.h"
-//#include "project/EsmOptions.h"
-#include "project/EsmGlobOptions.h"
+#include "game/morrowind/global.h"
+//#include "mwedit/options.h"
+#include "mwedit/std_afx.h"
+#include "ui/glob_options.h"
+#include "ui/mwedit_doc.h"
 
 
 DEFINE_FILE("EsmScriptCompile.cpp");

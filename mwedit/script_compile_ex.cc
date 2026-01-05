@@ -11,11 +11,11 @@
 //#include <stdafx.h>
 #include <ctype.h>
 
-#include "project/StdAfx.h"
-#include "project/EsmScriptCompile.h"
-#include "esm/EsmGlobal.h"
-#include "project/MWEditDoc.h"
-#include "project/EsmGlobOptions.h"
+#include "game/morrowind/global.h"
+#include "mwedit/script_compile.h"
+#include "mwedit/std_afx.h"
+#include "ui/glob_options.h"
+#include "ui/mwedit_doc.h"
 
 
 DEFINE_FILE("EsmScriptCompileEx.cpp");

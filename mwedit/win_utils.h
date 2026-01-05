@@ -11,7 +11,7 @@
 #define __ESMWINUTILS_H
 
 
-#include "esm/EsmFile.h"
+#include "game/morrowind/file.h"
 
 
 /* Morrowind registries */

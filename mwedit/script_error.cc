@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmScriptError.h"
+#include "mwedit/script_error.h"
 
 
 DEFINE_FILE("EsmScriptError.cpp");

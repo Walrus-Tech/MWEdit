@@ -7,9 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "esm/EsmWinUtils.h"
-#include "Windows/WinUtil.h"
+#include "mwedit/win_utils.h"
+
+#include "mwedit/std_afx.h"
+#include "windows/win_util.h"
 
 
 DEFINE_FILE("EsmWinUtils.cpp");

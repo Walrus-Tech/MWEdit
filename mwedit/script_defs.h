@@ -14,7 +14,7 @@
 //#define MWEDIT_SCRIPT_MWSE
 
 
-#include "Common/dl_err.h"
+#include "common/dl_err.h"
 
 
 /* Number of script word types */

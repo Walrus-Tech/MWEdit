@@ -7,10 +7,11 @@
  * Implements the CEsmOptions class.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/EsmOptions.h"
-#include "Common/dl_file.h"
-#include "project/EsmUtils.h"
+#include "mwedit/options.h"
+
+#include "common/dl_file.h"
+#include "mwedit/std_afx.h"
+#include "ui/utils.h"
 
 
 DEFINE_FILE("EsmOptions.cpp");

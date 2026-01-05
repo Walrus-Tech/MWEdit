@@ -11,10 +11,10 @@
 #define __MWCUSTOMFUNC_H
 
 
-#include "Common/File/GenFile.h"
-#include "Common/String/SString.h"
-#include "Common/Contain/dl_map.h"
-#include "project/EsmScriptDefs.h"
+#include "common/container/dl_map.h"
+#include "common/file/gen_file.h"
+#include "common/string/sstring.h"
+#include "mwedit/script_defs.h"
 
 
 /*===========================================================================

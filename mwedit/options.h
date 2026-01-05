@@ -12,11 +12,11 @@
 #define __ESMOPTIONS_H
 
 
-#include "esm/EsmDefs.h"
-#include "project/EsmOptionsDef.h"
-#include "project/EsmScriptOptions.h"
-#include "project/EsmRegDefs.h"
-#include "Common/dl_str.h"
+#include "common/dl_str.h"
+#include "game/morrowind/defs.h"
+#include "mwedit/options_def.h"
+#include "mwedit/script_options.h"
+#include "mwedit/reg_defs.h"
 
 
 #define MWEDIT_DEFAULT_EXTRAFILE    _T("mweditextrafile.esp")

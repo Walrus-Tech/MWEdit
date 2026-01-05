@@ -7,8 +7,9 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmScriptDefs.h"
-#include "project/mwcustomfunc.h"
+#include "mwedit/script_defs.h"
+
+#include "mwedit/mw_custom_func.h"
 
 
 DEFINE_FILE("EsmScriptDefs.cpp");

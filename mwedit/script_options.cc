@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/EsmScriptOptions.h"
-#include "project/EsmOptions.h"
-#include "Windows/WinUtil.h"
+#include "mwedit/script_options.h"
+
+#include "mwedit/options.h"
+#include "mwedit/std_afx.h"
+#include "windows/win_util.h"
 
 
 DEFINE_FILE("EsmScriptOptions.cpp");

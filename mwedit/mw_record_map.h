@@ -11,7 +11,7 @@
 #define __MWRECORDMAP_H
 
 
-#include "esm/EsmRecord.h"
+#include "game/morrowind/record.h"
 
 
 /* Default size of the hash map tables */

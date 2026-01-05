@@ -10,8 +10,7 @@
 #ifndef __MWCOMMON_H
 #define __MWCOMMON_H
 
-
-#include "Common/dl_err.h"
+#include "common/dl_err.h"
 
 
 /* Morrowind registries */

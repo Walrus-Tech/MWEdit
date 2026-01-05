@@ -11,10 +11,10 @@
 #define __SCRIPTTEMPLATE_H
 
 
-#include "Common/dl_err.h"
-#include "esm/EsmScript.h"
-#include "Common/Contain/PtrArray.h"
-#include "File/CsvFile.h"
+#include "common/dl_err.h"
+#include "common/container/ptr_array.h"
+#include "file/csv_file.h"
+#include "game/morrowind/script.h"
 
 
 /* Maximum size of template files */

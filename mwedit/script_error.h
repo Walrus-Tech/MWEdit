@@ -11,10 +11,10 @@
 #define __ESMSCRIPTERROR_H
 
 
-#include "Common/dl_err.h"
-#include "project/EsmScriptDefs.h"
-#include "Common/String/SString.h"
-#include "Common/Contain/PtrArray.h"
+#include "common/dl_err.h"
+#include "common/container/ptr_array.h"
+#include "common/string/sstring.h"
+#include "mwedit/script_defs.h"
 
 
 /* Error/warning types */

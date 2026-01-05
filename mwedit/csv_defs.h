@@ -10,9 +10,8 @@
 #ifndef __ESMCSVDEFS_H
 #define __ESMCSVDEFS_H
 
-
-#include "File/CsvFile.h"
-#include "esm/EsmDefs.h"
+#include "file/csv_file.h"
+#include "game/morrowind/defs.h"
 
 
 /* Holds extended CSV import/export column information */

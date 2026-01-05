@@ -1,4 +1,4 @@
 // stdafx.cpp : source file that includes just the standard includes
 //	MWEdit.pch will be the pre-compiled header
 //	stdafx.obj will contain the pre-compiled type information
-#include "project/StdAfx.h"
+#include "mwedit/std_afx.h"
