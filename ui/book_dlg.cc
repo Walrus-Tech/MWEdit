@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmBookDlg.h"
-#include "project/EsmDlgArray.h"
+#include "ui/book_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "ui/dlg_array.h"
 
 
 #if _DEBUG

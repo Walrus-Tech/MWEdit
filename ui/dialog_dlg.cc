@@ -11,11 +11,12 @@
  *    list to check for any 'one-way' links.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmDialogDlg.h"
-#include "project/EsmInfoDlg.h"
-#include "project/EsmJournalDlg.h"
+#include "ui/dialog_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/info_dlg.h"
+#include "ui/journal_dlg.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

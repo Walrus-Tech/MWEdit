@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/editundo.h"
-#include "Common/dl_str.h"
-#include "Windows/WinUtil.h"
+#include "project/edit_undo.h"
+
+#include "common/dl_str.h"
+#include "mwedit/std_afx.h"
+#include "windows/win_util.h"
 
 
 DEFINE_FILE("EditUndo.cpp");

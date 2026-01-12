@@ -12,12 +12,11 @@
 
 #include <afxext.h>
 
-#include "esm/EsmFile.h"
-#include "project/EsmUtils.h"
-#include "Windows/WinUtil.h"
-#include "project/MWEditDoc.h"
-#include "project/EsmIconFrame.h"
-
+#include "game/morrowind/file.h"
+#include "ui/icon_frame.h"
+#include "ui/mwedit_doc.h"
+#include "ui/utils.h"
+#include "windows/win_util.h"
 
 /* Custom messaages */
 #define ESMDLG_MSG_ONINFOEDIT 0x8301

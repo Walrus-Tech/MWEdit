@@ -7,9 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmScriptCompareDlg.h"
+#include "ui/script_compare_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

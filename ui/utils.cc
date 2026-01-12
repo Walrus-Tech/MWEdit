@@ -11,15 +11,15 @@
  *    the previous filename as the initial filename.
  *
  *=========================================================================*/
-#include "project/EsmUtils.h"
+#include "ui/utils.h"
 
 #include <direct.h>
 
-#include "project/StdAfx.h"
-#include "esm/EsmArmor.h"
-#include "project/MWEditDoc.h"
-#include "Windows/WinUtil.h"
-#include "project/EsmGlobOptions.h"
+#include "game/morrowind/armor.h"
+#include "mwedit/stdafx.h"
+#include "ui/mwedit_doc.h"
+#include "ui/glob_options.h"
+#include "windows/win_util.h"
 
 
 DEFINE_FILE("EsmUtils.cpp");

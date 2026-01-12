@@ -11,7 +11,7 @@
 #define __ESMICONFRAME_H
 
 
-#include "Common/dl_err.h"
+#include "common/dl_err.h"
 
 
 /* Default icon width/height */

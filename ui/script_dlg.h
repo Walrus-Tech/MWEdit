@@ -10,19 +10,18 @@
 #ifndef __RtfEditView_H
 #define __RtfEditView_H
 
-#include "project/EsmScriptDefs.h"
 
 #include <richole.h>
 
-#include "project/EsmGlobOptions.h"
-#include "Common/Contain/PtrArray.h"
-#include "project/CustRichEdit.h"
-#include "project/EsmScriptCompile.h"
-#include "project/EsmRecDialog.h"
-#include "Windows/dl_ToolTip.h"
-#include "project/EsmScrFuncArray.h"
-#include "project/editundo.h"
-
+#include "common/container/ptr_array.h"
+#include "mwedit/scr_func_array.h"
+#include "mwedit/script_compile.h"
+#include "mwedit/script_defs.h"
+#include "ui/cust_rich_edit.h"
+#include "ui/edit_undo.h"
+#include "ui/glob_options.h"
+#include "ui/rec_dialog.h"
+#include "windows/dl_tooltip.h"
 
 /* Word Types */
 #define ESMSCRIPT_WORDTYPE_END     -1

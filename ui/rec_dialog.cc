@@ -15,13 +15,14 @@
  *    record is editted.
  *
  *=========================================================================*/
+#include "ui/rec_dialog.h"
+
 #include <afxext.h>
 
-#include "project/StdAfx.h"
-#include "project/EsmRecDialog.h"
-#include "project/EsmDlgArray.h"
-#include "project/MWEdit.h"
-#include "project/MWEditDoc.h"
+#include "mwedit/std_afx.h"
+#include "ui/dlg_array.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
 
 
 #if _DEBUG

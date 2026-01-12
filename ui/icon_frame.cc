@@ -7,12 +7,14 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/EsmIconFrame.h"
+#include "ui/icon_frame.h"
+
 #include "IL/il.h"
 #include "IL/ilut.h"
-#include "project/EsmUtils.h"
-#include "esm/EsmDefs.h"
+
+#include "game/morrowind/esmdefs.h"
+#include "mwedit/std_afx.h"
+#include "ui/utils.h"
 
 
 #if _DEBUG

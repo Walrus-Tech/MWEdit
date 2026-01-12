@@ -7,12 +7,13 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmInfoDlg.h"
-#include "project/MWEditDoc.h"
-#include "project/EsmUtils.h"
-#include "Windows/WinUtil.h"
+#include "ui/info_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
+#include "ui/utils.h"
+#include "windows/win_util.h"
 
 
 #if _DEBUG

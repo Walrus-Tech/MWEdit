@@ -7,13 +7,14 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmNpcPage4.h"
-#include "project/EsmAiActivateDlg.h"
-#include "project/EsmAiEscortDlg.h"
-#include "project/EsmAiTravelDlg.h"
-#include "project/EsmAiWanderDlg.h"
+#include "ui/npc_page_4.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/ai_activate_dlg.h"
+#include "ui/ai_escort_dlg.h"
+#include "ui/ai_travel_dlg.h"
+#include "ui/ai_wander_dlg.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

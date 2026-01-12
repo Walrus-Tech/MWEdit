@@ -7,9 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmGlobalDlg.h"
+#include "ui/global_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

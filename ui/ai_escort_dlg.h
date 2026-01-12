@@ -11,7 +11,7 @@
 #define __ESMAIESCORTDLG_H
 
 
-#include "esm/EsmSubAI_E.h"
+#include "game/morrowind/sub_ai_e.h"
 
 
 /*===========================================================================

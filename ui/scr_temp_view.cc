@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmScrTempView.h"
-#include "project/EsmScriptCompile.h"
+#include "ui/scr_temp_view.h"
+
+#include "mwedit/script_compile.h"
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

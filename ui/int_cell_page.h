@@ -10,9 +10,8 @@
 #ifndef __ESMINTCELLPAGE_H
 #define __ESMINTCELLPAGE_H
 
-
-#include "project/ColorStatic1.h"
-#include "esm/EsmFile.h"
+#include "game/morrowind/file.h"
+#include "windows/color_static.h"
 
 
 class CEsmRecDialog;

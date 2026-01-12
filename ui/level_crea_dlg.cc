@@ -7,9 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmLevelCreaDlg.h"
+#include "ui/level_crea_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

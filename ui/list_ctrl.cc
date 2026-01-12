@@ -12,13 +12,15 @@
  *    the bug of the selection changing in a list when using the +/- keys.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
+#include "ui/list_ctrl.h"
+
+#include "mwedit/std_afx.h"
 
 #ifndef NO_ESMLIST_EDIT
-	#include "project/MWEdit.h"
+	#include "ui/mwedit.h"
 #endif
 
-#include "project/EsmListCtrl.h"
+
 //#include "Resource.h"
 
 

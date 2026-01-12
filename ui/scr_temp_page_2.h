@@ -11,8 +11,8 @@
 #define __ESMSCRTEMPPAGE2_H
 
 
-#include "Common/dl_err.h"
-#include "project/EsmDlgArray.h"
+#include "common/dl_err.h"
+#include "ui/dlg_array.h"
 
 
 /*===========================================================================

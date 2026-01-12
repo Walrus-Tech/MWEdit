@@ -10,13 +10,12 @@
 #ifndef __ESMCELLDLG_H
 #define __ESMCELLDLG_H
 
-
-#include "project/EsmRecDialog.h"
-#include "project/Resource.h"
-#include "project/EsmIntCellPage.h"
-#include "project/EsmExtCellPage.h"
-#include "project/EsmRefCellPage.h"
-#include "Windows/TabCtrlSheet.h"
+#include "ui/ext_cell_page.h"
+#include "ui/int_cell_page.h"
+#include "ui/rec_dialog.h"
+#include "ui/ref_cell_page.h"
+#include "ui/Resource.h"
+#include "windows/tab_ctrl_sheet.h"
 
 
 /*===========================================================================

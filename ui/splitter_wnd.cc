@@ -7,11 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/splitterwnd.h"
+#include "ui/splitter_wnd.h"
 
 #include <afxpriv.h>
 
-#include "project/StdAfx.h"
+#include "mwedit/std_afx.h"
 
 
 #if _DEBUG

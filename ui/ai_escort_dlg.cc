@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmAiEscortDlg.h"
-#include "project/EsmUtils.h"
+#include "ui/ai_escort_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "ui/utils.h"
 
 
 #if _DEBUG

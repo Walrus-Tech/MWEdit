@@ -12,7 +12,7 @@
 #define __ESMGLOBOPTIONS_H
 
 
-#include "project/EsmOptionsDef.h"
+#include "mwedit/options_def.h"
 
 
 bool GetEsmOptNoScriptFormat();

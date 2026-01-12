@@ -10,17 +10,17 @@
  *  - Updated CleanRecord() method to dirty the document's modified flag.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/MWEditDoc.h"
-#include "project/EsmUtils.h"
-#include "Windows/WinUtil.h"
-#include "esm/EsmGlobal.h"
-#include "project/EsmScriptCompile.h"
-#include "project/EsmGlobOptions.h"
-#include "Common/dl_time.h"
-#include "project/EsmScriptCompile.h"
-#include "project/ErrorDialog.h"
+#include "ui/mwedit_doc.h"
+
+#include "common/dl_time.h"
+#include "game/morrowind/global.h"
+#include "mwedit/script_compile.h"
+#include "mwedit/std_afx.h"
+#include "ui/error_dialog.h"
+#include "ui/glob_options.h"
+#include "ui/mwedit.h"
+#include "ui/utils.h"
+#include "windows/win_util.h"
 
 
 /* Debug definitions */

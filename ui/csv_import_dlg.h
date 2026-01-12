@@ -11,7 +11,7 @@
 #define __ESMCSVIMPORTDLG_H
 
 
-#include "project/EsmCsvDefs.h"
+#include "mwedit/csv_defs.h"
 
 
 /* List definitions */

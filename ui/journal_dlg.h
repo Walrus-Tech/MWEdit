@@ -11,8 +11,8 @@
 #define __ESMJOURNALDLG_H
 
 
-#include "esm/EsmInfo.h"
-#include "Common/Contain/PtrArray.h"
+#include "common/container/ptr_array.h"
+#include "game/morrowind/info.h"
 
 
 class CMWEditDoc;

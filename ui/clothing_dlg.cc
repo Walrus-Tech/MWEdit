@@ -7,12 +7,13 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/Resource.h"
-#include "project/EsmClothingDlg.h"
-#include "project/EsmDlgArray.h"
-#include "project/ChildFrmFix.h"
+#include "ui/clothing_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/child_frame_fix.h"
+#include "ui/dlg_array.h"
+#include "ui/mwedit.h"
+#include "ui/Resource.h"
 
 
 #if _DEBUG

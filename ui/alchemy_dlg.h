@@ -11,8 +11,8 @@
 #define __ESMALCHEMYDLG_H
 
 
-#include "project/EsmRecDialog.h"
-#include "project/Resource.h"
+#include "ui/rec_dialog.h"
+#include "ui/Resource.h"
 
 
 /*===========================================================================

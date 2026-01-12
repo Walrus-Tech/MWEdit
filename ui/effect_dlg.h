@@ -11,9 +11,9 @@
 #define __ESMEFFECTDLG_H
 
 
-#include "project/EsmRecDialog.h"
-#include "project/Resource.h"
-#include "project/ColorStatic1.h"
+#include "ui/rec_dialog.h"
+#include "ui/Resource.h"
+#include "windows/color_static.h"
 
 
 /*===========================================================================

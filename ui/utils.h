@@ -12,8 +12,8 @@
 
 #include <afxwin.h>
 
-#include "Common/String/SString.h"
-#include "esm/mwcommon.h"
+#include "common/string/sstring.h"
+#include "game/morrowind/mw_common.h"
 
 
 /* Type conversion functions */

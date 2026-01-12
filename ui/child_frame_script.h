@@ -10,10 +10,9 @@
 #ifndef __CHILDFRMSCRIPT_H
 #define __CHILDFRMSCRIPT_H
 
-
-#include "project/Resource.h"
-#include "project/EsmScriptDefs.h"
-#include "project/splitterwnd.h"
+#include "mwedit/script_defs.h"
+#include "ui/Resource.h"
+#include "ui/splitter_wnd.h"
 
 
 /*===========================================================================

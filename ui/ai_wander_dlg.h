@@ -11,7 +11,7 @@
 #define __ESMAIWANDERDLG_H
 
 
-#include "esm/EsmSubAI_W.h"
+#include "game/morrowind/sub_ai_w.h"
 
 
 /*===========================================================================

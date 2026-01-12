@@ -10,10 +10,9 @@
 #ifndef __ESMLEVELITEMDLG_H
 #define __ESMLEVELITEMDLG_H
 
-
-#include "project/EsmRecDialog.h"
-#include "project/Resource.h"
-#include "project/EsmListCtrl.h"
+#include "ui/list_ctrl.h"
+#include "ui/rec_dialog.h"
+#include "ui/Resource.h"
 
 
 /*===========================================================================

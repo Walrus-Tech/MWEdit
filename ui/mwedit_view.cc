@@ -7,16 +7,17 @@
  * Implementation of the CMWEditView class.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/MWEditDoc.h"
-#include "project/MWEditView.h"
-#include "esm/EsmFile.h"
-#include "Common/dl_time.h"
-#include "project/EsmHeaderDlg.h"
-#include "project/InputDialog.h"
-#include "project/EsmCsvImportDlg.h"
-#include "project/EsmScriptCompareDlg.h"
+#include "ui/mwedit_view.h"
+
+#include "common/dl_time.h"
+#include "game/morrowind/file.h"
+#include "mwedit/std_afx.h"
+#include "ui/csv_import_dlg.h"
+#include "ui/header_dlg.h"
+#include "ui/input_dialog.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
+#include "ui/script_compare_dlg.h"
 
 
 #if _DEBUG

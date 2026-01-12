@@ -7,24 +7,23 @@
  * Defines the class behaviors for the application.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/MainFrm.h"
-#include "project/ChildFrm.h"
-#include "project/MWEditDoc.h"
-#include "project/MWEditView.h"
-#include "Common/dl_err.h"
-#include "project/OpenPluginDlg.h"
-#include "project/EsmListCtrl.h"
-#include "project/EsmUtils.h"
-#include "Common/dl_err.h"
 #include "IL/il.h"
-#include "Common/dl_math.h"
-#include "project/ChildFrmFix.h"
-#include "project/ChildFrmVar.h"
-#include "project/ChildFrm.h"
-#include "project/Resource.h"
-#include "project/EsmScriptCompile.h"
+
+#include "common/dl_err.h"
+#include "common/dl_math.h"
+#include "mwedit/script_compile.h"
+#include "mwedit/std_afx.h"
+#include "ui/child_frame.h"
+#include "ui/child_frame_fix.h"
+#include "ui/child_frame_var.h"
+#include "ui/list_ctrl.h"
+#include "ui/main_frm.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
+#include "ui/mwedit_view.h"
+#include "ui/open_plugin_dlg.h"
+#include "ui/Resource.h"
+#include "ui/utils.h"
 
 
 #if _DEBUG

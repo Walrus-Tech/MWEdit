@@ -10,9 +10,10 @@
  *  - Input textbox has initial focus.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/InputDialog.h"
+#include "ui/input_dialog.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

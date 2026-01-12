@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmFuncHelpView.h"
-#include "Windows/WinUtil.h"
+#include "ui/func_help_view.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "windows/win_util.h"
 
 
 #if _DEBUG

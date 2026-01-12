@@ -15,13 +15,14 @@
 	#error include 'stdafx.h' before including this file for PCH
 #endif
 
-#include "project/Resource.h"
-#include "esm/EsmFile.h"
-#include "project/EsmLoadDlg.h"
-#include "project/EsmFuncHelpView.h"
-#include "project/EsmOptions.h"
-#include "project/EsmRegDefs.h"
-#include "project/mwcustomfunc.h"
+
+#include "game/morrowind/file.h"
+#include "mwedit/mw_custom_func.h"
+#include "mwedit/options.h"
+#include "mwedit/reg_defs.h"
+#include "ui/func_help_view.h"
+#include "ui/load_dlg.h"
+#include "ui/Resource.h"
 
 
 /* Default web sites */

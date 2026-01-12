@@ -11,7 +11,7 @@
 #define __ESMAIACTIVATEDLG_H
 
 
-#include "esm/EsmSubAI_A.h"
+#include "game/morrowind/sub_ai_a.h"
 
 
 /*===========================================================================

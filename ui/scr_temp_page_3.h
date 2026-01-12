@@ -11,9 +11,9 @@
 #define __ESMSCRTEMPPAGE3_H
 
 
-#include "Common/dl_err.h"
-#include "project/EsmDlgArray.h"
-#include "File/CsvFile.h"
+#include "common/dl_err.h"
+#include "file/csv_file.h"
+#include "ui/dlg_array.h"
 
 
 /* Default list column width */

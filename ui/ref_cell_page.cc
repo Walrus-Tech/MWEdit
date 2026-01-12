@@ -13,11 +13,12 @@
  *    'Save' button in the dialog.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmRefCellPage.h"
-#include "project/EsmRecDialog.h"
-#include "project/EsmCellRefDlg.h"
+#include "ui/ref_cell_page.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/cell_ref_dlg.h"
+#include "ui/mwedit.h"
+#include "ui/rec_dialog.h"
 
 
 #if _DEBUG

@@ -7,9 +7,10 @@
  * Implementation of the CChildFrameFix class
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/ChildFrmFix.h"
+#include "ui/child_frame_fix.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 /* Debug defines */

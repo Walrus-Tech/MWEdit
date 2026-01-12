@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "project/CustRichEdit.h"
+#include "ui/cust_rich_edit.h"
 
 #include "afxrich.h"
 
-#include "Common/dl_err.h"
-#include "project/StdAfx.h"
+#include "common/dl_err.h"
+#include "mwedit/std_afx.h"
 
 
 #if _DEBUG

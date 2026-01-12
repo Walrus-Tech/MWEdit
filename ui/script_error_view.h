@@ -14,7 +14,7 @@
 #ifndef __AFXEXT_H__
 	#include <afxext.h>
 #endif
-#include "project/EsmScriptError.h"
+#include "mwedit/script_error.h"
 
 
 /*===========================================================================

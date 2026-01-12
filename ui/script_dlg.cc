@@ -7,18 +7,19 @@
  * Implementation of the CEsmScriptDlg class.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/Resource.h"
-#include "project/EsmScriptDlg.h"
-#include "project/MWEditDoc.h"
-#include "Common/dl_err.h"
-#include "Common/dl_str.h"
-#include "Common/dl_time.h"
-#include "Common/String/SString.h"
-#include "Windows/WinUtil.h"
-#include "project/ChildFrmScript.h"
-#include "project/EsmScriptOptions.h"
-#include "project/MWEdit.h"
+#include "ui/script_dlg.h"
+
+#include "common/dl_err.h"
+#include "common/dl_str.h"
+#include "common/dl_time.h"
+#include "common/string/sstring.h"
+#include "mwedit/script_options.h"
+#include "mwedit/std_afx.h"
+#include "ui/child_frame_script.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
+#include "ui/Resource.h"
+#include "windows/win_util.h"
 //#include "afxole.h"
 
 

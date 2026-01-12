@@ -11,9 +11,9 @@
 #define __MWEditDoc_H
 
 
-#include "esm/EsmFile.h"
-#include "project/EsmLoadDlg.h"
-#include "project/mwrecordmap.h"
+#include "game/morrowind/file.h"
+#include "mwedit/mw_record_map.h"
+#include "ui/load_dlg.h"
 
 
 /* View update definitions */

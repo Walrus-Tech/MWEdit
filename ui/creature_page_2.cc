@@ -7,12 +7,13 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmCreaturePage2.h"
-#include "Common/dl_Err.h"
-#include "project/MWEditDoc.h"
-#include "project/EsmDlgArray.h"
+#include "ui/creature_page_2.h"
+
+#include "common/dl_err.h"
+#include "mwedit/std_afx.h"
+#include "ui/dlg_array.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
 
 
 #if _DEBUG

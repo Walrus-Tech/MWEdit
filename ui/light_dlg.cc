@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmLightDlg.h"
+#include "ui/light_dlg.h"
 
 #include "mmsystem.h"
 
-#include "project/StdAfx.h"
-#include "MWEdit.h"
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

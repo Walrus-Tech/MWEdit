@@ -10,9 +10,8 @@
 #ifndef __ESMDLGARRAY_H
 #define __ESMDLGARRAY_H
 
-
-#include "project/EsmRecDialog.h"
-#include "project/MainFrm.h"
+#include "ui/main_frm.h"
+#include "ui/rec_dialog.h"
 
 
 /* Array of dialog pointers */

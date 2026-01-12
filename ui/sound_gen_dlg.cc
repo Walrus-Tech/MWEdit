@@ -7,12 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "project/EsmSoundGenDlg.h"
+#include "ui/sound_gen_dlg.h"
 
 #include "mmsystem.h"
 
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

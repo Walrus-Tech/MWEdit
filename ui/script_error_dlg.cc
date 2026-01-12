@@ -7,11 +7,12 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/ScriptErrorDlg.h"
-#include "project/EsmScriptDefs.h"
-#include "project/EsmScrFuncData.h"
+#include "ui/script_error_dlg.h"
+
+#include "mwedit/scr_func_data.h"
+#include "mwedit/script_defs.h"
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

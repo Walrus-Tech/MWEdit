@@ -1,7 +1,8 @@
 // ErrorDialog.cpp : implementation file
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/ErrorDialog.h"
+#include "ui/error_dialog.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

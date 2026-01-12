@@ -11,8 +11,8 @@
 #define __ESMUSESDLG_H
 
 
-#include "project/MWEditDoc.h"
-#include "project/EsmListCtrl.h"
+#include "ui/list_ctrl.h"
+#include "ui/mwedit_doc.h"
 
 
 class CEsmDlgHandler;

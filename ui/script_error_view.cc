@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/ScriptErrorView.h"
-#include "project/ScriptErrorDlg.h"
+#include "ui/script_error_view.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "ui/script_error_dlg.h"
 
 
 #if _DEBUG

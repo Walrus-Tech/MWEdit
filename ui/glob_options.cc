@@ -8,10 +8,11 @@
  * various MWEdit options.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/EsmGlobOptions.h"
-#include "project/EsmOptions.h"
-#include "project/MWEdit.h"
+#include "project/glob_options.h"
+
+#include "mwedit/options.h"
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 DEFINE_FILE("EsmGlobOptions.cpp");

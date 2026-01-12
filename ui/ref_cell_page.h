@@ -11,8 +11,8 @@
 #define __ESMREFCELLPAGE_H
 
 
-#include "project/ColorStatic1.h"
-#include "project/EsmSubListCtrl.h"
+#include "ui/sub_list_ctrl.h"
+#include "windows/color_static.h"
 
 
 /* Types of modified records */

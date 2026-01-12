@@ -11,7 +11,7 @@
 #define __ESMNPCPAGE5_H
 
 
-#include "project/EsmListCtrl.h"
+#include "ui/list_ctrl.h"
 
 
 class CEsmDlgHandler;

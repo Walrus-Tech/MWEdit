@@ -7,9 +7,10 @@
  * Implementation of the CChildFrameVar class
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/ChildFrmVar.h"
+#include "ui/child_frame_var.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

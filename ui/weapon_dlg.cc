@@ -7,10 +7,11 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmWeaponDlg.h"
-#include "project/EsmDlgArray.h"
+#include "ui/weapon_dlg.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/dlg_array.h"
+#include "ui/mwedit.h"
 
 
 #if _DEBUG

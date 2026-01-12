@@ -14,12 +14,13 @@
  *    +/- key.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/EsmNpcPage3.h"
-#include "Common/dl_Err.h"
-#include "project/MWEditDoc.h"
-#include "project/EsmDlgArray.h"
+#include "ui/npc_page_3.h"
+
+#include "common/dl_err.h"
+#include "mwedit/std_afx.h"
+#include "ui/dlg_array.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_doc.h"
 
 
 #if _DEBUG

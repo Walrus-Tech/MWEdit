@@ -10,10 +10,9 @@
 #ifndef __ESMCELLREFDLG_H
 #define __ESMCELLREFDLG_H
 
-
-#include "esm/EsmSubCellRef.h"
-#include "esm/EsmCell.h"
-#include "Common/Contain/PtrArray.h"
+#include "common/container/ptr_array.h"
+#include "game/morrowind/cell.h"
+#include "game/morrowind/sub_cell_ref.h"
 
 
 /*===========================================================================

@@ -12,11 +12,12 @@
  *  - Added the events for opening the various web page links.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/MainFrm.h"
-#include "project/EsmOptionsDlg.h"
-#include "project/MWEditView.h"
+#include "ui/main_frm.h"
+
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "ui/mwedit_view.h"
+#include "ui/options_dlg.h"
 
 
 #if _DEBUG

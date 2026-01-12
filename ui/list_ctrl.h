@@ -11,10 +11,10 @@
 #define __ESMLISTCTRL_H
 
 
-#include "esm/EsmFile.h"
+#include "game/morrowind/file.h"
 
 #ifndef NO_ESMLIST_EDIT
-	#include "project/EsmDlgArray.h"
+	#include "ui/dlg_array.h"
 #endif
 
 

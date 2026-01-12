@@ -10,11 +10,12 @@
  *  - Fixed bug when changing an item's active status.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "project/MWEdit.h"
-#include "project/OpenPluginDlg.h"
-#include "Common/File/GenFind.h"
-#include "project/EsmUtils.h"
+#include "ui/open_plugin_dlg.h"
+
+#include "common/file/gen_find.h"
+#include "mwedit/std_afx.h"
+#include "ui/mwedit.h"
+#include "ui/utils.h"
 
 
 #if _DEBUG
