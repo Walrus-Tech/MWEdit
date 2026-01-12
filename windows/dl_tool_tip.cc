@@ -7,8 +7,8 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "Windows/dl_tooltip.h"
+#include "mwedit/std_afx.h"
+#include "windows/dl_tooltip.h"
 
 
 #ifdef _DEBUG

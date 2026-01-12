@@ -20,10 +20,12 @@
  *  - Re-added the CopyTextToClipboard() and GetClipboardText() functions.
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "Windows/WinUtil.h"
-#include "Common/dl_file.h"
+#include "windows/win_util.h"
+
 #include "process.h"
+
+#include "common/dl_file.h"
+#include "mwedit/std_afx.h"
 
 
 DEFINE_FILE("WinUtil.cpp");

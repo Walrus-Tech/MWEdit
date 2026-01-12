@@ -7,9 +7,10 @@
  * Description
  *
  *=========================================================================*/
-#include "project/StdAfx.h"
-#include "Common/dl_err.h"
-#include "Windows/ColorStatic.h"
+#include "windows/color_static.h"
+
+#include "common/dl_err.h"
+#include "mwedit/std_afx.h"
 
 
 #ifdef _DEBUG

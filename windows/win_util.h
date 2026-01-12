@@ -12,7 +12,7 @@
 
 #include <afxcmn.h>
 
-#include "Common/dl_err.h"
+#include "common/dl_err.h"
 
 
 /* Options for the MakeTimeString() function, bit field values */
