@@ -7,7 +7,7 @@
  * Description
  *
  *=========================================================================*/
-#include "project/edit_undo.h"
+#include "ui/edit_undo.h"
 
 #include "common/dl_str.h"
 #include "mwedit/std_afx.h"

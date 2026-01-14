@@ -13,7 +13,7 @@
 
 #include "common/dl_err.h"
 #include "file/csv_file.h"
-#include "mwedit/scripttemplate.h"
+#include "mwedit/script_template.h"
 #include "ui/scr_temp_page_1.h"
 #include "ui/scr_temp_page_2.h"
 #include "ui/scr_temp_page_3.h"
