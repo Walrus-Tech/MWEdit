@@ -12,8 +12,8 @@
 
 #include "game/morrowind/record.h"
 #include "game/morrowind/sub_name.h"
-#include "game/morrowind/sub_name32.h"
-#include "game/morrowind/sub_namefix.h"
+#include "game/morrowind/sub_name_32.h"
+#include "game/morrowind/sub_name_fix.h"
 #include "game/morrowind/sub_radt.h"
 
 /*===========================================================================

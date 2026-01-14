@@ -472,7 +472,7 @@ bool ReplaceString(TCHAR **ppNewString, const size_t Length) {
 void Test_CreateString1() {
 	DEFINE_FUNCTION("Test_CreateString1()");
 	TCHAR *Buffer;
-	TCHAR *pTestStrings[4] = {
+	const TCHAR *pTestStrings[4] = {
 		_T(""),
 		_T("\0"),
 		_T("testing"),
@@ -603,7 +603,7 @@ void Test_CreateString2() {
  *=========================================================================*/
 void Test_CreateString3() {
 	DEFINE_FUNCTION("Test_CreateString3()");
-	TCHAR* pStrings[4] = {
+	const TCHAR *pStrings[4] = {
 		_T("asldkja;lkdj;asd"),
 		_T("123785"),
 		_T(""),
@@ -704,7 +704,7 @@ void Test_memsearch() {
  *=========================================================================*/
 void Test_ReplaceString() {
 	DEFINE_FUNCTION("Test_ReplaceString()");
-	TCHAR *pStrings[4] = {
+	const TCHAR *pStrings[4] = {
 		_T("asldkja;lkdj;asd"),
 		_T("123385"),
 		_T(""),
