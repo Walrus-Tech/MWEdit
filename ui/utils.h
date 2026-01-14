@@ -13,7 +13,7 @@
 #include <afxwin.h>
 
 #include "common/string/sstring.h"
-#include "game/morrowind/mw_common.h"
+#include "mwedit/mw_common.h"
 
 
 /* Type conversion functions */
