@@ -21,7 +21,7 @@
 #include "ui/edit_undo.h"
 #include "ui/glob_options.h"
 #include "ui/rec_dialog.h"
-#include "windows/dl_tooltip.h"
+#include "windows/dl_tool_tip.h"
 
 /* Word Types */
 #define ESMSCRIPT_WORDTYPE_END     -1
