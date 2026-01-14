@@ -211,7 +211,7 @@ boolean CListFile::ReadNextLine() {
  *=========================================================================*/
 void Test_ListFile() {
 	DEFINE_FUNCTION("Test_ListFile()");
-	SystemLog.Printf(std::stdout, "================= Testing CListFile =========================");
+	SystemLog.Printf(/*std::*/stdout, "================= Testing CListFile =========================");
 
 	/* Test the CListFile construction */
 	CListFile TestFile1;

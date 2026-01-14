@@ -12,7 +12,7 @@
 
 #include "common/container/ptr_array.h"
 #include "common/file/gen_file.h"
-#include "common/string.sstring.h"
+#include "common/string/sstring.h"
 
 #define CONFIG_LINE_LENGTH 256
 

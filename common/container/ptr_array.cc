@@ -766,7 +766,7 @@ void Test_StressPtrArray(const std::size_t NumTests) {
 	std::size_t NumAllocs;
 	std::size_t TestSize;
 	char *pBuffer;
-	SystemLog.Printf(std::stdout,
+	SystemLog.Printf(/*std::*/stdout,
 	                 "================ Stressing the TPtrArray Class ====================");
 	std::srand((std::size_t)std::time(NULL));
 	ErrorHandler.ClearErrors();
@@ -778,7 +778,7 @@ void Test_StressPtrArray(const std::size_t NumTests) {
 		TestSize = (std::size_t)((float)std::rand() * 100000l / RAND_MAX) + 1;
 		CPCharArray StringArray2(TestSize, 0);
 		NumAllocs = (std::size_t)((float)std::rand() * 1100 / RAND_MAX) + 1;
-		SystemLog.Printf(std::stdout,
+		SystemLog.Printf(/*std::*/stdout,
 		                 "\t%u) Adding %u random sized strings...",
 		                 LoopCounter,
 		                 NumAllocs);
@@ -841,7 +841,7 @@ void Test_PtrArray() {
 	char *pTestPtr;
 	testdata_t TestData;
 	testdata_t *pTestData;
-	SystemLog.Printf(std::stdout,
+	SystemLog.Printf(/*std::*/stdout,
 	                 "================ Testing the TPtrArray Class ====================");
 
 	/* Test construction of sample templates */
