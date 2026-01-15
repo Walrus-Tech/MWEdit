@@ -257,6 +257,11 @@ else ()
 	target_compile_options(MWEdit PRIVATE -Wall -Wextra -Wpedantic)
 endif ()
 
+# Add Windows Multimedia Library
+if (WIN32)
+	target_link_libraries(MWEdit PRIVATE winmm)
+endif ()
+
 # Find and link the image library
 find_package(DevIL)
 if (DevIL_ILUT_FOUND)

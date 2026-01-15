@@ -19,10 +19,10 @@
 	#include <afxcmn.h>         // MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
-#pragma comment(lib, "WINMM.lib")
-#pragma comment(lib, "../IL/DevIL.lib")
-#pragma comment(lib, "../IL/ILU.lib")
-#pragma comment(lib, "../IL/ILUT.lib")
+//#pragma comment(lib, "WINMM.lib")
+//#pragma comment(lib, "../IL/DevIL.lib")
+//#pragma comment(lib, "../IL/ILU.lib")
+//#pragma comment(lib, "../IL/ILUT.lib")
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
