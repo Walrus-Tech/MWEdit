@@ -12,7 +12,7 @@
 #include "IL/il.h"
 #include "IL/ilut.h"
 
-#include "game/morrowind/esmdefs.h"
+#include "game/morrowind/defs.h"
 #include "mwedit/std_afx.h"
 #include "ui/utils.h"
 

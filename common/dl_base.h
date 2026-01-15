@@ -365,7 +365,7 @@ extern TCHAR ThisFile[];
  *
  *=========================================================================*/
 #ifndef ASSERT
-	#if DEBUG || _DEBUG
+	#if _DEBUG
 		#define ASSERT(exp)  { if (!(exp)) { CustomAssert(_T(#exp), ThisFile, ThisFunction, __LINE__); } }
 		#undef TRACE
 		#define TRACE(msg)   { SystemLog.Printf(_T("%s - %s"), ThisFunction, msg); }

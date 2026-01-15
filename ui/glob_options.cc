@@ -8,7 +8,7 @@
  * various MWEdit options.
  *
  *=========================================================================*/
-#include "project/glob_options.h"
+#include "ui/glob_options.h"
 
 #include "mwedit/options.h"
 #include "mwedit/std_afx.h"
