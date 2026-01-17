@@ -16,7 +16,7 @@
 #include <direct.h>
 
 #include "game/morrowind/armor.h"
-#include "mwedit/stdafx.h"
+#include "mwedit/std_afx.h"
 #include "ui/mwedit_doc.h"
 #include "ui/glob_options.h"
 #include "windows/win_util.h"

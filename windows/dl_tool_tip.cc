@@ -8,7 +8,7 @@
  *
  *=========================================================================*/
 #include "mwedit/std_afx.h"
-#include "windows/dl_tooltip.h"
+#include "windows/dl_tool_tip.h"
 
 
 #ifdef _DEBUG
