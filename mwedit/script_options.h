@@ -10,6 +10,9 @@
 #ifndef __ESMSCRIPTOPTIONS_H
 #define __ESMSCRIPTOPTIONS_H
 
+#include <afxwin.h>
+#include <richedit.h>
+#include <windef.h>
 
 /* Format type indices */
 #define ESMSCRIPT_FORMAT_DEFAULT    0
